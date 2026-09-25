@@ -274,7 +274,8 @@ export async function POST(req: Request) {
   // new row — the fresh row still gets created (marketplace behaviour
   // preserved) but only the first row per user receives the FK.
   const userId = user.id;
-  const requestedRole = profile.role;
+  // Phase 1 supply is authorised schools only — never stamp HANDLEDARE here.
+  const requestedRole = 'INSTRUCTOR' as const;
   const existing = await prisma.instructor.findMany({
     where: { userId },
   });
