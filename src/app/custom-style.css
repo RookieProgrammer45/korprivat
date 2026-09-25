@@ -1,0 +1,952 @@
+/* @polsia:user-owned — supporting styles for the public marketplace composition. */
+
+html {
+  color-scheme: light;
+  background-color: #fff;
+}
+
+html.dark {
+  color-scheme: dark;
+  background-color: var(--background);
+  --background: oklch(0.115 0.025 184);
+  --foreground: oklch(0.96 0.012 184);
+  --card: oklch(0.155 0.028 184);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.175 0.03 184);
+  --popover-foreground: var(--foreground);
+  --secondary: oklch(0.205 0.03 184);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.18 0.027 184);
+  --muted-foreground: oklch(0.72 0.025 184);
+  --accent: oklch(0.205 0.03 184);
+  --accent-foreground: var(--foreground);
+  --border: oklch(0.72 0.06 184 / 0.19);
+  --input: oklch(0.72 0.06 184 / 0.25);
+  --ring: var(--brand-400);
+  --elevation-1: oklch(0 0 0 / 0.46);
+  --elevation-2: oklch(0 0 0 / 0.58);
+  --elevation-3: oklch(0 0 0 / 0.7);
+  --shadow-brand-color: oklch(var(--brand-l) var(--brand-c) var(--brand-h) / 0.44);
+}
+
+body {
+  min-width: 320px;
+  background-color: var(--background);
+  background-image: none;
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  text-rendering: optimizeLegibility;
+}
+
+html:not(.dark) body {
+  background-color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+main {
+  isolation: isolate;
+}
+
+::selection {
+  background-color: var(--brand-100);
+  color: var(--foreground);
+}
+
+html.dark ::selection {
+  background-color: var(--brand-900);
+  color: var(--foreground);
+}
+
+:where(a, button, input, textarea, select, [role="button"]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+/* Existing marketplace islands use semantic shadcn classes; these shared
+   surfaces give them consistent depth without changing behavior. */
+[class~="border-border"],
+[class*="border-border/"] {
+  border-color: var(--border);
+}
+
+input,
+textarea,
+select {
+  background-color: var(--card);
+  border-color: var(--input);
+  color: var(--foreground);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted-foreground);
+}
+
+[role="dialog"],
+[data-radix-popper-content-wrapper] > * {
+  border-color: var(--border);
+  background-color: var(--popover);
+  box-shadow: var(--shadow-sm);
+}
+
+table {
+  color: var(--foreground);
+}
+
+thead {
+  background-color: var(--muted);
+}
+
+::file-selector-button {
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--brand-100);
+  color: var(--brand-700);
+  font-weight: 600;
+}
+
+html.dark ::file-selector-button {
+  color: var(--brand-300);
+}
+
+.marketplace-hero {
+  position: relative;
+  background-color: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+html.dark .marketplace-hero {
+  background-color: var(--background);
+}
+
+.marketplace-hero h1,
+.marketplace-hero h2 {
+  text-wrap: balance;
+}
+
+.marketplace-hero-grid {
+  position: relative;
+}
+
+.marketplace-hero-title {
+  max-width: 10ch;
+  font-size: clamp(3.45rem, 12vw, 7.25rem);
+  line-height: 0.94;
+  letter-spacing: -0.075em;
+  font-weight: 800;
+}
+
+.marketplace-hero-card {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--card);
+  border-color: var(--border);
+  box-shadow: var(--shadow-xl);
+}
+
+.marketplace-hero-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.marketplace-primary-cta {
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.marketplace-secondary-cta {
+  border-color: color-mix(in oklch, var(--brand-500) 45%, var(--border));
+}
+
+.marketplace-quick-links {
+  background-color: #fff;
+}
+
+html.dark .marketplace-quick-links {
+  background-color: var(--background);
+}
+
+.marketplace-quick-links a {
+  border-color: color-mix(in oklch, var(--brand-500) 27%, var(--border));
+  background-color: var(--card);
+}
+
+.marketplace-quick-links a:hover {
+  border-color: var(--brand-400);
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
+.marketplace-providers-section {
+  background-color: #fff;
+}
+
+html.dark .marketplace-providers-section {
+  background-color: var(--background);
+}
+
+.surface-panel,
+.surface-card {
+  border-color: var(--border);
+  background-color: var(--card);
+  box-shadow: var(--shadow-md);
+}
+
+.surface-panel {
+  border-radius: calc(var(--radius) + 0.25rem);
+  background-color: var(--card);
+}
+
+.receipt-page {
+  --receipt-black: #111;
+  --receipt-white: #fff;
+  --receipt-ink: var(--receipt-black);
+  --receipt-paper: var(--receipt-white);
+  --receipt-muted: #525252;
+  --receipt-line: #d4d4d4;
+  --receipt-green: #166534;
+  --receipt-green-ink: #14532d;
+  --receipt-green-surface: #dcfce7;
+  background-color: var(--receipt-paper);
+  color: var(--receipt-ink);
+}
+
+html.dark .receipt-page {
+  --receipt-ink: var(--receipt-white);
+  --receipt-paper: #111;
+  --receipt-muted: #d4d4d4;
+  --receipt-line: #525252;
+  --receipt-green-surface: #052e16;
+  --receipt-green-ink: #bbf7d0;
+}
+
+.receipt-page,
+.receipt-page * {
+  background-image: none;
+}
+
+.receipt-page .receipt-print-area {
+  color: var(--receipt-ink);
+}
+
+.receipt-page .text-muted-foreground,
+.receipt-page .receipt-meta-label,
+.receipt-page .receipt-fact-label,
+.receipt-page .receipt-breakdown-label,
+.receipt-page .receipt-verified-charge {
+  color: var(--receipt-muted);
+}
+
+.receipt-page .text-foreground,
+.receipt-page .text-card-foreground,
+.receipt-page .receipt-meta-value,
+.receipt-page .receipt-fact-value,
+.receipt-page .receipt-status-value {
+  color: var(--receipt-ink);
+}
+
+.receipt-eyebrow,
+.receipt-fact-icon {
+  color: var(--receipt-green);
+}
+
+.receipt-issued-badge {
+  border-color: var(--receipt-green);
+  background-color: var(--receipt-green-surface);
+  color: var(--receipt-green-ink);
+}
+
+.receipt-card {
+  border-color: var(--receipt-line);
+  background-color: var(--receipt-paper);
+  color: var(--receipt-ink);
+  box-shadow: 0 1.25rem 2.75rem rgb(0 0 0 / 0.12);
+}
+
+.receipt-card-header {
+  border-bottom: 1px solid var(--receipt-line);
+  background-color: var(--receipt-paper);
+}
+
+.receipt-status-panel {
+  border: 1px solid var(--receipt-green);
+  background-color: var(--receipt-green-surface);
+}
+
+.receipt-status-label {
+  color: var(--receipt-muted);
+}
+
+.receipt-role-badge {
+  border-color: var(--receipt-green);
+  background-color: var(--receipt-paper);
+  color: var(--receipt-ink);
+}
+
+.receipt-money-row {
+  border-color: var(--receipt-line);
+  color: var(--receipt-muted);
+}
+
+.receipt-money-row-emphasized {
+  border-top: 2px solid var(--receipt-green);
+  color: var(--receipt-ink);
+}
+
+.receipt-page .receipt-verified-charge {
+  border-color: var(--receipt-line);
+}
+
+.receipt-actions .receipt-action {
+  border-color: var(--receipt-line);
+  color: var(--receipt-ink);
+  box-shadow: none;
+}
+
+.receipt-actions .receipt-action-download {
+  border-color: var(--receipt-green);
+  background-color: var(--receipt-green);
+  color: var(--receipt-white);
+}
+
+.receipt-actions .receipt-action-download:hover {
+  border-color: var(--receipt-green-ink);
+  background-color: var(--receipt-green-ink);
+  color: var(--receipt-white);
+}
+
+.receipt-actions .receipt-action-print:hover {
+  border-color: var(--receipt-ink);
+  background-color: var(--receipt-ink);
+  color: var(--receipt-paper);
+}
+
+.receipt-actions .receipt-action-back {
+  color: var(--receipt-green-ink);
+}
+
+.receipt-actions .receipt-action-back:hover {
+  background-color: var(--receipt-green-surface);
+  color: var(--receipt-green-ink);
+}
+
+.surface-card {
+  transition:
+    transform 220ms var(--ease-out-expo),
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.surface-card:hover {
+  border-color: color-mix(in oklch, var(--brand-400) 48%, var(--border));
+  box-shadow: var(--shadow-lg);
+}
+
+.marketplace-assurance-section .surface-card,
+.marketplace-entry-section {
+  position: relative;
+}
+
+.marketplace-assurance-section .surface-card {
+  min-height: 100%;
+  background-color: var(--card);
+}
+
+.marketplace-entry-section {
+  background-color: #fff;
+}
+
+html.dark .marketplace-entry-section {
+  background-color: var(--background);
+}
+
+.marketplace-entry-section > * {
+  position: relative;
+}
+
+.directory-shell {
+  padding-top: clamp(1.5rem, 4vw, 3rem);
+}
+
+.auth-shell {
+  background-color: #fff;
+}
+
+html.dark .auth-shell {
+  background-color: var(--background);
+}
+
+.chatbot-fab {
+  box-shadow: var(--shadow-md);
+}
+
+.dl-action-group {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dl-action-group > button,
+.dl-action-group > a {
+  max-width: 100%;
+  white-space: normal;
+}
+
+.site-header {
+  background-color: #fff;
+  box-shadow: 0 1px 0 color-mix(in oklch, var(--brand-500) 24%, var(--border));
+}
+
+html.dark .site-header {
+  background-color: var(--background);
+}
+
+.site-header nav {
+  min-height: 4.75rem;
+}
+
+.site-header .site-nav-cta {
+  box-shadow: var(--shadow-md);
+}
+
+.site-header-wordmark {
+  color: var(--foreground);
+}
+
+.site-header-wordmark:hover {
+  color: var(--brand-400);
+}
+
+.site-header button:hover,
+.site-header [role="button"]:hover {
+  background-color: var(--muted);
+}
+
+.site-header button[aria-current="page"],
+.site-header a[aria-current="page"] {
+  color: var(--brand-300);
+}
+
+.directory-shell {
+  max-width: 70rem;
+}
+
+.directory-shell > .surface-panel {
+  border-color: color-mix(in oklch, var(--brand-500) 25%, var(--border));
+}
+
+.marketplace-provider-card {
+  border: 1px solid color-mix(in oklch, var(--brand-500) 16%, var(--border));
+  background-color: var(--card);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 220ms var(--ease-out-expo),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.marketplace-provider-card .marketplace-rate-badge {
+  font-size: 0.75rem;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.marketplace-provider-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--brand-400) 55%, var(--border));
+  background-color: var(--card);
+  box-shadow: var(--shadow-lg);
+}
+
+.marketplace-provider-avatar {
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-shell > .surface-panel {
+  box-shadow: var(--shadow-xl);
+}
+
+main > section > header h1,
+main > header h1 {
+  text-wrap: balance;
+}
+
+.directory-shell .group:focus-visible,
+.directory-shell .group:focus-visible .surface-card,
+.marketplace-home a:focus-visible,
+.site-header a:focus-visible,
+.site-header button:focus-visible {
+  outline: 2px solid var(--brand-300);
+  outline-offset: 4px;
+}
+
+main > section {
+  position: relative;
+}
+
+main > section[class*="border"] {
+  border-color: var(--border);
+}
+
+.marketplace-hero-card {
+  animation-delay: 120ms;
+}
+
+.marketplace-reveal {
+  animation: marketplace-rise 700ms var(--ease-out-expo) both;
+}
+
+.marketplace-footer {
+  background-color: #fff;
+}
+
+html.dark .marketplace-footer {
+  background-color: var(--background);
+}
+
+.site-nav-links a,
+.site-header .site-nav-cta,
+.site-header button {
+  min-height: 2.5rem;
+}
+
+.site-nav-sheet {
+  width: min(88vw, 24rem);
+}
+
+.site-nav-sheet nav > a,
+.site-nav-sheet nav > button,
+.site-nav-sheet nav [role="button"] {
+  min-height: 3rem;
+}
+
+.directory-shell,
+.auth-shell,
+main[class~="section"] {
+  isolation: isolate;
+}
+
+.directory-shell > header,
+.auth-shell .surface-panel,
+.dashboard-shell > header {
+  position: relative;
+}
+
+.directory-shell > header::before,
+.auth-shell .surface-panel::before,
+.dashboard-shell > header::before {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  width: 3rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: var(--brand-400);
+  content: "";
+}
+
+.dashboard-nav {
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-nav::after {
+  position: absolute;
+  top: -4rem;
+  right: -2rem;
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid color-mix(in oklch, var(--brand-400) 22%, transparent);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.dashboard-nav > * {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-card-header {
+  padding-top: 2rem;
+}
+
+.profile-shell,
+.provider-entry-shell {
+  position: relative;
+}
+
+.profile-shell::before,
+.provider-entry-shell::before {
+  position: absolute;
+  top: 1.5rem;
+  right: var(--spacing-gutter);
+  width: 5rem;
+  height: 5rem;
+  border-top: 1px solid color-mix(in oklch, var(--brand-400) 45%, transparent);
+  border-right: 1px solid color-mix(in oklch, var(--brand-400) 45%, transparent);
+  content: "";
+  pointer-events: none;
+}
+
+.provider-entry-copy {
+  max-width: 42rem;
+}
+
+.instructor-detail-card {
+  background-color: var(--card);
+}
+
+.instructor-detail-photo img {
+  box-shadow: var(--shadow-lg);
+}
+
+.marketplace-preview-card,
+.marketplace-directory-card {
+  min-height: 100%;
+}
+
+.directory-empty-state,
+.directory-error-state {
+  min-height: 14rem;
+  place-content: center;
+}
+
+.directory-shell > header {
+  max-width: 54rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.directory-shell > .surface-panel {
+  border-radius: calc(var(--radius) + 0.45rem);
+  box-shadow: var(--shadow-lg);
+}
+
+.marketplace-home .marketplace-assurance-section {
+  background-color: #fff;
+}
+
+html.dark .marketplace-home .marketplace-assurance-section {
+  background-color: var(--background);
+}
+
+.marketplace-home .marketplace-entry-section {
+  background-color: #fff;
+}
+
+.booking-form,
+.booking-summary,
+.auth-shell .surface-panel,
+.dashboard-shell .surface-panel {
+  border-radius: calc(var(--radius) + 0.4rem);
+}
+
+.booking-form-card,
+.payment-handoff-card,
+.contact-flow-card {
+  box-shadow: var(--shadow-lg);
+}
+
+.booking-form-card > div,
+.payment-handoff-card > div,
+.contact-flow-card > div {
+  padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.booking-summary {
+  background-color: var(--muted);
+}
+
+form {
+  accent-color: var(--brand-500);
+}
+
+form > button[type="submit"] {
+  min-height: 3rem;
+}
+
+[data-sonner-toaster] [data-sonner-toast] {
+  border-radius: calc(var(--radius) + 0.15rem);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .site-header nav {
+    padding-inline: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .marketplace-home .marketplace-assurance-section .surface-card:nth-child(2) {
+    transform: translateY(1.5rem);
+  }
+}
+
+@keyframes marketplace-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(*, *::before, *::after) {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
+  }
+}
+
+@media (max-width: 639px) {
+  .receipt-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .receipt-actions .receipt-action {
+    width: 100%;
+  }
+
+  .chatbot-fab {
+    bottom: 8.5rem;
+    right: 1rem;
+  }
+
+  .dl-action-group {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dl-action-group > button,
+  .dl-action-group > a {
+    width: 100%;
+  }
+
+  .marketplace-hero-title {
+    max-width: 11ch;
+    font-size: clamp(2.9rem, 13vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.065em;
+  }
+
+  .marketplace-hero-grid {
+    gap: 2.5rem;
+    padding-block: 3.5rem;
+  }
+
+  .marketplace-hero-copy {
+    gap: 1.25rem;
+  }
+
+  .marketplace-quick-links {
+    align-items: stretch;
+  }
+
+  .marketplace-quick-links > span {
+    white-space: normal;
+  }
+
+  .marketplace-hero-card {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .site-header nav {
+    min-height: 3.75rem;
+    gap: 0.5rem;
+    padding-inline: 0.75rem;
+  }
+
+  .site-header-wordmark {
+    max-width: clamp(7rem, 36vw, 8.75rem);
+  }
+
+  .site-nav-actions {
+    gap: 0.125rem;
+  }
+
+  .site-nav-actions > * {
+    flex-shrink: 0;
+  }
+
+  .site-nav-sheet {
+    width: min(24rem, calc(100vw - 1rem));
+    max-width: calc(100vw - 1rem);
+  }
+
+  .marketplace-preview-card-header,
+  .marketplace-directory-card-header {
+    row-gap: 0.75rem;
+  }
+
+  .marketplace-preview-card-header .marketplace-rate-badge,
+  .marketplace-directory-card-header .marketplace-rate-badge {
+    margin-left: auto;
+  }
+
+  .marketplace-provider-card {
+    overflow-wrap: anywhere;
+  }
+
+  .marketplace-provider-card .marketplace-rate-badge {
+    line-height: 1.35;
+  }
+
+  .booking-form-card,
+  .booking-summary,
+  .instructor-detail-card {
+    min-width: 0;
+  }
+
+  .booking-summary dl > div,
+  .booking-summary dd {
+    min-width: 0;
+  }
+
+  .booking-summary dd {
+    overflow-wrap: anywhere;
+    text-align: right;
+  }
+
+  .booking-status-row {
+    align-items: flex-start;
+  }
+
+  .instructor-detail-card h1 {
+    font-size: clamp(2.25rem, 11vw, 3.052rem);
+  }
+
+  .instructor-detail-card section,
+  .instructor-detail-card dl {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  html,
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  body:has(.receipt-page) .site-header,
+  body:has(.receipt-page) footer,
+  body:has(.receipt-page) .chatbot-fab,
+  body:has(.receipt-page) [data-sonner-toaster],
+  body:has(.receipt-page) [role="dialog"] {
+    display: none;
+  }
+
+  .receipt-page {
+    padding: 0;
+    background: #fff;
+    color: #111;
+  }
+
+  .receipt-page,
+  .receipt-page * {
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  .receipt-page .receipt-print-area {
+    max-width: none;
+    gap: 1rem;
+  }
+
+  .receipt-header {
+    color: #111;
+  }
+
+  .receipt-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #111;
+    background: #fff;
+    color: #111;
+  }
+
+  .receipt-card-header {
+    border-color: #111;
+    background: #fff;
+  }
+
+  .receipt-page .text-muted-foreground,
+  .receipt-page .receipt-meta-label,
+  .receipt-page .receipt-fact-label,
+  .receipt-page .receipt-breakdown-label,
+  .receipt-page .receipt-verified-charge,
+  .receipt-page .receipt-money-row {
+    color: #404040;
+  }
+
+  .receipt-page .text-foreground,
+  .receipt-page .text-card-foreground,
+  .receipt-page .receipt-meta-value,
+  .receipt-page .receipt-fact-value,
+  .receipt-page .receipt-status-value,
+  .receipt-page .receipt-money-row-emphasized {
+    color: #111;
+  }
+
+  .receipt-eyebrow,
+  .receipt-fact-icon {
+    color: #166534;
+  }
+
+  .receipt-issued-badge,
+  .receipt-role-badge {
+    border-color: #166534;
+    background: #fff;
+    color: #14532d;
+  }
+
+  .receipt-status-panel {
+    border-color: #166534;
+    background: #f0fdf4;
+  }
+
+  .receipt-money-row,
+  .receipt-page .receipt-verified-charge {
+    border-color: #a3a3a3;
+  }
+
+  .receipt-money-row-emphasized {
+    border-top-color: #166534;
+  }
+
+  .receipt-actions {
+    display: none;
+  }
+}

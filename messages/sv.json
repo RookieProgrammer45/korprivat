@@ -1,0 +1,2396 @@
+{
+  "common": {
+    "nav": {
+      "findProvider": "Hitta trafikskolor",
+      "howItWorks": "Så fungerar det",
+      "licenceCategories": "Körkortskategorier",
+      "forInstructors": "För trafikskolor",
+      "forProviders": "För trafikskolor",
+      "handledare": "Handledarguide",
+      "getStarted": "Kom igång",
+      "faq": "Vanliga frågor",
+      "contactUs": "Kontakta oss",
+      "contact": "Kontakt",
+      "openMenu": "Öppna meny",
+      "more": "Mer",
+      "theme": "Tema",
+      "language": "Språk",
+      "languageAria": "Byt språk",
+      "themeAria": "Byt tema",
+      "primary": "Huvudnavigation",
+      "mobile": "Mobilnavigation",
+      "footer": "Sidfotsnavigation",
+      "signIn": "Logga in",
+      "signOut": "Logga ut",
+      "signingOut": "Loggar ut…",
+      "signOutError": "Det gick inte att logga ut. Försök igen.",
+      "languageError": "Det gick inte att byta språk. Försök igen.",
+      "dashboard": "Översikt",
+      "resources": "Resurser",
+      "blog": "Blogg",
+      "profile": "Profil",
+      "cityStockholm": "Stockholm",
+      "cityGoteborg": "Göteborg",
+      "cityMalmo": "Malmö",
+      "cityUppsala": "Uppsala",
+      "cityVasteras": "Västerås",
+      "privacy": "Integritet",
+      "pricing": "Priser",
+      "paymentMethods": "Betalningsmetoder",
+      "southernSweden": "Södra Sverige",
+      "westernNorthernSweden": "Västra och norra Sverige"
+    },
+    "language": {
+      "sv": "Svenska",
+      "en": "English"
+    },
+    "weekdays": {
+      "mon": "M",
+      "tue": "T",
+      "wed": "O",
+      "thu": "T",
+      "fri": "F",
+      "sat": "L",
+      "sun": "S"
+    }
+  },
+  "availability": {
+    "weekday": {
+      "0": "Sön",
+      "1": "Mån",
+      "2": "Tis",
+      "3": "Ons",
+      "4": "Tor",
+      "5": "Fre",
+      "6": "Lör"
+    }
+  },
+  "landing": {
+    "contactPage": {
+      "eyebrow": "Support",
+      "headingLead": "Hur kan vi hjälpa",
+      "headingAccent": "dig idag?",
+      "lead": "Fråga om en bokning, avbokning, trygghet eller integritet. Välj ett ämne så dirigerar supportteamet ditt meddelande rätt.",
+      "step": {
+        "backToTopics": "Välj ett annat ämne",
+        "heading": "Berätta vad som har hänt",
+        "lead": "Berätta tillräckligt mycket för att teamet ska förstå din fråga. Vi svarar till e-postadressen du anger."
+      },
+      "fields": {
+        "nameLabel": "Ditt namn",
+        "namePlaceholder": "Alex Andersson",
+        "emailLabel": "E-post",
+        "emailPlaceholder": "alex@example.com",
+        "messageLabel": "Meddelande",
+        "messagePlaceholder": "Vad vill du ha hjälp med?",
+        "topicLabel": "Supportämne",
+        "topicHint": "Välj det ämne som bäst matchar din fråga."
+      },
+      "topics": [
+        {
+          "title": "Bokning eller avbokning",
+          "description": "En tid, bokningsförfrågan, ändring eller avbokning."
+        },
+        {
+          "title": "Fråga om en trafikskola eller handledare",
+          "description": "En fråga om annons, kategori, tillgänglighet eller lektion."
+        },
+        {
+          "title": "Betalning",
+          "description": "En fråga om kassa, debitering, återbetalning eller betalningsstatus."
+        },
+        {
+          "title": "Tekniskt problem",
+          "description": "Något laddar inte eller fungerar inte som det ska."
+        },
+        {
+          "title": "Press eller partnerskap",
+          "description": "Media, forskning eller en partnerskapsförfrågan."
+        },
+        {
+          "title": "Annan fråga",
+          "description": "Allt annat om DriveLinkUp."
+        }
+      ],
+      "submit": "Skicka till support",
+      "submitting": "Skickar…",
+      "success": {
+        "title": "Meddelandet har skickats",
+        "body": "Tack — supportteamet har fått ditt meddelande och återkommer."
+      },
+      "error": {
+        "generic": "Meddelandet kunde inte skickas. Försök igen."
+      },
+      "footerNote": "Vid akuta trygghetsfrågor: avbryt lektionen och kontakta först lokala larmtjänster.",
+      "cta": {
+        "eyebrow": "Vill du hellre bläddra?",
+        "browseStockholmTitle": "Se trafikskolor i Stockholm",
+        "browseStockholmSubtitle": "{count} listade skolor",
+        "browseAllTitle": "Se alla trafikskolor",
+        "browseAllSubtitle": "Filtrera på stad, kategori, språk och pris."
+      }
+    }
+  },
+  "checkout": {
+    "success": {
+      "meta": {
+        "title": "Kassa"
+      },
+      "eyebrow": "Betalning",
+      "verifiedTitle": "Tack — din prenumeration är igång.",
+      "verifiedBody": "Vi har bekräftat betalningen hos Stripe. Du kan stänga fliken eller gå tillbaka till din dashboard.",
+      "missingTitle": "Hittade ingen betalningssession.",
+      "missingBody": "Öppna länken från ditt senaste mejl eller gå tillbaka till din dashboard och försök igen.",
+      "timeoutTitle": "Bekräftelsen dröjer.",
+      "timeoutBody": "Vi kunde inte bekräfta betalningen inom ett par sekunder. Försök igen om en liten stund — kontakta teamet om pengarna dragits.",
+      "cta": "Tillbaka till dashboard"
+    },
+    "cancelled": {
+      "eyebrow": "Avbruten",
+      "title": "Betalningen avbröts.",
+      "body": "Inget har debiterats. Du kan försöka igen från din dashboard när du är redo.",
+      "cta": "Tillbaka till dashboard"
+    }
+  },
+  "faqPage": {
+    "header": {
+      "eyebrow": "FAQ",
+      "title": "Frågor innan du bokar?",
+      "subtitle": "Det viktigaste om auktoriserade trafikskolor, kostnadsfri bokning, tillgänglighet, trygghet och avbokning."
+    },
+    "items": {
+      "scope": {
+        "q": "Vad kan jag boka via DriveLinkUp?",
+        "a": "Bläddra bland auktoriserade trafikskolor i Sverige för körkortskategorier som AM, A1, A2, A, B och BE. Varje annons visar kategorier, publicerat pris, tillgänglighet och bokningsläge."
+      },
+      "choose": {
+        "q": "Hur väljer jag trafikskola?",
+        "a": "Använd filter för kategori, stad, språk, tillgänglighet och högsta pris. Jämför skolans publicerade uppgifter, lediga tider, bokningsläge och avbokningsnivå före bokning."
+      },
+      "booking": {
+        "q": "Hur fungerar bokningen?",
+        "a": "Välj en ledig tid hos skolan och fyll i det korta bokningsformuläret. Direktbokning går vidare till en extern kassa; en förfrågan skickas först till skolan och betalning sker efter godkännande."
+      },
+      "price": {
+        "q": "Vad betalar jag?",
+        "a": "Du ser trafikskolans publicerade lektionspris och totalen i SEK före kassan. Att upptäcka, jämföra och boka är kostnadsfritt för elever: DriveLinkUp lägger inte på någon separat avgift."
+      },
+      "safety": {
+        "q": "Vilka trygghets- och behörighetskrav gäller?",
+        "a": "Auktoriserade trafikskolor ansvarar för de behörigheter och upplägg de publicerar. Läs annonsen och bekräfta kvarvarande frågor före start. Svenska handledare är en separat privat väg med egna lagkrav och är inte trafikskolor."
+      },
+      "cancellation": {
+        "q": "Hur fungerar avbokning och återbetalning?",
+        "a": "Skolan väljer en avbokningsnivå som visas före bokning och sparas på bokningen. Flexibel: full återbetalning minst 24 timmar före, hela lektionsavgiften inom 24 timmar. Måttlig: full återbetalning minst 120 timmar före, 50% avgift från 120 till 24 timmar, hela avgiften inom 24 timmar. Strikt: full återbetalning minst 168 timmar före, 50% avgift från 168 till 24 timmar, hela avgiften inom 24 timmar."
+      },
+      "prerequisites": {
+        "q": "Vad behöver jag innan en lektion?",
+        "a": "Kontrollera kraven för din körkortskategori och skolans instruktioner före träffen. Vid övningskörning måste elev och handledare uppfylla tillämpliga svenska krav. Fråga skolan om du är osäker på dokument, bil eller förberedelser."
+      }
+    },
+    "cta": {
+      "findProviders": "Hitta en trafikskola",
+      "contact": "Kontakta support"
+    }
+  },
+  "blogPage": {
+    "meta": {
+      "title": "Blogg · DriveLinkUp",
+      "description": "Praktiska guider för körkortselever i Sverige — Transportstyrelsens steg, skoljämförelse, språk och publicerade lektionspriser."
+    },
+    "header": {
+      "eyebrow": "Blogg",
+      "title": "Att köra i Sverige, på riktigt klarspråk.",
+      "subtitle": "Korta guider för dig som lär dig köra på svenska vägar. Vi tar upp Transportstyrelsens steg, skoljämförelse, lokala krav och tydliga priser i SEK."
+    },
+    "posts": {
+      "0": {
+        "eyebrow": "Artikel · Stockholmsexpater",
+        "title": "Så skaffar du svenskt körkort som expat i Stockholm",
+        "excerpt": "Transportstyrelsens steg, realistisk prisplanering och hur du jämför auktoriserade trafikskolor i Stockholm.",
+        "readCta": "Läs artikeln",
+        "meta": "{minutes} min läsning · Uppdaterad augusti 2026"
+      }
+    }
+  },
+  "forInstructorsPage": {
+    "meta": {
+      "title": "För auktoriserade trafikskolor | DriveLinkUp",
+      "description": "Lista din auktoriserade trafikskola för elever som jämför priser, tillgänglighet och bokningsalternativ i Sverige."
+    },
+    "hero": {
+      "eyebrow": "För auktoriserade trafikskolor",
+      "title": "Gör skolans tider till tydligare bokningar.",
+      "body": "Publicera skolans behörighet, priser och tillgänglighet så att elever kan jämföra och boka med tydliga villkor.",
+      "primaryCta": "Skapa din profil",
+      "learnerCta": "Se elevvyn"
+    },
+    "roles": {
+      "trafiklarare": {
+        "title": "Auktoriserad trafikskola",
+        "body": "För skolor som erbjuder strukturerade körlektioner och själva styr publicerade priser och tillgänglighet."
+      },
+      "handledare": {
+        "title": "Skolstyrd annons",
+        "body": "Håll kategorier, tjänster, priser och lediga tider korrekta för eleverna."
+      }
+    },
+    "safety": {
+      "title": "Trygghet börjar med korrekt information.",
+      "body": "Håll behörighet, plats, språk, priser och tillgänglighet uppdaterade. Elever ska förstå annonsen innan de bokar."
+    }
+  },
+  "instructorsPage": {
+    "header": {
+      "eyebrow": "Aktuell marknadsplats för trafikskolor",
+      "title": "Hitta en auktoriserad trafikskola",
+      "subtitle": "Jämför skolannonser efter kategori, stad, språk, publicerat pris, tillgänglighet och bokningspolicy. Bokning har ingen separat DriveLinkUp-avgift."
+    },
+    "directoryCta": "Se alla trafikskolor",
+    "stockholmCity": {
+      "meta": {
+        "title": "Auktoriserade trafikskolor i Stockholm | DriveLinkUp",
+        "description": "Jämför auktoriserade trafikskolor i Stockholm efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
+        "ogTitle": "Hitta en trafikskola i Stockholm",
+        "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Stockholm utan separat DriveLinkUp-avgift."
+      },
+      "header": {
+        "eyebrow": "Trafikskolor i Stockholm",
+        "title": "Hitta en auktoriserad trafikskola i Stockholm",
+        "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
+      },
+      "slug": "stockholm"
+    },
+    "goteborgCity": {
+      "meta": {
+        "title": "Auktoriserade trafikskolor i Göteborg | DriveLinkUp",
+        "description": "Jämför auktoriserade trafikskolor i Göteborg efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
+        "ogTitle": "Hitta en trafikskola i Göteborg",
+        "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Göteborg utan separat DriveLinkUp-avgift."
+      },
+      "header": {
+        "eyebrow": "Trafikskolor i Göteborg",
+        "title": "Hitta en auktoriserad trafikskola i Göteborg",
+        "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
+      },
+      "slug": "goteborg"
+    },
+    "malmoCity": {
+      "meta": {
+        "title": "Auktoriserade trafikskolor i Malmö | DriveLinkUp",
+        "description": "Jämför auktoriserade trafikskolor i Malmö efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
+        "ogTitle": "Hitta en trafikskola i Malmö",
+        "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Malmö utan separat DriveLinkUp-avgift."
+      },
+      "header": {
+        "eyebrow": "Trafikskolor i Malmö",
+        "title": "Hitta en auktoriserad trafikskola i Malmö",
+        "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
+      },
+      "slug": "malmo"
+    },
+    "uppsalaCity": {
+      "meta": {
+        "title": "Auktoriserade trafikskolor i Uppsala | DriveLinkUp",
+        "description": "Jämför auktoriserade trafikskolor i Uppsala efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
+        "ogTitle": "Hitta en trafikskola i Uppsala",
+        "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Uppsala utan separat DriveLinkUp-avgift."
+      },
+      "header": {
+        "eyebrow": "Trafikskolor i Uppsala",
+        "title": "Hitta en auktoriserad trafikskola i Uppsala",
+        "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
+      },
+      "slug": "uppsala"
+    },
+    "vasterasCity": {
+      "meta": {
+        "title": "Auktoriserade trafikskolor i Västerås | DriveLinkUp",
+        "description": "Hitta auktoriserade trafikskolor för lektioner i Västerås. Jämför kategorier, språk, publicerade priser, tillgänglighet och bokningspolicy.",
+        "ogTitle": "Hitta en trafikskola i Västerås",
+        "ogDescription": "Jämför skolannonser i Västerås med tydlig information om pris, språk och tillgänglighet."
+      },
+      "header": {
+        "eyebrow": "Trafikskolor i Västerås",
+        "title": "Hitta en auktoriserad trafikskola i Västerås",
+        "subtitle": "Planerar du lektioner i Västerås? Jämför auktoriserade skolor efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy innan du bokar."
+      },
+      "services": {
+        "eyebrow": "Välj rätt stöd på vägen",
+        "title": "Körlektioner i Västerås på ditt sätt",
+        "subtitle": "Jämför auktoriserade trafikskolor efter lektionstyp, publicerat pris, tillgänglighet och bokningspolicy.",
+        "handledare": {
+          "title": "Vägledning om privat handledare",
+          "body": "Handledare är en separat svensk väg för privat övningskörning, inte annonser från auktoriserade trafikskolor. Läs kraven före övningskörning."
+        },
+        "trafiklarare": {
+          "title": "Auktoriserade trafikskolor",
+          "body": "Boka strukturerade lektioner i Västerås från en skolannons med kategorier, pris och lediga tider."
+        }
+      },
+      "cta": {
+        "eyebrow": "Redo att börja?",
+        "title": "Hitta din match i Västerås",
+        "body": "Filtrera katalogen efter körkortskategori, språk, pris och tillgänglighet. Öppna en profil för att läsa mer och boka.",
+        "find": "Hitta en trafikskola",
+        "become": "Lista er trafikskola"
+      },
+      "slug": "vasteras"
+    }
+  },
+  "instructorDirectory": {
+    "categoryLabel": "Körkortskategori",
+    "cityLabel": "Stad",
+    "cityPlaceholder": "Alla städer",
+    "cityAllOption": "Alla städer",
+    "minRateLabel": "Lägsta lektionspris",
+    "maxRateLabel": "Högsta lektionspris",
+    "englishOnly": "Engelska tillgängligt",
+    "minRatePlaceholder": "t.ex. 400",
+    "maxRatePlaceholder": "t.ex. 600",
+    "ratingLabel": "Lägsta betyg",
+    "ratingPlaceholder": "Alla betyg",
+    "ratingAllOption": "Alla betyg",
+    "rating3Plus": "3+ stjärnor",
+    "rating4Plus": "4+ stjärnor",
+    "rating4_5Plus": "4,5+ stjärnor",
+    "availabilityLabel": "Tillgänglighet",
+    "availabilityPlaceholder": "Alla dagar",
+    "availabilityAllOption": "Alla dagar",
+    "weekday": "Vardagar",
+    "weekend": "Helger",
+    "rateSuffix": "SEK / timme",
+    "rateRangeError": "Lägsta priset måste vara mindre än eller lika med det högsta priset.",
+    "clearFilters": "Rensa filter",
+    "resultCount": "{count, plural, one {# trafikskola hittades} other {# trafikskolor hittades}}",
+    "loadingResults": "Uppdaterar skolresultat…",
+    "emptyTitle": "Inga trafikskolor matchar filtren",
+    "emptyBody": "Prova att ta bort ett filter eller visa alla trafikskolor.",
+    "errorTitle": "Katalogen kunde inte laddas",
+    "errorBody": "Försök igen om en stund.",
+    "retry": "Försök igen",
+    "nextAvailableLabel": "Nästa lediga tid",
+    "noUpcomingSlot": "Ingen kommande tid listad",
+    "languageLabel": "Språk",
+    "englishAvailable": "Engelska tillgängligt",
+    "swedishAvailable": "Svenska",
+    "slotLabel": "Nästa lediga tid",
+    "slotLabelRelative": "Nästa lediga tid · {when}",
+    "slotMonthDay": "{day} {monthShort}",
+    "slotTime": "{time}",
+    "slotTimeAndWeekday": "{weekday} {time}",
+    "geoTitle": "Sök nära dig",
+    "useMyLocation": "Använd min plats",
+    "locationStatus": {
+      "prompt": "Använd din plats för att sortera skolor efter avstånd och filtrera i närheten.",
+      "requesting": "Hämtar din plats…",
+      "granted": "Visar skolor nära din plats.",
+      "denied": "Platstillstånd nekades. Du kan fortfarande filtrera på stad.",
+      "unsupported": "Plats är inte tillgängligt i den här webbläsaren. Du kan fortfarande filtrera på stad."
+    },
+    "nearKmLabel": "Inom (km)",
+    "nearKmPlaceholder": "25",
+    "sortLabel": "Sortering",
+    "sortNewest": "Standardordning",
+    "sortNearest": "Närmast först",
+    "distancePill": "{km} km",
+    "clearGeolocation": "Rensa plats",
+    "profileCta": "Visa profil",
+    "portraitAlt": "Profilbild på {name}",
+    "serviceAreaLabel": "Serviceområde",
+    "verificationLabel": "Verifiering",
+    "verification": {
+      "verified": "Verifierad",
+      "pending": "Verifiering pågår",
+      "rejected": "Inte verifierad",
+      "unverified": "Inte verifierad"
+    },
+    "reviewsLabel": "Omdömen",
+    "reviewsNone": "Inga omdömen ännu",
+    "reviewsSummary": "{average} · {count, plural, one {# omdöme} other {# omdömen}}",
+    "language": {
+      "sv": "Svenska",
+      "en": "Engelska"
+    },
+    "category": {
+      "AM": "AM",
+      "A1": "A1",
+      "A2": "A2",
+      "A": "A",
+      "B": "B",
+      "BE": "BE"
+    },
+    "comparison": {
+      "eyebrow": "Urval",
+      "title": "Jämför trafikskolor",
+      "count": "{count} av {max} valda",
+      "addToComparison": "Lägg till i jämförelsen",
+      "removeFromComparison": "Ta bort från jämförelsen",
+      "limitReached": "Du kan jämföra högst tre trafikskolor åt gången.",
+      "clear": "Rensa jämförelse",
+      "remove": "Ta bort",
+      "removeAria": "Ta bort {name} från jämförelsen",
+      "category": "Kategorier",
+      "language": "Språk",
+      "languages": {
+        "sv": "Svenska",
+        "en": "Engelska"
+      },
+      "serviceArea": "Serviceområde",
+      "rate": "Lektionspris",
+      "fee": "Marknadsplatsavgift",
+      "feeValue": "Ingen separat DriveLinkUp-avgift; skolans pris visas före betalning",
+      "rateValue": "{amount} / tim",
+      "availability": "Tillgänglighet",
+      "noAvailability": "Ingen kommande tid listad",
+      "bookingMode": "Bokningsläge",
+      "bookingModes": {
+        "instant": "Direktbokning",
+        "request": "Bokningsförfrågan"
+      },
+      "cancellation": "Avbokning",
+      "policies": {
+        "flexible": "Flexibel",
+        "moderate": "Måttlig",
+        "strict": "Strikt"
+      },
+      "policyUnknown": "Se profilen",
+      "reviews": "Omdömen",
+      "noReviews": "Inga omdömen ännu",
+      "reviewsValue": "{average}/5 ({count})",
+      "viewProfile": "Visa profil"
+    }
+  },
+  "instructorDetail": {
+    "meta": {
+      "title": "Trafikskolans annons | DriveLinkUp",
+      "description": "Se skolans kategorier, publicerade pris, tillgänglighet, bokningsläge och avbokningspolicy före bokning."
+    },
+    "profileEyebrow": "Trafikskolans annons",
+    "locatedIn": "Finns i {city}",
+    "hourlyRate": "Lektionspris",
+    "rateSuffix": "SEK / timme",
+    "portraitAlt": "Profilbild på {name}",
+    "facts": {
+      "city": "Stad",
+      "serviceArea": "Serviceområde",
+      "language": "Språk",
+      "verification": "Verifiering",
+      "reviews": "Omdömen",
+      "availability": "Nästa lediga tid"
+    },
+    "category": {
+      "AM": "AM",
+      "A1": "A1",
+      "A2": "A2",
+      "A": "A",
+      "B": "B",
+      "BE": "BE"
+    },
+    "language": {
+      "sv": "Svenska",
+      "en": "Engelska"
+    },
+    "verification": {
+      "verified": "Verifierad",
+      "pending": "Verifiering pågår",
+      "rejected": "Inte verifierad",
+      "unverified": "Inte verifierad"
+    },
+    "reviews": {
+      "none": "Inga omdömen ännu",
+      "summary": "{average} · {count, plural, one {# omdöme} other {# omdömen}}"
+    },
+    "availability": {
+      "none": "Ingen kommande tid listad"
+    },
+    "loadError": "Profilen kunde inte laddas.",
+    "notFoundTitle": "Skolannonsen hittades inte",
+    "notFoundBody": "Annonsen kan ha tagits bort. Gå tillbaka till katalogen för att se aktuella skolor.",
+    "backDirectory": "Tillbaka till skolorna",
+    "fallbackError": "Något gick fel när profilen laddades.",
+    "bookingModeEyebrow": "Bokningsläge",
+    "bookingMode": {
+      "instant": {
+        "title": "Direktbokning",
+        "body": "Välj en ledig tid och gå vidare till den externa kassan för att säkra lektionen."
+      },
+      "request": {
+        "title": "Bokningsförfrågan",
+        "body": "Välj en ledig tid och skicka en förfrågan. Skolan bekräftar innan betalning tas."
+      }
+    },
+    "safetyEyebrow": "Innan du bokar",
+    "safetyTitle": "Kontrollera detta",
+    "safetyBody": "DriveLinkUp tillhandahåller marknadsplatsen och bokningsflödet. Kontrollera skolans behörighet, lektionsupplägg och avbokningsvillkor innan du börjar.",
+    "safetyItems": {
+      "credentials": "Auktoriserade skolor ansvarar för den behörighet som anges i annonsen.",
+      "insurance": "Bekräfta skolans bil- och lektionsupplägg före bokning.",
+      "checkBeforeBooking": "Fråga skolan om allt som inte framgår tydligt av annonsen före bokning."
+    },
+    "slots": {
+      "loadError": "Kunde inte läsa in lediga tider.",
+      "retry": "Försök igen",
+      "empty": "Inga lediga tider är listade just nu."
+    }
+  },
+  "bookingForm": {
+    "title": "Välj en tid",
+    "descriptionLoaded": "{rate} visas nedan. Se skolans pris och avbokningspolicy innan du skickar din förfrågan.",
+    "descriptionEmpty": "Välj en ledig tid och granska bokningsdetaljerna innan du fortsätter.",
+    "submit": "Skicka bokningsförfrågan",
+    "submitting": "Skickar…",
+    "policyEyebrow": "Avbokningspolicy",
+    "policyLink": "Läs hela policyn i FAQ",
+    "policyScheduleFlexible": "Flexibel: full återbetalning minst 24 timmar före; hela lektionsavgiften behålls inom 24 timmar.",
+    "policyScheduleModerate": "Måttlig: full återbetalning minst 120 timmar före; 50% avgift från 120 till 24 timmar; hela avgiften inom 24 timmar.",
+    "policyScheduleStrict": "Strikt: full återbetalning minst 168 timmar före; 50% avgift från 168 till 24 timmar; hela avgiften inom 24 timmar.",
+    "instructorUnavailable": "Den här skolannonsen är inte längre tillgänglig.",
+    "loadError": "Bokningsformuläret kunde inte laddas.",
+    "submitError": "Bokningen kunde inte skapas. Försök igen.",
+    "labels": {
+      "yourName": "Ditt namn",
+      "email": "E-post",
+      "phone": "Telefon",
+      "category": "Körkortskategori",
+      "categoryPlaceholder": "Välj en kategori"
+    },
+    "placeholders": {
+      "yourName": "Alex Andersson",
+      "email": "alex@example.com",
+      "phone": "+46 70 123 45 67"
+    },
+    "slots": {
+      "pickPrompt": "Välj en ledig tid",
+      "noSlotsAvailable": "Inga lediga tider finns.",
+      "slotTaken": "Den tiden bokades precis. Välj en annan tid.",
+      "groupToday": "Idag",
+      "groupTomorrow": "Imorgon",
+      "backToProfile": "Tillbaka till skolannonsen"
+    },
+    "successEyebrow": "Bokningen är sparad",
+    "successBody": "Din bokning med {instructor} är sparad. Se skolans pris, betalningsstatus och nästa steg nedan.",
+    "rateLabel": "Lektionspris",
+    "rateSuffix": "SEK / timme",
+    "paymentLabel": "Betalning",
+    "rateFallback": "skolan",
+    "paidBadge": "Betald",
+    "waitingPayment": "Väntar på betalning",
+    "paymentPollTimeoutTitle": "Bekräftelsen av betalningen dröjer.",
+    "paymentPollTimeoutBody": "Vi väntar fortfarande på betalningsleverantören. Försök kontrollera igen om en stund och kontakta supporten om ditt kort debiterades.",
+    "retryPaymentPoll": "Kontrollera igen",
+    "openingCheckout": "Öppnar kassan…",
+    "payLesson": "Betala lektionen",
+    "holdLabel": "Betalningen hålls",
+    "holdBody": "Betalningen hålls säkert tills lektionen är genomförd. Använd supportflödet om något behöver hanteras.",
+    "disputeOpen": "Ett supportärende är öppet för bokningen.",
+    "releasedBody": "Bokningen är slutförd.",
+    "refundedBadge": "Återbetald",
+    "refundedBody": "Återbetalningen behandlas av betalningsleverantören.",
+    "paymentNotEnabled": "Betalningar är ännu inte aktiverade för den här skolannonsen.",
+    "instructorNotOnboarded": "Skolan måste slutföra betalningsinställningen innan kassan kan öppnas.",
+    "paymentFailed": "Kassan kunde inte startas. Försök igen.",
+    "freshLoadFailure": "Bokningen kunde inte uppdateras. Försök igen om några sekunder.",
+    "bookingRequest": {
+      "eyebrow": "Förfrågan skickad",
+      "body": "{instructor} granskar din förfrågan innan betalning tas.",
+      "awaitingBadge": "Väntar på skolan",
+      "awaitingBody": "Vi uppdaterar dig när skolan godkänner eller avböjer. Ingen betalning har tagits ännu.",
+      "declinedBody": "{instructor} kunde inte godkänna förfrågan. Ingen betalning togs."
+    },
+    "bookingModeLabel": {
+      "instant": "Direkt",
+      "request": "Förfrågan"
+    },
+    "bookingMode": {
+      "title": "Bokningsläge",
+      "description": "Välj om elever kan boka direkt eller skicka en förfrågan för godkännande.",
+      "instantLabel": "Direkt",
+      "instantSummary": "Elever väljer en ledig tid och går vidare till betalning.",
+      "instantName": "Direktbokning",
+      "requestLabel": "Förfrågan",
+      "requestSummary": "Elever väljer en ledig tid och väntar på ditt godkännande före betalning.",
+      "requestName": "Bokningsförfrågan"
+    },
+    "validation": {
+      "nameRequired": "Ange ditt namn.",
+      "nameTooLong": "Namnet är för långt.",
+      "emailInvalid": "Ange en giltig e-postadress.",
+      "phoneRequired": "Ange ditt telefonnummer.",
+      "phoneTooLong": "Telefonnumret är för långt.",
+      "categoryRequired": "Välj en av skolans publicerade kategorier.",
+      "slotRequired": "Välj en ledig tid.",
+      "bookingModeChanged": "Skolans bokningsläge har ändrats. Uppdatera sidan och försök igen."
+    }
+  },
+  "instructorOnboarding": {
+    "title": "Skapa skolans annons",
+    "subtitle": "Publicera den auktoriserade skolans uppgifter, pris och tillgänglighet som elever behöver för att jämföra. Håll annonsen aktuell; 10 % gäller först efter genomförd tjänst.",
+    "submit": "Publicera annonsen",
+    "submitting": "Skapar annons…",
+    "error": "Något gick fel. Försök igen.",
+    "fields": {
+      "nameLabel": "Namn",
+      "namePlaceholder": "Erik Lindqvist",
+      "cityLabel": "Stad",
+      "cityPlaceholder": "Stockholm",
+      "categoriesLabel": "Behörighetskategorier",
+      "categoriesDescription": "Markera alla körkortsklasser du är certifierad att undervisa i.",
+      "rateLabel": "Timkostnad (SEK)",
+      "ratePlaceholder": "550",
+      "rateDescription": "Vi visar bara heltal — skriv hela kronor, exempelvis 550.",
+      "photoLabel": "Profilbild",
+      "photoPlaceholder": "Ladda upp en bild",
+      "photoRequired": "Ladda upp en profilbild för att fortsätta.",
+      "photoWrongType": "Filen är inte en bild. Använd JPEG, PNG eller WebP.",
+      "photoTooLarge": "Bilden är över 20 MB. Prova en mindre export.",
+      "photoDescription": "Ladda upp en porträttbild. JPEG, PNG eller WebP, upp till 20 MB.",
+      "emailLabel": "E-post",
+      "emailPlaceholder": "du@example.com",
+      "emailDescription": "Vi skickar din bekräftelse på att profilen är live hit.",
+      "bioLabel": "Kort presentation",
+      "bioPlaceholder": "Hej! Jag heter Erik och har undervisat i 8 år…",
+      "serviceAreaLabel": "Serviceområde (valfritt)",
+      "serviceAreaPlaceholder": "Stockholm och närliggande kommuner",
+      "serviceAreaDescription": "Berätta för elever var du kan träffas eller resa. Lämna tomt för att använda din stad."
+    },
+    "success": {
+      "title": "Din profil är live",
+      "body": "Skolannonsen är live. Bekräftelsen skickas till {email}; spara länken till den här sidan så hittar du tillbaka till annonsen.",
+      "emailSent": "Bekräftelsen har skickats.",
+      "emailFailed": "Din profil är live, men vi kunde inte bekräfta att mejlet skickades. Spara profillänken.",
+      "viewProfile": "Visa din profil"
+    }
+  },
+  "instructorOnboardingPage": {
+    "meta": {
+      "title": "Skapa skol konto",
+      "description": "Skapa en auktoriserad trafikskolas annons med publicerat pris och tillgänglighet för elever att jämföra."
+    },
+    "eyebrow": "För auktoriserade trafikskolor",
+    "title": "Skapa skol konto",
+    "lead": "Fyll i formuläret för att skapa annonsen. Publicera det pris och den tillgänglighet som skolan styr över så att elever kan jämföra och boka.",
+    "back": "Tillbaka till översikten",
+    "loading": "Kontrollerar ditt konto…",
+    "error": "Vi kunde inte läsa in din skolregistrering. Försök igen.",
+    "roleMismatch": {
+      "body": "Det här formuläret är för auktoriserade trafikskolor med nödvändiga Transportstyrelsen-behörigheter. Ditt konto är registrerat som {role}.",
+      "student": "körkortselev",
+      "handledare": "handledare",
+      "contactLead": "Om du representerar en auktoriserad trafikskola, kontakta oss på",
+      "contactTail": "för att uppdatera din roll."
+    }
+  },
+  "waitlist": {
+    "saved": "Du är med på listan — vi mejlar dig när DriveLinkUp lanseras.",
+    "error": "Något gick fel — försök igen.",
+    "fields": {
+      "nameLabel": "Namn",
+      "namePlaceholder": "Ditt fullständiga namn",
+      "emailLabel": "E-post",
+      "emailPlaceholder": "du@example.com",
+      "roleLabel": "Jag är"
+    },
+    "roleOptions": {
+      "student": {
+        "label": "Körkortselev",
+        "hint": "Jag vill hitta en trafikskola."
+      },
+      "instructor": {
+        "label": "Auktoriserad trafikskola",
+        "hint": "Jag vill lista min skola på marknadsplatsen."
+      }
+    },
+    "validation": {
+      "nameRequired": "Ange ditt namn.",
+      "nameTooLong": "Håll namnet under 120 tecken.",
+      "emailInvalid": "Ange en giltig e-postadress.",
+      "roleRequired": "Välj om du är elev eller representerar en trafikskola.",
+      "generic": "Vi kunde inte spara dina uppgifter. Försök igen."
+    },
+    "submit": "Spara min plats",
+    "submitting": "Sparar…"
+  },
+  "auth": {
+    "signIn": {
+      "title": "Välkommen tillbaka",
+      "subtitle": "Logga in på ditt DriveLinkUp-konto för att hantera dina lektioner.",
+      "submit": "Logga in",
+      "submitting": "Loggar in…",
+      "switchToSignupLead": "Inget konto ännu?",
+      "switchToSignup": "Skapa ett",
+      "fields": {
+        "emailLabel": "Användarnamn eller e-post",
+        "emailPlaceholder": "ditt användarnamn eller du@example.com",
+        "passwordLabel": "Lösenord",
+        "passwordPlaceholder": "Ditt lösenord"
+      },
+      "errors": {
+        "invalidCredentials": "Användarnamn eller lösenord stämmer inte. Försök igen.",
+        "generic": "Kunde inte logga in. Försök igen."
+      }
+    },
+    "signUp": {
+      "title": "Skapa ditt DriveLinkUp-konto",
+      "subtitle": "Välj en roll — vi anpassar marknadsplatsen efter det.",
+      "submit": "Skapa konto",
+      "submitting": "Skapar konto…",
+      "switchToSigninLead": "Har du redan ett konto?",
+      "switchToSignin": "Logga in",
+      "fields": {
+        "nameLabel": "Fullständigt namn",
+        "namePlaceholder": "Anna Svensson",
+        "emailLabel": "E-post",
+        "emailPlaceholder": "du@example.com",
+        "passwordLabel": "Lösenord",
+        "passwordPlaceholder": "Minst 8 tecken",
+        "roleLabel": "Jag är",
+        "roleStudent": "Körkortselev",
+        "roleInstructor": "Auktoriserad trafikskola — Transportstyrelsen-behörigheter",
+        "roleHandledare": "Privat handledare — vägledningskonto (inte skolannons)",
+        "roleStudentDesc": "Vill ta körkort.",
+        "roleInstructorDesc": "Lista en auktoriserad trafikskola med skolstyrda priser och tillgänglighet.",
+        "roleHandledareDesc": "Endast svensk privat övningsvägledning. Handledare är inte marknadsplatsutbud och kan inte publicera bokningsbara skolannonser."
+      },
+      "clickwrap": {
+        "stepEyebrow": "Handledare-villkor",
+        "stepTitle": "Bekräfta handledare-villkor",
+        "stepLead": "Som handledare sitter du bredvid en körkortselev under övningskörning. Läs villkoren nedan och bocka sedan i rutan för att bekräfta att du uppfyller kraven.",
+        "versionEyebrow": "Villkorsversion {version}",
+        "bodyParagraphs": {
+          "0": "DriveLinkUp kopplar ihop körkortselever och handledare — det är hela vår roll som marknadsplats. Vi förmedlar inte försäkringar, övervakar inte lektionerna och vi bär inte ansvar för vad som händer bakom ratten. Genom att bocka i rutan nedan bekräftar du att din bilförsäkring täcker övningskörning med en körkortselev, och att du kan visa bevis på det (försäkringsbolagets bekräftelse eller ditt försäkringsbrev).",
+          "1": "Ansvaret för handledda lektioner ligger hos dig och eleven under själva lektionen. DriveLinkUp är inte part i upplägget mellan handledare och elev, och vår roll som marknadsplats tar slut när lektionen har bokats och hålls. Om en incident inträffar är det de inblandade parternas försäkringar — inte marknadsplatsen — som är rätt första samtal.",
+          "2": "Dessa villkor kan uppdateras då och då. När vi gör väsentliga ändringar hör vi av oss och ber dig bekräfta på nytt. En logg över varje acceptans — inklusive vilken version av villkoren du godkände och datum — sparas mot ditt konto. Det här är en platsmarkering; grundarteamet ersätter texten med juristgranskad version."
+        },
+        "checkboxLabel": "Jag bekräftar att jag har giltig bilförsäkring som täcker övningskörning med en körkortselev, att ansvaret för handledda lektioner ligger hos mig och eleven (inte DriveLinkUp), och att jag har läst och godkänner handledare-villkoren nedan.",
+        "submit": "Bekräfta och fortsätt",
+        "submitting": "Sparar…",
+        "back": "Tillbaka",
+        "errors": {
+          "attestationRequired": "Bocka i rutan för att bekräfta att du har läst villkoren och har giltig försäkring.",
+          "submitFailed": "Vi kunde inte spara din bekräftelse. Försök igen."
+        }
+      },
+      "errors": {
+        "generic": "Kunde inte skapa ditt konto. Försök igen."
+      },
+      "licenseUpload": {
+        "stepEyebrow": "Verifiera ditt körkort",
+        "stepTitle": "Ladda upp ditt lärarekörkort",
+        "stepLead": "Vi verifierar skolans Transportstyrelsen-behörigheter innan annonsen blir sökbar för elever. Ladda upp ett foto eller en PDF och bekräfta attesteringen nedan.",
+        "fields": {
+          "licenseLabel": "Körkortsfil",
+          "licenseHelp": "JPG, PNG, GIF eller WebP upp till 20 MB, eller en PDF upp till 50 MB.",
+          "licenseAlt": "När du väljer en fil visar vi dess namn och storlek.",
+          "attestationLabel": "Jag bekräftar att detta körkort är mitt och att jag är behörig att undervisa med det."
+        },
+        "submit": "Skicka för granskning",
+        "submitting": "Laddar upp…",
+        "back": "Tillbaka",
+        "errors": {
+          "licenseMissing": "Välj din körkortsfil innan du skickar.",
+          "licenseWrongType": "Filen är inte en JPG, PNG, GIF, WebP eller PDF.",
+          "licenseTooLarge": "Filen är för stor — välj en under storleksgränsen.",
+          "licenseUploadFailed": "Vi kunde inte ladda upp ditt körkort. Försök igen.",
+          "attestationRequired": "Bocka i attesteringen för att bekräfta att det är ditt körkort."
+        }
+      },
+      "pictureUpload": {
+        "stepEyebrow": "Lägg till ditt foto",
+        "stepTitle": "Sätt ett vänligt ansikte på din profil",
+        "stepLead": "Den här bilden hjälper elever att känna igen dig.",
+        "placeholderAria": "Profilfoto",
+        "chooseButton": "Välj ett foto",
+        "dragHint": "Dra och släpp eller välj",
+        "submit": "Fortsätt",
+        "submitting": "Laddar upp…",
+        "confirm": "Bekräfta mitt foto",
+        "confirming": "Bekräftar…",
+        "confirmationLabel": "Jag bekräftar att det här är fotot jag vill använda på min profil.",
+        "staged": "Förhandsvisningen är uppladdad — bekräfta den för att fortsätta.",
+        "back": "Tillbaka",
+        "whyWeAsk": "Vi visar ditt foto på din profil så att elever vet vem de bokar.",
+        "errors": {
+          "pictureRequired": "Välj ett foto för att fortsätta.",
+          "pictureWrongType": "Den filen är inte en giltig bild.",
+          "pictureTooLarge": "Fotot är för stort — håll det under 20 MB.",
+          "pictureUploadFailed": "Vi kunde inte ladda upp ditt foto. Försök igen.",
+          "proxyFailure": "Bildtjänsten returnerade ett fel. Försök igen."
+        }
+      },
+      "segments": {
+        "STUDENT": {
+          "pictureUpload": {
+            "stepEyebrow": "Lägg till ditt foto",
+            "stepTitle": "Sätt ett ansikte på dina bokningar",
+            "stepLead": "Den här bilden hjälper elever att känna igen skolannonsen.",
+            "placeholderAria": "Profilfoto",
+            "chooseButton": "Välj ett foto",
+            "dragHint": "Dra och släpp eller välj",
+            "submit": "Fortsätt",
+            "submitting": "Laddar upp…",
+            "back": "Tillbaka",
+            "whyWeAsk": "Vi visar bilden med bokningsförfrågan så att skolan vet vem som kommer.",
+            "errors": {
+              "pictureRequired": "Välj ett foto för att fortsätta.",
+              "pictureWrongType": "Den filen är inte en giltig bild.",
+              "pictureTooLarge": "Fotot är för stort — håll det under 20 MB.",
+              "pictureUploadFailed": "Vi kunde inte ladda upp ditt foto. Försök igen."
+            }
+          }
+        },
+        "HANDLEDARE": {
+          "pictureUpload": {
+            "stepEyebrow": "Lägg till ditt foto",
+            "stepTitle": "Sätt ett vänligt ansikte på din profil",
+            "stepLead": "Den här bilden hjälper elever att känna igen dig.",
+            "placeholderAria": "Profilfoto",
+            "chooseButton": "Välj ett foto",
+            "dragHint": "Dra och släpp eller välj",
+            "submit": "Fortsätt",
+            "submitting": "Laddar upp…",
+            "back": "Tillbaka",
+            "whyWeAsk": "Vi visar ditt foto på din annons så att elever vet vem de kommer att öva med.",
+            "errors": {
+              "pictureRequired": "Välj ett foto för att fortsätta.",
+              "pictureWrongType": "Den filen är inte en giltig bild.",
+              "pictureTooLarge": "Fotot är för stort — håll det under 20 MB.",
+              "pictureUploadFailed": "Vi kunde inte ladda upp ditt foto. Försök igen."
+            }
+          }
+        },
+        "INSTRUCTOR": {
+          "pictureUpload": {
+            "stepEyebrow": "Lägg till ditt foto",
+            "stepTitle": "Sätt ett vänligt ansikte på din profil",
+            "stepLead": "Den här bilden hjälper elever att känna igen dig.",
+            "placeholderAria": "Profilfoto",
+            "chooseButton": "Välj ett foto",
+            "dragHint": "Dra och släpp eller välj",
+            "submit": "Fortsätt",
+            "submitting": "Laddar upp…",
+            "back": "Tillbaka",
+            "whyWeAsk": "Vi visar ditt foto på din profil så att elever vet vem de bokar.",
+            "errors": {
+              "pictureRequired": "Välj ett foto för att fortsätta.",
+              "pictureWrongType": "Den filen är inte en giltig bild.",
+              "pictureTooLarge": "Fotot är för stort — håll det under 20 MB.",
+              "pictureUploadFailed": "Vi kunde inte ladda upp ditt foto. Försök igen."
+            }
+          },
+          "licenseUpload": {
+            "stepEyebrow": "Verifiera ditt körkort",
+            "stepTitle": "Ladda upp ditt lärarekörkort",
+            "stepLead": "Vi verifierar skolans Transportstyrelsen-behörigheter innan annonsen blir synlig för elever. Ladda upp ett foto eller en PDF och bekräfta attesteringen nedan.",
+            "fields": {
+              "licenseLabel": "Körkortsfil",
+              "licenseHelp": "JPG, PNG, GIF eller WebP upp till 20 MB, eller en PDF upp till 50 MB.",
+              "licenseAlt": "När du väljer en fil visar vi dess namn och storlek.",
+              "attestationLabel": "Jag bekräftar att detta körkort är mitt och att jag är behörig att undervisa med det."
+            },
+            "submit": "Skicka för granskning",
+            "submitting": "Laddar upp…",
+            "back": "Tillbaka",
+            "errors": {
+              "licenseMissing": "Välj din körkortsfil innan du skickar.",
+              "licenseWrongType": "Filen är inte en JPG, PNG, GIF, WebP eller PDF.",
+              "licenseTooLarge": "Filen är för stor — välj en under storleksgränsen.",
+              "licenseUploadFailed": "Vi kunde inte ladda upp ditt körkort. Försök igen.",
+              "attestationRequired": "Bocka i attesteringen för att bekräfta att det är ditt körkort."
+            }
+          }
+        }
+      }
+    }
+  },
+  "bookingFees": {
+    "serviceFeeLabel": "Ingen separat DriveLinkUp-avgift",
+    "commissionLabel": "Skolans provisionsinställning",
+    "learnerBreakdown": {
+      "eyebrow": "Ditt pris",
+      "priceLine": "Lektionspris",
+      "feeLine": "DriveLinkUp-avgift",
+      "totalLine": "Skolans pris / elevens total",
+      "note": "DriveLinkUp lägger inte på någon separat elevavgift. Skolans publicerade pris är elevens total före kassan.",
+      "error": "Den aktuella totalen kunde inte laddas.",
+      "retry": "Försök igen"
+    },
+    "instructorBreakdown": {
+      "rateLine": "Publicerat lektionspris",
+      "commissionLine": "Skolans provision efter genomförande",
+      "payoutLine": "10 % gäller på hänförligt bokningsvärde först efter genomförd tjänst.",
+      "exampleTitle": "Exempel"
+    }
+  },
+  "instructorPayoutCard": {
+    "title": "Provision per bokning",
+    "eyebrow": "Utbetalningar",
+    "body": "Auktoriserade trafikskolor betalar {percent} % av hänförligt bokningsvärde först efter genomförd tjänst.",
+    "payoutLine": "Skolan styr sitt publicerade pris och sin tillgänglighet; ingen provision tas före genomförd tjänst.",
+    "exampleTitle": "Exempel vid 600 SEK/h",
+    "exampleLine": "En genomförd bokning på {price} SEK → {fee} SEK provision och {payout} SEK kvar till skolan.",
+    "exampleLearnerLine": "Eleven betalar skolans publicerade pris {price} SEK; DriveLinkUp lägger inte på någon separat avgift.",
+    "errorTitle": "Kunde inte ladda provisionsinformationen.",
+    "retry": "Försök igen"
+  },
+  "dashboard": {
+    "signedInAs": "Inloggad som {name}",
+    "shell": {
+      "loading": "Laddar kontrollpanel…",
+      "redirecting": "Omdirigerar till inloggning…",
+      "brand": "Kontrollpanel",
+      "adminAccess": "Adminåtkomst",
+      "marketplace": "Marknadsplats"
+    },
+    "nav": {
+      "ariaLabel": "Dashboard-sektioner",
+      "studentTab": "Elev",
+      "instructorTab": "Trafikskola",
+      "handledareTab": "Handledare",
+      "adminBadge": "Admin",
+      "signOut": "Logga ut",
+      "signingOut": "Loggar ut…",
+      "signOutError": "Det gick inte att logga ut. Försök igen.",
+      "messagesTab": "Meddelanden",
+      "overviewTab": "Översikt",
+      "availabilityTab": "Tillgänglighet"
+    },
+    "providerActivation": {
+      "eyebrow": "Marknadsplatsens hälsa",
+      "pageTitle": "Aktivering av trafikskolor",
+      "pageLead": "En aktuell vy över skolor som är redo att visas i det publika skolregistret.",
+      "title": "Aktiverade trafikskolor",
+      "description": "Det aktuella antalet aktiverade skolannonser på marknadsplatsen.",
+      "count": "{count, plural, one {# aktiverad trafikskola} other {# aktiverade trafikskolor}}",
+      "trendNeutral": "Ingen historik ännu",
+      "trendConfirmed": "Trend bekräftad",
+      "liveLabel": "Aktuell siffra",
+      "tooltipLabel": "Så definieras aktivering",
+      "tooltip": "En skola räknas som aktiverad när skolannonsen publicerar minst en kanonisk körkortskategori: AM, A1, A2, A, B eller BE. Det matchar det publika skolregistret. Det finns ännu ingen historisk aktiveringskälla, så rutan visar ingen procentuell förändring.",
+      "loading": "Laddar antal aktiverade…",
+      "error": "Det gick inte att läsa in antalet aktiverade.",
+      "retry": "Försök igen"
+    },
+    "completedLessons": {
+      "title": "Genomförda lektioner",
+      "description": "En snabb överblick över lektioner du har genomfört och fått utbetalda.",
+      "roles": {
+        "INSTRUCTOR": "Trafikskola",
+        "HANDLEDARE": "Handledare"
+      },
+      "count": "{count, plural, one {# genomförd lektion} other {# genomförda lektioner}}",
+      "completedLabel": "Utbetalda",
+      "recentTitle": "Senaste lektionerna",
+      "lessonDate": "Lektion {date}",
+      "completedDate": "Genomförd {date}",
+      "emptyTitle": "Inga genomförda lektioner ännu",
+      "emptyBody": "Genomförda och utbetalda lektioner visas här när både lektionen och betalningen är klara.",
+      "loading": "Laddar genomförda lektioner…",
+      "error": "Det gick inte att hämta dina genomförda lektioner.",
+      "retry": "Försök igen"
+    },
+    "signupConfirmation": {
+      "title": "Ditt konto är klart",
+      "body": "Välkommen till DriveLinkUp — ditt konto är klart. Ditt profilfoto bekräftades under registreringen.",
+      "emailNote": "Vi har skickat en bekräftelse till din inkorg.",
+      "dismiss": "Stäng"
+    },
+    "student": {
+      "eyebrow": "Elev",
+      "title": "Min dashboard",
+      "lead": "Dina bokningsförfrågningar och kommande lektioner. Klicka på en rad för att se full status, betalning och bekräftelsesteg.",
+      "upcomingBookings": "Bokade lektioner",
+      "count": "{count, plural, one {# bokning} other {# bokningar}}",
+      "open": "Öppna",
+      "emptyTitle": "Inga bokningar ännu.",
+      "emptyBody": "Bläddra bland pilotkullen, välj en trafikskola och skicka din första bokningsförfrågan — den hamnar här så snart skolan svarar.",
+      "emptyCta": "Bläddra bland trafikskolor",
+      "loadError": "Vi kunde inte hämta dina bokningar just nu.",
+      "retry": "Försök igen",
+      "paymentStatus": {
+        "unpaid": "Väntar på betalning",
+        "pending": "Betalning pågår",
+        "paid": "Betald",
+        "heldEscrow": "Hålls i escrow",
+        "released": "Genomförd",
+        "refunded": "Återbetald",
+        "awaitingApproval": "Väntar på godkännande",
+        "declined": "Avböjd",
+        "cancelled": "Avbokad"
+      },
+      "recommended": {
+        "eyebrow": "Rekommenderade trafikskolor",
+        "title": "Skolor som matchar din bokning",
+        "lead": "AI-rankade matchningar för din valda kategori, stad och tillgänglighet — från pilotkullen, sorterade på passform, stads-matchning och lediga tider.",
+        "viewProfile": "Visa profil",
+        "nextSlot": "Nästa lediga tid · {when}",
+        "portraitAlt": "Bild för {name}, trafikskola",
+        "englishAvailable": "Engelska tillgängligt",
+        "rateSuffix": "SEK / timme",
+        "errorTitle": "Vi kunde inte hämta dina rekommendationer just nu.",
+        "retry": "Försök igen"
+      },
+      "viewAllBookings": "Se alla bokningar",
+      "history": {
+        "eyebrow": "Bokningshistorik",
+        "title": "Din bokningshistorik",
+        "lead": "Alla lektioner du har bokat — genomförda och kommande, med timtaxan som gäller vid visningstillfället.",
+        "sectionUpcoming": "Kommande",
+        "sectionPast": "Tidigare",
+        "count": "{count, plural, one {# bokning} other {# bokningar}}",
+        "instructorLabel": "Trafikskola",
+        "categoryLabel": "Kategori",
+        "dateLabel": "Tidpunkt",
+        "priceLabel": "Pris",
+        "statusLabel": "Status",
+        "priceApproxNote": "Pris enligt nuvarande timtaxa.",
+        "loadError": "Vi kunde inte hämta din bokningshistorik just nu.",
+        "retry": "Försök igen",
+        "emptyTitle": "Inga bokningar ännu.",
+        "emptyBody": "När du skickat din första bokningsförfrågan hamnar den här — både genomförda och kommande.",
+        "emptyCta": "Bläddra bland trafikskolor",
+        "backToDashboard": "Tillbaka till dashboard",
+        "statusCancelled": "Avbokad",
+        "statusDisputeOpen": "Tvist öppen",
+        "receiptLink": "Visa kvitto",
+        "receiptDeliveryFailed": "Kvitto-e-post kräver åtgärd",
+        "receiptDeliveryFailedBody": "Betalningen är bekräftad, men kvitto-e-postmeddelandet kunde inte skickas. Öppna kvittot för att försöka igen.",
+        "receiptDeliveryFailedShort": "Kvitto-e-post misslyckades",
+        "reviewCta": "Lämna en recension"
+      },
+      "rebook": {
+        "ariaLabel": "Snabb ombokning",
+        "title": "Boka om hos en bekant skola",
+        "lead": "Välj en skola du redan bokat hos. Vi fyller i dina uppgifter — du bekräftar bara.",
+        "cta": "Boka om {teacher}"
+      },
+      "paymentMethods": {
+        "eyebrow": "Sparade uppgifter",
+        "title": "Sparade betalningsmetoder",
+        "lead": "Vi lagrar aldrig själva kortet — bara e-postadressen för den som betalade. Listan nedan visar de senaste betalarna för dina bokningar.",
+        "emptyTitle": "Inga sparade betalningsmetoder ännu.",
+        "emptyBody": "När du betalat för en lektion hamnar köparens e-post här, så att ombokning hos en bekant skola går snabbt.",
+        "emptyHint": "Använd bokningshistoriken ovan för att boka om hos en tidigare skola i ett klick.",
+        "loadError": "Vi kunde inte hämta dina sparade uppgifter just nu.",
+        "last4WithBrand": "{brand} som slutar på {last4}",
+        "brandOnly": "{brand} på fil",
+        "lastUsed": "Senast betald för {when} sedan",
+        "defaultBadge": "Standard",
+        "setDefault": "Ange som standard",
+        "forget": "Glöm"
+      }
+    },
+    "instructor": {
+      "eyebrow": "Trafikskola",
+      "title": "Trafikskolans dashboard",
+      "lead": "Nya bokningsförfrågningar från elever. Öppna en rad för att bekräfta, avböja eller svara, medan skolan styr annonsen.",
+      "availabilityCta": "Hantera tillgänglighet",
+      "newRequests": "Nya förfrågningar",
+      "count": "{count, plural, one {# förfrågan} other {# förfrågningar}}",
+      "requested": "Ny",
+      "status": {
+        "awaitingApproval": "Väntar på godkännande",
+        "declined": "Avböjd",
+        "cancelled": "Avbokad"
+      },
+      "open": "Öppna",
+      "emptyTitle": "Inga nya förfrågningar just nu.",
+      "emptyBody": "Vi visar nya elevförfrågningar här. Se till att annonsen visar skolans kategorier och städerna ni täcker.",
+      "loadError": "Vi kunde inte hämta dina förfrågningar just nu.",
+      "retry": "Försök igen",
+      "pendingLicense": {
+        "pendingEyebrow": "Väntar på granskning",
+        "pendingTitle": "Skolans behörigheter verifieras",
+        "pendingBody": "Tack för att du laddade upp skolans Transportstyrelsen-behörigheter. Vi granskar dem och mejlar när skolannonsen kan hittas av elever.",
+        "rejectedEyebrow": "Verifiering misslyckades",
+        "rejectedTitle": "Vi kunde inte verifiera ditt körkort",
+        "rejectedBody": "Se anledningen nedan och ladda upp en tydligare kopia från din dashboard."
+      },
+      "createListing": {
+        "eyebrow": "Nästa steg",
+        "title": "Skapa skolannonsen",
+        "body": "Behörigheterna är verifierade — skapa annonsen så att elever kan jämföra skolan.",
+        "cta": "Skapa annons"
+      },
+      "availability": {
+        "eyebrow": "Tillgänglighet",
+        "title": "Hantera din tillgänglighet",
+        "lead": "Släpp de tider elever kan boka. Skapa återkommande tider, lägg till en enstaka lucka eller ändra redan publicerade tider.",
+        "formWeeklyTitle": "Veckotider",
+        "formWeeklyHint": "Välj veckodagar, startdatum, tid och hur många veckor framåt.",
+        "formSingleTitle": "Enstaka tid",
+        "formSingleHint": "För en oregelbunden dag — enstaka eftermiddag, helg eller ombokning.",
+        "weekdayLabel": "Veckodagar",
+        "startDateLabel": "Startdatum",
+        "timeOfDayLabel": "Klockslag",
+        "weeksAheadLabel": "Antal veckor",
+        "weeksAheadHint": "Mellan 1 och 12 — datum i förflutet hoppas över.",
+        "durationLabel": "Längd (minuter)",
+        "durationHint": "Mellan 15 och 240.",
+        "submitBulk": "Släpp tider",
+        "submitBulkSubmitting": "Skapar…",
+        "submitBulkDone": "Tider skapade",
+        "submitSingle": "Lägg till tid",
+        "submitSingleSubmitting": "Lägger till…",
+        "submitSingleDone": "Tid tillagd",
+        "submitError": "Kunde inte spara — försök igen.",
+        "invalidDate": "Välj giltig start- och sluttid.",
+        "loadError": "Kunde inte läsa in dina tider.",
+        "retry": "Försök igen",
+        "emptyTitle": "Inga kommande tider.",
+        "emptyBody": "Släpp några tider i veckoformuläret ovan — elever ser dem och kan boka.",
+        "upcomingTitle": "Kommande tider",
+        "bookedCount": "{count, plural, one {# bokad} other {# bokade}}",
+        "bookedBadge": "Bokad",
+        "slotDuration": "{minutes} min",
+        "editRow": "Ändra",
+        "deleteRow": "Ta bort",
+        "deleteConfirm": "Ta bort {when}? Elever kommer inte kunna boka den.",
+        "deleteSaved": "Tid borttagen",
+        "saveEdit": "Spara",
+        "cancelEdit": "Avbryt",
+        "editSaved": "Tid uppdaterad",
+        "cannotDeleteBooked": "Tiden är redan bokad — hantera den via bokningen istället för att ta bort den.",
+        "startAtLabel": "Start (lokal)",
+        "endsAtLabel": "Slut (lokal)"
+      },
+      "history": {
+        "eyebrow": "Bokningshistorik",
+        "title": "Genomförda transaktioner",
+        "lead": "Avslutade lektioner med elevens totala betalning och din skatteklara utbetalningsöversikt.",
+        "count": "{count, plural, one {# bokning} other {# bokningar}}",
+        "empty": "Inga genomförda transaktioner ännu.",
+        "emptyBody": "Dina avslutade lektioner visas här när lektionen och utbetalningen är klara.",
+        "loadError": "Vi kunde inte hämta din bokningshistorik just nu.",
+        "retry": "Försök igen",
+        "receiptLink": "Visa kvitto",
+        "receiptOpen": "Öppna skolans kvitto",
+        "receiptDownload": "Ladda ner kvitto som PDF",
+        "receiptUnavailable": "Kvitto saknas",
+        "receiptUnavailableBody": "Den här äldre transaktionen saknar ett kanoniskt kvittosnapshot än.",
+        "receiptDeliveryFailed": "Kvitto-e-post kräver åtgärd",
+        "receiptDeliveryFailedShort": "Kvitto-e-post misslyckades",
+        "open": "Öppna bokning",
+        "grossPaid": "Brutto betalt av eleven",
+        "serviceFee": "DriveLinkUp-avgift",
+        "commission": "Skolprovision (10 %)",
+        "netPayout": "Skolans nettoutbetalning",
+        "payoutUnavailable": "Utbetalningsöversikt saknas",
+        "paymentStatus": {
+          "unpaid": "Väntar på betalning",
+          "pending": "Betalning pågår",
+          "paid": "Betald",
+          "heldEscrow": "Hålls i escrow",
+          "released": "Genomförd",
+          "refunded": "Återbetald",
+          "awaitingApproval": "Väntar på godkännande",
+          "declined": "Avböjd",
+          "cancelled": "Avbokad"
+        },
+        "payoutStatus": {
+          "not_applicable": "Inte tillämpligt",
+          "pending": "Utbetalning väntar",
+          "released": "Utbetalning frigjord",
+          "refunded": "Återbetald",
+          "cancelled": "Ingen utbetalning"
+        }
+      }
+    },
+    "handledare": {
+      "eyebrow": "Handledare",
+      "title": "Handledare-dashboard",
+      "lead": "Bläddra bland elever som söker handledd övningskörning och visa att du är tillgänglig. Du måste godkänna handledare-villkoren innan din profil blir aktiv.",
+      "learnersCta": "Bläddra bland elever",
+      "statusTitle": "Dina handledare-villkor är godkända",
+      "statusBody": "Du kan bläddra bland elever och visa din tillgänglighet. Vi finns här medan marknadsplatsen växer och listnings-sökningen rullas ut.",
+      "availability": {
+        "eyebrow": "Tillgänglighet",
+        "title": "Hantera din handledartillgänglighet",
+        "lead": "Publicera tider då elever kan be om handledd övningskörning.",
+        "nav": "Tillgänglighet"
+      },
+      "clickwrap": {
+        "pendingEyebrow": "Nästan där",
+        "pendingTitle": "Godkänn handledare-villkoren",
+        "pendingBody": "Innan din profil kan bli aktiv på DriveLinkUp behöver du läsa och godkänna handledare-villkoren — en aktiv, daterad acceptans (inte en passiv sidnotis).",
+        "renewalEyebrow": "Villkoren uppdaterade",
+        "renewalTitle": "Godkänn handledare-villkoren på nytt",
+        "renewalBody": "Vi har uppdaterat handledare-villkoren sedan du senast godkände dem. Läs igenom och bocka i rutan för att bekräfta på nytt. Din tidigare acceptans finns kvar i din journal — att bekräfta här registrerar bara din acceptans av den nya versionen.",
+        "currentBadge": "Handledare-villkor godkända",
+        "versionEyebrow": "Villkorsversion {version}",
+        "bodyParagraphs": {
+          "0": "DriveLinkUp kopplar ihop körkortselever och handledare — det är hela vår roll som marknadsplats. Vi förmedlar inte försäkringar, övervakar inte lektionerna och vi bär inte ansvar för vad som händer bakom ratten. Genom att bocka i rutan nedan bekräftar du att din bilförsäkring täcker övningskörning med en körkortselev, och att du kan visa bevis på det (försäkringsbolagets bekräftelse eller ditt försäkringsbrev).",
+          "1": "Ansvaret för handledda lektioner ligger hos dig och eleven under själva lektionen. DriveLinkUp är inte part i upplägget mellan handledare och elev, och vår roll som marknadsplats tar slut när lektionen har bokats och hålls. Om en incident inträffar är det de inblandade parternas försäkringar — inte marknadsplatsen — som är rätt första samtal.",
+          "2": "Dessa villkor kan uppdateras då och då. När vi gör väsentliga ändringar hör vi av oss och ber dig bekräfta på nytt. En logg över varje acceptans — inklusive vilken version av villkoren du godkände och datum — sparas mot ditt konto. Det här är en platsmarkering; grundarteamet ersätter texten med juristgranskad version."
+        },
+        "checkboxLabel": "Jag bekräftar att jag har giltig bilförsäkring som täcker övningskörning med en körkortselev, att ansvaret för handledda lektioner ligger hos mig och eleven (inte DriveLinkUp), och att jag har läst och godkänner handledare-villkoren nedan.",
+        "submit": "Bekräfta och fortsätt",
+        "submitting": "Sparar…",
+        "back": "Tillbaka",
+        "renewalSuccess": "Tack — din acceptans är registrerad.",
+        "errors": {
+          "attestationRequired": "Bocka i rutan för att bekräfta att du har läst villkoren och har giltig försäkring.",
+          "submitFailed": "Vi kunde inte spara din bekräftelse. Försök igen."
+        }
+      },
+      "eligibility": {
+        "eyebrow": "Din handledarbehörighet",
+        "title": "Du är godkänd handledare",
+        "body": "Du kan nu sitta bredvid en körkortselev under handledd övningskörning.",
+        "yourRequirementsTitle": "Vad du behöver",
+        "req0": "Minst 5 år med giltigt B-körkort (eller mer beroende på kategori)",
+        "req1": "Giltig bilförsäkring som täcker övningskörning med körkortselev",
+        "learnerNeedsTitle": "Vad din elev behöver",
+        "learnerNeedsItem": "Giltigt körkortstillstånd (KKT) — eleven måste ha detta INNAN ni börjar öva",
+        "noHandledarkursNote": "Observera: handledarkurs är inte längre ett lagkrav sedan 2021."
+      },
+      "upgrade": {
+        "eyebrow": "Verifiera skolans behörigheter",
+        "title": "Slutför verifieringen av trafikskolan",
+        "lead": "Ladda upp bevis på skolans Transportstyrelsen-behörigheter här. Vi verifierar dem; när de är godkända kan kontot publicera en auktoriserad skolannons.",
+        "loadErrorEyebrow": "Något gick fel",
+        "loadErrorBody": "Vi kunde inte läsa din licensstatus. Försök ladda om sidan.",
+        "retry": "Försök igen",
+        "pendingEyebrow": "Väntar på granskning",
+        "pendingBody": "Ditt intyg är hos oss. Vi mejlar dig så snart det är verifierat — eller så snart en admin har granskat dokumentet, om vi inte kan matcha det mot Transportstyrelsens register.",
+        "rejectedEyebrow": "Intyget godkändes inte",
+        "rejectedBody": "Vi kunde inte matcha intyget du laddade upp. Du kan skicka en ny fil nedan; den tidigare finns kvar i din journal men granskas inte igen.",
+        "pepEyebrow": "Slutför uppgraderingen",
+        "pepTitle": "Nästan klart",
+        "pepBody": "Behörigheterna är verifierade — vi växlar kontot till skolvyn nu…",
+        "verifiedEyebrow": "Uppgraderad",
+        "verifiedTitle": "Välkommen ombord",
+        "verifiedBody": "Kontot kan nu fungera som en auktoriserad skolannons. Vi tar dig till skolans dashboard strax.",
+        "autoUpgradeSuccess": "Skolans verifiering är klar — vi tar dig dit…",
+        "autoUpgradeFailed": "Något gick fel när vi växlade över. Ladda om sidan eller logga ut och in igen för att försöka igen.",
+        "form": {
+          "fileLabel": "Fil för lärarintyg",
+          "fileHelp": "JPG, PNG, GIF eller WebP upp till 20 MB, eller en PDF upp till 50 MB.",
+          "fileSelectedNone": "När du väljer en fil visar vi dess namn och storlek.",
+          "fileWrongType": "Filen är inte en JPG, PNG, GIF, WebP eller PDF.",
+          "fileTooLarge": "Filen är för stor — välj en under storleksgränsen.",
+          "attestationLabel": "Jag bekräftar att detta intyg är mitt och att jag är behörig att undervisa med det.",
+          "submit": "Skicka intyg för granskning",
+          "submitting": "Laddar upp…",
+          "errors": {
+            "uploadFailed": "Vi kunde inte ladda upp ditt intyg. Försök igen.",
+            "attestationRequired": "Bocka i attesteringen för att bekräfta att det är ditt intyg."
+          }
+        }
+      }
+    },
+    "admin": {
+      "instructorLicenses": {
+        "eyebrow": "Admin",
+        "title": "Granskning av instruktörsintyg",
+        "lead": "Väntande Transportstyrelsen-lärarintyg. Den äldsta förfrågan ligger överst. Att godkänna en HANDLEDARE-rad växlar deras konto till certifierad instruktör och mejlar dem; att godkänna en redan INSTRUKTÖR-rad bekräftar bara det befintliga beslutet.",
+        "columns": {
+          "user": "Användare",
+          "submittedAt": "Skickad",
+          "file": "Intyg",
+          "actions": "Åtgärder"
+        },
+        "actions": {
+          "verify": "Godkänn",
+          "reject": "Avvisa",
+          "verifyShort": "Godkänn",
+          "rejectShort": "Avvisa"
+        },
+        "dialog": {
+          "rejectReasonLabel": "Anledning till avvisning (visas för användaren)",
+          "rejectReasonPlaceholder": "t.ex. Bilden var för suddig för att läsa körkortskategorin.",
+          "submit": "Skicka beslut",
+          "cancel": "Avbryt"
+        },
+        "empty": "Inga väntande intyg.",
+        "loadError": "Vi kunde inte läsa den väntande listan.",
+        "toasts": {
+          "approveSuccess": "Godkänd — uppgraderingsflödet har körts.",
+          "rejectSuccess": "Avvisad — användaren kan ladda upp igen.",
+          "approveFailed": "Kunde inte godkänna. Försök igen.",
+          "rejectFailed": "Kunde inte avvisa. Försök igen.",
+          "rejectionRequired": "Lägg till en anledning så användaren vet vad som ska fixas."
+        }
+      }
+    }
+  },
+  "bookingDispute": {
+    "openFormEyebrow": "Öppna en tvist",
+    "openFormTitle": "Flagga ett problem med bokningen",
+    "openFormLead": "Beskriv vad som har hänt — den andra parten får ett mejl och kan lösa tvisten via samma länk du använde. Utbetalningen pausas tills tvisten är löst.",
+    "nameLabel": "Ditt namn",
+    "youAreLabel": "Du är",
+    "youAreLearner": "Elev",
+    "youAreInstructor": "Instruktör",
+    "reasonLabel": "Anledning",
+    "reasonPlaceholder": "Berätta vad som har hänt — vi vidarebefordrar inget av din text utan ditt medgivande, men en kort sammanfattning syns i bekräftelsemejlet.",
+    "reasonCounter": "{count} / {max} tecken",
+    "openSubmit": "Öppna tvist",
+    "opening": "Öppnar…",
+    "resolveFormTitle": "Tvisten är öppen — välj utgång",
+    "resolveFormLead": "Pengarna är pausade. Välj hur du vill lösa tvisten — antingen frigörs de till instruktören, eller återbetalas till eleven (hanteras av vår support).",
+    "noteLabel": "Kommentar (valfri)",
+    "resolveRefund": "Återbetala eleven",
+    "resolveRelease": "Frigör till instruktören",
+    "resolving": "Skickar…",
+    "inertTitle": "Kan inte öppna tvist",
+    "openedBadge": "Tvist öppnad",
+    "openedTitle": "Din tvist är registrerad.",
+    "openedBody": "Utbetalningen är pausad. Den andra parten får ett mejl och kan välja att lösa tvisten via samma länk du använde.",
+    "releasedTitle": "Medlen har frigjorts till din instruktör.",
+    "refundedTitle": "Återbetalning är på väg.",
+    "refundedBody": "Pengarna syns normalt på kontot inom 1–2 bankdagar — vi sköter återbetalningen utanför appen.",
+    "resolvedBody": "Klart — bokningen är stängd. Tack för att du tog dig tid.",
+    "resolvedBadge": "Tvist löst",
+    "error": "Något gick fel",
+    "notFound": "Bokningen hittades inte",
+    "loadError": "Kunde inte ladda bokningen.",
+    "openError": "Kunde inte öppna tvisten.",
+    "resolveError": "Kunde inte lösa tvisten.",
+    "invalidAction": "Ogiltig åtgärdslänk",
+    "invalidActionBody": "Länken du använde ger inte behörighet till den här åtgärden. Öppna det senaste mejlet vi skickade och följ länken därifrån.",
+    "inert": {
+      "released": "Lektionen är redan markerad som genomförd — pengarna är frigjorda. En tvist är inte längre aktuell här.",
+      "refunded": "En återbetalning har redan utfärdats för den här bokningen.",
+      "resolved_released": "Tvisten är redan löst med pengar frigjorda till instruktören.",
+      "resolved_refunded": "Tvisten är redan löst med återbetalning. Hanterat utanför appen av oss.",
+      "notHeld": "Tvister kan bara öppnas medan bokningen hålls i escrow — vanligtvis innan lektionen äger rum.",
+      "alreadyOpen": "Det finns redan en öppen tvist för den här bokningen.",
+      "notOpen": "Det finns ingen öppen tvist att lösa."
+    }
+  },
+  "bookingComplete": {
+    "eyebrow": "Markera lektion som genomförd",
+    "title": "Genomför lektionen",
+    "body": "När lektionen är avklarad markerar du den här som genomförd — då frigörs medlen från escrow och din instruktör får sin utbetalning.",
+    "nameLabel": "Ditt namn",
+    "youAreLabel": "Du är",
+    "youAreLearner": "Elev",
+    "youAreInstructor": "Instruktör",
+    "submit": "Markera lektionen som genomförd",
+    "submitting": "Markerar…",
+    "releasedBadge": "Lektion genomförd",
+    "releasedTitle": "Tack — lektionen är markerad som genomförd.",
+    "releasedBody": "Medlen har släppts från escrow.",
+    "releasedByLabel": "Markerad av {name}.",
+    "cantCompleteTitle": "Kan inte markeras som genomförd",
+    "disputeOpen": "En tvist är öppen för den här bokningen — lös den innan lektionen markeras som genomförd.",
+    "notEscrow": "Lektionen kan inte markeras som genomförd från den här länken just nu — bokningen ligger inte i escrow.",
+    "errorTitle": "Något gick fel",
+    "notFound": "Bokningen hittades inte",
+    "loadError": "Kunde inte ladda bokningen.",
+    "submitError": "Kunde inte markera lektionen som genomförd.",
+    "invalidAction": "Ogiltig åtgärdslänk",
+    "invalidActionBody": "Länken du använde ger inte behörighet till den här åtgärden. Öppna det senaste mejlet vi skickade och följ länken därifrån.",
+    "nameRequired": "Ange ditt namn så vi kan registrera vem som markerade lektionen som genomförd."
+  },
+  "instructorPreview": {
+    "meta": {
+      "title": "Instruktörsförhandsvisning | DriveLinkUp",
+      "description": "Se instruktörskorten från elevens sida och fortsätt till den aktuella katalogen."
+    },
+    "pageEyebrow": "Elevvy",
+    "pageTitle": "Förhandsvisa skolmarknaden",
+    "pageBody": "De här aktuella korten visar informationen en elev använder för att jämföra instruktörer. Öppna en profil för tillgänglighet, pris, policy och bokning.",
+    "directoryCta": "Öppna hela katalogen",
+    "errorTitle": "Förhandsvisningen kunde inte laddas.",
+    "empty": "Inga instruktörer är listade ännu.",
+    "portraitAlt": "Profilbild på {name}",
+    "rateSuffix": "SEK / timme",
+    "nextAvailableLabel": "Nästa lediga tid",
+    "noUpcomingSlot": "Ingen kommande tid listad",
+    "englishAvailable": "Engelska tillgängligt",
+    "swedishAvailable": "Svenska",
+    "profileCta": "Visa profil",
+    "slotLabel": "Nästa lediga tid",
+    "slotLabelRelative": "Nästa lediga tid · {when}",
+    "slotMonthDay": "{day} {monthShort}",
+    "slotTime": "{time}",
+    "slotTimeAndWeekday": "{weekday} {time}"
+  },
+  "reviewForm": {
+    "title": "Lämna en recension",
+    "description": "Dela din upplevelse av instruktören — ditt namn, ett betyg i stjärnor och en kort kommentar.",
+    "submit": "Publicera recension",
+    "submitting": "Publicerar…",
+    "submitError": "Något gick fel. Försök igen.",
+    "submitSuccess": "Tack — din recension är publicerad.",
+    "context": {
+      "notEligibleTitle": "Recensioner blir tillgängliga efter en genomförd lektion",
+      "notEligibleBody": "Öppna en genomförd bokning från din elevdashboard för att lämna feedback.",
+      "alreadyReviewedTitle": "Du har redan recenserat den här lektionen",
+      "alreadyReviewedBody": "Tack för att du hjälper framtida elever att välja tryggt.",
+      "errorTitle": "Vi kunde inte kontrollera recensionen",
+      "errorBody": "Öppna länken igen från din bokningshistorik eller försök senare."
+    },
+    "validation": {
+      "nameRequired": "Ange ditt namn.",
+      "nameTooLong": "Det namnet är för långt.",
+      "ratingRequired": "Välj ett betyg.",
+      "commentRequired": "Skriv en kort kommentar.",
+      "bookingUnavailable": "Den här lektionen är inte tillgänglig för en recension."
+    },
+    "labels": {
+      "nameLabel": "Ditt namn",
+      "ratingLabel": "Betyg",
+      "ratingAriaLabel": "Betyg från 1 till 5 stjärnor",
+      "commentLabel": "Din kommentar"
+    },
+    "placeholders": {
+      "namePlaceholder": "Sara K.",
+      "commentPlaceholder": "Vad stack ut under lektionen?"
+    },
+    "ratingOption": "★ {rating}",
+    "list": {
+      "heading": "Recensioner",
+      "emptyTitle": "Inga recensioner ännu.",
+      "emptyBody": "Bli först med att lämna en — berätta vad som stack ut under lektionen.",
+      "loadError": "Kunde inte läsa in recensionerna.",
+      "retry": "Försök igen",
+      "ratingValue": "{rating}/5",
+      "errorTitle": "Vi kunde inte spara din recension."
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "signedInAs": "Inloggad som {name}",
+    "role": {
+      "label": "Roll",
+      "learner": "Elev",
+      "instructor": "Instruktör",
+      "handledare": "Handledare"
+    },
+    "pictureUpload": {
+      "editButton": "Redigera foto",
+      "editButtonAlt": "Lägg till foto",
+      "stepEyebrow": "Uppdatera ditt foto",
+      "stepTitle": "Sätt ett ansikte på din profil",
+      "stepLead": "Ett tydligt foto hjälper andra att känna igen dig.",
+      "placeholderAria": "Profilfoto",
+      "chooseButton": "Välj ett foto",
+      "dragHint": "Dra och släpp eller välj",
+      "submit": "Spara",
+      "submitting": "Sparar…",
+      "confirm": "Bekräfta mitt foto",
+      "confirming": "Bekräftar…",
+      "confirmationLabel": "Jag bekräftar att det här är fotot jag vill använda på min profil.",
+      "staged": "Förhandsvisningen är uppladdad — bekräfta den för att slutföra.",
+      "cancel": "Avbryt",
+      "whyWeAsk": "Vi visar ditt foto på din profil och dina bokningar så att andra vet vem de träffar.",
+      "successToast": "Ditt foto har uppdaterats.",
+      "errors": {
+        "pictureWrongType": "Den filen är inte en giltig bild.",
+        "pictureTooLarge": "Fotot är för stort — håll det under 20 MB.",
+        "pictureUploadFailed": "Vi kunde inte ladda upp ditt foto. Försök igen."
+      }
+    },
+    "upcoming": {
+      "studentEyebrow": "Kommande bokningar",
+      "instructorEyebrow": "Kommande lektioner",
+      "count": "{count, plural, one {# bokning} other {# bokningar}}",
+      "open": "Öppna",
+      "emptyTitle": "Inga kommande bokningar ännu.",
+      "emptyBodyStudent": "Välj en kategori, bläddra bland pilotinstruktörerna och boka din nästa lektion — den hamnar här så snart din instruktör bekräftar.",
+      "emptyBodyInstructor": "Släpp några lediga tider på din tillgänglighetssida så ser eleverna dem — bokningar hamnar här så snart de bekräftar.",
+      "emptyCtaStudent": "Bläddra bland trafikskolor",
+      "emptyCtaInstructor": "Hantera tillgänglighet"
+    },
+    "loadError": "Kunde inte ladda din profil.",
+    "retry": "Försök igen",
+    "paymentStatus": {
+      "unpaid": "Väntar på betalning",
+      "pending": "Betalning pågår",
+      "paid": "Betald",
+      "heldEscrow": "Hålls i escrow",
+      "released": "Genomförd",
+      "refunded": "Återbetald",
+      "awaitingApproval": "Väntar på godkännande",
+      "declined": "Avböjd",
+      "cancelled": "Avbokad"
+    }
+  },
+  "chatbot": {
+    "fabLabel": "Fråga DriveLinkUp",
+    "title": "Fråga DriveLinkUp",
+    "lead": "Få ett snabbt svar om kategorier, priser, bokning, trygghet eller avbokning. Personliga betalnings-, återbetalnings- och trygghetsärenden går till supporten.",
+    "placeholder": "Fråga om kategori, pris eller bokning…",
+    "sendAria": "Skicka",
+    "inputAria": "Skriv din fråga",
+    "emptyState": "Hej! Fråga mig om kategorier, priser, bokning, trygghet eller avbokningspolicyer.",
+    "errorGeneric": "Assistenten är inte tillgänglig just nu. Försök igen snart.",
+    "rateLimited": "Vänta en stund innan du skickar ett nytt meddelande.",
+    "handoffLabel": "Behöver du personlig hjälp? Kontakta support →",
+    "closeAria": "Stäng"
+  },
+  "privacyPage": {
+    "meta": {
+      "title": "Integritetspolicy | DriveLinkUp",
+      "description": "Så behandlar DriveLinkUp personuppgifter för konton, bokningar, betalningar, skolbehörigheter och trygghet."
+    },
+    "hero": {
+      "eyebrow": "Integritet",
+      "title": "Integritetspolicy",
+      "lastUpdated": "Senast uppdaterad: 26 augusti 2026 · policyversion {version}",
+      "intro": "Den här policyn beskriver hur DriveLinkUp behandlar personuppgifter när du bläddrar bland skolannonser, skapar ett konto, bokar en lektion eller registrerar dig som skola eller handledare.",
+      "reviewNotice": "Juridisk granskningsnotis: detta kundutkast ska granskas och kompletteras av DriveLinkUps juridiska rådgivare före publicering."
+    },
+    "sections": {
+      "0": {
+        "title": "1. Personuppgiftsansvarig och kontakt",
+        "body": "DriveLinkUp är personuppgiftsansvarig för personuppgifterna som beskrivs här. För integritetsfrågor eller begäranden, mejla korprivat@polsia.app med ”Integritet” i ämnesraden.",
+        "items": []
+      },
+      "1": {
+        "title": "2. Personuppgifter vi samlar in",
+        "body": "Beroende på hur du använder tjänsten kan vi behandla:",
+        "items": [
+          "Kontouppgifter som namn, e-postadress, inloggningsuppgifter och kontoroll.",
+          "Profiluppgifter som stad, språk, körkortskategorier, profilbild, lektionspris och biografi.",
+          "Bokningsuppgifter som vald skola, kategori, tid, bokningsstatus, avbokningspolicy och supportkommunikation.",
+          "Betalningsuppgifter och transaktionsstatus som behandlas via den externa betalningsleverantören. Kortuppgifter hanteras av leverantören och lagras inte av DriveLinkUp.",
+          "Behörighets-, körkorts-, försäkrings- och onboardinguppgifter som skickas in för skol- eller handledarkontot.",
+          "Tekniska uppgifter som IP-adress, webbläsarinformation, enhetsinformation och samtyckesval.",
+          "Meddelanden eller kontaktuppgifter som du väljer att skicka till supporten."
+        ]
+      },
+      "2": {
+        "title": "3. Ändamål och rättslig grund",
+        "body": "Vi använder personuppgifter endast för att tillhandahålla, skydda och förbättra tjänsten. Tillämplig grund kan vara fullgörande av avtal, berättigat intresse, samtycke eller rättslig skyldighet.",
+        "items": [
+          "För att skapa och hantera konton och skol- eller handledarprofiler.",
+          "För att visa skolannonser, tillgänglighet, priser och bokningspolicyer för personer som överväger att boka.",
+          "För att skapa bokningar, skicka transaktionsmeddelanden och ge support.",
+          "För att behandla betalningar, återbetalningar och betalningsrelaterade register via vår betalningsleverantör.",
+          "För att granska behörighets- och trygghetsuppgifter som skickas in under onboarding.",
+          "För att skydda tjänsten, förhindra missbruk och uppfylla bokförings- eller andra rättsliga skyldigheter."
+        ]
+      },
+      "3": {
+        "title": "4. Lagringstid",
+        "body": "Vi sparar uppgifter endast så länge det behövs för ändamålet, för att lösa tvister, uppfylla lagkrav och tillämpa våra avtal. Exakta tider beror på uppgiftstyp och tillämpligt lagkrav.",
+        "items": [
+          "Konto- och profiluppgifter sparas medan kontot är aktivt och under en begränsad tid därefter för trygghet och support.",
+          "Boknings-, betalnings- och bokföringsuppgifter kan sparas under den tid svensk lag kräver.",
+          "Behörighets- och försäkringsmaterial sparas endast så länge det behövs för onboarding, granskning, trygghet och lagkrav.",
+          "Supportmeddelanden och tekniska loggar sparas under en begränsad tid som passar ärendet eller trygghetsändamålet."
+        ]
+      },
+      "4": {
+        "title": "5. Delning och personuppgiftsbiträden",
+        "body": "Vi säljer inte personuppgifter. Vi delar dem endast med leverantörer och myndigheter när det behövs för att driva tjänsten, behandla en betalning, ge bokningssupport, skydda användare eller följa lag.",
+        "items": [
+          "Externa betalningsleverantörer, inklusive Stripe, hanterar kassa och betalningsrelaterad behandling.",
+          "Molnlagringsleverantörer kan lagra profilbilder eller leverantörsdokument som skickas till tjänsten.",
+          "Leverantörer för e-post, autentisering, hosting och övervakning hjälper till att skicka meddelanden, säkra konton och driva webbplatsen.",
+          "Myndigheter, rådgivare eller andra mottagare kan få uppgifter när lagen kräver det eller när det behövs för att fastställa, göra gällande eller försvara rättsliga anspråk."
+        ]
+      },
+      "5": {
+        "title": "6. Internationella överföringar",
+        "body": "Vissa personuppgiftsbiträden kan behandla uppgifter utanför EU/EES. När det krävs använder DriveLinkUp ett adekvansbeslut, standardavtalsklausuler eller annan laglig skyddsåtgärd och lämnar relevant information på begäran.",
+        "items": []
+      },
+      "6": {
+        "title": "7. Dina rättigheter",
+        "body": "Med förbehåll för villkoren i GDPR kan du begära:",
+        "items": [
+          "Tillgång till dina personuppgifter.",
+          "Rättelse av felaktiga eller ofullständiga uppgifter.",
+          "Radering, begränsning eller invändning när de rättsliga villkoren är uppfyllda.",
+          "Dataportabilitet för uppgifter som behandlas automatiserat med stöd av samtycke eller avtal.",
+          "Återkallelse av samtycke när som helst när behandlingen grundas på samtycke.",
+          "Klagomål till relevant tillsynsmyndighet; i Sverige Integritetsskyddsmyndigheten (IMY)."
+        ]
+      },
+      "7": {
+        "title": "8. Cookies",
+        "body": "DriveLinkUp använder nödvändiga cookies för autentisering, språk och säkerhet. Valfria analys- eller marknadsföringscookies används endast när erforderligt samtycke har lämnats. Du kan hantera samtycke via webbplatsens cookieinställningar.",
+        "items": []
+      },
+      "8": {
+        "title": "9. Ändringar och kontakt",
+        "body": "Vi kan uppdatera policyn när tjänsten, lagen eller behandlingen ändras. Senaste version och datum står ovan. För frågor eller en rättighetsbegäran, kontakta korprivat@polsia.app.",
+        "items": []
+      }
+    },
+    "cta": {
+      "findProviders": "Hitta en trafikskola",
+      "contact": "Kontakta support"
+    }
+  },
+  "consentBanner": {
+    "intro": "Vi använder nödvändiga cookies för att driva marknadsplatsen. Med ditt samtycke vill vi också sätta analyscookies för att förbättra den. Du kan ändra ditt val när som helst.",
+    "essentialLabel": "Nödvändiga",
+    "essentialBody": "Autentisering, CSRF-skydd, språkinställning. Krävs — går inte att stänga av.",
+    "analyticsLabel": "Analys",
+    "analyticsBody": "Anonym användardata så vi ser vilka körkortskategorier som efterfrågas mest och vilka sidor som behöver förbättras.",
+    "marketingLabel": "Marknadsföring",
+    "marketingBody": "Mejluppdateringar om nya handledare i ditt område och kampanjer du prenumererar på.",
+    "acceptAll": "Acceptera alla",
+    "rejectNonEssential": "Avvisa icke-nödvändiga",
+    "customize": "Anpassa",
+    "save": "Spara mitt val",
+    "saved": "Ditt cookieval är sparat.",
+    "error": "Kunde inte spara ditt cookieval — försök igen.",
+    "privacy": "Integritetspolicy"
+  },
+  "consentForm": {
+    "signupCheckbox": "Jag har läst och godkänner integritetspolicyn.",
+    "signupCheckboxLinkText": "Integritetspolicy",
+    "signupCheckboxError": "Bocka i rutan för att bekräfta att du har läst integritetspolicyn.",
+    "licenseCheckbox": "Jag samtycker till att DriveLinkUp får behandla mitt körkort och mina personuppgifter enligt integritetspolicyn för att verifiera mitt lärarekörkortstillstånd hos Transportstyrelsen.",
+    "licenseCheckboxError": "Bocka i rutan för att bekräfta att du samtycker till behandling av dina körkortsuppgifter."
+  },
+  "learnerSubscription": {
+    "removed": "Elevabonnemanget är inte längre en del av DriveLinkUp. Skolans publicerade bokningspris visas före betalningen utan separat DriveLinkUp-avgift."
+  },
+  "cancellationPolicy": {
+    "tierBadge": {
+      "flexible": "Flexibel",
+      "moderate": "Måttlig",
+      "strict": "Strikt"
+    },
+    "flexible": {
+      "name": "Flexibel",
+      "summary": "Full återbetalning minst 24 timmar före lektionen. Inom 24 timmar behålls hela lektionsavgiften.",
+      "fullRefundBefore": "Full återbetalning när du avbokar minst 24 timmar före lektionen.",
+      "noRefundAfter": "Inom 24 timmar behålls hela lektionsavgiften."
+    },
+    "moderate": {
+      "name": "Måttlig",
+      "summary": "Full återbetalning minst 120 timmar före lektionen. Från 120 till 24 timmar tillkommer 50% avgift. Inom 24 timmar behålls hela lektionsavgiften.",
+      "fullRefundBefore": "Full återbetalning när du avbokar minst 120 timmar före lektionen.",
+      "partialBetween": "Från 120 till 24 timmar före lektionen behålls 50% avgift.",
+      "noRefundAfter": "Inom 24 timmar behålls hela lektionsavgiften."
+    },
+    "strict": {
+      "name": "Strikt",
+      "summary": "Full återbetalning minst 168 timmar före lektionen. Från 168 till 24 timmar tillkommer 50% avgift. Inom 24 timmar behålls hela lektionsavgiften.",
+      "fullRefundBefore": "Full återbetalning när du avbokar minst 168 timmar före lektionen.",
+      "partialBetween": "Från 168 till 24 timmar före lektionen behålls 50% avgift.",
+      "noRefundAfter": "Inom 24 timmar behålls hela lektionsavgiften."
+    },
+    "sectionEyebrow": "Avbokningspolicy",
+    "sectionHeading": "Så hanteras avbokningar",
+    "editor": {
+      "title": "Avbokningspolicy",
+      "description": "Välj den nivå som passar ditt schema. Avgiftsschemat visas för eleverna innan de bekräftar en bokning och lagras vid bokningstillfället — en senare ändring kan inte retroaktivt flytta en redan genomförd boknings återbetalning.",
+      "flexibleLabel": "Flexibel",
+      "flexibleSummary": "Full återbetalning upp till 24 timmar före lektionen. 100% avgift inom 24 timmar.",
+      "moderateLabel": "Måttlig",
+      "moderateSummary": "Full återbetalning upp till 5 dagar före lektionen. 50% avgift mellan 5 dagar och 24 timmar. 100% avgift inom 24 timmar.",
+      "strictLabel": "Strikt",
+      "strictSummary": "Full återbetalning upp till 7 dagar före lektionen. 50% avgift mellan 7 dagar och 24 timmar. 100% avgift inom 24 timmar.",
+      "save": "Spara policy",
+      "saving": "Sparar…",
+      "saved": "Avbokningspolicy sparad",
+      "error": "Kunde inte spara avbokningspolicyn",
+      "noInstructorRow": "Du har ingen listad skolprofil ännu — slutför registreringen på /instructors/new först och kom tillbaka hit för att ställa in din avbokningspolicy."
+    }
+  },
+  "publicHome": {
+    "hero": {
+      "eyebrow": "Ett tydligare sätt att boka körlektioner",
+      "title": "Jämför auktoriserade trafikskolor. Boka med trygghet.",
+      "body": "Upptäck skolor efter kategori, stad, språk, publicerat pris och tillgänglighet. Upptäckt, jämförelse och bokning är kostnadsfritt för elever.",
+      "primaryCta": "Hitta en trafikskola",
+      "secondaryCta": "För trafikskolor",
+      "contactCta": "Starta en konversation",
+      "assurance": {
+        "price": "Skolans pris visas före kassan",
+        "safety": "Annonser från auktoriserade skolor",
+        "choice": "Ingen separat DriveLinkUp-avgift"
+      },
+      "previewEyebrow": "Beslutet, samlat på ett ställe",
+      "previewTitle": "Profil → tid → total",
+      "previewLines": {
+        "profile": "Jämför kategori, språk och plats.",
+        "price": "Se skolans publicerade pris; ingen separat DriveLinkUp-avgift.",
+        "time": "Välj en tid och se policyn före kassan."
+      }
+    },
+    "quickLinks": {
+      "label": "Börja med",
+      "categories": {
+        "B": "Bil · B",
+        "A": "Motorcykel · A",
+        "BE": "Bil + släp · BE"
+      },
+      "cities": {
+        "stockholm": "Stockholm",
+        "goteborg": "Göteborg",
+        "malmo": "Malmö",
+        "vasteras": "Västerås"
+      }
+    },
+    "how": {
+      "eyebrow": "Så fungerar det",
+      "title": "En kort väg till rätt trafikskola.",
+      "body": "Jämför det som spelar roll innan du bokar.",
+      "steps": {
+        "choose": {
+          "title": "Välj vad du behöver",
+          "body": "Filtrera efter körkortskategori, stad, språk och högsta skolpris."
+        },
+        "compare": {
+          "title": "Jämför detaljerna",
+          "body": "Öppna en annons för att se skolans publicerade tillgänglighet, bokningsläge och avbokningspolicy."
+        },
+        "book": {
+          "title": "Boka med hela totalen",
+          "body": "Välj en ledig tid hos skolan, se det publicerade priset i SEK och fortsätt utan separat DriveLinkUp-avgift."
+        }
+      }
+    },
+    "providers": {
+      "eyebrow": "Aktuella profiler",
+      "title": "Jämför auktoriserade trafikskolor",
+      "cta": "Se alla skolor"
+    },
+    "assurance": {
+      "eyebrow": "Innan du bokar",
+      "title": "De viktiga detaljerna är synliga.",
+      "cards": {
+        "price": {
+          "title": "Ett pris du kan förstå",
+          "body": "Skolans publicerade pris visas i SEK före kassan; DriveLinkUp lägger inte på någon separat elevavgift."
+        },
+        "safety": {
+          "title": "Veta vad du ska kontrollera",
+          "body": "Kontrollera skolans behörighet, lektionsupplägg och avbokningsvillkor före lektionen."
+        },
+        "cancellation": {
+          "title": "Avbokningspolicy i förväg",
+          "body": "Flexibel, måttlig och strikt nivå visas före bokning, med alla återbetalnings- och avgiftsfönster tydligt angivna."
+        }
+      }
+    },
+    "entry": {
+      "eyebrow": "Redo för nästa steg?",
+      "title": "Börja från den sida av vägen där du är.",
+      "body": "Elever kan bläddra och boka. Auktoriserade trafikskolor kan publicera pris och tillgänglighet via det befintliga onboardingflödet.",
+      "learnerCta": "Hitta en trafikskola",
+      "providerCta": "Lista er trafikskola"
+    },
+    "footer": {
+      "prompt": "Behöver du mer information?",
+      "label": "Hjälplänkar",
+      "faq": "FAQ",
+      "privacy": "Integritet",
+      "contact": "Kontakta support"
+    }
+  },
+  "providerEntry": {
+    "eyebrow": "För auktoriserade trafikskolor",
+    "title": "Gör er tillgänglighet till mätbara bokningar.",
+    "body": "Publicera det pris och den tillgänglighet som skolan styr över så att elever kan jämföra och boka tydligt.",
+    "primaryCta": "Lista er trafikskola",
+    "learnerCta": "Se elevkatalogen",
+    "rolesEyebrow": "En marknadsplats där skolan styr",
+    "roles": {
+      "trafiklarare": {
+        "title": "Kvalificerade skolannonser",
+        "body": "För auktoriserade trafikskolor som erbjuder strukturerade lektioner för svenska körkortskategorier.",
+        "expectation": "Håll skolans uppgifter, kategorier, pris och tillgänglighet korrekta."
+      },
+      "commission": {
+        "title": "10 % efter genomförande",
+        "body": "DriveLinkUp tillämpar 10 % på hänförligt bokningsvärde först efter genomförd tjänst.",
+        "expectation": "Ingen separat elevavgift och inget löfte om bokningsvolym."
+      }
+    },
+    "safety": {
+      "title": "En annons byggd på tydlig information",
+      "body": "Elever ska förstå skolans behörighet, publicerade pris, tillgänglighet och lektionsupplägg före bokning.",
+      "review": "Det befintliga onboardingflödet samlar in informationen som behövs för skolans annons."
+    }
+  },
+  "bookingConfirmPayment": {
+    "meta": {
+      "title": "Granska din DriveLinkUp-bokning",
+      "description": "Granska skolans sparade lektionspris och avbokningsvillkor före betalningen. Ingen separat DriveLinkUp-avgift tillkommer."
+    },
+    "eyebrow": "Kassa",
+    "title": "Granska din bokning",
+    "schedule": "Lektionstid: {date}",
+    "paymentLabel": "Betalningsstatus",
+    "status": {
+      "paid": "Betald",
+      "held_escrow": "Betalningen hålls",
+      "released": "Slutförd",
+      "refunded": "Återbetald",
+      "unpaid": "Väntar på betalning",
+      "pending": "Betalning pågår",
+      "awaiting_approval": "Väntar på skolans godkännande",
+      "declined": "Avböjd",
+      "cancelled_early": "Avbokad",
+      "cancelled_late": "Avbokad",
+      "cancelled_full_refund": "Avbokad",
+      "cancelled_partial": "Avbokad"
+    },
+    "providerLabel": "Trafikskola",
+    "cityLabel": "Stad",
+    "categoryLabel": "Körkortskategori",
+    "durationLabel": "Lektionens längd",
+    "duration": "{minutes} minuter",
+    "category": {
+      "AM": "AM",
+      "A1": "A1",
+      "A2": "A2",
+      "A": "A",
+      "B": "B",
+      "BE": "BE"
+    },
+    "cancellationTitle": "Avbokningsvillkor",
+    "cancellationBody": "{tier}: full återbetalning minst {hours} timmar före lektionen.",
+    "tier": {
+      "flexible": "Flexibel",
+      "moderate": "Måttlig",
+      "strict": "Strikt"
+    },
+    "heldConfirmation": "Din betalning hålls i escrow tills lektionen är genomförd.",
+    "paidConfirmation": "Betalningen är mottagen och din bokning är bekräftad.",
+    "refundedBody": "Återbetalningen behandlas av betalningsleverantören.",
+    "awaitingTitle": "Väntar på skolans godkännande",
+    "awaitingBody": "Vi meddelar dig när skolan accepterar eller avböjer förfrågan. Ingen betalning tas ännu.",
+    "declinedTitle": "Bokningsförfrågan avböjd",
+    "declinedBody": "Ingen betalning togs. Bläddra i katalogen för att välja en annan skola eller tid.",
+    "cancelledTitle": "Bokningen är avbokad",
+    "cancelledBody": "Den här bokningen är inte längre aktiv.",
+    "accessTitle": "Åtkomsten till bokningen har gått ut",
+    "accessBody": "Öppna den senaste bokningslänken från din e-post, eller logga in för att se en bokning som tillhör dig.",
+    "payCta": "Fortsätt till extern kassa",
+    "openingCheckout": "Öppnar kassan…",
+    "paymentHelp": "Behöver du hjälp med betalningen?",
+    "paymentError": "Kassan kunde inte startas. Kontakta support om felet kvarstår.",
+    "providerNotReady": "Skolan är ännu inte redo för kassa.",
+    "notFound": "Bokningen kunde inte laddas.",
+    "notReady": "Bokningen är inte redo för betalning.",
+    "invalidTitle": "Den här betalningslänken är inte giltig.",
+    "invalidBody": "Öppna betalningslänken från det ursprungliga bokningsmeddelandet.",
+    "notReadyTitle": "Betalning är inte tillgänglig ännu.",
+    "paymentPollTimeoutTitle": "Bekräftelsen av betalningen dröjer.",
+    "paymentPollTimeoutBody": "Vi väntar fortfarande på betalningsleverantören. Försök kontrollera igen om en stund och kontakta supporten om ditt kort debiterades.",
+    "retryPaymentPoll": "Kontrollera igen",
+    "browseCta": "Bläddra bland trafikskolor",
+    "receiptLink": "Visa kvitto",
+    "receiptDeliveryFailed": "Kvitto-e-post kunde inte skickas",
+    "receiptDeliveryFailedBody": "Din betalning är bekräftad. Öppna kvittot för att försöka skicka e-postmeddelandet igen."
+  },
+  "messaging": {
+    "eyebrow": "Dina konversationer",
+    "title": "Meddelanden",
+    "lead": "Samla bokningsdetaljer, förväntningar och hjälp på ett ställe.",
+    "loading": "Laddar meddelanden…",
+    "emptyTitle": "Inga konversationer ännu",
+    "emptyBody": "Öppna en meddelandetråd från en av dina bokningar för att hålla samtalet på DriveLinkUp.",
+    "retry": "Försök igen",
+    "errorTitle": "Meddelandena kunde inte laddas",
+    "selectPrompt": "Välj en konversation att läsa",
+    "bookingContextTitle": "Bokningskontext",
+    "backToBooking": "Öppna bokning",
+    "scheduled": "Planerad {date}",
+    "duration": "{minutes} minuter",
+    "category": "Kategori {category}",
+    "unread": "{count, plural, one {# oläst} other {# olästa}}",
+    "read": "Läst",
+    "noMessages": "Inga meddelanden ännu. Säg hej till din trafikskola.",
+    "sentByYou": "Du",
+    "messageLabel": "Meddelande",
+    "placeholder": "Skriv ett textmeddelande…",
+    "send": "Skicka meddelande",
+    "sending": "Skickar…",
+    "sendError": "Meddelandet kunde inte skickas. Försök igen.",
+    "blockedTitle": "Håll oss på DriveLinkUp",
+    "blockedBody": "Meddelandet verkar innehålla kontaktuppgifter eller en betalningsförfrågan utanför plattformen. Vi sparade det inte.",
+    "alternative": "Du kan i stället dela lektionstid, mötesplats och andra bokningsdetaljer här.",
+    "guardrails": {
+      "phone": "telefonnummer",
+      "email": "e-postadress",
+      "social": "socialt konto",
+      "external_link": "extern länk",
+      "off_platform_payment": "betalningsförfrågan utanför plattformen"
+    },
+    "report": "Rapportera en oro",
+    "reportTitle": "Rapportera en oro",
+    "reportDescription": "Berätta kort vad som hänt. Vi granskar konversationen; akuta säkerhetsfrågor ska hanteras via lokala räddningstjänster.",
+    "reasonLabel": "Anledning",
+    "reasons": {
+      "safety": "Säkerhetsoro",
+      "harassment": "Trakasserier eller respektlöst beteende",
+      "off_platform_request": "Bad att flytta samtalet utanför plattformen",
+      "other": "Något annat"
+    },
+    "detailsLabel": "Detaljer (valfritt)",
+    "detailsPlaceholder": "Lägg till en kort anteckning",
+    "submitReport": "Skicka rapport",
+    "reporting": "Skickar…",
+    "cancel": "Avbryt",
+    "reportSuccess": "Tack — din rapport har skickats.",
+    "reportError": "Rapporten kunde inte skickas. Försök igen.",
+    "safetyNote": "Håll betalningar och personliga kontaktuppgifter på DriveLinkUp. Dela aldrig något du inte känner dig bekväm med.",
+    "accessibility": {
+      "conversationList": "Dina konversationer",
+      "messageList": "Meddelandehistorik",
+      "reportDialog": "Rapportera konversation"
+    }
+  },
+  "bookingAccept": {
+    "invalidTitle": "Ogiltig åtgärdslänk",
+    "invalidBody": "Länken du använde ger inte behörighet till den här åtgärden. Öppna det senaste mejlet vi skickade och följ länken därifrån.",
+    "cantTitle": "Bokningen kan inte accepteras",
+    "declined": "Bokningen har avböjts.",
+    "notAwaiting": "Bokningen väntar inte på skolans godkännande.",
+    "notFound": "Bokningen hittades inte",
+    "loadError": "Kunde inte ladda bokningen.",
+    "errorTitle": "Något gick fel",
+    "submitError": "Bokningen kunde inte accepteras.",
+    "acceptedTitle": "Bokningen är godkänd",
+    "acceptedBody": "Eleven har skickats till kassan. Betalningen hålls i escrow tills lektionen är genomförd.",
+    "eyebrow": "Bekräfta bokning",
+    "title": "Acceptera bokning",
+    "bookingId": "Boknings-id: {id}",
+    "nameLabel": "Ditt namn",
+    "submit": "Acceptera och skicka eleven till kassan",
+    "submitting": "Accepterar…",
+    "continueToPayment": "Öppna boknings- och betalningsdetaljer",
+    "declineInstead": "Avslå denna förfrågan"
+  },
+  "bookingDecline": {
+    "invalidTitle": "Ogiltig åtgärdslänk",
+    "invalidBody": "Länken du använde ger inte behörighet till den här åtgärden. Öppna det senaste mejlet vi skickade och följ länken därifrån.",
+    "cantTitle": "Bokningen kan inte avböjas",
+    "notAwaiting": "Bokningen väntar inte på skolans godkännande.",
+    "notFound": "Bokningen hittades inte",
+    "loadError": "Kunde inte ladda bokningen.",
+    "errorTitle": "Något gick fel",
+    "submitError": "Bokningen kunde inte avböjas.",
+    "declinedTitle": "Bokningen är avböjd",
+    "declinedBody": "Ingen betalning togs. Eleven har meddelats och kan välja en annan skola.",
+    "eyebrow": "Avböj bokning",
+    "title": "Avböj bokning",
+    "nameLabel": "Ditt namn",
+    "reasonLabel": "Valfri anledning (skickas till eleven)",
+    "reasonPlaceholder": "Till exempel: tiden är inte längre tillgänglig.",
+    "submit": "Avböj bokningen",
+    "submitting": "Avböjer…"
+  },
+  "bookingCancel": {
+    "eyebrow": "Avbokning",
+    "title": "Granska avbokning",
+    "schedule": "Lektionstid: {date}",
+    "policyEyebrow": "Sparad avbokningspolicy",
+    "policy": {
+      "fullRefund": "Full återbetalning minst {hours} timmar före lektionen.",
+      "partial": "{percent}% avgift från {from} till {to} timmar före lektionen.",
+      "late": "Inom {hours} timmar behålls hela lektionsavgiften.",
+      "moreDetails": "Läs avboknings-FAQ"
+    },
+    "fee": {
+      "full": "Full avbokningsavgift",
+      "partial": "Delvis avbokningsavgift",
+      "amount": "Avbokningsavgift: {fee} USD",
+      "none": "Ingen avbokningsavgift visas för denna tidpunkt."
+    },
+    "form": {
+      "nameLabel": "Ditt namn",
+      "roleLabel": "Vem avbokar?",
+      "roles": {
+        "learner": "Elev",
+        "instructor": "Instruktör"
+      },
+      "nameRequired": "Ange ditt namn innan du avbokar.",
+      "submit": "Bekräfta avbokning",
+      "submitting": "Avbokar…"
+    },
+    "states": {
+      "alreadySettled": "Bokningen är redan avslutad och kan inte avbokas här.",
+      "notCancellable": "Bokningen kan inte avbokas från den här länken.",
+      "lessonStarted": "Lektionen har börjat och kan inte avbokas här.",
+      "notFound": "Bokningen hittades inte.",
+      "loadError": "Bokningen kunde inte laddas.",
+      "submitError": "Avbokningen kunde inte slutföras. Försök igen."
+    },
+    "invalidTitle": "Den här avbokningslänken är inte giltig.",
+    "invalidBody": "Öppna avbokningslänken från det ursprungliga bokningsmeddelandet.",
+    "errorTitle": "Avbokningsflödet kunde inte laddas.",
+    "cantCancelTitle": "Bokningen kan inte avbokas här.",
+    "receipt": {
+      "badge": "Avbokningen är registrerad",
+      "withFee": "Avbokningsavgift: {fee} USD",
+      "withoutFee": "Ingen avbokningsavgift",
+      "body": "Den sparade policyn tillämpades på bokningen.",
+      "browseCta": "Bläddra bland en annan trafikskola",
+      "toast": "Avbokningen är registrerad"
+    }
+  },
+  "bookingReceipt": {
+    "meta": {
+      "title": "Bokningskvitto · DriveLinkUp",
+      "description": "Ett tydligt digitalt kvitto för din lektion hos DriveLinkUp."
+    },
+    "eyebrow": "DriveLinkUp-kvitto",
+    "title": "Ditt bokningskvitto",
+    "learnerLead": "En tydlig sammanställning av vad du bokade och betalade.",
+    "instructorLead": "En tydlig sammanställning av lektionen och skolans förväntade utbetalning.",
+    "issued": "Kvitto utfärdat",
+    "lessonWith": "Lektion med {name}",
+    "receiptNumber": "Kvittonummer",
+    "date": "Datum och tid",
+    "duration": "Längd",
+    "minutes": "{count} minuter",
+    "location": "Plats",
+    "paymentStatus": "Betalningsstatus",
+    "breakdown": "Transaktionsöversikt",
+    "totalPaid": "Totalt betalt",
+    "netPayout": "Nettoutbetalning",
+    "reconciliation": "Skolans pris − 10 % hänförlig provision efter genomförande = skolans utbetalning.",
+    "payoutStatus": "Utbetalningsstatus",
+    "learnerReceipt": "Elevkvitto",
+    "instructorReceipt": "Skolans kvitto",
+    "verifiedCharge": "Verifierad kassabetalning: {usd}.",
+    "pdfTitle": "DriveLinkUp bokningskvitto",
+    "pdfNote": "Verifierad kassabetalning: {usd}. Beloppen visas i SEK.",
+    "download": "Ladda ner PDF",
+    "print": "Skriv ut kvitto",
+    "backToBooking": "Tillbaka till bokningen",
+    "retry": "Försök igen",
+    "errorEyebrow": "Kvitto saknas",
+    "errorTitle": "Vi kunde inte läsa in kvittot",
+    "errorBody": "Kvittot är kanske inte utfärdat ännu eller så har länken gått ut.",
+    "items": {
+      "lesson": "Lektionspris (SEK)",
+      "serviceFee": "DriveLinkUp-avgift (SEK)",
+      "grossPaid": "Elevens brutto betalda belopp (SEK)",
+      "grossLesson": "Brutto lektionspris (SEK)",
+      "commission": "10% skolprovision (SEK)"
+    },
+    "statuses": {
+      "paid": "Betald",
+      "held_escrow": "Betalning hålls",
+      "released": "Genomförd",
+      "refunded": "Återbetald",
+      "cancelled_early": "Avbokad",
+      "cancelled_late": "Avbokad",
+      "cancelled_full_refund": "Avbokad",
+      "cancelled_partial": "Avbokad"
+    },
+    "delivery": {
+      "sent": "Kvitto-e-post skickat",
+      "unknown": "E-poststatus okänd",
+      "pending": "Kvitto-e-post väntar",
+      "failed": "Kvitto-e-post kunde inte skickas",
+      "failedBody": "Betalningen är bekräftad, men kvittot kunde inte skickas.",
+      "retry": "Försök skicka igen",
+      "retrying": "Försöker skicka…",
+      "retrySucceeded": "Kvitto-e-post skickades.",
+      "retryFailed": "Det gick inte att skicka kvittot. Försök igen."
+    },
+    "payoutStatuses": {
+      "not_applicable": "Inte tillämpligt",
+      "pending": "Utbetalning väntar",
+      "released": "Utbetalning frigjord",
+      "refunded": "Återbetald",
+      "cancelled": "Ingen utbetalning"
+    }
+  },
+  "handledareDirectory": {
+    "eyebrow": "Svensk juridisk vägledning",
+    "title": "Förstå handledarvägen",
+    "description": "Lär dig hur privata handledare och övningskörning skiljer sig från auktoriserade trafikskolor.",
+    "lead": "Handledare är privata handledare, inte skolannonser på marknadsplatsen. Läs gällande svenska krav före övning."
+  },
+  "providerOperations": {
+    "instructorTitle": "Trafikskolans arbetsyta",
+    "handledareTitle": "Handledarens arbetsyta",
+    "timezone": "Tidszon: {timezone}",
+    "availabilityCta": "Hantera tillgänglighet",
+    "availabilityCount": "Kommande tider",
+    "requestCount": "Förfrågningar att granska",
+    "bookingCount": "Kommande bokningar",
+    "requestsEyebrow": "Inkommande",
+    "requestsTitle": "Bokningsförfrågningar",
+    "requestsEmpty": "Inga förfrågningar behöver din uppmärksamhet. Nya förfrågningar visas här.",
+    "scheduleEyebrow": "Din kalender",
+    "scheduleTitle": "Schema och status",
+    "scheduleEmpty": "Ditt schema är tomt. Lägg till tider så kan elever boka.",
+    "duration": "{minutes} min",
+    "status": {
+      "unpaid": "Väntar på betalning",
+      "pending": "Betalning väntar",
+      "paid": "Betald",
+      "held_escrow": "Betalning i escrow",
+      "released": "Genomförd",
+      "refunded": "Återbetald",
+      "awaiting_approval": "Väntar på ditt svar",
+      "declined": "Nekad",
+      "cancelled": "Avbokad"
+    },
+    "open": "Öppna detaljer",
+    "errorTitle": "Skoldata kunde inte läsas in",
+    "errorBody": "Försök igen. Om problemet kvarstår, slutför skolprofilen eller kontakta support.",
+    "retry": "Försök igen",
+    "actionError": "Åtgärden kunde inte genomföras. Läs in sidan och försök igen.",
+    "setup": {
+      "title": "Slutför skolprofilen",
+      "body": "Skapa eller koppla skolprofilen för att publicera tider och ta emot bokningsförfrågningar.",
+      "empty": "Ingen skolprofil är kopplad till kontot ännu.",
+      "cta": "Skapa skolprofil"
+    },
+    "actions": {
+      "accept": "Acceptera",
+      "decline": "Avböj",
+      "cancel": "Avboka",
+      "complete": "Markera genomförd",
+      "acceptSuccess": "Förfrågan accepterad. Eleven kan nu betala.",
+      "declineSuccess": "Förfrågan avböjd och eleven har meddelats.",
+      "cancelSuccess": "Bokningen avbokades och tiden frigjordes.",
+      "completeSuccess": "Bokningen markerades som genomförd och escrow-statusen uppdaterades."
+    }
+  },
+  "southernSwedenPage": {
+    "meta": {
+      "title": "Auktoriserade trafikskolor i södra Sverige | DriveLinkUp",
+      "description": "Jämför auktoriserade trafikskolor i Skåne, Halland, Blekinge och Småland.",
+      "ogTitle": "Hitta din väg genom södra Sverige",
+      "ogDescription": "Jämför skolannonser nära dig och boka utan separat DriveLinkUp-avgift."
+    },
+    "hero": {
+      "eyebrow": "DriveLinkUp · södra Sverige",
+      "title": "Hitta rätt väg genom södra Sverige.",
+      "body": "Från första lektionen till körkortet kan du jämföra auktoriserade trafikskolor i regionen efter pris, tillgänglighet och bokningspolicy.",
+      "primaryCta": "Hitta en trafikskola",
+      "secondaryCta": "Utforska regionerna"
+    },
+    "learnerGuide": {
+      "eyebrow": "För dig som lär dig köra",
+      "title": "Gör nästa körlektion enklare att välja.",
+      "body": "Börja där du befinner dig, jämför det som faktiskt spelar roll och boka övningskörning med tydliga villkor.",
+      "steps": {
+        "choose": {
+          "title": "Välj din stad",
+          "body": "Öppna en stad nära dig för att se tillgängliga auktoriserade trafikskolor."
+        },
+        "compare": {
+          "title": "Jämför med lugn och ro",
+          "body": "Titta på pris, språk, tillgänglighet och hur varje profil arbetar innan du bestämmer dig."
+        },
+        "practice": {
+          "title": "Boka din övningskörning",
+          "body": "Välj en tid som fungerar och fortsätt mot körkortet med en plan som passar dig."
+        }
+      }
+    },
+    "regionNav": {
+      "eyebrow": "Regionguide",
+      "title": "Fyra regioner. En tydligare start.",
+      "body": "Hoppa direkt till din del av södra Sverige och hitta lokala vägar till nästa körlektion.",
+      "jumpLabel": "Hoppa till region"
+    },
+    "regions": {
+      "skane": {
+        "name": "Skåne",
+        "description": "Täta stadskärnor, kustvägar och flexibla lektionsalternativ. Börja med Malmö eller jämför skolor i en annan skånsk stad.",
+        "cities": {
+          "malmo": { "label": "Malmö" },
+          "helsingborg": { "label": "Helsingborg" },
+          "lund": { "label": "Lund" },
+          "kristianstad": { "label": "Kristianstad" },
+          "ystad": { "label": "Ystad" }
+        }
+      },
+      "halland": {
+        "name": "Halland",
+        "description": "Planera lektioner mellan kust, landsväg och växande städer. Se vilka auktoriserade skolor som finns nära din vardag.",
+        "cities": {
+          "halmstad": { "label": "Halmstad" },
+          "varberg": { "label": "Varberg" },
+          "falkenberg": { "label": "Falkenberg" },
+          "kungsbacka": { "label": "Kungsbacka" }
+        }
+      },
+      "blekinge": {
+        "name": "Blekinge",
+        "description": "Hitta en lokal plan för övningskörning i Blekinges städer och kustlandskap, med tydlig information innan du bokar.",
+        "cities": {
+          "karlskrona": { "label": "Karlskrona" },
+          "karlshamn": { "label": "Karlshamn" },
+          "ronneby": { "label": "Ronneby" },
+          "solvesborg": { "label": "Sölvesborg" }
+        }
+      },
+      "smaland": {
+        "name": "Småland",
+        "description": "Från Jönköping till Kalmar och Växjö: välj en stad, jämför lokala alternativ och bygg trygghet bakom ratten steg för steg.",
+        "cities": {
+          "jonkoping": { "label": "Jönköping" },
+          "vaxjo": { "label": "Växjö" },
+          "kalmar": { "label": "Kalmar" },
+          "varnamo": { "label": "Värnamo" },
+          "ljungby": { "label": "Ljungby" }
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "Redo att börja?",
+      "title": "Din nästa körlektion finns närmare än du tror.",
+      "body": "Utforska hela skolmarknaden om du vill jämföra fler städer, språk och körkortskategorier.",
+      "button": "Se alla trafikskolor",
+      "ariaLabel": "Öppna hela katalogen med auktoriserade trafikskolor"
+    },
+    "ui": {
+      "loading": "Laddar regionguiden…",
+      "error": "Regionguiden kunde inte laddas just nu.",
+      "retry": "Försök igen",
+      "cityListingLabel": "Välj en stad",
+      "cityLinkPrefix": "Hitta trafikskolor i",
+      "regionNavLabel": "Navigera mellan regioner",
+      "backToRegions": "Tillbaka till regionerna",
+      "directoryLinkPrefix": "Öppna skolistan för"
+    }
+  },
+  "westernNorthernSwedenPage": {
+    "meta": {
+      "title": "Auktoriserade trafikskolor i västra och norra Sverige | DriveLinkUp",
+      "description": "Jämför auktoriserade trafikskolor i västra och norra Sverige, från Göteborg till Kiruna.",
+      "ogTitle": "Hitta din körväg genom västra och norra Sverige",
+      "ogDescription": "Jämför lokala skolannonser och välj lektioner som passar din stad, vardag och nästa steg."
+    },
+    "hero": {
+      "eyebrow": "DriveLinkUp · västra och norra Sverige",
+      "title": "Hitta din väg från väst till norr.",
+      "body": "Från Göteborgs gator till norrländska vintervägar kan du jämföra auktoriserade trafikskolor som känner till vägarna runt din vardag.",
+      "primaryCta": "Hitta en trafikskola",
+      "secondaryCta": "Utforska regionerna"
+    },
+    "learnerGuide": {
+      "eyebrow": "För dig som lär dig köra",
+      "title": "En lokal start gör övningskörningen enklare.",
+      "body": "Välj en stad nära dig, jämför det som spelar roll och bygg en plan för övningskörningen utifrån din väg och årstid.",
+      "steps": {
+        "choose": {
+          "title": "Börja med din stad",
+          "body": "Öppna en stad nära dig för att se tillgängliga auktoriserade trafikskolor i katalogen."
+        },
+        "compare": {
+          "title": "Jämför helheten",
+          "body": "Titta på pris, språk, tillgänglighet och profilinformation innan du väljer vem som passar ditt sätt att lära."
+        },
+        "practice": {
+          "title": "Öva på dina vägar",
+          "body": "Välj en tid och bygg trygghet steg för steg, från stadstrafik och rondeller till landsväg och vinterväglag."
+        }
+      }
+    },
+    "regionNav": {
+      "eyebrow": "Regionguide",
+      "title": "Fyra regionala startpunkter.",
+      "body": "Gå från region till närmaste stad och vidare till den publika skolmarknaden för lokala alternativ.",
+      "jumpLabel": "Hoppa till region"
+    },
+    "regions": {
+      "vastra-gotaland": {
+        "name": "Västra Götaland",
+        "description": "Kombinera stadstrafik, leder och öppna landsvägar. Börja i Göteborg eller jämför skolor i Borås, Trollhättan och Skövde för en praktisk lokal väg.",
+        "cities": {
+          "goteborg": { "label": "Göteborg" },
+          "boras": { "label": "Borås" },
+          "trollhattan": { "label": "Trollhättan" },
+          "skovde": { "label": "Skövde" }
+        }
+      },
+      "varmland": {
+        "name": "Värmland",
+        "description": "Bygg säkra färdigheter på Karlstads gator, i mindre städer och på längre landsvägar. Välj den plats som gör regelbunden övning realistisk för dig.",
+        "cities": {
+          "karlstad": { "label": "Karlstad" },
+          "arvika": { "label": "Arvika" },
+          "kristinehamn": { "label": "Kristinehamn" }
+        }
+      },
+      "gavleborg-vasternorrland": {
+        "name": "Gävleborg och Västernorrland",
+        "description": "Förbered dig på en blandning av stadstrafik, kust och längre avstånd. Hitta lokala alternativ i Gävle, Sundsvall, Hudiksvall eller Örnsköldsvik och planera efter dina riktiga resor.",
+        "cities": {
+          "gavle": { "label": "Gävle" },
+          "sundsvall": { "label": "Sundsvall" },
+          "hudiksvall": { "label": "Hudiksvall" },
+          "ornskoldsvik": { "label": "Örnsköldsvik" }
+        }
+      },
+      "vasterbotten-norrbotten": {
+        "name": "Västerbotten och Norrbotten",
+        "description": "Ge dig själv utrymme att lära i skiftande ljus, väder och väglag. Jämför skolor i Umeå, Skellefteå, Luleå och Kiruna för en praktisk lokal plan.",
+        "cities": {
+          "umea": { "label": "Umeå" },
+          "skelleftea": { "label": "Skellefteå" },
+          "lulea": { "label": "Luleå" },
+          "kiruna": { "label": "Kiruna" }
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "Redo att börja?",
+      "title": "Nästa lektion kan börja med en stad nära dig.",
+      "body": "Öppna hela skolmarknaden för att jämföra städer, språk, körkortskategorier, priser och tillgänglighet i Sverige.",
+      "button": "Se alla trafikskolor",
+      "ariaLabel": "Öppna hela katalogen med auktoriserade trafikskolor"
+    },
+    "ui": {
+      "loading": "Laddar regionguiden…",
+      "error": "Regionguiden kunde inte laddas just nu.",
+      "retry": "Försök igen",
+      "cityListingLabel": "Välj en stad",
+      "cityLinkPrefix": "Hitta trafikskolor i",
+      "regionNavLabel": "Navigera mellan regioner",
+      "backToRegions": "Tillbaka till regionerna",
+      "directoryLinkPrefix": "Öppna skolistan för"
+    }
+  },
+  "pricingPage": {
+    "meta": {
+      "title": "Priser och avgifter | DriveLinkUp",
+      "description": "Elever upptäcker, jämför och bokar auktoriserade trafikskolor utan separat elevavgift. Skolor betalar 10 % först efter genomförd tjänst."
+    },
+    "hero": {
+      "eyebrow": "Enkel marknadsekonomi",
+      "title": "Skolans pris är elevens total.",
+      "body": "Upptäck, jämför och boka auktoriserade trafikskolor utan separat DriveLinkUp-avgift."
+    },
+    "learner": {
+      "title": "För elever",
+      "body": "Bläddra bland auktoriserade trafikskolor, jämför deras publicerade priser och tillgänglighet och boka det alternativ som passar.",
+      "price": "0 % elevavgift",
+      "detail": "Du betalar skolans publicerade bokningspris. DriveLinkUp lägger inte på någon separat marknadsplatsavgift."
+    },
+    "school": {
+      "title": "För auktoriserade trafikskolor",
+      "body": "Publicera det pris och den tillgänglighet ni styr över och ta emot kvalificerade, mätbara bokningar från elever som valt er annons.",
+      "price": "10 % efter genomförande",
+      "detail": "Provisionen gäller på hänförligt bokningsvärde först efter genomförd tjänst."
+    },
+    "notes": {
+      "title": "Första marknadens boknings- och provisionsregler (Sverige)",
+      "body": "En bokning är hänförlig när eleven slutför den via DriveLinkUp. Provisionen är 10 % av det hänförliga bokningsvärdet och utgår först efter genomförd tjänst—inte för bläddring, registrering eller ofullbordad förfrågan. Avbokning, återbetalning och utebliven ankomst följer skolans publicerade policy och bokningsposten. Elever betalar aldrig någon separat DriveLinkUp-avgift; skolans publicerade pris förblir elevens total. Utbetalningstid och ansvar bekräftas per deltagande skola innan skarpa bokningar marknadsförs."
+    },
+    "cta": { "learner": "Jämför trafikskolor", "school": "Lista er trafikskola" }
+  },
+  "handledareInfo": {
+    "meta": {
+      "title": "Handledare och privat övningskörning | DriveLinkUp",
+      "description": "Förstå handledarvägen i Sverige och hur den skiljer sig från auktoriserade trafikskolors annonser."
+    },
+    "eyebrow": "Svensk juridisk vägledning",
+    "title": "Handledare är en separat privat väg.",
+    "lead": "I Sverige stödjer en handledare privat övningskörning enligt gällande regler. Det skiljer sig från att boka en auktoriserad trafikskola via DriveLinkUp.",
+    "private": {
+      "title": "Privat övningskörning",
+      "body": "Elev och handledare måste uppfylla aktuella svenska krav, tillstånd och fordonsregler. Kontrollera Transportstyrelsens vägledning före övning. DriveLinkUp presenterar inte handledare som auktoriserade trafikskolor."
+    },
+    "schools": {
+      "title": "Auktoriserade trafikskolor",
+      "body": "För professionella lektioner kan du jämföra auktoriserade trafikskolors annonser, publicerade priser och tillgänglighet. Upptäckt, jämförelse och bokning har ingen separat DriveLinkUp-avgift."
+    },
+    "cta": { "schools": "Jämför trafikskolor", "faq": "Läs vanliga frågor" }
+  }
+}

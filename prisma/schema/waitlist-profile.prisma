@@ -1,0 +1,25 @@
+// User-owned companion to the `waitlist` module.
+//
+// The module's `WaitlistEntry` (prisma/schema/waitlist.prisma) is
+// framework_owned and captures only email. The brief asks for name + email +
+// role at minimum, plus a launch-notify broadcast flag, so we add a
+// parallel `WaitlistProfile` table that the route handler writes to.
+// Both tables are additive (no @relation between them, and neither
+// references the auth User model — that one is locked away in
+// prisma/schema/_base.prisma).
+
+enum WaitlistRole {
+  STUDENT
+  INSTRUCTOR
+}
+
+model WaitlistProfile {
+  id           String       @id @default(cuid())
+  name         String
+  email        String       @unique
+  role         WaitlistRole
+  createdAt    DateTime     @default(now())
+  notifySentAt DateTime?
+
+  @@index([notifySentAt])
+}

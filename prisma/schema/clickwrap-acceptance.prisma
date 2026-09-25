@@ -1,0 +1,20 @@
+// @polsia:user-owned — dated, versioned acceptance of the handledare terms.
+//
+// One row per signed-up handledare; `userId @unique` makes a re-attestation
+// act like an upsert on the same row. `User` lives in framework-owned
+// prisma/schema/auth.prisma (Prisma cannot extend a model across files), so
+// the link is a plain scalar `userId` per the nextjs-prisma skill — NO
+// @relation to User (that would require a back-relation field ON User, which
+// we cannot own). Reads happen by id in app / route code.
+
+model ClickwrapAcceptance {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  termsVersion String
+  acceptedAt   DateTime
+  ipAddress    String?
+  userAgent    String?
+
+  @@index([termsVersion])
+  @@map("clickwrap_acceptance")
+}

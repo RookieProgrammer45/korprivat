@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="DriveLinkUp">
+  <title>DriveLinkUp</title>
+  <g transform="translate(16 16)" fill="currentColor">
+    <g transform="rotate(-45)">
+      <path fill-rule="evenodd" d="M-9.5 -2.5 h19 a3.5 3.5 0 0 1 0 7 h-19 a3.5 3.5 0 0 1 0 -7 z M-7 -1.75 h14 a1.75 1.75 0 0 1 0 3.5 h-14 a1.75 1.75 0 0 1 0 -3.5 z"/>
+    </g>
+    <rect x="-2.6" y="-2.6" width="5.2" height="5.2" transform="rotate(45)"/>
+    <g transform="rotate(45)">
+      <path fill-rule="evenodd" d="M-9.5 -2.5 h19 a3.5 3.5 0 0 1 0 7 h-19 a3.5 3.5 0 0 1 0 -7 z M-7 -1.75 h14 a1.75 1.75 0 0 1 0 3.5 h-14 a1.75 1.75 0 0 1 0 -3.5 z"/>
+      <circle cx="0" cy="0" r="1.05"/>
+      <rect x="-0.35" y="-1.05" width="0.7" height="2.1"/>
+    </g>
+    <circle cx="0" cy="0" r="1.05" transform="rotate(-45)"/>
+    <rect x="-0.35" y="-1.05" width="0.7" height="2.1" transform="rotate(-45)"/>
+  </g>
+</svg>

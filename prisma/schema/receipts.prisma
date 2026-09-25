@@ -1,0 +1,37 @@
+// @polsia:user-owned — immutable-ish transaction snapshots for paid bookings.
+// Booking and recipient user links are scalar ids because the related models
+// are framework-owned or live in another governed schema file.
+
+model BookingReceipt {
+  id                String   @id @default(cuid())
+  bookingId         String
+  recipientUserId   String?
+  recipientRole     String
+  receiptNumber     String   @unique
+  locale            String   @default("sv")
+  learnerName       String
+  instructorName    String
+  instructorCity    String
+  category          String
+  scheduledAt       DateTime
+  durationMinutes   Int
+  priceAmountSek    Int
+  serviceFeeSek     Int
+  grossChargedSek   Int
+  commissionSek     Int
+  netPayoutSek      Int
+  verifiedAmountUsd Int
+  paymentStatus     String
+  payoutStatus      String
+  emailDeliveryStatus String?  @default("pending")
+  emailLastAttemptAt DateTime?
+  emailSentAt        DateTime?
+  emailFailureReason String?
+  issuedAt          DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([bookingId, recipientRole])
+  @@index([bookingId])
+  @@index([recipientUserId])
+}

@@ -1,0 +1,38 @@
+// @polsia:user-owned — Late-cancellation fee ledger.
+//
+// One row per late cancellation. Reproduces the math the cancel route handler
+// ran at insert time (amountUsd + windowHoursAtCancel + feePercentApplied) so
+// an operator reconciling the Stripe Connect side later has an audit row per
+// fee, surviving even if the related Booking row is later mutated.
+//
+// `status` is operator-driven: 'recorded' on insert, 'reconciled' once the
+// platform-team sweep has captured the residual from the original booking
+// charge (platform infra, not app code — see the stripe-payments skill:
+// refunds and re-routing are platform-only). The app never writes
+// 'reconciled' — there is no /api path for it.
+//
+// The fee is RECORDED, not re-charged. The platform-team reconciliation
+// cycle that already sweeps Stripe Connect captures the residual as part
+// of the marketplace's existing payment-handling; the instructor still
+// keeps the full lesson rate per the marketplace model.
+model LateCancellationFee {
+  id                  String   @id @default(cuid())
+  bookingId           String
+  // Whole-dollar USD amount of the late-cancellation fee. Capped at the
+  // lesson USD charge so a fee can never exceed what the learner paid.
+  amountUsd           Int
+  // Snapshot for audit: how many whole hours remained until preferredAt at
+  // the moment the cancel POST resolved the window. Operators compare this
+  // to the policy's LATE_WINDOW_HOURS when reconciling disputes.
+  windowHoursAtCancel Int
+  // Snapshot for audit: the percent applied (e.g. 25) — sourced from the
+  // same cancellation policy module that the running cancel route used,
+  // so the contract record matches the math without a second copy of the
+  // number.
+  feePercentApplied   Int
+  createdAt           DateTime @default(now())
+  // 'recorded' on insert; 'reconciled' is operator-driven (see header).
+  status              String   @default("recorded")
+
+  @@index([bookingId])
+}

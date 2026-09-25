@@ -1,0 +1,42 @@
+// @polsia:user-owned — `RebookingCache` model: bookkeeping so the rebook
+// form on `/instructors/[id]?rebook=<bookingId>` can pre-fill from the
+// learner's last booking with that instructor.
+//
+// Captures a SNAPSHOT of `category`, `studentPhone`, `studentName` — the
+// fields the rebook form sticks behind a `Use saved details? Yes / Edit`
+// affordance — and `lastBookingId` so the page can deep-link back to the
+// booking detail on the dashboard.
+//
+// One row per (userId, instructorId) — `@@unique([userId, instructorId])`
+// enforces the rule that "the latest booking" is the only one we cache
+// for a given instructor, removing a special "AND ranked #1" lookup in
+// hot reads. `prisma db push --accept-data-loss` adds the index without
+// complaining about pre-existing rows because we create zero rows here —
+// the route handler at payment-poll fills this lazily, on the first
+// rebook-worthy booking per user.
+//
+// Both `userId` and `instructorId` are SCALAR FKs (per the nextjs-prisma
+// skill: the locked framework-owned User / Instructor must not get a
+// back-relation). `@@index([userId])` for the dashboard-side read; the
+// composite `@@unique` covers the instructor lookup since the rebook
+// query will only ever go `userId + instructorId`.
+
+model RebookingCache {
+  id            String   @id @default(cuid())
+  userId        String
+  instructorId  String
+  category      String
+  studentPhone  String
+  studentName   String
+  // Optional scalar pointer to the prior `Booking.id`. Scalar only
+  // (no @relation — the locked Booking model would need a back-relation
+  // for `@relation` to work, and its schema file belongs to the
+  // user-owned instructors file). We pull the Booking row separately
+  // when the rebook page needs it.
+  lastBookingId String?
+  updatedAt     DateTime @updatedAt
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, instructorId])
+  @@index([userId])
+}

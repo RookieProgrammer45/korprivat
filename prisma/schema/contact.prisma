@@ -1,0 +1,15 @@
+// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/contact-form@0.1.0. Drift = commit rejected.
+//
+// Self-contained contact-message model. No @relation, no foreign-model mutation.
+// Datasource + generator live in prisma/schema/_base.prisma (framework-owned
+// by the template). Do NOT redeclare them here.
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("contact_message")
+}

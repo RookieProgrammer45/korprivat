@@ -1,0 +1,63 @@
+// @polsia:user-owned — booking-scoped learner/instructor messaging.
+// External User, Booking, and Instructor references are scalar IDs because
+// those models are framework/module-owned and cannot receive back-relations.
+
+model Conversation {
+  id            String                    @id @default(cuid())
+  bookingId     String                    @unique
+  learnerId     String
+  instructorId  String
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+  lastMessageAt DateTime?
+  participants  ConversationParticipant[]
+  messages      Message[]
+  reports       MessageReport[]
+
+  @@index([learnerId])
+  @@index([instructorId])
+}
+
+model ConversationParticipant {
+  id             String       @id @default(cuid())
+  conversationId String
+  userId         String
+  role           String
+  lastReadAt     DateTime?
+  createdAt      DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+}
+
+model Message {
+  id              String          @id @default(cuid())
+  conversationId  String
+  senderId        String
+  body            String
+  moderationState String          @default("allowed")
+  createdAt       DateTime        @default(now())
+  conversation    Conversation    @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  reports         MessageReport[]
+
+  @@index([conversationId, createdAt])
+  @@index([senderId])
+}
+
+model MessageReport {
+  id             String       @id @default(cuid())
+  conversationId String
+  messageId      String?
+  reporterId     String
+  reason         String
+  details        String?
+  status         String       @default("open")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  message        Message?     @relation(fields: [messageId], references: [id], onDelete: SetNull)
+
+  @@index([conversationId, status])
+  @@index([reporterId])
+}

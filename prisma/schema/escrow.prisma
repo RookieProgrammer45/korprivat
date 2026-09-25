@@ -1,0 +1,24 @@
+// @polsia:user-owned — Escrow-style booking payment state.
+//
+// One Dispute row per opened dispute. All fields are nullable/defaulted so
+// `prisma db push --accept-data-loss` accepts pre-existing rows from prior
+// in-flight tasks (signup, reviews). `openedByLabel` and `resolvedByLabel`
+// are free-form strings — the app does not yet have a User table tied to
+// Bookings, so we accept the opener's name/email as text. When better-auth
+// lands these become `userId` scalars.
+
+model Dispute {
+  id              String    @id @default(cuid())
+  bookingId       String
+  openedByRole    String
+  openedByLabel   String
+  openedByAt      DateTime  @default(now())
+  reason          String
+  status          String    @default("open")
+  resolvedByLabel String?
+  resolvedByAt    DateTime?
+  resolutionNote  String?
+
+  @@index([bookingId])
+  @@index([status])
+}

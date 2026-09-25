@@ -1,0 +1,27 @@
+// @polsia:user-owned — public reviews posted against an Instructor. Model is
+// in its own file (per `nextjs-prisma` skill: one file per feature area) so
+// the back-relation `reviews Review[]` on the `Instructor` model can live in
+// `instructors.prisma` and stay a one-line edit.
+//
+// `prisma db push` does NOT add a FK between Review.instructorId and
+// Instructor.id, so any future POST handler MUST re-validate the
+// instructorId exists in app code (mirror the Booking.instructorId guard in
+// the `/api/bookings` handler). The `rating` column is validated as an
+// integer 1-5 in the zod contract — no DB-level CHECK constraint is created
+// by `prisma db push`, so the handler is the only line of defense.
+
+model Review {
+  id           String     @id @default(cuid())
+  instructorId String
+  // Scalar reference to the completed Booking that authorizes this review.
+  // Nullable for legacy rows so the deploy can safely add this column.
+  bookingId    String?
+  reviewerName String
+  rating       Int
+  comment      String
+  createdAt    DateTime   @default(now())
+  instructor   Instructor @relation(fields: [instructorId], references: [id])
+
+  @@index([instructorId])
+  @@index([bookingId])
+}

@@ -1,0 +1,49 @@
+// @polsia:user-owned — `SavedPaymentMethod` model: an opaque reference to a
+// method-of-payment the learner has used before, scoped per user.
+//
+// Why this exists (the brief): mirror Airbnb's saved-payment rebooking flow
+// so a learner can rebook a previously-used instructor without re-entering
+// their email + phone + category. We achieve ONE STEP on rebook by pre-filling
+// — there is no literal "1-tap Stripe-charge on the same saved card" shortcut
+// because the Polsia Stripe-billing proxy does not expose PaymentIntents /
+// Stripe Customers / SetupIntents — see the plan's constraints.
+//
+// What we NEVER store here:
+//   - PAN or card number — D26 / PCI scope.
+//   - CVC, expiry day or any value Stripe hands back that would leak personal data.
+//   - The `cs_…` / `pm_…` / `cus_…` opaque id, because the proxy does not expose it.
+//
+// What we DO store:
+//   - the buyer's email (this curlies back to Booking.studentEmail), the
+//     `brand` ("card" placeholder for now — until the proxy surfaces
+//     card-meta, the real brand/last4 stay null), and `lastUsedAt` so the
+//     dashboard island can rank the most-recent one as the "default".
+//
+// One row per saved method per user. `userId` is a SCALAR FK to the locked
+// auth User — no `@relation` (per the nextjs-prisma skill: framework-owned
+// models cannot carry a back-relation field). `@@index([userId])` so the
+// profile/me route can fetch the list with a single query.
+
+model SavedPaymentMethod {
+  id            String   @id @default(cuid())
+  userId        String
+  // Booking.studentEmail — the canonical Stripe customer email for the
+  // session that produced this method. Lowercased server-side in the
+  // /api/profile/payment-methods response so duplicate-case rows collapse.
+  customerEmail String
+  // Defaults to "card" for now; future proxy enrichment may surface
+  // "visa" / "mastercard" / "swish" once the events payload carries it.
+  brand         String   @default("card")
+  // Optional — Stripe does not expose `last4` from the proxy's `/api/v2/app-payments/events`
+  // payload today, so this stays null until that gap closes. We keep the
+  // column so the schema doesn't have to migrate when the proxy starts
+  // surfacing card meta.
+  last4         String?
+  // Last time a Stripe confirm landed for the bookings row tied to this
+  // email. Used by the UI to highlight the most-recent method as "default".
+  lastUsedAt    DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+}

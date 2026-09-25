@@ -1,0 +1,248 @@
+// @polsia:user-owned — Instructor + Booking + AvailabilitySlot models for the
+// DriveLinkUp marketplace. All three live in ONE file because the two
+// bidirectional @relation chains (Slot ↔ Instructor and Slot ↔ Booking) require
+// both ends in the same user-owned file; a relation field across two files
+// would need a back-relation on a file we don't own.
+//
+// IDs are plain `String` with NO `@default(cuid())` so seed rows can supply
+// deterministic string IDs (e.g. "instructor_erik"). `prisma.db push` does not
+// add a foreign key between Booking.instructorId and Instructor.id, so the
+// `/api/bookings` handler re-validates `instructorId` exists before insert.
+
+model Instructor {
+  id                     String             @id
+  name                   String
+  city                   String
+  // Optional public catchment description, for example "Södermalm + 15 km".
+  // Public reads fall back to `city` for legacy rows created before this field.
+  serviceArea            String?
+  categories             String[]
+  hourlyRateSek          Int
+  bio                    String
+  photoUrl               String
+  bookedHours            Int                @default(0)
+  // Nullable so `prisma db push --accept-data-loss` won't reject on
+  // pre-existing instructor rows. The booking handler treats a missing
+  // `email` as "can't notify the instructor" and still returns 201.
+  email                  String?
+  englishSpeaking        Boolean            @default(false)
+  // Nullable for `prisma db push --accept-data-loss`; distance computation
+  // falls back to a city-keyed lookup when these are NULL.
+  latitude               Float?
+  longitude              Float?
+  // Optional scalar FK to the auth User.id so a signed-in instructor's
+  // account row can be paired with their marketplace listing without a
+  // reverse `@relation` on the locked framework-owned `User` model.
+  // Nullable so pre-existing rows and unauthed marketplace onboarding both
+  // survive `prisma db push`. NOT `@unique` — Prisma treats adding a UNIQUE
+  // as a data-loss warning and the deploy gate runs `prisma db push` without
+  // `--accept-data-loss`, which would fail the run. Uniqueness is enforced at
+  // the app layer in POST /api/instructors (existing-row check before insert).
+  userId                 String?
+  // Provider discriminator for the two marketplace supply roles. Nullable
+  // with an INSTRUCTOR default so legacy rows remain valid during db push.
+  providerRole           String?            @default("INSTRUCTOR")
+  bookings               Booking[]
+  reviews                Review[]
+  // Cancellation-policy tier the instructor publishes on their profile.
+  // Snapshotted onto every Booking row at create time so a later change
+  // to the instructor's tier can't retroactively shift a prior booking's
+  // refund. Nullable + defaulted so `prisma db push --accept-data-loss`
+  // accepts pre-existing rows and seed rows.
+  cancellationPolicyTier String?            @default("flexible")
+  // Booking mode the instructor publishes on their profile:
+  //   'instant' — learner books a slot and the row is held in escrow right away.
+  //   'request' — learner POSTs a request; instructor accepts/declines; payment
+  //               is captured only after the instructor accepts.
+  // Nullable + defaulted so pre-existing rows survive `prisma db push` —
+  // the read path defaults to 'instant' on a missing field so a row
+  // written before this column existed still behaves as the legacy
+  // "instant" flow.
+  bookingMode            String?            @default("instant")
+  // Back-relation for AvailabilitySlot — instructor owns a list of open /
+  // booked slots. Persisted slot.times are addressed via AvailabilitySlot
+  // .instructorId, not via include across User, so no FK to a foreign model.
+  availabilitySlots      AvailabilitySlot[]
+
+  @@index([city])
+  @@index([userId])
+  @@index([providerRole])
+}
+
+model Booking {
+  id                      String            @id @default(cuid())
+  instructorId            String
+  // Scalar reference to the availability slot selected by the learner. The
+  // existing AvailabilitySlot ↔ Booking relation is kept for its booked-slot
+  // back-reference; this field preserves the selected slot even while a
+  // request-mode booking is awaiting approval.
+  slotId                  String?
+  studentName             String
+  studentEmail            String
+  studentPhone            String
+  category                String
+  preferredAt             DateTime
+  createdAt               DateTime          @default(now())
+  // Payment columns are nullable/defaulted so `prisma db push --accept-data-loss`
+  // doesn't reject on pre-existing rows. `paymentStatus` starts at "unpaid" and
+  // progresses to "pending" once a Stripe checkout session has been minted, then
+  // to "paid" once the learner completes checkout. `stripeCheckoutSessionId` is
+  // the `cs_...` session id used for the server-side verify call on the
+  // success page and is the idempotency key for the "Betala lektionen" flow.
+  paymentStatus           String?           @default("unpaid")
+  stripeCheckoutSessionId String?
+  // Escrow-style payment state — all additive / nullable / defaulted so
+  // `prisma db push --accept-data-loss` accepts pre-existing rows. The
+  // booking is funded at checkout (`held_escrow`) and "released" only after
+  // a complete step; `disputeStatus` denormalises the active Dispute row's
+  // status so the read endpoint can render the badge in a single query.
+  heldAt                  DateTime?
+  completedAt             DateTime?
+  completedByRole         String?
+  completedByLabel        String?
+  payoutReleasedAt        DateTime?
+  releasedByRole          String?
+  releasedByLabel         String?
+  actionToken             String?
+  // One-time-returned learner bearer token, stored only as a SHA-256 digest.
+  // The raw token is returned by POST /api/bookings and is never serialized
+  // from a booking read or included in a dashboard payload.
+  // Token hashes are intentionally not database-unique: this table already
+  // contains legacy rows with duplicate values, so the deploy-time `prisma
+  // db push` must not attempt to add an unexecutable UNIQUE constraint. Token
+  // generation is cryptographically random and access checks compare the
+  // supplied bearer token against the stored hash in application code.
+  learnerAccessTokenHash  String?
+  disputeStatus           String?
+  // Optional FK to the auth User.id so a learner-signed-in booking can be
+  // read by user.id without falling back to the studentEmail match. Scalar
+  // FK only — NO @relation to User: the locked framework-owned User model
+  // can't carry a back-relation. Nullable so existing rows and bookings
+  // created by anonymous learners pre-signin survive `--accept-data-loss`.
+  userId                  String?
+  // Nullable reminder timestamp set the first time the `lesson-reminders`
+  // cron successfully emails both parties a 24h-before lesson reminder.
+  // `reminderSentAt === null` selects bookings still owed a reminder, so
+  // a second cron run inside the same window re-fires nothing.
+  reminderSentAt          DateTime?
+  // ── Cancellation fields — all nullable so `prisma db push --accept-data-loss`
+  //  survives any pre-existing rows. `cancellationOutcome` is terminal once set:
+  //    'cancelled_full_refund' — outside the tier's full-refund window AND
+  //                              outside the partial window; no fee, slot freed.
+  //    'cancelled_partial'    — inside the tier's partial-refund window
+  //                              (between full-refund and <24h); LateCancellationFee
+  //                              row records the tier's partialFeePercent.
+  //    'cancelled_late'       — within LATE_WINDOW_HOURS (24h before the lesson);
+  //                              feePercentApplied=100 on the audit row.
+  //    'cancelled_early'      — LEGACY pre-tier value kept on BookingRead for
+  //                              historical rows; new writes only emit the
+  //                              three tier-aware outcomes above.
+  //  In every case the platform-team reconciliation cycle handles any
+  //  residual; the instructor keeps the full lesson rate per the marketplace
+  //  model.
+  cancellationOutcome     String?
+  // Snapshot of the instructor's cancellation-policy tier AT BOOKING TIME.
+  // The cancel handler reads this snapshot — NEVER the live instructor tier
+  // — so a later change to the instructor's tier can't retroactively shift
+  // a prior booking's refund. Nullable + defaulted so `prisma db push
+  // --accept-data-loss` accepts pre-existing rows.
+  cancellationPolicyTier  String?
+  // Snapshot of the instructor's booking mode (instant | request) at
+  // booking time. Same idea as `cancellationPolicyTier` — the read
+  // surface reads this snapshot so a later flip from request → instant
+  // (or vice versa) doesn't retroactively change a prior booking's
+  // payment semantics. Nullable / defaulted so pre-existing rows
+  // survive `prisma db push`; the read path defaults to 'instant' on
+  // null. New Request rows are born at `paymentStatus='awaiting_approval'`
+  // until the instructor accepts.
+  bookingMode             String?           @default("instant")
+  // Locale active when the learner created the booking. Receipt copy uses
+  // this snapshot so a later cookie change cannot rewrite transactional copy.
+  locale                  String?           @default("sv")
+  // Approve-side audit trail — set when the instructor accepts a
+  // Request-mode booking. Fields mirror the same shape the complete /
+  // cancel / dispute audit trails use; nullable so a pre-feature row
+  // parses cleanly.
+  acceptedAt              DateTime?
+  acceptedByLabel         String?
+  // Decline-side audit trail — set when the instructor declines a
+  // Request-mode booking. `declinedReason` is the optional free-text
+  // reason the instructor provides; nullable / maximum 2000 chars at
+  // the contract level.
+  declinedAt              DateTime?
+  declinedByLabel         String?
+  declinedReason          String?
+  cancelledAt             DateTime?
+  cancelledByRole         String?
+  cancelledByLabel         String?
+  // ── Per-booking fee snapshots — all nullable so `prisma db push
+  //  --accept-data-loss` survives pre-existing rows. The four columns
+  //  are stamped ONCE at the payment-link / accept transition (the
+  //  "mint seam") so a later `Instructor.hourlyRateSek` change cannot
+  //  retroactively shift a prior booking's charged / payout figures.
+  //    priceAmountSek    — `Instructor.hourlyRateSek` at booking time
+  //    serviceFeeSek     — 5% snapshot of priceAmountSek
+  //    grossChargedSek   — total the learner paid = priceAmountSek + serviceFeeSek
+  //    payoutAmountSek   — instructor payout = priceAmountSek − 10% commission,
+  //                        settled at release. Computed once at the
+  //                        /complete transition (NOT at the mint seam —
+  //                        the release is what actually pays out).
+  //  A pre-feature row that has any of these as null is still
+  //  processable; reads on null fall through to a "skip disclosure"
+  //  branch, and the `/complete` handler falls back to the live
+  //  `instructor.hourlyRateSek` for `payoutAmountSek` so legacy rows
+  //  still release cleanly.
+  priceAmountSek          Int?
+  serviceFeeSek           Int?
+  grossChargedSek         Int?
+  payoutAmountSek         Int?
+  instructor              Instructor        @relation(fields: [instructorId], references: [id])
+  // Back-relation for the slot the booking was made against. Nullable so
+  // bookings created before the slot feature shipped parse cleanly; old
+  // rows with `bookedSlot === null` resolve `Booking.preferredAt` directly
+  // from the stored DateTime for the email body.
+  bookedSlot              AvailabilitySlot?
+
+  @@index([instructorId])
+  @@index([slotId])
+  @@index([userId])
+}
+
+// AvailabilitySlot — a single open (or booked) time slot an instructor makes
+// available for booking. `bookedAt IS NULL` means "open for booking";
+// `bookedAt != NULL` means the slot is taken (`bookedBookingId` carries the
+// matching Booking.id). All columns are nullable / defaulted so legacy
+// rows (none yet) would survive `prisma db push --accept-data-loss` if any
+// appeared from a half-applied migration.
+//
+// `bookedBookingId` is `@unique` because the back-relation is 1:1 — a
+// booking links to at most one slot — and `@unique` plus a non-array
+// back-relation field (`Booking.bookedSlot AvailabilitySlot?`) is what Prisma
+// expects for a one-to-one relation.
+//
+// No FK to the locked `User` model — instructor ownership is queried by
+// `Instructor.email` like every other instructor-scoped route; adding a
+// `userId` scalar FK is a follow-on. No new `migrations/` folder — the
+// deploy script runs `prisma db push`, so this model ships at the same
+// instant as the first POST.
+model AvailabilitySlot {
+  id              String     @id @default(cuid())
+  instructorId    String
+  startsAt        DateTime
+  endsAt          DateTime
+  durationMinutes Int
+  createdAt       DateTime   @default(now())
+  // `bookedAt IS NULL` is the "open" flag. Defaulted so `prisma db push
+  // --accept-data-loss` accepts any pre-existing row shape. Same for
+  // `bookedBookingId` — both NULL means the slot exists, is unbooked, and
+  // `startsAt > now()` makes it visible to learners.
+  bookedAt        DateTime?
+  // 1:1 back-relation to Booking.id — the booking this slot was booked
+  // against. `NULL` while the slot is open.
+  bookedBookingId String?    @unique
+  instructor      Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+  bookedBooking   Booking?   @relation(fields: [bookedBookingId], references: [id])
+
+  @@unique([instructorId, startsAt])
+  @@index([instructorId, startsAt])
+}

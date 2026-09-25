@@ -1,0 +1,27 @@
+// @polsia:user-owned — GDPR privacy consent audit trail.
+//
+// One row per consent decision (banner / signup / license-upload).
+// `userId` is a plain scalar (NO @relation to User — User lives in framework-
+// owned prisma/schema/auth.prisma, which Prisma cannot extend across files,
+// and a @relation would force a back-relation on User that we can't own).
+// Anonymous banner consents carry `subjectHash` (SHA-256 of IP + UA + a fresh
+// random salt) so retries from the same visitor group without ever storing
+// raw PII at rest — the DB never retains the IP/UA itself, so a forensic
+// lookup of "what did this visitor do" is impossible from inside the DB.
+
+model ConsentEvent {
+  id            String   @id @default(cuid())
+  userId        String?
+  subjectHash   String?
+  policyVersion String
+  scope         Json
+  source        String
+  ipAddress     String?
+  userAgent     String?
+  acceptedAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([policyVersion])
+  @@index([acceptedAt])
+  @@map("consent_event")
+}

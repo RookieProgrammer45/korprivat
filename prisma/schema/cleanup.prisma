@@ -1,0 +1,49 @@
+// @polsia:user-owned — audit tables for the weekly R2 orphan-cleanup cron.
+//
+// `CleanupRun` records one execution of the cleanup job (trigger = 'cron'
+// when fired by the [[crons]] block, 'admin' when fired from the admin
+// "Run cleanup now" button). `CleanupRunDeletion` is the audit grain:
+// one row per R2 object the run actually deleted, capturing the key
+// (and the URL when known) so an operator can later reconstruct what
+// left the bucket.
+//
+// All columns are nullable or defaulted so a future `prisma db push
+// --accept-data-loss` against existing tables / rows cannot reject.
+// The CleanupRun -> CleanupRunDeletion link is a one-way @relation
+// from the audit table to CleanupRun; CleanupRun is the parent and
+// carries no back-relation field because we never compute the parent
+// from a deletion row client-side (the admin dashboard paginates by
+// runId directly).
+
+model CleanupRun {
+  id         String    @id @default(cuid())
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+  status     String?   @default("running")
+  trigger    String    @default("cron")
+  scanned    Int?
+  deleted    Int?
+  error      String?
+
+  // Back-relation for CleanupRunDeletion — runs owns a list of audit
+  // rows, each pointing back via `runId`. Both models live in this
+  // file because the relation is bidirectional and the only consumers
+  // are this file's own endpoints.
+  deletions CleanupRunDeletion[]
+
+  @@index([startedAt])
+  @@map("cleanup_run")
+}
+
+model CleanupRunDeletion {
+  id        String     @id @default(cuid())
+  runId     String
+  key       String
+  url       String?
+  deletedAt DateTime   @default(now())
+  run       CleanupRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId])
+  @@index([key])
+  @@map("cleanup_run_deletion")
+}

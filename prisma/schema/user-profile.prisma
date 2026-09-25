@@ -1,0 +1,33 @@
+// @polsia:user-owned — per-user app fields for the better-auth `User` row.
+//
+// `User` lives in the framework-owned prisma/schema/auth.prisma (Prisma can't
+// extend a model across files), so fields that are MINE — the student/instructor
+// role for the marketplace and a "we already sent you a welcome" dedup marker —
+// live on this user-owned model. The link to User is a plain scalar `userId`
+// (per the nextjs-prisma skill: NO @relation to the framework-owned User, since
+// that would require a back-relation field on User which we cannot own).
+//
+// `role` mirrors the existing `WaitlistRole` enum on prisma/schema/waitlist-profile.prisma:
+// a user is either a learner (STUDENT) or an instructor (INSTRUCTOR), defaulting
+// to STUDENT. Created with the user row via the `user.create.after` hook in
+// src/lib/auth-config.ts so the row exists without an extra round trip on any
+// page that reads it. `profileCompletedAt` is stamped by /api/profile/picture
+// exactly when a real avatar upload lands on User.image.
+model UserProfile {
+  id                 String    @id @default(cuid())
+  userId             String    @unique
+  role               Role      @default(STUDENT)
+  welcomeSentAt      DateTime?
+  profileCompletedAt DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("user_profile")
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  HANDLEDARE
+}

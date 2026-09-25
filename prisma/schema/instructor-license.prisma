@@ -1,0 +1,40 @@
+// @polsia:user-owned — first-time driving-licence verification per instructor.
+//
+// One row per signed-up instructor; `userId @unique` makes a re-upload act
+// like an upsert on the same row. `User` lives in framework-owned
+// prisma/schema/auth.prisma (Prisma cannot extend a model across files), so
+// the link is a plain scalar `userId` per the nextjs-prisma skill — NO
+// @relation to User (that would require a back-relation field ON User, which
+// we cannot own). Reads happen by id in app / route code.
+//
+// Status lifecycle (admin UI for PENDING → VERIFIED | REJECTED is out of
+// scope this phase; the schema reserves the audit fields so the admin page
+// can be added later without a migration):
+//   PENDING   — the instructor uploaded a file; awaiting admin review.
+//   VERIFIED  — admin approved the licence.
+//   REJECTED  — admin declined, with a free-text `rejectionReason`.
+enum LicenseStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+model InstructorLicense {
+  id              String        @id @default(cuid())
+  userId          String        @unique
+  fileKey         String
+  fileUrl         String
+  fileMime        String
+  fileSizeBytes   Int
+  attestation     Boolean
+  status          LicenseStatus @default(PENDING)
+  submittedAt     DateTime
+  verifiedAt      DateTime?
+  verifiedByEmail String?
+  rejectionReason String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([status])
+  @@map("instructor_license")
+}
