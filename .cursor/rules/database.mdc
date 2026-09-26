@@ -15,3 +15,9 @@ alwaysApply: true
 - Foreign keys always have an index.
 - Never edit a migration that's already been applied to staging or production.
 - After schema changes run `pnpm prisma migrate dev` and commit the migration.
+- Never apply schema changes with `prisma db execute` outside a
+  migration file. Every change must live in
+  prisma/migrations/<timestamp>_<name>/migration.sql.
+- If history drift is detected, STOP and report. Do not reset the DB.
+- If a migration must be applied manually to recover from drift,
+  generate the migration file FIRST, then mark it applied.
