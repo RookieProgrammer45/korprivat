@@ -82,6 +82,21 @@ introduce `/learner/*` as the primary surface.
   `requireSignupPrerequisites` / handledare clickwrap guards.
 - APIs: `requireAuth` / admin session checks.
 
+## Required env vars (Didit)
+
+| Var | Source |
+| --- | --- |
+| `DIDIT_API_KEY` | Didit console → API Keys |
+| `DIDIT_WEBHOOK_SECRET` | Didit console → Webhooks → destination `secret_shared_key` (shown once) |
+| `DIDIT_WORKFLOW_ID` | Didit console → Workflows → UUID |
+
+Rules:
+
+- Never hardcode these in source.
+- Never pipe them to a CLI via `printf` — interactive prompts only
+  (`vercel env add DIDIT_WORKFLOW_ID preview`, etc.).
+- Rotate immediately if a value is ever pasted into a chat or log.
+
 ## How to work
 
 1. Name the bounded context before writing code.

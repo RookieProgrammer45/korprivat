@@ -10,7 +10,8 @@ import {
   alertDiditWebhook,
   DiditWebhookParseError,
   parseDiditWebhook,
-  verifyDiditSignature,
+  verifyDiditRequest,
+  type ParsedDiditWebhook,
 } from '@/lib/verification/didit';
 import {
   type LearnerVerificationState,
@@ -19,6 +20,12 @@ import {
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+
+/** Session webhook families that can drive the learner age-gate writer. */
+const LEARNER_SESSION_WEBHOOK_TYPES = new Set([
+  'status.updated',
+  'data.updated',
+]);
 
 function isLearnerState(value: string): value is LearnerVerificationState {
   return (
@@ -45,29 +52,64 @@ function claimedVerifiedMismatchYears(
 
 export async function POST(req: Request) {
   const rawBody = await req.text();
-  const signature = req.headers.get('x-didit-signature');
+  const signatureV2 = req.headers.get('x-signature-v2');
+  const signatureRaw = req.headers.get('x-signature');
+  const signatureSimple = req.headers.get('x-signature-simple');
+  const timestamp = req.headers.get('x-timestamp');
 
-  if (!verifyDiditSignature(rawBody, signature)) {
+  let jsonBody: unknown;
+  try {
+    jsonBody = JSON.parse(rawBody) as unknown;
+  } catch {
+    alertDiditWebhook('invalid_json', {
+      bodyPreview: rawBody.slice(0, 512),
+    });
+    return NextResponse.json({ error: 'invalid_payload' }, { status: 400 });
+  }
+
+  const verified = verifyDiditRequest({
+    rawBody,
+    jsonBody,
+    signatureV2,
+    signatureRaw,
+    signatureSimple,
+    timestamp,
+  });
+
+  if (!verified.ok) {
+    alertDiditWebhook('invalid_signature', {
+      bodyPreview: rawBody.slice(0, 512),
+      hasV2: Boolean(signatureV2),
+      hasRaw: Boolean(signatureRaw),
+      hasSimple: Boolean(signatureSimple),
+      hasTimestamp: Boolean(timestamp),
+    });
     return NextResponse.json({ error: 'invalid_signature' }, { status: 401 });
   }
 
-  let parsed;
+  let parsed: ParsedDiditWebhook;
   try {
-    parsed = parseDiditWebhook(JSON.parse(rawBody) as unknown);
+    parsed = parseDiditWebhook(jsonBody);
   } catch (error) {
-    if (error instanceof SyntaxError || error instanceof DiditWebhookParseError) {
+    if (error instanceof DiditWebhookParseError) {
       return NextResponse.json({ error: 'invalid_payload' }, { status: 400 });
     }
     throw error;
   }
 
+  // Simple authenticates the envelope only — never trust decision / DOB from it.
+  parsed.decisionTrusted = verified.method === 'v2' || verified.method === 'raw';
+
   const payloadHash = crypto.createHash('sha256').update(rawBody).digest('hex');
 
+  // Idempotency: Didit event_id is the delivery key (docs).
   try {
     await prisma.diditWebhookEvent.create({
       data: {
-        diditSessionId: parsed.sessionId,
-        decision: parsed.decision,
+        eventId: parsed.eventId,
+        diditSessionId: parsed.sessionId ?? parsed.eventId,
+        decision: parsed.statusLabel || parsed.webhookType,
+        webhookType: parsed.webhookType,
         payloadHash,
       },
     });
@@ -83,9 +125,47 @@ export async function POST(req: Request) {
     throw error;
   }
 
+  // Ack non-learner families immediately (entity / activity / transaction / KYB).
+  if (!LEARNER_SESSION_WEBHOOK_TYPES.has(parsed.webhookType)) {
+    return NextResponse.json(
+      { ok: true, ignored: true, webhook_type: parsed.webhookType },
+      { status: 200 },
+    );
+  }
+
+  if (parsed.sessionKind === 'business') {
+    return NextResponse.json(
+      { ok: true, ignored: true, reason: 'business_session' },
+      { status: 200 },
+    );
+  }
+
+  if (!parsed.decision) {
+    return NextResponse.json(
+      { ok: true, ignored: true, reason: 'unknown_status' },
+      { status: 200 },
+    );
+  }
+
+  // Approved DOB writes require a body-authenticating signature.
+  if (parsed.decision === 'approved' && !parsed.decisionTrusted) {
+    alertDiditWebhook('approved_without_trusted_signature', {
+      eventId: parsed.eventId,
+      sessionId: parsed.sessionId,
+      method: verified.method,
+    });
+    return NextResponse.json(
+      { ok: true, deferred: true, reason: 'decision_untrusted' },
+      { status: 200 },
+    );
+  }
+
   const userId = parsed.vendorData.trim();
   if (!userId) {
-    alertDiditWebhook('missing_vendor_data', { sessionId: parsed.sessionId });
+    alertDiditWebhook('missing_vendor_data', {
+      eventId: parsed.eventId,
+      sessionId: parsed.sessionId,
+    });
     return NextResponse.json({ ignored: true }, { status: 200 });
   }
 
@@ -103,6 +183,7 @@ export async function POST(req: Request) {
   if (!profile) {
     alertDiditWebhook('unknown_vendor_data', {
       userId,
+      eventId: parsed.eventId,
       sessionId: parsed.sessionId,
     });
     return NextResponse.json({ ignored: true }, { status: 200 });
@@ -150,12 +231,14 @@ export async function POST(req: Request) {
     await tx.userProfile.update({
       where: { userId },
       data: {
-        ...(parsed.decision === 'approved' && parsed.verifiedDob
+        ...(parsed.decision === 'approved' &&
+        parsed.decisionTrusted &&
+        parsed.verifiedDob
           ? { dateOfBirthVerified: parsed.verifiedDob }
           : {}),
         verificationState: nextState,
         diditAttempts: nextAttempts,
-        diditSessionId: parsed.sessionId,
+        ...(parsed.sessionId ? { diditSessionId: parsed.sessionId } : {}),
         diditLastDecision: parsed.decision,
         diditLastReason: parsed.reason,
       },
@@ -167,8 +250,12 @@ export async function POST(req: Request) {
         subjectId: userId,
         fromStatus: currentState,
         toStatus: nextState,
-        note: `Didit decision=${parsed.decision} session=${parsed.sessionId}`,
+        note: `Didit ${parsed.webhookType} decision=${parsed.decision} session=${parsed.sessionId ?? 'n/a'} event=${parsed.eventId}`,
         metadata: {
+          eventId: parsed.eventId,
+          webhookType: parsed.webhookType,
+          statusLabel: parsed.statusLabel,
+          signatureMethod: verified.method,
           claimedDob: profile.dateOfBirth?.toISOString() ?? null,
           verifiedDob: verifiedDob?.toISOString() ?? null,
           attempts: nextAttempts,
