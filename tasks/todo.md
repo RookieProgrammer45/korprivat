@@ -4,17 +4,13 @@
 
 - [x] Install agent-skills pack + routing rule
 - [x] Split signup: learner / school / instructor + age/licence rules
-- [ ] Fix failing unit tests (llms, instructors list, photo Blob mock)
-- [ ] Responsive audit: home, directory, signup, booking detail, dashboards
-- [ ] Neon: apply UserProfile signup fields
-- [ ] Browser smoke before promote
+- [x] Fix failing unit tests (llms, instructors list, photo Blob mock)
+- [x] Responsive audit: home, directory, signup (ongoing polish)
+- [ ] Neon: apply UserProfile signup fields (`prisma/manual/2026-09-26-user-profile-signup.sql`)
+- [x] Didit age-check API + signup UI (activates when `DIDIT_API_KEY` is set)
+- [ ] Add `DIDIT_API_KEY` on Vercel + smoke learner selfie path
 
 ## Next (P1)
 
-- [ ] Didit age/ID verification for learners
-- [ ] Didit document verification for school/instructor credentials
-
-## Later (P2+)
-
-- [ ] Directory dual-supply UX (school vs instructor)
-- [ ] Observability + payout reporting
+- [ ] Didit ID document verification for school/instructor credentials
+- [ ] Browser smoke before promote

@@ -39,6 +39,7 @@ import {
   SignupState,
   type SignupPath as SignupPathType,
 } from '@/lib/contracts/signup';
+import { AgeCheckResponse, SignupCapabilities } from '@/lib/contracts/didit-age';
 import { SignupStartResponse } from '@/lib/contracts/signup-start';
 import { applyServerErrors } from '@/lib/forms';
 import {
@@ -93,6 +94,15 @@ export function SignUpForm({ next }: { next?: string }) {
   const [submittingClickwrap, setSubmittingClickwrap] = useState(false);
   const [stagedPhotoUrl, setStagedPhotoUrl] = useState<string | null>(null);
   const [signupPath, setSignupPath] = useState<SignupPathType | null>('LEARNER');
+  const [diditAgeCheck, setDiditAgeCheck] = useState(false);
+  const [faceFile, setFaceFile] = useState<File | null>(null);
+  const [ageCheck, setAgeCheck] = useState<{
+    eligible: boolean;
+    estimatedAge: number | null;
+    requestId: string | null;
+    status: string;
+  } | null>(null);
+  const [checkingAge, setCheckingAge] = useState(false);
 
   const form = useForm<AccountValues>({
     defaultValues: {
@@ -143,6 +153,20 @@ export function SignUpForm({ next }: { next?: string }) {
   );
 
   useEffect(() => {
+    let active = true;
+    apiFetch('/api/signup/capabilities', { schema: SignupCapabilities })
+      .then((caps) => {
+        if (active) setDiditAgeCheck(caps.diditAgeCheck);
+      })
+      .catch(() => {
+        if (active) setDiditAgeCheck(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!session?.user) return;
     let active = true;
     apiFetch('/api/signup/state', { schema: SignupState })
@@ -162,6 +186,53 @@ export function SignUpForm({ next }: { next?: string }) {
     setAttested(false);
     setLicenseConsent(false);
     setSubmittingClickwrap(false);
+    setFaceFile(null);
+    setAgeCheck(null);
+  };
+
+  const runAgeCheck = async (): Promise<typeof ageCheck> => {
+    if (!diditAgeCheck || selectedPath !== 'LEARNER') return null;
+    if (!faceFile) {
+      toast.error(t('fields.errors.faceRequired'));
+      return null;
+    }
+    setCheckingAge(true);
+    try {
+      const fd = new FormData();
+      fd.append('face', faceFile, faceFile.name || 'selfie.jpg');
+      const response = await fetch('/api/signup/age-check', {
+        method: 'POST',
+        body: fd,
+        credentials: 'include',
+      });
+      const body = await response.json().catch(() => null);
+      const parsed = AgeCheckResponse.safeParse(body);
+      if (!parsed.success) {
+        toast.error(t('fields.errors.ageCheckFailed'));
+        return null;
+      }
+      setAgeCheck({
+        eligible: parsed.data.eligible,
+        estimatedAge: parsed.data.estimatedAge,
+        requestId: parsed.data.requestId,
+        status: parsed.data.status,
+      });
+      if (!parsed.data.eligible) {
+        toast.error(t('fields.errors.ageCheckIneligible', { age: MIN_LEARNER_AGE_YEARS }));
+        return null;
+      }
+      return {
+        eligible: parsed.data.eligible,
+        estimatedAge: parsed.data.estimatedAge,
+        requestId: parsed.data.requestId,
+        status: parsed.data.status,
+      };
+    } catch {
+      toast.error(t('fields.errors.ageCheckFailed'));
+      return null;
+    } finally {
+      setCheckingAge(false);
+    }
   };
 
   const submitAccount = form.handleSubmit(
@@ -203,6 +274,12 @@ export function SignUpForm({ next }: { next?: string }) {
         }
       }
 
+      let learnerAge = ageCheck;
+      if (values.path === 'LEARNER' && diditAgeCheck) {
+        learnerAge = (await runAgeCheck()) ?? null;
+        if (!learnerAge?.eligible) return;
+      }
+
       const { error } = await signUp.email({
         name: values.name.trim(),
         email: values.email.trim(),
@@ -239,6 +316,9 @@ export function SignUpForm({ next }: { next?: string }) {
             organizationNumber: values.organizationNumber.trim() || undefined,
             licenseHeldYears:
               values.licenseHeldYears === '' ? undefined : Number(values.licenseHeldYears),
+            ageEstimatedYears: learnerAge?.estimatedAge ?? undefined,
+            ageCheckRequestId: learnerAge?.requestId ?? undefined,
+            ageCheckStatus: learnerAge?.status ?? undefined,
           }),
           schema: SignupStartResponse,
         });
@@ -672,6 +752,29 @@ export function SignUpForm({ next }: { next?: string }) {
                 </FormItem>
               )}
             />
+            {diditAgeCheck ? (
+              <div className="grid gap-2">
+                <Label htmlFor="signup-face">{t('fields.faceLabel')}</Label>
+                <p className="text-caption text-muted-foreground">{t('fields.faceHelp')}</p>
+                <Input
+                  id="signup-face"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/tiff"
+                  className="cursor-pointer file:mr-3 file:cursor-pointer"
+                  onChange={(e) => {
+                    setFaceFile(e.target.files?.[0] ?? null);
+                    setAgeCheck(null);
+                  }}
+                />
+                <p className="text-caption text-muted-foreground">
+                  {faceFile
+                    ? faceFile.name
+                    : ageCheck?.eligible
+                      ? t('fields.faceVerified', { age: Math.floor(ageCheck.estimatedAge ?? 0) })
+                      : t('fields.faceAlt')}
+                </p>
+              </div>
+            ) : null}
           </div>
         ) : null}
 
@@ -826,8 +929,16 @@ export function SignUpForm({ next }: { next?: string }) {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={form.formState.isSubmitting} className="shadow-sm">
-          {form.formState.isSubmitting ? t('submitting') : t('submit')}
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting || checkingAge}
+          className="shadow-sm"
+        >
+          {checkingAge
+            ? t('fields.ageChecking')
+            : form.formState.isSubmitting
+              ? t('submitting')
+              : t('submit')}
         </Button>
       </form>
     </Form>

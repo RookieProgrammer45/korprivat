@@ -73,6 +73,9 @@ export async function POST(req: Request) {
       schoolName: parsed.data.schoolName?.trim() || null,
       organizationNumber: parsed.data.organizationNumber?.trim() || null,
       licenseHeldYears: parsed.data.licenseHeldYears ?? null,
+      ageEstimatedYears: parsed.data.ageEstimatedYears ?? null,
+      ageCheckRequestId: parsed.data.ageCheckRequestId?.trim() || null,
+      ageCheckStatus: parsed.data.ageCheckStatus?.trim() || null,
     },
     update: {
       role,
@@ -83,6 +86,9 @@ export async function POST(req: Request) {
       schoolName: parsed.data.schoolName?.trim() || null,
       organizationNumber: parsed.data.organizationNumber?.trim() || null,
       licenseHeldYears: parsed.data.licenseHeldYears ?? null,
+      ageEstimatedYears: parsed.data.ageEstimatedYears ?? null,
+      ageCheckRequestId: parsed.data.ageCheckRequestId?.trim() || null,
+      ageCheckStatus: parsed.data.ageCheckStatus?.trim() || null,
     },
   });
   await prisma.photoVerification.upsert({

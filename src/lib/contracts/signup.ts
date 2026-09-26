@@ -36,6 +36,9 @@ export const SignupStart = z
     schoolName: z.string().max(160).optional(),
     organizationNumber: z.string().max(32).optional(),
     licenseHeldYears: z.coerce.number().int().min(0).max(80).optional(),
+    ageEstimatedYears: z.coerce.number().min(0).max(120).optional(),
+    ageCheckRequestId: z.string().max(120).optional(),
+    ageCheckStatus: z.string().max(40).optional(),
   })
   .superRefine((data, ctx) => {
     if (data.path === 'LEARNER') {

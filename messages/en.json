@@ -773,8 +773,16 @@
           "schoolName": "Enter the driving school name.",
           "organizationNumber": "Enter the school organisation number.",
           "city": "Enter a city.",
-          "licenseYears": "Instructors must have held a licence for at least {years} years."
-        }
+          "licenseYears": "Instructors must have held a licence for at least {years} years.",
+          "faceRequired": "Add a selfie so we can confirm you are old enough.",
+          "ageCheckFailed": "We could not complete the age check. Try another photo.",
+          "ageCheckIneligible": "You must be at least {age} years old to join as a learner."
+        },
+        "faceLabel": "Face photo for age check",
+        "faceHelp": "When Didit is enabled we estimate age from a clear selfie (JPEG/PNG/WebP, max 5 MB).",
+        "faceAlt": "Choose a clear front-facing selfie…",
+        "faceVerified": "Age check passed (about {age}).",
+        "ageChecking": "Checking age…"
       },
       "clickwrap": {
         "stepEyebrow": "Handledare terms",

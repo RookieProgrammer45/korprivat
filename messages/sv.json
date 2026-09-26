@@ -773,8 +773,16 @@
           "schoolName": "Ange skolans namn.",
           "organizationNumber": "Ange skolans organisationsnummer.",
           "city": "Ange en stad.",
-          "licenseYears": "Instruktörer måste ha haft körkort i minst {years} år."
-        }
+          "licenseYears": "Instruktörer måste ha haft körkort i minst {years} år.",
+          "faceRequired": "Lägg till en selfie så att vi kan bekräfta att du är tillräckligt gammal.",
+          "ageCheckFailed": "Vi kunde inte genomföra ålderskontrollen. Prova en annan bild.",
+          "ageCheckIneligible": "Du måste vara minst {age} år för att registrera dig som elev."
+        },
+        "faceLabel": "Ansiktsfoto för ålderskontroll",
+        "faceHelp": "När Didit är aktiverat uppskattar vi ålder från en tydlig selfie (JPEG/PNG/WebP, max 5 MB).",
+        "faceAlt": "Välj en tydlig selfie framifrån…",
+        "faceVerified": "Ålderskontroll godkänd (cirka {age}).",
+        "ageChecking": "Kontrollerar ålder…"
       },
       "clickwrap": {
         "stepEyebrow": "Handledare-villkor",
