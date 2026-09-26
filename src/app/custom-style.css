@@ -152,10 +152,7 @@ html.dark .marketplace-hero {
 }
 
 .marketplace-hero-card {
-  position: relative;
   overflow: hidden;
-  background-color: var(--card);
-  border-color: var(--border);
   box-shadow: var(--shadow-xl);
 }
 

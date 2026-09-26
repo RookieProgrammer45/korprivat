@@ -6,6 +6,7 @@
 
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
@@ -28,7 +29,7 @@ export function PublicHome() {
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
       <section className="marketplace-hero border-b border-border">
-        <div className="marketplace-hero-grid container-page grid min-w-0 gap-10 py-16 md:py-28 lg:grid-cols-[1.12fr_0.88fr] lg:items-end lg:gap-20">
+        <div className="marketplace-hero-grid container-page grid min-w-0 gap-10 py-16 md:py-28 lg:grid-cols-[1.12fr_0.88fr] lg:gap-20">
           <div className="marketplace-hero-copy marketplace-reveal flex min-w-0 flex-col gap-7">
             <Badge
               variant="outline"
@@ -61,25 +62,43 @@ export function PublicHome() {
             </div>
           </div>
 
-          <Card className="marketplace-reveal marketplace-hero-card min-w-0 border-border bg-card shadow-md">
-            <CardContent className="grid gap-6 p-6 sm:p-8">
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-eyebrow text-brand-700 dark:text-brand-300">
-                  {t('hero.previewEyebrow')}
+          <div className="marketplace-reveal relative min-w-0 lg:min-h-[640px]">
+            <div className="absolute inset-0 hidden overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 lg:block dark:border-white/10 dark:bg-neutral-900">
+              <div
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,200,150,0.10),transparent_70%)] opacity-40 dark:opacity-100"
+                aria-hidden
+              />
+              <Image
+                src="/images/hero-driving.png"
+                alt={t('hero.imageAlt')}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain p-10 opacity-95 dark:opacity-85 dark:contrast-[0.92] dark:brightness-[0.95]"
+                style={{ objectPosition: 'center 45%' }}
+              />
+            </div>
+
+            <Card className="marketplace-hero-card z-10 min-w-0 border-neutral-200 bg-white/95 shadow-md backdrop-blur-sm lg:absolute lg:bottom-6 lg:left-6 lg:max-w-[400px] dark:border-white/10 dark:bg-black/85">
+              <CardContent className="grid gap-6 p-6 sm:p-8">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-eyebrow text-brand-700 dark:text-brand-300">
+                    {t('hero.previewEyebrow')}
+                  </p>
+                  <span className="size-2 rounded-full bg-brand-500" aria-hidden />
+                </div>
+                <p className="font-display text-h3 leading-tight tracking-tight text-foreground">
+                  {t('hero.previewTitle')}
                 </p>
-                <span className="size-2 rounded-full bg-brand-500" aria-hidden />
-              </div>
-              <p className="font-display text-h3 leading-tight tracking-tight text-foreground">
-                {t('hero.previewTitle')}
-              </p>
-              <Separator className="bg-border/60" />
-              <div className="grid gap-4">
-                <PreviewLine index="01" text={t('hero.previewLines.profile')} />
-                <PreviewLine index="02" text={t('hero.previewLines.price')} />
-                <PreviewLine index="03" text={t('hero.previewLines.time')} />
-              </div>
-            </CardContent>
-          </Card>
+                <Separator className="bg-border/60" />
+                <div className="grid gap-4">
+                  <PreviewLine index="01" text={t('hero.previewLines.profile')} />
+                  <PreviewLine index="02" text={t('hero.previewLines.price')} />
+                  <PreviewLine index="03" text={t('hero.previewLines.time')} />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         <div className="marketplace-quick-links container-page flex min-w-0 flex-col gap-3 border-t border-border py-5 text-small text-muted-foreground sm:flex-row sm:items-center sm:gap-5">

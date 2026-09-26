@@ -147,14 +147,14 @@ export function SiteNav() {
             <g transform="translate(24 24)" fill="currentColor">
               <g transform="rotate(-45)">
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M-14.5 -3.8 h29 a5.3 5.3 0 0 1 0 10.6 h-29 a5.3 5.3 0 0 1 0 -10.6 z M-10.7 -2.65 h21.4 a2.65 2.65 0 0 1 0 5.3 h-21.4 a2.65 2.65 0 0 1 0 -5.3 z"
                 />
               </g>
               <rect x="-3.9" y="-3.9" width="7.8" height="7.8" transform="rotate(45)" />
               <g transform="rotate(45)">
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M-14.5 -3.8 h29 a5.3 5.3 0 0 1 0 10.6 h-29 a5.3 5.3 0 0 1 0 -10.6 z M-10.7 -2.65 h21.4 a2.65 2.65 0 0 1 0 5.3 h-21.4 a2.65 2.65 0 0 1 0 -5.3 z"
                 />
                 <circle cx="0" cy="0" r="1.6" />
@@ -166,10 +166,10 @@ export function SiteNav() {
             <text
               x="62"
               y="33"
-              font-family="Syne, Avenir Next, sans-serif"
-              font-size="24"
-              font-weight="600"
-              letter-spacing="-0.48"
+              fontFamily="Syne, Avenir Next, sans-serif"
+              fontSize="24"
+              fontWeight="600"
+              letterSpacing="-0.48"
               fill="currentColor"
             >
               DriveLinkUp

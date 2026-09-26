@@ -6,7 +6,8 @@ handledare (Trafikverket-oriented supervised practice). This file is
 authoritative. Read it before every task.
 
 **Decisions:** [ADR-001 Sweden-first](docs/decisions/ADR-001-sweden-first.md) ·
-[ADR-002 better-auth](docs/decisions/ADR-002-better-auth.md)
+[ADR-002 better-auth](docs/decisions/ADR-002-better-auth.md) ·
+[ADR-003 canonical webhook host](docs/decisions/ADR-003-canonical-webhook-host.md)
 
 ## Invariants (never violate)
 
@@ -96,6 +97,16 @@ Rules:
 - Never pipe them to a CLI via `printf` — interactive prompts only
   (`vercel env add DIDIT_WORKFLOW_ID preview`, etc.).
 - Rotate immediately if a value is ever pasted into a chat or log.
+
+## Canonical webhook host
+
+All external services that POST to this app MUST target
+`https://www.drivelinkup.com` — not the apex `drivelinkup.com`, which
+308-redirects to www. Some HTTP clients drop the request body on 308,
+which breaks webhook signature verification and silently loses events.
+
+Affected: Didit webhook destination, Stripe webhook endpoint (when
+Connect ships), any future inbound webhook.
 
 ## How to work
 

@@ -65,7 +65,10 @@ const nextConfig: NextConfig = {
       // template ships with an empty allow-list.
       // @polsia:slot images_remote_patterns end
     ],
-    localPatterns: [{ pathname: '/assets/**', search: '' }],
+    localPatterns: [
+      { pathname: '/assets/**', search: '' },
+      { pathname: '/images/**', search: '' },
+    ],
     dangerouslyAllowLocalIP: false,
     qualities: [75],
   },
