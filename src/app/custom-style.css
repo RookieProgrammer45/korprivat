@@ -737,6 +737,28 @@ form > button[type="submit"] {
     padding-inline: 0.75rem;
   }
 
+  .auth-shell .surface-panel,
+  .auth-shell [data-slot='card'] {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .auth-shell input,
+  .auth-shell button,
+  .auth-shell [role='radio'] {
+    max-width: 100%;
+  }
+
+  .dashboard-shell,
+  .dashboard-shell > * {
+    min-width: 0;
+  }
+
+  .dashboard-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .instructor-page-booking {
     order: -1;
   }

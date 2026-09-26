@@ -93,7 +93,7 @@ describe('/llms.txt route', () => {
     it('starts with the site name heading and description blockquote', () => {
       expect(
         body.startsWith(
-          '# DriveLinkUp\n\n> Compare authorized driving schools in Sweden and book the right lesson with no separate DriveLinkUp fee.',
+          '# DriveLinkUp\n\n> The marketplace that connects driving schools and certified instructors to learners in Sweden — compare, book, and learn with no separate DriveLinkUp fee.',
         ),
       ).toBe(true);
     });

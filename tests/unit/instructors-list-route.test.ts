@@ -83,6 +83,37 @@ function instructorRow(
   };
 }
 
+/** Rate / city filters are AND-composed with the marketplace supply role guard. */
+function hourlyRateFromWhere(where: unknown): Record<string, number> | undefined {
+  if (!where || typeof where !== 'object') return undefined;
+  const record = where as Record<string, unknown>;
+  if (record.hourlyRateSek && typeof record.hourlyRateSek === 'object') {
+    return record.hourlyRateSek as Record<string, number>;
+  }
+  if (Array.isArray(record.AND)) {
+    for (const part of record.AND) {
+      if (part && typeof part === 'object' && 'hourlyRateSek' in part) {
+        return (part as { hourlyRateSek: Record<string, number> }).hourlyRateSek;
+      }
+    }
+  }
+  return undefined;
+}
+
+function whereField<T>(where: unknown, key: string): T | undefined {
+  if (!where || typeof where !== 'object') return undefined;
+  const record = where as Record<string, unknown>;
+  if (key in record) return record[key] as T;
+  if (Array.isArray(record.AND)) {
+    for (const part of record.AND) {
+      if (part && typeof part === 'object' && key in part) {
+        return (part as Record<string, T>)[key];
+      }
+    }
+  }
+  return undefined;
+}
+
 describe('GET /api/instructors — next-open-slot projection', () => {
   beforeEach(() => {
     mockInstructorFindMany.mockReset();
@@ -211,8 +242,8 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req('?minRate=500'));
 
     expect(res.status).toBe(200);
-    expect(mockInstructorFindMany.mock.calls[0]?.[0]).toMatchObject({
-      where: { hourlyRateSek: { gte: 500 } },
+    expect(hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0]?.[0]?.where)).toEqual({
+      gte: 500,
     });
   });
 
@@ -222,8 +253,8 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req('?maxRate=600'));
 
     expect(res.status).toBe(200);
-    expect(mockInstructorFindMany.mock.calls[0]?.[0]).toMatchObject({
-      where: { hourlyRateSek: { lte: 600 } },
+    expect(hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0]?.[0]?.where)).toEqual({
+      lte: 600,
     });
   });
 
@@ -233,8 +264,9 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req('?minRate=500&maxRate=600'));
 
     expect(res.status).toBe(200);
-    expect(mockInstructorFindMany.mock.calls[0]?.[0]).toMatchObject({
-      where: { hourlyRateSek: { gte: 500, lte: 600 } },
+    expect(hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0]?.[0]?.where)).toEqual({
+      gte: 500,
+      lte: 600,
     });
   });
 
@@ -244,21 +276,11 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req('?city=Stockholm&categories=B&english=true&minRate=500&maxRate=600'));
 
     expect(res.status).toBe(200);
-    const call = mockInstructorFindMany.mock.calls[0]?.[0] as {
-      where: {
-        OR: Array<{ categories: { has: string } }>;
-        city: string;
-        englishSpeaking: boolean;
-      } & {
-        hourlyRateSek: { gte: number; lte: number };
-      };
-    };
-    expect(call.where).toMatchObject({
-      city: 'Stockholm',
-      englishSpeaking: true,
-      hourlyRateSek: { gte: 500, lte: 600 },
-    });
-    expect(call.where.OR).toEqual([{ categories: { has: 'B' } }]);
+    const where = mockInstructorFindMany.mock.calls[0]?.[0]?.where;
+    expect(whereField(where, 'city')).toBe('Stockholm');
+    expect(whereField(where, 'englishSpeaking')).toBe(true);
+    expect(hourlyRateFromWhere(where)).toEqual({ gte: 500, lte: 600 });
+    expect(whereField(where, 'OR')).toEqual([{ categories: { has: 'B' } }]);
   });
 
   it('keeps instructors at or above the inclusive minimum rating threshold', async () => {
@@ -360,9 +382,9 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: Array<{ id: string }> };
     expect(body.items.map((item) => item.id)).toEqual([instructorId]);
-    expect(mockInstructorFindMany.mock.calls[0]?.[0]).toMatchObject({
-      where: { hourlyRateSek: { lte: 550 } },
-    });
+    expect(mockInstructorFindMany.mock.calls[0]?.[0]?.where
+      ? hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0][0].where)
+      : undefined).toEqual({ lte: 550 });
   });
 
   it('returns zero items when no valid review meets the rating threshold', async () => {

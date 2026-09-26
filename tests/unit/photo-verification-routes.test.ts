@@ -8,22 +8,27 @@ const mocks = vi.hoisted(() => ({
   userProfile: { upsert: vi.fn() },
   photoVerification: { findUnique: vi.fn(), upsert: vi.fn() },
   requireAuth: vi.fn(),
-  nodeFetch: vi.fn(),
+  put: vi.fn(),
 }));
 
 vi.mock('server-only', () => ({}));
 vi.mock('@/lib/db', () => ({ prisma: mocks }));
 vi.mock('@/lib/require-auth', () => ({ requireAuth: mocks.requireAuth }));
-vi.mock('node-fetch', () => ({ default: mocks.nodeFetch }));
+vi.mock('@vercel/blob', () => ({ put: mocks.put }));
 
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as confirmPOST } from '@/app/api/profile/picture/confirm/route';
 import { POST as uploadPOST } from '@/app/api/profile/picture/route';
 
 const user = { id: 'user_test', email: 'test@example.test', name: 'Test', role: 'user' as const };
 
+beforeEach(() => {
+  process.env.BLOB_READ_WRITE_TOKEN = 'test-blob-token';
+});
+
 afterEach(() => {
   vi.clearAllMocks();
+  delete process.env.BLOB_READ_WRITE_TOKEN;
 });
 
 function uploadRequest(file: File): Request {
@@ -33,7 +38,7 @@ function uploadRequest(file: File): Request {
 }
 
 describe('photo verification', () => {
-  it('requires a session and rejects HEIC, empty, and oversized files before R2', async () => {
+  it('requires a session and rejects HEIC, empty, and oversized files before storage', async () => {
     mocks.requireAuth.mockRejectedValueOnce(new Response(null, { status: 401 }));
     expect(
       (await uploadPOST(uploadRequest(new File(['x'], 'x.png', { type: 'image/png' })))).status,
@@ -48,17 +53,14 @@ describe('photo verification', () => {
       const response = await uploadPOST(uploadRequest(file));
       expect(response.status).toBe(400);
     }
-    expect(mocks.nodeFetch).not.toHaveBeenCalled();
+    expect(mocks.put).not.toHaveBeenCalled();
   });
 
   it('stages a valid image without replacing the confirmed user image', async () => {
     mocks.requireAuth.mockResolvedValue(user);
-    mocks.nodeFetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        success: true,
-        file: { key: 'photos/test.png', url: 'https://cdn.test/test.png' },
-      }),
+    mocks.put.mockResolvedValue({
+      url: 'https://cdn.test/test.png',
+      pathname: 'photos/test.png',
     });
     const response = await uploadPOST(
       uploadRequest(new File(['png'], 'portrait.png', { type: 'image/png' })),
