@@ -74,6 +74,15 @@ export function resolveLearnerState(input: ResolveInput): LearnerVerificationSta
       }
       return 'HANDLEDARE_PENDING';
     }
+
+    // Out-of-order / replay: a late in_review must not regress a verified
+    // outcome while dateOfBirthVerified already stands.
+    if (input.diditDecision === 'in_review') {
+      if (input.currentState === 'ACTIVE') return 'ACTIVE';
+      if (input.currentState === 'HANDLEDARE_PENDING') return 'HANDLEDARE_PENDING';
+      if (input.currentState === 'HANDLEDARE_EXPIRED') return 'HANDLEDARE_EXPIRED';
+      if (input.currentState === 'BLOCKED_UNDERAGE') return 'BLOCKED_UNDERAGE';
+    }
   }
 
   // ---- Didit outcomes that aren't approval. ----

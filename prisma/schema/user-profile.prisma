@@ -20,7 +20,17 @@ model UserProfile {
   // Signup path discriminator for role-specific onboarding:
   // LEARNER | SCHOOL | INSTRUCTOR. Nullable for legacy rows.
   signupPath         String?
+  // Claimed DOB from the signup form — routing only. Never treat as verified.
   dateOfBirth        DateTime?
+  // Authoritative DOB from Didit ID verification. Written ONLY by the
+  // Didit webhook handler (src/app/api/webhooks/didit).
+  dateOfBirthVerified DateTime?
+  // Learner verification state machine — see docs/learner-verification-flow.md.
+  verificationState  String    @default("SIGNED_UP")
+  diditAttempts      Int       @default(0)
+  diditSessionId     String?
+  diditLastDecision  String?
+  diditLastReason    String?
   phone              String?
   city               String?
   schoolName         String?

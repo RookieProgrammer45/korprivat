@@ -186,6 +186,17 @@ describe('resolveLearnerState', () => {
       }),
     ).toBe('SUSPENDED');
   });
+
+  it('preserves ACTIVE when late in_review arrives with verifiedDob already set', () => {
+    expect(
+      resolve({
+        currentState: 'ACTIVE',
+        claimedDob: dobYearsAgo(25),
+        verifiedDob: dobYearsAgo(25),
+        diditDecision: 'in_review',
+      }),
+    ).toBe('ACTIVE');
+  });
 });
 
 describe('stateToRoute', () => {

@@ -1,0 +1,33 @@
+// @polsia:user-owned — Verification context (Didit webhook writer + audit).
+//
+// Append-only events and idempotency keys for the learner age gate.
+// See docs/learner-verification-flow.md §5 and AGENTS.md invariants.
+
+/// Append-only audit of verification state transitions. No updates, no deletes.
+model VerificationEvent {
+  id          String   @id @default(cuid())
+  subjectType String
+  subjectId   String
+  actorId     String?
+  fromStatus  String?
+  toStatus    String
+  note        String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  @@index([subjectType, subjectId])
+  @@map("verification_event")
+}
+
+/// Idempotency ledger for Didit webhook deliveries.
+/// Unique on (diditSessionId, decision) so replays are no-ops.
+model DiditWebhookEvent {
+  id             String   @id @default(cuid())
+  diditSessionId String
+  decision       String
+  payloadHash    String
+  receivedAt     DateTime @default(now())
+
+  @@unique([diditSessionId, decision])
+  @@map("didit_webhook_event")
+}
