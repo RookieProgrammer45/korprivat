@@ -20,11 +20,14 @@ model VerificationEvent {
 }
 
 /// Idempotency ledger for Didit webhook deliveries.
-/// Unique on (diditSessionId, decision) so replays are no-ops.
+/// Prefer unique `eventId` (Didit `event_id`). Keep (diditSessionId, decision)
+/// as a fallback compound key for older rows / missing event_id.
 model DiditWebhookEvent {
   id             String   @id @default(cuid())
+  eventId        String?  @unique
   diditSessionId String
   decision       String
+  webhookType    String?
   payloadHash    String
   receivedAt     DateTime @default(now())
 

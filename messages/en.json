@@ -1157,7 +1157,14 @@
       },
       "verifyBanner": {
         "body": "Verify your identity to start booking lessons.",
-        "cta": "Continue verification"
+        "disclosure": "We use Didit to confirm your age and identity from your ID document. Your data is processed according to our privacy policy and Didit's terms.",
+        "consent": "I consent to identity verification via Didit and understand DriveLinkUp will receive my verified date of birth.",
+        "consentRequired": "Please confirm consent before starting verification.",
+        "cta": "Verify my identity",
+        "starting": "Starting…",
+        "submitted": "Thanks — we'll update your status when Didit finishes. You can keep browsing.",
+        "startFailed": "We couldn't start verification. Try again in a moment.",
+        "invalidState": "Verification isn't available in your current state. Refresh the page."
       }
     },
     "instructor": {

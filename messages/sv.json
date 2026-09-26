@@ -1157,7 +1157,14 @@
       },
       "verifyBanner": {
         "body": "Verifiera din identitet för att börja boka lektioner.",
-        "cta": "Fortsätt verifiering"
+        "disclosure": "Vi använder Didit för att bekräfta din ålder och identitet via din ID-handling. Dina uppgifter behandlas enligt vår integritetspolicy och Didits villkor.",
+        "consent": "Jag samtycker till identitetsverifiering via Didit och förstår att DriveLinkUp tar emot mitt verifierade födelsedatum.",
+        "consentRequired": "Bekräfta samtycke innan du startar verifieringen.",
+        "cta": "Verifiera min identitet",
+        "starting": "Startar…",
+        "submitted": "Tack — vi uppdaterar din status när Didit är klar. Du kan fortsätta bläddra.",
+        "startFailed": "Vi kunde inte starta verifieringen. Försök igen om en stund.",
+        "invalidState": "Verifiering är inte tillgänglig i ditt nuvarande läge. Ladda om sidan."
       }
     },
     "instructor": {
