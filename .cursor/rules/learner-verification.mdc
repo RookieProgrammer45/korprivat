@@ -1,0 +1,24 @@
+---
+description: Learner age-16 gate, Didit verification, guardian consent
+globs:
+  - "app/**/learner/**"
+  - "app/api/**/didit/**"
+  - "lib/verification/**"
+  - "middleware.ts"
+alwaysApply: false
+---
+
+# Learner verification rules
+
+Full spec: `@docs/learner-verification-flow.md` — read it before changing this area.
+
+Hard rules:
+
+- Two DOB sources: `dateOfBirthClaimed` (routing only) and `dateOfBirthVerified`
+  (authoritative). The gate runs twice.
+- Age is date-only UTC comparison. See `lib/verification/age.ts`.
+- `resolveLearnerState()` in `lib/verification/state.ts` is the single source of
+  truth for state. Do not branch on state anywhere else.
+- Webhook handler dedupes on `(diditSessionId, decision)` before work.
+- Guardian consent expires in 7 days. Expired consent → `GUARDIAN_EXPIRED`.
+- `/onboarding/learner` is ONE page rendering 8 states. Do not split into routes.

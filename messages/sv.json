@@ -714,27 +714,27 @@
   },
   "auth": {
     "signIn": {
-      "title": "Välkommen tillbaka",
-      "subtitle": "Logga in på ditt DriveLinkUp-konto för att hantera dina lektioner.",
-      "submit": "Logga in",
+      "title": "Logga in",
+      "subtitle": "Välkommen tillbaka till DriveLinkUp.",
+      "submit": "Fortsätt",
       "submitting": "Loggar in…",
       "switchToSignupLead": "Inget konto ännu?",
-      "switchToSignup": "Skapa ett",
+      "switchToSignup": "Skapa konto",
       "fields": {
-        "emailLabel": "Användarnamn eller e-post",
-        "emailPlaceholder": "ditt användarnamn eller du@example.com",
+        "emailLabel": "E-post",
+        "emailPlaceholder": "du@example.com",
         "passwordLabel": "Lösenord",
         "passwordPlaceholder": "Ditt lösenord"
       },
       "errors": {
-        "invalidCredentials": "Användarnamn eller lösenord stämmer inte. Försök igen.",
+        "invalidCredentials": "E-post eller lösenord stämmer inte. Försök igen.",
         "generic": "Kunde inte logga in. Försök igen."
       }
     },
     "signUp": {
-      "title": "Skapa ditt DriveLinkUp-konto",
-      "subtitle": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Välj elev, skola eller instruktör — vi frågar bara efter det som behövs för den vägen.",
-      "submit": "Skapa konto",
+      "title": "Gå med i DriveLinkUp",
+      "subtitle": "Välj hur du vill använda DriveLinkUp, och fyll sedan i dina uppgifter.",
+      "submit": "Fortsätt",
       "submitting": "Skapar konto…",
       "switchToSigninLead": "Har du redan ett konto?",
       "switchToSignin": "Logga in",
@@ -746,12 +746,12 @@
         "passwordLabel": "Lösenord",
         "passwordPlaceholder": "Minst 8 tecken…",
         "roleLabel": "Jag är",
-        "roleLearner": "Elev",
-        "roleSchool": "Trafikskola",
-        "roleInstructor": "Utbildad och erfaren instruktör",
-        "roleLearnerDesc": "Hitta och boka lektioner. Lägsta ålder 16 år.",
+        "roleLearner": "Jag är elev",
+        "roleSchool": "Jag är en trafikskola",
+        "roleInstructor": "Jag är certifierad instruktör",
+        "roleLearnerDesc": "Boka lektioner. Du måste vara minst 16 år.",
         "roleSchoolDesc": "Lista er auktoriserade skola med priser och tillgänglighet.",
-        "roleInstructorDesc": "Undervisa som certifierad instruktör. Du måste ha haft körkort i minst 5 år.",
+        "roleInstructorDesc": "Undervisa elever. Körkort i minst 5 år.",
         "learnerSection": "Uppgifter för elev",
         "schoolSection": "Uppgifter för trafikskola",
         "instructorSection": "Uppgifter för instruktör",
@@ -774,9 +774,9 @@
           "organizationNumber": "Ange skolans organisationsnummer.",
           "city": "Ange en stad.",
           "licenseYears": "Instruktörer måste ha haft körkort i minst {years} år.",
-          "faceRequired": "Lägg till en selfie så att vi kan bekräfta att du är tillräckligt gammal.",
-          "ageCheckFailed": "Vi kunde inte genomföra ålderskontrollen. Prova en annan bild.",
-          "ageCheckIneligible": "Du måste vara minst {age} år för att registrera dig som elev."
+          "faceRequired": "Lägg till en selfie så vi kan bekräfta din ålder.",
+          "ageCheckFailed": "Ålderskontrollen kunde inte slutföras. Prova en annan bild.",
+          "ageCheckIneligible": "Du måste vara minst {age} år för att gå med som elev."
         },
         "faceLabel": "Ansiktsfoto för ålderskontroll",
         "faceHelp": "När Didit är aktiverat uppskattar vi ålder från en tydlig selfie (JPEG/PNG/WebP, max 5 MB).",
@@ -966,7 +966,16 @@
             }
           }
         }
-      }
+      },
+      "pathTitle": "Gå med i DriveLinkUp",
+      "pathSubtitle": "Berätta först vem du är. Vi frågar bara efter det som behövs för den vägen.",
+      "backToPaths": "Tillbaka",
+      "accountTitleLearner": "Skapa ditt elevkonto",
+      "accountLeadLearner": "Hitta och boka lektioner hos trafikskolor och certifierade instruktörer.",
+      "accountTitleSchool": "Lista er trafikskola",
+      "accountLeadSchool": "Lägg till skolans uppgifter så att elever kan hitta och boka er.",
+      "accountTitleInstructor": "Skapa ditt instruktörskonto",
+      "accountLeadInstructor": "Undervisa som certifierad instruktör med körkort i minst 5 år."
     }
   },
   "bookingFees": {
@@ -1144,6 +1153,10 @@
         "defaultBadge": "Standard",
         "setDefault": "Ange som standard",
         "forget": "Glöm"
+      },
+      "verifyBanner": {
+        "body": "Verifiera din identitet för att börja boka lektioner.",
+        "cta": "Fortsätt verifiering"
       }
     },
     "instructor": {
@@ -2529,6 +2542,20 @@
     "cta": {
       "schools": "Jämför trafikskolor",
       "faq": "Läs vanliga frågor"
+    }
+  },
+  "onboarding": {
+    "learner": {
+      "title": "Låt oss verifiera dig",
+      "body": "Vi behöver bekräfta din ålder och identitet innan du kan boka lektioner."
+    },
+    "verify": {
+      "title": "Verifiering pågår",
+      "body": "Det tar vanligtvis under två minuter. Stäng inte den här fliken."
+    },
+    "handledare": {
+      "title": "Väntar på din handledare",
+      "body": "Din handledare behöver godkänna registreringen innan du kan boka."
     }
   }
 }

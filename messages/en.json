@@ -714,30 +714,39 @@
   },
   "auth": {
     "signIn": {
-      "title": "Welcome back",
-      "subtitle": "Sign in to your DriveLinkUp account to manage your lessons.",
-      "submit": "Sign in",
+      "title": "Log in",
+      "subtitle": "Welcome back to DriveLinkUp.",
+      "submit": "Continue",
       "submitting": "Signing in…",
       "switchToSignupLead": "Don't have an account?",
-      "switchToSignup": "Create one",
+      "switchToSignup": "Sign up",
       "fields": {
-        "emailLabel": "Username or email",
-        "emailPlaceholder": "your username or you@example.com",
+        "emailLabel": "Email",
+        "emailPlaceholder": "you@example.com",
         "passwordLabel": "Password",
         "passwordPlaceholder": "Your password"
       },
       "errors": {
-        "invalidCredentials": "Username or password didn't match. Try again.",
+        "invalidCredentials": "Email or password didn't match. Try again.",
         "generic": "Could not sign in. Please try again."
       }
     },
     "signUp": {
-      "title": "Create your DriveLinkUp account",
-      "subtitle": "DriveLinkUp connects driving schools and certified instructors to learners. Choose learner, school, or instructor — we only ask for what that path needs.",
-      "submit": "Create account",
+      "title": "Join DriveLinkUp",
+      "subtitle": "Choose how you want to use DriveLinkUp, then add your details.",
+      "pathTitle": "Join DriveLinkUp",
+      "pathSubtitle": "First, tell us who you are. We'll only ask for what that path needs.",
+      "backToPaths": "Back",
+      "accountTitleLearner": "Create your student account",
+      "accountLeadLearner": "Find and book lessons with driving schools and certified instructors.",
+      "accountTitleSchool": "List your driving school",
+      "accountLeadSchool": "Add your school details so learners can find and book you.",
+      "accountTitleInstructor": "Create your instructor account",
+      "accountLeadInstructor": "Teach as a certified instructor with a licence held for at least 5 years.",
+      "submit": "Continue",
       "submitting": "Creating account…",
       "switchToSigninLead": "Already have an account?",
-      "switchToSignin": "Sign in",
+      "switchToSignin": "Log in",
       "fields": {
         "nameLabel": "Full name",
         "namePlaceholder": "Anna Svensson…",
@@ -746,17 +755,17 @@
         "passwordLabel": "Password",
         "passwordPlaceholder": "At least 8 characters…",
         "roleLabel": "I am a",
-        "roleLearner": "Learner",
-        "roleSchool": "Driving school",
-        "roleInstructor": "Trained and experienced instructor",
-        "roleLearnerDesc": "Find and book lessons. Minimum age 16.",
+        "roleLearner": "I'm a student",
+        "roleSchool": "I'm a driving school",
+        "roleInstructor": "I'm a certified instructor",
+        "roleLearnerDesc": "Book lessons. You must be at least 16.",
         "roleSchoolDesc": "List your authorized school with prices and availability.",
-        "roleInstructorDesc": "Teach as a certified instructor. You must have held a licence for at least 5 years.",
+        "roleInstructorDesc": "Teach learners. Licence held for at least 5 years.",
         "learnerSection": "Learner details",
         "schoolSection": "School details",
         "instructorSection": "Instructor details",
         "dateOfBirthLabel": "Date of birth",
-        "dateOfBirthHelp": "Learners must be at least {age} years old.",
+        "dateOfBirthHelp": "Students must be at least {age} years old.",
         "phoneLabel": "Phone (optional)",
         "phonePlaceholder": "+46 70 123 45 67…",
         "cityLabel": "City",
@@ -769,14 +778,14 @@
         "licenseHeldYearsPlaceholder": "5…",
         "licenseHeldYearsHelp": "Instructors must have held a licence for at least {years} years.",
         "errors": {
-          "learnerAge": "The youngest learner age is {age}.",
+          "learnerAge": "The youngest student age is {age}.",
           "schoolName": "Enter the driving school name.",
           "organizationNumber": "Enter the school organisation number.",
           "city": "Enter a city.",
           "licenseYears": "Instructors must have held a licence for at least {years} years.",
           "faceRequired": "Add a selfie so we can confirm you are old enough.",
           "ageCheckFailed": "We could not complete the age check. Try another photo.",
-          "ageCheckIneligible": "You must be at least {age} years old to join as a learner."
+          "ageCheckIneligible": "You must be at least {age} years old to join as a student."
         },
         "faceLabel": "Face photo for age check",
         "faceHelp": "When Didit is enabled we estimate age from a clear selfie (JPEG/PNG/WebP, max 5 MB).",
@@ -1144,6 +1153,10 @@
         "defaultBadge": "Default",
         "setDefault": "Set as default",
         "forget": "Forget"
+      },
+      "verifyBanner": {
+        "body": "Verify your identity to start booking lessons.",
+        "cta": "Continue verification"
       }
     },
     "instructor": {
@@ -2529,6 +2542,20 @@
     "cta": {
       "schools": "Compare driving schools",
       "faq": "Read the FAQ"
+    }
+  },
+  "onboarding": {
+    "learner": {
+      "title": "Let's get you verified",
+      "body": "We need to confirm your age and identity before you can book lessons."
+    },
+    "verify": {
+      "title": "Verification in progress",
+      "body": "This usually takes under 2 minutes. Don't close this tab."
+    },
+    "handledare": {
+      "title": "Waiting for your handledare",
+      "body": "Your handledare needs to approve enrollment before you can book."
     }
   }
 }

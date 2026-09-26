@@ -5,23 +5,17 @@
 // island that fetches /api/instructors/recommendations. No data-fetches
 // in the page body — composition only.
 //
-// The recommendations island is hidden via `return null` when the
-// learner has no category/city anchor yet (bookings = none). That is
-// the brief's "hidden if no category/city set" affordance, so the page
-// stays composition-only and never reads booking state itself.
-//
 // Role gate: only a Session whose `UserProfile.role === 'STUDENT'` renders
-// here. A wrong-role deep-link (e.g. an INSTRUCTOR pasting the URL from a
-// stale message) is redirected to the role-correct dashboard via
-// `dashboardPathFor()`. The guard already fetched the role; we just branch
-// on it before rendering.
+// here. Soft verification banner when identity is not yet ACTIVE.
 
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { RecommendedInstructors } from '@/components/custom/dashboard/recommended-instructors';
 import { StudentDashboard } from '@/components/custom/dashboard/student-dashboard';
 import { dashboardPathFor, requireDashboardSession } from '@/lib/dashboard-guard';
+import { getStoredLearnerState } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dashboard.student');
@@ -38,6 +32,11 @@ export default async function StudentDashboardPage() {
     redirect(dashboardPathFor(session.role));
   }
   const t = await getTranslations('dashboard.student');
+
+  const verificationState = await getStoredLearnerState(session.userId);
+  const showVerifyBanner =
+    verificationState === 'SIGNED_UP' || verificationState === 'DIDIT_PENDING';
+
   return (
     <section className="grid gap-6">
       <header className="grid gap-1">
@@ -47,6 +46,17 @@ export default async function StudentDashboardPage() {
         </h1>
         <p className="max-w-2xl text-body text-muted-foreground">{t('lead')}</p>
       </header>
+      {showVerifyBanner ? (
+        <aside className="flex flex-col gap-3 rounded-xl border border-brand-500/35 bg-brand-50/80 px-4 py-3 text-small text-foreground sm:flex-row sm:items-center sm:justify-between dark:bg-brand-950/40">
+          <p className="text-pretty">{t('verifyBanner.body')}</p>
+          <Link
+            href="/signup"
+            className="shrink-0 font-semibold text-brand-700 underline-offset-2 hover:underline dark:text-brand-300"
+          >
+            {t('verifyBanner.cta')}
+          </Link>
+        </aside>
+      ) : null}
       <StudentDashboard />
       <RecommendedInstructors />
     </section>

@@ -7,6 +7,8 @@ import { SignupComplete, SignupCompleteResponse } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { completeSignupHandshake } from '@/lib/email/onboarding';
 import { requireAuth } from '@/lib/require-auth';
+import { resolveStoredLearnerState } from '@/lib/signup-resume';
+import { stateToRoute } from '@/lib/verification/state';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,7 +30,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { next: 'Invalid redirect path.' } }, { status: 400 });
   const profile = await prisma.userProfile.findUnique({
     where: { userId: user.id },
-    select: { role: true },
+    select: { role: true, dateOfBirth: true },
   });
   const role =
     profile?.role === 'INSTRUCTOR' || profile?.role === 'HANDLEDARE' ? profile.role : 'STUDENT';
@@ -60,6 +62,9 @@ export async function POST(req: Request) {
     name: user.name,
     requestedRole: role,
   });
-  const to = parsed.data.next ?? result.dashboardPath;
+  const to =
+    role === 'STUDENT'
+      ? stateToRoute(resolveStoredLearnerState(profile?.dateOfBirth ?? null))
+      : (parsed.data.next ?? result.dashboardPath);
   return NextResponse.json(SignupCompleteResponse.parse({ to }));
 }
