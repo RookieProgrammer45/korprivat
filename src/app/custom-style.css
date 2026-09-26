@@ -148,13 +148,7 @@ html.dark .marketplace-hero {
 }
 
 .marketplace-hero-title {
-  max-width: 12ch;
-  font-size: clamp(2.35rem, 7.2vw, 7.25rem);
-  line-height: 0.96;
-  letter-spacing: -0.06em;
   font-weight: 800;
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .marketplace-hero-card {
@@ -391,11 +385,36 @@ html.dark .marketplace-entry-section {
 }
 
 .auth-shell {
-  background-color: #fff;
+  background:
+    radial-gradient(120% 80% at 50% -10%, color-mix(in oklch, var(--brand-400) 14%, transparent), transparent 55%),
+    linear-gradient(180deg, color-mix(in oklch, var(--muted) 55%, white) 0%, var(--background) 42%, var(--background) 100%);
 }
 
 html.dark .auth-shell {
-  background-color: var(--background);
+  background:
+    radial-gradient(120% 80% at 50% -10%, color-mix(in oklch, var(--brand-500) 18%, transparent), transparent 55%),
+    var(--background);
+}
+
+.auth-shell-topbar {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-panel {
+  animation: marketplace-rise 560ms var(--ease-out-expo) both;
+}
+
+.auth-path-option {
+  min-height: 4.75rem;
+}
+
+.auth-form .auth-input {
+  border-radius: 0.85rem;
+}
+
+.auth-submit {
+  border-radius: 999px;
 }
 
 .chatbot-fab {
@@ -558,7 +577,6 @@ main[class~="section"] {
 }
 
 .directory-shell > header::before,
-.auth-shell .surface-panel::before,
 .dashboard-shell > header::before {
   position: absolute;
   top: -1rem;
@@ -791,14 +809,6 @@ form > button[type="submit"] {
   .dl-action-group > button,
   .dl-action-group > a {
     width: 100%;
-  }
-
-  .marketplace-hero-title {
-    max-width: none;
-    width: 100%;
-    font-size: clamp(1.85rem, 8.4vw, 2.45rem);
-    line-height: 1.05;
-    letter-spacing: -0.04em;
   }
 
   .marketplace-hero-grid {

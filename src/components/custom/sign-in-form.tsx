@@ -57,7 +57,7 @@ export function SignInForm({ next }: { next?: string }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="grid gap-5" noValidate>
+      <form onSubmit={onSubmit} className="auth-form grid gap-5" noValidate>
         <FormField
           control={form.control}
           name="email"
@@ -69,6 +69,7 @@ export function SignInForm({ next }: { next?: string }) {
                 <Input
                   type="email"
                   autoComplete="email"
+                  className="auth-input h-12"
                   placeholder={t('fields.emailPlaceholder')}
                   {...field}
                 />
@@ -88,6 +89,7 @@ export function SignInForm({ next }: { next?: string }) {
                 <Input
                   type="password"
                   autoComplete="current-password"
+                  className="auth-input h-12"
                   placeholder={t('fields.passwordPlaceholder')}
                   {...field}
                 />
@@ -96,7 +98,12 @@ export function SignInForm({ next }: { next?: string }) {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={form.formState.isSubmitting} className="shadow-sm">
+        <Button
+          type="submit"
+          size="lg"
+          disabled={form.formState.isSubmitting}
+          className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
+        >
           {form.formState.isSubmitting ? t('submitting') : t('submit')}
         </Button>
       </form>

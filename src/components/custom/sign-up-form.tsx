@@ -1,14 +1,18 @@
 // @polsia:user-owned
 'use client';
 
-// Signup wizard — account creation first, then role-specific onboarding.
+// Signup wizard — path first (Airbnb/Uber style), then account details.
 //
-// Step 1 — Account: name / email / password / path picker
-//   LEARNER    → date of birth (≥16) + optional phone/city → dashboard
-//   SCHOOL     → school name, org number, city → photo → Transportstyrelsen licence
-//   INSTRUCTOR → licence held ≥5 years + city → photo → teaching credentials
-// Handledare clickwrap remains only for resumable legacy sessions.
+// Step contract (discriminated by `step`):
+//   path       → choose LEARNER | SCHOOL | INSTRUCTOR (no credentials yet)
+//   account    → name / email / password + path-specific fields only
+//   photo|license|handledare → post-auth onboarding as required
+//
+// LEARNER    → DOB (≥16) + optional phone/city (+ Didit selfie when enabled)
+// SCHOOL     → school name, org number, city → photo → Transportstyrelsen licence
+// INSTRUCTOR → licence held ≥5 years + city → photo → teaching credentials
 
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -27,31 +31,47 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { apiFetch } from '@/lib/api-client';
 import { signUp, useSession } from '@/lib/auth-client';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/auth';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
+import { AgeCheckResponse, SignupCapabilities } from '@/lib/contracts/didit-age';
 import { LicenseUploadResponse } from '@/lib/contracts/instructor-license';
 import {
   SignupCompleteResponse,
-  SignupPath,
-  SignupState,
   type SignupPath as SignupPathType,
+  SignupState,
 } from '@/lib/contracts/signup';
-import { AgeCheckResponse, SignupCapabilities } from '@/lib/contracts/didit-age';
 import { SignupStartResponse } from '@/lib/contracts/signup-start';
 import { applyServerErrors } from '@/lib/forms';
 import {
   isInstructorLicenseTenureEligible,
-  isLearnerAgeEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
   MIN_LEARNER_AGE_YEARS,
 } from '@/lib/signup-eligibility';
+import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
 import { ClickwrapStep } from './clickwrap-step';
 import { PhotoPromptStep } from './photo-prompt-step';
 
-type Step = 'account' | 'photo' | 'license' | 'handledare';
+type Step = 'path' | 'account' | 'photo' | 'license' | 'handledare';
+
+const PATH_OPTIONS = [
+  {
+    value: 'LEARNER' as const,
+    labelKey: 'roleLearner' as const,
+    descKey: 'roleLearnerDesc' as const,
+  },
+  {
+    value: 'SCHOOL' as const,
+    labelKey: 'roleSchool' as const,
+    descKey: 'roleSchoolDesc' as const,
+  },
+  {
+    value: 'INSTRUCTOR' as const,
+    labelKey: 'roleInstructor' as const,
+    descKey: 'roleInstructorDesc' as const,
+  },
+];
 
 type AccountValues = {
   name: string;
@@ -75,8 +95,12 @@ function withSignupFlag(path: string): string {
   return `${path}${path.includes('?') ? '&' : '?'}signup=1`;
 }
 
-function isSignupPath(value: string): value is SignupPathType {
-  return SignupPath.safeParse(value).success;
+/** Claimed DOB is a routing check only. Date-only UTC age, same helper as the state machine. */
+function claimedDobIsUnderage(value: string): boolean {
+  if (!value) return false;
+  const dob = new Date(value);
+  if (Number.isNaN(dob.getTime())) return false;
+  return ageInYears(dob) < MINIMUM_AGE;
 }
 
 export function SignUpForm({ next }: { next?: string }) {
@@ -86,14 +110,14 @@ export function SignUpForm({ next }: { next?: string }) {
   const tConsentBanner = useTranslations('consentBanner');
   const { data: session } = useSession();
 
-  const [step, setStep] = useState<Step>('account');
+  const [step, setStep] = useState<Step>('path');
   const [licenseFile, setLicenseFile] = useState<File | null>(null);
   const [attested, setAttested] = useState(false);
   const [licenseConsent, setLicenseConsent] = useState(false);
   const [submittingLicense, setSubmittingLicense] = useState(false);
   const [submittingClickwrap, setSubmittingClickwrap] = useState(false);
   const [stagedPhotoUrl, setStagedPhotoUrl] = useState<string | null>(null);
-  const [signupPath, setSignupPath] = useState<SignupPathType | null>('LEARNER');
+  const [signupPath, setSignupPath] = useState<SignupPathType | null>(null);
   const [diditAgeCheck, setDiditAgeCheck] = useState(false);
   const [faceFile, setFaceFile] = useState<File | null>(null);
   const [ageCheck, setAgeCheck] = useState<{
@@ -122,6 +146,9 @@ export function SignUpForm({ next }: { next?: string }) {
   });
 
   const selectedPath = useWatch({ control: form.control, name: 'path' });
+  const dateOfBirthValue = useWatch({ control: form.control, name: 'dateOfBirth' });
+  const learnerUnderage =
+    selectedPath === 'LEARNER' && claimedDobIsUnderage(dateOfBirthValue ?? '');
 
   const completeSignup = useCallback(async () => {
     try {
@@ -190,6 +217,24 @@ export function SignUpForm({ next }: { next?: string }) {
     setAgeCheck(null);
   };
 
+  const selectPath = (path: SignupPathType) => {
+    handlePathChange(path);
+    setStep('account');
+  };
+
+  const accountTitleKey =
+    selectedPath === 'SCHOOL'
+      ? 'accountTitleSchool'
+      : selectedPath === 'INSTRUCTOR'
+        ? 'accountTitleInstructor'
+        : 'accountTitleLearner';
+  const accountLeadKey =
+    selectedPath === 'SCHOOL'
+      ? 'accountLeadSchool'
+      : selectedPath === 'INSTRUCTOR'
+        ? 'accountLeadInstructor'
+        : 'accountLeadLearner';
+
   const runAgeCheck = async (): Promise<typeof ageCheck> => {
     if (!diditAgeCheck || selectedPath !== 'LEARNER') return null;
     if (!faceFile) {
@@ -239,9 +284,9 @@ export function SignUpForm({ next }: { next?: string }) {
     async (values) => {
       if (values.path === 'LEARNER') {
         const dob = new Date(values.dateOfBirth);
-        if (!values.dateOfBirth || Number.isNaN(dob.getTime()) || !isLearnerAgeEligible(dob)) {
+        if (!values.dateOfBirth || Number.isNaN(dob.getTime()) || ageInYears(dob) < MINIMUM_AGE) {
           form.setError('dateOfBirth', {
-            message: t('fields.errors.learnerAge', { age: MIN_LEARNER_AGE_YEARS }),
+            message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
           });
           return;
         }
@@ -422,6 +467,43 @@ export function SignUpForm({ next }: { next?: string }) {
 
   const licenseCopyKey = signupPath === 'SCHOOL' ? 'school' : 'instructor';
 
+  if (step === 'path') {
+    return (
+      <div className="grid gap-8">
+        <div className="grid gap-2">
+          <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            {t('pathTitle')}
+          </h1>
+          <p className="text-pretty text-body text-muted-foreground">{t('pathSubtitle')}</p>
+        </div>
+        <ul className="grid gap-3">
+          {PATH_OPTIONS.map(({ value, labelKey, descKey }) => (
+            <li key={value}>
+              <button
+                type="button"
+                onClick={() => selectPath(value)}
+                className="auth-path-option group flex w-full min-w-0 items-center gap-4 rounded-2xl border border-border bg-card px-4 py-4 text-left transition-[border-color,box-shadow,transform,background-color] duration-200 hover:-translate-y-0.5 hover:border-brand-400 hover:bg-brand-50/60 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 dark:hover:bg-brand-950/40"
+              >
+                <span className="min-w-0 flex-1">
+                  <span className="block text-pretty text-base font-semibold text-foreground">
+                    {t(`fields.${labelKey}`)}
+                  </span>
+                  <span className="mt-1 block text-pretty text-small text-muted-foreground">
+                    {t(`fields.${descKey}`)}
+                  </span>
+                </span>
+                <ChevronRight
+                  aria-hidden
+                  className="size-5 shrink-0 text-muted-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-brand-600"
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
   if (step === 'photo') {
     return (
       <PhotoPromptStep
@@ -475,7 +557,9 @@ export function SignUpForm({ next }: { next?: string }) {
           <Label htmlFor="signup-license">
             {t(`segments.${licenseCopyKey}.licenseUpload.fields.licenseLabel`)}
           </Label>
-          <p className="text-[0.8rem] text-muted-foreground">{t('licenseUpload.fields.licenseHelp')}</p>
+          <p className="text-[0.8rem] text-muted-foreground">
+            {t('licenseUpload.fields.licenseHelp')}
+          </p>
           <Input
             id="signup-license"
             type="file"
@@ -582,7 +666,23 @@ export function SignUpForm({ next }: { next?: string }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={submitAccount} className="grid gap-5" noValidate>
+      <form onSubmit={submitAccount} className="auth-form grid gap-5" noValidate>
+        <div className="mb-1 grid gap-3">
+          <button
+            type="button"
+            onClick={() => setStep('path')}
+            className="w-fit text-small font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            ← {t('backToPaths')}
+          </button>
+          <div className="grid gap-2">
+            <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              {t(accountTitleKey)}
+            </h1>
+            <p className="text-pretty text-body text-muted-foreground">{t(accountLeadKey)}</p>
+          </div>
+        </div>
+
         <FormField
           control={form.control}
           name="name"
@@ -591,7 +691,12 @@ export function SignUpForm({ next }: { next?: string }) {
             <FormItem>
               <FormLabel>{t('fields.nameLabel')}</FormLabel>
               <FormControl>
-                <Input autoComplete="name" placeholder={t('fields.namePlaceholder')} {...field} />
+                <Input
+                  autoComplete="name"
+                  className="auth-input h-12"
+                  placeholder={t('fields.namePlaceholder')}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -610,6 +715,7 @@ export function SignUpForm({ next }: { next?: string }) {
                   autoComplete="email"
                   spellCheck={false}
                   inputMode="email"
+                  className="auth-input h-12"
                   placeholder={t('fields.emailPlaceholder')}
                   {...field}
                 />
@@ -629,6 +735,7 @@ export function SignUpForm({ next }: { next?: string }) {
                 <Input
                   type="password"
                   autoComplete="new-password"
+                  className="auth-input h-12"
                   placeholder={t('fields.passwordPlaceholder')}
                   {...field}
                 />
@@ -638,67 +745,8 @@ export function SignUpForm({ next }: { next?: string }) {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="path"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('fields.roleLabel')}</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={(value) => {
-                    if (isSignupPath(value)) handlePathChange(value);
-                  }}
-                  onBlur={field.onBlur}
-                  value={field.value}
-                  className="grid min-w-0 grid-cols-1 gap-3"
-                >
-                  {(
-                    [
-                      ['LEARNER', 'roleLearner', 'roleLearnerDesc'],
-                      ['SCHOOL', 'roleSchool', 'roleSchoolDesc'],
-                      ['INSTRUCTOR', 'roleInstructor', 'roleInstructorDesc'],
-                    ] as const
-                  ).map(([value, labelKey, descKey]) => (
-                    <div
-                      key={value}
-                      className={`group relative min-w-0 rounded-md border bg-card transition-colors focus-within:ring-2 focus-within:ring-brand-500/30 ${
-                        field.value === value
-                          ? 'border-brand-500 bg-brand-100 dark:bg-brand-900'
-                          : 'border-input hover:border-brand-500'
-                      } flex h-full cursor-pointer items-start gap-3 px-3 py-3 text-small`}
-                    >
-                      <RadioGroupItem
-                        id={`role-${value.toLowerCase()}`}
-                        value={value}
-                        aria-label={`${t(`fields.${labelKey}`)}. ${t(`fields.${descKey}`)}`}
-                        className="absolute inset-0 z-10 h-full w-full rounded-md border-0 bg-transparent opacity-0 shadow-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand-500/50 [&>span]:hidden"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="pointer-events-none flex min-w-0 flex-1 flex-col gap-1"
-                      >
-                        <span className="break-words text-pretty font-medium text-foreground">
-                          {t(`fields.${labelKey}`)}
-                        </span>
-                        <span className="break-words text-caption text-muted-foreground [text-wrap:pretty]">
-                          {t(`fields.${descKey}`)}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         {selectedPath === 'LEARNER' ? (
-          <div className="grid gap-4 rounded-md border border-border bg-muted/30 p-3">
-            <p className="text-caption font-medium text-muted-foreground">
-              {t('fields.learnerSection')}
-            </p>
+          <div className="grid gap-4 border-t border-border pt-4">
             <FormField
               control={form.control}
               name="dateOfBirth"
@@ -707,7 +755,23 @@ export function SignUpForm({ next }: { next?: string }) {
                 <FormItem>
                   <FormLabel>{t('fields.dateOfBirthLabel')}</FormLabel>
                   <FormControl>
-                    <Input type="date" autoComplete="bday" {...field} />
+                    <Input
+                      type="date"
+                      autoComplete="bday"
+                      className="auth-input h-12"
+                      {...field}
+                      onChange={(event) => {
+                        field.onChange(event);
+                        const value = event.target.value;
+                        if (claimedDobIsUnderage(value)) {
+                          form.setError('dateOfBirth', {
+                            message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
+                          });
+                        } else if (value) {
+                          form.clearErrors('dateOfBirth');
+                        }
+                      }}
+                    />
                   </FormControl>
                   <p className="text-caption text-muted-foreground">
                     {t('fields.dateOfBirthHelp', { age: MIN_LEARNER_AGE_YEARS })}
@@ -727,6 +791,7 @@ export function SignUpForm({ next }: { next?: string }) {
                       type="tel"
                       autoComplete="tel"
                       inputMode="tel"
+                      className="auth-input h-12"
                       placeholder={t('fields.phonePlaceholder')}
                       {...field}
                     />
@@ -744,6 +809,7 @@ export function SignUpForm({ next }: { next?: string }) {
                   <FormControl>
                     <Input
                       autoComplete="address-level2"
+                      className="auth-input h-12"
                       placeholder={t('fields.cityPlaceholder')}
                       {...field}
                     />
@@ -760,7 +826,7 @@ export function SignUpForm({ next }: { next?: string }) {
                   id="signup-face"
                   type="file"
                   accept="image/jpeg,image/png,image/webp,image/tiff"
-                  className="cursor-pointer file:mr-3 file:cursor-pointer"
+                  className="auth-input cursor-pointer file:mr-3 file:cursor-pointer"
                   onChange={(e) => {
                     setFaceFile(e.target.files?.[0] ?? null);
                     setAgeCheck(null);
@@ -779,10 +845,7 @@ export function SignUpForm({ next }: { next?: string }) {
         ) : null}
 
         {selectedPath === 'SCHOOL' ? (
-          <div className="grid gap-4 rounded-md border border-border bg-muted/30 p-3">
-            <p className="text-caption font-medium text-muted-foreground">
-              {t('fields.schoolSection')}
-            </p>
+          <div className="grid gap-4 border-t border-border pt-4">
             <FormField
               control={form.control}
               name="schoolName"
@@ -793,6 +856,7 @@ export function SignUpForm({ next }: { next?: string }) {
                   <FormControl>
                     <Input
                       autoComplete="organization"
+                      className="auth-input h-12"
                       placeholder={t('fields.schoolNamePlaceholder')}
                       {...field}
                     />
@@ -811,6 +875,7 @@ export function SignUpForm({ next }: { next?: string }) {
                   <FormControl>
                     <Input
                       spellCheck={false}
+                      className="auth-input h-12"
                       placeholder={t('fields.organizationNumberPlaceholder')}
                       {...field}
                     />
@@ -829,6 +894,7 @@ export function SignUpForm({ next }: { next?: string }) {
                   <FormControl>
                     <Input
                       autoComplete="address-level2"
+                      className="auth-input h-12"
                       placeholder={t('fields.cityPlaceholder')}
                       {...field}
                     />
@@ -841,10 +907,7 @@ export function SignUpForm({ next }: { next?: string }) {
         ) : null}
 
         {selectedPath === 'INSTRUCTOR' ? (
-          <div className="grid gap-4 rounded-md border border-border bg-muted/30 p-3">
-            <p className="text-caption font-medium text-muted-foreground">
-              {t('fields.instructorSection')}
-            </p>
+          <div className="grid gap-4 border-t border-border pt-4">
             <FormField
               control={form.control}
               name="licenseHeldYears"
@@ -858,6 +921,7 @@ export function SignUpForm({ next }: { next?: string }) {
                       inputMode="numeric"
                       min={MIN_INSTRUCTOR_LICENSE_YEARS}
                       max={80}
+                      className="auth-input h-12"
                       placeholder={t('fields.licenseHeldYearsPlaceholder')}
                       {...field}
                     />
@@ -879,6 +943,7 @@ export function SignUpForm({ next }: { next?: string }) {
                   <FormControl>
                     <Input
                       autoComplete="address-level2"
+                      className="auth-input h-12"
                       placeholder={t('fields.cityPlaceholder')}
                       {...field}
                     />
@@ -901,7 +966,7 @@ export function SignUpForm({ next }: { next?: string }) {
               <FormControl>
                 <label
                   htmlFor="signup-consent"
-                  className="flex cursor-pointer items-start gap-2 rounded-md border border-brand-500/40 bg-brand-100 px-3 py-2.5 text-small dark:bg-brand-900"
+                  className="flex cursor-pointer items-start gap-2 rounded-xl border border-border bg-muted/40 px-3 py-3 text-small"
                 >
                   <Checkbox
                     id="signup-consent"
@@ -931,8 +996,9 @@ export function SignUpForm({ next }: { next?: string }) {
         />
         <Button
           type="submit"
-          disabled={form.formState.isSubmitting || checkingAge}
-          className="shadow-sm"
+          size="lg"
+          disabled={form.formState.isSubmitting || checkingAge || learnerUnderage}
+          className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
         >
           {checkingAge
             ? t('fields.ageChecking')

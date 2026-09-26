@@ -37,7 +37,7 @@ export function PublicHome() {
               <span className="mr-2 inline-block size-1.5 rounded-full bg-brand-500" aria-hidden />
               {t('hero.eyebrow')}
             </Badge>
-            <h1 className="marketplace-hero-title max-w-4xl font-display text-foreground">
+            <h1 className="marketplace-hero-title max-w-4xl font-display text-3xl leading-[1.05] tracking-tight text-balance text-foreground sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
               {t('hero.title')}
             </h1>
             <p className="max-w-2xl min-w-0 text-body-lg text-muted-foreground">{t('hero.body')}</p>
