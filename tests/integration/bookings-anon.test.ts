@@ -1,22 +1,20 @@
-// @polsia:user-owned — anonymous booking & post-signup re-identification.
-//
-// The trust-critical journey: a learner should be able to file a booking
-// WITHOUT signing in, then use its opaque access token to open the booking;
-// a later signed-in dashboard read is scoped to the auth user id.
+// @polsia:user-owned — authenticated booking create + soft-gate on claimed DOB.
 //
 // Coverage:
-//   1. POST /api/bookings                      — anonymous create persists
-//                                                with both emails sent, no
-//                                                noticeable failure mode
-//   2. POST /api/bookings → category mismatch  — rejected 400, no email
-//   3. POST /api/bookings → unknown instructor — rejected 400, no email
-//   4. POST /api/bookings → instructor without email — still 201, only the
+//   1. POST /api/bookings                      — no session → 401
+//   2. POST /api/bookings                      — claimed DOB age 15 → 403
+//                                                learner_not_eligible /
+//                                                BLOCKED_UNDERAGE
+//   3. POST /api/bookings                      — signed-in + DOB 16+ → 201,
+//                                                emails sent, userId set
+//   4. POST /api/bookings → category mismatch  — rejected 400, no email
+//   5. POST /api/bookings → unknown instructor — rejected 400, no email
+//   6. POST /api/bookings → instructor without email — still 201, only the
 //                                                student email is sent
-//   5. GET /api/bookings/[id]                  — booking detail returns
+//   7. GET /api/bookings/[id]                  — booking detail returns
 //                                                the persisted row + rate
-//   6. Post-signup re-identification           — after the row is created,
-//                                                the owner session sees the
-//                                                same booking via /api/bookings/me
+//   8. Post-create dashboard read              — signed-in owner sees the
+//                                                booking via /api/bookings/me
 
 import './_setup/env';
 import './_setup/auth-mock';
@@ -54,6 +52,21 @@ const VALID_BODY = {
   instructorId: 'instructor_erik',
 };
 
+const LEARNER_USER = {
+  id: 'user_learner',
+  email: 'learner@example.test',
+  name: 'Test Learner',
+  role: 'user' as const,
+};
+
+function dobYearsAgo(years: number): Date {
+  const d = new Date();
+  d.setFullYear(d.getFullYear() - years);
+  d.setMonth(0, 15);
+  d.setHours(12, 0, 0, 0);
+  return d;
+}
+
 function jsonPost(url: string, body: unknown): Request {
   return new Request(`http://localhost${url}`, {
     method: 'POST',
@@ -66,11 +79,22 @@ function bookingsMeReq(): Request {
   return new Request('http://localhost/api/bookings/me', { method: 'GET' });
 }
 
-function queueOpenSlot(slotId = 'slot_1'): void {
+function stubOpenSlot(slotId = 'slot_1'): void {
   prismaMock.availabilitySlot.findFirst.mockResolvedValueOnce({
     id: slotId,
     startsAt: new Date('2030-08-10T14:30:00.000Z'),
   });
+}
+
+function stubEligibleProfile(ageYears = 25): void {
+  prismaMock.userProfile.findUnique.mockResolvedValueOnce({
+    dateOfBirth: dobYearsAgo(ageYears),
+  });
+}
+
+function signInEligibleLearner(ageYears = 25): void {
+  authMock.setUser(LEARNER_USER);
+  stubEligibleProfile(ageYears);
 }
 
 function learnerReadReq(url: string, token = TEST_LEARNER_ACCESS_TOKEN): Request {
@@ -87,10 +111,35 @@ afterEach(() => {
   // nothing to restore
 });
 
-describe('POST /api/bookings — anonymous create', () => {
-  it('persists a row + sends BOTH student and instructor emails (201)', async () => {
+describe('POST /api/bookings — auth + claimed-DOB soft-gate', () => {
+  it('returns 401 when there is no session', async () => {
+    const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
+    expect(res.status).toBe(401);
+    expect(prismaMock.booking.create).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it('returns 403 learner_not_eligible when claimed DOB is age 15', async () => {
+    authMock.setUser(LEARNER_USER);
+    prismaMock.userProfile.findUnique.mockResolvedValueOnce({
+      dateOfBirth: dobYearsAgo(15),
+    });
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
-    queueOpenSlot();
+
+    const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({
+      error: 'learner_not_eligible',
+      state: 'BLOCKED_UNDERAGE',
+    });
+    expect(prismaMock.booking.create).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it('persists a row + sends BOTH emails when signed-in with claimed DOB age 16+ (201)', async () => {
+    signInEligibleLearner(25);
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_1',
       preferredAt: new Date('2026-08-10T14:30:00.000Z'),
@@ -106,9 +155,10 @@ describe('POST /api/bookings — anonymous create', () => {
 
     expect(prismaMock.booking.create).toHaveBeenCalledOnce();
     const createArgs = prismaMock.booking.create.mock.calls[0][0] as {
-      data: { studentEmail: string; category: string };
+      data: { studentEmail: string; category: string; userId: string };
     };
     expect(createArgs.data.studentEmail).toBe('learner@example.test');
+    expect(createArgs.data.userId).toBe('user_learner');
     expect(createArgs.data).toMatchObject({
       slotId: 'slot_1',
       priceAmountSek: 550,
@@ -123,6 +173,7 @@ describe('POST /api/bookings — anonymous create', () => {
   });
 
   it("400 + zero emails when category is not on the instructor's list", async () => {
+    signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
       instructorRow({ categories: ['A2', 'BE'] }),
     );
@@ -134,6 +185,7 @@ describe('POST /api/bookings — anonymous create', () => {
   });
 
   it('400 + zero emails when instructor id is unknown', async () => {
+    signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(null);
 
     const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
@@ -143,8 +195,9 @@ describe('POST /api/bookings — anonymous create', () => {
   });
 
   it('201 + only student email when instructor has no email', async () => {
+    signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow({ email: null }));
-    queueOpenSlot();
+    stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_no_instr',
       preferredAt: new Date('2026-08-10T14:30:00.000Z'),
@@ -157,8 +210,9 @@ describe('POST /api/bookings — anonymous create', () => {
   });
 
   it('409 + no email when instant slot reservation loses the race', async () => {
+    signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
-    queueOpenSlot();
+    stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({ id: 'booking_race' });
     prismaMock.availabilitySlot.updateMany.mockResolvedValueOnce({ count: 0 });
 
@@ -170,10 +224,11 @@ describe('POST /api/bookings — anonymous create', () => {
   });
 
   it('409 + no row when request mode already has an active request for the slot', async () => {
+    signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
       instructorRow({ bookingMode: 'request' }),
     );
-    queueOpenSlot();
+    stubOpenSlot();
     prismaMock.booking.findFirst.mockResolvedValueOnce({ id: 'existing_request' });
 
     const res = await bookingsPOST(jsonPost('/api/bookings', { ...VALID_BODY, mode: 'request' }));
@@ -199,8 +254,9 @@ describe('POST /api/bookings — anonymous create', () => {
   });
 
   it('still returns 201 when instructor email fails to send', async () => {
+    signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
-    queueOpenSlot();
+    stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_partial',
       preferredAt: new Date('2026-08-10T14:30:00.000Z'),
@@ -268,11 +324,11 @@ describe('GET /api/bookings/[id]', () => {
   });
 });
 
-describe('post-signup re-identification (anonymous booking joins by user id)', () => {
+describe('post-create dashboard read (signed-in booking joins by user id)', () => {
   it('the signed-in owner sees the booking on /api/bookings/me', async () => {
-    // 1) anonymous POST /api/bookings → row persists with studentEmail === learner@example.test
+    signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
-    queueOpenSlot();
+    stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_join',
       preferredAt: new Date('2026-08-10T14:30:00.000Z'),
@@ -282,20 +338,12 @@ describe('post-signup re-identification (anonymous booking joins by user id)', (
 
     const createdBooking = (
       prismaMock.booking.create.mock.calls[0][0] as {
-        data: { studentEmail: string };
+        data: { studentEmail: string; userId: string };
       }
     ).data;
     expect(createdBooking.studentEmail).toBe('learner@example.test');
+    expect(createdBooking.userId).toBe('user_learner');
 
-    // 2) the learner signs up — session now holds that email
-    authMock.setUser({
-      id: 'user_learner',
-      email: 'learner@example.test',
-      name: 'Test Learner',
-      role: 'user',
-    });
-
-    // 3) /api/bookings/me resolves the row by user id
     prismaMock.booking.findMany.mockResolvedValueOnce([
       {
         id: 'booking_join',
@@ -321,10 +369,15 @@ describe('post-signup re-identification (anonymous booking joins by user id)', (
   });
 
   it('does not use the submitted email as the dashboard authorization key', async () => {
-    // Anonymous booking: email is submitted mixed-case, but the later
-    // dashboard read remains scoped to the signed-in user id.
+    authMock.setUser({
+      id: 'user_x',
+      email: 'learner@example.test',
+      name: 'Test',
+      role: 'user',
+    });
+    stubEligibleProfile(25);
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
-    queueOpenSlot();
+    stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_case',
       preferredAt: new Date('2026-08-10T14:30:00.000Z'),
@@ -337,14 +390,12 @@ describe('post-signup re-identification (anonymous booking joins by user id)', (
       }),
     );
     expect(prismaMock.booking.create).toHaveBeenCalledTimes(1);
-
-    // Sign in with a distinct user id.
-    authMock.setUser({
-      id: 'user_x',
-      email: 'learner@example.test',
-      name: 'Test',
-      role: 'user',
-    });
+    const createdBooking = (
+      prismaMock.booking.create.mock.calls[0][0] as {
+        data: { userId: string };
+      }
+    ).data;
+    expect(createdBooking.userId).toBe('user_x');
 
     prismaMock.booking.findMany.mockResolvedValueOnce([
       {

@@ -549,6 +549,7 @@
     "instructorUnavailable": "Den här skolannonsen är inte längre tillgänglig.",
     "loadError": "Bokningsformuläret kunde inte laddas.",
     "submitError": "Bokningen kunde inte skapas. Försök igen.",
+    "learnerNotEligible": "Du behöver vara minst 16 år för att boka lektioner.",
     "labels": {
       "yourName": "Ditt namn",
       "email": "E-post",

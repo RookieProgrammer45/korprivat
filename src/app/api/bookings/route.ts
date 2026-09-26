@@ -16,7 +16,8 @@ import {
   studentBookingRequestReceivedEmail,
 } from '@/lib/email/templates';
 import { resolveOrigin } from '@/lib/payments/origin';
-import { getSessionUser } from '@/lib/require-auth';
+import { requireAuth, type SessionUser } from '@/lib/require-auth';
+import { resolveLearnerState } from '@/lib/verification/state';
 
 export const dynamic = 'force-dynamic';
 
@@ -63,6 +64,36 @@ export async function POST(req: Request) {
   }
 
   const data = parsed.data;
+
+  let sessionUser: SessionUser;
+  try {
+    sessionUser = await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
+
+  const profile = await prisma.userProfile.findUnique({
+    where: { userId: sessionUser.id },
+    select: { dateOfBirth: true },
+  });
+
+  // TODO: Tighten to require ACTIVE once Didit webhook writes
+  // dateOfBirthVerified (see docs/learner-verification-flow.md §5).
+  const learnerState = resolveLearnerState({
+    currentState: 'SIGNED_UP',
+    claimedDob: profile?.dateOfBirth ?? null,
+    verifiedDob: null,
+    diditDecision: null,
+    diditAttempts: 0,
+    handledareEnrollment: null,
+  });
+  if (learnerState === 'BLOCKED_UNDERAGE' || learnerState === 'SUSPENDED') {
+    return NextResponse.json(
+      { error: 'learner_not_eligible', state: learnerState },
+      { status: 403 },
+    );
+  }
+
   const instructor = await prisma.instructor.findUnique({
     where: { id: data.instructorId },
     select: {
@@ -107,7 +138,6 @@ export async function POST(req: Request) {
   const totals = learnerTotalSek(instructor.hourlyRateSek);
   const learnerAccess = generateLearnerAccessToken();
   const actionToken = instructorMode === 'request' ? generateBookingToken() : null;
-  const sessionUser = await getSessionUser();
 
   let transactionResult: { id: string; startsAt: Date };
   try {
@@ -136,6 +166,7 @@ export async function POST(req: Request) {
           data: {
             instructorId: data.instructorId,
             slotId: slot.id,
+            userId: sessionUser.id,
             studentName: data.studentName,
             studentEmail: data.studentEmail,
             studentPhone: data.studentPhone,
@@ -150,7 +181,6 @@ export async function POST(req: Request) {
             grossChargedSek: totals.totalSek,
             learnerAccessTokenHash: learnerAccess.tokenHash,
             ...(actionToken ? { actionToken } : {}),
-            ...(sessionUser ? { userId: sessionUser.id } : {}),
           },
           select: { id: true },
         });
@@ -191,16 +221,14 @@ export async function POST(req: Request) {
     locale: data.locale === 'sv' ? 'sv' : 'en',
   }).catch(() => undefined);
 
-  if (sessionUser) {
-    await recordRebookingContext({
-      userId: sessionUser.id,
-      instructorId: data.instructorId,
-      category: data.category,
-      studentName: data.studentName,
-      studentPhone: data.studentPhone,
-      lastBookingId: transactionResult.id,
-    });
-  }
+  await recordRebookingContext({
+    userId: sessionUser.id,
+    instructorId: data.instructorId,
+    category: data.category,
+    studentName: data.studentName,
+    studentPhone: data.studentPhone,
+    lastBookingId: transactionResult.id,
+  });
 
   return NextResponse.json(
     BookingCreated.parse({

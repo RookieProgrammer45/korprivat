@@ -10,6 +10,7 @@ const {
   mockBookingCreate,
   mockSlotFindFirst,
   mockSlotUpdateMany,
+  mockUserProfileFindUnique,
   mockTransaction,
   mockGetSessionUser,
 } = vi.hoisted(() => ({
@@ -19,9 +20,24 @@ const {
   mockBookingCreate: vi.fn(),
   mockSlotFindFirst: vi.fn(),
   mockSlotUpdateMany: vi.fn(),
+  mockUserProfileFindUnique: vi.fn(),
   mockTransaction: vi.fn(),
   mockGetSessionUser: vi.fn(),
 }));
+
+const LEARNER_SESSION = {
+  id: 'user_learner',
+  email: 'learner@example.test',
+  name: 'Test Learner',
+};
+
+function dobYearsAgo(years: number): Date {
+  const d = new Date();
+  d.setFullYear(d.getFullYear() - years);
+  d.setMonth(0, 15);
+  d.setHours(12, 0, 0, 0);
+  return d;
+}
 
 // vi.mock calls are hoisted above all imports by Vitest.
 vi.mock('@/lib/email/send', () => ({
@@ -33,11 +49,21 @@ vi.mock('@/lib/db', () => ({
     instructor: { findUnique: mockInstructorFindUnique },
     booking: { findFirst: mockBookingFindFirst, create: mockBookingCreate },
     availabilitySlot: { findFirst: mockSlotFindFirst, updateMany: mockSlotUpdateMany },
+    userProfile: { findUnique: mockUserProfileFindUnique },
     $transaction: mockTransaction,
   },
 }));
 
-vi.mock('@/lib/require-auth', () => ({ getSessionUser: mockGetSessionUser }));
+vi.mock('@/lib/require-auth', () => ({
+  getSessionUser: mockGetSessionUser,
+  requireAuth: async () => {
+    const user = await mockGetSessionUser();
+    if (!user) {
+      throw Response.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    return user;
+  },
+}));
 
 // `server-only` is a Next-time side-effect guard that throws on the client
 // bundle. It isn't installed at the package root in this app's tree, and
@@ -98,9 +124,13 @@ describe('POST /api/bookings — email dispatch', () => {
     mockBookingCreate.mockReset();
     mockSlotFindFirst.mockReset();
     mockSlotUpdateMany.mockReset();
+    mockUserProfileFindUnique.mockReset();
     mockTransaction.mockReset();
     mockGetSessionUser.mockReset();
-    mockGetSessionUser.mockResolvedValue(null);
+    mockGetSessionUser.mockResolvedValue(LEARNER_SESSION);
+    mockUserProfileFindUnique.mockResolvedValue({
+      dateOfBirth: dobYearsAgo(25),
+    });
     mockBookingFindFirst.mockResolvedValue(null);
     mockBookingCreate.mockResolvedValue({
       id: 'mock_booking',

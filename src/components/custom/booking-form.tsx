@@ -7,7 +7,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -34,6 +34,7 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
+import { useSession } from '@/lib/auth-client';
 import type { CancellationTier } from '@/lib/business/cancellation-policy';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import {
@@ -77,12 +78,15 @@ export function BookingForm({
   rebookBookingId: string | null;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const { data: session, isPending: sessionPending } = useSession();
   const t = useTranslations('bookingForm');
   const tDetail = useTranslations('instructorDetail');
   const locale = useLocale();
 
   const [instructor, setInstructor] = useState<InstructorItem | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [eligibilityError, setEligibilityError] = useState<string | null>(null);
   const [sentRate, setSentRate] = useState<number | null>(null);
   const [sentInstructorName, setSentInstructorName] = useState<string | null>(null);
   const [booking, setBooking] = useState<BookingRead | null>(null);
@@ -324,6 +328,18 @@ export function BookingForm({
       return;
     }
 
+    if (sessionPending) return;
+    if (!session?.user) {
+      const next =
+        typeof window !== 'undefined'
+          ? `${window.location.pathname}${window.location.search}`
+          : pathname;
+      router.push(`/login?next=${encodeURIComponent(next)}`);
+      return;
+    }
+
+    setEligibilityError(null);
+
     try {
       // Always POST with the matching `mode` so the route does not 400
       // when the instructor's published mode is `request`. Mirrors the
@@ -346,6 +362,15 @@ export function BookingForm({
       );
     } catch (err) {
       const body = err instanceof Error ? err.cause : null;
+      if (
+        body &&
+        typeof body === 'object' &&
+        'error' in body &&
+        (body as { error?: string }).error === 'learner_not_eligible'
+      ) {
+        setEligibilityError(t('learnerNotEligible'));
+        return;
+      }
       const slotError = getServerErrors(body).slotId;
       const localized = localizeBookingErrors(body, t);
       if (localized.general) {
@@ -724,6 +749,11 @@ export function BookingForm({
             >
               {form.formState.isSubmitting ? t('submitting') : t('submit')}
             </Button>
+            {eligibilityError ? (
+              <p className="text-small text-destructive" role="alert">
+                {eligibilityError}
+              </p>
+            ) : null}
           </form>
         </Form>
       </CardContent>
