@@ -51,22 +51,42 @@ function request(): Request {
 }
 
 describe('signup photo gate across marketplace roles', () => {
+  it('lets STUDENT complete without a photo (add later on /profile)', async () => {
+    mocks.userProfile.findUnique.mockResolvedValue({ role: 'STUDENT' });
+    mocks.user.findUnique.mockResolvedValue({ image: null });
+    mocks.photoVerification.findUnique.mockResolvedValue(null);
+    const { completeSignupHandshake } = await import('@/lib/email/onboarding');
+    vi.mocked(completeSignupHandshake).mockResolvedValue({
+      dashboardPath: '/dashboard/student',
+      welcomeSent: true,
+    });
+    const response = await completePOST(request());
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ to: '/dashboard/student' });
+  });
+
   it.each([
-    ['STUDENT', 'photo_confirmation_required'],
     ['INSTRUCTOR', 'license_required'],
     ['HANDLEDARE', 'clickwrap_required'],
   ])('blocks %s until its persisted prerequisite is complete', async (role, expected) => {
     mocks.userProfile.findUnique.mockResolvedValue({ role });
-    if (role === 'STUDENT') {
-      mocks.user.findUnique.mockResolvedValue({ image: null });
-      mocks.photoVerification.findUnique.mockResolvedValue(null);
-    }
     const response = await completePOST(request());
     expect(response.status).toBe(409);
     expect(await response.json()).toEqual({
       errors: {
-        [role === 'STUDENT' ? 'photo' : role === 'INSTRUCTOR' ? 'license' : 'clickwrap']: expected,
+        [role === 'INSTRUCTOR' ? 'license' : 'clickwrap']: expected,
       },
+    });
+  });
+
+  it('blocks INSTRUCTOR without a confirmed photo before license', async () => {
+    mocks.userProfile.findUnique.mockResolvedValue({ role: 'INSTRUCTOR' });
+    mocks.user.findUnique.mockResolvedValue({ image: null });
+    mocks.photoVerification.findUnique.mockResolvedValue(null);
+    const response = await completePOST(request());
+    expect(response.status).toBe(409);
+    expect(await response.json()).toEqual({
+      errors: { photo: 'photo_confirmation_required' },
     });
   });
 });

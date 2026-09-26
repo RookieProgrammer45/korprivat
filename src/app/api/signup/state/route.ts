@@ -35,7 +35,7 @@ export async function GET(req: Request) {
       : null,
   ]);
   const nextPrerequisite =
-    photo.status !== 'CONFIRMED'
+    role === 'INSTRUCTOR' && photo.status !== 'CONFIRMED'
       ? 'photo'
       : role === 'INSTRUCTOR' && !license
         ? 'license'

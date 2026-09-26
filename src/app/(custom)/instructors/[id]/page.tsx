@@ -40,15 +40,19 @@ export default async function InstructorPage({ params, searchParams }: PageProps
 
   return (
     <main className="container-page section">
-      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
-        <InstructorDetail instructorId={id} />
-        <BookingForm
-          instructorId={id}
-          bookingId={bookingId}
-          bookingToken={bookingToken}
-          rebookBookingId={rebookId}
-        />
-        <ReviewSection instructorId={id} reviewBookingId={reviewBookingId} />
+      <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+        <div className="grid min-w-0 gap-6">
+          <InstructorDetail instructorId={id} />
+          <ReviewSection instructorId={id} reviewBookingId={reviewBookingId} />
+        </div>
+        <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
+          <BookingForm
+            instructorId={id}
+            bookingId={bookingId}
+            bookingToken={bookingToken}
+            rebookBookingId={rebookId}
+          />
+        </div>
       </div>
     </main>
   );

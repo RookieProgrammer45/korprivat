@@ -44,3 +44,7 @@ lerna-debug.log*
 
 # Polsia upgrade reconcile sidecars (never commit)
 *.polsia-app-old
+
+# Agent skill installs from Vercel integrations (local only)
+.agents/
+skills-lock.json

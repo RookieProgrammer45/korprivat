@@ -1,28 +1,17 @@
 // @polsia:user-owned
 'use client';
 
-// Signup wizard — account creation first, photo later.
+// Signup wizard — account creation first, photo when required for schools.
 //
-// Step 1 — Account: name / email / password / role picker (Student / Driving
-//   instructor / Private practice driver). On submit calls better-auth's
-//   `signUp.email` — a session is now established. The welcome email is
-//   fired for EVERY role immediately after the account resolves, then the
-//   flow branches by role:
-//     STUDENT   → resolve dashboard path → router.push('<path>?signup=1').
-//     HANDLEDARE → show the handledare clickwrap step, then commit the role
-//                  through /api/clickwrap before redirecting to the dashboard.
-//     INSTRUCTOR → advance to step 2 ('license'). The licence upload is the
-//                  only onboarding step that still belongs in the wizard
-//                  (the instructor dashboard's banner has no upload
-//                  affordance — it only shows pending/rejected status).
+// Step 1 — Account: name / email / password / role picker (Learner / Authorized
+//   school / Handledare guidance). On submit calls better-auth's
+//   `signUp.email` — a session is now established. Flow branches by role:
+//     STUDENT   → complete signup → dashboard (?signup=1). Photo optional later.
+//     HANDLEDARE → clickwrap step, then complete → handledare dashboard.
+//     INSTRUCTOR → photo confirmation, then licence upload, then complete.
 // Step 2 — Role-specific onboarding:
 //   HANDLEDARE → clickwrap acceptance, then dashboard redirect.
-//   INSTRUCTOR → existing licence picker + attestation, then dashboard redirect.
-//
-// Photo upload is decoupled from signup entirely — it lives on /profile via
-// the profile-page island, where it can be added or changed any time. The
-// `?signup=1` flag drives the in-app confirmation banner mounted in the
-// dashboard layout.
+//   INSTRUCTOR → photo + Transportstyrelsen credential upload + attestation.
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

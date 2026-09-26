@@ -725,6 +725,20 @@ form > button[type="submit"] {
 }
 
 @media (max-width: 639px) {
+  .auth-panel,
+  .auth-shell,
+  form.grid {
+    min-width: 0;
+  }
+
+  .auth-shell {
+    padding-inline: 0.75rem;
+  }
+
+  .instructor-page-booking {
+    order: -1;
+  }
+
   .receipt-actions {
     align-items: stretch;
     flex-direction: column;

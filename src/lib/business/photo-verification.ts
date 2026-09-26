@@ -1,11 +1,9 @@
 // @polsia:user-owned — server-only photo verification business rules.
 import 'server-only';
-import FormDataNode from 'form-data';
-import nodeFetch from 'node-fetch';
+import { ObjectStorageError, storeUserUpload } from '@/lib/business/object-storage';
 import { prisma } from '@/lib/db';
 
 export const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
-const R2_UPLOAD_URL = 'https://polsia.com/api/proxy/r2/upload';
 const SUPPORTED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
 const SUPPORTED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp']);
 const REJECTED_EXTENSIONS = new Set(['.heic', '.heif']);
@@ -31,10 +29,6 @@ export function validatePhoto(
 
 export type PhotoUpload = { url: string; key: string; mime: string; size: number };
 
-type R2Response =
-  | { success: true; file: { key: string; url: string } }
-  | { success: false; error?: { code?: string; message?: string } };
-
 export class PhotoUploadError extends Error {
   code: string;
 
@@ -48,34 +42,17 @@ export async function uploadPhoto(file: File): Promise<PhotoUpload> {
   const validation = validatePhoto(file);
   if (!validation.ok) throw new PhotoUploadError(validation.code, validation.code);
   try {
-    const r2Form = new FormDataNode();
-    r2Form.append('file', Buffer.from(await file.arrayBuffer()), {
-      filename: safeFilename(file.name || 'photo'),
+    const stored = await storeUserUpload(file, {
+      folder: 'photos',
       contentType: normalizedMimeType(file),
+      filename: file.name || 'photo',
     });
-    const apiKey = process.env.POLSIA_API_KEY;
-    const response = await nodeFetch(R2_UPLOAD_URL, {
-      method: 'POST',
-      headers: {
-        ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
-        ...r2Form.getHeaders(),
-      },
-      body: r2Form,
-    });
-    const result = (await response.json()) as R2Response;
-    if (!response.ok || !result.success) {
-      const code = result.success ? 'upload_failed' : (result.error?.code ?? 'upload_failed');
-      const message = result.success ? 'Upload failed' : (result.error?.message ?? 'Upload failed');
-      throw new PhotoUploadError(code, message);
-    }
-    return {
-      url: result.file.url,
-      key: result.file.key,
-      mime: normalizedMimeType(file),
-      size: file.size,
-    };
+    return stored;
   } catch (error) {
     if (error instanceof PhotoUploadError) throw error;
+    if (error instanceof ObjectStorageError) {
+      throw new PhotoUploadError(error.code, error.message);
+    }
     throw new PhotoUploadError(
       'upload_failed',
       error instanceof Error ? error.message : 'Upload failed',
@@ -185,13 +162,4 @@ function normalizedMimeType(file: File): string {
   if (extension === '.png') return 'image/png';
   if (extension === '.gif') return 'image/gif';
   return 'image/webp';
-}
-
-function safeFilename(raw: string): string {
-  const noSeparators = raw.replace(/[\\/]/g, '_');
-  let cleaned = '';
-  for (const character of noSeparators) {
-    if (character.charCodeAt(0) >= 32) cleaned += character;
-  }
-  return cleaned.trim() || `photo-${Date.now()}`;
 }

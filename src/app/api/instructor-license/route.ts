@@ -32,9 +32,8 @@
 //      a row exists).
 
 import 'server-only';
-import FormDataNode from 'form-data';
 import { NextResponse } from 'next/server';
-import nodeFetch from 'node-fetch';
+import { ObjectStorageError, storeUserUpload } from '@/lib/business/object-storage';
 import { LicenseStatusResponse, LicenseUploadResponse } from '@/lib/contracts/instructor-license';
 import { prisma } from '@/lib/db';
 import { requireAuth } from '@/lib/require-auth';
@@ -43,42 +42,6 @@ export const dynamic = 'force-dynamic';
 
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 const MAX_PDF_BYTES = 50 * 1024 * 1024;
-const R2_UPLOAD_URL = 'https://polsia.com/api/proxy/r2/upload';
-
-interface R2UploadSuccess {
-  success: true;
-  file: {
-    id: string;
-    key: string;
-    url: string;
-    filename: string;
-    mime_type: string;
-    size: number;
-    created_at: string;
-  };
-}
-
-interface R2UploadFailure {
-  success: false;
-  error?: { message?: string };
-}
-
-type R2UploadResponse = R2UploadSuccess | R2UploadFailure;
-
-function safeFilename(raw: string): string {
-  // Strip path separators so the key stays a single path segment. Falls back
-  // to a timestamped default if empty.
-  const noSeparators = raw.replace(/[\\/]/g, '_');
-  // Replace control chars (NUL through US) one char at a time so we don't
-  // embed a control-character range into a regex literal.
-  let cleaned = '';
-  for (const ch of noSeparators) {
-    const code = ch.charCodeAt(0);
-    cleaned += code < 32 ? '' : ch;
-  }
-  const stripped = cleaned.trim();
-  return stripped.length > 0 ? stripped : `licence-${Date.now()}`;
-}
 
 function fileIsAccepted(
   mimeType: string,
@@ -144,36 +107,23 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { license: accepted.reason } }, { status: 400 });
   }
 
-  // 4. Stream to R2. Mirror the avatar upload exactly: form-data compose,
-  // Bearer POLSIA_API_KEY header, r2-form getHeaders().
-  let uploadResult: R2UploadResponse;
+  // 4. Store via Vercel Blob (or legacy Polsia R2 when configured).
+  let fileKey: string;
+  let fileUrl: string;
   try {
-    const r2Form = new FormDataNode();
-    const buffer = Buffer.from(await fileEntry.arrayBuffer());
-    r2Form.append('file', buffer, {
-      filename: safeFilename(fileEntry.name || 'licence'),
+    const stored = await storeUserUpload(fileEntry, {
+      folder: 'licenses',
       contentType: fileEntry.type,
+      filename: fileEntry.name || 'licence',
     });
-    const apiKey = process.env.POLSIA_API_KEY;
-    const res = await nodeFetch(R2_UPLOAD_URL, {
-      method: 'POST',
-      headers: {
-        ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
-        ...r2Form.getHeaders(),
-      },
-      body: r2Form,
-    });
-    uploadResult = (await res.json()) as R2UploadResponse;
-    if (!uploadResult.success) {
-      return NextResponse.json({ error: 'upload_failed' }, { status: 502 });
-    }
-  } catch (_err) {
-    return NextResponse.json({ error: 'upload_failed' }, { status: 502 });
+    fileKey = stored.key;
+    fileUrl = stored.url;
+  } catch (error) {
+    const message = error instanceof ObjectStorageError ? error.message : 'upload_failed';
+    return NextResponse.json({ error: 'upload_failed', message }, { status: 502 });
   }
 
   const submittedAt = new Date();
-  const fileKey = uploadResult.file.key;
-  const fileUrl = uploadResult.file.url;
 
   // 5. Persist. Upsert on `userId @unique` — every re-upload from the
   // dashboard (after a REJECTED outcome) writes the SAME row and resets

@@ -32,7 +32,9 @@ export async function POST(req: Request) {
   });
   const role =
     profile?.role === 'INSTRUCTOR' || profile?.role === 'HANDLEDARE' ? profile.role : 'STUDENT';
-  if (!(await confirmedPhotoUrl(user.id))) {
+  // School listings need a confirmed photo before the wizard can finish.
+  // Learners and handledare can complete signup and add a photo later on /profile.
+  if (role === 'INSTRUCTOR' && !(await confirmedPhotoUrl(user.id))) {
     return NextResponse.json({ errors: { photo: 'photo_confirmation_required' } }, { status: 409 });
   }
   if (role === 'INSTRUCTOR') {

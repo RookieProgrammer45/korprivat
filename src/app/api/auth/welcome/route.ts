@@ -16,7 +16,7 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { RoleEnum, WelcomeRequest } from '@/lib/contracts/auth';
+import { WelcomeRequest } from '@/lib/contracts/auth';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { signedUpWelcomeEmail } from '@/lib/email/templates';
@@ -24,10 +24,12 @@ import { env } from '@/lib/env';
 
 export const dynamic = 'force-dynamic';
 
-function dashboardUrlFor(role: 'STUDENT' | 'INSTRUCTOR'): string {
+function dashboardUrlFor(role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE'): string {
   // Same-origin relative so the link works on every deployed host
   // (*.polsia.app, custom brand domains) without baking a baseURL in.
-  return role === 'INSTRUCTOR' ? '/dashboard/instructor' : '/dashboard/student';
+  if (role === 'INSTRUCTOR') return '/dashboard/instructor';
+  if (role === 'HANDLEDARE') return '/dashboard/handledare';
+  return '/dashboard/student';
 }
 
 function resolveOrigin(): string {
@@ -82,7 +84,12 @@ export async function POST(req: Request) {
     where: { userId: session.user.id },
     select: { role: true },
   });
-  const role = profile?.role ? RoleEnum.parse(profile.role) : 'STUDENT';
+  const role =
+    profile?.role === 'INSTRUCTOR'
+      ? 'INSTRUCTOR'
+      : profile?.role === 'HANDLEDARE'
+        ? 'HANDLEDARE'
+        : 'STUDENT';
   const name = session.user.name?.trim() || sessionEmail;
 
   const origin = resolveOrigin();
