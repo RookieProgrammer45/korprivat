@@ -1,0 +1,21 @@
+---
+description: Stripe Connect, fee splits, payouts
+globs:
+  - "lib/payments/**"
+  - "app/api/stripe/**"
+  - "app/api/webhooks/stripe/**"
+alwaysApply: false
+---
+
+# Payments rules
+
+Full spec: `@docs/architecture.md` §7.2 (fee split).
+
+Hard rules:
+
+- All fee splits computed in `lib/payments/split.ts`. Never inline.
+- Every split has a table-driven test. New split? Add a test row first.
+- Stripe webhooks dedupe on `stripeEventId` in a `StripeWebhookEvent` table.
+- Instructor onboarding uses Stripe Connect **Express**, not Standard or Custom.
+- Never surface raw Stripe errors to users. Map to friendly codes.
+- Payouts run via cron, not on-demand. See `docs/architecture.md` §7.4.

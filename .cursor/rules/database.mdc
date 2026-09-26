@@ -1,0 +1,17 @@
+---
+description: Prisma schema and migration conventions
+globs:
+  - "prisma/**"
+alwaysApply: true
+---
+
+# Database rules
+
+- One migration per bounded context per PR. Never bundle.
+- Every table has `id`, `createdAt`, `updatedAt` unless immutable (events).
+- Events (`VerificationEvent`, `AdminAction`, `StripeWebhookEvent`) are
+  append-only. No updates, no deletes.
+- Enum values are SCREAMING_SNAKE.
+- Foreign keys always have an index.
+- Never edit a migration that's already been applied to staging or production.
+- After schema changes run `pnpm prisma migrate dev` and commit the migration.

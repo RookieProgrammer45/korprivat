@@ -1,0 +1,21 @@
+---
+description: Scheduling, availability, double-booking prevention
+globs:
+  - "lib/scheduling/**"
+  - "app/api/bookings/**"
+alwaysApply: false
+---
+
+# Booking rules
+
+Full spec: `@docs/architecture.md` §6 (Scheduling) and §7.1 (booking flow).
+
+Hard rules:
+
+- Double-booking prevention is a **Postgres exclusion constraint**, not app logic.
+  See the SQL in `docs/architecture.md` §6.
+- A slot is only "taken" if a Booking with status PENDING/CONFIRMED/IN_PROGRESS
+  overlaps. CANCELLED and NO_SHOW don't block.
+- Price is snapshotted at booking time. Never recompute from current rates.
+- Pickup postcode is geocoded at booking time and stored as lat/lng.
+- Instructor accept window is 24h. Timeout → auto-cancel + release PI.
