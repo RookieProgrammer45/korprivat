@@ -201,9 +201,8 @@
     },
     {
       "path": "proxy.ts",
-      "tier": "shared",
-      "strategy": "composed",
-      "slot": "middleware_chain"
+      "tier": "user_owned",
+      "_note": "DriveLinkUp owns edge proxy (CSP). Auth/verification guards stay in src/lib/dashboard-guard.ts and signup-resume. Do not reintroduce middleware.ts."
     },
     {
       "path": "next.config.ts",
@@ -217,7 +216,7 @@
     {
       "path": "next.user-config.ts",
       "tier": "user_owned",
-      "_note": "User-owned companion to next.config.ts, imported + merged by it. The agent adds remote image hosts (userRemotePatterns), package-level Next options (userNextConfig), config plugin wrappers (userConfigPlugins — next-intl/Sentry/MDX/analyzer), browser-capability opt-ins (appCapabilities — microphone/camera/geolocation, default off) and extra CSP sources (cspExtraSources — frame/connect/media/font/img, default empty) HERE; next.config.ts + proxy.ts stay framework-owned (security headers/CSP, re-asserted after plugin composition)."
+      "_note": "User-owned companion to next.config.ts, imported + merged by it. The agent adds remote image hosts (userRemotePatterns), package-level Next options (userNextConfig), config plugin wrappers (userConfigPlugins), browser-capability opt-ins (appCapabilities) and extra CSP sources (cspExtraSources) HERE. next.config.ts remains shared/composed; proxy.ts is user_owned for DriveLinkUp."
     },
     {
       "path": "src/app/layout.tsx",
@@ -235,8 +234,8 @@
     },
     {
       "path": "prisma/schema/_base.prisma",
-      "tier": "framework_owned",
-      "_note": "Datasource + generator only. Never redeclare these in a module file."
+      "tier": "user_owned",
+      "_note": "Datasource + generator. DriveLinkUp-owned; modules must not redeclare datasource/generator."
     },
     {
       "path": "prisma/migrations/migration_lock.toml",

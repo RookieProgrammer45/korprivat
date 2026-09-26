@@ -37,7 +37,6 @@ describe('.polsia/ownership.json', () => {
 
   it.each([
     'src/app/health/route.ts',
-    'prisma/schema/_base.prisma',
     'prisma/migrations/migration_lock.toml',
     'src/lib/site.ts',
     'src/app/robots.ts',
@@ -47,6 +46,13 @@ describe('.polsia/ownership.json', () => {
   ])('keeps template-shipped %s framework_owned', (path) => {
     expect(find(path)?.tier).toBe('framework_owned');
   });
+
+  it.each(['prisma/schema/_base.prisma', 'proxy.ts'])(
+    'keeps DriveLinkUp-owned %s user_owned (ADR reconcile)',
+    (path) => {
+      expect(find(path)?.tier).toBe('user_owned');
+    },
+  );
 
   it.each(['src/app/api/example/**', 'src/lib/contracts/example.ts'])(
     'keeps the data-plane example %s user_owned (deletable)',
