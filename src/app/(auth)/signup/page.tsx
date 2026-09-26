@@ -1,11 +1,14 @@
 // @polsia:user-owned — `/signup` page.
+//
+// Auth shell owns brand + locale. SignUpForm owns the step contract:
+// path → account → (photo|license|handledare) as required.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { AuthShell } from '@/components/custom/auth-shell';
 import { SignUpForm } from '@/components/custom/sign-up-form';
-import { LocaleSwitcher } from '@/components/locale-switcher';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { redirectLearnerAwayFromSignup } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('auth.signUp');
@@ -31,29 +34,23 @@ export default async function SignupPage({
   const params = await searchParams;
   const next = sanitizeNext(params.next);
 
+  await redirectLearnerAwayFromSignup();
+
   return (
-    <main className="auth-shell min-h-dvh flex min-w-0 items-center justify-center px-gutter py-section bg-[var(--background)]">
-      <Card className="surface-panel relative w-full min-w-0 max-w-md overflow-hidden border border-border bg-card shadow-sm lg:max-w-3xl">
-        <CardHeader className="auth-card-header text-center pb-2">
-          <div className="mx-auto mb-3 flex items-center justify-end">
-            <LocaleSwitcher />
-          </div>
-          <CardTitle className="text-balance text-h4">{t('title')}</CardTitle>
-          <CardDescription className="text-pretty">{t('subtitle')}</CardDescription>
-        </CardHeader>
-        <CardContent className="mx-auto w-full min-w-0 max-w-md pt-4">
-          <SignUpForm next={next} />
-          <p className="mt-4 text-center text-small text-muted-foreground">
-            {t('switchToSigninLead')}{' '}
-            <Link
-              href={next ? `/login?next=${encodeURIComponent(next)}` : '/login'}
-              className="text-brand-600 font-medium hover:text-brand-700 hover:underline underline-offset-2 transition-colors dark:text-brand-400"
-            >
-              {t('switchToSignin')}
-            </Link>
-          </p>
-        </CardContent>
-      </Card>
-    </main>
+    <AuthShell
+      footer={
+        <>
+          {t('switchToSigninLead')}{' '}
+          <Link
+            href={next ? `/login?next=${encodeURIComponent(next)}` : '/login'}
+            className="font-medium text-brand-600 underline-offset-2 transition-colors hover:text-brand-700 hover:underline dark:text-brand-400"
+          >
+            {t('switchToSignin')}
+          </Link>
+        </>
+      }
+    >
+      <SignUpForm next={next} />
+    </AuthShell>
   );
 }
