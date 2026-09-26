@@ -62,6 +62,9 @@ export async function POST(req: Request) {
     name: user.name,
     requestedRole: role,
   });
+  // Learners: verification soft-gate via stateToRoute.
+  // Instructors / handledare: handshake dashboardPath (maps role →
+  // /dashboard/instructor|handledare). No /onboarding/instructor route exists.
   const to =
     role === 'STUDENT'
       ? stateToRoute(resolveStoredLearnerState(profile?.dateOfBirth ?? null))

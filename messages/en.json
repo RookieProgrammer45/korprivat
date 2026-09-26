@@ -1773,6 +1773,8 @@
       "title": "Compare driving schools and certified instructors. Book with confidence.",
       "body": "DriveLinkUp connects driving schools and certified instructors to learners. Discover by category, city, language, published price and availability — free for learners.",
       "primaryCta": "Find lessons",
+      "instructorCta": "I'm a trafiklärare",
+      "schoolCta": "I run a driving school",
       "secondaryCta": "For schools & instructors",
       "contactCta": "Start a conversation",
       "assurance": {
@@ -1857,6 +1859,27 @@
       "faq": "FAQ",
       "privacy": "Privacy",
       "contact": "Contact support"
+    }
+  },
+  "forSkolor": {
+    "meta": {
+      "title": "For driving schools",
+      "description": "Register interest for the DriveLinkUp school portal. Organizations are not live yet."
+    },
+    "eyebrow": "Coming soon",
+    "title": "För trafikskolor",
+    "body": "The school portal is on the way. Leave your school details and we will reach out when Organizations signup opens.",
+    "form": {
+      "schoolNameLabel": "School name",
+      "schoolNamePlaceholder": "Your driving school",
+      "cityLabel": "City",
+      "cityPlaceholder": "Stockholm",
+      "emailLabel": "Work email",
+      "emailPlaceholder": "you@school.se",
+      "submit": "Register interest",
+      "submitting": "Sending…",
+      "success": "Thanks — you are on the list. We will email you when the school portal opens.",
+      "genericError": "Something went wrong. Please try again."
     }
   },
   "providerEntry": {

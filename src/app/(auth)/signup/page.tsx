@@ -25,14 +25,20 @@ function sanitizeNext(raw: string | undefined): string | undefined {
   return raw;
 }
 
+function resolveInitialPath(role: string | undefined): 'LEARNER' | 'INSTRUCTOR' | undefined {
+  if (role === 'instructor') return 'INSTRUCTOR';
+  return undefined;
+}
+
 export default async function SignupPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; role?: string }>;
 }) {
   const t = await getTranslations('auth.signUp');
   const params = await searchParams;
   const next = sanitizeNext(params.next);
+  const initialPath = resolveInitialPath(params.role);
 
   await redirectLearnerAwayFromSignup();
 
@@ -50,7 +56,7 @@ export default async function SignupPage({
         </>
       }
     >
-      <SignUpForm next={next} />
+      <SignUpForm next={next} initialPath={initialPath} />
     </AuthShell>
   );
 }

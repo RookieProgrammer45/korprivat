@@ -103,21 +103,30 @@ function claimedDobIsUnderage(value: string): boolean {
   return ageInYears(dob) < MINIMUM_AGE;
 }
 
-export function SignUpForm({ next }: { next?: string }) {
+export function SignUpForm({
+  next,
+  initialPath,
+}: {
+  next?: string;
+  /** Pre-select marketplace path from /signup?role=… (LEARNER default). */
+  initialPath?: SignupPathType;
+}) {
   const router = useRouter();
   const t = useTranslations('auth.signUp');
   const tConsentForm = useTranslations('consentForm');
   const tConsentBanner = useTranslations('consentBanner');
   const { data: session } = useSession();
 
-  const [step, setStep] = useState<Step>('path');
+  const resolvedPath: SignupPathType = initialPath ?? 'LEARNER';
+  // Deep-link from hero (role=instructor) skips the path picker; user can go back.
+  const [step, setStep] = useState<Step>(initialPath ? 'account' : 'path');
   const [licenseFile, setLicenseFile] = useState<File | null>(null);
   const [attested, setAttested] = useState(false);
   const [licenseConsent, setLicenseConsent] = useState(false);
   const [submittingLicense, setSubmittingLicense] = useState(false);
   const [submittingClickwrap, setSubmittingClickwrap] = useState(false);
   const [stagedPhotoUrl, setStagedPhotoUrl] = useState<string | null>(null);
-  const [signupPath, setSignupPath] = useState<SignupPathType | null>(null);
+  const [signupPath, setSignupPath] = useState<SignupPathType | null>(initialPath ?? null);
   const [diditAgeCheck, setDiditAgeCheck] = useState(false);
   const [faceFile, setFaceFile] = useState<File | null>(null);
   const [ageCheck, setAgeCheck] = useState<{
@@ -133,7 +142,7 @@ export function SignUpForm({ next }: { next?: string }) {
       name: '',
       email: '',
       password: '',
-      path: 'LEARNER',
+      path: resolvedPath,
       dateOfBirth: '',
       phone: '',
       city: '',

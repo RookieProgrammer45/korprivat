@@ -41,17 +41,17 @@ export function PublicHome() {
               {t('hero.title')}
             </h1>
             <p className="max-w-2xl min-w-0 text-body-lg text-muted-foreground">{t('hero.body')}</p>
-            <div className="marketplace-hero-actions flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="marketplace-hero-actions flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:flex-nowrap">
               <Button asChild size="lg" className="marketplace-primary-cta">
                 <Link href="/instructors">
                   {t('hero.primaryCta')} <span aria-hidden>→</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="marketplace-secondary-cta">
-                <Link href="/for-instructors">{t('hero.secondaryCta')}</Link>
+                <Link href="/signup?role=instructor">{t('hero.instructorCta')}</Link>
               </Button>
-              <Button asChild variant="ghost" size="lg" className="w-full sm:w-auto">
-                <Link href="/contact">{t('hero.contactCta')}</Link>
+              <Button asChild variant="outline" size="lg" className="marketplace-secondary-cta">
+                <Link href="/for-skolor">{t('hero.schoolCta')}</Link>
               </Button>
             </div>
             <div className="grid min-w-0 gap-2 border-t border-border pt-4 text-small text-muted-foreground sm:grid-cols-3 sm:gap-4">

@@ -1773,6 +1773,8 @@
       "title": "Jämför trafikskolor och certifierade instruktörer. Boka med trygghet.",
       "body": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Upptäck efter kategori, stad, språk, publicerat pris och tillgänglighet — kostnadsfritt för elever.",
       "primaryCta": "Hitta lektioner",
+      "instructorCta": "Jag är trafiklärare",
+      "schoolCta": "Jag driver trafikskola",
       "secondaryCta": "För skolor och instruktörer",
       "contactCta": "Starta en konversation",
       "assurance": {
@@ -1857,6 +1859,27 @@
       "faq": "FAQ",
       "privacy": "Integritet",
       "contact": "Kontakta support"
+    }
+  },
+  "forSkolor": {
+    "meta": {
+      "title": "För trafikskolor",
+      "description": "Anmäl intresse för DriveLinkUps skolportal. Organizations är inte live ännu."
+    },
+    "eyebrow": "Kommer snart",
+    "title": "För trafikskolor",
+    "body": "Skolportalen är på väg. Lämna skolans uppgifter så hör vi av oss när Organizations-registrering öppnar.",
+    "form": {
+      "schoolNameLabel": "Skolans namn",
+      "schoolNamePlaceholder": "Er trafikskola",
+      "cityLabel": "Stad",
+      "cityPlaceholder": "Stockholm",
+      "emailLabel": "Jobbmejl",
+      "emailPlaceholder": "du@skola.se",
+      "submit": "Anmäl intresse",
+      "submitting": "Skickar…",
+      "success": "Tack — ni är med på listan. Vi mejlar er när skolportalen öppnar.",
+      "genericError": "Något gick fel. Försök igen."
     }
   },
   "providerEntry": {
