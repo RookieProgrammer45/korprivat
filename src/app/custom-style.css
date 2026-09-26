@@ -810,8 +810,8 @@ form > button[type="submit"] {
   }
 
   .site-nav-sheet {
-    width: min(24rem, calc(100vw - 1rem));
-    max-width: calc(100vw - 1rem);
+    width: min(24rem, calc(100% - 1rem));
+    max-width: calc(100% - 1rem);
   }
 
   .marketplace-preview-card-header,

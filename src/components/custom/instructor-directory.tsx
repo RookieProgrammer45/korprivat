@@ -277,7 +277,7 @@ export function InstructorDirectory({
   }, [location.status, location.coords, replaceUrl]);
 
   return (
-    <section className="directory-shell mx-auto mt-10 flex min-w-0 max-w-3xl flex-col gap-7">
+    <section className="mx-auto mt-10 flex min-w-0 w-full max-w-6xl flex-col gap-7">
       <Suspense>
         <FilterBar
           filters={filters}
@@ -434,8 +434,8 @@ function FilterBar({
           <div className="flex min-w-0 flex-col gap-2">
             <Label htmlFor="min-rate-input">{tr('minRateLabel')}</Label>
             <div className="relative">
-              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-small text-muted-foreground">
-                {tr('rateSuffix')}
+              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
+                {tr('rateSuffixShort')}
               </span>
               <Input
                 id="min-rate-input"
@@ -448,7 +448,7 @@ function FilterBar({
                   const raw = event.target.value;
                   onMinRateChange(raw === '' ? '' : Number(raw));
                 }}
-                className="bg-background pl-24"
+                className="bg-background pl-12"
                 placeholder={tr('minRatePlaceholder')}
                 aria-invalid={hasInvalidRateRange}
                 aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
@@ -459,8 +459,8 @@ function FilterBar({
           <div className="flex min-w-0 flex-col gap-2">
             <Label htmlFor="max-rate-input">{tr('maxRateLabel')}</Label>
             <div className="relative">
-              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-small text-muted-foreground">
-                {tr('rateSuffix')}
+              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
+                {tr('rateSuffixShort')}
               </span>
               <Input
                 id="max-rate-input"
@@ -473,7 +473,7 @@ function FilterBar({
                   const raw = event.target.value;
                   onMaxRateChange(raw === '' ? '' : Number(raw));
                 }}
-                className="bg-background pl-24"
+                className="bg-background pl-12"
                 placeholder={tr('maxRatePlaceholder')}
                 aria-invalid={hasInvalidRateRange}
                 aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}

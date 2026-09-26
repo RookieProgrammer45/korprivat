@@ -39,8 +39,8 @@ export default async function InstructorPage({ params, searchParams }: PageProps
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
   return (
-    <main className="container-page section">
-      <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+    <main className="container-page min-w-0">
+      <div className="mx-auto grid w-full max-w-6xl gap-6 py-section lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
         <div className="grid min-w-0 gap-6">
           <InstructorDetail instructorId={id} />
           <ReviewSection instructorId={id} reviewBookingId={reviewBookingId} />

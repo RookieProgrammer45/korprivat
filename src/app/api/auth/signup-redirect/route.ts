@@ -14,6 +14,8 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { PostLoginRedirect, RoleEnum } from '@/lib/contracts/auth';
+import { SignupRole } from '@/lib/contracts/signup';
+import { dashboardPathFor } from '@/lib/dashboard-guard';
 import { prisma } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
@@ -26,20 +28,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { form: 'Invalid JSON body' } }, { status: 400 });
   }
 
-  // Parse the desired role.
-  const roleParsed = RoleEnum.safeParse((bodyJson as { role?: unknown })?.role);
-  // Whether the parse failed or not, we still need a session to write
-  // through — even if the user picked a bogus role, fall back to STUDENT.
+  // Accept the full marketplace role set (learner / school / handledare).
+  const roleParsed = SignupRole.safeParse((bodyJson as { role?: unknown })?.role);
+  const legacyRole = RoleEnum.safeParse((bodyJson as { role?: unknown })?.role);
   const session = await auth.api.getSession({ headers: req.headers });
   if (!session?.user) {
     return new NextResponse(null, { status: 401 });
   }
 
-  const chosen = roleParsed.success ? roleParsed.data : 'STUDENT';
+  const chosen = roleParsed.success
+    ? roleParsed.data
+    : legacyRole.success
+      ? legacyRole.data
+      : 'STUDENT';
 
-  // Write the chosen role to UserProfile (the after-hook above seeds it as
-  // STUDENT; this flips it on signup so the first dashboard render goes to
-  // the role-correct surface). Idempotent — race-safe via the @unique userId.
   await prisma.userProfile
     .update({
       where: { userId: session.user.id },
@@ -52,7 +54,7 @@ export async function POST(req: Request) {
 
   return NextResponse.json(
     PostLoginRedirect.parse({
-      to: chosen === 'INSTRUCTOR' ? '/dashboard/instructor' : '/dashboard/student',
+      to: dashboardPathFor(chosen),
     }),
   );
 }

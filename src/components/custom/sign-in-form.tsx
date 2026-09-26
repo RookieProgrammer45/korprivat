@@ -49,8 +49,8 @@ export function SignInForm({ next }: { next?: string }) {
       }
       return;
     }
-    // Default landing is the role-correct dashboard (the route guard picks
-    // STUDENT vs INSTRUCTOR server-side). An explicit `?next=…` overrides.
+    // Land on /dashboard so the server role router sends learners, schools,
+    // and handledare to the correct leaf. Explicit ?next=… still overrides.
     router.push(next ?? '/dashboard');
     router.refresh();
   });

@@ -236,6 +236,22 @@ export async function POST(req: Request) {
     );
   }
 
+  const license = await prisma.instructorLicense.findUnique({
+    where: { userId: user.id },
+    select: { status: true },
+  });
+  if (license?.status !== 'VERIFIED') {
+    return NextResponse.json(
+      {
+        errors: {
+          license:
+            'Transportstyrelsen credentials must be verified before publishing a school listing.',
+        },
+      },
+      { status: 403 },
+    );
+  }
+
   let bodyJson: unknown;
   try {
     bodyJson = await req.json();

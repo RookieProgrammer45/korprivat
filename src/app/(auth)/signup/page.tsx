@@ -33,7 +33,7 @@ export default async function SignupPage({
 
   return (
     <main className="auth-shell min-h-dvh flex items-center justify-center px-gutter py-section bg-[var(--background)]">
-      <Card className="surface-panel relative w-full max-w-md border border-border bg-card shadow-sm lg:max-w-5xl">
+      <Card className="surface-panel relative w-full max-w-md border border-border bg-card shadow-sm lg:max-w-3xl">
         <CardHeader className="auth-card-header text-center pb-2">
           <div className="mx-auto mb-3 flex items-center justify-end">
             <LocaleSwitcher />
@@ -41,7 +41,7 @@ export default async function SignupPage({
           <CardTitle className="text-h4">{t('title')}</CardTitle>
           <CardDescription>{t('subtitle')}</CardDescription>
         </CardHeader>
-        <CardContent className="pt-4">
+        <CardContent className="mx-auto w-full max-w-md pt-4">
           <SignUpForm next={next} />
           <p className="mt-4 text-center text-small text-muted-foreground">
             {t('switchToSigninLead')}{' '}

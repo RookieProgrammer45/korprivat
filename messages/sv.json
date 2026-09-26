@@ -360,6 +360,7 @@
     "weekday": "Vardagar",
     "weekend": "Helger",
     "rateSuffix": "SEK / timme",
+    "rateSuffixShort": "kr",
     "rateRangeError": "Lägsta priset måste vara mindre än eller lika med det högsta priset.",
     "clearFilters": "Rensa filter",
     "resultCount": "{count, plural, one {# trafikskola hittades} other {# trafikskolor hittades}}",

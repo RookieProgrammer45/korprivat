@@ -20,8 +20,8 @@ export function PublicDirectoryPage({ city, cityName }: { city?: CityKey; cityNa
   const subtitle = t(`${prefix}.subtitle`);
 
   return (
-    <main className="directory-shell container-page section min-h-[calc(100dvh-3.5rem)]">
-      <header className="mx-auto flex max-w-3xl flex-col gap-3">
+    <main className="directory-shell container-page min-h-[calc(100dvh-3.5rem)] min-w-0">
+      <header className="mx-auto flex w-full max-w-6xl flex-col gap-3">
         <p className="text-eyebrow">{t(`${prefix}.eyebrow`)}</p>
         <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
           {title}

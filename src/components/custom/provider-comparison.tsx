@@ -40,8 +40,8 @@ export function ProviderComparison({
           {t('clear')}
         </Button>
       </CardHeader>
-      <CardContent className="overflow-x-auto p-4 pt-0 sm:p-6 sm:pt-0">
-        <div className="grid min-w-[42rem] gap-3 md:grid-cols-3">
+      <CardContent className="min-w-0 overflow-x-auto p-4 pt-0 sm:p-6 sm:pt-0">
+        <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {providers.map((provider) => (
             <article
               key={provider.id}

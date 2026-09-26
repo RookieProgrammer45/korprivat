@@ -207,6 +207,26 @@ export function signedUpWelcomeEmail(input: {
       text: avatar ? appendImageUrl(baseText, avatar) : baseText,
     };
   }
+  if (role === 'HANDLEDARE') {
+    const baseBody = [
+      `Your handledare guidance account is live. This path is for Swedish private-practice guidance — it is not an authorized school listing and cannot publish bookable marketplace supply.`,
+      `Review the handledare terms in your dashboard, then use the guidance surfaces. If you later earn Transportstyrelsen teaching credentials, you can request an upgrade to a school listing.`,
+      avatar ? `Your profile photo is set.` : null,
+    ].filter((line): line is string => line !== null);
+    const { html: baseHtml, text: baseText } = renderEmail({
+      heading,
+      body: baseBody,
+      cta: { label: 'Open your handledare dashboard', url: dashboardUrl },
+      footer: 'DriveLinkUp · launching in Sweden',
+    });
+    return {
+      subject: avatar
+        ? 'Your profile is set up — welcome to DriveLinkUp'
+        : 'Welcome to DriveLinkUp',
+      html: avatar ? injectAvatar(baseHtml, avatar) : baseHtml,
+      text: avatar ? appendImageUrl(baseText, avatar) : baseText,
+    };
+  }
   const baseBody = [
     `Your learner account is live. Tell us your licence goal, preferred language, neighbourhood, schedule, and budget so you can compare authorized schools nearby.`,
     `You can browse the pilot cohort right now, or wait for the launch email with the full marketplace.`,

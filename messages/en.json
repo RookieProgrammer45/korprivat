@@ -360,6 +360,7 @@
     "weekday": "Weekdays",
     "weekend": "Weekends",
     "rateSuffix": "SEK / hour",
+    "rateSuffixShort": "kr",
     "rateRangeError": "The minimum price must be less than or equal to the maximum price.",
     "clearFilters": "Clear filters",
     "resultCount": "{count, plural, one {# school found} other {# schools found}}",

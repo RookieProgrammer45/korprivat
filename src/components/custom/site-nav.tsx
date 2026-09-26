@@ -292,6 +292,12 @@ export function SiteNav() {
 
         {/* Right cluster: ml-auto pushes it right at every breakpoint */}
         <div className="site-nav-actions ml-auto flex min-w-0 items-center gap-1">
+          {/* Compact Get started on small screens so signup is reachable without the drawer. */}
+          {secondary.some((item) => item.labelKey === 'nav.getStarted') ? (
+            <Button asChild variant="default" size="sm" className="site-nav-cta md:hidden">
+              <Link href="/signup">{tNav('nav.getStarted')}</Link>
+            </Button>
+          ) : null}
           {/* Desktop secondary buttons */}
           <div className="site-nav-secondary hidden items-center gap-1 md:flex">
             {secondary.map((item) => (
@@ -395,7 +401,7 @@ export function SiteNav() {
                         <Button
                           key={item.href}
                           asChild
-                          variant="secondary"
+                          variant={item.labelKey === 'nav.getStarted' ? 'default' : 'secondary'}
                           className="w-full justify-start"
                         >
                           <Link
