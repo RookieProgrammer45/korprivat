@@ -134,7 +134,7 @@ export function ConsentBanner() {
 
   return (
     <div
-      className="pointer-events-auto fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background px-4 py-3 shadow-lg"
+      className="consent-banner pointer-events-auto fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background px-4 py-3 shadow-lg"
       role="dialog"
       aria-label={t('intro')}
     >

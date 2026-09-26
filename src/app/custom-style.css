@@ -148,11 +148,13 @@ html.dark .marketplace-hero {
 }
 
 .marketplace-hero-title {
-  max-width: 10ch;
-  font-size: clamp(3.45rem, 12vw, 7.25rem);
-  line-height: 0.94;
-  letter-spacing: -0.075em;
+  max-width: 12ch;
+  font-size: clamp(2.35rem, 7.2vw, 7.25rem);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
   font-weight: 800;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .marketplace-hero-card {
@@ -749,8 +751,14 @@ form > button[type="submit"] {
   }
 
   .chatbot-fab {
-    bottom: 8.5rem;
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
     right: 1rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  body:has(.consent-banner) .chatbot-fab {
+    bottom: max(8.5rem, calc(env(safe-area-inset-bottom, 0px) + 8rem));
   }
 
   .dl-action-group {
@@ -764,19 +772,28 @@ form > button[type="submit"] {
   }
 
   .marketplace-hero-title {
-    max-width: 11ch;
-    font-size: clamp(2.9rem, 13vw, 4.5rem);
-    line-height: 0.98;
-    letter-spacing: -0.065em;
+    max-width: none;
+    width: 100%;
+    font-size: clamp(1.85rem, 8.4vw, 2.45rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
   }
 
   .marketplace-hero-grid {
-    gap: 2.5rem;
-    padding-block: 3.5rem;
+    gap: 2rem;
+    padding-block: 2.5rem;
   }
 
   .marketplace-hero-copy {
-    gap: 1.25rem;
+    gap: 1.1rem;
+  }
+
+  .marketplace-hero-actions {
+    width: 100%;
+  }
+
+  .marketplace-hero-actions > * {
+    width: 100%;
   }
 
   .marketplace-quick-links {
@@ -792,17 +809,19 @@ form > button[type="submit"] {
   }
 
   .site-header nav {
-    min-height: 3.75rem;
-    gap: 0.5rem;
+    min-height: 3.5rem;
+    gap: 0.35rem;
     padding-inline: 0.75rem;
   }
 
   .site-header-wordmark {
-    max-width: clamp(7rem, 36vw, 8.75rem);
+    max-width: clamp(6.5rem, 34vw, 8rem);
+    height: 1.35rem;
   }
 
   .site-nav-actions {
     gap: 0.125rem;
+    flex-shrink: 0;
   }
 
   .site-nav-actions > * {
@@ -812,6 +831,36 @@ form > button[type="submit"] {
   .site-nav-sheet {
     width: min(24rem, calc(100% - 1rem));
     max-width: calc(100% - 1rem);
+  }
+
+  .directory-shell > header h1,
+  .text-h1 {
+    font-size: clamp(1.65rem, 7.5vw, 2.1rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  .text-display {
+    font-size: clamp(1.85rem, 8vw, 2.35rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .text-body-lg {
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .container-page,
+  .section,
+  .section-lg {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  html,
+  body {
+    overflow-x: clip;
   }
 
   .marketplace-preview-card-header,
@@ -853,7 +902,9 @@ form > button[type="submit"] {
   }
 
   .instructor-detail-card h1 {
-    font-size: clamp(2.25rem, 11vw, 3.052rem);
+    font-size: clamp(1.75rem, 8vw, 2.35rem);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
   }
 
   .instructor-detail-card section,

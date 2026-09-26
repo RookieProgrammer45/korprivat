@@ -5,5 +5,7 @@ import type { Viewport } from 'next';
 import { brandVisual } from '@/lib/brand';
 
 export const viewportConfig: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
   themeColor: brandVisual.themeColor,
 };

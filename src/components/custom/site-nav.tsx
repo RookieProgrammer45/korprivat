@@ -291,14 +291,8 @@ export function SiteNav() {
         </div>
 
         {/* Right cluster: ml-auto pushes it right at every breakpoint */}
-        <div className="site-nav-actions ml-auto flex min-w-0 items-center gap-1">
-          {/* Compact Get started on small screens so signup is reachable without the drawer. */}
-          {secondary.some((item) => item.labelKey === 'nav.getStarted') ? (
-            <Button asChild variant="default" size="sm" className="site-nav-cta md:hidden">
-              <Link href="/signup">{tNav('nav.getStarted')}</Link>
-            </Button>
-          ) : null}
-          {/* Desktop secondary buttons */}
+        <div className="site-nav-actions ml-auto flex min-w-0 items-center gap-0.5 sm:gap-1">
+          {/* Desktop secondary buttons — Get started lives in the mobile drawer to keep the bar uncrowded. */}
           <div className="site-nav-secondary hidden items-center gap-1 md:flex">
             {secondary.map((item) => (
               <Button
@@ -316,9 +310,10 @@ export function SiteNav() {
             <AuthNav />
           </div>
 
-          {/* Always visible — language toggle sits immediately left of theme so
-              the two cluster tightly on the right edge of the bar. */}
-          <LanguageToggle />
+          {/* Language lives in the mobile drawer; keep theme on the bar for one-tap access. */}
+          <div className="hidden md:contents">
+            <LanguageToggle />
+          </div>
           <ThemeToggle />
 
           {/* Mobile (below md): burger + drawer — only when there's something to collapse */}
