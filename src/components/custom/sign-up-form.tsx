@@ -1,23 +1,19 @@
 // @polsia:user-owned
 'use client';
 
-// Signup wizard — account creation first, photo when required for schools.
+// Signup wizard — account creation first, then role-specific onboarding.
 //
-// Step 1 — Account: name / email / password / role picker (Learner / School or
-//   certified instructor / Handledare guidance). On submit calls better-auth's
-//   `signUp.email` — a session is now established. Flow branches by role:
-//     STUDENT   → complete signup → dashboard (?signup=1). Photo optional later.
-//     HANDLEDARE → clickwrap step, then complete → handledare dashboard.
-//     INSTRUCTOR → photo confirmation, then licence upload, then complete.
-// Step 2 — Role-specific onboarding:
-//   HANDLEDARE → clickwrap acceptance, then dashboard redirect.
-//   INSTRUCTOR → photo + Transportstyrelsen credential upload + attestation.
+// Step 1 — Account: name / email / password / path picker
+//   LEARNER    → date of birth (≥16) + optional phone/city → dashboard
+//   SCHOOL     → school name, org number, city → photo → Transportstyrelsen licence
+//   INSTRUCTOR → licence held ≥5 years + city → photo → teaching credentials
+// Handledare clickwrap remains only for resumable legacy sessions.
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -35,11 +31,22 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { apiFetch } from '@/lib/api-client';
 import { signUp, useSession } from '@/lib/auth-client';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/auth';
-import { HANDLEDARE_TERMS_VERSION, type MarketplaceRole } from '@/lib/contracts/clickwrap';
+import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { LicenseUploadResponse } from '@/lib/contracts/instructor-license';
-import { SignupCompleteResponse, SignupState } from '@/lib/contracts/signup';
+import {
+  SignupCompleteResponse,
+  SignupPath,
+  SignupState,
+  type SignupPath as SignupPathType,
+} from '@/lib/contracts/signup';
 import { SignupStartResponse } from '@/lib/contracts/signup-start';
 import { applyServerErrors } from '@/lib/forms';
+import {
+  isInstructorLicenseTenureEligible,
+  isLearnerAgeEligible,
+  MIN_INSTRUCTOR_LICENSE_YEARS,
+  MIN_LEARNER_AGE_YEARS,
+} from '@/lib/signup-eligibility';
 import { ClickwrapStep } from './clickwrap-step';
 import { PhotoPromptStep } from './photo-prompt-step';
 
@@ -49,7 +56,13 @@ type AccountValues = {
   name: string;
   email: string;
   password: string;
-  role: MarketplaceRole;
+  path: SignupPathType;
+  dateOfBirth: string;
+  phone: string;
+  city: string;
+  schoolName: string;
+  organizationNumber: string;
+  licenseHeldYears: string;
   consent: boolean;
 };
 
@@ -59,6 +72,10 @@ const ACCEPT_MIME = 'image/*,application/pdf';
 
 function withSignupFlag(path: string): string {
   return `${path}${path.includes('?') ? '&' : '?'}signup=1`;
+}
+
+function isSignupPath(value: string): value is SignupPathType {
+  return SignupPath.safeParse(value).success;
 }
 
 export function SignUpForm({ next }: { next?: string }) {
@@ -75,17 +92,26 @@ export function SignUpForm({ next }: { next?: string }) {
   const [submittingLicense, setSubmittingLicense] = useState(false);
   const [submittingClickwrap, setSubmittingClickwrap] = useState(false);
   const [stagedPhotoUrl, setStagedPhotoUrl] = useState<string | null>(null);
+  const [signupPath, setSignupPath] = useState<SignupPathType | null>('LEARNER');
 
   const form = useForm<AccountValues>({
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      role: 'STUDENT',
+      path: 'LEARNER',
+      dateOfBirth: '',
+      phone: '',
+      city: '',
+      schoolName: '',
+      organizationNumber: '',
+      licenseHeldYears: '',
       consent: false,
     },
     mode: 'onTouched',
   });
+
+  const selectedPath = useWatch({ control: form.control, name: 'path' });
 
   const completeSignup = useCallback(async () => {
     try {
@@ -103,7 +129,10 @@ export function SignUpForm({ next }: { next?: string }) {
 
   const applySignupState = useCallback(
     (state: ReturnType<typeof SignupState.parse>) => {
-      form.setValue('role', state.role, { shouldValidate: true });
+      if (state.path) {
+        setSignupPath(state.path);
+        form.setValue('path', state.path, { shouldValidate: true });
+      }
       setStagedPhotoUrl(state.photo.status === 'STAGED' ? state.photo.imageUrl : null);
       if (state.nextPrerequisite === 'photo') setStep('photo');
       else if (state.nextPrerequisite === 'license') setStep('license');
@@ -126,8 +155,9 @@ export function SignUpForm({ next }: { next?: string }) {
     };
   }, [session?.user, applySignupState]);
 
-  const handleRoleChange = (role: MarketplaceRole) => {
-    form.setValue('role', role, { shouldDirty: true, shouldValidate: true });
+  const handlePathChange = (path: SignupPathType) => {
+    form.setValue('path', path, { shouldDirty: true, shouldValidate: true });
+    setSignupPath(path);
     setLicenseFile(null);
     setAttested(false);
     setLicenseConsent(false);
@@ -136,6 +166,43 @@ export function SignUpForm({ next }: { next?: string }) {
 
   const submitAccount = form.handleSubmit(
     async (values) => {
+      if (values.path === 'LEARNER') {
+        const dob = new Date(values.dateOfBirth);
+        if (!values.dateOfBirth || Number.isNaN(dob.getTime()) || !isLearnerAgeEligible(dob)) {
+          form.setError('dateOfBirth', {
+            message: t('fields.errors.learnerAge', { age: MIN_LEARNER_AGE_YEARS }),
+          });
+          return;
+        }
+      }
+      if (values.path === 'SCHOOL') {
+        if (!values.schoolName.trim()) {
+          form.setError('schoolName', { message: t('fields.errors.schoolName') });
+          return;
+        }
+        if (!values.organizationNumber.trim()) {
+          form.setError('organizationNumber', { message: t('fields.errors.organizationNumber') });
+          return;
+        }
+        if (!values.city.trim()) {
+          form.setError('city', { message: t('fields.errors.city') });
+          return;
+        }
+      }
+      if (values.path === 'INSTRUCTOR') {
+        const years = Number(values.licenseHeldYears);
+        if (!isInstructorLicenseTenureEligible(years)) {
+          form.setError('licenseHeldYears', {
+            message: t('fields.errors.licenseYears', { years: MIN_INSTRUCTOR_LICENSE_YEARS }),
+          });
+          return;
+        }
+        if (!values.city.trim()) {
+          form.setError('city', { message: t('fields.errors.city') });
+          return;
+        }
+      }
+
       const { error } = await signUp.email({
         name: values.name.trim(),
         email: values.email.trim(),
@@ -143,16 +210,10 @@ export function SignUpForm({ next }: { next?: string }) {
       });
       if (error) {
         const applied = applyServerErrors(error, form.setError);
-        if (!applied) {
-          toast.error(t('errors.generic'));
-        }
+        if (!applied) toast.error(t('errors.generic'));
         return;
       }
-      // Audit-row consent stamp for the GDPR privacy policy. We post this
-      // AFTER the auth signup resolves because the server route stamps the
-      // userId-less audit row with the visitor's subjectHash; once a session
-      // is set, subsequent consent stamps will carry the userId. Best-effort:
-      // a banner failure should not block the wizard's progress.
+
       try {
         await apiFetch('/api/consent', {
           method: 'POST',
@@ -163,12 +224,22 @@ export function SignUpForm({ next }: { next?: string }) {
           }),
         });
       } catch {
-        // swallow — banner will reappear on next visit if cookie didn't stick.
+        // best-effort
       }
+
       try {
         await apiFetch('/api/signup/start', {
           method: 'POST',
-          body: JSON.stringify({ role: values.role }),
+          body: JSON.stringify({
+            path: values.path,
+            dateOfBirth: values.dateOfBirth || undefined,
+            phone: values.phone.trim() || undefined,
+            city: values.city.trim() || undefined,
+            schoolName: values.schoolName.trim() || undefined,
+            organizationNumber: values.organizationNumber.trim() || undefined,
+            licenseHeldYears:
+              values.licenseHeldYears === '' ? undefined : Number(values.licenseHeldYears),
+          }),
           schema: SignupStartResponse,
         });
         const state = await apiFetch('/api/signup/state', { schema: SignupState });
@@ -233,8 +304,6 @@ export function SignUpForm({ next }: { next?: string }) {
     }
     setSubmittingLicense(true);
     try {
-      // Stamp the GDPR consent decision tied to the licence-processing
-      // surface (Art. 6(1)(a) record of consent) BEFORE the licence upload.
       try {
         await apiFetch('/api/consent', {
           method: 'POST',
@@ -245,7 +314,7 @@ export function SignUpForm({ next }: { next?: string }) {
           }),
         });
       } catch {
-        // best-effort — don't block the licence upload on consent api hiccup
+        // best-effort
       }
       const fd = new FormData();
       fd.append('license', licenseFile, licenseFile.name || 'licence');
@@ -257,7 +326,6 @@ export function SignUpForm({ next }: { next?: string }) {
       return;
     }
     setSubmittingLicense(false);
-
     await completeSignup();
   };
 
@@ -272,6 +340,8 @@ export function SignUpForm({ next }: { next?: string }) {
     return LicenseUploadResponse.parse(body);
   }
 
+  const licenseCopyKey = signupPath === 'SCHOOL' ? 'school' : 'instructor';
+
   if (step === 'photo') {
     return (
       <PhotoPromptStep
@@ -282,9 +352,9 @@ export function SignUpForm({ next }: { next?: string }) {
         onConfirmed={() => void advanceAfterPhoto()}
         onBack={() => setStep('account')}
         copy={{
-          eyebrow: t('pictureUpload.stepEyebrow'),
-          title: t('pictureUpload.stepTitle'),
-          lead: t('pictureUpload.stepLead'),
+          eyebrow: t(`segments.${licenseCopyKey}.pictureUpload.stepEyebrow`),
+          title: t(`segments.${licenseCopyKey}.pictureUpload.stepTitle`),
+          lead: t(`segments.${licenseCopyKey}.pictureUpload.stepLead`),
           placeholderAria: t('pictureUpload.placeholderAria'),
           chooseButton: t('pictureUpload.chooseButton'),
           dragHint: t('pictureUpload.dragHint'),
@@ -294,7 +364,7 @@ export function SignUpForm({ next }: { next?: string }) {
           confirming: t('pictureUpload.confirming'),
           confirmationLabel: t('pictureUpload.confirmationLabel'),
           staged: t('pictureUpload.staged'),
-          whyWeAsk: t('pictureUpload.whyWeAsk'),
+          whyWeAsk: t(`segments.${licenseCopyKey}.pictureUpload.whyWeAsk`),
           errors: {
             pictureRequired: t('pictureUpload.errors.pictureRequired'),
             pictureWrongType: t('pictureUpload.errors.pictureWrongType'),
@@ -311,15 +381,21 @@ export function SignUpForm({ next }: { next?: string }) {
     return (
       <div className="grid gap-4">
         <div className="grid gap-1">
-          <p className="text-eyebrow text-muted-foreground">{t('licenseUpload.stepEyebrow')}</p>
-          <p className="text-h4 text-foreground">{t('licenseUpload.stepTitle')}</p>
-          <p className="text-body text-muted-foreground">{t('licenseUpload.stepLead')}</p>
+          <p className="text-eyebrow text-muted-foreground">
+            {t(`segments.${licenseCopyKey}.licenseUpload.stepEyebrow`)}
+          </p>
+          <p className="text-h4 text-foreground">
+            {t(`segments.${licenseCopyKey}.licenseUpload.stepTitle`)}
+          </p>
+          <p className="text-body text-muted-foreground">
+            {t(`segments.${licenseCopyKey}.licenseUpload.stepLead`)}
+          </p>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="signup-license">{t('licenseUpload.fields.licenseLabel')}</Label>
-          <p className="text-[0.8rem] text-muted-foreground">
-            {t('licenseUpload.fields.licenseHelp')}
-          </p>
+          <Label htmlFor="signup-license">
+            {t(`segments.${licenseCopyKey}.licenseUpload.fields.licenseLabel`)}
+          </Label>
+          <p className="text-[0.8rem] text-muted-foreground">{t('licenseUpload.fields.licenseHelp')}</p>
           <Input
             id="signup-license"
             type="file"
@@ -351,6 +427,7 @@ export function SignUpForm({ next }: { next?: string }) {
                 target="_blank"
                 rel="noopener"
                 className="underline-offset-2 hover:underline"
+                onClick={(event) => event.stopPropagation()}
               >
                 {tConsentBanner('privacy')}
               </Link>
@@ -367,10 +444,8 @@ export function SignUpForm({ next }: { next?: string }) {
             onCheckedChange={(checked) => setAttested(checked === true)}
             className="mt-0.5"
           />
-          <span className="flex flex-col">
-            <span className="font-medium text-foreground">
-              {t('licenseUpload.fields.attestationLabel')}
-            </span>
+          <span className="font-medium text-foreground">
+            {t(`segments.${licenseCopyKey}.licenseUpload.fields.attestationLabel`)}
           </span>
         </label>
         <div className="dl-action-group flex-col sm:flex-row sm:justify-between">
@@ -482,102 +557,236 @@ export function SignUpForm({ next }: { next?: string }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
-          name="role"
+          name="path"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t('fields.roleLabel')}</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={(value) => {
-                    if (isMarketplaceRole(value)) handleRoleChange(value);
+                    if (isSignupPath(value)) handlePathChange(value);
                   }}
                   onBlur={field.onBlur}
                   value={field.value}
-                  className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3"
+                  className="grid min-w-0 grid-cols-1 gap-3"
                 >
-                  <div
-                    className={`group relative min-w-0 rounded-md border bg-card transition-colors focus-within:ring-2 focus-within:ring-brand-500/30 ${
-                      field.value === 'STUDENT'
-                        ? 'border-brand-500 bg-brand-100 dark:bg-brand-900'
-                        : 'border-input hover:border-brand-500'
-                    } flex h-full cursor-pointer items-start gap-3 px-3 py-3 text-small`}
-                  >
-                    <RadioGroupItem
-                      id="role-student"
-                      value="STUDENT"
-                      aria-label={`${t('fields.roleStudent')}. ${t('fields.roleStudentDesc')}`}
-                      className="absolute inset-0 z-10 h-full w-full rounded-md border-0 bg-transparent opacity-0 shadow-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand-500/50 [&>span]:hidden"
-                    />
+                  {(
+                    [
+                      ['LEARNER', 'roleLearner', 'roleLearnerDesc'],
+                      ['SCHOOL', 'roleSchool', 'roleSchoolDesc'],
+                      ['INSTRUCTOR', 'roleInstructor', 'roleInstructorDesc'],
+                    ] as const
+                  ).map(([value, labelKey, descKey]) => (
                     <div
-                      aria-hidden="true"
-                      className="pointer-events-none flex min-w-0 flex-1 flex-col gap-1"
+                      key={value}
+                      className={`group relative min-w-0 rounded-md border bg-card transition-colors focus-within:ring-2 focus-within:ring-brand-500/30 ${
+                        field.value === value
+                          ? 'border-brand-500 bg-brand-100 dark:bg-brand-900'
+                          : 'border-input hover:border-brand-500'
+                      } flex h-full cursor-pointer items-start gap-3 px-3 py-3 text-small`}
                     >
-                      <span className="break-words text-pretty font-medium text-foreground">
-                        {t('fields.roleStudent')}
-                      </span>
-                      <span className="break-words text-caption text-muted-foreground [text-wrap:pretty]">
-                        {t('fields.roleStudentDesc')}
-                      </span>
+                      <RadioGroupItem
+                        id={`role-${value.toLowerCase()}`}
+                        value={value}
+                        aria-label={`${t(`fields.${labelKey}`)}. ${t(`fields.${descKey}`)}`}
+                        className="absolute inset-0 z-10 h-full w-full rounded-md border-0 bg-transparent opacity-0 shadow-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand-500/50 [&>span]:hidden"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none flex min-w-0 flex-1 flex-col gap-1"
+                      >
+                        <span className="break-words text-pretty font-medium text-foreground">
+                          {t(`fields.${labelKey}`)}
+                        </span>
+                        <span className="break-words text-caption text-muted-foreground [text-wrap:pretty]">
+                          {t(`fields.${descKey}`)}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    className={`group relative min-w-0 rounded-md border bg-card transition-colors focus-within:ring-2 focus-within:ring-brand-500/30 ${
-                      field.value === 'INSTRUCTOR'
-                        ? 'border-brand-500 bg-brand-100 dark:bg-brand-900'
-                        : 'border-input hover:border-brand-500'
-                    } flex h-full cursor-pointer items-start gap-3 px-3 py-3 text-small`}
-                  >
-                    <RadioGroupItem
-                      id="role-instructor"
-                      value="INSTRUCTOR"
-                      aria-label={`${t('fields.roleInstructor')}. ${t('fields.roleInstructorDesc')}`}
-                      className="absolute inset-0 z-10 h-full w-full rounded-md border-0 bg-transparent opacity-0 shadow-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand-500/50 [&>span]:hidden"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none flex min-w-0 flex-1 flex-col gap-1"
-                    >
-                      <span className="break-words text-pretty font-medium text-foreground">
-                        {t('fields.roleInstructor')}
-                      </span>
-                      <span className="break-words text-caption text-muted-foreground [text-wrap:pretty]">
-                        {t('fields.roleInstructorDesc')}
-                      </span>
-                    </div>
-                  </div>
-                  <div
-                    className={`group relative min-w-0 rounded-md border bg-card transition-colors focus-within:ring-2 focus-within:ring-brand-500/30 ${
-                      field.value === 'HANDLEDARE'
-                        ? 'border-brand-500 bg-brand-100 dark:bg-brand-900'
-                        : 'border-input hover:border-brand-500'
-                    } flex h-full cursor-pointer items-start gap-3 px-3 py-3 text-small`}
-                  >
-                    <RadioGroupItem
-                      id="role-handledare"
-                      value="HANDLEDARE"
-                      aria-label={`${t('fields.roleHandledare')}. ${t('fields.roleHandledareDesc')}`}
-                      className="absolute inset-0 z-10 h-full w-full rounded-md border-0 bg-transparent opacity-0 shadow-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand-500/50 [&>span]:hidden"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none flex min-w-0 flex-1 flex-col gap-1"
-                    >
-                      <span className="break-words text-pretty font-medium text-foreground">
-                        {t('fields.roleHandledare')}
-                      </span>
-                      <span className="break-words text-caption text-muted-foreground [text-wrap:pretty]">
-                        {t('fields.roleHandledareDesc')}
-                      </span>
-                    </div>
-                  </div>
+                  ))}
                 </RadioGroup>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        {selectedPath === 'LEARNER' ? (
+          <div className="grid gap-4 rounded-md border border-border bg-muted/30 p-3">
+            <p className="text-caption font-medium text-muted-foreground">
+              {t('fields.learnerSection')}
+            </p>
+            <FormField
+              control={form.control}
+              name="dateOfBirth"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.dateOfBirthLabel')}</FormLabel>
+                  <FormControl>
+                    <Input type="date" autoComplete="bday" {...field} />
+                  </FormControl>
+                  <p className="text-caption text-muted-foreground">
+                    {t('fields.dateOfBirthHelp', { age: MIN_LEARNER_AGE_YEARS })}
+                  </p>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.phoneLabel')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      autoComplete="tel"
+                      inputMode="tel"
+                      placeholder={t('fields.phonePlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.cityLabel')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="address-level2"
+                      placeholder={t('fields.cityPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        ) : null}
+
+        {selectedPath === 'SCHOOL' ? (
+          <div className="grid gap-4 rounded-md border border-border bg-muted/30 p-3">
+            <p className="text-caption font-medium text-muted-foreground">
+              {t('fields.schoolSection')}
+            </p>
+            <FormField
+              control={form.control}
+              name="schoolName"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.schoolNameLabel')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="organization"
+                      placeholder={t('fields.schoolNamePlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="organizationNumber"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.organizationNumberLabel')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      spellCheck={false}
+                      placeholder={t('fields.organizationNumberPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.cityLabel')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="address-level2"
+                      placeholder={t('fields.cityPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        ) : null}
+
+        {selectedPath === 'INSTRUCTOR' ? (
+          <div className="grid gap-4 rounded-md border border-border bg-muted/30 p-3">
+            <p className="text-caption font-medium text-muted-foreground">
+              {t('fields.instructorSection')}
+            </p>
+            <FormField
+              control={form.control}
+              name="licenseHeldYears"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.licenseHeldYearsLabel')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      inputMode="numeric"
+                      min={MIN_INSTRUCTOR_LICENSE_YEARS}
+                      max={80}
+                      placeholder={t('fields.licenseHeldYearsPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <p className="text-caption text-muted-foreground">
+                    {t('fields.licenseHeldYearsHelp', { years: MIN_INSTRUCTOR_LICENSE_YEARS })}
+                  </p>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('fields.cityLabel')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="address-level2"
+                      placeholder={t('fields.cityPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        ) : null}
+
         <FormField
           control={form.control}
           name="consent"
@@ -623,10 +832,6 @@ export function SignUpForm({ next }: { next?: string }) {
       </form>
     </Form>
   );
-}
-
-function isMarketplaceRole(value: string): value is MarketplaceRole {
-  return value === 'STUDENT' || value === 'INSTRUCTOR' || value === 'HANDLEDARE';
 }
 
 function licenseAccepted(file: File): 'ok' | 'wrongType' | 'tooLarge' {

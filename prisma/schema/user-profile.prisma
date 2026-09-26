@@ -17,12 +17,24 @@ model UserProfile {
   id                 String    @id @default(cuid())
   userId             String    @unique
   role               Role      @default(STUDENT)
+  // Signup path discriminator for role-specific onboarding:
+  // LEARNER | SCHOOL | INSTRUCTOR. Nullable for legacy rows.
+  signupPath         String?
+  dateOfBirth        DateTime?
+  phone              String?
+  city               String?
+  schoolName         String?
+  organizationNumber String?
+  // Years the certified instructor has held a full driving licence. Required
+  // for the INSTRUCTOR signup path (must be > 5).
+  licenseHeldYears   Int?
   welcomeSentAt      DateTime?
   profileCompletedAt DateTime?
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 
   @@index([userId])
+  @@index([signupPath])
   @@map("user_profile")
 }
 

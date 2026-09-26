@@ -733,7 +733,7 @@
     },
     "signUp": {
       "title": "Create your DriveLinkUp account",
-      "subtitle": "DriveLinkUp connects driving schools and certified instructors to learners. Pick your role to get started.",
+      "subtitle": "DriveLinkUp connects driving schools and certified instructors to learners. Choose learner, school, or instructor — we only ask for what that path needs.",
       "submit": "Create account",
       "submitting": "Creating account…",
       "switchToSigninLead": "Already have an account?",
@@ -746,12 +746,35 @@
         "passwordLabel": "Password",
         "passwordPlaceholder": "At least 8 characters…",
         "roleLabel": "I am a",
-        "roleStudent": "Learner",
-        "roleInstructor": "Driving school or certified instructor",
-        "roleHandledare": "Private handledare — guidance only",
-        "roleStudentDesc": "Find and book lessons from schools and certified instructors.",
-        "roleInstructorDesc": "Publish prices and availability so learners can compare and book your lessons.",
-        "roleHandledareDesc": "Private supervised practice (övningskörning) only — not a bookable marketplace listing."
+        "roleLearner": "Learner",
+        "roleSchool": "Driving school",
+        "roleInstructor": "Trained and experienced instructor",
+        "roleLearnerDesc": "Find and book lessons. Minimum age 16.",
+        "roleSchoolDesc": "List your authorized school with prices and availability.",
+        "roleInstructorDesc": "Teach as a certified instructor. You must have held a licence for at least 5 years.",
+        "learnerSection": "Learner details",
+        "schoolSection": "School details",
+        "instructorSection": "Instructor details",
+        "dateOfBirthLabel": "Date of birth",
+        "dateOfBirthHelp": "Learners must be at least {age} years old.",
+        "phoneLabel": "Phone (optional)",
+        "phonePlaceholder": "+46 70 123 45 67…",
+        "cityLabel": "City",
+        "cityPlaceholder": "Stockholm…",
+        "schoolNameLabel": "School name",
+        "schoolNamePlaceholder": "Stockholm Trafikskola…",
+        "organizationNumberLabel": "Organisation number",
+        "organizationNumberPlaceholder": "556000-0000…",
+        "licenseHeldYearsLabel": "Years with a full driving licence",
+        "licenseHeldYearsPlaceholder": "5…",
+        "licenseHeldYearsHelp": "Instructors must have held a licence for at least {years} years.",
+        "errors": {
+          "learnerAge": "The youngest learner age is {age}.",
+          "schoolName": "Enter the driving school name.",
+          "organizationNumber": "Enter the school organisation number.",
+          "city": "Enter a city.",
+          "licenseYears": "Instructors must have held a licence for at least {years} years."
+        }
       },
       "clickwrap": {
         "stepEyebrow": "Handledare terms",
@@ -898,6 +921,40 @@
               "licenseTooLarge": "That file is too large — pick one under the size limit.",
               "licenseUploadFailed": "We couldn't upload your licence. Try again.",
               "attestationRequired": "Tick the attestation box to confirm this is your licence."
+            }
+          }
+        },
+        "school": {
+          "pictureUpload": {
+            "stepEyebrow": "School photo",
+            "stepTitle": "Add a photo for your school listing",
+            "stepLead": "Learners use this image to recognise your school before they book.",
+            "whyWeAsk": "We show this photo on your school listing."
+          },
+          "licenseUpload": {
+            "stepEyebrow": "School credentials",
+            "stepTitle": "Upload your Transportstyrelsen authorisation",
+            "stepLead": "We verify school credentials before the listing goes live. Upload a photo or PDF of the authorisation.",
+            "fields": {
+              "licenseLabel": "School authorisation file",
+              "attestationLabel": "I confirm this authorisation belongs to the school and we are allowed to teach with it."
+            }
+          }
+        },
+        "instructor": {
+          "pictureUpload": {
+            "stepEyebrow": "Instructor photo",
+            "stepTitle": "Add a photo for your instructor profile",
+            "stepLead": "Learners use this image to recognise you before they book.",
+            "whyWeAsk": "We show this photo on your instructor listing."
+          },
+          "licenseUpload": {
+            "stepEyebrow": "Teaching credentials",
+            "stepTitle": "Upload your teaching licence",
+            "stepLead": "We verify Transportstyrelsen teaching credentials before your listing goes live. You must have held a driving licence for at least 5 years.",
+            "fields": {
+              "licenseLabel": "Teaching licence file",
+              "attestationLabel": "I confirm this licence is mine, I am authorised to teach with it, and I have held a full driving licence for at least 5 years."
             }
           }
         }
@@ -1766,7 +1823,7 @@
         }
       }
     },
-      "entry": {
+    "entry": {
       "eyebrow": "Ready for the next step?",
       "title": "Start from the side of the road you are on.",
       "body": "Learners can browse and book. Driving schools and certified instructors can publish price and availability through onboarding.",
@@ -2193,42 +2250,78 @@
         "name": "Skåne",
         "description": "City streets, coastal roads, and flexible lesson options. Start with Malmö or compare schools in another Skåne city.",
         "cities": {
-          "malmo": { "label": "Malmö" },
-          "helsingborg": { "label": "Helsingborg" },
-          "lund": { "label": "Lund" },
-          "kristianstad": { "label": "Kristianstad" },
-          "ystad": { "label": "Ystad" }
+          "malmo": {
+            "label": "Malmö"
+          },
+          "helsingborg": {
+            "label": "Helsingborg"
+          },
+          "lund": {
+            "label": "Lund"
+          },
+          "kristianstad": {
+            "label": "Kristianstad"
+          },
+          "ystad": {
+            "label": "Ystad"
+          }
         }
       },
       "halland": {
         "name": "Halland",
         "description": "Plan lessons across coast, country roads, and growing towns. See which authorized schools are close to your routine.",
         "cities": {
-          "halmstad": { "label": "Halmstad" },
-          "varberg": { "label": "Varberg" },
-          "falkenberg": { "label": "Falkenberg" },
-          "kungsbacka": { "label": "Kungsbacka" }
+          "halmstad": {
+            "label": "Halmstad"
+          },
+          "varberg": {
+            "label": "Varberg"
+          },
+          "falkenberg": {
+            "label": "Falkenberg"
+          },
+          "kungsbacka": {
+            "label": "Kungsbacka"
+          }
         }
       },
       "blekinge": {
         "name": "Blekinge",
         "description": "Build a local practice-driving plan across Blekinge's towns and coastline, with useful details visible before you book.",
         "cities": {
-          "karlskrona": { "label": "Karlskrona" },
-          "karlshamn": { "label": "Karlshamn" },
-          "ronneby": { "label": "Ronneby" },
-          "solvesborg": { "label": "Sölvesborg" }
+          "karlskrona": {
+            "label": "Karlskrona"
+          },
+          "karlshamn": {
+            "label": "Karlshamn"
+          },
+          "ronneby": {
+            "label": "Ronneby"
+          },
+          "solvesborg": {
+            "label": "Sölvesborg"
+          }
         }
       },
       "smaland": {
         "name": "Småland",
         "description": "From Jönköping to Kalmar and Växjö: choose a city, compare local options, and build confidence behind the wheel one step at a time.",
         "cities": {
-          "jonkoping": { "label": "Jönköping" },
-          "vaxjo": { "label": "Växjö" },
-          "kalmar": { "label": "Kalmar" },
-          "varnamo": { "label": "Värnamo" },
-          "ljungby": { "label": "Ljungby" }
+          "jonkoping": {
+            "label": "Jönköping"
+          },
+          "vaxjo": {
+            "label": "Växjö"
+          },
+          "kalmar": {
+            "label": "Kalmar"
+          },
+          "varnamo": {
+            "label": "Värnamo"
+          },
+          "ljungby": {
+            "label": "Ljungby"
+          }
         }
       }
     },
@@ -2294,39 +2387,69 @@
         "name": "Västra Götaland",
         "description": "Balance city traffic, ring roads, and open country routes. Start in Göteborg or compare schools across Borås, Trollhättan, and Skövde for a practical local route.",
         "cities": {
-          "goteborg": { "label": "Göteborg" },
-          "boras": { "label": "Borås" },
-          "trollhattan": { "label": "Trollhättan" },
-          "skovde": { "label": "Skövde" }
+          "goteborg": {
+            "label": "Göteborg"
+          },
+          "boras": {
+            "label": "Borås"
+          },
+          "trollhattan": {
+            "label": "Trollhättan"
+          },
+          "skovde": {
+            "label": "Skövde"
+          }
         }
       },
       "varmland": {
         "name": "Värmland",
         "description": "Build steady skills across Karlstad streets, smaller towns, and longer country-road drives. Pick the place that makes regular practice realistic for you.",
         "cities": {
-          "karlstad": { "label": "Karlstad" },
-          "arvika": { "label": "Arvika" },
-          "kristinehamn": { "label": "Kristinehamn" }
+          "karlstad": {
+            "label": "Karlstad"
+          },
+          "arvika": {
+            "label": "Arvika"
+          },
+          "kristinehamn": {
+            "label": "Kristinehamn"
+          }
         }
       },
       "gavleborg-vasternorrland": {
         "name": "Gävleborg & Västernorrland",
         "description": "Prepare for a mix of city traffic, coast, and longer distances. Find local options in Gävle, Sundsvall, Hudiksvall, or Örnsköldsvik and plan practice around your real journeys.",
         "cities": {
-          "gavle": { "label": "Gävle" },
-          "sundsvall": { "label": "Sundsvall" },
-          "hudiksvall": { "label": "Hudiksvall" },
-          "ornskoldsvik": { "label": "Örnsköldsvik" }
+          "gavle": {
+            "label": "Gävle"
+          },
+          "sundsvall": {
+            "label": "Sundsvall"
+          },
+          "hudiksvall": {
+            "label": "Hudiksvall"
+          },
+          "ornskoldsvik": {
+            "label": "Örnsköldsvik"
+          }
         }
       },
       "vasterbotten-norrbotten": {
         "name": "Västerbotten & Norrbotten",
         "description": "Give yourself room to learn in changing light, weather, and road conditions. Compare schools in Umeå, Skellefteå, Luleå, and Kiruna for a practical local plan.",
         "cities": {
-          "umea": { "label": "Umeå" },
-          "skelleftea": { "label": "Skellefteå" },
-          "lulea": { "label": "Luleå" },
-          "kiruna": { "label": "Kiruna" }
+          "umea": {
+            "label": "Umeå"
+          },
+          "skelleftea": {
+            "label": "Skellefteå"
+          },
+          "lulea": {
+            "label": "Luleå"
+          },
+          "kiruna": {
+            "label": "Kiruna"
+          }
         }
       }
     },
@@ -2374,7 +2497,10 @@
       "title": "First-market booking and commission rules (Sweden)",
       "body": "A booking is attributable when the learner completes it through DriveLinkUp. Commission is 10% of that attributable booking value and is due only after completed service—not for browsing, registration, or an uncompleted enquiry. Cancellation, refund and no-show outcomes follow the school’s published policy and the booking record. Learners never pay a separate DriveLinkUp fee; the school’s published price stays the learner total. Settlement timing and payout responsibilities are confirmed per participating school before live transactions are promoted."
     },
-    "cta": { "learner": "Compare schools", "school": "List your school" }
+    "cta": {
+      "learner": "Compare schools",
+      "school": "List your school"
+    }
   },
   "handledareInfo": {
     "meta": {
@@ -2392,6 +2518,9 @@
       "title": "Authorized driving schools",
       "body": "For professional lessons, use the marketplace to compare authorized-school listings, published prices and availability. Learner discovery, comparison and booking have no separate DriveLinkUp fee."
     },
-    "cta": { "schools": "Compare driving schools", "faq": "Read the FAQ" }
+    "cta": {
+      "schools": "Compare driving schools",
+      "faq": "Read the FAQ"
+    }
   }
 }

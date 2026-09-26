@@ -3,11 +3,16 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { photoState } from '@/lib/business/photo-verification';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
-import { SignupState } from '@/lib/contracts/signup';
+import { SignupPath, SignupState } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
+
+function parseSignupPath(value: string | null | undefined) {
+  const parsed = SignupPath.safeParse(value);
+  return parsed.success ? parsed.data : null;
+}
 
 export async function GET(req: Request) {
   let user: Awaited<ReturnType<typeof requireAuth>>;
@@ -18,10 +23,11 @@ export async function GET(req: Request) {
   }
   const profile = await prisma.userProfile.findUnique({
     where: { userId: user.id },
-    select: { role: true },
+    select: { role: true, signupPath: true },
   });
   const role =
     profile?.role === 'INSTRUCTOR' || profile?.role === 'HANDLEDARE' ? profile.role : 'STUDENT';
+  const path = parseSignupPath(profile?.signupPath);
   const photo = await photoState(user.id);
   const [license, clickwrap] = await Promise.all([
     role === 'INSTRUCTOR'
@@ -42,5 +48,5 @@ export async function GET(req: Request) {
         : role === 'HANDLEDARE' && clickwrap?.termsVersion !== HANDLEDARE_TERMS_VERSION
           ? 'clickwrap'
           : 'complete';
-  return NextResponse.json(SignupState.parse({ role, photo, nextPrerequisite }));
+  return NextResponse.json(SignupState.parse({ role, path, photo, nextPrerequisite }));
 }

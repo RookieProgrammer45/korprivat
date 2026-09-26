@@ -290,8 +290,14 @@ export async function POST(req: Request) {
   // new row — the fresh row still gets created (marketplace behaviour
   // preserved) but only the first row per user receives the FK.
   const userId = user.id;
-  // Phase 1 supply is authorised schools only — never stamp HANDLEDARE here.
-  const requestedRole = 'INSTRUCTOR' as const;
+  const profilePath = await prisma.userProfile.findUnique({
+    where: { userId },
+    select: { signupPath: true, city: true, schoolName: true },
+  });
+  // Schools and certified instructors both use UserProfile.role=INSTRUCTOR.
+  // signupPath decides the listing discriminator (SCHOOL vs INSTRUCTOR).
+  const requestedRole =
+    profilePath?.signupPath === 'SCHOOL' ? ('SCHOOL' as const) : ('INSTRUCTOR' as const);
   const existing = await prisma.instructor.findMany({
     where: { userId },
   });
@@ -302,8 +308,7 @@ export async function POST(req: Request) {
     );
   }
   if (existing[0]) {
-    const existingRole = existing[0].providerRole === 'HANDLEDARE' ? 'HANDLEDARE' : 'INSTRUCTOR';
-    if (existingRole !== requestedRole) {
+    if (existing[0].providerRole === 'HANDLEDARE') {
       return NextResponse.json(
         { errors: { providerRole: 'This account already has another provider profile.' } },
         { status: 409 },

@@ -733,7 +733,7 @@
     },
     "signUp": {
       "title": "Skapa ditt DriveLinkUp-konto",
-      "subtitle": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Välj din roll för att komma igång.",
+      "subtitle": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Välj elev, skola eller instruktör — vi frågar bara efter det som behövs för den vägen.",
       "submit": "Skapa konto",
       "submitting": "Skapar konto…",
       "switchToSigninLead": "Har du redan ett konto?",
@@ -746,12 +746,35 @@
         "passwordLabel": "Lösenord",
         "passwordPlaceholder": "Minst 8 tecken…",
         "roleLabel": "Jag är",
-        "roleStudent": "Körkortselev",
-        "roleInstructor": "Trafikskola eller certifierad instruktör",
-        "roleHandledare": "Privat handledare — endast vägledning",
-        "roleStudentDesc": "Hitta och boka lektioner hos skolor och certifierade instruktörer.",
-        "roleInstructorDesc": "Publicera priser och tillgänglighet så elever kan jämföra och boka dina lektioner.",
-        "roleHandledareDesc": "Endast privat övningskörning — inte en bokningsbar marknadsplatsannons."
+        "roleLearner": "Elev",
+        "roleSchool": "Trafikskola",
+        "roleInstructor": "Utbildad och erfaren instruktör",
+        "roleLearnerDesc": "Hitta och boka lektioner. Lägsta ålder 16 år.",
+        "roleSchoolDesc": "Lista er auktoriserade skola med priser och tillgänglighet.",
+        "roleInstructorDesc": "Undervisa som certifierad instruktör. Du måste ha haft körkort i minst 5 år.",
+        "learnerSection": "Uppgifter för elev",
+        "schoolSection": "Uppgifter för trafikskola",
+        "instructorSection": "Uppgifter för instruktör",
+        "dateOfBirthLabel": "Födelsedatum",
+        "dateOfBirthHelp": "Elever måste vara minst {age} år.",
+        "phoneLabel": "Telefon (valfritt)",
+        "phonePlaceholder": "+46 70 123 45 67…",
+        "cityLabel": "Stad",
+        "cityPlaceholder": "Stockholm…",
+        "schoolNameLabel": "Skolans namn",
+        "schoolNamePlaceholder": "Stockholm Trafikskola…",
+        "organizationNumberLabel": "Organisationsnummer",
+        "organizationNumberPlaceholder": "556000-0000…",
+        "licenseHeldYearsLabel": "Antal år med fullständigt körkort",
+        "licenseHeldYearsPlaceholder": "5…",
+        "licenseHeldYearsHelp": "Instruktörer måste ha haft körkort i minst {years} år.",
+        "errors": {
+          "learnerAge": "Lägsta ålder för elever är {age} år.",
+          "schoolName": "Ange skolans namn.",
+          "organizationNumber": "Ange skolans organisationsnummer.",
+          "city": "Ange en stad.",
+          "licenseYears": "Instruktörer måste ha haft körkort i minst {years} år."
+        }
       },
       "clickwrap": {
         "stepEyebrow": "Handledare-villkor",
@@ -898,6 +921,40 @@
               "licenseTooLarge": "Filen är för stor — välj en under storleksgränsen.",
               "licenseUploadFailed": "Vi kunde inte ladda upp ditt körkort. Försök igen.",
               "attestationRequired": "Bocka i attesteringen för att bekräfta att det är ditt körkort."
+            }
+          }
+        },
+        "school": {
+          "pictureUpload": {
+            "stepEyebrow": "Skolfoto",
+            "stepTitle": "Lägg till ett foto för skolannonsen",
+            "stepLead": "Elever använder bilden för att känna igen skolan innan de bokar.",
+            "whyWeAsk": "Vi visar fotot på er skolannons."
+          },
+          "licenseUpload": {
+            "stepEyebrow": "Skolbehörighet",
+            "stepTitle": "Ladda upp Transportstyrelsen-behörighet",
+            "stepLead": "Vi verifierar skolans behörighet innan annonsen går live. Ladda upp foto eller PDF.",
+            "fields": {
+              "licenseLabel": "Behörighetsfil för skolan",
+              "attestationLabel": "Jag bekräftar att behörigheten tillhör skolan och att vi får undervisa med den."
+            }
+          }
+        },
+        "instructor": {
+          "pictureUpload": {
+            "stepEyebrow": "Instruktörsfoto",
+            "stepTitle": "Lägg till ett foto för din instruktörsprofil",
+            "stepLead": "Elever använder bilden för att känna igen dig innan de bokar.",
+            "whyWeAsk": "Vi visar fotot på din instruktörsannons."
+          },
+          "licenseUpload": {
+            "stepEyebrow": "Undervisningsbehörighet",
+            "stepTitle": "Ladda upp ditt lärarintyg",
+            "stepLead": "Vi verifierar Transportstyrelsen-behörighet innan din annons går live. Du måste ha haft körkort i minst 5 år.",
+            "fields": {
+              "licenseLabel": "Lärarintygsfil",
+              "attestationLabel": "Jag bekräftar att intyget är mitt, att jag får undervisa med det, och att jag har haft fullständigt körkort i minst 5 år."
             }
           }
         }
@@ -2193,42 +2250,78 @@
         "name": "Skåne",
         "description": "Täta stadskärnor, kustvägar och flexibla lektionsalternativ. Börja med Malmö eller jämför skolor i en annan skånsk stad.",
         "cities": {
-          "malmo": { "label": "Malmö" },
-          "helsingborg": { "label": "Helsingborg" },
-          "lund": { "label": "Lund" },
-          "kristianstad": { "label": "Kristianstad" },
-          "ystad": { "label": "Ystad" }
+          "malmo": {
+            "label": "Malmö"
+          },
+          "helsingborg": {
+            "label": "Helsingborg"
+          },
+          "lund": {
+            "label": "Lund"
+          },
+          "kristianstad": {
+            "label": "Kristianstad"
+          },
+          "ystad": {
+            "label": "Ystad"
+          }
         }
       },
       "halland": {
         "name": "Halland",
         "description": "Planera lektioner mellan kust, landsväg och växande städer. Se vilka auktoriserade skolor som finns nära din vardag.",
         "cities": {
-          "halmstad": { "label": "Halmstad" },
-          "varberg": { "label": "Varberg" },
-          "falkenberg": { "label": "Falkenberg" },
-          "kungsbacka": { "label": "Kungsbacka" }
+          "halmstad": {
+            "label": "Halmstad"
+          },
+          "varberg": {
+            "label": "Varberg"
+          },
+          "falkenberg": {
+            "label": "Falkenberg"
+          },
+          "kungsbacka": {
+            "label": "Kungsbacka"
+          }
         }
       },
       "blekinge": {
         "name": "Blekinge",
         "description": "Hitta en lokal plan för övningskörning i Blekinges städer och kustlandskap, med tydlig information innan du bokar.",
         "cities": {
-          "karlskrona": { "label": "Karlskrona" },
-          "karlshamn": { "label": "Karlshamn" },
-          "ronneby": { "label": "Ronneby" },
-          "solvesborg": { "label": "Sölvesborg" }
+          "karlskrona": {
+            "label": "Karlskrona"
+          },
+          "karlshamn": {
+            "label": "Karlshamn"
+          },
+          "ronneby": {
+            "label": "Ronneby"
+          },
+          "solvesborg": {
+            "label": "Sölvesborg"
+          }
         }
       },
       "smaland": {
         "name": "Småland",
         "description": "Från Jönköping till Kalmar och Växjö: välj en stad, jämför lokala alternativ och bygg trygghet bakom ratten steg för steg.",
         "cities": {
-          "jonkoping": { "label": "Jönköping" },
-          "vaxjo": { "label": "Växjö" },
-          "kalmar": { "label": "Kalmar" },
-          "varnamo": { "label": "Värnamo" },
-          "ljungby": { "label": "Ljungby" }
+          "jonkoping": {
+            "label": "Jönköping"
+          },
+          "vaxjo": {
+            "label": "Växjö"
+          },
+          "kalmar": {
+            "label": "Kalmar"
+          },
+          "varnamo": {
+            "label": "Värnamo"
+          },
+          "ljungby": {
+            "label": "Ljungby"
+          }
         }
       }
     },
@@ -2294,39 +2387,69 @@
         "name": "Västra Götaland",
         "description": "Kombinera stadstrafik, leder och öppna landsvägar. Börja i Göteborg eller jämför skolor i Borås, Trollhättan och Skövde för en praktisk lokal väg.",
         "cities": {
-          "goteborg": { "label": "Göteborg" },
-          "boras": { "label": "Borås" },
-          "trollhattan": { "label": "Trollhättan" },
-          "skovde": { "label": "Skövde" }
+          "goteborg": {
+            "label": "Göteborg"
+          },
+          "boras": {
+            "label": "Borås"
+          },
+          "trollhattan": {
+            "label": "Trollhättan"
+          },
+          "skovde": {
+            "label": "Skövde"
+          }
         }
       },
       "varmland": {
         "name": "Värmland",
         "description": "Bygg säkra färdigheter på Karlstads gator, i mindre städer och på längre landsvägar. Välj den plats som gör regelbunden övning realistisk för dig.",
         "cities": {
-          "karlstad": { "label": "Karlstad" },
-          "arvika": { "label": "Arvika" },
-          "kristinehamn": { "label": "Kristinehamn" }
+          "karlstad": {
+            "label": "Karlstad"
+          },
+          "arvika": {
+            "label": "Arvika"
+          },
+          "kristinehamn": {
+            "label": "Kristinehamn"
+          }
         }
       },
       "gavleborg-vasternorrland": {
         "name": "Gävleborg och Västernorrland",
         "description": "Förbered dig på en blandning av stadstrafik, kust och längre avstånd. Hitta lokala alternativ i Gävle, Sundsvall, Hudiksvall eller Örnsköldsvik och planera efter dina riktiga resor.",
         "cities": {
-          "gavle": { "label": "Gävle" },
-          "sundsvall": { "label": "Sundsvall" },
-          "hudiksvall": { "label": "Hudiksvall" },
-          "ornskoldsvik": { "label": "Örnsköldsvik" }
+          "gavle": {
+            "label": "Gävle"
+          },
+          "sundsvall": {
+            "label": "Sundsvall"
+          },
+          "hudiksvall": {
+            "label": "Hudiksvall"
+          },
+          "ornskoldsvik": {
+            "label": "Örnsköldsvik"
+          }
         }
       },
       "vasterbotten-norrbotten": {
         "name": "Västerbotten och Norrbotten",
         "description": "Ge dig själv utrymme att lära i skiftande ljus, väder och väglag. Jämför skolor i Umeå, Skellefteå, Luleå och Kiruna för en praktisk lokal plan.",
         "cities": {
-          "umea": { "label": "Umeå" },
-          "skelleftea": { "label": "Skellefteå" },
-          "lulea": { "label": "Luleå" },
-          "kiruna": { "label": "Kiruna" }
+          "umea": {
+            "label": "Umeå"
+          },
+          "skelleftea": {
+            "label": "Skellefteå"
+          },
+          "lulea": {
+            "label": "Luleå"
+          },
+          "kiruna": {
+            "label": "Kiruna"
+          }
         }
       }
     },
@@ -2374,7 +2497,10 @@
       "title": "Första marknadens boknings- och provisionsregler (Sverige)",
       "body": "En bokning är hänförlig när eleven slutför den via DriveLinkUp. Provisionen är 10 % av det hänförliga bokningsvärdet och utgår först efter genomförd tjänst—inte för bläddring, registrering eller ofullbordad förfrågan. Avbokning, återbetalning och utebliven ankomst följer skolans publicerade policy och bokningsposten. Elever betalar aldrig någon separat DriveLinkUp-avgift; skolans publicerade pris förblir elevens total. Utbetalningstid och ansvar bekräftas per deltagande skola innan skarpa bokningar marknadsförs."
     },
-    "cta": { "learner": "Jämför trafikskolor", "school": "Lista er trafikskola" }
+    "cta": {
+      "learner": "Jämför trafikskolor",
+      "school": "Lista er trafikskola"
+    }
   },
   "handledareInfo": {
     "meta": {
@@ -2392,6 +2518,9 @@
       "title": "Auktoriserade trafikskolor",
       "body": "För professionella lektioner kan du jämföra auktoriserade trafikskolors annonser, publicerade priser och tillgänglighet. Upptäckt, jämförelse och bokning har ingen separat DriveLinkUp-avgift."
     },
-    "cta": { "schools": "Jämför trafikskolor", "faq": "Läs vanliga frågor" }
+    "cta": {
+      "schools": "Jämför trafikskolor",
+      "faq": "Läs vanliga frågor"
+    }
   }
 }

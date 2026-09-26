@@ -12,6 +12,7 @@ export function isProviderActivated(categories: readonly string[]): boolean {
 }
 
 export function isMarketplaceSchoolRole(providerRole: string | null | undefined): boolean {
+  // Learners book schools and certified instructors. Handledare stay out of supply.
   return providerRole !== 'HANDLEDARE';
 }
 
