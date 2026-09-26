@@ -3,8 +3,8 @@
 
 // Signup wizard — account creation first, photo when required for schools.
 //
-// Step 1 — Account: name / email / password / role picker (Learner / Authorized
-//   school / Handledare guidance). On submit calls better-auth's
+// Step 1 — Account: name / email / password / role picker (Learner / School or
+//   certified instructor / Handledare guidance). On submit calls better-auth's
 //   `signUp.email` — a session is now established. Flow branches by role:
 //     STUDENT   → complete signup → dashboard (?signup=1). Photo optional later.
 //     HANDLEDARE → clickwrap step, then complete → handledare dashboard.
@@ -134,49 +134,57 @@ export function SignUpForm({ next }: { next?: string }) {
     setSubmittingClickwrap(false);
   };
 
-  const submitAccount = form.handleSubmit(async (values) => {
-    const { error } = await signUp.email({
-      name: values.name.trim(),
-      email: values.email.trim(),
-      password: values.password,
-    });
-    if (error) {
-      const applied = applyServerErrors(error, form.setError);
-      if (!applied) {
-        toast.error(t('errors.generic'));
+  const submitAccount = form.handleSubmit(
+    async (values) => {
+      const { error } = await signUp.email({
+        name: values.name.trim(),
+        email: values.email.trim(),
+        password: values.password,
+      });
+      if (error) {
+        const applied = applyServerErrors(error, form.setError);
+        if (!applied) {
+          toast.error(t('errors.generic'));
+        }
+        return;
       }
-      return;
-    }
-    // Audit-row consent stamp for the GDPR privacy policy. We post this
-    // AFTER the auth signup resolves because the server route stamps the
-    // userId-less audit row with the visitor's subjectHash; once a session
-    // is set, subsequent consent stamps will carry the userId. Best-effort:
-    // a banner failure should not block the wizard's progress.
-    try {
-      await apiFetch('/api/consent', {
-        method: 'POST',
-        body: JSON.stringify({
-          policyVersion: PRIVACY_POLICY_VERSION,
-          scope: { essential: true, analytics: false, marketing: false },
-          source: 'signup',
-        }),
-      });
-    } catch {
-      // swallow — banner will reappear on next visit if cookie didn't stick.
-    }
-    try {
-      await apiFetch('/api/signup/start', {
-        method: 'POST',
-        body: JSON.stringify({ role: values.role }),
-        schema: SignupStartResponse,
-      });
-      const state = await apiFetch('/api/signup/state', { schema: SignupState });
-      applySignupState(state);
-    } catch (err) {
-      const applied = err instanceof Error && applyServerErrors(err.cause, form.setError);
-      if (!applied) toast.error(t('errors.generic'));
-    }
-  });
+      // Audit-row consent stamp for the GDPR privacy policy. We post this
+      // AFTER the auth signup resolves because the server route stamps the
+      // userId-less audit row with the visitor's subjectHash; once a session
+      // is set, subsequent consent stamps will carry the userId. Best-effort:
+      // a banner failure should not block the wizard's progress.
+      try {
+        await apiFetch('/api/consent', {
+          method: 'POST',
+          body: JSON.stringify({
+            policyVersion: PRIVACY_POLICY_VERSION,
+            scope: { essential: true, analytics: false, marketing: false },
+            source: 'signup',
+          }),
+        });
+      } catch {
+        // swallow — banner will reappear on next visit if cookie didn't stick.
+      }
+      try {
+        await apiFetch('/api/signup/start', {
+          method: 'POST',
+          body: JSON.stringify({ role: values.role }),
+          schema: SignupStartResponse,
+        });
+        const state = await apiFetch('/api/signup/state', { schema: SignupState });
+        applySignupState(state);
+      } catch (err) {
+        const applied = err instanceof Error && applyServerErrors(err.cause, form.setError);
+        if (!applied) toast.error(t('errors.generic'));
+      }
+    },
+    () => {
+      const firstError = document.querySelector<HTMLElement>(
+        '[aria-invalid="true"], [data-invalid]',
+      );
+      firstError?.focus();
+    },
+  );
 
   const advanceAfterPhoto = async () => {
     try {
@@ -445,6 +453,8 @@ export function SignUpForm({ next }: { next?: string }) {
                 <Input
                   type="email"
                   autoComplete="email"
+                  spellCheck={false}
+                  inputMode="email"
                   placeholder={t('fields.emailPlaceholder')}
                   {...field}
                 />
@@ -595,6 +605,7 @@ export function SignUpForm({ next }: { next?: string }) {
                         target="_blank"
                         rel="noopener"
                         className="underline-offset-2 hover:underline"
+                        onClick={(event) => event.stopPropagation()}
                       >
                         {tConsentForm('signupCheckboxLinkText')}
                       </Link>

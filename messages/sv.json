@@ -4,8 +4,8 @@
       "findProvider": "Hitta trafikskolor",
       "howItWorks": "Så fungerar det",
       "licenceCategories": "Körkortskategorier",
-      "forInstructors": "För trafikskolor",
-      "forProviders": "För trafikskolor",
+      "forInstructors": "För skolor och instruktörer",
+      "forProviders": "För skolor och instruktörer",
       "handledare": "Handledarguide",
       "getStarted": "Kom igång",
       "faq": "Vanliga frågor",
@@ -215,23 +215,23 @@
   },
   "forInstructorsPage": {
     "meta": {
-      "title": "För auktoriserade trafikskolor | DriveLinkUp",
-      "description": "Lista din auktoriserade trafikskola för elever som jämför priser, tillgänglighet och bokningsalternativ i Sverige."
+      "title": "För skolor och instruktörer | DriveLinkUp",
+      "description": "Lista din trafikskola eller certifierade instruktörsprofil så elever kan jämföra priser, tillgänglighet och bokningsalternativ i Sverige."
     },
     "hero": {
-      "eyebrow": "För auktoriserade trafikskolor",
-      "title": "Gör skolans tider till tydligare bokningar.",
-      "body": "Publicera skolans behörighet, priser och tillgänglighet så att elever kan jämföra och boka med tydliga villkor.",
+      "eyebrow": "För skolor och certifierade instruktörer",
+      "title": "Gör din tillgänglighet till tydligare bokningar.",
+      "body": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Publicera behörighet, priser och tillgänglighet så elever kan jämföra och boka med tydliga villkor.",
       "primaryCta": "Skapa din profil",
       "learnerCta": "Se elevvyn"
     },
     "roles": {
       "trafiklarare": {
-        "title": "Auktoriserad trafikskola",
-        "body": "För skolor som erbjuder strukturerade körlektioner och själva styr publicerade priser och tillgänglighet."
+        "title": "Trafikskola eller certifierad instruktör",
+        "body": "För auktoriserade skolor och Transportstyrelsen-certifierade instruktörer som erbjuder strukturerade lektioner och själva styr publicerade priser och tillgänglighet."
       },
       "handledare": {
-        "title": "Skolstyrd annons",
+        "title": "Marknadsplatsannons",
         "body": "Håll kategorier, tjänster, priser och lediga tider korrekta för eleverna."
       }
     },
@@ -242,9 +242,9 @@
   },
   "instructorsPage": {
     "header": {
-      "eyebrow": "Aktuell marknadsplats för trafikskolor",
-      "title": "Hitta en auktoriserad trafikskola",
-      "subtitle": "Jämför skolannonser efter kategori, stad, språk, publicerat pris, tillgänglighet och bokningspolicy. Bokning har ingen separat DriveLinkUp-avgift."
+      "eyebrow": "Marknadsplats för skolor och instruktörer",
+      "title": "Hitta en trafikskola eller certifierad instruktör",
+      "subtitle": "Jämför annonser efter kategori, stad, språk, publicerat pris, tillgänglighet och bokningspolicy. Bokning har ingen separat DriveLinkUp-avgift."
     },
     "directoryCta": "Se alla trafikskolor",
     "stockholmCity": {
@@ -698,8 +698,8 @@
         "hint": "Jag vill hitta en trafikskola."
       },
       "instructor": {
-        "label": "Auktoriserad trafikskola",
-        "hint": "Jag vill lista min skola på marknadsplatsen."
+        "label": "Trafikskola eller certifierad instruktör",
+        "hint": "Jag vill lista lektioner på marknadsplatsen."
       }
     },
     "validation": {
@@ -733,25 +733,25 @@
     },
     "signUp": {
       "title": "Skapa ditt DriveLinkUp-konto",
-      "subtitle": "Välj en roll — vi anpassar marknadsplatsen efter det.",
+      "subtitle": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Välj din roll för att komma igång.",
       "submit": "Skapa konto",
       "submitting": "Skapar konto…",
       "switchToSigninLead": "Har du redan ett konto?",
       "switchToSignin": "Logga in",
       "fields": {
         "nameLabel": "Fullständigt namn",
-        "namePlaceholder": "Anna Svensson",
+        "namePlaceholder": "Anna Svensson…",
         "emailLabel": "E-post",
         "emailPlaceholder": "du@example.com",
         "passwordLabel": "Lösenord",
-        "passwordPlaceholder": "Minst 8 tecken",
+        "passwordPlaceholder": "Minst 8 tecken…",
         "roleLabel": "Jag är",
         "roleStudent": "Körkortselev",
-        "roleInstructor": "Auktoriserad trafikskola — Transportstyrelsen-behörigheter",
-        "roleHandledare": "Privat handledare — vägledningskonto (inte skolannons)",
-        "roleStudentDesc": "Vill ta körkort.",
-        "roleInstructorDesc": "Lista en auktoriserad trafikskola med skolstyrda priser och tillgänglighet.",
-        "roleHandledareDesc": "Endast svensk privat övningsvägledning. Handledare är inte marknadsplatsutbud och kan inte publicera bokningsbara skolannonser."
+        "roleInstructor": "Trafikskola eller certifierad instruktör",
+        "roleHandledare": "Privat handledare — endast vägledning",
+        "roleStudentDesc": "Hitta och boka lektioner hos skolor och certifierade instruktörer.",
+        "roleInstructorDesc": "Publicera priser och tillgänglighet så elever kan jämföra och boka dina lektioner.",
+        "roleHandledareDesc": "Endast privat övningskörning — inte en bokningsbar marknadsplatsannons."
       },
       "clickwrap": {
         "stepEyebrow": "Handledare-villkor",
@@ -1691,15 +1691,15 @@
   },
   "publicHome": {
     "hero": {
-      "eyebrow": "Ett tydligare sätt att boka körlektioner",
-      "title": "Jämför auktoriserade trafikskolor. Boka med trygghet.",
-      "body": "Upptäck skolor efter kategori, stad, språk, publicerat pris och tillgänglighet. Upptäckt, jämförelse och bokning är kostnadsfritt för elever.",
-      "primaryCta": "Hitta en trafikskola",
-      "secondaryCta": "För trafikskolor",
+      "eyebrow": "Skolor och instruktörer. Elever. En marknadsplats.",
+      "title": "Jämför trafikskolor och certifierade instruktörer. Boka med trygghet.",
+      "body": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Upptäck efter kategori, stad, språk, publicerat pris och tillgänglighet — kostnadsfritt för elever.",
+      "primaryCta": "Hitta lektioner",
+      "secondaryCta": "För skolor och instruktörer",
       "contactCta": "Starta en konversation",
       "assurance": {
-        "price": "Skolans pris visas före kassan",
-        "safety": "Annonser från auktoriserade skolor",
+        "price": "Publicerat pris visas före kassan",
+        "safety": "Skolor och certifierade instruktörer",
         "choice": "Ingen separat DriveLinkUp-avgift"
       },
       "previewEyebrow": "Beslutet, samlat på ett ställe",
@@ -1769,9 +1769,9 @@
     "entry": {
       "eyebrow": "Redo för nästa steg?",
       "title": "Börja från den sida av vägen där du är.",
-      "body": "Elever kan bläddra och boka. Auktoriserade trafikskolor kan publicera pris och tillgänglighet via det befintliga onboardingflödet.",
-      "learnerCta": "Hitta en trafikskola",
-      "providerCta": "Lista er trafikskola"
+      "body": "Elever kan bläddra och boka. Trafikskolor och certifierade instruktörer kan publicera pris och tillgänglighet via onboarding.",
+      "learnerCta": "Hitta lektioner",
+      "providerCta": "Lista er profil"
     },
     "footer": {
       "prompt": "Behöver du mer information?",

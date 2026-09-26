@@ -4,8 +4,8 @@
       "findProvider": "Find driving schools",
       "howItWorks": "How it works",
       "licenceCategories": "Licence categories",
-      "forInstructors": "For driving schools",
-      "forProviders": "Driving-school partners",
+      "forInstructors": "For schools & instructors",
+      "forProviders": "School & instructor partners",
       "handledare": "Handledare guidance",
       "getStarted": "Get started",
       "faq": "FAQ",
@@ -215,23 +215,23 @@
   },
   "forInstructorsPage": {
     "meta": {
-      "title": "For authorized driving schools | DriveLinkUp",
-      "description": "List your authorized driving school for learners comparing prices, availability and booking options in Sweden."
+      "title": "For schools & instructors | DriveLinkUp",
+      "description": "List your driving school or certified instructor profile so learners can compare prices, availability and booking options in Sweden."
     },
     "hero": {
-      "eyebrow": "For authorized driving schools",
-      "title": "Turn school availability into clearer bookings.",
-      "body": "Publish your school's authorization, prices and availability so learners can compare and book with clear expectations.",
+      "eyebrow": "For schools and certified instructors",
+      "title": "Turn your availability into clearer bookings.",
+      "body": "DriveLinkUp connects driving schools and certified instructors to learners. Publish authorization, prices and availability so learners can compare and book with clear expectations.",
       "primaryCta": "Create your profile",
       "learnerCta": "See the learner view"
     },
     "roles": {
       "trafiklarare": {
-        "title": "Authorized driving school",
-        "body": "For schools that offer structured driving lessons and want control over their published prices and availability."
+        "title": "Driving school or certified instructor",
+        "body": "For authorized schools and Transportstyrelsen-certified instructors who offer structured lessons and want control over published prices and availability."
       },
       "handledare": {
-        "title": "School-controlled listing",
+        "title": "Marketplace listing",
         "body": "Keep your categories, service details, prices and available times accurate for learners."
       }
     },
@@ -242,9 +242,9 @@
   },
   "instructorsPage": {
     "header": {
-      "eyebrow": "Live driving-school marketplace",
-      "title": "Find an authorized driving school",
-      "subtitle": "Compare school listings by category, city, language, published price, availability and booking policy. Booking has no separate DriveLinkUp fee."
+      "eyebrow": "Schools and instructors marketplace",
+      "title": "Find a driving school or certified instructor",
+      "subtitle": "Compare listings by category, city, language, published price, availability and booking policy. Booking has no separate DriveLinkUp fee."
     },
     "directoryCta": "View all driving schools",
     "stockholmCity": {
@@ -698,8 +698,8 @@
         "hint": "I want to find a driving school."
       },
       "instructor": {
-        "label": "Authorized driving school",
-        "hint": "I want to list my school on the marketplace."
+        "label": "Driving school or certified instructor",
+        "hint": "I want to list lessons on the marketplace."
       }
     },
     "validation": {
@@ -733,25 +733,25 @@
     },
     "signUp": {
       "title": "Create your DriveLinkUp account",
-      "subtitle": "Pick a role — we tailor the marketplace to match.",
+      "subtitle": "DriveLinkUp connects driving schools and certified instructors to learners. Pick your role to get started.",
       "submit": "Create account",
       "submitting": "Creating account…",
       "switchToSigninLead": "Already have an account?",
       "switchToSignin": "Sign in",
       "fields": {
         "nameLabel": "Full name",
-        "namePlaceholder": "Anna Svensson",
+        "namePlaceholder": "Anna Svensson…",
         "emailLabel": "Email",
         "emailPlaceholder": "you@example.com",
         "passwordLabel": "Password",
-        "passwordPlaceholder": "At least 8 characters",
+        "passwordPlaceholder": "At least 8 characters…",
         "roleLabel": "I am a",
-        "roleStudent": "Driving student",
-        "roleInstructor": "Authorized driving school — Transportstyrelsen credentials",
-        "roleHandledare": "Private handledare — guidance account (not a school listing)",
-        "roleStudentDesc": "Looking to earn a driving licence.",
-        "roleInstructorDesc": "List an authorized school with school-controlled prices and availability.",
-        "roleHandledareDesc": "Swedish private-practice guidance only. Handledare are not marketplace supply and cannot publish bookable school listings."
+        "roleStudent": "Learner",
+        "roleInstructor": "Driving school or certified instructor",
+        "roleHandledare": "Private handledare — guidance only",
+        "roleStudentDesc": "Find and book lessons from schools and certified instructors.",
+        "roleInstructorDesc": "Publish prices and availability so learners can compare and book your lessons.",
+        "roleHandledareDesc": "Private supervised practice (övningskörning) only — not a bookable marketplace listing."
       },
       "clickwrap": {
         "stepEyebrow": "Handledare terms",
@@ -1691,15 +1691,15 @@
   },
   "publicHome": {
     "hero": {
-      "eyebrow": "A clearer way to book driving lessons",
-      "title": "Compare authorized driving schools. Book with confidence.",
-      "body": "Discover schools by category, city, language, published price and availability. Discovery, comparison and booking are free for learners.",
-      "primaryCta": "Find a driving school",
-      "secondaryCta": "For driving schools",
+      "eyebrow": "Schools and instructors. Learners. One marketplace.",
+      "title": "Compare driving schools and certified instructors. Book with confidence.",
+      "body": "DriveLinkUp connects driving schools and certified instructors to learners. Discover by category, city, language, published price and availability — free for learners.",
+      "primaryCta": "Find lessons",
+      "secondaryCta": "For schools & instructors",
       "contactCta": "Start a conversation",
       "assurance": {
-        "price": "School price shown before checkout",
-        "safety": "Authorized-school listings",
+        "price": "Published price shown before checkout",
+        "safety": "Schools and certified instructors",
         "choice": "No separate DriveLinkUp fee"
       },
       "previewEyebrow": "The decision, in one place",
@@ -1766,12 +1766,12 @@
         }
       }
     },
-    "entry": {
+      "entry": {
       "eyebrow": "Ready for the next step?",
       "title": "Start from the side of the road you are on.",
-      "body": "Learners can browse and book. Authorized driving schools can publish their price and availability through the existing onboarding flow.",
-      "learnerCta": "Find a driving school",
-      "providerCta": "List your school"
+      "body": "Learners can browse and book. Driving schools and certified instructors can publish price and availability through onboarding.",
+      "learnerCta": "Find lessons",
+      "providerCta": "List your profile"
     },
     "footer": {
       "prompt": "Need more context?",
