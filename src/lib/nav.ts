@@ -12,8 +12,9 @@ export interface NavItem {
     | 'nav.findProvider'
     | 'nav.howItWorks'
     | 'nav.licenceCategories'
-    | 'nav.forInstructors'
-    | 'nav.forProviders'
+    | 'nav.drivingInstructor'
+    | 'nav.drivingSchool'
+    | 'nav.forSchoolsMenu'
     | 'nav.getStarted'
     | 'nav.faq'
     | 'nav.contactUs'
@@ -89,18 +90,25 @@ export const navItems: NavItem[] = [
     requiresAuth: true,
   },
   {
-    label: 'For driving schools',
-    labelKey: 'nav.forInstructors',
-    href: '/for-instructors',
+    label: "I'm a driving instructor",
+    labelKey: 'nav.drivingInstructor',
+    href: '/signup?role=instructor',
     group: 'secondary',
     order: 0,
+  },
+  {
+    label: 'I run a driving school',
+    labelKey: 'nav.drivingSchool',
+    href: '/for-skolor',
+    group: 'secondary',
+    order: 1,
   },
   {
     label: 'Get started',
     labelKey: 'nav.getStarted',
     href: '/signup',
     group: 'secondary',
-    order: 1,
+    order: 2,
   },
   { label: 'FAQ', labelKey: 'nav.faq', href: '/faq', group: 'footer', order: 0 },
   { label: 'Pricing', labelKey: 'nav.pricing', href: '/pricing', group: 'footer', order: 1 },

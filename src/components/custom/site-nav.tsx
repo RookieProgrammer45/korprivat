@@ -104,6 +104,15 @@ export function SiteNav() {
   // The brand links home, so drop a redundant '/' item from the rendered links.
   const primary = visibleItems('primary', isAuthenticated).filter((item) => item.href !== '/');
   const secondary = visibleItems('secondary', isAuthenticated);
+  // Instructor and school are separate paths. They share a "För skolor" menu
+  // only at lg, where the two Swedish labels don't fit beside Kom igång and
+  // Logga in. Below lg they live in the mobile sheet. At xl they are buttons.
+  const roleNav = secondary.filter(
+    (item) => item.labelKey === 'nav.drivingInstructor' || item.labelKey === 'nav.drivingSchool',
+  );
+  const barNav = secondary.filter(
+    (item) => item.labelKey !== 'nav.drivingInstructor' && item.labelKey !== 'nav.drivingSchool',
+  );
 
   // Top-bar slots (links + `menu` dropdowns); `inline` renders, `overflow` → "More".
   const slots = buildPrimarySlots(primary);
@@ -291,9 +300,48 @@ export function SiteNav() {
 
         {/* Right cluster: ml-auto pushes it right at every breakpoint */}
         <div className="site-nav-actions ml-auto flex min-w-0 items-center gap-0.5 sm:gap-1">
-          {/* Desktop secondary buttons — Get started lives in the mobile drawer to keep the bar uncrowded. */}
+          {/* Desktop secondary buttons. Role CTAs collapse to a menu at lg only. */}
           <div className="site-nav-secondary hidden items-center gap-1 md:flex">
-            {secondary.map((item) => (
+            {roleNav.length > 0 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="site-nav-cta hidden lg:inline-flex xl:hidden"
+                  >
+                    {tNav('nav.forSchoolsMenu')}
+                    <ChevronDown className="ml-1 size-4 opacity-60" aria-hidden />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {roleNav.map((item) => (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <Link
+                        href={item.href}
+                        aria-current={isActive(item.href) ? 'page' : undefined}
+                      >
+                        {tNav(item.labelKey)}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+            {roleNav.map((item) => (
+              <Button
+                key={item.href}
+                asChild
+                variant="outline"
+                size="sm"
+                className="site-nav-cta hidden whitespace-nowrap xl:inline-flex"
+              >
+                <Link href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                  {tNav(item.labelKey)}
+                </Link>
+              </Button>
+            ))}
+            {barNav.map((item) => (
               <Button
                 key={item.href}
                 asChild
@@ -322,7 +370,7 @@ export function SiteNav() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="site-nav-mobile-trigger shrink-0 rounded-full border border-border bg-card md:hidden"
+                  className="site-nav-mobile-trigger shrink-0 rounded-full border border-border bg-card lg:hidden"
                 >
                   <Menu />
                   <span className="sr-only">{tNav('nav.openMenu')}</span>
