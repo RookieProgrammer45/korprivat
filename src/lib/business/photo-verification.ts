@@ -139,12 +139,11 @@ export async function photoState(userId: string) {
     }),
     prisma.user.findUnique({ where: { id: userId }, select: { image: true } }),
   ]);
-  const isConfirmed = verification?.status === 'CONFIRMED' || Boolean(user?.image && !verification);
+  const isConfirmed = verification?.status === 'CONFIRMED';
   return {
     status: isConfirmed ? 'CONFIRMED' : verification?.stagedUrl ? 'STAGED' : 'NONE',
     imageUrl: verification?.stagedUrl ?? user?.image ?? null,
-    confirmedAt:
-      verification?.confirmedAt?.toISOString() ?? (isConfirmed && user?.image ? null : null),
+    confirmedAt: verification?.confirmedAt?.toISOString() ?? null,
   } as const;
 }
 
