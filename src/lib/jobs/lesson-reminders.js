@@ -1,7 +1,7 @@
 // jobs/lesson-reminders.js — 24h-before lesson reminder cron.
 //
-// Runs under plain `node` (NOT via Next.js). The deploy platform picks this
-// up via the [[crons]] block in polsia.toml:
+// Runs under plain `node` (NOT via Next.js). Schedule via Vercel Cron or
+// equivalent:
 //   schedule = "5 * * * *"     (every hour at :05; off the noisy :00 slot)
 //   command  = "node src/lib/jobs/lesson-reminders.js"
 //
@@ -19,9 +19,8 @@
 // places; a divergence silently ships wrong bodies.
 
 const { PrismaClient } = require('@prisma/client');
-const nodeFetch = require('node-fetch').default || require('node-fetch');
+const { Resend } = require('resend');
 
-const EMAIL_PROXY_URL = 'https://polsia.com/api/proxy/email';
 const WINDOW_HOURS = 25;
 
 // Mirrors `INSTRUCTOR_TIMEZONE` in src/app/api/bookings/route.ts.
@@ -94,26 +93,20 @@ function buildInstructorReminderBody(input) {
   return { subject, text };
 }
 
-async function sendViaProxy(to, subject, text) {
-  if (!process.env.POLSIA_API_KEY) {
-    throw new Error('POLSIA_API_KEY is required for jobs/lesson-reminders.js');
+async function sendViaResend(to, subject, text) {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY is required for jobs/lesson-reminders.js');
   }
-  const res = await nodeFetch(`${EMAIL_PROXY_URL}/send`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.POLSIA_API_KEY}`,
-    },
-    body: JSON.stringify({
-      to,
-      subject,
-      body: text,
-      html: plainTextHtml(text),
-    }),
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM ?? 'DriveLinkUp <noreply@drivelinkup.com>',
+    to,
+    subject,
+    text,
+    html: plainTextHtml(text),
   });
-  if (!res.ok) {
-    const detail = await res.text().catch(() => '');
-    throw new Error(`email proxy POST failed (${res.status} ${res.statusText}): ${detail}`);
+  if (error) {
+    throw new Error(`Resend error: ${error.message}`);
   }
 }
 
@@ -167,7 +160,7 @@ async function main() {
       bookingId: booking.id,
     });
 
-    const tasks = [sendViaProxy(booking.studentEmail, studentContent.subject, studentContent.text)];
+    const tasks = [sendViaResend(booking.studentEmail, studentContent.subject, studentContent.text)];
 
     let instructorContent = null;
     if (instructor.email) {
@@ -179,7 +172,7 @@ async function main() {
         lessonCity,
         bookingId: booking.id,
       });
-      tasks.push(sendViaProxy(instructor.email, instructorContent.subject, instructorContent.text));
+      tasks.push(sendViaResend(instructor.email, instructorContent.subject, instructorContent.text));
     }
 
     const results = await Promise.allSettled(tasks);

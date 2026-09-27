@@ -3,8 +3,7 @@
 // server-only imports — safe to import from 'use client' components.
 //
 // SAME-ORIGIN: no baseURL is set, so the client calls /api/auth on whatever host
-// the app is served from (<slug>.polsia.app, the .io backup, or a custom brand
-// domain). This is what makes auth work on EVERY host from ONE build — an
+// the app is served from (www.drivelinkup.com, apex, or a Vercel preview). An
 // absolute baseURL baked at build time made every non-primary host a cross-origin
 // call that failed CORS. The auth endpoints are mounted at /api/auth/* by the
 // catch-all route handler on that same origin.

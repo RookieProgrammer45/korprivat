@@ -43,7 +43,7 @@ export interface DashboardSession {
   // marketplace faces STUDENT/INSTRUCTOR/HANDLEDARE exclusively and we don't
   // want admin to leak there.
   role: MarketplaceRole;
-  // True if the underlying better-auth user is admin (POLSIA_OWNER_EMAIL or
+  // True if the underlying better-auth user is admin (OWNER_EMAIL or
   // promoted later). Lets us render admin-only chips while keeping the student
   // or instructor default route reachable.
   isAdmin: boolean;

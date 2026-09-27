@@ -3,7 +3,7 @@
 ## Ownership
 
 - [x] Stripped Polsia markers and metadata (commit 7d1373f)
-- [ ] Replace email proxy with direct Resend (Slice 2)
+- [x] Replace email proxy with direct Resend (Slice 2)
 - [ ] Replace storage proxy with direct Vercel Blob / R2 (Slice 3)
 - [ ] Replace Stripe proxy with direct Stripe SDK (Slice 4)
 - [ ] Replace AI proxy with direct OpenAI SDK (Slice 5)

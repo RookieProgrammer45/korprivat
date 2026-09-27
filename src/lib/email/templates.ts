@@ -839,14 +839,14 @@ export function cancellationFeeReceiptEmail(input: {
         `Din avbokning av lektionen med ${instructorName} har registrerats. En avgift på ${feeUsd} USD (av lektionens ${lessonChargeUsd} USD) behålls av plattformen.`,
         policyLine,
         'Din instruktör behåller sin fulla lektionsavgift enligt marknadsplatsens modell — du behöver inte kontakta instruktören om betalningen.',
-        'Frågor kan skickas till korprivat@polsia.app.',
+        'Frågor kan skickas till support@drivelinkup.com.',
       ]
     : [
         `Hi ${recipientName},`,
         `Your cancellation of the lesson with ${instructorName} was recorded. A fee of ${feeUsd} USD (from the ${lessonChargeUsd} USD lesson charge) is retained by the platform.`,
         policyLine,
         'Your instructor keeps the full lesson rate under the marketplace model — you do not need to contact them about payment.',
-        'Questions can be sent to korprivat@polsia.app.',
+        'Questions can be sent to support@drivelinkup.com.',
       ];
   const { html, text } = renderEmail({
     heading,
@@ -977,7 +977,7 @@ export function instructorProfileLiveEmail(input: {
 
 /**
  * Notification to the founder when a visitor sends an inquiry through the
- * guided `/contact` flow. The recipient is `process.env.POLSIA_COMPANY_EMAIL`
+ * guided `/contact` flow. The recipient is `process.env.CONTACT_EMAIL`
  * resolved at request time in the route handler — never hardcoded as a domain
  * address (which would bounce). The visitor themselves do NOT get an
  * auto-responder (the founder reads & replies personally).

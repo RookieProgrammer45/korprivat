@@ -22,10 +22,6 @@ export const env = createEnv({
     DATABASE_URL: z.string().url(),
     // @polsia:slot env_vars_server start
     // Modules append additional server-side env vars here at install time.
-    POLSIA_COMPANY_EMAIL: z.string().email(),
-    // @polsia:contrib email start
-    POLSIA_EMAIL_PROXY_URL: z.string().url(),
-    // @polsia:contrib email end
     // @polsia:contrib stripe-billing start
     POLSIA_API_BASE_URL: z.string().url().default('https://polsia.com'),
     POLSIA_API_KEY: z.string().min(1).optional(),
@@ -35,7 +31,6 @@ export const env = createEnv({
     BETTER_AUTH_SECRET: z.string().min(1),
     BETTER_AUTH_URL: z.string().url(),
     BETTER_AUTH_TRUSTED_ORIGINS: z.string().optional(),
-    POLSIA_OWNER_EMAIL: z.string().optional(),
     // @polsia:contrib better-auth end
     // @polsia:contrib ai start
     POLSIA_AI_BASE_URL: z.string().url().default('https://polsia.com/ai/openai/v1'),
@@ -60,10 +55,6 @@ export const env = createEnv({
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     // @polsia:slot env_runtime start
     // Modules append runtime-env entries here at install time.
-    POLSIA_COMPANY_EMAIL: process.env.POLSIA_COMPANY_EMAIL,
-    // @polsia:contrib email start
-    POLSIA_EMAIL_PROXY_URL: process.env.POLSIA_EMAIL_PROXY_URL,
-    // @polsia:contrib email end
     // @polsia:contrib stripe-billing start
     POLSIA_API_BASE_URL: process.env.POLSIA_API_BASE_URL,
     POLSIA_API_KEY: process.env.POLSIA_API_KEY,
@@ -73,7 +64,6 @@ export const env = createEnv({
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
     BETTER_AUTH_TRUSTED_ORIGINS: process.env.BETTER_AUTH_TRUSTED_ORIGINS,
-    POLSIA_OWNER_EMAIL: process.env.POLSIA_OWNER_EMAIL,
     // @polsia:contrib better-auth end
     // @polsia:contrib ai start
     POLSIA_AI_BASE_URL: process.env.POLSIA_AI_BASE_URL,

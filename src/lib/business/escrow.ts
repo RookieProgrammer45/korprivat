@@ -1,8 +1,8 @@
 //
 // Shared primitives for the complete / dispute / dispute-resolve route
-// handlers: per-booking unguessable token generation + matching, and the
-// email-proxy "register known contact" side effect that runs before the
-// first transactional send to a learner who just paid.
+// handlers: per-booking unguessable token generation + matching, and a
+// no-op known-contact hook kept for call-site compatibility (Resend does
+// not require a separate contact-registration step).
 
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 
@@ -27,36 +27,14 @@ export function assertTokenMatches(rowToken: string | null | undefined, supplied
 }
 
 /**
- * Side effect: register the learner's email as a known contact on the
- * Polsia email proxy so transactional sends stay under the known-contact
- * tier (50/day) rather than the cold-outreach tier (2/day). Returns the
- * upstream HTTP status — non-2xx are silently ignored because lack of a
- * known-contact registration is a "won't deliver" risk, not a booking-
- * creation blocker; we still send the email and the proxy will retry the
- * classification on next send.
+ * No-op under Resend (formerly registered contacts on the Polsia email
+ * proxy for tier classification). Kept so existing call sites do not need
+ * edits; always returns null.
  */
-export async function registerKnownContact(input: {
+export async function registerKnownContact(_input: {
   email: string;
   name?: string;
   source: 'signup' | 'contact_form' | 'purchase' | 'invite' | 'import' | 'other';
 }): Promise<number | null> {
-  const apiKey = process.env.POLSIA_API_KEY;
-  if (!apiKey) return null;
-  try {
-    const res = await fetch('https://polsia.com/api/proxy/email/contacts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        email: input.email,
-        name: input.name ?? undefined,
-        source: input.source,
-      }),
-    });
-    return res.status;
-  } catch {
-    return null;
-  }
+  return null;
 }

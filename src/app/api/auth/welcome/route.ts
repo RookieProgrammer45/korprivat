@@ -25,7 +25,7 @@ export const dynamic = 'force-dynamic';
 
 function dashboardUrlFor(role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE'): string {
   // Same-origin relative so the link works on every deployed host
-  // (*.polsia.app, custom brand domains) without baking a baseURL in.
+  // (www.drivelinkup.com, custom brand domains) without baking a baseURL in.
   if (role === 'INSTRUCTOR') return '/dashboard/instructor';
   if (role === 'HANDLEDARE') return '/dashboard/handledare';
   return '/dashboard/student';
