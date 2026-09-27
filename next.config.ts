@@ -12,6 +12,7 @@
 // stabilizes on the new agent.
 
 import type { NextConfig } from 'next';
+import path from 'node:path';
 
 // Eager-load so @t3-oss validates env on every build (relative path: @/ won't resolve here).
 import './src/lib/env';
@@ -86,4 +87,10 @@ export default {
   ...withConfigPlugins,
   headers: nextConfig.headers,
   poweredByHeader: false,
+  // Pin after plugins so next-intl can register its relative path first.
+  // Silences the multiple-lockfiles warning from ~/package-lock.json.
+  turbopack: {
+    ...((withConfigPlugins as NextConfig).turbopack ?? {}),
+    root: path.join(__dirname),
+  },
 } satisfies NextConfig;
