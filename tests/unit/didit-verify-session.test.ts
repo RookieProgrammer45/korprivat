@@ -17,7 +17,7 @@ const {
 vi.mock('server-only', () => ({}));
 
 vi.mock('@/lib/require-auth', () => ({
-  requireAuth: vi.fn(async () => ({ id: 'user_learner_1' })),
+  requireAuth: vi.fn(async () => ({ id: 'test-user-id', emailVerified: true })),
 }));
 
 vi.mock('@/lib/db', () => ({
