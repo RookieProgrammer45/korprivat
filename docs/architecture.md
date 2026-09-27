@@ -45,7 +45,8 @@ Hard constraints:
 - Instructor/school operation is gated on regulatory verification that expires
   (licence, insurance docs as those ship).
 - Fee model today is flat: **0% learner fee, 10% instructor commission (SEK)**.
-  School payout splits wait until Organizations exist.
+  School-affiliated bookings are **8%** ([ADR-004](decisions/ADR-004-school-commission.md)).
+  That rate ships in Phase 5 slice 6. Until then every booking uses 10%.
 - Reconcile in place on the existing Polsia/Next app — do not greenfield-replace
   `Booking`, auth, or dashboard routes.
 
@@ -86,7 +87,7 @@ flowchart TB
     VERIF[Verification]
     BOOK[Scheduling]
     PAY[Payments]
-    ORG[Organizations - future]
+    ORG[Organizations]
     DISC[Discovery]
     REV[Trust]
     COMM[Comms]
@@ -120,7 +121,7 @@ flowchart TB
 | --- | --- | --- | --- |
 | Identity & Auth | Users, sessions, admin role; **email verification enforced** on protected routes | `src/lib/auth*.ts` → `src/lib/identity/` | better-auth `User` (`emailVerified`), `Session`, `Account`; marketplace role on `UserProfile` |
 | Verification | Age, Didit, handledare enrollment, instructor licence | `src/lib/verification/` | verification state, `HandledareEnrollment`, licence rows |
-| Organizations | Schools, memberships | `src/lib/orgs/` | **Not started** |
+| Organizations | Schools, memberships | `src/lib/orgs/` | `Organization`, `Membership` (schema; services stubbed) |
 | Discovery | Search, geo, profiles | `src/lib/discovery/` | Instructor listings (Prisma today) |
 | Scheduling | Availability, bookings | `src/lib/scheduling/` | `AvailabilitySlot`, `Booking` |
 | Payments | Charges, receipts, fees | `src/lib/payments/` + `booking-fees.ts` | Booking payment fields, receipts |
@@ -170,8 +171,12 @@ Live schema is the source of truth under `prisma/schema/`. Below is the
 
 ### Organizations
 
-Deferred. Schools today are signup path `SCHOOL` + `Instructor.providerRole`.
-No `Organization` / `Membership` until Phase 5.
+`Organization` and `Membership` exist (`prisma/schema/organizations.prisma`).
+People link to a school through `Membership`, not through `Instructor.organizationId`.
+`UserProfile.role` stays `STUDENT` | `INSTRUCTOR` | `HANDLEDARE`. School staff
+role is `Membership.role` (`OWNER` | `STAFF`). Registration, dashboard, and
+invites are later Phase 5 slices. Signup path `SCHOOL` still writes free-text
+`schoolName` / `organizationNumber` until those slices land.
 
 ### Scheduling — existing `Booking` (migrate in place)
 
@@ -204,7 +209,8 @@ Exact `WHERE` clause must match live status vocabulary before migrate.
 ### Payments
 
 No separate `Payment` model yet. Fee snapshots live on `Booking` /
-`BookingReceipt`. **Do not add `schoolNetCents` until Organizations exist.**
+`BookingReceipt`. **Do not add `schoolNetCents` until Phase 5 slice 6**, when a
+booking records `organizationId`. See [ADR-004](decisions/ADR-004-school-commission.md).
 
 ## 7. Key flows
 
@@ -221,16 +227,23 @@ Learner picks availability slot
 
 DB exclusion on `startsAt`/`endsAt` becomes the hard overlap guard after migrate.
 
-### 7.2 Fee model (current — authoritative)
+### 7.2 Fee model (authoritative)
 
 ```text
-Learner pays published lesson price (SEK). DriveLinkUp adds 0% learner fee.
-After completed service, instructor net = price − 10% commission.
+- Independent instructor booking: 10% platform commission
+- School-affiliated booking: 8% platform commission
+- Learner: 0%
 ```
 
-Encoded in `src/lib/business/booking-fees.ts` (`LEARNER_SERVICE_FEE_PERCENT = 0`,
-`INSTRUCTOR_COMMISSION_PERCENT = 10`). Unit-test table-driven. **No school cut
-in this phase.**
+School commission ships in Phase 5 (Slice 6). Until then, all bookings use the
+10% model. See [ADR-004](decisions/ADR-004-school-commission.md).
+
+The 8% is taken from the lesson price. The school receives 92% and pays its
+instructors itself. DriveLinkUp does not mediate that payout.
+
+Live code until slice 6: `src/lib/business/booking-fees.ts`
+(`LEARNER_SERVICE_FEE_PERCENT = 0`, `INSTRUCTOR_COMMISSION_PERCENT = 10`).
+Unit-test table-driven.
 
 ### 7.3 Verification
 
@@ -284,7 +297,7 @@ payment paths.
 | 2 — Discovery | Search/geo polish | Learner finds instructor |
 | 3 — Booking | `startsAt`/`endsAt` backfill + exclusion constraint, accept/reject | First booking under constraint |
 | 4 — Payments | Harden Stripe path, receipts | Test-mode payout/release |
-| 5 — Schools | Organization + Membership + school splits | School manages instructors |
+| 5 — Schools | Organization + Membership, then 8% school commission ([ADR-004](decisions/ADR-004-school-commission.md)) in slice 6 | School manages instructors |
 | 6 — Trust | Reviews, disputes, moderation | First review published |
 | 7 — Ops | Crons, admin dashboards | Expiry verified |
 

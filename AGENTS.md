@@ -17,10 +17,12 @@ authoritative. Read it before every task.
 2. **Bookings cannot overlap.** Enforced by a Postgres exclusion constraint on
    the existing `Booking` table (`startsAt`/`endsAt`). Never check overlap in
    application code alone.
-3. **Money stays on the Stripe/Polsia payment path.** No custom ledgers. Current
+3. **Money stays on the Stripe payment path.** No custom ledgers. Current
    fee model: **0% learner fee, 10% instructor commission, SEK** — encoded in
-   `src/lib/business/booking-fees.ts` and table-tested. Do not invent school
-   payout splits until Organizations exist.
+   `src/lib/business/booking-fees.ts` and table-tested. School-affiliated
+   bookings are **8%** ([ADR-004](docs/decisions/ADR-004-school-commission.md))
+   once a booking records `organizationId` (Phase 5 slice 6). Until then every
+   booking uses 10%. DriveLinkUp does not mediate school-to-instructor payouts.
 4. **Webhooks are idempotent.** Every webhook handler dedupes on a unique key
    before doing any work.
 5. **No cross-context DB writes.** Each bounded context owns its tables. Import
@@ -38,7 +40,7 @@ authoritative. Read it before every task.
 | --- | --- | --- |
 | Identity & Auth | `src/lib/identity/` (today: `src/lib/auth*.ts`) | User, Session, Account (better-auth) |
 | Verification | `src/lib/verification/` | Learner verification state, Didit, HandledareEnrollment, instructor licence |
-| Organizations | `src/lib/orgs/` | Organization, Membership — **not started** |
+| Organizations | `src/lib/orgs/` | Organization, Membership — schema only; services stubbed |
 | Discovery | `src/lib/discovery/` | Instructor search / geo (today: `api/instructors*`) |
 | Scheduling | `src/lib/scheduling/` | AvailabilitySlot, Booking |
 | Payments | `src/lib/payments/` + `src/lib/business/booking-fees.ts` | Charges, receipts, fee math |

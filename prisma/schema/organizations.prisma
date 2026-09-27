@@ -1,0 +1,48 @@
+// Organizations bounded context. Schools are entities; instructor↔school
+// links are Membership rows. Do not add organizationId onto Instructor.
+// Membership is not deleted when someone leaves — set status REVOKED.
+
+model Organization {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String   @unique
+  organizationNumber String   @unique
+  vatNumber          String?
+  address            String?
+  postcode           String?
+  city               String?
+  country            String   @default("SE")
+  // DRAFT | PENDING | APPROVED | REJECTED | SUSPENDED
+  verificationState  String   @default("DRAFT")
+  rejectionReason    String?
+  stripeAccountId    String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  memberships Membership[]
+
+  @@index([verificationState])
+}
+
+model Membership {
+  id             String    @id @default(cuid())
+  userId         String
+  organizationId String
+  // OWNER | STAFF
+  role           String
+  // PENDING | ACTIVE | REVOKED
+  status         String    @default("PENDING")
+  invitedBy      String?
+  invitedAt      DateTime  @default(now())
+  acceptedAt     DateTime?
+  revokedAt      DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([organizationId, status])
+  @@index([userId, status])
+}

@@ -1,8 +1,8 @@
 //
 // better-auth (v1.6.x) core models for the Prisma adapter — verbatim shape
 // emitted by `npx @better-auth/cli generate`, plus admin plugin fields on
-// User/Session. Self-contained: relations exist ONLY among these four models;
-// NO @relation to any other module's models.
+// User/Session. Relations stay among these four models, plus User.memberships
+// back to Organizations Membership (Prisma requires that reverse field).
 // Datasource + generator live in prisma/schema/_base.prisma (framework-owned by
 // the template). Do NOT redeclare them here.
 //
@@ -24,6 +24,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  memberships   Membership[]
 
   @@unique([email])
   @@map("user")

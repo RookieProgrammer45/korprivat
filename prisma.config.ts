@@ -15,4 +15,9 @@ import { defineConfig } from 'prisma/config';
 
 export default defineConfig({
   schema: path.join('prisma', 'schema'),
+  // Schema lives in a folder, so Prisma would otherwise look for migrations
+  // under prisma/schema/migrations. History is prisma/migrations.
+  migrations: {
+    path: path.join('prisma', 'migrations'),
+  },
 });
