@@ -1,14 +1,17 @@
 /* @polsia:user-owned — supporting styles for the public marketplace composition. */
 
-html {
+/* Beat globals.css :root / .dark page tint — pure white / pure black site-wide. */
+html:root {
   color-scheme: light;
+  --background: #fff;
   background-color: #fff;
 }
 
 html.dark {
   color-scheme: dark;
-  background-color: var(--background);
-  --background: oklch(0.115 0.025 184);
+  /* Canonical page dark: #000 (no #0a0a0a in use; unify on pure black). */
+  --background: #000;
+  background-color: #000;
   --foreground: oklch(0.96 0.012 184);
   --card: oklch(0.155 0.028 184);
   --card-foreground: var(--foreground);
@@ -41,6 +44,10 @@ body {
 
 html:not(.dark) body {
   background-color: #fff;
+}
+
+html.dark body {
+  background-color: #000;
 }
 
 h1,
@@ -382,15 +389,13 @@ html.dark .marketplace-entry-section {
 }
 
 .auth-shell {
-  background:
-    radial-gradient(120% 80% at 50% -10%, color-mix(in oklch, var(--brand-400) 14%, transparent), transparent 55%),
-    linear-gradient(180deg, color-mix(in oklch, var(--muted) 55%, white) 0%, var(--background) 42%, var(--background) 100%);
+  background-color: #fff;
+  background-image: none;
 }
 
 html.dark .auth-shell {
-  background:
-    radial-gradient(120% 80% at 50% -10%, color-mix(in oklch, var(--brand-500) 18%, transparent), transparent 55%),
-    var(--background);
+  background-color: #000;
+  background-image: none;
 }
 
 .auth-shell-topbar {

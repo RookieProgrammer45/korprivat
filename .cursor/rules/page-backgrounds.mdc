@@ -1,0 +1,20 @@
+---
+description: Global page backgrounds and surfaces
+globs:
+  - "src/app/**/*.tsx"
+  - "src/app/custom-style.css"
+  - "src/**/*.css"
+alwaysApply: false
+---
+
+## Page backgrounds
+- Light mode: solid white or neutral-50. No gradients.
+- Dark mode: solid #0a0a0a or black. No gradients.
+- Never apply radial or linear gradients to a page-level container.
+- Gradients are allowed only on small elements (buttons, badges,
+  hover states), never full-page.
+
+## Surfaces that need distinction from the page
+Use borders and elevation, not background tint:
+- Cards: bg-white dark:bg-neutral-900
+- Borders: border-neutral-200 dark:border-white/10

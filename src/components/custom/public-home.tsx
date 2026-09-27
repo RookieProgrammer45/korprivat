@@ -64,10 +64,6 @@ export function PublicHome() {
 
           <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
             <div className="absolute inset-0 hidden overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 backdrop-blur-md lg:block dark:border-white/[0.08] dark:bg-neutral-800/50 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-              <div
-                className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_60%_50%_at_50%_55%,rgba(0,200,150,0.15),transparent_75%)] opacity-40 dark:opacity-100"
-                aria-hidden
-              />
               <div className="absolute inset-x-0 top-0 bottom-[22rem]">
                 <Image
                   src="/images/hero-driving.png"
@@ -75,7 +71,7 @@ export function PublicHome() {
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain p-4 opacity-95 lg:p-6 dark:opacity-90 dark:brightness-95"
+                  className="object-contain p-3 opacity-95 lg:p-2 dark:opacity-90 dark:brightness-95"
                   style={{ objectPosition: 'center 55%' }}
                 />
               </div>
