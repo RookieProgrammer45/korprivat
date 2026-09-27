@@ -3,6 +3,15 @@
 Authoritative ADRs: [ADR-001 Sweden-first](decisions/ADR-001-sweden-first.md) ·
 [ADR-002 better-auth](decisions/ADR-002-better-auth.md).
 
+## Ownership
+
+DriveLinkUp owns and operates this codebase. All integrations are
+called directly against provider APIs with credentials owned by
+DriveLinkUp. There is no scaffold layer, no proxy layer, and no
+third-party control over runtime behavior.
+
+Canonical host: https://www.drivelinkup.com
+
 ## Contents
 
 - [1. Product summary](#1-product-summary)
