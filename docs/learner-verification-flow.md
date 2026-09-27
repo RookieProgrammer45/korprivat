@@ -127,6 +127,11 @@ Webhook handler (`/api/webhooks/didit`) must:
 
 Never call the age gate from the client. Always server-side, always from webhook data.
 
+> **Note (2026-09-27):** Age is verified from ID documents, never from facial
+> estimation. Facial estimation deprecated 2026-09-27; signup no longer calls
+> `/api/signup/age-check`. Authoritative DOB is
+> `decision.id_verifications[].date_of_birth` from the Free KYC webhook.
+
 ## 6. Route guards
 
 Do **not** add `middleware.ts`. Use:

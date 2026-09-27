@@ -12,8 +12,8 @@ booking surfaces once one real KYC session completes.
 
 ## In progress
 
-- Didit KYC end-to-end wired (session create, webhook, client button).
-  Awaiting first real production session.
+- Signup: 3-step wizard (account → photo → KYC) for LEARNER; ID document
+  Didit Free KYC on `/onboarding/learner/verify`.
 
 ## Production findings
 
@@ -25,6 +25,12 @@ booking surfaces once one real KYC session completes.
 
 - [ ] Booking gate still uses claimed DOB soft-gate. Tighten to
       require ACTIVE once one real KYC session completes in production.
+- [ ] Deprecated `UserProfile` columns `ageEstimatedYears` /
+      `ageCheckRequestId` / `ageCheckStatus` (facial estimation retired
+      2026-09-27). No migration to drop yet.
+- [ ] Existing selfie-verified users: none found in Neon at cutover
+      (0 `ageEstimatedYears` rows); flag any future estimate-only rows
+      for re-verification via ID KYC.
 - [ ] zsh .zshrc module_init warning (local machine, not app)
 - `POST /api/bookings/…/[id]/payment-link` and `payment-poll` do not
   check learner verification. Revisit when the hard gate lands.
