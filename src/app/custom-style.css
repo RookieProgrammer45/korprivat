@@ -158,6 +158,52 @@ html.dark .marketplace-hero {
   font-weight: 800;
 }
 
+/* Hero illustration: CSS-only (no framer-motion). Entrance once; hover rocks
+   the whole asset because the PNG has no isolated wheel layers. */
+@keyframes marketplace-hero-illust-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes marketplace-hero-wheel-hint {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+
+.marketplace-hero-illustration {
+  animation: marketplace-hero-illust-enter 500ms ease-out both;
+}
+
+.marketplace-hero-illustration-img {
+  transition: transform 300ms ease-out;
+  transform-origin: 45% 70%;
+}
+
+.marketplace-hero-panel:hover .marketplace-hero-illustration-img {
+  animation: marketplace-hero-wheel-hint 2s linear infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketplace-hero-illustration,
+  .marketplace-hero-panel:hover .marketplace-hero-illustration-img {
+    animation: none;
+  }
+
+  .marketplace-hero-illustration-img {
+    transition: none;
+  }
+}
+
 .marketplace-hero-card {
   overflow: hidden;
   box-shadow: var(--shadow-xl);
