@@ -62,25 +62,25 @@ export function PublicHome() {
           </div>
 
           <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
-            <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 backdrop-blur-md lg:block dark:border-white/[0.08] dark:bg-neutral-800/50 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-              <div className="marketplace-hero-illustration absolute inset-x-0 top-0 bottom-[22rem]">
+            <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden bg-white lg:block dark:bg-black">
+              <div className="hero-road" aria-hidden>
+                <span className="hero-road-line" />
+                <span className="hero-road-line hero-road-line-b" />
+              </div>
+              <div className="hero-car marketplace-hero-illustration absolute inset-x-0 top-0 bottom-[22rem]">
                 <Image
                   src="/images/hero-driving.png"
                   alt={t('hero.imageAlt')}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="marketplace-hero-illustration-img object-contain p-3 opacity-95 lg:p-2 dark:opacity-90 dark:brightness-95"
+                  className="object-contain p-3 lg:p-2"
                   style={{ objectPosition: 'center 55%' }}
                 />
               </div>
-              <div
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-neutral-100/90 to-transparent dark:from-black/60"
-                aria-hidden
-              />
             </div>
 
-            <Card className="marketplace-hero-card z-10 min-w-0 border-neutral-200 bg-white/95 shadow-md backdrop-blur-sm lg:absolute lg:bottom-6 lg:left-6 lg:max-w-[400px] dark:border-white/10 dark:bg-black/85">
+            <Card className="marketplace-hero-card z-10 min-w-0 rounded-2xl border border-neutral-200 bg-white/95 shadow-none backdrop-blur-sm lg:absolute lg:bottom-6 lg:left-6 lg:max-w-[400px] dark:border-white/10 dark:bg-black/85">
               <CardContent className="grid gap-6 p-6 sm:p-8">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-eyebrow text-brand-700 dark:text-brand-300">
