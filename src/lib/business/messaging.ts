@@ -1,4 +1,3 @@
-// @polsia:user-owned — server-only helpers for booking-scoped messaging.
 
 import type {
   BookingContext,

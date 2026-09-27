@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared photo-verification wire contracts.
 import { z } from 'zod';
 
 export const PhotoStatus = z.enum(['NONE', 'STAGED', 'CONFIRMED']);

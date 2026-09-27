@@ -1,4 +1,3 @@
-// @polsia:user-owned — Next.js 16 edge proxy for DriveLinkUp (replaces middleware.ts).
 //
 // Do NOT create `middleware.ts`. This file owns:
 //   - CSP with per-request nonce

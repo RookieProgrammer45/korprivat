@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/bookings/[id]/accept.
 // An instructor can accept through the emailed action token or a signed-in
 // session linked to the instructor profile. Checkout uses the amount already
 // stamped on the booking, never the current browser or profile value.

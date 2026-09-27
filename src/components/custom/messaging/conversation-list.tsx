@@ -1,4 +1,3 @@
-// @polsia:user-owned — accessible conversation list presentation.
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the Instructor resource. Client
 // and server both import this so a single schema is the source of truth for
 // the instructor payload returned by GET /api/instructors and
 // GET /api/instructors/[id].

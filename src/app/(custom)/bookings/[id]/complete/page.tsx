@@ -1,4 +1,3 @@
-// @polsia:user-owned — Server Component shell for the "mark lesson complete"
 // deep link. The page hosts `<BookingCompleteForm>` (a client island) which
 // reads the live booking row, gates the form on `paymentStatus ===
 // 'held_escrow' && disputeStatus === null`, and POSTs to

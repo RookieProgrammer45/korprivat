@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/signup/start, idempotent role + path marker.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { SignupStart } from '@/lib/contracts/signup';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — escrow-style payment helpers.
 //
 // Shared primitives for the complete / dispute / dispute-resolve route
 // handlers: per-booking unguessable token generation + matching, and the

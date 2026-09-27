@@ -1,4 +1,3 @@
-// @polsia:user-owned — booking-scoped conversation list and creation.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { getBookingParticipantProof, roleForBooking, summaryFor } from '@/lib/business/messaging';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — zod contract for the admin cleanup-runs surface.
 //
 // Single source of truth shared between the admin route handler
 // (`src/app/api/admin/cleanup-runs/route.ts`) and the client island

@@ -1,4 +1,3 @@
-// @polsia:user-owned
 //
 // Shared zod schema for the early-access signup form. Safe to import from a
 // 'use client' file: it has no server-only imports, so the client form

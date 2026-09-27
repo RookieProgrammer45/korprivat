@@ -1,4 +1,3 @@
-// @polsia:user-owned — concise provider entry island.
 //
 // This is an entry point, not an operational dashboard. Credentials, safety,
 // account setup, and scheduling details remain behind the existing authenticated

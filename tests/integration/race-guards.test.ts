@@ -1,4 +1,3 @@
-// @polsia:user-owned — race-guards for the trust-critical flow.
 //
 // Two scenarios where concurrent calls would otherwise double-trigger a
 // side effect:

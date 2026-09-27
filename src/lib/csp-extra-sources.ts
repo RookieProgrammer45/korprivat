@@ -1,4 +1,3 @@
-// @polsia:user-owned — extra CSP source allow-lists consumed by proxy.ts.
 // Kept out of next.user-config.ts so the edge proxy does not import
 // next-intl/plugin (and its WASM extractor) into the proxy graph.
 import type { CspExtraSources } from './csp';

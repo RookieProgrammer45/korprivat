@@ -1,4 +1,3 @@
-// @polsia:user-owned — compact dashboard sub-nav.
 //
 // Renders the role-correct tab (Student / Instructor / Handledare) + a
 // sign-out button that fires better-auth's `signOut()` then

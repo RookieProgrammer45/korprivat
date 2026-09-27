@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contracts for auth-shaped app data.
 //
 // The auth flows themselves (signIn/signUp/signOut/getSession) go through
 // better-auth's framework types — those are the source of truth for the

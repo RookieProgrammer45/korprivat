@@ -1,4 +1,3 @@
-// @polsia:user-owned — student-dashboard island: AI-ranked instructor
 // recommendations.
 //
 // Loads GET /api/instructors/recommendations (`apiFetch` only — never

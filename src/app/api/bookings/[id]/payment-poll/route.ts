@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/bookings/[id]/payment-poll
 //
 // Stripe verification and the pending → held_escrow transition stay guarded
 // independently from per-recipient receipt delivery. A mail failure therefore

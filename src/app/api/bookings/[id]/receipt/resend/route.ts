@@ -1,4 +1,3 @@
-// @polsia:user-owned — authorized receipt email retry endpoint.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { deliverBookingReceipt } from '@/lib/business/receipt-delivery';

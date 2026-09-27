@@ -1,4 +1,3 @@
-// @polsia:user-owned
 //
 // POST /api/stripe-billing/checkout
 // App-owned runtime checkout route: the browser posts a product id, the server

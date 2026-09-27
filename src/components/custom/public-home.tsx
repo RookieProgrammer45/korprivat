@@ -1,4 +1,3 @@
-// @polsia:user-owned — learner-first public home island.
 //
 // The page deliberately answers only the questions that move a learner toward
 // a booking: what is available, what it costs, how the next step works, and

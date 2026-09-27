@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/bookings/[id]/dispute/resolve
 //
 // Closing transition for the dispute flow. Either party (the one carrying the
 // token) can call this with `outcome: 'released'` (terms agreed — funds go

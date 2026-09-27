@@ -1,4 +1,3 @@
-// @polsia:user-owned — learner onboarding after claimed DOB (SIGNED_UP).
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

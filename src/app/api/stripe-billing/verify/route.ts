@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/stripe-billing@0.4.0. Drift = commit rejected.
 //
 // GET /api/stripe-billing/verify?session_id=...
 // Public success-page verification route. It verifies the Stripe checkout

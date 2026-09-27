@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/consent
 //                      GET  /api/consent
 //
 // Universal cookie/consent capture endpoint. Anonymous-OK (no requireAuth)

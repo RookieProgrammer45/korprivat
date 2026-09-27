@@ -1,4 +1,3 @@
-// @polsia:user-owned — email-send mock helper.
 //
 // The `@/lib/email/send` module is imported statically by every handler
 // test at module-evaluation time. Register vi.mock at module-load so vitest

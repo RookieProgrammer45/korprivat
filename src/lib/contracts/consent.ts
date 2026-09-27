@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contracts for the consent banner / API.
 //
 // Single source of truth shared between the consent banner client island
 // (`src/components/custom/consent-banner.tsx`), the route handler

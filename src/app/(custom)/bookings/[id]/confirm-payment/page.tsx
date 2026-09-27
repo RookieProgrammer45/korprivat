@@ -1,4 +1,3 @@
-// @polsia:user-owned — no-index shell for the token-bearing hosted checkout.
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingConfirmPayment } from '@/components/custom/booking-confirm-payment';

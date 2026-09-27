@@ -1,4 +1,3 @@
-// @polsia:user-owned — metadata-only receipt page shell.
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingReceipt } from '@/components/custom/booking-receipt';

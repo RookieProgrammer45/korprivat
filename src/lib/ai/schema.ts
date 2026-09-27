@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/ai@0.1.0. Drift = commit rejected.
 //
 // Shared schemas for Polsia-managed AI calls. Safe to import from client
 // components: this file has no server-only imports and does not expose secrets

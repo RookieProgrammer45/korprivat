@@ -1,4 +1,3 @@
-// @polsia:user-owned — durable mandatory photo verification state.
 // User is framework-owned, so userId is intentionally a scalar link.
 
 enum PhotoVerificationStatus {

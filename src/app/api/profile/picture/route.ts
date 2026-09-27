@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/profile/picture
 //
 // Real avatar upload. Decoupled from signup: the welcome email is fired
 // exactly once from /api/auth/welcome immediately after signUp.email

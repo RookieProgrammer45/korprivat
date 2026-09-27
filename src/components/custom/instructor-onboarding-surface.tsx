@@ -1,4 +1,3 @@
-// @polsia:user-owned — client island for onboarding context and role gating.
 'use client';
 
 import { useRouter } from 'next/navigation';

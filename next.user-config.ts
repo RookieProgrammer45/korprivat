@@ -1,6 +1,5 @@
-// @polsia:user-owned — your Next.js customizations, merged into next.config.ts by the
-// framework. Edit freely (no slot markers). next.config.ts stays framework-owned: don't
-// put security headers / CSP / a full `images` block here.
+// Next.js customizations merged into next.config.ts.
+// Do not put security headers / CSP / a full `images` block here.
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 import type { AppCapabilities } from './src/lib/permissions-policy';
@@ -11,12 +10,7 @@ export { cspExtraSources };
 type RemotePatterns = NonNullable<NonNullable<NextConfig['images']>['remotePatterns']>;
 
 /** Remote hosts you load <Image> from. e.g. { protocol: 'https', hostname: 'images.unsplash.com' } */
-export const userRemotePatterns: RemotePatterns = [
-  // Avatars uploaded via /api/profile/picture land on cdn.polsia.com through
-  // the R2 proxy. next/image needs the host allow-listed here; the base CSP
-  // already permits HTTPS image loads so no cspExtraSources change.
-  { protocol: 'https', hostname: 'cdn.polsia.com' },
-];
+export const userRemotePatterns: RemotePatterns = [];
 
 /**
  * Browser capabilities this app needs (drives the Permissions-Policy header).

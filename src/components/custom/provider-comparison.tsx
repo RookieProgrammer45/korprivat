@@ -1,4 +1,3 @@
-// @polsia:user-owned — client-only comparison island for provider discovery.
 
 'use client';
 

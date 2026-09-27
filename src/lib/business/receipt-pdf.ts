@@ -1,4 +1,3 @@
-// @polsia:user-owned — canonical receipt authorization and PDF document mapping.
 import 'server-only';
 import { getBookingAccessToken, matchesLearnerAccessToken } from '@/lib/business/booking-access';
 import { assertTokenMatches } from '@/lib/business/escrow';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — deterministic instructor seed manifest. Imported by
 // marketplace seed (server) and chatbot knowledge. Stable string IDs are
 // intentional — see schema/instructors.prisma.
 //

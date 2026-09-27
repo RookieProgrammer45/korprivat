@@ -1,4 +1,3 @@
-// @polsia:user-owned — learner/instructor receipt island.
 'use client';
 
 import {

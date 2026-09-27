@@ -1,4 +1,3 @@
-// @polsia:user-owned — token-bearing cancellation island.
 //
 // The server remains authoritative for the cancellation classification and
 // writes the final outcome. This island previews the same three policy bands,

@@ -1,4 +1,3 @@
-// @polsia:user-owned — explicit Swedish handledare distinction.
 
 'use client';
 

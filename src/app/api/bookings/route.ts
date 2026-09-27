@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST a booking request against an instructor.
 import 'server-only';
 import { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — learner-facing fee quote island.
 //
 // The browser never calculates the service fee. It requests the quote from
 // the server, or displays the already-snapshotted values returned by a

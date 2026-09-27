@@ -1,4 +1,3 @@
-// @polsia:user-owned — global navigation rendered from src/lib/nav.ts.
 //
 // Labels are translation keys (resolved by the SiteNav island via
 // `useTranslations('common')`) so the same list renders SV or EN depending on

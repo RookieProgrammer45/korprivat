@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/booking-fees/config
 //
 // Provider-only fee configuration used by the authenticated payout card.
 // Learner-facing pages use `/api/booking-fees/quote`, which never exposes

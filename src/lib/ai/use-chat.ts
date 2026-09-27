@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/ai@0.1.0. Drift = commit rejected.
 //
 // Streaming chat state hook. Owns ALL the fragile chat logic — message state,
 // the POST to /api/ai/chat, SSE parsing, and the token-by-token optimistic

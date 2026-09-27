@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/instructor/availability` server page.
 //
 // Server Component shell: session-gated via `requireDashboardSession`, sets
 // `metadata`, and mounts the <AvailabilityEditor/> client island. The

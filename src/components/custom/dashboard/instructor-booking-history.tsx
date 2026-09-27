@@ -1,4 +1,3 @@
-// @polsia:user-owned — instructor's paid and settled booking history island.
 'use client';
 
 import Link from 'next/link';

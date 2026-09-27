@@ -1,4 +1,3 @@
-// @polsia:user-owned
 //
 // POST /api/waitlist — REST route handler for the DriveLinkUp early-access
 // signup. Lives under /api, which proxy.ts's matcher excludes.

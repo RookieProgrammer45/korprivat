@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/pdf@0.1.0. Drift = commit rejected.
 //
 // Shared schemas for server-side PDF document generation. Safe to import from
 // client components: this file has no server-only imports and does not expose

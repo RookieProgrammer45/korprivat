@@ -1,4 +1,3 @@
-// @polsia:user-owned — receipt calculations and wire-shape coverage.
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const prismaMock = vi.hoisted(() => ({

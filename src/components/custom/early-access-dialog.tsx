@@ -1,7 +1,6 @@
-// @polsia:user-owned — 'use client' island that pairs a custom trigger with
-// the shadcn Dialog hosting <WaitlistForm/>. Each CTAs on the landing page
-// mounts this island so clicking the button opens the early-access dialog
-// properly (and so the Server Component can stay free of browser state).
+// 'use client' island that pairs a custom trigger with the shadcn Dialog
+// hosting <WaitlistForm/>. Landing CTAs mount this so the Server Component
+// stays free of browser state.
 'use client';
 
 import * as React from 'react';

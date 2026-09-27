@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/signup/complete, the server completion gate.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { confirmedPhotoUrl } from '@/lib/business/photo-verification';

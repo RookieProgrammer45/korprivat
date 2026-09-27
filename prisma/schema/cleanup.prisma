@@ -1,4 +1,3 @@
-// @polsia:user-owned — audit tables for the weekly R2 orphan-cleanup cron.
 //
 // `CleanupRun` records one execution of the cleanup job (trigger = 'cron'
 // when fired by the [[crons]] block, 'admin' when fired from the admin

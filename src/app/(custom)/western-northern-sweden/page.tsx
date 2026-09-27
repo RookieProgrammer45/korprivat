@@ -1,4 +1,3 @@
-// @polsia:user-owned — metadata shell for the Western and Northern Sweden SEO hub.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

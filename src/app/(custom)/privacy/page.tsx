@@ -1,4 +1,3 @@
-// @polsia:user-owned — public privacy-policy shell.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — public instructor profile island.
 //
 // The profile is intentionally a small decision surface: live identity,
 // categories, rate, learner fee quote, booking mode, cancellation schedule,

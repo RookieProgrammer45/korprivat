@@ -1,4 +1,3 @@
-// @polsia:user-owned
 //
 // Payment fulfillment via Polsia's payment-events feed (no inbound Stripe
 // callbacks): pull events from a cursor, process each idempotently.

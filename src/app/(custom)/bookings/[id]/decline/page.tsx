@@ -1,4 +1,3 @@
-// @polsia:user-owned — Server Component shell for the "decline a booking"
 // deep link. Mirrors `/bookings/[id]/accept` but hosts
 // `<BookingDeclineForm/>` (a sibling client island). The token-bearing
 // URL keeps `robots: { index: false, follow: false }` so this page is

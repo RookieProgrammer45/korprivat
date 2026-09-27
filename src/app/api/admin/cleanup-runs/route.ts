@@ -1,4 +1,3 @@
-// @polsia:user-owned — admin R2-cleanup runs surface.
 //
 // Two verbs:
 //   GET  — last 50 CleanupRun rows with their final `scanned` / `deleted`

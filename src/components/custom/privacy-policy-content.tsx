@@ -1,4 +1,3 @@
-// @polsia:user-owned — client-rendered privacy policy content.
 //
 // Keeping the body in an island lets the page shell remain a small metadata
 // wrapper while preserving the cookie-based locale switcher for every section.

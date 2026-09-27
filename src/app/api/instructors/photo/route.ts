@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/instructors/photo
 //
 // Signed-in multipart upload for the instructor self-onboarding form's profile
 // picture. It does not persist anything until the detail form creates the

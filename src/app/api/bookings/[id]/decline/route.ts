@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/bookings/[id]/decline
 //
 // "Instructor declined the Request-mode booking" terminal transition. Like
 // the complete / cancel / dispute routes, authorised by the per-booking

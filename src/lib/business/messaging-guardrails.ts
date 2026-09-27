@@ -1,4 +1,3 @@
-// @polsia:user-owned — deterministic, high-confidence messaging guardrails.
 import type { MessagingCategoryCode } from '@/lib/contracts/messaging';
 
 export interface MessagingGuardrailResult {

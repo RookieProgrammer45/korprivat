@@ -1,4 +1,3 @@
-// @polsia:user-owned — end-to-end marketplace payment flow coverage.
 //
 // The other integration files lock in isolated segments (payment-link +
 // payment-poll, escrow terminal transitions, race-guards). This file is

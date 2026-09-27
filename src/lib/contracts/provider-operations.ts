@@ -1,4 +1,3 @@
-// @polsia:user-owned — typed provider dashboard and action projections.
 import { z } from 'zod';
 import { AvailabilitySlotItem, ProviderRoleEnum } from '@/lib/contracts/availability';
 import {

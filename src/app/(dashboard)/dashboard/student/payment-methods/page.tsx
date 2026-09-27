@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/student/payment-methods` server page.
 //
 // Student dashboard leaf that mounts the `<SavedMethodsPanel/>` island.
 // The island fetches `/api/profile/payment-methods` (list) and

@@ -1,4 +1,3 @@
-// @polsia:user-owned — landing target of Stripe hosted-checkout `cancelUrl`.
 //
 // Renders a short message + a link back to `/dashboard/instructor`. The page
 // itself is fully static — no DB, no API, no auth check (cancellation is a

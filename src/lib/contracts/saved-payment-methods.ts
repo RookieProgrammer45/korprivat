@@ -1,4 +1,3 @@
-// @polsia:user-owned — client-safe zod contracts for the "saved payment
 // method + one-click rebook" surfaces.
 //
 // Three contracts in one file (the plan's §4) so the dashboard islands, the

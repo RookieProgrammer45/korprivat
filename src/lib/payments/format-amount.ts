@@ -1,4 +1,3 @@
-// @polsia:user-owned — single source of truth for SEK↔USD conversion in the
 // DriveLinkUp booking payment flow.
 //
 // The `stripe-billing` module's `createCheckoutSession` helper is USD-only and

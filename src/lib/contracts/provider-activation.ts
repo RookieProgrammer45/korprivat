@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared provider activation KPI response contract.
 import { z } from 'zod';
 
 export const ProviderActivationTrend = z.discriminatedUnion('status', [

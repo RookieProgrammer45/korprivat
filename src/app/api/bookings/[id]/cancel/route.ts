@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/bookings/[id]/cancel
 //
 // "Cancel a booking" terminal transition. Authorised by the same per-booking
 // unguessable action token the held-receipt email deep-link carries

@@ -1,4 +1,3 @@
-// @polsia:user-owned — /profile photo edit island.
 //
 // Renders the "Edit photo" / "Add photo" button in the profile header. On
 // click opens a Dialog hosting <PhotoPromptStep/> wired to

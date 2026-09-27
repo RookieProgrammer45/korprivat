@@ -1,4 +1,3 @@
-// @polsia:user-owned — privacy / consent constants single-sourced here so the
 // auth contract, the consent banner, and the server-side route handler all
 // stamp the same `policyVersion`.
 

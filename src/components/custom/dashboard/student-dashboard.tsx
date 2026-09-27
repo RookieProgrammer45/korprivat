@@ -1,4 +1,3 @@
-// @polsia:user-owned — student dashboard island.
 //
 // Loads /api/bookings/me via the api-fetch + zod contract path so the
 // response shape is validated at the client. Empty / loading / error

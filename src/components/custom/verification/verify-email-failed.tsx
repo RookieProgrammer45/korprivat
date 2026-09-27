@@ -1,4 +1,3 @@
-// @polsia:user-owned — client UI when email verification link fails / expires.
 
 'use client';
 

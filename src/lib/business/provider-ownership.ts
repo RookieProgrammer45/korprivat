@@ -1,4 +1,3 @@
-// @polsia:user-owned — one authenticated provider ownership resolver.
 import 'server-only';
 import { prisma } from '@/lib/db';
 import type { SessionUser } from '@/lib/require-auth';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — bilingual instructor self-onboarding form. Strings via
 // `useTranslations('instructorOnboarding')`. The page `/instructors/new`
 // hosts this island; the flow is a two-step wizard:
 //

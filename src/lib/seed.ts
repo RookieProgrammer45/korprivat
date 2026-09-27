@@ -1,4 +1,3 @@
-// @polsia:user-owned — deploy-time database seed. You OWN this file.
 //
 // seed() runs once when the server boots (via the framework-owned
 // src/instrumentation.ts), on the Node server, AFTER the schema is applied. Use it

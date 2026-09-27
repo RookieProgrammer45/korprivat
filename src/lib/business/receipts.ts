@@ -1,4 +1,3 @@
-// @polsia:user-owned — receipt snapshots and lifecycle status mapping.
 import 'server-only';
 import { instructorPayoutSek, learnerTotalSek } from '@/lib/business/booking-fees';
 import {

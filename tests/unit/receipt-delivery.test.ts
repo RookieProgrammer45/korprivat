@@ -1,4 +1,3 @@
-// @polsia:user-owned — receipt delivery claim, failure, and duplicate coverage.
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const hoisted = vi.hoisted(() => ({

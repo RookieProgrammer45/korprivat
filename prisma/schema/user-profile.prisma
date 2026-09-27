@@ -1,4 +1,3 @@
-// @polsia:user-owned — per-user app fields for the better-auth `User` row.
 //
 // `User` lives in the framework-owned prisma/schema/auth.prisma (Prisma can't
 // extend a model across files), so fields that are MINE — the student/instructor

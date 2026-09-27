@@ -1,4 +1,3 @@
-// @polsia:user-owned — public reviews resource. Read-only placeholder:
 // `GET` returns the empty `ReviewList` envelope to prove the table rendered
 // on the live DB. POST is out of scope for this iteration.
 import 'server-only';

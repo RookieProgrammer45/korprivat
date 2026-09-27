@@ -1,4 +1,3 @@
-// @polsia:user-owned — single source of truth for the per-booking fee model.
 //
 // DriveLinkUp does not add a learner service fee. A new booking charges only
 // the school's published lesson price. The school commission is 10% of the

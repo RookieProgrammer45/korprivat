@@ -1,4 +1,3 @@
-// @polsia:user-owned — Late-cancellation fee ledger.
 //
 // One row per late cancellation. Reproduces the math the cancel route handler
 // ran at insert time (amountUsd + windowHoursAtCancel + feePercentApplied) so

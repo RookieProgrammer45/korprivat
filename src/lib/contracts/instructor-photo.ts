@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared contract for instructor photo upload responses.
 import { z } from 'zod';
 
 export const InstructorPhotoUploaded = z.object({

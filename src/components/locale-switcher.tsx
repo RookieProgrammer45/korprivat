@@ -1,4 +1,3 @@
-// @polsia:user-owned — language switcher; style/place freely (drop it in your nav,
 // under <I18nProvider>). POSTs /api/locale to set the cookie, then refreshes.
 'use client';
 import { useRouter } from 'next/navigation';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — idempotent marketplace seed used by boot (`src/lib/seed.ts`)
 // and `npm run db:seed`. Instructors come from the deterministic manifest;
 // open weekday slots make the booking form testable without a live editor.
 

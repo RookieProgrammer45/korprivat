@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared contract for the public Western and Northern Sweden SEO hub.
 
 import { z } from 'zod';
 

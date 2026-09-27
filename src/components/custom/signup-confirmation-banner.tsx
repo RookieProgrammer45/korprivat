@@ -1,4 +1,3 @@
-// @polsia:user-owned — in-app signup confirmation banner.
 //
 // Rendered once in the /dashboard layout shell. Reads `?signup=1` from the
 // URL via useSearchParams() and shows an inline success card so the user

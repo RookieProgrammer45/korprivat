@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/pdf@0.1.0. Drift = commit rejected.
 //
 // POST /api/pdf/document
 // Generates a PDF from a validated DocumentSpec in the request body and streams

@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the per-booking fee disclosure
 // surface. Powers the instructor-detail breakdown card and the instructor
 // dashboard payout card. Both ends read from `/api/booking-fees/*` so the
 // constants never live in the client.

@@ -1,4 +1,3 @@
-// @polsia:user-owned — compact booking context for a conversation.
 'use client';
 
 import { CalendarClock, ExternalLink } from 'lucide-react';

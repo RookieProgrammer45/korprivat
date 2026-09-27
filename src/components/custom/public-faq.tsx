@@ -1,4 +1,3 @@
-// @polsia:user-owned — learner FAQ island.
 
 'use client';
 

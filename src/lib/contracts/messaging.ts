@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared contract for booking-scoped messaging.
 import { z } from 'zod';
 
 export const MessagingCategoryCode = z.enum([

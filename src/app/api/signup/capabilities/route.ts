@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/signup/capabilities
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { SignupCapabilities } from '@/lib/contracts/didit-age';

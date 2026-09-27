@@ -1,4 +1,3 @@
-// @polsia:user-owned — server-side guard layered on `/dashboard/handledare`.
 //
 // Calls `requireDashboardSession('/dashboard/handledare')` first (which runs
 // `redirect('/login?next=…')` when no session and self-heals a missing

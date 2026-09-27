@@ -1,4 +1,3 @@
-// @polsia:user-owned — "Instructor declines a Request-mode booking" form.
 // Sibling of `<BookingAcceptForm/>` — same shape, the only difference is the
 // route it posts to and the optional `reason` field that lets the
 // instructor add a one-line explanation that flows back to the learner.

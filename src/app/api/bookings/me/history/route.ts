@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/bookings/me/history
 //
 // Read-only history of every booking (past + upcoming) that the signed-in
 // learner owns. Used by the dashboard island's "See all bookings" deep-link

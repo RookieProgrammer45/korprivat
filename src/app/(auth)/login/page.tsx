@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/login` page.
 //
 // Server Component: reads `?next` server-side so a better-auth deep-link from
 // the dashboard guard lands the user back where they came from after sign-in.

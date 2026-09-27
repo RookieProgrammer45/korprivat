@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the AvailabilitySlot resource.
 //
 // Client and server both import this so a single schema is the source of
 // truth for the slot read shape, the editor write shape, and the single-slot

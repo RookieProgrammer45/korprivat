@@ -1,4 +1,3 @@
-// @polsia:user-owned — `RebookingCache` model: bookkeeping so the rebook
 // form on `/instructors/[id]?rebook=<bookingId>` can pre-fill from the
 // learner's last booking with that instructor.
 //

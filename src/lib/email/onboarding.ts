@@ -1,4 +1,3 @@
-// @polsia:user-owned — server-only post-signup handshake helper.
 //
 // Both the email-signup `POST /api/auth/welcome` route and the social-signup
 // `POST /api/auth/social-role` route need the same per-user intro work after

@@ -1,4 +1,3 @@
-// @polsia:user-owned — signed-in instructor manages their own time slots.
 //
 // `GET /api/instructor-availability` returns all upcoming slots (open +
 // booked) for the signed-in instructor's Instructor row. "All upcoming"

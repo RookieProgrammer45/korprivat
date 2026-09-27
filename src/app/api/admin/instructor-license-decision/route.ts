@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/admin/instructor-license-decision
 //
 // Admin-only endpoint that flips an InstructorLicense row's status to one
 // of {VERIFIED, REJECTED} (writes `verifiedAt` + `verifiedByEmail` + an

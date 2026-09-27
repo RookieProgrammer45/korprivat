@@ -1,4 +1,3 @@
-// @polsia:user-owned — canonical licence categories for the DriveLinkUp
 // marketplace. The hero chip on the landing page, the contract enum, and the
 // booking form's `<Select>` all import the same set so display copy and
 // validation never drift apart.

@@ -1,4 +1,3 @@
-// @polsia:user-owned
 'use client';
 
 import { useRouter } from 'next/navigation';

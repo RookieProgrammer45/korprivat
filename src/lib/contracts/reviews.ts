@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the reviews resource. Keep this
 // module client-importable: zod only, no server-only imports.
 import { z } from 'zod';
 

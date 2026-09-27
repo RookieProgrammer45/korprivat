@@ -1,4 +1,3 @@
-// @polsia:user-owned — `GET /api/profile/payment-methods`.
 //
 // Per-user list of `SavedPaymentMethod` rows the dashboard renders on
 // the "payment methods" page. Owner-scoped via `requireAuth(req)` +

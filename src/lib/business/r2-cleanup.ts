@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared logic for the weekly R2 orphan-cleanup job.
 //
 // Used by:
 //   - the admin route handler `src/app/api/admin/cleanup-runs/route.ts`

@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/instructor-license/upgrade
 //
 // User-facing fallback for the handledare→trafiklärare role flip. The
 // admin decision endpoint (`/api/admin/instructor-license-decision`) does

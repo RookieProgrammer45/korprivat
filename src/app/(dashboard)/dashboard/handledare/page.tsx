@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/handledare` server page.
 //
 // Server Component: greeting + a "Find learners" CTA + the clickwrap
 // status badge. When the user's stored ClickwrapAcceptance row is missing

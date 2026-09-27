@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the profile-picture upload.
 //
 // POST /api/profile/picture returns { imageUrl, profileCompletedAt } on success.
 // Both the route handler (server) and the SignUpForm's photo step (client)

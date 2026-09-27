@@ -1,4 +1,3 @@
-// @polsia:user-owned — global GDPR cookie / consent banner.
 //
 // Three actions: accept all / reject non-essential / customize (granular
 // toggles). On every decision, POSTs /api/consent via apiFetch. The server

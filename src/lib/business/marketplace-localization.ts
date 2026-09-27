@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared locale and provider-time formatting helpers.
 
 export type MarketplaceLocale = 'en' | 'sv';
 

@@ -1,4 +1,3 @@
-// @polsia:framework-owned — do NOT edit. Cookie read for the locale. next/headers is
 // only allowed under src/lib/**, so the read lives here (not in src/i18n/request.ts).
 import { cookies } from 'next/headers';
 import { defaultLocale, isLocale } from '@/i18n/config';

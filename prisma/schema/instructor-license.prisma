@@ -1,4 +1,3 @@
-// @polsia:user-owned — first-time driving-licence verification per instructor.
 //
 // One row per signed-up instructor; `userId @unique` makes a re-upload act
 // like an upsert on the same row. `User` lives in framework-owned

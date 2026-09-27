@@ -1,4 +1,3 @@
-// @polsia:user-owned — handledare dashboard clickwrap renewal card.
 //
 // Server-guard `requireHandledareClickwrap()` mounts this client island
 // when the user's stored ClickwrapAcceptance row is missing or its

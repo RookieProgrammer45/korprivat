@@ -1,4 +1,3 @@
-// @polsia:user-owned — Didit KYC step during learner signup (DIDIT_PENDING / SIGNED_UP).
 
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — age and licence-tenure gates for marketplace signup.
 
 /** Youngest learner age accepted on DriveLinkUp. */
 export const MIN_LEARNER_AGE_YEARS = 16;

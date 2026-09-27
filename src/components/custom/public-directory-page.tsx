@@ -1,4 +1,3 @@
-// @polsia:user-owned — localized directory page composition.
 //
 // The directory itself owns all filtering and data fetching. This wrapper only
 // provides the learner-oriented heading and, for city routes, the initial city

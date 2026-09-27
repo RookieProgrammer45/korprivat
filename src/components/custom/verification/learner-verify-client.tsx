@@ -1,7 +1,5 @@
 'use client';
 
-// @polsia:user-owned — learner Didit KYC step during signup onboarding.
-
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';

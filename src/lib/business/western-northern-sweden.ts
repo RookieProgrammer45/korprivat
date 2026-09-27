@@ -1,4 +1,3 @@
-// @polsia:user-owned — pure Western and Northern Sweden region/link manifest.
 
 import {
   type WesternNorthernSwedenCopy,

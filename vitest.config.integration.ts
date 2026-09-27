@@ -1,4 +1,3 @@
-// @polsia:user-owned — integration test config.
 //
 // The framework-owned vitest.config.ts only includes tests/unit/** (audit +
 // contract tests). This file is the integration companion: it ADDS the

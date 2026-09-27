@@ -1,4 +1,3 @@
-// @polsia:user-owned — your email templates. Edit, add, or delete freely.
 // Each template returns { subject, html, text }; spread it into the framework transport:
 //   import { sendEmail } from '@/lib/email/send';
 //   await sendEmail({ to: user.email, ...someTemplate({ name: user.name, … }) });

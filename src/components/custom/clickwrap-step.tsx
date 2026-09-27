@@ -1,4 +1,3 @@
-// @polsia:user-owned — the handledare "I agree to the terms" wizard step.
 //
 // Pure client island: receives copy + identity-free props from the parent
 // sign-up-form, holds `attested` state, and surfaces the controlled submit

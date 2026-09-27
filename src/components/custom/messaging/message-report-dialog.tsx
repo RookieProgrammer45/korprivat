@@ -1,4 +1,3 @@
-// @polsia:user-owned — compact participant safety/report control.
 'use client';
 
 import { useTranslations } from 'next-intl';

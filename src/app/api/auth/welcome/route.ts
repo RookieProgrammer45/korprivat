@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/auth/welcome
 //
 // Single signup-time welcome email. The signup form fires this AFTER better-
 // auth's signUp.email resolves and the session cookie is set: idempotent —

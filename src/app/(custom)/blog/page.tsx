@@ -1,4 +1,3 @@
-// @polsia:user-owned — public blog index. Bilingual via the `blogPage`
 // message namespace; renders one editorial card per published post. Static
 // SSR shape (no `'use client'`, no server-only imports, no fetch) — the
 // post page itself is hand-written JSX so a markdown renderer is unjustified

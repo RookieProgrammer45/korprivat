@@ -1,4 +1,3 @@
-// @polsia:user-owned — public read of an instructor's bookable time slots.
 //
 // `GET /api/instructors/[id]/availability` is called by the learner-side
 // booking form island. Only future, unbooked slots are returned; anything

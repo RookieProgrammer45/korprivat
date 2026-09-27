@@ -1,4 +1,3 @@
-// @polsia:user-owned — booking context, plain-text history, and composer.
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';

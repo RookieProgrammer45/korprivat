@@ -77,7 +77,6 @@ introduce `/learner/*` as the primary surface.
 
 ## Guards
 
-- Edge: `proxy.ts` (CSP + optional `@polsia:slot middleware_chain` contributions).
   **Never** add `middleware.ts` (Next 16 / Polsia reject the old name).
 - Pages: `requireDashboardSession` in `src/lib/dashboard-guard.ts`, plus
   `requireSignupPrerequisites` / handledare clickwrap guards.

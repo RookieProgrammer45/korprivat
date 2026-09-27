@@ -1,4 +1,3 @@
-// @polsia:user-owned — Instructor + Booking + AvailabilitySlot models for the
 // DriveLinkUp marketplace. All three live in ONE file because the two
 // bidirectional @relation chains (Slot ↔ Instructor and Slot ↔ Booking) require
 // both ends in the same user-owned file; a relation field across two files

@@ -1,4 +1,3 @@
-// @polsia:user-owned — email-proxy contacts fetch stub.
 //
 // The /api/auth/welcome route calls
 //   POST https://polsia.com/api/proxy/email/contacts

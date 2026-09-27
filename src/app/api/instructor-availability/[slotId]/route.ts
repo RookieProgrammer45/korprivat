@@ -1,4 +1,3 @@
-// @polsia:user-owned — single-slot PATCH/DELETE for the signed-in instructor.
 //
 // `PATCH /api/instructor-availability/[slotId]` nudges an open slot's
 // `startsAt` / `endsAt`. `DELETE` removes an empty slot. Both are gated

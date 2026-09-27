@@ -1,4 +1,3 @@
-// @polsia:user-owned — `PATCH /api/profile/payment-methods/[id]`.
 //
 // Two actions, one route, owner-scoped to the signed-in learner's user.id:
 //   - action: 'default' — set this row's `isDefault: true` AND flip every

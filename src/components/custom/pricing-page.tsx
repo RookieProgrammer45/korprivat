@@ -1,4 +1,3 @@
-// @polsia:user-owned — learner/school marketplace fee explainer island.
 
 'use client';
 

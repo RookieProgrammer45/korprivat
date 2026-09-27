@@ -1,4 +1,3 @@
-// @polsia:user-owned — mandatory photo verification route coverage.
 // @vitest-environment node
 
 import { vi } from 'vitest';

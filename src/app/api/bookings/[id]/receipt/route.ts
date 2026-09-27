@@ -1,4 +1,3 @@
-// @polsia:user-owned — private learner/instructor receipt read endpoint.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { getAuthorizedBookingReceipt } from '@/lib/business/receipt-pdf';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared provider operations island for both roles.
 'use client';
 
 import Link from 'next/link';

@@ -1,4 +1,3 @@
-// @polsia:framework-owned — DO NOT EDIT.
 //
 // Prisma config: points the CLI at the `prisma/schema/` folder. Replaces the
 // deprecated `package.json#prisma` key (which Prisma 7 removes), so

@@ -1,4 +1,3 @@
-// @polsia:user-owned — practical English guide for Stockholm learners.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';

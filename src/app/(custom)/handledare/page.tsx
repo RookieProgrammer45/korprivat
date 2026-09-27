@@ -1,4 +1,3 @@
-// @polsia:user-owned — Swedish private-supervisor legal explainer shell.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

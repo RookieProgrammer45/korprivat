@@ -1,4 +1,3 @@
-// @polsia:user-owned — metadata shell for the marketplace fee explainer.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

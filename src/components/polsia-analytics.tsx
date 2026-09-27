@@ -1,4 +1,3 @@
-// @polsia:framework-owned — DO NOT EDIT. Code installed by polsia/template-next@0.3.2.
 //
 // Visitor beacon: a pixel per page load from the deploy-injected slug + base.
 'use client';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — plain-text message composer and guardrail feedback.
 'use client';
 
 import { useTranslations } from 'next-intl';

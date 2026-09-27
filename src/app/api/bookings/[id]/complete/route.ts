@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/bookings/[id]/complete
 //
 // "Lesson completed" terminal transition for the escrow flow. Either the
 // learner or the instructor can mark the lesson done — both carry the same

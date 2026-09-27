@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contracts for the handledare clickwrap.
 //
 // Single source of truth shared between the clickwrap step in the
 // `src/components/custom/sign-up-form.tsx` wizard, the

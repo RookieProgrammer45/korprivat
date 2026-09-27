@@ -1,4 +1,3 @@
-// @polsia:user-owned — server-side dashboard guard.
 //
 // better-auth exposes `requireAuth(req: Request)` (@/lib/require-auth) but
 // that throws a 401 response — fine for /api route handlers, wrong shape for

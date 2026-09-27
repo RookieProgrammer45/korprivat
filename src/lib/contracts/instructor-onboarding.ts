@@ -1,4 +1,3 @@
-// @polsia:user-owned — client-safe contract for the instructor onboarding context.
 import { z } from 'zod';
 
 export const InstructorOnboardingRole = z.enum(['STUDENT', 'INSTRUCTOR', 'HANDLEDARE']);

@@ -1,4 +1,3 @@
-// @polsia:user-owned — static eligibility card shown on the handledare dashboard
 // after clickwrap acceptance. Server Component; no client state needed.
 
 import { getTranslations } from 'next-intl/server';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — email verification callback from the signup link.
 
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';

@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/stripe-billing@0.4.0. Drift = commit rejected.
 //
 // Shared billing schemas + types. Client-safe: no server-only imports, no secrets.
 

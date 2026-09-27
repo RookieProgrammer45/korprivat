@@ -1,4 +1,3 @@
-// @polsia:user-owned — in-memory Prisma stub for the integration suite.
 //
 // vi.hoisted runs BEFORE vi.mock factory bodies (both at the top of the
 // file). We bundle the entire `prisma` singleton — every model the booking

@@ -1,4 +1,3 @@
-// @polsia:user-owned — explicit integration fixture for the signup completion gate.
 // The repository Vitest config intentionally excludes integration/**; run this
 // file explicitly with `npx vitest run --include tests/integration/signup-photo-flow.test.ts`.
 // @vitest-environment node

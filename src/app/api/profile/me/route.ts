@@ -1,4 +1,3 @@
-// @polsia:user-owned — `GET /api/profile/me`.
 //
 // Owner-scoped readout the dashboard islands need for the rebook card row
 // and the saved-payment-method strip:

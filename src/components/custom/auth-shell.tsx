@@ -1,4 +1,3 @@
-// @polsia:user-owned
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { LocaleSwitcher } from '@/components/locale-switcher';

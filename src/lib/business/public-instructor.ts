@@ -1,4 +1,3 @@
-// @polsia:user-owned — safe public instructor facts shared by list/detail routes.
 import 'server-only';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';

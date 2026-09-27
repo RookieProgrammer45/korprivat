@@ -1,4 +1,3 @@
-// @polsia:user-owned — provider activation KPI client island.
 'use client';
 
 import { Info, RotateCw } from 'lucide-react';

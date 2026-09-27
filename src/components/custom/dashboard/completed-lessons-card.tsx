@@ -1,4 +1,3 @@
-// @polsia:user-owned — completed-lesson dashboard summary island.
 'use client';
 
 import { RotateCw } from 'lucide-react';

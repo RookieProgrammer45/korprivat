@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/profile/picture integration coverage.
 //
 // Six end-to-end paths for the new picture upload route:
 //   1. unauthenticated → 401 (requireAuth short-circuits)

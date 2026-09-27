@@ -1,4 +1,3 @@
-// @polsia:framework-owned — DO NOT EDIT. Next.js server-startup hook.
 //
 // Next calls register() ONCE when the server process boots. We use it to run the
 // app's idempotent startup seed AFTER the schema is applied: polsia.toml's `start`

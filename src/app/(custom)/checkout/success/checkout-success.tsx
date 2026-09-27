@@ -1,4 +1,3 @@
-// @polsia:user-owned — Stripe hosted-checkout success-page polling island.
 //
 // After Stripe redirects back with `?session_id=cs_xxx`, this island polls
 // GET /api/stripe-billing/verify to confirm the payment. Once verified it

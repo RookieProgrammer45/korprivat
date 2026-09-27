@@ -1,4 +1,3 @@
-// @polsia:user-owned — `GET /api/bookings/me/suggest-rebook`.
 //
 // Per-instructor lookup the rebook affordance on `/instructors/[id]` runs to
 // pre-fill the booking form. Returns the user's most-recent booking with

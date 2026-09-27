@@ -1,4 +1,3 @@
-// @polsia:user-owned — your app's locales. Add a locale here AND add a matching
 // messages/<locale>.json with the SAME keys as every other locale file (a missing
 // key throws MISSING_MESSAGE). `defaultLocale` is what `/` and unknown locales use.
 export const locales = ['sv', 'en'] as const;

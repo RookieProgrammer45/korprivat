@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/student/bookings` client island.
 //
 // Read-only list of every booking the signed-in learner owns.
 // Fetches `/api/bookings/me/history` (apiFetch + zod contract — the response

@@ -1,4 +1,3 @@
-// @polsia:user-owned — clickwrap acceptance integration coverage.
 //
 // Three end-to-end paths:
 //   1. POST /api/clickwrap — upsert one row keyed by userId. Idempotent on

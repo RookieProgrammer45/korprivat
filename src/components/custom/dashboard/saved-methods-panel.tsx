@@ -1,4 +1,3 @@
-// @polsia:user-owned — `<SavedMethodsPanel/>` island.
 //
 // One-line affordance for the `/dashboard/student/payment-methods`
 // surface. Reads the PII-bearing list of "saved methods of payment" +

@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/signup` page.
 //
 // Auth shell owns brand + locale. SignUpForm owns the step contract:
 // path → account → verifyEmail → (photo|license|handledare) as required.

@@ -1,4 +1,3 @@
-// @polsia:user-owned — Didit KYC session + webhook helpers (Verification context).
 //
 // ID-document Free KYC path only. Facial age estimation was retired 2026-09-27;
 // verified DOB comes from decision.id_verifications[].date_of_birth via webhook.

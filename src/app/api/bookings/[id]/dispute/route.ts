@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/bookings/[id]/dispute
 //
 // "Open a dispute" terminal transition for the escrow flow. Either the
 // learner or the instructor can flag a problem — both carry the same

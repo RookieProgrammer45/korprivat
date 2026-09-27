@@ -1,4 +1,3 @@
-// @polsia:user-owned — integration-suite env stub.
 //
 // Sets the minimum env the typed-env module accepts before any test file
 // imports a route handler. Each test file imports this FIRST so the values

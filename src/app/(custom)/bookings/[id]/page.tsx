@@ -1,4 +1,3 @@
-// @polsia:user-owned — metadata-only canonical booking detail shell.
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingConfirmPayment } from '@/components/custom/booking-confirm-payment';

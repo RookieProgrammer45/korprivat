@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/stripe-billing@0.4.0. Drift = commit rejected.
 //
 // Server-only Polsia billing helpers. No Stripe SDK, no Stripe secrets in the
 // app — checkout, verify, and the payment-events feed all go through the proxy.

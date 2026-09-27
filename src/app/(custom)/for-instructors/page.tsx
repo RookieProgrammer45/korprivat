@@ -1,4 +1,3 @@
-// @polsia:user-owned — provider entry shell.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

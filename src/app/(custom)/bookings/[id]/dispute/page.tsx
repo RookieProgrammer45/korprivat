@@ -1,4 +1,3 @@
-// @polsia:user-owned — Server Component shell for the "open or resolve a
 // dispute" deep link. The page hosts `<BookingDisputeForm>` (a client island)
 // which reads the live booking row, picks between open and resolve modes
 // based on `disputeStatus`, and POSTs to /api/bookings/[id]/dispute or

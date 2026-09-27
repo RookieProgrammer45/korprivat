@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/student/bookings` server page.
 //
 // Read-only view of every booking the signed-in learner owns —
 // past and upcoming. Sits inside the existing (dashboard) layout so the

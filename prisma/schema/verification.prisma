@@ -1,4 +1,3 @@
-// @polsia:user-owned — Verification context (Didit webhook writer + audit).
 //
 // Append-only events and idempotency keys for the learner age gate.
 // See docs/learner-verification-flow.md §5 and AGENTS.md invariants.

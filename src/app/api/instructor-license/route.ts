@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/instructor-license (multipart upload)
 //                      GET  /api/instructor-license (current status)
 //
 // The wizard on /signup drops the instructor at this endpoint after the

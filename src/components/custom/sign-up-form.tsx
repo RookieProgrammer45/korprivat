@@ -1,4 +1,3 @@
-// @polsia:user-owned
 'use client';
 
 // Signup wizard — path first (Airbnb/Uber style), then account details.

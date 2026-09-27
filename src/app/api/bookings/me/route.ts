@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/bookings/me
 //
 // Bookings that the signed-in student owns through the scalar Booking.userId
 // link. Owner-scoped via requireAuth() so the route cannot be hit anonymously.

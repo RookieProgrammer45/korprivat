@@ -1,4 +1,3 @@
-// @polsia:user-owned — single client island for the reviews block on the
 // instructor detail page. Owns BOTH the list (GET) and the form (POST) so no
 // DB read lands in the surrounding Server Component (which would cross the
 // Server-Component ↔ route-handler boundary and break the build per the

@@ -1,4 +1,3 @@
-// @polsia:user-owned — authorized canonical learner/instructor receipt PDF.
 import 'server-only';
 import {
   buildReceiptPdfSpec,

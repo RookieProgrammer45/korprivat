@@ -1,4 +1,3 @@
-// @polsia:user-owned — public reviews posted against an Instructor. Model is
 // in its own file (per `nextjs-prisma` skill: one file per feature area) so
 // the back-relation `reviews Review[]` on the `Instructor` model can live in
 // `instructors.prisma` and stay a one-line edit.

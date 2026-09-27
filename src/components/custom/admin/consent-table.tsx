@@ -1,4 +1,3 @@
-// @polsia:user-owned — admin GDPR/cookie consent audit table.
 //
 // Client island: fetches /api/admin/consent on mount and renders the last
 // 200 consent events with loading / empty / error states per the nextjs-

@@ -1,4 +1,3 @@
-// @polsia:user-owned — authenticated or opaque-token booking detail.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { getBookingAccessToken, matchesLearnerAccessToken } from '@/lib/business/booking-access';

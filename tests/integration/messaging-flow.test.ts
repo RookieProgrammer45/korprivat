@@ -1,4 +1,3 @@
-// @polsia:user-owned — authorization and persistence-boundary coverage.
 import './_setup/env';
 import './_setup/auth-mock';
 import { vi } from 'vitest';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — guided Contact flow island.
 //
 // Two-step marketplace support pattern:
 //   Step 1 — eyebrow + heading + lead + a grid of brand-tinted topic tiles

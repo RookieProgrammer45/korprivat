@@ -1,4 +1,3 @@
-// @polsia:user-owned
 //
 // POST /api/chatbot — public FAQ chatbot endpoint.
 //

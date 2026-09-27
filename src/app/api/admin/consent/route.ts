@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/admin/consent
 //
 // Admin-only audit view: latest 200 GDPR/cookie consent events.
 // Inline session/admin check (NOT requireAdmin: that redirects on non-admin

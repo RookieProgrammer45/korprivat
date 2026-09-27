@@ -1,4 +1,3 @@
-// @polsia:user-owned — "Instructor accepts a Request-mode booking" form.
 // Mirrors the shape of `<BookingCancelForm/>` the deep-link `cancel` page
 // hosts — reads the booking (to verify the row exists / hasn't been
 // terminal-committed already), then renders a state machine that POSTs

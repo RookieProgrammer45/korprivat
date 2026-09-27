@@ -1,4 +1,3 @@
-// @polsia:user-owned — geo helpers for directory distance filtering.
 // Plain TypeScript (no `server-only`, no `'use client'`), safe to import from
 // route handlers and unit tests. Coordinates use decimal degrees, kilometres
 // is the distance unit surfaced to the client.

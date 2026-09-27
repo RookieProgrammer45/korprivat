@@ -1,4 +1,3 @@
-// @polsia:user-owned — pure Southern Sweden region and directory-link manifest.
 
 import {
   type SouthernSwedenCopy,

@@ -1,4 +1,3 @@
-// @polsia:user-owned — response contract for starting a resumable signup.
 import { z } from 'zod';
 import { SignupRole } from '@/lib/contracts/signup';
 

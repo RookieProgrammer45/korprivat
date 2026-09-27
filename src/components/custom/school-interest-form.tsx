@@ -1,4 +1,3 @@
-// @polsia:user-owned — school interest waitlist at /for-skolor.
 //
 // Organizations / school portal do not exist yet. This page captures email +
 // school name + city via the existing POST /api/waitlist contract

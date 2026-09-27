@@ -1,4 +1,3 @@
-// @polsia:user-owned
 'use client';
 
 import { useTranslations } from 'next-intl';

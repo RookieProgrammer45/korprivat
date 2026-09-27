@@ -1,4 +1,3 @@
-// @polsia:user-owned — compact live instructor rail.
 //
 // This island is shared by the home page and the provider-facing preview. It
 // uses the same public list contract as the directory and links every card to

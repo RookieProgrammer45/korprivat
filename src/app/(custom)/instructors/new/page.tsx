@@ -1,4 +1,3 @@
-// @polsia:user-owned — instructor self-onboarding page. Server Component
 // shell that exports `metadata` and renders the
 // `<InstructorOnboardingSurface />` client island; runtime session context and
 // the onboarding flow are loaded through REST handlers.

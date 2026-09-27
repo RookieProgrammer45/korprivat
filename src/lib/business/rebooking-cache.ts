@@ -1,4 +1,3 @@
-// @polsia:user-owned — `recordRebookingContext(...)`.
 //
 // Helper that both the booking-create and payment-poll routes call so the
 // `RebookingCache` row mirrors the latest booking-context per (userId,

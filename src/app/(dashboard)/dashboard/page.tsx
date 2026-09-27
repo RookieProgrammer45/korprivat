@@ -1,4 +1,3 @@
-// @polsia:user-owned — provider activation overview for marketplace roles.
 
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';

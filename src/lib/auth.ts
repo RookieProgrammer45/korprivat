@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/better-auth@0.8.0. Drift = commit rejected.
 // Protected core (db/secret/baseURL, admin plugin, multi-host trustedOrigins) + owner-admin grant,
 // composed with the app's own databaseHooks. Configure auth in @/lib/auth-config (user-owned).
 

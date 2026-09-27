@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/bookings/[id]/payment-link.
 // The hosted checkout amount is always read from the booking snapshot (or,
 // only for a legacy row, stamped from the current instructor rate first).
 import 'server-only';

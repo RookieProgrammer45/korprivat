@@ -1,4 +1,3 @@
-// @polsia:user-owned — metadata/auth shell for the protected inbox.
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';

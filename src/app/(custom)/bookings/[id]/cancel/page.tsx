@@ -1,4 +1,3 @@
-// @polsia:user-owned — no-index shell for the token-bearing cancellation flow.
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingCancelForm } from '@/components/custom/booking-cancel-form';

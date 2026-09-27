@@ -1,4 +1,3 @@
-// @polsia:user-owned — compact participant-only message reporting.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { participantFor } from '@/lib/business/messaging';

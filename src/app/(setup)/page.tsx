@@ -1,4 +1,3 @@
-// @polsia:user-owned — DriveLinkUp learner-first home page.
 
 import type { Metadata } from 'next';
 import { PublicHome } from '@/components/custom/public-home';

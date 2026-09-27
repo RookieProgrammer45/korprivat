@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/auth/signup-redirect
 //
 // Returns the role-correct dashboard path for the freshly signed-up user.
 // The signup form POSTs the chosen role in the body so this endpoint can

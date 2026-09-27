@@ -1,4 +1,3 @@
-// @polsia:user-owned — opaque learner access tokens for anonymous booking links.
 import 'server-only';
 import { createHash, randomBytes, timingSafeEqual } from 'node:crypto';
 

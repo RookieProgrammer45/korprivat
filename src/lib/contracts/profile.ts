@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the /profile surface.
 //
 // Single envelope returned by GET /api/profile: the signed-in user's name/
 // email/avatar + their marketplace role + the role-correct upcoming-bookings

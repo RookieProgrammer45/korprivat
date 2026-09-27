@@ -1,4 +1,3 @@
-// @polsia:user-owned — payment-link + payment-poll + SEK→USD floor coverage.
 //
 // The payment rail goes:
 //   POST /api/bookings/[id]/payment-link  → mints Stripe Checkout session,

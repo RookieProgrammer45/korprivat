@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/signup/state, owner-scoped resume state.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { photoState } from '@/lib/business/photo-verification';

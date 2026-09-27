@@ -1,4 +1,3 @@
-// @polsia:user-owned — reactive auth nav wired into the top bar.
 //
 // Renders (logged-out) Sign in / Sign up or (logged-in) Profile / Sign out
 // from better-auth's `useSession`. We render nothing while the session is

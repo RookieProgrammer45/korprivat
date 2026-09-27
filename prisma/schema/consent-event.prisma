@@ -1,4 +1,3 @@
-// @polsia:user-owned — GDPR privacy consent audit trail.
 //
 // One row per consent decision (banner / signup / license-upload).
 // `userId` is a plain scalar (NO @relation to User — User lives in framework-

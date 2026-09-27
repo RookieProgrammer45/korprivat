@@ -1,4 +1,3 @@
-// @polsia:user-owned — single source of truth for the cancellation-policy
 // rule + fee math. Every code path that decides "is this cancel free, partial,
 // or full-fee" — the cancel API route (server-only), the cancel client form
 // (browser island for the pre-confirm preview), and the booking form (the

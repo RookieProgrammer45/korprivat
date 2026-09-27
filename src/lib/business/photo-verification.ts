@@ -1,4 +1,3 @@
-// @polsia:user-owned — server-only photo verification business rules.
 import 'server-only';
 import { ObjectStorageError, storeUserUpload } from '@/lib/business/object-storage';
 import { prisma } from '@/lib/db';

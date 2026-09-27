@@ -1,4 +1,3 @@
-// @polsia:user-owned — instructor-side availability editor island.
 //
 // Mounted only inside `/dashboard/instructor/availability`, this island
 // drives the editor's three concerns:

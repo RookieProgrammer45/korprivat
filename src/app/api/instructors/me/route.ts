@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET / PATCH /api/instructors/me
 //
 // "The signed-in instructor's row". Authed, scoped by `userId` —
 // `requireAuth` is the gate; we look up the Instructor row whose `userId`

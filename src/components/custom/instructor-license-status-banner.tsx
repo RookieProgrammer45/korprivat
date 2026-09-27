@@ -1,4 +1,3 @@
-// @polsia:user-owned — instructor-license admin-review status banner.
 //
 // On `/dashboard/instructor`, this island gates what the user sees based
 // on the review status of their uploaded driving licence:

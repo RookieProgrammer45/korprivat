@@ -1,4 +1,3 @@
-// @polsia:user-owned — self-hosted display/body typography for the app shell.
 
 import { DM_Sans, Syne } from 'next/font/google';
 

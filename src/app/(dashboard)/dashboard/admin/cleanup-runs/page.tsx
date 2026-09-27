@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/admin/cleanup-runs` admin page.
 //
 // Server Component shell — `requireAdminServer()` runs server-side and
 // redirects non-admins, so the page is gated before any data is read.

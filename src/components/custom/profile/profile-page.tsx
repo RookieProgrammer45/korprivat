@@ -1,4 +1,3 @@
-// @polsia:user-owned — /profile island.
 //
 // Fetches the signed-in profile envelope from GET /api/profile, then renders:
 //   1. a brand-tinted header card — avatar block (initial-letter fallback when

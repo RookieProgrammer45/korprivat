@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the Booking resource. Client
 // and server both import this so a single schema is the source of truth for
 // the booking write shape and the success-view payload.
 import { z } from 'zod';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — canonical receipt email delivery and retry service.
 import 'server-only';
 import { generateLearnerAccessToken } from '@/lib/business/booking-access';
 import { registerKnownContact } from '@/lib/business/escrow';

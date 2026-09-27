@@ -1,4 +1,3 @@
-// @polsia:user-owned — canonical learner booking detail/payment island.
 
 'use client';
 

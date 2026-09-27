@@ -1,4 +1,3 @@
-// @polsia:user-owned — instructor onboarding route coverage.
 // @vitest-environment node
 
 import './_setup/env';

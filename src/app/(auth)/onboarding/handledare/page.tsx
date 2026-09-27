@@ -1,4 +1,3 @@
-// @polsia:user-owned — waiting on HandledareEnrollment (HANDLEDARE_PENDING).
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

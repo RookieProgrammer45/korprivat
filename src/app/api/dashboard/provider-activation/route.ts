@@ -1,4 +1,3 @@
-// @polsia:user-owned — protected provider activation KPI endpoint.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { buildProviderActivationWhere } from '@/lib/business/provider-activation';

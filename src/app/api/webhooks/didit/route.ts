@@ -1,4 +1,3 @@
-// @polsia:user-owned — Didit ID-verification webhook writer.
 // The ONLY code path allowed to write UserProfile.dateOfBirthVerified.
 
 import 'server-only';

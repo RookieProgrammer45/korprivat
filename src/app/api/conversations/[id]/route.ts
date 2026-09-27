@@ -1,4 +1,3 @@
-// @polsia:user-owned — authorized conversation detail.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import {

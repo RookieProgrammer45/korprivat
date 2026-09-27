@@ -1,4 +1,3 @@
-// @polsia:user-owned — learner-side profile preview shell.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — /profile server page. metadata + guard + island.
 //
 // Renders avatar/name/role + the role-correct upcoming-bookings list for the
 // signed-in user. The guard redirects unauthed visitors to /login?next=/profile

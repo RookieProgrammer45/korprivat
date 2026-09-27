@@ -1,4 +1,3 @@
-// @polsia:user-owned — public instructor profile and booking shell.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

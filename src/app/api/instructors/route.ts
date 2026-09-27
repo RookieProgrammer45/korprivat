@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET (filtered) instructor list + POST (self-onboarding).
 // The directory page's island calls GET with URL search params; the handler
 // parses them through `parseInstructorQuery`, builds a Prisma `where`
 // accordingly, and returns the rows plus the distinct, sorted cities the

@@ -1,4 +1,3 @@
-// @polsia:user-owned — Instructor dashboard's cancellation-policy editor
 // island. Loads the signed-in instructor's current tier on mount, lets
 // them pick a new tier from a three-option RadioGroup, and PATCHes
 // /api/instructors/me on save. Lives on the instructor dashboard page

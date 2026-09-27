@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/profile
 //
 // Owner-scoped read for the /profile surface. Returns the session user's
 // name/email/avatar + their marketplace role + the role-correct upcoming

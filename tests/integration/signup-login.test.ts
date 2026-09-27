@@ -1,4 +1,3 @@
-// @polsia:user-owned — signup/login integration coverage.
 //
 // Asserts the auth-flank of the trust-critical flow. Three end-to-end paths:
 //   1. POST /api/auth/welcome — single welcome email per account, deduped

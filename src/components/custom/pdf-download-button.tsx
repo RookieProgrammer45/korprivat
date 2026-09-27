@@ -1,4 +1,3 @@
-// @polsia:user-owned
 'use client';
 
 import { Download, Loader2 } from 'lucide-react';

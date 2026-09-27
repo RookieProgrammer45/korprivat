@@ -1,4 +1,3 @@
-// @polsia:user-owned — staged upload + explicit confirmation photo island.
 'use client';
 
 import Image from 'next/image';

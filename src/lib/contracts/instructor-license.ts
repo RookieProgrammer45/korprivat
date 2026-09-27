@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for instructor-license.
 //
 // Both the route handler (server) and the InstructorLicenseStatusBanner
 // island (client) import the SAME schemas, so a shape drift surfaces as

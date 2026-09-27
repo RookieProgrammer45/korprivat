@@ -1,4 +1,3 @@
-// @polsia:user-owned — canonical booking actor capabilities and transitions.
 import type { ProviderRole } from '@/lib/business/provider-ownership';
 
 export type BookingActor = 'learner' | 'provider';

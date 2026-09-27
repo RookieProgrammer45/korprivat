@@ -1,4 +1,3 @@
-// @polsia:user-owned — Escrow-style booking payment state.
 //
 // One Dispute row per opened dispute. All fields are nullable/defaulted so
 // `prisma db push --accept-data-loss` accepts pre-existing rows from prior

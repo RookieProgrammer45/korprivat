@@ -1,4 +1,3 @@
-// @polsia:user-owned — Contact page CTA cluster.
 //
 // Two brand-tinted buttons that give visitors a fast-path off the contact
 // flow when they only came here to browse the directory (footer "Browse

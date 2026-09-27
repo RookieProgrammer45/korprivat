@@ -1,4 +1,3 @@
-// @polsia:user-owned — email verification (confirm address after signup).
 
 import { type EmailContent, renderEmail } from '@/lib/email/templates';
 

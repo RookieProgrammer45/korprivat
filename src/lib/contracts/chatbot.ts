@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the public FAQ chatbot.
 //
 // Client island in src/components/custom/chatbot-mount.tsx and route handler
 // src/app/api/chatbot/route.ts both import the same schemas so a shape change

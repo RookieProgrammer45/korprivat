@@ -1,4 +1,3 @@
-// @polsia:user-owned
 
 import { getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';

@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared signup state/start/complete contracts.
 import { z } from 'zod';
 import { PhotoVerificationState } from '@/lib/contracts/photo-verification';
 import {

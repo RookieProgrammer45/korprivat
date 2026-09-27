@@ -1,4 +1,3 @@
-// @polsia:user-owned — immutable-ish transaction snapshots for paid bookings.
 // Booking and recipient user links are scalar ids because the related models
 // are framework-owned or live in another governed schema file.
 

@@ -1,4 +1,3 @@
-// @polsia:user-owned — handledare dashboard clickwrap status card.
 //
 // Tiny client island the handledare dashboard mounts after the server
 // guard confirms `isCurrent === true`. Fetches GET /api/clickwrap so the

@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/instructor` server page (role stub).
 //
 // Server Component: greeting + a "Manage availability" CTA + the
 // <InstructorLicenseStatusBanner/> client island, which fetches the

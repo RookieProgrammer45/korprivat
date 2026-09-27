@@ -1,4 +1,3 @@
-// @polsia:user-owned — public in-app FAQ chatbot client island.
 //
 // Single client island, mounted once at the app root by global-mounts.tsx
 // (which the framework-owned layout.tsx renders once). Lives next to the

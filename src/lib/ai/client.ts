@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/ai@0.1.0. Drift = commit rejected.
 //
 // Server-only helpers for Polsia-managed LLM calls. Customer app code talks to
 // the platform AI proxy (an OpenAI-compatible endpoint) using the platform-

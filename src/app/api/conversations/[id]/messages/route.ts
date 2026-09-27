@@ -1,4 +1,3 @@
-// @polsia:user-owned — authorized plain-text message creation.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import {

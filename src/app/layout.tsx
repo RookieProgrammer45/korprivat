@@ -1,7 +1,5 @@
-// @polsia:framework-owned — the framework owns this shell (re-stamped on upgrade; the
-// ownership gate rejects edits). Customize via the user-owned seams it imports — see
-// AGENTS.md "Customizing the shell" (lang/head/viewport/providers/nav/brand).
-// Code installed by polsia/template-next@0.3.6.
+// Root layout shell. Customize via the seams it imports — see AGENTS.md
+// "Customizing the shell" (lang/head/viewport/providers/nav/brand).
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import { GlobalMounts } from '@/components/custom/global-mounts';

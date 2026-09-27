@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/better-auth@0.8.0. Drift = commit rejected.
 //
 // better-auth React client (v1.6.x). Client-safe: NO server secrets, NO
 // server-only imports — safe to import from 'use client' components.

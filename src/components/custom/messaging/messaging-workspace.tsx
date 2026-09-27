@@ -1,4 +1,3 @@
-// @polsia:user-owned — inbox + thread client island.
 'use client';
 
 import { useTranslations } from 'next-intl';

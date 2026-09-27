@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/profile/picture/confirm.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { confirmPhoto, PhotoUploadError } from '@/lib/business/photo-verification';

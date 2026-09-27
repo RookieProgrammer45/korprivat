@@ -1,4 +1,3 @@
-// @polsia:user-owned — bilingual booking form. Strings resolve per active
 // locale from the `bookingForm` namespace; the live state machine stays
 // unchanged (server-loaded instructor + slot list, slot picker, Stripe
 // redirect).

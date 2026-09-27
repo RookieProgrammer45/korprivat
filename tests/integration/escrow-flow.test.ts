@@ -1,4 +1,3 @@
-// @polsia:user-owned — escrow terminal transitions (complete + dispute).
 //
 // After Stripe confirms the payment, the booking row sits at
 // `paymentStatus = 'held_escrow'` with a per-row `actionToken`. The two

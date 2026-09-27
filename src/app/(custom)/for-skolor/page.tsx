@@ -1,4 +1,3 @@
-// @polsia:user-owned — /for-skolor school waitlist entry (Organizations not started).
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

@@ -1,23 +1,12 @@
-/* @polsia:shared scaffold — the agent's ONLY authority here is the SEED inside
- * the `brand_tokens` slot. Everything else (the @theme namespaces, the
- * framework-DERIVED color block, @layer base/components, @custom-variant dark)
- * is FRAMEWORK STRUCTURE — do not edit it.
- *
- * Tailwind 4 is CSS-first (no tailwind.config.js). Seed -> derived model: the
- * agent sets a handful of values in the slot (brand hue/chroma/lightness,
- * radius, fonts); the framework DERIVES the full --brand-50..900 ramp + every
- * semantic role (background/foreground/card/primary/border/...) + dark mode
- * from that seed via oklch(). So editing ONE value (--brand-h) recolors the
- * WHOLE site coherently. Out-of-range seed values are rejected at commit time.
- * Dark mode is class-based: next-themes toggles `.dark` on <html>.
- *
- * Derivation runs at runtime via oklch(calc()) (evergreen browsers). If wider
- * support is needed, pre-compute the derived block to literal oklch at install.
+/*
+ * DriveLinkUp global styles. Tailwind 4 is CSS-first (no tailwind.config.js).
+ * Brand seed tokens live in the brand_tokens block below; the derived ramp and
+ * semantic roles are computed from that seed via oklch(). Custom app CSS goes
+ * in custom-style.css.
  */
 
 @import "tailwindcss";
 @import "tw-animate-css";
-/* @polsia:user-owned entrypoint — agents add custom global CSS in custom-style.css, not here. */
 @import "./custom-style.css";
 
 @custom-variant dark (&:is(.dark *));

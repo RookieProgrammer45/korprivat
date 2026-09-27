@@ -1,4 +1,3 @@
-// @polsia:user-owned — authenticated booking create + soft-gate on claimed DOB.
 //
 // Coverage:
 //   1. POST /api/bookings                      — no session → 401

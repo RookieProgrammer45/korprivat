@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/admin/consent` — GDPR consent-event audit
 // surface (Article 30 records of processing).
 //
 // Server Component shell — calls `requireAdminServer()` at the top (which

@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/clickwrap
 //                      GET  /api/clickwrap
 //
 // Handledare-only: dated, versioned acceptance of the handledare terms.

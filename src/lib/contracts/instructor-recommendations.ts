@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared zod contract for the AI-ranked instructor
 // recommendation payload returned by GET /api/instructors/recommendations.
 //
 // The route handler projects a managed set of `Instructor` rows into this

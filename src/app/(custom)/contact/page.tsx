@@ -1,4 +1,3 @@
-// @polsia:user-owned — public Contact page.
 //
 // Server Component — exports `metadata` (page.title / page.description /
 // canonical) so the route gets a clean `<title>`, social previews, and a

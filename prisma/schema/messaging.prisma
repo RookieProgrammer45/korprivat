@@ -1,4 +1,3 @@
-// @polsia:user-owned — booking-scoped learner/instructor messaging.
 // External User, Booking, and Instructor references are scalar IDs because
 // those models are framework/module-owned and cannot receive back-relations.
 

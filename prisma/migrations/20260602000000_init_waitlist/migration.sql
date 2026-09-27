@@ -1,4 +1,3 @@
--- @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/waitlist@0.2.0. Drift = commit rejected.
 -- Forward-only. Applied by `prisma migrate deploy` at deploy time (NOT at install).
 
 CREATE TABLE "WaitlistEntry" (

@@ -1,4 +1,3 @@
-// @polsia:user-owned — public, per-instructor reviews resource.
 // Co-locates GET (scoped to one instructor) and POST (writes one row).
 // Mirrors the async `params: Promise<{ id: string }>` pattern from
 // `src/app/api/instructors/[id]/availability/route.ts` and the FK-re-validate

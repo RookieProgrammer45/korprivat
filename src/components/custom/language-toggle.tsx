@@ -1,4 +1,3 @@
-// @polsia:user-owned — site-wide Swedish/English toggle. Mirrors <ThemeToggle/>'s
 // icon-button / dropdown pattern so the two sit visually balanced next to each
 // other in the right-hand cluster of the header. Switching writes the
 // `NEXT_LOCALE` cookie via the installed POST /api/locale lane and then refreshes

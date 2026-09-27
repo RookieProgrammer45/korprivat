@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/pdf@0.1.0. Drift = commit rejected.
 //
 // Server-only PDF renderer. Lays out a validated DocumentSpec into a single
 // (paginating as needed) PDF using the pure-JS `pdf-lib` library — no native

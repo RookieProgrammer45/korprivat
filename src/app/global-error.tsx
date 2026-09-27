@@ -1,4 +1,3 @@
-// @polsia:user-owned — root error boundary; REPLACES the layout, so it renders its own
 // <html>/<body> with inline styles (theme/providers unavailable). This file sits
 // outside the i18n <I18nProvider/> because the layout it replaces is the one
 // that would have wrapped next-intl's context — so we hard-code <html lang="sv">

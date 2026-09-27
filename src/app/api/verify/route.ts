@@ -1,4 +1,3 @@
-// @polsia:user-owned — Create Didit KYC session (Verification context).
 // Returns { url, session_id } for the web SDK / iframe / redirect.
 // The API key never leaves the server. Webhook remains source of truth.
 

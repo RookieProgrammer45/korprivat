@@ -1,4 +1,3 @@
-// @polsia:user-owned — auth-mock helper.
 //
 // Both the user-owned /api/bookings/me + /api/bookings/instructor routes
 // and the better-auth catch-all reach `@/lib/auth.api.getSession` via a

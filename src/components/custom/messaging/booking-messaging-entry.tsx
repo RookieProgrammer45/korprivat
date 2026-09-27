@@ -1,4 +1,3 @@
-// @polsia:user-owned — authenticated booking-context messaging entry point.
 'use client';
 
 import { MessageCircle } from 'lucide-react';

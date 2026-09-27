@@ -1,4 +1,3 @@
-// @polsia:user-owned — public support chatbot facts.
 //
 // Server-only module: the assistant receives a small, auditable set of
 // marketplace facts and hands personal or safety-sensitive cases to the

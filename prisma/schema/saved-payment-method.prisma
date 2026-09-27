@@ -1,4 +1,3 @@
-// @polsia:user-owned — `SavedPaymentMethod` model: an opaque reference to a
 // method-of-payment the learner has used before, scoped per user.
 //
 // Why this exists (the brief): mirror Airbnb's saved-payment rebooking flow

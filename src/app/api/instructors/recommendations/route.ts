@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/instructors/recommendations
 //
 // Returns an AI-ranked list of instructors for the signed-in student,
 // based on the student's most recent `Booking`'s (category, instructor's

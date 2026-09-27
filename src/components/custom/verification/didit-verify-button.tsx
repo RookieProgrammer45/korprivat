@@ -1,6 +1,5 @@
 'use client';
 
-// @polsia:user-owned — Didit KYC verify trigger (web SDK modal).
 // Consent copy is required before opening the hosted verification URL.
 // onComplete is a UI hint only — the webhook is the source of truth.
 

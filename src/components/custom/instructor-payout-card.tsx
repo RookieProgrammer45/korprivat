@@ -1,4 +1,3 @@
-// @polsia:user-owned — instructor payout card on `/dashboard/instructor`.
 //
 // Replaces the prior subscription CTA. Reads the platform-wide fee
 // constants from `/api/booking-fees/config` and renders the per-booking

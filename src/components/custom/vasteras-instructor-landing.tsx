@@ -1,4 +1,3 @@
-// @polsia:user-owned — Västerås-specific instructor landing island.
 
 'use client';
 

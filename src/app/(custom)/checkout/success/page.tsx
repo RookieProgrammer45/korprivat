@@ -1,4 +1,3 @@
-// @polsia:user-owned — landing target of Stripe hosted-checkout `successUrl`.
 //
 // Server Component shell that mounts the polling island. The page itself
 // does no DB / API work — the island reads `session_id` from `useSearchParams`

@@ -1,4 +1,3 @@
-// @polsia:user-owned — `requireAdminServer` mirrors `requireAdmin` from
 // `@/lib/require-admin` but for use in pages NOT covered by the
 // biome override `src/app/**/route.ts` (e.g. Server Component pages
 // under `src/app/(dashboard)/dashboard/admin/*`). The override releases

@@ -1,4 +1,3 @@
-// @polsia:user-owned — admin instructor-licence review client island.
 //
 // Fetches /api/admin/instructor-license-decisions on mount (last 200
 // pending rows; FIFO by submittedAt) and renders a table where admin can

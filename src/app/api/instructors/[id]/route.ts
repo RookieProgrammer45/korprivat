@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET one instructor by stable string id.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import {

@@ -1,4 +1,3 @@
-// @polsia:user-owned — dated, versioned acceptance of the handledare terms.
 //
 // One row per signed-up handledare; `userId @unique` makes a re-attestation
 // act like an upsert on the same row. `User` lives in framework-owned

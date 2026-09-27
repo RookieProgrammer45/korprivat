@@ -1,4 +1,3 @@
-// @polsia:user-owned — provider-local time and timezone invariants.
 // This module is deliberately server/client safe: it contains no database or
 // request imports, so the availability island and API handlers share it.
 

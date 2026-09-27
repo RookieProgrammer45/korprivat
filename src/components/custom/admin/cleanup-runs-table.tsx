@@ -1,4 +1,3 @@
-// @polsia:user-owned — admin R2-cleanup runs client island.
 //
 // Fetches `/api/admin/cleanup-runs` on mount, renders the last 50
 // CleanupRun rows with loading / empty / error states per the

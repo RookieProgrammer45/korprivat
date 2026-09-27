@@ -65,7 +65,6 @@ signage only.
 ## What Not To Edit
 
 - Anything marked `framework_owned` in `.polsia/ownership.json`.
-  Comment-capable source files carry `@polsia:framework-owned` banners as
   signage, but the ownership map is the authority.
 - Anything outside declared slot markers in shared files such as
   `next.config.ts`, `proxy.ts`, `src/lib/env.ts`, `src/app/layout.tsx`, and

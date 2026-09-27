@@ -1,4 +1,3 @@
-// @polsia:user-owned — R2 upload mock helper.
 //
 // /api/profile/picture uses `node-fetch` (per the r2-proxy skill: native fetch
 // breaks form-data streams with "Unexpected end of form"). Mocking `node-fetch`

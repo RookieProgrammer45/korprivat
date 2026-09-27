@@ -1,4 +1,3 @@
-// @polsia:user-owned — server-only origin resolver used by the bookings payment
 // routes. Mirrors the inline helper in /api/subscription/checkout, hoisted here
 // so all booking routes — payment-link (Stripe success/cancel URLs), payment-poll
 // (receipt email deep-links) — share a single seam.

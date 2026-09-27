@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared signup-resume gate for dashboard entry.
 // Mirrors GET /api/signup/state + POST /api/signup/complete so incomplete
 // wizard users cannot bypass prerequisites by deep-linking into /dashboard.
 

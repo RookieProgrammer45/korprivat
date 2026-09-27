@@ -1,4 +1,3 @@
-// @polsia:user-owned — Server Component shell for the "accept a booking"
 // deep link. The page hosts `<BookingAcceptForm/>` (a client island) which
 // reads the booking row, renders a single-page state machine, and POSTs to
 // /api/bookings/[id]/accept with the per-booking action token.

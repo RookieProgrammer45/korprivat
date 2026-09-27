@@ -1,4 +1,3 @@
-// @polsia:framework-owned - DO NOT EDIT. Code installed by polsia/modules/email@0.3.0. Drift = commit rejected.
 // Server-only sendEmail transport — POSTs to the Polsia email proxy. Import it from your app's
 // OWN server route handlers (never expose a generic /api/email route). Compose subject/html/text in
 // the user-owned @/lib/email/templates, then: sendEmail({ to, ...welcomeEmail({ name }) }).

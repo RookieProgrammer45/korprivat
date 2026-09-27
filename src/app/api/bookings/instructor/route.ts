@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/bookings/instructor?state=requested
 //
 // Bookings that the signed-in instructor should action (new request or any
 // state filter). Owner-scoped via requireAuth(); resolves the caller's

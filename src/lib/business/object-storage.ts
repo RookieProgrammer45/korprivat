@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared file upload for signup photos and licence docs.
 // Prefers Vercel Blob (BLOB_READ_WRITE_TOKEN). Falls back to the legacy Polsia
 // R2 proxy only when a POLSIA_API_KEY is present so local/prod deploys keep
 // working after disconnecting from Polsia.

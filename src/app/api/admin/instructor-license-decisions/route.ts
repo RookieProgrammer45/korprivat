@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/admin/instructor-license-decisions
 //
 // Admin-only list of pending InstructorLicense rows for the review table.
 // Returns the User's email + name alongside each licence row — User is

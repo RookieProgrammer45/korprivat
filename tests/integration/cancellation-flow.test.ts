@@ -1,4 +1,3 @@
-// @polsia:user-owned — booking cancellation flow.
 //
 // `POST /api/bookings/[id]/cancel` has three windows:
 //   - early (cancel > LATE_WINDOW_HOURS before start) → 'cancelled_early',

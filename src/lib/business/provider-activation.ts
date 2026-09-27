@@ -1,4 +1,3 @@
-// @polsia:user-owned — canonical provider activation definition.
 //
 // Marketplace supply is authorised driving schools only. Handledare /
 // private-supervisor rows may exist for account history, but they are not

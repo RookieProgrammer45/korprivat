@@ -1,4 +1,3 @@
-// @polsia:framework-owned — do NOT edit. POST /api/locale sets the NEXT_LOCALE cookie.
 // This is the locale-change lane because Server Actions ('use server') are banned.
 import 'server-only';
 import { cookies } from 'next/headers';

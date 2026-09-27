@@ -1,4 +1,3 @@
-// @polsia:user-owned — Stripe-billing proxy fetch stub.
 //
 // The stripe-billing module talks to Polsia's billing API via the global
 // fetch. In tests we want to serve canned responses for

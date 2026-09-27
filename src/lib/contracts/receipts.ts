@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared receipt wire contracts.
 import { z } from 'zod';
 import { documentSpecSchema } from '@/lib/pdf/schema';
 

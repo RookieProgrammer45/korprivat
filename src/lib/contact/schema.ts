@@ -1,4 +1,3 @@
-// @polsia:user-owned
 //
 // Shared zod schemas for the guided `/contact` flow. Safe to import from a
 // 'use client' file: no server-only imports here, so the client island can

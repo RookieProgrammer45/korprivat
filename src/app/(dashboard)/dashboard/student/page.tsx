@@ -1,4 +1,3 @@
-// @polsia:user-owned — `/dashboard/student` server page (role stub).
 //
 // Server Component: greeting + the <StudentDashboard/> client island that
 // fetches /api/bookings/me AND a sibling <RecommendedInstructors/>

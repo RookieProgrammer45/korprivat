@@ -1,4 +1,3 @@
-// @polsia:user-owned — datasource + generator for DriveLinkUp.
 // Modules still add prisma/schema/<name>.prisma alongside this file.
 // Do NOT redeclare datasource or generator in module files.
 

@@ -1,4 +1,3 @@
-// @polsia:user-owned — `<RebookPanel/>` island.
 //
 // One-line affordance that the dashboard's "Booking history" page
 // mounts ABOVE the history list. Renders the user's most-recent

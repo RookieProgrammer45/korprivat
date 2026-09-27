@@ -1,4 +1,3 @@
-// @polsia:user-owned — Malmö provider directory SEO shell.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

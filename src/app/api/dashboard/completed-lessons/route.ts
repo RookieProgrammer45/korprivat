@@ -1,4 +1,3 @@
-// @polsia:user-owned — protected completed-lesson dashboard summary endpoint.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import {

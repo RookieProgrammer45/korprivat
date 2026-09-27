@@ -1,4 +1,3 @@
-// @polsia:user-owned — mark only the caller's conversation participant read.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { participantFor } from '@/lib/business/messaging';

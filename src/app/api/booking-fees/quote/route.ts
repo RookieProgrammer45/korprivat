@@ -1,4 +1,3 @@
-// @polsia:user-owned — GET /api/booking-fees/quote?instructorId=…
 //
 // Public quote endpoint for any island that needs to render an inline
 // per-booking breakdown (price, fee, total) without a

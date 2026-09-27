@@ -1,4 +1,3 @@
-// @polsia:user-owned — POST /api/auth/social-role
 //
 // Post-OAuth-callback handshake for Google + Facebook sign-in.
 //

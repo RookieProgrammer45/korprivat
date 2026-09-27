@@ -1,4 +1,3 @@
-// @polsia:user-owned — shared completed-lesson dashboard response contract.
 // Keep this client-safe: the route and the dashboard island both parse this
 // shape so the summary cannot drift from its data source.
 import { z } from 'zod';

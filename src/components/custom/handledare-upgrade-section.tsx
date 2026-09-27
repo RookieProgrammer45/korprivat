@@ -1,4 +1,3 @@
-// @polsia:user-owned — `HandledareUpgradeSection` client island.
 //
 // Mounted on `/dashboard/handledare` (between the clickwrap badge and the
 // "Browse learners" CTA). Reads `GET /api/instructor-license` on mount

@@ -1,4 +1,3 @@
-// @polsia:user-owned — public editorial data for the Western and Northern Sweden SEO hub.
 
 import 'server-only';
 import { type NextRequest, NextResponse } from 'next/server';

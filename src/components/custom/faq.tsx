@@ -1,4 +1,3 @@
-// @polsia:user-owned — accordion-based FAQ block. `a` accepts a ReactNode so
 // each answer can end with an inline <Link> to the relevant booking-flow step.
 
 'use client';

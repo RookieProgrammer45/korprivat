@@ -1,4 +1,3 @@
-// @polsia:user-owned — localized public Southern Sweden SEO hub island.
 
 'use client';
 
