@@ -24,6 +24,21 @@ export const SignupState = z.object({
   path: SignupPath.nullable(),
   photo: PhotoVerificationState,
   nextPrerequisite: SignupPrerequisite,
+  /** Learner verification machine state — present for STUDENT resumes / polling. */
+  verificationState: z
+    .enum([
+      'SIGNED_UP',
+      'BLOCKED_UNDERAGE',
+      'DIDIT_PENDING',
+      'DIDIT_FAILED',
+      'MANUAL_REVIEW',
+      'HANDLEDARE_PENDING',
+      'HANDLEDARE_EXPIRED',
+      'ACTIVE',
+      'SUSPENDED',
+    ])
+    .optional(),
+  diditSessionId: z.string().nullable().optional(),
 });
 export type SignupState = z.infer<typeof SignupState>;
 
@@ -117,6 +132,10 @@ export const SignupComplete = z.object({
 export type SignupComplete = z.infer<typeof SignupComplete>;
 
 export const SignupCompleteResponse = z.object({
+  ok: z.literal(true),
+  /** Canonical post-signup destination (preferred by the client). */
+  next: z.string().startsWith('/'),
+  /** Alias kept for older clients / tests. */
   to: z.string().startsWith('/'),
 });
 export type SignupCompleteResponse = z.infer<typeof SignupCompleteResponse>;

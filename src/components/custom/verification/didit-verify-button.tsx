@@ -11,12 +11,28 @@ import { Button } from '@/components/ui/button';
 
 type VerifyPhase = 'idle' | 'loading' | 'open' | 'done' | 'error';
 
+export type DiditVerifyResult = {
+  type: string;
+};
+
 export function DiditVerifyButton({
   className,
+  onComplete,
+  onCancelled,
+  onOpened,
+  translationNamespace = 'dashboard.student.verifyBanner',
+  ctaLabel,
+  startingLabel,
 }: {
   className?: string;
+  onComplete?: (result: DiditVerifyResult) => void;
+  onCancelled?: () => void;
+  onOpened?: () => void;
+  translationNamespace?: 'dashboard.student.verifyBanner' | 'onboarding.verify';
+  ctaLabel?: string;
+  startingLabel?: string;
 }) {
-  const t = useTranslations('dashboard.student.verifyBanner');
+  const t = useTranslations(translationNamespace);
   const [phase, setPhase] = useState<VerifyPhase>('idle');
   const [error, setError] = useState<string | null>(null);
   const [consented, setConsented] = useState(false);
@@ -37,23 +53,35 @@ export function DiditVerifyButton({
       };
       if (!res.ok || !body.url) {
         setPhase('error');
-        setError(
-          body.error === 'invalid_state'
-            ? t('invalidState')
-            : t('startFailed'),
-        );
+        setError(body.error === 'invalid_state' ? t('invalidState') : t('startFailed'));
         return;
       }
 
       DiditSdk.shared.onComplete = (result) => {
         // UI hint only — webhook writes dateOfBirthVerified.
-        setPhase(result.type === 'cancelled' ? 'idle' : 'done');
+        if (result.type === 'cancelled') {
+          setPhase('idle');
+          onCancelled?.();
+          return;
+        }
+        setPhase('done');
+        onComplete?.(result);
       };
-      void DiditSdk.shared.startVerification({ url: body.url }).then(() => {
-        setPhase('open');
-      });
+      void DiditSdk.shared
+        .startVerification({ url: body.url })
+        .then(() => {
+          setPhase('open');
+          onOpened?.();
+        })
+        .catch((err) => {
+          console.error('Didit SDK failed to open', err);
+          setPhase('error');
+          setError(t('startFailed'));
+        });
       setPhase('open');
-    } catch {
+      onOpened?.();
+    } catch (err) {
+      console.error('Didit verify start failed', err);
       setPhase('error');
       setError(t('startFailed'));
     }
@@ -79,9 +107,9 @@ export function DiditVerifyButton({
         disabled={!consented || phase === 'loading' || phase === 'open'}
         onClick={() => void start()}
       >
-        {phase === 'loading' ? t('starting') : t('cta')}
+        {phase === 'loading' ? (startingLabel ?? t('starting')) : (ctaLabel ?? t('cta'))}
       </Button>
-      {phase === 'done' ? (
+      {phase === 'done' && translationNamespace === 'dashboard.student.verifyBanner' ? (
         <p className="text-pretty text-small text-muted-foreground">{t('submitted')}</p>
       ) : null}
       {error ? (

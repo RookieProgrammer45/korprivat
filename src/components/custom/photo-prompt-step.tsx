@@ -45,6 +45,14 @@ type PhotoPromptStepProps = {
   initialStagedUrl?: string | null;
   onConfirmed: (url: string) => void;
   onBack?: () => void;
+  /** Optional skip — used for LEARNER signup profile photo. */
+  allowSkip?: boolean;
+  onSkip?: () => void;
+  skipLabel?: string;
+  /** Default 20 MB; LEARNER signup uses 5 MB. */
+  maxBytes?: number;
+  /** After a successful stage, confirm immediately (LEARNER). */
+  autoConfirmOnUpload?: boolean;
   copy: PhotoPromptCopy;
 };
 
@@ -55,6 +63,11 @@ export function PhotoPromptStep({
   initialStagedUrl,
   onConfirmed,
   onBack,
+  allowSkip = false,
+  onSkip,
+  skipLabel,
+  maxBytes = MAX_IMAGE_BYTES,
+  autoConfirmOnUpload = false,
   copy,
 }: PhotoPromptStepProps) {
   const inputId = useId();
@@ -83,7 +96,7 @@ export function PhotoPromptStep({
       setError(copy.errors.pictureWrongType);
       return;
     }
-    if (next.size === 0 || next.size > MAX_IMAGE_BYTES) {
+    if (next.size === 0 || next.size > maxBytes) {
       clearLocalSelection(initialStagedUrl, previewUrl, setFile, setPreviewUrl, setStagedUrl);
       setError(next.size === 0 ? copy.errors.pictureUploadFailed : copy.errors.pictureTooLarge);
       return;
@@ -94,6 +107,16 @@ export function PhotoPromptStep({
     setStagedUrl(null);
     setConfirmed(false);
     setConfirmationChecked(false);
+  };
+
+  const confirmStaged = async (url: string) => {
+    const response = await apiFetch('/api/profile/picture/confirm', {
+      method: 'POST',
+      body: JSON.stringify({}),
+      schema: PhotoConfirmationResponse,
+    });
+    setConfirmed(true);
+    onConfirmed(response.imageUrl || url);
   };
 
   const submit = async () => {
@@ -110,6 +133,9 @@ export function PhotoPromptStep({
       setConfirmed(false);
       setConfirmationChecked(false);
       setError(null);
+      if (autoConfirmOnUpload) {
+        await confirmStaged(response.imageUrl);
+      }
     } catch (err) {
       const detail =
         extractServerMessage(err instanceof Error ? err.cause : undefined) ??
@@ -129,13 +155,7 @@ export function PhotoPromptStep({
     }
     setSubmitting(true);
     try {
-      const response = await apiFetch('/api/profile/picture/confirm', {
-        method: 'POST',
-        body: JSON.stringify({}),
-        schema: PhotoConfirmationResponse,
-      });
-      setConfirmed(true);
-      onConfirmed(response.imageUrl);
+      await confirmStaged(stagedUrl);
     } catch (err) {
       const detail =
         extractServerMessage(err instanceof Error ? err.cause : undefined) ??
@@ -194,7 +214,7 @@ export function PhotoPromptStep({
           ref={inputRef}
           id={inputId}
           type="file"
-          accept="image/jpeg,image/png,image/gif,image/webp,.jpg,.jpeg,.png,.gif,.webp"
+          accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
           className="sr-only"
           onChange={(event) => acceptFile(event.target.files?.[0] ?? null)}
         />
@@ -211,7 +231,7 @@ export function PhotoPromptStep({
             {confirmed ? copy.confirmationLabel : copy.staged}
           </p>
         ) : null}
-        {stagedUrl && !confirmed ? (
+        {stagedUrl && !confirmed && !autoConfirmOnUpload ? (
           <label
             htmlFor={`${inputId}-confirm`}
             className="flex max-w-sm items-start gap-2 text-small text-foreground"
@@ -242,21 +262,28 @@ export function PhotoPromptStep({
           <span aria-hidden="true" />
         )}
         <div className="flex flex-col gap-2 sm:flex-row">
+          {allowSkip ? (
+            <Button type="button" variant="ghost" onClick={onSkip} disabled={submitting}>
+              {skipLabel ?? 'Skip'}
+            </Button>
+          ) : null}
           <Button
             type="button"
-            variant={stagedUrl ? 'outline' : 'default'}
+            variant={stagedUrl && !autoConfirmOnUpload ? 'outline' : 'default'}
             onClick={submit}
             disabled={submitting || !file}
           >
             {submitting && !stagedUrl ? copy.submitting : copy.submit}
           </Button>
-          <Button
-            type="button"
-            onClick={confirm}
-            disabled={submitting || !stagedUrl || !confirmationChecked || confirmed}
-          >
-            {submitting && stagedUrl ? copy.confirming : copy.confirm}
-          </Button>
+          {!autoConfirmOnUpload ? (
+            <Button
+              type="button"
+              onClick={confirm}
+              disabled={submitting || !stagedUrl || !confirmationChecked || confirmed}
+            >
+              {submitting && stagedUrl ? copy.confirming : copy.confirm}
+            </Button>
+          ) : null}
         </div>
       </div>
     </div>

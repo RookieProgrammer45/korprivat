@@ -1,28 +1,66 @@
-// @polsia:user-owned — Didit in progress (DIDIT_PENDING).
+// @polsia:user-owned — Didit KYC step during learner signup (DIDIT_PENDING / SIGNED_UP).
 
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { AuthShell } from '@/components/custom/auth-shell';
+import { LearnerVerifyClient } from '@/components/custom/verification/learner-verify-client';
+import { prisma } from '@/lib/db';
+import { getSessionUser } from '@/lib/require-auth';
+import {
+  loadLearnerVerificationFacts,
+  resolveLearnerStateFromFacts,
+} from '@/lib/signup-resume';
+import { stateToRoute } from '@/lib/verification/state';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('onboarding.verify');
   return {
-    title: t('title'),
+    title: t('heading'),
     alternates: { canonical: '/onboarding/learner/verify' },
     robots: { index: false, follow: false },
   };
 }
 
 export default async function LearnerVerifyPage() {
-  const t = await getTranslations('onboarding.verify');
+  const user = await getSessionUser();
+  if (!user) {
+    redirect('/signup');
+  }
+
+  const profile = await prisma.userProfile.findUnique({
+    where: { userId: user.id },
+    select: { role: true },
+  });
+  if (profile?.role !== 'STUDENT') {
+    redirect('/signup');
+  }
+
+  const facts = await loadLearnerVerificationFacts(user.id);
+  if (!facts?.claimedDob) {
+    redirect('/signup');
+  }
+
+  const verificationState = resolveLearnerStateFromFacts(facts);
+
+  // Already past Didit — leave this page (handles refresh after webhook).
+  if (
+    verificationState === 'ACTIVE' ||
+    verificationState === 'HANDLEDARE_PENDING' ||
+    verificationState === 'HANDLEDARE_EXPIRED' ||
+    verificationState === 'BLOCKED_UNDERAGE' ||
+    verificationState === 'SUSPENDED' ||
+    verificationState === 'MANUAL_REVIEW'
+  ) {
+    redirect(stateToRoute(verificationState));
+  }
+
   return (
     <AuthShell>
-      <div className="grid gap-3">
-        <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          {t('title')}
-        </h1>
-        <p className="text-pretty text-body text-muted-foreground">{t('body')}</p>
-      </div>
+      <LearnerVerifyClient
+        initialState={verificationState}
+        initialSessionId={facts.diditSessionId}
+      />
     </AuthShell>
   );
 }

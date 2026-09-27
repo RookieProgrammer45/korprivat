@@ -65,9 +65,11 @@ export async function POST(req: Request) {
   // Learners: verification soft-gate via stateToRoute.
   // Instructors / handledare: handshake dashboardPath (maps role →
   // /dashboard/instructor|handledare). No /onboarding/instructor route exists.
-  const to =
+  const destination =
     role === 'STUDENT'
       ? stateToRoute(resolveStoredLearnerState(profile?.dateOfBirth ?? null))
       : (parsed.data.next ?? result.dashboardPath);
-  return NextResponse.json(SignupCompleteResponse.parse({ to }));
+  return NextResponse.json(
+    SignupCompleteResponse.parse({ ok: true, next: destination, to: destination }),
+  );
 }

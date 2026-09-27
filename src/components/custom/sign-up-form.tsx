@@ -8,7 +8,7 @@
 //   account    → name / email / password + path-specific fields only
 //   photo|license|handledare → post-auth onboarding as required
 //
-// LEARNER    → DOB (≥16) + optional phone/city (+ Didit selfie when enabled)
+// LEARNER    → DOB (≥16) + optional phone/city → optional photo → ID KYC (verify)
 // SCHOOL     → school name, org number, city → photo → Transportstyrelsen licence
 // INSTRUCTOR → licence held ≥5 years + city → photo → teaching credentials
 
@@ -35,7 +35,6 @@ import { apiFetch } from '@/lib/api-client';
 import { signUp, useSession } from '@/lib/auth-client';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/auth';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
-import { AgeCheckResponse, SignupCapabilities } from '@/lib/contracts/didit-age';
 import { LicenseUploadResponse } from '@/lib/contracts/instructor-license';
 import {
   SignupCompleteResponse,
@@ -127,15 +126,6 @@ export function SignUpForm({
   const [submittingClickwrap, setSubmittingClickwrap] = useState(false);
   const [stagedPhotoUrl, setStagedPhotoUrl] = useState<string | null>(null);
   const [signupPath, setSignupPath] = useState<SignupPathType | null>(initialPath ?? null);
-  const [diditAgeCheck, setDiditAgeCheck] = useState(false);
-  const [faceFile, setFaceFile] = useState<File | null>(null);
-  const [ageCheck, setAgeCheck] = useState<{
-    eligible: boolean;
-    estimatedAge: number | null;
-    requestId: string | null;
-    status: string;
-  } | null>(null);
-  const [checkingAge, setCheckingAge] = useState(false);
 
   const form = useForm<AccountValues>({
     defaultValues: {
@@ -166,7 +156,7 @@ export function SignUpForm({
         body: JSON.stringify({ next }),
         schema: SignupCompleteResponse,
       });
-      router.push(withSignupFlag(result.to));
+      router.push(withSignupFlag(result.next ?? result.to));
       router.refresh();
     } catch {
       toast.error(t('errors.generic'));
@@ -183,24 +173,24 @@ export function SignUpForm({
       if (state.nextPrerequisite === 'photo') setStep('photo');
       else if (state.nextPrerequisite === 'license') setStep('license');
       else if (state.nextPrerequisite === 'clickwrap') setStep('handledare');
-      else void completeSignup();
+      else if (state.role === 'STUDENT' && state.photo.status !== 'CONFIRMED') {
+        // LEARNER: account → optional profile photo → verify (via complete).
+        setStep('photo');
+      } else {
+        void completeSignup();
+      }
     },
     [completeSignup, form],
   );
 
-  useEffect(() => {
-    let active = true;
-    apiFetch('/api/signup/capabilities', { schema: SignupCapabilities })
-      .then((caps) => {
-        if (active) setDiditAgeCheck(caps.diditAgeCheck);
-      })
-      .catch(() => {
-        if (active) setDiditAgeCheck(false);
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
+  const handlePathChange = (path: SignupPathType) => {
+    form.setValue('path', path, { shouldDirty: true, shouldValidate: true });
+    setSignupPath(path);
+    setLicenseFile(null);
+    setAttested(false);
+    setLicenseConsent(false);
+    setSubmittingClickwrap(false);
+  };
 
   useEffect(() => {
     if (!session?.user) return;
@@ -214,17 +204,6 @@ export function SignUpForm({
       active = false;
     };
   }, [session?.user, applySignupState]);
-
-  const handlePathChange = (path: SignupPathType) => {
-    form.setValue('path', path, { shouldDirty: true, shouldValidate: true });
-    setSignupPath(path);
-    setLicenseFile(null);
-    setAttested(false);
-    setLicenseConsent(false);
-    setSubmittingClickwrap(false);
-    setFaceFile(null);
-    setAgeCheck(null);
-  };
 
   const selectPath = (path: SignupPathType) => {
     handlePathChange(path);
@@ -243,51 +222,6 @@ export function SignUpForm({
       : selectedPath === 'INSTRUCTOR'
         ? 'accountLeadInstructor'
         : 'accountLeadLearner';
-
-  const runAgeCheck = async (): Promise<typeof ageCheck> => {
-    if (!diditAgeCheck || selectedPath !== 'LEARNER') return null;
-    if (!faceFile) {
-      toast.error(t('fields.errors.faceRequired'));
-      return null;
-    }
-    setCheckingAge(true);
-    try {
-      const fd = new FormData();
-      fd.append('face', faceFile, faceFile.name || 'selfie.jpg');
-      const response = await fetch('/api/signup/age-check', {
-        method: 'POST',
-        body: fd,
-        credentials: 'include',
-      });
-      const body = await response.json().catch(() => null);
-      const parsed = AgeCheckResponse.safeParse(body);
-      if (!parsed.success) {
-        toast.error(t('fields.errors.ageCheckFailed'));
-        return null;
-      }
-      setAgeCheck({
-        eligible: parsed.data.eligible,
-        estimatedAge: parsed.data.estimatedAge,
-        requestId: parsed.data.requestId,
-        status: parsed.data.status,
-      });
-      if (!parsed.data.eligible) {
-        toast.error(t('fields.errors.ageCheckIneligible', { age: MIN_LEARNER_AGE_YEARS }));
-        return null;
-      }
-      return {
-        eligible: parsed.data.eligible,
-        estimatedAge: parsed.data.estimatedAge,
-        requestId: parsed.data.requestId,
-        status: parsed.data.status,
-      };
-    } catch {
-      toast.error(t('fields.errors.ageCheckFailed'));
-      return null;
-    } finally {
-      setCheckingAge(false);
-    }
-  };
 
   const submitAccount = form.handleSubmit(
     async (values) => {
@@ -328,12 +262,6 @@ export function SignUpForm({
         }
       }
 
-      let learnerAge = ageCheck;
-      if (values.path === 'LEARNER' && diditAgeCheck) {
-        learnerAge = (await runAgeCheck()) ?? null;
-        if (!learnerAge?.eligible) return;
-      }
-
       const { error } = await signUp.email({
         name: values.name.trim(),
         email: values.email.trim(),
@@ -370,9 +298,6 @@ export function SignUpForm({
             organizationNumber: values.organizationNumber.trim() || undefined,
             licenseHeldYears:
               values.licenseHeldYears === '' ? undefined : Number(values.licenseHeldYears),
-            ageEstimatedYears: learnerAge?.estimatedAge ?? undefined,
-            ageCheckRequestId: learnerAge?.requestId ?? undefined,
-            ageCheckStatus: learnerAge?.status ?? undefined,
           }),
           schema: SignupStartResponse,
         });
@@ -475,6 +400,10 @@ export function SignUpForm({
   }
 
   const licenseCopyKey = signupPath === 'SCHOOL' ? 'school' : 'instructor';
+  const photoCopyKey =
+    signupPath === 'SCHOOL' ? 'school' : signupPath === 'LEARNER' ? 'learner' : 'instructor';
+  const isLearnerPhoto = signupPath === 'LEARNER';
+  const LEARNER_PHOTO_MAX_BYTES = 5 * 1024 * 1024;
 
   if (step === 'path') {
     return (
@@ -522,10 +451,15 @@ export function SignUpForm({
         initialStagedUrl={stagedPhotoUrl}
         onConfirmed={() => void advanceAfterPhoto()}
         onBack={() => setStep('account')}
+        allowSkip={isLearnerPhoto}
+        onSkip={isLearnerPhoto ? () => void completeSignup() : undefined}
+        skipLabel={isLearnerPhoto ? t('pictureUpload.skip') : undefined}
+        maxBytes={isLearnerPhoto ? LEARNER_PHOTO_MAX_BYTES : undefined}
+        autoConfirmOnUpload={isLearnerPhoto}
         copy={{
-          eyebrow: t(`segments.${licenseCopyKey}.pictureUpload.stepEyebrow`),
-          title: t(`segments.${licenseCopyKey}.pictureUpload.stepTitle`),
-          lead: t(`segments.${licenseCopyKey}.pictureUpload.stepLead`),
+          eyebrow: t(`segments.${photoCopyKey}.pictureUpload.stepEyebrow`),
+          title: t(`segments.${photoCopyKey}.pictureUpload.stepTitle`),
+          lead: t(`segments.${photoCopyKey}.pictureUpload.stepLead`),
           placeholderAria: t('pictureUpload.placeholderAria'),
           chooseButton: t('pictureUpload.chooseButton'),
           dragHint: t('pictureUpload.dragHint'),
@@ -535,11 +469,13 @@ export function SignUpForm({
           confirming: t('pictureUpload.confirming'),
           confirmationLabel: t('pictureUpload.confirmationLabel'),
           staged: t('pictureUpload.staged'),
-          whyWeAsk: t(`segments.${licenseCopyKey}.pictureUpload.whyWeAsk`),
+          whyWeAsk: t(`segments.${photoCopyKey}.pictureUpload.whyWeAsk`),
           errors: {
             pictureRequired: t('pictureUpload.errors.pictureRequired'),
             pictureWrongType: t('pictureUpload.errors.pictureWrongType'),
-            pictureTooLarge: t('pictureUpload.errors.pictureTooLarge'),
+            pictureTooLarge: isLearnerPhoto
+              ? t('pictureUpload.errors.pictureTooLargeLearner')
+              : t('pictureUpload.errors.pictureTooLarge'),
             pictureUploadFailed: t('pictureUpload.errors.pictureUploadFailed'),
             proxyFailure: t('pictureUpload.errors.proxyFailure'),
           },
@@ -827,29 +763,6 @@ export function SignUpForm({
                 </FormItem>
               )}
             />
-            {diditAgeCheck ? (
-              <div className="grid gap-2">
-                <Label htmlFor="signup-face">{t('fields.faceLabel')}</Label>
-                <p className="text-caption text-muted-foreground">{t('fields.faceHelp')}</p>
-                <Input
-                  id="signup-face"
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp,image/tiff"
-                  className="auth-input cursor-pointer file:mr-3 file:cursor-pointer"
-                  onChange={(e) => {
-                    setFaceFile(e.target.files?.[0] ?? null);
-                    setAgeCheck(null);
-                  }}
-                />
-                <p className="text-caption text-muted-foreground">
-                  {faceFile
-                    ? faceFile.name
-                    : ageCheck?.eligible
-                      ? t('fields.faceVerified', { age: Math.floor(ageCheck.estimatedAge ?? 0) })
-                      : t('fields.faceAlt')}
-                </p>
-              </div>
-            ) : null}
           </div>
         ) : null}
 
@@ -1006,14 +919,10 @@ export function SignUpForm({
         <Button
           type="submit"
           size="lg"
-          disabled={form.formState.isSubmitting || checkingAge || learnerUnderage}
+          disabled={form.formState.isSubmitting || learnerUnderage}
           className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
         >
-          {checkingAge
-            ? t('fields.ageChecking')
-            : form.formState.isSubmitting
-              ? t('submitting')
-              : t('submit')}
+          {form.formState.isSubmitting ? t('submitting') : t('submit')}
         </Button>
       </form>
     </Form>

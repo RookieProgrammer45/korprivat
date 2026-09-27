@@ -10,12 +10,54 @@ import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { prisma } from '@/lib/db';
 import { getSessionUser } from '@/lib/require-auth';
 import {
+  type DiditDecision,
   type LearnerVerificationState,
   resolveLearnerState,
   stateToRoute,
 } from '@/lib/verification/state';
 
 const HARD_BLOCK_STATES = new Set<LearnerVerificationState>(['BLOCKED_UNDERAGE', 'SUSPENDED']);
+
+const LEARNER_STATES = new Set<LearnerVerificationState>([
+  'SIGNED_UP',
+  'BLOCKED_UNDERAGE',
+  'DIDIT_PENDING',
+  'DIDIT_FAILED',
+  'MANUAL_REVIEW',
+  'HANDLEDARE_PENDING',
+  'HANDLEDARE_EXPIRED',
+  'ACTIVE',
+  'SUSPENDED',
+]);
+
+function asLearnerState(value: string | null | undefined): LearnerVerificationState {
+  if (value && LEARNER_STATES.has(value as LearnerVerificationState)) {
+    return value as LearnerVerificationState;
+  }
+  return 'SIGNED_UP';
+}
+
+function asDiditDecision(value: string | null | undefined): DiditDecision | null {
+  if (
+    value === 'approved' ||
+    value === 'declined' ||
+    value === 'in_review' ||
+    value === 'expired' ||
+    value === 'abandoned'
+  ) {
+    return value;
+  }
+  return null;
+}
+
+export type LearnerVerificationFacts = {
+  claimedDob: Date | null;
+  verifiedDob: Date | null;
+  currentState: LearnerVerificationState;
+  diditDecision: DiditDecision | null;
+  diditAttempts: number;
+  diditSessionId: string | null;
+};
 
 /**
  * Facts we can read before Didit persistence exists.
@@ -30,61 +72,87 @@ export function resolveStoredLearnerState(
     verifiedDob: null,
     diditDecision: null,
     diditAttempts: 0,
+    handledareEnrollment: null,
+  });
+}
+
+export function resolveLearnerStateFromFacts(
+  facts: LearnerVerificationFacts,
+): LearnerVerificationState {
+  return resolveLearnerState({
+    currentState: facts.currentState,
+    claimedDob: facts.claimedDob,
+    verifiedDob: facts.verifiedDob,
+    diditDecision: facts.diditDecision,
+    diditAttempts: facts.diditAttempts,
     // TODO(verification): load HandledareEnrollment snapshot when that model ships.
     handledareEnrollment: null,
   });
 }
 
-/** Load claimed DOB and resolve verification state for dashboard UI (banner, etc.). */
-export async function getStoredLearnerState(userId: string): Promise<LearnerVerificationState> {
+export async function loadLearnerVerificationFacts(
+  userId: string,
+): Promise<LearnerVerificationFacts | null> {
   const profile = await prisma.userProfile.findUnique({
     where: { userId },
-    select: { dateOfBirth: true },
+    select: {
+      dateOfBirth: true,
+      dateOfBirthVerified: true,
+      verificationState: true,
+      diditAttempts: true,
+      diditLastDecision: true,
+      diditSessionId: true,
+    },
   });
-  return resolveStoredLearnerState(profile?.dateOfBirth ?? null);
+  if (!profile) return null;
+  return {
+    claimedDob: profile.dateOfBirth,
+    verifiedDob: profile.dateOfBirthVerified,
+    currentState: asLearnerState(profile.verificationState),
+    diditDecision: asDiditDecision(profile.diditLastDecision),
+    diditAttempts: profile.diditAttempts,
+    diditSessionId: profile.diditSessionId,
+  };
+}
+
+/** Load verification facts and resolve state for dashboard UI (banner, etc.). */
+export async function getStoredLearnerState(userId: string): Promise<LearnerVerificationState> {
+  const facts = await loadLearnerVerificationFacts(userId);
+  if (!facts) return 'SIGNED_UP';
+  return resolveLearnerStateFromFacts(facts);
 }
 
 /**
  * Signed-in learners who already stored a claimed DOB leave /signup for
- * the route the state machine assigns (usually /dashboard/student). Hard
- * blocks stay on /signup?blocked=….
+ * the route the state machine assigns (usually /onboarding/learner/verify).
+ * Hard blocks stay on /signup?blocked=….
  */
 export async function redirectLearnerAwayFromSignup(): Promise<void> {
   const user = await getSessionUser();
   if (!user) return;
 
+  const facts = await loadLearnerVerificationFacts(user.id);
+  if (!facts?.claimedDob) return;
+
   const profile = await prisma.userProfile.findUnique({
     where: { userId: user.id },
-    select: { role: true, dateOfBirth: true },
+    select: { role: true },
   });
-  if (profile?.role !== 'STUDENT' || !profile.dateOfBirth) return;
+  if (profile?.role !== 'STUDENT') return;
 
-  const destination = stateToRoute(resolveStoredLearnerState(profile.dateOfBirth));
+  const destination = stateToRoute(resolveLearnerStateFromFacts(facts));
   if (!destination.startsWith('/signup')) redirect(destination);
 }
 
 /**
  * Hard gate for booking / checkout surfaces.
- * TODO(verification): Didit webhook slice must write dateOfBirthVerified
- * (and related facts) before this can return for real ACTIVE learners.
- * Do not wire into booking/checkout until that writer ships.
+ * Requires dateOfBirthVerified from the Didit webhook writer.
  */
 export async function requireActiveLearner(userId: string): Promise<void> {
-  const profile = await prisma.userProfile.findUnique({
-    where: { userId },
-    select: { dateOfBirth: true },
-  });
-
-  const state = resolveLearnerState({
-    currentState: 'SIGNED_UP',
-    claimedDob: profile?.dateOfBirth ?? null,
-    // TODO(verification): read dateOfBirthVerified once Didit webhook persists it.
-    verifiedDob: null,
-    diditDecision: null,
-    diditAttempts: 0,
-    // TODO(verification): load HandledareEnrollment snapshot when that model ships.
-    handledareEnrollment: null,
-  });
+  const facts = await loadLearnerVerificationFacts(userId);
+  const state = facts
+    ? resolveLearnerStateFromFacts(facts)
+    : resolveStoredLearnerState(null);
 
   if (state !== 'ACTIVE') {
     redirect(stateToRoute(state));
@@ -118,19 +186,14 @@ export async function requireSignupPrerequisites(
   }
 
   if (role === 'STUDENT') {
-    const profile = await prisma.userProfile.findUnique({
-      where: { userId },
-      select: {
-        dateOfBirth: true,
-      },
-    });
+    const facts = await loadLearnerVerificationFacts(userId);
 
     // Claimed DOB is collected on /signup. Until it exists, send them back.
-    if (!profile?.dateOfBirth) {
+    if (!facts?.claimedDob) {
       redirect('/signup');
     }
 
-    const state = resolveStoredLearnerState(profile.dateOfBirth);
+    const state = resolveLearnerStateFromFacts(facts);
     // Soft-gate: only hard-block underage / suspended. Other states may browse
     // /dashboard/student; booking uses requireActiveLearner later.
     if (HARD_BLOCK_STATES.has(state)) {

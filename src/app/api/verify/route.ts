@@ -108,7 +108,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'missing_claimed_dob' }, { status: 400 });
   }
 
-  const callbackUrl = `${siteUrl}/dashboard/student?verify=done`;
+  const callbackUrl = `${siteUrl}/onboarding/learner/verify`;
 
   let session: { sessionId: string; url: string };
   try {

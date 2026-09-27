@@ -200,13 +200,13 @@ describe('resolveLearnerState', () => {
 });
 
 describe('stateToRoute', () => {
-  it('soft-gates incomplete states to the student dashboard; hard-blocks to signup', () => {
-    expect(stateToRoute('SIGNED_UP')).toBe('/dashboard/student');
-    expect(stateToRoute('DIDIT_PENDING')).toBe('/dashboard/student');
-    expect(stateToRoute('DIDIT_FAILED')).toBe('/dashboard/student');
+  it('routes incomplete / terminal states to the correct surfaces', () => {
+    expect(stateToRoute('SIGNED_UP')).toBe('/onboarding/learner/verify');
+    expect(stateToRoute('DIDIT_PENDING')).toBe('/onboarding/learner/verify');
+    expect(stateToRoute('DIDIT_FAILED')).toBe('/onboarding/learner/verify');
     expect(stateToRoute('MANUAL_REVIEW')).toBe('/dashboard/student');
-    expect(stateToRoute('HANDLEDARE_PENDING')).toBe('/dashboard/student');
-    expect(stateToRoute('HANDLEDARE_EXPIRED')).toBe('/dashboard/student');
+    expect(stateToRoute('HANDLEDARE_PENDING')).toBe('/onboarding/handledare');
+    expect(stateToRoute('HANDLEDARE_EXPIRED')).toBe('/onboarding/handledare');
     expect(stateToRoute('ACTIVE')).toBe('/dashboard/student');
     expect(stateToRoute('BLOCKED_UNDERAGE')).toBe('/signup?blocked=underage');
     expect(stateToRoute('SUSPENDED')).toBe('/signup?blocked=suspended');

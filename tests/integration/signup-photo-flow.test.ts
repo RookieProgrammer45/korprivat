@@ -62,7 +62,11 @@ describe('signup photo gate across marketplace roles', () => {
     });
     const response = await completePOST(request());
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ to: '/dashboard/student' });
+    expect(await response.json()).toEqual({
+      ok: true,
+      next: '/onboarding/learner/verify',
+      to: '/onboarding/learner/verify',
+    });
   });
 
   it.each([

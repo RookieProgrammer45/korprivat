@@ -774,16 +774,8 @@
           "schoolName": "Ange skolans namn.",
           "organizationNumber": "Ange skolans organisationsnummer.",
           "city": "Ange en stad.",
-          "licenseYears": "Instruktörer måste ha haft körkort i minst {years} år.",
-          "faceRequired": "Lägg till en selfie så vi kan bekräfta din ålder.",
-          "ageCheckFailed": "Ålderskontrollen kunde inte slutföras. Prova en annan bild.",
-          "ageCheckIneligible": "Du måste vara minst {age} år för att gå med som elev."
-        },
-        "faceLabel": "Ansiktsfoto för ålderskontroll",
-        "faceHelp": "När Didit är aktiverat uppskattar vi ålder från en tydlig selfie (JPEG/PNG/WebP, max 5 MB).",
-        "faceAlt": "Välj en tydlig selfie framifrån…",
-        "faceVerified": "Ålderskontroll godkänd (cirka {age}).",
-        "ageChecking": "Kontrollerar ålder…"
+          "licenseYears": "Instruktörer måste ha haft körkort i minst {years} år."
+        }
       },
       "clickwrap": {
         "stepEyebrow": "Handledare-villkor",
@@ -848,8 +840,10 @@
           "pictureWrongType": "Den filen är inte en giltig bild.",
           "pictureTooLarge": "Fotot är för stort — håll det under 20 MB.",
           "pictureUploadFailed": "Vi kunde inte ladda upp ditt foto. Försök igen.",
-          "proxyFailure": "Bildtjänsten returnerade ett fel. Försök igen."
-        }
+          "proxyFailure": "Bildtjänsten returnerade ett fel. Försök igen.",
+          "pictureTooLargeLearner": "Det fotot är för stort — håll det under 5 MB."
+        },
+        "skip": "Hoppa över"
       },
       "segments": {
         "STUDENT": {
@@ -965,6 +959,14 @@
               "licenseLabel": "Lärarintygsfil",
               "attestationLabel": "Jag bekräftar att intyget är mitt, att jag får undervisa med det, och att jag har haft fullständigt körkort i minst 5 år."
             }
+          }
+        },
+        "learner": {
+          "pictureUpload": {
+            "stepEyebrow": "Lägg till ett profilfoto",
+            "stepTitle": "Lägg till ett profilfoto",
+            "stepLead": "Elever och lärare ser ditt foto när ni bokar lektioner.",
+            "whyWeAsk": "Ditt foto visas vid bokningar så att andra vet vem de möter."
           }
         }
       },
@@ -2583,7 +2585,25 @@
     },
     "verify": {
       "title": "Verifiering pågår",
-      "body": "Det tar vanligtvis under två minuter. Stäng inte den här fliken."
+      "body": "Det tar vanligtvis under 2 minuter. Stäng inte den här fliken.",
+      "heading": "Verifiera din identitet",
+      "subtext": "Ladda upp en giltig legitimation (pass, nationellt ID eller körkort) så att vi kan bekräfta din ålder. Tar under 2 minuter.",
+      "startCta": "Ladda upp legitimation",
+      "starting": "Öppnar…",
+      "consent": "Jag godkänner att DriveLinkUp delar mina uppgifter med Didit för identitetsverifiering via legitimation.",
+      "consentRequired": "Godkänn delning med Didit för att fortsätta.",
+      "startFailed": "Kunde inte starta verifieringen. Försök igen.",
+      "invalidState": "Verifiering kan inte startas i ditt nuvarande läge.",
+      "inProgressTitle": "Verifiering pågår",
+      "waitingTitle": "Verifiering pågår",
+      "waitingBody": "Det tar vanligtvis under 2 minuter. Stäng inte den här fliken.",
+      "timeoutBody": "Vi väntar fortfarande på svar från Didit. Försök igen om en stund.",
+      "checkAgain": "Kontrollera igen",
+      "restartCta": "Starta om verifiering",
+      "pollingHint": "Kontrollerar status automatiskt…",
+      "refreshFailed": "Kunde inte hämta status. Försök igen.",
+      "success": "Identitet bekräftad",
+      "failed": "Vi kunde inte verifiera din legitimation. Försök igen."
     },
     "handledare": {
       "title": "Väntar på din handledare",

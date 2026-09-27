@@ -6,6 +6,10 @@ import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { SignupPath, SignupState } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { requireAuth } from '@/lib/require-auth';
+import {
+  loadLearnerVerificationFacts,
+  resolveLearnerStateFromFacts,
+} from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,5 +52,25 @@ export async function GET(req: Request) {
         : role === 'HANDLEDARE' && clickwrap?.termsVersion !== HANDLEDARE_TERMS_VERSION
           ? 'clickwrap'
           : 'complete';
-  return NextResponse.json(SignupState.parse({ role, path, photo, nextPrerequisite }));
+
+  let verificationState: SignupState['verificationState'];
+  let diditSessionId: string | null | undefined;
+  if (role === 'STUDENT') {
+    const facts = await loadLearnerVerificationFacts(user.id);
+    if (facts) {
+      verificationState = resolveLearnerStateFromFacts(facts);
+      diditSessionId = facts.diditSessionId;
+    }
+  }
+
+  return NextResponse.json(
+    SignupState.parse({
+      role,
+      path,
+      photo,
+      nextPrerequisite,
+      verificationState,
+      diditSessionId,
+    }),
+  );
 }

@@ -128,21 +128,20 @@ export function resolveLearnerState(input: ResolveInput): LearnerVerificationSta
 /** App route for a verification state (live surfaces — ADR-001). */
 export function stateToRoute(state: LearnerVerificationState): string {
   switch (state) {
-    // TODO(verification): Move to /onboarding/learner when that route ships.
     case 'SIGNED_UP':
-      return '/dashboard/student';
+      return '/onboarding/learner/verify';
     case 'BLOCKED_UNDERAGE':
       return '/signup?blocked=underage';
     case 'SUSPENDED':
       return '/signup?blocked=suspended';
-    // Soft-gate: incomplete verification still uses the student dashboard;
-    // booking/checkout will call requireActiveLearner once Didit persists verified DOB.
     case 'DIDIT_PENDING':
     case 'DIDIT_FAILED':
+      return '/onboarding/learner/verify';
     case 'MANUAL_REVIEW':
+      return '/dashboard/student';
     case 'HANDLEDARE_PENDING':
     case 'HANDLEDARE_EXPIRED':
-      return '/dashboard/student';
+      return '/onboarding/handledare';
     case 'ACTIVE':
       return '/dashboard/student';
   }
