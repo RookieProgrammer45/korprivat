@@ -104,8 +104,8 @@ describe('POST /api/verify', () => {
     });
     expect(mockCreateDiditSession).toHaveBeenCalledWith(
       expect.objectContaining({
-        userId: 'user_learner_1',
-        callbackUrl: 'https://app.example.com/dashboard/student?verify=done',
+        userId: 'test-user-id',
+        callbackUrl: 'https://app.example.com/onboarding/learner/verify',
       }),
     );
     expect(mockUserProfileUpdate).toHaveBeenCalledOnce();
