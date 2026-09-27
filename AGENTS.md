@@ -117,9 +117,18 @@ shell/.env.local conflicts, unset the offending var in the shell:
   unset DIDIT_WORKFLOW_ID
 
 Then restart. Next.js will not override an existing shell env var
-with `.env.local`, so an empty shell export silently wins and the
-app sees unset. This has bitten us twice (`BETTER_AUTH_URL`,
-`DIDIT_WORKFLOW_ID`).
+with `.env.local`, so an empty or stale shell export silently wins.
+This has bitten us three times.
+
+Common offenders we have hit:
+- `BETTER_AUTH_URL` (empty shell override)
+- `DIDIT_WORKFLOW_ID` (and any `DIDIT_*` key — empty shell override)
+- `NEXT_PUBLIC_APP_URL` (stale production / preview value in shell)
+
+Rule: before `npm run dev`, run `npm run dev:check`. If it
+reports conflicts, unset each reported key in the current shell,
+then start dev. Do not edit `.env.local` to work around a shell
+override.
 
 ## How to work
 

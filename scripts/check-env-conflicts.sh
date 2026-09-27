@@ -11,38 +11,48 @@ if [ ! -f .env.local ]; then
 fi
 
 CONFLICTS=0
-while IFS= read -r line || [ -n "$line" ]; do
-  # Skip comments and blanks
-  [[ "$line" =~ ^[[:space:]]*# ]] && continue
-  [[ -z "${line//[[:space:]]/}" ]] && continue
+UNSET_KEYS=()
 
-  key="${line%%=*}"
-  # Strip whitespace
-  key="$(echo "$key" | xargs)"
-  [ -z "$key" ] && continue
+report() {
+  echo "⚠  $2"
+  echo "   → unset $1"
+  CONFLICTS=$((CONFLICTS + 1))
+  UNSET_KEYS+=("$1")
+}
 
-  # Is it exported in the shell?
-  if printenv "$key" > /dev/null 2>&1; then
-    shell_val="$(printenv "$key")"
-    file_val="${line#*=}"
-    # Strip surrounding quotes from .env.local values for comparison
-    if [[ "$file_val" =~ ^\".*\"$ ]] || [[ "$file_val" =~ ^\'.*\'$ ]]; then
-      file_val="${file_val:1:${#file_val}-2}"
-    fi
-    if [ -z "$shell_val" ] && [ -n "$file_val" ]; then
-      echo "⚠  $key is EMPTY in shell but set in .env.local — shell wins"
-      CONFLICTS=$((CONFLICTS + 1))
-    elif [ "$shell_val" != "$file_val" ]; then
-      echo "⚠  $key differs between shell and .env.local — shell wins"
-      CONFLICTS=$((CONFLICTS + 1))
-    fi
+check_key() {
+  local key="$1" file_val="$2" shell_val
+  printenv "$key" >/dev/null 2>&1 || return 0
+  shell_val="$(printenv "$key")"
+  if [ -z "$shell_val" ] && [ -n "$file_val" ]; then
+    report "$key" "$key is EMPTY in shell but set in .env.local — shell wins"
+  elif [ "$shell_val" != "$file_val" ]; then
+    report "$key" "$key differs between shell and .env.local — shell wins"
   fi
+}
+
+while IFS= read -r line || [ -n "$line" ]; do
+  [[ "$line" =~ ^[[:space:]]*# || -z "${line//[[:space:]]/}" ]] && continue
+  key="${line%%=*}"; key="${key#"${key%%[![:space:]]*}"}"; key="${key%"${key##*[![:space:]]}"}"
+  [ -z "$key" ] && continue
+  file_val="${line#*=}"
+  [[ "$file_val" =~ ^[\"\'].*[\"\']$ ]] && file_val="${file_val:1:${#file_val}-2}"
+  check_key "$key" "$file_val"
 done < .env.local
+
+# Also flag NEXT_PUBLIC_* shell exports missing from .env.local
+while IFS= read -r key; do
+  [ -z "$key" ] && continue
+  grep -q "^${key}=" .env.local 2>/dev/null && continue
+  report "$key" "$key is set in shell but absent from .env.local (NEXT_PUBLIC_* leak)"
+done < <(env | awk -F= '/^NEXT_PUBLIC_/ {print $1}')
 
 if [ "$CONFLICTS" -eq 0 ]; then
   echo "✓ No shell/.env.local conflicts."
-else
-  echo ""
-  echo "$CONFLICTS conflict(s). Run: unset <KEY> and restart dev."
-  exit 1
+  exit 0
 fi
+echo ""
+echo "$CONFLICTS conflict(s). Run:"
+echo "  unset ${UNSET_KEYS[*]}"
+echo "Then restart dev."
+exit 1
