@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { signIn } from '@/lib/auth-client';
 import { applyServerErrors } from '@/lib/forms';
+import { SocialAuthButtons } from './social-auth-buttons';
 
 type FormValues = { email: string; password: string };
 
@@ -55,11 +56,13 @@ export function SignInForm({ next }: { next?: string }) {
   });
 
   return (
-    <Form {...form}>
-      <form onSubmit={onSubmit} className="auth-form grid gap-5" noValidate>
-        <FormField
-          control={form.control}
-          name="email"
+    <div className="grid gap-5">
+      <SocialAuthButtons mode="login" next={next} />
+      <Form {...form}>
+        <form onSubmit={onSubmit} className="auth-form grid gap-5" noValidate>
+          <FormField
+            control={form.control}
+            name="email"
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
@@ -107,5 +110,6 @@ export function SignInForm({ next }: { next?: string }) {
         </Button>
       </form>
     </Form>
+    </div>
   );
 }

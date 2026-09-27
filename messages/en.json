@@ -714,6 +714,13 @@
     "submitting": "Saving…"
   },
   "auth": {
+    "social": {
+      "google": "Continue with Google",
+      "error": "Could not sign in. Try again."
+    },
+    "divider": {
+      "or": "or"
+    },
     "signIn": {
       "title": "Log in",
       "subtitle": "Welcome back to DriveLinkUp.",

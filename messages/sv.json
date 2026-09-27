@@ -714,6 +714,13 @@
     "submitting": "Sparar…"
   },
   "auth": {
+    "social": {
+      "google": "Fortsätt med Google",
+      "error": "Kunde inte logga in. Försök igen."
+    },
+    "divider": {
+      "or": "eller"
+    },
     "signIn": {
       "title": "Logga in",
       "subtitle": "Välkommen tillbaka till DriveLinkUp.",

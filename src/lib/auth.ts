@@ -12,12 +12,13 @@ import { env } from '@/lib/env';
 // Compose the owner-admin grant with the app's hooks — don't overwrite them.
 const appHooks = authConfig.databaseHooks;
 
-// Multi-host auth: production www + apex, plus any deploy-injected extras
-// (preview URLs via BETTER_AUTH_TRUSTED_ORIGINS). baseURL's own origin is
-// always trusted implicitly.
+// Multi-host auth: production www + apex, local dev, plus any deploy-injected
+// extras (preview URLs via BETTER_AUTH_TRUSTED_ORIGINS). baseURL's own origin
+// is always trusted implicitly.
 const trustedOrigins = [
   'https://www.drivelinkup.com',
   'https://drivelinkup.com',
+  'http://localhost:3000',
   ...(env.BETTER_AUTH_TRUSTED_ORIGINS?.split(',')
     .map((o) => o.trim())
     .filter(Boolean) ?? []),
@@ -31,6 +32,12 @@ export const auth = betterAuth({
   secret: env.BETTER_AUTH_SECRET,
   baseURL: env.BETTER_AUTH_URL,
   trustedOrigins,
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    },
+  },
   databaseHooks: {
     ...appHooks,
     user: {

@@ -47,10 +47,12 @@ import {
   isInstructorLicenseTenureEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
   MIN_LEARNER_AGE_YEARS,
+  roleForSignupPath,
 } from '@/lib/signup-eligibility';
 import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
 import { ClickwrapStep } from './clickwrap-step';
 import { PhotoPromptStep } from './photo-prompt-step';
+import { SocialAuthButtons } from './social-auth-buttons';
 
 type Step = 'path' | 'account' | 'verifyEmail' | 'photo' | 'license' | 'handledare';
 
@@ -704,27 +706,34 @@ export function SignUpForm({
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={submitAccount} className="auth-form grid gap-5" noValidate>
-        <div className="mb-1 grid gap-3">
-          <button
-            type="button"
-            onClick={() => setStep('path')}
-            className="w-fit text-small font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            ← {t('backToPaths')}
-          </button>
-          <div className="grid gap-2">
-            <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              {t(accountTitleKey)}
-            </h1>
-            <p className="text-pretty text-body text-muted-foreground">{t(accountLeadKey)}</p>
-          </div>
+    <div className="grid gap-5">
+      <div className="mb-1 grid gap-3">
+        <button
+          type="button"
+          onClick={() => setStep('path')}
+          className="w-fit text-small font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          ← {t('backToPaths')}
+        </button>
+        <div className="grid gap-2">
+          <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            {t(accountTitleKey)}
+          </h1>
+          <p className="text-pretty text-body text-muted-foreground">{t(accountLeadKey)}</p>
         </div>
+      </div>
 
-        <FormField
-          control={form.control}
-          name="name"
+      <SocialAuthButtons
+        mode="signup"
+        role={roleForSignupPath(selectedPath)}
+        next={next}
+      />
+
+      <Form {...form}>
+        <form onSubmit={submitAccount} className="auth-form grid gap-5" noValidate>
+          <FormField
+            control={form.control}
+            name="name"
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
@@ -1020,6 +1029,7 @@ export function SignUpForm({
         </Button>
       </form>
     </Form>
+    </div>
   );
 }
 
