@@ -1,0 +1,43 @@
+---
+description: DriveLinkUp owns this codebase. No scaffold, no proxies.
+globs:
+  - "src/**"
+  - "prisma/**"
+  - "next.config.ts"
+  - "next.user-config.ts"
+  - "proxy.ts"
+alwaysApply: true
+---
+
+## Ownership
+
+This repo is owned and operated by DriveLinkUp. It is not built on,
+controlled by, or dependent on any scaffold provider (Polsia or
+otherwise).
+
+## Hard rules
+
+1. Never import from a scaffold package or proxy.
+2. Never add a passthrough proxy around a third-party SDK. Call the
+   provider's SDK directly:
+   - Email → `resend`
+   - Payments → `stripe`
+   - KYC / ID verification → Didit HTTP API (direct)
+   - Storage → Vercel Blob or Cloudflare R2 (direct)
+   - AI → OpenAI SDK (direct)
+   - Auth → `better-auth`
+   - Analytics → Vercel Analytics or Plausible (direct)
+3. Every file in this repo is owned by this repo. No
+   "framework-owned" markers, no "do not edit" warnings from a
+   scaffold.
+4. All outbound URLs must target:
+   - www.drivelinkup.com for user-facing links
+   - The provider's own API domain for integrations
+   Never a scaffold's proxy domain.
+5. Env vars use the provider's real names:
+   RESEND_API_KEY (not POLSIA_EMAIL_PROXY_URL)
+   STRIPE_SECRET_KEY (not POLSIA_API_KEY)
+   OPENAI_API_KEY (not POLSIA_AI_BASE_URL)
+   OWNER_EMAIL (not POLSIA_OWNER_EMAIL)
+6. If a scaffold is present in node_modules but unused, log it in
+   docs/progress.md for removal — do not import it.
