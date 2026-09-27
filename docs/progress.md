@@ -12,8 +12,9 @@ booking surfaces once one real KYC session completes.
 
 ## In progress
 
-- Signup: 3-step wizard (account → photo → KYC) for LEARNER; ID document
-  Didit Free KYC on `/onboarding/learner/verify`.
+- Signup: 4-step wizard (account → email → photo → KYC) for LEARNER; ID
+  document Didit Free KYC on `/onboarding/learner/verify`. Email verification
+  via better-auth + Polsia email proxy; dashboards require `emailVerified`.
 
 ## Production findings
 

@@ -109,7 +109,7 @@ flowchart TB
 
 | Context | Responsibility | Service root | Owns (target) |
 | --- | --- | --- | --- |
-| Identity & Auth | Users, sessions, admin role | `src/lib/auth*.ts` → `src/lib/identity/` | better-auth `User`, `Session`, `Account`; marketplace role on `UserProfile` |
+| Identity & Auth | Users, sessions, admin role; **email verification enforced** on protected routes | `src/lib/auth*.ts` → `src/lib/identity/` | better-auth `User` (`emailVerified`), `Session`, `Account`; marketplace role on `UserProfile` |
 | Verification | Age, Didit, handledare enrollment, instructor licence | `src/lib/verification/` | verification state, `HandledareEnrollment`, licence rows |
 | Organizations | Schools, memberships | `src/lib/orgs/` | **Not started** |
 | Discovery | Search, geo, profiles | `src/lib/discovery/` | Instructor listings (Prisma today) |

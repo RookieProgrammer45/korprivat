@@ -81,6 +81,12 @@ stateDiagram-v2
 
 ## 4. Transition rules (exact conditions)
 
+**Prerequisite (before T1/T2):** `User.emailVerified === true`. Signup is
+account → confirm email → optional profile photo → ID KYC. Unverified sessions
+are kept on `/signup` (email step); dashboards and `/onboarding/*` redirect
+there. Email verification does not change `verificationState` — it only gates
+entry into the Didit path.
+
 ```text
 T1  SIGNED_UP         → BLOCKED_UNDERAGE   when claimedDob age < 16
 T2  SIGNED_UP         → DIDIT_PENDING      when claimedDob age >= 16
