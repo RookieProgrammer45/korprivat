@@ -50,7 +50,7 @@ export default function OAuthCompletePage() {
         if (role === 'STUDENT') {
           router.replace('/onboarding/learner/verify');
         } else {
-          router.replace(next ?? '/signup');
+          router.replace(next ?? '/signup?role=instructor');
         }
         router.refresh();
       } catch {

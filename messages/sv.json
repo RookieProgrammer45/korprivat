@@ -2624,6 +2624,12 @@
       "body": "Det tar vanligtvis under 2 minuter. Stäng inte den här fliken.",
       "heading": "Verifiera din identitet",
       "subtext": "Ladda upp en giltig legitimation (pass, nationellt ID eller körkort) så att vi kan bekräfta din ålder. Tar under 2 minuter.",
+      "dobPhase": {
+        "heading": "Innan vi verifierar din identitet",
+        "lead": "Bekräfta ditt födelsedatum och godkänn integritetspolicyn så att vi kan fortsätta.",
+        "continue": "Fortsätt",
+        "submitting": "Sparar…"
+      },
       "startCta": "Ladda upp legitimation",
       "starting": "Öppnar…",
       "consent": "Jag godkänner att DriveLinkUp delar mina uppgifter med Didit för identitetsverifiering via legitimation.",
