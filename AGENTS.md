@@ -109,6 +109,18 @@ which breaks webhook signature verification and silently loses events.
 Affected: Didit webhook destination, Stripe webhook endpoint (when
 Connect ships), any future inbound webhook.
 
+## Local env hygiene
+
+Before running `npm run dev`, run `npm run dev:check`. If it reports
+shell/.env.local conflicts, unset the offending var in the shell:
+
+  unset DIDIT_WORKFLOW_ID
+
+Then restart. Next.js will not override an existing shell env var
+with `.env.local`, so an empty shell export silently wins and the
+app sees unset. This has bitten us twice (`BETTER_AUTH_URL`,
+`DIDIT_WORKFLOW_ID`).
+
 ## How to work
 
 1. Name the bounded context before writing code.
