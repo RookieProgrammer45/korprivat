@@ -13,7 +13,6 @@
 // INSTRUCTOR → licence held ≥5 years + city → photo → teaching credentials
 
 import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState } from 'react';
@@ -46,11 +45,14 @@ import { applyServerErrors } from '@/lib/forms';
 import {
   isInstructorLicenseTenureEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
-  MIN_LEARNER_AGE_YEARS,
   roleForSignupPath,
 } from '@/lib/signup-eligibility';
 import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
 import { ClickwrapStep } from './clickwrap-step';
+import {
+  claimedDobIsUnderage,
+  LearnerDobConsentFields,
+} from './learner-dob-consent-fields';
 import { PhotoPromptStep } from './photo-prompt-step';
 import { SocialAuthButtons } from './social-auth-buttons';
 
@@ -94,14 +96,6 @@ const ACCEPT_MIME = 'image/*,application/pdf';
 
 function withSignupFlag(path: string): string {
   return `${path}${path.includes('?') ? '&' : '?'}signup=1`;
-}
-
-/** Claimed DOB is a routing check only. Date-only UTC age, same helper as the state machine. */
-function claimedDobIsUnderage(value: string): boolean {
-  if (!value) return false;
-  const dob = new Date(value);
-  if (Number.isNaN(dob.getTime())) return false;
-  return ageInYears(dob) < MINIMUM_AGE;
 }
 
 export function SignUpForm({
@@ -155,6 +149,7 @@ export function SignUpForm({
 
   const selectedPath = useWatch({ control: form.control, name: 'path' });
   const dateOfBirthValue = useWatch({ control: form.control, name: 'dateOfBirth' });
+  const consentValue = useWatch({ control: form.control, name: 'consent' });
   const learnerUnderage =
     selectedPath === 'LEARNER' && claimedDobIsUnderage(dateOfBirthValue ?? '');
 
@@ -288,6 +283,10 @@ export function SignUpForm({
 
   const submitAccount = form.handleSubmit(
     async (values) => {
+      if (!values.consent) {
+        form.setError('consent', { message: tConsentForm('signupCheckboxError') });
+        return;
+      }
       if (values.path === 'LEARNER') {
         const dob = new Date(values.dateOfBirth);
         if (!values.dateOfBirth || Number.isNaN(dob.getTime()) || ageInYears(dob) < MINIMUM_AGE) {
@@ -795,38 +794,26 @@ export function SignUpForm({
 
         {selectedPath === 'LEARNER' ? (
           <div className="grid gap-4 border-t border-border pt-4">
-            <FormField
-              control={form.control}
-              name="dateOfBirth"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.dateOfBirthLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="date"
-                      autoComplete="bday"
-                      className="auth-input h-12"
-                      {...field}
-                      onChange={(event) => {
-                        field.onChange(event);
-                        const value = event.target.value;
-                        if (claimedDobIsUnderage(value)) {
-                          form.setError('dateOfBirth', {
-                            message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
-                          });
-                        } else if (value) {
-                          form.clearErrors('dateOfBirth');
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <p className="text-caption text-muted-foreground">
-                    {t('fields.dateOfBirthHelp', { age: MIN_LEARNER_AGE_YEARS })}
-                  </p>
-                  <FormMessage />
-                </FormItem>
-              )}
+            <LearnerDobConsentFields
+              idPrefix="signup-dob"
+              includeDob
+              includeConsent={false}
+              dob={dateOfBirthValue ?? ''}
+              onDobChange={(value) => {
+                form.setValue('dateOfBirth', value, { shouldDirty: true, shouldValidate: true });
+                if (claimedDobIsUnderage(value)) {
+                  form.setError('dateOfBirth', {
+                    message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
+                  });
+                } else if (value) {
+                  form.clearErrors('dateOfBirth');
+                }
+              }}
+              consent={false}
+              onConsentChange={() => {}}
+              errors={{
+                dateOfBirth: form.formState.errors.dateOfBirth?.message,
+              }}
             />
             <FormField
               control={form.control}
@@ -980,44 +967,22 @@ export function SignUpForm({
           </div>
         ) : null}
 
-        <FormField
-          control={form.control}
-          name="consent"
-          rules={{
-            validate: (value) => value === true || tConsentForm('signupCheckboxError'),
+        <LearnerDobConsentFields
+          idPrefix="signup"
+          includeDob={false}
+          dob=""
+          onDobChange={() => {}}
+          consent={consentValue === true}
+          onConsentChange={(value) => {
+            form.setValue('consent', value, { shouldDirty: true, shouldValidate: true });
+            if (value) form.clearErrors('consent');
+            else {
+              form.setError('consent', { message: tConsentForm('signupCheckboxError') });
+            }
           }}
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <label
-                  htmlFor="signup-consent"
-                  className="flex cursor-pointer items-start gap-2 rounded-xl border border-border bg-muted/40 px-3 py-3 text-small"
-                >
-                  <Checkbox
-                    id="signup-consent"
-                    checked={field.value === true}
-                    onCheckedChange={(checked) => field.onChange(checked === true)}
-                    className="mt-0.5"
-                  />
-                  <span className="flex flex-col">
-                    <span className="font-medium text-foreground">
-                      {tConsentForm('signupCheckbox')}{' '}
-                      <Link
-                        href="/privacy"
-                        target="_blank"
-                        rel="noopener"
-                        className="underline-offset-2 hover:underline"
-                        onClick={(event) => event.stopPropagation()}
-                      >
-                        {tConsentForm('signupCheckboxLinkText')}
-                      </Link>
-                    </span>
-                  </span>
-                </label>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          errors={{
+            consent: form.formState.errors.consent?.message,
+          }}
         />
         <Button
           type="submit"
