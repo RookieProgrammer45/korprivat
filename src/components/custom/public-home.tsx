@@ -62,20 +62,26 @@ export function PublicHome() {
             </div>
           </div>
 
-          <div className="marketplace-reveal relative min-w-0 lg:min-h-[640px]">
-            <div className="absolute inset-0 hidden overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 lg:block dark:border-white/10 dark:bg-neutral-900">
+          <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
+            <div className="absolute inset-0 hidden overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 backdrop-blur-md lg:block dark:border-white/[0.08] dark:bg-neutral-800/50 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <div
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,200,150,0.10),transparent_70%)] opacity-40 dark:opacity-100"
+                className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_60%_50%_at_50%_55%,rgba(0,200,150,0.15),transparent_75%)] opacity-40 dark:opacity-100"
                 aria-hidden
               />
-              <Image
-                src="/images/hero-driving.png"
-                alt={t('hero.imageAlt')}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain p-10 opacity-95 dark:opacity-85 dark:contrast-[0.92] dark:brightness-[0.95]"
-                style={{ objectPosition: 'center 45%' }}
+              <div className="absolute inset-x-0 top-0 bottom-[22rem]">
+                <Image
+                  src="/images/hero-driving.png"
+                  alt={t('hero.imageAlt')}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain p-4 opacity-95 lg:p-6 dark:opacity-90 dark:brightness-95"
+                  style={{ objectPosition: 'center 55%' }}
+                />
+              </div>
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-neutral-100/90 to-transparent dark:from-black/60"
+                aria-hidden
               />
             </div>
 
