@@ -38,9 +38,11 @@ model UserProfile {
   // Years the certified instructor has held a full driving licence. Required
   // for the INSTRUCTOR signup path (must be >= 5).
   licenseHeldYears   Int?
-  // Didit age-estimation result for LEARNER path (nullable when Didit is off).
+  // Deprecated — superseded by KYC webhook DOB (facial estimation retired 2026-09-27).
   ageEstimatedYears  Float?
+  // Deprecated — superseded by KYC webhook DOB (facial estimation retired 2026-09-27).
   ageCheckRequestId  String?
+  // Deprecated — superseded by KYC webhook DOB (facial estimation retired 2026-09-27).
   ageCheckStatus     String?
   welcomeSentAt      DateTime?
   profileCompletedAt DateTime?

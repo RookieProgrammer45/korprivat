@@ -1,7 +1,7 @@
 // @polsia:user-owned — Didit KYC session + webhook helpers (Verification context).
 //
-// Facial age estimation lives in src/lib/didit/age-estimation.ts (different
-// product). This module is the ID-document / Free KYC path.
+// ID-document Free KYC path only. Facial age estimation was retired 2026-09-27;
+// verified DOB comes from decision.id_verifications[].date_of_birth via webhook.
 //
 // Signature verification follows https://docs.didit.me/integration/webhooks
 // (X-Signature-V2 preferred, then X-Signature raw, then X-Signature-Simple).
