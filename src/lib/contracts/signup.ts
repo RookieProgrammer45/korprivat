@@ -24,6 +24,9 @@ export const SignupState = z.object({
   path: SignupPath.nullable(),
   photo: PhotoVerificationState,
   nextPrerequisite: SignupPrerequisite,
+  /** better-auth User.emailVerified — gates Step 2 of signup. */
+  emailVerified: z.boolean(),
+  email: z.string().email().optional(),
   /** Learner verification machine state — present for STUDENT resumes / polling. */
   verificationState: z
     .enum([

@@ -4,6 +4,9 @@
 
 import type { BetterAuthOptions } from 'better-auth';
 import { prisma } from '@/lib/db';
+import { sendEmail } from '@/lib/email/send';
+import { verifyEmailTemplate } from '@/lib/email/verify-email';
+import { siteUrl } from '@/lib/site';
 
 // On user.create (fires once per sign-up), seed the UserProfile row with the
 // marketplace role defaulted to STUDENT. The signup form posts the chosen role
@@ -18,6 +21,27 @@ export const authConfig: BetterAuthOptions = {
     // The minimum length better-auth enforces; tightening here would tighten
     // the contract for /login too.
     minPasswordLength: 8,
+    // Keep false so sign-up still creates a session (needed for the in-wizard
+    // email-verify + photo steps). App guards enforce emailVerified instead.
+    requireEmailVerification: false,
+  },
+  emailVerification: {
+    sendOnSignUp: true,
+    autoSignInAfterVerification: true,
+    // 24 hours — matches verify-email copy.
+    expiresIn: 60 * 60 * 24,
+    sendVerificationEmail: async ({ user, token }) => {
+      // Rewrite better-auth's /api/auth/verify-email URL to our branded page.
+      const verifyUrl = `${siteUrl}/verify-email?token=${encodeURIComponent(token)}`;
+      await sendEmail({
+        to: user.email,
+        ...verifyEmailTemplate({
+          name: user.name,
+          verifyUrl,
+          locale: 'sv',
+        }),
+      });
+    },
   },
   databaseHooks: {
     user: {

@@ -978,7 +978,36 @@
       "accountTitleSchool": "Lista er trafikskola",
       "accountLeadSchool": "Lägg till skolans uppgifter så att elever kan hitta och boka er.",
       "accountTitleInstructor": "Skapa ditt instruktörskonto",
-      "accountLeadInstructor": "Undervisa som certifierad instruktör med körkort i minst 5 år."
+      "accountLeadInstructor": "Undervisa som certifierad instruktör med körkort i minst 5 år.",
+      "step": {
+        "account": {
+          "title": "Skapa konto"
+        },
+        "verifyEmail": {
+          "eyebrow": "Bekräfta e-post",
+          "title": "Bekräfta din e-post",
+          "body": "Vi har skickat en länk till {email}. Klicka på länken för att aktivera ditt konto.",
+          "resend": "Skicka igen",
+          "resendIn": "Skicka igen om {n} sekunder",
+          "resent": "Länken har skickats igen",
+          "resendFailed": "Kunde inte skicka länken igen. Försök igen.",
+          "polling": "Väntar på bekräftelse…"
+        },
+        "photo": {
+          "title": "Lägg till ett profilfoto",
+          "body": "Elever och lärare ser ditt foto när ni bokar lektioner.",
+          "upload": "Ladda upp",
+          "skip": "Hoppa över"
+        },
+        "verify": {
+          "heading": "Verifiera din identitet",
+          "body": "Ladda upp en giltig legitimation (pass, nationellt ID eller körkort) så att vi kan bekräfta din ålder. Tar under 2 minuter.",
+          "cta": "Ladda upp legitimation",
+          "pending": "Verifiering pågår",
+          "success": "Identitet bekräftad",
+          "failed": "Vi kunde inte verifiera din legitimation. Försök igen."
+        }
+      }
     }
   },
   "bookingFees": {
@@ -2609,5 +2638,15 @@
       "title": "Väntar på din handledare",
       "body": "Din handledare behöver godkänna registreringen innan du kan boka."
     }
+  },
+  "verifyEmail": {
+    "heading": "Bekräfta din e-post",
+    "invalid": "Länken är ogiltig eller har gått ut.",
+    "invalidBody": "Begär en ny bekräftelselänk för att fortsätta.",
+    "resendNew": "Skicka ny länk",
+    "resent": "Länken har skickats igen",
+    "resending": "Skickar…",
+    "resendFailed": "Kunde inte skicka en ny länk. Försök igen.",
+    "resendNeedsEmail": "Logga in igen för att begära en ny länk."
   }
 }

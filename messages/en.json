@@ -978,6 +978,35 @@
             "whyWeAsk": "Your photo appears on booking requests so people know who they are meeting."
           }
         }
+      },
+      "step": {
+        "account": {
+          "title": "Create account"
+        },
+        "verifyEmail": {
+          "eyebrow": "Confirm email",
+          "title": "Confirm your email",
+          "body": "We sent a link to {email}. Click it to activate your account.",
+          "resend": "Send again",
+          "resendIn": "Send again in {n} seconds",
+          "resent": "Link sent again",
+          "resendFailed": "Could not resend the link. Try again.",
+          "polling": "Waiting for confirmation…"
+        },
+        "photo": {
+          "title": "Add a profile photo",
+          "body": "Learners and instructors see your photo when you book lessons.",
+          "upload": "Upload",
+          "skip": "Skip for now"
+        },
+        "verify": {
+          "heading": "Verify your identity",
+          "body": "Upload a valid ID (passport, national ID, or driving licence) so we can confirm your age. Takes under 2 minutes.",
+          "cta": "Upload ID document",
+          "pending": "Verification in progress",
+          "success": "Identity confirmed",
+          "failed": "We could not verify your ID document. Please try again."
+        }
       }
     }
   },
@@ -2609,5 +2638,15 @@
       "title": "Waiting for your handledare",
       "body": "Your handledare needs to approve enrollment before you can book."
     }
+  },
+  "verifyEmail": {
+    "heading": "Confirm your email",
+    "invalid": "This link is invalid or has expired.",
+    "invalidBody": "Request a new confirmation link to continue.",
+    "resendNew": "Send a new link",
+    "resent": "Link sent again",
+    "resending": "Sending…",
+    "resendFailed": "Could not send a new link. Try again.",
+    "resendNeedsEmail": "Sign in again to request a new link."
   }
 }

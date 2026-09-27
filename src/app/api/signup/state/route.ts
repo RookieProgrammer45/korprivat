@@ -69,6 +69,8 @@ export async function GET(req: Request) {
       path,
       photo,
       nextPrerequisite,
+      emailVerified: Boolean(user.emailVerified),
+      email: user.email,
       verificationState,
       diditSessionId,
     }),
