@@ -1,5 +1,15 @@
 # Progress
 
+## Database migration baseline (follow-up)
+
+- [ ] The following tables exist in the DB but have no migration
+      file: Booking, Instructor, UserProfile, and the rest of the
+      marketplace tables.
+- [ ] Until a baseline migration lands, use the manual workflow in
+      prisma/migrations/README.md.
+- [ ] Do NOT run `npx prisma migrate dev` or `npx prisma migrate
+      reset` until the baseline is complete.
+
 ## Ownership
 
 - [x] Stripped Polsia markers and metadata (commit 7d1373f)
