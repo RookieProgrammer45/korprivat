@@ -22,6 +22,7 @@ export const env = createEnv({
     DATABASE_URL: z.string().url(),
     // @polsia:slot env_vars_server start
     // Modules append additional server-side env vars here at install time.
+    EMAIL_OVERRIDE_TO: z.string().email().optional(),
     // @polsia:contrib stripe-billing start
     POLSIA_API_BASE_URL: z.string().url().default('https://polsia.com'),
     POLSIA_API_KEY: z.string().min(1).optional(),
@@ -55,6 +56,7 @@ export const env = createEnv({
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     // @polsia:slot env_runtime start
     // Modules append runtime-env entries here at install time.
+    EMAIL_OVERRIDE_TO: process.env.EMAIL_OVERRIDE_TO,
     // @polsia:contrib stripe-billing start
     POLSIA_API_BASE_URL: process.env.POLSIA_API_BASE_URL,
     POLSIA_API_KEY: process.env.POLSIA_API_KEY,

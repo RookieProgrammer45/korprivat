@@ -19,6 +19,12 @@ export interface SendEmailResult {
   id: string;
 }
 
+const emailOverrideTo = process.env.EMAIL_OVERRIDE_TO;
+if (emailOverrideTo) {
+  // biome-ignore lint/suspicious/noConsole: one-shot startup notice for ops visibility
+  console.info(`[email] EMAIL_OVERRIDE_TO active — all mail → ${emailOverrideTo}`);
+}
+
 export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult> {
   if (!process.env.RESEND_API_KEY) {
     throw new Error('RESEND_API_KEY is not set');
@@ -32,10 +38,15 @@ export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult>
       .replace(/\s+/g, ' ')
       .trim();
 
+  const recipient = process.env.EMAIL_OVERRIDE_TO ?? input.to;
+  const subject = process.env.EMAIL_OVERRIDE_TO
+    ? `[→ ${input.to}] ${input.subject}`
+    : input.subject;
+
   const { data, error } = await resend.emails.send({
     from: process.env.RESEND_FROM ?? 'DriveLinkUp <noreply@drivelinkup.com>',
-    to: input.to,
-    subject: input.subject,
+    to: recipient,
+    subject,
     html: input.html,
     text,
   });
