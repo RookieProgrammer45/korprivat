@@ -1,7 +1,7 @@
 // @polsia:user-owned — `/signup` page.
 //
 // Auth shell owns brand + locale. SignUpForm owns the step contract:
-// path → account → (photo|license|handledare) as required.
+// path → account → verifyEmail → (photo|license|handledare) as required.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -33,12 +33,13 @@ function resolveInitialPath(role: string | undefined): 'LEARNER' | 'INSTRUCTOR' 
 export default async function SignupPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string; role?: string }>;
+  searchParams: Promise<{ next?: string; role?: string; step?: string }>;
 }) {
   const t = await getTranslations('auth.signUp');
   const params = await searchParams;
   const next = sanitizeNext(params.next);
   const initialPath = resolveInitialPath(params.role);
+  const initialStep = params.step === 'photo' ? 'photo' : undefined;
 
   await redirectLearnerAwayFromSignup();
 
@@ -56,7 +57,7 @@ export default async function SignupPage({
         </>
       }
     >
-      <SignUpForm next={next} initialPath={initialPath} />
+      <SignUpForm next={next} initialPath={initialPath} initialStep={initialStep} />
     </AuthShell>
   );
 }

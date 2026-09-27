@@ -57,6 +57,11 @@ export async function requireDashboardSession(nextPath: string): Promise<Dashboa
     redirect(`/login?next=${qs}`);
   }
 
+  // Email must be confirmed before any dashboard surface.
+  if (!session.user.emailVerified) {
+    redirect('/signup');
+  }
+
   const userId = session.user.id;
   const isAdminBetterAuth = session.user.role === 'admin';
 

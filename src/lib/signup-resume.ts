@@ -130,6 +130,8 @@ export async function getStoredLearnerState(userId: string): Promise<LearnerVeri
 export async function redirectLearnerAwayFromSignup(): Promise<void> {
   const user = await getSessionUser();
   if (!user) return;
+  // Unverified emails stay on /signup (Step 2 — confirm email).
+  if (!user.emailVerified) return;
 
   const facts = await loadLearnerVerificationFacts(user.id);
   if (!facts?.claimedDob) return;
@@ -163,6 +165,14 @@ export async function requireSignupPrerequisites(
   userId: string,
   role: MarketplaceRole,
 ): Promise<void> {
+  const authUser = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { emailVerified: true },
+  });
+  if (!authUser?.emailVerified) {
+    redirect('/signup');
+  }
+
   if (role === 'INSTRUCTOR') {
     if (!(await confirmedPhotoUrl(userId))) {
       redirect('/signup');

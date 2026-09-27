@@ -4,11 +4,12 @@
 // Signup wizard — path first (Airbnb/Uber style), then account details.
 //
 // Step contract (discriminated by `step`):
-//   path       → choose LEARNER | SCHOOL | INSTRUCTOR (no credentials yet)
-//   account    → name / email / password + path-specific fields only
+//   path        → choose LEARNER | SCHOOL | INSTRUCTOR (no credentials yet)
+//   account     → name / email / password + path-specific fields only
+//   verifyEmail → confirm address (emailVerified must flip true)
 //   photo|license|handledare → post-auth onboarding as required
 //
-// LEARNER    → DOB (≥16) + optional phone/city → optional photo → ID KYC (verify)
+// LEARNER    → DOB (≥16) → email verify → optional photo → ID KYC (verify)
 // SCHOOL     → school name, org number, city → photo → Transportstyrelsen licence
 // INSTRUCTOR → licence held ≥5 years + city → photo → teaching credentials
 
@@ -32,7 +33,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { apiFetch } from '@/lib/api-client';
-import { signUp, useSession } from '@/lib/auth-client';
+import { signUp, useSession, authClient } from '@/lib/auth-client';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/auth';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { LicenseUploadResponse } from '@/lib/contracts/instructor-license';
@@ -52,7 +53,7 @@ import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
 import { ClickwrapStep } from './clickwrap-step';
 import { PhotoPromptStep } from './photo-prompt-step';
 
-type Step = 'path' | 'account' | 'photo' | 'license' | 'handledare';
+type Step = 'path' | 'account' | 'verifyEmail' | 'photo' | 'license' | 'handledare';
 
 const PATH_OPTIONS = [
   {
@@ -105,10 +106,13 @@ function claimedDobIsUnderage(value: string): boolean {
 export function SignUpForm({
   next,
   initialPath,
+  initialStep,
 }: {
   next?: string;
   /** Pre-select marketplace path from /signup?role=… (LEARNER default). */
   initialPath?: SignupPathType;
+  /** Deep-link after email verify: /signup?step=photo */
+  initialStep?: 'photo';
 }) {
   const router = useRouter();
   const t = useTranslations('auth.signUp');
@@ -118,7 +122,9 @@ export function SignUpForm({
 
   const resolvedPath: SignupPathType = initialPath ?? 'LEARNER';
   // Deep-link from hero (role=instructor) skips the path picker; user can go back.
-  const [step, setStep] = useState<Step>(initialPath ? 'account' : 'path');
+  const [step, setStep] = useState<Step>(
+    initialStep === 'photo' ? 'photo' : initialPath ? 'account' : 'path',
+  );
   const [licenseFile, setLicenseFile] = useState<File | null>(null);
   const [attested, setAttested] = useState(false);
   const [licenseConsent, setLicenseConsent] = useState(false);
@@ -126,6 +132,8 @@ export function SignUpForm({
   const [submittingClickwrap, setSubmittingClickwrap] = useState(false);
   const [stagedPhotoUrl, setStagedPhotoUrl] = useState<string | null>(null);
   const [signupPath, setSignupPath] = useState<SignupPathType | null>(initialPath ?? null);
+  const [pendingEmail, setPendingEmail] = useState('');
+  const [resendCooldown, setResendCooldown] = useState(0);
 
   const form = useForm<AccountValues>({
     defaultValues: {
@@ -169,12 +177,19 @@ export function SignUpForm({
         setSignupPath(state.path);
         form.setValue('path', state.path, { shouldValidate: true });
       }
+      if (state.email) setPendingEmail(state.email);
       setStagedPhotoUrl(state.photo.status === 'STAGED' ? state.photo.imageUrl : null);
+
+      if (!state.emailVerified) {
+        setStep('verifyEmail');
+        return;
+      }
+
       if (state.nextPrerequisite === 'photo') setStep('photo');
       else if (state.nextPrerequisite === 'license') setStep('license');
       else if (state.nextPrerequisite === 'clickwrap') setStep('handledare');
       else if (state.role === 'STUDENT' && state.photo.status !== 'CONFIRMED') {
-        // LEARNER: account → optional profile photo → verify (via complete).
+        // LEARNER: account → email → optional profile photo → verify (via complete).
         setStep('photo');
       } else {
         void completeSignup();
@@ -204,6 +219,53 @@ export function SignUpForm({
       active = false;
     };
   }, [session?.user, applySignupState]);
+
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const id = setInterval(() => {
+      setResendCooldown((n) => Math.max(0, n - 1));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [resendCooldown]);
+
+  useEffect(() => {
+    if (step !== 'verifyEmail') return;
+    let active = true;
+    const tick = async () => {
+      try {
+        const state = await apiFetch('/api/signup/state', { schema: SignupState });
+        if (!active) return;
+        if (state.emailVerified) applySignupState(state);
+      } catch {
+        // keep polling
+      }
+    };
+    void tick();
+    const id = setInterval(() => void tick(), 5000);
+    return () => {
+      active = false;
+      clearInterval(id);
+    };
+  }, [step, applySignupState]);
+
+  const resendVerificationEmail = async () => {
+    const email = pendingEmail || form.getValues('email');
+    if (!email || resendCooldown > 0) return;
+    try {
+      const { error } = await authClient.sendVerificationEmail({
+        email,
+        callbackURL: '/signup?step=photo',
+      });
+      if (error) {
+        toast.error(t('step.verifyEmail.resendFailed'));
+        return;
+      }
+      toast.success(t('step.verifyEmail.resent'));
+      setResendCooldown(60);
+    } catch {
+      toast.error(t('step.verifyEmail.resendFailed'));
+    }
+  };
 
   const selectPath = (path: SignupPathType) => {
     handlePathChange(path);
@@ -272,6 +334,9 @@ export function SignUpForm({
         if (!applied) toast.error(t('errors.generic'));
         return;
       }
+
+      setPendingEmail(values.email.trim());
+      setResendCooldown(60);
 
       try {
         await apiFetch('/api/consent', {
@@ -438,6 +503,36 @@ export function SignUpForm({
             </li>
           ))}
         </ul>
+      </div>
+    );
+  }
+
+  if (step === 'verifyEmail') {
+    const email = pendingEmail || form.getValues('email') || session?.user?.email || '';
+    return (
+      <div className="grid gap-5">
+        <div className="grid gap-2">
+          <p className="text-eyebrow text-muted-foreground">{t('step.verifyEmail.eyebrow')}</p>
+          <p className="text-h4 text-foreground">{t('step.verifyEmail.title')}</p>
+          <p className="text-body text-muted-foreground">
+            {t('step.verifyEmail.body', { email })}
+          </p>
+        </div>
+        <p className="text-small text-muted-foreground" aria-live="polite">
+          {t('step.verifyEmail.polling')}
+        </p>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <Button
+            type="button"
+            variant="outline"
+            disabled={resendCooldown > 0}
+            onClick={() => void resendVerificationEmail()}
+          >
+            {resendCooldown > 0
+              ? t('step.verifyEmail.resendIn', { n: resendCooldown })
+              : t('step.verifyEmail.resend')}
+          </Button>
+        </div>
       </div>
     );
   }

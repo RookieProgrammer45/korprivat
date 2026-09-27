@@ -27,6 +27,9 @@ export default async function LearnerVerifyPage() {
   if (!user) {
     redirect('/signup');
   }
+  if (!user.emailVerified) {
+    redirect('/signup');
+  }
 
   const profile = await prisma.userProfile.findUnique({
     where: { userId: user.id },

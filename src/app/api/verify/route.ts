@@ -51,6 +51,10 @@ export async function POST(req: Request) {
     return res as Response;
   }
 
+  if (!user.emailVerified) {
+    return NextResponse.json({ error: 'email_unverified' }, { status: 403 });
+  }
+
   const profile = await prisma.userProfile.findUnique({
     where: { userId: user.id },
     select: {
