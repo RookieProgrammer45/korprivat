@@ -48,7 +48,10 @@ export async function POST(req: Request) {
 
   // SCHOOL path: create Organization + OWNER Membership, skip Didit / stateToRoute.
   if (profile?.signupPath === 'SCHOOL') {
-    const schoolDestination = parsed.data.next ?? '/dashboard/school';
+    // Default to school dashboard; preserve /invite/{token} so invitees accept first.
+    const schoolDestination = parsed.data.next?.startsWith('/invite/')
+      ? parsed.data.next
+      : '/dashboard/school';
     const existing = await listMembershipsForUser(user.id, { onlyActive: true });
     const alreadyOwner = existing.some((m) => m.role === 'OWNER' || m.role === 'STAFF');
     if (!alreadyOwner) {

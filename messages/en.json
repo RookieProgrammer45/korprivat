@@ -2000,6 +2000,7 @@
     "revokeConfirm": "Remove this instructor from the school?",
     "removeSuccess": "Instructor removed",
     "inviteSuccess": "Invitation sent",
+    "inviteCancelled": "Invitation cancelled",
     "inviteError": "Could not send the invitation. Try again.",
     "inviteDuplicate": "This person is already invited or a member",
     "emailLabel": "Email"

@@ -105,6 +105,7 @@ export function SchoolInstructorRoster({ organizationId, isOwner, members, invit
         method: 'DELETE',
       });
       if (res.ok) {
+        toast.success(t('inviteCancelled'));
         router.refresh();
       } else {
         toast.error(t('inviteError'));
@@ -242,7 +243,17 @@ export function SchoolInstructorRoster({ organizationId, isOwner, members, invit
         </div>
       )}
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog
+        open={open}
+        onOpenChange={(nextOpen) => {
+          setOpen(nextOpen);
+          if (!nextOpen) {
+            setEmail('');
+            setInlineError(null);
+            setSubmitting(false);
+          }
+        }}
+      >
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>{t('inviteCta')}</DialogTitle>

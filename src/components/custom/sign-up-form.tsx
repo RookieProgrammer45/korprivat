@@ -159,9 +159,15 @@ export function SignUpForm({
       const result = await apiFetch('/api/signup/complete', {
         method: 'POST',
         body: JSON.stringify({
-          // SCHOOL always lands on the school dashboard so ?signup=1
-          // can show the school confirmation banner (not learner copy).
-          next: signupPath === 'SCHOOL' ? '/dashboard/school' : next,
+          // SCHOOL normally lands on the school dashboard so ?signup=1
+          // can show the school confirmation banner. Preserve invite
+          // acceptance deep-links so invitees can accept first.
+          next:
+            signupPath === 'SCHOOL'
+              ? next?.startsWith('/invite/')
+                ? next
+                : '/dashboard/school'
+              : next,
         }),
         schema: SignupCompleteResponse,
       });
