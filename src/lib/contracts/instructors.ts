@@ -91,6 +91,13 @@ export const InstructorItem = z.object({
   // always-instant flow.
   bookingMode: InstructorBookingModeEnum.nullable(),
   providerRole: ProviderRoleEnum,
+  affiliation: z
+    .object({
+      name: z.string().min(1),
+      slug: z.string().min(1),
+    })
+    .nullable()
+    .optional(),
 });
 
 // Read shape for list rows: same as detail plus the directory-required
@@ -148,6 +155,8 @@ export const InstructorQuery = z
     nearKm: z.coerce.number().int().positive().max(20_000).optional(),
     sort: z.enum(['distance', 'default']).optional(),
     providerRole: ProviderRoleEnum.optional(),
+    /** Marketplace affiliation filter — school Membership vs independent. */
+    affiliation: z.enum(['school', 'independent', 'all']).optional(),
   })
   .superRefine((query, ctx) => {
     if (query.minRate != null && query.maxRate != null && query.minRate > query.maxRate) {
@@ -275,6 +284,7 @@ type RawInstructorQuery = {
   nearKm: string | null | undefined;
   sort: string | null | undefined;
   providerRole: string | null | undefined;
+  affiliation: string | null | undefined;
 };
 
 // Server-only: builds a raw filter object from `URLSearchParams` then runs it
@@ -301,6 +311,7 @@ export function parseInstructorQuery(
     nearKm: searchParams.get('nearKm'),
     sort: searchParams.get('sort'),
     providerRole: searchParams.get('providerRole'),
+    affiliation: searchParams.get('affiliation'),
   };
   // The geo fields are parsed-into-typed values via the schema's own coerce,
   // so out-of-range or half-paired `lat`/`lng` etc. fall back to `undefined`
@@ -319,6 +330,7 @@ export function parseInstructorQuery(
     nearKm: parseInteger(raw.nearKm),
     sort: parseSort(raw.sort),
     providerRole: parseProviderRole(raw.providerRole),
+    affiliation: parseAffiliation(raw.affiliation),
   });
   if (!parsed.success) return { ok: false, error: parsed.error };
   return { ok: true, value: parsed.data };
@@ -353,5 +365,12 @@ function parseProviderRole(
   raw: string | null | undefined,
 ): 'INSTRUCTOR' | 'HANDLEDARE' | undefined {
   if (raw === 'INSTRUCTOR' || raw === 'HANDLEDARE') return raw;
+  return undefined;
+}
+
+function parseAffiliation(
+  raw: string | null | undefined,
+): 'school' | 'independent' | 'all' | undefined {
+  if (raw === 'school' || raw === 'independent' || raw === 'all') return raw;
   return undefined;
 }

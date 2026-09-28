@@ -27,6 +27,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
   const [instructor, setInstructor] = useState<InstructorItem | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const tr = useTranslations('instructorDetail');
+  const tAffiliation = useTranslations('instructorAffiliation');
   const locale = useLocale();
 
   useEffect(() => {
@@ -125,6 +126,16 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             <p className="mt-1 text-body text-muted-foreground">
               {tr('locatedIn', { city: instructor.city })}
             </p>
+            {instructor.affiliation ? (
+              <p className="mt-2 text-body text-muted-foreground">
+                <Link
+                  href={`/schools/${instructor.affiliation.slug}`}
+                  className="font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  {tAffiliation('belongsTo', { name: instructor.affiliation.name })}
+                </Link>
+              </p>
+            ) : null}
           </div>
 
           <div className="flex min-w-0 flex-wrap gap-2">

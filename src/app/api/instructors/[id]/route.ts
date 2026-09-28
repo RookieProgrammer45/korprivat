@@ -7,6 +7,7 @@ import {
 } from '@/lib/business/public-instructor';
 import { InstructorItem, PUBLIC_INSTRUCTOR_SELECT } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
+import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,8 +27,9 @@ export async function GET(_req: Request, ctx: Ctx) {
   if (!hasCanonicalCategory(instructor)) {
     return NextResponse.json({ errors: { id: 'Not found' } }, { status: 404 });
   }
-  const aggregates = await loadPublicInstructorAggregates([
-    { id: instructor.id, userId: instructor.userId },
+  const [aggregates, affiliation] = await Promise.all([
+    loadPublicInstructorAggregates([{ id: instructor.id, userId: instructor.userId }]),
+    getActiveAffiliationForUser(instructor.userId),
   ]);
   const slot = prisma.availabilitySlot
     ? await prisma.availabilitySlot.findFirst({
@@ -45,8 +47,11 @@ export async function GET(_req: Request, ctx: Ctx) {
     reviewSummary: { count: 0, averageRating: null },
   };
   return NextResponse.json(
-    InstructorItem.parse(
-      toPublicInstructor(instructor, aggregate, slot?.startsAt.toISOString() ?? null),
-    ),
+    InstructorItem.parse({
+      ...toPublicInstructor(instructor, aggregate, slot?.startsAt.toISOString() ?? null),
+      affiliation: affiliation
+        ? { name: affiliation.name, slug: affiliation.slug }
+        : null,
+    }),
   );
 }
