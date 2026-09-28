@@ -62,7 +62,7 @@ export function SchoolRegisterForm() {
         }),
         schema: OrgRegisterResponse,
       });
-      router.push('/dashboard/school');
+      router.push('/dashboard/school?signup=1');
       router.refresh();
     } catch (err) {
       const cause =

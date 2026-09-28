@@ -59,7 +59,7 @@ export default async function SchoolDashboardPage() {
       </header>
 
       {isDraft ? (
-        <Card className="border-brand-500/35 bg-brand-50/80 dark:bg-brand-950/40">
+        <Card className="border-border bg-card text-card-foreground">
           <CardContent className="grid gap-3 p-6">
             <p className="font-medium text-foreground">{t('draftCardTitle')}</p>
             <p className="text-small text-muted-foreground">{t('draftCardBody')}</p>

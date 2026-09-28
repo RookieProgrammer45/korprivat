@@ -1068,7 +1068,12 @@
       "signOutError": "Could not sign out. Please try again.",
       "messagesTab": "Messages",
       "overviewTab": "Overview",
-      "availabilityTab": "Availability"
+      "availabilityTab": "Availability",
+      "schoolOverviewTab": "Overview",
+      "schoolInstructorsTab": "Instructors",
+      "schoolBookingsTab": "Bookings",
+      "schoolRevenueTab": "Revenue",
+      "schoolSettingsTab": "Settings"
     },
     "providerActivation": {
       "eyebrow": "Marketplace health",
@@ -1949,6 +1954,12 @@
     "emptyInstructors": "No instructors yet",
     "inviteInstructor": "Invite instructor",
     "comingSoon": "Coming soon",
+    "signupConfirmation": {
+      "title": "Your school account is ready",
+      "body": "Welcome to DriveLinkUp. Add school details and invite instructors to get started.",
+      "emailNote": "We've sent a confirmation email to your inbox.",
+      "dismiss": "Dismiss"
+    },
     "panels": {
       "bookings": { "title": "Upcoming bookings" },
       "revenue": { "title": "Revenue" },

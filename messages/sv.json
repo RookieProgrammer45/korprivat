@@ -1068,7 +1068,12 @@
       "signOutError": "Det gick inte att logga ut. Försök igen.",
       "messagesTab": "Meddelanden",
       "overviewTab": "Översikt",
-      "availabilityTab": "Tillgänglighet"
+      "availabilityTab": "Tillgänglighet",
+      "schoolOverviewTab": "Översikt",
+      "schoolInstructorsTab": "Instruktörer",
+      "schoolBookingsTab": "Bokningar",
+      "schoolRevenueTab": "Intäkter",
+      "schoolSettingsTab": "Inställningar"
     },
     "providerActivation": {
       "eyebrow": "Marknadsplatsens hälsa",
@@ -1949,6 +1954,12 @@
     "emptyInstructors": "Inga instruktörer ännu",
     "inviteInstructor": "Bjud in instruktör",
     "comingSoon": "Kommer snart",
+    "signupConfirmation": {
+      "title": "Ditt skolkonto är klart",
+      "body": "Välkommen till DriveLinkUp. Lägg till skoluppgifter och bjud in instruktörer för att komma igång.",
+      "emailNote": "Vi har skickat en bekräftelse till din inkorg.",
+      "dismiss": "Stäng"
+    },
     "panels": {
       "bookings": { "title": "Kommande bokningar" },
       "revenue": { "title": "Intäkter" },

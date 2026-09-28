@@ -15,9 +15,16 @@ export interface DashboardNavProps {
   role: MarketplaceRole;
   isAdmin: boolean;
   userLabel: string;
+  /** ACTIVE OWNER or STAFF Membership — school nav wins over UserProfile.role. */
+  isSchoolOwner?: boolean;
 }
 
-export function DashboardNav({ role, isAdmin, userLabel }: DashboardNavProps) {
+export function DashboardNav({
+  role,
+  isAdmin,
+  userLabel,
+  isSchoolOwner = false,
+}: DashboardNavProps) {
   const pathname = usePathname();
   const t = useTranslations('dashboard.nav');
   const [signingOut, setSigningOut] = useState(false);
@@ -33,7 +40,15 @@ export function DashboardNav({ role, isAdmin, userLabel }: DashboardNavProps) {
     }
   }
 
-  const navItems = [
+  const schoolNavItems = [
+    { href: '/dashboard/school', label: t('schoolOverviewTab'), icon: LayoutDashboard },
+    { href: '/dashboard/school#instructors', label: t('schoolInstructorsTab'), icon: LayoutDashboard },
+    { href: '/dashboard/school#bookings', label: t('schoolBookingsTab'), icon: LayoutDashboard },
+    { href: '/dashboard/school#revenue', label: t('schoolRevenueTab'), icon: LayoutDashboard },
+    { href: '/dashboard/school/settings', label: t('schoolSettingsTab'), icon: LayoutDashboard },
+  ];
+
+  const marketplaceNavItems = [
     ...(role === 'INSTRUCTOR' || role === 'HANDLEDARE'
       ? [{ href: '/dashboard', label: t('overviewTab'), icon: LayoutDashboard }]
       : []),
@@ -69,6 +84,8 @@ export function DashboardNav({ role, isAdmin, userLabel }: DashboardNavProps) {
       : []),
   ];
 
+  const navItems = isSchoolOwner ? schoolNavItems : marketplaceNavItems;
+
   return (
     <nav
       aria-label={t('ariaLabel')}
@@ -76,7 +93,13 @@ export function DashboardNav({ role, isAdmin, userLabel }: DashboardNavProps) {
     >
       {navItems.map((item) => {
         const Icon = item.icon;
-        const active = pathname === item.href;
+        const hrefPath = item.href.split('#')[0] ?? item.href;
+        const isHashPlaceholder = item.href.includes('#');
+        const active = isHashPlaceholder
+          ? false
+          : hrefPath === '/dashboard/school'
+            ? pathname === '/dashboard/school'
+            : pathname === hrefPath || pathname.startsWith(`${hrefPath}/`);
 
         return (
           <Link

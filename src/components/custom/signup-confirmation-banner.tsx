@@ -24,7 +24,10 @@ export function SignupConfirmationBanner() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const t = useTranslations('dashboard.signupConfirmation');
+  const isSchool = pathname.startsWith('/dashboard/school');
+  const tLearner = useTranslations('dashboard.signupConfirmation');
+  const tSchool = useTranslations('dashboardSchool.signupConfirmation');
+  const t = isSchool ? tSchool : tLearner;
   const [visible, setVisible] = useState(false);
 
   // Read the flag once on mount. Suspense at the call site wraps this so

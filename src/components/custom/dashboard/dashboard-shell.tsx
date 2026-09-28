@@ -17,6 +17,8 @@ export interface DashboardShellProps {
   role: MarketplaceRole;
   isAdmin: boolean;
   userLabel: string;
+  /** ACTIVE OWNER or STAFF Membership — drives school sidebar. */
+  isSchoolOwner?: boolean;
 }
 
 function hasRole(role: string | null | undefined, expected: string) {
@@ -28,7 +30,13 @@ function hasRole(role: string | null | undefined, expected: string) {
   );
 }
 
-export function DashboardShell({ children, role, isAdmin, userLabel }: DashboardShellProps) {
+export function DashboardShell({
+  children,
+  role,
+  isAdmin,
+  userLabel,
+  isSchoolOwner = false,
+}: DashboardShellProps) {
   const { data: session, isPending } = useSession();
   const router = useRouter();
   const t = useTranslations('dashboard.shell');
@@ -77,7 +85,12 @@ export function DashboardShell({ children, role, isAdmin, userLabel }: Dashboard
 
         <div className="mx-auto grid w-full max-w-7xl flex-1 gap-6 px-gutter py-6 lg:grid-cols-[220px_minmax(0,1fr)]">
           <aside className="lg:border-r lg:border-border/70 lg:pr-6">
-            <DashboardNav role={role} isAdmin={isAdmin} userLabel={userLabel} />
+            <DashboardNav
+              role={role}
+              isAdmin={isAdmin}
+              userLabel={userLabel}
+              isSchoolOwner={isSchoolOwner}
+            />
           </aside>
 
           <section className="min-w-0">

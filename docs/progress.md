@@ -50,9 +50,12 @@ booking surfaces once one real KYC session completes.
 
 ## Known issues
 
-- [ ] Nav shows student tabs when a school owner views
-      /dashboard/school. Add membership-aware nav in
-      site-nav.tsx. Slice 1b or 2.
+- [ ] Dev overlay shows 2 persistent issues: Prisma
+      `Unique constraint failed on the fields: (slug)` when creating
+      Organization (duplicate slug race in createOrganization).
+      Investigate in a cleanup / slice 1b hardening pass.
+- [x] Nav shows student tabs when a school owner views
+      /dashboard/school — fixed with membership-aware dashboard nav.
 - [ ] Rate limit + idempotency + health check for
       /api/orgs/register. Slice 1b.
 - [ ] Cache school membership in session JWT (slice 1b).
