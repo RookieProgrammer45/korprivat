@@ -54,6 +54,7 @@ type Filters = {
   nearKm: number | '';
   sort: SortMode;
   providerRole: 'INSTRUCTOR' | 'HANDLEDARE' | '';
+  affiliation: 'school' | 'independent' | 'all' | '';
 };
 
 const EMPTY_FILTERS: Filters = {
@@ -69,6 +70,7 @@ const EMPTY_FILTERS: Filters = {
   nearKm: '',
   sort: 'default',
   providerRole: '',
+  affiliation: '',
 };
 
 // Radix `<Select.Item value="">` throws on hydration — use a non-empty
@@ -77,6 +79,7 @@ const EMPTY_FILTERS: Filters = {
 const CITY_ALL = '__all__';
 const RATING_ALL = '__all_ratings__';
 const AVAILABILITY_ALL = '__all_availability__';
+const AFFILIATION_ALL = '__all_affiliation__';
 
 type Status = 'loading' | 'ready' | 'empty' | 'error' | 'invalid';
 
@@ -292,6 +295,7 @@ export function InstructorDirectory({
           onEnglishChange={(value) => updateFilters({ english: value })}
           onNearKmChange={(value) => updateFilters({ nearKm: value })}
           onSortChange={(value) => updateFilters({ sort: value })}
+          onAffiliationChange={(value) => updateFilters({ affiliation: value })}
           onLocationRequest={onLocationRequest}
           onClearGeolocation={() =>
             updateFilters({ lat: null, lng: null, sort: 'default', nearKm: '' })
@@ -355,6 +359,7 @@ function FilterBar({
   onEnglishChange,
   onNearKmChange,
   onSortChange,
+  onAffiliationChange,
   onLocationRequest,
   onClearGeolocation,
 }: {
@@ -370,6 +375,7 @@ function FilterBar({
   onEnglishChange: (value: boolean) => void;
   onNearKmChange: (value: number | '') => void;
   onSortChange: (value: SortMode) => void;
+  onAffiliationChange: (value: 'school' | 'independent' | 'all' | '') => void;
   onLocationRequest: () => void;
   onClearGeolocation: () => void;
 }) {
@@ -520,6 +526,31 @@ function FilterBar({
                 <SelectItem value={AVAILABILITY_ALL}>{tr('availabilityAllOption')}</SelectItem>
                 <SelectItem value="weekday">{tr('weekday')}</SelectItem>
                 <SelectItem value="weekend">{tr('weekend')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex min-w-0 flex-col gap-2">
+            <Label htmlFor="affiliation-select">{tr('affiliationLabel')}</Label>
+            <Select
+              value={
+                filters.affiliation === '' || filters.affiliation === 'all'
+                  ? AFFILIATION_ALL
+                  : filters.affiliation
+              }
+              onValueChange={(value) => {
+                if (value === AFFILIATION_ALL) onAffiliationChange('');
+                else if (value === 'school' || value === 'independent') onAffiliationChange(value);
+                else onAffiliationChange('');
+              }}
+            >
+              <SelectTrigger id="affiliation-select" className="bg-background">
+                <SelectValue placeholder={tr('affiliationAll')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={AFFILIATION_ALL}>{tr('affiliationAll')}</SelectItem>
+                <SelectItem value="school">{tr('affiliationSchool')}</SelectItem>
+                <SelectItem value="independent">{tr('affiliationIndependent')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -912,6 +943,9 @@ function buildQueryString(filters: Filters): string {
   }
   if (filters.sort === 'distance') params.set('sort', 'distance');
   if (filters.providerRole) params.set('providerRole', filters.providerRole);
+  if (filters.affiliation === 'school' || filters.affiliation === 'independent') {
+    params.set('affiliation', filters.affiliation);
+  }
   return params.toString();
 }
 
@@ -929,6 +963,8 @@ function normaliseFromUrl(q: InstructorQuery): Filters {
     nearKm: typeof q.nearKm === 'number' ? q.nearKm : '',
     sort: q.sort === 'distance' ? 'distance' : 'default',
     providerRole: q.providerRole ?? '',
+    affiliation:
+      q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
   };
 }
 
@@ -972,7 +1008,9 @@ function hasActiveFilter(f: Filters): boolean {
     f.lng != null ||
     f.nearKm !== '' ||
     f.sort === 'distance' ||
-    f.providerRole !== ''
+    f.providerRole !== '' ||
+    f.affiliation === 'school' ||
+    f.affiliation === 'independent'
   );
 }
 

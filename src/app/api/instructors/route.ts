@@ -32,6 +32,7 @@ import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
 import { env } from '@/lib/env';
+import { listActiveMemberUserIds } from '@/lib/orgs/public';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -67,7 +68,8 @@ export async function GET(req: NextRequest) {
     q.lng !== undefined ||
     q.nearKm !== undefined ||
     q.sort !== undefined ||
-    q.providerRole !== undefined;
+    q.providerRole !== undefined ||
+    q.affiliation !== undefined;
   if (countOnly && !hasDirectoryFilters) {
     const count = await prisma.instructor.count({
       where: buildProviderActivationWhere(),
@@ -88,7 +90,7 @@ export async function GET(req: NextRequest) {
   // it (city, then name) so the path where geo is unused stays a single
   // indexed read.
   const rawRows = await prisma.instructor.findMany({
-    where: buildWhere(q),
+    where: await buildWhere(q),
     select: PUBLIC_INSTRUCTOR_SELECT,
     orderBy:
       q.sort === 'distance' && hasGeo
@@ -396,7 +398,7 @@ export async function POST(req: Request) {
   }
 }
 
-function buildWhere(q: InstructorQuery): Prisma.InstructorWhereInput {
+async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInput> {
   const filters: Prisma.InstructorWhereInput = {};
   if (q.categories && q.categories.length > 0) {
     // Postgres `String[]` exposes per-value `has` (single); the canonical
@@ -418,9 +420,26 @@ function buildWhere(q: InstructorQuery): Prisma.InstructorWhereInput {
   // marketplace supply — that path is guidance-only, not bookable listings.
   if (q.providerRole === 'INSTRUCTOR') filters.providerRole = 'INSTRUCTOR';
 
-  return {
-    AND: [buildProviderActivationWhere(), filters],
-  };
+  const clauses: Prisma.InstructorWhereInput[] = [buildProviderActivationWhere(), filters];
+
+  // Affiliation via Membership (ACTIVE), not Instructor.providerRole —
+  // public reads collapse SCHOOL → INSTRUCTOR.
+  if (q.affiliation === 'school' || q.affiliation === 'independent') {
+    const memberUserIds = await listActiveMemberUserIds();
+    if (q.affiliation === 'school') {
+      clauses.push({
+        userId: { in: memberUserIds.length > 0 ? memberUserIds : ['__none__'] },
+      });
+    } else if (memberUserIds.length === 0) {
+      // No members → every listing is independent; no extra clause.
+    } else {
+      clauses.push({
+        OR: [{ userId: null }, { userId: { notIn: memberUserIds } }],
+      });
+    }
+  }
+
+  return { AND: clauses };
 }
 
 function matchesAvailability(
