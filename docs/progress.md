@@ -40,10 +40,7 @@ booking surfaces once one real KYC session completes.
 
 ## School dashboard follow-ups
 
-- [ ] Cache school membership in session JWT (slice 1b).
-      Currently hits DB on every dashboard load. Single indexed
-      lookup on (userId, status) — fine for the first 10k users.
-- [ ] Rate limit + idempotency on `POST /api/orgs/register` (slice 1b).
+(Moved into Known issues below — slice 1b.)
 
 ## Production findings
 
@@ -53,6 +50,13 @@ booking surfaces once one real KYC session completes.
 
 ## Known issues
 
+- [ ] Nav shows student tabs when a school owner views
+      /dashboard/school. Add membership-aware nav in
+      site-nav.tsx. Slice 1b or 2.
+- [ ] Rate limit + idempotency + health check for
+      /api/orgs/register. Slice 1b.
+- [ ] Cache school membership in session JWT (slice 1b).
+      Currently hits DB on every dashboard load.
 - [ ] Booking gate still uses claimed DOB soft-gate. Tighten to
       require ACTIVE once one real KYC session completes in production.
 - [ ] Deprecated `UserProfile` columns `ageEstimatedYears` /
