@@ -1,4 +1,5 @@
-import type { Membership, Organization, Prisma } from '@prisma/client';
+import { randomBytes } from 'node:crypto';
+import type { Membership, MembershipInvite, Organization, Prisma } from '@prisma/client';
 import { Prisma as PrismaNamespace } from '@prisma/client';
 import { prisma } from '@/lib/db';
 
@@ -10,6 +11,32 @@ export class OrgAlreadyExistsError extends Error {
   }
 }
 
+export class OrgMemberAlreadyExistsError extends Error {
+  readonly code = 'ORG_MEMBER_EXISTS' as const;
+  constructor() {
+    super('Member or invite already exists');
+    this.name = 'OrgMemberAlreadyExistsError';
+  }
+}
+
+export class OrgForbiddenError extends Error {
+  readonly code = 'ORG_FORBIDDEN' as const;
+  constructor() {
+    super('Not authorized for this organization');
+    this.name = 'OrgForbiddenError';
+  }
+}
+
+export class OrgNotFoundError extends Error {
+  readonly code = 'ORG_NOT_FOUND' as const;
+  constructor() {
+    super('Organization not found');
+    this.name = 'OrgNotFoundError';
+  }
+}
+
+const INVITE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
 /** Canonical Swedish org number: digits only (e.g. 5561234567). */
 export function normalizeOrganizationNumber(raw: string): string {
   return raw
@@ -18,8 +45,8 @@ export function normalizeOrganizationNumber(raw: string): string {
     .replace(/[\s-]/g, '');
 }
 
-function slugifyName(name: string): string {
-  const base = name
+export function slugify(baseName: string): string {
+  const base = baseName
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
@@ -29,17 +56,46 @@ function slugifyName(name: string): string {
   return base.length > 0 ? base : 'skola';
 }
 
-async function uniqueSlug(tx: Prisma.TransactionClient, name: string): Promise<string> {
-  const base = slugifyName(name);
-  for (let attempt = 0; attempt < 8; attempt += 1) {
-    const candidate = attempt === 0 ? base : `${base}-${Math.random().toString(36).slice(2, 6)}`;
-    const existing = await tx.organization.findUnique({
+function isP2002OnField(err: unknown, field: string): boolean {
+  if (!(err instanceof PrismaNamespace.PrismaClientKnownRequestError) || err.code !== 'P2002') {
+    return false;
+  }
+  const target = err.meta?.target;
+  const fields = Array.isArray(target) ? target.map(String) : [String(target ?? '')];
+  return fields.some((f) => f.includes(field));
+}
+
+export async function generateUniqueSlug(
+  baseName: string,
+  excludeId?: string,
+  client: Prisma.TransactionClient | typeof prisma = prisma,
+): Promise<string> {
+  const base = slugify(baseName);
+  let candidate = base;
+  let suffix = 1;
+  while (suffix <= 50) {
+    const exists = await client.organization.findUnique({
       where: { slug: candidate },
       select: { id: true },
     });
-    if (!existing) return candidate;
+    if (!exists || exists.id === excludeId) return candidate;
+    suffix += 1;
+    candidate = `${base}-${suffix}`;
   }
-  return `${base}-${Date.now().toString(36)}`;
+  return `${base}-${randomBytes(3).toString('hex')}`;
+}
+
+async function requireOwnerMembership(orgId: string, actorId: string): Promise<Membership> {
+  const membership = await prisma.membership.findFirst({
+    where: {
+      organizationId: orgId,
+      userId: actorId,
+      role: 'OWNER',
+      status: 'ACTIVE',
+    },
+  });
+  if (!membership) throw new OrgForbiddenError();
+  return membership;
 }
 
 export async function createOrganization(input: {
@@ -51,13 +107,12 @@ export async function createOrganization(input: {
   ownerUserId: string;
   ownerEmail: string;
 }): Promise<{ organization: Organization; membership: Membership }> {
-  void input.ownerEmail; // reserved for audit / invite copy; not stored on Membership today
   const organizationNumber = normalizeOrganizationNumber(input.organizationNumber);
   const name = input.name.trim();
+  const contactEmail = input.ownerEmail.trim().toLowerCase();
 
-  try {
-    return await prisma.$transaction(async (tx) => {
-      const slug = await uniqueSlug(tx, name);
+  const run = async (slug: string) =>
+    prisma.$transaction(async (tx) => {
       const organization = await tx.organization.create({
         data: {
           name,
@@ -66,6 +121,7 @@ export async function createOrganization(input: {
           city: input.city?.trim() || null,
           address: input.address?.trim() || null,
           postcode: input.postcode?.trim() || null,
+          contactEmail,
           country: 'SE',
           verificationState: 'DRAFT',
         },
@@ -81,15 +137,23 @@ export async function createOrganization(input: {
       });
       return { organization, membership };
     });
+
+  try {
+    const slug = await generateUniqueSlug(name);
+    return await run(slug);
   } catch (err) {
-    if (
-      err instanceof PrismaNamespace.PrismaClientKnownRequestError &&
-      err.code === 'P2002'
-    ) {
-      const target = err.meta?.target;
-      const fields = Array.isArray(target) ? target.map(String) : [String(target ?? '')];
-      if (fields.some((f) => f.includes('organizationNumber'))) {
-        throw new OrgAlreadyExistsError();
+    if (isP2002OnField(err, 'organizationNumber')) {
+      throw new OrgAlreadyExistsError();
+    }
+    if (isP2002OnField(err, 'slug')) {
+      const slug = await generateUniqueSlug(name);
+      try {
+        return await run(slug);
+      } catch (retryErr) {
+        if (isP2002OnField(retryErr, 'organizationNumber')) {
+          throw new OrgAlreadyExistsError();
+        }
+        throw retryErr;
       }
     }
     throw err;
@@ -97,8 +161,56 @@ export async function createOrganization(input: {
 }
 
 export async function getOrganizationById(id: string): Promise<Organization | null> {
-  void id;
-  throw new Error('not implemented');
+  return prisma.organization.findUnique({ where: { id } });
+}
+
+export async function updateOrganization(
+  orgId: string,
+  actorId: string,
+  data: {
+    name?: string;
+    address?: string | null;
+    postcode?: string | null;
+    city?: string | null;
+    contactEmail?: string | null;
+    contactPhone?: string | null;
+  },
+): Promise<Organization> {
+  await requireOwnerMembership(orgId, actorId);
+  const existing = await prisma.organization.findUnique({ where: { id: orgId } });
+  if (!existing) throw new OrgNotFoundError();
+
+  const name = data.name?.trim();
+  let slug = existing.slug;
+  if (name && name !== existing.name) {
+    slug = await generateUniqueSlug(name, orgId);
+  }
+
+  const patch: Prisma.OrganizationUpdateInput = {
+    ...(name ? { name, slug } : {}),
+    ...(data.address !== undefined ? { address: data.address?.trim() || null } : {}),
+    ...(data.postcode !== undefined ? { postcode: data.postcode?.trim() || null } : {}),
+    ...(data.city !== undefined ? { city: data.city?.trim() || null } : {}),
+    ...(data.contactEmail !== undefined
+      ? { contactEmail: data.contactEmail?.trim().toLowerCase() || null }
+      : {}),
+    ...(data.contactPhone !== undefined
+      ? { contactPhone: data.contactPhone?.trim() || null }
+      : {}),
+  };
+
+  try {
+    return await prisma.organization.update({ where: { id: orgId }, data: patch });
+  } catch (err) {
+    if (isP2002OnField(err, 'slug') && name) {
+      const retrySlug = await generateUniqueSlug(name, orgId);
+      return prisma.organization.update({
+        where: { id: orgId },
+        data: { ...patch, slug: retrySlug },
+      });
+    }
+    throw err;
+  }
 }
 
 export async function listMembershipsForUser(
@@ -116,27 +228,184 @@ export async function listMembershipsForUser(
   });
 }
 
-export async function inviteMember(
-  orgId: string,
-  userId: string,
-  role: 'OWNER' | 'STAFF',
-  invitedBy: string,
-): Promise<Membership> {
-  void orgId;
-  void userId;
-  void role;
-  void invitedBy;
-  throw new Error('not implemented');
+export async function listOrgMembers(orgId: string): Promise<
+  Array<
+    Membership & {
+      user: { id: string; name: string; email: string };
+    }
+  >
+> {
+  return prisma.membership.findMany({
+    where: { organizationId: orgId, status: { in: ['ACTIVE', 'REVOKED'] } },
+    include: { user: { select: { id: true, name: true, email: true } } },
+    orderBy: { createdAt: 'asc' },
+  });
 }
 
+export async function listOrgInvites(orgId: string): Promise<MembershipInvite[]> {
+  return prisma.membershipInvite.findMany({
+    where: { organizationId: orgId, acceptedAt: null },
+    orderBy: { createdAt: 'desc' },
+  });
+}
+
+export async function inviteMember(
+  orgId: string,
+  email: string,
+  role: 'STAFF',
+  invitedBy: string,
+): Promise<{ invite: MembershipInvite; inviteToken: string }> {
+  await requireOwnerMembership(orgId, invitedBy);
+  const normalized = email.trim().toLowerCase();
+  const org = await prisma.organization.findUnique({ where: { id: orgId } });
+  if (!org) throw new OrgNotFoundError();
+
+  const existingUser = await prisma.user.findUnique({
+    where: { email: normalized },
+    select: { id: true },
+  });
+  if (existingUser) {
+    const existingMembership = await prisma.membership.findUnique({
+      where: {
+        userId_organizationId: { userId: existingUser.id, organizationId: orgId },
+      },
+    });
+    if (existingMembership && existingMembership.status !== 'REVOKED') {
+      throw new OrgMemberAlreadyExistsError();
+    }
+  }
+
+  const pendingInvite = await prisma.membershipInvite.findFirst({
+    where: {
+      organizationId: orgId,
+      email: normalized,
+      acceptedAt: null,
+      expiresAt: { gt: new Date() },
+    },
+  });
+  if (pendingInvite) throw new OrgMemberAlreadyExistsError();
+
+  const inviteToken = randomBytes(32).toString('hex');
+  const invite = await prisma.membershipInvite.create({
+    data: {
+      organizationId: orgId,
+      email: normalized,
+      role,
+      token: inviteToken,
+      expiresAt: new Date(Date.now() + INVITE_TTL_MS),
+      invitedBy,
+    },
+  });
+  return { invite, inviteToken };
+}
+
+export async function getInviteByToken(token: string): Promise<
+  | (MembershipInvite & { organization: Organization })
+  | null
+> {
+  return prisma.membershipInvite.findUnique({
+    where: { token },
+    include: { organization: true },
+  });
+}
+
+export async function acceptInviteByToken(
+  token: string,
+  userId: string,
+  userEmail: string,
+): Promise<{ organizationId: string }> {
+  const invite = await prisma.membershipInvite.findUnique({ where: { token } });
+  if (!invite) throw new OrgNotFoundError();
+  if (invite.acceptedAt) {
+    return { organizationId: invite.organizationId };
+  }
+  if (invite.expiresAt.getTime() < Date.now()) {
+    throw new OrgForbiddenError();
+  }
+  if (invite.email !== userEmail.trim().toLowerCase()) {
+    throw new OrgForbiddenError();
+  }
+
+  await prisma.$transaction(async (tx) => {
+    const existing = await tx.membership.findUnique({
+      where: {
+        userId_organizationId: { userId, organizationId: invite.organizationId },
+      },
+    });
+    if (existing) {
+      await tx.membership.update({
+        where: { id: existing.id },
+        data: {
+          status: 'ACTIVE',
+          role: invite.role,
+          acceptedAt: existing.acceptedAt ?? new Date(),
+          revokedAt: null,
+        },
+      });
+    } else {
+      await tx.membership.create({
+        data: {
+          userId,
+          organizationId: invite.organizationId,
+          role: invite.role,
+          status: 'ACTIVE',
+          invitedBy: invite.invitedBy,
+          invitedAt: invite.createdAt,
+          acceptedAt: new Date(),
+        },
+      });
+    }
+    await tx.membershipInvite.update({
+      where: { id: invite.id },
+      data: { acceptedAt: new Date() },
+    });
+  });
+
+  return { organizationId: invite.organizationId };
+}
+
+export async function revokeMembership(
+  membershipId: string,
+  actorId: string,
+): Promise<Membership> {
+  const membership = await prisma.membership.findUnique({ where: { id: membershipId } });
+  if (!membership) throw new OrgNotFoundError();
+  await requireOwnerMembership(membership.organizationId, actorId);
+  if (membership.role === 'OWNER') throw new OrgForbiddenError();
+  return prisma.membership.update({
+    where: { id: membershipId },
+    data: { status: 'REVOKED', revokedAt: new Date() },
+  });
+}
+
+export async function resendInvite(
+  inviteId: string,
+  actorId: string,
+): Promise<{ invite: MembershipInvite; inviteToken: string }> {
+  const invite = await prisma.membershipInvite.findUnique({ where: { id: inviteId } });
+  if (!invite || invite.acceptedAt) throw new OrgNotFoundError();
+  await requireOwnerMembership(invite.organizationId, actorId);
+  const inviteToken = randomBytes(32).toString('hex');
+  const updated = await prisma.membershipInvite.update({
+    where: { id: inviteId },
+    data: {
+      token: inviteToken,
+      expiresAt: new Date(Date.now() + INVITE_TTL_MS),
+    },
+  });
+  return { invite: updated, inviteToken };
+}
+
+export async function cancelInvite(inviteId: string, actorId: string): Promise<void> {
+  const invite = await prisma.membershipInvite.findUnique({ where: { id: inviteId } });
+  if (!invite) throw new OrgNotFoundError();
+  await requireOwnerMembership(invite.organizationId, actorId);
+  await prisma.membershipInvite.delete({ where: { id: inviteId } });
+}
+
+/** @deprecated Prefer inviteMember(email). Kept for stub compatibility. */
 export async function acceptInvite(membershipId: string, userId: string): Promise<Membership> {
   void membershipId;
   void userId;
-  throw new Error('not implemented');
-}
-
-export async function revokeMembership(membershipId: string, actorId: string): Promise<Membership> {
-  void membershipId;
-  void actorId;
-  throw new Error('not implemented');
+  throw new Error('not implemented — use acceptInviteByToken');
 }
