@@ -1,6 +1,7 @@
 // Organizations bounded context. Schools are entities; instructor↔school
 // links are Membership rows. Do not add organizationId onto Instructor.
 // Membership is not deleted when someone leaves — set status REVOKED.
+// Pending email invites live on MembershipInvite until accepted.
 
 model Organization {
   id                 String   @id @default(cuid())
@@ -12,6 +13,8 @@ model Organization {
   postcode           String?
   city               String?
   country            String   @default("SE")
+  contactEmail       String?
+  contactPhone       String?
   // DRAFT | PENDING | APPROVED | REJECTED | SUSPENDED
   verificationState  String   @default("DRAFT")
   rejectionReason    String?
@@ -20,6 +23,7 @@ model Organization {
   updatedAt          DateTime @updatedAt
 
   memberships Membership[]
+  invites     MembershipInvite[]
 
   @@index([verificationState])
 }
@@ -45,4 +49,24 @@ model Membership {
   @@unique([userId, organizationId])
   @@index([organizationId, status])
   @@index([userId, status])
+}
+
+/// Email invite before (or without) an existing User row.
+model MembershipInvite {
+  id             String    @id @default(cuid())
+  organizationId String
+  email          String
+  // STAFF (OWNER is never invited via this table)
+  role           String    @default("STAFF")
+  token          String    @unique
+  expiresAt      DateTime
+  invitedBy      String
+  acceptedAt     DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, email])
+  @@index([email])
 }
