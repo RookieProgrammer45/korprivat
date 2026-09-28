@@ -158,7 +158,12 @@ export function SignUpForm({
     try {
       const result = await apiFetch('/api/signup/complete', {
         method: 'POST',
-        body: JSON.stringify({ next }),
+        body: JSON.stringify({
+          next:
+            signupPath === 'SCHOOL'
+              ? (next ?? '/dashboard/school')
+              : next,
+        }),
         schema: SignupCompleteResponse,
       });
       router.push(withSignupFlag(result.next ?? result.to));
@@ -166,7 +171,7 @@ export function SignUpForm({
     } catch {
       toast.error(t('errors.generic'));
     }
-  }, [next, router, t]);
+  }, [next, router, signupPath, t]);
 
   const applySignupState = useCallback(
     (state: ReturnType<typeof SignupState.parse>) => {
@@ -179,6 +184,12 @@ export function SignUpForm({
 
       if (!state.emailVerified) {
         setStep('verifyEmail');
+        return;
+      }
+
+      // SCHOOL: no photo / licence — create org via complete and land on next.
+      if (state.path === 'SCHOOL') {
+        void completeSignup();
         return;
       }
 
@@ -726,7 +737,7 @@ export function SignUpForm({
       <SocialAuthButtons
         mode="signup"
         role={roleForSignupPath(selectedPath)}
-        next={next}
+        next={selectedPath === 'SCHOOL' ? (next ?? '/for-skolor') : next}
       />
 
       <Form {...form}>

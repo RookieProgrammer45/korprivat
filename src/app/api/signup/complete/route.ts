@@ -5,6 +5,11 @@ import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { SignupComplete, SignupCompleteResponse } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { completeSignupHandshake } from '@/lib/email/onboarding';
+import {
+  createOrganization,
+  listMembershipsForUser,
+  OrgAlreadyExistsError,
+} from '@/lib/orgs/service';
 import { requireAuth } from '@/lib/require-auth';
 import { resolveStoredLearnerState } from '@/lib/signup-resume';
 import { stateToRoute } from '@/lib/verification/state';
@@ -29,10 +34,69 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { next: 'Invalid redirect path.' } }, { status: 400 });
   const profile = await prisma.userProfile.findUnique({
     where: { userId: user.id },
-    select: { role: true, dateOfBirth: true },
+    select: {
+      role: true,
+      dateOfBirth: true,
+      signupPath: true,
+      schoolName: true,
+      organizationNumber: true,
+      city: true,
+    },
   });
   const role =
     profile?.role === 'INSTRUCTOR' || profile?.role === 'HANDLEDARE' ? profile.role : 'STUDENT';
+
+  // SCHOOL path: create Organization + OWNER Membership, skip Didit / stateToRoute.
+  if (profile?.signupPath === 'SCHOOL') {
+    const schoolDestination = parsed.data.next ?? '/dashboard/school';
+    const existing = await listMembershipsForUser(user.id, { onlyActive: true });
+    const alreadyOwner = existing.some((m) => m.role === 'OWNER' || m.role === 'STAFF');
+    if (!alreadyOwner) {
+      const schoolName = profile.schoolName?.trim();
+      const organizationNumber = profile.organizationNumber?.trim();
+      if (!schoolName || !organizationNumber) {
+        return NextResponse.json(
+          {
+            errors: {
+              schoolName: !schoolName ? 'School name is required.' : undefined,
+              organizationNumber: !organizationNumber
+                ? 'Organisation number is required.'
+                : undefined,
+            },
+          },
+          { status: 400 },
+        );
+      }
+      try {
+        await createOrganization({
+          name: schoolName,
+          organizationNumber,
+          city: profile.city ?? undefined,
+          ownerUserId: user.id,
+          ownerEmail: user.email,
+        });
+      } catch (err) {
+        if (err instanceof OrgAlreadyExistsError) {
+          return NextResponse.json({ error: 'org_exists' }, { status: 409 });
+        }
+        throw err;
+      }
+    }
+    await completeSignupHandshake({
+      userId: user.id,
+      email: user.email,
+      name: user.name,
+      requestedRole: 'STUDENT',
+    });
+    return NextResponse.json(
+      SignupCompleteResponse.parse({
+        ok: true,
+        next: schoolDestination,
+        to: schoolDestination,
+      }),
+    );
+  }
+
   // School listings need a confirmed photo before the wizard can finish.
   // Learners and handledare can complete signup and add a photo later on /profile.
   if (role === 'INSTRUCTOR' && !(await confirmedPhotoUrl(user.id))) {

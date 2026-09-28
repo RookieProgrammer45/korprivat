@@ -24,8 +24,11 @@ function sanitizeNext(raw: string | undefined): string | undefined {
   return raw;
 }
 
-function resolveInitialPath(role: string | undefined): 'LEARNER' | 'INSTRUCTOR' | undefined {
+function resolveInitialPath(
+  role: string | undefined,
+): 'LEARNER' | 'SCHOOL' | 'INSTRUCTOR' | undefined {
   if (role === 'instructor') return 'INSTRUCTOR';
+  if (role === 'school') return 'SCHOOL';
   return undefined;
 }
 

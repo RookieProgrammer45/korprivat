@@ -7,6 +7,7 @@ import { confirmedPhotoUrl } from '@/lib/business/photo-verification';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { prisma } from '@/lib/db';
+import { listMembershipsForUser } from '@/lib/orgs/service';
 import { getSessionUser } from '@/lib/require-auth';
 import {
   type DiditDecision,
@@ -172,6 +173,12 @@ export async function requireSignupPrerequisites(
     redirect('/signup');
   }
 
+  // School owners/staff enter via Membership, not learner DOB / instructor docs.
+  const schoolMemberships = await listMembershipsForUser(userId, { onlyActive: true });
+  if (schoolMemberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')) {
+    return;
+  }
+
   if (role === 'INSTRUCTOR') {
     if (!(await confirmedPhotoUrl(userId))) {
       redirect('/signup');
@@ -195,6 +202,15 @@ export async function requireSignupPrerequisites(
   }
 
   if (role === 'STUDENT') {
+    const profile = await prisma.userProfile.findUnique({
+      where: { userId },
+      select: { signupPath: true },
+    });
+    // SCHOOL signup collects org fields, not claimed DOB — do not bounce to /signup.
+    if (profile?.signupPath === 'SCHOOL') {
+      return;
+    }
+
     const facts = await loadLearnerVerificationFacts(userId);
 
     // Claimed DOB is collected on /signup. Until it exists, send them back.

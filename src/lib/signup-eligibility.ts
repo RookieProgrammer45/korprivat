@@ -26,7 +26,9 @@ export function isInstructorLicenseTenureEligible(yearsHeld: number): boolean {
 
 /** Map UI signup path → persisted UserProfile.role. */
 export function roleForSignupPath(path: SignupPath): 'STUDENT' | 'INSTRUCTOR' {
-  return path === 'LEARNER' ? 'STUDENT' : 'INSTRUCTOR';
+  // SCHOOL ownership is Membership (OWNER), not UserProfile.role.
+  if (path === 'LEARNER' || path === 'SCHOOL') return 'STUDENT';
+  return 'INSTRUCTOR';
 }
 
 /** Map UI signup path → Instructor.providerRole when a listing is created. */

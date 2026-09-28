@@ -27,7 +27,7 @@ describe('signup eligibility', () => {
 
   it('maps signup paths to roles and provider roles', () => {
     expect(roleForSignupPath('LEARNER')).toBe('STUDENT');
-    expect(roleForSignupPath('SCHOOL')).toBe('INSTRUCTOR');
+    expect(roleForSignupPath('SCHOOL')).toBe('STUDENT');
     expect(roleForSignupPath('INSTRUCTOR')).toBe('INSTRUCTOR');
     expect(providerRoleForSignupPath('SCHOOL')).toBe('SCHOOL');
     expect(providerRoleForSignupPath('INSTRUCTOR')).toBe('INSTRUCTOR');

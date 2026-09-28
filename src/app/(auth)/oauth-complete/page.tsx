@@ -45,12 +45,14 @@ export default function OAuthCompletePage() {
           body: JSON.stringify({ role, ...(next ? { next } : {}) }),
           schema: PostLoginRedirect,
         });
-        // Learners skip email verify (OAuth sets emailVerified) and go
-        // straight to Didit. Instructors still need photo + licence uploads.
-        if (role === 'STUDENT') {
+        // Prefer an explicit same-origin `next` (e.g. school signup → /for-skolor).
+        // Otherwise learners go to Didit; instructors resume the signup wizard.
+        if (next) {
+          router.replace(next);
+        } else if (role === 'STUDENT') {
           router.replace('/onboarding/learner/verify');
         } else {
-          router.replace(next ?? '/signup?role=instructor');
+          router.replace('/signup?role=instructor');
         }
         router.refresh();
       } catch {
