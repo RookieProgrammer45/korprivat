@@ -1910,23 +1910,54 @@
   },
   "forSkolor": {
     "meta": {
-      "title": "För trafikskolor",
-      "description": "Anmäl intresse för DriveLinkUps skolportal. Organizations är inte live ännu."
+      "title": "För trafikskolor | DriveLinkUp",
+      "description": "Registrera er trafikskola på DriveLinkUp och nå fler elever."
     },
-    "eyebrow": "Kommer snart",
-    "title": "För trafikskolor",
-    "body": "Skolportalen är på väg. Lämna skolans uppgifter så hör vi av oss när Organizations-registrering öppnar.",
+    "badge": "FÖR TRAFIKSKOLOR",
+    "title": "Få fler elever med DriveLinkUp",
+    "body": "Publicera skolans lektioner, priser och tillgänglighet så elever kan jämföra och boka med tydliga villkor. Ni behåller kontrollen över erbjudandet — vi tar hand om marknadsplatsen.",
+    "benefit1": "Synlighet hos elever som aktivt söker lektioner i er stad.",
+    "benefit2": "Tydliga bokningar utan separat elevavgift på DriveLinkUp.",
+    "benefit3": "Skolägare kan bjuda in instruktörer från dashboarden (kommer snart).",
+    "ctaSignedOut": "Skapa skolkonto",
+    "ctaSignIn": "Logga in",
+    "timeNote": "Det tar under 2 minuter.",
     "form": {
-      "schoolNameLabel": "Skolans namn",
-      "schoolNamePlaceholder": "Er trafikskola",
-      "cityLabel": "Stad",
-      "cityPlaceholder": "Stockholm",
-      "emailLabel": "Jobbmejl",
-      "emailPlaceholder": "du@skola.se",
-      "submit": "Anmäl intresse",
-      "submitting": "Skickar…",
-      "success": "Tack — ni är med på listan. Vi mejlar er när skolportalen öppnar.",
+      "name": "Skolans namn",
+      "organizationNumber": "Organisationsnummer",
+      "organizationNumberHint": "Format: 556xxx-xxxx",
+      "city": "Stad",
+      "address": "Adress",
+      "postcode": "Postnummer",
+      "submit": "Registrera skolan",
+      "submitting": "Registrerar…",
+      "errorDuplicate": "En skola med detta organisationsnummer är redan registrerad.",
       "genericError": "Något gick fel. Försök igen."
+    }
+  },
+  "dashboardSchool": {
+    "title": "Skoldashboard",
+    "eyebrow": "Trafikskola",
+    "welcome": "Välkommen, {name}",
+    "orgNumber": "Org.nr {number}",
+    "verificationDraft": "Utkast",
+    "verificationPending": "Granskas",
+    "verificationApproved": "Verifierad",
+    "draftCardTitle": "Fyll i skoluppgifter för att komma igång",
+    "draftCardBody": "Lägg till mer information om skolan när ni är redo. Verifiering sker asynkront.",
+    "draftCardCta": "Öppna inställningar",
+    "emptyInstructors": "Inga instruktörer ännu",
+    "inviteInstructor": "Bjud in instruktör",
+    "comingSoon": "Kommer snart",
+    "panels": {
+      "bookings": { "title": "Kommande bokningar" },
+      "revenue": { "title": "Intäkter" },
+      "settings": { "title": "Inställningar" }
+    },
+    "settings": {
+      "title": "Skolinställningar",
+      "body": "Den här ytan kommer snart. Gå tillbaka till skoldashboarden.",
+      "back": "Tillbaka till skolan"
     }
   },
   "providerEntry": {

@@ -1910,23 +1910,54 @@
   },
   "forSkolor": {
     "meta": {
-      "title": "For driving schools",
-      "description": "Register interest for the DriveLinkUp school portal. Organizations are not live yet."
+      "title": "For driving schools | DriveLinkUp",
+      "description": "Register your driving school on DriveLinkUp and reach more learners."
     },
-    "eyebrow": "Coming soon",
-    "title": "För trafikskolor",
-    "body": "The school portal is on the way. Leave your school details and we will reach out when Organizations signup opens.",
+    "badge": "FOR DRIVING SCHOOLS",
+    "title": "Get more learners with DriveLinkUp",
+    "body": "Publish your school’s lessons, prices and availability so learners can compare and book with clear terms. You stay in control of the offer — we run the marketplace.",
+    "benefit1": "Visibility with learners actively searching in your city.",
+    "benefit2": "Clear bookings with no separate learner fee on DriveLinkUp.",
+    "benefit3": "School owners can invite instructors from the dashboard (coming soon).",
+    "ctaSignedOut": "Create school account",
+    "ctaSignIn": "Sign in",
+    "timeNote": "It takes under 2 minutes.",
     "form": {
-      "schoolNameLabel": "School name",
-      "schoolNamePlaceholder": "Your driving school",
-      "cityLabel": "City",
-      "cityPlaceholder": "Stockholm",
-      "emailLabel": "Work email",
-      "emailPlaceholder": "you@school.se",
-      "submit": "Register interest",
-      "submitting": "Sending…",
-      "success": "Thanks — you are on the list. We will email you when the school portal opens.",
+      "name": "School name",
+      "organizationNumber": "Organisation number",
+      "organizationNumberHint": "Format: 556xxx-xxxx",
+      "city": "City",
+      "address": "Address",
+      "postcode": "Postcode",
+      "submit": "Register school",
+      "submitting": "Registering…",
+      "errorDuplicate": "A school with this organisation number is already registered.",
       "genericError": "Something went wrong. Please try again."
+    }
+  },
+  "dashboardSchool": {
+    "title": "School dashboard",
+    "eyebrow": "Driving school",
+    "welcome": "Welcome, {name}",
+    "orgNumber": "Org. no. {number}",
+    "verificationDraft": "Draft",
+    "verificationPending": "In review",
+    "verificationApproved": "Verified",
+    "draftCardTitle": "Complete school details to get started",
+    "draftCardBody": "Add more information about the school when you are ready. Verification runs asynchronously.",
+    "draftCardCta": "Open settings",
+    "emptyInstructors": "No instructors yet",
+    "inviteInstructor": "Invite instructor",
+    "comingSoon": "Coming soon",
+    "panels": {
+      "bookings": { "title": "Upcoming bookings" },
+      "revenue": { "title": "Revenue" },
+      "settings": { "title": "Settings" }
+    },
+    "settings": {
+      "title": "School settings",
+      "body": "This surface is coming soon. Return to the school dashboard.",
+      "back": "Back to school"
     }
   },
   "providerEntry": {
