@@ -23,3 +23,19 @@ export const OrgRegisterResponse = z.object({
   slug: z.string().min(1),
 });
 export type OrgRegisterResponse = z.infer<typeof OrgRegisterResponse>;
+
+export const OrgUpdateRequest = z.object({
+  name: z.string().trim().min(2).max(120).optional(),
+  address: z.string().trim().max(200).nullable().optional(),
+  postcode: z.string().trim().max(20).nullable().optional(),
+  city: z.string().trim().max(80).nullable().optional(),
+  contactEmail: z.string().trim().email().max(254).nullable().optional(),
+  contactPhone: z.string().trim().max(40).nullable().optional(),
+});
+export type OrgUpdateRequest = z.infer<typeof OrgUpdateRequest>;
+
+export const OrgInviteRequest = z.object({
+  email: z.string().trim().email().max(254),
+  role: z.literal('STAFF'),
+});
+export type OrgInviteRequest = z.infer<typeof OrgInviteRequest>;

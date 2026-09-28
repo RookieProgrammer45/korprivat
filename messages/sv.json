@@ -1967,9 +1967,61 @@
     },
     "settings": {
       "title": "Skolinställningar",
-      "body": "Den här ytan kommer snart. Gå tillbaka till skoldashboarden.",
+      "body": "Du kan se skoluppgifterna men bara ägaren kan ändra dem.",
       "back": "Tillbaka till skolan"
     }
+  },
+  "schoolSettings": {
+    "title": "Skolinställningar",
+    "name": "Skolans namn",
+    "orgNumber": "Organisationsnummer",
+    "orgNumberLocked": "Organisationsnummer kan bara ändras via support.",
+    "address": "Adress",
+    "postcode": "Postnummer",
+    "city": "Stad",
+    "contactEmail": "Kontakt-e-post",
+    "contactPhone": "Kontakt-telefon",
+    "save": "Spara",
+    "saved": "Ändringarna är sparade",
+    "errorGeneric": "Kunde inte spara. Försök igen."
+  },
+  "schoolInstructors": {
+    "title": "Instruktörer",
+    "inviteCta": "Bjud in instruktör",
+    "emptyTitle": "Inga instruktörer ännu",
+    "emptyBody": "Bjud in instruktörer så att de kan gå med i skolan.",
+    "pendingTitle": "Väntande inbjudningar",
+    "roleOwner": "Ägare",
+    "roleStaff": "Instruktör",
+    "joinedAt": "Gick med {date}",
+    "resend": "Skicka igen",
+    "cancel": "Avbryt",
+    "revoke": "Ta bort",
+    "revokeConfirm": "Vill du ta bort den här instruktören från skolan?",
+    "removeSuccess": "Instruktören har tagits bort",
+    "inviteSuccess": "Inbjudan skickad",
+    "inviteError": "Kunde inte skicka inbjudan. Försök igen.",
+    "inviteDuplicate": "Den här personen är redan inbjuden eller medlem",
+    "emailLabel": "E-post"
+  },
+  "inviteAccept": {
+    "title": "Inbjudan till skola",
+    "body": "Du har blivit inbjuden att gå med i {name} på DriveLinkUp.",
+    "acceptCta": "Acceptera inbjudan",
+    "wrongEmail": "Den här inbjudan är för {email}",
+    "expired": "Den här inbjudan har gått ut eller är ogiltig.",
+    "successTitle": "Du är med",
+    "successBody": "Du är nu medlem i {name}.",
+    "goToDashboard": "Gå till skoldashboarden",
+    "loginPrompt": "Logga in eller skapa konto för att acceptera",
+    "signupCta": "Skapa konto eller logga in"
+  },
+  "orgInvite": {
+    "subject": "Inbjudan till {orgName} på DriveLinkUp",
+    "greeting": "Hej,",
+    "body": "Du har blivit inbjuden att gå med i {orgName} som instruktör på DriveLinkUp.",
+    "cta": "Acceptera inbjudan",
+    "footer": "DriveLinkUp · Sverige"
   },
   "providerEntry": {
     "eyebrow": "För auktoriserade trafikskolor",

@@ -1967,9 +1967,61 @@
     },
     "settings": {
       "title": "School settings",
-      "body": "This surface is coming soon. Return to the school dashboard.",
+      "body": "You can view school details, but only the owner can edit them.",
       "back": "Back to school"
     }
+  },
+  "schoolSettings": {
+    "title": "School settings",
+    "name": "School name",
+    "orgNumber": "Organisation number",
+    "orgNumberLocked": "Organisation number can only be changed via support.",
+    "address": "Address",
+    "postcode": "Postcode",
+    "city": "City",
+    "contactEmail": "Contact email",
+    "contactPhone": "Contact phone",
+    "save": "Save",
+    "saved": "Changes saved",
+    "errorGeneric": "Could not save. Try again."
+  },
+  "schoolInstructors": {
+    "title": "Instructors",
+    "inviteCta": "Invite instructor",
+    "emptyTitle": "No instructors yet",
+    "emptyBody": "Invite instructors so they can join the school.",
+    "pendingTitle": "Pending invitations",
+    "roleOwner": "Owner",
+    "roleStaff": "Instructor",
+    "joinedAt": "Joined {date}",
+    "resend": "Resend",
+    "cancel": "Cancel",
+    "revoke": "Remove",
+    "revokeConfirm": "Remove this instructor from the school?",
+    "removeSuccess": "Instructor removed",
+    "inviteSuccess": "Invitation sent",
+    "inviteError": "Could not send the invitation. Try again.",
+    "inviteDuplicate": "This person is already invited or a member",
+    "emailLabel": "Email"
+  },
+  "inviteAccept": {
+    "title": "School invitation",
+    "body": "You've been invited to join {name} on DriveLinkUp.",
+    "acceptCta": "Accept invitation",
+    "wrongEmail": "This invitation is for {email}",
+    "expired": "This invitation has expired or is invalid.",
+    "successTitle": "You're in",
+    "successBody": "You are now a member of {name}.",
+    "goToDashboard": "Go to school dashboard",
+    "loginPrompt": "Sign in or create an account to accept",
+    "signupCta": "Create account or sign in"
+  },
+  "orgInvite": {
+    "subject": "Invitation to {orgName} on DriveLinkUp",
+    "greeting": "Hello,",
+    "body": "You've been invited to join {orgName} as an instructor on DriveLinkUp.",
+    "cta": "Accept invitation",
+    "footer": "DriveLinkUp · Sweden"
   },
   "providerEntry": {
     "eyebrow": "For authorized driving schools",
