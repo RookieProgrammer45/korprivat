@@ -20,7 +20,7 @@ import { ProviderOperations } from '@/components/custom/dashboard/provider-opera
 import { InstructorLicenseStatusBanner } from '@/components/custom/instructor-license-status-banner';
 import { InstructorPayoutCard } from '@/components/custom/instructor-payout-card';
 import { Button } from '@/components/ui/button';
-import { dashboardPathFor, requireDashboardSession } from '@/lib/dashboard-guard';
+import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dashboard.instructor');
@@ -33,6 +33,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function InstructorDashboardPage() {
   const session = await requireDashboardSession('/dashboard/instructor');
+  const home = await resolveDashboardHome(session.userId, session.role);
+  if (home !== '/dashboard/instructor') {
+    redirect(home);
+  }
   if (session.role !== 'INSTRUCTOR') {
     redirect(dashboardPathFor(session.role));
   }

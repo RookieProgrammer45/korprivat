@@ -35,6 +35,15 @@ booking surfaces once one real KYC session completes.
 - Signup: 4-step wizard (account → email → photo → KYC) for LEARNER; ID
   document Didit Free KYC on `/onboarding/learner/verify`. Email verification
   via better-auth + Polsia email proxy; dashboards require `emailVerified`.
+- School registration (slice 1a): `/for-skolor` creates Organization + OWNER
+  Membership and lands on `/dashboard/school`.
+
+## School dashboard follow-ups
+
+- [ ] Cache school membership in session JWT (slice 1b).
+      Currently hits DB on every dashboard load. Single indexed
+      lookup on (userId, status) — fine for the first 10k users.
+- [ ] Rate limit + idempotency on `POST /api/orgs/register` (slice 1b).
 
 ## Production findings
 

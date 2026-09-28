@@ -12,6 +12,9 @@
 // path. Used by the /dashboard role router, the per-role leaves when a
 // wrong-role deep-link arrives, and the handledare clickwrap guard. Keeps
 // the trivial "where does role X go?" read consistent across all sites.
+//
+// School owners are routed via Membership (OWNER/STAFF), checked before
+// UserProfile.role — a school owner may also be an INSTRUCTOR.
 
 import 'server-only';
 import { headers } from 'next/headers';
@@ -19,18 +22,41 @@ import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
 import { prisma } from '@/lib/db';
+import { listMembershipsForUser } from '@/lib/orgs/service';
+
+export type DashboardLeafPath =
+  | '/dashboard/student'
+  | '/dashboard/instructor'
+  | '/dashboard/handledare'
+  | '/dashboard/school';
 
 /**
  * Map a marketplace role to its dashboard leaf path. Single source of
  * truth so /dashboard, the role-gated leaves, and the clickwrap guard all
  * agree on where each role "lives" in the dashboard tree.
  */
-export function dashboardPathFor(
-  role: MarketplaceRole,
-): '/dashboard/student' | '/dashboard/instructor' | '/dashboard/handledare' {
+export function dashboardPathFor(role: MarketplaceRole): DashboardLeafPath {
   if (role === 'INSTRUCTOR') return '/dashboard/instructor';
   if (role === 'HANDLEDARE') return '/dashboard/handledare';
   return '/dashboard/student';
+}
+
+/**
+ * Prefer school Membership over UserProfile.role.
+ *
+ * TODO: Cache school membership in session JWT (slice 1b).
+ * Currently hits DB on every dashboard load. Single indexed
+ * lookup on (userId, status) — fine for the first 10k users.
+ */
+export async function resolveDashboardHome(
+  userId: string,
+  role: MarketplaceRole,
+): Promise<DashboardLeafPath> {
+  const memberships = await listMembershipsForUser(userId, { onlyActive: true });
+  if (memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')) {
+    return '/dashboard/school';
+  }
+  return dashboardPathFor(role);
 }
 
 export interface DashboardSession {

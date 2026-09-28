@@ -13,7 +13,7 @@ import { getTranslations } from 'next-intl/server';
 import { RecommendedInstructors } from '@/components/custom/dashboard/recommended-instructors';
 import { StudentDashboard } from '@/components/custom/dashboard/student-dashboard';
 import { DiditVerifyButton } from '@/components/custom/verification/didit-verify-button';
-import { dashboardPathFor, requireDashboardSession } from '@/lib/dashboard-guard';
+import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
 import { getStoredLearnerState } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,6 +27,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function StudentDashboardPage() {
   const session = await requireDashboardSession('/dashboard/student');
+  const home = await resolveDashboardHome(session.userId, session.role);
+  if (home !== '/dashboard/student') {
+    redirect(home);
+  }
   if (session.role !== 'STUDENT') {
     redirect(dashboardPathFor(session.role));
   }
