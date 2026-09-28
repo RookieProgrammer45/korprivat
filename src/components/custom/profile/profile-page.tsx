@@ -175,6 +175,7 @@ function ProfileHeader({
                 sizes="80px"
                 className="object-cover"
                 priority={false}
+                unoptimized
               />
             </div>
           ) : (

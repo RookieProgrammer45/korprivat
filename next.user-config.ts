@@ -10,7 +10,13 @@ export { cspExtraSources };
 type RemotePatterns = NonNullable<NonNullable<NextConfig['images']>['remotePatterns']>;
 
 /** Remote hosts you load <Image> from. e.g. { protocol: 'https', hostname: 'images.unsplash.com' } */
-export const userRemotePatterns: RemotePatterns = [];
+export const userRemotePatterns: RemotePatterns = [
+  {
+    protocol: 'https',
+    hostname: 'lh3.googleusercontent.com',
+    pathname: '/**',
+  },
+];
 
 /**
  * Browser capabilities this app needs (drives the Permissions-Policy header).
