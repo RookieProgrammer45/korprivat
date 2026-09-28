@@ -2,11 +2,20 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import {
+  SchoolInstructorRoster,
+  type RosterInvite,
+  type RosterMember,
+} from '@/components/custom/school/school-instructor-roster';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { requireDashboardSession } from '@/lib/dashboard-guard';
-import { listMembershipsForUser } from '@/lib/orgs/service';
+import {
+  listMembershipsForUser,
+  listOrgInvites,
+  listOrgMembers,
+} from '@/lib/orgs/service';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dashboardSchool');
@@ -37,6 +46,28 @@ export default async function SchoolDashboardPage() {
   const org = membership.organization;
   const t = await getTranslations('dashboardSchool');
   const isDraft = org.verificationState === 'DRAFT';
+  const isOwner = membership.role === 'OWNER';
+
+  const [rawMembers, rawInvites] = await Promise.all([
+    listOrgMembers(org.id),
+    listOrgInvites(org.id),
+  ]);
+
+  const members: RosterMember[] = rawMembers.map((m) => ({
+    id: m.id,
+    role: m.role,
+    status: m.status,
+    acceptedAt: m.acceptedAt?.toISOString() ?? null,
+    createdAt: m.createdAt.toISOString(),
+    user: m.user,
+  }));
+  const invites: RosterInvite[] = rawInvites.map((inv) => ({
+    id: inv.id,
+    email: inv.email,
+    role: inv.role,
+    createdAt: inv.createdAt.toISOString(),
+    expiresAt: inv.expiresAt.toISOString(),
+  }));
 
   return (
     <section className="grid gap-6">
@@ -73,11 +104,13 @@ export default async function SchoolDashboardPage() {
       ) : null}
 
       <Card className="border-border bg-card">
-        <CardContent className="grid gap-4 p-6">
-          <p className="font-display text-h3 text-foreground">{t('emptyInstructors')}</p>
-          <Button type="button" disabled size="sm" className="w-fit">
-            {t('inviteInstructor')}
-          </Button>
+        <CardContent className="p-6">
+          <SchoolInstructorRoster
+            organizationId={org.id}
+            isOwner={isOwner}
+            members={members}
+            invites={invites}
+          />
         </CardContent>
       </Card>
 
@@ -86,7 +119,13 @@ export default async function SchoolDashboardPage() {
           <Card key={key} className="border-border bg-card opacity-70">
             <CardContent className="grid gap-2 p-5">
               <p className="font-medium text-foreground">{t(`panels.${key}.title`)}</p>
-              <p className="text-small text-muted-foreground">{t('comingSoon')}</p>
+              {key === 'settings' ? (
+                <Button asChild variant="link" size="sm" className="h-auto w-fit p-0">
+                  <Link href="/dashboard/school/settings">{t('draftCardCta')}</Link>
+                </Button>
+              ) : (
+                <p className="text-small text-muted-foreground">{t('comingSoon')}</p>
+              )}
             </CardContent>
           </Card>
         ))}
