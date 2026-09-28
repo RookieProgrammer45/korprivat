@@ -39,3 +39,9 @@ export const OrgInviteRequest = z.object({
   role: z.literal('STAFF'),
 });
 export type OrgInviteRequest = z.infer<typeof OrgInviteRequest>;
+
+export const OrgInviteResponse = z.object({
+  inviteId: z.string().min(1),
+  email: z.string().email(),
+});
+export type OrgInviteResponse = z.infer<typeof OrgInviteResponse>;

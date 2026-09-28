@@ -1,7 +1,7 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { getLocale } from 'next-intl/server';
-import { OrgInviteRequest } from '@/lib/contracts/orgs';
+import { OrgInviteRequest, OrgInviteResponse } from '@/lib/contracts/orgs';
 import { orgInviteEmail } from '@/lib/email/org-invite';
 import { sendEmail } from '@/lib/email/send';
 import { env } from '@/lib/env';
@@ -63,7 +63,7 @@ export async function POST(req: Request, context: RouteContext) {
     await sendEmail({ to: invite.email, ...mail });
 
     return NextResponse.json(
-      { membershipId: invite.id, inviteId: invite.id, email: invite.email },
+      OrgInviteResponse.parse({ inviteId: invite.id, email: invite.email }),
       { status: 201 },
     );
   } catch (err) {
