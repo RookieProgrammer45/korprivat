@@ -360,6 +360,10 @@
     "availabilityAllOption": "Alla dagar",
     "weekday": "Vardagar",
     "weekend": "Helger",
+    "affiliationLabel": "Skola eller fristående",
+    "affiliationAll": "Alla",
+    "affiliationSchool": "Endast skolor",
+    "affiliationIndependent": "Endast fristående",
     "rateSuffix": "SEK / timme",
     "rateSuffixShort": "kr",
     "rateRangeError": "Lägsta priset måste vara mindre än eller lika med det högsta priset.",
@@ -1939,6 +1943,17 @@
       "errorDuplicate": "En skola med detta organisationsnummer är redan registrerad.",
       "genericError": "Något gick fel. Försök igen."
     }
+  },
+  "schoolProfile": {
+    "title": "Trafikskola",
+    "verifiedBadge": "Verifierad",
+    "pendingBadge": "Verifiering pågår",
+    "instructorsHeading": "Instruktörer",
+    "noInstructors": "Inga instruktörer ännu",
+    "contactHeading": "Kontakt"
+  },
+  "instructorAffiliation": {
+    "belongsTo": "Tillhör {name}"
   },
   "dashboardSchool": {
     "title": "Skoldashboard",

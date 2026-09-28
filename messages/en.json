@@ -360,6 +360,10 @@
     "availabilityAllOption": "Any day",
     "weekday": "Weekdays",
     "weekend": "Weekends",
+    "affiliationLabel": "School or independent",
+    "affiliationAll": "All",
+    "affiliationSchool": "Schools only",
+    "affiliationIndependent": "Independent only",
     "rateSuffix": "SEK / hour",
     "rateSuffixShort": "kr",
     "rateRangeError": "The minimum price must be less than or equal to the maximum price.",
@@ -1939,6 +1943,17 @@
       "errorDuplicate": "A school with this organisation number is already registered.",
       "genericError": "Something went wrong. Please try again."
     }
+  },
+  "schoolProfile": {
+    "title": "Driving school",
+    "verifiedBadge": "Verified",
+    "pendingBadge": "Verification in progress",
+    "instructorsHeading": "Instructors",
+    "noInstructors": "No instructors yet",
+    "contactHeading": "Contact"
+  },
+  "instructorAffiliation": {
+    "belongsTo": "Belongs to {name}"
   },
   "dashboardSchool": {
     "title": "School dashboard",
