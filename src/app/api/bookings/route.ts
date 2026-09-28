@@ -15,6 +15,7 @@ import {
   studentBookingRequestReceivedEmail,
 } from '@/lib/email/templates';
 import { resolveOrigin } from '@/lib/payments/origin';
+import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 import { resolveLearnerState } from '@/lib/verification/state';
 
@@ -104,11 +105,17 @@ export async function POST(req: Request) {
       email: true,
       cancellationPolicyTier: true,
       bookingMode: true,
+      userId: true,
     },
   });
   if (!instructor) {
     return NextResponse.json({ errors: { instructorId: 'Unknown instructor' } }, { status: 400 });
   }
+
+  // Snapshot school affiliation at booking time (ADR-004 prep). Fees stay 10% until slice 6.
+  // Multi-org: show first by createdAt. Revisit if any user has >1 ACTIVE membership.
+  const affiliation = await getActiveAffiliationForUser(instructor.userId);
+  const organizationId = affiliation?.organizationId ?? null;
 
   if (!isLicenceCategoryCode(data.category) || !instructor.categories.includes(data.category)) {
     return NextResponse.json(
@@ -179,6 +186,7 @@ export async function POST(req: Request) {
             serviceFeeSek: totals.serviceFeeSek,
             grossChargedSek: totals.totalSek,
             learnerAccessTokenHash: learnerAccess.tokenHash,
+            organizationId,
             ...(actionToken ? { actionToken } : {}),
           },
           select: { id: true },

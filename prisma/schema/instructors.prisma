@@ -195,6 +195,10 @@ model Booking {
   serviceFeeSek           Int?
   grossChargedSek         Int?
   payoutAmountSek         Int?
+  // School affiliation snapshot at booking time. Null = independent instructor.
+  // Fee math still uses 10% until slice 6 branches on this column (ADR-004).
+  // Scalar only — no @relation onto Organization (cross-context).
+  organizationId          String?
   instructor              Instructor        @relation(fields: [instructorId], references: [id])
   // Back-relation for the slot the booking was made against. Nullable so
   // bookings created before the slot feature shipped parse cleanly; old
@@ -205,6 +209,7 @@ model Booking {
   @@index([instructorId])
   @@index([slotId])
   @@index([userId])
+  @@index([organizationId])
 }
 
 // AvailabilitySlot — a single open (or booked) time slot an instructor makes
