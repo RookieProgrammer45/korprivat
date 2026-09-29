@@ -3,7 +3,7 @@
 // Idempotent via Booking.paidAt / stripeSessionId unique.
 
 import 'server-only';
-import { NextResponse } from 'next/server';
+import { after, NextResponse } from 'next/server';
 import { ensureBookingReceipts } from '@/lib/business/receipts';
 import { prisma } from '@/lib/db';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
@@ -57,31 +57,31 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, duplicate: true }, { status: 200 });
   }
 
-  // Best-effort receipt snapshots — never fail the webhook on mail/receipt errors.
-  try {
-    const booking = await prisma.booking.findUnique({
-      where: { id: bookingId },
-      include: { bookedSlot: { select: { startsAt: true, durationMinutes: true } } },
-    });
-    if (booking) {
+  // Ack 200 before receipt/email/PDF so Stripe does not retry on slow receipt work.
+  after(async () => {
+    try {
+      const booking = await prisma.booking.findUnique({
+        where: { id: bookingId },
+        include: { bookedSlot: { select: { startsAt: true, durationMinutes: true } } },
+      });
+      if (!booking) return;
       const instructor = await prisma.instructor.findUnique({
         where: { id: booking.instructorId },
         select: { name: true, city: true, hourlyRateSek: true },
       });
-      if (instructor) {
-        const amountTotal = typeof session.amount_total === 'number' ? session.amount_total : 0;
-        // amount_total is in öre for SEK; receipts still accept a USD-ish number
-        // for legacy snapshot fields — pass SEK major units as a stand-in.
-        await ensureBookingReceipts({
-          booking: { ...booking, slot: booking.bookedSlot, paymentStatus: 'held_escrow' },
-          instructor,
-          verifiedAmountUsd: Math.max(1, Math.round(amountTotal / 100)),
-        });
-      }
+      if (!instructor) return;
+      const amountTotal = typeof session.amount_total === 'number' ? session.amount_total : 0;
+      // amount_total is in öre for SEK; receipts still accept a USD-ish number
+      // for legacy snapshot fields — pass SEK major units as a stand-in.
+      await ensureBookingReceipts({
+        booking: { ...booking, slot: booking.bookedSlot, paymentStatus: 'held_escrow' },
+        instructor,
+        verifiedAmountUsd: Math.max(1, Math.round(amountTotal / 100)),
+      });
+    } catch (error) {
+      console.error('[stripe webhook] receipt snapshot failed', error);
     }
-  } catch (error) {
-    console.error('[stripe webhook] receipt snapshot failed', error);
-  }
+  });
 
   return NextResponse.json({ ok: true, duplicate: false }, { status: 200 });
 }
