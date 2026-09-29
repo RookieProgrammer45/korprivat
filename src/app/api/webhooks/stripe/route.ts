@@ -14,7 +14,8 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
-  if (!secret) {
+  if (!secret?.trim()) {
+    console.error('[stripe webhook] STRIPE_WEBHOOK_SECRET missing or empty');
     return NextResponse.json({ error: 'webhook_not_configured' }, { status: 503 });
   }
 
