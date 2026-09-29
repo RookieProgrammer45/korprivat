@@ -70,30 +70,33 @@ export async function createBookingCheckoutSession(input: {
   }`;
 
   const stripe = getStripe();
-  const session = await stripe.checkout.sessions.create({
-    mode: 'payment',
-    line_items: [
-      {
-        quantity: 1,
-        price_data: {
-          currency: 'sek',
-          unit_amount: totals.totalSek * 100,
-          product_data: {
-            name: `Betala lektionen — ${instructor.name}`,
+  const session = await stripe.checkout.sessions.create(
+    {
+      mode: 'payment',
+      line_items: [
+        {
+          quantity: 1,
+          price_data: {
+            currency: 'sek',
+            unit_amount: totals.totalSek * 100,
+            product_data: {
+              name: `Betala lektionen — ${instructor.name}`,
+            },
           },
         },
+      ],
+      success_url: `${appUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/checkout/cancelled`,
+      metadata: {
+        bookingId: booking.id,
+        ...(input.userId ? { userId: input.userId } : {}),
+        priceSek: String(totals.priceSek),
+        serviceFeeSek: String(totals.serviceFeeSek),
+        grossChargedSek: String(totals.totalSek),
       },
-    ],
-    success_url: `${appUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${appUrl}/checkout/cancelled`,
-    metadata: {
-      bookingId: booking.id,
-      ...(input.userId ? { userId: input.userId } : {}),
-      priceSek: String(totals.priceSek),
-      serviceFeeSek: String(totals.serviceFeeSek),
-      grossChargedSek: String(totals.totalSek),
     },
-  });
+    { idempotencyKey: `checkout:booking:${booking.id}` },
+  );
 
   if (!session.url) {
     throw new Error('stripe_session_missing_url');
