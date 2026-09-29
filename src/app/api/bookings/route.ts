@@ -114,8 +114,17 @@ export async function POST(req: Request) {
 
   // Snapshot school affiliation at booking time (ADR-004 prep). Fees stay 10% until slice 6.
   // Multi-org: show first by createdAt. Revisit if any user has >1 ACTIVE membership.
-  const affiliation = await getActiveAffiliationForUser(instructor.userId);
-  const organizationId = affiliation?.organizationId ?? null;
+  // Resolve BEFORE the booking transaction so a Membership read never holds the write lock.
+  // On lookup failure, fall back to null — never fail the booking for affiliation.
+  let organizationId: string | null = null;
+  try {
+    const affiliation = await getActiveAffiliationForUser(instructor.userId);
+    organizationId = affiliation?.organizationId ?? null;
+  } catch (err) {
+    // TODO(observability): route to Sentry once @sentry/nextjs is installed.
+    console.error('[bookings] affiliation lookup failed; proceeding with organizationId=null', err);
+    organizationId = null;
+  }
 
   if (!isLicenceCategoryCode(data.category) || !instructor.categories.includes(data.category)) {
     return NextResponse.json(
