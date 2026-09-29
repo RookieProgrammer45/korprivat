@@ -1,9 +1,8 @@
 //
 // After Stripe redirects back with `?session_id=cs_xxx`, this island polls
-// GET /api/stripe-billing/verify to confirm the payment. Once verified it
+// GET /api/checkout?session_id= to confirm paidAt. Once verified it
 // surfaces a localized confirmation; on timeout it shows a localised error
-// state with a CTA back to the dashboard. Loading → verified/timeout — three
-// states total, no extra routes.
+// state with a CTA back to the dashboard.
 
 'use client';
 
@@ -11,10 +10,16 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import { checkoutVerificationResultSchema } from '@/lib/stripe-billing/schema';
+
+const checkoutStatusSchema = z.object({
+  verified: z.boolean(),
+  paymentStatus: z.string().nullable().optional(),
+  bookingId: z.string().optional(),
+});
 
 type State =
   | { kind: 'missing-session' }
@@ -45,10 +50,10 @@ export function CheckoutSuccessIsland() {
       attemptsRef.current += 1;
       try {
         const result = await apiFetch(
-          `/api/stripe-billing/verify?${new URLSearchParams({
+          `/api/checkout?${new URLSearchParams({
             session_id: sessionId,
           }).toString()}`,
-          { schema: checkoutVerificationResultSchema },
+          { schema: checkoutStatusSchema },
         );
         if (cancelled) return;
         if (result.verified) {

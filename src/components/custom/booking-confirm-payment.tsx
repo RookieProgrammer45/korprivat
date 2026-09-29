@@ -65,9 +65,9 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
     );
     setPaymentPollError(false);
     try {
-      const result = await apiFetch(`/api/bookings/${encodeURIComponent(id)}/payment-link`, {
+      const result = await apiFetch('/api/checkout', {
         method: 'POST',
-        body: JSON.stringify(token ? { token } : {}),
+        body: JSON.stringify({ bookingId: id, ...(token ? { token } : {}) }),
         headers: accessHeaders(token),
         schema: BookingPaymentLinkResponse,
       });

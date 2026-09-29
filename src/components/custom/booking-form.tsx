@@ -394,9 +394,12 @@ export function BookingForm({
   const startPayment = async (id: string) => {
     setPaymentLoading(true);
     try {
-      const result = await apiFetch(`/api/bookings/${encodeURIComponent(id)}/payment-link`, {
+      const result = await apiFetch('/api/checkout', {
         method: 'POST',
-        body: JSON.stringify(bookingToken ? { token: bookingToken } : {}),
+        body: JSON.stringify({
+          bookingId: id,
+          ...(bookingToken ? { token: bookingToken } : {}),
+        }),
         headers: accessHeaders(bookingToken),
         schema: BookingPaymentLinkResponse,
       });

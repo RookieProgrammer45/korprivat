@@ -1,7 +1,7 @@
 //
 // Server Component shell that mounts the polling island. The page itself
 // does no DB / API work — the island reads `session_id` from `useSearchParams`
-// and polls GET /api/stripe-billing/verify to confirm the payment.
+// and polls GET /api/checkout?session_id= to confirm the payment.
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

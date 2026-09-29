@@ -20,19 +20,14 @@ import {
   bookingRequestApprovedEmail,
   bookingRequestApprovedInstructorCopyEmail,
 } from '@/lib/email/templates';
-import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
+import {
+  CheckoutConfigurationError,
+  createBookingCheckoutSession,
+} from '@/lib/payments/create-booking-checkout';
 import { resolveOrigin } from '@/lib/payments/origin';
 import { getSessionUser } from '@/lib/require-auth';
-import {
-  createCheckoutSession,
-  StripeBillingConfigurationError,
-  StripeBillingNotEnabledError,
-  StripeBillingOnboardingError,
-} from '@/lib/stripe-billing/client';
 
 export const dynamic = 'force-dynamic';
-
-type PaymentLinkError = 'not_enabled' | 'not_onboarded' | 'unknown';
 
 function safeStatus(value: string | null | undefined): BookingPaymentStatus {
   return BookingPaymentStatusEnum.options.includes(value as BookingPaymentStatus)
@@ -150,32 +145,11 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   const origin = resolveOrigin(req);
   const detailUrl = `${origin}/bookings/${encodeURIComponent(booking.id)}?token=${encodeURIComponent(learnerAccess.token)}`;
 
-  let checkout: { stripeSessionId: string; url: string };
-  try {
-    checkout = await createCheckoutSession({
-      amountUsd: sekToUsdChargeAmount(totals.totalSek),
-      name: `Betala lektionen — ${instructor.name}`,
-      successUrl: detailUrl,
-      cancelUrl: detailUrl,
-      metadata: {
-        bookingId: booking.id,
-        priceSek: String(totals.priceSek),
-        serviceFeeSek: String(totals.serviceFeeSek),
-        grossChargedSek: String(totals.totalSek),
-      },
-    });
-  } catch (error) {
-    await releaseSlot(booking.id);
-    const code = classifyStripeError(error);
-    const status = code === 'not_enabled' ? 403 : code === 'not_onboarded' ? 409 : 500;
-    return NextResponse.json({ errors: { payments: code } }, { status });
-  }
-
-  const updated = await prisma.booking.updateMany({
+  // Stamp accept fields before minting checkout so a mid-flight failure still
+  // leaves an auditable accept, then mint Checkout and overwrite pending.
+  const preAccept = await prisma.booking.updateMany({
     where: { id: booking.id, paymentStatus: 'awaiting_approval' },
     data: {
-      paymentStatus: 'pending',
-      stripeCheckoutSessionId: checkout.stripeSessionId,
       actionToken: escrowActionToken,
       learnerAccessTokenHash: learnerAccess.tokenHash,
       acceptedByLabel: parsed.data.acceptedByLabel,
@@ -185,7 +159,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       grossChargedSek: totals.totalSek,
     },
   });
-  if (updated.count !== 1) {
+  if (preAccept.count !== 1) {
     await releaseSlot(booking.id);
     const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
     return NextResponse.json(
@@ -196,6 +170,27 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       }),
       { status: 200 },
     );
+  }
+
+  try {
+    await createBookingCheckoutSession({
+      bookingId: booking.id,
+      req,
+      accessToken: learnerAccess.token,
+      userId: booking.userId,
+    });
+  } catch (error) {
+    await releaseSlot(booking.id);
+    await prisma.booking
+      .updateMany({
+        where: { id: booking.id },
+        data: { paymentStatus: 'awaiting_approval', stripeSessionId: null, stripeCheckoutSessionId: null },
+      })
+      .catch(() => undefined);
+    if (error instanceof CheckoutConfigurationError) {
+      return NextResponse.json({ errors: { payments: 'not_enabled' } }, { status: 403 });
+    }
+    return NextResponse.json({ errors: { payments: 'unknown' } }, { status: 500 });
   }
 
   const bookingLocale = booking.locale === 'en' ? 'en' : 'sv';
@@ -255,26 +250,4 @@ async function releaseSlot(bookingId: string): Promise<void> {
       data: { bookedAt: null, bookedBookingId: null },
     })
     .catch(() => undefined);
-}
-
-function classifyStripeError(error: unknown): PaymentLinkError {
-  if (
-    error instanceof StripeBillingNotEnabledError ||
-    errorName(error) === 'StripeBillingNotEnabledError' ||
-    error instanceof StripeBillingConfigurationError ||
-    errorName(error) === 'StripeBillingConfigurationError'
-  ) {
-    return 'not_enabled';
-  }
-  if (
-    error instanceof StripeBillingOnboardingError ||
-    errorName(error) === 'StripeBillingOnboardingError'
-  ) {
-    return 'not_onboarded';
-  }
-  return 'unknown';
-}
-
-function errorName(error: unknown): string | null {
-  return error instanceof Error && typeof error.name === 'string' ? error.name : null;
 }
