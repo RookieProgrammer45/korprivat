@@ -1,6 +1,7 @@
 import 'server-only';
-import type { Instructor, Organization } from '@prisma/client';
+import type { Organization, Prisma } from '@prisma/client';
 import { buildProviderActivationWhere } from '@/lib/business/provider-activation';
+import { PUBLIC_INSTRUCTOR_SELECT } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
 
 export type SchoolAffiliation = {
@@ -8,6 +9,10 @@ export type SchoolAffiliation = {
   name: string;
   slug: string;
 };
+
+export type SchoolListedInstructor = Prisma.InstructorGetPayload<{
+  select: typeof PUBLIC_INSTRUCTOR_SELECT;
+}>;
 
 /**
  * First ACTIVE Membership for a user, ordered by createdAt.
@@ -50,11 +55,11 @@ export async function listActiveMemberUserIds(): Promise<string[]> {
  *
  * Shape:
  *   Membership.findMany({ organizationId, status: ACTIVE })
- *   → Instructor.findMany({ userId in …, AND activation where })
+ *   → Instructor.findMany({ userId in …, AND activation where, public select })
  */
 export async function listSchoolListedInstructors(
   organizationId: string,
-): Promise<Instructor[]> {
+): Promise<SchoolListedInstructor[]> {
   const memberships = await prisma.membership.findMany({
     where: { organizationId, status: 'ACTIVE' },
     select: { userId: true },
@@ -66,6 +71,7 @@ export async function listSchoolListedInstructors(
       userId: { in: userIds },
       AND: [buildProviderActivationWhere()],
     },
+    select: PUBLIC_INSTRUCTOR_SELECT,
     orderBy: { name: 'asc' },
   });
 }
