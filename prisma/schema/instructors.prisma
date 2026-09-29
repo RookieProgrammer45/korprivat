@@ -90,6 +90,11 @@ model Booking {
   // success page and is the idempotency key for the "Betala lektionen" flow.
   paymentStatus           String?           @default("unpaid")
   stripeCheckoutSessionId String?
+  // Direct Stripe Checkout session id (`cs_...`) + paid marker. Idempotency
+  // for the webhook uses `paidAt IS NULL` on updateMany; unique on
+  // stripeSessionId prevents two bookings claiming the same session.
+  stripeSessionId         String?
+  paidAt                  DateTime?
   // Escrow-style payment state — all additive / nullable / defaulted so
   // `prisma db push --accept-data-loss` accepts pre-existing rows. The
   // booking is funded at checkout (`held_escrow`) and "released" only after
