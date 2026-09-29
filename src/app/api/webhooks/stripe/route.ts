@@ -42,14 +42,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ received: true, skipped: 'no_booking_id' }, { status: 200 });
   }
 
-  // Heavy work after signature OK — still await here so serverless doesn't
-  // freeze mid-flight; return 200 with duplicate flag when already paid.
   const result = await markBookingPaidFromCheckout({
     bookingId,
     stripeSessionId: session.id,
   });
 
-  if (result.duplicate) {
+  if (result.kind === 'ignored') {
+    // No @sentry/nextjs yet — structured console until wired (same pattern as Didit).
+    console.error(`webhook: unknown booking ${bookingId}`);
+    return NextResponse.json({ ok: true, ignored: true }, { status: 200 });
+  }
+
+  if (result.kind === 'duplicate') {
     return NextResponse.json({ ok: true, duplicate: true }, { status: 200 });
   }
 

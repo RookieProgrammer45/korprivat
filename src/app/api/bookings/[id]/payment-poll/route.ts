@@ -153,7 +153,15 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
     preserveLearnerToken: learnerTokenAuthorized,
   });
 
-  if (mark.duplicate) {
+  if (mark.kind === 'ignored') {
+    return pollResponse(
+      false,
+      'pending',
+      await getReceiptEmailDeliveryStatus(booking.id, recipientRole),
+    );
+  }
+
+  if (mark.kind === 'duplicate') {
     const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
     return pollResponse(
       true,

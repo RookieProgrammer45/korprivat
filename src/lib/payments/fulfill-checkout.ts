@@ -15,8 +15,14 @@ const CANCEL_TERMINAL_STATES = [
 ] as const;
 
 export type MarkBookingPaidResult =
-  | { ok: true; duplicate: false; actionToken: string; learnerAccessToken: string | null }
-  | { ok: true; duplicate: true };
+  | {
+      ok: true;
+      kind: 'paid';
+      actionToken: string;
+      learnerAccessToken: string | null;
+    }
+  | { ok: true; kind: 'duplicate' }
+  | { ok: true; kind: 'ignored' };
 
 export async function markBookingPaidFromCheckout(input: {
   bookingId: string;
@@ -24,6 +30,19 @@ export async function markBookingPaidFromCheckout(input: {
   /** When true, do not rotate learnerAccessTokenHash (caller already holds a valid token). */
   preserveLearnerToken?: boolean;
 }): Promise<MarkBookingPaidResult> {
+  const booking = await prisma.booking.findUnique({
+    where: { id: input.bookingId },
+    select: { id: true, paidAt: true },
+  });
+
+  if (!booking) {
+    return { ok: true, kind: 'ignored' };
+  }
+
+  if (booking.paidAt != null) {
+    return { ok: true, kind: 'duplicate' };
+  }
+
   const actionToken = generateBookingToken();
   const learnerAccess = input.preserveLearnerToken ? null : generateLearnerAccessToken();
   const paidAt = new Date();
@@ -48,12 +67,13 @@ export async function markBookingPaidFromCheckout(input: {
   });
 
   if (updateResult.count === 0) {
-    return { ok: true, duplicate: true };
+    // Lost a race with another writer (webhook retry / payment-poll) — treat as duplicate.
+    return { ok: true, kind: 'duplicate' };
   }
 
   return {
     ok: true,
-    duplicate: false,
+    kind: 'paid',
     actionToken,
     learnerAccessToken: learnerAccess?.token ?? null,
   };
@@ -73,4 +93,3 @@ export async function isBookingAlreadyPaid(bookingId: string): Promise<boolean> 
     row.paymentStatus === 'refunded'
   );
 }
-
