@@ -30,7 +30,11 @@ type State =
 const MAX_POLLS = 8;
 const POLL_DELAY_MS = 750;
 
-export function CheckoutSuccessIsland() {
+export function CheckoutSuccessIsland({
+  dashboardHref = '/dashboard',
+}: {
+  dashboardHref?: string;
+}) {
   const t = useTranslations('checkout.success');
   const params = useSearchParams();
   const sessionId = params.get('session_id')?.trim() ?? '';
@@ -88,7 +92,7 @@ export function CheckoutSuccessIsland() {
         <p className="text-body text-muted-foreground">{t('missingBody')}</p>
         <div className="mt-2 flex justify-center">
           <Button asChild>
-            <Link href="/dashboard/instructor">{t('cta')}</Link>
+            <Link href={dashboardHref}>{t('cta')}</Link>
           </Button>
         </div>
       </section>
@@ -115,7 +119,7 @@ export function CheckoutSuccessIsland() {
         <p className="text-body text-muted-foreground">{t('verifiedBody')}</p>
         <div className="mt-2 flex justify-center">
           <Button asChild>
-            <Link href="/dashboard/instructor">{t('cta')}</Link>
+            <Link href={dashboardHref}>{t('cta')}</Link>
           </Button>
         </div>
       </section>
@@ -131,7 +135,7 @@ export function CheckoutSuccessIsland() {
       <p className="text-body text-muted-foreground">{t('timeoutBody')}</p>
       <div className="mt-2 flex justify-center">
         <Button asChild>
-          <Link href="/dashboard/instructor">{t('cta')}</Link>
+          <Link href={dashboardHref}>{t('cta')}</Link>
         </Button>
       </div>
     </section>
