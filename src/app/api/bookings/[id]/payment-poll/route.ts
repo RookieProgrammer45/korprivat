@@ -1,16 +1,11 @@
 //
-// Stripe verification and the pending → held_escrow transition stay guarded
-// independently from per-recipient receipt delivery. A mail failure therefore
-// never changes the payment or booking state, and later authorized polls can
-// retry only the caller's undelivered receipt.
+// Payment poll: read paidAt / paymentStatus. If still pending and a Stripe
+// session id exists, retrieve the session from Stripe as a self-heal when
+// the webhook hasn't landed yet. Receipt delivery stays best-effort.
 import 'server-only';
 import { NextResponse } from 'next/server';
-import {
-  generateLearnerAccessToken,
-  getBookingAccessToken,
-  matchesLearnerAccessToken,
-} from '@/lib/business/booking-access';
-import { assertTokenMatches, generateBookingToken } from '@/lib/business/escrow';
+import { getBookingAccessToken, matchesLearnerAccessToken } from '@/lib/business/booking-access';
+import { assertTokenMatches } from '@/lib/business/escrow';
 import { recordRebookingContext } from '@/lib/business/rebooking-cache';
 import {
   deliverBookingReceipt,
@@ -20,8 +15,9 @@ import { ensureBookingReceipts } from '@/lib/business/receipts';
 import { BookingPaymentPollResponse, BookingPaymentStatusEnum } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
 import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
+import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
+import { getStripe } from '@/lib/payments/stripe';
 import { getSessionUser } from '@/lib/require-auth';
-import { verifyCheckoutSession } from '@/lib/stripe-billing/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -102,6 +98,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
     );
   }
   if (
+    booking.paidAt != null ||
     booking.paymentStatus === LEGACY_PAID_STATE ||
     TERMINAL_PAYMENT_STATES.includes(
       booking.paymentStatus as (typeof TERMINAL_PAYMENT_STATES)[number],
@@ -120,7 +117,9 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
       delivery.status,
     );
   }
-  if (!booking.stripeCheckoutSessionId) {
+
+  const sessionId = booking.stripeSessionId ?? booking.stripeCheckoutSessionId;
+  if (!sessionId) {
     return pollResponse(
       false,
       safePaymentStatus(booking.paymentStatus),
@@ -128,8 +127,19 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
     );
   }
 
-  const result = await verifyCheckoutSession({ sessionId: booking.stripeCheckoutSessionId });
-  if (!result.verified) {
+  // Self-heal: if webhook hasn't marked paid yet, ask Stripe.
+  let paid = false;
+  try {
+    const session = await getStripe().checkout.sessions.retrieve(sessionId);
+    paid = session.payment_status === 'paid' || session.status === 'complete';
+  } catch {
+    return pollResponse(
+      false,
+      'pending',
+      await getReceiptEmailDeliveryStatus(booking.id, recipientRole),
+    );
+  }
+  if (!paid) {
     return pollResponse(
       false,
       'pending',
@@ -137,25 +147,13 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
     );
   }
 
-  const actionToken = generateBookingToken();
-  const learnerAccess = learnerTokenAuthorized ? null : generateLearnerAccessToken();
-  const heldAt = new Date();
-  const updateResult = await prisma.booking.updateMany({
-    where: {
-      id: booking.id,
-      paymentStatus: {
-        notIn: [...TERMINAL_PAYMENT_STATES, ...CANCEL_TERMINAL_STATES],
-      },
-    },
-    data: {
-      paymentStatus: 'held_escrow',
-      heldAt,
-      actionToken,
-      ...(learnerAccess ? { learnerAccessTokenHash: learnerAccess.tokenHash } : {}),
-    },
+  const mark = await markBookingPaidFromCheckout({
+    bookingId: booking.id,
+    stripeSessionId: sessionId,
+    preserveLearnerToken: learnerTokenAuthorized,
   });
 
-  if (updateResult.count === 0) {
+  if (mark.duplicate) {
     const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
     return pollResponse(
       true,
@@ -164,10 +162,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
     );
   }
 
-  const verifiedAmountUsd =
-    typeof result.payment?.amount_usd === 'number'
-      ? result.payment.amount_usd
-      : sekToUsdChargeAmount(booking.grossChargedSek ?? 1);
+  const verifiedAmountUsd = sekToUsdChargeAmount(booking.grossChargedSek ?? 1);
   await ensureBookingReceipts({
     booking: { ...booking, slot: booking.bookedSlot, paymentStatus: 'held_escrow' },
     instructor: instructor ?? {
@@ -179,14 +174,15 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
   });
 
   const learnerToken =
-    learnerAccess?.token ?? (learnerTokenAuthorized ? (suppliedToken ?? undefined) : undefined);
+    mark.learnerAccessToken ??
+    (learnerTokenAuthorized ? (suppliedToken ?? undefined) : undefined);
   const deliveryBooking = {
     id: booking.id,
     studentName: booking.studentName,
     studentEmail: booking.studentEmail,
     instructorId: booking.instructorId,
-    actionToken,
-    learnerAccessTokenHash: learnerAccess?.tokenHash ?? booking.learnerAccessTokenHash,
+    actionToken: mark.actionToken,
+    learnerAccessTokenHash: booking.learnerAccessTokenHash,
     instructor: instructor ? { email: instructor.email, name: instructor.name } : null,
   };
   const [learnerDelivery, instructorDelivery] = await Promise.all([
