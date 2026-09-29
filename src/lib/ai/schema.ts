@@ -1,5 +1,5 @@
 //
-// Shared schemas for Polsia-managed AI calls. Safe to import from client
+// Shared schemas for AI chat calls. Safe to import from client
 // components: this file has no server-only imports and does not expose secrets
 // or any LLM SDK. The public /api/ai/chat route validates request bodies with
 // chatRequestSchema; the server-only client adds vision/structured helpers.

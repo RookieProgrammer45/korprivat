@@ -1,5 +1,5 @@
 //
-// POST /api/ai/chat — streaming chat relay to the Polsia AI proxy.
+// POST /api/ai/chat — streaming chat relay to OpenAI.
 // SECURITY: this relays caller messages to the platform LLM proxy using the
 // server-only platform key. The platform meters per-app token budget, but this
 // route is NOT an authorization boundary — gate it behind an authenticated

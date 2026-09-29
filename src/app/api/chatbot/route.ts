@@ -4,12 +4,11 @@
 // Drives the floating in-app chatbot (FAB + dialog mounted once at the app
 // root via global-mounts.tsx → chatbot-mount.tsx). The bot answers routine
 // learner questions (categories, pricing ranges, how booking works, legality,
-// cancellation) through the Polsia AI proxy and falls back to the human
+// cancellation) through OpenAI and falls back to the human
 // contact flow when the question is not an FAQ — see
 // src/lib/business/chatbot-knowledge.ts for the kernel.
 //
-// Round-trips through the Polsia AI proxy via the server-only `chat()` helper
-// installed by the polsia `ai` capability module. We NEVER call
+// Round-trips through the server-only `chat()` helper (OpenAI). We NEVER call
 // @anthropic-ai/sdk (the module's client.ts handles all provider routing).
 //
 // Hard rules from the brief + plan:
