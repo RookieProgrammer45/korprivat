@@ -27,7 +27,7 @@ export function assertTokenMatches(rowToken: string | null | undefined, supplied
 }
 
 /**
- * No-op under Resend (formerly registered contacts on the Polsia email
+ * No-op under Resend (contact registration is unused;
  * proxy for tier classification). Kept so existing call sites do not need
  * edits; always returns null.
  */

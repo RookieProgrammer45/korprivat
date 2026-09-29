@@ -224,6 +224,8 @@ export function bookingRow(
     preferredAt: Date;
     paymentStatus: string | null;
     stripeCheckoutSessionId: string | null;
+    stripeSessionId: string | null;
+    paidAt: Date | null;
     actionToken: string | null;
     learnerAccessTokenHash: string | null;
     heldAt: Date | null;
@@ -255,6 +257,8 @@ export function bookingRow(
     preferredAt: new Date('2026-08-10T14:30:00.000Z'),
     paymentStatus: null,
     stripeCheckoutSessionId: null,
+    stripeSessionId: null,
+    paidAt: null,
     actionToken: null,
     learnerAccessTokenHash: testLearnerAccessTokenHash(),
     heldAt: null,

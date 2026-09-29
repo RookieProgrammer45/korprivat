@@ -11,7 +11,7 @@
 //   1. Make every write IDEMPOTENT — upsert (`where` + `create` + `update`) or
 //      `createMany({ ..., skipDuplicates: true })`, NEVER a bare `create`/`insert`.
 //   2. Keep it fast and small — it runs before the server serves traffic.
-//   3. NOT for recurring work (that's polsia.toml `[[crons]]`) or per-user/
+//   3. NOT for recurring work (that's a scheduled cron) or per-user/
 //      request-time logic (that's an /api route handler). There is no request here.
 export async function seed(): Promise<void> {
   const { prisma } = await import('@/lib/db');

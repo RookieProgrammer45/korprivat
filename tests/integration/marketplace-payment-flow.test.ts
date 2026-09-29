@@ -1,5 +1,5 @@
 //
-// The other integration files lock in isolated segments (payment-link +
+// The other integration files lock in isolated segments (checkout +
 // payment-poll, escrow terminal transitions, race-guards). This file is
 // the
 // cross-surface coverage: full booking payment→escrow→payout chain, fee
@@ -41,22 +41,32 @@ import {
   resetPrisma,
   TEST_LEARNER_ACCESS_TOKEN,
 } from './_setup/prisma-mock';
-import {
-  checkoutSessionResponse,
-  installStripeProxy,
-  verifyCheckoutResponse,
-} from './_setup/stripe-proxy-mock';
+const createCheckoutSession = vi.fn();
+const retrieveCheckoutSession = vi.fn();
 
 vi.mock('server-only', () => ({}));
 vi.mock('next/headers', () => ({
   headers: async () => new Headers(),
 }));
+vi.mock('stripe', () => {
+  class StripeMock {
+    checkout = {
+      sessions: {
+        create: (...args: unknown[]) => createCheckoutSession(...args),
+        retrieve: (...args: unknown[]) => retrieveCheckoutSession(...args),
+      },
+    };
+    webhooks = { constructEvent: vi.fn() };
+    constructor(_key: string, _opts?: unknown) {}
+  }
+  return { default: StripeMock };
+});
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as completePOST } from '@/app/api/bookings/[id]/complete/route';
 import { POST as disputeResolvePOST } from '@/app/api/bookings/[id]/dispute/resolve/route';
 import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
-import { POST as paymentLinkPOST } from '@/app/api/bookings/[id]/payment-link/route';
+import { POST as checkoutPOST } from '@/app/api/checkout/route';
 import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
 
 import { authMock } from './_setup/auth-mock';
@@ -88,25 +98,35 @@ function learnerGet(url: string): Request {
   });
 }
 
-let stripe: ReturnType<typeof installStripeProxy>;
-
 beforeEach(() => {
   resetPrisma();
   resetEmailMock();
   authMock.reset();
   authMock.setUser(SESSION_USER);
-  stripe = installStripeProxy();
+  createCheckoutSession.mockReset();
+  retrieveCheckoutSession.mockReset();
+  process.env.STRIPE_SECRET_KEY = 'sk_test_integration';
+  createCheckoutSession.mockResolvedValue({
+    id: 'cs_chain',
+    url: 'https://checkout.stripe.com/c/pay/cs_chain',
+  });
+  retrieveCheckoutSession.mockResolvedValue({
+    id: 'cs_chain',
+    payment_status: 'unpaid',
+    status: 'open',
+  });
 });
 
 afterEach(() => {
-  stripe.restore();
+  createCheckoutSession.mockReset();
+  retrieveCheckoutSession.mockReset();
 });
 
 // ─── G. Booking full chain ──────────────────────────────────────────
 
 describe('booking: full chain unpaid → mint → held_escrow → complete → released', () => {
   it('carries through to released with both receipt emails then completion email', async () => {
-    // 1. payment-link mints the session + stamps fee snapshot columns
+    // 1. checkout mints the session + stamps fee snapshot columns
     prismaMock.booking.findUnique.mockResolvedValueOnce(
       bookingRow({
         id: 'booking_chain',
@@ -117,16 +137,20 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow({ hourlyRateSek: 550 }));
     prismaMock.booking.update.mockResolvedValueOnce({ id: 'booking_chain' });
     // 550 SEK school price → totalSek 550 → ceil(550 × 0.094) = 52
-    stripe.setResponse('POST /api/v2/app-payments/checkout-session', () =>
-      checkoutSessionResponse({ sessionId: 'cs_chain', amountUsd: 52 }),
-    );
+    createCheckoutSession.mockResolvedValueOnce({
+      id: 'cs_chain',
+      url: 'https://checkout.stripe.com/c/pay/cs_chain',
+    });
 
-    const linkRes = await paymentLinkPOST(
-      new Request('http://localhost/api/bookings/booking_chain/payment-link', {
+    const linkRes = await checkoutPOST(
+      new Request('http://localhost/api/checkout', {
         method: 'POST',
-        headers: { Authorization: `Bearer ${TEST_LEARNER_ACCESS_TOKEN}` },
+        headers: {
+          Authorization: `Bearer ${TEST_LEARNER_ACCESS_TOKEN}`,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ bookingId: 'booking_chain', token: TEST_LEARNER_ACCESS_TOKEN }),
       }),
-      { params: Promise.resolve({ id: 'booking_chain' }) },
     );
     expect(linkRes.status).toBe(200);
 
@@ -137,6 +161,7 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
         where: { id: 'booking_chain' },
         data: expect.objectContaining({
           paymentStatus: 'pending',
+          stripeSessionId: 'cs_chain',
           stripeCheckoutSessionId: 'cs_chain',
           priceAmountSek: 550,
           serviceFeeSek: 0,
@@ -150,6 +175,7 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
       bookingRow({
         id: 'booking_chain',
         paymentStatus: 'pending',
+        stripeSessionId: 'cs_chain',
         stripeCheckoutSessionId: 'cs_chain',
       }),
     );
@@ -157,9 +183,11 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
       instructorRow({ email: 'erik@drivelinkup.test' }),
     );
-    stripe.setResponse('GET /api/company-payments/verify', () =>
-      verifyCheckoutResponse({ verified: true }),
-    );
+    retrieveCheckoutSession.mockResolvedValueOnce({
+      id: 'cs_chain',
+      payment_status: 'paid',
+      status: 'complete',
+    });
 
     const pollRes = await paymentPollGET(
       learnerGet('http://localhost/api/bookings/booking_chain/payment-poll'),
@@ -241,24 +269,27 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
 
 // ─── H. Booking double-mint on `pending` ────────────────────────────
 
-describe('booking/payment-link: re-mints on `pending` (intentional per comment)', () => {
+describe('booking/checkout: re-mints on `pending` (intentional per comment)', () => {
   it('second POST while still `pending` returns a fresh URL (overwrites session id)', async () => {
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
+    prismaMock.booking.findUnique.mockResolvedValue(
       bookingRow({ id: 'booking_pending', paymentStatus: 'pending' }),
     );
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow({ hourlyRateSek: 550 }));
-    prismaMock.booking.update.mockResolvedValueOnce({ id: 'booking_pending' });
-    // 550 school price → 550 → ceil(550 * 0.094) = 52
-    stripe.setResponse('POST /api/v2/app-payments/checkout-session', () =>
-      checkoutSessionResponse({ sessionId: 'cs_remint', amountUsd: 52 }),
-    );
+    prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
+    prismaMock.booking.update.mockResolvedValue({ id: 'booking_pending' });
+    createCheckoutSession.mockResolvedValueOnce({
+      id: 'cs_remint',
+      url: 'https://checkout.stripe.com/c/pay/cs_remint',
+    });
 
-    const res = await paymentLinkPOST(
-      new Request('http://localhost/api/bookings/booking_pending/payment-link', {
+    const res = await checkoutPOST(
+      new Request('http://localhost/api/checkout', {
         method: 'POST',
-        headers: { Authorization: `Bearer ${TEST_LEARNER_ACCESS_TOKEN}` },
+        headers: {
+          Authorization: `Bearer ${TEST_LEARNER_ACCESS_TOKEN}`,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ bookingId: 'booking_pending', token: TEST_LEARNER_ACCESS_TOKEN }),
       }),
-      { params: Promise.resolve({ id: 'booking_pending' }) },
     );
     expect(res.status).toBe(200);
     const body = (await res.json()) as { url: string | null; paymentStatus: string };
@@ -272,6 +303,7 @@ describe('booking/payment-link: re-mints on `pending` (intentional per comment)'
         where: { id: 'booking_pending' },
         data: expect.objectContaining({
           paymentStatus: 'pending',
+          stripeSessionId: 'cs_remint',
           stripeCheckoutSessionId: 'cs_remint',
           priceAmountSek: 550,
           serviceFeeSek: 0,
@@ -290,12 +322,15 @@ describe('booking/payment-poll: verified=false leaves the row untouched', () => 
       bookingRow({
         id: 'booking_unverified',
         paymentStatus: 'pending',
+        stripeSessionId: 'cs_yet',
         stripeCheckoutSessionId: 'cs_yet',
       }),
     );
-    stripe.setResponse('GET /api/company-payments/verify', () =>
-      verifyCheckoutResponse({ verified: false }),
-    );
+    retrieveCheckoutSession.mockResolvedValueOnce({
+      id: 'cs_yet',
+      payment_status: 'unpaid',
+      status: 'open',
+    });
 
     const res = await paymentPollGET(
       learnerGet('http://localhost/api/bookings/booking_unverified/payment-poll'),
@@ -321,6 +356,8 @@ describe('booking/payment-poll: short-circuits on terminal paymentStatus', () =>
         bookingRow({
           id: `booking_${terminal}`,
           paymentStatus: terminal,
+          paidAt: terminal === 'refunded' ? new Date() : new Date(),
+          stripeSessionId: 'cs_terminal',
           stripeCheckoutSessionId: 'cs_terminal',
           actionToken: 'token_terminal',
           heldAt: new Date(),
@@ -336,8 +373,8 @@ describe('booking/payment-poll: short-circuits on terminal paymentStatus', () =>
       expect(body.verified).toBe(true);
       expect(body.paymentStatus).toBe(terminal);
 
-      // No outbound verify, no row update, no email.
-      expect(stripe.calls.filter((c) => c.url.includes('verify'))).toHaveLength(0);
+      // No Stripe retrieve, no row update, no email.
+      expect(retrieveCheckoutSession).not.toHaveBeenCalled();
       expect(prismaMock.booking.updateMany).not.toHaveBeenCalled();
       expect(sendEmailMock).not.toHaveBeenCalled();
     });
@@ -507,42 +544,39 @@ describe('booking: dispute → resolve released (funds go to instructor)', () =>
   });
 });
 
-// ─── Origin resolver priority (payment-link sanity) ──────────────────
+// ─── Origin resolver priority (checkout sanity) ──────────────────
 
-describe('payment-link + payment-poll: public origin flows through x-forwarded-host', () => {
-  it('payment-link sends Stripe URLs rooted at the origin header (not the bind host)', async () => {
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
+describe('checkout: success/cancel URLs use public app URL', () => {
+  it('Checkout Session uses NEXT_PUBLIC_APP_URL / Origin for redirects', async () => {
+    prismaMock.booking.findUnique.mockResolvedValue(
       bookingRow({ id: 'booking_origin', paymentStatus: null }),
     );
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(
+    prismaMock.instructor.findUnique.mockResolvedValue(
       instructorRow({ id: 'instructor_erik', hourlyRateSek: 550 }),
     );
-    prismaMock.booking.update.mockResolvedValueOnce({ id: 'booking_origin' });
-    // 550 school price → 550 → ceil(550 * 0.094) = 52
-    stripe.setResponse('POST /api/v2/app-payments/checkout-session', () =>
-      checkoutSessionResponse({ sessionId: 'cs_origin', amountUsd: 52 }),
-    );
-
-    const req = new Request(
-      'http://service-container:3000/api/bookings/booking_origin/payment-link',
-      {
-        method: 'POST',
-        headers: {
-          origin: 'https://drivelinkup.polsia.app',
-          Authorization: `Bearer ${TEST_LEARNER_ACCESS_TOKEN}`,
-        },
-      },
-    );
-    const res = await paymentLinkPOST(req, {
-      params: Promise.resolve({ id: 'booking_origin' }),
+    prismaMock.booking.update.mockResolvedValue({ id: 'booking_origin' });
+    createCheckoutSession.mockResolvedValueOnce({
+      id: 'cs_origin',
+      url: 'https://checkout.stripe.com/c/pay/cs_origin',
     });
+
+    const req = new Request('http://service-container:3000/api/checkout', {
+      method: 'POST',
+      headers: {
+        origin: 'https://www.drivelinkup.com',
+        Authorization: `Bearer ${TEST_LEARNER_ACCESS_TOKEN}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ bookingId: 'booking_origin', token: TEST_LEARNER_ACCESS_TOKEN }),
+    });
+    const res = await checkoutPOST(req);
     expect(res.status).toBe(200);
 
-    const checkoutCall = stripe.calls.find((c) =>
-      c.url.endsWith('/api/v2/app-payments/checkout-session'),
-    );
-    const body = checkoutCall?.body as { success_url?: string; cancel_url?: string };
-    expect(body.success_url).toMatch(/^https:\/\/drivelinkup\.polsia\.app\//);
-    expect(body.cancel_url).toMatch(/^https:\/\/drivelinkup\.polsia\.app\//);
+    const arg = createCheckoutSession.mock.calls[0]?.[0] as {
+      success_url?: string;
+      cancel_url?: string;
+    };
+    expect(arg.success_url).toMatch(/^https:\/\/www\.drivelinkup\.com\//);
+    expect(arg.cancel_url).toMatch(/^https:\/\/www\.drivelinkup\.com\//);
   });
 });

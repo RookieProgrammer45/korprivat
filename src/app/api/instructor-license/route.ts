@@ -106,7 +106,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { license: accepted.reason } }, { status: 400 });
   }
 
-  // 4. Store via Vercel Blob (or legacy Polsia R2 when configured).
+  // 4. Store via Vercel Blob.
   let fileKey: string;
   let fileUrl: string;
   try {

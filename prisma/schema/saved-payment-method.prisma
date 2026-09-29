@@ -4,7 +4,7 @@
 // so a learner can rebook a previously-used instructor without re-entering
 // their email + phone + category. We achieve ONE STEP on rebook by pre-filling
 // — there is no literal "1-tap Stripe-charge on the same saved card" shortcut
-// because the Polsia Stripe-billing proxy does not expose PaymentIntents /
+// because PaymentIntents /
 // Stripe Customers / SetupIntents — see the plan's constraints.
 //
 // What we NEVER store here:

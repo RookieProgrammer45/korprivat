@@ -107,7 +107,6 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* === BEGIN polsia-slot:brand_tokens === */
 /* THE SEED — the agent's only styling authority on this file.
    Set the brand HUE (and optionally chroma/lightness), the radius, and the
    fonts. The framework derives the full --brand ramp + every surface/text/
@@ -122,7 +121,6 @@
   --font-display: var(--font-display-face, "Syne"), "Avenir Next", sans-serif;
   --font-body: var(--font-body-face, "DM Sans"), "Avenir Next", sans-serif;
 }
-/* === END polsia-slot:brand_tokens === */
 
 /* FRAMEWORK-DERIVED — NOT agent-editable (outside the slot). The full ramp,
    every semantic role, and dark mode are computed from the seed above. Neutrals

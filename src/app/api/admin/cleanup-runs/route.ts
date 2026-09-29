@@ -1,21 +1,12 @@
 //
-// Two verbs:
-//   GET  — last 50 CleanupRun rows with their final `scanned` / `deleted`
-//          counters, gated by an inline admin check (NOT `requireAdmin`,
-//          which redirects on non-admin — wrong UX for an API client
-//          that wants a 403 to render an error state).
-//   POST — runs the cleanup on demand (mirror of jobs/r2-cleanup.js),
-//          gated by the same admin check, returns the row totals.
-//
-// Both verbs are `force-dynamic` so they're never statically cached, and
-// the admin "Run now" button always sees fresh data on the next refetch.
+// Historical CleanupRun read-only listing. Object-storage R2 cleanup has
+// been removed; POST returns 410.
 
 import 'server-only';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { runCleanup } from '@/lib/business/r2-cleanup';
-import { CleanupRunCreated, CleanupRunsList } from '@/lib/contracts/cleanup-runs';
+import { CleanupRunsList } from '@/lib/contracts/cleanup-runs';
 import { prisma } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
@@ -65,14 +56,8 @@ export async function GET() {
 export async function POST() {
   const forbidden = await assertAdmin();
   if (forbidden) return forbidden;
-
-  const summary = await runCleanup({ trigger: 'admin' });
   return NextResponse.json(
-    CleanupRunCreated.parse({
-      runId: summary.runId,
-      scanned: summary.scanned,
-      deleted: summary.deleted,
-    }),
-    { status: 201 },
+    { error: 'gone', message: 'R2 cleanup has been removed; uploads use Vercel Blob only.' },
+    { status: 410 },
   );
 }

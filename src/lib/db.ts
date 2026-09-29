@@ -1,4 +1,4 @@
-// Code installed by polsia/template-next. Server-only PrismaClient singleton.
+// Server-only PrismaClient singleton.
 import 'server-only';
 import { PrismaClient } from '@prisma/client';
 
