@@ -1,11 +1,13 @@
 // POST /api/webhooks/stripe
 // Raw-body signature verify → checkout.session.completed → mark booking paid.
+// Also handles account.updated for Connect Express school onboarding.
 // Idempotent via Booking.paidAt / stripeSessionId unique.
 
 import 'server-only';
 import { after, NextResponse } from 'next/server';
 import { ensureBookingReceipts } from '@/lib/business/receipts';
 import { prisma } from '@/lib/db';
+import { applyConnectAccountUpdated } from '@/lib/payments/connect';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
 import { getStripe } from '@/lib/payments/stripe';
 import type Stripe from 'stripe';
@@ -32,7 +34,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'invalid_signature' }, { status: 401 });
   }
 
-  // Ack immediately for types we ignore; process checkout.session.completed below.
+  if (event.type === 'account.updated') {
+    const account = event.data.object as Stripe.Account;
+    const result = await applyConnectAccountUpdated(account);
+    console.info('[stripe webhook] account.updated', {
+      accountId: account.id,
+      updated: result.updated,
+      chargesEnabled: account.charges_enabled,
+      payoutsEnabled: account.payouts_enabled,
+      detailsSubmitted: account.details_submitted,
+    });
+    return NextResponse.json({ ok: true, connect: result.updated }, { status: 200 });
+  }
+
   if (event.type !== 'checkout.session.completed') {
     return NextResponse.json({ received: true }, { status: 200 });
   }

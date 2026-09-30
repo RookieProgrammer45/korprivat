@@ -98,6 +98,11 @@ async function requireOwnerMembership(orgId: string, actorId: string): Promise<M
   return membership;
 }
 
+/** ACTIVE OWNER gate for org-scoped API routes (Connect, invites, settings). */
+export async function assertActiveOwner(orgId: string, actorId: string): Promise<Membership> {
+  return requireOwnerMembership(orgId, actorId);
+}
+
 export async function createOrganization(input: {
   name: string;
   organizationNumber: string;
