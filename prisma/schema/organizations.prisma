@@ -18,7 +18,10 @@ model Organization {
   // DRAFT | PENDING | APPROVED | REJECTED | SUSPENDED
   verificationState  String   @default("DRAFT")
   rejectionReason    String?
-  stripeAccountId    String?
+  stripeAccountId    String?  @unique
+  chargesEnabled     Boolean  @default(false)
+  payoutsEnabled     Boolean  @default(false)
+  detailsSubmitted   Boolean  @default(false)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
