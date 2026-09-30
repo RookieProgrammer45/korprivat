@@ -53,6 +53,17 @@ booking surfaces once one real KYC session completes.
 - [x] Escrow: either party could mark complete and fire payout with no
       proof of delivery — fixed with deliver → buyer confirm / 48h
       auto-release / dispute-escrow (2026-09-30).
+- [ ] Partial dispute resolution returns 501. Design the payout
+      math before enabling. Needs a decision: reduce payout by
+      refunded SEK, or split the booking into two ledger entries.
+- [ ] actionToken on /complete grants instructor privilege. Review
+      in a security pass: should complete require session
+      Instructor.userId even when the token matches?
+- [ ] Cron uses plain === for CRON_SECRET. Switch to
+      timingSafeEqual.
+- [ ] Cron batch cap is 50/hour. If held bookings exceed that,
+      increase or shard.
+- [ ] Dispute dialog does not reset reason/details on dismiss.
 - [ ] Dev overlay shows 2 persistent issues: Prisma
       `Unique constraint failed on the fields: (slug)` when creating
       Organization (duplicate slug race in createOrganization).
