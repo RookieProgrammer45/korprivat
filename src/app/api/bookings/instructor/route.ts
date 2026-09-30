@@ -105,6 +105,8 @@ export async function GET(req: Request) {
       cancellationOutcome: true,
       cancelledAt: true,
       completedAt: true,
+      deliveredAt: true,
+      autoReleaseAt: true,
       disputeStatus: true,
       grossChargedSek: true,
       locale: true,
@@ -162,6 +164,8 @@ export async function GET(req: Request) {
       cancellationOutcome: b.cancellationOutcome ?? null,
       cancelledAt: b.cancelledAt?.toISOString() ?? null,
       completedAt: b.completedAt?.toISOString() ?? null,
+      deliveredAt: b.deliveredAt?.toISOString() ?? null,
+      autoReleaseAt: b.autoReleaseAt?.toISOString() ?? null,
       disputeStatus:
         b.disputeStatus === 'open' ||
         b.disputeStatus === 'resolved_released' ||
@@ -192,6 +196,15 @@ function payoutStatusForPayment(
   if (paymentStatus === 'released') return 'released';
   if (paymentStatus === 'refunded') return 'refunded';
   if (paymentStatus?.startsWith('cancelled_')) return 'cancelled';
-  if (paymentStatus === 'paid' || paymentStatus === 'held_escrow') return 'pending';
+  if (
+    paymentStatus === 'paid' ||
+    paymentStatus === 'held_escrow' ||
+    paymentStatus === 'awaiting_buyer_confirmation' ||
+    paymentStatus === 'release_ready' ||
+    paymentStatus === 'payout_pending' ||
+    paymentStatus === 'payout_failed' ||
+    paymentStatus === 'disputed'
+  )
+    return 'pending';
   return null;
 }

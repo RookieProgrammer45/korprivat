@@ -52,6 +52,10 @@ export async function GET(req: Request) {
       cancellationOutcome: true,
       cancelledAt: true,
       completedAt: true,
+      deliveredAt: true,
+      confirmedAt: true,
+      autoReleaseAt: true,
+      disputeOpenedAt: true,
       disputeStatus: true,
       // Per-booking fee snapshots — optional, all nullable so pre-
       // FeeModel rows parse cleanly. Surfaced so the history list can
@@ -107,6 +111,10 @@ export async function GET(req: Request) {
       cancellationOutcome: b.cancellationOutcome ?? null,
       cancelledAt: isoOrNull(b.cancelledAt),
       completedAt: isoOrNull(b.completedAt),
+      deliveredAt: isoOrNull(b.deliveredAt),
+      confirmedAt: isoOrNull(b.confirmedAt),
+      autoReleaseAt: isoOrNull(b.autoReleaseAt),
+      disputeOpenedAt: isoOrNull(b.disputeOpenedAt),
       disputeStatus: b.disputeStatus ?? null,
       priceAmountSek: b.priceAmountSek ?? null,
       serviceFeeSek: b.serviceFeeSek ?? null,

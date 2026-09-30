@@ -31,7 +31,12 @@ const checkoutBodySchema = z.object({
 const TERMINAL_STATES = new Set<BookingPaymentStatus>([
   'paid',
   'held_escrow',
+  'awaiting_buyer_confirmation',
+  'release_ready',
   'released',
+  'disputed',
+  'payout_pending',
+  'payout_failed',
   'refunded',
   'cancelled_early',
   'cancelled_late',

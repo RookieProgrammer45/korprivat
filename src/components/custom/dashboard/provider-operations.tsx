@@ -85,12 +85,13 @@ export function ProviderOperations() {
 
   async function mutate(
     booking: ProviderBookingItem,
-    action: 'accept' | 'decline' | 'cancel' | 'complete',
+    action: 'accept' | 'decline' | 'cancel' | 'complete' | 'deliver',
   ) {
     if (state.kind !== 'ready') return;
     setBusyId(booking.id);
     try {
-      const endpoint = `/api/bookings/${encodeURIComponent(booking.id)}/${action}`;
+      const endpointAction = action === 'complete' ? 'deliver' : action;
+      const endpoint = `/api/bookings/${encodeURIComponent(booking.id)}/${endpointAction}`;
       await apiFetch(endpoint, {
         method: 'POST',
         body: JSON.stringify(
@@ -98,13 +99,13 @@ export function ProviderOperations() {
             ? { acceptedByLabel: state.provider.name }
             : action === 'decline'
               ? { declinedByLabel: state.provider.name }
-              : action === 'complete'
-                ? { completedByLabel: state.provider.name }
+              : action === 'complete' || action === 'deliver'
+                ? { deliveredByLabel: state.provider.name }
                 : { cancelledByLabel: state.provider.name },
         ),
         schema: ProviderActionResponse,
       });
-      toast.success(t(`actions.${action}Success`));
+      toast.success(t(`actions.${action === 'deliver' ? 'complete' : action}Success`));
       await load();
     } catch {
       toast.error(t('actionError'));
@@ -150,6 +151,13 @@ export function ProviderOperations() {
     (booking) =>
       booking.paymentStatus !== 'declined' && !booking.paymentStatus.startsWith('cancelled_'),
   );
+  const awaitingConfirmation = bookings.filter(
+    (b) => b.paymentStatus === 'awaiting_buyer_confirmation',
+  );
+  const pendingPayoutSek = awaitingConfirmation.reduce(
+    (sum, b) => sum + (b.grossChargedSek ?? b.priceAmountSek ?? 0),
+    0,
+  );
   return (
     <div className="grid gap-6">
       {!provider.setupComplete ? (
@@ -162,6 +170,24 @@ export function ProviderOperations() {
             <Button asChild>
               <Link href="/instructors/new">{t('setup.cta')}</Link>
             </Button>
+          </CardContent>
+        </Card>
+      ) : null}
+      {awaitingConfirmation.length > 0 ? (
+        <Card className="border-brand-500/40 bg-card">
+          <CardContent className="grid gap-1 p-5 sm:grid-cols-2">
+            <div>
+              <p className="text-caption text-muted-foreground">{t('pendingPayoutsTitle')}</p>
+              <p className="mt-1 font-display text-h3 tabular-nums">
+                {awaitingConfirmation.length}
+              </p>
+            </div>
+            <div>
+              <p className="text-caption text-muted-foreground">{t('pendingPayoutsTotal')}</p>
+              <p className="mt-1 font-display text-h3 tabular-nums">
+                {t('pendingPayoutsAmount', { amount: pendingPayoutSek })}
+              </p>
+            </div>
           </CardContent>
         </Card>
       ) : null}
@@ -275,10 +301,14 @@ function BookingCard({
   t: ReturnType<typeof useTranslations<'providerOperations'>>;
   onAction: (
     booking: ProviderBookingItem,
-    action: 'accept' | 'decline' | 'cancel' | 'complete',
+    action: 'accept' | 'decline' | 'cancel' | 'complete' | 'deliver',
   ) => void;
 }) {
   const date = formatProviderDate(booking.scheduledAt, locale, provider.timezone);
+  const hoursLeft =
+    booking.autoReleaseAt != null
+      ? Math.max(0, Math.ceil((new Date(booking.autoReleaseAt).getTime() - Date.now()) / 3_600_000))
+      : null;
   return (
     <Card className="surface-card border-border bg-card">
       <CardContent className="grid gap-4 p-5 lg:grid-cols-[1fr_auto] lg:items-center">
@@ -290,6 +320,19 @@ function BookingCard({
           <p className="text-small text-muted-foreground">
             {booking.category} · {date} · {t('duration', { minutes: booking.durationMinutes })}
           </p>
+          {booking.paymentStatus === 'awaiting_buyer_confirmation' ? (
+            <p className="text-small text-muted-foreground">
+              {t('awaitingBuyerConfirm')}
+              {hoursLeft != null ? ` · ${t('autoReleaseIn', { hours: hoursLeft })}` : null}
+            </p>
+          ) : null}
+          {booking.paymentStatus === 'release_ready' ||
+          booking.paymentStatus === 'payout_pending' ? (
+            <p className="text-small text-muted-foreground">{t('payoutInProgress')}</p>
+          ) : null}
+          {booking.paymentStatus === 'disputed' ? (
+            <p className="text-small text-destructive">{t('disputeOpenHint')}</p>
+          ) : null}
         </div>
         <div className="flex flex-wrap gap-2 lg:justify-end">
           {booking.capabilities.canAccept ? (
@@ -319,7 +362,7 @@ function BookingCard({
               size="sm"
               variant="secondary"
               disabled={busy}
-              onClick={() => onAction(booking, 'complete')}
+              onClick={() => onAction(booking, 'deliver')}
             >
               {t('actions.complete')}
             </Button>
@@ -354,7 +397,12 @@ function statusLabel(
     'pending',
     'paid',
     'held_escrow',
+    'awaiting_buyer_confirmation',
+    'release_ready',
     'released',
+    'disputed',
+    'payout_pending',
+    'payout_failed',
     'refunded',
     'awaiting_approval',
     'declined',
