@@ -7,6 +7,10 @@ import {
   type RosterInvite,
   type RosterMember,
 } from '@/components/custom/school/school-instructor-roster';
+import {
+  SchoolPayoutsCard,
+  type SchoolPayoutsState,
+} from '@/components/custom/school/school-payouts-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +20,8 @@ import {
   listOrgInvites,
   listOrgMembers,
 } from '@/lib/orgs/service';
+import { refreshConnectStatus } from '@/lib/payments/connect';
+import { prisma } from '@/lib/db';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dashboardSchool');
@@ -35,6 +41,21 @@ function verificationLabel(
   return t('verificationDraft');
 }
 
+function resolvePayoutsState(
+  org: {
+    stripeAccountId: string | null;
+    chargesEnabled: boolean;
+    payoutsEnabled: boolean;
+    detailsSubmitted: boolean;
+  },
+  currentlyDue: string[],
+): SchoolPayoutsState {
+  if (!org.stripeAccountId) return 'A';
+  if (org.chargesEnabled && org.payoutsEnabled) return 'C';
+  if (!org.detailsSubmitted || currentlyDue.length > 0) return 'B';
+  return 'D';
+}
+
 export default async function SchoolDashboardPage() {
   const session = await requireDashboardSession('/dashboard/school');
   const memberships = await listMembershipsForUser(session.userId, { onlyActive: true });
@@ -43,10 +64,22 @@ export default async function SchoolDashboardPage() {
     redirect('/for-skolor');
   }
 
-  const org = membership.organization;
+  let org = membership.organization;
   const t = await getTranslations('dashboardSchool');
   const isDraft = org.verificationState === 'DRAFT';
   const isOwner = membership.role === 'OWNER';
+  let currentlyDue: string[] = [];
+
+  if (isOwner) {
+    try {
+      const status = await refreshConnectStatus(org.id);
+      currentlyDue = status.currentlyDue;
+      const fresh = await prisma.organization.findUnique({ where: { id: org.id } });
+      if (fresh) org = fresh;
+    } catch (error) {
+      console.error('[dashboard/school] refreshConnectStatus failed', error);
+    }
+  }
 
   const [rawMembers, rawInvites] = await Promise.all([
     listOrgMembers(org.id),
@@ -68,6 +101,8 @@ export default async function SchoolDashboardPage() {
     createdAt: inv.createdAt.toISOString(),
     expiresAt: inv.expiresAt.toISOString(),
   }));
+
+  const payoutsState = resolvePayoutsState(org, currentlyDue);
 
   return (
     <section className="grid gap-6">
@@ -102,6 +137,8 @@ export default async function SchoolDashboardPage() {
           </CardContent>
         </Card>
       ) : null}
+
+      <SchoolPayoutsCard organizationId={org.id} state={payoutsState} isOwner={isOwner} />
 
       <Card className="border-border bg-card">
         <CardContent className="p-6">

@@ -1986,6 +1986,30 @@
       "back": "Back to school"
     }
   },
+  "schoolPayouts": {
+    "title": "Payouts",
+    "stateA": {
+      "title": "Accept payments",
+      "body": "Connect a bank account to receive payments through DriveLinkUp.",
+      "cta": "Connect bank account"
+    },
+    "stateB": {
+      "title": "Finish verification",
+      "body": "Stripe needs more information. Click to continue.",
+      "cta": "Continue verification"
+    },
+    "stateC": {
+      "title": "Payouts active",
+      "body": "Payments are sent to your bank account after each completed lesson.",
+      "badge": "Verified",
+      "dashboardCta": "Open Stripe Dashboard"
+    },
+    "stateD": {
+      "title": "Verification failed",
+      "body": "Contact support for help."
+    },
+    "errorGeneric": "Could not open Stripe. Try again."
+  },
   "schoolSettings": {
     "title": "School settings",
     "name": "School name",
