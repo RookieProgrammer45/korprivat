@@ -55,6 +55,7 @@ import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { cancellationFeeReceiptEmail, cancellationNeutralEmail } from '@/lib/email/templates';
 import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
+import { alertReleasedCancelNeedsReview, refundBooking } from '@/lib/payments/refunds';
 import { getSessionUser } from '@/lib/require-auth';
 
 // Acceptable base states for a cancel POST — any in-flight state the
@@ -165,8 +166,20 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     );
   }
   // Pre-flight state guard. Cancellation only applies while the booking
-  // is in flight (pending/paid/held_escrow). A released / refunded row has
-  // already settled; a 'cancelled_*' row is handled above.
+  // is in flight (pending/paid/held_escrow). A released row needs manual
+  // review (funds already transferred). A 'cancelled_*' row is handled above.
+  if (booking.paymentStatus === 'released') {
+    await alertReleasedCancelNeedsReview(booking.id).catch(() => undefined);
+    return NextResponse.json(
+      {
+        errors: {
+          state:
+            'This lesson was already paid out. Support has been notified to review a refund.',
+        },
+      },
+      { status: 409 },
+    );
+  }
   if (
     !booking.paymentStatus ||
     !(CANCEL_BASE_STATES as readonly string[]).includes(booking.paymentStatus)
@@ -339,6 +352,32 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       booking.grossChargedSek ?? cancellationInstructor?.hourlyRateSek ?? 1,
     ),
   });
+
+  // Auto-refund Stripe charge while funds are still in platform escrow.
+  if (booking.paymentStatus === 'held_escrow') {
+    const gross = booking.grossChargedSek ?? cancellationInstructor?.hourlyRateSek ?? 0;
+    let refundAmountSek: number | null = null;
+    if (outcome === 'cancelled_full_refund') {
+      refundAmountSek = null; // full PaymentIntent refund
+    } else if (outcome === 'cancelled_partial' && feePercentApplied > 0 && feePercentApplied < 100) {
+      refundAmountSek = Math.max(0, Math.round(gross * (1 - feePercentApplied / 100)));
+    } else if (outcome === 'cancelled_late') {
+      refundAmountSek = 0; // 100% fee retained — no Stripe refund
+    }
+
+    if (refundAmountSek === null || refundAmountSek > 0) {
+      const refundResult = await refundBooking(
+        booking.id,
+        refundAmountSek === null ? undefined : { amountSek: refundAmountSek },
+      );
+      if (refundResult.kind === 'error') {
+        console.error('[cancel] refund failed after cancel commit', {
+          bookingId: booking.id,
+          message: refundResult.message,
+        });
+      }
+    }
+  }
 
   // Fire side-effect emails — failure of either side does NOT block the
   // successful return; the booking is already in its terminal state.
