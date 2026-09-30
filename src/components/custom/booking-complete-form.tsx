@@ -21,7 +21,6 @@ export function BookingCompleteForm({ bookingId, token }: { bookingId: string; t
   const t = useTranslations('bookingComplete');
   const [status, setStatus] = useState<Status>({ kind: 'loading' });
   const [actorName, setActorName] = useState('');
-  const [actorRole, setActorRole] = useState<'learner' | 'instructor'>('learner');
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -70,12 +69,11 @@ export function BookingCompleteForm({ bookingId, token }: { bookingId: string; t
     }
     setSubmitting(true);
     try {
-      await apiFetch(`/api/bookings/${encodeURIComponent(bookingId)}/complete`, {
+      await apiFetch(`/api/bookings/${encodeURIComponent(bookingId)}/deliver`, {
         method: 'POST',
         body: JSON.stringify({
           token,
-          completedByRole: actorRole,
-          completedByLabel: trimmed,
+          deliveredByLabel: trimmed,
         }),
         schema: BookingCompleteResponse,
       });
@@ -180,25 +178,7 @@ export function BookingCompleteForm({ bookingId, token }: { bookingId: string; t
               className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-foreground shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             />
           </label>
-          <fieldset className="grid gap-2">
-            <legend className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {t('youAreLabel')}
-            </legend>
-            <div className="dl-action-group">
-              {(['learner', 'instructor'] as const).map((role) => (
-                <Button
-                  key={role}
-                  type="button"
-                  variant={actorRole === role ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setActorRole(role)}
-                  disabled={submitting}
-                >
-                  {role === 'learner' ? t('youAreLearner') : t('youAreInstructor')}
-                </Button>
-              ))}
-            </div>
-          </fieldset>
+          <p className="text-small text-muted-foreground">{t('instructorOnlyHint')}</p>
         </div>
         <Button type="button" onClick={onSubmit} disabled={submitting}>
           {submitting ? t('submitting') : t('submit')}

@@ -14,8 +14,19 @@ import { OWNER_EMAIL } from '@/lib/ownership';
 export type PayoutResult =
   | { kind: 'sent'; transferId: string; amountSek: number; recipientType: string }
   | { kind: 'duplicate'; transferId: string }
-  | { kind: 'skipped'; reason: 'no_connect' | 'payouts_disabled' | 'not_held' | 'missing_booking' }
+  | {
+      kind: 'skipped';
+      reason:
+        | 'no_connect'
+        | 'payouts_disabled'
+        | 'not_ready'
+        | 'not_held'
+        | 'missing_booking'
+        | 'disputed';
+    }
   | { kind: 'error'; message: string };
+
+const PAYOUT_READY_STATES = new Set(['release_ready', 'payout_pending', 'payout_failed']);
 
 export type PayoutActor = {
   completedByRole: 'learner' | 'instructor';
@@ -58,8 +69,11 @@ export async function payoutBooking(
   if (!booking) {
     return { kind: 'skipped', reason: 'missing_booking' };
   }
-  if (booking.paymentStatus !== 'held_escrow') {
-    return { kind: 'skipped', reason: 'not_held' };
+  if (booking.paymentStatus === 'disputed') {
+    return { kind: 'skipped', reason: 'disputed' };
+  }
+  if (!booking.paymentStatus || !PAYOUT_READY_STATES.has(booking.paymentStatus)) {
+    return { kind: 'skipped', reason: 'not_ready' };
   }
 
   const instructor = await prisma.instructor.findUnique({
@@ -93,16 +107,24 @@ export async function payoutBooking(
       },
     });
     if (!org?.stripeAccountId) {
+      await prisma.booking.updateMany({
+        where: { id: bookingId, paymentStatus: { in: [...PAYOUT_READY_STATES] } },
+        data: { paymentStatus: 'payout_pending' },
+      });
       await alertOps('Payout skipped — school Connect missing', [
         `Booking ${bookingId} is school-affiliated but Organization ${booking.organizationId} has no Stripe Connect account.`,
-        'Funds remain in held_escrow. Complete Connect onboarding, then retry via admin.',
+        'Funds remain in payout_pending. Complete Connect onboarding, then retry via admin.',
       ]);
       return { kind: 'skipped', reason: 'no_connect' };
     }
     if (!org.payoutsEnabled) {
+      await prisma.booking.updateMany({
+        where: { id: bookingId, paymentStatus: { in: [...PAYOUT_READY_STATES] } },
+        data: { paymentStatus: 'payout_pending' },
+      });
       await alertOps('Payout skipped — school payouts disabled', [
         `Booking ${bookingId}: Organization ${org.id} Connect account exists but payoutsEnabled=false.`,
-        'Funds remain in held_escrow.',
+        'Funds remain in payout_pending.',
       ]);
       return { kind: 'skipped', reason: 'payouts_disabled' };
     }
@@ -112,16 +134,24 @@ export async function payoutBooking(
     payoutsEnabled = true;
   } else {
     if (!instructor.stripeAccountId) {
+      await prisma.booking.updateMany({
+        where: { id: bookingId, paymentStatus: { in: [...PAYOUT_READY_STATES] } },
+        data: { paymentStatus: 'payout_pending' },
+      });
       await alertOps('Payout skipped — instructor Connect missing', [
         `Booking ${bookingId}: Instructor ${instructor.id} has no Stripe Connect account.`,
-        'Funds remain in held_escrow. Instructor must finish Connect onboarding, then retry.',
+        'Funds remain in payout_pending. Instructor must finish Connect onboarding, then retry.',
       ]);
       return { kind: 'skipped', reason: 'no_connect' };
     }
     if (!instructor.payoutsEnabled) {
+      await prisma.booking.updateMany({
+        where: { id: bookingId, paymentStatus: { in: [...PAYOUT_READY_STATES] } },
+        data: { paymentStatus: 'payout_pending' },
+      });
       await alertOps('Payout skipped — instructor payouts disabled', [
         `Booking ${bookingId}: Instructor ${instructor.id} Connect account exists but payoutsEnabled=false.`,
-        'Funds remain in held_escrow.',
+        'Funds remain in payout_pending.',
       ]);
       return { kind: 'skipped', reason: 'payouts_disabled' };
     }
@@ -169,9 +199,8 @@ export async function payoutBooking(
     const claimed = await prisma.booking.updateMany({
       where: {
         id: bookingId,
-        paymentStatus: 'held_escrow',
+        paymentStatus: { in: ['release_ready', 'payout_pending', 'payout_failed'] },
         payoutReleasedAt: null,
-        disputeStatus: null,
       },
       data: {
         completedAt: now,
@@ -252,10 +281,14 @@ export async function payoutBooking(
   } catch (err) {
     const message = err instanceof Error ? err.message : 'transfer_failed';
     console.error('[payouts] transfer failed', { bookingId, message });
+    await prisma.booking.updateMany({
+      where: { id: bookingId, paymentStatus: { in: [...PAYOUT_READY_STATES] } },
+      data: { paymentStatus: 'payout_failed' },
+    });
     await alertOps('Payout transfer failed', [
       `Booking ${bookingId}: Stripe transfer failed.`,
       message,
-      'Funds remain in held_escrow. Lesson is NOT marked completed.',
+      'Funds remain in payout_failed. Retry via admin after investigating.',
     ]);
     return { kind: 'error', message };
   }
