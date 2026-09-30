@@ -50,6 +50,9 @@ booking surfaces once one real KYC session completes.
 
 ## Known issues
 
+- [x] Escrow: either party could mark complete and fire payout with no
+      proof of delivery — fixed with deliver → buyer confirm / 48h
+      auto-release / dispute-escrow (2026-09-30).
 - [ ] Dev overlay shows 2 persistent issues: Prisma
       `Unique constraint failed on the fields: (slug)` when creating
       Organization (duplicate slug race in createOrganization).

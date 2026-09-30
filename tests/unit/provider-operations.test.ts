@@ -55,7 +55,22 @@ describe('provider operations rules', () => {
       canAccept: false,
       canDecline: false,
     });
+    expect(bookingCapabilities('held_escrow', 'provider', 'INSTRUCTOR')).toMatchObject({
+      canComplete: true,
+      canConfirm: false,
+    });
+    expect(bookingCapabilities('held_escrow', 'learner')).toMatchObject({
+      canComplete: false,
+      canConfirm: false,
+    });
+    expect(bookingCapabilities('awaiting_buyer_confirmation', 'learner')).toMatchObject({
+      canConfirm: true,
+      canDisputeEscrow: true,
+      canComplete: false,
+    });
     expect(canTransition('awaiting_approval', 'pending', 'provider')).toBe(true);
     expect(canTransition('awaiting_approval', 'pending', 'learner')).toBe(false);
+    expect(canTransition('held_escrow', 'awaiting_buyer_confirmation', 'provider')).toBe(true);
+    expect(canTransition('held_escrow', 'released', 'provider')).toBe(false);
   });
 });

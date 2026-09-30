@@ -80,11 +80,10 @@ vi.mock('stripe', () => {
 });
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { POST as completePOST } from '@/app/api/bookings/[id]/complete/route';
-import { POST as disputeResolvePOST } from '@/app/api/bookings/[id]/dispute/resolve/route';
-import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
 import { POST as checkoutPOST } from '@/app/api/checkout/route';
 import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
+import { POST as disputeResolvePOST } from '@/app/api/bookings/[id]/dispute/resolve/route';
+import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
 
 import { authMock } from './_setup/auth-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
@@ -239,66 +238,75 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     const token = updateData.actionToken;
     expect(typeof token).toBe('string');
 
-    // 3. complete → flips to released, notifies counterparty
+    // 3. instructor deliver → awaiting_buyer_confirmation (no payout yet)
     prismaMock.booking.findUnique.mockReset();
     prismaMock.instructor.findUnique.mockReset();
-    prismaMock.booking.findUnique
-      .mockResolvedValueOnce(
-        bookingRow({
-          id: 'booking_chain',
-          paymentStatus: 'held_escrow',
-          actionToken: token,
-          heldAt: new Date(),
-          disputeStatus: null,
-        }),
-      )
-      .mockResolvedValueOnce(
-        bookingRow({
-          id: 'booking_chain',
-          paymentStatus: 'released',
-          actionToken: token,
-          completedAt: new Date(),
-          payoutReleasedAt: new Date(),
-          payoutAmountSek: 495,
-        }),
-      );
-    prismaMock.instructor.findUnique
-      .mockResolvedValueOnce(
-        instructorRow({ hourlyRateSek: 550, email: 'erik@drivelinkup.test' }),
-      )
-      .mockResolvedValueOnce(instructorRow({ email: 'erik@drivelinkup.test' }));
+    prismaMock.booking.findUnique.mockResolvedValueOnce(
+      bookingRow({
+        id: 'booking_chain',
+        paymentStatus: 'held_escrow',
+        actionToken: token,
+        heldAt: new Date(),
+        disputeStatus: null,
+      }),
+    );
+    prismaMock.instructor.findUnique.mockResolvedValue(
+      instructorRow({ hourlyRateSek: 550, email: 'erik@drivelinkup.test' }),
+    );
 
-    const completeRes = await completePOST(
-      postJson('http://localhost/api/bookings/booking_chain/complete', {
+    const { POST: deliverPOST } = await import('@/app/api/bookings/[id]/deliver/route');
+    const deliverRes = await deliverPOST(
+      postJson('http://localhost/api/bookings/booking_chain/deliver', {
         token,
-        completedByRole: 'learner',
-        completedByLabel: 'Alice Andersson',
+        deliveredByLabel: 'Erik Lindqvist',
       }),
       { params: Promise.resolve({ id: 'booking_chain' }) },
     );
-    expect(completeRes.status).toBe(200);
-    const completeBody = (await completeRes.json()) as { paymentStatus: string };
-    expect(completeBody.paymentStatus).toBe('released');
+    expect(deliverRes.status).toBe(200);
+    const deliverBody = (await deliverRes.json()) as { paymentStatus: string };
+    expect(deliverBody.paymentStatus).toBe('awaiting_buyer_confirmation');
+    expect(payoutBookingMock).not.toHaveBeenCalled();
 
-    // Release path stamps the instructor payout via payoutBooking (Connect transfer).
-    expect(payoutBookingMock).toHaveBeenCalledWith(
-      'booking_chain',
-      expect.objectContaining({
-        completedByLabel: 'Alice Andersson',
+    // 4. buyer confirms → release_ready + payoutBooking
+    prismaMock.booking.findUnique.mockReset();
+    prismaMock.booking.findUnique.mockResolvedValueOnce(
+      bookingRow({
+        id: 'booking_chain',
+        paymentStatus: 'awaiting_buyer_confirmation',
+        actionToken: 'provider_other_token',
+        deliveredAt: new Date(),
+        autoReleaseAt: new Date(Date.now() + 48 * 3600_000),
+        heldAt: new Date(),
       }),
     );
 
-    // Receipts + 1 completion email = 3 total. Counterparty depends on which
-    // token matched (actionToken ⇒ provider actor ⇒ learner notified).
-    await vi.waitFor(() => {
-      expect(sendEmailMock).toHaveBeenCalledTimes(receiptEmails + 1);
-    });
-    expect(['erik@drivelinkup.test', 'learner@example.test']).toContain(
-      sendEmailMock.mock.calls[receiptEmails][0].to,
+    const { POST: confirmPOST } = await import('@/app/api/bookings/[id]/confirm/route');
+    const confirmRes = await confirmPOST(
+      postJson('http://localhost/api/bookings/booking_chain/confirm', {
+        token: TEST_LEARNER_ACCESS_TOKEN,
+        confirmedByLabel: 'Alice Andersson',
+      }),
+      { params: Promise.resolve({ id: 'booking_chain' }) },
     );
+    expect(confirmRes.status).toBe(200);
+    const confirmBody = (await confirmRes.json()) as { paymentStatus: string };
+    expect(confirmBody.paymentStatus).toBe('release_ready');
+
+    await vi.waitFor(() => {
+      expect(payoutBookingMock).toHaveBeenCalledWith(
+        'booking_chain',
+        expect.objectContaining({
+          completedByRole: 'learner',
+        }),
+      );
+    });
+
+    // Deliver emails the learner; confirm emails the instructor (best-effort after()).
+    await vi.waitFor(() => {
+      expect(sendEmailMock.mock.calls.length).toBeGreaterThanOrEqual(receiptEmails + 1);
+    });
   });
 });
-
 // ─── H. Booking double-mint on `pending` ────────────────────────────
 
 describe('booking/checkout: re-mints on `pending` (intentional per comment)', () => {

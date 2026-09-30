@@ -219,11 +219,33 @@ booking records `organizationId`. See [ADR-004](decisions/ADR-004-school-commiss
 ```text
 Learner picks availability slot
   → POST /api/bookings (instant or request mode)
-  → Stripe checkout via Polsia proxy (escrow-style hold)
-  → Instructor accept (request mode) / learner pays
-  → Lesson complete → release payout (10% commission retained)
+  → Stripe Checkout (SEK) → paymentStatus = held_escrow
+  → Lesson happens off-platform
+  → Instructor POST /api/bookings/[id]/deliver
+      → awaiting_buyer_confirmation, autoReleaseAt = now+48h
+  → Buyer confirms POST /confirm → release_ready → Connect transfer → released
+     OR buyer disputes POST /dispute-escrow → disputed (ops resolve)
+     OR 48h cron auto-release → release_ready → transfer → released
   → Receipts + optional review
 ```
+
+### 7.1a Escrow flow
+
+```text
+held_escrow
+  → (instructor deliver) awaiting_buyer_confirmation
+      → (buyer confirm OR cron after autoReleaseAt) release_ready
+          → (payoutBooking transfer) released
+      → (buyer dispute) disputed
+          → (admin resolve release|refund|partial) release_ready / refunded
+```
+
+- Transfer fires only from `release_ready` (or retry from `payout_pending` /
+  `payout_failed`), never from `held_escrow`.
+- 48h auto-release: `GET|POST /api/cron/auto-release` with
+  `Authorization: Bearer $CRON_SECRET` (hourly via `vercel.json` crons).
+- Admin: `POST /api/admin/bookings/[id]/resolve-dispute`.
+- Post-release disputes are manual (clawback / refund), not the escrow route.
 
 DB exclusion on `startsAt`/`endsAt` becomes the hard overlap guard after migrate.
 
