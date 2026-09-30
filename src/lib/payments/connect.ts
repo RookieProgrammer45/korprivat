@@ -2,6 +2,7 @@
 // Does not handle booking payouts / transfers — that is 7c.
 
 import 'server-only';
+import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/db';
 import { getStripe } from '@/lib/payments/stripe';
 
@@ -62,12 +63,40 @@ export async function createConnectAccount(orgId: string): Promise<{ accountId: 
     metadata: { organizationId: orgId },
   });
 
-  await prisma.organization.update({
-    where: { id: orgId },
-    data: { stripeAccountId: account.id },
-  });
+  try {
+    // Null-gated write so only one concurrent request wins the org row.
+    const claimed = await prisma.organization.updateMany({
+      where: { id: orgId, stripeAccountId: null },
+      data: { stripeAccountId: account.id },
+    });
 
-  return { accountId: account.id };
+    if (claimed.count === 0) {
+      const winner = await requireOrg(orgId);
+      if (winner.stripeAccountId) {
+        console.warn('[connect] race: Express account orphaned after concurrent create', {
+          orgId,
+          orphanedAccountId: account.id,
+          keptAccountId: winner.stripeAccountId,
+        });
+        return { accountId: winner.stripeAccountId };
+      }
+      throw new Error('connect_account_claim_failed');
+    }
+
+    return { accountId: account.id };
+  } catch (err) {
+    // Unique on stripeAccountId — another writer claimed this account id (rare).
+    if (
+      err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === 'P2002'
+    ) {
+      const winner = await requireOrg(orgId);
+      if (winner.stripeAccountId) {
+        return { accountId: winner.stripeAccountId };
+      }
+    }
+    throw err;
+  }
 }
 
 export async function createOnboardingLink(
