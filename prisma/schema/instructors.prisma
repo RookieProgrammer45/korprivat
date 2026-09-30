@@ -109,6 +109,12 @@ model Booking {
   completedAt             DateTime?
   completedByRole         String?
   completedByLabel        String?
+  // Delivery-confirmation escrow (instructor marks delivered → buyer confirms
+  // or 48h auto-release). All nullable so pre-escrow rows survive.
+  deliveredAt             DateTime?
+  confirmedAt             DateTime?
+  autoReleaseAt           DateTime?
+  disputeOpenedAt         DateTime?
   payoutReleasedAt        DateTime?
   releasedByRole          String?
   releasedByLabel         String?
@@ -222,6 +228,7 @@ model Booking {
   @@index([slotId])
   @@index([userId])
   @@index([organizationId])
+  @@index([autoReleaseAt, paymentStatus])
 }
 
 /// Append-only Stripe Transfer audit for a completed booking payout.

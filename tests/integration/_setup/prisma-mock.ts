@@ -245,6 +245,10 @@ export function bookingRow(
     heldAt: Date | null;
     completedAt: Date | null;
     completedByLabel: string | null;
+    deliveredAt: Date | null;
+    confirmedAt: Date | null;
+    autoReleaseAt: Date | null;
+    disputeOpenedAt: Date | null;
     payoutReleasedAt: Date | null;
     releasedByLabel: string | null;
     disputeStatus: string | null;
@@ -278,6 +282,10 @@ export function bookingRow(
     heldAt: null,
     completedAt: null,
     completedByLabel: null,
+    deliveredAt: null,
+    confirmedAt: null,
+    autoReleaseAt: null,
+    disputeOpenedAt: null,
     payoutReleasedAt: null,
     releasedByLabel: null,
     disputeStatus: null,

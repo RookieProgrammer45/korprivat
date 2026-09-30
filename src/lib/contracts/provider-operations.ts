@@ -21,6 +21,8 @@ export const ProviderBookingItem = z.object({
   cancellationOutcome: CancellationOutcomeEnum.nullable(),
   cancelledAt: z.string().nullable(),
   completedAt: z.string().nullable(),
+  deliveredAt: z.string().nullable().optional(),
+  autoReleaseAt: z.string().nullable().optional(),
   disputeStatus: DisputeStatusEnum.nullable(),
   priceAmountSek: z.number().int().nonnegative().nullable(),
   serviceFeeSek: z.number().int().nonnegative().nullable(),
@@ -37,6 +39,8 @@ export const ProviderBookingItem = z.object({
     canDecline: z.boolean(),
     canCancel: z.boolean(),
     canComplete: z.boolean(),
+    canConfirm: z.boolean().optional(),
+    canDisputeEscrow: z.boolean().optional(),
     nextStates: z.array(BookingPaymentStatusEnum),
   }),
 });
@@ -71,5 +75,8 @@ export const ProviderActionResponse = z.object({
   cancellationOutcome: CancellationOutcomeEnum.nullable().optional(),
   completedAt: z.string().nullable().optional(),
   payoutReleasedAt: z.string().nullable().optional(),
+  deliveredAt: z.string().nullable().optional(),
+  autoReleaseAt: z.string().nullable().optional(),
+  confirmedAt: z.string().nullable().optional(),
 });
 export type ProviderActionResponse = z.infer<typeof ProviderActionResponse>;

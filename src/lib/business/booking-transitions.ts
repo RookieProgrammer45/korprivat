@@ -6,7 +6,12 @@ export type BookingState =
   | 'pending'
   | 'paid'
   | 'held_escrow'
+  | 'awaiting_buyer_confirmation'
+  | 'release_ready'
   | 'released'
+  | 'disputed'
+  | 'payout_pending'
+  | 'payout_failed'
   | 'refunded'
   | 'awaiting_approval'
   | 'declined'
@@ -19,7 +24,12 @@ export type BookingCapabilities = {
   canAccept: boolean;
   canDecline: boolean;
   canCancel: boolean;
+  /** Instructor: mark lesson delivered (held_escrow → awaiting_buyer_confirmation). */
   canComplete: boolean;
+  /** Learner: confirm delivery (awaiting_buyer_confirmation → release_ready). */
+  canConfirm: boolean;
+  /** Learner: open escrow dispute before release. */
+  canDisputeEscrow: boolean;
   nextStates: BookingState[];
 };
 
@@ -41,13 +51,26 @@ export function bookingCapabilities(
   const canAccept = providerCanAct && current === 'awaiting_approval';
   const canDecline = providerCanAct && current === 'awaiting_approval';
   const canCancel = actor !== null && cancellationStates.has(current);
-  const canComplete = actor !== null && current === 'held_escrow';
+  // Only the instructor marks delivered — buyer confirms via canConfirm.
+  const canComplete = providerCanAct && current === 'held_escrow';
+  const canConfirm = actor === 'learner' && current === 'awaiting_buyer_confirmation';
+  const canDisputeEscrow = actor === 'learner' && current === 'awaiting_buyer_confirmation';
   const nextStates: BookingState[] = [];
   if (canAccept) nextStates.push('pending');
   if (canDecline) nextStates.push('declined');
   if (canCancel) nextStates.push('cancelled_full_refund');
-  if (canComplete) nextStates.push('released');
-  return { canAccept, canDecline, canCancel, canComplete, nextStates };
+  if (canComplete) nextStates.push('awaiting_buyer_confirmation');
+  if (canConfirm) nextStates.push('release_ready');
+  if (canDisputeEscrow) nextStates.push('disputed');
+  return {
+    canAccept,
+    canDecline,
+    canCancel,
+    canComplete,
+    canConfirm,
+    canDisputeEscrow,
+    nextStates,
+  };
 }
 
 export function canTransition(
@@ -57,7 +80,13 @@ export function canTransition(
 ): boolean {
   if (to === 'declined' || to === 'pending')
     return actor === 'provider' && from === 'awaiting_approval';
-  if (to === 'released') return from === 'held_escrow';
+  if (to === 'awaiting_buyer_confirmation')
+    return actor === 'provider' && from === 'held_escrow';
+  if (to === 'release_ready')
+    return actor === 'learner' && from === 'awaiting_buyer_confirmation';
+  if (to === 'disputed') return actor === 'learner' && from === 'awaiting_buyer_confirmation';
+  if (to === 'released')
+    return from === 'release_ready' || from === 'payout_pending' || from === 'payout_failed';
   if (to.startsWith('cancelled_'))
     return actor !== null && cancellationStates.has(from as BookingState);
   return false;

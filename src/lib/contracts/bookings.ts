@@ -107,7 +107,12 @@ export const BookingPaymentStatusEnum = z.enum([
   'pending',
   'paid',
   'held_escrow',
+  'awaiting_buyer_confirmation',
+  'release_ready',
   'released',
+  'disputed',
+  'payout_pending',
+  'payout_failed',
   'refunded',
   'cancelled_early',
   'cancelled_late',
@@ -241,6 +246,10 @@ export const BookingHistoryItem = z.object({
   cancellationOutcome: CancellationOutcomeEnum.nullable(),
   cancelledAt: z.string().nullable(),
   completedAt: z.string().nullable(),
+  deliveredAt: z.string().nullable().optional(),
+  confirmedAt: z.string().nullable().optional(),
+  autoReleaseAt: z.string().nullable().optional(),
+  disputeOpenedAt: z.string().nullable().optional(),
   disputeStatus: DisputeStatusEnum.nullable(),
   // Per-booking fee snapshots — all nullable so pre-FeeModel rows parse
   // cleanly. `grossChargedSek` is what the learner actually paid on the
@@ -282,6 +291,64 @@ export const BookingCompleteRequest = z.object({
 });
 export type BookingCompleteRequest = z.infer<typeof BookingCompleteRequest>;
 
+/** Instructor marks lesson delivered — funds stay escrowed until buyer confirms. */
+export const BookingDeliverRequest = z.object({
+  token: z.string().min(1).optional(),
+  deliveredByLabel: z.string().min(1, 'Name is required').max(120),
+});
+export type BookingDeliverRequest = z.infer<typeof BookingDeliverRequest>;
+
+export const BookingDeliverResponse = z.object({
+  id: z.string(),
+  paymentStatus: z.literal('awaiting_buyer_confirmation'),
+  deliveredAt: z.string(),
+  autoReleaseAt: z.string(),
+});
+export type BookingDeliverResponse = z.infer<typeof BookingDeliverResponse>;
+
+/** Buyer confirms delivery — moves to release_ready and kicks off payout. */
+export const BookingConfirmRequest = z.object({
+  token: z.string().min(1).optional(),
+  confirmedByLabel: z.string().min(1).max(120).optional(),
+});
+export type BookingConfirmRequest = z.infer<typeof BookingConfirmRequest>;
+
+export const BookingConfirmResponse = z.object({
+  id: z.string(),
+  paymentStatus: z.enum(['release_ready', 'released', 'payout_pending', 'payout_failed']),
+  confirmedAt: z.string().nullable(),
+});
+export type BookingConfirmResponse = z.infer<typeof BookingConfirmResponse>;
+
+/** Buyer disputes before release (while awaiting confirmation). */
+export const BookingDisputeEscrowRequest = z.object({
+  token: z.string().min(1).optional(),
+  reason: z.string().min(1).max(2000),
+  details: z.string().max(4000).optional(),
+});
+export type BookingDisputeEscrowRequest = z.infer<typeof BookingDisputeEscrowRequest>;
+
+export const BookingDisputeEscrowResponse = z.object({
+  id: z.string(),
+  paymentStatus: z.literal('disputed'),
+  disputeOpenedAt: z.string(),
+});
+export type BookingDisputeEscrowResponse = z.infer<typeof BookingDisputeEscrowResponse>;
+
+export const AdminResolveDisputeRequest = z.object({
+  outcome: z.enum(['release', 'refund', 'partial']),
+  amountSek: z.number().int().positive().optional(),
+  note: z.string().min(1).max(4000),
+});
+export type AdminResolveDisputeRequest = z.infer<typeof AdminResolveDisputeRequest>;
+
+export const AdminResolveDisputeResponse = z.object({
+  id: z.string(),
+  paymentStatus: BookingPaymentStatusEnum,
+  outcome: z.enum(['release', 'refund', 'partial']),
+});
+export type AdminResolveDisputeResponse = z.infer<typeof AdminResolveDisputeResponse>;
+
 export const BookingDisputeOpenRequest = z.object({
   token: z.string().min(1, 'Missing action token'),
   openedByRole: RoleEnum,
@@ -301,8 +368,10 @@ export type BookingDisputeResolveRequest = z.infer<typeof BookingDisputeResolveR
 export const BookingCompleteResponse = z.object({
   id: z.string(),
   paymentStatus: BookingPaymentStatusEnum,
-  completedAt: z.string().nullable(),
-  payoutReleasedAt: z.string().nullable(),
+  completedAt: z.string().nullable().optional(),
+  payoutReleasedAt: z.string().nullable().optional(),
+  deliveredAt: z.string().optional(),
+  autoReleaseAt: z.string().optional(),
 });
 export type BookingCompleteResponse = z.infer<typeof BookingCompleteResponse>;
 
