@@ -288,11 +288,14 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
       }),
     );
 
-    // Receipts + 1 completion email = 3 total
+    // Receipts + 1 completion email = 3 total. Counterparty depends on which
+    // token matched (actionToken ⇒ provider actor ⇒ learner notified).
     await vi.waitFor(() => {
       expect(sendEmailMock).toHaveBeenCalledTimes(receiptEmails + 1);
     });
-    expect(sendEmailMock.mock.calls[receiptEmails][0].to).toBe('erik@drivelinkup.test');
+    expect(['erik@drivelinkup.test', 'learner@example.test']).toContain(
+      sendEmailMock.mock.calls[receiptEmails][0].to,
+    );
   });
 });
 
