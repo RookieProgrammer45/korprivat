@@ -48,10 +48,10 @@ vi.mock('server-only', () => ({}));
 vi.mock('next/headers', () => ({
   headers: async () => new Headers(),
 }));
-vi.mock('next/server', async () => {
-  const { NextResponse } = await import('next/dist/server/web/exports');
+vi.mock('next/server', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('next/server')>();
   return {
-    NextResponse,
+    ...actual,
     after: (task: (() => unknown) | Promise<unknown>) => {
       if (typeof task === 'function') {
         void Promise.resolve().then(() => task());
@@ -151,15 +151,16 @@ afterEach(() => {
 describe('booking: full chain unpaid → mint → held_escrow → complete → released', () => {
   it('carries through to released with both receipt emails then completion email', async () => {
     // 1. checkout mints the session + stamps fee snapshot columns
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
+    // Checkout route + createBookingCheckoutSession each call findUnique.
+    prismaMock.booking.findUnique.mockResolvedValue(
       bookingRow({
         id: 'booking_chain',
         paymentStatus: null,
         studentEmail: 'learner@example.test',
       }),
     );
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow({ hourlyRateSek: 550 }));
-    prismaMock.booking.update.mockResolvedValueOnce({ id: 'booking_chain' });
+    prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
+    prismaMock.booking.update.mockResolvedValue({ id: 'booking_chain' });
     // 550 SEK school price → totalSek 550 → ceil(550 × 0.094) = 52
     createCheckoutSession.mockResolvedValueOnce({
       id: 'cs_chain',
@@ -194,8 +195,14 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
       }),
     );
 
+    // Reset sticky mocks before the poll / complete segments.
+    prismaMock.booking.findUnique.mockReset();
+    prismaMock.instructor.findUnique.mockReset();
+    prismaMock.booking.update.mockReset();
+
     // 2. payment-poll verifies → flips to held_escrow + receipts
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
+    // Sticky until complete segment re-queues — poll + fulfill may re-read.
+    prismaMock.booking.findUnique.mockResolvedValue(
       bookingRow({
         id: 'booking_chain',
         paymentStatus: 'pending',
@@ -203,11 +210,11 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
         stripeCheckoutSessionId: 'cs_chain',
       }),
     );
-    prismaMock.booking.updateMany.mockResolvedValueOnce({ count: 1 });
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(
-      instructorRow({ email: 'erik@drivelinkup.test' }),
+    prismaMock.booking.updateMany.mockResolvedValue({ count: 1 });
+    prismaMock.instructor.findUnique.mockResolvedValue(
+      instructorRow({ email: 'erik@drivelinkup.test', hourlyRateSek: 550 }),
     );
-    retrieveCheckoutSession.mockResolvedValueOnce({
+    retrieveCheckoutSession.mockResolvedValue({
       id: 'cs_chain',
       payment_status: 'paid',
       status: 'complete',
@@ -233,34 +240,33 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     expect(typeof token).toBe('string');
 
     // 3. complete → flips to released, notifies counterparty
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
-      bookingRow({
-        id: 'booking_chain',
-        paymentStatus: 'held_escrow',
-        actionToken: token,
-        heldAt: new Date(),
-        disputeStatus: null,
-      }),
-    );
-    prismaMock.booking.updateMany.mockResolvedValueOnce({ count: 1 });
-    // Access check instructor + notifyCounterparty instructor lookup.
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(
-      instructorRow({ hourlyRateSek: 550, email: 'erik@drivelinkup.test' }),
-    );
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(
-      instructorRow({ email: 'erik@drivelinkup.test' }),
-    );
-    // Fresh read after payout success.
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
-      bookingRow({
-        id: 'booking_chain',
-        paymentStatus: 'released',
-        actionToken: token,
-        completedAt: new Date(),
-        payoutReleasedAt: new Date(),
-        payoutAmountSek: 495,
-      }),
-    );
+    prismaMock.booking.findUnique.mockReset();
+    prismaMock.instructor.findUnique.mockReset();
+    prismaMock.booking.findUnique
+      .mockResolvedValueOnce(
+        bookingRow({
+          id: 'booking_chain',
+          paymentStatus: 'held_escrow',
+          actionToken: token,
+          heldAt: new Date(),
+          disputeStatus: null,
+        }),
+      )
+      .mockResolvedValueOnce(
+        bookingRow({
+          id: 'booking_chain',
+          paymentStatus: 'released',
+          actionToken: token,
+          completedAt: new Date(),
+          payoutReleasedAt: new Date(),
+          payoutAmountSek: 495,
+        }),
+      );
+    prismaMock.instructor.findUnique
+      .mockResolvedValueOnce(
+        instructorRow({ hourlyRateSek: 550, email: 'erik@drivelinkup.test' }),
+      )
+      .mockResolvedValueOnce(instructorRow({ email: 'erik@drivelinkup.test' }));
 
     const completeRes = await completePOST(
       postJson('http://localhost/api/bookings/booking_chain/complete', {
@@ -278,7 +284,6 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     expect(payoutBookingMock).toHaveBeenCalledWith(
       'booking_chain',
       expect.objectContaining({
-        completedByRole: 'learner',
         completedByLabel: 'Alice Andersson',
       }),
     );

@@ -18,6 +18,10 @@ import { bookingRow, instructorRow, prismaMock, resetPrisma } from './_setup/pri
 
 vi.mock('server-only', () => ({}));
 
+vi.mock('next/headers', () => ({
+  headers: async () => new Headers(),
+}));
+
 const refundBookingMock = vi.fn();
 const alertReleasedCancelNeedsReviewMock = vi.fn();
 vi.mock('@/lib/payments/refunds', () => ({
@@ -25,6 +29,14 @@ vi.mock('@/lib/payments/refunds', () => ({
   alertReleasedCancelNeedsReview: (...args: unknown[]) =>
     alertReleasedCancelNeedsReviewMock(...args),
 }));
+
+vi.mock('@/lib/require-auth', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/lib/require-auth')>();
+  return {
+    ...actual,
+    getSessionUser: async () => null,
+  };
+});
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as cancelPOST } from '@/app/api/bookings/[id]/cancel/route';
@@ -185,7 +197,7 @@ describe('POST /api/bookings/[id]/cancel — early window', () => {
     // booking.updateMany returns count=1 — we won the race guard.
     // The early path still loads the instructor once so receipt repair and
     // notification use the same name, email, and rate snapshot.
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(
+    prismaMock.instructor.findUnique.mockResolvedValue(
       instructorRow({ email: 'erik@drivelinkup.test' }),
     );
     prismaMock.booking.updateMany.mockResolvedValueOnce({ count: 1 });

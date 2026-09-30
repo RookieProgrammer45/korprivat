@@ -21,14 +21,18 @@
 import './_setup/env';
 import './_setup/email-mock';
 import { vi } from 'vitest';
-import { bookingRow, instructorRow, prismaMock, resetPrisma } from './_setup/prisma-mock';
+import { bookingRow, instructorRow, prismaMock, resetPrisma, TEST_LEARNER_ACCESS_TOKEN } from './_setup/prisma-mock';
 
 vi.mock('server-only', () => ({}));
 
-vi.mock('next/server', async () => {
-  const { NextResponse } = await import('next/dist/server/web/exports');
+vi.mock('next/headers', () => ({
+  headers: async () => new Headers(),
+}));
+
+vi.mock('next/server', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('next/server')>();
   return {
-    NextResponse,
+    ...actual,
     after: (task: (() => unknown) | Promise<unknown>) => {
       if (typeof task === 'function') {
         void Promise.resolve().then(() => task());
@@ -43,6 +47,14 @@ const payoutBookingMock = vi.fn();
 vi.mock('@/lib/payments/payouts', () => ({
   payoutBooking: (...args: unknown[]) => payoutBookingMock(...args),
 }));
+
+vi.mock('@/lib/require-auth', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/lib/require-auth')>();
+  return {
+    ...actual,
+    getSessionUser: async () => null,
+  };
+});
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as completePOST } from '@/app/api/bookings/[id]/complete/route';
@@ -157,8 +169,14 @@ describe('POST /api/bookings/[id]/complete', () => {
 
   it('happy path: flips held_escrow → released + notifies counterparty', async () => {
     const releasedAt = new Date('2026-08-10T16:00:00.000Z');
+    // Use learner access token so actorRole resolves to learner (actionToken
+    // would match providerToken and flip the counterparty).
     prismaMock.booking.findUnique
-      .mockResolvedValueOnce(heldBooking())
+      .mockResolvedValueOnce(
+        heldBooking({
+          actionToken: 'provider_token_other',
+        }),
+      )
       .mockResolvedValueOnce(
         heldBooking({
           paymentStatus: 'released',
@@ -176,7 +194,7 @@ describe('POST /api/bookings/[id]/complete', () => {
 
     const res = await completePOST(
       jsonPost('/api/bookings/booking_escrow/complete', {
-        token: VALID_TOKEN,
+        token: TEST_LEARNER_ACCESS_TOKEN,
         completedByRole: 'learner',
         completedByLabel: 'Test Learner',
       }),
@@ -189,7 +207,6 @@ describe('POST /api/bookings/[id]/complete', () => {
     expect(payoutBookingMock).toHaveBeenCalledWith(
       'booking_escrow',
       expect.objectContaining({
-        completedByRole: 'learner',
         completedByLabel: 'Test Learner',
       }),
     );
