@@ -79,6 +79,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     bookingData.payoutReleasedAt = now;
     bookingData.payoutAmountSek = instructorPayoutSek(
       booking.priceAmountSek ?? instructor?.hourlyRateSek ?? 0,
+      { organizationId: booking.organizationId },
     ).payoutSek;
     bookingData.releasedByRole = 'instructor';
     bookingData.releasedByLabel = data.resolvedByLabel;

@@ -87,7 +87,9 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   // charged before the FeeModel column shipped), fall back to the live
   // `hourlyRateSek` so legacy rows still release cleanly.
   const priceForPayout = booking.priceAmountSek ?? instructor?.hourlyRateSek ?? 0;
-  const payout = instructorPayoutSek(priceForPayout);
+  const payout = instructorPayoutSek(priceForPayout, {
+    organizationId: booking.organizationId,
+  });
 
   const now = new Date();
   const updateResult = await prisma.booking.updateMany({

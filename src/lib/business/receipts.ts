@@ -43,6 +43,7 @@ type BookingSnapshot = {
   serviceFeeSek: number | null;
   grossChargedSek: number | null;
   payoutAmountSek: number | null;
+  organizationId?: string | null;
   locale?: string | null;
   slot?: { startsAt: Date; durationMinutes: number } | null;
 };
@@ -85,14 +86,19 @@ function receiptNumber(bookingId: string, role: ReceiptRole): string {
 }
 
 export function receiptAmounts(
-  booking: Pick<BookingSnapshot, 'priceAmountSek' | 'serviceFeeSek' | 'grossChargedSek'>,
+  booking: Pick<
+    BookingSnapshot,
+    'priceAmountSek' | 'serviceFeeSek' | 'grossChargedSek' | 'organizationId'
+  >,
   rateSek: number,
 ) {
   const totals = learnerTotalSek(safeMoney(booking.priceAmountSek, rateSek));
   const priceAmountSek = safeMoney(booking.priceAmountSek, totals.priceSek);
   const serviceFeeSek = safeMoney(booking.serviceFeeSek, totals.serviceFeeSek);
   const grossChargedSek = safeMoney(booking.grossChargedSek, priceAmountSek + serviceFeeSek);
-  const payout = instructorPayoutSek(priceAmountSek);
+  const payout = instructorPayoutSek(priceAmountSek, {
+    organizationId: booking.organizationId,
+  });
   return {
     priceAmountSek,
     serviceFeeSek,

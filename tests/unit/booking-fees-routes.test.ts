@@ -84,6 +84,7 @@ describe('GET /api/booking-fees/config', () => {
     expect(await response.json()).toEqual({
       serviceFeePercent: 0,
       commissionPercent: 10,
+      schoolCommissionPercent: 8,
     });
   });
 });

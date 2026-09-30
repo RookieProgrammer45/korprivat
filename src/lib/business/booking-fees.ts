@@ -1,7 +1,9 @@
 //
 // DriveLinkUp does not add a learner service fee. A new booking charges only
-// the school's published lesson price. The school commission is 10% of the
-// attributable booking value and applies only after completed service.
+// the school's published lesson price. Platform commission is taken from
+// attributable booking value after completed service:
+//   - 10% for independent instructors
+//   - 8% for school-affiliated bookings (organizationId set) — ADR-004
 //
 // This file is a pure module — NO Prisma, NO fetch, NO env reads. Any server
 // route or route handler can import it without dragging in server-only imports
@@ -14,6 +16,7 @@ import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
 // file is a code-review red flag.
 export const LEARNER_SERVICE_FEE_PERCENT = 0;
 export const INSTRUCTOR_COMMISSION_PERCENT = 10;
+export const SCHOOL_COMMISSION_PERCENT = 8;
 
 // Internal integer-SEK math so receipts + audit rows match the displayed
 // figures exactly. Rounding strategy: half-up at 0.5 (Math.round does that
@@ -46,27 +49,43 @@ export function learnerTotalSek(priceSek: number): LearnerTotals {
 }
 
 /**
- * Instructor-facing payout for a single booking at the instructor's
- * published `hourlyRateSek`. `payoutSek` is the amount released to the
- * instructor when the lesson is marked complete — lesson price minus 10%
- * attributable booking value after completion.
+ * Instructor/school-facing payout for a single booking. `payoutSek` is the
+ * amount released when the lesson is marked complete — lesson price minus
+ * commission (10% independent, 8% when `organizationId` is set).
  */
 export interface InstructorPayout {
   priceSek: number;
   commissionSek: number;
   payoutSek: number;
+  commissionPercent: number;
 }
 
-export function instructorPayoutSek(priceSek: number): InstructorPayout {
+export type InstructorPayoutOpts = {
+  organizationId?: string | null;
+};
+
+export function instructorPayoutSek(
+  priceSek: number,
+  opts?: InstructorPayoutOpts,
+): InstructorPayout {
   if (!Number.isFinite(priceSek) || priceSek < 0) {
     throw new Error('priceSek must be a non-negative finite number');
   }
-  const commissionSek = percent(priceSek, INSTRUCTOR_COMMISSION_PERCENT);
+  const commissionPercent = opts?.organizationId
+    ? SCHOOL_COMMISSION_PERCENT
+    : INSTRUCTOR_COMMISSION_PERCENT;
+  const commissionSek = percent(priceSek, commissionPercent);
   return {
     priceSek: Math.round(priceSek),
     commissionSek,
     payoutSek: Math.round(priceSek) - commissionSek,
+    commissionPercent,
   };
+}
+
+/** Alias for fee breakdown used by payout / receipt call sites. */
+export function computeFees(priceSek: number, opts?: InstructorPayoutOpts): InstructorPayout {
+  return instructorPayoutSek(priceSek, opts);
 }
 
 /**

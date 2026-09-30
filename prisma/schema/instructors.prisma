@@ -205,8 +205,7 @@ model Booking {
   serviceFeeSek           Int?
   grossChargedSek         Int?
   payoutAmountSek         Int?
-  // School affiliation snapshot at booking time. Null = independent instructor.
-  // Fee math still uses 10% until slice 6 branches on this column (ADR-004).
+  // Fee math: 10% independent, 8% when organizationId is set (ADR-004).
   // Scalar only — no @relation onto Organization (cross-context).
   organizationId          String?
   instructor              Instructor        @relation(fields: [instructorId], references: [id])

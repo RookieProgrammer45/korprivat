@@ -12,6 +12,7 @@ import { z } from 'zod';
 export const InstructorFeesConfig = z.object({
   serviceFeePercent: z.number().int().nonnegative(),
   commissionPercent: z.number().int().positive(),
+  schoolCommissionPercent: z.number().int().positive().optional(),
 });
 export type InstructorFeesConfig = z.infer<typeof InstructorFeesConfig>;
 

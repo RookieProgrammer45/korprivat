@@ -8,6 +8,7 @@ import { NextResponse } from 'next/server';
 import {
   INSTRUCTOR_COMMISSION_PERCENT,
   LEARNER_SERVICE_FEE_PERCENT,
+  SCHOOL_COMMISSION_PERCENT,
 } from '@/lib/business/booking-fees';
 import { InstructorFeesConfig } from '@/lib/contracts/booking-fees';
 import { prisma } from '@/lib/db';
@@ -39,6 +40,7 @@ export async function GET(request: Request) {
     InstructorFeesConfig.parse({
       serviceFeePercent: LEARNER_SERVICE_FEE_PERCENT,
       commissionPercent: INSTRUCTOR_COMMISSION_PERCENT,
+      schoolCommissionPercent: SCHOOL_COMMISSION_PERCENT,
     }),
   );
 }
