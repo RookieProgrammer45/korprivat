@@ -48,6 +48,23 @@ vi.mock('server-only', () => ({}));
 vi.mock('next/headers', () => ({
   headers: async () => new Headers(),
 }));
+vi.mock('next/server', async () => {
+  const { NextResponse } = await import('next/dist/server/web/exports');
+  return {
+    NextResponse,
+    after: (task: (() => unknown) | Promise<unknown>) => {
+      if (typeof task === 'function') {
+        void Promise.resolve().then(() => task());
+      } else {
+        void task;
+      }
+    },
+  };
+});
+const payoutBookingMock = vi.fn();
+vi.mock('@/lib/payments/payouts', () => ({
+  payoutBooking: (...args: unknown[]) => payoutBookingMock(...args),
+}));
 vi.mock('stripe', () => {
   class StripeMock {
     checkout = {
@@ -105,6 +122,13 @@ beforeEach(() => {
   authMock.setUser(SESSION_USER);
   createCheckoutSession.mockReset();
   retrieveCheckoutSession.mockReset();
+  payoutBookingMock.mockReset();
+  payoutBookingMock.mockResolvedValue({
+    kind: 'sent',
+    transferId: 'tr_chain',
+    amountSek: 495,
+    recipientType: 'INSTRUCTOR',
+  });
   process.env.STRIPE_SECRET_KEY = 'sk_test_integration';
   createCheckoutSession.mockResolvedValue({
     id: 'cs_chain',
@@ -219,15 +243,23 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
       }),
     );
     prismaMock.booking.updateMany.mockResolvedValueOnce({ count: 1 });
-    // Two `instructor.findUnique` calls on this path — the payout-fallback
-    // lookup (hourlyRateSek) and notifyCounterparty's (email, name) lookup.
-    // Queue both so the test isn't relying on the default null fallback
-    // for the second call.
+    // Access check instructor + notifyCounterparty instructor lookup.
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
       instructorRow({ hourlyRateSek: 550, email: 'erik@drivelinkup.test' }),
     );
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
       instructorRow({ email: 'erik@drivelinkup.test' }),
+    );
+    // Fresh read after payout success.
+    prismaMock.booking.findUnique.mockResolvedValueOnce(
+      bookingRow({
+        id: 'booking_chain',
+        paymentStatus: 'released',
+        actionToken: token,
+        completedAt: new Date(),
+        payoutReleasedAt: new Date(),
+        payoutAmountSek: 495,
+      }),
     );
 
     const completeRes = await completePOST(
@@ -242,27 +274,19 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     const completeBody = (await completeRes.json()) as { paymentStatus: string };
     expect(completeBody.paymentStatus).toBe('released');
 
-    // Release path stamps the instructor payout ONCE so a later
-    // `hourlyRateSek` drift can't re-quote what the instructor receives.
-    // 550 SEK - 10% commission → 495 SEK payout.
-    expect(prismaMock.booking.updateMany).toHaveBeenCalledWith(
+    // Release path stamps the instructor payout via payoutBooking (Connect transfer).
+    expect(payoutBookingMock).toHaveBeenCalledWith(
+      'booking_chain',
       expect.objectContaining({
-        where: {
-          id: 'booking_chain',
-          paymentStatus: 'held_escrow',
-          payoutReleasedAt: null,
-          disputeStatus: null,
-        },
-        data: expect.objectContaining({
-          paymentStatus: 'released',
-          payoutReleasedAt: expect.any(Date) as unknown as Date,
-          payoutAmountSek: 495,
-        }),
+        completedByRole: 'learner',
+        completedByLabel: 'Alice Andersson',
       }),
     );
 
     // Receipts + 1 completion email = 3 total
-    expect(sendEmailMock).toHaveBeenCalledTimes(receiptEmails + 1);
+    await vi.waitFor(() => {
+      expect(sendEmailMock).toHaveBeenCalledTimes(receiptEmails + 1);
+    });
     expect(sendEmailMock.mock.calls[receiptEmails][0].to).toBe('erik@drivelinkup.test');
   });
 });

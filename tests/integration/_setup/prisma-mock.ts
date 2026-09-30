@@ -118,6 +118,20 @@ const prisma = vi.hoisted(() => {
       updateMany: vi.fn(async () => ({ count: 1 })),
       upsert: vi.fn(async () => ({})),
     },
+    organization: {
+      findUnique: vi.fn(async () => null),
+      findFirst: vi.fn(async () => null),
+      findMany: vi.fn(async () => []),
+      create: vi.fn(async (args: unknown) => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      update: vi.fn(async () => ({ count: 1 })),
+      updateMany: vi.fn(async () => ({ count: 0 })),
+    },
+    payoutRecord: {
+      findUnique: vi.fn(async () => null),
+      findFirst: vi.fn(async () => null),
+      findMany: vi.fn(async () => []),
+      create: vi.fn(async (args: unknown) => ({ id: 'mock_payout', ...((args as object) ?? {}) })),
+    },
     subscription: {
       findUnique: vi.fn(async () => null),
       findFirst: vi.fn(async () => null),

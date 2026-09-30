@@ -25,6 +25,25 @@ import { bookingRow, instructorRow, prismaMock, resetPrisma } from './_setup/pri
 
 vi.mock('server-only', () => ({}));
 
+vi.mock('next/server', async () => {
+  const { NextResponse } = await import('next/dist/server/web/exports');
+  return {
+    NextResponse,
+    after: (task: (() => unknown) | Promise<unknown>) => {
+      if (typeof task === 'function') {
+        void Promise.resolve().then(() => task());
+      } else {
+        void task;
+      }
+    },
+  };
+});
+
+const payoutBookingMock = vi.fn();
+vi.mock('@/lib/payments/payouts', () => ({
+  payoutBooking: (...args: unknown[]) => payoutBookingMock(...args),
+}));
+
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as completePOST } from '@/app/api/bookings/[id]/complete/route';
 import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
@@ -46,6 +65,8 @@ function heldBooking(
     actionToken: string | null;
     paymentStatus: string;
     disputeStatus: string | null;
+    completedAt: Date | null;
+    payoutReleasedAt: Date | null;
   }> = {},
 ) {
   return bookingRow({
@@ -61,6 +82,13 @@ function heldBooking(
 beforeEach(() => {
   resetPrisma();
   resetEmailMock();
+  payoutBookingMock.mockReset();
+  payoutBookingMock.mockResolvedValue({
+    kind: 'sent',
+    transferId: 'tr_test',
+    amountSek: 495,
+    recipientType: 'INSTRUCTOR',
+  });
 });
 
 afterEach(() => {
@@ -82,7 +110,7 @@ describe('POST /api/bookings/[id]/complete', () => {
       { params: Promise.resolve({ id: 'booking_escrow' }) },
     );
     expect(res.status).toBe(403);
-    expect(prismaMock.booking.updateMany).not.toHaveBeenCalled();
+    expect(payoutBookingMock).not.toHaveBeenCalled();
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
@@ -110,7 +138,7 @@ describe('POST /api/bookings/[id]/complete', () => {
       { params: Promise.resolve({ id: 'booking_escrow' }) },
     );
     expect(res.status).toBe(409);
-    expect(prismaMock.booking.updateMany).not.toHaveBeenCalled();
+    expect(payoutBookingMock).not.toHaveBeenCalled();
   });
 
   it('409 when a dispute is already open', async () => {
@@ -124,12 +152,24 @@ describe('POST /api/bookings/[id]/complete', () => {
       { params: Promise.resolve({ id: 'booking_escrow' }) },
     );
     expect(res.status).toBe(409);
-    expect(prismaMock.booking.updateMany).not.toHaveBeenCalled();
+    expect(payoutBookingMock).not.toHaveBeenCalled();
   });
 
   it('happy path: flips held_escrow → released + notifies counterparty', async () => {
-    prismaMock.booking.findUnique.mockResolvedValueOnce(heldBooking());
-    prismaMock.booking.updateMany.mockResolvedValueOnce({ count: 1 });
+    const releasedAt = new Date('2026-08-10T16:00:00.000Z');
+    prismaMock.booking.findUnique
+      .mockResolvedValueOnce(heldBooking())
+      .mockResolvedValueOnce(
+        heldBooking({
+          paymentStatus: 'released',
+          completedAt: releasedAt,
+          payoutReleasedAt: releasedAt,
+        }),
+      );
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(
+      instructorRow({ email: 'erik@drivelinkup.test' }),
+    );
+    // notifyCounterparty instructor lookup (after)
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
       instructorRow({ email: 'erik@drivelinkup.test' }),
     );
@@ -146,27 +186,24 @@ describe('POST /api/bookings/[id]/complete', () => {
     const body = (await res.json()) as { id: string; paymentStatus: string };
     expect(body.paymentStatus).toBe('released');
 
-    expect(prismaMock.booking.updateMany).toHaveBeenCalledWith(
+    expect(payoutBookingMock).toHaveBeenCalledWith(
+      'booking_escrow',
       expect.objectContaining({
-        where: expect.objectContaining({
-          id: 'booking_escrow',
-          paymentStatus: 'held_escrow',
-          payoutReleasedAt: null,
-        }),
-        data: expect.objectContaining({
-          paymentStatus: 'released',
-        }),
+        completedByRole: 'learner',
+        completedByLabel: 'Test Learner',
       }),
     );
 
     // Notify counterparty: the learner completed → notify instructor.
-    expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    await vi.waitFor(() => {
+      expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    });
     const email = sendEmailMock.mock.calls[0][0];
     expect(email.to).toBe('erik@drivelinkup.test');
   });
 
   it('does not treat a dispute-released booking as a completed lesson', async () => {
-    prismaMock.booking.findUnique.mockResolvedValueOnce(heldBooking()).mockResolvedValueOnce(
+    prismaMock.booking.findUnique.mockResolvedValueOnce(
       heldBooking({
         paymentStatus: 'released',
         completedAt: null,
@@ -174,7 +211,6 @@ describe('POST /api/bookings/[id]/complete', () => {
         disputeStatus: 'resolved_released',
       }),
     );
-    prismaMock.booking.updateMany.mockResolvedValueOnce({ count: 0 });
 
     const res = await completePOST(
       jsonPost('/api/bookings/booking_escrow/complete', {
@@ -186,13 +222,24 @@ describe('POST /api/bookings/[id]/complete', () => {
     );
 
     expect(res.status).toBe(409);
+    expect(payoutBookingMock).not.toHaveBeenCalled();
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it('no instructor email → no notification, still 200', async () => {
-    prismaMock.booking.findUnique.mockResolvedValueOnce(heldBooking());
-    prismaMock.booking.updateMany.mockResolvedValueOnce({ count: 1 });
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow({ email: null }));
+    const releasedAt = new Date();
+    prismaMock.booking.findUnique
+      .mockResolvedValueOnce(heldBooking())
+      .mockResolvedValueOnce(
+        heldBooking({
+          paymentStatus: 'released',
+          completedAt: releasedAt,
+          payoutReleasedAt: releasedAt,
+        }),
+      );
+    prismaMock.instructor.findUnique
+      .mockResolvedValueOnce(instructorRow({ email: null }))
+      .mockResolvedValueOnce(instructorRow({ email: null }));
 
     const res = await completePOST(
       jsonPost('/api/bookings/booking_escrow/complete', {
@@ -203,21 +250,20 @@ describe('POST /api/bookings/[id]/complete', () => {
       { params: Promise.resolve({ id: 'booking_escrow' }) },
     );
     expect(res.status).toBe(200);
-    // Instructor completed → student gets notified. With instructorNoEmail
-    // we'd skip; here too the student receives the email (only instructor
-    // can be missing).
-    expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    // Instructor completed → student gets notified.
+    await vi.waitFor(() => {
+      expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    });
     expect(sendEmailMock.mock.calls[0][0].to).toBe('learner@example.test');
   });
 
-  it('second complete call is idempotent: 200, no second email, no second update', async () => {
-    // First the route reads the row at held_escrow, then a racing second
-    // call is shown by a row already at released (post-fulfillment state).
+  it('second complete call is idempotent: 200, no second payout, no second email', async () => {
+    const releasedAt = new Date();
     prismaMock.booking.findUnique.mockResolvedValueOnce(
       heldBooking({
         paymentStatus: 'released',
-        completedAt: new Date(),
-        payoutReleasedAt: new Date(),
+        completedAt: releasedAt,
+        payoutReleasedAt: releasedAt,
       }),
     );
     const res = await completePOST(
@@ -228,13 +274,25 @@ describe('POST /api/bookings/[id]/complete', () => {
       }),
       { params: Promise.resolve({ id: 'booking_escrow' }) },
     );
-    // Guard says: paymentStatus !== 'held_escrow' OR disputeStatus === 'open'
-    // ⇒ 409. The route is strict on entry — it does NOT accept post-release
-    // completes; it returns 409 so the client doesn't try to "complete"
-    // an already-released booking (would be a no-op state-wise but the
-    // counterparty should not be re-notified, which 409 prevents).
+    expect(res.status).toBe(200);
+    expect(payoutBookingMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it('409 when payout is skipped (no Connect)', async () => {
+    prismaMock.booking.findUnique.mockResolvedValueOnce(heldBooking());
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    payoutBookingMock.mockResolvedValueOnce({ kind: 'skipped', reason: 'no_connect' });
+
+    const res = await completePOST(
+      jsonPost('/api/bookings/booking_escrow/complete', {
+        token: VALID_TOKEN,
+        completedByRole: 'learner',
+        completedByLabel: 'Test Learner',
+      }),
+      { params: Promise.resolve({ id: 'booking_escrow' }) },
+    );
     expect(res.status).toBe(409);
-    expect(prismaMock.booking.updateMany).not.toHaveBeenCalled();
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 });

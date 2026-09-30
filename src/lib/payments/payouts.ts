@@ -1,0 +1,229 @@
+// Stripe Connect Transfer on lesson completion.
+// Destination: Organization Connect account when booking.organizationId is set,
+// otherwise the Instructor Connect account. Commission via instructorPayoutSek.
+
+import 'server-only';
+import { instructorPayoutSek } from '@/lib/business/booking-fees';
+import { syncBookingReceiptStatuses } from '@/lib/business/receipts';
+import { prisma } from '@/lib/db';
+import { sendEmail } from '@/lib/email/send';
+import { notificationEmail } from '@/lib/email/templates';
+import { getStripe } from '@/lib/payments/stripe';
+import { OWNER_EMAIL } from '@/lib/ownership';
+
+export type PayoutResult =
+  | { kind: 'sent'; transferId: string; amountSek: number; recipientType: string }
+  | { kind: 'duplicate'; transferId: string }
+  | { kind: 'skipped'; reason: 'no_connect' | 'payouts_disabled' | 'not_held' | 'missing_booking' }
+  | { kind: 'error'; message: string };
+
+export type PayoutActor = {
+  completedByRole: 'learner' | 'instructor';
+  completedByLabel: string;
+};
+
+function alertRecipient(): string {
+  return (
+    process.env.EMAIL_OVERRIDE_TO?.trim() ||
+    process.env.CONTACT_EMAIL?.trim() ||
+    process.env.OWNER_EMAIL?.trim() ||
+    OWNER_EMAIL
+  );
+}
+
+async function alertOps(subject: string, lines: string[]) {
+  console.error(`[payouts] ${subject}`, { lines });
+  try {
+    const mail = notificationEmail({
+      subject: `[DriveLinkUp] ${subject}`,
+      title: subject,
+      lines,
+    });
+    await sendEmail({ to: alertRecipient(), ...mail });
+  } catch (err) {
+    console.error('[payouts] alert email failed', err);
+  }
+}
+
+export async function payoutBooking(
+  bookingId: string,
+  actor?: PayoutActor,
+): Promise<PayoutResult> {
+  const existing = await prisma.payoutRecord.findUnique({ where: { bookingId } });
+  if (existing) {
+    return { kind: 'duplicate', transferId: existing.transferId };
+  }
+
+  const booking = await prisma.booking.findUnique({ where: { id: bookingId } });
+  if (!booking) {
+    return { kind: 'skipped', reason: 'missing_booking' };
+  }
+  if (booking.paymentStatus !== 'held_escrow') {
+    return { kind: 'skipped', reason: 'not_held' };
+  }
+
+  const instructor = await prisma.instructor.findUnique({
+    where: { id: booking.instructorId },
+    select: {
+      id: true,
+      hourlyRateSek: true,
+      stripeAccountId: true,
+      payoutsEnabled: true,
+      name: true,
+      email: true,
+    },
+  });
+  if (!instructor) {
+    return { kind: 'skipped', reason: 'missing_booking' };
+  }
+
+  let destinationAccountId: string | null = null;
+  let recipientType: 'INSTRUCTOR' | 'ORGANIZATION' = 'INSTRUCTOR';
+  let recipientId = instructor.id;
+  let payoutsEnabled = false;
+
+  if (booking.organizationId) {
+    const org = await prisma.organization.findUnique({
+      where: { id: booking.organizationId },
+      select: {
+        id: true,
+        stripeAccountId: true,
+        payoutsEnabled: true,
+        name: true,
+      },
+    });
+    if (!org?.stripeAccountId) {
+      await alertOps('Payout skipped — school Connect missing', [
+        `Booking ${bookingId} is school-affiliated but Organization ${booking.organizationId} has no Stripe Connect account.`,
+        'Funds remain in held_escrow. Complete Connect onboarding, then retry via admin.',
+      ]);
+      return { kind: 'skipped', reason: 'no_connect' };
+    }
+    if (!org.payoutsEnabled) {
+      await alertOps('Payout skipped — school payouts disabled', [
+        `Booking ${bookingId}: Organization ${org.id} Connect account exists but payoutsEnabled=false.`,
+        'Funds remain in held_escrow.',
+      ]);
+      return { kind: 'skipped', reason: 'payouts_disabled' };
+    }
+    destinationAccountId = org.stripeAccountId;
+    recipientType = 'ORGANIZATION';
+    recipientId = org.id;
+    payoutsEnabled = true;
+  } else {
+    if (!instructor.stripeAccountId) {
+      await alertOps('Payout skipped — instructor Connect missing', [
+        `Booking ${bookingId}: Instructor ${instructor.id} has no Stripe Connect account.`,
+        'Funds remain in held_escrow. Instructor must finish Connect onboarding, then retry.',
+      ]);
+      return { kind: 'skipped', reason: 'no_connect' };
+    }
+    if (!instructor.payoutsEnabled) {
+      await alertOps('Payout skipped — instructor payouts disabled', [
+        `Booking ${bookingId}: Instructor ${instructor.id} Connect account exists but payoutsEnabled=false.`,
+        'Funds remain in held_escrow.',
+      ]);
+      return { kind: 'skipped', reason: 'payouts_disabled' };
+    }
+    destinationAccountId = instructor.stripeAccountId;
+    recipientType = 'INSTRUCTOR';
+    recipientId = instructor.id;
+    payoutsEnabled = true;
+  }
+
+  if (!destinationAccountId || !payoutsEnabled) {
+    return { kind: 'skipped', reason: 'no_connect' };
+  }
+
+  const priceForPayout = booking.priceAmountSek ?? instructor.hourlyRateSek ?? 0;
+  const fees = instructorPayoutSek(priceForPayout, {
+    organizationId: booking.organizationId,
+  });
+  const amountOre = fees.payoutSek * 100;
+
+  if (amountOre <= 0) {
+    return { kind: 'error', message: 'invalid_payout_amount' };
+  }
+
+  try {
+    const stripe = getStripe();
+    const transfer = await stripe.transfers.create(
+      {
+        amount: amountOre,
+        currency: 'sek',
+        destination: destinationAccountId,
+        transfer_group: bookingId,
+        metadata: {
+          bookingId,
+          recipientType,
+          recipientId,
+        },
+      },
+      { idempotencyKey: `transfer:booking:${bookingId}` },
+    );
+
+    const now = new Date();
+    const completedByRole = actor?.completedByRole ?? 'instructor';
+    const completedByLabel = actor?.completedByLabel ?? 'system';
+
+    const claimed = await prisma.booking.updateMany({
+      where: {
+        id: bookingId,
+        paymentStatus: 'held_escrow',
+        payoutReleasedAt: null,
+        disputeStatus: null,
+      },
+      data: {
+        completedAt: now,
+        completedByRole,
+        completedByLabel,
+        payoutReleasedAt: now,
+        releasedByRole: completedByRole,
+        releasedByLabel: completedByLabel,
+        paymentStatus: 'released',
+        payoutAmountSek: fees.payoutSek,
+      },
+    });
+
+    if (claimed.count === 0) {
+      // Race: another worker released, or state changed. Transfer may exist —
+      // still write PayoutRecord if missing for audit.
+      const freshRecord = await prisma.payoutRecord.findUnique({ where: { bookingId } });
+      if (freshRecord) {
+        return { kind: 'duplicate', transferId: freshRecord.transferId };
+      }
+    }
+
+    await prisma.payoutRecord.create({
+      data: {
+        bookingId,
+        transferId: transfer.id,
+        recipientType,
+        recipientId,
+        amountSek: fees.payoutSek,
+        currency: 'SEK',
+        status: 'sent',
+      },
+    });
+
+    await syncBookingReceiptStatuses(bookingId, 'released', 'released').catch((err) => {
+      console.error('[payouts] receipt sync failed', err);
+    });
+
+    return {
+      kind: 'sent',
+      transferId: transfer.id,
+      amountSek: fees.payoutSek,
+      recipientType,
+    };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'transfer_failed';
+    console.error('[payouts] transfer failed', { bookingId, message });
+    await alertOps('Payout transfer failed', [
+      `Booking ${bookingId}: Stripe transfer failed.`,
+      message,
+      'Funds remain in held_escrow. Lesson is NOT marked completed.',
+    ]);
+    return { kind: 'error', message };
+  }
+}

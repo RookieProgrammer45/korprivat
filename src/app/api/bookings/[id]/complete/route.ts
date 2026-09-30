@@ -4,24 +4,21 @@
 // per-booking unguessable action token in the deep-link, so the route is
 // anonymous and the token is the only auth check.
 //
-// Fulfill-once: the conditional `where` clause is the race guard. A second
-// call with `paymentStatus: 'released'` matches zero rows and is a no-op
-// (which becomes a 200 with the original timestamps so idempotent retries
-// from the deep-link page resolve cleanly).
-//
-// Side effect: notify the *other* party (the one who did NOT click). Funds
-// are conceptually released to the instructor immediately on this update —
-// the actual Stripe side is the operator's task and is communicated in copy.
+// Payout: awaits Stripe Connect transfer via payoutBooking. On success the
+// booking flips held_escrow → released and completedAt is stamped. On
+// Connect/transfer failure the row stays held_escrow with completedAt null
+// (fail-closed). Counterparty email runs in after().
+
 import 'server-only';
-import { NextResponse } from 'next/server';
+import { after, NextResponse } from 'next/server';
 import { getBookingAccessToken, matchesLearnerAccessToken } from '@/lib/business/booking-access';
-import { instructorPayoutSek } from '@/lib/business/booking-fees';
 import { assertTokenMatches } from '@/lib/business/escrow';
 import { syncBookingReceiptStatuses } from '@/lib/business/receipts';
 import { BookingCompleteRequest, BookingCompleteResponse } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { lessonCompletedEmail } from '@/lib/email/templates';
+import { payoutBooking } from '@/lib/payments/payouts';
 import { getSessionUser } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -70,104 +67,80 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   }
   const actorRole: 'learner' | 'instructor' =
     providerSession || providerToken ? 'instructor' : 'learner';
+  const completedByRole: 'learner' | 'instructor' = sessionUser
+    ? actorRole
+    : data.completedByRole === 'instructor'
+      ? 'instructor'
+      : actorRole;
+  const completedByLabel = data.completedByLabel;
+
+  // Idempotent: already released with completedAt → success without re-transfer.
+  if (
+    booking.paymentStatus === 'released' &&
+    booking.completedAt != null &&
+    booking.payoutReleasedAt != null
+  ) {
+    await syncBookingReceiptStatuses(booking.id, 'released', 'released');
+    return NextResponse.json(
+      BookingCompleteResponse.parse({
+        id: booking.id,
+        paymentStatus: 'released',
+        completedAt: booking.completedAt.toISOString(),
+        payoutReleasedAt: booking.payoutReleasedAt.toISOString(),
+      }),
+      { status: 200 },
+    );
+  }
+
   if (booking.paymentStatus !== 'held_escrow' || booking.disputeStatus === 'open') {
-    // Either the funds were never received, or they're locked behind an
-    // unresolved dispute. Both reject with 409 — completing from either
-    // base is a no-op.
     return NextResponse.json(
       { errors: { state: 'Lesson cannot be completed in this state' } },
       { status: 409 },
     );
   }
 
-  // Compute the instructor payout ONCE for the audit row. The
-  // `priceAmountSek` snapshot is the source of truth — a later change to
-  // the instructor's `hourlyRateSek` cannot retroactively shift the row's
-  // payout. If the snapshot is missing (a pre-feature row that was
-  // charged before the FeeModel column shipped), fall back to the live
-  // `hourlyRateSek` so legacy rows still release cleanly.
-  const priceForPayout = booking.priceAmountSek ?? instructor?.hourlyRateSek ?? 0;
-  const payout = instructorPayoutSek(priceForPayout, {
-    organizationId: booking.organizationId,
+  const result = await payoutBooking(booking.id, {
+    completedByRole,
+    completedByLabel,
   });
 
-  const now = new Date();
-  const updateResult = await prisma.booking.updateMany({
-    where: {
-      id: booking.id,
-      paymentStatus: 'held_escrow',
-      payoutReleasedAt: null,
-      disputeStatus: null,
-    },
-    data: {
-      completedAt: now,
-      completedByRole: sessionUser
-        ? actorRole
-        : data.completedByRole === 'instructor'
-          ? 'instructor'
-          : actorRole,
-      completedByLabel: data.completedByLabel,
-      payoutReleasedAt: now,
-      releasedByRole: sessionUser
-        ? actorRole
-        : data.completedByRole === 'instructor'
-          ? 'instructor'
-          : actorRole,
-      releasedByLabel: data.completedByLabel,
-      paymentStatus: 'released',
-      // Per-booking payout audit column — stamped ONCE at release so the
-      // operator can reconcile without joining on `instructor.hourlyRateSek`.
-      payoutAmountSek: payout.payoutSek,
-    },
-  });
-
-  if (updateResult.count === 0) {
-    // Lost the race OR the row has already settled in some terminal state.
-    // Idempotent retry: return the current row's completion timestamps so
-    // the caller treats it as success.
-    const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
-    if (
-      !fresh ||
-      fresh.paymentStatus !== 'released' ||
-      fresh.completedAt === null ||
-      fresh.payoutReleasedAt === null
-    ) {
-      return NextResponse.json(
-        { errors: { state: 'Lesson cannot be completed in this state' } },
-        { status: 409 },
-      );
-    }
-    await syncBookingReceiptStatuses(booking.id, 'released', 'released');
+  if (result.kind === 'skipped' || result.kind === 'error') {
     return NextResponse.json(
-      BookingCompleteResponse.parse({
-        id: fresh.id,
-        paymentStatus: 'released',
-        completedAt: fresh.completedAt ? fresh.completedAt.toISOString() : null,
-        payoutReleasedAt: fresh.payoutReleasedAt ? fresh.payoutReleasedAt.toISOString() : null,
-      }),
-      { status: 200 },
+      {
+        errors: {
+          state:
+            result.kind === 'skipped'
+              ? `Payout unavailable (${result.reason}). Lesson not marked completed.`
+              : 'Payout failed. Lesson not marked completed.',
+        },
+      },
+      { status: 409 },
     );
   }
 
-  await syncBookingReceiptStatuses(booking.id, 'released', 'released');
+  const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
+  const completedAt = fresh?.completedAt ?? new Date();
+  const payoutReleasedAt = fresh?.payoutReleasedAt ?? completedAt;
 
-  await notifyCounterparty({
-    booking,
-    completedByRole: sessionUser
-      ? actorRole
-      : data.completedByRole === 'instructor'
-        ? 'instructor'
-        : actorRole,
-    completedByLabel: data.completedByLabel,
-    locale: booking.locale === 'en' ? 'en' : 'sv',
-  }).catch((_reason) => {});
+  after(async () => {
+    try {
+      await notifyCounterparty({
+        booking,
+        completedByRole,
+        completedByLabel,
+        locale: booking.locale === 'en' ? 'en' : 'sv',
+      });
+    } catch {
+      // Non-fatal — payout already succeeded.
+    }
+  });
 
   return NextResponse.json(
     BookingCompleteResponse.parse({
       id: booking.id,
       paymentStatus: 'released',
-      completedAt: now.toISOString(),
-      payoutReleasedAt: now.toISOString(),
+      completedAt: completedAt.toISOString(),
+      payoutReleasedAt: payoutReleasedAt.toISOString(),
     }),
     { status: 200 },
   );

@@ -205,6 +205,9 @@ model Booking {
   serviceFeeSek           Int?
   grossChargedSek         Int?
   payoutAmountSek         Int?
+  // Set when a Stripe refund succeeds for this booking (phase 5).
+  refundedAt              DateTime?
+  // School affiliation snapshot at booking time. Null = independent instructor.
   // Fee math: 10% independent, 8% when organizationId is set (ADR-004).
   // Scalar only — no @relation onto Organization (cross-context).
   organizationId          String?
@@ -219,6 +222,22 @@ model Booking {
   @@index([slotId])
   @@index([userId])
   @@index([organizationId])
+}
+
+/// Append-only Stripe Transfer audit for a completed booking payout.
+model PayoutRecord {
+  id            String   @id @default(cuid())
+  bookingId     String   @unique
+  transferId    String   @unique
+  // INSTRUCTOR | ORGANIZATION
+  recipientType String
+  recipientId   String
+  amountSek     Int
+  currency      String   @default("SEK")
+  status        String   @default("sent")
+  createdAt     DateTime @default(now())
+
+  @@index([recipientType, recipientId])
 }
 
 // AvailabilitySlot — a single open (or booked) time slot an instructor makes
