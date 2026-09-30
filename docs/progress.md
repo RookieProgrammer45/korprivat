@@ -48,11 +48,68 @@ booking surfaces once one real KYC session completes.
       `www.drivelinkup.com`. Verify all webhook destinations point at
       the www host. Didit destination updated 2026-09-26.
 
+## Weekend test plan (Stripe test mode)
+
+Run in Stripe test mode with sk_test_ keys before any live
+traffic. Each test must pass end-to-end — not mocked.
+
+1. Instructor Connect onboarding
+   - IBAN SE35 5000 0000 0549 1000 0003
+   - Verify chargesEnabled + payoutsEnabled flip true
+   - Double-click: no duplicate Express account
+
+2. Buyer happy path
+   - Book + pay 500 SEK with 4242 4242 4242 4242
+   - Webhook fires, paymentStatus = held_escrow
+
+3. Deliver → confirm → transfer
+   - Instructor delivers → awaiting_buyer_confirmation
+   - autoReleaseAt set ~48h
+   - Buyer confirms → release_ready → transfer → released
+   - PayoutRecord written, amount = 90% or 92%
+
+4. Auto-release cron
+   - Set autoReleaseAt past via SQL
+   - POST /api/cron/auto-release with Bearer CRON_SECRET
+   - Verify transfer
+
+5. Dispute → admin release
+   - Buyer disputes → disputed
+   - Admin resolves with outcome=release → transfer
+   - Verify partial returns 501
+
+6. Race: confirm + cron concurrent
+   - Fire both simultaneously → exactly one transfer
+
+7. Admin retry gates
+   - held_escrow → 409
+   - awaiting_buyer_confirmation → 409
+   - payout_failed → 200 + transfer
+
+8. Cancel + refund
+   - Pay → cancel → Stripe refund → refunded
+
+Do not accept live payments until all 8 pass.
+
 ## Known issues
 
 - [x] Escrow: either party could mark complete and fire payout with no
       proof of delivery — fixed with deliver → buyer confirm / 48h
       auto-release / dispute-escrow (2026-09-30).
+- [ ] Preview + development share production Neon DB. Create
+      separate Neon branches; set DATABASE_URL per environment.
+- [ ] Missing webhook handlers: charge.dispute.created,
+      charge.refunded, transfer.failed, checkout.session.expired,
+      account.application.deauthorized.
+- [ ] Reconciliation cron: nightly scan for held_escrow bookings
+      older than 7 days. Alert if webhook never landed.
+- [ ] Pending-payouts strip uses grossChargedSek. Change to
+      instructorPayoutSek (net).
+- [ ] Revenue dashboard has no view of held_escrow /
+      payout_pending / payout_failed. Add pending-balance card.
+- [ ] Fee snapshot fallback can charge one rate and payout another
+      if instructor rate changes mid-flight. Remove fallback;
+      require snapshot.
 - [ ] Partial dispute resolution returns 501. Design the payout
       math before enabling. Needs a decision: reduce payout by
       refunded SEK, or split the booking into two ledger entries.
