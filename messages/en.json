@@ -1077,7 +1077,8 @@
       "schoolInstructorsTab": "Instructors",
       "schoolBookingsTab": "Bookings",
       "schoolRevenueTab": "Revenue",
-      "schoolSettingsTab": "Settings"
+      "schoolSettingsTab": "Settings",
+      "revenueTab": "Revenue"
     },
     "providerActivation": {
       "eyebrow": "Marketplace health",
@@ -1220,6 +1221,7 @@
       "title": "Driving-school dashboard",
       "lead": "New booking requests from learners. Open a row to confirm, decline, or message back, with your school controlling the listing.",
       "availabilityCta": "Manage availability",
+      "revenueCta": "Revenue",
       "newRequests": "New requests",
       "count": "{count, plural, one {# request} other {# requests}}",
       "requested": "New",
@@ -1977,7 +1979,7 @@
     },
     "panels": {
       "bookings": { "title": "Upcoming bookings" },
-      "revenue": { "title": "Revenue" },
+      "revenue": { "title": "Revenue", "open": "View revenue" },
       "settings": { "title": "Settings" }
     },
     "settings": {
@@ -2033,6 +2035,20 @@
       "body": "Contact support for help."
     },
     "errorGeneric": "Could not open Stripe. Try again."
+  },
+  "revenue": {
+    "eyebrow": "Payouts",
+    "instructorTitle": "Revenue",
+    "instructorLead": "Transfers sent to your Connect account after completed lessons.",
+    "schoolTitle": "School revenue",
+    "schoolLead": "Transfers sent to the school Connect account after completed lessons.",
+    "metricTotal": "Total paid out",
+    "metricCount": "Payouts",
+    "tableTitle": "Recent payouts",
+    "empty": "No payouts yet. Complete a lesson after Connect is verified to see transfers here.",
+    "bookingLabel": "Booking {id}",
+    "amountSek": "{amount} SEK",
+    "back": "Back to dashboard"
   },
   "schoolSettings": {
     "title": "School settings",

@@ -153,12 +153,16 @@ export default async function SchoolDashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-3">
         {(['bookings', 'revenue', 'settings'] as const).map((key) => (
-          <Card key={key} className="border-border bg-card opacity-70">
+          <Card key={key} className="border-border bg-card">
             <CardContent className="grid gap-2 p-5">
               <p className="font-medium text-foreground">{t(`panels.${key}.title`)}</p>
               {key === 'settings' ? (
                 <Button asChild variant="link" size="sm" className="h-auto w-fit p-0">
                   <Link href="/dashboard/school/settings">{t('draftCardCta')}</Link>
+                </Button>
+              ) : key === 'revenue' ? (
+                <Button asChild variant="link" size="sm" className="h-auto w-fit p-0">
+                  <Link href="/dashboard/school/revenue">{t('panels.revenue.open')}</Link>
                 </Button>
               ) : (
                 <p className="text-small text-muted-foreground">{t('comingSoon')}</p>

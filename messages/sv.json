@@ -1077,7 +1077,8 @@
       "schoolInstructorsTab": "Instruktörer",
       "schoolBookingsTab": "Bokningar",
       "schoolRevenueTab": "Intäkter",
-      "schoolSettingsTab": "Inställningar"
+      "schoolSettingsTab": "Inställningar",
+      "revenueTab": "Intäkter"
     },
     "providerActivation": {
       "eyebrow": "Marknadsplatsens hälsa",
@@ -1220,6 +1221,7 @@
       "title": "Trafikskolans dashboard",
       "lead": "Nya bokningsförfrågningar från elever. Öppna en rad för att bekräfta, avböja eller svara, medan skolan styr annonsen.",
       "availabilityCta": "Hantera tillgänglighet",
+      "revenueCta": "Intäkter",
       "newRequests": "Nya förfrågningar",
       "count": "{count, plural, one {# förfrågan} other {# förfrågningar}}",
       "requested": "Ny",
@@ -1977,7 +1979,7 @@
     },
     "panels": {
       "bookings": { "title": "Kommande bokningar" },
-      "revenue": { "title": "Intäkter" },
+      "revenue": { "title": "Intäkter", "open": "Visa intäkter" },
       "settings": { "title": "Inställningar" }
     },
     "settings": {
@@ -2033,6 +2035,20 @@
       "body": "Kontakta support för hjälp."
     },
     "errorGeneric": "Kunde inte öppna Stripe. Försök igen."
+  },
+  "revenue": {
+    "eyebrow": "Utbetalningar",
+    "instructorTitle": "Intäkter",
+    "instructorLead": "Överföringar till ditt Connect-konto efter genomförda lektioner.",
+    "schoolTitle": "Skolans intäkter",
+    "schoolLead": "Överföringar till skolans Connect-konto efter genomförda lektioner.",
+    "metricTotal": "Totalt utbetalt",
+    "metricCount": "Utbetalningar",
+    "tableTitle": "Senaste utbetalningar",
+    "empty": "Inga utbetalningar ännu. Genomför en lektion efter att Connect är verifierat för att se överföringar här.",
+    "bookingLabel": "Bokning {id}",
+    "amountSek": "{amount} kr",
+    "back": "Tillbaka till dashboard"
   },
   "schoolSettings": {
     "title": "Skolinställningar",

@@ -18,6 +18,14 @@ import { bookingRow, instructorRow, prismaMock, resetPrisma } from './_setup/pri
 
 vi.mock('server-only', () => ({}));
 
+const refundBookingMock = vi.fn();
+const alertReleasedCancelNeedsReviewMock = vi.fn();
+vi.mock('@/lib/payments/refunds', () => ({
+  refundBooking: (...args: unknown[]) => refundBookingMock(...args),
+  alertReleasedCancelNeedsReview: (...args: unknown[]) =>
+    alertReleasedCancelNeedsReviewMock(...args),
+}));
+
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as cancelPOST } from '@/app/api/bookings/[id]/cancel/route';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
@@ -54,6 +62,14 @@ function heldBooking(overrides: Partial<Parameters<typeof bookingRow>[0]> = {}) 
 beforeEach(() => {
   resetPrisma();
   resetEmailMock();
+  refundBookingMock.mockReset();
+  alertReleasedCancelNeedsReviewMock.mockReset();
+  refundBookingMock.mockResolvedValue({
+    kind: 'refunded',
+    refundId: 're_test',
+    amountSek: 550,
+  });
+  alertReleasedCancelNeedsReviewMock.mockResolvedValue(undefined);
 });
 
 afterEach(() => {

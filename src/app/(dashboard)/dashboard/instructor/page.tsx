@@ -110,6 +110,9 @@ export default async function InstructorDashboardPage() {
           <Button asChild variant="secondary">
             <Link href="/dashboard/instructor/availability">{t('availabilityCta')}</Link>
           </Button>
+          <Button asChild variant="outline">
+            <Link href="/dashboard/instructor/revenue">{t('revenueCta')}</Link>
+          </Button>
         </div>
       </header>
       <InstructorLicenseStatusBanner />

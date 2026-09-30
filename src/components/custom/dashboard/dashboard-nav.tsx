@@ -44,7 +44,7 @@ export function DashboardNav({
     { href: '/dashboard/school', label: t('schoolOverviewTab'), icon: LayoutDashboard },
     { href: '/dashboard/school#instructors', label: t('schoolInstructorsTab'), icon: LayoutDashboard },
     { href: '/dashboard/school#bookings', label: t('schoolBookingsTab'), icon: LayoutDashboard },
-    { href: '/dashboard/school#revenue', label: t('schoolRevenueTab'), icon: LayoutDashboard },
+    { href: '/dashboard/school/revenue', label: t('schoolRevenueTab'), icon: LayoutDashboard },
     { href: '/dashboard/school/settings', label: t('schoolSettingsTab'), icon: LayoutDashboard },
   ];
 
@@ -66,6 +66,11 @@ export function DashboardNav({
           {
             href: '/dashboard/instructor/availability',
             label: t('availabilityTab'),
+            icon: LayoutDashboard,
+          },
+          {
+            href: '/dashboard/instructor/revenue',
+            label: t('revenueTab'),
             icon: LayoutDashboard,
           },
         ]
