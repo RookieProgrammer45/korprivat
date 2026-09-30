@@ -7,7 +7,7 @@ import 'server-only';
 import { after, NextResponse } from 'next/server';
 import { ensureBookingReceipts } from '@/lib/business/receipts';
 import { prisma } from '@/lib/db';
-import { applyConnectAccountUpdated } from '@/lib/payments/connect';
+import { applyConnectAccountUpdated, applyInstructorAccountUpdated } from '@/lib/payments/connect';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
 import { getStripe } from '@/lib/payments/stripe';
 import type Stripe from 'stripe';
@@ -36,15 +36,30 @@ export async function POST(req: Request) {
 
   if (event.type === 'account.updated') {
     const account = event.data.object as Stripe.Account;
-    const result = await applyConnectAccountUpdated(account);
-    console.info('[stripe webhook] account.updated', {
-      accountId: account.id,
-      updated: result.updated,
-      chargesEnabled: account.charges_enabled,
-      payoutsEnabled: account.payouts_enabled,
-      detailsSubmitted: account.details_submitted,
-    });
-    return NextResponse.json({ ok: true, connect: result.updated }, { status: 200 });
+    const orgResult = await applyConnectAccountUpdated(account);
+    if (orgResult.updated) {
+      console.info('[stripe webhook] account.updated org', {
+        accountId: account.id,
+        chargesEnabled: account.charges_enabled,
+        payoutsEnabled: account.payouts_enabled,
+        detailsSubmitted: account.details_submitted,
+      });
+      return NextResponse.json({ ok: true, connect: 'organization' }, { status: 200 });
+    }
+
+    const instructorResult = await applyInstructorAccountUpdated(account);
+    if (instructorResult.updated) {
+      console.info('[stripe webhook] account.updated instructor', {
+        accountId: account.id,
+        chargesEnabled: account.charges_enabled,
+        payoutsEnabled: account.payouts_enabled,
+        detailsSubmitted: account.details_submitted,
+      });
+      return NextResponse.json({ ok: true, connect: 'instructor' }, { status: 200 });
+    }
+
+    console.info('[stripe webhook] account.updated unmatched', { accountId: account.id });
+    return NextResponse.json({ ok: true, connect: false }, { status: 200 });
   }
 
   if (event.type !== 'checkout.session.completed') {

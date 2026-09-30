@@ -2010,6 +2010,30 @@
     },
     "errorGeneric": "Kunde inte öppna Stripe. Försök igen."
   },
+  "instructorPayouts": {
+    "title": "Utbetalningar",
+    "stateA": {
+      "title": "Ta emot betalningar",
+      "body": "Anslut ett bankkonto för att ta emot lektionsutbetalningar via DriveLinkUp.",
+      "cta": "Anslut bankkonto"
+    },
+    "stateB": {
+      "title": "Slutför verifieringen",
+      "body": "Stripe behöver mer information. Klicka för att fortsätta.",
+      "cta": "Fortsätt verifiering"
+    },
+    "stateC": {
+      "title": "Utbetalningar aktiva",
+      "body": "Utbetalningar skickas till ditt bankkonto efter varje genomförd lektion.",
+      "badge": "Verifierad",
+      "dashboardCta": "Öppna Stripe Dashboard"
+    },
+    "stateD": {
+      "title": "Verifiering misslyckades",
+      "body": "Kontakta support för hjälp."
+    },
+    "errorGeneric": "Kunde inte öppna Stripe. Försök igen."
+  },
   "schoolSettings": {
     "title": "Skolinställningar",
     "name": "Skolans namn",
