@@ -108,6 +108,26 @@ export async function POST(req: Request) {
         instructor,
         verifiedAmountUsd: Math.max(1, Math.round(amountTotal / 100)),
       });
+
+      const amountSek =
+        booking.grossChargedSek ??
+        (amountTotal > 0 ? Math.round(amountTotal / 100) : instructor.hourlyRateSek);
+      const locale = booking.locale === 'en' ? 'en' : 'sv';
+      const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.drivelinkup.com').replace(
+        /\/+$/,
+        '',
+      );
+      const { paymentReceiptEmail } = await import('@/lib/email/payment-receipt');
+      const { sendEmail } = await import('@/lib/email/send');
+      const mail = paymentReceiptEmail({
+        locale,
+        recipientName: booking.studentName,
+        instructorName: instructor.name,
+        amountSek,
+        bookingId: booking.id,
+        bookingUrl: `${appUrl}/bookings/${encodeURIComponent(booking.id)}`,
+      });
+      await sendEmail({ to: booking.studentEmail, ...mail });
     } catch (error) {
       console.error('[stripe webhook] receipt snapshot failed', error);
     }

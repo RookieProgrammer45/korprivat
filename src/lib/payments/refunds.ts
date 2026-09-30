@@ -93,6 +93,20 @@ export async function refundBooking(
       data: { refundedAt: new Date() },
     });
 
+    try {
+      const locale = booking.locale === 'en' ? 'en' : 'sv';
+      const { refundNotificationEmail } = await import('@/lib/email/refund-notification');
+      const mail = refundNotificationEmail({
+        locale,
+        recipientName: booking.studentName,
+        amountSek: opts?.amountSek ?? booking.grossChargedSek ?? null,
+        bookingId,
+      });
+      await sendEmail({ to: booking.studentEmail, ...mail });
+    } catch (err) {
+      console.error('[refunds] refund notification email failed', err);
+    }
+
     return {
       kind: 'refunded',
       refundId: refund.id,

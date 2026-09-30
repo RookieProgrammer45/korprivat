@@ -210,6 +210,39 @@ export async function payoutBooking(
       console.error('[payouts] receipt sync failed', err);
     });
 
+    // Payout notification — best-effort after successful transfer.
+    try {
+      const locale = booking.locale === 'en' ? 'en' : 'sv';
+      const { payoutNotificationEmail } = await import('@/lib/email/payout-notification');
+      if (recipientType === 'ORGANIZATION') {
+        const org = await prisma.organization.findUnique({
+          where: { id: recipientId },
+          select: { name: true, contactEmail: true },
+        });
+        if (org?.contactEmail) {
+          const mail = payoutNotificationEmail({
+            locale,
+            recipientName: org.name,
+            amountSek: fees.payoutSek,
+            bookingId,
+            learnerName: booking.studentName,
+          });
+          await sendEmail({ to: org.contactEmail, ...mail });
+        }
+      } else if (instructor.email) {
+        const mail = payoutNotificationEmail({
+          locale,
+          recipientName: instructor.name,
+          amountSek: fees.payoutSek,
+          bookingId,
+          learnerName: booking.studentName,
+        });
+        await sendEmail({ to: instructor.email, ...mail });
+      }
+    } catch (err) {
+      console.error('[payouts] payout notification email failed', err);
+    }
+
     return {
       kind: 'sent',
       transferId: transfer.id,
