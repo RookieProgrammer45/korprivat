@@ -24,6 +24,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { signOut as signOutAction, useSession } from '@/lib/auth-client';
 
 import { type NavGroup, type NavItem, navItems } from '@/lib/nav';
+import { isFocusedShellPath } from '@/lib/shell-mode';
 import { siteName } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -39,7 +40,12 @@ function useIsAuthenticated(): boolean {
 
 function visibleItems(group: NavGroup, isAuthenticated: boolean): NavItem[] {
   return navItems
-    .filter((item) => item.group === group && (!item.requiresAuth || isAuthenticated))
+    .filter((item) => {
+      if (item.group !== group) return false;
+      if (item.requiresAuth && !isAuthenticated) return false;
+      if (item.hideWhenAuthenticated && isAuthenticated) return false;
+      return true;
+    })
     .sort(
       (a, b) =>
         (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) ||
@@ -101,6 +107,14 @@ function splitPrimarySlots(slots: NavSlot[]): { inline: NavSlot[]; overflow: Nav
 export function SiteNav() {
   const isAuthenticated = useIsAuthenticated();
   const tNav = useTranslations('common');
+  const pathname = usePathname();
+
+  // Auth / onboarding / dashboard / listing wizard own their chrome — do not
+  // stack the marketing header on top of AuthShell or DashboardShell.
+  if (isFocusedShellPath(pathname)) {
+    return null;
+  }
+
   // The brand links home, so drop a redundant '/' item from the rendered links.
   const primary = visibleItems('primary', isAuthenticated).filter((item) => item.href !== '/');
   const secondary = visibleItems('secondary', isAuthenticated);
@@ -117,13 +131,14 @@ export function SiteNav() {
   // Top-bar slots (links + `menu` dropdowns); `inline` renders, `overflow` → "More".
   const slots = buildPrimarySlots(primary);
   const { inline, overflow } = splitPrimarySlots(slots);
-  const collapsedCount = primary.length + secondary.length;
+  // When signed in, secondary CTAs are hidden but AuthNav (avatar menu) still
+  // needs the mobile sheet entry point.
+  const collapsedCount = primary.length + secondary.length + (isAuthenticated ? 1 : 0);
 
   // Controlled so a drawer link both navigates AND dismisses the overlay; without
   // this the Sheet stays open over the new route after client-side navigation.
   const [open, setOpen] = React.useState(false);
 
-  const pathname = usePathname();
   // Exact match for the root; segment-boundary match for everything else so
   // '/blog' highlights on '/blog/post' but '/' never matches every route.
   const isActive = (href: string) =>
@@ -437,7 +452,7 @@ export function SiteNav() {
                       </div>
                     ),
                   )}
-                  {secondary.length > 0 && (
+                  {(secondary.length > 0 || isAuthenticated) && (
                     <div className="mt-2 flex flex-col gap-1 border-t border-border pt-4">
                       {secondary.map((item) => (
                         <Button
@@ -455,7 +470,7 @@ export function SiteNav() {
                           </Link>
                         </Button>
                       ))}
-                      {/* AuthNav (mobile) — Sign in / Sign out reactive. */}
+                      {/* AuthNav (mobile) — Sign in / avatar menu reactive. */}
                       <AuthNavMobile onClose={() => setOpen(false)} />
                     </div>
                   )}
@@ -480,6 +495,11 @@ export function SiteNav() {
 }
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  if (isFocusedShellPath(pathname)) {
+    return null;
+  }
+
   const isAuthenticated = useIsAuthenticated();
   const tNav = useTranslations('common');
   const footer = visibleItems('footer', isAuthenticated);
@@ -501,8 +521,7 @@ export function SiteFooter() {
   );
 }
 
-// Mobile-drawer auth slot — wraps <AuthNav/> in a wide Button so it lands
-// cleanly in the drawer's vertical layout.
+// Mobile-drawer auth slot — Sign in link or Dashboard / Profile / Sign out.
 function AuthNavMobile({ onClose }: { onClose: () => void }) {
   const t = useTranslations('common');
   const { data: session, isPending } = useSession();
@@ -516,25 +535,37 @@ function AuthNavMobile({ onClose }: { onClose: () => void }) {
     );
   }
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      className="w-full justify-start text-muted-foreground hover:text-foreground"
-      disabled={signingOut}
-      aria-busy={signingOut}
-      onClick={async () => {
-        setSigningOut(true);
-        try {
-          await signOutAction();
-          onClose();
-          window.location.assign('/');
-        } catch {
-          setSigningOut(false);
-          toast.error(t('nav.signOutError'));
-        }
-      }}
-    >
-      {signingOut ? t('nav.signingOut') : t('nav.signOut')}
-    </Button>
+    <>
+      <Button asChild variant="ghost" className="w-full justify-start">
+        <Link href="/dashboard" onClick={onClose}>
+          {t('nav.dashboard')}
+        </Link>
+      </Button>
+      <Button asChild variant="ghost" className="w-full justify-start">
+        <Link href="/profile" onClick={onClose}>
+          {t('nav.profile')}
+        </Link>
+      </Button>
+      <Button
+        type="button"
+        variant="ghost"
+        className="w-full justify-start text-muted-foreground hover:text-foreground"
+        disabled={signingOut}
+        aria-busy={signingOut}
+        onClick={async () => {
+          setSigningOut(true);
+          try {
+            await signOutAction();
+            onClose();
+            window.location.assign('/');
+          } catch {
+            setSigningOut(false);
+            toast.error(t('nav.signOutError'));
+          }
+        }}
+      >
+        {signingOut ? t('nav.signingOut') : t('nav.signOut')}
+      </Button>
+    </>
   );
 }

@@ -8,6 +8,7 @@ import { getTranslations } from 'next-intl/server';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignUpForm } from '@/components/custom/sign-up-form';
 import { loginHrefWithNext, sanitizeNext } from '@/lib/auth-next';
+import { getSessionUser } from '@/lib/require-auth';
 import { redirectLearnerAwayFromSignup } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -38,21 +39,25 @@ export default async function SignupPage({
   const next = sanitizeNext(params.next);
   const initialPath = resolveInitialPath(params.role);
   const initialStep = params.step === 'photo' ? 'photo' : undefined;
+  // Mid-flow photo/licence steps run while signed in — never show "Log in".
+  const sessionUser = await getSessionUser();
 
   await redirectLearnerAwayFromSignup(next);
 
   return (
     <AuthShell
       footer={
-        <>
-          {t('switchToSigninLead')}{' '}
-          <Link
-            href={loginHrefWithNext(next)}
-            className="font-medium text-brand-600 underline-offset-2 transition-colors hover:text-brand-700 hover:underline dark:text-brand-400"
-          >
-            {t('switchToSignin')}
-          </Link>
-        </>
+        sessionUser ? undefined : (
+          <>
+            {t('switchToSigninLead')}{' '}
+            <Link
+              href={loginHrefWithNext(next)}
+              className="font-medium text-brand-600 underline-offset-2 transition-colors hover:text-brand-700 hover:underline dark:text-brand-400"
+            >
+              {t('switchToSignin')}
+            </Link>
+          </>
+        )
       }
     >
       <SignUpForm next={next} initialPath={initialPath} initialStep={initialStep} />

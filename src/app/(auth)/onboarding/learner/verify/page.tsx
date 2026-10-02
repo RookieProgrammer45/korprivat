@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { AuthShell } from '@/components/custom/auth-shell';
 import { LearnerVerifyClient } from '@/components/custom/verification/learner-verify-client';
 import { LearnerVerifyDobStep } from '@/components/custom/verification/learner-verify-dob-step';
 import { prisma } from '@/lib/db';
@@ -43,11 +42,7 @@ export default async function LearnerVerifyPage() {
   // Phase 1: OAuth (and any other) learners without claimed DOB collect it
   // here instead of bouncing back to /signup (which re-triggered complete).
   if (!facts?.claimedDob) {
-    return (
-      <AuthShell>
-        <LearnerVerifyDobStep />
-      </AuthShell>
-    );
+    return <LearnerVerifyDobStep />;
   }
 
   const verificationState = resolveLearnerStateFromFacts(facts);
@@ -65,11 +60,9 @@ export default async function LearnerVerifyPage() {
   }
 
   return (
-    <AuthShell>
-      <LearnerVerifyClient
-        initialState={verificationState}
-        initialSessionId={facts.diditSessionId}
-      />
-    </AuthShell>
+    <LearnerVerifyClient
+      initialState={verificationState}
+      initialSessionId={facts.diditSessionId}
+    />
   );
 }

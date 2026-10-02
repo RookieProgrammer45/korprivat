@@ -48,6 +48,8 @@ export interface NavItem {
   menu?: string;
   /** When true, render only if a session exists (see site-nav.tsx). */
   requiresAuth?: boolean;
+  /** When true, hide once a session exists (acquisition CTAs / marketing-only). */
+  hideWhenAuthenticated?: boolean;
   /** Sort key within a group (ascending); unordered items fall to the end. */
   order?: number;
 }
@@ -70,31 +72,17 @@ export const navItems: NavItem[] = [
     href: '/#how',
     group: 'primary',
     order: 2,
+    hideWhenAuthenticated: true,
   },
-  // Visible only to signed-in users — taps into the useSession seam
-  // that SiteNav wires up to better-auth's client.
-  {
-    label: 'Profile',
-    labelKey: 'nav.profile',
-    href: '/profile',
-    group: 'primary',
-    order: 3,
-    requiresAuth: true,
-  },
-  {
-    label: 'Dashboard',
-    labelKey: 'nav.dashboard',
-    href: '/dashboard',
-    group: 'primary',
-    order: 4,
-    requiresAuth: true,
-  },
+  // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
+  // primary bar — keeps marketing chrome short once a session exists.
   {
     label: "I'm a driving instructor",
     labelKey: 'nav.drivingInstructor',
     href: '/signup?role=instructor',
     group: 'secondary',
     order: 0,
+    hideWhenAuthenticated: true,
   },
   {
     label: 'I run a driving school',
@@ -102,6 +90,7 @@ export const navItems: NavItem[] = [
     href: '/for-skolor',
     group: 'secondary',
     order: 1,
+    hideWhenAuthenticated: true,
   },
   {
     label: 'Get started',
@@ -109,6 +98,7 @@ export const navItems: NavItem[] = [
     href: '/signup',
     group: 'secondary',
     order: 2,
+    hideWhenAuthenticated: true,
   },
   { label: 'FAQ', labelKey: 'nav.faq', href: '/faq', group: 'footer', order: 0 },
   { label: 'Pricing', labelKey: 'nav.pricing', href: '/pricing', group: 'footer', order: 1 },
