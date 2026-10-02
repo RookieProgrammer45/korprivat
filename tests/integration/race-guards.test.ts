@@ -38,6 +38,13 @@ import { POST as signupRedirectPOST } from '@/app/api/auth/signup-redirect/route
 import { POST as welcomePOST } from '@/app/api/auth/welcome/route';
 import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
 import { authMock } from './_setup/auth-mock';
+
+const SESSION_USER = {
+  id: 'user_race',
+  email: 'race@example.test',
+  name: 'Race Tester',
+  role: 'user' as const,
+};
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
 
 function learnerGet(url: string): Request {

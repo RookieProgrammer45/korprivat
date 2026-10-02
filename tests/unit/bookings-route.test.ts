@@ -214,20 +214,31 @@ describe('POST /api/bookings — email dispatch', () => {
     expect(mockBookingCreate).toHaveBeenCalledOnce();
     expect(sendEmailMock).toHaveBeenCalledTimes(2);
 
-    const [studentCall, instructorCall] = sendEmailMock.mock.calls;
-    expect(studentCall[0].to).toBe('learner@example.test');
-    expect(studentCall[0].subject).toBe('We received your booking request — DriveLinkUp');
-    expect(studentCall[0].text).toContain('Test Learner');
-    expect(studentCall[0].text).toContain('booking_abc123');
-    expect(studentCall[0].text).toContain('Erik Lindqvist');
-    expect(studentCall[0].text).toContain('B');
+    expect(sendEmailMock).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        to: 'learner@example.test',
+        subject: 'We received your booking request — DriveLinkUp',
+      }),
+    );
+    const studentArgs = sendEmailMock.mock.calls[0] as unknown as Array<{ text: string }>;
+    expect(studentArgs[0]?.text).toContain('Test Learner');
+    expect(studentArgs[0]?.text).toContain('booking_abc123');
+    expect(studentArgs[0]?.text).toContain('Erik Lindqvist');
+    expect(studentArgs[0]?.text).toContain('B');
 
-    expect(instructorCall[0].to).toBe('erik@drivelinkup.test');
-    expect(instructorCall[0].subject).toMatch(/^New booking request — B on /);
-    expect(instructorCall[0].text).toContain('Test Learner');
-    expect(instructorCall[0].text).toContain('learner@example.test');
-    expect(instructorCall[0].text).toContain('+46700000000');
-    expect(instructorCall[0].text).toContain('booking_abc123');
+    expect(sendEmailMock).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        to: 'erik@drivelinkup.test',
+        subject: expect.stringMatching(/^New booking request — B on /),
+      }),
+    );
+    const instructorArgs = sendEmailMock.mock.calls[1] as unknown as Array<{ text: string }>;
+    expect(instructorArgs[0]?.text).toContain('Test Learner');
+    expect(instructorArgs[0]?.text).toContain('learner@example.test');
+    expect(instructorArgs[0]?.text).toContain('+46700000000');
+    expect(instructorArgs[0]?.text).toContain('booking_abc123');
   });
 
   it('still returns 201 and sends the student email when the instructor has no email', async () => {
@@ -240,7 +251,10 @@ describe('POST /api/bookings — email dispatch', () => {
     const res = await POST(jsonRequest(VALID_BODY));
     expect(res.status).toBe(201);
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    expect(sendEmailMock.mock.calls[0][0].to).toBe('learner@example.test');
+    expect(sendEmailMock).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({ to: 'learner@example.test' }),
+    );
   });
 
   it('returns 201 even when sendEmail rejects for the instructor (student still sent)', async () => {

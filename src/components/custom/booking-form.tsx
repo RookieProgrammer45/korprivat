@@ -394,10 +394,15 @@ export function BookingForm({
         'error' in body &&
         (body as { error?: string }).error === 'learner_not_eligible'
       ) {
-        const state = (body as { state?: string }).state;
+        const payload = body as {
+          error: string;
+          state?: string;
+          redirectTo?: string;
+        };
+        const state = payload.state;
         const redirectTo =
-          typeof (body as { redirectTo?: string }).redirectTo === 'string'
-            ? (body as { redirectTo: string }).redirectTo
+          typeof payload.redirectTo === 'string'
+            ? payload.redirectTo
             : state && typeof state === 'string'
               ? stateToRoute(state as LearnerVerificationState)
               : '/onboarding/learner/verify';
