@@ -1,21 +1,16 @@
 //
-// Server Component: greeting + a "Manage availability" CTA + the
-// <InstructorLicenseStatusBanner/> client island, which fetches the
-// review status of the instructor's uploaded driving licence and branches
-// on it: VERIFIED → the real instructor dashboard; NONE/PENDING → the
-// pending-review empty state; REJECTED → the rejection card. No
-// data-fetches in the page body — the licence status comes from the
-// island's GET /api/instructor-license.
+// Server Component: greeting + host checklist + licence status banner +
+// Connect / fee / policy / a single ProviderOperations mount + history.
 //
 // Role gate: only a session whose `UserProfile.role === 'INSTRUCTOR'`
-// renders here. A wrong-role deep-link is redirected to the role-correct
-// dashboard via `dashboardPathFor()`. The guard already fetched the role.
+// renders here.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { InstructorBookingHistory } from '@/components/custom/dashboard/instructor-booking-history';
+import { InstructorHostChecklist } from '@/components/custom/dashboard/instructor-host-checklist';
 import { ProviderOperations } from '@/components/custom/dashboard/provider-operations';
 import {
   InstructorPayoutsCard,
@@ -23,6 +18,7 @@ import {
 } from '@/components/custom/instructor/instructor-payouts-card';
 import { InstructorLicenseStatusBanner } from '@/components/custom/instructor-license-status-banner';
 import { InstructorPayoutCard } from '@/components/custom/instructor-payout-card';
+import { InstructorPolicyEditor } from '@/components/custom/instructor-policy-editor';
 import { Button } from '@/components/ui/button';
 import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
 import { prisma } from '@/lib/db';
@@ -98,6 +94,9 @@ export default async function InstructorDashboardPage() {
     }
   }
 
+  const hasListing = Boolean(instructor);
+  const connectReady = payoutsState === 'C';
+
   return (
     <section className="grid gap-6">
       <header className="grid gap-3">
@@ -115,9 +114,15 @@ export default async function InstructorDashboardPage() {
           </Button>
         </div>
       </header>
+      <InstructorHostChecklist hasListing={hasListing} connectReady={connectReady} />
       <InstructorLicenseStatusBanner />
-      {instructor ? <InstructorPayoutsCard state={payoutsState} /> : null}
+      {instructor ? (
+        <div id="instructor-connect">
+          <InstructorPayoutsCard state={payoutsState} />
+        </div>
+      ) : null}
       <InstructorPayoutCard />
+      {hasListing ? <InstructorPolicyEditor /> : null}
       <ProviderOperations />
       <InstructorBookingHistory />
     </section>

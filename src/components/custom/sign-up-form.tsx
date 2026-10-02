@@ -33,6 +33,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { apiFetch } from '@/lib/api-client';
 import { signUp, useSession, authClient } from '@/lib/auth-client';
+import {
+  clearPersistedAuthNext,
+  persistAuthNext,
+  readPersistedAuthNext,
+} from '@/lib/auth-next';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/auth';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { LicenseUploadResponse } from '@/lib/contracts/instructor-license';
@@ -130,6 +135,17 @@ export function SignUpForm({
   const [signupPath, setSignupPath] = useState<SignupPathType | null>(initialPath ?? null);
   const [pendingEmail, setPendingEmail] = useState('');
   const [resendCooldown, setResendCooldown] = useState(0);
+  const [resumeNext, setResumeNext] = useState<string | undefined>(next);
+
+  useEffect(() => {
+    if (next) {
+      persistAuthNext(next);
+      setResumeNext(next);
+      return;
+    }
+    const stored = readPersistedAuthNext();
+    if (stored) setResumeNext(stored);
+  }, [next]);
 
   const form = useForm<AccountValues>({
     defaultValues: {
@@ -164,19 +180,20 @@ export function SignUpForm({
           // acceptance deep-links so invitees can accept first.
           next:
             signupPath === 'SCHOOL'
-              ? next?.startsWith('/invite/')
-                ? next
+              ? resumeNext?.startsWith('/invite/')
+                ? resumeNext
                 : '/dashboard/school'
-              : next,
+              : resumeNext,
         }),
         schema: SignupCompleteResponse,
       });
+      clearPersistedAuthNext();
       router.push(withSignupFlag(result.next ?? result.to));
       router.refresh();
     } catch {
       toast.error(t('errors.generic'));
     }
-  }, [next, router, signupPath, t]);
+  }, [resumeNext, router, signupPath, t]);
 
   const applySignupState = useCallback(
     (state: ReturnType<typeof SignupState.parse>) => {
@@ -265,9 +282,12 @@ export function SignUpForm({
     const email = pendingEmail || form.getValues('email');
     if (!email || resendCooldown > 0) return;
     try {
+      const callbackURL = resumeNext
+        ? `/signup?step=photo&next=${encodeURIComponent(resumeNext)}`
+        : '/signup?step=photo';
       const { error } = await authClient.sendVerificationEmail({
         email,
-        callbackURL: '/signup?step=photo',
+        callbackURL,
       });
       if (error) {
         toast.error(t('step.verifyEmail.resendFailed'));
@@ -742,7 +762,7 @@ export function SignUpForm({
       <SocialAuthButtons
         mode="signup"
         role={roleForSignupPath(selectedPath)}
-        next={selectedPath === 'SCHOOL' ? (next ?? '/for-skolor') : next}
+        next={selectedPath === 'SCHOOL' ? (resumeNext ?? '/for-skolor') : resumeNext}
       />
 
       <Form {...form}>

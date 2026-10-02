@@ -138,13 +138,14 @@
         "title": "Kassa"
       },
       "eyebrow": "Betalning",
-      "verifiedTitle": "Tack — din prenumeration är igång.",
-      "verifiedBody": "Vi har bekräftat betalningen hos Stripe. Du kan stänga fliken eller gå tillbaka till din dashboard.",
+      "verifiedTitle": "Tack — din lektion är bokad.",
+      "verifiedBody": "Vi har bekräftat betalningen hos Stripe. Hitta bokningen under Mina bokningar — efter lektionen kan du bekräfta och lämna omdöme där.",
       "missingTitle": "Hittade ingen betalningssession.",
       "missingBody": "Öppna länken från ditt senaste mejl eller gå tillbaka till din dashboard och försök igen.",
       "timeoutTitle": "Bekräftelsen dröjer.",
       "timeoutBody": "Vi kunde inte bekräfta betalningen inom ett par sekunder. Försök igen om en liten stund — kontakta teamet om pengarna dragits.",
-      "cta": "Tillbaka till dashboard"
+      "cta": "Tillbaka till dashboard",
+      "bookingsCta": "Mina bokningar"
     },
     "cancelled": {
       "eyebrow": "Avbruten",
@@ -545,7 +546,11 @@
     "descriptionLoaded": "{rate} visas nedan. Se skolans pris och avbokningspolicy innan du skickar din förfrågan.",
     "descriptionEmpty": "Välj en ledig tid och granska bokningsdetaljerna innan du fortsätter.",
     "submit": "Skicka bokningsförfrågan",
+    "submitInstant": "Boka och betala",
+    "submitRequest": "Skicka bokningsförfrågan",
     "submitting": "Skickar…",
+    "submittingInstant": "Bokar…",
+    "submittingRequest": "Skickar…",
     "policyEyebrow": "Avbokningspolicy",
     "policyLink": "Läs hela policyn i FAQ",
     "policyScheduleFlexible": "Flexibel: full återbetalning minst 24 timmar före; hela lektionsavgiften behålls inom 24 timmar.",
@@ -1173,6 +1178,17 @@
         "retry": "Försök igen"
       },
       "viewAllBookings": "Se alla bokningar",
+      "nextAction": {
+        "payTitle": "Betalning behövs",
+        "payBody": "Slutför betalningen för din lektion med {name}.",
+        "payCta": "Betala nu",
+        "confirmTitle": "Bekräfta din lektion",
+        "confirmBody": "Din lektion med {name} väntar på din bekräftelse.",
+        "confirmCta": "Bekräfta lektion",
+        "reviewTitle": "Lämna ett omdöme",
+        "reviewBody": "Hur var din lektion med {name}?",
+        "reviewCta": "Lämna omdöme"
+      },
       "history": {
         "eyebrow": "Bokningshistorik",
         "title": "Din bokningshistorik",
@@ -1265,6 +1281,28 @@
         "title": "Skapa skolannonsen",
         "body": "Behörigheterna är verifierade — skapa annonsen så att elever kan jämföra skolan.",
         "cta": "Skapa annons"
+      },
+      "checklist": {
+        "licence": {
+          "title": "Verifiera din behörighet",
+          "body": "Vi behöver en godkänd Transportstyrelsen-behörighet innan elever kan boka dig.",
+          "cta": "Se status"
+        },
+        "listing": {
+          "title": "Skapa din annons",
+          "body": "Publicera din profil så elever kan hitta dig i sökningen.",
+          "cta": "Skapa annons"
+        },
+        "connect": {
+          "title": "Koppla utbetalningar",
+          "body": "Slutför Stripe Connect så du kan få betalt för lektioner.",
+          "cta": "Öppna utbetalningar"
+        },
+        "availability": {
+          "title": "Publicera tillgänglighet",
+          "body": "Släpp minst en ledig tid så elever kan boka.",
+          "cta": "Hantera tillgänglighet"
+        }
       },
       "availability": {
         "eyebrow": "Tillgänglighet",
@@ -2485,10 +2523,10 @@
     "retry": "Försök igen",
     "actionError": "Åtgärden kunde inte genomföras. Läs in sidan och försök igen.",
     "setup": {
-      "title": "Slutför skolprofilen",
-      "body": "Skapa eller koppla skolprofilen för att publicera tider och ta emot bokningsförfrågningar.",
+      "title": "Slutför värdinställningen",
+      "body": "Slutför checklistan ovan — koppla utbetalningar och publicera tillgänglighet — innan elever kan boka betalda lektioner.",
       "empty": "Ingen skolprofil är kopplad till kontot ännu.",
-      "cta": "Skapa skolprofil"
+      "cta": "Visa installationschecklista"
     },
     "actions": {
       "accept": "Acceptera",

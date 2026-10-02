@@ -35,6 +35,11 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { useSession } from '@/lib/auth-client';
 import type { CancellationTier } from '@/lib/business/cancellation-policy';
+import {
+  clearBookingDraft,
+  persistBookingDraft,
+  readBookingDraft,
+} from '@/lib/booking-form-draft';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import {
   BookingCreate,
@@ -266,6 +271,19 @@ export function BookingForm({
     form.setValue('instructorId', instructorId);
   }, [form, instructorId]);
 
+  // Restore draft after login/signup bounce so the learner does not retype.
+  useEffect(() => {
+    const draft = readBookingDraft(instructorId);
+    if (!draft) return;
+    if (draft.studentName) form.setValue('studentName', draft.studentName, { shouldDirty: true });
+    if (draft.studentEmail) form.setValue('studentEmail', draft.studentEmail, { shouldDirty: true });
+    if (draft.studentPhone) form.setValue('studentPhone', draft.studentPhone, { shouldDirty: true });
+    if (draft.category) {
+      form.setValue('category', draft.category as FormValues['category'], { shouldDirty: true });
+    }
+    if (draft.slotId) form.setValue('slotId', draft.slotId, { shouldDirty: true });
+  }, [form, instructorId]);
+
   useEffect(() => {
     const first = categoryOptions[0];
     if (instructor && first && !form.formState.dirtyFields.category) {
@@ -329,6 +347,13 @@ export function BookingForm({
 
     if (sessionPending) return;
     if (!session?.user) {
+      persistBookingDraft(instructorId, {
+        studentName: values.studentName,
+        studentEmail: values.studentEmail,
+        studentPhone: values.studentPhone,
+        category: values.category ?? '',
+        slotId: values.slotId,
+      });
       const next =
         typeof window !== 'undefined'
           ? `${window.location.pathname}${window.location.search}`
@@ -354,6 +379,7 @@ export function BookingForm({
         }),
         schema: BookingCreated,
       });
+      clearBookingDraft(instructorId);
       setSentRate(created.hourlyRateSek);
       setSentInstructorName(instructor?.name ?? null);
       router.replace(
@@ -749,7 +775,13 @@ export function BookingForm({
               disabled={form.formState.isSubmitting || !instructor}
               className="shadow-sm"
             >
-              {form.formState.isSubmitting ? t('submitting') : t('submit')}
+              {form.formState.isSubmitting
+                ? instructor?.bookingMode === 'request'
+                  ? t('submittingRequest')
+                  : t('submittingInstant')
+                : instructor?.bookingMode === 'request'
+                  ? t('submitRequest')
+                  : t('submitInstant')}
             </Button>
             {eligibilityError ? (
               <p className="text-small text-destructive" role="alert">

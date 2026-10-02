@@ -12,6 +12,7 @@ import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { RecommendedInstructors } from '@/components/custom/dashboard/recommended-instructors';
 import { StudentDashboard } from '@/components/custom/dashboard/student-dashboard';
+import { StudentNextActionBanner } from '@/components/custom/dashboard/student-next-action-banner';
 import { DiditVerifyButton } from '@/components/custom/verification/didit-verify-button';
 import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
 import { getStoredLearnerState } from '@/lib/signup-resume';
@@ -62,6 +63,7 @@ export default async function StudentDashboardPage() {
           <DiditVerifyButton className="sm:max-w-xs sm:shrink-0" />
         </aside>
       ) : null}
+      <StudentNextActionBanner />
       <StudentDashboard />
       <RecommendedInstructors />
     </section>

@@ -62,6 +62,31 @@ export async function GET(req: Request) {
       { status: 404 },
     );
   }
+
+  const [connectRow, openSlot] = await Promise.all([
+    prisma.instructor.findUnique({
+      where: { id: instructor.id },
+      select: { chargesEnabled: true, payoutsEnabled: true },
+    }),
+    prisma.availabilitySlot.findFirst({
+      where: {
+        instructorId: instructor.id,
+        bookedAt: null,
+        startsAt: { gt: new Date() },
+      },
+      select: { id: true },
+    }),
+  ]);
+
+  const profileReady =
+    instructor.name.trim().length > 0 &&
+    instructor.city.trim().length > 0 &&
+    instructor.categories.length > 0;
+  const connectReady = Boolean(
+    connectRow?.chargesEnabled && connectRow?.payoutsEnabled,
+  );
+  const hasAvailability = openSlot != null;
+
   return NextResponse.json(
     InstructorMe.parse({
       id: instructor.id,
@@ -77,10 +102,9 @@ export async function GET(req: Request) {
       bookingMode: instructor.bookingMode === 'request' ? 'request' : 'instant',
       providerRole: instructor.providerRole,
       timezone: providerTimezoneForCity(instructor.city),
-      setupComplete:
-        instructor.name.trim().length > 0 &&
-        instructor.city.trim().length > 0 &&
-        instructor.categories.length > 0,
+      // Licence stays a separate banner gate; setupComplete tracks
+      // listing profile + Connect + published availability.
+      setupComplete: profileReady && connectReady && hasAvailability,
       canManageAvailability: true,
     }),
     { status: 200 },

@@ -32,8 +32,10 @@ const POLL_DELAY_MS = 750;
 
 export function CheckoutSuccessIsland({
   dashboardHref = '/dashboard',
+  bookingsHref,
 }: {
   dashboardHref?: string;
+  bookingsHref?: string;
 }) {
   const t = useTranslations('checkout.success');
   const params = useSearchParams();
@@ -117,8 +119,13 @@ export function CheckoutSuccessIsland({
           {t('verifiedTitle')}
         </h1>
         <p className="text-body text-muted-foreground">{t('verifiedBody')}</p>
-        <div className="mt-2 flex justify-center">
-          <Button asChild>
+        <div className="mt-2 flex flex-wrap justify-center gap-3">
+          {bookingsHref ? (
+            <Button asChild>
+              <Link href={bookingsHref}>{t('bookingsCta')}</Link>
+            </Button>
+          ) : null}
+          <Button asChild variant={bookingsHref ? 'outline' : 'default'}>
             <Link href={dashboardHref}>{t('cta')}</Link>
           </Button>
         </div>

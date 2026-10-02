@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import type { Role } from '@/lib/contracts/auth';
+import { loginHrefWithNext, signupHrefWithNext } from '@/lib/auth-next';
 import { signIn } from '@/lib/auth-client';
 
 function GoogleMark({ className }: { className?: string }) {
@@ -71,7 +72,8 @@ export function SocialAuthButtons({
       const { data, error } = await signIn.social({
         provider: 'google',
         callbackURL,
-        errorCallbackURL: mode === 'signup' ? '/signup' : '/login',
+        errorCallbackURL:
+          mode === 'signup' ? signupHrefWithNext(next) : loginHrefWithNext(next),
         disableRedirect: true,
       });
 

@@ -131,9 +131,12 @@ export async function POST(req: Request) {
   // Learners: verification soft-gate via stateToRoute.
   // Instructors / handledare: handshake dashboardPath (maps role →
   // /dashboard/instructor|handledare). No /onboarding/instructor route exists.
+  // Prefer an explicit same-origin `next` (booking resume, invite, etc.)
+  // over the Didit soft-gate so demand-side auth does not drop context.
   const destination =
     role === 'STUDENT'
-      ? stateToRoute(resolveStoredLearnerState(profile?.dateOfBirth ?? null))
+      ? (parsed.data.next ??
+        stateToRoute(resolveStoredLearnerState(profile?.dateOfBirth ?? null)))
       : (parsed.data.next ?? result.dashboardPath);
   return NextResponse.json(
     SignupCompleteResponse.parse({ ok: true, next: destination, to: destination }),

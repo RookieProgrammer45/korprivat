@@ -126,8 +126,11 @@ export async function getStoredLearnerState(userId: string): Promise<LearnerVeri
  * Signed-in learners who already stored a claimed DOB leave /signup for
  * the route the state machine assigns (usually /onboarding/learner/verify).
  * Hard blocks stay on /signup?blocked=….
+ *
+ * When `resumeNext` is set (e.g. return to an instructor profile after auth),
+ * prefer that same-origin path so booking context is not lost to Didit.
  */
-export async function redirectLearnerAwayFromSignup(): Promise<void> {
+export async function redirectLearnerAwayFromSignup(resumeNext?: string): Promise<void> {
   const user = await getSessionUser();
   if (!user) return;
   // Unverified emails stay on /signup (Step 2 — confirm email).
@@ -141,6 +144,10 @@ export async function redirectLearnerAwayFromSignup(): Promise<void> {
     select: { role: true },
   });
   if (profile?.role !== 'STUDENT') return;
+
+  if (resumeNext) {
+    redirect(resumeNext);
+  }
 
   const destination = stateToRoute(resolveLearnerStateFromFacts(facts));
   if (!destination.startsWith('/signup')) redirect(destination);

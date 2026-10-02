@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignInForm } from '@/components/custom/sign-in-form';
+import { sanitizeNext, signupHrefWithNext } from '@/lib/auth-next';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('auth.signIn');
@@ -33,7 +34,7 @@ export default async function LoginPage({
         <>
           {t('switchToSignupLead')}{' '}
           <Link
-            href="/signup"
+            href={signupHrefWithNext(next)}
             className="font-medium text-brand-600 underline-offset-2 transition-colors hover:text-brand-700 hover:underline dark:text-brand-400"
           >
             {t('switchToSignup')}
@@ -50,11 +51,4 @@ export default async function LoginPage({
       <SignInForm next={next} />
     </AuthShell>
   );
-}
-
-function sanitizeNext(raw: string | undefined): string | undefined {
-  if (!raw) return undefined;
-  if (!raw.startsWith('/')) return undefined;
-  if (raw.startsWith('//')) return undefined;
-  return raw;
 }

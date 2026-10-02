@@ -1,19 +1,16 @@
 //
-// On `/dashboard/instructor`, this island gates what the user sees based
-// on the review status of their uploaded driving licence:
+// On `/dashboard/instructor`, this island surfaces licence review state only:
 //
-//   NONE | PENDING — render the "pending review" empty state.
-//   REJECTED        — render the rejection card with the admin's reason.
-//   VERIFIED        — check GET /api/instructors/me:
-//                     - listing exists → render <InstructorDashboard/>
-//                     - no listing (404) → render "create your listing" CTA
+//   NONE | PENDING — "pending review" empty state.
+//   REJECTED        — rejection card with the admin's reason.
+//   VERIFIED + no listing — "create your listing" CTA.
+//   VERIFIED + listing    — render nothing (ops live on the page once).
 
 'use client';
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { InstructorDashboard } from '@/components/custom/dashboard/instructor-dashboard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -52,7 +49,6 @@ export function InstructorLicenseStatusBanner() {
           return;
         }
 
-        // VERIFIED: check whether a marketplace listing exists
         try {
           await apiFetch('/api/instructors/me');
           if (active) setState({ kind: 'ready-verified-has-listing' });
@@ -75,7 +71,7 @@ export function InstructorLicenseStatusBanner() {
   }
 
   if (state.kind === 'ready-verified-has-listing') {
-    return <InstructorDashboard />;
+    return null;
   }
 
   if (state.kind === 'ready-verified-no-listing') {

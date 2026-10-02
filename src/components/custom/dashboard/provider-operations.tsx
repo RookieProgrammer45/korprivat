@@ -136,7 +136,7 @@ export function ProviderOperations() {
         <CardContent className="p-6">
           <p className="text-body">{t('setup.empty')}</p>
           <Button asChild className="mt-4">
-            <Link href="/instructors/new">{t('setup.cta')}</Link>
+            <Link href="/dashboard/instructor#host-checklist">{t('setup.cta')}</Link>
           </Button>
         </CardContent>
       </Card>
@@ -168,7 +168,7 @@ export function ProviderOperations() {
               <p className="text-small text-muted-foreground">{t('setup.body')}</p>
             </div>
             <Button asChild>
-              <Link href="/instructors/new">{t('setup.cta')}</Link>
+              <Link href="/dashboard/instructor#host-checklist">{t('setup.cta')}</Link>
             </Button>
           </CardContent>
         </Card>

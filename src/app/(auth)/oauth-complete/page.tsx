@@ -17,12 +17,8 @@ import { useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { apiFetch } from '@/lib/api-client';
+import { clearPersistedAuthNext, sanitizeNext } from '@/lib/auth-next';
 import { PostLoginRedirect, RoleEnum } from '@/lib/contracts/auth';
-
-function sanitizeNext(raw: string | null): string | undefined {
-  if (!raw || !raw.startsWith('/') || raw.startsWith('//')) return undefined;
-  return raw;
-}
 
 export default function OAuthCompletePage() {
   const router = useRouter();
@@ -48,6 +44,7 @@ export default function OAuthCompletePage() {
         // Prefer an explicit same-origin `next` (e.g. school signup → /for-skolor).
         // Otherwise learners go to Didit; instructors resume the signup wizard.
         if (next) {
+          clearPersistedAuthNext();
           router.replace(next);
         } else if (role === 'STUDENT') {
           router.replace('/onboarding/learner/verify');

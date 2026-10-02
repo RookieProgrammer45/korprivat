@@ -138,13 +138,14 @@
         "title": "Checkout"
       },
       "eyebrow": "Payment",
-      "verifiedTitle": "Thanks — your subscription is live.",
-      "verifiedBody": "We've confirmed the payment with Stripe. You can close this tab or head back to your dashboard.",
+      "verifiedTitle": "Thanks — your lesson is booked.",
+      "verifiedBody": "We've confirmed the payment with Stripe. Find this booking under My bookings — after the lesson you can confirm delivery and leave a review there.",
       "missingTitle": "We couldn't find a payment session.",
       "missingBody": "Open the link from your most recent email, or head back to your dashboard and try again.",
       "timeoutTitle": "Confirmation is taking longer than expected.",
       "timeoutBody": "We couldn't confirm the payment within a few seconds. Try again in a moment — reach out to the team if your card was charged.",
-      "cta": "Back to dashboard"
+      "cta": "Back to dashboard",
+      "bookingsCta": "My bookings"
     },
     "cancelled": {
       "eyebrow": "Cancelled",
@@ -545,7 +546,11 @@
     "descriptionLoaded": "{rate} is shown below. Review the school price and cancellation policy before sending your request.",
     "descriptionEmpty": "Choose an available time and review the booking details before you continue.",
     "submit": "Send booking request",
+    "submitInstant": "Book and pay",
+    "submitRequest": "Send booking request",
     "submitting": "Sending…",
+    "submittingInstant": "Booking…",
+    "submittingRequest": "Sending…",
     "policyEyebrow": "Cancellation policy",
     "policyLink": "Read the full policy in the FAQ",
     "policyScheduleFlexible": "Flexible: full refund at least 24 hours before; the full lesson fee is retained within 24 hours.",
@@ -1173,6 +1178,17 @@
         "retry": "Try again"
       },
       "viewAllBookings": "See all bookings",
+      "nextAction": {
+        "payTitle": "Payment needed",
+        "payBody": "Finish paying for your lesson with {name}.",
+        "payCta": "Pay now",
+        "confirmTitle": "Confirm your lesson",
+        "confirmBody": "Your lesson with {name} is waiting for your confirmation.",
+        "confirmCta": "Confirm lesson",
+        "reviewTitle": "Leave a review",
+        "reviewBody": "How was your lesson with {name}?",
+        "reviewCta": "Leave a review"
+      },
       "history": {
         "eyebrow": "Booking history",
         "title": "Your booking history",
@@ -1265,6 +1281,28 @@
         "title": "Create your school listing",
         "body": "Your credentials are verified — create your listing now so learners can compare your school.",
         "cta": "Create listing"
+      },
+      "checklist": {
+        "licence": {
+          "title": "Verify your licence",
+          "body": "We need an approved Transportstyrelsen credential before learners can book you.",
+          "cta": "See status"
+        },
+        "listing": {
+          "title": "Create your listing",
+          "body": "Publish your profile so learners can find you in search.",
+          "cta": "Create listing"
+        },
+        "connect": {
+          "title": "Connect payouts",
+          "body": "Finish Stripe Connect so you can get paid for lessons.",
+          "cta": "Open payouts"
+        },
+        "availability": {
+          "title": "Publish availability",
+          "body": "Release at least one open slot so learners can book.",
+          "cta": "Manage availability"
+        }
       },
       "availability": {
         "eyebrow": "Availability",
@@ -2485,10 +2523,10 @@
     "retry": "Try again",
     "actionError": "The action could not be completed. Refresh and try again.",
     "setup": {
-      "title": "Finish school setup",
-      "body": "Create or claim your school listing to publish availability and receive booking requests.",
+      "title": "Finish host setup",
+      "body": "Complete the checklist above — Connect payouts and publish availability — before learners can book paid lessons.",
       "empty": "No school listing is linked to this account yet.",
-      "cta": "Set up school listing"
+      "cta": "View setup checklist"
     },
     "actions": {
       "accept": "Accept",

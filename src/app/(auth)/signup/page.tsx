@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignUpForm } from '@/components/custom/sign-up-form';
+import { loginHrefWithNext, sanitizeNext } from '@/lib/auth-next';
 import { redirectLearnerAwayFromSignup } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,11 +18,6 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: { canonical: '/signup' },
     robots: { index: false, follow: false },
   };
-}
-
-function sanitizeNext(raw: string | undefined): string | undefined {
-  if (!raw || !raw.startsWith('/') || raw.startsWith('//')) return undefined;
-  return raw;
 }
 
 function resolveInitialPath(
@@ -43,7 +39,7 @@ export default async function SignupPage({
   const initialPath = resolveInitialPath(params.role);
   const initialStep = params.step === 'photo' ? 'photo' : undefined;
 
-  await redirectLearnerAwayFromSignup();
+  await redirectLearnerAwayFromSignup(next);
 
   return (
     <AuthShell
@@ -51,7 +47,7 @@ export default async function SignupPage({
         <>
           {t('switchToSigninLead')}{' '}
           <Link
-            href={next ? `/login?next=${encodeURIComponent(next)}` : '/login'}
+            href={loginHrefWithNext(next)}
             className="font-medium text-brand-600 underline-offset-2 transition-colors hover:text-brand-700 hover:underline dark:text-brand-400"
           >
             {t('switchToSignin')}
