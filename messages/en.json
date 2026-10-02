@@ -1064,7 +1064,19 @@
       "redirecting": "Redirecting to sign in…",
       "brand": "Dashboard",
       "adminAccess": "Admin access",
-      "marketplace": "Marketplace"
+      "marketplace": "Marketplace",
+      "title": {
+        "learner": "My overview",
+        "instructor": "Instructor overview",
+        "school": "School overview",
+        "admin": "Admin overview"
+      },
+      "badge": {
+        "learner": "Learner",
+        "instructor": "Instructor",
+        "school": "School",
+        "admin": "Admin"
+      }
     },
     "nav": {
       "ariaLabel": "Dashboard sections",

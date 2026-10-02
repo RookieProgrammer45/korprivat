@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import { Separator } from '@/components/ui/separator';
 import { useSession } from '@/lib/auth-client';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
+import type { DashboardShellRole } from '@/lib/dashboard-shell-role';
+import { cn } from '@/lib/utils';
 import { SignupConfirmationBanner } from '../signup-confirmation-banner';
 import { DashboardNav } from './dashboard-nav';
 
@@ -19,6 +21,8 @@ export interface DashboardShellProps {
   userLabel: string;
   /** ACTIVE OWNER or STAFF Membership — drives school sidebar. */
   isSchoolOwner?: boolean;
+  /** Chrome identity: badge + header title. */
+  shellRole: DashboardShellRole;
 }
 
 function hasRole(role: string | null | undefined, expected: string) {
@@ -30,12 +34,24 @@ function hasRole(role: string | null | undefined, expected: string) {
   );
 }
 
+const BADGE_TINT: Record<DashboardShellRole, string> = {
+  learner:
+    'border-teal-500/25 bg-teal-500/10 text-teal-800 dark:border-teal-400/30 dark:bg-teal-400/10 dark:text-teal-200',
+  instructor:
+    'border-blue-500/25 bg-blue-500/10 text-blue-800 dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-200',
+  school:
+    'border-purple-500/25 bg-purple-500/10 text-purple-800 dark:border-purple-400/30 dark:bg-purple-400/10 dark:text-purple-200',
+  admin:
+    'border-red-500/25 bg-red-500/10 text-red-800 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-200',
+};
+
 export function DashboardShell({
   children,
   role,
   isAdmin,
   userLabel,
   isSchoolOwner = false,
+  shellRole,
 }: DashboardShellProps) {
   const { data: session, isPending } = useSession();
   const router = useRouter();
@@ -75,11 +91,23 @@ export function DashboardShell({
               <span className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-card">
                 <LayoutDashboard aria-hidden="true" className="size-4" />
               </span>
-              <span className="truncate text-sm font-semibold text-foreground">{t('brand')}</span>
+              <span className="truncate text-sm font-semibold text-foreground">
+                {t(`title.${shellRole}`)}
+              </span>
             </Link>
-            <span className="hidden text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground sm:block">
-              {hasAdminRole ? t('adminAccess') : t('marketplace')}
-            </span>
+            <div className="flex min-w-0 items-center gap-2">
+              <span
+                className={cn(
+                  'inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-[0.08em]',
+                  BADGE_TINT[shellRole],
+                )}
+              >
+                {t(`badge.${shellRole}`)}
+              </span>
+              <span className="hidden truncate text-xs font-medium text-muted-foreground sm:block">
+                {hasAdminRole && shellRole !== 'admin' ? t('adminAccess') : userLabel}
+              </span>
+            </div>
           </div>
         </header>
 

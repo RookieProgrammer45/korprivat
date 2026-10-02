@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { DashboardShell } from '@/components/custom/dashboard/dashboard-shell';
 import { requireDashboardSession } from '@/lib/dashboard-guard';
+import { deriveDashboardShellRole } from '@/lib/dashboard-shell-role';
 import { listMembershipsForUser } from '@/lib/orgs/service';
 import { requireSignupPrerequisites } from '@/lib/signup-resume';
 
@@ -13,6 +14,11 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
   const memberships = await listMembershipsForUser(session.userId, { onlyActive: true });
   const isSchoolOwner = memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF');
+  const shellRole = deriveDashboardShellRole({
+    isSchoolOwner,
+    role: session.role,
+    isAdmin: session.isAdmin,
+  });
 
   return (
     <DashboardShell
@@ -20,6 +26,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       isAdmin={session.isAdmin}
       userLabel={t('signedInAs', { name: session.name })}
       isSchoolOwner={isSchoolOwner}
+      shellRole={shellRole}
     >
       {children}
     </DashboardShell>

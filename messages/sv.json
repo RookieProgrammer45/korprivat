@@ -1064,7 +1064,19 @@
       "redirecting": "Omdirigerar till inloggning…",
       "brand": "Kontrollpanel",
       "adminAccess": "Adminåtkomst",
-      "marketplace": "Marknadsplats"
+      "marketplace": "Marknadsplats",
+      "title": {
+        "learner": "Min översikt",
+        "instructor": "Läraröversikt",
+        "school": "Skolöversikt",
+        "admin": "Adminöversikt"
+      },
+      "badge": {
+        "learner": "Elev",
+        "instructor": "Lärare",
+        "school": "Skola",
+        "admin": "Admin"
+      }
     },
     "nav": {
       "ariaLabel": "Dashboard-sektioner",
