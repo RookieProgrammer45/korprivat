@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { signOut } from '@/lib/auth-client';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
+import { buildDashboardNavItems } from '@/lib/dashboard-nav-items';
 import { cn } from '@/lib/utils';
 
 export interface DashboardNavProps {
@@ -40,56 +41,7 @@ export function DashboardNav({
     }
   }
 
-  const schoolNavItems = [
-    { href: '/dashboard/school', label: t('schoolOverviewTab'), icon: LayoutDashboard },
-    { href: '/dashboard/school#instructors', label: t('schoolInstructorsTab'), icon: LayoutDashboard },
-    { href: '/dashboard/school#bookings', label: t('schoolBookingsTab'), icon: LayoutDashboard },
-    { href: '/dashboard/school/revenue', label: t('schoolRevenueTab'), icon: LayoutDashboard },
-    { href: '/dashboard/school/settings', label: t('schoolSettingsTab'), icon: LayoutDashboard },
-  ];
-
-  const marketplaceNavItems = [
-    ...(role === 'INSTRUCTOR' || role === 'HANDLEDARE'
-      ? [{ href: '/dashboard', label: t('overviewTab'), icon: LayoutDashboard }]
-      : []),
-    ...(role === 'STUDENT'
-      ? [{ href: '/dashboard/student', label: t('studentTab'), icon: LayoutDashboard }]
-      : []),
-    ...(role === 'INSTRUCTOR'
-      ? [{ href: '/dashboard/instructor', label: t('instructorTab'), icon: LayoutDashboard }]
-      : []),
-    ...(role === 'HANDLEDARE'
-      ? [{ href: '/dashboard/handledare', label: t('handledareTab'), icon: LayoutDashboard }]
-      : []),
-    ...(role === 'INSTRUCTOR'
-      ? [
-          {
-            href: '/dashboard/instructor/availability',
-            label: t('availabilityTab'),
-            icon: LayoutDashboard,
-          },
-          {
-            href: '/dashboard/instructor/revenue',
-            label: t('revenueTab'),
-            icon: LayoutDashboard,
-          },
-        ]
-      : []),
-    ...(role === 'HANDLEDARE'
-      ? [
-          {
-            href: '/dashboard/handledare/availability',
-            label: t('availabilityTab'),
-            icon: LayoutDashboard,
-          },
-        ]
-      : []),
-    ...(role !== 'HANDLEDARE'
-      ? [{ href: '/dashboard/messages', label: t('messagesTab'), icon: LayoutDashboard }]
-      : []),
-  ];
-
-  const navItems = isSchoolOwner ? schoolNavItems : marketplaceNavItems;
+  const navItems = buildDashboardNavItems({ role, isSchoolOwner });
 
   return (
     <nav
@@ -97,7 +49,7 @@ export function DashboardNav({
       className="flex flex-wrap items-center gap-2 rounded-[calc(var(--radius)+0.25rem)] border border-border bg-card px-3 py-3 shadow-md lg:grid lg:overflow-visible"
     >
       {navItems.map((item) => {
-        const Icon = item.icon;
+        const Icon = LayoutDashboard;
         const hrefPath = item.href.split('#')[0] ?? item.href;
         const isHashPlaceholder = item.href.includes('#');
         const active = isHashPlaceholder
@@ -119,7 +71,7 @@ export function DashboardNav({
             )}
           >
             <Icon aria-hidden="true" className="size-4" />
-            <span>{item.label}</span>
+            <span>{t(item.labelKey)}</span>
           </Link>
         );
       })}
