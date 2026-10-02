@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -38,9 +38,17 @@ type Props = {
   isOwner: boolean;
   members: RosterMember[];
   invites: RosterInvite[];
+  /** Open the invite dialog once on mount (checklist deep-link). */
+  openInviteOnMount?: boolean;
 };
 
-export function SchoolInstructorRoster({ organizationId, isOwner, members, invites }: Props) {
+export function SchoolInstructorRoster({
+  organizationId,
+  isOwner,
+  members,
+  invites,
+  openInviteOnMount = false,
+}: Props) {
   const t = useTranslations('schoolInstructors');
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -48,6 +56,17 @@ export function SchoolInstructorRoster({ organizationId, isOwner, members, invit
   const [submitting, setSubmitting] = useState(false);
   const [inlineError, setInlineError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!openInviteOnMount || !isOwner) return;
+    setOpen(true);
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('invite')) {
+      url.searchParams.delete('invite');
+      const next = `${url.pathname}${url.search}${url.hash}`;
+      window.history.replaceState(null, '', next);
+    }
+  }, [openInviteOnMount, isOwner]);
 
   const activeMembers = members.filter((m) => m.status === 'ACTIVE');
   const hasAnyone = activeMembers.length > 0 || invites.length > 0;

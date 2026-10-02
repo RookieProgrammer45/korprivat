@@ -2047,6 +2047,16 @@
     "draftCardTitle": "Fyll i skoluppgifter för att komma igång",
     "draftCardBody": "Lägg till mer information om skolan när ni är redo. Verifiering sker asynkront.",
     "draftCardCta": "Öppna inställningar",
+    "setupChecklist": {
+      "title": "Kom igång med skolan",
+      "description": "Slutför dessa steg för att ta emot bokningar.",
+      "stepDetails": "Fyll i skoluppgifter",
+      "stepDetailsCta": "Öppna inställningar",
+      "stepInvite": "Bjud in din första instruktör",
+      "stepInviteCta": "Bjud in",
+      "stepConnect": "Anslut bankkonto för utbetalningar",
+      "stepConnectCta": "Öppna utbetalningar"
+    },
     "emptyInstructors": "Inga instruktörer ännu",
     "inviteInstructor": "Bjud in instruktör",
     "comingSoon": "Kommer snart",

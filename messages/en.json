@@ -2047,6 +2047,16 @@
     "draftCardTitle": "Complete school details to get started",
     "draftCardBody": "Add more information about the school when you are ready. Verification runs asynchronously.",
     "draftCardCta": "Open settings",
+    "setupChecklist": {
+      "title": "Get your school ready",
+      "description": "Complete these steps to start receiving bookings.",
+      "stepDetails": "Complete school details",
+      "stepDetailsCta": "Open settings",
+      "stepInvite": "Invite your first instructor",
+      "stepInviteCta": "Invite",
+      "stepConnect": "Connect a bank account for payouts",
+      "stepConnectCta": "Open payouts"
+    },
     "emptyInstructors": "No instructors yet",
     "inviteInstructor": "Invite instructor",
     "comingSoon": "Coming soon",

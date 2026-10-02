@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { SchoolSetupChecklist } from '@/components/custom/dashboard/school-setup-checklist';
 import {
   SchoolInstructorRoster,
   type RosterInvite,
@@ -57,7 +58,11 @@ function resolvePayoutsState(
   return 'D';
 }
 
-export default async function SchoolDashboardPage() {
+export default async function SchoolDashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ invite?: string }>;
+}) {
   const session = await requireDashboardSession('/dashboard/school');
   const memberships = await listMembershipsForUser(session.userId, { onlyActive: true });
   const membership = memberships.find((m) => m.role === 'OWNER' || m.role === 'STAFF');
@@ -67,9 +72,12 @@ export default async function SchoolDashboardPage() {
 
   let org = membership.organization;
   const t = await getTranslations('dashboardSchool');
-  const isDraft = org.verificationState === 'DRAFT';
+  const showSetupChecklist =
+    org.verificationState === 'DRAFT' || org.verificationState === 'PENDING';
   const isOwner = membership.role === 'OWNER';
   let currentlyDue: string[] = [];
+  const params = await searchParams;
+  const openInviteOnMount = params.invite === 'open';
 
   if (isOwner) {
     try {
@@ -104,6 +112,9 @@ export default async function SchoolDashboardPage() {
   }));
 
   const payoutsState = resolvePayoutsState(org, currentlyDue);
+  const detailsComplete = Boolean(org.address?.trim() && org.city?.trim() && org.contactEmail?.trim());
+  const hasInstructorMember = members.some((m) => m.status === 'ACTIVE' && m.role !== 'OWNER');
+  const connectReady = Boolean(org.stripeAccountId && org.chargesEnabled);
 
   return (
     <section className="grid gap-6">
@@ -125,21 +136,27 @@ export default async function SchoolDashboardPage() {
         </p>
       </header>
 
-      {isDraft ? (
-        <Card className="border-border bg-card text-card-foreground">
-          <CardContent className="grid gap-3 p-6">
-            <p className="font-medium text-foreground">{t('draftCardTitle')}</p>
-            <p className="text-small text-muted-foreground">{t('draftCardBody')}</p>
-            <div>
-              <Button asChild variant="secondary" size="sm">
-                <Link href="/dashboard/school/settings">{t('draftCardCta')}</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+      {showSetupChecklist ? (
+        <SchoolSetupChecklist
+          flags={{
+            detailsComplete,
+            hasInstructorMember,
+            connectReady,
+          }}
+          title={t('setupChecklist.title')}
+          description={t('setupChecklist.description')}
+          stepDetailsLabel={t('setupChecklist.stepDetails')}
+          stepDetailsCta={t('setupChecklist.stepDetailsCta')}
+          stepInviteLabel={t('setupChecklist.stepInvite')}
+          stepInviteCta={t('setupChecklist.stepInviteCta')}
+          stepConnectLabel={t('setupChecklist.stepConnect')}
+          stepConnectCta={t('setupChecklist.stepConnectCta')}
+        />
       ) : null}
 
-      <SchoolPayoutsCard organizationId={org.id} state={payoutsState} isOwner={isOwner} />
+      <div id="school-payouts" className="scroll-mt-24">
+        <SchoolPayoutsCard organizationId={org.id} state={payoutsState} isOwner={isOwner} />
+      </div>
 
       <div id="instructors" className="scroll-mt-24">
         <Card className="border-border bg-card">
@@ -149,6 +166,7 @@ export default async function SchoolDashboardPage() {
               isOwner={isOwner}
               members={members}
               invites={invites}
+              openInviteOnMount={openInviteOnMount}
             />
           </CardContent>
         </Card>

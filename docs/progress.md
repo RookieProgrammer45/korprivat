@@ -20,6 +20,13 @@
 - [ ] Classify and clean: polsia-analytics.tsx, layout.tsx
       analytics, instrumentation.ts, CSS polsia-slot comments
 
+## Deferred
+
+- [ ] Dashboard mode switcher for dual-role users (OWNER/STAFF +
+      INSTRUCTOR). No users match this today. Build when the first
+      dual-role user appears, or when a school owner also lists
+      themselves as an instructor.
+
 ## Phase 0 — learner state resolver (soft-gate)
 
 Pure `resolveLearnerState` / `stateToRoute` live under `src/lib/verification/`

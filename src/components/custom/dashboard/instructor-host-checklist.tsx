@@ -4,10 +4,9 @@
 
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { SetupChecklist } from '@/components/custom/dashboard/setup-checklist';
 import { apiFetch } from '@/lib/api-client';
 import {
   type HostChecklistAction,
@@ -88,17 +87,19 @@ export function InstructorHostChecklist({ hasListing, connectReady }: Props) {
         : HREF[action];
 
   return (
-    <aside
+    <SetupChecklist
       id="host-checklist"
-      className="flex flex-col gap-3 rounded-xl border border-brand-500/35 bg-brand-50/80 px-4 py-3 text-small text-foreground sm:flex-row sm:items-center sm:justify-between dark:bg-brand-950/40"
-    >
-      <div className="grid gap-1">
-        <p className="text-pretty font-medium">{t(`${action}.title`)}</p>
-        <p className="text-pretty text-muted-foreground">{t(`${action}.body`)}</p>
-      </div>
-      <Button asChild className="sm:shrink-0">
-        <Link href={href}>{t(`${action}.cta`)}</Link>
-      </Button>
-    </aside>
+      title={t(`${action}.title`)}
+      description={t(`${action}.body`)}
+      steps={[
+        {
+          id: action,
+          label: t(`${action}.title`),
+          completed: false,
+          ctaLabel: t(`${action}.cta`),
+          ctaHref: href,
+        },
+      ]}
+    />
   );
 }
