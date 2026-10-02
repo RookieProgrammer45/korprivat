@@ -1069,7 +1069,7 @@
     "nav": {
       "ariaLabel": "Dashboard-sektioner",
       "studentTab": "Elev",
-      "instructorTab": "Trafikskola",
+      "instructorTab": "Lärare",
       "handledareTab": "Handledare",
       "adminBadge": "Admin",
       "signOut": "Logga ut",
@@ -1250,8 +1250,8 @@
       }
     },
     "instructor": {
-      "eyebrow": "Trafikskola",
-      "title": "Trafikskolans dashboard",
+      "eyebrow": "Lärare",
+      "title": "Lärardashboard",
       "lead": "Nya bokningsförfrågningar från elever. Öppna en rad för att bekräfta, avböja eller svara, medan skolan styr annonsen.",
       "availabilityCta": "Hantera tillgänglighet",
       "revenueCta": "Intäkter",

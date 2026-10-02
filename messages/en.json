@@ -1069,7 +1069,7 @@
     "nav": {
       "ariaLabel": "Dashboard sections",
       "studentTab": "Student",
-      "instructorTab": "Driving school",
+      "instructorTab": "Instructor",
       "handledareTab": "Handledare",
       "adminBadge": "Admin",
       "signOut": "Sign out",
@@ -1250,8 +1250,8 @@
       }
     },
     "instructor": {
-      "eyebrow": "Driving school",
-      "title": "Driving-school dashboard",
+      "eyebrow": "Instructor",
+      "title": "Instructor dashboard",
       "lead": "New booking requests from learners. Open a row to confirm, decline, or message back, with your school controlling the listing.",
       "availabilityCta": "Manage availability",
       "revenueCta": "Revenue",
