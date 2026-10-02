@@ -1346,6 +1346,17 @@
         "startAtLabel": "Start (lokal)",
         "endsAtLabel": "Slut (lokal)"
       },
+      "reviews": {
+        "eyebrow": "Omdömen",
+        "title": "Elevomdömen",
+        "lead": "Vad elever har skrivit om dina lektioner.",
+        "count": "{count, plural, one {# omdöme} other {# omdömen}}",
+        "empty": "Inga omdömen ännu.",
+        "emptyBody": "Omdömen visas här när elever slutför och betygsätter en lektion med dig.",
+        "loadError": "Vi kunde inte hämta dina omdömen just nu.",
+        "retry": "Försök igen",
+        "rating": "{rating}/5"
+      },
       "history": {
         "eyebrow": "Bokningshistorik",
         "title": "Genomförda transaktioner",
@@ -2027,6 +2038,32 @@
     "emptyInstructors": "Inga instruktörer ännu",
     "inviteInstructor": "Bjud in instruktör",
     "comingSoon": "Kommer snart",
+    "bookings": {
+      "eyebrow": "Bokningar",
+      "title": "Skolans bokningar",
+      "lead": "Lektioner bokade hos instruktörer kopplade till skolan. Instruktörerna accepterar och genomför fortfarande — den här vyn är för översikt.",
+      "count": "{count, plural, one {# bokning} other {# bokningar}}",
+      "empty": "Inga skolbokningar ännu.",
+      "emptyBody": "När anslutna instruktörer tar bokningar visas de här.",
+      "loadError": "Vi kunde inte hämta skolbokningarna just nu.",
+      "retry": "Försök igen",
+      "open": "Öppna",
+      "withInstructor": "med {name}",
+      "status": {
+        "awaitingApproval": "Väntar på godkännande",
+        "paymentPending": "Väntar på betalning",
+        "heldEscrow": "Hålls i escrow",
+        "awaitingConfirm": "Väntar på elevbekräftelse",
+        "payoutPending": "Utbetalning pågår",
+        "payoutFailed": "Utbetalning misslyckades",
+        "released": "Genomförd",
+        "disputed": "Under granskning",
+        "refunded": "Återbetald",
+        "declined": "Avböjd",
+        "cancelled": "Avbokad",
+        "other": "Statusuppdatering"
+      }
+    },
     "signupConfirmation": {
       "title": "Ditt skolkonto är klart",
       "body": "Välkommen till DriveLinkUp. Lägg till skoluppgifter och bjud in instruktörer för att komma igång.",

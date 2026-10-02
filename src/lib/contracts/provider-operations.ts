@@ -68,6 +68,16 @@ export type ProviderOperationsResponse = z.infer<typeof ProviderOperationsRespon
 export const ProviderBookingList = z.object({ items: z.array(ProviderBookingItem) });
 export type ProviderBookingList = z.infer<typeof ProviderBookingList>;
 
+/** Org-scoped school bookings list — same row shape plus instructor label. */
+export const SchoolBookingItem = ProviderBookingItem.extend({
+  instructorId: z.string(),
+  instructorName: z.string(),
+});
+export type SchoolBookingItem = z.infer<typeof SchoolBookingItem>;
+
+export const SchoolBookingList = z.object({ items: z.array(SchoolBookingItem) });
+export type SchoolBookingList = z.infer<typeof SchoolBookingList>;
+
 export const ProviderActionResponse = z.object({
   id: z.string(),
   paymentStatus: BookingPaymentStatusEnum,

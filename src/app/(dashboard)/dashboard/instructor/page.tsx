@@ -11,6 +11,7 @@ import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { InstructorBookingHistory } from '@/components/custom/dashboard/instructor-booking-history';
 import { InstructorHostChecklist } from '@/components/custom/dashboard/instructor-host-checklist';
+import { InstructorReviewInbox } from '@/components/custom/dashboard/instructor-review-inbox';
 import { ProviderOperations } from '@/components/custom/dashboard/provider-operations';
 import {
   InstructorPayoutsCard,
@@ -124,6 +125,7 @@ export default async function InstructorDashboardPage() {
       <InstructorPayoutCard />
       {hasListing ? <InstructorPolicyEditor /> : null}
       <ProviderOperations />
+      <InstructorReviewInbox />
       <InstructorBookingHistory />
     </section>
   );

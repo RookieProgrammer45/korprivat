@@ -103,6 +103,20 @@ export async function assertActiveOwner(orgId: string, actorId: string): Promise
   return requireOwnerMembership(orgId, actorId);
 }
 
+/** ACTIVE OWNER or STAFF gate for org-scoped read APIs (bookings panel). */
+export async function assertActiveMember(orgId: string, actorId: string): Promise<Membership> {
+  const membership = await prisma.membership.findFirst({
+    where: {
+      organizationId: orgId,
+      userId: actorId,
+      role: { in: ['OWNER', 'STAFF'] },
+      status: 'ACTIVE',
+    },
+  });
+  if (!membership) throw new OrgForbiddenError();
+  return membership;
+}
+
 export async function createOrganization(input: {
   name: string;
   organizationNumber: string;

@@ -7,6 +7,7 @@ import {
   type RosterInvite,
   type RosterMember,
 } from '@/components/custom/school/school-instructor-roster';
+import { SchoolBookingsPanel } from '@/components/custom/school/school-bookings-panel';
 import {
   SchoolPayoutsCard,
   type SchoolPayoutsState,
@@ -140,19 +141,23 @@ export default async function SchoolDashboardPage() {
 
       <SchoolPayoutsCard organizationId={org.id} state={payoutsState} isOwner={isOwner} />
 
-      <Card className="border-border bg-card">
-        <CardContent className="p-6">
-          <SchoolInstructorRoster
-            organizationId={org.id}
-            isOwner={isOwner}
-            members={members}
-            invites={invites}
-          />
-        </CardContent>
-      </Card>
+      <div id="instructors" className="scroll-mt-24">
+        <Card className="border-border bg-card">
+          <CardContent className="p-6">
+            <SchoolInstructorRoster
+              organizationId={org.id}
+              isOwner={isOwner}
+              members={members}
+              invites={invites}
+            />
+          </CardContent>
+        </Card>
+      </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        {(['bookings', 'revenue', 'settings'] as const).map((key) => (
+      <SchoolBookingsPanel organizationId={org.id} />
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {(['revenue', 'settings'] as const).map((key) => (
           <Card key={key} className="border-border bg-card">
             <CardContent className="grid gap-2 p-5">
               <p className="font-medium text-foreground">{t(`panels.${key}.title`)}</p>
@@ -160,12 +165,10 @@ export default async function SchoolDashboardPage() {
                 <Button asChild variant="link" size="sm" className="h-auto w-fit p-0">
                   <Link href="/dashboard/school/settings">{t('draftCardCta')}</Link>
                 </Button>
-              ) : key === 'revenue' ? (
+              ) : (
                 <Button asChild variant="link" size="sm" className="h-auto w-fit p-0">
                   <Link href="/dashboard/school/revenue">{t('panels.revenue.open')}</Link>
                 </Button>
-              ) : (
-                <p className="text-small text-muted-foreground">{t('comingSoon')}</p>
               )}
             </CardContent>
           </Card>

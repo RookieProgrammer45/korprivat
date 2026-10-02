@@ -1346,6 +1346,17 @@
         "startAtLabel": "Start (local)",
         "endsAtLabel": "End (local)"
       },
+      "reviews": {
+        "eyebrow": "Reviews",
+        "title": "Learner reviews",
+        "lead": "What learners have written about your lessons.",
+        "count": "{count, plural, one {# review} other {# reviews}}",
+        "empty": "No reviews yet.",
+        "emptyBody": "Reviews appear here after learners complete and rate a lesson with you.",
+        "loadError": "We couldn't load your reviews just now.",
+        "retry": "Try again",
+        "rating": "{rating}/5"
+      },
       "history": {
         "eyebrow": "Booking history",
         "title": "Completed transactions",
@@ -2027,6 +2038,32 @@
     "emptyInstructors": "No instructors yet",
     "inviteInstructor": "Invite instructor",
     "comingSoon": "Coming soon",
+    "bookings": {
+      "eyebrow": "Bookings",
+      "title": "School bookings",
+      "lead": "Lessons booked with instructors affiliated to this school. Instructors still accept and deliver — this view is for oversight.",
+      "count": "{count, plural, one {# booking} other {# bookings}}",
+      "empty": "No school bookings yet.",
+      "emptyBody": "When affiliated instructors take bookings, they appear here.",
+      "loadError": "We couldn't load school bookings just now.",
+      "retry": "Try again",
+      "open": "Open",
+      "withInstructor": "with {name}",
+      "status": {
+        "awaitingApproval": "Awaiting approval",
+        "paymentPending": "Payment pending",
+        "heldEscrow": "Held in escrow",
+        "awaitingConfirm": "Awaiting learner confirm",
+        "payoutPending": "Payout pending",
+        "payoutFailed": "Payout failed",
+        "released": "Completed",
+        "disputed": "Disputed",
+        "refunded": "Refunded",
+        "declined": "Declined",
+        "cancelled": "Cancelled",
+        "other": "Status update"
+      }
+    },
     "signupConfirmation": {
       "title": "Your school account is ready",
       "body": "Welcome to DriveLinkUp. Add school details and invite instructors to get started.",
