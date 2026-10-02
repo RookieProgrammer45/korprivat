@@ -18,6 +18,8 @@ describe('shellModeForPath', () => {
     expect(isFocusedShellPath('/instructors/new')).toBe(true);
     expect(isFocusedShellPath('/profile')).toBe(true);
     expect(isFocusedShellPath('/verify-email')).toBe(true);
+    expect(isFocusedShellPath('/forgot-password')).toBe(true);
+    expect(isFocusedShellPath('/reset-password')).toBe(true);
     expect(isFocusedShellPath('/oauth-complete')).toBe(true);
   });
 });

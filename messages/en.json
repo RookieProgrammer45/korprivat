@@ -736,6 +736,7 @@
       "subtitle": "Welcome back to DriveLinkUp.",
       "submit": "Continue",
       "submitting": "Signing in…",
+      "forgotPassword": "Forgot password?",
       "switchToSignupLead": "Don't have an account?",
       "switchToSignup": "Sign up",
       "fields": {
@@ -747,6 +748,44 @@
       "errors": {
         "invalidCredentials": "Email or password didn't match. Try again.",
         "generic": "Could not sign in. Please try again."
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email and we'll send a reset link if an account exists.",
+      "submit": "Send reset link",
+      "submitting": "Sending…",
+      "sentBody": "If that email is registered, check your inbox for a reset link. It expires in 1 hour.",
+      "backLead": "Remembered it?",
+      "backToLogin": "Log in",
+      "fields": {
+        "emailLabel": "Email",
+        "emailPlaceholder": "you@example.com"
+      },
+      "errors": {
+        "generic": "Could not send the reset link. Try again."
+      }
+    },
+    "resetPassword": {
+      "title": "Choose a new password",
+      "subtitle": "Pick a password with at least 8 characters.",
+      "submit": "Update password",
+      "submitting": "Updating…",
+      "success": "Password updated. You can log in now.",
+      "backToLogin": "Back to log in",
+      "invalidTitle": "Link expired or invalid",
+      "invalidBody": "Request a new reset link and try again.",
+      "requestAgain": "Request a new link",
+      "fields": {
+        "passwordLabel": "New password",
+        "passwordPlaceholder": "At least 8 characters…",
+        "confirmLabel": "Confirm password",
+        "confirmPlaceholder": "Repeat the password…"
+      },
+      "errors": {
+        "tooShort": "Use at least 8 characters.",
+        "mismatch": "Passwords don't match.",
+        "invalidToken": "This reset link is invalid or expired. Request a new one."
       }
     },
     "signUp": {

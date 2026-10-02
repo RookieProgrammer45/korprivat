@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
@@ -86,7 +87,15 @@ export function SignInForm({ next }: { next?: string }) {
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('fields.passwordLabel')}</FormLabel>
+              <div className="flex items-center justify-between gap-3">
+                <FormLabel>{t('fields.passwordLabel')}</FormLabel>
+                <Link
+                  href="/forgot-password"
+                  className="text-caption font-medium text-brand-600 underline-offset-2 hover:underline dark:text-brand-400"
+                >
+                  {t('forgotPassword')}
+                </Link>
+              </div>
               <FormControl>
                 <Input
                   type="password"

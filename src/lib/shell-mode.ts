@@ -15,6 +15,8 @@ const FOCUSED_PREFIXES = [
   '/login',
   '/oauth-complete',
   '/verify-email',
+  '/forgot-password',
+  '/reset-password',
   '/instructors/new/',
 ] as const;
 

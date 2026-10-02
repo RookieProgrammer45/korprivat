@@ -18,7 +18,8 @@ export const authClient = createAuthClient({
   plugins: [adminClient()],
 });
 
-export const { signIn, signUp, signOut, useSession } = authClient;
+export const { signIn, signUp, signOut, useSession, requestPasswordReset, resetPassword } =
+  authClient;
 
 /**
  * `true` when the signed-in user is an admin (`role === 'admin'`, the admin

@@ -3,6 +3,7 @@
 
 import type { BetterAuthOptions } from 'better-auth';
 import { prisma } from '@/lib/db';
+import { resetPasswordEmail } from '@/lib/email/reset-password';
 import { sendEmail } from '@/lib/email/send';
 import { verifyEmailTemplate } from '@/lib/email/verify-email';
 import { siteUrl } from '@/lib/site';
@@ -23,6 +24,21 @@ export const authConfig: BetterAuthOptions = {
     // Keep false so sign-up still creates a session (needed for the in-wizard
     // email-verify + photo steps). App guards enforce emailVerified instead.
     requireEmailVerification: false,
+    // Force re-auth everywhere after a successful reset (stolen-session hygiene).
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async ({ user, token }) => {
+      // Branded page (same pattern as verify-email). Token is validated on POST
+      // /api/auth/reset-password — see better-auth email-password docs.
+      const resetUrl = `${siteUrl}/reset-password?token=${encodeURIComponent(token)}`;
+      await sendEmail({
+        to: user.email,
+        ...resetPasswordEmail({
+          name: user.name,
+          resetUrl,
+          locale: 'sv',
+        }),
+      });
+    },
   },
   emailVerification: {
     sendOnSignUp: true,
