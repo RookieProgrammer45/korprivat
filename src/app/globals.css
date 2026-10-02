@@ -188,6 +188,33 @@
   --shadow-brand-color: oklch(var(--brand-l) var(--brand-c) var(--brand-h) / 0.45);
 }
 
+/* Dashboard shell page tint only — header/aside/cards keep bg-background / bg-card. */
+.dashboard-shell[data-shell-role='learner'] {
+  background-color: hsl(162 42% 97%);
+}
+.dashboard-shell[data-shell-role='instructor'] {
+  background-color: hsl(217 55% 97%);
+}
+.dashboard-shell[data-shell-role='school'] {
+  background-color: hsl(275 40% 97%);
+}
+.dashboard-shell[data-shell-role='admin'] {
+  background-color: hsl(0 45% 97%);
+}
+
+.dark .dashboard-shell[data-shell-role='learner'] {
+  background-color: hsl(162 28% 6%);
+}
+.dark .dashboard-shell[data-shell-role='instructor'] {
+  background-color: hsl(217 35% 7%);
+}
+.dark .dashboard-shell[data-shell-role='school'] {
+  background-color: hsl(275 28% 7%);
+}
+.dark .dashboard-shell[data-shell-role='admin'] {
+  background-color: hsl(0 30% 7%);
+}
+
 @layer components {
   .section {
     @apply py-section px-gutter;

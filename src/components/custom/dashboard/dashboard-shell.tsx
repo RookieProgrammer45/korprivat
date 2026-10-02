@@ -83,7 +83,10 @@ export function DashboardShell({
   }
 
   return (
-    <main className="min-h-dvh bg-background text-foreground">
+    <main
+      data-shell-role={shellRole}
+      className="dashboard-shell min-h-dvh text-foreground"
+    >
       <div className="flex min-h-dvh flex-col">
         <header className="border-b border-border/70 bg-background">
           <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-gutter">
