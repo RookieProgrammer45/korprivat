@@ -130,6 +130,11 @@ describe('POST /api/bookings — email dispatch', () => {
     mockGetSessionUser.mockResolvedValue(LEARNER_SESSION);
     mockUserProfileFindUnique.mockResolvedValue({
       dateOfBirth: dobYearsAgo(25),
+      dateOfBirthVerified: dobYearsAgo(25),
+      verificationState: 'ACTIVE',
+      diditAttempts: 1,
+      diditLastDecision: 'approved',
+      diditSessionId: 'didit_sess_unit',
     });
     mockBookingFindFirst.mockResolvedValue(null);
     mockBookingCreate.mockResolvedValue({

@@ -60,8 +60,8 @@ export type LearnerVerificationFacts = {
 };
 
 /**
- * Facts we can read before Didit persistence exists.
- * Claimed DOB is routing only. Verified DOB stays null until the Didit writer ships.
+ * Facts we can read for learner verification.
+ * Claimed DOB is routing only. Verified DOB is written only by the Didit webhook.
  */
 export function resolveStoredLearnerState(
   claimedDob: Date | null | undefined,
@@ -123,6 +123,36 @@ export async function getStoredLearnerState(userId: string): Promise<LearnerVeri
 }
 
 /**
+ * Booking / checkout eligibility — verified ACTIVE only (AGENTS.md invariant 1).
+ * API routes use this; page guards use `requireActiveLearner` (redirect).
+ */
+export async function resolveLearnerBookingGate(userId: string): Promise<
+  | { eligible: true; state: 'ACTIVE' }
+  | { eligible: false; state: LearnerVerificationState; redirectTo: string }
+> {
+  const facts = await loadLearnerVerificationFacts(userId);
+  const state = facts
+    ? resolveLearnerStateFromFacts(facts)
+    : resolveStoredLearnerState(null);
+
+  if (state === 'ACTIVE') {
+    return { eligible: true, state };
+  }
+  return { eligible: false, state, redirectTo: stateToRoute(state) };
+}
+
+/**
+ * Hard gate for booking / checkout page surfaces.
+ * Requires dateOfBirthVerified from the Didit webhook writer.
+ */
+export async function requireActiveLearner(userId: string): Promise<void> {
+  const gate = await resolveLearnerBookingGate(userId);
+  if (!gate.eligible) {
+    redirect(gate.redirectTo);
+  }
+}
+
+/**
  * Signed-in learners who already stored a claimed DOB leave /signup for
  * the route the state machine assigns (usually /onboarding/learner/verify).
  * Hard blocks stay on /signup?blocked=….
@@ -151,21 +181,6 @@ export async function redirectLearnerAwayFromSignup(resumeNext?: string): Promis
 
   const destination = stateToRoute(resolveLearnerStateFromFacts(facts));
   if (!destination.startsWith('/signup')) redirect(destination);
-}
-
-/**
- * Hard gate for booking / checkout surfaces.
- * Requires dateOfBirthVerified from the Didit webhook writer.
- */
-export async function requireActiveLearner(userId: string): Promise<void> {
-  const facts = await loadLearnerVerificationFacts(userId);
-  const state = facts
-    ? resolveLearnerStateFromFacts(facts)
-    : resolveStoredLearnerState(null);
-
-  if (state !== 'ACTIVE') {
-    redirect(stateToRoute(state));
-  }
 }
 
 export async function requireSignupPrerequisites(

@@ -51,6 +51,7 @@ import {
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { RebookSuggestResponse } from '@/lib/contracts/saved-payment-methods';
 import { applyServerErrors } from '@/lib/forms';
+import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/state';
 import { cn } from '@/lib/utils';
 
 type FormValues = BookingCreate;
@@ -393,7 +394,19 @@ export function BookingForm({
         'error' in body &&
         (body as { error?: string }).error === 'learner_not_eligible'
       ) {
-        setEligibilityError(t('learnerNotEligible'));
+        const state = (body as { state?: string }).state;
+        const redirectTo =
+          typeof (body as { redirectTo?: string }).redirectTo === 'string'
+            ? (body as { redirectTo: string }).redirectTo
+            : state && typeof state === 'string'
+              ? stateToRoute(state as LearnerVerificationState)
+              : '/onboarding/learner/verify';
+        if (state === 'BLOCKED_UNDERAGE' || state === 'SUSPENDED') {
+          setEligibilityError(t('learnerNotEligible'));
+          return;
+        }
+        setEligibilityError(t('learnerNeedsVerification'));
+        router.push(redirectTo);
         return;
       }
       const slotError = getServerErrors(body).slotId;

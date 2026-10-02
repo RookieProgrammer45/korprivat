@@ -88,6 +88,11 @@ function stubOpenSlot(slotId = 'slot_1'): void {
 function stubEligibleProfile(ageYears = 25): void {
   prismaMock.userProfile.findUnique.mockResolvedValueOnce({
     dateOfBirth: dobYearsAgo(ageYears),
+    dateOfBirthVerified: dobYearsAgo(ageYears),
+    verificationState: 'ACTIVE',
+    diditAttempts: 1,
+    diditLastDecision: 'approved',
+    diditSessionId: 'didit_sess_test',
   });
 }
 
@@ -110,7 +115,7 @@ afterEach(() => {
   // nothing to restore
 });
 
-describe('POST /api/bookings — auth + claimed-DOB soft-gate', () => {
+describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
   it('returns 401 when there is no session', async () => {
     const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
     expect(res.status).toBe(401);
@@ -122,20 +127,46 @@ describe('POST /api/bookings — auth + claimed-DOB soft-gate', () => {
     authMock.setUser(LEARNER_USER);
     prismaMock.userProfile.findUnique.mockResolvedValueOnce({
       dateOfBirth: dobYearsAgo(15),
+      dateOfBirthVerified: null,
+      verificationState: 'SIGNED_UP',
+      diditAttempts: 0,
+      diditLastDecision: null,
+      diditSessionId: null,
     });
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
 
     const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
     expect(res.status).toBe(403);
     expect(await res.json()).toEqual({
       error: 'learner_not_eligible',
       state: 'BLOCKED_UNDERAGE',
+      redirectTo: '/signup?blocked=underage',
     });
     expect(prismaMock.booking.create).not.toHaveBeenCalled();
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
-  it('persists a row + sends BOTH emails when signed-in with claimed DOB age 16+ (201)', async () => {
+  it('returns 403 when adult has claimed DOB only (not Didit-verified)', async () => {
+    authMock.setUser(LEARNER_USER);
+    prismaMock.userProfile.findUnique.mockResolvedValueOnce({
+      dateOfBirth: dobYearsAgo(25),
+      dateOfBirthVerified: null,
+      verificationState: 'SIGNED_UP',
+      diditAttempts: 0,
+      diditLastDecision: null,
+      diditSessionId: null,
+    });
+
+    const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({
+      error: 'learner_not_eligible',
+      state: 'SIGNED_UP',
+      redirectTo: '/onboarding/learner/verify',
+    });
+    expect(prismaMock.booking.create).not.toHaveBeenCalled();
+  });
+
+  it('persists a row + sends BOTH emails when signed-in ACTIVE learner (201)', async () => {
     signInEligibleLearner(25);
     prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
     stubOpenSlot();

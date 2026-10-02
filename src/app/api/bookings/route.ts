@@ -17,7 +17,7 @@ import {
 import { resolveOrigin } from '@/lib/payments/origin';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
-import { resolveLearnerState } from '@/lib/verification/state';
+import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
 
@@ -72,24 +72,15 @@ export async function POST(req: Request) {
     return res as Response;
   }
 
-  const profile = await prisma.userProfile.findUnique({
-    where: { userId: sessionUser.id },
-    select: { dateOfBirth: true },
-  });
-
-  // TODO: Tighten to require ACTIVE once Didit webhook writes
-  // dateOfBirthVerified (see docs/learner-verification-flow.md §5).
-  const learnerState = resolveLearnerState({
-    currentState: 'SIGNED_UP',
-    claimedDob: profile?.dateOfBirth ?? null,
-    verifiedDob: null,
-    diditDecision: null,
-    diditAttempts: 0,
-    handledareEnrollment: null,
-  });
-  if (learnerState === 'BLOCKED_UNDERAGE' || learnerState === 'SUSPENDED') {
+  // Invariant 1: verified DOB / ACTIVE only — never trust signup claimed DOB alone.
+  const gate = await resolveLearnerBookingGate(sessionUser.id);
+  if (!gate.eligible) {
     return NextResponse.json(
-      { error: 'learner_not_eligible', state: learnerState },
+      {
+        error: 'learner_not_eligible',
+        state: gate.state,
+        redirectTo: gate.redirectTo,
+      },
       { status: 403 },
     );
   }

@@ -560,6 +560,7 @@
     "loadError": "Bokningsformuläret kunde inte laddas.",
     "submitError": "Bokningen kunde inte skapas. Försök igen.",
     "learnerNotEligible": "Du behöver vara minst 16 år för att boka lektioner.",
+    "learnerNeedsVerification": "Bekräfta din ålder med ID-verifiering innan du bokar.",
     "labels": {
       "yourName": "Ditt namn",
       "email": "E-post",

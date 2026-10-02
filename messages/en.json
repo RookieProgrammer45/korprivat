@@ -560,6 +560,7 @@
     "loadError": "The booking form could not load.",
     "submitError": "We could not create the booking. Please try again.",
     "learnerNotEligible": "You must be at least 16 years old to book lessons.",
+    "learnerNeedsVerification": "Confirm your age with ID verification before booking.",
     "labels": {
       "yourName": "Your name",
       "email": "Email",
