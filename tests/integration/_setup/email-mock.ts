@@ -17,13 +17,10 @@
 import { vi } from 'vitest';
 
 const hoisted = vi.hoisted(() => {
-  // Plain vi.fn() without an explicit implementation — the route handlers
-  // are responsible for calling `mockResolvedValueOnce({ id: ... })` per
-  // case via the helpers below. We deliberately DO NOT call
-  // `mockImplementation` here: that triggers TS's NormalizedProcedure
-  // arity check, which then demands a different runtime signature and
-  // explodes when the route handler invokes `sendEmail({to, subject, ...})`.
-  const sendEmail = vi.fn();
+  // Accept an optional arg so mock.calls[i] is typed as [unknown?], not [].
+  // resetEmailMock() installs the recording implementation; tests may
+  // override with mockResolvedValueOnce / mockRejectedValueOnce.
+  const sendEmail = vi.fn(async (_input?: unknown) => ({ id: 'mock_email_unset' }));
   const calls: Array<{
     to: string;
     subject: string;

@@ -19,6 +19,7 @@ import './_setup/env';
 import './_setup/auth-mock';
 import './_setup/email-mock';
 import { vi } from 'vitest';
+import { mockCallArg } from './_setup/mock-call';
 import {
   bookingRow,
   instructorRow,
@@ -184,9 +185,9 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
     expect(parsed.learnerAccessToken).toEqual(expect.any(String));
 
     expect(prismaMock.booking.create).toHaveBeenCalledOnce();
-    const createArgs = prismaMock.booking.create.mock.calls[0][0] as {
+    const createArgs = mockCallArg<{
       data: { studentEmail: string; category: string; userId: string };
-    };
+    }>(prismaMock.booking.create);
     expect(createArgs.data.studentEmail).toBe('learner@example.test');
     expect(createArgs.data.userId).toBe('user_learner');
     expect(createArgs.data).toMatchObject({
@@ -198,8 +199,8 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
     expect(createArgs.data).toHaveProperty('learnerAccessTokenHash');
 
     expect(sendEmailMock).toHaveBeenCalledTimes(2);
-    expect(sendEmailMock.mock.calls[0][0].to).toBe('learner@example.test');
-    expect(sendEmailMock.mock.calls[1][0].to).toBe('erik@drivelinkup.test');
+    expect(mockCallArg<{ to: string }>(sendEmailMock).to).toBe('learner@example.test');
+    expect(mockCallArg<{ to: string }>(sendEmailMock, 1).to).toBe('erik@drivelinkup.test');
   });
 
   it("400 + zero emails when category is not on the instructor's list", async () => {
@@ -236,7 +237,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
     const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
     expect(res.status).toBe(201);
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    expect(sendEmailMock.mock.calls[0][0].to).toBe('learner@example.test');
+    expect(mockCallArg<{ to: string }>(sendEmailMock).to).toBe('learner@example.test');
   });
 
   it('409 + no email when instant slot reservation loses the race', async () => {
@@ -366,11 +367,9 @@ describe('post-create dashboard read (signed-in booking joins by user id)', () =
     const create = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
     expect(create.status).toBe(201);
 
-    const createdBooking = (
-      prismaMock.booking.create.mock.calls[0][0] as {
-        data: { studentEmail: string; userId: string };
-      }
-    ).data;
+    const createdBooking = mockCallArg<{
+      data: { studentEmail: string; userId: string };
+    }>(prismaMock.booking.create).data;
     expect(createdBooking.studentEmail).toBe('learner@example.test');
     expect(createdBooking.userId).toBe('user_learner');
 
@@ -420,11 +419,9 @@ describe('post-create dashboard read (signed-in booking joins by user id)', () =
       }),
     );
     expect(prismaMock.booking.create).toHaveBeenCalledTimes(1);
-    const createdBooking = (
-      prismaMock.booking.create.mock.calls[0][0] as {
-        data: { userId: string };
-      }
-    ).data;
+    const createdBooking = mockCallArg<{
+      data: { userId: string };
+    }>(prismaMock.booking.create).data;
     expect(createdBooking.userId).toBe('user_x');
 
     prismaMock.booking.findMany.mockResolvedValueOnce([

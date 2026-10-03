@@ -10,12 +10,50 @@
 
 import { vi } from 'vitest';
 
+type R2JsonSuccess = {
+  success: true;
+  file: {
+    id: string;
+    key: string;
+    url: string;
+    filename: string;
+    mime_type: string;
+    size: number;
+    created_at: string;
+  };
+};
+type R2JsonError = { success: false; error: { message: string } };
+type R2UploadResponse = {
+  status: number;
+  ok: boolean;
+  json: () => Promise<R2JsonSuccess | R2JsonError>;
+  text: () => Promise<string>;
+};
+
+const happyPath: R2UploadResponse = {
+  status: 200,
+  ok: true,
+  json: async () => ({
+    success: true,
+    file: {
+      id: 'mock-r2-id',
+      key: 'mock/key.png',
+      url: 'https://cdn.polsia.com/mock/key.png',
+      filename: 'avatar.png',
+      mime_type: 'image/png',
+      size: 1024,
+      created_at: '2026-07-31T00:00:00Z',
+    },
+  }),
+  text: async () => '',
+};
+
 const hoisted = vi.hoisted(() => {
-  const upload = vi.fn(async () => ({
+  const upload = vi.fn(async (_input?: unknown): Promise<R2UploadResponse> => ({
     status: 200,
     ok: true,
     json: async () => ({
-      success: true,
+      success: true as const,
       file: {
         id: 'mock-r2-id',
         key: 'mock/key.png',
@@ -46,21 +84,5 @@ export const r2UploadMock = hoisted.upload;
  */
 export function resetR2Mock(): void {
   hoisted.upload.mockReset();
-  hoisted.upload.mockResolvedValue({
-    status: 200,
-    ok: true,
-    json: async () => ({
-      success: true,
-      file: {
-        id: 'mock-r2-id',
-        key: 'mock/key.png',
-        url: 'https://cdn.polsia.com/mock/key.png',
-        filename: 'avatar.png',
-        mime_type: 'image/png',
-        size: 1024,
-        created_at: '2026-07-31T00:00:00Z',
-      },
-    }),
-    text: async () => '',
-  });
+  hoisted.upload.mockResolvedValue(happyPath);
 }

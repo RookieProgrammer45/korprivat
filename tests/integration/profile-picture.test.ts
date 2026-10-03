@@ -41,6 +41,7 @@ import { authMock } from './_setup/auth-mock';
 import type { ContactsMockFixture } from './_setup/contacts-mock';
 import { installContactsProxy } from './_setup/contacts-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
+import { mockCallArg } from './_setup/mock-call';
 import { prismaMock, resetPrisma } from './_setup/prisma-mock';
 import { r2UploadMock, resetR2Mock } from './_setup/r2-mock';
 
@@ -174,7 +175,12 @@ describe('POST /api/profile/picture', () => {
       }),
     );
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    const sent = sendEmailMock.mock.calls[0][0];
+    const sent = mockCallArg<{
+      to: string;
+      subject: string;
+      html?: string;
+      text?: string;
+    }>(sendEmailMock);
     expect(sent.to).toBe(SESSION_USER.email);
     expect(sent.subject).toBe('Your profile is set up — welcome to DriveLinkUp');
     expect(sent.html).toContain('cdn.polsia.com/mock/key.png');

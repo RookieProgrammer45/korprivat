@@ -33,6 +33,7 @@ import { GET as bookingsMeGET } from '@/app/api/bookings/me/route';
 import { BookingList } from '@/lib/contracts/auth';
 import { authMock } from './_setup/auth-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
+import { mockCallArg } from './_setup/mock-call';
 
 const SESSION_USER = {
   id: 'user_alice',
@@ -130,8 +131,8 @@ describe('POST /api/auth/welcome', () => {
       }),
     );
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    expect(sendEmailMock.mock.calls[0][0].to).toBe('alice@example.test');
-    expect(sendEmailMock.mock.calls[0][0].subject).toMatch(/Welcome/);
+    expect(mockCallArg<{ to: string }>(sendEmailMock).to).toBe('alice@example.test');
+    expect(mockCallArg<{ subject: string }>(sendEmailMock).subject).toMatch(/Welcome/);
   });
 
   it('second post is a 204 no-op (welcomeSentAt already set) — no second email', async () => {
@@ -211,7 +212,7 @@ describe('POST /api/auth/signup-redirect', () => {
     expect(((await r2.json()) as { to: string }).to).toBe('/dashboard/instructor');
 
     expect(prismaMock.userProfile.update).toHaveBeenCalledTimes(2);
-    expect(prismaMock.userProfile.update.mock.calls[1][0]).toMatchObject({
+    expect(mockCallArg(prismaMock.userProfile.update, 1)).toMatchObject({
       data: { role: 'INSTRUCTOR' },
     });
   });

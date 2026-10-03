@@ -87,6 +87,7 @@ import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
 
 import { authMock } from './_setup/auth-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
+import { mockCallArg } from './_setup/mock-call';
 
 // ─── Helpers ─────────────────────────────────────────────────────────
 
@@ -233,8 +234,9 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     expect(receiptEmails).toBe(2);
 
     // Pull the action token from the updateMany so we can use it on complete.
-    const updateData = (prismaMock.booking.updateMany.mock.calls[0][0] as { data: unknown })
-      .data as { actionToken?: string };
+    const updateData = mockCallArg<{ data: { actionToken?: string } }>(
+      prismaMock.booking.updateMany,
+    ).data;
     const token = updateData.actionToken;
     expect(typeof token).toBe('string');
 
@@ -484,9 +486,10 @@ describe('booking: dispute → resolve refunded (cancel-before-payout)', () => {
     // The booking update set paymentStatus=refunded and DID NOT set payoutReleasedAt.
     const txCalls = prismaMock.$transaction.mock.calls;
     expect(txCalls.length).toBeGreaterThan(0);
-    const txOps = (txCalls[txCalls.length - 1][0] as Array<unknown>).slice() as Array<
-      Promise<unknown>
-    >;
+    const txOps = mockCallArg<Array<Promise<unknown>>>(
+      prismaMock.$transaction,
+      txCalls.length - 1,
+    ).slice();
     // Resolve the ops so we can inspect the call shapes passed in.
     await Promise.all(txOps);
     expect(prismaMock.booking.updateMany).toHaveBeenCalledWith(
@@ -500,16 +503,18 @@ describe('booking: dispute → resolve refunded (cancel-before-payout)', () => {
     );
     // Refund path: do NOT carry payoutReleasedAt.
     const bookingUpdateCall = prismaMock.booking.updateMany.mock.calls.find(
-      (c) => (c[0] as { data: { paymentStatus?: string } }).data.paymentStatus === 'refunded',
+      (c) =>
+        (c[0] as { data: { paymentStatus?: string } } | undefined)?.data.paymentStatus ===
+        'refunded',
     );
     expect(bookingUpdateCall).toBeDefined();
-    const refundData = (bookingUpdateCall?.[0] as { data: object }).data;
+    const refundData = (bookingUpdateCall![0] as { data: object }).data;
     expect(refundData).not.toHaveProperty('payoutReleasedAt');
 
     // After open (1 counterparty email) + resolve (2 parties notified),
     // expect exactly 3 emails dispatched in this test.
     expect(sendEmailMock).toHaveBeenCalledTimes(3);
-    const last = sendEmailMock.mock.calls[2][0];
+    const last = mockCallArg<{ to: string; subject: string }>(sendEmailMock, 2);
     expect(['erik@drivelinkup.test', SESSION_USER.email]).toContain(last.to);
     expect(last.subject).toMatch(/återbetalning|tvist/i);
   });

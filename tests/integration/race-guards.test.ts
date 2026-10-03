@@ -72,36 +72,29 @@ afterEach(() => {
 
 describe('payment-poll race guard', () => {
   it('two concurrent polls → held_escrow flips ONCE + exactly one winning updateMany', async () => {
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
-      bookingRow({
-        id: 'booking_race',
-        paymentStatus: 'pending',
-        stripeSessionId: 'cs_test_race',
-        stripeCheckoutSessionId: 'cs_test_race',
-      }),
+    // Each poll: route findUnique + markBookingPaidFromCheckout findUnique.
+    // Loser duplicate path: one more findUnique for the fresh row.
+    const pending = bookingRow({
+      id: 'booking_race',
+      paymentStatus: 'pending',
+      stripeSessionId: 'cs_test_race',
+      stripeCheckoutSessionId: 'cs_test_race',
+    });
+    const held = bookingRow({
+      id: 'booking_race',
+      paymentStatus: 'held_escrow',
+      paidAt: new Date(),
+      stripeSessionId: 'cs_test_race',
+      stripeCheckoutSessionId: 'cs_test_race',
+      heldAt: new Date(),
+    });
+    let updateWins = 0;
+    prismaMock.booking.findUnique.mockImplementation(async () =>
+      updateWins === 0 ? pending : held,
     );
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
-      bookingRow({
-        id: 'booking_race',
-        paymentStatus: 'pending',
-        stripeSessionId: 'cs_test_race',
-        stripeCheckoutSessionId: 'cs_test_race',
-      }),
-    );
-    prismaMock.booking.findUnique.mockResolvedValueOnce(
-      bookingRow({
-        id: 'booking_race',
-        paymentStatus: 'held_escrow',
-        paidAt: new Date(),
-        stripeSessionId: 'cs_test_race',
-        stripeCheckoutSessionId: 'cs_test_race',
-        heldAt: new Date(),
-      }),
-    );
-    let n = 0;
     prismaMock.booking.updateMany.mockImplementation(async () => {
-      n += 1;
-      return { count: n === 1 ? 1 : 0 };
+      updateWins += 1;
+      return { count: updateWins === 1 ? 1 : 0 };
     });
     prismaMock.instructor.findUnique.mockResolvedValue(
       instructorRow({ email: 'erik@drivelinkup.test' }),
@@ -115,44 +108,43 @@ describe('payment-poll race guard', () => {
 
     expect(r1.status).toBe(200);
     expect(r2.status).toBe(200);
-    const [b1, b2] = (await Promise.all([r1.json(), r2.json()])) as Array<{
+    const bodies = (await Promise.all([r1.json(), r2.json()])) as Array<{
       verified: boolean;
       paymentStatus: string;
     }>;
-    expect(b1.verified).toBe(true);
-    expect(b2.verified).toBe(true);
-    expect(b1.paymentStatus).toBe('held_escrow');
-    expect(b2.paymentStatus).toBe('held_escrow');
+    const b1 = bodies[0];
+    const b2 = bodies[1];
+    expect(b1).toBeDefined();
+    expect(b2).toBeDefined();
+    expect(b1!.verified).toBe(true);
+    expect(b2!.verified).toBe(true);
+    expect(b1!.paymentStatus).toBe('held_escrow');
+    expect(b2!.paymentStatus).toBe('held_escrow');
     expect(prismaMock.booking.updateMany).toHaveBeenCalledTimes(2);
     expect(sendEmailMock).toHaveBeenCalledTimes(2);
   });
 
   it('three concurrent polls — still ONE held-receipt send', async () => {
-    for (let i = 0; i < 3; i++) {
-      prismaMock.booking.findUnique.mockResolvedValueOnce(
-        bookingRow({
-          id: 'booking_3x',
-          paymentStatus: 'pending',
-          stripeSessionId: 'cs_test_3x',
-          stripeCheckoutSessionId: 'cs_test_3x',
-        }),
-      );
-    }
-    for (let i = 0; i < 2; i++) {
-      prismaMock.booking.findUnique.mockResolvedValueOnce(
-        bookingRow({
-          id: 'booking_3x',
-          paymentStatus: 'held_escrow',
-          paidAt: new Date(),
-          stripeSessionId: 'cs_test_3x',
-          stripeCheckoutSessionId: 'cs_test_3x',
-        }),
-      );
-    }
-    let n = 0;
+    const pending = bookingRow({
+      id: 'booking_3x',
+      paymentStatus: 'pending',
+      stripeSessionId: 'cs_test_3x',
+      stripeCheckoutSessionId: 'cs_test_3x',
+    });
+    const held = bookingRow({
+      id: 'booking_3x',
+      paymentStatus: 'held_escrow',
+      paidAt: new Date(),
+      stripeSessionId: 'cs_test_3x',
+      stripeCheckoutSessionId: 'cs_test_3x',
+    });
+    let updateWins = 0;
+    prismaMock.booking.findUnique.mockImplementation(async () =>
+      updateWins === 0 ? pending : held,
+    );
     prismaMock.booking.updateMany.mockImplementation(async () => {
-      n += 1;
-      return { count: n === 1 ? 1 : 0 };
+      updateWins += 1;
+      return { count: updateWins === 1 ? 1 : 0 };
     });
     prismaMock.instructor.findUnique.mockResolvedValue(
       instructorRow({ email: 'erik@drivelinkup.test' }),
@@ -169,6 +161,7 @@ describe('payment-poll race guard', () => {
       expect(r.status).toBe(200);
     }
     expect(prismaMock.booking.updateMany).toHaveBeenCalledTimes(3);
+    // Winner sends learner + instructor receipts; losers are duplicate (no resend).
     expect(sendEmailMock).toHaveBeenCalledTimes(2);
   });
 });

@@ -14,6 +14,7 @@
 import './_setup/env';
 import './_setup/email-mock';
 import { vi } from 'vitest';
+import { mockCallArg } from './_setup/mock-call';
 import { bookingRow, instructorRow, prismaMock, resetPrisma } from './_setup/prisma-mock';
 
 vi.mock('server-only', () => ({}));
@@ -280,7 +281,7 @@ describe('POST /api/bookings/[id]/cancel — early window', () => {
     );
     expect(res.status).toBe(200);
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    expect(stringArg(sendEmailMock.mock.calls[0][0], 'to')).toBe('learner@example.test');
+    expect(stringArg(mockCallArg(sendEmailMock), 'to')).toBe('learner@example.test');
   });
 
   it('cancel from the unpaid (pre-payment) state flips to cancelled_early without a fee', async () => {
@@ -333,10 +334,12 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
 
     // Fee row is inserted only after the booking claim.
     expect(prismaMock.lateCancellationFee.create).toHaveBeenCalledOnce();
-    expect(prismaMock.booking.updateMany.mock.invocationCallOrder[0]).toBeLessThan(
-      prismaMock.lateCancellationFee.create.mock.invocationCallOrder[0],
-    );
-    const feeCreateArgs = prismaMock.lateCancellationFee.create.mock.calls[0][0] as {
+    const bookingClaimOrder = prismaMock.booking.updateMany.mock.invocationCallOrder[0];
+    const feeCreateOrder = prismaMock.lateCancellationFee.create.mock.invocationCallOrder[0];
+    expect(bookingClaimOrder).toBeDefined();
+    expect(feeCreateOrder).toBeDefined();
+    expect(bookingClaimOrder!).toBeLessThan(feeCreateOrder!);
+    const feeCreateArgs = mockCallArg<{
       data: {
         bookingId: string;
         amountUsd: number;
@@ -344,7 +347,7 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
         windowHoursAtCancel: number;
         status: string;
       };
-    };
+    }>(prismaMock.lateCancellationFee.create);
     expect(feeCreateArgs.data.bookingId).toBe('booking_cancel');
     expect(feeCreateArgs.data.feePercentApplied).toBeGreaterThan(0);
     expect(feeCreateArgs.data.windowHoursAtCancel).toBeGreaterThanOrEqual(0);
@@ -387,7 +390,7 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
     );
     expect(learnerMail).toBeDefined();
     expect(instructorMail).toBeDefined();
-    expect(learnerMail?.[0]?.subject).toMatch(/avgift/i);
+    expect(stringArg(learnerMail?.[0], 'subject')).toMatch(/avgift/i);
   });
 });
 
