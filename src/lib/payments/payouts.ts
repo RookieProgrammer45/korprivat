@@ -177,6 +177,12 @@ export async function payoutBooking(
 
   try {
     const stripe = getStripe();
+    // Stripe caches failed transfer responses under the same idempotency key
+    // for ~24h. A sticky `transfer:booking:{id}` key blocks admin retry after
+    // balance_insufficient once the platform balance is topped up.
+    // Include paymentStatus so release_ready races still dedupe, while
+    // payout_failed / payout_pending retries get a fresh key.
+    const idempotencyKey = `transfer:booking:${bookingId}:${booking.paymentStatus ?? 'ready'}`;
     const transfer = await stripe.transfers.create(
       {
         amount: amountOre,
@@ -189,7 +195,7 @@ export async function payoutBooking(
           recipientId,
         },
       },
-      { idempotencyKey: `transfer:booking:${bookingId}` },
+      { idempotencyKey },
     );
 
     const now = new Date();

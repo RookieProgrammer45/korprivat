@@ -19,6 +19,8 @@ import {
   CheckoutConfigurationError,
   createBookingCheckoutSession,
 } from '@/lib/payments/create-booking-checkout';
+import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
+import { getStripe } from '@/lib/payments/stripe';
 import { getSessionUser, requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -58,7 +60,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ verified: false, error: 'missing_session_id' }, { status: 400 });
   }
 
-  const booking = await prisma.booking.findFirst({
+  let booking = await prisma.booking.findFirst({
     where: {
       OR: [{ stripeSessionId: sessionId }, { stripeCheckoutSessionId: sessionId }],
     },
@@ -67,6 +69,37 @@ export async function GET(req: Request) {
 
   if (!booking) {
     return NextResponse.json({ verified: false, paymentStatus: null }, { status: 200 });
+  }
+
+  // Self-heal when the webhook never landed (local/dev, dropped 308, etc.):
+  // ask Stripe, then mark held_escrow the same way payment-poll does.
+  const alreadyPaid =
+    booking.paidAt != null ||
+    booking.paymentStatus === 'held_escrow' ||
+    booking.paymentStatus === 'released' ||
+    booking.paymentStatus === 'paid';
+
+  if (!alreadyPaid) {
+    try {
+      const session = await getStripe().checkout.sessions.retrieve(sessionId);
+      const stripePaid = session.payment_status === 'paid' || session.status === 'complete';
+      if (stripePaid) {
+        await markBookingPaidFromCheckout({
+          bookingId: booking.id,
+          stripeSessionId: sessionId,
+          preserveLearnerToken: true,
+        });
+        booking = await prisma.booking.findUnique({
+          where: { id: booking.id },
+          select: { paidAt: true, paymentStatus: true, id: true },
+        });
+        if (!booking) {
+          return NextResponse.json({ verified: false, paymentStatus: null }, { status: 200 });
+        }
+      }
+    } catch (err) {
+      console.error('[checkout GET] Stripe self-heal failed', err);
+    }
   }
 
   const verified =
