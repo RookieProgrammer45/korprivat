@@ -24,6 +24,7 @@ export interface MockSessionUser {
   email: string;
   name?: string;
   role?: 'user' | 'admin';
+  emailVerified?: boolean;
 }
 
 interface HoistedState {
@@ -45,10 +46,20 @@ const hoisted = vi.hoisted<HoistedState>(() => {
     if (nextUserRef.current !== null) {
       const u = nextUserRef.current;
       nextUserRef.current = null;
-      return u ? { user: u, session: { id: `sess_${u.id}`, userId: u.id } } : null;
+      return u
+        ? {
+            user: { emailVerified: true, ...u },
+            session: { id: `sess_${u.id}`, userId: u.id },
+          }
+        : null;
     }
     const cur = userRef.current;
-    return cur ? { user: cur, session: { id: `sess_${cur.id}`, userId: cur.id } } : null;
+    return cur
+      ? {
+          user: { emailVerified: true, ...cur },
+          session: { id: `sess_${cur.id}`, userId: cur.id },
+        }
+      : null;
   });
   return { userRef, nextUserRef, getSessionCalls, getSession };
 });

@@ -1,6 +1,7 @@
 
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { HandledareInviteClient } from './invite-client';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('onboarding.handledare');
@@ -14,11 +15,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HandledareOnboardingPage() {
   const t = await getTranslations('onboarding.handledare');
   return (
-    <div className="grid gap-3">
+    <div className="grid gap-4">
       <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
         {t('title')}
       </h1>
       <p className="text-pretty text-body text-muted-foreground">{t('body')}</p>
+      <HandledareInviteClient />
     </div>
   );
 }

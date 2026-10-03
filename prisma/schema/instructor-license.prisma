@@ -16,6 +16,7 @@ enum LicenseStatus {
   PENDING
   VERIFIED
   REJECTED
+  EXPIRED
 }
 
 model InstructorLicense {
@@ -31,9 +32,12 @@ model InstructorLicense {
   verifiedAt      DateTime?
   verifiedByEmail String?
   rejectionReason String?
+  /// When set, expire-docs cron flips VERIFIED → EXPIRED after this instant.
+  expiresAt       DateTime?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
   @@index([status])
+  @@index([expiresAt])
   @@map("instructor_license")
 }

@@ -115,12 +115,14 @@ afterEach(() => {
 });
 
 describe('POST /api/admin/bookings/[id]/resolve-dispute', () => {
-  it('outcome=partial → 501, no refund, no state change', async () => {
+  it('outcome=partial → refund + release_ready remainder (ADR-005)', async () => {
     mockBookingFindUnique.mockResolvedValue({
       id: 'booking_disputed',
       paymentStatus: 'disputed',
       grossChargedSek: 500,
+      payoutAmountSek: 450,
     });
+    mockRefundBooking.mockResolvedValue({ kind: 'refunded', refundId: 're_1', amountSek: 100 });
 
     const res = await resolveDisputePOST(
       jsonPost('/api/admin/bookings/booking_disputed/resolve-dispute', {
@@ -131,12 +133,12 @@ describe('POST /api/admin/bookings/[id]/resolve-dispute', () => {
       { params: Promise.resolve({ id: 'booking_disputed' }) },
     );
 
-    expect(res.status).toBe(501);
-    const body = (await res.json()) as { error: string };
-    expect(body.error).toBe('not_implemented');
-    expect(mockRefundBooking).not.toHaveBeenCalled();
-    expect(mockBookingUpdate).not.toHaveBeenCalled();
-    expect(mockPayoutBooking).not.toHaveBeenCalled();
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as { outcome: string; paymentStatus: string };
+    expect(body.outcome).toBe('partial');
+    expect(body.paymentStatus).toBe('release_ready');
+    expect(mockRefundBooking).toHaveBeenCalled();
+    expect(mockBookingUpdate).toHaveBeenCalled();
   });
 });
 

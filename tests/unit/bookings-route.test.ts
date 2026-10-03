@@ -11,6 +11,7 @@ const {
   mockSlotFindFirst,
   mockSlotUpdateMany,
   mockUserProfileFindUnique,
+  mockHandledareFindFirst,
   mockTransaction,
   mockGetSessionUser,
 } = vi.hoisted(() => ({
@@ -21,6 +22,7 @@ const {
   mockSlotFindFirst: vi.fn(),
   mockSlotUpdateMany: vi.fn(),
   mockUserProfileFindUnique: vi.fn(),
+  mockHandledareFindFirst: vi.fn(async () => null),
   mockTransaction: vi.fn(),
   mockGetSessionUser: vi.fn(),
 }));
@@ -50,6 +52,7 @@ vi.mock('@/lib/db', () => ({
     booking: { findFirst: mockBookingFindFirst, create: mockBookingCreate },
     availabilitySlot: { findFirst: mockSlotFindFirst, updateMany: mockSlotUpdateMany },
     userProfile: { findUnique: mockUserProfileFindUnique },
+    handledareEnrollment: { findFirst: mockHandledareFindFirst },
     $transaction: mockTransaction,
   },
 }));
@@ -144,6 +147,8 @@ describe('POST /api/bookings — email dispatch', () => {
     mockSlotFindFirst.mockResolvedValue({
       id: 'slot_1',
       startsAt: new Date('2030-08-10T14:30:00.000Z'),
+      endsAt: new Date('2030-08-10T15:30:00.000Z'),
+      durationMinutes: 60,
     });
     mockSlotUpdateMany.mockResolvedValue({ count: 1 });
     mockTransaction.mockImplementation(async (callback: unknown) =>

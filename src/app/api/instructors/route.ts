@@ -13,7 +13,10 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { registerKnownContact } from '@/lib/business/escrow';
 import { haversineKm, resolveInstructorCoords } from '@/lib/business/geo';
 import { confirmedPhotoUrl } from '@/lib/business/photo-verification';
-import { buildProviderActivationWhere } from '@/lib/business/provider-activation';
+import {
+  buildProviderActivationWhere,
+  buildVerifiedProviderActivationWhere,
+} from '@/lib/business/provider-activation';
 import { providerTimezoneForCity } from '@/lib/business/provider-timezone';
 import {
   hasCanonicalCategory,
@@ -72,7 +75,7 @@ export async function GET(req: NextRequest) {
     q.affiliation !== undefined;
   if (countOnly && !hasDirectoryFilters) {
     const count = await prisma.instructor.count({
-      where: buildProviderActivationWhere(),
+      where: await buildVerifiedProviderActivationWhere(),
     });
     return NextResponse.json(InstructorList.parse({ items: [], cities: [], count }));
   }
@@ -420,7 +423,10 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
   // marketplace supply — that path is guidance-only, not bookable listings.
   if (q.providerRole === 'INSTRUCTOR') filters.providerRole = 'INSTRUCTOR';
 
-  const clauses: Prisma.InstructorWhereInput[] = [buildProviderActivationWhere(), filters];
+  const clauses: Prisma.InstructorWhereInput[] = [
+    await buildVerifiedProviderActivationWhere(),
+    filters,
+  ];
 
   // Affiliation via Membership (ACTIVE), not Instructor.providerRole —
   // public reads collapse SCHOOL → INSTRUCTOR.

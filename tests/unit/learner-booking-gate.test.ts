@@ -8,6 +8,7 @@ vi.mock('server-only', () => ({}));
 vi.mock('@/lib/db', () => ({
   prisma: {
     userProfile: { findUnique: mockUserProfileFindUnique },
+    handledareEnrollment: { findFirst: vi.fn(async () => null) },
   },
 }));
 vi.mock('@/lib/require-auth', () => ({

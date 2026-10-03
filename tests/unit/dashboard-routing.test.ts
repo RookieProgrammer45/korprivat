@@ -9,7 +9,11 @@ vi.mock('@/lib/orgs/service', () => ({ listMembershipsForUser }));
 vi.mock('@/lib/auth', () => ({ auth: { api: { getSession: vi.fn() } } }));
 vi.mock('@/lib/db', () => ({ prisma: { userProfile: { findUnique: vi.fn(), create: vi.fn() } } }));
 
-import { dashboardPathFor, resolveDashboardHome } from '@/lib/dashboard-guard';
+import {
+  clearDashboardMembershipCache,
+  dashboardPathFor,
+  resolveDashboardHome,
+} from '@/lib/dashboard-guard';
 import { deriveDashboardShellRole } from '@/lib/dashboard-shell-role';
 
 describe('dashboardPathFor', () => {
@@ -23,6 +27,7 @@ describe('dashboardPathFor', () => {
 describe('resolveDashboardHome', () => {
   beforeEach(() => {
     listMembershipsForUser.mockReset();
+    clearDashboardMembershipCache();
   });
 
   it('routes OWNER membership to /dashboard/school', async () => {

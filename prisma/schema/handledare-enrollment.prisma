@@ -1,0 +1,21 @@
+/// Legal artefact: Trafikverket-oriented supervised-practice enrollment.
+/// Never hard-delete — mark REVOKED / let expire only (AGENTS.md invariant 7).
+model HandledareEnrollment {
+  id              String    @id @default(cuid())
+  learnerUserId   String
+  handledareEmail String
+  handledareName  String?
+  /// PENDING | APPROVED | REVOKED | EXPIRED
+  status          String    @default("PENDING")
+  /// Opaque invite token (raw). Stored hashed in inviteTokenHash for lookup.
+  inviteTokenHash String    @unique
+  expiresAt       DateTime
+  approvedAt      DateTime?
+  revokedAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([learnerUserId, status])
+  @@index([expiresAt])
+  @@map("handledare_enrollment")
+}

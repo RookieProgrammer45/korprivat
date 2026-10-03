@@ -440,8 +440,9 @@ export async function createDiditSession(args: {
   return { sessionId, url };
 }
 
-/** Structured alert when Sentry is not wired (no @sentry package today). */
+/** Structured alert via observability seam (Sentry when SENTRY_DSN is set). */
 export function alertDiditWebhook(note: string, extra?: Record<string, unknown>): void {
-  // TODO(verification): route to Sentry once @sentry/nextjs is installed.
-  console.error('[didit-webhook]', note, extra ?? {});
+  void import('@/lib/observability/report-error').then(({ reportError }) =>
+    reportError(new Error(note), { tags: { area: 'didit' }, extra }),
+  );
 }

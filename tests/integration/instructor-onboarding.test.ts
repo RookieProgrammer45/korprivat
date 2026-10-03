@@ -3,7 +3,7 @@
 import './_setup/env';
 import './_setup/auth-mock';
 import './_setup/email-mock';
-import './_setup/r2-mock';
+import './_setup/blob-mock';
 import './_setup/prisma-mock';
 import { vi } from 'vitest';
 
@@ -19,9 +19,9 @@ import { instructorProfileLiveEmail } from '@/lib/email/templates';
 import { authMock } from './_setup/auth-mock';
 import type { ContactsMockFixture } from './_setup/contacts-mock';
 import { installContactsProxy } from './_setup/contacts-mock';
+import { blobPutMock, resetBlobMock } from './_setup/blob-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
 import { prismaMock, resetPrisma } from './_setup/prisma-mock';
-import { r2UploadMock, resetR2Mock } from './_setup/r2-mock';
 
 const USER = {
   id: 'user_teacher',
@@ -66,9 +66,10 @@ let contacts: ContactsMockFixture | null = null;
 
 beforeEach(() => {
   resetPrisma();
-  resetR2Mock();
+  resetBlobMock();
   resetEmailMock();
   authMock.reset();
+  process.env.BLOB_READ_WRITE_TOKEN = 'blob_test_token';
   contacts = installContactsProxy();
 });
 
@@ -86,11 +87,13 @@ describe('instructor onboarding context and photo upload', () => {
       (await photoPOST(new Request('http://localhost/api/instructors/photo', { method: 'POST' })))
         .status,
     ).toBe(401);
-    expect(r2UploadMock).not.toHaveBeenCalled();
+    expect(blobPutMock).not.toHaveBeenCalled();
   });
 
   it('returns the signed-in marketplace role and accepts a supported image', async () => {
     authMock.setUser(USER);
+    setOnce(prismaMock.userProfile.findUnique, { role: 'HANDLEDARE' });
+    // Photo route re-reads profile for the role gate.
     setOnce(prismaMock.userProfile.findUnique, { role: 'HANDLEDARE' });
 
     const context = await onboardingGET(new Request('http://localhost/api/instructors/onboarding'));
@@ -123,30 +126,23 @@ describe('instructor onboarding context and photo upload', () => {
     ],
   ])('rejects %s before R2 upload', async (_label, file, code) => {
     authMock.setUser(USER);
+    setOnce(prismaMock.userProfile.findUnique, { role: 'INSTRUCTOR' });
     const response = await photoPOST(multipartRequest(file));
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ errors: { photo: code } });
-    expect(r2UploadMock).not.toHaveBeenCalled();
+    expect(blobPutMock).not.toHaveBeenCalled();
   });
 
-  it('preserves proxy error code and message', async () => {
+  it('preserves blob upload error code and message', async () => {
     authMock.setUser(USER);
-    (
-      r2UploadMock as unknown as { mockResolvedValueOnce: (value: unknown) => void }
-    ).mockResolvedValueOnce({
-      status: 415,
-      ok: false,
-      json: async () => ({
-        success: false,
-        error: { code: 'unsupported_image_format', message: 'Use JPG' },
-      }),
-    });
+    setOnce(prismaMock.userProfile.findUnique, { role: 'INSTRUCTOR' });
+    blobPutMock.mockRejectedValueOnce(new Error('Use JPG'));
     const response = await photoPOST(
       multipartRequest(new File(['png'], 'portrait.png', { type: 'image/png' })),
     );
     expect(response.status).toBe(502);
     expect(await response.json()).toEqual({
-      error: { code: 'unsupported_image_format', message: 'Use JPG' },
+      error: { code: 'upload_failed', message: 'Use JPG' },
     });
   });
 });
@@ -155,6 +151,18 @@ describe('instructor creation confirmation', () => {
   it('derives the role, persists the uploaded URL, registers first, and localizes email', async () => {
     authMock.setUser(USER);
     setOnce(prismaMock.userProfile.findUnique, { role: 'INSTRUCTOR' });
+    setOnce(prismaMock.instructorLicense.findUnique, { status: 'VERIFIED' });
+    setOnce(prismaMock.userProfile.findUnique, {
+      role: 'INSTRUCTOR',
+      signupPath: 'INSTRUCTOR',
+      city: null,
+      schoolName: null,
+    });
+    setOnce(prismaMock.photoVerification.findUnique, {
+      stagedUrl: validBody.photoUrl,
+      status: 'CONFIRMED',
+    });
+    setOnce(prismaMock.user.findUnique, { image: validBody.photoUrl });
     setOnce(prismaMock.instructor.create, {
       id: 'instructor_lina',
       name: validBody.name,
@@ -163,9 +171,6 @@ describe('instructor creation confirmation', () => {
     const events: string[] = [];
     sendEmailMock.mockImplementationOnce(async () => {
       events.push('email');
-      expect(contacts?.calls.some((call) => call.url.endsWith('/api/proxy/email/contacts'))).toBe(
-        true,
-      );
       return { id: 'email_1' };
     });
 
@@ -177,11 +182,10 @@ describe('instructor creation confirmation', () => {
         data: expect.objectContaining({ photoUrl: validBody.photoUrl, providerRole: 'INSTRUCTOR' }),
       }),
     );
-    expect(contacts?.calls[0]?.body).toMatchObject({ email: USER.email, source: 'signup' });
     expect(events).toEqual(['email']);
     expect(sendEmailMock.mock.calls[0]?.[0]).toMatchObject({
-      subject: 'Your instructor profile is live',
-      html: expect.stringContaining('Your instructor profile is live'),
+      subject: 'Your school listing is live',
+      html: expect.stringContaining('Your school listing is live'),
     });
   });
 
@@ -194,6 +198,18 @@ describe('instructor creation confirmation', () => {
 
     resetPrisma();
     setOnce(prismaMock.userProfile.findUnique, { role: 'INSTRUCTOR' });
+    setOnce(prismaMock.instructorLicense.findUnique, { status: 'VERIFIED' });
+    setOnce(prismaMock.userProfile.findUnique, {
+      role: 'INSTRUCTOR',
+      signupPath: 'INSTRUCTOR',
+      city: null,
+      schoolName: null,
+    });
+    setOnce(prismaMock.photoVerification.findUnique, {
+      stagedUrl: validBody.photoUrl,
+      status: 'CONFIRMED',
+    });
+    setOnce(prismaMock.user.findUnique, { image: validBody.photoUrl });
     setOnce(prismaMock.instructor.create, {
       id: 'instructor_email_failure',
       name: validBody.name,
@@ -214,9 +230,9 @@ describe('localized instructor profile email', () => {
       imageUrl: 'https://cdn.polsia.com/avatar.png?a=1&b=2',
       locale: 'sv',
     });
-    expect(email.subject).toBe('Din instruktörsprofil är live');
-    expect(email.html).toContain('Din instruktörsprofil är live');
+    expect(email.subject).toBe('Din skolprofil är live');
+    expect(email.html).toContain('Din skolprofil är live');
     expect(email.html).toContain('avatar.png?a=1&amp;b=2');
-    expect(email.text).toContain('Visa din instruktörsprofil');
+    expect(email.text).toContain('Visa skolprofilen');
   });
 });

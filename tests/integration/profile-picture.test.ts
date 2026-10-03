@@ -26,7 +26,7 @@
 import './_setup/env';
 import './_setup/auth-mock';
 import './_setup/email-mock';
-import './_setup/r2-mock';
+import './_setup/blob-mock';
 import './_setup/prisma-mock';
 import { vi } from 'vitest';
 
@@ -43,7 +43,7 @@ import { installContactsProxy } from './_setup/contacts-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
 import { mockCallArg } from './_setup/mock-call';
 import { prismaMock, resetPrisma } from './_setup/prisma-mock';
-import { r2UploadMock, resetR2Mock } from './_setup/r2-mock';
+import { blobPutMock, resetBlobMock } from './_setup/blob-mock';
 
 const SESSION_USER = {
   id: 'user_alice',
@@ -83,7 +83,8 @@ let contactsMock: ContactsMockFixture | null = null;
 
 beforeEach(() => {
   resetPrisma();
-  resetR2Mock();
+  resetBlobMock();
+  process.env.BLOB_READ_WRITE_TOKEN = 'vercel_blob_test_token';
   authMock.reset();
   resetEmailMock();
   contactsMock = installContactsProxy();
@@ -104,7 +105,7 @@ describe('POST /api/profile/picture', () => {
     expect(prismaMock.user.update).not.toHaveBeenCalled();
     expect(prismaMock.userProfile.upsert).not.toHaveBeenCalled();
     // requireAuth short-circuits — R2 must not be touched.
-    expect(r2UploadMock).not.toHaveBeenCalled();
+    expect(blobPutMock).not.toHaveBeenCalled();
   });
 
   it('400 when MIME is not an image', async () => {
@@ -113,7 +114,7 @@ describe('POST /api/profile/picture', () => {
     expect(res.status).toBe(400);
     const body = (await res.json()) as { errors?: { picture?: string } };
     expect(body.errors?.picture).toBe('pictureWrongType');
-    expect(r2UploadMock).not.toHaveBeenCalled();
+    expect(blobPutMock).not.toHaveBeenCalled();
     expect(prismaMock.user.update).not.toHaveBeenCalled();
   });
 
@@ -123,7 +124,7 @@ describe('POST /api/profile/picture', () => {
     expect(res.status).toBe(400);
     const body = (await res.json()) as { errors?: { picture?: string } };
     expect(body.errors?.picture).toMatch(/No file|uploaded/i);
-    expect(r2UploadMock).not.toHaveBeenCalled();
+    expect(blobPutMock).not.toHaveBeenCalled();
   });
 
   it('201 on a valid image — User.image + profileCompletedAt both set', async () => {
@@ -144,17 +145,15 @@ describe('POST /api/profile/picture', () => {
 
     expect(res.status).toBe(201);
     const body = (await res.json()) as { imageUrl?: string; profileCompletedAt?: string };
-    expect(body.imageUrl).toBe('https://cdn.polsia.com/mock/key.png');
+    expect(body.imageUrl).toMatch(/^https:\/\/cdn\.polsia\.com\/mock\//);
     expect(typeof body.profileCompletedAt).toBe('string');
     expect(Number.isNaN(Date.parse(body.profileCompletedAt ?? ''))).toBe(false);
 
-    // The R2 mock was hit exactly once, with the correct URL in the body
-    // envelope that the route then unwraps.
-    expect(r2UploadMock).toHaveBeenCalledTimes(1);
+    expect(blobPutMock).toHaveBeenCalledTimes(1);
     expect(prismaMock.user.update).toHaveBeenCalledWith(
       expect.objectContaining({
         where: { id: SESSION_USER.id },
-        data: { image: 'https://cdn.polsia.com/mock/key.png' },
+        data: { image: expect.stringMatching(/^https:\/\/cdn\.polsia\.com\/mock\//) as string },
       }),
     );
     expect(prismaMock.userProfile.upsert).toHaveBeenCalledWith(
@@ -183,8 +182,8 @@ describe('POST /api/profile/picture', () => {
     }>(sendEmailMock);
     expect(sent.to).toBe(SESSION_USER.email);
     expect(sent.subject).toBe('Your profile is set up — welcome to DriveLinkUp');
-    expect(sent.html).toContain('cdn.polsia.com/mock/key.png');
-    expect(sent.text).toContain('cdn.polsia.com/mock/key.png');
+    expect(sent.html).toContain('cdn.polsia.com/mock/');
+    expect(sent.text).toContain('cdn.polsia.com/mock/');
     expect(sent.html).toContain('Your profile is set up and you');
     // Contact-register fired with source:'signup'.
     const contactsCall = contactsMock?.calls.find((c) =>
@@ -219,29 +218,9 @@ describe('POST /api/profile/picture', () => {
     );
   });
 
-  it('502 when the R2 proxy reports a non-success response', async () => {
+  it('502 when Blob upload throws', async () => {
     authMock.setUser(SESSION_USER);
-    r2UploadMock.mockResolvedValueOnce({
-      status: 502,
-      ok: false,
-      json: async () => ({ success: false, error: { message: 'upstream' } }),
-      text: async () => '',
-    });
-
-    const pngBytes = new Uint8Array([0x89, 0x50, 0x4e, 0x47]);
-    const file = new File([pngBytes], 'avatar.png', { type: 'image/png' });
-    const res = await picturePOST(multipartImageRequest(file));
-
-    expect(res.status).toBe(502);
-    const body = (await res.json()) as { error?: string };
-    expect(body.error).toBe('upload_failed');
-    // No persistence on a failed upload — User.image stays untouched.
-    expect(prismaMock.user.update).not.toHaveBeenCalled();
-  });
-
-  it('502 when the R2 proxy throws', async () => {
-    authMock.setUser(SESSION_USER);
-    r2UploadMock.mockRejectedValueOnce(new Error('socket hang up'));
+    blobPutMock.mockRejectedValueOnce(new Error('socket hang up'));
 
     const pngBytes = new Uint8Array([0x89, 0x50, 0x4e, 0x47]);
     const file = new File([pngBytes], 'avatar.png', { type: 'image/png' });
@@ -269,7 +248,7 @@ describe('POST /api/profile/picture', () => {
 
     expect(res.status).toBe(201);
     const body = (await res.json()) as { imageUrl?: string; profileCompletedAt?: string };
-    expect(body.imageUrl).toBe('https://cdn.polsia.com/mock/key.png');
+    expect(body.imageUrl).toMatch(/^https:\/\/cdn\.polsia\.com\/mock\//);
     // HANDLEDARE branch must NOT stamp welcomeSentAt or send the email.
     expect(prismaMock.userProfile.updateMany).not.toHaveBeenCalled();
     expect(sendEmailMock).not.toHaveBeenCalled();

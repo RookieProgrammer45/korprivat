@@ -3,7 +3,7 @@
 // ROUTE 400 CONTRACT this consumes (emit exactly one of these from a handler
 // when validation fails):
 //   A) flat map  — { errors: { <field>: '<message>' } }   (preferred shape;
-//      this is what the reference route at src/app/api/example/route.ts emits)
+//      shared Zod contracts under src/lib/contracts/)
 //   B) zod shape — { errors: { fieldErrors: { <field>: ['<message>', ...] } } }
 //      i.e. the result of `zodError.flatten()`. Useful if a handler forwards a
 //      flatten() verbatim. The first message per field is used.

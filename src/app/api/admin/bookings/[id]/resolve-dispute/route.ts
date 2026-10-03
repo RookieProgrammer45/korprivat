@@ -41,17 +41,6 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     return NextResponse.json({ error: 'invalid_body', details: parsed.error.flatten() }, { status: 400 });
   }
 
-  if (parsed.data.outcome === 'partial') {
-    return NextResponse.json(
-      {
-        error: 'not_implemented',
-        message:
-          'Partial dispute resolution is not yet supported. Use full refund or full release.',
-      },
-      { status: 501 },
-    );
-  }
-
   const booking = await prisma.booking.findUnique({ where: { id } });
   if (!booking) {
     return NextResponse.json({ error: 'not_found' }, { status: 404 });
@@ -60,8 +49,67 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     return NextResponse.json({ error: 'not_disputed' }, { status: 409 });
   }
 
-  const { outcome, note } = parsed.data;
-  console.info('[admin/resolve-dispute]', { bookingId: id, outcome, note });
+  const { outcome, note, amountSek } = parsed.data;
+  console.info('[admin/resolve-dispute]', { bookingId: id, outcome, note, amountSek });
+
+  if (outcome === 'partial') {
+    // ADR-005: refund amountSek to learner, transfer remainder of payout snapshot.
+    if (amountSek == null || amountSek <= 0) {
+      return NextResponse.json({ error: 'amount_required' }, { status: 400 });
+    }
+    if (booking.payoutAmountSek == null) {
+      return NextResponse.json({ error: 'missing_fee_snapshot' }, { status: 409 });
+    }
+    const { partialPayoutAfterRefund } = await import('@/lib/trust/disputes');
+    const math = partialPayoutAfterRefund({
+      payoutAmountSek: booking.payoutAmountSek,
+      refundSek: amountSek,
+    });
+    const refundResult = await refundBooking(id, { amountSek: math.refundSek });
+    if (refundResult.kind === 'error') {
+      return NextResponse.json({ error: 'refund_failed', result: refundResult }, { status: 500 });
+    }
+    if (math.transferSek > 0) {
+      await prisma.booking.update({
+        where: { id },
+        data: {
+          paymentStatus: 'release_ready',
+          disputeStatus: 'resolved_partial',
+          confirmedAt: new Date(),
+          payoutAmountSek: math.transferSek,
+        },
+      });
+      after(async () => {
+        await payoutBooking(id, {
+          completedByRole: 'instructor',
+          completedByLabel: 'admin_resolve_partial',
+        });
+      });
+      return NextResponse.json(
+        AdminResolveDisputeResponse.parse({
+          id,
+          paymentStatus: 'release_ready',
+          outcome: 'partial',
+        }),
+        { status: 200 },
+      );
+    }
+    await prisma.booking.update({
+      where: { id },
+      data: {
+        paymentStatus: 'refunded',
+        disputeStatus: 'resolved_partial',
+      },
+    });
+    return NextResponse.json(
+      AdminResolveDisputeResponse.parse({
+        id,
+        paymentStatus: 'refunded',
+        outcome: 'partial',
+      }),
+      { status: 200 },
+    );
+  }
 
   if (outcome === 'release') {
     await prisma.booking.update({

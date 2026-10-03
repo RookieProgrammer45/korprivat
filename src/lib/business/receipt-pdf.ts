@@ -128,7 +128,7 @@ const PDF_COPY = {
     lesson: 'Lesson price (SEK)',
     serviceFee: 'DriveLinkUp fee (SEK)',
     grossPaid: 'Learner-paid gross total (SEK)',
-    commission: '10% school commission (SEK)',
+    commission: 'School commission (SEK)',
     reconciliation: 'Net payout = school price − attributable school commission after completion.',
     note: (usd: string) => `Verified checkout charge: ${usd}. Amounts are shown in SEK.`,
   },
@@ -139,7 +139,7 @@ const PDF_COPY = {
     lesson: 'Lektionspris (SEK)',
     serviceFee: 'DriveLinkUp-avgift (SEK)',
     grossPaid: 'Elevens brutto betalda belopp (SEK)',
-    commission: '10% skolprovision (SEK)',
+    commission: 'Skolprovision (SEK)',
     reconciliation:
       'Nettoutbetalning = skolans pris − hänförlig skolprovision efter genomförd tjänst.',
     note: (usd: string) => `Verifierad kassabetalning: ${usd}. Beloppen visas i SEK.`,

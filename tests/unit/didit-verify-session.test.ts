@@ -27,6 +27,7 @@ vi.mock('@/lib/db', () => ({
       update: mockUserProfileUpdate,
     },
     verificationEvent: { create: mockVerificationEventCreate },
+    handledareEnrollment: { findFirst: vi.fn(async () => null) },
     $transaction: mockTransaction,
   },
 }));

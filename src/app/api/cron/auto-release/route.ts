@@ -5,16 +5,10 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { notificationEmail } from '@/lib/email/templates';
+import { authorizeCron } from '@/lib/payments/cron-auth';
 import { payoutBooking } from '@/lib/payments/payouts';
 
 export const dynamic = 'force-dynamic';
-
-function authorizeCron(req: Request): boolean {
-  const secret = process.env.CRON_SECRET?.trim();
-  if (!secret) return false;
-  const header = req.headers.get('authorization') ?? '';
-  return header === `Bearer ${secret}`;
-}
 
 export async function POST(req: Request) {
   if (!authorizeCron(req)) {

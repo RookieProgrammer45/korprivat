@@ -5,7 +5,7 @@
 
 import { z } from 'zod';
 
-export const LicenseStatusEnum = z.enum(['NONE', 'PENDING', 'VERIFIED', 'REJECTED']);
+export const LicenseStatusEnum = z.enum(['NONE', 'PENDING', 'VERIFIED', 'REJECTED', 'EXPIRED']);
 export type LicenseStatusWire = z.infer<typeof LicenseStatusEnum>;
 
 // Response from POST /api/instructor-license. The server returns the just-

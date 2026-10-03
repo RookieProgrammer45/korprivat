@@ -638,7 +638,7 @@
   },
   "instructorOnboarding": {
     "title": "Create your school listing",
-    "subtitle": "Publish the authorized-school details, price and availability learners need to compare. Keep the listing accurate; the 10% commission applies only after completed service.",
+    "subtitle": "Publish the authorized-school details, price and availability learners need to compare. Keep the listing accurate; the 8% school commission applies only after completed service.",
     "submit": "Publish my listing",
     "submitting": "Creating listing…",
     "error": "Something went wrong. Please try again.",
@@ -1082,7 +1082,7 @@
     "instructorBreakdown": {
       "rateLine": "Published lesson price",
       "commissionLine": "School commission after completion",
-      "payoutLine": "The 10% commission applies to attributable booking value only after completed service.",
+      "payoutLine": "School-affiliated bookings pay 8% commission (independent instructors 10%) after completed service.",
       "exampleTitle": "Example"
     }
   },
@@ -1428,7 +1428,7 @@
         "open": "Open booking",
         "grossPaid": "Gross paid by learner",
         "serviceFee": "DriveLinkUp fee",
-        "commission": "School commission (10%)",
+        "commission": "School commission (8%)",
         "netPayout": "School net payout",
         "payoutUnavailable": "Payout breakdown unavailable",
         "paymentStatus": {
@@ -2272,8 +2272,8 @@
         "expectation": "Keep your school details, categories, price and availability accurate."
       },
       "commission": {
-        "title": "10% after completion",
-        "body": "DriveLinkUp applies 10% to attributable booking value only after the service is completed.",
+        "title": "8% after completion for schools",
+        "body": "DriveLinkUp applies 8% to school-affiliated bookings (10% for independent instructors) only after the service is completed.",
         "expectation": "There is no separate learner fee and no promise of booking volume."
       }
     },
@@ -2541,7 +2541,7 @@
       "serviceFee": "DriveLinkUp fee (SEK)",
       "grossPaid": "Learner-paid gross total (SEK)",
       "grossLesson": "Gross lesson price (SEK)",
-      "commission": "10% school commission (SEK)"
+      "commission": "School commission (SEK)"
     },
     "statuses": {
       "paid": "Paid",
@@ -2906,7 +2906,7 @@
   "pricingPage": {
     "meta": {
       "title": "Pricing and fees | DriveLinkUp",
-      "description": "Learners discover, compare and book authorized driving schools for free. Schools pay 10% only after completed service."
+      "description": "Learners discover, compare and book authorized driving schools for free. Schools pay 8% only after completed service."
     },
     "hero": {
       "eyebrow": "Simple marketplace economics",
@@ -2922,12 +2922,12 @@
     "school": {
       "title": "For authorized schools",
       "body": "Publish the price and availability you control, then receive qualified, measurable bookings from learners who chose your listing.",
-      "price": "10% after completion",
-      "detail": "The commission applies to attributable booking value only after the service is completed."
+      "price": "8% after completion",
+      "detail": "School-affiliated bookings pay 8% (independent instructors 10%) of attributable booking value only after completed service."
     },
     "notes": {
       "title": "First-market booking and commission rules (Sweden)",
-      "body": "A booking is attributable when the learner completes it through DriveLinkUp. Commission is 10% of that attributable booking value and is due only after completed service—not for browsing, registration, or an uncompleted enquiry. Cancellation, refund and no-show outcomes follow the school’s published policy and the booking record. Learners never pay a separate DriveLinkUp fee; the school’s published price stays the learner total. Settlement timing and payout responsibilities are confirmed per participating school before live transactions are promoted."
+      "body": "A booking is attributable when the learner completes it through DriveLinkUp. School-affiliated commission is 8% of that attributable booking value (10% for independent instructors) and is due only after completed service—not for browsing, registration, or an uncompleted enquiry. Cancellation, refund and no-show outcomes follow the school’s published policy and the booking record. Learners never pay a separate DriveLinkUp fee; the school’s published price stays the learner total. Settlement timing and payout responsibilities are confirmed per participating school before live transactions are promoted."
     },
     "cta": {
       "learner": "Compare schools",

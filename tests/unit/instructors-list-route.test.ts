@@ -214,7 +214,8 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       }),
     ]);
     mockSlotFindMany.mockResolvedValueOnce([]);
-    mockLicenseFindMany.mockResolvedValueOnce([{ userId: 'user_verified', status: 'VERIFIED' }]);
+    // Called twice: directory eligibility filter + public aggregates.
+    mockLicenseFindMany.mockResolvedValue([{ userId: 'user_verified', status: 'VERIFIED' }]);
     mockReviewFindMany.mockResolvedValueOnce([
       { instructorId, rating: 5 },
       { instructorId, rating: 4 },

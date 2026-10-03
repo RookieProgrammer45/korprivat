@@ -8,6 +8,7 @@
 import './_setup/env';
 import './_setup/auth-mock';
 import './_setup/email-mock';
+import './_setup/prisma-mock';
 
 import { vi } from 'vitest';
 
@@ -139,6 +140,10 @@ describe('POST /api/checkout', () => {
   });
 
   it('401 without session or token', async () => {
+    prismaMock.booking.findUnique.mockResolvedValue(
+      bookingRow({ id: 'booking_pay', paymentStatus: null }),
+    );
+    prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
     const res = await checkoutPOST(
       new Request('http://localhost/api/checkout', {
         method: 'POST',

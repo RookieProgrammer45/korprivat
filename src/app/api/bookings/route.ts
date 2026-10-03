@@ -2,7 +2,7 @@ import 'server-only';
 import { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { generateLearnerAccessToken } from '@/lib/business/booking-access';
-import { learnerTotalSek } from '@/lib/business/booking-fees';
+import { instructorPayoutSek, learnerTotalSek } from '@/lib/business/booking-fees';
 import { generateBookingToken } from '@/lib/business/escrow';
 import { isLicenceCategoryCode } from '@/lib/business/licence-categories';
 import { formatProviderDate, providerTimezoneForCity } from '@/lib/business/provider-timezone';
@@ -103,7 +103,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { instructorId: 'Unknown instructor' } }, { status: 400 });
   }
 
-  // Snapshot school affiliation at booking time (ADR-004 prep). Fees stay 10% until slice 6.
+  // Snapshot school affiliation at booking time (ADR-004: 8% when organizationId set).
   // Multi-org: show first by createdAt. Revisit if any user has >1 ACTIVE membership.
   // Resolve BEFORE the booking transaction so a Membership read never holds the write lock.
   // On lookup failure, fall back to null — never fail the booking for affiliation.
@@ -112,7 +112,6 @@ export async function POST(req: Request) {
     const affiliation = await getActiveAffiliationForUser(instructor.userId);
     organizationId = affiliation?.organizationId ?? null;
   } catch (err) {
-    // TODO(observability): route to Sentry once @sentry/nextjs is installed.
     console.error('[bookings] affiliation lookup failed; proceeding with organizationId=null', err);
     organizationId = null;
   }
@@ -142,6 +141,7 @@ export async function POST(req: Request) {
   }
 
   const totals = learnerTotalSek(instructor.hourlyRateSek);
+  const payoutSnapshot = instructorPayoutSek(totals.priceSek, { organizationId });
   const learnerAccess = generateLearnerAccessToken();
   const actionToken = instructorMode === 'request' ? generateBookingToken() : null;
 
@@ -156,7 +156,7 @@ export async function POST(req: Request) {
             bookedAt: null,
             startsAt: { gt: new Date() },
           },
-          select: { id: true, startsAt: true },
+          select: { id: true, startsAt: true, endsAt: true, durationMinutes: true },
         });
         if (!slot) throw new BookingConflictError();
 
@@ -168,6 +168,10 @@ export async function POST(req: Request) {
           if (activeRequest) throw new BookingConflictError();
         }
 
+        const lessonEndsAt =
+          slot.endsAt ??
+          new Date(slot.startsAt.getTime() + (slot.durationMinutes || 60) * 60_000);
+
         const created = await tx.booking.create({
           data: {
             instructorId: data.instructorId,
@@ -178,6 +182,8 @@ export async function POST(req: Request) {
             studentPhone: data.studentPhone,
             category: data.category,
             preferredAt: slot.startsAt,
+            startsAt: slot.startsAt,
+            endsAt: lessonEndsAt,
             cancellationPolicyTier: instructor.cancellationPolicyTier ?? 'flexible',
             bookingMode: instructorMode,
             locale: data.locale ?? 'en',
@@ -185,6 +191,7 @@ export async function POST(req: Request) {
             priceAmountSek: totals.priceSek,
             serviceFeeSek: totals.serviceFeeSek,
             grossChargedSek: totals.totalSek,
+            payoutAmountSek: payoutSnapshot.payoutSek,
             learnerAccessTokenHash: learnerAccess.tokenHash,
             organizationId,
             ...(actionToken ? { actionToken } : {}),

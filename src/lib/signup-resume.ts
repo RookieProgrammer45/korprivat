@@ -57,6 +57,7 @@ export type LearnerVerificationFacts = {
   diditDecision: DiditDecision | null;
   diditAttempts: number;
   diditSessionId: string | null;
+  handledareEnrollment?: import('@/lib/verification/state').HandledareEnrollmentSnapshot | null;
 };
 
 /**
@@ -85,8 +86,7 @@ export function resolveLearnerStateFromFacts(
     verifiedDob: facts.verifiedDob,
     diditDecision: facts.diditDecision,
     diditAttempts: facts.diditAttempts,
-    // TODO(verification): load HandledareEnrollment snapshot when that model ships.
-    handledareEnrollment: null,
+    handledareEnrollment: facts.handledareEnrollment ?? null,
   });
 }
 
@@ -105,6 +105,10 @@ export async function loadLearnerVerificationFacts(
     },
   });
   if (!profile) return null;
+  const { loadActiveHandledareEnrollment } = await import(
+    '@/lib/verification/handledare-enrollment'
+  );
+  const handledareEnrollment = await loadActiveHandledareEnrollment(userId);
   return {
     claimedDob: profile.dateOfBirth,
     verifiedDob: profile.dateOfBirthVerified,
@@ -112,6 +116,7 @@ export async function loadLearnerVerificationFacts(
     diditDecision: asDiditDecision(profile.diditLastDecision),
     diditAttempts: profile.diditAttempts,
     diditSessionId: profile.diditSessionId,
+    handledareEnrollment,
   };
 }
 

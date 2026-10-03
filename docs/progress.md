@@ -14,11 +14,12 @@
 
 - [x] Stripped Polsia markers and metadata (commit 7d1373f)
 - [x] Replace email proxy with direct Resend (Slice 2)
-- [ ] Replace storage proxy with direct Vercel Blob / R2 (Slice 3)
-- [ ] Replace Stripe proxy with direct Stripe SDK (Slice 4)
-- [ ] Replace AI proxy with direct OpenAI SDK (Slice 5)
-- [ ] Classify and clean: polsia-analytics.tsx, layout.tsx
-      analytics, instrumentation.ts, CSS polsia-slot comments
+- [x] Storage via direct Vercel Blob (no scaffold proxy)
+- [x] Stripe via direct SDK + Connect (no scaffold proxy)
+- [ ] OpenAI SDK only if/when AI features ship (no proxy)
+- [ ] Classify and clean remaining scaffold residue:
+      polsia-analytics.tsx, layout analytics, instrumentation.ts,
+      CSS polsia-slot comments, `/example` routes
 
 ## Deferred
 
@@ -27,21 +28,18 @@
       dual-role user appears, or when a school owner also lists
       themselves as an instructor.
 
-## Phase 0 — learner state resolver (soft-gate)
+## Phase 0 — learner state resolver
 
 Pure `resolveLearnerState` / `stateToRoute` live under `src/lib/verification/`
-with table-driven unit tests. STUDENT dashboard entry soft-gates only
-`BLOCKED_UNDERAGE` / `SUSPENDED`; incomplete states may browse
-`/dashboard/student` with a non-blocking verify banner. `requireActiveLearner()`
-exists for booking/checkout but is **not wired** until one real KYC
-session confirms the writer. Next slice: wire `requireActiveLearner` on
-booking surfaces once one real KYC session completes.
+with table-driven unit tests. Booking + checkout require ACTIVE learner
+verification (`resolveLearnerBookingGate`). STUDENT dashboard still soft-gates
+browse for incomplete states with a verify banner.
 
 ## In progress
 
 - Signup: 4-step wizard (account → email → photo → KYC) for LEARNER; ID
   document Didit Free KYC on `/onboarding/learner/verify`. Email verification
-  via better-auth + Polsia email proxy; dashboards require `emailVerified`.
+  via better-auth + Resend; dashboards require `emailVerified`.
 - School registration (slice 1a): `/for-skolor` creates Organization + OWNER
   Membership and lands on `/dashboard/school`.
 
@@ -103,28 +101,21 @@ Do not accept live payments until all 8 pass.
 - [x] Escrow: either party could mark complete and fire payout with no
       proof of delivery — fixed with deliver → buyer confirm / 48h
       auto-release / dispute-escrow (2026-09-30).
-- [ ] Preview + development share production Neon DB. Create
-      separate Neon branches; set DATABASE_URL per environment.
-- [ ] Missing webhook handlers: charge.dispute.created,
-      charge.refunded, transfer.failed, checkout.session.expired,
-      account.application.deauthorized.
-- [ ] Reconciliation cron: nightly scan for held_escrow bookings
-      older than 7 days. Alert if webhook never landed.
-- [ ] Pending-payouts strip uses grossChargedSek. Change to
-      instructorPayoutSek (net).
-- [ ] Revenue dashboard has no view of held_escrow /
-      payout_pending / payout_failed. Add pending-balance card.
-- [ ] Fee snapshot fallback can charge one rate and payout another
-      if instructor rate changes mid-flight. Remove fallback;
-      require snapshot.
-- [ ] Partial dispute resolution returns 501. Design the payout
-      math before enabling. Needs a decision: reduce payout by
-      refunded SEK, or split the booking into two ledger entries.
+- [x] Preview Neon branch created (`preview`); wire Vercel Preview
+      `DATABASE_URL` — see docs/neon-env-isolation.md (2026-10-03).
+- [x] Stripe webhook handlers + StripeWebhookEvent ledger:
+      charge.dispute.created, charge.refunded, transfer.failed,
+      checkout.session.expired, account.application.deauthorized.
+- [x] Reconciliation cron `/api/cron/reconcile-escrow` (nightly).
+- [x] Pending-payouts strip uses payoutAmountSek (net).
+- [x] Revenue dashboard pending-balance card (held / pending / failed).
+- [x] Fee snapshot required at payout — no live hourlyRateSek fallback;
+      payoutAmountSek stamped at booking create.
+- [x] Partial dispute enabled (ADR-005) — reduce payout by refundSek.
 - [ ] actionToken on /complete grants instructor privilege. Review
       in a security pass: should complete require session
       Instructor.userId even when the token matches?
-- [ ] Cron uses plain === for CRON_SECRET. Switch to
-      timingSafeEqual.
+- [x] Cron uses timingSafeEqual for CRON_SECRET.
 - [ ] Cron batch cap is 50/hour. If held bookings exceed that,
       increase or shard.
 - [ ] Dispute dialog does not reset reason/details on dismiss.
@@ -136,10 +127,8 @@ Do not accept live payments until all 8 pass.
       /dashboard/school — fixed with membership-aware dashboard nav.
 - [ ] Rate limit + idempotency + health check for
       /api/orgs/register. Slice 1b.
-- [ ] Cache school membership in session JWT (slice 1b).
-      Currently hits DB on every dashboard load.
-- [ ] Booking gate still uses claimed DOB soft-gate. Tighten to
-      require ACTIVE once one real KYC session completes in production.
+- [x] School membership home cached 60s in resolveDashboardHome (slice 1b).
+- [x] Booking + checkout gate require ACTIVE learner verification.
 - [ ] Deprecated `UserProfile` columns `ageEstimatedYears` /
       `ageCheckRequestId` / `ageCheckStatus` (facial estimation retired
       2026-09-27). No migration to drop yet.
@@ -147,8 +136,17 @@ Do not accept live payments until all 8 pass.
       (0 `ageEstimatedYears` rows); flag any future estimate-only rows
       for re-verification via ID KYC.
 - [ ] zsh .zshrc module_init warning (local machine, not app)
-- `POST /api/bookings/…/[id]/payment-link` and `payment-poll` do not
-  check learner verification. Revisit when the hard gate lands.
+- [x] Checkout enforces ACTIVE learner gate (payment-link retired onto checkout).
+- [x] HandledareEnrollment model + invite/approve + admin MANUAL_REVIEW queue.
+- [x] Instructor search requires VERIFIED licence (AGENTS invariant 6).
+- [x] InstructorLicense.expiresAt + EXPIRED status; expire-docs cron.
+- [x] Booking overlap EXCLUDE constraint (startsAt/endsAt + btree_gist).
+- [x] CI workflow (.github/workflows/ci.yml) + npm run test:integration.
+- [x] Admin escrow ops UI + school 8% commission copy (ADR-004).
+- [x] Trust partial disputes (ADR-005) + observability reportError seam.
+- [x] Prisma baseline procedure documented (docs/prisma-baseline.md).
+- [x] Vercel Preview `DATABASE_URL` (+ Postgres siblings) pointed at Neon
+      `preview` branch — see docs/neon-env-isolation.md (2026-10-03).
 - **`/onboarding/instructor`:** does not exist. Instructor post-signup uses
   `dashboardPathFor('INSTRUCTOR')` → `/dashboard/instructor`. Listing fields
   continue on `/instructors/new` after auth.

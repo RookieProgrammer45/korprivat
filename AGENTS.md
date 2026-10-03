@@ -63,8 +63,8 @@ files under `prisma/schema/`.
 ## Stack
 
 Next.js 16 App Router · TypeScript strict · Prisma · PostgreSQL (Neon) ·
-**better-auth** · Stripe via Polsia billing proxy (Connect later as needed) ·
-Didit · Resend/email proxy · Vercel · Tailwind + shadcn/ui.
+**better-auth** · Stripe (direct SDK + Connect Express) ·
+Didit · Resend (direct) · Vercel Blob · Vercel · Tailwind + shadcn/ui.
 
 ## Routes (do not rename)
 
@@ -79,7 +79,7 @@ introduce `/learner/*` as the primary surface.
 
 ## Guards
 
-  **Never** add `middleware.ts` (Next 16 / Polsia reject the old name).
+  **Never** add `middleware.ts` (Next 16 uses `proxy.ts`; the old name is rejected).
 - Pages: `requireDashboardSession` in `src/lib/dashboard-guard.ts`, plus
   `requireSignupPrerequisites` / handledare clickwrap guards.
 - APIs: `requireAuth` / admin session checks.

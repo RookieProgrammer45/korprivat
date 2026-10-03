@@ -1,7 +1,7 @@
 //
 // Server-side auth gate for any signed-in user (analogue of require-admin.ts).
 // Use in API route handlers serving per-user data; copyable example at
-// src/app/api/example-secure/route.ts.
+// authenticated API route handlers.
 //
 //   import { requireAuth, type SessionUser } from '@/lib/require-auth';
 //   export async function GET(req: Request) {

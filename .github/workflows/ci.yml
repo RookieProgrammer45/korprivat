@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Generate Prisma client
+        run: npx prisma generate
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests
+        run: npm test
+      - name: Integration tests
+        run: npm run test:integration
+        env:
+          # Integration suite uses mocks; no live DATABASE_URL required.
+          DATABASE_URL: postgresql://user:pass@localhost:5432/ci
+          BETTER_AUTH_SECRET: ci-test-secret-min-32-chars-long!!
+          BETTER_AUTH_URL: http://localhost:3000
+          NEXT_PUBLIC_APP_URL: http://localhost:3000

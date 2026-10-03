@@ -84,13 +84,18 @@ export async function POST(req: Request) {
       ? profile.diditLastDecision
       : null;
 
+  const { loadActiveHandledareEnrollment } = await import(
+    '@/lib/verification/handledare-enrollment'
+  );
+  const handledareEnrollment = await loadActiveHandledareEnrollment(profile.userId);
+
   const state = resolveLearnerState({
     currentState,
     claimedDob: profile.dateOfBirth,
     verifiedDob: profile.dateOfBirthVerified,
     diditDecision: lastDecision,
     diditAttempts: profile.diditAttempts,
-    handledareEnrollment: null,
+    handledareEnrollment,
   });
 
   // Prefer persisted gate — never re-open KYC for terminal verified states.

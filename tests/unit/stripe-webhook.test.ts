@@ -6,11 +6,13 @@ const {
   mockBookingUpdateMany,
   mockInstructorFindUnique,
   mockEnsureBookingReceipts,
+  mockStripeWebhookEventCreate,
 } = vi.hoisted(() => ({
   mockBookingFindUnique: vi.fn(),
   mockBookingUpdateMany: vi.fn(),
   mockInstructorFindUnique: vi.fn(),
   mockEnsureBookingReceipts: vi.fn(async () => undefined),
+  mockStripeWebhookEventCreate: vi.fn(async () => ({ id: 'swe_1' })),
 }));
 
 vi.mock('server-only', () => ({}));
@@ -37,6 +39,9 @@ vi.mock('@/lib/db', () => ({
     },
     instructor: {
       findUnique: mockInstructorFindUnique,
+    },
+    stripeWebhookEvent: {
+      create: mockStripeWebhookEventCreate,
     },
   },
 }));

@@ -57,8 +57,8 @@ Hard constraints:
   booking eligibility.
 - **State is derived where possible.** `resolveLearnerState()` resolves from
   facts (claimed DOB, verified DOB, Didit decision, handledare enrollment).
-- **Money moves through Stripe / Polsia billing.** No custom ledgers. Fee math
-  lives in one module (`src/lib/business/booking-fees.ts` today).
+- **Money moves through Stripe (direct SDK + Connect).** No custom ledgers. Fee
+  math lives in one module (`src/lib/business/booking-fees.ts` today).
 - **Everything that expires has a cron** (licence docs, handledare tokens,
   verification sessions) as those features ship.
 - **Idempotency everywhere.** Webhooks, payouts, emails — assume retries.
@@ -100,9 +100,9 @@ flowchart TB
   end
 
   subgraph Third["Third party"]
-    STRIPE[Stripe via Polsia proxy]
+    STRIPE[Stripe SDK + Connect]
     DIDIT[Didit]
-    EMAIL[Email proxy / Resend]
+    EMAIL[Resend]
   end
 
   WEB --> PROXY --> RSC
@@ -142,9 +142,9 @@ services — not foreign models for writes.
 | ORM | Prisma (multi-file `prisma/schema/`) | Live Neon schema |
 | DB | PostgreSQL (Neon) | Bookings, exclusion constraints |
 | Files | Vercel Blob / R2 | Photos, licences |
-| Payments | Stripe via Polsia app-payments proxy | Checkout + escrow-style release today |
-| KYC/Age | Didit | Age estimation now; ID workflow as verification hardens |
-| Email | Polsia email proxy | Transactional mail |
+| Payments | Stripe SDK + Connect Express | Checkout + escrow release |
+| KYC/Age | Didit | ID document verification + age gate |
+| Email | Resend (direct) | Transactional mail |
 | Hosting | Vercel + Neon | Current deploy |
 
 ## 6. Core data model
@@ -281,13 +281,13 @@ fields ship.
 
 | Service | Purpose |
 | --- | --- |
-| Stripe (Polsia proxy) | Checkout, payment events |
+| Stripe (direct SDK) | Checkout, Connect, payment events |
 | Didit | Age / identity |
-| Email proxy | Transactional email |
+| Resend | Transactional email |
 | Vercel Blob / R2 | Media |
 
-Adapters prefer `src/lib/<context>/` or existing `src/lib/stripe-billing/`,
-`src/lib/didit/`. No SDK calls from client components.
+Adapters live under `src/lib/payments/`, `src/lib/verification/`,
+`src/lib/email/`. No SDK calls from client components.
 
 ## 9. Security & compliance
 

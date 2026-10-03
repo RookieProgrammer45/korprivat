@@ -42,6 +42,24 @@ export default async function InstructorRevenuePage() {
     take: 50,
   });
 
+  const balanceGroups = await prisma.booking.groupBy({
+    by: ['paymentStatus'],
+    where: {
+      instructorId: instructor.id,
+      paymentStatus: {
+        in: ['held_escrow', 'awaiting_buyer_confirmation', 'release_ready', 'payout_pending', 'payout_failed'],
+      },
+    },
+    _sum: { payoutAmountSek: true },
+    _count: { _all: true },
+  });
+  const balanceByStatus = Object.fromEntries(
+    balanceGroups.map((g) => [
+      g.paymentStatus ?? 'unknown',
+      { count: g._count._all, sek: g._sum.payoutAmountSek ?? 0 },
+    ]),
+  );
+
   const totalSek = payouts.reduce((sum, row) => sum + row.amountSek, 0);
   const count = payouts.length;
 
@@ -60,7 +78,7 @@ export default async function InstructorRevenuePage() {
         </div>
       </header>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card className="border-border bg-card">
           <CardContent className="grid gap-1 p-5">
             <p className="text-small text-muted-foreground">{t('metricTotal')}</p>
@@ -73,6 +91,33 @@ export default async function InstructorRevenuePage() {
           <CardContent className="grid gap-1 p-5">
             <p className="text-small text-muted-foreground">{t('metricCount')}</p>
             <p className="font-display text-h3 text-foreground">{count}</p>
+          </CardContent>
+        </Card>
+        <Card className="border-border bg-card sm:col-span-2 lg:col-span-1">
+          <CardContent className="grid gap-2 p-5">
+            <p className="text-small text-muted-foreground">Pending balance (net)</p>
+            <ul className="grid gap-1 text-small text-foreground">
+              {(
+                [
+                  'held_escrow',
+                  'awaiting_buyer_confirmation',
+                  'release_ready',
+                  'payout_pending',
+                  'payout_failed',
+                ] as const
+              ).map((status) => {
+                const row = balanceByStatus[status];
+                if (!row || row.count === 0) return null;
+                return (
+                  <li key={status} className="flex justify-between gap-3 tabular-nums">
+                    <span className="text-muted-foreground">{status}</span>
+                    <span>
+                      {row.count} · {t('amountSek', { amount: row.sek })}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
           </CardContent>
         </Card>
       </div>

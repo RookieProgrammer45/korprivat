@@ -204,6 +204,34 @@ const prisma = vi.hoisted(() => {
         ...((args as object) ?? {}),
       })),
     },
+    stripeWebhookEvent: {
+      findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
+      findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
+      findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
+      create: vi.fn(async (args: unknown): Promise<unknown> => ({
+        id: 'stripe_webhook_event',
+        ...((args as object) ?? {}),
+      })),
+    },
+    handledareEnrollment: {
+      findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
+      findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
+      findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
+      create: vi.fn(async (args: unknown): Promise<unknown> => ({
+        id: 'handledare_enrollment',
+        ...((args as object) ?? {}),
+      })),
+      update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
+      updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
+    },
+    verificationEvent: {
+      findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
+      findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
+      create: vi.fn(async (args: unknown): Promise<unknown> => ({
+        id: 'verification_event',
+        ...((args as object) ?? {}),
+      })),
+    },
     $transaction: vi.fn(async (...args: unknown[]) => {
       if (typeof args[0] === 'function') {
         return (args[0] as (tx: unknown) => Promise<unknown>)(prisma);

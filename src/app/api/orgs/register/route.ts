@@ -69,8 +69,8 @@ export async function POST(req: Request) {
     if (err instanceof OrgAlreadyExistsError) {
       return NextResponse.json({ error: 'org_exists' }, { status: 409 });
     }
-    // TODO(observability): route to Sentry once @sentry/nextjs is installed.
-    console.error('[orgs/register] unhandled', err);
+    const { reportError } = await import('@/lib/observability/report-error');
+    await reportError(err, { tags: { area: 'orgs', route: 'register' } });
     return NextResponse.json({ error: 'internal' }, { status: 500 });
   }
 }

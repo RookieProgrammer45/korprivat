@@ -154,8 +154,9 @@ export function ProviderOperations() {
   const awaitingConfirmation = bookings.filter(
     (b) => b.paymentStatus === 'awaiting_buyer_confirmation',
   );
+  // Net instructor/school payout (not gross charged) — avoids overstating pending.
   const pendingPayoutSek = awaitingConfirmation.reduce(
-    (sum, b) => sum + (b.grossChargedSek ?? b.priceAmountSek ?? 0),
+    (sum, b) => sum + (b.payoutAmountSek ?? b.priceAmountSek ?? 0),
     0,
   );
   return (

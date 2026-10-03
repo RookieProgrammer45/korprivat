@@ -41,22 +41,34 @@ export function dashboardPathFor(role: MarketplaceRole): DashboardLeafPath {
   return '/dashboard/student';
 }
 
+/** Short TTL cache for school membership routing (slice 1b). */
+const membershipHomeCache = new Map<string, { path: DashboardLeafPath; expiresAt: number }>();
+const MEMBERSHIP_CACHE_TTL_MS = 60_000;
+
+/** Test helper — clear membership routing cache. */
+export function clearDashboardMembershipCache(): void {
+  membershipHomeCache.clear();
+}
+
 /**
  * Prefer school Membership over UserProfile.role.
- *
- * TODO: Cache school membership in session JWT (slice 1b).
- * Currently hits DB on every dashboard load. Single indexed
- * lookup on (userId, status) — fine for the first 10k users.
+ * Caches ACTIVE OWNER/STAFF → /dashboard/school for 60s per userId
+ * (JWT custom claims would be ideal later; this removes per-nav DB spam).
  */
 export async function resolveDashboardHome(
   userId: string,
   role: MarketplaceRole,
 ): Promise<DashboardLeafPath> {
-  const memberships = await listMembershipsForUser(userId, { onlyActive: true });
-  if (memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')) {
-    return '/dashboard/school';
+  const cached = membershipHomeCache.get(userId);
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.path;
   }
-  return dashboardPathFor(role);
+  const memberships = await listMembershipsForUser(userId, { onlyActive: true });
+  const path = memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')
+    ? '/dashboard/school'
+    : dashboardPathFor(role);
+  membershipHomeCache.set(userId, { path, expiresAt: Date.now() + MEMBERSHIP_CACHE_TTL_MS });
+  return path;
 }
 
 export interface DashboardSession {

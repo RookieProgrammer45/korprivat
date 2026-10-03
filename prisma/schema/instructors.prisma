@@ -217,6 +217,10 @@ model Booking {
   // Fee math: 10% independent, 8% when organizationId is set (ADR-004).
   // Scalar only — no @relation onto Organization (cross-context).
   organizationId          String?
+  // Lesson window for overlap exclusion (Scheduling invariant).
+  // Backfilled from preferredAt + slot duration; required for new rows.
+  startsAt                DateTime?
+  endsAt                  DateTime?
   instructor              Instructor        @relation(fields: [instructorId], references: [id])
   // Back-relation for the slot the booking was made against. Nullable so
   // bookings created before the slot feature shipped parse cleanly; old
@@ -229,6 +233,7 @@ model Booking {
   @@index([userId])
   @@index([organizationId])
   @@index([autoReleaseAt, paymentStatus])
+  @@index([instructorId, startsAt, endsAt])
 }
 
 /// Append-only Stripe Transfer audit for a completed booking payout.

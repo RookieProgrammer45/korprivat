@@ -165,10 +165,26 @@ export async function payoutBooking(
     return { kind: 'skipped', reason: 'no_connect' };
   }
 
-  const priceForPayout = booking.priceAmountSek ?? instructor.hourlyRateSek ?? 0;
-  const fees = instructorPayoutSek(priceForPayout, {
-    organizationId: booking.organizationId,
-  });
+  // Prefer frozen payoutAmountSek stamped at charge/complete; else recompute
+  // from priceAmountSek snapshot only — never fall back to live hourlyRateSek
+  // (rate drift between book and payout is a known money bug).
+  let payoutSek = booking.payoutAmountSek;
+  if (payoutSek == null) {
+    if (booking.priceAmountSek == null) {
+      await alertOps('Payout blocked — missing fee snapshot', [
+        `Booking ${bookingId} has neither payoutAmountSek nor priceAmountSek.`,
+        'Refuse live-rate fallback. Reconcile manually.',
+      ]);
+      return { kind: 'error', message: 'missing_fee_snapshot' };
+    }
+    payoutSek = instructorPayoutSek(booking.priceAmountSek, {
+      organizationId: booking.organizationId,
+    }).payoutSek;
+  }
+  const fees = {
+    payoutSek,
+    priceSek: booking.priceAmountSek ?? payoutSek,
+  };
   const amountOre = fees.payoutSek * 100;
 
   if (amountOre <= 0) {

@@ -163,6 +163,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { email: 'email_not_verified' } }, { status: 403 });
   }
 
+  // Learner paying must be ACTIVE (verified DOB / handledare) — same gate as POST /api/bookings.
+  if (sessionUser && booking.userId === sessionUser.id) {
+    const { resolveLearnerBookingGate } = await import('@/lib/signup-resume');
+    const gate = await resolveLearnerBookingGate(sessionUser.id);
+    if (!gate.eligible) {
+      return NextResponse.json(
+        { errors: { verification: 'learner_not_eligible', state: gate.state } },
+        { status: 403 },
+      );
+    }
+  }
+
   const sessionAuthorized =
     sessionUser != null &&
     (booking.userId === sessionUser.id || instructor.userId === sessionUser.id);

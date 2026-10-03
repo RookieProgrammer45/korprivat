@@ -45,9 +45,10 @@ vi.mock('@/lib/llms-config', () => ({
   },
 }));
 
+import { siteUrl } from '@/lib/site';
 import { GET } from '../../src/app/llms.txt/route';
 
-const ORIGIN = 'http://localhost:3000';
+const ORIGIN = siteUrl.replace(/\/+$/, '');
 
 let prevIndexable: string | undefined;
 

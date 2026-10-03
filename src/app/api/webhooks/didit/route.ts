@@ -202,13 +202,18 @@ export async function POST(req: Request) {
 
   const verifiedDob = parsed.verifiedDob ?? profile.dateOfBirthVerified;
 
+  const { loadActiveHandledareEnrollment } = await import(
+    '@/lib/verification/handledare-enrollment'
+  );
+  const handledareEnrollment = await loadActiveHandledareEnrollment(profile.userId);
+
   let nextState = resolveLearnerState({
     currentState,
     claimedDob: profile.dateOfBirth,
     verifiedDob,
     diditDecision: parsed.decision,
     diditAttempts: nextAttempts,
-    handledareEnrollment: null,
+    handledareEnrollment,
   });
 
   // §8 — claimed vs verified mismatch > 1 year → flag for review.

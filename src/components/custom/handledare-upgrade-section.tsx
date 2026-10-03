@@ -48,7 +48,7 @@ const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 const MAX_PDF_BYTES = 50 * 1024 * 1024;
 const ACCEPT_MIME = 'image/*,application/pdf';
 
-type Status = 'NONE' | 'PENDING' | 'VERIFIED' | 'REJECTED';
+type Status = 'NONE' | 'PENDING' | 'VERIFIED' | 'REJECTED' | 'EXPIRED';
 
 type LicenseFetchState =
   | {
