@@ -102,6 +102,11 @@ export async function GET(req: Request) {
     }
   }
 
+  // Reassignment inside try/catch widens the type; re-narrow before use.
+  if (!booking) {
+    return NextResponse.json({ verified: false, paymentStatus: null }, { status: 200 });
+  }
+
   const verified =
     booking.paidAt != null ||
     booking.paymentStatus === 'held_escrow' ||
