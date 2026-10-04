@@ -27,6 +27,7 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
     location.kind === 'city'
       ? t('descriptionCity', { name, country: country.nameLocal })
       : t('descriptionRegion', { name, country: country.nameLocal });
+  const brandedTitle = `${title} · ${siteName}`;
   return {
     title,
     description,
@@ -34,11 +35,11 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
     openGraph: {
       type: 'website',
       siteName,
-      title,
+      title: brandedTitle,
       description,
       url: absoluteUrl(path),
     },
-    twitter: { card: 'summary_large_image', title, description },
+    twitter: { card: 'summary_large_image', title: brandedTitle, description },
   };
 }
 

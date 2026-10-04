@@ -13,15 +13,17 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('locationHub.meta');
+  const title = t('titleCountry', { country: 'Norden' });
+  const description = t('descriptionCountry', { country: 'Norden' });
   return {
-    title: t('titleCountry', { country: 'Norden' }),
-    description: t('descriptionCountry', { country: 'Norden' }),
+    title,
+    description,
     alternates: publicAlternates('/locations'),
     openGraph: {
       type: 'website',
       siteName,
-      title: t('titleCountry', { country: 'Norden' }),
-      description: t('descriptionCountry', { country: 'Norden' }),
+      title: `${title} · ${siteName}`,
+      description,
       url: absoluteUrl('/locations'),
     },
   };

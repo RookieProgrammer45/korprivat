@@ -3130,9 +3130,9 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Driving schools in {name}, {country} | DriveLinkUp",
-      "titleRegion": "Driving schools in {name}, {country} | DriveLinkUp",
-      "titleCountry": "Driving schools in {country} | DriveLinkUp",
+      "titleCity": "Driving schools in {name}, {country}",
+      "titleRegion": "Driving schools in {name}, {country}",
+      "titleCountry": "Driving schools in {country}",
       "descriptionCity": "Compare authorized driving-school listings for {name}, {country}. Published prices, availability and booking — 0% learner fee on DriveLinkUp.",
       "descriptionRegion": "Explore cities in {name}, {country} and compare authorized driving schools when marketplace listings are live.",
       "descriptionCountry": "Find driving-school hubs across {country}. Sweden is live for booking; other Nordic markets are expansion pages."

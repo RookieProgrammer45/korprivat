@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const path = countryPath(country);
   const title = t('titleCountry', { country: meta.nameLocal });
   const description = t('descriptionCountry', { country: meta.nameLocal });
+  const brandedTitle = `${title} · ${siteName}`;
   return {
     title,
     description,
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'website',
       siteName,
-      title,
+      title: brandedTitle,
       description,
       url: absoluteUrl(path),
     },

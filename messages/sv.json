@@ -3130,9 +3130,9 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Trafikskolor i {name}, {country} | DriveLinkUp",
-      "titleRegion": "Trafikskolor i {name}, {country} | DriveLinkUp",
-      "titleCountry": "Trafikskolor i {country} | DriveLinkUp",
+      "titleCity": "Trafikskolor i {name}, {country}",
+      "titleRegion": "Trafikskolor i {name}, {country}",
+      "titleCountry": "Trafikskolor i {country}",
       "descriptionCity": "Jämför auktoriserade trafikskolor i {name}, {country}. Publicerade priser, tillgänglighet och bokning — 0% elevavgift på DriveLinkUp.",
       "descriptionRegion": "Utforska orter i {name}, {country} och jämför auktoriserade trafikskolor när annonser är live.",
       "descriptionCountry": "Hitta trafikskolehus över {country}. Sverige är live för bokning; övriga Norden är expansionssidor."
