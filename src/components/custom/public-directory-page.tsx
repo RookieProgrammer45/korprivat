@@ -9,10 +9,15 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { InstructorDirectory } from '@/components/custom/instructor-directory';
 import { Button } from '@/components/ui/button';
+import type { CityHubKey } from '@/lib/seo/city-hubs';
 
-type CityKey = 'stockholm' | 'goteborg' | 'malmo' | 'uppsala' | 'vasteras';
-
-export function PublicDirectoryPage({ city, cityName }: { city?: CityKey; cityName?: string }) {
+export function PublicDirectoryPage({
+  city,
+  cityName,
+}: {
+  city?: CityHubKey;
+  cityName?: string;
+}) {
   const t = useTranslations('instructorsPage');
   const prefix = city ? `${city}City.header` : 'header';
   const title = t(`${prefix}.title`);

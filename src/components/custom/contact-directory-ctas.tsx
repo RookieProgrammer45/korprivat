@@ -64,7 +64,7 @@ export function ContactDirectoryCtas() {
             size="lg"
             className="h-auto w-full min-w-0 max-w-full justify-start whitespace-normal py-3 shadow-sm sm:flex-1"
           >
-            <Link href="/instructors/stockholm" className="flex w-full min-w-0">
+            <Link href="/locations/se/stockholm" className="flex w-full min-w-0">
               <span className="flex min-w-0 flex-1 flex-col items-start gap-0.5 text-left whitespace-normal break-words">
                 <span className="min-w-0 max-w-full break-words whitespace-normal font-display text-base font-semibold">
                   {t('browseStockholmTitle')}

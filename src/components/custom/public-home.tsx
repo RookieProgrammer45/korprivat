@@ -16,10 +16,10 @@ import { Separator } from '@/components/ui/separator';
 
 const QUICK_CATEGORIES = ['B', 'A', 'BE'] as const;
 const QUICK_CITIES = [
-  { id: 'stockholm', href: '/instructors/stockholm' },
-  { id: 'goteborg', href: '/instructors/goteborg' },
-  { id: 'malmo', href: '/instructors/malmo' },
-  { id: 'vasteras', href: '/instructors/vasteras' },
+  { id: 'stockholm', href: '/locations/se/stockholm' },
+  { id: 'goteborg', href: '/locations/se/goteborg' },
+  { id: 'malmo', href: '/locations/se/malmo' },
+  { id: 'vasteras', href: '/locations/se/vasteras' },
 ] as const;
 
 export function PublicHome() {

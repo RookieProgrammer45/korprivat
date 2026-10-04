@@ -25,6 +25,7 @@ export interface NavItem {
     | 'nav.resources'
     | 'nav.blog'
     | 'nav.profile'
+    | 'nav.locations'
     | 'nav.cityStockholm'
     | 'nav.cityGoteborg'
     | 'nav.cityMalmo'
@@ -113,39 +114,46 @@ export const navItems: NavItem[] = [
     order: 4,
   },
   {
-    label: 'Stockholm',
-    labelKey: 'nav.cityStockholm',
-    href: '/instructors/stockholm',
+    label: 'Locations',
+    labelKey: 'nav.locations',
+    href: '/locations',
     group: 'footer',
     order: 4,
   },
   {
-    label: 'Gothenburg',
-    labelKey: 'nav.cityGoteborg',
-    href: '/instructors/goteborg',
+    label: 'Stockholm',
+    labelKey: 'nav.cityStockholm',
+    href: '/locations/se/stockholm',
     group: 'footer',
     order: 5,
   },
   {
-    label: 'Malmö',
-    labelKey: 'nav.cityMalmo',
-    href: '/instructors/malmo',
+    label: 'Gothenburg',
+    labelKey: 'nav.cityGoteborg',
+    href: '/locations/se/goteborg',
     group: 'footer',
     order: 6,
   },
   {
-    label: 'Uppsala',
-    labelKey: 'nav.cityUppsala',
-    href: '/instructors/uppsala',
+    label: 'Malmö',
+    labelKey: 'nav.cityMalmo',
+    href: '/locations/se/malmo',
     group: 'footer',
     order: 7,
   },
   {
-    label: 'Västerås',
-    labelKey: 'nav.cityVasteras',
-    href: '/instructors/vasteras',
+    label: 'Uppsala',
+    labelKey: 'nav.cityUppsala',
+    href: '/locations/se/uppsala',
     group: 'footer',
     order: 8,
+  },
+  {
+    label: 'Västerås',
+    labelKey: 'nav.cityVasteras',
+    href: '/locations/se/vasteras',
+    group: 'footer',
+    order: 9,
   },
   // Authed-only: "Saved details" / "payment methods" page. Lives in the
   // footer because it requires a session — the global footer
@@ -157,7 +165,7 @@ export const navItems: NavItem[] = [
     labelKey: 'nav.paymentMethods',
     href: '/dashboard/student/payment-methods',
     group: 'footer',
-    order: 9,
+    order: 10,
     requiresAuth: true,
   },
   {
@@ -165,13 +173,13 @@ export const navItems: NavItem[] = [
     labelKey: 'nav.southernSweden',
     href: '/southern-sweden',
     group: 'footer',
-    order: 10,
+    order: 11,
   },
   {
     label: 'Western & Northern Sweden',
     labelKey: 'nav.westernNorthernSweden',
     href: '/western-northern-sweden',
     group: 'footer',
-    order: 11,
+    order: 12,
   },
 ];

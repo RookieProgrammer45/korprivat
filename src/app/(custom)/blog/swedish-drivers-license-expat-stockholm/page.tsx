@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { publicAlternates } from '@/lib/seo/alternates';
 import { siteName, siteUrl } from '@/lib/site';
 
 const TITLE = "How to compare driving schools for a Swedish driver's licence in Stockholm";
@@ -13,7 +14,7 @@ const MODIFIED = '2026-09-05';
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: '/blog/swedish-drivers-license-expat-stockholm' },
+  alternates: publicAlternates('/blog/swedish-drivers-license-expat-stockholm'),
 };
 
 export default function SwedishDriversLicenseExpatStockholmPost() {
@@ -100,7 +101,7 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
           </section>
           <div className="flex flex-col gap-3 border-t border-border pt-6 sm:flex-row">
             <Button asChild>
-              <Link href="/instructors/stockholm">Compare Stockholm schools</Link>
+              <Link href="/locations/se/stockholm">Compare Stockholm schools</Link>
             </Button>
             <Button asChild variant="outline">
               <Link href="/faq">Read the marketplace FAQ</Link>

@@ -37,6 +37,10 @@ browse for incomplete states with a verify banner.
 
 ## In progress
 
+- Nordic SEO scale: `/locations/[country]/[slug]` driven by
+  `src/lib/seo/nordic-locations.ts` (SE live booking; NO/DK/FI/IS expansion).
+  Legacy `/instructors/{city}` 308s to `/locations/se/*`. Add cities by
+  appending a registry row + `messages.locationHub` templates.
 - Signup: 4-step wizard (account → email → photo → KYC) for LEARNER; ID
   document Didit Free KYC on `/onboarding/learner/verify`. Email verification
   via better-auth + Resend; dashboards require `emailVerified`.
@@ -147,6 +151,9 @@ Do not accept live payments until all 8 pass.
 - [x] Prisma baseline procedure documented (docs/prisma-baseline.md).
 - [x] Vercel Preview `DATABASE_URL` (+ Postgres siblings) pointed at Neon
       `preview` branch — see docs/neon-env-isolation.md (2026-10-03).
+- [x] SEO: city hub unique copy + FAQ JSON-LD, indexable verified school
+      profiles (metadata + DrivingSchool schema), sitemap instructor URLs,
+      hreflang helpers, sv-first cost/path blog posts, llms 8%/10% copy.
 - **`/onboarding/instructor`:** does not exist. Instructor post-signup uses
   `dashboardPathFor('INSTRUCTOR')` → `/dashboard/instructor`. Listing fields
   continue on `/instructors/new` after auth.

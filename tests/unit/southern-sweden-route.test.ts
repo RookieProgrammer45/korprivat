@@ -28,10 +28,10 @@ describe('GET /api/southern-sweden', () => {
     ]);
     expect(body.regions[0]?.cities[0]).toEqual({
       label: 'Malmö',
-      href: '/instructors/malmo',
+      href: '/locations/se/malmo',
     });
     expect(body.regions[3]?.cities.map((city) => city.href)).toContain(
-      '/instructors?city=J%C3%B6nk%C3%B6ping',
+      '/locations/se/jonkoping',
     );
   });
 

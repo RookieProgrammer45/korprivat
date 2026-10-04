@@ -1,19 +1,13 @@
-
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingForm } from '@/components/custom/booking-form';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { ReviewSection } from '@/components/custom/review-section';
+import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { loadPublicInstructorSeo } from '@/lib/seo/public-instructor';
+import { siteName } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
-
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('instructorDetail.meta');
-  return {
-    title: t('title'),
-    description: t('description'),
-  };
-}
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -25,8 +19,45 @@ type PageProps = {
   }>;
 };
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const instructor = await loadPublicInstructorSeo(id);
+  const t = await getTranslations('instructorDetail.meta');
+  if (!instructor) {
+    return {
+      title: t('title'),
+      description: t('description'),
+      robots: { index: false, follow: false },
+    };
+  }
+  const path = `/instructors/${instructor.id}`;
+  const title = `${instructor.name} — ${instructor.city} | DriveLinkUp`;
+  const description =
+    instructor.bio?.trim().slice(0, 155) ||
+    t('descriptionNamed', {
+      name: instructor.name,
+      city: instructor.city,
+      rate: instructor.hourlyRateSek,
+    });
+  return {
+    title,
+    description,
+    alternates: publicAlternates(path),
+    robots: instructor.indexable ? { index: true, follow: true } : { index: false, follow: true },
+    openGraph: {
+      type: 'profile',
+      siteName,
+      title,
+      description,
+      url: absoluteUrl(path),
+      images: instructor.photoUrl ? [{ url: instructor.photoUrl }] : undefined,
+    },
+  };
+}
+
 export default async function InstructorPage({ params, searchParams }: PageProps) {
   const [{ id }, sp] = await Promise.all([params, searchParams]);
+  const instructor = await loadPublicInstructorSeo(id);
   const rawBooking = Array.isArray(sp.booking) ? sp.booking[0] : sp.booking;
   const rawToken = Array.isArray(sp.token) ? sp.token[0] : sp.token;
   const rawRebook = Array.isArray(sp.rebook) ? sp.rebook[0] : sp.rebook;
@@ -36,6 +67,26 @@ export default async function InstructorPage({ params, searchParams }: PageProps
   const rebookId = typeof rawRebook === 'string' && rawRebook.length > 0 ? rawRebook : null;
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
+
+  const jsonLd =
+    instructor && instructor.indexable
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'DrivingSchool',
+          name: instructor.name,
+          description: instructor.bio?.slice(0, 300) || undefined,
+          url: absoluteUrl(`/instructors/${instructor.id}`),
+          image: instructor.photoUrl || undefined,
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: instructor.city,
+            addressCountry: 'SE',
+          },
+          priceRange: `${instructor.hourlyRateSek} SEK`,
+          areaServed: instructor.city,
+          knowsLanguage: instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+        }
+      : null;
 
   return (
     <main className="container-page min-w-0">
@@ -53,6 +104,9 @@ export default async function InstructorPage({ params, searchParams }: PageProps
           />
         </div>
       </div>
+      {jsonLd ? (
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      ) : null}
     </main>
   );
 }

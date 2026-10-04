@@ -30,6 +30,7 @@
       "resources": "Resurser",
       "blog": "Blogg",
       "profile": "Profil",
+      "locations": "Orter",
       "cityStockholm": "Stockholm",
       "cityGoteborg": "Göteborg",
       "cityMalmo": "Malmö",
@@ -212,6 +213,27 @@
         "excerpt": "Transportstyrelsens steg, realistisk prisplanering och hur du jämför auktoriserade trafikskolor i Stockholm.",
         "readCta": "Läs artikeln",
         "meta": "{minutes} min läsning · Uppdaterad augusti 2026"
+      },
+      "1": {
+        "eyebrow": "Handledare",
+        "title": "Handledare och övningskörning i Sverige",
+        "excerpt": "Så kompletterar 16–17-åringar handledarskap innan bokning på DriveLinkUp.",
+        "meta": "{minutes} min läsning",
+        "readCta": "Läs guiden"
+      },
+      "2": {
+        "eyebrow": "Kostnad",
+        "title": "Vad kostar körkortet i Sverige?",
+        "excerpt": "Hur lektionspriser fungerar och varför DriveLinkUp visar skolans pris utan elevavgift.",
+        "meta": "{minutes} min läsning",
+        "readCta": "Läs guiden"
+      },
+      "3": {
+        "eyebrow": "Val",
+        "title": "Trafikskola eller handledare?",
+        "excerpt": "När du ska boka auktoriserad skola respektive privat övningskörning med handledare.",
+        "meta": "{minutes} min läsning",
+        "readCta": "Läs guiden"
       }
     }
   },
@@ -261,7 +283,26 @@
         "title": "Hitta en auktoriserad trafikskola i Stockholm",
         "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
       },
-      "slug": "stockholm"
+      "slug": "stockholm",
+      "seo": {
+        "lead": "Boka en auktoriserad trafikskola i Stockholm",
+        "p1": "I Stockholm jämför du B-skolor efter publicerat lektionspris, engelska och lediga tider—och bokar utan separat DriveLinkUp-avgift. Endast verifierade behörigheter visas.",
+        "p2": "Många kombinerar skollektioner med privat övningskörning. Är du 16–17 krävs godkänt handledarskap före bokning. Vuxna bokar efter ID-verifiering.",
+        "howTitle": "Så fungerar bokning i Stockholm",
+        "howBody": "Öppna en skolannons, välj tid, betala skolans publicerade pris till escrow, genomför lektionen och bekräfta så skolan får betalt. Avbokning följer skolans policy.",
+        "relatedTitle": "Relaterade guider",
+        "linkHandledare": "Handledare och övningskörning",
+        "linkPricing": "Priser för elev och skola",
+        "linkFaq": "Vanliga frågor",
+        "linkBlog": "Guider för elever i Sverige",
+        "faqTitle": "Vanliga frågor Stockholm",
+        "faq1q": "Betalar elever en DriveLinkUp-avgift i Stockholm?",
+        "faq1a": "Nej. Du betalar skolans publicerade lektionspris. DriveLinkUp lägger inte på en separat elevavgift.",
+        "faq2q": "Visas privata handledare som trafikskolor?",
+        "faq2a": "Nej. Handledare är en separat juridisk väg för övningskörning. Skolannonser är auktoriserade trafikskolor.",
+        "faq3q": "Kan jag boka som 16 eller 17 åring?",
+        "faq3a": "Efter ID-verifiering bjuder du in en handledare. Bokning låses upp först när handledarskapet är godkänt."
+      }
     },
     "goteborgCity": {
       "meta": {
@@ -275,7 +316,26 @@
         "title": "Hitta en auktoriserad trafikskola i Göteborg",
         "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
       },
-      "slug": "goteborg"
+      "slug": "goteborg",
+      "seo": {
+        "lead": "Auktoriserade trafikskolor i Göteborg",
+        "p1": "Jämför Göteborgsskolor efter behörighet, språk, publicerat pris i SEK och tillgänglighet. Endast verifierade instruktörer syns i sök.",
+        "p2": "Filtrera efter område, öppna en annons och boka. Kombinera gärna med Trafikverket-orienterad övningskörning om du har handledare.",
+        "howTitle": "Bokningsflöde för elever i Göteborg",
+        "howBody": "Välj verifierad skola, reservera tid, betala till escrow, genomför lektionen och bekräfta så utbetalning kan ske. Tvistverktyg finns vid behov.",
+        "relatedTitle": "Relaterade guider",
+        "linkHandledare": "Handledare och övningskörning",
+        "linkPricing": "Priser och provision",
+        "linkFaq": "FAQ",
+        "linkBlog": "Elevguider",
+        "faqTitle": "Vanliga frågor Göteborg",
+        "faq1q": "Finns undervisning på engelska?",
+        "faq1a": "Många annonser markerar engelska. Filtrera katalogen eller läs profilen före bokning.",
+        "faq2q": "Vad betalar skolan till DriveLinkUp?",
+        "faq2a": "Skolbokningar betalar 8% efter genomförd tjänst. Oberoende instruktörer 10%. Elevavgift 0%.",
+        "faq3q": "När betalar jag?",
+        "faq3a": "Vid checkout för bokad tid. Medlen hålls i escrow tills leverans bekräftas eller auto-release körs."
+      }
     },
     "malmoCity": {
       "meta": {
@@ -289,7 +349,26 @@
         "title": "Hitta en auktoriserad trafikskola i Malmö",
         "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
       },
-      "slug": "malmo"
+      "slug": "malmo",
+      "seo": {
+        "lead": "Hitta trafikskola i Malmö",
+        "p1": "I Malmö och Skåne jämför du auktoriserade skolor sida vid sida—kategorier, priser, tillgänglighet och avbokningspolicy—innan du bokar.",
+        "p2": "Tvåspråkiga hushåll behöver ofta tydlig engelsk information; annonser som erbjuder engelska är märkta i katalogen.",
+        "howTitle": "Från jämförelse till bokad lektion",
+        "howBody": "Korta listan i Malmö, kolla nästa lediga tid, boka till publicerat pris och följ escrow-flödet efter lektionen.",
+        "relatedTitle": "Relaterade guider",
+        "linkHandledare": "Krav för handledare",
+        "linkPricing": "Avgifter förklarade",
+        "linkFaq": "FAQ",
+        "linkBlog": "Blogg",
+        "faqTitle": "Vanliga frågor Malmö",
+        "faq1q": "Syns priser före registrering?",
+        "faq1a": "Ja. Timpris publiceras på varje annons så du kan jämföra innan konto skapas.",
+        "faq2q": "Kan jag övningsköra privat också?",
+        "faq2a": "Ja, via den separata handledarvägen. Skolbokning och privat övning är olika produkter.",
+        "faq3q": "Vilka närliggande städer finns?",
+        "faq3a": "Börja i Malmö och använd hubben för södra Sverige för fler orter i Skåne."
+      }
     },
     "uppsalaCity": {
       "meta": {
@@ -303,7 +382,26 @@
         "title": "Hitta en auktoriserad trafikskola i Uppsala",
         "subtitle": "Jämför skolannonser efter kategori, språk, publicerat pris, tillgänglighet och avbokningspolicy och öppna sedan en annons för att boka."
       },
-      "slug": "uppsala"
+      "slug": "uppsala",
+      "seo": {
+        "lead": "Trafikskolor för elever i Uppsala",
+        "p1": "Studenter och yrkesverksamma i Uppsala jämför auktoriserade B-skolor med tydliga priser i SEK och aktuell tillgänglighet.",
+        "p2": "Många pendlar mot Stockholm—använd stadshubbarna för att boka lokalt där du är.",
+        "howTitle": "Boka lektion i Uppsala",
+        "howBody": "Välj verifierad skola, välj tid, betala publicerat pris, genomför lektionen och bekräfta. Escrow skyddar båda parter.",
+        "relatedTitle": "Relaterade guider",
+        "linkHandledare": "Handledarguide",
+        "linkPricing": "Priser",
+        "linkFaq": "FAQ",
+        "linkBlog": "Guider",
+        "faqTitle": "Vanliga frågor Uppsala",
+        "faq1q": "Måste hela utbildningen ske hos skola?",
+        "faq1a": "Skolor ger strukturerade lektioner. Privat övningskörning med handledare är valfritt och separat.",
+        "faq2q": "Krävs verifiering för att boka?",
+        "faq2a": "Ja. Elev måste ID-verifieras (och ha godkänt handledarskap under 18) före bokning.",
+        "faq3q": "Hur fungerar avbokning?",
+        "faq3a": "Varje skola publicerar avbokningsnivå på annonsen. Den gäller bokningen."
+      }
     },
     "vasterasCity": {
       "meta": {
@@ -337,7 +435,26 @@
         "find": "Hitta en trafikskola",
         "become": "Lista er trafikskola"
       },
-      "slug": "vasteras"
+      "slug": "vasteras",
+      "seo": {
+        "lead": "Auktoriserade lektioner i Västerås",
+        "p1": "Annonser i Västerås visar kategori, språk, pris och bokningspolicy så du kan välja skola utan gissningar.",
+        "p2": "Kombinera skollektioner med privat övning bara när handledarreglerna är uppfyllda—DriveLinkUp håller vägarna åtskilda.",
+        "howTitle": "Så bokar du i Västerås",
+        "howBody": "Jämför skolor, öppna profil, boka ledig tid till publicerat pris och bekräfta efter lektionen så utbetalning kan ske.",
+        "relatedTitle": "Relaterade guider",
+        "linkHandledare": "Information om handledare",
+        "linkPricing": "Prisöversikt",
+        "linkFaq": "FAQ",
+        "linkBlog": "Blogg",
+        "faqTitle": "Vanliga frågor Västerås",
+        "faq1q": "Vem syns i sök?",
+        "faq1a": "Endast aktiverade skolor/instruktörer med verifierad behörighet.",
+        "faq2q": "Finns elevavgift på marknadsplatsen?",
+        "faq2a": "Nej. Skolans publicerade pris är det du betalar.",
+        "faq3q": "Var läser jag om privat övningskörning?",
+        "faq3a": "På handledarsidan—privata handledare säljs inte som skolannonser."
+      }
     }
   },
   "instructorDirectory": {
@@ -471,7 +588,8 @@
   "instructorDetail": {
     "meta": {
       "title": "Trafikskolans annons | DriveLinkUp",
-      "description": "Se skolans kategorier, publicerade pris, tillgänglighet, bokningsläge och avbokningspolicy före bokning."
+      "description": "Se skolans kategorier, publicerade pris, tillgänglighet, bokningsläge och avbokningspolicy före bokning.",
+      "descriptionNamed": "{name} i {city} — från {rate} SEK/timme. Jämför kategorier, tillgänglighet och bokningspolicy på DriveLinkUp."
     },
     "profileEyebrow": "Trafikskolans annons",
     "locatedIn": "Finns i {city}",
@@ -2133,9 +2251,16 @@
       "dismiss": "Stäng"
     },
     "panels": {
-      "bookings": { "title": "Kommande bokningar" },
-      "revenue": { "title": "Intäkter", "open": "Visa intäkter" },
-      "settings": { "title": "Inställningar" }
+      "bookings": {
+        "title": "Kommande bokningar"
+      },
+      "revenue": {
+        "title": "Intäkter",
+        "open": "Visa intäkter"
+      },
+      "settings": {
+        "title": "Inställningar"
+      }
     },
     "settings": {
       "title": "Skolinställningar",
@@ -3002,5 +3127,49 @@
     "resending": "Skickar…",
     "resendFailed": "Kunde inte skicka en ny länk. Försök igen.",
     "resendNeedsEmail": "Logga in igen för att begära en ny länk."
+  },
+  "locationHub": {
+    "meta": {
+      "titleCity": "Trafikskolor i {name}, {country} | DriveLinkUp",
+      "titleRegion": "Trafikskolor i {name}, {country} | DriveLinkUp",
+      "titleCountry": "Trafikskolor i {country} | DriveLinkUp",
+      "descriptionCity": "Jämför auktoriserade trafikskolor i {name}, {country}. Publicerade priser, tillgänglighet och bokning — 0% elevavgift på DriveLinkUp.",
+      "descriptionRegion": "Utforska orter i {name}, {country} och jämför auktoriserade trafikskolor när annonser är live.",
+      "descriptionCountry": "Hitta trafikskolehus över {country}. Sverige är live för bokning; övriga Norden är expansionssidor."
+    },
+    "eyebrow": "{country}",
+    "headerTitleCity": "Trafikskolor i {name}",
+    "headerTitleRegion": "Trafikskolor i {name}",
+    "headerTitleCountry": "Trafikskolor i {name}",
+    "subtitleLive": "Jämför verifierade skolannonser i {name} efter kategori, språk, publicerat pris i SEK och tillgänglighet — boka utan separat DriveLinkUp-avgift.",
+    "subtitleExpansion": "{name} i {country} är en expansionshub. Bokning är live i Sverige i dag; använd dessa sidor för nordisk täckning när vi växer.",
+    "subtitleCountryLive": "Bläddra regioner och städer i {name}. Öppna en stadshubb för att jämföra annonser.",
+    "subtitleCountryExpansion": "Hubbar för {name} är redo för SEO och expansion. Marknadsplatsbokning är live i Sverige först (ADR-001).",
+    "breadcrumbLocations": "Orter",
+    "expansionTitle": "Marknadsplatsbokning är Sweden-first",
+    "expansionBody": "DriveLinkUp slutför just nu betalda bokningar i Sverige. Den här nordiska sidan är indexerbar så elever hittar oss när vi växer — utforska svenska städer för att boka i dag.",
+    "expansionCtaSweden": "Bläddra svenska trafikskolor",
+    "seoLead": "Lär dig och boka i {name}, {country}",
+    "seoP1Live": "Annonser i {name} visar endast aktiverade skolor med verifierad Transportstyrelsen-behörighet. Jämför innan du skapar konto.",
+    "seoP1Expansion": "Vi publicerar en strukturerad hubb för {name}, {country} så sök och AI kan dirigera elever rätt medan utbud onboards.",
+    "seoP2": "Elever betalar 0% marknadsplatsavgift. Skolbokningar betalar 8% efter genomförd tjänst; oberoende instruktörer 10%. Handledare är en separat juridisk väg.",
+    "howTitle": "Så fungerar DriveLinkUp",
+    "howBodyLive": "Öppna en annons, välj tid, betala publicerat pris till escrow, genomför lektionen och bekräfta så skolan får betalt.",
+    "howBodyExpansion": "När annonser går live på den här marknaden gäller samma escrow-flöde som i Sverige — verifierade skolor, publicerade priser, ingen elevavgift.",
+    "nearbyTitle": "Närliggande hubbar",
+    "regionsTitle": "Regioner",
+    "citiesTitle": "Städer",
+    "countriesTitle": "Nordiska länder",
+    "faqTitle": "Vanliga frågor",
+    "faq1q": "Kan jag boka en lektion i {name} i dag?",
+    "faq1aLive": "Ja, om en verifierad skolannons visas nedan. Bokning kräver ID-verifiering (och godkänt handledarskap om du är 16–17).",
+    "faq1aExpansion": "Betald bokning är live i Sverige först. Den här sidan förbereder orten för lansering; använd svenska stadshubbar för att boka nu.",
+    "faq2q": "Betalar elever en DriveLinkUp-avgift?",
+    "faq2a": "Nej. Du betalar endast skolans publicerade lektionspris.",
+    "faq3q": "Är handledare samma sak som skolor?",
+    "faq3a": "Nej. Handledare gäller privat övningskörning enligt svenska regler och säljs inte som skolannonser.",
+    "linkHandledare": "Handledarguide",
+    "linkPricing": "Priser",
+    "linkBlog": "Guider"
   }
 }

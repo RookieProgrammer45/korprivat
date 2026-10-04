@@ -28,14 +28,14 @@ describe('GET /api/western-northern-sweden', () => {
     ]);
     expect(body.regions[0]?.cities[0]).toEqual({
       label: 'Göteborg',
-      href: '/instructors/goteborg',
+      href: '/locations/se/goteborg',
     });
-    expect(body.regions[0]?.cities[1]?.href).toBe('/instructors?city=Bor%C3%A5s');
+    expect(body.regions[0]?.cities[1]?.href).toBe('/locations/se/boras');
     expect(body.regions[2]?.cities.map((city) => city.href)).toContain(
-      '/instructors?city=%C3%96rnsk%C3%B6ldsvik',
+      '/locations/se/ornskoldsvik',
     );
     expect(body.regions[3]?.cities.map((city) => city.href)).toContain(
-      '/instructors?city=Skellefte%C3%A5',
+      '/locations/se/skelleftea',
     );
   });
 

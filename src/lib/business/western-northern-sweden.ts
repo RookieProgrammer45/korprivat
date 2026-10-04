@@ -6,42 +6,42 @@ import {
   WesternNorthernSwedenPageCopy,
 } from '@/lib/contracts/western-northern-sweden';
 
-const cityFilterHref = (city: string) => `/instructors?city=${encodeURIComponent(city)}`;
+const se = (slug: string) => `/locations/se/${slug}`;
 
 export const westernNorthernSwedenRegions = [
   {
     slug: 'vastra-gotaland',
     cityLinks: [
-      { key: 'goteborg', href: '/instructors/goteborg' },
-      { key: 'boras', href: cityFilterHref('Borås') },
-      { key: 'trollhattan', href: cityFilterHref('Trollhättan') },
-      { key: 'skovde', href: cityFilterHref('Skövde') },
+      { key: 'goteborg', href: se('goteborg') },
+      { key: 'boras', href: se('boras') },
+      { key: 'trollhattan', href: se('trollhattan') },
+      { key: 'skovde', href: se('skovde') },
     ],
   },
   {
     slug: 'varmland',
     cityLinks: [
-      { key: 'karlstad', href: cityFilterHref('Karlstad') },
-      { key: 'arvika', href: cityFilterHref('Arvika') },
-      { key: 'kristinehamn', href: cityFilterHref('Kristinehamn') },
+      { key: 'karlstad', href: se('karlstad') },
+      { key: 'arvika', href: se('arvika') },
+      { key: 'kristinehamn', href: se('kristinehamn') },
     ],
   },
   {
     slug: 'gavleborg-vasternorrland',
     cityLinks: [
-      { key: 'gavle', href: cityFilterHref('Gävle') },
-      { key: 'sundsvall', href: cityFilterHref('Sundsvall') },
-      { key: 'hudiksvall', href: cityFilterHref('Hudiksvall') },
-      { key: 'ornskoldsvik', href: cityFilterHref('Örnsköldsvik') },
+      { key: 'gavle', href: se('gavle') },
+      { key: 'sundsvall', href: se('sundsvall') },
+      { key: 'hudiksvall', href: se('hudiksvall') },
+      { key: 'ornskoldsvik', href: se('ornskoldsvik') },
     ],
   },
   {
     slug: 'vasterbotten-norrbotten',
     cityLinks: [
-      { key: 'umea', href: cityFilterHref('Umeå') },
-      { key: 'skelleftea', href: cityFilterHref('Skellefteå') },
-      { key: 'lulea', href: cityFilterHref('Luleå') },
-      { key: 'kiruna', href: cityFilterHref('Kiruna') },
+      { key: 'umea', href: se('umea') },
+      { key: 'skelleftea', href: se('skelleftea') },
+      { key: 'lulea', href: se('lulea') },
+      { key: 'kiruna', href: se('kiruna') },
     ],
   },
 ] as const;

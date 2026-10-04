@@ -30,6 +30,7 @@
       "resources": "Resources",
       "blog": "Journal",
       "profile": "Profile",
+      "locations": "Locations",
       "cityStockholm": "Stockholm",
       "cityGoteborg": "Gothenburg",
       "cityMalmo": "Malmö",
@@ -212,6 +213,27 @@
         "excerpt": "Transportstyrelsen steps, realistic price planning, and how to compare authorized driving schools in Stockholm.",
         "readCta": "Read article",
         "meta": "{minutes} min read · Updated August 2026"
+      },
+      "1": {
+        "eyebrow": "Handledare",
+        "title": "Handledare and supervised practice in Sweden",
+        "excerpt": "How 16–17-year-olds complete handledare enrollment before booking on DriveLinkUp.",
+        "meta": "{minutes} min read",
+        "readCta": "Read guide"
+      },
+      "2": {
+        "eyebrow": "Costs",
+        "title": "What does a Swedish driving licence cost?",
+        "excerpt": "How lesson prices work, and why DriveLinkUp shows school prices without a learner fee.",
+        "meta": "{minutes} min read",
+        "readCta": "Read guide"
+      },
+      "3": {
+        "eyebrow": "Paths",
+        "title": "Traffic school or handledare?",
+        "excerpt": "When to book an authorized school versus private övningskörning with a handledare.",
+        "meta": "{minutes} min read",
+        "readCta": "Read guide"
       }
     }
   },
@@ -261,7 +283,26 @@
         "title": "Find an authorized driving school in Stockholm",
         "subtitle": "Compare school listings by category, language, published price, availability and cancellation policy, then open a listing to book."
       },
-      "slug": "stockholm"
+      "slug": "stockholm",
+      "seo": {
+        "lead": "Book an authorized driving school in Stockholm",
+        "p1": "Stockholm learners compare B-category schools by published lesson price, English availability, and live slots—then book without a separate DriveLinkUp fee. Listings are limited to verified Transportstyrelsen credentials.",
+        "p2": "Typical journeys combine school lessons with optional private övningskörning. If you are 16–17, complete handledare enrollment before booking. Adults book directly after ID verification.",
+        "howTitle": "How booking works in Stockholm",
+        "howBody": "Open a school listing, pick an available slot, pay the school’s published price into escrow, take the lesson, then confirm completion so the school is paid. Cancellations follow the school’s published policy.",
+        "relatedTitle": "Related guides",
+        "linkHandledare": "Handledare and private practice (Sweden)",
+        "linkPricing": "Learner and school pricing",
+        "linkFaq": "Marketplace FAQ",
+        "linkBlog": "Guides for learners in Sweden",
+        "faqTitle": "Stockholm FAQ",
+        "faq1q": "Do learners pay a DriveLinkUp fee in Stockholm?",
+        "faq1a": "No. You pay the school’s published lesson price. DriveLinkUp does not add a separate learner fee.",
+        "faq2q": "Are private handledare listed as schools?",
+        "faq2a": "No. Handledare are a separate legal path for övningskörning. Use the handledare guide; school listings stay authorized traffic schools.",
+        "faq3q": "Can I book if I am 16 or 17?",
+        "faq3a": "After ID verification you invite a handledare. Booking unlocks only when handledare enrollment is approved."
+      }
     },
     "goteborgCity": {
       "meta": {
@@ -275,7 +316,26 @@
         "title": "Find an authorized driving school in Gothenburg",
         "subtitle": "Compare school listings by category, language, published price, availability and cancellation policy, then open a listing to book."
       },
-      "slug": "goteborg"
+      "slug": "goteborg",
+      "seo": {
+        "lead": "Authorized driving schools in Gothenburg",
+        "p1": "Compare Göteborg traffic schools by licence category, language, published SEK price and availability. Only verified instructors appear in search.",
+        "p2": "Use city filters for lessons near major areas, then open a listing to book. Pair school lessons with Trafikverket-oriented private practice when you have a handledare.",
+        "howTitle": "Booking flow for Gothenburg learners",
+        "howBody": "Choose a verified school, reserve a slot, pay into escrow at the published price, complete the lesson, and confirm so funds release. Dispute tools exist if something goes wrong.",
+        "relatedTitle": "Related guides",
+        "linkHandledare": "Handledare and övningskörning",
+        "linkPricing": "Pricing and commissions",
+        "linkFaq": "FAQ",
+        "linkBlog": "Learner guides",
+        "faqTitle": "Gothenburg FAQ",
+        "faq1q": "Is English-speaking instruction available?",
+        "faq1a": "Many listings flag English. Filter the directory or open a school profile to confirm before you book.",
+        "faq2q": "What does a school pay DriveLinkUp?",
+        "faq2a": "School-affiliated bookings pay 8% after completed service. Independent instructors pay 10%. Learners pay 0%.",
+        "faq3q": "When do I pay?",
+        "faq3a": "At checkout for the booked slot. Funds stay in escrow until delivery is confirmed or auto-release runs."
+      }
     },
     "malmoCity": {
       "meta": {
@@ -289,7 +349,26 @@
         "title": "Find an authorized driving school in Malmö",
         "subtitle": "Compare school listings by category, language, published price, availability and cancellation policy, then open a listing to book."
       },
-      "slug": "malmo"
+      "slug": "malmo",
+      "seo": {
+        "lead": "Find a traffic school in Malmö",
+        "p1": "Malmö and Skåne learners can compare authorized schools side by side—categories, prices, availability and cancellation policy—before committing.",
+        "p2": "Cross-border and bilingual households often need clear English copy; listings that speak English are marked in the directory.",
+        "howTitle": "From comparison to booked lesson",
+        "howBody": "Shortlist schools in Malmö, check the next free slot, book at the published price, and follow the escrow confirmation flow after the lesson.",
+        "relatedTitle": "Related guides",
+        "linkHandledare": "Handledare requirements",
+        "linkPricing": "Fees explained",
+        "linkFaq": "FAQ",
+        "linkBlog": "Blog",
+        "faqTitle": "Malmö FAQ",
+        "faq1q": "Are prices shown before signup?",
+        "faq1a": "Yes. Hourly rates are published on each listing so you can compare before you create an account.",
+        "faq2q": "Can I practice privately as well?",
+        "faq2a": "Yes, via the separate handledare path. School bookings and private practice are not the same legal product.",
+        "faq3q": "Which cities are nearby on DriveLinkUp?",
+        "faq3a": "Start from Malmö, then browse the southern Sweden hub for other Skåne and neighbouring cities."
+      }
     },
     "uppsalaCity": {
       "meta": {
@@ -303,7 +382,26 @@
         "title": "Find an authorized driving school in Uppsala",
         "subtitle": "Compare school listings by category, language, published price, availability and cancellation policy, then open a listing to book."
       },
-      "slug": "uppsala"
+      "slug": "uppsala",
+      "seo": {
+        "lead": "Driving schools for Uppsala learners",
+        "p1": "Uppsala students and working adults compare authorized B-licence schools with transparent SEK pricing and live availability.",
+        "p2": "Many learners split time between Uppsala and Stockholm—use city hubs to keep booking local while you travel.",
+        "howTitle": "Book a lesson in Uppsala",
+        "howBody": "Pick a verified school, select a slot, pay the published price, attend, then confirm. Escrow protects both sides until the lesson is done.",
+        "relatedTitle": "Related guides",
+        "linkHandledare": "Handledare guide",
+        "linkPricing": "Pricing",
+        "linkFaq": "FAQ",
+        "linkBlog": "Guides",
+        "faqTitle": "Uppsala FAQ",
+        "faq1q": "Do I need a school for the whole licence?",
+        "faq1a": "Schools provide structured lessons. Private övningskörning with a handledare is optional and separate.",
+        "faq2q": "Is verification required to book?",
+        "faq2a": "Yes. Learners must pass ID verification (and handledare approval if under 18) before booking.",
+        "faq3q": "How do cancellations work?",
+        "faq3a": "Each school publishes a cancellation tier on the listing. It applies to that booking."
+      }
     },
     "vasterasCity": {
       "meta": {
@@ -337,7 +435,26 @@
         "find": "Find a driving school",
         "become": "List your driving school"
       },
-      "slug": "vasteras"
+      "slug": "vasteras",
+      "seo": {
+        "lead": "Authorized lessons in Västerås",
+        "p1": "Västerås listings highlight category, language, price and booking policy so you can choose a school without guesswork.",
+        "p2": "Combine school lessons with private practice only when handledare rules are met—DriveLinkUp keeps those paths distinct.",
+        "howTitle": "How to book in Västerås",
+        "howBody": "Compare schools, open a profile, book an open slot at the published price, then confirm after the lesson so payout can proceed.",
+        "relatedTitle": "Related guides",
+        "linkHandledare": "Handledare information",
+        "linkPricing": "Pricing overview",
+        "linkFaq": "FAQ",
+        "linkBlog": "Blog",
+        "faqTitle": "Västerås FAQ",
+        "faq1q": "Who appears in search?",
+        "faq1a": "Only marketplace-activated schools/instructors with a verified licence.",
+        "faq2q": "Is there a learner marketplace fee?",
+        "faq2a": "No. The published school price is what you pay.",
+        "faq3q": "Where do I read about private practice?",
+        "faq3a": "See the handledare page—private supervisors are not sold as school listings."
+      }
     }
   },
   "instructorDirectory": {
@@ -471,7 +588,8 @@
   "instructorDetail": {
     "meta": {
       "title": "Driving-school listing | DriveLinkUp",
-      "description": "Review a school's categories, published price, availability, booking mode and cancellation policy before you book."
+      "description": "Review a school's categories, published price, availability, booking mode and cancellation policy before you book.",
+      "descriptionNamed": "{name} in {city} — from {rate} SEK/hour. Compare categories, availability and booking policy on DriveLinkUp."
     },
     "profileEyebrow": "Driving-school listing",
     "locatedIn": "Based in {city}",
@@ -2133,9 +2251,16 @@
       "dismiss": "Dismiss"
     },
     "panels": {
-      "bookings": { "title": "Upcoming bookings" },
-      "revenue": { "title": "Revenue", "open": "View revenue" },
-      "settings": { "title": "Settings" }
+      "bookings": {
+        "title": "Upcoming bookings"
+      },
+      "revenue": {
+        "title": "Revenue",
+        "open": "View revenue"
+      },
+      "settings": {
+        "title": "Settings"
+      }
     },
     "settings": {
       "title": "School settings",
@@ -3002,5 +3127,49 @@
     "resending": "Sending…",
     "resendFailed": "Could not send a new link. Try again.",
     "resendNeedsEmail": "Sign in again to request a new link."
+  },
+  "locationHub": {
+    "meta": {
+      "titleCity": "Driving schools in {name}, {country} | DriveLinkUp",
+      "titleRegion": "Driving schools in {name}, {country} | DriveLinkUp",
+      "titleCountry": "Driving schools in {country} | DriveLinkUp",
+      "descriptionCity": "Compare authorized driving-school listings for {name}, {country}. Published prices, availability and booking — 0% learner fee on DriveLinkUp.",
+      "descriptionRegion": "Explore cities in {name}, {country} and compare authorized driving schools when marketplace listings are live.",
+      "descriptionCountry": "Find driving-school hubs across {country}. Sweden is live for booking; other Nordic markets are expansion pages."
+    },
+    "eyebrow": "{country}",
+    "headerTitleCity": "Driving schools in {name}",
+    "headerTitleRegion": "Driving schools in {name}",
+    "headerTitleCountry": "Driving schools in {name}",
+    "subtitleLive": "Compare verified school listings in {name} by category, language, published SEK price and availability — then book without a separate DriveLinkUp fee.",
+    "subtitleExpansion": "{name} in {country} is an expansion hub. Booking is live in Sweden today; use these pages to explore Nordic coverage as we grow.",
+    "subtitleCountryLive": "Browse regions and cities across {name}. Open a city hub to compare listings.",
+    "subtitleCountryExpansion": "{name} hubs are ready for SEO and expansion. Marketplace booking is live in Sweden first (ADR-001).",
+    "breadcrumbLocations": "Locations",
+    "expansionTitle": "Marketplace booking is Sweden-first",
+    "expansionBody": "DriveLinkUp currently completes paid bookings in Sweden. This Nordic location page is indexable so learners can find us as we expand — explore Swedish cities to book today.",
+    "expansionCtaSweden": "Browse Swedish driving schools",
+    "seoLead": "Learn and book in {name}, {country}",
+    "seoP1Live": "Listings in {name} show only marketplace-activated schools with verified Transportstyrelsen credentials. Compare before you create an account.",
+    "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
+    "seoP2": "Learners pay 0% marketplace fee. School-affiliated bookings pay 8% after completion; independent instructors 10%. Handledare / private practice is a separate legal path.",
+    "howTitle": "How DriveLinkUp works",
+    "howBodyLive": "Open a listing, pick a slot, pay the published price into escrow, complete the lesson, then confirm so the school is paid.",
+    "howBodyExpansion": "When listings go live in this market, the same escrow booking flow used in Sweden will apply — verified schools, published prices, no learner marketplace fee.",
+    "nearbyTitle": "Nearby hubs",
+    "regionsTitle": "Regions",
+    "citiesTitle": "Cities",
+    "countriesTitle": "Nordic countries",
+    "faqTitle": "FAQ",
+    "faq1q": "Can I book a lesson in {name} today?",
+    "faq1aLive": "Yes, if a verified school listing appears below. Booking requires learner ID verification (and handledare approval if you are 16–17).",
+    "faq1aExpansion": "Paid booking is live in Sweden first. This page prepares the location for launch; use Swedish city hubs to book now.",
+    "faq2q": "Do learners pay a DriveLinkUp fee?",
+    "faq2a": "No. You pay the school’s published lesson price only.",
+    "faq3q": "Are handledare the same as schools?",
+    "faq3a": "No. Handledare support private övningskörning under Swedish rules and are not sold as school listings.",
+    "linkHandledare": "Handledare guide",
+    "linkPricing": "Pricing",
+    "linkBlog": "Guides"
   }
 }

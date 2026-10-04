@@ -17,14 +17,30 @@ const POSTS = [
     index: '0',
     minutes: 7,
   },
+  {
+    slug: 'handledare-ovningskorning-sverige',
+    index: '1',
+    minutes: 6,
+  },
+  {
+    slug: 'kostnad-korkort-sverige',
+    index: '2',
+    minutes: 5,
+  },
+  {
+    slug: 'trafikskola-eller-handledare',
+    index: '3',
+    minutes: 5,
+  },
 ] as const;
 
 export async function generateMetadata() {
   const t = await getTranslations('blogPage.meta');
+  const { publicAlternates } = await import('@/lib/seo/alternates');
   return {
     title: t('title'),
     description: t('description'),
-    alternates: { canonical: '/blog' },
+    alternates: publicAlternates('/blog'),
   };
 }
 

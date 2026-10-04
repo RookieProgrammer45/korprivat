@@ -31,7 +31,7 @@ export function VasterasInstructorLanding() {
             <p className="max-w-2xl text-body-lg text-muted-foreground">{t('header.subtitle')}</p>
             <div className="flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <Link href="/instructors/vasteras#directory">
+                <Link href="/locations/se/vasteras#directory">
                   {t('cta.find')}
                   <ArrowUpRight className="ml-2 size-4" aria-hidden />
                 </Link>

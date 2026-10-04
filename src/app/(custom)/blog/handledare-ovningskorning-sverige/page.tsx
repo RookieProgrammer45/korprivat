@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { publicAlternates } from '@/lib/seo/alternates';
 
 export const metadata: Metadata = {
   title: 'Handledare och övningskörning i Sverige — DriveLinkUp',
   description:
     'Så fungerar handledarskap för övningskörning, och hur DriveLinkUp kopplar 16–17-åringar till handledare innan bokning.',
-  alternates: { canonical: '/blog/handledare-ovningskorning-sverige' },
+  alternates: publicAlternates('/blog/handledare-ovningskorning-sverige'),
 };
 
 export default function HandledareBlogPost() {

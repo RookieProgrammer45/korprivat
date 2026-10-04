@@ -6,45 +6,45 @@ import {
   SouthernSwedenPageCopy,
 } from '@/lib/contracts/southern-sweden';
 
-const cityFilterHref = (city: string) => `/instructors?city=${encodeURIComponent(city)}`;
+const se = (slug: string) => `/locations/se/${slug}`;
 
 export const southernSwedenRegions = [
   {
     slug: 'skane',
     cityLinks: [
-      { key: 'malmo', href: '/instructors/malmo' },
-      { key: 'helsingborg', href: cityFilterHref('Helsingborg') },
-      { key: 'lund', href: cityFilterHref('Lund') },
-      { key: 'kristianstad', href: cityFilterHref('Kristianstad') },
-      { key: 'ystad', href: cityFilterHref('Ystad') },
+      { key: 'malmo', href: se('malmo') },
+      { key: 'helsingborg', href: se('helsingborg') },
+      { key: 'lund', href: se('lund') },
+      { key: 'kristianstad', href: se('kristianstad') },
+      { key: 'ystad', href: se('ystad') },
     ],
   },
   {
     slug: 'halland',
     cityLinks: [
-      { key: 'halmstad', href: cityFilterHref('Halmstad') },
-      { key: 'varberg', href: cityFilterHref('Varberg') },
-      { key: 'falkenberg', href: cityFilterHref('Falkenberg') },
-      { key: 'kungsbacka', href: cityFilterHref('Kungsbacka') },
+      { key: 'halmstad', href: se('halmstad') },
+      { key: 'varberg', href: se('varberg') },
+      { key: 'falkenberg', href: se('falkenberg') },
+      { key: 'kungsbacka', href: se('kungsbacka') },
     ],
   },
   {
     slug: 'blekinge',
     cityLinks: [
-      { key: 'karlskrona', href: cityFilterHref('Karlskrona') },
-      { key: 'karlshamn', href: cityFilterHref('Karlshamn') },
-      { key: 'ronneby', href: cityFilterHref('Ronneby') },
-      { key: 'solvesborg', href: cityFilterHref('Sölvesborg') },
+      { key: 'karlskrona', href: se('karlskrona') },
+      { key: 'karlshamn', href: se('karlshamn') },
+      { key: 'ronneby', href: se('ronneby') },
+      { key: 'solvesborg', href: se('solvesborg') },
     ],
   },
   {
     slug: 'smaland',
     cityLinks: [
-      { key: 'jonkoping', href: cityFilterHref('Jönköping') },
-      { key: 'vaxjo', href: cityFilterHref('Växjö') },
-      { key: 'kalmar', href: cityFilterHref('Kalmar') },
-      { key: 'varnamo', href: cityFilterHref('Värnamo') },
-      { key: 'ljungby', href: cityFilterHref('Ljungby') },
+      { key: 'jonkoping', href: se('jonkoping') },
+      { key: 'vaxjo', href: se('vaxjo') },
+      { key: 'kalmar', href: se('kalmar') },
+      { key: 'varnamo', href: se('varnamo') },
+      { key: 'ljungby', href: se('ljungby') },
     ],
   },
 ] as const;
