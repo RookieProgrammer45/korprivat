@@ -736,14 +736,23 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
       <CardContent className="flex h-full min-w-0 flex-col gap-5 p-6">
         <div className="marketplace-directory-card-header flex min-w-0 flex-wrap items-start justify-between gap-4">
           <div className="flex min-w-0 flex-1 items-center gap-3">
-            <Image
-              src={row.photoUrl}
-              alt={tr('portraitAlt', { name: row.name })}
-              width={48}
-              height={48}
-              unoptimized
-              className="marketplace-provider-avatar size-12 shrink-0 rounded-full border border-brand-500/35 bg-brand-100 object-cover dark:bg-brand-900"
-            />
+            {row.photoUrl ? (
+              <Image
+                src={row.photoUrl}
+                alt={tr('portraitAlt', { name: row.name })}
+                width={48}
+                height={48}
+                unoptimized
+                className="marketplace-provider-avatar size-12 shrink-0 rounded-full border border-brand-500/35 bg-brand-100 object-cover dark:bg-brand-900"
+              />
+            ) : (
+              <div
+                aria-hidden
+                className="marketplace-provider-avatar flex size-12 shrink-0 items-center justify-center rounded-full border border-brand-500/35 bg-brand-100 font-display text-sm font-semibold text-brand-700 dark:bg-brand-900 dark:text-brand-300"
+              >
+                {row.name.slice(0, 1).toUpperCase()}
+              </div>
+            )}
             <div className="min-w-0">
               <div className="break-words font-display text-base font-semibold text-foreground">
                 {row.name}

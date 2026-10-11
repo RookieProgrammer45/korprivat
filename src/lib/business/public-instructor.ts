@@ -120,6 +120,12 @@ export function toPublicInstructor(
           : null,
     bookingMode: row.bookingMode === 'request' ? 'request' : 'instant',
     providerRole: row.providerRole === 'HANDLEDARE' ? 'HANDLEDARE' : 'INSTRUCTOR',
+    // Raw marketplace kind (SCHOOL vs INSTRUCTOR) — additive so the directory
+    // can badge schools without touching the collapsed public contract.
+    providerType:
+      row.providerRole === 'SCHOOL' || row.providerRole === 'HANDLEDARE'
+        ? row.providerRole
+        : 'INSTRUCTOR',
     ...(distanceKm == null ? {} : { distanceKm }),
   };
 }
