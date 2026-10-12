@@ -37,6 +37,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
+import { isLocale } from '@/i18n/config';
 import { apiFetch } from '@/lib/api-client';
 import {
   CONTACT_TOPICS,
@@ -62,6 +63,15 @@ interface TopicDef {
 }
 
 const TOPIC_DEFS: TopicDef[] = CONTACT_TOPICS.map((value, index) => ({ value, index }));
+
+export function contactPayloadWithLocale(
+  values: ContactInquiryCreate,
+  activeLocale: string,
+): ContactInquiryCreate {
+  // `useLocale()` is configured from our supported locales. Retain the form's
+  // validated value if a malformed provider value ever reaches this client.
+  return { ...values, locale: isLocale(activeLocale) ? activeLocale : values.locale };
+}
 
 export function ContactFlow({ initialTopic = null }: ContactFlowProps) {
   const t = useTranslations('landing.contactPage');
@@ -95,9 +105,10 @@ export function ContactFlow({ initialTopic = null }: ContactFlowProps) {
 
   const onSubmit = form.handleSubmit(async (values) => {
     try {
+      const payload = contactPayloadWithLocale(values, locale);
       await apiFetch('/api/contact', {
         method: 'POST',
-        body: JSON.stringify(values),
+        body: JSON.stringify(payload),
         schema: contactInquiryCreatedSchema,
       });
       toast.success(t('success.title'), {

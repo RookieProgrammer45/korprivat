@@ -34,12 +34,8 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { useSession } from '@/lib/auth-client';
+import { clearBookingDraft, persistBookingDraft, readBookingDraft } from '@/lib/booking-form-draft';
 import type { CancellationTier } from '@/lib/business/cancellation-policy';
-import {
-  clearBookingDraft,
-  persistBookingDraft,
-  readBookingDraft,
-} from '@/lib/booking-form-draft';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import {
   BookingCreate,
@@ -51,8 +47,8 @@ import {
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { RebookSuggestResponse } from '@/lib/contracts/saved-payment-methods';
 import { applyServerErrors } from '@/lib/forms';
-import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/state';
 import { cn } from '@/lib/utils';
+import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/state';
 
 type FormValues = BookingCreate;
 
@@ -99,7 +95,7 @@ export function BookingForm({
   const [bookingReadError, setBookingReadError] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentPollError, setPaymentPollError] = useState(false);
-  const [_paymentPollRetryNonce, setPaymentPollRetryNonce] = useState(0);
+  const [paymentPollRetryNonce, setPaymentPollRetryNonce] = useState(0);
   const [slots, setSlots] = useState<SlotState>({ kind: 'loading' });
 
   useEffect(() => {
@@ -206,6 +202,7 @@ export function BookingForm({
     };
   }, [bookingToken, externalBookingId]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Retry deliberately starts a new polling sequence for the unchanged pending booking.
   useEffect(() => {
     if (!booking || booking.paymentStatus !== 'pending' || !externalBookingId) return;
     let active = true;
@@ -248,7 +245,7 @@ export function BookingForm({
       active = false;
       if (timer) clearTimeout(timer);
     };
-  }, [booking, bookingToken, externalBookingId]);
+  }, [booking, bookingToken, externalBookingId, paymentPollRetryNonce]);
 
   const categoryOptions = useMemo(() => instructor?.categories ?? [], [instructor]);
 
@@ -267,6 +264,7 @@ export function BookingForm({
       locale: locale === 'en' ? 'en' : 'sv',
     },
   });
+  const selectedSlotId = form.watch('slotId');
 
   useEffect(() => {
     form.setValue('instructorId', instructorId);
@@ -277,8 +275,10 @@ export function BookingForm({
     const draft = readBookingDraft(instructorId);
     if (!draft) return;
     if (draft.studentName) form.setValue('studentName', draft.studentName, { shouldDirty: true });
-    if (draft.studentEmail) form.setValue('studentEmail', draft.studentEmail, { shouldDirty: true });
-    if (draft.studentPhone) form.setValue('studentPhone', draft.studentPhone, { shouldDirty: true });
+    if (draft.studentEmail)
+      form.setValue('studentEmail', draft.studentEmail, { shouldDirty: true });
+    if (draft.studentPhone)
+      form.setValue('studentPhone', draft.studentPhone, { shouldDirty: true });
     if (draft.category) {
       form.setValue('category', draft.category as FormValues['category'], { shouldDirty: true });
     }
@@ -670,7 +670,9 @@ export function BookingForm({
                 </p>
               </div>
             ) : null}
-            {instructor ? <BookingPriceSummary instructorId={instructor.id} /> : null}
+            {instructor ? (
+              <BookingPriceSummary instructorId={instructor.id} slotId={selectedSlotId || null} />
+            ) : null}
             <FormField
               control={form.control}
               name="studentName"

@@ -22,6 +22,7 @@ import {
 } from '@/lib/email/templates';
 import {
   CheckoutConfigurationError,
+  CheckoutUnavailableError,
   createBookingCheckoutSession,
 } from '@/lib/payments/create-booking-checkout';
 import { resolveOrigin } from '@/lib/payments/origin';
@@ -145,11 +146,20 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   const origin = resolveOrigin(req);
   const detailUrl = `${origin}/bookings/${encodeURIComponent(booking.id)}?token=${encodeURIComponent(learnerAccess.token)}`;
 
-  // Stamp accept fields before minting checkout so a mid-flight failure still
-  // leaves an auditable accept, then mint Checkout and overwrite pending.
+  // Stamp the acceptance and enter the shared issuer's payable state before
+  // minting Checkout. The issuer will atomically advance unpaid -> pending
+  // when it claims the durable Checkout issuance key.
   const preAccept = await prisma.booking.updateMany({
-    where: { id: booking.id, paymentStatus: 'awaiting_approval' },
+    where: {
+      id: booking.id,
+      paymentStatus: 'awaiting_approval',
+      cancellationOutcome: null,
+      paidAt: null,
+      stripeSessionId: null,
+      stripeCheckoutSessionId: null,
+    },
     data: {
+      paymentStatus: 'unpaid',
       actionToken: escrowActionToken,
       learnerAccessTokenHash: learnerAccess.tokenHash,
       acceptedByLabel: parsed.data.acceptedByLabel,
@@ -160,7 +170,6 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     },
   });
   if (preAccept.count !== 1) {
-    await releaseSlot(booking.id);
     const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
     return NextResponse.json(
       BookingAcceptResponse.parse({
@@ -180,17 +189,24 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       userId: booking.userId,
     });
   } catch (error) {
-    await releaseSlot(booking.id);
-    await prisma.booking
-      .updateMany({
-        where: { id: booking.id },
-        data: { paymentStatus: 'awaiting_approval', stripeSessionId: null, stripeCheckoutSessionId: null },
-      })
-      .catch(() => undefined);
     if (error instanceof CheckoutConfigurationError) {
-      return NextResponse.json({ errors: { payments: 'not_enabled' } }, { status: 403 });
+      // Configuration is checked before the issuer reads or claims the row.
+      // It is therefore the one failure that can return this request to
+      // approval, but only if this exact pre-issuance state is still ours.
+      if (await rollbackAcceptedReservation(booking.id)) {
+        return NextResponse.json({ errors: { payments: 'not_enabled' } }, { status: 403 });
+      }
     }
-    return NextResponse.json({ errors: { payments: 'unknown' } }, { status: 500 });
+    if (error instanceof CheckoutUnavailableError) {
+      return NextResponse.json({ errors: { payments: 'booking_not_payable' } }, { status: 409 });
+    }
+    // A durable issuance claim may already identify a Stripe request even when
+    // its outcome is unknown. Keep the accepted booking and reserved slot so
+    // learner checkout recovery can retry the same idempotent claim.
+    return NextResponse.json(
+      { errors: { payments: 'checkout_recovery_required' } },
+      { status: 503 },
+    );
   }
 
   const bookingLocale = booking.locale === 'en' ? 'en' : 'sv';
@@ -250,4 +266,23 @@ async function releaseSlot(bookingId: string): Promise<void> {
       data: { bookedAt: null, bookedBookingId: null },
     })
     .catch(() => undefined);
+}
+
+async function rollbackAcceptedReservation(bookingId: string): Promise<boolean> {
+  const rollback = await prisma.booking
+    .updateMany({
+      where: {
+        id: bookingId,
+        paymentStatus: 'unpaid',
+        cancellationOutcome: null,
+        paidAt: null,
+        stripeSessionId: null,
+        stripeCheckoutSessionId: null,
+      },
+      data: { paymentStatus: 'awaiting_approval' },
+    })
+    .catch(() => ({ count: 0 }));
+  if (rollback.count !== 1) return false;
+  await releaseSlot(bookingId);
+  return true;
 }

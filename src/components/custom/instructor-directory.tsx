@@ -36,11 +36,12 @@ import {
 type SortMode = 'default' | 'distance';
 
 // Local mirror of the typed filter spec, derived from URL state. The island
-// also keeps a parallel `initialCities` array so the city dropdown is populated
-// from the first fetch even if a later, empty-filter fetch produces an
-// empty `cities` set. Geo fields (`lat`, `lng`, `nearKm`, `sort`) flow through
-// the same URL → filters → query-string round-trip pattern the existing
-// filters already use so the URL is canonical when sharing a search.
+// keeps a stable city option baseline (refreshed by an unfiltered response)
+// instead of treating each narrowed result set as a city facet: learners must
+// be able to switch cities directly while other filters remain active. Geo
+// fields (`lat`, `lng`, `nearKm`, `sort`) flow through the same URL → filters →
+// query-string round-trip pattern the existing filters already use so the URL
+// is canonical when sharing a search.
 type Filters = {
   categories: LicenceCategoryCode[];
   city: string | '';
@@ -138,6 +139,8 @@ export function InstructorDirectory({
     typeof filters.minRate === 'number' &&
     typeof filters.maxRate === 'number' &&
     filters.minRate > filters.maxRate;
+  const hasInvalidNumericFilter = hasInvalidNumericFilters(filters);
+  const hasInvalidDirectoryFilter = hasInvalidRateRange || hasInvalidNumericFilter;
 
   // Whenever the URL changes (back/forward, or our own router.replace below),
   // re-derive the local filter state so the controls stay in sync with the
@@ -164,7 +167,7 @@ export function InstructorDirectory({
   useEffect(() => {
     let active = true;
     setStatus('loading');
-    if (hasInvalidRateRange) {
+    if (hasInvalidDirectoryFilter) {
       setStatus('invalid');
       return () => {
         active = false;
@@ -192,7 +195,7 @@ export function InstructorDirectory({
     return () => {
       active = false;
     };
-  }, [hasInvalidRateRange, queryString, retryNonce]);
+  }, [hasInvalidDirectoryFilter, queryString, retryNonce]);
 
   const hasAnyFilter = useMemo(() => hasActiveFilter(filters), [filters]);
 
@@ -211,7 +214,9 @@ export function InstructorDirectory({
     (patch: Partial<Filters>) => {
       setFilters((curr) => {
         const next: Filters = { ...curr, ...patch };
-        if (!isInvalidRateRange(next)) replaceUrl(next);
+        // Do not serialise or fetch malformed numeric filters as a broad,
+        // unfiltered query. They stay editable in local state until corrected.
+        if (!hasInvalidDirectoryFilters(next)) replaceUrl(next);
         return next;
       });
     },
@@ -380,12 +385,30 @@ function FilterBar({
   onClearGeolocation: () => void;
 }) {
   const tr = useTranslations('instructorDirectory');
+  const [nativeValidationMessages, setNativeValidationMessages] = useState<{
+    minRate?: string;
+    maxRate?: string;
+    nearKm?: string;
+  }>({});
   const hasLocation = filters.lat != null || filters.lng != null;
   const statusCopy = locationStatusCopy(locationStatus, tr);
   const hasInvalidRateRange =
     typeof filters.minRate === 'number' &&
     typeof filters.maxRate === 'number' &&
     filters.minRate > filters.maxRate;
+  const hasInvalidMinRate = isInvalidPositiveInteger(filters.minRate);
+  const hasInvalidMaxRate = isInvalidPositiveInteger(filters.maxRate);
+  const hasInvalidNearKm = isInvalidNearKm(filters.nearKm);
+
+  function captureNativeValidation(
+    field: 'minRate' | 'maxRate' | 'nearKm',
+    input: HTMLInputElement,
+  ) {
+    setNativeValidationMessages((current) => ({
+      ...current,
+      [field]: input.validity.valid ? undefined : input.validationMessage,
+    }));
+  }
 
   return (
     <Card className="surface-panel border-border bg-card">
@@ -453,13 +476,25 @@ function FilterBar({
                 onChange={(event) => {
                   const raw = event.target.value;
                   onMinRateChange(raw === '' ? '' : Number(raw));
+                  captureNativeValidation('minRate', event.currentTarget);
                 }}
                 className="bg-background pl-12"
                 placeholder={tr('minRatePlaceholder')}
-                aria-invalid={hasInvalidRateRange}
-                aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
+                aria-invalid={hasInvalidRateRange || hasInvalidMinRate}
+                aria-describedby={
+                  hasInvalidMinRate
+                    ? 'min-rate-error'
+                    : hasInvalidRateRange
+                      ? 'rate-range-error'
+                      : undefined
+                }
               />
             </div>
+            {hasInvalidMinRate && nativeValidationMessages.minRate ? (
+              <p id="min-rate-error" role="alert" className="text-small text-destructive">
+                {nativeValidationMessages.minRate}
+              </p>
+            ) : null}
           </div>
 
           <div className="flex min-w-0 flex-col gap-2">
@@ -478,13 +513,25 @@ function FilterBar({
                 onChange={(event) => {
                   const raw = event.target.value;
                   onMaxRateChange(raw === '' ? '' : Number(raw));
+                  captureNativeValidation('maxRate', event.currentTarget);
                 }}
                 className="bg-background pl-12"
                 placeholder={tr('maxRatePlaceholder')}
-                aria-invalid={hasInvalidRateRange}
-                aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
+                aria-invalid={hasInvalidRateRange || hasInvalidMaxRate}
+                aria-describedby={
+                  hasInvalidMaxRate
+                    ? 'max-rate-error'
+                    : hasInvalidRateRange
+                      ? 'rate-range-error'
+                      : undefined
+                }
               />
             </div>
+            {hasInvalidMaxRate && nativeValidationMessages.maxRate ? (
+              <p id="max-rate-error" role="alert" className="text-small text-destructive">
+                {nativeValidationMessages.maxRate}
+              </p>
+            ) : null}
           </div>
 
           <div className="flex min-w-0 flex-col gap-2">
@@ -607,11 +654,19 @@ function FilterBar({
                 onChange={(event) => {
                   const raw = event.target.value;
                   onNearKmChange(raw === '' ? '' : Number(raw));
+                  captureNativeValidation('nearKm', event.currentTarget);
                 }}
                 className="bg-background"
                 placeholder={tr('nearKmPlaceholder')}
                 disabled={!hasLocation}
+                aria-invalid={hasInvalidNearKm}
+                aria-describedby={hasInvalidNearKm ? 'near-km-error' : undefined}
               />
+              {hasInvalidNearKm && nativeValidationMessages.nearKm ? (
+                <p id="near-km-error" role="alert" className="text-small text-destructive">
+                  {nativeValidationMessages.nearKm}
+                </p>
+              ) : null}
             </div>
             <div className="flex min-w-0 flex-col gap-2">
               <Label htmlFor="sort-select">{tr('sortLabel')}</Label>
@@ -972,8 +1027,7 @@ function normaliseFromUrl(q: InstructorQuery): Filters {
     nearKm: typeof q.nearKm === 'number' ? q.nearKm : '',
     sort: q.sort === 'distance' ? 'distance' : 'default',
     providerRole: q.providerRole ?? '',
-    affiliation:
-      q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
+    affiliation: q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
   };
 }
 
@@ -1029,6 +1083,28 @@ function isInvalidRateRange(filters: Filters): boolean {
     typeof filters.maxRate === 'number' &&
     filters.minRate > filters.maxRate
   );
+}
+
+function isInvalidPositiveInteger(value: number | ''): boolean {
+  return (
+    typeof value === 'number' && (!Number.isFinite(value) || !Number.isInteger(value) || value < 1)
+  );
+}
+
+function isInvalidNearKm(value: number | ''): boolean {
+  return isInvalidPositiveInteger(value) || (typeof value === 'number' && value > 20_000);
+}
+
+function hasInvalidNumericFilters(filters: Filters): boolean {
+  return (
+    isInvalidPositiveInteger(filters.minRate) ||
+    isInvalidPositiveInteger(filters.maxRate) ||
+    isInvalidNearKm(filters.nearKm)
+  );
+}
+
+function hasInvalidDirectoryFilters(filters: Filters): boolean {
+  return isInvalidRateRange(filters) || hasInvalidNumericFilters(filters);
 }
 
 // Native-Intl pill formatter. Within a week → "Weekday 18:30"; further out

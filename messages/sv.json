@@ -67,6 +67,23 @@
       "6": "Lör"
     }
   },
+  "publicRecovery": {
+    "notFound": {
+      "title": "Sidan hittades inte",
+      "description": "Sidan du söker finns inte.",
+      "action": "Till startsidan"
+    },
+    "routeError": {
+      "title": "Något gick fel",
+      "description": "Ett oväntat fel uppstod. Försök igen.",
+      "action": "Försök igen"
+    },
+    "globalError": {
+      "title": "Något gick fel",
+      "description": "Ett kritiskt fel uppstod. Försök igen.",
+      "action": "Försök igen"
+    }
+  },
   "landing": {
     "contactPage": {
       "eyebrow": "Support",
@@ -904,7 +921,8 @@
       "errors": {
         "tooShort": "Använd minst 8 tecken.",
         "mismatch": "Lösenorden matchar inte.",
-        "invalidToken": "Återställningslänken är ogiltig eller har gått ut. Begär en ny."
+        "invalidToken": "Återställningslänken är ogiltig eller har gått ut. Begär en ny.",
+        "generic": "Kunde inte uppdatera ditt lösenord. Försök igen."
       }
     },
     "signUp": {
@@ -2592,7 +2610,7 @@
     "fee": {
       "full": "Full avbokningsavgift",
       "partial": "Delvis avbokningsavgift",
-      "amount": "Avbokningsavgift: {fee} USD",
+      "amount": "Avbokningsavgift: {fee}",
       "none": "Ingen avbokningsavgift visas för denna tidpunkt."
     },
     "form": {
@@ -2620,11 +2638,14 @@
     "cantCancelTitle": "Bokningen kan inte avbokas här.",
     "receipt": {
       "badge": "Avbokningen är registrerad",
-      "withFee": "Avbokningsavgift: {fee} USD",
+      "withFee": "Avbokningsavgift: {fee}",
       "withoutFee": "Ingen avbokningsavgift",
       "body": "Den sparade policyn tillämpades på bokningen.",
       "browseCta": "Bläddra bland en annan trafikskola",
-      "toast": "Avbokningen är registrerad"
+      "toast": "Avbokningen är registrerad",
+      "feeRecorded": "Avbokningsavgift registrerad — se ditt kvitto.",
+      "reconciliationPending": "Avbokningen är registrerad. Betalningen håller fortfarande på att stämmas av; kontrollera igen för att försöka på nytt.",
+      "checkCancellation": "Kontrollera avbokning och återbetalning"
     }
   },
   "bookingReceipt": {
@@ -2651,7 +2672,7 @@
     "payoutStatus": "Utbetalningsstatus",
     "learnerReceipt": "Elevkvitto",
     "instructorReceipt": "Skolans kvitto",
-    "verifiedCharge": "Verifierad kassabetalning: {usd}.",
+    "verifiedCharge": "Registrerat kassabelopp: {sek}.",
     "pdfTitle": "DriveLinkUp bokningskvitto",
     "pdfNote": "Verifierad kassabetalning: {usd}. Beloppen visas i SEK.",
     "download": "Ladda ner PDF",

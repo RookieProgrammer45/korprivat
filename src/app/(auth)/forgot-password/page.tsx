@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { ForgotPasswordForm } from '@/components/custom/forgot-password-form';
+import { loginHrefWithNext, sanitizeNext } from '@/lib/auth-next';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('auth.forgotPassword');
@@ -14,8 +15,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ForgotPasswordPage() {
+export default async function ForgotPasswordPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string }>;
+}) {
   const t = await getTranslations('auth.forgotPassword');
+  const params = await searchParams;
+  const next = sanitizeNext(params.next);
 
   return (
     <AuthShell
@@ -23,7 +30,7 @@ export default async function ForgotPasswordPage() {
         <>
           {t('backLead')}{' '}
           <Link
-            href="/login"
+            href={loginHrefWithNext(next)}
             className="font-medium text-brand-600 underline-offset-2 transition-colors hover:text-brand-700 hover:underline dark:text-brand-400"
           >
             {t('backToLogin')}
@@ -37,7 +44,7 @@ export default async function ForgotPasswordPage() {
         </h1>
         <p className="text-pretty text-body text-muted-foreground">{t('subtitle')}</p>
       </div>
-      <ForgotPasswordForm />
+      <ForgotPasswordForm next={next} />
     </AuthShell>
   );
 }

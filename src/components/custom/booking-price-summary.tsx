@@ -24,14 +24,16 @@ type QuoteState = {
 
 export function BookingPriceSummary({
   instructorId,
+  slotId,
   snapshot,
 }: {
   instructorId: string;
+  slotId?: string | null;
   snapshot?: QuoteSnapshot | null;
 }) {
   const tr = useTranslations('bookingFees.learnerBreakdown');
   const locale = useLocale();
-  const [_retryNonce, setRetryNonce] = useState(0);
+  const [retryNonce, setRetryNonce] = useState(0);
   const [state, setState] = useState<QuoteState>({
     quote: null,
     loading: true,
@@ -41,6 +43,7 @@ export function BookingPriceSummary({
   const snapshotFee = snapshot?.serviceFeeSek ?? null;
   const snapshotTotal = snapshot?.grossChargedSek ?? null;
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Retry deliberately reloads the same selected-slot quote.
   useEffect(() => {
     if (snapshotPrice !== null && snapshotFee !== null && snapshotTotal !== null) {
       setState({
@@ -55,9 +58,14 @@ export function BookingPriceSummary({
       return;
     }
 
+    if (!slotId) {
+      setState({ quote: null, loading: false, error: false });
+      return;
+    }
+
     let active = true;
     setState({ quote: null, loading: true, error: false });
-    const query = new URLSearchParams({ instructorId });
+    const query = new URLSearchParams({ instructorId, slotId });
     apiFetch(`/api/booking-fees/quote?${query.toString()}`, { schema: BookingFeeQuote })
       .then((quote) => {
         if (active) setState({ quote, loading: false, error: false });
@@ -68,7 +76,11 @@ export function BookingPriceSummary({
     return () => {
       active = false;
     };
-  }, [instructorId, snapshotFee, snapshotPrice, snapshotTotal]);
+  }, [instructorId, retryNonce, slotId, snapshotFee, snapshotPrice, snapshotTotal]);
+
+  if (!slotId && snapshotPrice === null && snapshotFee === null && snapshotTotal === null) {
+    return null;
+  }
 
   if (state.loading) {
     return (

@@ -131,14 +131,14 @@ export async function getStoredLearnerState(userId: string): Promise<LearnerVeri
  * Booking / checkout eligibility — verified ACTIVE only (AGENTS.md invariant 1).
  * API routes use this; page guards use `requireActiveLearner` (redirect).
  */
-export async function resolveLearnerBookingGate(userId: string): Promise<
+export async function resolveLearnerBookingGate(
+  userId: string,
+): Promise<
   | { eligible: true; state: 'ACTIVE' }
   | { eligible: false; state: LearnerVerificationState; redirectTo: string }
 > {
   const facts = await loadLearnerVerificationFacts(userId);
-  const state = facts
-    ? resolveLearnerStateFromFacts(facts)
-    : resolveStoredLearnerState(null);
+  const state = facts ? resolveLearnerStateFromFacts(facts) : resolveStoredLearnerState(null);
 
   if (state === 'ACTIVE') {
     return { eligible: true, state };
@@ -165,7 +165,10 @@ export async function requireActiveLearner(userId: string): Promise<void> {
  * When `resumeNext` is set (e.g. return to an instructor profile after auth),
  * prefer that same-origin path so booking context is not lost to Didit.
  */
-export async function redirectLearnerAwayFromSignup(resumeNext?: string): Promise<void> {
+export async function redirectLearnerAwayFromSignup(
+  resumeNext?: string,
+  allowOptionalPhotoResume = false,
+): Promise<void> {
   const user = await getSessionUser();
   if (!user) return;
   // Unverified emails stay on /signup (Step 2 — confirm email).
@@ -180,11 +183,17 @@ export async function redirectLearnerAwayFromSignup(resumeNext?: string): Promis
   });
   if (profile?.role !== 'STUDENT') return;
 
+  const state = resolveLearnerStateFromFacts(facts);
+  // Email verification deliberately resumes the optional learner photo prompt
+  // before Didit. Once verification has begun, the state machine keeps owning
+  // the destination and an arbitrary ?step=photo cannot re-open this branch.
+  if (allowOptionalPhotoResume && state === 'SIGNED_UP') return;
+
   if (resumeNext) {
     redirect(resumeNext);
   }
 
-  const destination = stateToRoute(resolveLearnerStateFromFacts(facts));
+  const destination = stateToRoute(state);
   if (!destination.startsWith('/signup')) redirect(destination);
 }
 

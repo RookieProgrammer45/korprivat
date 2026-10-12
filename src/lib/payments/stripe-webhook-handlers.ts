@@ -2,11 +2,11 @@
 // Keep each handler idempotent against booking / connect state.
 
 import 'server-only';
+import type Stripe from 'stripe';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { notificationEmail } from '@/lib/email/templates';
 import { OWNER_EMAIL } from '@/lib/ownership';
-import type Stripe from 'stripe';
 
 function alertRecipient(): string {
   return (
@@ -61,9 +61,7 @@ export async function handleChargeDisputeCreated(dispute: Stripe.Dispute): Promi
   const metaBookingId = dispute.metadata?.bookingId;
   const target =
     booking ??
-    (metaBookingId
-      ? await prisma.booking.findUnique({ where: { id: metaBookingId } })
-      : null);
+    (metaBookingId ? await prisma.booking.findUnique({ where: { id: metaBookingId } }) : null);
 
   if (!target) {
     await alertOps('Stripe dispute with unmatched booking', [
@@ -77,7 +75,9 @@ export async function handleChargeDisputeCreated(dispute: Stripe.Dispute): Promi
   await prisma.booking.updateMany({
     where: {
       id: target.id,
-      paymentStatus: { in: ['held_escrow', 'awaiting_buyer_confirmation', 'release_ready', 'released'] },
+      paymentStatus: {
+        in: ['held_escrow', 'awaiting_buyer_confirmation', 'release_ready', 'released'],
+      },
     },
     data: {
       paymentStatus: 'disputed',
@@ -101,18 +101,24 @@ export async function handleChargeRefunded(charge: Stripe.Charge): Promise<void>
     return;
   }
   const now = new Date();
+  // Refund events also describe partial refunds. Cancelled bookings keep their
+  // terminal policy outcome even when Stripe refunds some or all of the charge.
+  await prisma.booking.updateMany({
+    where: {
+      id: bookingId,
+      paymentStatus: {
+        in: ['cancelled_early', 'cancelled_full_refund', 'cancelled_partial', 'cancelled_late'],
+      },
+      refundedAt: null,
+    },
+    data: { refundedAt: now },
+  });
+  if (!charge.refunded) return;
   const updated = await prisma.booking.updateMany({
     where: {
       id: bookingId,
       paymentStatus: {
-        in: [
-          'held_escrow',
-          'awaiting_buyer_confirmation',
-          'cancelled_full_refund',
-          'cancelled_partial',
-          'cancelled_late',
-          'disputed',
-        ],
+        in: ['held_escrow', 'awaiting_buyer_confirmation', 'disputed'],
       },
       refundedAt: null,
     },

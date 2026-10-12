@@ -1,10 +1,19 @@
 // <html>/<body> with inline styles (theme/providers unavailable). This file sits
 // outside the i18n <I18nProvider/> because the layout it replaces is the one
-// that would have wrapped next-intl's context — so we hard-code <html lang="sv">
-// (DrivelinkUp's install-default locale; crawlers and cookieless visitors see
-// this fallback) instead of trying to read the cookie.
+// that would have wrapped next-intl's context. It uses only the browser-visible,
+// validated locale cookie with Swedish as its server-safe fallback.
 
 'use client';
+
+import { useSyncExternalStore } from 'react';
+import { defaultLocale } from '@/i18n/config';
+import {
+  documentLocaleAttributes,
+  globalErrorFallback,
+  publicLocaleFromCookie,
+} from '@/lib/public-locale';
+
+const subscribeToNothing = () => () => undefined;
 
 export default function GlobalError({
   reset,
@@ -12,8 +21,16 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const locale = useSyncExternalStore(
+    subscribeToNothing,
+    () => publicLocaleFromCookie(document.cookie),
+    () => defaultLocale,
+  );
+  const { lang, dir } = documentLocaleAttributes(locale);
+  const text = globalErrorFallback[locale];
+
   return (
-    <html lang="sv">
+    <html lang={lang} dir={dir}>
       <body
         style={{
           display: 'flex',
@@ -27,8 +44,8 @@ export default function GlobalError({
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 600 }}>Something went wrong</h1>
-        <p style={{ color: '#666' }}>A critical error occurred. Please try again.</p>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 600 }}>{text.title}</h1>
+        <p style={{ color: '#666' }}>{text.description}</p>
         <button
           type="button"
           onClick={() => reset()}
@@ -39,7 +56,7 @@ export default function GlobalError({
             cursor: 'pointer',
           }}
         >
-          Try again
+          {text.action}
         </button>
       </body>
     </html>

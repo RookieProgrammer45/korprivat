@@ -14,7 +14,7 @@ const ReceiptBase = z.object({
   category: z.string(),
   scheduledAt: z.string().datetime(),
   durationMinutes: z.number().int().positive(),
-  verifiedAmountUsd: z.number().int().nonnegative(),
+  verifiedAmountSek: z.number().int().nonnegative(),
   paymentStatus: z.string(),
   emailDeliveryStatus: ReceiptEmailDeliveryStatusEnum.nullable(),
   issuedAt: z.string().datetime(),

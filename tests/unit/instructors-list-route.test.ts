@@ -201,6 +201,10 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     };
     expect(body.items.every((i) => i.nextSlotAt === null)).toBe(true);
     expect(body.cities).toEqual(['Göteborg', 'Stockholm']);
+    expect(mockLicenseFindMany.mock.calls[0]?.[0].where).toMatchObject({
+      status: 'VERIFIED',
+      OR: [{ expiresAt: null }, { expiresAt: { gt: expect.any(Date) } }],
+    });
   });
 
   it('returns safe profile facts with coarse verification and review aggregates', async () => {
@@ -383,9 +387,11 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: Array<{ id: string }> };
     expect(body.items.map((item) => item.id)).toEqual([instructorId]);
-    expect(mockInstructorFindMany.mock.calls[0]?.[0]?.where
-      ? hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0][0].where)
-      : undefined).toEqual({ lte: 550 });
+    expect(
+      mockInstructorFindMany.mock.calls[0]?.[0]?.where
+        ? hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0][0].where)
+        : undefined,
+    ).toEqual({ lte: 550 });
   });
 
   it('returns zero items when no valid review meets the rating threshold', async () => {
@@ -398,7 +404,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: unknown[]; cities: string[] };
     expect(body.items).toEqual([]);
-    expect(body.cities).toEqual(['Stockholm']);
+    expect(body.cities).toEqual([]);
   });
 
   it('rejects a minimum hourly rate above the maximum with the standard error envelope', async () => {

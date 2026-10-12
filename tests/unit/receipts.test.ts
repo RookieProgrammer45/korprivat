@@ -103,7 +103,7 @@ describe('paid cancellation receipt repair', () => {
       booking,
       instructor,
       paymentStatus: 'cancelled_partial',
-      verifiedAmountUsd: 99,
+      verifiedAmountSek: 630,
     });
 
     expect(prismaMock.bookingReceipt.upsert).toHaveBeenCalledTimes(2);
@@ -147,10 +147,12 @@ describe('paid cancellation receipt repair', () => {
 
   it('does not manufacture a receipt for an unpaid cancellation', async () => {
     await repairPaidCancellationReceipts({
-      booking: { ...booking, paymentStatus: 'pending', heldAt: null },
+      // A payout amount is frozen at booking creation, before any capture.
+      // It must never be treated as proof that the learner paid.
+      booking: { ...booking, paymentStatus: 'pending', heldAt: null, payoutAmountSek: 570 },
       instructor,
       paymentStatus: 'cancelled_full_refund',
-      verifiedAmountUsd: 1,
+      verifiedAmountSek: 630,
     });
 
     expect(prismaMock.bookingReceipt.upsert).not.toHaveBeenCalled();
@@ -167,7 +169,7 @@ describe('paid cancellation receipt repair', () => {
       booking,
       instructor,
       paymentStatus: 'cancelled_late',
-      verifiedAmountUsd: 1,
+      verifiedAmountSek: 630,
     });
 
     expect(prismaMock.bookingReceipt.updateMany).toHaveBeenNthCalledWith(1, {
@@ -193,7 +195,7 @@ describe('receipt contract and copy', () => {
       category: 'B',
       scheduledAt: '2026-08-30T10:00:00.000Z',
       durationMinutes: 60,
-      verifiedAmountUsd: 55,
+      verifiedAmountSek: 578,
       paymentStatus: 'held_escrow',
       emailDeliveryStatus: null,
       issuedAt: '2026-08-30T10:00:00.000Z',

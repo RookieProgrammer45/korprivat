@@ -13,7 +13,7 @@ export function MessageComposer({
   onSent,
 }: {
   conversationId: string;
-  onSent: (message: ConversationMessage) => void;
+  onSent: (conversationId: string, message: ConversationMessage) => void;
 }) {
   const t = useTranslations('messaging');
   const [body, setBody] = useState('');
@@ -38,7 +38,7 @@ export function MessageComposer({
         setBlockedCategories(result.categories);
         return;
       }
-      onSent(result.message);
+      onSent(conversationId, result.message);
       setBody('');
     } catch {
       toast.error(t('sendError'));

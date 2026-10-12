@@ -36,13 +36,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import {
-  localDateTimeToUtcIso,
-  SWEDISH_TIMEZONE,
-  utcToLocalDateTimeInput,
-} from '@/lib/business/provider-timezone';
+import { localDateTimeToUtcIso, utcToLocalDateTimeInput } from '@/lib/business/provider-timezone';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import { cn } from '@/lib/utils';
+import { availabilityTimezone } from './availability-timezone';
 
 type Slot = AvailabilitySlotList['items'][number];
 
@@ -103,7 +100,7 @@ export function AvailabilityEditor() {
   const [editingSlotId, setEditingSlotId] = useState<string | null>(null);
   const [busySingle, setBusySingle] = useState(false);
   const [busyBulk, setBusyBulk] = useState(false);
-  const [providerTimezone, setProviderTimezone] = useState(SWEDISH_TIMEZONE);
+  const [providerTimezone, setProviderTimezone] = useState<string | null>(null);
 
   const today = useMemo(() => new Date(), []);
   const defaultStartDate = useMemo(() => nextMondayIso(today), [today]);
@@ -131,7 +128,7 @@ export function AvailabilityEditor() {
     const data = await apiFetch('/api/instructor-availability', {
       schema: AvailabilitySlotList,
     });
-    if (data.items[0]?.timezone) setProviderTimezone(data.items[0].timezone);
+    setProviderTimezone(availabilityTimezone(data) ?? null);
     setState({ kind: 'ready', items: data.items });
     return data.items;
   }, []);
@@ -168,6 +165,10 @@ export function AvailabilityEditor() {
   const onSingleSubmit = singleForm.handleSubmit(async (values) => {
     if (!values.startsAt || !values.endsAt) {
       toast.error(tDash('invalidDate'));
+      return;
+    }
+    if (!providerTimezone) {
+      toast.error(tDash('submitError'));
       return;
     }
     const startsIso = localDateTimeToUtcIso(values.startsAt, providerTimezone);
@@ -218,6 +219,10 @@ export function AvailabilityEditor() {
 
   const saveEdit = editForm.handleSubmit(async (values) => {
     if (!editingSlotId) return;
+    if (!providerTimezone) {
+      toast.error(tDash('submitError'));
+      return;
+    }
     const startsIso = localDateTimeToUtcIso(values.startsAt, providerTimezone);
     const endsIso = localDateTimeToUtcIso(values.endsAt, providerTimezone);
     if (!startsIso || !endsIso) {
@@ -462,7 +467,7 @@ export function AvailabilityEditor() {
               />
               <Button
                 type="submit"
-                disabled={busySingle}
+                disabled={busySingle || !providerTimezone}
                 className="sm:col-span-2"
                 variant="secondary"
               >

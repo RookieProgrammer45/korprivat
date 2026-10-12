@@ -29,6 +29,7 @@ import {
 } from './_setup/prisma-mock';
 
 vi.mock('server-only', () => ({}));
+vi.mock('@/lib/orgs/public', () => ({ getActiveAffiliationForUser: async () => null }));
 vi.mock('next/headers', () => ({
   headers: async () => new Headers(),
 }));
@@ -42,6 +43,10 @@ import { BookingList } from '@/lib/contracts/auth';
 import { BookingCreated } from '@/lib/contracts/bookings';
 import { authMock } from './_setup/auth-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
+
+function verifiedInstructor(overrides: Parameters<typeof instructorRow>[0] = {}) {
+  return instructorRow({ userId: 'verified-provider-user', ...overrides });
+}
 
 const VALID_BODY = {
   studentName: 'Test Learner',
@@ -83,6 +88,7 @@ function stubOpenSlot(slotId = 'slot_1'): void {
   prismaMock.availabilitySlot.findFirst.mockResolvedValueOnce({
     id: slotId,
     startsAt: new Date('2030-08-10T14:30:00.000Z'),
+    durationMinutes: 60,
   });
 }
 
@@ -110,6 +116,10 @@ beforeEach(() => {
   resetPrisma();
   resetEmailMock();
   authMock.reset();
+  prismaMock.instructorLicense.findFirst.mockResolvedValue({
+    id: 'verified-licence',
+    status: 'VERIFIED',
+  });
 });
 
 afterEach(() => {
@@ -169,7 +179,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
 
   it('persists a row + sends BOTH emails when signed-in ACTIVE learner (201)', async () => {
     signInEligibleLearner(25);
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(verifiedInstructor());
     stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_1',
@@ -206,7 +216,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
   it("400 + zero emails when category is not on the instructor's list", async () => {
     signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
-      instructorRow({ categories: ['A2', 'BE'] }),
+      verifiedInstructor({ categories: ['A2', 'BE'] }),
     );
 
     const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
@@ -227,7 +237,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
 
   it('201 + only student email when instructor has no email', async () => {
     signInEligibleLearner();
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow({ email: null }));
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(verifiedInstructor({ email: null }));
     stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_no_instr',
@@ -242,7 +252,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
 
   it('409 + no email when instant slot reservation loses the race', async () => {
     signInEligibleLearner();
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(verifiedInstructor());
     stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({ id: 'booking_race' });
     prismaMock.availabilitySlot.updateMany.mockResolvedValueOnce({ count: 0 });
@@ -257,7 +267,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
   it('409 + no row when request mode already has an active request for the slot', async () => {
     signInEligibleLearner();
     prismaMock.instructor.findUnique.mockResolvedValueOnce(
-      instructorRow({ bookingMode: 'request' }),
+      verifiedInstructor({ bookingMode: 'request' }),
     );
     stubOpenSlot();
     prismaMock.booking.findFirst.mockResolvedValueOnce({ id: 'existing_request' });
@@ -286,7 +296,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
 
   it('still returns 201 when instructor email fails to send', async () => {
     signInEligibleLearner();
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(verifiedInstructor());
     stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_partial',
@@ -307,7 +317,9 @@ describe('GET /api/bookings/[id]', () => {
     prismaMock.booking.findUnique.mockResolvedValueOnce(
       bookingRow({ id: 'booking_1', studentEmail: 'learner@example.test' }),
     );
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow({ hourlyRateSek: 550 }));
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(
+      verifiedInstructor({ hourlyRateSek: 550 }),
+    );
 
     const res = await bookingDetailGET(learnerReadReq('http://localhost/api/bookings/booking_1'), {
       params: Promise.resolve({ id: 'booking_1' }),
@@ -345,7 +357,7 @@ describe('GET /api/bookings/[id]', () => {
 
   it('rejects a booking id without the learner token', async () => {
     prismaMock.booking.findUnique.mockResolvedValueOnce(bookingRow({ id: 'private_booking' }));
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(verifiedInstructor());
 
     const res = await bookingDetailGET(
       learnerReadReq('http://localhost/api/bookings/private_booking', 'wrong-token'),
@@ -358,7 +370,7 @@ describe('GET /api/bookings/[id]', () => {
 describe('post-create dashboard read (signed-in booking joins by user id)', () => {
   it('the signed-in owner sees the booking on /api/bookings/me', async () => {
     signInEligibleLearner();
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(verifiedInstructor());
     stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_join',
@@ -405,7 +417,7 @@ describe('post-create dashboard read (signed-in booking joins by user id)', () =
       role: 'user',
     });
     stubEligibleProfile(25);
-    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(verifiedInstructor());
     stubOpenSlot();
     prismaMock.booking.create.mockResolvedValueOnce({
       id: 'booking_case',

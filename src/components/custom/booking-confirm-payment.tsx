@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -35,7 +34,7 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
   const locale = useLocale();
   const [status, setStatus] = useState<Status>({ kind: 'loading' });
   const [paymentPollError, setPaymentPollError] = useState(false);
-  const [_paymentPollRetryNonce, setPaymentPollRetryNonce] = useState(0);
+  const [paymentPollRetryNonce, setPaymentPollRetryNonce] = useState(0);
 
   useEffect(() => {
     let active = true;
@@ -97,6 +96,7 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
       ? status.booking.id
       : null;
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Retry deliberately starts a new polling sequence for the unchanged pending booking.
   useEffect(() => {
     if (!pendingBookingId) return;
     let active = true;
@@ -135,7 +135,7 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
       active = false;
       if (timer) clearTimeout(timer);
     };
-  }, [pendingBookingId, token]);
+  }, [paymentPollRetryNonce, pendingBookingId, token]);
 
   if (status.kind === 'loading') {
     return (

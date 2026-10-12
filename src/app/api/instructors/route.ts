@@ -208,7 +208,7 @@ export async function GET(req: NextRequest) {
     ),
   );
 
-  const cities = Array.from(new Set(canonicalRows.map((r) => r.city))).sort();
+  const cities = Array.from(new Set(filteredRows.map(({ row }) => row.city))).sort();
 
   // We DO return the `englishSpeaking` flag on each row — the directory island
   // surfaces it in the filter toggle (and could surface it as a badge later).
@@ -242,9 +242,12 @@ export async function POST(req: Request) {
 
   const license = await prisma.instructorLicense.findUnique({
     where: { userId: user.id },
-    select: { status: true },
+    select: { status: true, expiresAt: true },
   });
-  if (license?.status !== 'VERIFIED') {
+  if (
+    license?.status !== 'VERIFIED' ||
+    (license.expiresAt != null && license.expiresAt.getTime() <= Date.now())
+  ) {
     return NextResponse.json(
       {
         errors: {

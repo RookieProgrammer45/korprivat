@@ -16,6 +16,37 @@ export function isMarketplaceSchoolRole(providerRole: string | null | undefined)
   return providerRole !== 'HANDLEDARE';
 }
 
+/**
+ * Per-provider public profile, availability, and booking eligibility.
+ *
+ * This is deliberately a targeted licence lookup rather than reusing the
+ * directory's all-verified-users predicate: callers already have the provider
+ * row and must re-check its current verification state at the public boundary.
+ */
+export async function isPublicBookableProvider(provider: {
+  userId: string | null;
+  categories: readonly string[];
+  providerRole?: string | null;
+}): Promise<boolean> {
+  if (
+    !provider.userId ||
+    !isProviderActivated(provider.categories) ||
+    !isMarketplaceSchoolRole(provider.providerRole)
+  ) {
+    return false;
+  }
+
+  const verifiedLicence = await prisma.instructorLicense.findFirst({
+    where: {
+      userId: provider.userId,
+      status: 'VERIFIED',
+      OR: [{ expiresAt: null }, { expiresAt: { gt: new Date() } }],
+    },
+    select: { id: true },
+  });
+  return verifiedLicence !== null;
+}
+
 /** Category + role filter only (no licence). Prefer buildVerifiedProviderActivationWhere. */
 export function buildProviderActivationWhere(): Prisma.InstructorWhereInput {
   return {
@@ -34,7 +65,7 @@ export function buildProviderActivationWhere(): Prisma.InstructorWhereInput {
  */
 export async function buildVerifiedProviderActivationWhere(): Promise<Prisma.InstructorWhereInput> {
   const verified = await prisma.instructorLicense.findMany({
-    where: { status: 'VERIFIED' },
+    where: { status: 'VERIFIED', OR: [{ expiresAt: null }, { expiresAt: { gt: new Date() } }] },
     select: { userId: true },
   });
   const verifiedUserIds = verified.map((r) => r.userId);
@@ -44,9 +75,7 @@ export async function buildVerifiedProviderActivationWhere(): Promise<Prisma.Ins
       {
         OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
       },
-      verifiedUserIds.length > 0
-        ? { userId: { in: verifiedUserIds } }
-        : { id: { in: [] } },
+      verifiedUserIds.length > 0 ? { userId: { in: verifiedUserIds } } : { id: { in: [] } },
     ],
   };
 }

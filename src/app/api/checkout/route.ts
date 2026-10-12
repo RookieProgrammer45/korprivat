@@ -15,11 +15,15 @@ import {
   BookingPaymentStatusEnum,
 } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
+import { validateBookingCheckoutAmount } from '@/lib/payments/checkout-amount';
 import {
   CheckoutConfigurationError,
+  CheckoutRecoveryError,
+  CheckoutUnavailableError,
   createBookingCheckoutSession,
 } from '@/lib/payments/create-booking-checkout';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
+import { reconcileCancelledCheckoutCapture } from '@/lib/payments/refunds';
 import { getStripe } from '@/lib/payments/stripe';
 import { getSessionUser, requireAuth } from '@/lib/require-auth';
 
@@ -64,7 +68,15 @@ export async function GET(req: Request) {
     where: {
       OR: [{ stripeSessionId: sessionId }, { stripeCheckoutSessionId: sessionId }],
     },
-    select: { paidAt: true, paymentStatus: true, id: true },
+    select: {
+      paidAt: true,
+      heldAt: true,
+      paymentStatus: true,
+      cancellationOutcome: true,
+      cancellationPolicyTier: true,
+      grossChargedSek: true,
+      id: true,
+    },
   });
 
   if (!booking) {
@@ -82,16 +94,43 @@ export async function GET(req: Request) {
   if (!alreadyPaid) {
     try {
       const session = await getStripe().checkout.sessions.retrieve(sessionId);
-      const stripePaid = session.payment_status === 'paid' || session.status === 'complete';
+      const amount = validateBookingCheckoutAmount({
+        currency: session.currency,
+        amountTotal: session.amount_total,
+        grossChargedSek: booking.grossChargedSek,
+      });
+      const stripePaid = session.payment_status === 'paid' && amount.ok;
       if (stripePaid) {
-        await markBookingPaidFromCheckout({
+        const marked = await markBookingPaidFromCheckout({
           bookingId: booking.id,
           stripeSessionId: sessionId,
           preserveLearnerToken: true,
         });
+        if (marked.kind === 'cancelled') {
+          const reconciliation = await reconcileCancelledCheckoutCapture({
+            bookingId: marked.booking.id,
+            sessionId,
+            cancellationOutcome: marked.booking.cancellationOutcome ?? marked.booking.paymentStatus,
+            cancellationPolicyTier: marked.booking.cancellationPolicyTier,
+            grossChargedSek: marked.booking.grossChargedSek,
+            forceFullRefund: marked.booking.paidAt == null && marked.booking.heldAt == null,
+            session,
+          });
+          if (reconciliation.kind === 'error') {
+            console.error('[checkout GET] cancelled capture reconciliation failed', reconciliation);
+          }
+        }
         booking = await prisma.booking.findUnique({
           where: { id: booking.id },
-          select: { paidAt: true, paymentStatus: true, id: true },
+          select: {
+            paidAt: true,
+            heldAt: true,
+            paymentStatus: true,
+            cancellationOutcome: true,
+            cancellationPolicyTier: true,
+            grossChargedSek: true,
+            id: true,
+          },
         });
         if (!booking) {
           return NextResponse.json({ verified: false, paymentStatus: null }, { status: 200 });
@@ -210,6 +249,15 @@ export async function POST(req: Request) {
   } catch (error) {
     if (error instanceof CheckoutConfigurationError) {
       return NextResponse.json({ errors: { payments: 'not_enabled' } }, { status: 403 });
+    }
+    if (error instanceof CheckoutUnavailableError) {
+      return NextResponse.json({ errors: { payments: 'booking_not_payable' } }, { status: 409 });
+    }
+    if (error instanceof CheckoutRecoveryError) {
+      return NextResponse.json(
+        { errors: { payments: 'checkout_recovery_required' } },
+        { status: 503 },
+      );
     }
     console.error('[checkout] create failed', error);
     return NextResponse.json({ errors: { payments: 'unknown' } }, { status: 500 });

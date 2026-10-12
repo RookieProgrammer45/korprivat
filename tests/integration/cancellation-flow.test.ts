@@ -68,6 +68,9 @@ function heldBooking(overrides: Partial<Parameters<typeof bookingRow>[0]> = {}) 
     paymentStatus: 'held_escrow',
     heldAt: new Date(Date.now() - 60 * 60 * 1000),
     preferredAt: FAR_FUTURE,
+    priceAmountSek: 550,
+    serviceFeeSek: 0,
+    grossChargedSek: 550,
     ...overrides,
   });
 }
@@ -184,9 +187,9 @@ describe('POST /api/bookings/[id]/cancel — guards', () => {
       { params: Promise.resolve({ id: 'booking_cancel' }) },
     );
     expect(res.status).toBe(200);
-    const body = (await res.json()) as { cancellationOutcome: string; feeAmountUsd: number | null };
+    const body = (await res.json()) as { cancellationOutcome: string; feeAmountSek: number };
     expect(body.cancellationOutcome).toBe('cancelled_early');
-    expect(body.feeAmountUsd).toBeNull();
+    expect(body.feeAmountSek).toBe(0);
     expect(prismaMock.$transaction).not.toHaveBeenCalled();
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
@@ -216,11 +219,11 @@ describe('POST /api/bookings/[id]/cancel — early window', () => {
     const body = (await res.json()) as {
       paymentStatus: string;
       cancellationOutcome: string;
-      feeAmountUsd: number | null;
+      feeAmountSek: number;
     };
     expect(body.paymentStatus).toBe('cancelled_full_refund');
     expect(body.cancellationOutcome).toBe('cancelled_full_refund');
-    expect(body.feeAmountUsd).toBeNull();
+    expect(body.feeAmountSek).toBe(0);
 
     // Late path: NO lateCancellationFee.create() at all.
     expect(prismaMock.lateCancellationFee.create).not.toHaveBeenCalled();
@@ -326,11 +329,11 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
     const body = (await res.json()) as {
       paymentStatus: string;
       cancellationOutcome: string;
-      feeAmountUsd: number | null;
+      feeAmountSek: number;
     };
     expect(body.paymentStatus).toBe('cancelled_late');
     expect(body.cancellationOutcome).toBe('cancelled_late');
-    expect(body.feeAmountUsd).not.toBeNull();
+    expect(body.feeAmountSek).toBe(550);
 
     // Fee row is inserted only after the booking claim.
     expect(prismaMock.lateCancellationFee.create).toHaveBeenCalledOnce();
@@ -338,7 +341,9 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
     const feeCreateOrder = prismaMock.lateCancellationFee.create.mock.invocationCallOrder[0];
     expect(bookingClaimOrder).toBeDefined();
     expect(feeCreateOrder).toBeDefined();
-    expect(bookingClaimOrder!).toBeLessThan(feeCreateOrder!);
+    if (bookingClaimOrder === undefined || feeCreateOrder === undefined)
+      throw new Error('Missing ordered mutation');
+    expect(bookingClaimOrder).toBeLessThan(feeCreateOrder);
     const feeCreateArgs = mockCallArg<{
       data: {
         bookingId: string;
@@ -349,6 +354,7 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
       };
     }>(prismaMock.lateCancellationFee.create);
     expect(feeCreateArgs.data.bookingId).toBe('booking_cancel');
+    expect(feeCreateArgs.data.amountUsd).toBe(52);
     expect(feeCreateArgs.data.feePercentApplied).toBeGreaterThan(0);
     expect(feeCreateArgs.data.windowHoursAtCancel).toBeGreaterThanOrEqual(0);
     expect(feeCreateArgs.data.status).toBe('recorded');
@@ -359,9 +365,7 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
         where: expect.objectContaining({
           id: 'booking_cancel',
           cancellationOutcome: null,
-          paymentStatus: {
-            in: ['unpaid', 'pending', 'paid', 'held_escrow', 'awaiting_approval'],
-          },
+          paymentStatus: 'held_escrow',
         }),
         data: expect.objectContaining({
           paymentStatus: 'cancelled_late',

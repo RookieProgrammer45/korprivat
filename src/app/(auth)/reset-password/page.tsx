@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { ResetPasswordForm } from '@/components/custom/reset-password-form';
+import { forgotPasswordHrefWithNext, sanitizeNext } from '@/lib/auth-next';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('auth.resetPassword');
@@ -17,10 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ResetPasswordPage({
   searchParams,
 }: {
-  searchParams: Promise<{ token?: string; error?: string }>;
+  searchParams: Promise<{ token?: string; error?: string; next?: string }>;
 }) {
   const t = await getTranslations('auth.resetPassword');
   const params = await searchParams;
+  const next = sanitizeNext(params.next);
   const token =
     typeof params.token === 'string' && /^[A-Za-z0-9_-]{8,128}$/.test(params.token)
       ? params.token
@@ -31,7 +33,7 @@ export default async function ResetPasswordPage({
       <AuthShell
         footer={
           <Link
-            href="/forgot-password"
+            href={forgotPasswordHrefWithNext(next)}
             className="font-medium text-brand-600 underline-offset-2 hover:underline dark:text-brand-400"
           >
             {t('requestAgain')}
@@ -56,7 +58,7 @@ export default async function ResetPasswordPage({
         </h1>
         <p className="text-pretty text-body text-muted-foreground">{t('subtitle')}</p>
       </div>
-      <ResetPasswordForm token={token} />
+      <ResetPasswordForm token={token} next={next} />
     </AuthShell>
   );
 }
