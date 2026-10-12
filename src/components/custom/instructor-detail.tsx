@@ -107,14 +107,23 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
     <Card className="surface-card instructor-detail-card min-w-0 overflow-hidden border-brand-500/25 bg-card shadow-md">
       <CardContent className="grid min-w-0 gap-7 p-6 sm:p-8 md:grid-cols-[180px_minmax(0,1fr)] md:gap-9">
         <div className="instructor-detail-photo flex min-w-0 items-start justify-center">
-          <Image
-            src={instructor.photoUrl}
-            alt={tr('portraitAlt', { name: instructor.name })}
-            width={180}
-            height={180}
-            unoptimized
-            className="size-[180px] max-w-full rounded-xl border border-brand-500/25 bg-brand-100 object-cover shadow-sm dark:bg-brand-900"
-          />
+          {instructor.photoUrl ? (
+            <Image
+              src={instructor.photoUrl}
+              alt={tr('portraitAlt', { name: instructor.name })}
+              width={180}
+              height={180}
+              unoptimized
+              className="size-[180px] max-w-full rounded-xl border border-brand-500/25 bg-brand-100 object-cover shadow-sm dark:bg-brand-900"
+            />
+          ) : (
+            <div
+              aria-hidden
+              className="flex size-[180px] max-w-full items-center justify-center rounded-xl border border-brand-500/25 bg-brand-100 font-display text-4xl font-semibold text-brand-700 shadow-sm dark:bg-brand-900 dark:text-brand-300"
+            >
+              {instructor.name.slice(0, 1).toUpperCase()}
+            </div>
+          )}
         </div>
 
         <div className="flex min-w-0 flex-col gap-5">

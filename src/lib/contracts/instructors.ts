@@ -91,6 +91,13 @@ export const InstructorItem = z.object({
   // always-instant flow.
   bookingMode: InstructorBookingModeEnum.nullable(),
   providerRole: ProviderRoleEnum,
+  // Raw marketplace kind (SCHOOL | INSTRUCTOR | HANDLEDARE) alongside the
+  // collapsed `providerRole`. Additive, but it MUST be declared here: zod
+  // strips unknown keys by default, so a field computed in
+  // toPublicInstructor never survives the InstructorItem / InstructorList
+  // parses and never reaches the client (list + detail both parse through
+  // this contract).
+  providerType: z.enum(['SCHOOL', 'INSTRUCTOR', 'HANDLEDARE']),
   affiliation: z
     .object({
       name: z.string().min(1),
