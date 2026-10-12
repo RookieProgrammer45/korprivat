@@ -210,7 +210,7 @@ export function BookingReceipt({ bookingId, token }: { bookingId: string; token?
 
           <p className="receipt-verified-charge border-t pt-4 text-small">
             {t('verifiedCharge', {
-              usd: formatUsd(receipt.verifiedAmountUsd, locale),
+              sek: formatSek(receipt.verifiedAmountSek, locale),
             })}
           </p>
         </CardContent>
@@ -378,14 +378,6 @@ function formatSek(amount: number, locale: string): string {
   return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
     style: 'currency',
     currency: 'SEK',
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
-function formatUsd(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
-    style: 'currency',
-    currency: 'USD',
     maximumFractionDigits: 0,
   }).format(amount);
 }

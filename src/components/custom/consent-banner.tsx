@@ -26,7 +26,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { apiFetch } from '@/lib/api-client';
-import type { ConsentDecisionScope } from '@/lib/contracts/consent';
+import { ConsentDecisionScope, ConsentState } from '@/lib/contracts/consent';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/privacy';
 
 const STORAGE_KEY = 'consent_v1';
@@ -42,14 +42,14 @@ function readStored(): Stored | null {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
+    const scope = ConsentDecisionScope.safeParse(parsed?.scope);
     if (
       parsed &&
       typeof parsed === 'object' &&
       typeof parsed.policyVersion === 'string' &&
-      parsed.scope &&
-      parsed.scope.essential === true
+      scope.success
     ) {
-      return parsed as Stored;
+      return { policyVersion: parsed.policyVersion, scope: scope.data };
     }
     return null;
   } catch {
@@ -93,13 +93,39 @@ export function ConsentBanner() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    let current = true;
     setMounted(true);
     const stored = readStored();
     if (stored?.policyVersion === PRIVACY_POLICY_VERSION) {
       setDecided(true);
-      return;
+      return () => {
+        current = false;
+      };
     }
-    setDecided(false);
+
+    // Start hidden and resolve the HTTP-only cookie before showing the prompt.
+    // This avoids flashing the banner for a returning visitor whose localStorage
+    // mirror was cleared or blocked.
+    void apiFetch('/api/consent', {
+      method: 'GET',
+      schema: ConsentState.nullable(),
+    })
+      .then((state) => {
+        if (current) {
+          setDecided(state?.policyVersion === PRIVACY_POLICY_VERSION);
+        }
+      })
+      .catch(() => {
+        if (current) {
+          // A network or malformed-response failure is not consent. Keep the
+          // banner available so the visitor can make a decision.
+          setDecided(false);
+        }
+      });
+
+    return () => {
+      current = false;
+    };
   }, []);
 
   const submit = useCallback(

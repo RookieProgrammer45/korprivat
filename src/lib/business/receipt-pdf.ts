@@ -130,7 +130,7 @@ const PDF_COPY = {
     grossPaid: 'Learner-paid gross total (SEK)',
     commission: 'School commission (SEK)',
     reconciliation: 'Net payout = school price − attributable school commission after completion.',
-    note: (usd: string) => `Verified checkout charge: ${usd}. Amounts are shown in SEK.`,
+    note: (sek: string) => `Recorded checkout total: ${sek}. Amounts are shown in SEK.`,
   },
   sv: {
     title: 'DriveLinkUp bokningskvitto',
@@ -142,7 +142,7 @@ const PDF_COPY = {
     commission: 'Skolprovision (SEK)',
     reconciliation:
       'Nettoutbetalning = skolans pris − hänförlig skolprovision efter genomförd tjänst.',
-    note: (usd: string) => `Verifierad kassabetalning: ${usd}. Beloppen visas i SEK.`,
+    note: (sek: string) => `Registrerat kassabelopp: ${sek}. Beloppen visas i SEK.`,
   },
 } as const;
 
@@ -154,11 +154,12 @@ export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec 
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
   }).format(receipt.scheduledAt);
-  const formattedUsd = new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
-    style: 'currency',
-    currency: 'USD',
+  // The legacy verifiedAmountUsd column is an approximate conversion, not
+  // a second currency charged by Checkout. Keep the PDF and JSON on the same
+  // immutable SEK snapshot, including historical receipts.
+  const formattedSek = `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
     maximumFractionDigits: 0,
-  }).format(receipt.verifiedAmountUsd);
+  }).format(receipt.grossChargedSek)} SEK`;
   const lineItems =
     receipt.recipientRole === 'learner'
       ? [
@@ -211,8 +212,8 @@ export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec 
       (receipt.recipientRole === 'learner' ? receipt.grossChargedSek : receipt.netPayoutSek) * 100,
     notes:
       receipt.recipientRole === 'instructor'
-        ? `${copy.note(formattedUsd)} ${copy.reconciliation}`
-        : copy.note(formattedUsd),
+        ? `${copy.note(formattedSek)} ${copy.reconciliation}`
+        : copy.note(formattedSek),
     footer: 'DriveLinkUp',
   };
 }

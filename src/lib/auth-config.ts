@@ -2,6 +2,7 @@
 // Framework owns db/secret/baseURL/admin() + the owner-admin grant (no-op if set here).
 
 import type { BetterAuthOptions } from 'better-auth';
+import { recoveryNextFromCallbackURL, resetPasswordHrefWithNext } from '@/lib/auth-next';
 import { prisma } from '@/lib/db';
 import { resetPasswordEmail } from '@/lib/email/reset-password';
 import { sendEmail } from '@/lib/email/send';
@@ -26,10 +27,15 @@ export const authConfig: BetterAuthOptions = {
     requireEmailVerification: false,
     // Force re-auth everywhere after a successful reset (stolen-session hygiene).
     revokeSessionsOnPasswordReset: true,
-    sendResetPassword: async ({ user, token }) => {
+    sendResetPassword: async ({ user, token, url }) => {
       // Branded page (same pattern as verify-email). Token is validated on POST
-      // /api/auth/reset-password — see better-auth email-password docs.
-      const resetUrl = `${siteUrl}/reset-password?token=${encodeURIComponent(token)}`;
+      // /api/auth/reset-password — see better-auth email-password docs. Better
+      // Auth carries redirectTo as callbackURL in `url`; retain only a checked
+      // same-origin /reset-password?next=… callback in the email link.
+      const callbackURL = new URL(url).searchParams.get('callbackURL');
+      const next = recoveryNextFromCallbackURL(callbackURL, siteUrl);
+      const resetHref = resetPasswordHrefWithNext(next);
+      const resetUrl = `${siteUrl}${resetHref}${resetHref.includes('?') ? '&' : '?'}token=${encodeURIComponent(token)}`;
       await sendEmail({
         to: user.email,
         ...resetPasswordEmail({

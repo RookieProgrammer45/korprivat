@@ -41,6 +41,7 @@ import {
   resetPrisma,
   TEST_LEARNER_ACCESS_TOKEN,
 } from './_setup/prisma-mock';
+
 const createCheckoutSession = vi.fn();
 const retrieveCheckoutSession = vi.fn();
 
@@ -80,10 +81,10 @@ vi.mock('stripe', () => {
 });
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { POST as checkoutPOST } from '@/app/api/checkout/route';
-import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
 import { POST as disputeResolvePOST } from '@/app/api/bookings/[id]/dispute/resolve/route';
 import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
+import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
+import { POST as checkoutPOST } from '@/app/api/checkout/route';
 
 import { authMock } from './_setup/auth-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
@@ -160,7 +161,6 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
       }),
     );
     prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
-    prismaMock.booking.update.mockResolvedValue({ id: 'booking_chain' });
     // 550 SEK school price → totalSek 550 → ceil(550 × 0.094) = 52
     createCheckoutSession.mockResolvedValueOnce({
       id: 'cs_chain',
@@ -181,11 +181,10 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
 
     // Fee snapshot columns stamped at the mint seam — once for this row,
     // never re-baked from a later `hourlyRateSek` drift. 550 → no learner fee.
-    expect(prismaMock.booking.update).toHaveBeenCalledWith(
+    expect(prismaMock.booking.updateMany).toHaveBeenLastCalledWith(
       expect.objectContaining({
-        where: { id: 'booking_chain' },
+        where: expect.objectContaining({ id: 'booking_chain', cancellationOutcome: null }),
         data: expect.objectContaining({
-          paymentStatus: 'pending',
           stripeSessionId: 'cs_chain',
           stripeCheckoutSessionId: 'cs_chain',
           priceAmountSek: 550,
@@ -198,7 +197,6 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     // Reset sticky mocks before the poll / complete segments.
     prismaMock.booking.findUnique.mockReset();
     prismaMock.instructor.findUnique.mockReset();
-    prismaMock.booking.update.mockReset();
 
     // 2. payment-poll verifies → flips to held_escrow + receipts
     // Sticky until complete segment re-queues — poll + fulfill may re-read.
@@ -208,6 +206,9 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
         paymentStatus: 'pending',
         stripeSessionId: 'cs_chain',
         stripeCheckoutSessionId: 'cs_chain',
+        priceAmountSek: 550,
+        serviceFeeSek: 0,
+        grossChargedSek: 550,
       }),
     );
     prismaMock.booking.updateMany.mockResolvedValue({ count: 1 });
@@ -218,6 +219,8 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
       id: 'cs_chain',
       payment_status: 'paid',
       status: 'complete',
+      currency: 'sek',
+      amount_total: 55000,
     });
 
     const pollRes = await paymentPollGET(
@@ -234,9 +237,12 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
     expect(receiptEmails).toBe(2);
 
     // Pull the action token from the updateMany so we can use it on complete.
-    const updateData = mockCallArg<{ data: { actionToken?: string } }>(
-      prismaMock.booking.updateMany,
-    ).data;
+    const fulfillmentCall = prismaMock.booking.updateMany.mock.calls.find(
+      (call) =>
+        (call[0] as { data?: { paymentStatus?: string } } | undefined)?.data?.paymentStatus ===
+        'held_escrow',
+    );
+    const updateData = (fulfillmentCall?.[0] as { data: { actionToken?: string } }).data;
     const token = updateData.actionToken;
     expect(typeof token).toBe('string');
 
@@ -311,13 +317,12 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
 });
 // ─── H. Booking double-mint on `pending` ────────────────────────────
 
-describe('booking/checkout: re-mints on `pending` (intentional per comment)', () => {
-  it('second POST while still `pending` returns a fresh URL (overwrites session id)', async () => {
+describe('booking/checkout: recovers pending without a persisted session', () => {
+  it('uses a durable new claim when pending has no saved Stripe session', async () => {
     prismaMock.booking.findUnique.mockResolvedValue(
       bookingRow({ id: 'booking_pending', paymentStatus: 'pending' }),
     );
     prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
-    prismaMock.booking.update.mockResolvedValue({ id: 'booking_pending' });
     createCheckoutSession.mockResolvedValueOnce({
       id: 'cs_remint',
       url: 'https://checkout.stripe.com/c/pay/cs_remint',
@@ -340,11 +345,15 @@ describe('booking/checkout: re-mints on `pending` (intentional per comment)', ()
 
     // A NEW session was stamped on the row, and the fee snapshot columns
     // were re-stamped with the same figures so a second mint never drifts.
-    expect(prismaMock.booking.update).toHaveBeenCalledWith(
+    expect(prismaMock.booking.updateMany).toHaveBeenLastCalledWith(
       expect.objectContaining({
-        where: { id: 'booking_pending' },
+        where: expect.objectContaining({
+          id: 'booking_pending',
+          cancellationOutcome: null,
+          stripeSessionId: null,
+          stripeCheckoutSessionId: expect.stringMatching(/^dlu_checkout_/),
+        }),
         data: expect.objectContaining({
-          paymentStatus: 'pending',
           stripeSessionId: 'cs_remint',
           stripeCheckoutSessionId: 'cs_remint',
           priceAmountSek: 550,
@@ -508,7 +517,7 @@ describe('booking: dispute → resolve refunded (cancel-before-payout)', () => {
         'refunded',
     );
     expect(bookingUpdateCall).toBeDefined();
-    const refundData = (bookingUpdateCall![0] as { data: object }).data;
+    const refundData = (bookingUpdateCall?.[0] as { data: object }).data;
     expect(refundData).not.toHaveProperty('payoutReleasedAt');
 
     // After open (1 counterparty email) + resolve (2 parties notified),

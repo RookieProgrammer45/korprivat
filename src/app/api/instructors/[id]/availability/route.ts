@@ -9,6 +9,7 @@
 // `PUBLIC_INSTRUCTOR_SELECT` in src/lib/contracts/instructors.ts).
 import 'server-only';
 import { NextResponse } from 'next/server';
+import { isPublicBookableProvider } from '@/lib/business/provider-activation';
 import { providerTimezoneForCity } from '@/lib/business/provider-timezone';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import { prisma } from '@/lib/db';
@@ -21,9 +22,9 @@ export async function GET(_req: Request, ctx: Ctx) {
   const { id } = await ctx.params;
   const instructor = await prisma.instructor.findUnique({
     where: { id },
-    select: { providerRole: true, city: true },
+    select: { userId: true, categories: true, providerRole: true, city: true },
   });
-  if (!instructor)
+  if (!instructor || !(await isPublicBookableProvider(instructor)))
     return NextResponse.json({ errors: { id: 'Provider not found' } }, { status: 404 });
   const rows = await prisma.availabilitySlot.findMany({
     where: {

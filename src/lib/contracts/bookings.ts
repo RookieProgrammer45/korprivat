@@ -395,15 +395,17 @@ export const BookingCancelRequest = z.object({
 });
 export type BookingCancelRequest = z.infer<typeof BookingCancelRequest>;
 
-// Response shape mirrors the route's terminal commit. `feeAmountUsd` is
-// non-null only on a `cancelled_late` outcome so the client can render
-// the fee receipt card vs. the neutral cancellation card.
+// Response shape mirrors the route's terminal commit. `feeAmountSek` is
+// derived from the frozen booking charge and is non-null only when a fee was
+// retained, so the client never presents SEK Checkout as a USD charge.
 export const BookingCancelResponse = z.object({
   id: z.string(),
   paymentStatus: BookingPaymentStatusEnum,
   cancellationOutcome: CancellationOutcomeEnum,
   cancelledAt: z.string(),
-  feeAmountUsd: z.number().int().nonnegative().nullable(),
+  feeAmountSek: z.number().int().nonnegative().nullable(),
+  // A 202 records cancellation but does not claim that a refund completed.
+  reconciliationPending: z.boolean().optional(),
 });
 export type BookingCancelResponse = z.infer<typeof BookingCancelResponse>;
 

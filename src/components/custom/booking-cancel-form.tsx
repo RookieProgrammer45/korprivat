@@ -20,7 +20,7 @@ import { apiFetch } from '@/lib/api-client';
 import {
   type CancellationTier,
   classifyCancellationOutcome,
-  computeCancellationFeeUsd,
+  computeCancellationFeeSek,
   getPolicyForTier,
 } from '@/lib/business/cancellation-policy';
 import {
@@ -28,7 +28,6 @@ import {
   BookingCancelResponse,
   BookingRead,
 } from '@/lib/contracts/bookings';
-import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
 
 type Status =
   | { kind: 'loading' }
@@ -46,10 +45,11 @@ type Status =
       booking: BookingRead;
       fee: number | null;
       outcome: BookingRead['cancellationOutcome'];
+      reconciliationPending?: boolean;
     }
   | { kind: 'error'; reason: string };
 
-export function BookingCancelForm({ bookingId, token }: { bookingId: string; token: string }) {
+export function BookingCancelForm({ bookingId, token }: { bookingId: string; token?: string }) {
   const t = useTranslations('bookingCancel');
   const tPolicy = useTranslations('cancellationPolicy');
   const locale = useLocale();
@@ -66,10 +66,6 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
     })
       .then((booking) => {
         if (!active) return;
-        if (!token) {
-          setStatus({ kind: 'invalid-token' });
-          return;
-        }
         if (booking.cancellationOutcome) {
           setStatus({
             kind: 'cancelled',
@@ -88,6 +84,7 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
           'paid',
           'pending',
           'unpaid',
+          'awaiting_approval',
           'cancelled_full_refund',
           'cancelled_partial',
           'cancelled_late',
@@ -109,10 +106,11 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
           setStatus({ kind: 'cant-cancel', reason: t('states.lessonStarted') });
           return;
         }
-        const lessonChargeUsd = sekToUsdChargeAmount(booking.hourlyRateSek);
+        const grossChargedSek = booking.grossChargedSek;
+        const wasPaid = booking.paymentStatus === 'paid' || booking.paymentStatus === 'held_escrow';
         const previewFee =
-          classified.feePercent > 0
-            ? computeCancellationFeeUsd(lessonChargeUsd, classified.feePercent)
+          wasPaid && classified.feePercent > 0 && grossChargedSek !== null
+            ? computeCancellationFeeSek(grossChargedSek, classified.feePercent)
             : null;
         setStatus({
           kind: 'preview',
@@ -135,8 +133,10 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
   }, [bookingId, t, token]);
 
   const onSubmit = async () => {
-    if (status.kind !== 'preview') return;
-    const trimmed = actorName.trim();
+    if (submitting || (status.kind !== 'preview' && status.kind !== 'cancelled')) return;
+    const wasCancelled = status.kind === 'cancelled';
+    // The idempotent follow-up branch never changes the original actor label.
+    const trimmed = actorName.trim() || (wasCancelled ? 'Cancellation follow-up' : '');
     if (trimmed.length === 0) {
       toast.error(t('form.nameRequired'));
       return;
@@ -144,7 +144,7 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
     setSubmitting(true);
     try {
       const body: BookingCancelRequest = {
-        token,
+        ...(token ? { token } : {}),
         cancelledByRole: actorRole,
         cancelledByLabel: trimmed,
       };
@@ -156,14 +156,20 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
       const fresh = await apiFetch(`/api/bookings/${encodeURIComponent(bookingId)}`, {
         schema: BookingRead,
         headers: bookingAccessHeaders(token),
-      });
+      }).catch(() => ({
+        ...status.booking,
+        paymentStatus: result.paymentStatus,
+        cancellationOutcome: result.cancellationOutcome,
+        cancelledAt: result.cancelledAt,
+      }));
       setStatus({
         kind: 'cancelled',
         booking: fresh,
-        fee: result.feeAmountUsd ?? null,
+        fee: result.feeAmountSek ?? null,
         outcome: result.cancellationOutcome,
+        reconciliationPending: result.reconciliationPending ?? false,
       });
-      toast.success(t('receipt.toast'));
+      if (!result.reconciliationPending) toast.success(t('receipt.toast'));
     } catch (err: unknown) {
       const stateError = readFieldError(err, 'state');
       const tokenError = readFieldError(err, 'token');
@@ -173,7 +179,8 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
         setStatus({ kind: 'invalid-token' });
       } else {
         toast.error(t('states.submitError'));
-        setStatus({ kind: 'error', reason: t('states.submitError') });
+        if (wasCancelled) setStatus({ ...status, reconciliationPending: true });
+        // Preserve preview/cancelled state so a transient failure stays retryable.
       }
     } finally {
       setSubmitting(false);
@@ -223,8 +230,8 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
   if (status.kind === 'cancelled') {
     const hasFee =
       (status.fee ?? 0) > 0 ||
-      status.outcome === 'cancelled_late' ||
-      status.outcome === 'cancelled_partial';
+      (status.fee === null &&
+        (status.outcome === 'cancelled_late' || status.outcome === 'cancelled_partial'));
     return (
       <Card className="surface-panel border-border bg-card shadow-sm">
         <CardContent className="flex flex-col gap-3 p-6">
@@ -238,9 +245,26 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
             {t('receipt.badge')}
           </Badge>
           <p className="font-display text-h3 tracking-tight text-foreground">
-            {hasFee ? t('receipt.withFee', { fee: status.fee ?? 0 }) : t('receipt.withoutFee')}
+            {hasFee
+              ? status.fee === null
+                ? t('receipt.feeRecorded')
+                : t('receipt.withFee', { fee: formatSek(status.fee, locale) })
+              : t('receipt.withoutFee')}
           </p>
           <p className="text-small text-muted-foreground">{t('receipt.body')}</p>
+          {status.reconciliationPending ? (
+            <output className="text-small text-muted-foreground">
+              {t('receipt.reconciliationPending')}
+            </output>
+          ) : null}
+          <Button
+            type="button"
+            variant="outline"
+            disabled={submitting}
+            onClick={() => void onSubmit()}
+          >
+            {submitting ? t('form.submitting') : t('receipt.checkCancellation')}
+          </Button>
           <Link
             href="/instructors"
             className="text-small font-medium text-brand-700 underline-offset-4 hover:underline dark:text-brand-300"
@@ -304,7 +328,7 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
               {status.previewPercent >= 100 ? t('fee.full') : t('fee.partial')}
             </p>
             <p className="font-display text-h4 text-foreground">
-              {t('fee.amount', { fee: status.previewFee })}
+              {t('fee.amount', { fee: formatSek(status.previewFee, locale) })}
             </p>
           </div>
         ) : (
@@ -365,6 +389,14 @@ function formatDate(iso: string, locale: string): string {
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
   }).format(date);
+}
+
+function formatSek(amount: number, locale: string): string {
+  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    style: 'currency',
+    currency: 'SEK',
+    maximumFractionDigits: 0,
+  }).format(amount);
 }
 
 type ErrorEnvelope = { errors?: Record<string, string | undefined> };

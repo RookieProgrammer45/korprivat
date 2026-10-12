@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { signIn } from '@/lib/auth-client';
+import { forgotPasswordHrefWithNext } from '@/lib/auth-next';
 import { applyServerErrors } from '@/lib/forms';
 import { SocialAuthButtons } from './social-auth-buttons';
 
@@ -36,24 +37,29 @@ export function SignInForm({ next }: { next?: string }) {
   });
 
   const onSubmit = form.handleSubmit(async (values) => {
-    const { error } = await signIn.email({
-      email: values.email.trim(),
-      password: values.password,
-    });
-    if (error) {
-      // Most auth failures surface a 400 with a flat `{ errors: { … } }`
-      // body — applyServerErrors honours that contract. If the shape
-      // doesn't match, fall back to a localised toast.
-      const applied = applyServerErrors(error, form.setError);
-      if (!applied) {
-        toast.error(t('errors.invalidCredentials'));
+    try {
+      const { error } = await signIn.email({
+        email: values.email.trim(),
+        password: values.password,
+      });
+      if (error) {
+        // Most auth failures surface a 400 with a flat `{ errors: { … } }`
+        // body — applyServerErrors honours that contract. If the shape
+        // doesn't match, fall back to a localised toast.
+        const applied = applyServerErrors(error, form.setError);
+        if (!applied) {
+          toast.error(t('errors.invalidCredentials'));
+        }
+        return;
       }
-      return;
+      // Land on /dashboard so the server role router sends learners, schools,
+      // and handledare to the correct leaf. Explicit ?next=… still overrides.
+      router.push(next ?? '/dashboard');
+      router.refresh();
+    } catch {
+      // Rejected transport calls do not return Better Auth's `{ error }` shape.
+      toast.error(t('errors.generic'));
     }
-    // Land on /dashboard so the server role router sends learners, schools,
-    // and handledare to the correct leaf. Explicit ?next=… still overrides.
-    router.push(next ?? '/dashboard');
-    router.refresh();
   });
 
   return (
@@ -64,61 +70,61 @@ export function SignInForm({ next }: { next?: string }) {
           <FormField
             control={form.control}
             name="email"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('fields.emailLabel')}</FormLabel>
-              <FormControl>
-                <Input
-                  type="email"
-                  autoComplete="email"
-                  className="auth-input h-12"
-                  placeholder={t('fields.emailPlaceholder')}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex items-center justify-between gap-3">
-                <FormLabel>{t('fields.passwordLabel')}</FormLabel>
-                <Link
-                  href="/forgot-password"
-                  className="text-caption font-medium text-brand-600 underline-offset-2 hover:underline dark:text-brand-400"
-                >
-                  {t('forgotPassword')}
-                </Link>
-              </div>
-              <FormControl>
-                <Input
-                  type="password"
-                  autoComplete="current-password"
-                  className="auth-input h-12"
-                  placeholder={t('fields.passwordPlaceholder')}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitting}
-          className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
-        >
-          {form.formState.isSubmitting ? t('submitting') : t('submit')}
-        </Button>
-      </form>
-    </Form>
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('fields.emailLabel')}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    className="auth-input h-12"
+                    placeholder={t('fields.emailPlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex items-center justify-between gap-3">
+                  <FormLabel>{t('fields.passwordLabel')}</FormLabel>
+                  <Link
+                    href={forgotPasswordHrefWithNext(next)}
+                    className="text-caption font-medium text-brand-600 underline-offset-2 hover:underline dark:text-brand-400"
+                  >
+                    {t('forgotPassword')}
+                  </Link>
+                </div>
+                <FormControl>
+                  <Input
+                    type="password"
+                    autoComplete="current-password"
+                    className="auth-input h-12"
+                    placeholder={t('fields.passwordPlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            size="lg"
+            disabled={form.formState.isSubmitting}
+            className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
+          >
+            {form.formState.isSubmitting ? t('submitting') : t('submit')}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }

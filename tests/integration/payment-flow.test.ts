@@ -34,8 +34,8 @@ vi.mock('stripe', () => {
 });
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { POST as checkoutPOST } from '@/app/api/checkout/route';
 import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
+import { POST as checkoutPOST } from '@/app/api/checkout/route';
 import { BookingPaymentLinkResponse, BookingPaymentPollResponse } from '@/lib/contracts/bookings';
 import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
 import { authMock } from './_setup/auth-mock';
@@ -90,7 +90,9 @@ function learnerGet(url: string): Request {
 
 describe('POST /api/checkout', () => {
   it('mints a Checkout Session in SEK and persists stripeSessionId', async () => {
-    prismaMock.booking.findUnique.mockResolvedValue(bookingRow({ id: 'booking_pay', paymentStatus: null }));
+    prismaMock.booking.findUnique.mockResolvedValue(
+      bookingRow({ id: 'booking_pay', paymentStatus: null }),
+    );
     prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
     prismaMock.booking.update.mockResolvedValue({ id: 'booking_pay' });
 
@@ -112,11 +114,10 @@ describe('POST /api/checkout', () => {
     expect(arg.metadata.bookingId).toBe('booking_pay');
     expect(arg.metadata.priceSek).toBe('550');
 
-    expect(prismaMock.booking.update).toHaveBeenCalledWith(
+    expect(prismaMock.booking.updateMany).toHaveBeenLastCalledWith(
       expect.objectContaining({
-        where: { id: 'booking_pay' },
+        where: expect.objectContaining({ id: 'booking_pay', cancellationOutcome: null }),
         data: expect.objectContaining({
-          paymentStatus: 'pending',
           stripeSessionId: 'cs_test_abc',
           stripeCheckoutSessionId: 'cs_test_abc',
           grossChargedSek: 550,
@@ -223,6 +224,9 @@ describe('GET /api/bookings/[id]/payment-poll', () => {
         paymentStatus: 'pending',
         stripeSessionId: 'cs_test_ok',
         stripeCheckoutSessionId: 'cs_test_ok',
+        priceAmountSek: 550,
+        serviceFeeSek: 0,
+        grossChargedSek: 550,
         preferredAt: new Date('2026-08-30T10:00:00.000Z'),
       }),
     );
@@ -234,6 +238,8 @@ describe('GET /api/bookings/[id]/payment-poll', () => {
       id: 'cs_test_ok',
       payment_status: 'paid',
       status: 'complete',
+      currency: 'sek',
+      amount_total: 55000,
     });
 
     const res = await paymentPollGET(

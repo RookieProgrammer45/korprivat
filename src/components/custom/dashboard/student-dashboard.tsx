@@ -16,6 +16,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { BookingList } from '@/lib/contracts/auth';
 import type { BookingPaymentStatus } from '@/lib/contracts/bookings';
+import { paymentStatusBadgeClassName, paymentStatusDisplay } from './payment-status-display';
 
 export function StudentDashboard() {
   const t = useTranslations('dashboard.student');
@@ -126,80 +127,12 @@ function PaymentBadge({
   status: BookingPaymentStatus;
   t: ReturnType<typeof useTranslations<'dashboard.student'>>;
 }) {
-  switch (status) {
-    case 'unpaid':
-      return (
-        <Badge
-          variant="outline"
-          className="border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-        >
-          {t('paymentStatus.unpaid')}
-        </Badge>
-      );
-    case 'pending':
-      return (
-        <Badge variant="outline" className="border-border bg-muted text-foreground">
-          {t('paymentStatus.pending')}
-        </Badge>
-      );
-    case 'paid':
-      return (
-        <Badge
-          variant="outline"
-          className="border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-        >
-          {t('paymentStatus.paid')}
-        </Badge>
-      );
-    case 'held_escrow':
-      return (
-        <Badge
-          variant="outline"
-          className="border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-        >
-          {t('paymentStatus.heldEscrow')}
-        </Badge>
-      );
-    case 'released':
-      return (
-        <Badge
-          variant="outline"
-          className="border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-        >
-          {t('paymentStatus.released')}
-        </Badge>
-      );
-    case 'refunded':
-      return (
-        <Badge variant="outline" className="border-border bg-muted text-muted-foreground">
-          {t('paymentStatus.refunded')}
-        </Badge>
-      );
-    case 'awaiting_approval':
-      return (
-        <Badge
-          variant="outline"
-          className="border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-        >
-          {t('paymentStatus.awaitingApproval')}
-        </Badge>
-      );
-    case 'declined':
-      return (
-        <Badge variant="outline" className="border-border bg-muted text-muted-foreground">
-          {t('paymentStatus.declined')}
-        </Badge>
-      );
-    case 'cancelled_early':
-    case 'cancelled_late':
-    case 'cancelled_full_refund':
-    case 'cancelled_partial':
-      return (
-        <Badge variant="outline" className="border-border bg-muted text-muted-foreground">
-          {t('paymentStatus.cancelled')}
-        </Badge>
-      );
-  }
+  const display = paymentStatusDisplay(status);
+  return (
+    <Badge className={paymentStatusBadgeClassName(display.tone)} variant="outline">
+      {t(`paymentStatus.${display.labelKey}`)}
+    </Badge>
+  );
 }
 
 function formatDate(iso: string, locale: string): string {

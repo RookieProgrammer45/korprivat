@@ -45,6 +45,7 @@ const SESSION_USER = {
   name: 'Race Tester',
   role: 'user' as const,
 };
+
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
 
 function learnerGet(url: string): Request {
@@ -62,6 +63,8 @@ beforeEach(() => {
     id: 'cs_test',
     payment_status: 'paid',
     status: 'complete',
+    currency: 'sek',
+    amount_total: 55000,
   });
   process.env.STRIPE_SECRET_KEY = 'sk_test_integration';
 });
@@ -79,6 +82,9 @@ describe('payment-poll race guard', () => {
       paymentStatus: 'pending',
       stripeSessionId: 'cs_test_race',
       stripeCheckoutSessionId: 'cs_test_race',
+      priceAmountSek: 550,
+      serviceFeeSek: 0,
+      grossChargedSek: 550,
     });
     const held = bookingRow({
       id: 'booking_race',
@@ -86,6 +92,9 @@ describe('payment-poll race guard', () => {
       paidAt: new Date(),
       stripeSessionId: 'cs_test_race',
       stripeCheckoutSessionId: 'cs_test_race',
+      priceAmountSek: 550,
+      serviceFeeSek: 0,
+      grossChargedSek: 550,
       heldAt: new Date(),
     });
     let updateWins = 0;
@@ -116,10 +125,10 @@ describe('payment-poll race guard', () => {
     const b2 = bodies[1];
     expect(b1).toBeDefined();
     expect(b2).toBeDefined();
-    expect(b1!.verified).toBe(true);
-    expect(b2!.verified).toBe(true);
-    expect(b1!.paymentStatus).toBe('held_escrow');
-    expect(b2!.paymentStatus).toBe('held_escrow');
+    expect(b1?.verified).toBe(true);
+    expect(b2?.verified).toBe(true);
+    expect(b1?.paymentStatus).toBe('held_escrow');
+    expect(b2?.paymentStatus).toBe('held_escrow');
     expect(prismaMock.booking.updateMany).toHaveBeenCalledTimes(2);
     expect(sendEmailMock).toHaveBeenCalledTimes(2);
   });
@@ -130,6 +139,9 @@ describe('payment-poll race guard', () => {
       paymentStatus: 'pending',
       stripeSessionId: 'cs_test_3x',
       stripeCheckoutSessionId: 'cs_test_3x',
+      priceAmountSek: 550,
+      serviceFeeSek: 0,
+      grossChargedSek: 550,
     });
     const held = bookingRow({
       id: 'booking_3x',
@@ -137,6 +149,9 @@ describe('payment-poll race guard', () => {
       paidAt: new Date(),
       stripeSessionId: 'cs_test_3x',
       stripeCheckoutSessionId: 'cs_test_3x',
+      priceAmountSek: 550,
+      serviceFeeSek: 0,
+      grossChargedSek: 550,
     });
     let updateWins = 0;
     prismaMock.booking.findUnique.mockImplementation(async () =>

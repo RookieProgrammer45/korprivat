@@ -49,6 +49,21 @@ export function learnerTotalSek(priceSek: number): LearnerTotals {
 }
 
 /**
+ * Server-side lesson price for a selected availability slot. Rates are SEK per
+ * 60 minutes; fractional SEK is rounded once, half-up, before fee and payout
+ * calculations so every persisted snapshot agrees with Checkout and receipts.
+ */
+export function lessonPriceForDurationSek(hourlyRateSek: number, durationMinutes: number): number {
+  if (!Number.isFinite(hourlyRateSek) || hourlyRateSek < 0) {
+    throw new Error('hourlyRateSek must be a non-negative finite number');
+  }
+  if (!Number.isInteger(durationMinutes) || durationMinutes <= 0) {
+    throw new Error('durationMinutes must be a positive integer');
+  }
+  return Math.round((hourlyRateSek * durationMinutes) / 60);
+}
+
+/**
  * Instructor/school-facing payout for a single booking. `payoutSek` is the
  * amount released when the lesson is marked complete — lesson price minus
  * commission (10% independent, 8% when `organizationId` is set).

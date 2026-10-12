@@ -19,7 +19,7 @@ export function ConversationThread({
   onSent,
 }: {
   detail: ConversationDetail;
-  onSent: (message: ConversationMessage) => void;
+  onSent: (conversationId: string, message: ConversationMessage) => void;
 }) {
   const t = useTranslations('messaging');
   const locale = useLocale();

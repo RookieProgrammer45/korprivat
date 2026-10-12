@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -15,6 +15,11 @@ import {
 } from '@/lib/contracts/messaging';
 import { ConversationList as ConversationListView } from './conversation-list';
 import { ConversationThread } from './conversation-thread';
+import {
+  appendSentMessage,
+  createConversationDetailRequestGuard,
+  updateConversationSummaryForSentMessage,
+} from './conversation-workspace-state';
 
 type ListState =
   | { kind: 'loading' }
@@ -27,7 +32,8 @@ export function MessagingWorkspace({ initialBookingId }: { initialBookingId?: st
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<ConversationDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
-  const [_retryNonce, setRetry] = useState(0);
+  const [retryNonce, setRetry] = useState(0);
+  const detailRequestGuard = useRef(createConversationDetailRequestGuard());
 
   const header = (
     <header className="grid gap-2">
@@ -38,12 +44,15 @@ export function MessagingWorkspace({ initialBookingId }: { initialBookingId?: st
   );
 
   const loadDetail = useCallback(async (id: string) => {
+    const request = detailRequestGuard.current.start(id);
     setSelectedId(id);
+    setDetail(null);
     setDetailLoading(true);
     try {
       const nextDetail = await apiFetch(`/api/conversations/${encodeURIComponent(id)}`, {
         schema: ConversationDetail,
       });
+      if (!detailRequestGuard.current.isCurrent(request)) return;
       setDetail(nextDetail);
       setListState((current) =>
         current.kind === 'ready'
@@ -56,16 +65,21 @@ export function MessagingWorkspace({ initialBookingId }: { initialBookingId?: st
           : current,
       );
     } catch {
+      if (!detailRequestGuard.current.isCurrent(request)) return;
       setDetail(null);
     } finally {
-      setDetailLoading(false);
+      if (detailRequestGuard.current.isCurrent(request)) setDetailLoading(false);
     }
   }, []);
 
   useEffect(() => {
     let active = true;
+    void retryNonce;
+    detailRequestGuard.current.invalidate();
     setListState({ kind: 'loading' });
+    setSelectedId(null);
     setDetail(null);
+    setDetailLoading(false);
     async function load() {
       try {
         let data = await apiFetch('/api/conversations', {
@@ -93,27 +107,17 @@ export function MessagingWorkspace({ initialBookingId }: { initialBookingId?: st
     void load();
     return () => {
       active = false;
+      detailRequestGuard.current.invalidate();
     };
-  }, [initialBookingId, loadDetail]);
+  }, [initialBookingId, loadDetail, retryNonce]);
 
-  function handleSent(message: ConversationMessage) {
-    setDetail((current) =>
-      current ? { ...current, messages: [...current.messages, message] } : current,
-    );
+  function handleSent(conversationId: string, message: ConversationMessage) {
+    setDetail((current) => appendSentMessage(current, conversationId, message));
     setListState((current) => {
-      if (current.kind !== 'ready' || !selectedId) return current;
+      if (current.kind !== 'ready') return current;
       return {
         kind: 'ready',
-        items: current.items.map((item) =>
-          item.id === selectedId
-            ? {
-                ...item,
-                lastMessage: message,
-                lastMessageAt: message.createdAt,
-                unreadCount: 0,
-              }
-            : item,
-        ),
+        items: updateConversationSummaryForSentMessage(current.items, conversationId, message),
       };
     });
   }

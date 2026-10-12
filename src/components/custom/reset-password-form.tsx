@@ -16,10 +16,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { resetPassword } from '@/lib/auth-client';
+import { loginHrefWithNext } from '@/lib/auth-next';
 
 type FormValues = { password: string; confirm: string };
 
-export function ResetPasswordForm({ token }: { token: string }) {
+export function ResetPasswordForm({ token, next }: { token: string; next?: string }) {
   const router = useRouter();
   const t = useTranslations('auth.resetPassword');
 
@@ -38,17 +39,22 @@ export function ResetPasswordForm({ token }: { token: string }) {
       return;
     }
 
-    const { error } = await resetPassword({
-      newPassword: values.password,
-      token,
-    });
-    if (error) {
-      toast.error(t('errors.invalidToken'));
-      return;
+    try {
+      const { error } = await resetPassword({
+        newPassword: values.password,
+        token,
+      });
+      if (error) {
+        toast.error(t('errors.invalidToken'));
+        return;
+      }
+      toast.success(t('success'));
+      router.push(loginHrefWithNext(next));
+      router.refresh();
+    } catch {
+      // Transport failures do not navigate away from the recovery form.
+      toast.error(t('errors.generic'));
     }
-    toast.success(t('success'));
-    router.push('/login');
-    router.refresh();
   });
 
   return (
@@ -104,7 +110,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
         </Button>
         <p className="text-center text-small text-muted-foreground">
           <Link
-            href="/login"
+            href={loginHrefWithNext(next)}
             className="font-medium text-brand-600 underline-offset-2 hover:underline dark:text-brand-400"
           >
             {t('backToLogin')}

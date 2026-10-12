@@ -190,7 +190,8 @@ describe('booking receipt PDF route', () => {
       totalCents: 57800,
     });
     expect(spec.meta).toContainEqual({ label: 'Receipt number', value: 'DLU-BOOKING_1-L' });
-    expect(spec.notes).toContain('61');
+    expect(spec.notes).toContain('578 SEK');
+    expect(spec.notes).not.toMatch(/USD|\$|61/);
     expect(spec.notes).not.toContain('9999');
     expect(response.headers.get('content-type')).toBe('application/pdf');
     expect(response.headers.get('content-disposition')).toContain('DLU-BOOKING_1-L.pdf');

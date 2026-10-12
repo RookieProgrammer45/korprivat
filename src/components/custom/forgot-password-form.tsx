@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { requestPasswordReset } from '@/lib/auth-client';
+import { loginHrefWithNext, resetPasswordHrefWithNext, sanitizeNext } from '@/lib/auth-next';
 
 type FormValues = { email: string };
 
@@ -23,7 +24,7 @@ type FormValues = { email: string };
  * Requests a password-reset email via better-auth.
  * Always shows the same success state (enumeration-safe).
  */
-export function ForgotPasswordForm() {
+export function ForgotPasswordForm({ next }: { next?: string }) {
   const t = useTranslations('auth.forgotPassword');
   const [sent, setSent] = useState(false);
 
@@ -34,17 +35,24 @@ export function ForgotPasswordForm() {
 
   const onSubmit = form.handleSubmit(async (values) => {
     const email = values.email.trim();
-    // redirectTo is optional — our sendResetPassword builds a branded URL with
-    // the token directly. Passing same-origin keeps originCheck happy if set.
-    const { error } = await requestPasswordReset({
-      email,
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
-    if (error) {
+    const resetHref = resetPasswordHrefWithNext(sanitizeNext(next));
+    try {
+      const { error } = await requestPasswordReset({
+        email,
+        // Better Auth verifies this same-origin callback before our email hook
+        // extracts its already-sanitized `next` value.
+        redirectTo: `${window.location.origin}${resetHref}`,
+      });
+      if (error) {
+        toast.error(t('errors.generic'));
+        return;
+      }
+      // Preserve the enumeration-safe success state for every returned success.
+      setSent(true);
+    } catch {
+      // A rejected fetch has no `{ error }` response from Better Auth.
       toast.error(t('errors.generic'));
-      return;
     }
-    setSent(true);
   });
 
   if (sent) {
@@ -52,7 +60,7 @@ export function ForgotPasswordForm() {
       <div className="grid gap-4">
         <p className="text-pretty text-body text-muted-foreground">{t('sentBody')}</p>
         <Button asChild variant="outline" size="lg" className="h-12 w-full">
-          <Link href="/login">{t('backToLogin')}</Link>
+          <Link href={loginHrefWithNext(next)}>{t('backToLogin')}</Link>
         </Button>
       </div>
     );

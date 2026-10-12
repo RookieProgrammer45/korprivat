@@ -20,6 +20,9 @@ model LateCancellationFee {
   // Whole-dollar USD amount of the late-cancellation fee. Capped at the
   // lesson USD charge so a fee can never exceed what the learner paid.
   amountUsd           Int
+  // Exact retained SEK fee for new cancellations. Null identifies legacy rows
+  // whose original SEK value cannot safely be reconstructed from rounded USD.
+  amountSek           Int?
   // Snapshot for audit: how many whole hours remained until preferredAt at
   // the moment the cancel POST resolved the window. Operators compare this
   // to the policy's LATE_WINDOW_HOURS when reconciling disputes.

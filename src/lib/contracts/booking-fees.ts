@@ -17,9 +17,9 @@ export const InstructorFeesConfig = z.object({
 export type InstructorFeesConfig = z.infer<typeof InstructorFeesConfig>;
 
 /**
- * Response for `GET /api/booking-fees/quote?instructorId=…`. Returns the
- * learner-facing breakdown for a hypothetical booking at the instructor's
- * published hourly rate. All values are non-negative integer SEK.
+ * Response for `GET /api/booking-fees/quote?instructorId=…&slotId=…`.
+ * Returns the learner-facing breakdown for the server-selected availability
+ * slot. All values are non-negative integer SEK.
  */
 export const BookingFeeQuote = z.object({
   priceAmountSek: z.number().int().nonnegative(),
@@ -30,5 +30,6 @@ export type BookingFeeQuote = z.infer<typeof BookingFeeQuote>;
 
 export const BookingFeeQuoteRequest = z.object({
   instructorId: z.string().min(1),
+  slotId: z.string().min(1),
 });
 export type BookingFeeQuoteRequest = z.infer<typeof BookingFeeQuoteRequest>;

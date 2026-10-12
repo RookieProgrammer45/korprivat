@@ -185,6 +185,29 @@ export function computeCancellationFeeUsd(lessonChargeUsd: number, feePercent: n
 }
 
 /**
+ * Refund from a frozen SEK checkout charge. This is the only rounding point
+ * for a partial cancellation: retained fee is always `gross - refund`, so the
+ * fee notice, audit value, and Stripe refund cannot drift by one SEK.
+ */
+export function cancellationRefundAmountSek(grossChargedSek: number, feePercent: number): number {
+  if (!Number.isInteger(grossChargedSek) || grossChargedSek < 0) {
+    throw new Error('grossChargedSek must be a non-negative integer');
+  }
+  if (!Number.isFinite(feePercent) || feePercent < 0 || feePercent > 100) {
+    throw new Error('feePercent must be between 0 and 100');
+  }
+  return Math.max(
+    0,
+    Math.min(grossChargedSek, Math.round(grossChargedSek * (1 - feePercent / 100))),
+  );
+}
+
+/** Retained cancellation fee from the booking's immutable SEK checkout snapshot. */
+export function computeCancellationFeeSek(grossChargedSek: number, feePercent: number): number {
+  return grossChargedSek - cancellationRefundAmountSek(grossChargedSek, feePercent);
+}
+
+/**
  * Whole-hours remaining until the lesson start — snapshotted into the
  * `LateCancellationFee.windowHoursAtCancel` audit column. Floors down
  * (`Math.floor`) so the operator reading the row can compare to the tier

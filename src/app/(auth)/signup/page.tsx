@@ -38,11 +38,13 @@ export default async function SignupPage({
   const params = await searchParams;
   const next = sanitizeNext(params.next);
   const initialPath = resolveInitialPath(params.role);
-  const initialStep = params.step === 'photo' ? 'photo' : undefined;
   // Mid-flow photo/licence steps run while signed in — never show "Log in".
   const sessionUser = await getSessionUser();
+  // The email verification callback is the only approved learner photo resume
+  // path. Anonymous and unverified users still begin at the normal wizard.
+  const initialStep = params.step === 'photo' && sessionUser?.emailVerified ? 'photo' : undefined;
 
-  await redirectLearnerAwayFromSignup(next);
+  await redirectLearnerAwayFromSignup(next, initialStep === 'photo');
 
   return (
     <AuthShell

@@ -9,6 +9,7 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { isInstructorPolicyDirty } from '@/components/custom/dashboard/instructor-policy-state';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -116,7 +117,12 @@ export function InstructorPolicyEditor() {
       return {
         ...curr,
         selected: next as CancellationTier,
-        dirty: next !== curr.original,
+        dirty: isInstructorPolicyDirty({
+          selected: next as CancellationTier,
+          original: curr.original,
+          bookingMode: curr.bookingMode,
+          bookingModeOriginal: curr.bookingModeOriginal,
+        }),
       };
     });
   };
@@ -127,7 +133,12 @@ export function InstructorPolicyEditor() {
       return {
         ...curr,
         bookingMode: next,
-        dirty: next !== curr.bookingModeOriginal,
+        dirty: isInstructorPolicyDirty({
+          selected: curr.selected,
+          original: curr.original,
+          bookingMode: next,
+          bookingModeOriginal: curr.bookingModeOriginal,
+        }),
       };
     });
   };

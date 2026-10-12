@@ -35,7 +35,13 @@ export async function POST(req: Request) {
   const role = roleForSignupPath(path);
   const current = await prisma.userProfile.findUnique({
     where: { userId: user.id },
-    select: { role: true, signupPath: true },
+    select: {
+      role: true,
+      signupPath: true,
+      dateOfBirth: true,
+      dateOfBirthVerified: true,
+      verificationState: true,
+    },
   });
   const marker = await prisma.photoVerification.findUnique({
     where: { userId: user.id },
@@ -60,6 +66,14 @@ export async function POST(req: Request) {
       ? new Date(parsed.data.dateOfBirth)
       : null;
 
+  const claimedDobLocked =
+    current?.role === 'STUDENT' &&
+    current.signupPath === 'LEARNER' &&
+    current.verificationState !== 'SIGNED_UP';
+  if (claimedDobLocked && !sameDate(current.dateOfBirth, dateOfBirth)) {
+    return NextResponse.json({ errors: { dateOfBirth: 'claimed_dob_locked' } }, { status: 409 });
+  }
+
   await prisma.userProfile.upsert({
     where: { userId: user.id },
     create: {
@@ -79,7 +93,9 @@ export async function POST(req: Request) {
     update: {
       role,
       signupPath: path,
-      dateOfBirth,
+      // Once Didit has started, retain the original claimed DOB. This route
+      // never writes dateOfBirthVerified; only the provider webhook may do so.
+      ...(claimedDobLocked ? {} : { dateOfBirth }),
       phone: parsed.data.phone?.trim() || null,
       city: parsed.data.city?.trim() || null,
       schoolName: parsed.data.schoolName?.trim() || null,
@@ -95,7 +111,9 @@ export async function POST(req: Request) {
     create: { userId: user.id, signupRole: role, signupStartedAt: startedAt },
     update: { signupRole: role, signupStartedAt: startedAt },
   });
-  return NextResponse.json(
-    SignupStartResponse.parse({ role, startedAt: startedAt.toISOString() }),
-  );
+  return NextResponse.json(SignupStartResponse.parse({ role, startedAt: startedAt.toISOString() }));
+}
+
+function sameDate(left: Date | null, right: Date | null): boolean {
+  return left?.getTime() === right?.getTime();
 }

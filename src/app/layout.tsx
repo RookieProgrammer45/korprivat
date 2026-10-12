@@ -8,7 +8,8 @@ import { SiteFooter, SiteNav } from '@/components/custom/site-nav';
 import { AppProviders } from '@/components/providers';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
-import { locale } from '@/lib/locale';
+import { resolveLocale } from '@/lib/i18n';
+import { documentLocaleAttributes } from '@/lib/public-locale';
 import { siteDescription, siteName, siteUrl } from '@/lib/site';
 import { viewportConfig } from '@/lib/viewport-config';
 import './globals.css';
@@ -37,10 +38,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { ...viewportConfig };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const nonce = (await headers()).get('x-nonce') ?? undefined;
+  const [requestHeaders, activeLocale] = await Promise.all([headers(), resolveLocale()]);
+  const nonce = requestHeaders.get('x-nonce') ?? undefined;
+  const { lang, dir } = documentLocaleAttributes(activeLocale);
 
   return (
-    <html lang={locale.lang} dir={locale.dir} suppressHydrationWarning>
+    <html lang={lang} dir={dir} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-body text-foreground antialiased">
         <HeadContent nonce={nonce} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem nonce={nonce}>

@@ -67,6 +67,23 @@
       "6": "Sat"
     }
   },
+  "publicRecovery": {
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist.",
+      "action": "Back to home"
+    },
+    "routeError": {
+      "title": "Something went wrong",
+      "description": "An unexpected error occurred. Please try again.",
+      "action": "Try again"
+    },
+    "globalError": {
+      "title": "Something went wrong",
+      "description": "A critical error occurred. Please try again.",
+      "action": "Try again"
+    }
+  },
   "landing": {
     "contactPage": {
       "eyebrow": "Support",
@@ -904,7 +921,8 @@
       "errors": {
         "tooShort": "Use at least 8 characters.",
         "mismatch": "Passwords don't match.",
-        "invalidToken": "This reset link is invalid or expired. Request a new one."
+        "invalidToken": "This reset link is invalid or expired. Request a new one.",
+        "generic": "Could not update your password. Please try again."
       }
     },
     "signUp": {
@@ -2592,7 +2610,7 @@
     "fee": {
       "full": "Full cancellation charge",
       "partial": "Partial cancellation charge",
-      "amount": "Cancellation charge: {fee} USD",
+      "amount": "Cancellation charge: {fee}",
       "none": "No cancellation charge is shown for this timing."
     },
     "form": {
@@ -2620,11 +2638,14 @@
     "cantCancelTitle": "This booking cannot be cancelled here.",
     "receipt": {
       "badge": "Cancellation recorded",
-      "withFee": "Cancellation charge: {fee} USD",
+      "withFee": "Cancellation charge: {fee}",
       "withoutFee": "No cancellation charge",
       "body": "The saved policy was applied to this booking.",
       "browseCta": "Browse another driving school",
-      "toast": "Cancellation recorded"
+      "toast": "Cancellation recorded",
+      "feeRecorded": "Cancellation charge recorded — see your receipt.",
+      "reconciliationPending": "Cancellation recorded. Payment reconciliation is still pending; check again to retry.",
+      "checkCancellation": "Check cancellation and refund"
     }
   },
   "bookingReceipt": {
@@ -2651,7 +2672,7 @@
     "payoutStatus": "Payout status",
     "learnerReceipt": "Learner receipt",
     "instructorReceipt": "School receipt",
-    "verifiedCharge": "Verified checkout charge: {usd}.",
+    "verifiedCharge": "Recorded checkout total: {sek}.",
     "pdfTitle": "DriveLinkUp booking receipt",
     "pdfNote": "Verified checkout charge: {usd}. Amounts are shown in SEK.",
     "download": "Download PDF",

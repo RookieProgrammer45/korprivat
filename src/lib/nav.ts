@@ -155,31 +155,18 @@ export const navItems: NavItem[] = [
     group: 'footer',
     order: 9,
   },
-  // Authed-only: "Saved details" / "payment methods" page. Lives in the
-  // footer because it requires a session — the global footer
-  // SiteNav renders it via useSession; non-authed visitors will see it
-  // ghost-rendered but the link is harmless on the public marketing
-  // pages. Better-auth auto-redirects unauthorised requests to /login.
-  {
-    label: 'Payment methods',
-    labelKey: 'nav.paymentMethods',
-    href: '/dashboard/student/payment-methods',
-    group: 'footer',
-    order: 10,
-    requiresAuth: true,
-  },
   {
     label: 'Southern Sweden',
     labelKey: 'nav.southernSweden',
     href: '/southern-sweden',
     group: 'footer',
-    order: 11,
+    order: 10,
   },
   {
     label: 'Western & Northern Sweden',
     labelKey: 'nav.westernNorthernSweden',
     href: '/western-northern-sweden',
     group: 'footer',
-    order: 12,
+    order: 11,
   },
 ];

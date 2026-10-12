@@ -14,6 +14,8 @@ const {
   mockHandledareFindFirst,
   mockTransaction,
   mockGetSessionUser,
+  mockLicenceFindUnique,
+  mockAffiliation,
 } = vi.hoisted(() => ({
   sendEmailMock: vi.fn(async () => ({ id: 'mock_email_id' })),
   mockInstructorFindUnique: vi.fn(),
@@ -25,6 +27,8 @@ const {
   mockHandledareFindFirst: vi.fn(async () => null),
   mockTransaction: vi.fn(),
   mockGetSessionUser: vi.fn(),
+  mockLicenceFindUnique: vi.fn(),
+  mockAffiliation: vi.fn(),
 }));
 
 const LEARNER_SESSION = {
@@ -53,9 +57,12 @@ vi.mock('@/lib/db', () => ({
     availabilitySlot: { findFirst: mockSlotFindFirst, updateMany: mockSlotUpdateMany },
     userProfile: { findUnique: mockUserProfileFindUnique },
     handledareEnrollment: { findFirst: mockHandledareFindFirst },
+    instructorLicense: { findFirst: mockLicenceFindUnique },
     $transaction: mockTransaction,
   },
 }));
+
+vi.mock('@/lib/orgs/public', () => ({ getActiveAffiliationForUser: mockAffiliation }));
 
 vi.mock('@/lib/require-auth', () => ({
   getSessionUser: mockGetSessionUser,
@@ -103,6 +110,8 @@ function instructorRecord(
     email: string | null;
     cancellationPolicyTier: string | null;
     bookingMode: 'instant' | 'request' | null;
+    userId: string | null;
+    providerRole: string | null;
   }> = {},
 ) {
   return {
@@ -114,6 +123,8 @@ function instructorRecord(
     email: 'erik@drivelinkup.test',
     cancellationPolicyTier: 'flexible',
     bookingMode: 'instant',
+    userId: 'user_provider',
+    providerRole: 'INSTRUCTOR',
     ...overrides,
   };
 }
@@ -130,6 +141,10 @@ describe('POST /api/bookings — email dispatch', () => {
     mockUserProfileFindUnique.mockReset();
     mockTransaction.mockReset();
     mockGetSessionUser.mockReset();
+    mockLicenceFindUnique.mockReset();
+    mockLicenceFindUnique.mockResolvedValue({ id: 'verified-licence' });
+    mockAffiliation.mockReset();
+    mockAffiliation.mockResolvedValue(null);
     mockGetSessionUser.mockResolvedValue(LEARNER_SESSION);
     mockUserProfileFindUnique.mockResolvedValue({
       dateOfBirth: dobYearsAgo(25),
@@ -205,6 +220,48 @@ describe('POST /api/bookings — email dispatch', () => {
     expect(sendEmailMock).not.toHaveBeenCalled();
     expect(mockBookingCreate).not.toHaveBeenCalled();
   });
+
+  it.each(['PENDING', 'EXPIRED', 'REJECTED'])(
+    'denies a %s provider before reservation or notifications',
+    async (licenceStatus) => {
+      mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+      // A VERIFIED-only DB query cannot return the non-VERIFIED fixture.
+      expect(licenceStatus).not.toBe('VERIFIED');
+      mockLicenceFindUnique.mockResolvedValueOnce(null);
+      const res = await POST(jsonRequest(VALID_BODY));
+      expect(res.status).toBe(404);
+      expect(mockTransaction).not.toHaveBeenCalled();
+      expect(mockBookingCreate).not.toHaveBeenCalled();
+      expect(sendEmailMock).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([40, 45, 90])(
+    'freezes learner charge and payout for a %i-minute selected slot',
+    async (duration) => {
+      mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+      mockSlotFindFirst.mockResolvedValueOnce({
+        id: 'slot_1',
+        startsAt: new Date('2030-08-10T14:30:00.000Z'),
+        endsAt: null,
+        durationMinutes: duration,
+      });
+      const res = await POST(jsonRequest({ ...VALID_BODY, priceAmountSek: 1, durationMinutes: 1 }));
+      const price = Math.round((550 * duration) / 60);
+      expect(res.status).toBe(201);
+      expect(mockBookingCreate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.objectContaining({
+            priceAmountSek: price,
+            serviceFeeSek: 0,
+            grossChargedSek: price,
+            payoutAmountSek: price - Math.round(price * 0.1),
+            endsAt: new Date(new Date('2030-08-10T14:30:00.000Z').getTime() + duration * 60_000),
+          }),
+        }),
+      );
+    },
+  );
 
   it('sends exactly two transactional emails on the happy path (201)', async () => {
     mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());

@@ -30,6 +30,9 @@ export type AvailabilitySlotItem = z.infer<typeof AvailabilitySlotItem>;
 
 export const AvailabilitySlotList = z.object({
   items: z.array(AvailabilitySlotItem),
+  // Owner list responses include this even when `items` is empty. It stays
+  // optional so existing public and older compatible envelopes still parse.
+  providerTimezone: z.string().min(1).optional(),
 });
 export type AvailabilitySlotList = z.infer<typeof AvailabilitySlotList>;
 

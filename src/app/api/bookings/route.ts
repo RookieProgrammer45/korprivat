@@ -2,9 +2,14 @@ import 'server-only';
 import { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { generateLearnerAccessToken } from '@/lib/business/booking-access';
-import { instructorPayoutSek, learnerTotalSek } from '@/lib/business/booking-fees';
+import {
+  instructorPayoutSek,
+  learnerTotalSek,
+  lessonPriceForDurationSek,
+} from '@/lib/business/booking-fees';
 import { generateBookingToken } from '@/lib/business/escrow';
 import { isLicenceCategoryCode } from '@/lib/business/licence-categories';
+import { isPublicBookableProvider } from '@/lib/business/provider-activation';
 import { formatProviderDate, providerTimezoneForCity } from '@/lib/business/provider-timezone';
 import { recordRebookingContext } from '@/lib/business/rebooking-cache';
 import { BookingCreate, BookingCreated, type BookingCreateMode } from '@/lib/contracts/bookings';
@@ -14,8 +19,8 @@ import {
   bookingRequestSubmittedEmail,
   studentBookingRequestReceivedEmail,
 } from '@/lib/email/templates';
-import { resolveOrigin } from '@/lib/payments/origin';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
+import { resolveOrigin } from '@/lib/payments/origin';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
@@ -97,10 +102,22 @@ export async function POST(req: Request) {
       cancellationPolicyTier: true,
       bookingMode: true,
       userId: true,
+      providerRole: true,
     },
   });
   if (!instructor) {
     return NextResponse.json({ errors: { instructorId: 'Unknown instructor' } }, { status: 400 });
+  }
+
+  if (
+    !(await isPublicBookableProvider({
+      userId: instructor.userId,
+      categories: instructor.categories,
+      providerRole: instructor.providerRole,
+    }))
+  ) {
+    // Do not disclose activation or licensing details to a public booker.
+    return NextResponse.json({ errors: { instructorId: 'Unknown instructor' } }, { status: 404 });
   }
 
   // Snapshot school affiliation at booking time (ADR-004: 8% when organizationId set).
@@ -140,8 +157,6 @@ export async function POST(req: Request) {
     );
   }
 
-  const totals = learnerTotalSek(instructor.hourlyRateSek);
-  const payoutSnapshot = instructorPayoutSek(totals.priceSek, { organizationId });
   const learnerAccess = generateLearnerAccessToken();
   const actionToken = instructorMode === 'request' ? generateBookingToken() : null;
 
@@ -160,6 +175,11 @@ export async function POST(req: Request) {
         });
         if (!slot) throw new BookingConflictError();
 
+        const totals = learnerTotalSek(
+          lessonPriceForDurationSek(instructor.hourlyRateSek, slot.durationMinutes),
+        );
+        const payoutSnapshot = instructorPayoutSek(totals.priceSek, { organizationId });
+
         if (instructorMode === 'request') {
           const activeRequest = await tx.booking.findFirst({
             where: { slotId: slot.id, paymentStatus: 'awaiting_approval' },
@@ -169,8 +189,7 @@ export async function POST(req: Request) {
         }
 
         const lessonEndsAt =
-          slot.endsAt ??
-          new Date(slot.startsAt.getTime() + (slot.durationMinutes || 60) * 60_000);
+          slot.endsAt ?? new Date(slot.startsAt.getTime() + (slot.durationMinutes || 60) * 60_000);
 
         const created = await tx.booking.create({
           data: {

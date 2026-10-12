@@ -1,7 +1,7 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
+import { isPublicBookableProvider } from '@/lib/business/provider-activation';
 import {
-  hasCanonicalCategory,
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
@@ -19,12 +19,10 @@ export async function GET(_req: Request, ctx: Ctx) {
     where: { id },
     select: PUBLIC_INSTRUCTOR_SELECT,
   });
-  if (!instructor) {
+  if (!instructor || !(await isPublicBookableProvider(instructor))) {
     // Same envelope the form's `applyServerErrors` consumes, so the client
-    // island can detect "not found" without a bespoke shape.
-    return NextResponse.json({ errors: { id: 'Not found' } }, { status: 404 });
-  }
-  if (!hasCanonicalCategory(instructor)) {
+    // island can detect "not found" without a bespoke shape. Do not reveal
+    // whether an id is absent or currently not public-bookable.
     return NextResponse.json({ errors: { id: 'Not found' } }, { status: 404 });
   }
   const [aggregates, affiliation] = await Promise.all([
@@ -49,9 +47,7 @@ export async function GET(_req: Request, ctx: Ctx) {
   return NextResponse.json(
     InstructorItem.parse({
       ...toPublicInstructor(instructor, aggregate, slot?.startsAt.toISOString() ?? null),
-      affiliation: affiliation
-        ? { name: affiliation.name, slug: affiliation.slug }
-        : null,
+      affiliation: affiliation ? { name: affiliation.name, slug: affiliation.slug } : null,
     }),
   );
 }

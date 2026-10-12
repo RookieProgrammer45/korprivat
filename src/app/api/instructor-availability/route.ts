@@ -180,8 +180,10 @@ export async function GET(req: Request) {
     },
   });
 
+  const providerTimezone = providerTimezoneForCity(owned.city);
   return NextResponse.json(
     AvailabilitySlotList.parse({
+      providerTimezone,
       items: rows.map((row) => ({
         id: row.id,
         instructorId: row.instructorId,
@@ -190,7 +192,7 @@ export async function GET(req: Request) {
         durationMinutes: row.durationMinutes,
         bookedAt: row.bookedAt ? row.bookedAt.toISOString() : null,
         providerRole: owned.providerRole,
-        timezone: providerTimezoneForCity(owned.city),
+        timezone: providerTimezone,
       })),
     }),
   );
@@ -377,8 +379,10 @@ export async function POST(req: Request) {
     },
   });
 
+  const providerTimezone = providerTimezoneForCity(owned.city);
   return NextResponse.json(
     AvailabilitySlotList.parse({
+      providerTimezone,
       items: inserted.map((row) => ({
         id: row.id,
         instructorId: row.instructorId,
@@ -387,7 +391,7 @@ export async function POST(req: Request) {
         durationMinutes: row.durationMinutes,
         bookedAt: row.bookedAt ? row.bookedAt.toISOString() : null,
         providerRole: owned.providerRole,
-        timezone: providerTimezoneForCity(owned.city),
+        timezone: providerTimezone,
       })),
     }),
     { status: 201 },

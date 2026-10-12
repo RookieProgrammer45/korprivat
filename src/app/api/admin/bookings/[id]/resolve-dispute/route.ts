@@ -6,10 +6,7 @@ import 'server-only';
 import { headers } from 'next/headers';
 import { after, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import {
-  AdminResolveDisputeRequest,
-  AdminResolveDisputeResponse,
-} from '@/lib/contracts/bookings';
+import { AdminResolveDisputeRequest, AdminResolveDisputeResponse } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
 import { payoutBooking } from '@/lib/payments/payouts';
 import { refundBooking } from '@/lib/payments/refunds';
@@ -38,7 +35,10 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   }
   const parsed = AdminResolveDisputeRequest.safeParse(bodyJson);
   if (!parsed.success) {
-    return NextResponse.json({ error: 'invalid_body', details: parsed.error.flatten() }, { status: 400 });
+    return NextResponse.json(
+      { error: 'invalid_body', details: parsed.error.flatten() },
+      { status: 400 },
+    );
   }
 
   const booking = await prisma.booking.findUnique({ where: { id } });
@@ -66,6 +66,18 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       refundSek: amountSek,
     });
     const refundResult = await refundBooking(id, { amountSek: math.refundSek });
+    if (refundResult.kind === 'pending') {
+      return NextResponse.json(
+        { error: 'refund_pending', reconciliationPending: true },
+        { status: 503 },
+      );
+    }
+    if (refundResult.kind === 'skipped' && refundResult.reason !== 'already_refunded') {
+      return NextResponse.json(
+        { error: 'refund_missing_evidence', reason: refundResult.reason },
+        { status: 409 },
+      );
+    }
     if (refundResult.kind === 'error') {
       return NextResponse.json({ error: 'refund_failed', result: refundResult }, { status: 500 });
     }
@@ -138,6 +150,18 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
 
   // outcome === 'refund'
   const refundResult = await refundBooking(id);
+  if (refundResult.kind === 'pending') {
+    return NextResponse.json(
+      { error: 'refund_pending', reconciliationPending: true },
+      { status: 503 },
+    );
+  }
+  if (refundResult.kind === 'skipped' && refundResult.reason !== 'already_refunded') {
+    return NextResponse.json(
+      { error: 'refund_missing_evidence', reason: refundResult.reason },
+      { status: 409 },
+    );
+  }
   if (refundResult.kind === 'error') {
     return NextResponse.json({ error: 'refund_failed', result: refundResult }, { status: 500 });
   }

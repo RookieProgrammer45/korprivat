@@ -6,6 +6,7 @@ import {
   ReceiptEmailDeliveryStatusEnum,
 } from '@/lib/contracts/receipts';
 import { prisma } from '@/lib/db';
+import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
 
 export type ReceiptRole = 'learner' | 'instructor';
 
@@ -49,6 +50,7 @@ type BookingSnapshot = {
 };
 
 type PaidBookingSnapshot = BookingSnapshot & {
+  paidAt?: Date | null;
   heldAt?: Date | null;
   payoutReleasedAt?: Date | null;
 };
@@ -111,10 +113,14 @@ export function receiptAmounts(
 export async function ensureBookingReceipts(input: {
   booking: BookingSnapshot;
   instructor: InstructorSnapshot;
-  verifiedAmountUsd: number;
+  verifiedAmountSek: number;
   locale?: string | null;
 }) {
   const amounts = receiptAmounts(input.booking, input.instructor.hourlyRateSek);
+  const verifiedAmountSek = input.verifiedAmountSek;
+  if (!Number.isSafeInteger(verifiedAmountSek) || verifiedAmountSek !== amounts.grossChargedSek) {
+    throw new Error('verified_checkout_amount_mismatch');
+  }
   const scheduledAt = input.booking.slot?.startsAt ?? input.booking.preferredAt;
   const durationMinutes = input.booking.slot?.durationMinutes ?? 60;
   const locale = safeLocale(input.locale ?? input.booking.locale);
@@ -134,7 +140,10 @@ export async function ensureBookingReceipts(input: {
     grossChargedSek: amounts.grossChargedSek,
     commissionSek: amounts.commissionSek,
     netPayoutSek: amounts.netPayoutSek,
-    verifiedAmountUsd: Math.max(0, Math.round(input.verifiedAmountUsd)),
+    // Preserve this legacy column's historical USD-conversion semantics.
+    // The public SEK flow uses the immutable grossChargedSek snapshot instead;
+    // never store SEK under a USD name or reinterpret historical USD values.
+    verifiedAmountUsd: verifiedAmountSek > 0 ? sekToUsdChargeAmount(verifiedAmountSek) : 0,
     paymentStatus,
   };
 
@@ -154,7 +163,7 @@ export async function ensureBookingReceipts(input: {
         payoutStatus: 'not_applicable',
         emailDeliveryStatus: 'pending',
       },
-      update: { paymentStatus, verifiedAmountUsd: common.verifiedAmountUsd },
+      update: { paymentStatus },
     }),
     prisma.bookingReceipt.upsert({
       where: {
@@ -174,7 +183,6 @@ export async function ensureBookingReceipts(input: {
       update: {
         paymentStatus,
         payoutStatus,
-        verifiedAmountUsd: common.verifiedAmountUsd,
       },
     }),
   ]);
@@ -201,7 +209,7 @@ export async function repairPaidCancellationReceipts(input: {
   booking: PaidBookingSnapshot;
   instructor?: InstructorSnapshot | null;
   paymentStatus: string;
-  verifiedAmountUsd: number;
+  verifiedAmountSek: number;
 }) {
   const existing = await prisma.bookingReceipt.findMany({
     where: { bookingId: input.booking.id },
@@ -227,9 +235,9 @@ export async function repairPaidCancellationReceipts(input: {
     existing.length > 0 ||
     input.booking.paymentStatus === 'paid' ||
     input.booking.paymentStatus === 'held_escrow' ||
+    input.booking.paidAt != null ||
     input.booking.heldAt != null ||
-    input.booking.payoutReleasedAt != null ||
-    input.booking.payoutAmountSek != null;
+    input.booking.payoutReleasedAt != null;
 
   if (!hasPersistedPayment) return false;
 
@@ -267,7 +275,8 @@ export async function repairPaidCancellationReceipts(input: {
     commissionSek: source?.commissionSek ?? amounts.commissionSek,
     netPayoutSek: source?.netPayoutSek ?? amounts.netPayoutSek,
     verifiedAmountUsd:
-      source?.verifiedAmountUsd ?? Math.max(0, Math.round(input.verifiedAmountUsd)),
+      source?.verifiedAmountUsd ??
+      (input.verifiedAmountSek > 0 ? sekToUsdChargeAmount(input.verifiedAmountSek) : 0),
     paymentStatus: input.paymentStatus,
   };
 
@@ -342,7 +351,10 @@ export function receiptResponse(row: {
     category: row.category,
     scheduledAt: row.scheduledAt.toISOString(),
     durationMinutes: row.durationMinutes,
-    verifiedAmountUsd: row.verifiedAmountUsd,
+    // Existing rows have no persisted currency marker for this legacy field.
+    // The immutable gross SEK snapshot is therefore the only safe public
+    // verified amount for the SEK-only Checkout flow.
+    verifiedAmountSek: row.grossChargedSek,
     paymentStatus: row.paymentStatus,
     emailDeliveryStatus: normalizeReceiptEmailDeliveryStatus(row.emailDeliveryStatus),
     issuedAt: row.issuedAt.toISOString(),

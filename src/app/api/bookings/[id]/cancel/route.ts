@@ -1,46 +1,11 @@
-//
-// "Cancel a booking" terminal transition. Authorised by the same per-booking
-// unguessable action token the held-receipt email deep-link carries
-// (mirrors the complete / dispute pattern). The per-tier classifier in
-// `src/lib/business/cancellation-policy` decides between FOUR buckets:
-//
-//   'full_refund' — outside the tier's `fullRefundBeforeHours` (5 days for
-//                   moderate, 7 days for strict, 24h for flexible). Cancel
-//                   permitted, NO fee, slot freed,
-//                   `cancellationOutcome='cancelled_full_refund'`.
-//   'partial'     — between the tier's full-refund window and the 24h
-//                   late window. Tier-supplied `partialFeePercent`
-//                   (50% for moderate / strict, 0% for flexible). Fee row
-//                   recorded; `cancellationOutcome='cancelled_partial'`.
-//   'late'        — within LATE_WINDOW_HOURS (24h before the lesson).
-//                   100% fee, fee row recorded,
-//                   `cancellationOutcome='cancelled_late'`.
-//   'past'        — at or after the lesson start; cancel rejected 409 —
-//                   the dispute path is the right channel at that point.
-//
-// The fee is read against the ALREADY-PAID lesson charge
-// (`sekToUsdChargeAmount(instructor.hourlyRateSek)`) so a learner who's
-// already completed Stripe checkout sees the fee they were already charged,
-// in the same currency the checkout page quoted. App code never issues
-// Stripe refunds per the stripe-payments skill — the platform-team
-// reconciliation cycle sweeps any residual out-of-band; the instructor
-// keeps the full lesson rate per the marketplace model.
-//
-// Fulfill-once: the transaction first claims the booking row, then inserts
-// the fee and frees the slot. A losing concurrent call therefore cannot leave
-// behind a fee row. If `booking.cancellationOutcome` is already set to any of
-// the four cancellation values, the route is short-circuit 200 idempotent.
-//
-// Side effect: notify the *non*-cancelling party. The learner gets a fee
-// receipt (when fee > 0) or a neutral confirmation (full refund). The
-// instructor gets the neutral confirmation regardless of outcome (their
-// payout is untouched on every path).
+// Terminal booking cancellation. The database CAS is intentionally short; all
+// Stripe calls happen after the terminal commit and are idempotently reconciled.
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { getBookingAccessToken, matchesLearnerAccessToken } from '@/lib/business/booking-access';
 import {
   classifyCancellationOutcome,
-  computeCancellationFeeUsd,
+  computeCancellationFeeSek,
   getPolicyForTier,
   hoursUntilLesson,
 } from '@/lib/business/cancellation-policy';
@@ -54,20 +19,16 @@ import {
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { cancellationFeeReceiptEmail, cancellationNeutralEmail } from '@/lib/email/templates';
+import { isCheckoutIssuanceClaim } from '@/lib/payments/checkout-issuance';
+import { recoverCancelledCheckoutIssuance } from '@/lib/payments/checkout-issuance-recovery';
 import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
-import { alertReleasedCancelNeedsReview, refundBooking } from '@/lib/payments/refunds';
+import {
+  alertReleasedCancelNeedsReview,
+  reconcileCancelledCheckoutCapture,
+} from '@/lib/payments/refunds';
+import { getStripe } from '@/lib/payments/stripe';
 import { getSessionUser } from '@/lib/require-auth';
 
-// Acceptable base states for a cancel POST — any in-flight state the
-// booking might sit before completion:
-//   unpaid     — pre-payment; no fee, just frees the slot.
-//   pending    — Stripe checkout minted, learner hasn't paid; no fee.
-//   paid       — LEGACY pre-escrow state; rare in practice.
-//   held_escrow— funds held; the normal case for both early and late.
-// `awaiting_approval` (Request-mode row, instructor hasn't answered yet)
-// is also a valid base — the learner can withdraw the request.
-// A paid-out booking (released / refunded) is past the point where
-// cancellation makes sense — the dispute path covers that surface.
 const CANCEL_BASE_STATES = [
   'unpaid',
   'pending',
@@ -76,11 +37,6 @@ const CANCEL_BASE_STATES = [
   'awaiting_approval',
 ] as const;
 type CancelBaseState = (typeof CANCEL_BASE_STATES)[number];
-// Terminal outcomes this route is allowed to WRITE onto a freshly-
-// cancelled booking. Any row arriving here with an already-set
-// `cancellationOutcome` is short-circuited via the idempotency block
-// BELOW — this is the set the route USES to commit + the idempotency
-// block COULD short-circuit.
 type TerminalCancellation =
   | 'cancelled_full_refund'
   | 'cancelled_partial'
@@ -88,11 +44,147 @@ type TerminalCancellation =
   | 'cancelled_early';
 type PaymentAfter = CancelBaseState | TerminalCancellation;
 
+type BookingSnapshot = NonNullable<Awaited<ReturnType<typeof prisma.booking.findUnique>>>;
+type CancellationPlan = { captured: boolean; feeAmountSek: number; feePercentApplied: number };
+
 export const dynamic = 'force-dynamic';
+
+function isTerminalCancellation(value: string | null | undefined): value is TerminalCancellation {
+  return (
+    value === 'cancelled_full_refund' ||
+    value === 'cancelled_partial' ||
+    value === 'cancelled_late' ||
+    value === 'cancelled_early'
+  );
+}
+
+function isCapturedStatus(value: string | null | undefined) {
+  return value === 'paid' || value === 'held_escrow';
+}
+
+async function hasCapturedPaymentEvidence(booking: BookingSnapshot): Promise<boolean> {
+  if (booking.paidAt != null || booking.heldAt != null || isCapturedStatus(booking.paymentStatus)) {
+    return true;
+  }
+  // Older schema revisions used a payment-intent field. Read it defensively so
+  // a deployed client generated from that schema remains correctly recognized.
+  if (
+    'stripePaymentIntentId' in booking &&
+    typeof (booking as unknown as { stripePaymentIntentId?: unknown }).stripePaymentIntentId ===
+      'string'
+  ) {
+    return true;
+  }
+  // A pre-existing receipt is historical evidence of payment; do not infer
+  // payment from a payout snapshot or from a pending Checkout Session.
+  const receipts = await prisma.bookingReceipt.findMany({
+    where: { bookingId: booking.id },
+    select: { id: true },
+    take: 1,
+  });
+  return receipts.length > 0;
+}
+
+async function cancellationPlan(
+  booking: BookingSnapshot,
+  outcome: TerminalCancellation,
+): Promise<CancellationPlan | 'legacy_support_required'> {
+  const captured = await hasCapturedPaymentEvidence(booking);
+  if (!captured || outcome === 'cancelled_full_refund' || outcome === 'cancelled_early') {
+    return { captured, feeAmountSek: 0, feePercentApplied: 0 };
+  }
+  if (booking.grossChargedSek == null) return 'legacy_support_required';
+  const feePercentApplied =
+    outcome === 'cancelled_late'
+      ? 100
+      : getPolicyForTier(booking.cancellationPolicyTier).partialFeePercent;
+  return {
+    captured,
+    feeAmountSek: computeCancellationFeeSek(booking.grossChargedSek, feePercentApplied),
+    feePercentApplied,
+  };
+}
+
+function responseFor(
+  booking: BookingSnapshot,
+  outcome: TerminalCancellation,
+  feeAmountSek: number,
+  reconciliationPending = false,
+): ReturnType<typeof BookingCancelResponse.parse> {
+  return BookingCancelResponse.parse({
+    id: booking.id,
+    paymentStatus: outcome as PaymentAfter,
+    cancellationOutcome: CancellationOutcomeEnum.parse(outcome),
+    cancelledAt: (booking.cancelledAt ?? new Date()).toISOString(),
+    feeAmountSek,
+    reconciliationPending,
+  });
+}
+
+async function expireCheckoutSession(sessionId: string, bookingId: string) {
+  try {
+    await getStripe().checkout.sessions.expire(sessionId);
+  } catch (error) {
+    // Completion/expiry races are expected. We always retrieve/reconcile below,
+    // so an expiration error is never used as proof that no money was captured.
+    console.warn('[cancel] unable to expire Checkout Session', {
+      bookingId,
+      checkoutSessionId: sessionId,
+      error: error instanceof Error ? error.message : 'unknown_error',
+    });
+  }
+}
+
+async function reconcileCancelledSession(
+  booking: BookingSnapshot,
+  plan: CancellationPlan,
+): Promise<'done' | 'retry'> {
+  let sessionId = booking.stripeSessionId ?? booking.stripeCheckoutSessionId;
+  if (!sessionId) return 'done';
+  if (isCheckoutIssuanceClaim(sessionId)) {
+    try {
+      if ((await recoverCancelledCheckoutIssuance(booking.id)) !== 'recovered') return 'retry';
+      const recovered = await prisma.booking.findUnique({ where: { id: booking.id } });
+      sessionId = recovered?.stripeSessionId ?? recovered?.stripeCheckoutSessionId ?? null;
+      if (!sessionId || isCheckoutIssuanceClaim(sessionId)) return 'retry';
+    } catch {
+      return 'retry';
+    }
+  }
+  await expireCheckoutSession(sessionId, booking.id);
+  const result = await reconcileCancelledCheckoutCapture({
+    bookingId: booking.id,
+    sessionId,
+    cancellationOutcome: booking.cancellationOutcome ?? booking.paymentStatus,
+    cancellationPolicyTier: booking.cancellationPolicyTier,
+    grossChargedSek: booking.grossChargedSek,
+    // A pending/unpaid withdrawal never retains a fee merely because Checkout
+    // captured after the terminal cancellation commit.
+    forceFullRefund: !plan.captured,
+  });
+  if (
+    result.kind === 'error' ||
+    result.kind === 'pending' ||
+    (result.kind === 'skipped' && result.reason === 'no_payment_intent')
+  ) {
+    console.error('[cancel] capture reconciliation requires retry', {
+      bookingId: booking.id,
+      result,
+    });
+    return 'retry';
+  }
+  return 'done';
+}
+
+async function loadCancellationInstructor(booking: BookingSnapshot) {
+  return prisma.instructor.findUnique({
+    where: { id: booking.instructorId },
+    select: { userId: true, email: true, name: true, city: true, hourlyRateSek: true },
+  });
+}
 
 export async function POST(req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params;
-
   let bodyJson: unknown;
   try {
     bodyJson = await req.json();
@@ -101,20 +193,19 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   }
   const parsed = BookingCancelRequest.safeParse(bodyJson);
   if (!parsed.success) {
-    const fieldErrors = parsed.error.flatten().fieldErrors;
     const errors: Record<string, string> = {};
-    for (const [field, messages] of Object.entries(fieldErrors)) {
-      const message = messages?.[0];
-      if (message) errors[field] = message;
+    for (const [field, messages] of Object.entries(parsed.error.flatten().fieldErrors)) {
+      if (messages?.[0]) errors[field] = messages[0];
     }
     return NextResponse.json({ errors }, { status: 400 });
   }
   const data = parsed.data;
 
-  const booking = await prisma.booking.findUnique({ where: { id } });
-  if (!booking) {
+  const initialBooking = await prisma.booking.findUnique({ where: { id } });
+  if (!initialBooking)
     return NextResponse.json({ errors: { id: 'Booking not found' } }, { status: 404 });
-  }
+  let booking: BookingSnapshot = initialBooking;
+
   const instructorForAccess = await prisma.instructor.findUnique({
     where: { id: booking.instructorId },
     select: { userId: true, providerRole: true },
@@ -134,47 +225,42 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   }
   const actorRole: 'learner' | 'instructor' =
     providerSession || providerToken ? 'instructor' : 'learner';
-  // Already-cancelled booking → return the prior outcome (idempotent retry).
-  // The four possible values match the four `CancellationOutcomeEnum`
-  // entries the cancel flow can write today + the LEGACY `cancelled_early`
-  // value (kept on the storage column for historical rows; no new writes
-  // target it because the per-tier classifier never maps to it).
-  const priorOutcome = booking.cancellationOutcome;
-  if (
-    priorOutcome === 'cancelled_full_refund' ||
-    priorOutcome === 'cancelled_partial' ||
-    priorOutcome === 'cancelled_late' ||
-    priorOutcome === 'cancelled_early'
-  ) {
-    await repairPaidCancellationReceipts({
-      booking,
-      paymentStatus: priorOutcome,
-      verifiedAmountUsd: sekToUsdChargeAmount(booking.grossChargedSek ?? 1),
-    });
+
+  if (isTerminalCancellation(booking.cancellationOutcome)) {
+    const priorPlan = await cancellationPlan(booking, booking.cancellationOutcome);
+    if (priorPlan === 'legacy_support_required') {
+      return NextResponse.json(
+        { errors: { state: 'Cancellation requires support review for this historical booking.' } },
+        { status: 409 },
+      );
+    }
+    if (priorPlan.captured && booking.grossChargedSek != null) {
+      const instructor = await loadCancellationInstructor(booking);
+      await repairPaidCancellationReceipts({
+        booking,
+        instructor,
+        paymentStatus: booking.cancellationOutcome,
+        verifiedAmountSek: booking.grossChargedSek,
+      });
+    }
+    const reconciliation = await reconcileCancelledSession(booking, priorPlan);
     return NextResponse.json(
-      BookingCancelResponse.parse({
-        id: booking.id,
-        paymentStatus: priorOutcome as PaymentAfter,
-        cancellationOutcome: priorOutcome,
-        cancelledAt: (booking.cancelledAt ?? new Date()).toISOString(),
-        // The fee from the original cancel was retained on the platform; we
-        // intentionally DO NOT look it up here — the original response is
-        // authoritative for the same-row retry path.
-        feeAmountUsd: null,
-      }),
-      { status: 200 },
+      responseFor(
+        booking,
+        booking.cancellationOutcome,
+        priorPlan.feeAmountSek,
+        reconciliation === 'retry',
+      ),
+      { status: reconciliation === 'done' ? 200 : 202 },
     );
   }
-  // Pre-flight state guard. Cancellation only applies while the booking
-  // is in flight (pending/paid/held_escrow). A released row needs manual
-  // review (funds already transferred). A 'cancelled_*' row is handled above.
+
   if (booking.paymentStatus === 'released') {
     await alertReleasedCancelNeedsReview(booking.id).catch(() => undefined);
     return NextResponse.json(
       {
         errors: {
-          state:
-            'This lesson was already paid out. Support has been notified to review a refund.',
+          state: 'This lesson was already paid out. Support has been notified to review a refund.',
         },
       },
       { status: 409 },
@@ -196,208 +282,175 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   }
 
   const now = new Date();
-  // Per-tier policy lookup — reads the SNAPSHOT on the booking row (set at
-  // POST /api/bookings time), NEVER the live instructor tier. Same fallback
-  // to 'flexible' that the contract's nullable tier column uses.
-  const policy = getPolicyForTier(booking.cancellationPolicyTier);
-  const classified = classifyCancellationOutcome(now, booking.preferredAt, policy);
+  const classified = classifyCancellationOutcome(
+    now,
+    booking.preferredAt,
+    getPolicyForTier(booking.cancellationPolicyTier),
+  );
   if (classified.kind === 'past') {
-    // Lesson already started — dispute is the right channel.
     return NextResponse.json(
-      {
-        errors: {
-          state:
-            'The lesson has already started — to flag a problem with this booking, open a dispute instead.',
-        },
-      },
+      { errors: { state: 'The lesson has already started — open a dispute instead.' } },
       { status: 409 },
     );
   }
-
-  const cancelledByLabel = data.cancelledByLabel;
-  // Session ownership is authoritative. For legacy email links the token is
-  // the authorization grant; retain the optional role only for old links that
-  // used one shared action token for both parties.
-  const cancelledByRole: 'learner' | 'instructor' = sessionUser
-    ? actorRole
-    : (data.cancelledByRole ?? actorRole);
   const outcome: TerminalCancellation =
     classified.kind === 'full_refund'
       ? 'cancelled_full_refund'
       : classified.kind === 'partial'
         ? 'cancelled_partial'
         : 'cancelled_late';
-  const paymentStatusAfter: PaymentAfter = outcome;
+  const cancelledByRole: 'learner' | 'instructor' = sessionUser
+    ? actorRole
+    : (data.cancelledByRole ?? actorRole);
 
-  // Fee branch — applies for `cancelled_partial` (tier.partialFeePercent)
-  // and `cancelled_late` (100%). `cancelled_full_refund` writes no fee.
-  let feeAmountUsd: number | null = null;
-  let feePercentApplied = 0;
-
-  // Stash the instructor row the fee branch fetched so the repair and email
-  // steps can share the same snapshot.
-  let feeBranchInstructor: {
-    email: string | null;
-    name: string;
-    city: string;
-    hourlyRateSek: number;
-  } | null = null;
-
-  if (outcome === 'cancelled_partial' || outcome === 'cancelled_late') {
-    const instructor = await prisma.instructor.findUnique({
-      where: { id: booking.instructorId },
-      select: { hourlyRateSek: true, name: true, email: true, city: true },
-    });
-    if (!instructor) {
-      return NextResponse.json({ errors: { id: 'Instructor not found' } }, { status: 404 });
-    }
-    feePercentApplied = classified.feePercent;
-    const lessonChargeUsd = sekToUsdChargeAmount(instructor.hourlyRateSek);
-    feeAmountUsd = computeCancellationFeeUsd(lessonChargeUsd, feePercentApplied);
-    feeBranchInstructor = instructor;
-  }
-
-  const transactionResult = await prisma.$transaction(async (tx) => {
-    const bookingUpdate = await tx.booking.updateMany({
-      where: {
-        id: booking.id,
-        cancellationOutcome: null,
-        paymentStatus: { in: [...CANCEL_BASE_STATES] },
-      },
-      data: {
-        paymentStatus: paymentStatusAfter,
-        cancellationOutcome: outcome,
-        cancelledAt: now,
-        cancelledByRole,
-        cancelledByLabel,
-      },
-    });
-
-    if (bookingUpdate.count === 0) return { bookingUpdate };
-
-    if (feeAmountUsd !== null) {
-      await tx.lateCancellationFee.create({
-        data: {
-          bookingId: booking.id,
-          amountUsd: feeAmountUsd,
-          windowHoursAtCancel: hoursUntilLesson(now, booking.preferredAt),
-          feePercentApplied,
-          status: 'recorded',
-        },
-      });
-    }
-
-    await tx.availabilitySlot.updateMany({
-      where: { bookedBookingId: booking.id },
-      data: { bookedAt: null, bookedBookingId: null },
-    });
-
-    return { bookingUpdate };
-  });
-  const bookingUpdate = transactionResult.bookingUpdate;
-
-  if (bookingUpdate.count === 0) {
-    // Concurrent cancel won — return its outcome so the caller doesn't
-    // see a phantom failure.
-    const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
-    if (fresh?.cancellationOutcome) {
-      return NextResponse.json(
-        BookingCancelResponse.parse({
-          id: fresh.id,
-          paymentStatus: (fresh.paymentStatus ?? outcome) as PaymentAfter,
-          cancellationOutcome: fresh.cancellationOutcome,
-          cancelledAt: (fresh.cancelledAt ?? now).toISOString(),
-          feeAmountUsd:
-            fresh.cancellationOutcome === 'cancelled_late' ||
-            fresh.cancellationOutcome === 'cancelled_partial'
-              ? feeAmountUsd
-              : null,
-        }),
-        { status: 200 },
-      );
-    }
+  let plan = await cancellationPlan(booking, outcome);
+  if (plan === 'legacy_support_required') {
     return NextResponse.json(
-      {
-        errors: {
-          state: 'Cancellation state changed underneath — refresh and try again.',
-        },
-      },
+      { errors: { state: 'Cancellation requires support review for this historical booking.' } },
       { status: 409 },
     );
   }
 
-  // Validate back through the enum so a refactor that drops a value out
-  // of `CancellationOutcomeEnum` surfaces as a parse error here, not a
-  // silently-wrong response shape downstream.
-  const parsedOutcome = CancellationOutcomeEnum.parse(outcome);
-  const responseBody = BookingCancelResponse.parse({
-    id: booking.id,
-    paymentStatus: paymentStatusAfter,
-    cancellationOutcome: parsedOutcome,
-    cancelledAt: now.toISOString(),
-    feeAmountUsd,
-  });
-
-  const cancellationInstructor =
-    feeBranchInstructor ??
-    (await prisma.instructor.findUnique({
-      where: { id: booking.instructorId },
-      select: { email: true, name: true, city: true, hourlyRateSek: true },
-    }));
-  await repairPaidCancellationReceipts({
-    booking,
-    instructor: cancellationInstructor,
-    paymentStatus: paymentStatusAfter,
-    verifiedAmountUsd: sekToUsdChargeAmount(
-      booking.grossChargedSek ?? cancellationInstructor?.hourlyRateSek ?? 1,
-    ),
-  });
-
-  // Auto-refund Stripe charge while funds are still in platform escrow.
-  if (booking.paymentStatus === 'held_escrow') {
-    const gross = booking.grossChargedSek ?? cancellationInstructor?.hourlyRateSek ?? 0;
-    let refundAmountSek: number | null = null;
-    if (outcome === 'cancelled_full_refund') {
-      refundAmountSek = null; // full PaymentIntent refund
-    } else if (outcome === 'cancelled_partial' && feePercentApplied > 0 && feePercentApplied < 100) {
-      refundAmountSek = Math.max(0, Math.round(gross * (1 - feePercentApplied / 100)));
-    } else if (outcome === 'cancelled_late') {
-      refundAmountSek = 0; // 100% fee retained — no Stripe refund
-    }
-
-    if (refundAmountSek === null || refundAmountSek > 0) {
-      const refundResult = await refundBooking(
-        booking.id,
-        refundAmountSek === null ? undefined : { amountSek: refundAmountSek },
-      );
-      if (refundResult.kind === 'error') {
-        console.error('[cancel] refund failed after cancel commit', {
-          bookingId: booking.id,
-          message: refundResult.message,
+  const commit = async (snapshot: BookingSnapshot, currentPlan: CancellationPlan) =>
+    prisma.$transaction(async (tx) => {
+      const claimed = await tx.booking.updateMany({
+        where: {
+          id: snapshot.id,
+          cancellationOutcome: null,
+          paymentStatus: snapshot.paymentStatus,
+          paidAt: snapshot.paidAt,
+        },
+        data: {
+          paymentStatus: outcome,
+          cancellationOutcome: outcome,
+          cancelledAt: now,
+          cancelledByRole,
+          cancelledByLabel: data.cancelledByLabel,
+        },
+      });
+      if (claimed.count !== 1) return false;
+      if (currentPlan.captured && currentPlan.feeAmountSek > 0) {
+        await tx.lateCancellationFee.create({
+          data: {
+            bookingId: snapshot.id,
+            // The column is legacy USD compatibility storage. The authoritative
+            // client/API value remains feeAmountSek from this frozen snapshot.
+            amountUsd: sekToUsdChargeAmount(currentPlan.feeAmountSek),
+            amountSek: currentPlan.feeAmountSek,
+            windowHoursAtCancel: hoursUntilLesson(now, snapshot.preferredAt),
+            feePercentApplied: currentPlan.feePercentApplied,
+            status: 'recorded',
+          },
         });
       }
+      await tx.availabilitySlot.updateMany({
+        where: { bookedBookingId: snapshot.id },
+        data: { bookedAt: null, bookedBookingId: null },
+      });
+      return true;
+    });
+
+  let committed = await commit(booking, plan);
+  if (!committed) {
+    const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });
+    if (!fresh) return NextResponse.json({ errors: { id: 'Booking not found' } }, { status: 404 });
+    booking = fresh;
+    if (isTerminalCancellation(booking.cancellationOutcome)) {
+      const priorPlan = await cancellationPlan(booking, booking.cancellationOutcome);
+      if (priorPlan === 'legacy_support_required') {
+        return NextResponse.json(
+          {
+            errors: { state: 'Cancellation requires support review for this historical booking.' },
+          },
+          { status: 409 },
+        );
+      }
+      const reconciliation = await reconcileCancelledSession(booking, priorPlan);
+      return NextResponse.json(
+        responseFor(
+          booking,
+          booking.cancellationOutcome,
+          priorPlan.feeAmountSek,
+          reconciliation === 'retry',
+        ),
+        {
+          status: reconciliation === 'done' ? 200 : 202,
+        },
+      );
+    }
+    // Capture won our first CAS. Retry against the actual captured snapshot so
+    // a frozen fee/refund is calculated once and reconciliation is triggered.
+    if (isCapturedStatus(booking.paymentStatus)) {
+      plan = await cancellationPlan(booking, outcome);
+      if (plan === 'legacy_support_required') {
+        return NextResponse.json(
+          {
+            errors: { state: 'Cancellation requires support review for this historical booking.' },
+          },
+          { status: 409 },
+        );
+      }
+      committed = await commit(booking, plan);
+    }
+    if (!committed) {
+      return NextResponse.json(
+        { errors: { state: 'Cancellation state changed underneath — refresh and try again.' } },
+        { status: 409 },
+      );
     }
   }
 
-  // Fire side-effect emails — failure of either side does NOT block the
-  // successful return; the booking is already in its terminal state.
+  const latestReferences = await prisma.booking.findUnique({
+    where: { id: booking.id },
+    select: { stripeSessionId: true, stripeCheckoutSessionId: true },
+  });
+  const committedBooking = {
+    ...booking,
+    ...(latestReferences
+      ? {
+          stripeSessionId: latestReferences.stripeSessionId,
+          stripeCheckoutSessionId: latestReferences.stripeCheckoutSessionId,
+        }
+      : {}),
+    cancellationOutcome: outcome,
+    paymentStatus: outcome,
+    cancelledAt: now,
+  };
+  const instructor = await loadCancellationInstructor(booking);
+  if (plan.captured && booking.grossChargedSek != null) {
+    await repairPaidCancellationReceipts({
+      booking: committedBooking,
+      instructor,
+      paymentStatus: outcome,
+      verifiedAmountSek: booking.grossChargedSek,
+    });
+  }
+
+  const reconciliation = await reconcileCancelledSession(committedBooking, plan);
+
   await notifyAfterCancel({
     booking: {
       id: booking.id,
       studentName: booking.studentName,
       studentEmail: booking.studentEmail,
       instructorId: booking.instructorId,
+      grossChargedSek: booking.grossChargedSek,
     },
     cancelledByRole,
-    cancelledByLabel,
+    cancelledByLabel: data.cancelledByLabel,
     outcome,
-    feeAmountUsd,
-    feePercentApplied,
-    feeBranchInstructor: cancellationInstructor,
+    feeAmountSek: plan.feeAmountSek,
+    feePercentApplied: plan.feePercentApplied,
+    instructor,
     locale: booking.locale === 'en' ? 'en' : 'sv',
-  }).catch((_reason) => {});
+  }).catch(() => undefined);
 
-  return NextResponse.json(responseBody, { status: 200 });
+  return NextResponse.json(
+    responseFor(committedBooking, outcome, plan.feeAmountSek, reconciliation === 'retry'),
+    {
+      status: reconciliation === 'done' ? 200 : 202,
+    },
+  );
 }
 
 async function notifyAfterCancel(input: {
@@ -406,74 +459,56 @@ async function notifyAfterCancel(input: {
     studentName: string;
     studentEmail: string;
     instructorId: string;
+    grossChargedSek: number | null;
   };
   cancelledByRole: 'learner' | 'instructor';
   cancelledByLabel: string;
   outcome: TerminalCancellation;
-  feeAmountUsd: number | null;
+  feeAmountSek: number;
   feePercentApplied: number;
-  feeBranchInstructor: {
-    email: string | null;
-    name: string;
-    hourlyRateSek: number;
-  } | null;
+  instructor: { email: string | null; name: string; city: string; hourlyRateSek: number } | null;
   locale: 'sv' | 'en';
 }) {
-  // The fee branch already fetched the instructor row (needed for the
-  // USD/sec computation); reuse it. On the no-fee branch (`full_refund`)
-  // we fetch the row here — same shape, same select set.
-  const instructorRow =
-    input.feeBranchInstructor ??
+  const instructor =
+    input.instructor ??
     (await prisma.instructor.findUnique({
       where: { id: input.booking.instructorId },
-      select: { email: true, name: true, hourlyRateSek: true },
+      select: { email: true, name: true, city: true, hourlyRateSek: true },
     }));
-  const finalInstructorName = instructorRow?.name ?? 'din instruktör';
-
-  // The learner gets the fee receipt when the cancel carried ANY fee —
-  // partial (50%) or full (100%). They get the neutral confirmation only
-  // when no fee was recorded (`cancelled_full_refund` / LEGACY
-  // `cancelled_early`).
-  const feeAmountUsd: number | null = input.feeAmountUsd;
-  const hasFee = feeAmountUsd !== null && feeAmountUsd > 0;
+  const instructorName = instructor?.name ?? 'din instruktör';
+  const hasFee = input.feeAmountSek > 0;
   const learnerMail =
-    hasFee && instructorRow && feeAmountUsd !== null
+    hasFee && instructor
       ? cancellationFeeReceiptEmail({
           recipientName: input.booking.studentName,
-          instructorName: finalInstructorName,
-          feeUsd: feeAmountUsd,
-          lessonChargeUsd: sekToUsdChargeAmount(instructorRow.hourlyRateSek),
+          instructorName,
+          feeSek: input.feeAmountSek,
+          lessonChargeSek: input.booking.grossChargedSek ?? input.feeAmountSek,
           bookingId: input.booking.id,
-          // Pass through the percent so the receipt email phrases a
-          // partial-fee cancel as "{X}% fee per your instructor's policy"
-          // when the cancel is partial (e.g. 50% on moderate / strict).
           feePercent: input.feePercentApplied,
           locale: input.locale,
         })
       : cancellationNeutralEmail({
           recipientRole: 'learner',
           recipientName: input.booking.studentName,
-          otherPartyName: finalInstructorName,
+          otherPartyName: instructorName,
           bookingId: input.booking.id,
           locale: input.locale,
         });
-  const sendTasks: Array<Promise<void>> = [
+  const notifications: Array<Promise<void>> = [
     sendEmail({ to: input.booking.studentEmail, ...learnerMail }).then(() => undefined),
   ];
-  if (instructorRow?.email) {
-    // The instructor gets the SAME neutral notification regardless of
-    // outcome (their payout is untouched on all four paths — full_refund
-    // has no fee, partial + late retain the fee on the platform-side
-    // residual and still release the lesson rate in full per the
-    // marketplace model).
+  if (instructor?.email) {
     const instructorMail = cancellationNeutralEmail({
       recipientRole: 'instructor',
-      recipientName: instructorRow.name,
+      recipientName: instructor.name,
       otherPartyName: input.booking.studentName,
       bookingId: input.booking.id,
       locale: input.locale,
     });
-    sendTasks.push(sendEmail({ to: instructorRow.email, ...instructorMail }).then(() => undefined));
+    notifications.push(
+      sendEmail({ to: instructor.email, ...instructorMail }).then(() => undefined),
+    );
   }
-  await Promise.allSettled(sendTasks);
+  await Promise.allSettled(notifications);
 }

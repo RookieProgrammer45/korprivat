@@ -804,7 +804,7 @@ export function bookingRequestDeclinedEmail(input: {
  * to phrase a partial-fee cancel as "{X}% fee per your instructor's
  * policy" so the learner understands the refund window explains why
  * they were charged less than the full lesson cost. The fee (≤ the
- * lesson USD charge) is RETAINED on the platform — the instructor still
+ * frozen lesson SEK charge) is RETAINED on the platform — the instructor still
  * keeps the full lesson rate per the marketplace model. Per the
  * stripe-payments skill, app code never issues Stripe refunds or
  * re-routes: this email is an audit receipt, and the platform-team
@@ -814,17 +814,17 @@ export function bookingRequestDeclinedEmail(input: {
 export function cancellationFeeReceiptEmail(input: {
   recipientName: string;
   instructorName: string;
-  feeUsd: number;
-  lessonChargeUsd: number;
+  feeSek: number;
+  lessonChargeSek: number;
   bookingId: string;
   feePercent?: number;
   locale?: BookingLocale;
 }): EmailContent {
-  const { recipientName, instructorName, feeUsd, lessonChargeUsd, bookingId, feePercent } = input;
+  const { recipientName, instructorName, feeSek, lessonChargeSek, bookingId, feePercent } = input;
   const isSwedish = input.locale !== 'en';
   const heading = isSwedish
-    ? `Avbokning registrerad — avgift ${feeUsd} USD`
-    : `Cancellation recorded — fee ${feeUsd} USD`;
+    ? `Avbokning registrerad — avgift ${feeSek} SEK`
+    : `Cancellation recorded — fee ${feeSek} SEK`;
   const isPartial = typeof feePercent === 'number' && feePercent > 0 && feePercent < 100;
   const policyLine = isPartial
     ? isSwedish
@@ -836,14 +836,14 @@ export function cancellationFeeReceiptEmail(input: {
   const baseBody = isSwedish
     ? [
         `Hej ${recipientName},`,
-        `Din avbokning av lektionen med ${instructorName} har registrerats. En avgift på ${feeUsd} USD (av lektionens ${lessonChargeUsd} USD) behålls av plattformen.`,
+        `Din avbokning av lektionen med ${instructorName} har registrerats. En avgift på ${feeSek} SEK (av lektionens ${lessonChargeSek} SEK) behålls av plattformen.`,
         policyLine,
         'Din instruktör behåller sin fulla lektionsavgift enligt marknadsplatsens modell — du behöver inte kontakta instruktören om betalningen.',
         'Frågor kan skickas till support@drivelinkup.com.',
       ]
     : [
         `Hi ${recipientName},`,
-        `Your cancellation of the lesson with ${instructorName} was recorded. A fee of ${feeUsd} USD (from the ${lessonChargeUsd} USD lesson charge) is retained by the platform.`,
+        `Your cancellation of the lesson with ${instructorName} was recorded. A fee of ${feeSek} SEK (from the ${lessonChargeSek} SEK lesson charge) is retained by the platform.`,
         policyLine,
         'Your instructor keeps the full lesson rate under the marketplace model — you do not need to contact them about payment.',
         'Questions can be sent to support@drivelinkup.com.',
@@ -854,7 +854,7 @@ export function cancellationFeeReceiptEmail(input: {
     footer: `Boknings-id: ${bookingId}`,
   });
   return {
-    subject: isSwedish ? `Avbokningsavgift ${feeUsd} USD` : `Cancellation fee ${feeUsd} USD`,
+    subject: isSwedish ? `Avbokningsavgift ${feeSek} SEK` : `Cancellation fee ${feeSek} SEK`,
     html,
     text,
   };
