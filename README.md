@@ -64,13 +64,6 @@ signage only.
 
 ## What Not To Edit
 
-- Anything marked `framework_owned` in `.polsia/ownership.json`.
-  signage, but the ownership map is the authority.
-- Anything outside declared slot markers in shared files such as
-  `next.config.ts`, `proxy.ts`, `src/lib/env.ts`, `src/app/layout.tsx`, and
-  `src/app/globals.css`.
-- `.polsia/installed.json` and `.polsia/ownership.json`. They are generated
-  state files. Use `.polsia/overrides.json` for hand-editable module policy.
 
 ## Platform Rules
 
