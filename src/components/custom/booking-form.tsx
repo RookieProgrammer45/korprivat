@@ -277,11 +277,11 @@ export function BookingForm({
   // Prefill identity from session when present (draft / rebook still win below).
   useEffect(() => {
     if (sessionPending || !session?.user) return;
-    if (!form.getValues('studentName') && session.user.name) {
-      form.setValue('studentName', session.user.name);
+    if (!form.getValues('studentName')?.trim() && session.user.name?.trim()) {
+      form.setValue('studentName', session.user.name.trim());
     }
-    if (!form.getValues('studentEmail') && session.user.email) {
-      form.setValue('studentEmail', session.user.email);
+    if (!form.getValues('studentEmail')?.trim() && session.user.email?.trim()) {
+      form.setValue('studentEmail', session.user.email.trim());
     }
   }, [session, sessionPending, form]);
 
@@ -352,8 +352,6 @@ export function BookingForm({
       active = false;
     };
   }, [rebookBookingId, instructorId, form]);
-
-  const slotsUnavailable = slots.kind === 'empty' || slots.kind === 'error';
 
   const onSubmit = form.handleSubmit(
     async (values) => {
@@ -457,8 +455,22 @@ export function BookingForm({
       }
     }
     },
-    () => {
+    (fieldErrors) => {
       toast.error(t('validation.formIncomplete'));
+      // Scroll to the first invalid field so a dead-click never happens:
+      // the learner sees inline errors + focus, not a silent button.
+      const order: Array<'studentName' | 'studentEmail' | 'studentPhone' | 'category' | 'slotId'> =
+        ['studentName', 'studentEmail', 'studentPhone', 'category', 'slotId'];
+      const first = order.find((key) => fieldErrors[key]);
+      if (!first) return;
+      const selector =
+        first === 'slotId' ? '[data-slot-picker]' : `[name="${first}"]`;
+      const el = document.querySelector<HTMLElement>(selector);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (first !== 'slotId') {
+        (el as HTMLInputElement).focus?.({ preventScroll: true });
+      }
     },
   );
 
@@ -761,7 +773,7 @@ export function BookingForm({
                   <FormItem>
                     <FormLabel>{t('labels.category')}</FormLabel>
                     {categoryOptions.length > 0 ? (
-                      <Select onValueChange={field.onChange} value={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value ?? ''}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder={t('labels.categoryPlaceholder')} />
@@ -782,7 +794,7 @@ export function BookingForm({
                   </FormItem>
                 )}
               />
-              <div className="grid min-w-0 gap-2">
+              <div className="grid min-w-0 gap-2" data-slot-picker>
                 <p className="text-small font-medium leading-none">{t('slots.pickPrompt')}</p>
                 <FormField
                   control={form.control}
@@ -806,9 +818,18 @@ export function BookingForm({
             </div>
 
             {slots.kind === 'empty' ? (
-              <p className="text-small text-muted-foreground" role="status">
-                {t('slots.noSlotsAvailable')}
-              </p>
+              <div className="grid gap-1.5 rounded-md border border-border bg-muted p-3" role="status">
+                <p className="text-small font-medium text-foreground">
+                  {t('slots.noSlotsAvailable')}
+                </p>
+                <p className="text-small text-muted-foreground">{t('slots.emptyBody')}</p>
+                <Link
+                  href="/contact"
+                  className="w-fit text-small font-medium text-brand-700 underline-offset-4 hover:underline dark:text-brand-300"
+                >
+                  {t('slots.contactFallback')}
+                </Link>
+              </div>
             ) : null}
 
             <BookingPolicyScheduleInline
@@ -823,9 +844,7 @@ export function BookingForm({
 
             <Button
               type="submit"
-              disabled={
-                form.formState.isSubmitting || !instructor || slotsUnavailable
-              }
+              disabled={form.formState.isSubmitting || !instructor}
               className="shadow-sm"
             >
               {form.formState.isSubmitting

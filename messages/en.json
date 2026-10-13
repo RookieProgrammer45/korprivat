@@ -693,7 +693,9 @@
     },
     "slots": {
       "pickPrompt": "Choose an available time",
-      "noSlotsAvailable": "No open times are available.",
+      "noSlotsAvailable": "No open times right now.",
+      "emptyBody": "New times are added regularly — check back soon or get in touch and we will help you along.",
+      "contactFallback": "Contact us about times",
       "slotTaken": "That time was just taken. Choose another time.",
       "groupToday": "Today",
       "groupTomorrow": "Tomorrow",

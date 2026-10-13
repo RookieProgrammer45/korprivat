@@ -693,7 +693,9 @@
     },
     "slots": {
       "pickPrompt": "Välj en ledig tid",
-      "noSlotsAvailable": "Inga lediga tider finns.",
+      "noSlotsAvailable": "Inga lediga tider just nu.",
+      "emptyBody": "Nya tider läggs till löpande — kom tillbaka snart eller hör av dig så hjälper vi dig vidare.",
+      "contactFallback": "Kontakta oss om tider",
       "slotTaken": "Den tiden bokades precis. Välj en annan tid.",
       "groupToday": "Idag",
       "groupTomorrow": "Imorgon",
