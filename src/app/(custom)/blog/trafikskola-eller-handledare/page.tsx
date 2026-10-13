@@ -6,7 +6,7 @@ import { siteName } from '@/lib/site';
 const path = '/blog/trafikskola-eller-handledare';
 
 export const metadata: Metadata = {
-  title: 'Trafikskola eller handledare? — DriveLinkUp',
+  title: 'Trafikskola eller handledare?',
   description:
     'Skillnaden mellan auktoriserad trafikskola och privat handledare för övningskörning i Sverige — och hur DriveLinkUp håller vägarna isär.',
   alternates: publicAlternates(path),

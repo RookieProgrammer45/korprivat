@@ -90,7 +90,8 @@ export function ProfilePage() {
   }
 
   const { user, role, upcoming, photo } = state.data;
-  const eyebrow = role === 'INSTRUCTOR' ? 'instructorEyebrow' : 'studentEyebrow';
+  const eyebrow =
+    role === 'INSTRUCTOR' ? 'instructorEyebrow' : role === 'SCHOOL' ? 'schoolEyebrow' : 'studentEyebrow';
 
   return (
     <div className="grid gap-6">
@@ -115,20 +116,28 @@ export function ProfilePage() {
                 {t(
                   role === 'INSTRUCTOR'
                     ? 'upcoming.emptyBodyInstructor'
-                    : 'upcoming.emptyBodyStudent',
+                    : role === 'SCHOOL'
+                      ? 'upcoming.emptyBodySchool'
+                      : 'upcoming.emptyBodyStudent',
                 )}
               </p>
               <div className="mt-2">
                 <Button asChild size="sm" variant="secondary">
                   <Link
                     href={
-                      role === 'INSTRUCTOR' ? '/dashboard/instructor/availability' : '/instructors'
+                      role === 'INSTRUCTOR'
+                        ? '/dashboard/instructor/availability'
+                        : role === 'SCHOOL'
+                          ? '/dashboard/school'
+                          : '/instructors'
                     }
                   >
                     {t(
                       role === 'INSTRUCTOR'
                         ? 'upcoming.emptyCtaInstructor'
-                        : 'upcoming.emptyCtaStudent',
+                        : role === 'SCHOOL'
+                          ? 'upcoming.emptyCtaSchool'
+                          : 'upcoming.emptyCtaStudent',
                     )}
                   </Link>
                 </Button>
