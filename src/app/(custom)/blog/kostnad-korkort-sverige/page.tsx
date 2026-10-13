@@ -6,7 +6,7 @@ import { siteName } from '@/lib/site';
 const path = '/blog/kostnad-korkort-sverige';
 
 export const metadata: Metadata = {
-  title: 'Vad kostar körkortet i Sverige? — DriveLinkUp',
+  title: 'Vad kostar körkortet i Sverige?',
   description:
     'Översikt av lektionspriser, skolavgifter och hur DriveLinkUp visar publicerade priser utan separat elevavgift.',
   alternates: publicAlternates(path),
