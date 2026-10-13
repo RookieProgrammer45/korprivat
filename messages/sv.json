@@ -1178,6 +1178,32 @@
           "resendFailed": "Kunde inte skicka länken igen. Försök igen.",
           "polling": "Väntar på bekräftelse…"
         },
+        "profile": {
+          "title": "Låt oss lära känna dig",
+          "pictureLabel": "Profilbild",
+          "replaceImage": "Byt bild",
+          "removeImage": "Ta bort",
+          "imageHint": "*.png, *.jpeg upp till {max} MB",
+          "firstNameLabel": "Förnamn",
+          "lastNameLabel": "Efternamn",
+          "firstNamePlaceholder": "Förnamn…",
+          "lastNamePlaceholder": "Efternamn…",
+          "firstNameError": "Ange ditt förnamn.",
+          "emailLabel": "E-post",
+          "emailHelp": "Används för inloggning och bokningskvitton.",
+          "subscribeLabel": "Få produktuppdateringar",
+          "subscribeDesc": "Få de senaste nyheterna om nya funktioner och förbättringar.",
+          "nameUpdateFailed": "Kunde inte spara namnet. Försök igen.",
+          "continue": "Fortsätt",
+          "submitting": "Sparar…",
+          "back": "Tillbaka",
+          "preview": {
+            "caption": "Så här ser din profil ut för andra",
+            "roleLearner": "Elev",
+            "roleInstructor": "Instruktör",
+            "roleSchool": "Trafikskola"
+          }
+        },
         "photo": {
           "title": "Lägg till ett profilfoto",
           "body": "Elever och lärare ser ditt foto när ni bokar lektioner.",

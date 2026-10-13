@@ -1178,6 +1178,32 @@
           "resendFailed": "Could not resend the link. Try again.",
           "polling": "Waiting for confirmation…"
         },
+        "profile": {
+          "title": "Let's get to know you",
+          "pictureLabel": "Profile picture",
+          "replaceImage": "Replace image",
+          "removeImage": "Remove",
+          "imageHint": "*.png, *.jpeg files up to {max}MB",
+          "firstNameLabel": "First name",
+          "lastNameLabel": "Last name",
+          "firstNamePlaceholder": "First name…",
+          "lastNamePlaceholder": "Last name…",
+          "firstNameError": "Enter your first name.",
+          "emailLabel": "Email",
+          "emailHelp": "Used for sign-in and booking receipts.",
+          "subscribeLabel": "Subscribe to product update emails",
+          "subscribeDesc": "Get the latest updates about features and product improvements.",
+          "nameUpdateFailed": "We couldn't save your name. Try again.",
+          "continue": "Continue",
+          "submitting": "Saving…",
+          "back": "Back",
+          "preview": {
+            "caption": "This is how your profile appears to others",
+            "roleLearner": "Learner",
+            "roleInstructor": "Instructor",
+            "roleSchool": "Driving school"
+          }
+        },
         "photo": {
           "title": "Add a profile photo",
           "body": "Learners and instructors see your photo when you book lessons.",
