@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { VerifyEmailFailed } from '@/components/custom/verification/verify-email-failed';
 import { getSessionUser } from '@/lib/require-auth';
+import { ensureSchoolSignupComplete } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('verifyEmail');
@@ -25,6 +26,15 @@ export default async function VerifyEmailPage({
 
   // Already verified (or just verified via better-auth redirect back here).
   if (session?.emailVerified && !params.error) {
+    // SCHOOL skips photo — create Org+Membership server-side and land on school dash.
+    const school = await ensureSchoolSignupComplete({
+      id: session.id,
+      email: session.email,
+      name: session.name,
+    });
+    if (school.ok) {
+      redirect(`${school.next}?signup=1`);
+    }
     redirect('/signup?step=photo');
   }
 

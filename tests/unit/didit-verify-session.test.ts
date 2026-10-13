@@ -47,6 +47,7 @@ vi.mock('@/lib/site', () => ({
 }));
 
 import { POST } from '@/app/api/verify/route';
+import { DiditSessionCreateError } from '@/lib/verification/didit';
 
 function baseProfile(
   overrides: Partial<{
@@ -136,5 +137,25 @@ describe('POST /api/verify', () => {
     const res = await POST(new Request('http://localhost/api/verify', { method: 'POST' }));
     expect(res.status).toBe(200);
     expect(mockCreateDiditSession).toHaveBeenCalledOnce();
+  });
+
+  it('surfaces didit_missing_env as 503 with stable error code', async () => {
+    mockUserProfileFindUnique.mockResolvedValueOnce(baseProfile());
+    mockCreateDiditSession.mockRejectedValueOnce(
+      new DiditSessionCreateError(503, 'DIDIT_API_KEY is not configured', 'didit_missing_env'),
+    );
+    const res = await POST(new Request('http://localhost/api/verify', { method: 'POST' }));
+    expect(res.status).toBe(503);
+    expect(await res.json()).toMatchObject({ error: 'didit_missing_env' });
+  });
+
+  it('surfaces didit_upstream as 502 with stable error code', async () => {
+    mockUserProfileFindUnique.mockResolvedValueOnce(baseProfile());
+    mockCreateDiditSession.mockRejectedValueOnce(
+      new DiditSessionCreateError(502, 'upstream failed', 'didit_upstream'),
+    );
+    const res = await POST(new Request('http://localhost/api/verify', { method: 'POST' }));
+    expect(res.status).toBe(502);
+    expect(await res.json()).toMatchObject({ error: 'didit_upstream' });
   });
 });

@@ -6,6 +6,7 @@
 import { DiditSdk } from '@didit-protocol/sdk-web';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 
 type VerifyPhase = 'idle' | 'loading' | 'open' | 'done' | 'error';
@@ -13,6 +14,19 @@ type VerifyPhase = 'idle' | 'loading' | 'open' | 'done' | 'error';
 export type DiditVerifyResult = {
   type: string;
 };
+
+function messageForVerifyError(
+  error: string | undefined,
+  t: {
+    (key: 'invalidState'): string;
+    (key: 'startFailed'): string;
+    (key: 'missingConfig'): string;
+  },
+): string {
+  if (error === 'invalid_state') return t('invalidState');
+  if (error === 'didit_missing_env') return t('missingConfig');
+  return t('startFailed');
+}
 
 export function DiditVerifyButton({
   className,
@@ -36,6 +50,13 @@ export function DiditVerifyButton({
   const [error, setError] = useState<string | null>(null);
   const [consented, setConsented] = useState(false);
 
+  function fail(message: string) {
+    setPhase('error');
+    setError(message);
+    // Dashboard previously looked silent on failure — always toast like onboarding.
+    toast.error(message);
+  }
+
   async function start() {
     if (!consented) {
       setError(t('consentRequired'));
@@ -51,8 +72,7 @@ export function DiditVerifyButton({
         state?: string;
       };
       if (!res.ok || !body.url) {
-        setPhase('error');
-        setError(body.error === 'invalid_state' ? t('invalidState') : t('startFailed'));
+        fail(messageForVerifyError(body.error, t));
         return;
       }
 
@@ -74,15 +94,13 @@ export function DiditVerifyButton({
         })
         .catch((err) => {
           console.error('Didit SDK failed to open', err);
-          setPhase('error');
-          setError(t('startFailed'));
+          fail(t('startFailed'));
         });
       setPhase('open');
       onOpened?.();
     } catch (err) {
       console.error('Didit verify start failed', err);
-      setPhase('error');
-      setError(t('startFailed'));
+      fail(t('startFailed'));
     }
   }
 

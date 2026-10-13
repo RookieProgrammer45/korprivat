@@ -751,6 +751,7 @@
       "phoneTooLong": "That phone number is too long.",
       "categoryRequired": "Choose one of the school's published categories.",
       "slotRequired": "Choose an available time.",
+      "formIncomplete": "Fill in the required fields and choose an available time.",
       "bookingModeChanged": "This school's booking mode changed. Refresh and try again."
     }
   },
@@ -923,6 +924,13 @@
       "submitting": "Creating account…",
       "switchToSigninLead": "Already have an account?",
       "switchToSignin": "Log in",
+      "alreadySignedIn": {
+        "title": "You're already signed in",
+        "lead": "Continue to your dashboard, or sign out to create a different account.",
+        "continue": "Continue to dashboard",
+        "signOut": "Sign out",
+        "signOutError": "Could not sign out. Please try again."
+      },
       "fields": {
         "nameLabel": "Full name",
         "namePlaceholder": "Anna Svensson…",
@@ -1416,7 +1424,8 @@
         "starting": "Starting…",
         "submitted": "Thanks — we'll update your status when Didit finishes. You can keep browsing.",
         "startFailed": "We couldn't start verification. Try again in a moment.",
-        "invalidState": "Verification isn't available in your current state. Refresh the page."
+        "invalidState": "Verification isn't available in your current state. Refresh the page.",
+        "missingConfig": "Identity verification isn't configured right now. Please try again later or contact support."
       }
     },
     "instructor": {
@@ -3102,6 +3111,7 @@
       "consentRequired": "Accept Didit sharing to continue.",
       "startFailed": "Could not start verification. Please try again.",
       "invalidState": "Verification cannot be started in your current state.",
+      "missingConfig": "Identity verification isn't configured right now. Please try again later or contact support.",
       "inProgressTitle": "Verification in progress",
       "waitingTitle": "Verification in progress",
       "waitingBody": "This usually takes under 2 minutes. Don't close this tab.",

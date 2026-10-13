@@ -108,6 +108,9 @@ export function SiteNav() {
   const isAuthenticated = useIsAuthenticated();
   const tNav = useTranslations('common');
   const pathname = usePathname();
+  // Hooks must run unconditionally — focused routes early-return null below.
+  // Soft-nav marketing ↔ /signup previously flipped hook count (React #300).
+  const [open, setOpen] = React.useState(false);
 
   // Auth / onboarding / dashboard / listing wizard own their chrome — do not
   // stack the marketing header on top of AuthShell or DashboardShell.
@@ -134,10 +137,6 @@ export function SiteNav() {
   // When signed in, secondary CTAs are hidden but AuthNav (avatar menu) still
   // needs the mobile sheet entry point.
   const collapsedCount = primary.length + secondary.length + (isAuthenticated ? 1 : 0);
-
-  // Controlled so a drawer link both navigates AND dismisses the overlay; without
-  // this the Sheet stays open over the new route after client-side navigation.
-  const [open, setOpen] = React.useState(false);
 
   // Exact match for the root; segment-boundary match for everything else so
   // '/blog' highlights on '/blog/post' but '/' never matches every route.
@@ -496,12 +495,14 @@ export function SiteNav() {
 
 export function SiteFooter() {
   const pathname = usePathname();
+  // Hooks before focused early-return — same soft-nav rule as SiteNav.
+  const isAuthenticated = useIsAuthenticated();
+  const tNav = useTranslations('common');
+
   if (isFocusedShellPath(pathname)) {
     return null;
   }
 
-  const isAuthenticated = useIsAuthenticated();
-  const tNav = useTranslations('common');
   const footer = visibleItems('footer', isAuthenticated);
   if (footer.length === 0) return null;
 

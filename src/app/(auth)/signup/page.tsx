@@ -4,12 +4,14 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { AlreadySignedIn } from '@/components/custom/already-signed-in';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignUpForm } from '@/components/custom/sign-up-form';
 import { loginHrefWithNext, sanitizeNext } from '@/lib/auth-next';
 import { getSessionUser } from '@/lib/require-auth';
-import { redirectLearnerAwayFromSignup } from '@/lib/signup-resume';
+import { resolveSignedInSignup } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('auth.signUp');
@@ -42,7 +44,27 @@ export default async function SignupPage({
   // Mid-flow photo/licence steps run while signed in — never show "Log in".
   const sessionUser = await getSessionUser();
 
-  await redirectLearnerAwayFromSignup(next);
+  if (sessionUser) {
+    const disposition = await resolveSignedInSignup(
+      {
+        id: sessionUser.id,
+        email: sessionUser.email,
+        name: sessionUser.name,
+        emailVerified: Boolean(sessionUser.emailVerified),
+      },
+      next,
+    );
+    if (disposition.kind === 'redirect') {
+      redirect(disposition.to);
+    }
+    if (disposition.kind === 'already_signed_in') {
+      return (
+        <AuthShell>
+          <AlreadySignedIn home={disposition.home} />
+        </AuthShell>
+      );
+    }
+  }
 
   return (
     <AuthShell

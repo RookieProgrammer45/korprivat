@@ -381,16 +381,31 @@ export function normalizeSessionStatus(raw: string): DiditDecision | null {
   }
 }
 
+/** Stable client-facing failure classes — never include secrets. */
+export type DiditSessionErrorCode =
+  | 'didit_missing_env'
+  | 'didit_upstream'
+  | 'didit_bad_payload';
+
 export class DiditSessionCreateError extends Error {
   readonly status: number;
   readonly detail: string;
+  readonly code: DiditSessionErrorCode;
 
-  constructor(status: number, detail: string) {
-    super(`Didit session create failed: ${status}`);
+  constructor(status: number, detail: string, code: DiditSessionErrorCode) {
+    super(`Didit session create failed: ${code}`);
     this.name = 'DiditSessionCreateError';
     this.status = status;
     this.detail = detail;
+    this.code = code;
   }
+}
+
+/** Truncate upstream text so logs never dump full Didit bodies. */
+export function sanitizeDiditFailureDetail(detail: string, maxLen = 180): string {
+  const trimmed = detail.replace(/\s+/g, ' ').trim();
+  if (trimmed.length <= maxLen) return trimmed;
+  return `${trimmed.slice(0, maxLen)}…`;
 }
 
 /**
@@ -405,7 +420,18 @@ export async function createDiditSession(args: {
 }): Promise<{ sessionId: string; url: string }> {
   const apiKey = process.env.DIDIT_API_KEY?.trim();
   if (!apiKey) {
-    throw new DiditSessionCreateError(500, 'DIDIT_API_KEY is not configured');
+    throw new DiditSessionCreateError(503, 'DIDIT_API_KEY is not configured', 'didit_missing_env');
+  }
+
+  let workflowId: string;
+  try {
+    workflowId = args.workflowId ?? requireDiditWorkflowId();
+  } catch {
+    throw new DiditSessionCreateError(
+      503,
+      'DIDIT_WORKFLOW_ID is not configured',
+      'didit_missing_env',
+    );
   }
 
   const res = await fetch(`${DIDIT_API_BASE}/v3/session/`, {
@@ -415,7 +441,7 @@ export async function createDiditSession(args: {
       'x-api-key': apiKey,
     },
     body: JSON.stringify({
-      workflow_id: args.workflowId ?? requireDiditWorkflowId(),
+      workflow_id: workflowId,
       vendor_data: args.userId,
       callback: args.callbackUrl,
       language: 'sv',
@@ -427,15 +453,19 @@ export async function createDiditSession(args: {
   });
 
   if (!res.ok) {
-    const detail = await res.text();
-    throw new DiditSessionCreateError(res.status, detail);
+    const detail = sanitizeDiditFailureDetail(await res.text());
+    throw new DiditSessionCreateError(res.status, detail, 'didit_upstream');
   }
 
   const json = (await res.json()) as Record<string, unknown>;
   const sessionId = strOrNull(json.session_id) ?? strOrNull(json.id);
   const url = strOrNull(json.url) ?? strOrNull(json.verification_url);
   if (!sessionId || !url) {
-    throw new DiditSessionCreateError(502, 'Didit response missing session_id or url');
+    throw new DiditSessionCreateError(
+      502,
+      'Didit response missing session_id or url',
+      'didit_bad_payload',
+    );
   }
   return { sessionId, url };
 }
