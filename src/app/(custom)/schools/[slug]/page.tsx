@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'DriveLinkUp', robots: { index: false, follow: false } };
   }
   const city = org.city?.trim() || 'Sverige';
-  const title = `${org.name} — trafikskola i ${city} | DriveLinkUp`;
+  const title = `${org.name} — trafikskola i ${city}`;
   const description = `${org.name} på DriveLinkUp — auktoriserad trafikskola i ${city}.`;
   const canonical = `/schools/${org.slug}`;
   return {
