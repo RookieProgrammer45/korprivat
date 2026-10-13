@@ -198,7 +198,7 @@
   },
   "blogPage": {
     "meta": {
-      "title": "Blogg · DriveLinkUp",
+      "title": "Blogg",
       "description": "Praktiska guider för körkortselever i Sverige — Transportstyrelsens steg, skoljämförelse, språk och publicerade lektionspriser."
     },
     "header": {
@@ -239,7 +239,7 @@
   },
   "forInstructorsPage": {
     "meta": {
-      "title": "För skolor och instruktörer | DriveLinkUp",
+      "title": "För skolor och instruktörer",
       "description": "Lista din trafikskola eller certifierade instruktörsprofil så elever kan jämföra priser, tillgänglighet och bokningsalternativ i Sverige."
     },
     "hero": {
@@ -273,7 +273,7 @@
     "directoryCta": "Se alla trafikskolor",
     "stockholmCity": {
       "meta": {
-        "title": "Auktoriserade trafikskolor i Stockholm | DriveLinkUp",
+        "title": "Auktoriserade trafikskolor i Stockholm",
         "description": "Jämför auktoriserade trafikskolor i Stockholm efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
         "ogTitle": "Hitta en trafikskola i Stockholm",
         "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Stockholm utan separat DriveLinkUp-avgift."
@@ -306,7 +306,7 @@
     },
     "goteborgCity": {
       "meta": {
-        "title": "Auktoriserade trafikskolor i Göteborg | DriveLinkUp",
+        "title": "Auktoriserade trafikskolor i Göteborg",
         "description": "Jämför auktoriserade trafikskolor i Göteborg efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
         "ogTitle": "Hitta en trafikskola i Göteborg",
         "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Göteborg utan separat DriveLinkUp-avgift."
@@ -339,7 +339,7 @@
     },
     "malmoCity": {
       "meta": {
-        "title": "Auktoriserade trafikskolor i Malmö | DriveLinkUp",
+        "title": "Auktoriserade trafikskolor i Malmö",
         "description": "Jämför auktoriserade trafikskolor i Malmö efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
         "ogTitle": "Hitta en trafikskola i Malmö",
         "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Malmö utan separat DriveLinkUp-avgift."
@@ -372,7 +372,7 @@
     },
     "uppsalaCity": {
       "meta": {
-        "title": "Auktoriserade trafikskolor i Uppsala | DriveLinkUp",
+        "title": "Auktoriserade trafikskolor i Uppsala",
         "description": "Jämför auktoriserade trafikskolor i Uppsala efter kategori, språk, publicerat pris, tillgänglighet och bokningspolicy.",
         "ogTitle": "Hitta en trafikskola i Uppsala",
         "ogDescription": "Jämför skolannonser, aktuell tillgänglighet och bokningspolicy i Uppsala utan separat DriveLinkUp-avgift."
@@ -405,7 +405,7 @@
     },
     "vasterasCity": {
       "meta": {
-        "title": "Auktoriserade trafikskolor i Västerås | DriveLinkUp",
+        "title": "Auktoriserade trafikskolor i Västerås",
         "description": "Hitta auktoriserade trafikskolor för lektioner i Västerås. Jämför kategorier, språk, publicerade priser, tillgänglighet och bokningspolicy.",
         "ogTitle": "Hitta en trafikskola i Västerås",
         "ogDescription": "Jämför skolannonser i Västerås med tydlig information om pris, språk och tillgänglighet."
@@ -587,7 +587,7 @@
   },
   "instructorDetail": {
     "meta": {
-      "title": "Trafikskolans annons | DriveLinkUp",
+      "title": "Trafikskolans annons",
       "description": "Se skolans kategorier, publicerade pris, tillgänglighet, bokningsläge och avbokningspolicy före bokning.",
       "descriptionNamed": "{name} i {city} — från {rate} SEK/timme. Jämför kategorier, tillgänglighet och bokningspolicy på DriveLinkUp."
     },
@@ -911,7 +911,7 @@
       }
     },
     "signUp": {
-      "title": "Gå med i DriveLinkUp",
+      "title": "Gå med",
       "subtitle": "Välj hur du vill använda DriveLinkUp, och fyll sedan i dina uppgifter.",
       "submit": "Fortsätt",
       "submitting": "Skapar konto…",
@@ -1771,7 +1771,7 @@
   },
   "instructorPreview": {
     "meta": {
-      "title": "Instruktörsförhandsvisning | DriveLinkUp",
+      "title": "Instruktörsförhandsvisning",
       "description": "Se instruktörskorten från elevens sida och fortsätt till den aktuella katalogen."
     },
     "pageEyebrow": "Elevvy",
@@ -1879,7 +1879,10 @@
       "emptyBodyStudent": "Välj en kategori, bläddra bland pilotinstruktörerna och boka din nästa lektion — den hamnar här så snart din instruktör bekräftar.",
       "emptyBodyInstructor": "Släpp några lediga tider på din tillgänglighetssida så ser eleverna dem — bokningar hamnar här så snart de bekräftar.",
       "emptyCtaStudent": "Bläddra bland trafikskolor",
-      "emptyCtaInstructor": "Hantera tillgänglighet"
+      "emptyCtaInstructor": "Hantera tillgänglighet",
+      "schoolEyebrow": "Kommande bokningar",
+      "emptyBodySchool": "Så snart skolans instruktörer är kopplade och tillgängligheten är publicerad hamnar inkommande bokningar här.",
+      "emptyCtaSchool": "Öppna skolans dashboard"
     },
     "loadError": "Kunde inte ladda din profil.",
     "retry": "Försök igen",
@@ -1910,7 +1913,7 @@
   },
   "privacyPage": {
     "meta": {
-      "title": "Integritetspolicy | DriveLinkUp",
+      "title": "Integritetspolicy",
       "description": "Så behandlar DriveLinkUp personuppgifter för konton, bokningar, betalningar, skolbehörigheter och trygghet."
     },
     "hero": {
@@ -2170,7 +2173,7 @@
   },
   "forSkolor": {
     "meta": {
-      "title": "För trafikskolor | DriveLinkUp",
+      "title": "För trafikskolor",
       "description": "Registrera er trafikskola på DriveLinkUp och nå fler elever."
     },
     "badge": "FÖR TRAFIKSKOLOR",
@@ -2396,17 +2399,17 @@
     "footer": "DriveLinkUp · Sverige"
   },
   "providerEntry": {
-    "eyebrow": "För auktoriserade trafikskolor",
-    "title": "Gör er tillgänglighet till mätbara bokningar.",
-    "body": "Publicera det pris och den tillgänglighet som skolan styr över så att elever kan jämföra och boka tydligt.",
-    "primaryCta": "Lista er trafikskola",
-    "learnerCta": "Se elevkatalogen",
-    "rolesEyebrow": "En marknadsplats där skolan styr",
+    "eyebrow": "För trafiklärare och instruktörer",
+    "title": "Fyll kalendern med elever som redan letar.",
+    "body": "Skapa din instruktörsprofil med körkortskategorier, pris och lediga tider så att elever kan jämföra och boka dig direkt.",
+    "primaryCta": "Registrera dig som instruktör",
+    "learnerCta": "Se katalogen",
+    "rolesEyebrow": "Så fungerar det",
     "roles": {
       "trafiklarare": {
-        "title": "Kvalificerade skolannonser",
-        "body": "För auktoriserade trafikskolor som erbjuder strukturerade lektioner för svenska körkortskategorier.",
-        "expectation": "Håll skolans uppgifter, kategorier, pris och tillgänglighet korrekta."
+        "title": "Din instruktörsannons",
+        "body": "För behöriga trafiklärare som erbjuder strukturerade lektioner för svenska körkortskategorier.",
+        "expectation": "Håll dina kategorier, pris och tillgänglighet aktuella."
       },
       "commission": {
         "title": "10 % efter genomförande",
@@ -2416,8 +2419,8 @@
     },
     "safety": {
       "title": "En annons byggd på tydlig information",
-      "body": "Elever ska förstå skolans behörighet, publicerade pris, tillgänglighet och lektionsupplägg före bokning.",
-      "review": "Det befintliga onboardingflödet samlar in informationen som behövs för skolans annons."
+      "body": "Elever ska förstå din behörighet, ditt publicerade pris, din tillgänglighet och ditt lektionsupplägg före bokning.",
+      "review": "Onboardingflödet samlar in den information som behövs för din annons."
     }
   },
   "bookingConfirmPayment": {
@@ -2641,7 +2644,7 @@
   },
   "bookingReceipt": {
     "meta": {
-      "title": "Bokningskvitto · DriveLinkUp",
+      "title": "Bokningskvitto",
       "description": "Ett tydligt digitalt kvitto för din lektion hos DriveLinkUp."
     },
     "eyebrow": "DriveLinkUp-kvitto",
@@ -2777,7 +2780,7 @@
   },
   "southernSwedenPage": {
     "meta": {
-      "title": "Auktoriserade trafikskolor i södra Sverige | DriveLinkUp",
+      "title": "Auktoriserade trafikskolor i södra Sverige",
       "description": "Jämför auktoriserade trafikskolor i Skåne, Halland, Blekinge och Småland.",
       "ogTitle": "Hitta din väg genom södra Sverige",
       "ogDescription": "Jämför skolannonser nära dig och boka utan separat DriveLinkUp-avgift."
@@ -2914,7 +2917,7 @@
   },
   "westernNorthernSwedenPage": {
     "meta": {
-      "title": "Auktoriserade trafikskolor i västra och norra Sverige | DriveLinkUp",
+      "title": "Auktoriserade trafikskolor i västra och norra Sverige",
       "description": "Jämför auktoriserade trafikskolor i västra och norra Sverige, från Göteborg till Kiruna.",
       "ogTitle": "Hitta din körväg genom västra och norra Sverige",
       "ogDescription": "Jämför lokala skolannonser och välj lektioner som passar din stad, vardag och nästa steg."
@@ -3042,7 +3045,7 @@
   },
   "pricingPage": {
     "meta": {
-      "title": "Priser och avgifter | DriveLinkUp",
+      "title": "Priser och avgifter",
       "description": "Elever upptäcker, jämför och bokar auktoriserade trafikskolor utan separat elevavgift. Skolor betalar 10 % först efter genomförd tjänst."
     },
     "hero": {
@@ -3073,7 +3076,7 @@
   },
   "handledareInfo": {
     "meta": {
-      "title": "Handledare och privat övningskörning | DriveLinkUp",
+      "title": "Handledare och privat övningskörning",
       "description": "Förstå handledarvägen i Sverige och hur den skiljer sig från auktoriserade trafikskolors annonser."
     },
     "eyebrow": "Svensk juridisk vägledning",
