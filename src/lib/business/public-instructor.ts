@@ -119,9 +119,16 @@ export function toPublicInstructor(
           ? 'flexible'
           : null,
     bookingMode: row.bookingMode === 'request' ? 'request' : 'instant',
-    providerRole: row.providerRole === 'HANDLEDARE' ? 'HANDLEDARE' : 'INSTRUCTOR',
-    // Raw marketplace kind (SCHOOL vs INSTRUCTOR) — additive so the directory
-    // can badge schools without touching the collapsed public contract.
+    // Raw marketplace kind as stored (SCHOOL | INSTRUCTOR | HANDLEDARE) — a
+    // school-owned listing reports SCHOOL (QA 2026-10-13: the previous
+    // collapse made /api/instructors describe every school as INSTRUCTOR).
+    // The contract's PublicProviderRoleEnum accepts all three kinds.
+    providerRole:
+      row.providerRole === 'SCHOOL' || row.providerRole === 'HANDLEDARE'
+        ? row.providerRole
+        : 'INSTRUCTOR',
+    // Additive alias of `providerRole`, retained so existing readers of the
+    // field keep parsing unchanged.
     providerType:
       row.providerRole === 'SCHOOL' || row.providerRole === 'HANDLEDARE'
         ? row.providerRole
