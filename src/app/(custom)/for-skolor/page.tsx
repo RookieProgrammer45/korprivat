@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { SchoolRegisterForm } from '@/components/custom/school-register-form';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { listMembershipsForUser } from '@/lib/orgs/service';
+import { listMembershipsForUser, listPendingInvitesForUser } from '@/lib/orgs/service';
 import { getSessionUser } from '@/lib/require-auth';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -54,23 +54,19 @@ function MarketingCopy({ t }: { t: Awaited<ReturnType<typeof getTranslations<'fo
   );
 }
 
-type MembershipWithOrg = Awaited<ReturnType<typeof listMembershipsForUser>>[number];
+type PendingInvite = Awaited<ReturnType<typeof listPendingInvitesForUser>>[number];
 
 export default async function ForSkolorPage() {
   const t = await getTranslations('forSkolor');
   const user = await getSessionUser();
 
-  let pendingInvite: MembershipWithOrg | null = null;
+  let pendingInvite: PendingInvite | null = null;
   if (user) {
-    const memberships = await listMembershipsForUser(user.id, { onlyActive: false });
-    if (
-      memberships.some(
-        (m) => m.status === 'ACTIVE' && (m.role === 'OWNER' || m.role === 'STAFF'),
-      )
-    ) {
+    const memberships = await listMembershipsForUser(user.id, { onlyActive: true });
+    if (memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')) {
       redirect('/dashboard/school');
     }
-    pendingInvite = memberships.find((m) => m.status === 'PENDING') ?? null;
+    pendingInvite = (await listPendingInvitesForUser(user.email))[0] ?? null;
   }
 
   return (

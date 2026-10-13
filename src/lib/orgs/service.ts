@@ -247,6 +247,23 @@ export async function listMembershipsForUser(
   });
 }
 
+// Invites that are still open (emailed but not yet accepted). Membership rows
+// only exist AFTER acceptance (created ACTIVE), so "invited, not yet joined"
+// users have none — the invite row is the source of truth for that state.
+export async function listPendingInvitesForUser(
+  userEmail: string,
+): Promise<Array<MembershipInvite & { organization: Organization }>> {
+  return prisma.membershipInvite.findMany({
+    where: {
+      email: userEmail.trim().toLowerCase(),
+      acceptedAt: null,
+      expiresAt: { gt: new Date() },
+    },
+    include: { organization: true },
+    orderBy: { createdAt: 'desc' },
+  });
+}
+
 export async function listOrgMembers(orgId: string): Promise<
   Array<
     Membership & {
