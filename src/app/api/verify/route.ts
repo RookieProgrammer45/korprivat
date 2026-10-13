@@ -127,9 +127,20 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     if (error instanceof DiditSessionCreateError) {
+      // Safe failure class only — never log API keys or full upstream bodies.
+      console.error('[didit] session create failed', {
+        code: error.code,
+        upstreamStatus: error.status,
+        detail: error.detail,
+      });
+      const httpStatus = error.code === 'didit_missing_env' ? 503 : 502;
       return NextResponse.json(
-        { error: 'session_create_failed', detail: error.detail },
-        { status: 502 },
+        {
+          error: error.code,
+          // Keep legacy alias so older clients still map a generic failure.
+          detail: error.detail,
+        },
+        { status: httpStatus },
       );
     }
     throw error;

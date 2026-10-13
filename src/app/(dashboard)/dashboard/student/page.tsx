@@ -15,7 +15,7 @@ import { StudentDashboard } from '@/components/custom/dashboard/student-dashboar
 import { StudentNextActionBanner } from '@/components/custom/dashboard/student-next-action-banner';
 import { DiditVerifyButton } from '@/components/custom/verification/didit-verify-button';
 import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
-import { getStoredLearnerState } from '@/lib/signup-resume';
+import { ensureSchoolSignupComplete, getStoredLearnerState } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dashboard.student');
@@ -28,6 +28,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function StudentDashboardPage() {
   const session = await requireDashboardSession('/dashboard/student');
+  // SCHOOL accounts that bounced here without Membership heal on this hit.
+  const school = await ensureSchoolSignupComplete({
+    id: session.userId,
+    email: session.email,
+    name: session.name,
+  });
+  if (school.ok) {
+    redirect(school.next);
+  }
   const home = await resolveDashboardHome(session.userId, session.role);
   if (home !== '/dashboard/student') {
     redirect(home);

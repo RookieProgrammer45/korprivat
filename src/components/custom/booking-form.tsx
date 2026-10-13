@@ -262,6 +262,8 @@ export function BookingForm({
       studentName: '',
       studentEmail: '',
       studentPhone: '',
+      // Empty string keeps the category Select controlled from first paint.
+      category: '' as FormValues['category'],
       slotId: '',
       instructorId,
       locale: locale === 'en' ? 'en' : 'sv',
@@ -271,6 +273,17 @@ export function BookingForm({
   useEffect(() => {
     form.setValue('instructorId', instructorId);
   }, [form, instructorId]);
+
+  // Prefill identity from session when present (draft / rebook still win below).
+  useEffect(() => {
+    if (sessionPending || !session?.user) return;
+    if (!form.getValues('studentName') && session.user.name) {
+      form.setValue('studentName', session.user.name);
+    }
+    if (!form.getValues('studentEmail') && session.user.email) {
+      form.setValue('studentEmail', session.user.email);
+    }
+  }, [session, sessionPending, form]);
 
   // Restore draft after login/signup bounce so the learner does not retype.
   useEffect(() => {
@@ -340,9 +353,19 @@ export function BookingForm({
     };
   }, [rebookBookingId, instructorId, form]);
 
-  const onSubmit = form.handleSubmit(async (values) => {
-    if (!values.slotId) {
-      form.setError('slotId', { type: 'server', message: t('slots.noSlotsAvailable') });
+  const slotsUnavailable = slots.kind === 'empty' || slots.kind === 'error';
+
+  const onSubmit = form.handleSubmit(
+    async (values) => {
+    if (!values.slotId || slots.kind !== 'ready') {
+      form.setError('slotId', {
+        type: 'server',
+        message:
+          slots.kind === 'empty' ? t('slots.noSlotsAvailable') : t('slots.pickPrompt'),
+      });
+      toast.error(
+        slots.kind === 'empty' ? t('slots.noSlotsAvailable') : t('validation.slotRequired'),
+      );
       return;
     }
 
@@ -433,7 +456,11 @@ export function BookingForm({
         await refetchSlots();
       }
     }
-  });
+    },
+    () => {
+      toast.error(t('validation.formIncomplete'));
+    },
+  );
 
   const startPayment = async (id: string) => {
     setPaymentLoading(true);
@@ -778,6 +805,12 @@ export function BookingForm({
               </div>
             </div>
 
+            {slots.kind === 'empty' ? (
+              <p className="text-small text-muted-foreground" role="status">
+                {t('slots.noSlotsAvailable')}
+              </p>
+            ) : null}
+
             <BookingPolicyScheduleInline
               tier={
                 instructor?.cancellationPolicyTier === 'moderate' ||
@@ -790,7 +823,9 @@ export function BookingForm({
 
             <Button
               type="submit"
-              disabled={form.formState.isSubmitting || !instructor}
+              disabled={
+                form.formState.isSubmitting || !instructor || slotsUnavailable
+              }
               className="shadow-sm"
             >
               {form.formState.isSubmitting

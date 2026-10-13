@@ -751,6 +751,7 @@
       "phoneTooLong": "Telefonnumret är för långt.",
       "categoryRequired": "Välj en av skolans publicerade kategorier.",
       "slotRequired": "Välj en ledig tid.",
+      "formIncomplete": "Fyll i obligatoriska fält och välj en ledig tid.",
       "bookingModeChanged": "Skolans bokningsläge har ändrats. Uppdatera sidan och försök igen."
     }
   },
@@ -914,6 +915,13 @@
       "submitting": "Skapar konto…",
       "switchToSigninLead": "Har du redan ett konto?",
       "switchToSignin": "Logga in",
+      "alreadySignedIn": {
+        "title": "Du är redan inloggad",
+        "lead": "Fortsätt till din översikt, eller logga ut för att skapa ett annat konto.",
+        "continue": "Fortsätt till översikten",
+        "signOut": "Logga ut",
+        "signOutError": "Kunde inte logga ut. Försök igen."
+      },
       "fields": {
         "nameLabel": "Fullständigt namn",
         "namePlaceholder": "Anna Svensson…",
@@ -1416,7 +1424,8 @@
         "starting": "Startar…",
         "submitted": "Tack — vi uppdaterar din status när Didit är klar. Du kan fortsätta bläddra.",
         "startFailed": "Vi kunde inte starta verifieringen. Försök igen om en stund.",
-        "invalidState": "Verifiering är inte tillgänglig i ditt nuvarande läge. Ladda om sidan."
+        "invalidState": "Verifiering är inte tillgänglig i ditt nuvarande läge. Ladda om sidan.",
+        "missingConfig": "Identitetsverifiering är inte konfigurerad just nu. Försök igen senare eller kontakta support."
       }
     },
     "instructor": {
@@ -3102,6 +3111,7 @@
       "consentRequired": "Godkänn delning med Didit för att fortsätta.",
       "startFailed": "Kunde inte starta verifieringen. Försök igen.",
       "invalidState": "Verifiering kan inte startas i ditt nuvarande läge.",
+      "missingConfig": "Identitetsverifiering är inte konfigurerad just nu. Försök igen senare eller kontakta support.",
       "inProgressTitle": "Verifiering pågår",
       "waitingTitle": "Verifiering pågår",
       "waitingBody": "Det tar vanligtvis under 2 minuter. Stäng inte den här fliken.",

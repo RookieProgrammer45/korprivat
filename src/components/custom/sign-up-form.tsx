@@ -582,7 +582,19 @@ export function SignUpForm({
         initialName={form.getValues('name')}
         initialStagedUrl={stagedPhotoUrl}
         onConfirmed={() => void advanceAfterPhoto()}
-        onBack={() => setStep('account')}
+        onBack={() => {
+          // SCHOOL (and other email-verified resumes) must not return to a
+          // dead account form after verify — finish or go back to path pick.
+          if (signupPath === 'SCHOOL' && session?.user) {
+            void completeSignup();
+            return;
+          }
+          if (session?.user?.emailVerified) {
+            setStep('path');
+            return;
+          }
+          setStep('account');
+        }}
         allowSkip={isLearnerPhoto}
         onSkip={isLearnerPhoto ? () => void completeSignup() : undefined}
         skipLabel={isLearnerPhoto ? t('pictureUpload.skip') : undefined}

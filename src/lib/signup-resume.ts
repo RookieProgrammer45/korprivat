@@ -7,7 +7,12 @@ import { confirmedPhotoUrl } from '@/lib/business/photo-verification';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { prisma } from '@/lib/db';
-import { listMembershipsForUser } from '@/lib/orgs/service';
+import { completeSignupHandshake } from '@/lib/email/onboarding';
+import {
+  createOrganization,
+  listMembershipsForUser,
+  OrgAlreadyExistsError,
+} from '@/lib/orgs/service';
 import { getSessionUser } from '@/lib/require-auth';
 import {
   type DiditDecision,
@@ -15,6 +20,150 @@ import {
   resolveLearnerState,
   stateToRoute,
 } from '@/lib/verification/state';
+
+export type SchoolSignupCompleteResult =
+  | { ok: true; next: string }
+  | { ok: false; reason: 'not_school' | 'missing_fields' | 'org_conflict' };
+
+/**
+ * Idempotent SCHOOL path finish: Organization + OWNER Membership if missing.
+ * role stays STUDENT; school access is Membership-based.
+ */
+export async function ensureSchoolSignupComplete(user: {
+  id: string;
+  email: string;
+  name: string | null | undefined;
+  next?: string;
+}): Promise<SchoolSignupCompleteResult> {
+  const profile = await prisma.userProfile.findUnique({
+    where: { userId: user.id },
+    select: {
+      signupPath: true,
+      schoolName: true,
+      organizationNumber: true,
+      city: true,
+    },
+  });
+  if (profile?.signupPath !== 'SCHOOL') {
+    return { ok: false, reason: 'not_school' };
+  }
+
+  const schoolDestination =
+    user.next?.startsWith('/invite/') ? user.next : '/dashboard/school';
+
+  const existing = await listMembershipsForUser(user.id, { onlyActive: true });
+  const alreadyMember = existing.some((m) => m.role === 'OWNER' || m.role === 'STAFF');
+  if (!alreadyMember) {
+    const schoolName = profile.schoolName?.trim();
+    const organizationNumber = profile.organizationNumber?.trim();
+    if (!schoolName || !organizationNumber) {
+      return { ok: false, reason: 'missing_fields' };
+    }
+    try {
+      await createOrganization({
+        name: schoolName,
+        organizationNumber,
+        city: profile.city ?? undefined,
+        ownerUserId: user.id,
+        ownerEmail: user.email,
+      });
+    } catch (err) {
+      if (err instanceof OrgAlreadyExistsError) {
+        // Concurrent complete: winner may already have attached Membership.
+        const again = await listMembershipsForUser(user.id, { onlyActive: true });
+        if (!again.some((m) => m.role === 'OWNER' || m.role === 'STAFF')) {
+          return { ok: false, reason: 'org_conflict' };
+        }
+      } else {
+        throw err;
+      }
+    }
+  }
+
+  await completeSignupHandshake({
+    userId: user.id,
+    email: user.email,
+    name: user.name,
+    requestedRole: 'STUDENT',
+  });
+  return { ok: true, next: schoolDestination };
+}
+
+export type SignedInSignupDisposition =
+  | { kind: 'redirect'; to: string }
+  | { kind: 'already_signed_in'; home: string }
+  | { kind: 'continue_wizard' };
+
+/**
+ * Signed-in /signup routing: finish SCHOOL membership when missing, otherwise
+ * either keep mid-wizard steps or show the already-signed-in surface.
+ */
+export async function resolveSignedInSignup(
+  user: { id: string; email: string; name: string | null | undefined; emailVerified: boolean },
+  resumeNext?: string,
+): Promise<SignedInSignupDisposition> {
+  if (!user.emailVerified) {
+    return { kind: 'continue_wizard' };
+  }
+
+  const school = await ensureSchoolSignupComplete({
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    next: resumeNext,
+  });
+  if (school.ok) {
+    return { kind: 'redirect', to: school.next.includes('?') ? school.next : `${school.next}?signup=1` };
+  }
+  // Missing org fields or org-number conflict — keep wizard / complete path.
+  if (school.reason === 'missing_fields' || school.reason === 'org_conflict') {
+    return { kind: 'continue_wizard' };
+  }
+
+  const profile = await prisma.userProfile.findUnique({
+    where: { userId: user.id },
+    select: { role: true, signupPath: true, dateOfBirth: true },
+  });
+
+  if (profile?.role === 'INSTRUCTOR') {
+    if (!(await confirmedPhotoUrl(user.id))) {
+      return { kind: 'continue_wizard' };
+    }
+    const license = await prisma.instructorLicense.findUnique({
+      where: { userId: user.id },
+      select: { id: true },
+    });
+    if (!license) return { kind: 'continue_wizard' };
+  }
+
+  if (profile?.role === 'HANDLEDARE') {
+    const clickwrap = await prisma.clickwrapAcceptance.findUnique({
+      where: { userId: user.id },
+      select: { termsVersion: true },
+    });
+    if (clickwrap?.termsVersion !== HANDLEDARE_TERMS_VERSION) {
+      return { kind: 'continue_wizard' };
+    }
+  }
+
+  // Learner mid-flow (claimed DOB collected, email verified) → wizard/verify,
+  // but completed visitors get the already-signed-in card instead of a hard
+  // dump into Didit via redirectLearnerAwayFromSignup.
+  if (profile?.role === 'STUDENT' && profile.signupPath !== 'SCHOOL' && !profile.dateOfBirth) {
+    return { kind: 'continue_wizard' };
+  }
+
+  const memberships = await listMembershipsForUser(user.id, { onlyActive: true });
+  const home = memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')
+    ? '/dashboard/school'
+    : profile?.role === 'INSTRUCTOR'
+      ? '/dashboard/instructor'
+      : profile?.role === 'HANDLEDARE'
+        ? '/dashboard/handledare'
+        : '/dashboard/student';
+
+  return { kind: 'already_signed_in', home };
+}
 
 const HARD_BLOCK_STATES = new Set<LearnerVerificationState>(['BLOCKED_UNDERAGE', 'SUSPENDED']);
 

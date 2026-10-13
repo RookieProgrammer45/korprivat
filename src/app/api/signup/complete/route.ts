@@ -5,13 +5,11 @@ import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { SignupComplete, SignupCompleteResponse } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { completeSignupHandshake } from '@/lib/email/onboarding';
-import {
-  createOrganization,
-  listMembershipsForUser,
-  OrgAlreadyExistsError,
-} from '@/lib/orgs/service';
 import { requireAuth } from '@/lib/require-auth';
-import { resolveStoredLearnerState } from '@/lib/signup-resume';
+import {
+  ensureSchoolSignupComplete,
+  resolveStoredLearnerState,
+} from '@/lib/signup-resume';
 import { stateToRoute } from '@/lib/verification/state';
 
 export const dynamic = 'force-dynamic';
@@ -48,21 +46,19 @@ export async function POST(req: Request) {
 
   // SCHOOL path: create Organization + OWNER Membership, skip Didit / stateToRoute.
   if (profile?.signupPath === 'SCHOOL') {
-    // Default to school dashboard; preserve /invite/{token} so invitees accept first.
-    const schoolDestination = parsed.data.next?.startsWith('/invite/')
-      ? parsed.data.next
-      : '/dashboard/school';
-    const existing = await listMembershipsForUser(user.id, { onlyActive: true });
-    const alreadyOwner = existing.some((m) => m.role === 'OWNER' || m.role === 'STAFF');
-    if (!alreadyOwner) {
-      const schoolName = profile.schoolName?.trim();
-      const organizationNumber = profile.organizationNumber?.trim();
-      if (!schoolName || !organizationNumber) {
+    const school = await ensureSchoolSignupComplete({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      next: parsed.data.next,
+    });
+    if (!school.ok) {
+      if (school.reason === 'missing_fields') {
         return NextResponse.json(
           {
             errors: {
-              schoolName: !schoolName ? 'School name is required.' : undefined,
-              organizationNumber: !organizationNumber
+              schoolName: !profile.schoolName?.trim() ? 'School name is required.' : undefined,
+              organizationNumber: !profile.organizationNumber?.trim()
                 ? 'Organisation number is required.'
                 : undefined,
             },
@@ -70,32 +66,16 @@ export async function POST(req: Request) {
           { status: 400 },
         );
       }
-      try {
-        await createOrganization({
-          name: schoolName,
-          organizationNumber,
-          city: profile.city ?? undefined,
-          ownerUserId: user.id,
-          ownerEmail: user.email,
-        });
-      } catch (err) {
-        if (err instanceof OrgAlreadyExistsError) {
-          return NextResponse.json({ error: 'org_exists' }, { status: 409 });
-        }
-        throw err;
+      if (school.reason === 'org_conflict') {
+        return NextResponse.json({ error: 'org_exists' }, { status: 409 });
       }
+      return NextResponse.json({ error: 'school_complete_failed' }, { status: 500 });
     }
-    await completeSignupHandshake({
-      userId: user.id,
-      email: user.email,
-      name: user.name,
-      requestedRole: 'STUDENT',
-    });
     return NextResponse.json(
       SignupCompleteResponse.parse({
         ok: true,
-        next: schoolDestination,
-        to: schoolDestination,
+        next: school.next,
+        to: school.next,
       }),
     );
   }
