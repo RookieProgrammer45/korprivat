@@ -429,7 +429,7 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
   ];
 
   // Affiliation via Membership (ACTIVE), not Instructor.providerRole —
-  // public reads collapse SCHOOL → INSTRUCTOR.
+  // providerRole describes the listing kind, not the owner's membership.
   if (q.affiliation === 'school' || q.affiliation === 'independent') {
     const memberUserIds = await listActiveMemberUserIds();
     if (q.affiliation === 'school') {
