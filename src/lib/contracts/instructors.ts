@@ -9,6 +9,13 @@ import { z } from 'zod';
 import { LICENCE_CATEGORY_CODES } from '@/lib/business/licence-categories';
 import { ProviderRoleEnum } from '@/lib/contracts/availability';
 
+// Public directory role: the raw marketplace kind as stored on the row.
+// Deliberately wider than the booking-path ProviderRoleEnum
+// (INSTRUCTOR | HANDLEDARE) — booking contracts keep their own narrower
+// vocabulary while the directory reports the provider kind truthfully.
+export const PublicProviderRoleEnum = z.enum(['INSTRUCTOR', 'HANDLEDARE', 'SCHOOL']);
+export type PublicProviderRole = z.infer<typeof PublicProviderRoleEnum>;
+
 // Inline literal tuple of cancellation tiers. Kept here rather than
 // imported from `lib/business/cancellation-policy` because zod's
 // `z.enum(T)` infers the narrowed literal union ONLY when `T` is a
@@ -90,13 +97,16 @@ export const InstructorItem = z.object({
   // missing so legacy pre-mode rows behave like the legacy
   // always-instant flow.
   bookingMode: InstructorBookingModeEnum.nullable(),
-  providerRole: ProviderRoleEnum,
-  // Raw marketplace kind (SCHOOL | INSTRUCTOR | HANDLEDARE) alongside the
-  // collapsed `providerRole`. Additive, but it MUST be declared here: zod
-  // strips unknown keys by default, so a field computed in
-  // toPublicInstructor never survives the InstructorItem / InstructorList
-  // parses and never reaches the client (list + detail both parse through
-  // this contract).
+  // Mirrors the raw marketplace kind (SCHOOL | INSTRUCTOR | HANDLEDARE) so a
+  // school-owned listing no longer reports itself as INSTRUCTOR (QA
+  // 2026-10-13). Kept alongside the redundant `providerType` alias so
+  // existing readers of either field keep parsing unchanged.
+  providerRole: PublicProviderRoleEnum,
+  // Additive alias of `providerRole` retained for contract stability. It
+  // MUST stay declared here: zod strips unknown keys by default, so a field
+  // computed in toPublicInstructor never survives the InstructorItem /
+  // InstructorList parses and never reaches the client (list + detail both
+  // parse through this contract).
   providerType: z.enum(['SCHOOL', 'INSTRUCTOR', 'HANDLEDARE']),
   affiliation: z
     .object({
