@@ -1110,3 +1110,13 @@ form > button[type="submit"] {
     display: none;
   }
 }
+
+/*
+ * Attio-style wide profile step: the signup wizard's profile step renders a
+ * two-column layout (form + live preview), so the shell widens only while
+ * that step is mounted. :has() keeps this zero-JS; browsers without :has()
+ * simply keep the narrow shell (the preview column hides below lg anyway).
+ */
+.auth-shell-body:has(.profile-details-step) {
+  max-width: 64rem;
+}

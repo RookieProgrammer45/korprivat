@@ -58,7 +58,7 @@ import {
   claimedDobIsUnderage,
   LearnerDobConsentFields,
 } from './learner-dob-consent-fields';
-import { PhotoPromptStep } from './photo-prompt-step';
+import { ProfileDetailsStep } from './profile-details-step';
 import { SocialAuthButtons } from './social-auth-buttons';
 
 type Step = 'path' | 'account' | 'verifyEmail' | 'photo' | 'license' | 'handledare';
@@ -501,8 +501,6 @@ export function SignUpForm({
   }
 
   const licenseCopyKey = signupPath === 'SCHOOL' ? 'school' : 'instructor';
-  const photoCopyKey =
-    signupPath === 'SCHOOL' ? 'school' : signupPath === 'LEARNER' ? 'learner' : 'instructor';
   const isLearnerPhoto = signupPath === 'LEARNER';
   const LEARNER_PHOTO_MAX_BYTES = 5 * 1024 * 1024;
 
@@ -575,12 +573,15 @@ export function SignUpForm({
 
   if (step === 'photo') {
     return (
-      <PhotoPromptStep
-        endpoint="/api/profile/picture"
-        fieldName="file"
-        initialName={form.getValues('name')}
+      <ProfileDetailsStep
+        signupPath={signupPath}
+        sessionName={session?.user?.name ?? form.getValues('name')}
+        sessionEmail={session?.user?.email ?? pendingEmail ?? form.getValues('email') ?? ''}
         initialStagedUrl={stagedPhotoUrl}
-        onConfirmed={() => void advanceAfterPhoto()}
+        stepCurrent={4}
+        stepTotal={signupPath === 'SCHOOL' ? 4 : 5}
+        learnerPhoto={isLearnerPhoto}
+        maxBytes={isLearnerPhoto ? LEARNER_PHOTO_MAX_BYTES : MAX_IMAGE_BYTES}
         onBack={() => {
           // SCHOOL (and other email-verified resumes) must not return to a
           // dead account form after verify — finish or go back to path pick.
@@ -594,35 +595,7 @@ export function SignUpForm({
           }
           setStep('account');
         }}
-        allowSkip={isLearnerPhoto}
-        onSkip={isLearnerPhoto ? () => void completeSignup() : undefined}
-        skipLabel={isLearnerPhoto ? t('pictureUpload.skip') : undefined}
-        maxBytes={isLearnerPhoto ? LEARNER_PHOTO_MAX_BYTES : undefined}
-        autoConfirmOnUpload={isLearnerPhoto}
-        copy={{
-          eyebrow: t(`segments.${photoCopyKey}.pictureUpload.stepEyebrow`),
-          title: t(`segments.${photoCopyKey}.pictureUpload.stepTitle`),
-          lead: t(`segments.${photoCopyKey}.pictureUpload.stepLead`),
-          placeholderAria: t('pictureUpload.placeholderAria'),
-          chooseButton: t('pictureUpload.chooseButton'),
-          dragHint: t('pictureUpload.dragHint'),
-          submit: t('pictureUpload.submit'),
-          submitting: t('pictureUpload.submitting'),
-          confirm: t('pictureUpload.confirm'),
-          confirming: t('pictureUpload.confirming'),
-          confirmationLabel: t('pictureUpload.confirmationLabel'),
-          staged: t('pictureUpload.staged'),
-          whyWeAsk: t(`segments.${photoCopyKey}.pictureUpload.whyWeAsk`),
-          errors: {
-            pictureRequired: t('pictureUpload.errors.pictureRequired'),
-            pictureWrongType: t('pictureUpload.errors.pictureWrongType'),
-            pictureTooLarge: isLearnerPhoto
-              ? t('pictureUpload.errors.pictureTooLargeLearner')
-              : t('pictureUpload.errors.pictureTooLarge'),
-            pictureUploadFailed: t('pictureUpload.errors.pictureUploadFailed'),
-            proxyFailure: t('pictureUpload.errors.proxyFailure'),
-          },
-        }}
+        onContinue={() => void advanceAfterPhoto()}
       />
     );
   }
