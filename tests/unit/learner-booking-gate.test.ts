@@ -41,7 +41,7 @@ describe('resolveLearnerBookingGate', () => {
     });
   });
 
-  it('blocks unverified adults and points to Didit', async () => {
+  it('allows a learner with claimed DOB while Didit is paused', async () => {
     mockUserProfileFindUnique.mockResolvedValueOnce({
       dateOfBirth: dobYearsAgo(30),
       dateOfBirthVerified: null,
@@ -51,9 +51,8 @@ describe('resolveLearnerBookingGate', () => {
       diditSessionId: null,
     });
     await expect(resolveLearnerBookingGate('u1')).resolves.toEqual({
-      eligible: false,
+      eligible: true,
       state: 'SIGNED_UP',
-      redirectTo: '/onboarding/learner/verify',
     });
   });
 });

@@ -277,11 +277,20 @@ export async function getStoredLearnerState(userId: string): Promise<LearnerVeri
 }
 
 /**
- * Booking / checkout eligibility — verified ACTIVE only (AGENTS.md invariant 1).
- * API routes use this; page guards use `requireActiveLearner` (redirect).
+ * Booking / checkout eligibility.
+ * Didit is paused: a learner with claimed age >= 16 (SIGNED_UP, or a
+ * leftover DIDIT_* state) may book. Underage, suspended, manual review,
+ * and handledare enrollment stays blocked. Verified DOB is not written here.
  */
+const BOOKABLE_WITHOUT_DIDIT = new Set<LearnerVerificationState>([
+  'ACTIVE',
+  'SIGNED_UP',
+  'DIDIT_PENDING',
+  'DIDIT_FAILED',
+]);
+
 export async function resolveLearnerBookingGate(userId: string): Promise<
-  | { eligible: true; state: 'ACTIVE' }
+  | { eligible: true; state: LearnerVerificationState }
   | { eligible: false; state: LearnerVerificationState; redirectTo: string }
 > {
   const facts = await loadLearnerVerificationFacts(userId);
@@ -289,7 +298,7 @@ export async function resolveLearnerBookingGate(userId: string): Promise<
     ? resolveLearnerStateFromFacts(facts)
     : resolveStoredLearnerState(null);
 
-  if (state === 'ACTIVE') {
+  if (BOOKABLE_WITHOUT_DIDIT.has(state)) {
     return { eligible: true, state };
   }
   return { eligible: false, state, redirectTo: stateToRoute(state) };

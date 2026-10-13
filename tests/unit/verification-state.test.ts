@@ -201,9 +201,9 @@ describe('resolveLearnerState', () => {
 
 describe('stateToRoute', () => {
   it('routes incomplete / terminal states to the correct surfaces', () => {
-    expect(stateToRoute('SIGNED_UP')).toBe('/onboarding/learner/verify');
-    expect(stateToRoute('DIDIT_PENDING')).toBe('/onboarding/learner/verify');
-    expect(stateToRoute('DIDIT_FAILED')).toBe('/onboarding/learner/verify');
+    expect(stateToRoute('SIGNED_UP')).toBe('/dashboard/student');
+    expect(stateToRoute('DIDIT_PENDING')).toBe('/dashboard/student');
+    expect(stateToRoute('DIDIT_FAILED')).toBe('/dashboard/student');
     expect(stateToRoute('MANUAL_REVIEW')).toBe('/dashboard/student');
     expect(stateToRoute('HANDLEDARE_PENDING')).toBe('/onboarding/handledare');
     expect(stateToRoute('HANDLEDARE_EXPIRED')).toBe('/onboarding/handledare');

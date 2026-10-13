@@ -63,8 +63,8 @@ describe('signup photo gate across marketplace roles', () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({
       ok: true,
-      next: '/onboarding/learner/verify',
-      to: '/onboarding/learner/verify',
+      next: '/dashboard/student',
+      to: '/dashboard/student',
     });
   });
 

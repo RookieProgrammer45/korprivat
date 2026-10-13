@@ -25,6 +25,8 @@ function messageForVerifyError(
 ): string {
   if (error === 'invalid_state') return t('invalidState');
   if (error === 'didit_missing_env') return t('missingConfig');
+  // session_create_failed is the previous 502 body; upstream/payload are the
+  // current codes. All of them use the same learner-facing sentence.
   return t('startFailed');
 }
 
@@ -51,9 +53,10 @@ export function DiditVerifyButton({
   const [consented, setConsented] = useState(false);
 
   function fail(message: string) {
-    setPhase('error');
+    // Stay on the form. Do not clear `consented` — a failed start must leave
+    // the checkbox as the learner set it.
+    setPhase('idle');
     setError(message);
-    // Dashboard previously looked silent on failure — always toast like onboarding.
     toast.error(message);
   }
 

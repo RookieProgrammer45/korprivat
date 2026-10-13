@@ -126,24 +126,24 @@ export async function POST(req: Request) {
       callbackUrl,
     });
   } catch (error) {
-    if (error instanceof DiditSessionCreateError) {
-      // Safe failure class only — never log API keys or full upstream bodies.
-      console.error('[didit] session create failed', {
-        code: error.code,
-        upstreamStatus: error.status,
-        detail: error.detail,
-      });
-      const httpStatus = error.code === 'didit_missing_env' ? 503 : 502;
-      return NextResponse.json(
-        {
-          error: error.code,
-          // Keep legacy alias so older clients still map a generic failure.
-          detail: error.detail,
-        },
-        { status: httpStatus },
-      );
-    }
-    throw error;
+    // Always a JSON body. A thrown error becomes Vercel's bare 502 with no
+    // payload, which the verify button cannot explain.
+    const coded =
+      error instanceof DiditSessionCreateError
+        ? error
+        : new DiditSessionCreateError(503, 'Didit session create failed', 'didit_upstream');
+    console.error('[didit] session create failed', {
+      code: coded.code,
+      upstreamStatus: coded.status,
+      detail: coded.detail,
+    });
+    return NextResponse.json(
+      {
+        error: coded.code,
+        detail: coded.detail,
+      },
+      { status: 503 },
+    );
   }
 
   await prisma.$transaction(async (tx) => {

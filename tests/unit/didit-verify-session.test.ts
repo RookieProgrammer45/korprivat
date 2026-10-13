@@ -149,13 +149,24 @@ describe('POST /api/verify', () => {
     expect(await res.json()).toMatchObject({ error: 'didit_missing_env' });
   });
 
-  it('surfaces didit_upstream as 502 with stable error code', async () => {
+  it('surfaces didit_upstream as a JSON 503, not an empty 502', async () => {
     mockUserProfileFindUnique.mockResolvedValueOnce(baseProfile());
     mockCreateDiditSession.mockRejectedValueOnce(
       new DiditSessionCreateError(502, 'upstream failed', 'didit_upstream'),
     );
     const res = await POST(new Request('http://localhost/api/verify', { method: 'POST' }));
-    expect(res.status).toBe(502);
+    expect(res.status).toBe(503);
+    expect(await res.json()).toMatchObject({
+      error: 'didit_upstream',
+      detail: 'upstream failed',
+    });
+  });
+
+  it('turns an unexpected throw into a JSON 503', async () => {
+    mockUserProfileFindUnique.mockResolvedValueOnce(baseProfile());
+    mockCreateDiditSession.mockRejectedValueOnce(new Error('socket hang up'));
+    const res = await POST(new Request('http://localhost/api/verify', { method: 'POST' }));
+    expect(res.status).toBe(503);
     expect(await res.json()).toMatchObject({ error: 'didit_upstream' });
   });
 });

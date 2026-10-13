@@ -146,7 +146,7 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
-  it('returns 403 when adult has claimed DOB only (not Didit-verified)', async () => {
+  it('creates a booking when the learner has claimed DOB only', async () => {
     authMock.setUser(LEARNER_USER);
     prismaMock.userProfile.findUnique.mockResolvedValueOnce({
       dateOfBirth: dobYearsAgo(25),
@@ -156,15 +156,16 @@ describe('POST /api/bookings — auth + verified ACTIVE gate', () => {
       diditLastDecision: null,
       diditSessionId: null,
     });
+    prismaMock.instructor.findUnique.mockResolvedValueOnce(instructorRow());
+    stubOpenSlot();
+    prismaMock.booking.create.mockResolvedValueOnce({
+      id: 'booking_claimed',
+      preferredAt: new Date('2026-08-10T14:30:00.000Z'),
+    });
 
     const res = await bookingsPOST(jsonPost('/api/bookings', VALID_BODY));
-    expect(res.status).toBe(403);
-    expect(await res.json()).toEqual({
-      error: 'learner_not_eligible',
-      state: 'SIGNED_UP',
-      redirectTo: '/onboarding/learner/verify',
-    });
-    expect(prismaMock.booking.create).not.toHaveBeenCalled();
+    expect(res.status).toBe(201);
+    expect(prismaMock.booking.create).toHaveBeenCalledOnce();
   });
 
   it('persists a row + sends BOTH emails when signed-in ACTIVE learner (201)', async () => {

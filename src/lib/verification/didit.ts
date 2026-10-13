@@ -434,30 +434,45 @@ export async function createDiditSession(args: {
     );
   }
 
-  const res = await fetch(`${DIDIT_API_BASE}/v3/session/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-    },
-    body: JSON.stringify({
-      workflow_id: workflowId,
-      vendor_data: args.userId,
-      callback: args.callbackUrl,
-      language: 'sv',
-      metadata: {
-        role: 'LEARNER',
-        claimedDob: args.claimedDob?.toISOString().slice(0, 10) ?? null,
+  let res: Response;
+  try {
+    res = await fetch(`${DIDIT_API_BASE}/v3/session/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
       },
-    }),
-  });
-
-  if (!res.ok) {
-    const detail = sanitizeDiditFailureDetail(await res.text());
-    throw new DiditSessionCreateError(res.status, detail, 'didit_upstream');
+      body: JSON.stringify({
+        workflow_id: workflowId,
+        vendor_data: args.userId,
+        callback: args.callbackUrl,
+        language: 'sv',
+        metadata: {
+          role: 'LEARNER',
+          claimedDob: args.claimedDob?.toISOString().slice(0, 10) ?? null,
+        },
+      }),
+    });
+  } catch {
+    // Network failure never reaches Didit. Don't leak the request URL.
+    throw new DiditSessionCreateError(503, 'Didit request failed', 'didit_upstream');
   }
 
-  const json = (await res.json()) as Record<string, unknown>;
+  if (!res.ok) {
+    const detail = sanitizeDiditFailureDetail(await res.text().catch(() => ''));
+    throw new DiditSessionCreateError(
+      res.status || 502,
+      detail || 'Didit rejected the session',
+      'didit_upstream',
+    );
+  }
+
+  let json: Record<string, unknown>;
+  try {
+    json = (await res.json()) as Record<string, unknown>;
+  } catch {
+    throw new DiditSessionCreateError(502, 'Didit response was not JSON', 'didit_bad_payload');
+  }
   const sessionId = strOrNull(json.session_id) ?? strOrNull(json.id);
   const url = strOrNull(json.url) ?? strOrNull(json.verification_url);
   if (!sessionId || !url) {

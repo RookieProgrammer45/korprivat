@@ -129,14 +129,15 @@ export function resolveLearnerState(input: ResolveInput): LearnerVerificationSta
 export function stateToRoute(state: LearnerVerificationState): string {
   switch (state) {
     case 'SIGNED_UP':
-      return '/onboarding/learner/verify';
+    case 'DIDIT_PENDING':
+    case 'DIDIT_FAILED':
+      // Didit is out of the learner workflow for now. These states stay
+      // on the student dashboard instead of the ID-verification page.
+      return '/dashboard/student';
     case 'BLOCKED_UNDERAGE':
       return '/signup?blocked=underage';
     case 'SUSPENDED':
       return '/signup?blocked=suspended';
-    case 'DIDIT_PENDING':
-    case 'DIDIT_FAILED':
-      return '/onboarding/learner/verify';
     case 'MANUAL_REVIEW':
       return '/dashboard/student';
     case 'HANDLEDARE_PENDING':

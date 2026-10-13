@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { LearnerVerifyClient } from '@/components/custom/verification/learner-verify-client';
 import { LearnerVerifyDobStep } from '@/components/custom/verification/learner-verify-dob-step';
 import { prisma } from '@/lib/db';
 import { getSessionUser } from '@/lib/require-auth';
@@ -39,30 +38,11 @@ export default async function LearnerVerifyPage() {
 
   const facts = await loadLearnerVerificationFacts(user.id);
 
-  // Phase 1: OAuth (and any other) learners without claimed DOB collect it
-  // here instead of bouncing back to /signup (which re-triggered complete).
+  // OAuth learners without a claimed DOB still collect it here. Didit ID
+  // verification is not part of the workflow right now.
   if (!facts?.claimedDob) {
     return <LearnerVerifyDobStep />;
   }
 
-  const verificationState = resolveLearnerStateFromFacts(facts);
-
-  // Already past Didit — leave this page (handles refresh after webhook).
-  if (
-    verificationState === 'ACTIVE' ||
-    verificationState === 'HANDLEDARE_PENDING' ||
-    verificationState === 'HANDLEDARE_EXPIRED' ||
-    verificationState === 'BLOCKED_UNDERAGE' ||
-    verificationState === 'SUSPENDED' ||
-    verificationState === 'MANUAL_REVIEW'
-  ) {
-    redirect(stateToRoute(verificationState));
-  }
-
-  return (
-    <LearnerVerifyClient
-      initialState={verificationState}
-      initialSessionId={facts.diditSessionId}
-    />
-  );
+  redirect(stateToRoute(resolveLearnerStateFromFacts(facts)));
 }

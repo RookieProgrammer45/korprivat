@@ -42,12 +42,13 @@ export default function OAuthCompletePage() {
           schema: PostLoginRedirect,
         });
         // Prefer an explicit same-origin `next` (e.g. school signup → /for-skolor).
-        // Otherwise learners go to Didit; instructors resume the signup wizard.
+        // Learners go to the dashboard. The verify page is only a claimed-DOB
+        // form now; instructors resume the signup wizard.
         if (next) {
           clearPersistedAuthNext();
           router.replace(next);
         } else if (role === 'STUDENT') {
-          router.replace('/onboarding/learner/verify');
+          router.replace('/dashboard/student');
         } else {
           router.replace('/signup?role=instructor');
         }

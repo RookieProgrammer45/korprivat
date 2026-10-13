@@ -1423,7 +1423,7 @@
         "cta": "Verify my identity",
         "starting": "Starting…",
         "submitted": "Thanks — we'll update your status when Didit finishes. You can keep browsing.",
-        "startFailed": "We couldn't start verification. Try again in a moment.",
+        "startFailed": "Could not start verification. Please try again.",
         "invalidState": "Verification isn't available in your current state. Refresh the page.",
         "missingConfig": "Identity verification isn't configured right now. Please try again later or contact support."
       }

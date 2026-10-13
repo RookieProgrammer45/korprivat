@@ -1423,7 +1423,7 @@
         "cta": "Verifiera min identitet",
         "starting": "Startar…",
         "submitted": "Tack — vi uppdaterar din status när Didit är klar. Du kan fortsätta bläddra.",
-        "startFailed": "Vi kunde inte starta verifieringen. Försök igen om en stund.",
+        "startFailed": "Kunde inte starta verifieringen. Försök igen.",
         "invalidState": "Verifiering är inte tillgänglig i ditt nuvarande läge. Ladda om sidan.",
         "missingConfig": "Identitetsverifiering är inte konfigurerad just nu. Försök igen senare eller kontakta support."
       }
