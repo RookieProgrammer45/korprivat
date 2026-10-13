@@ -2185,6 +2185,11 @@
     "ctaSignedOut": "Create school account",
     "ctaSignIn": "Sign in",
     "timeNote": "It takes under 2 minutes.",
+    "signedInContext": "Signed in as {email}. Fill in the details below to register your school.",
+    "pendingTitle": "You've been invited to a driving school",
+    "pendingBody": "You've been invited as {role} to {school}. Open the invite link in your email to join — if you can't find it, check your spam folder.",
+    "pendingRoleOwner": "owner",
+    "pendingRoleStaff": "team member",
     "form": {
       "name": "School name",
       "organizationNumber": "Organisation number",

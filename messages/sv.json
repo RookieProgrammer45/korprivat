@@ -2185,6 +2185,11 @@
     "ctaSignedOut": "Skapa skolkonto",
     "ctaSignIn": "Logga in",
     "timeNote": "Det tar under 2 minuter.",
+    "signedInContext": "Inloggad som {email}. Fyll i uppgifterna nedan för att registrera din skola.",
+    "pendingTitle": "Du är inbjuden till en trafikskola",
+    "pendingBody": "Du är inbjuden som {role} till {school}. Öppna inbjudningslänken i mejlet för att gå med — hittar du den inte, kolla skräpposten.",
+    "pendingRoleOwner": "ägare",
+    "pendingRoleStaff": "medarbetare",
     "form": {
       "name": "Skolans namn",
       "organizationNumber": "Organisationsnummer",

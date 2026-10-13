@@ -54,15 +54,23 @@ function MarketingCopy({ t }: { t: Awaited<ReturnType<typeof getTranslations<'fo
   );
 }
 
+type MembershipWithOrg = Awaited<ReturnType<typeof listMembershipsForUser>>[number];
+
 export default async function ForSkolorPage() {
   const t = await getTranslations('forSkolor');
   const user = await getSessionUser();
 
+  let pendingInvite: MembershipWithOrg | null = null;
   if (user) {
-    const memberships = await listMembershipsForUser(user.id, { onlyActive: true });
-    if (memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')) {
+    const memberships = await listMembershipsForUser(user.id, { onlyActive: false });
+    if (
+      memberships.some(
+        (m) => m.status === 'ACTIVE' && (m.role === 'OWNER' || m.role === 'STAFF'),
+      )
+    ) {
       redirect('/dashboard/school');
     }
+    pendingInvite = memberships.find((m) => m.status === 'PENDING') ?? null;
   }
 
   return (
@@ -71,9 +79,31 @@ export default async function ForSkolorPage() {
         <MarketingCopy t={t} />
 
         {user ? (
-          <section className="grid gap-4 rounded-xl border border-border bg-card p-6 shadow-sm">
-            <SchoolRegisterForm />
-          </section>
+          <>
+            {pendingInvite ? (
+              <section className="grid gap-2 rounded-xl border border-brand-500/25 bg-brand-100 p-6 shadow-sm dark:bg-brand-900">
+                <h2 className="font-display text-h3 tracking-tight text-brand-700 dark:text-brand-300">
+                  {t('pendingTitle')}
+                </h2>
+                <p className="text-small leading-relaxed text-brand-700 dark:text-brand-300">
+                  {t('pendingBody', {
+                    school: pendingInvite.organization.name,
+                    role:
+                      pendingInvite.role === 'OWNER'
+                        ? t('pendingRoleOwner')
+                        : t('pendingRoleStaff'),
+                  })}
+                </p>
+              </section>
+            ) : (
+              <p className="text-small text-muted-foreground">
+                {t('signedInContext', { email: user.email })}
+              </p>
+            )}
+            <section className="grid gap-4 rounded-xl border border-border bg-card p-6 shadow-sm">
+              <SchoolRegisterForm />
+            </section>
+          </>
         ) : (
           <section className="grid gap-4 rounded-xl border border-border bg-card p-6 shadow-sm">
             <Button asChild size="lg" className="w-full">
