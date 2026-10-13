@@ -28,6 +28,7 @@ function resolveInitialPath(
 ): 'LEARNER' | 'SCHOOL' | 'INSTRUCTOR' | undefined {
   if (role === 'instructor') return 'INSTRUCTOR';
   if (role === 'school') return 'SCHOOL';
+  if (role === 'student') return 'LEARNER';
   return undefined;
 }
 
