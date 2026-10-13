@@ -36,7 +36,9 @@ async function resolveSuccessDashboardHref(): Promise<string> {
         ? 'INSTRUCTOR'
         : profile?.role === 'HANDLEDARE'
           ? 'HANDLEDARE'
-          : 'STUDENT';
+          : profile?.role === 'SCHOOL'
+            ? 'SCHOOL'
+            : 'STUDENT';
     return await resolveDashboardHome(session.user.id, role);
   } catch {
     return '/dashboard';

@@ -177,7 +177,7 @@ function appendImageUrl(text: string, imageUrl: string): string {
  */
 export function signedUpWelcomeEmail(input: {
   name: string;
-  role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE';
+  role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL';
   dashboardUrl: string;
   imageUrl?: string;
 }): EmailContent {
@@ -186,6 +186,25 @@ export function signedUpWelcomeEmail(input: {
   const heading = avatar
     ? `Your profile is set up — welcome to DriveLinkUp, ${name}`
     : `Welcome to DriveLinkUp, ${name}`;
+  if (role === 'SCHOOL') {
+    const baseBody = [
+      `Your driving school account is live. Next: finish school details, invite instructors, and connect payouts from your school dashboard.`,
+      avatar ? `Your profile is set up.` : null,
+    ].filter((line): line is string => line !== null);
+    const { html: baseHtml, text: baseText } = renderEmail({
+      heading,
+      body: baseBody,
+      cta: { label: 'Open your school dashboard', url: dashboardUrl },
+      footer: 'DriveLinkUp · launching in Sweden',
+    });
+    return {
+      subject: avatar
+        ? 'Your profile is set up — welcome to DriveLinkUp'
+        : 'Welcome to DriveLinkUp',
+      html: avatar ? injectAvatar(baseHtml, avatar) : baseHtml,
+      text: avatar ? appendImageUrl(baseText, avatar) : baseText,
+    };
+  }
   if (role === 'INSTRUCTOR') {
     const baseBody = [
       `Your school account is live. Next: set your categories, published price, and weekly availability — we'll review the school information before the listing becomes searchable.`,

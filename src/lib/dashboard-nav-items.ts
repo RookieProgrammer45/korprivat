@@ -26,7 +26,7 @@ export function buildDashboardNavItems(input: {
   role: MarketplaceRole;
   isSchoolOwner: boolean;
 }): DashboardNavItemSpec[] {
-  if (input.isSchoolOwner) {
+  if (input.isSchoolOwner || input.role === 'SCHOOL') {
     return [
       { href: '/dashboard/school', labelKey: 'schoolOverviewTab' },
       { href: '/dashboard/school#instructors', labelKey: 'schoolInstructorsTab' },

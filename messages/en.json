@@ -926,7 +926,7 @@
       "switchToSignin": "Log in",
       "alreadySignedIn": {
         "title": "You're already signed in",
-        "lead": "Continue to your dashboard, or sign out to create a different account.",
+        "lead": "You're signed in as {email}. Continue to your dashboard, or sign out to create a different account.",
         "continue": "Continue to dashboard",
         "signOut": "Sign out",
         "signOutError": "Could not sign out. Please try again."
@@ -1841,7 +1841,8 @@
       "label": "Role",
       "learner": "Learner",
       "instructor": "Instructor",
-      "handledare": "Supervisor"
+      "handledare": "Supervisor",
+      "school": "Driving school"
     },
     "pictureUpload": {
       "editButton": "Edit photo",

@@ -21,6 +21,7 @@ describe('dashboardPathFor', () => {
     expect(dashboardPathFor('INSTRUCTOR')).toBe('/dashboard/instructor');
     expect(dashboardPathFor('HANDLEDARE')).toBe('/dashboard/handledare');
     expect(dashboardPathFor('STUDENT')).toBe('/dashboard/student');
+    expect(dashboardPathFor('SCHOOL')).toBe('/dashboard/school');
   });
 });
 
@@ -48,6 +49,11 @@ describe('resolveDashboardHome', () => {
   it('routes HANDLEDARE to /dashboard/handledare', async () => {
     listMembershipsForUser.mockResolvedValueOnce([]);
     await expect(resolveDashboardHome('u1', 'HANDLEDARE')).resolves.toBe('/dashboard/handledare');
+  });
+
+  it('routes SCHOOL with no membership to /dashboard/school', async () => {
+    listMembershipsForUser.mockResolvedValueOnce([]);
+    await expect(resolveDashboardHome('u1', 'SCHOOL')).resolves.toBe('/dashboard/school');
   });
 
   it('routes STUDENT with no membership to /dashboard/student', async () => {
@@ -90,6 +96,16 @@ describe('deriveDashboardShellRole', () => {
         isAdmin: false,
       }),
     ).toBe('instructor');
+  });
+
+  it('derives school from SCHOOL without membership', () => {
+    expect(
+      deriveDashboardShellRole({
+        isSchoolOwner: false,
+        role: 'SCHOOL',
+        isAdmin: false,
+      }),
+    ).toBe('school');
   });
 
   it('derives learner from STUDENT', () => {

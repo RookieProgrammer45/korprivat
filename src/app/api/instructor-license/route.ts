@@ -77,7 +77,7 @@ export async function POST(req: Request) {
     where: { userId: user.id },
     select: { role: true },
   });
-  if (!profile || profile.role === 'STUDENT') {
+  if (!profile || profile.role === 'STUDENT' || profile.role === 'SCHOOL') {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 });
   }
 

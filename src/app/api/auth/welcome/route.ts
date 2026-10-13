@@ -23,11 +23,12 @@ import { env } from '@/lib/env';
 
 export const dynamic = 'force-dynamic';
 
-function dashboardUrlFor(role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE'): string {
+function dashboardUrlFor(role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL'): string {
   // Same-origin relative so the link works on every deployed host
   // (www.drivelinkup.com, custom brand domains) without baking a baseURL in.
   if (role === 'INSTRUCTOR') return '/dashboard/instructor';
   if (role === 'HANDLEDARE') return '/dashboard/handledare';
+  if (role === 'SCHOOL') return '/dashboard/school';
   return '/dashboard/student';
 }
 
@@ -88,7 +89,9 @@ export async function POST(req: Request) {
       ? 'INSTRUCTOR'
       : profile?.role === 'HANDLEDARE'
         ? 'HANDLEDARE'
-        : 'STUDENT';
+        : profile?.role === 'SCHOOL'
+          ? 'SCHOOL'
+          : 'STUDENT';
   const name = session.user.name?.trim() || sessionEmail;
 
   const origin = resolveOrigin();

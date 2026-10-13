@@ -82,7 +82,7 @@ export async function GET(req: Request) {
 }
 
 async function loadUpcoming(
-  role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE',
+  role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL',
   user: SessionUser,
 ): Promise<{
   items: Array<{
@@ -94,6 +94,10 @@ async function loadUpcoming(
   }>;
 }> {
   const now = new Date();
+
+  if (role === 'SCHOOL') {
+    return { items: [] };
+  }
 
   if (role === 'STUDENT') {
     const rows = await prisma.booking.findMany({

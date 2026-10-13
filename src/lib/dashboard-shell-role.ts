@@ -12,7 +12,7 @@ export function deriveDashboardShellRole(input: {
   role: MarketplaceRole;
   isAdmin: boolean;
 }): DashboardShellRole {
-  if (input.isSchoolOwner) return 'school';
+  if (input.isSchoolOwner || input.role === 'SCHOOL') return 'school';
   if (input.role === 'INSTRUCTOR' || input.role === 'HANDLEDARE') return 'instructor';
   if (input.isAdmin) return 'admin';
   return 'learner';

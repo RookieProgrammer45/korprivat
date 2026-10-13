@@ -2,7 +2,7 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { photoState } from '@/lib/business/photo-verification';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
-import { SignupPath, SignupState } from '@/lib/contracts/signup';
+import { SignupPath, SignupRole, SignupState } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { requireAuth } from '@/lib/require-auth';
 import {
@@ -28,8 +28,8 @@ export async function GET(req: Request) {
     where: { userId: user.id },
     select: { role: true, signupPath: true },
   });
-  const role =
-    profile?.role === 'INSTRUCTOR' || profile?.role === 'HANDLEDARE' ? profile.role : 'STUDENT';
+  const parsedRole = SignupRole.safeParse(profile?.role);
+  const role = parsedRole.success ? parsedRole.data : 'STUDENT';
   const path = parseSignupPath(profile?.signupPath);
   const photo = await photoState(user.id);
   const [license, clickwrap] = await Promise.all([

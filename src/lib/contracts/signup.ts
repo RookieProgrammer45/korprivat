@@ -8,7 +8,7 @@ import {
 } from '@/lib/signup-eligibility';
 
 /** Persisted auth role (UserProfile.role). */
-export const SignupRole = z.enum(['STUDENT', 'INSTRUCTOR', 'HANDLEDARE']);
+export const SignupRole = z.enum(['STUDENT', 'INSTRUCTOR', 'HANDLEDARE', 'SCHOOL']);
 export type SignupRole = z.infer<typeof SignupRole>;
 
 /** UI signup path — learner / school / certified instructor. */

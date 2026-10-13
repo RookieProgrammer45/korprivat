@@ -11,14 +11,14 @@ import { signOut } from '@/lib/auth-client';
  * Signed-in visitors hitting /signup who are past the wizard — continue to
  * their dashboard or log out, instead of being dumped into learner Didit.
  */
-export function AlreadySignedIn({ home }: { home: string }) {
+export function AlreadySignedIn({ home, email }: { home: string; email: string }) {
   const t = useTranslations('auth.signUp.alreadySignedIn');
   const router = useRouter();
 
   async function handleSignOut() {
     try {
       await signOut();
-      router.push('/signup');
+      router.push(`${window.location.pathname}${window.location.search}` || '/signup');
       router.refresh();
     } catch {
       toast.error(t('signOutError'));
@@ -29,7 +29,7 @@ export function AlreadySignedIn({ home }: { home: string }) {
     <div className="grid gap-4">
       <div className="grid gap-1">
         <h1 className="text-h3 text-foreground">{t('title')}</h1>
-        <p className="text-body text-muted-foreground">{t('lead')}</p>
+        <p className="text-body text-muted-foreground">{t('lead', { email })}</p>
       </div>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
         <Button asChild>

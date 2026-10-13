@@ -16,15 +16,13 @@ import { z } from 'zod';
  *  `termsVersion` is less than this value. Format: semver-ish. */
 export const HANDLEDARE_TERMS_VERSION = 'v1.0.0';
 
-/** User-side companion type — the three-role union used wherever user
- *  code branches on a marketplace role (the wizard, the dashboard
- *  guard, the profile page, the dashboard router). The framework-owned
- *  `RoleEnum` in @/lib/contracts/auth is intentionally narrower
- *  (STUDENT | INSTRUCTOR) because the framework-owned /api/auth/welcome
- *  and /api/auth/signup-redirect routes cannot be widened — those
- *  pass through HANDLEDARE exclusively via the user-owned
- *  /api/clickwrap. */
-export type MarketplaceRole = 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE';
+/** User-side companion type used wherever user code branches on a
+ *  marketplace role (the wizard, the dashboard guard, the profile page,
+ *  the dashboard router). The framework-owned `RoleEnum` in
+ *  @/lib/contracts/auth stays STUDENT | INSTRUCTOR for Google/Facebook
+ *  OAuth. SCHOOL is written by POST /api/signup/start. HANDLEDARE still
+ *  lands through /api/clickwrap. */
+export type MarketplaceRole = 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL';
 
 /** POST /api/clickwrap body. */
 export const ClickwrapAccept = z.object({

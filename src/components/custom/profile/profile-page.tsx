@@ -156,7 +156,7 @@ function ProfileHeader({
   onPhotoUploaded,
 }: {
   user: { name: string; email: string; image: string | null };
-  role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE';
+  role: ProfileResponse['role'];
   stagedImage: string | null;
   onPhotoUploaded: () => void;
 }) {
@@ -200,7 +200,9 @@ function ProfileHeader({
                 ? 'role.instructor'
                 : role === 'HANDLEDARE'
                   ? 'role.handledare'
-                  : 'role.learner',
+                  : role === 'SCHOOL'
+                    ? 'role.school'
+                    : 'role.learner',
             )}
           </Badge>
           <ProfilePhotoEditor

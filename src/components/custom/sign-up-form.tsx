@@ -51,7 +51,6 @@ import { applyServerErrors } from '@/lib/forms';
 import {
   isInstructorLicenseTenureEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
-  roleForSignupPath,
 } from '@/lib/signup-eligibility';
 import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
 import { ClickwrapStep } from './clickwrap-step';
@@ -773,7 +772,7 @@ export function SignUpForm({
 
       <SocialAuthButtons
         mode="signup"
-        role={roleForSignupPath(selectedPath)}
+        role={selectedPath === 'INSTRUCTOR' ? 'INSTRUCTOR' : 'STUDENT'}
         next={selectedPath === 'SCHOOL' ? (resumeNext ?? '/for-skolor') : resumeNext}
       />
 

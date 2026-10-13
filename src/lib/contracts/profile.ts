@@ -13,7 +13,7 @@ import { z } from 'zod';
 import { BookingList } from '@/lib/contracts/auth';
 import { PhotoVerificationState } from '@/lib/contracts/photo-verification';
 
-export const MarketplaceRole = z.enum(['STUDENT', 'INSTRUCTOR', 'HANDLEDARE']);
+export const MarketplaceRole = z.enum(['STUDENT', 'INSTRUCTOR', 'HANDLEDARE', 'SCHOOL']);
 export type MarketplaceRole = z.infer<typeof MarketplaceRole>;
 
 export const ProfileUser = z.object({

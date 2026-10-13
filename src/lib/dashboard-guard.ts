@@ -38,6 +38,7 @@ export type DashboardLeafPath =
 export function dashboardPathFor(role: MarketplaceRole): DashboardLeafPath {
   if (role === 'INSTRUCTOR') return '/dashboard/instructor';
   if (role === 'HANDLEDARE') return '/dashboard/handledare';
+  if (role === 'SCHOOL') return '/dashboard/school';
   return '/dashboard/student';
 }
 
@@ -117,18 +118,19 @@ export async function requireDashboardSession(nextPath: string): Promise<Dashboa
     });
   }
 
-  // The UserProfile.role column carries STUDENT/INSTRUCTOR/HANDLEDARE;
-  // the framework-owned /api/auth/welcome helper isn't widened (it's not
-  // ours). Users with HANDLEDARE never go through that route — their welcome
-  // dispatch is the clickwrap success toast. Fall back to STUDENT if the
-  // self-heal flag is true (the column is the DEFAULT STUDENT either way).
+  // UserProfile.role is STUDENT, INSTRUCTOR, HANDLEDARE, or SCHOOL.
+  // Google OAuth still uses the narrower RoleEnum (STUDENT | INSTRUCTOR).
+  // HANDLEDARE is committed by the clickwrap flow. A missing profile
+  // self-heals to STUDENT.
   const role: MarketplaceRole = !profile
     ? 'STUDENT'
     : profile.role === 'HANDLEDARE'
       ? 'HANDLEDARE'
       : profile.role === 'INSTRUCTOR'
         ? 'INSTRUCTOR'
-        : 'STUDENT';
+        : profile.role === 'SCHOOL'
+          ? 'SCHOOL'
+          : 'STUDENT';
 
   return {
     userId,

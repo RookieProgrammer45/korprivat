@@ -2,11 +2,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const {
   mockUserProfileFindUnique,
+  mockUserProfileUpdate,
   mockListMemberships,
   mockCreateOrganization,
   mockCompleteHandshake,
 } = vi.hoisted(() => ({
   mockUserProfileFindUnique: vi.fn(),
+  mockUserProfileUpdate: vi.fn(),
   mockListMemberships: vi.fn(),
   mockCreateOrganization: vi.fn(),
   mockCompleteHandshake: vi.fn(),
@@ -16,7 +18,7 @@ vi.mock('server-only', () => ({}));
 
 vi.mock('@/lib/db', () => ({
   prisma: {
-    userProfile: { findUnique: mockUserProfileFindUnique },
+    userProfile: { findUnique: mockUserProfileFindUnique, update: mockUserProfileUpdate },
     instructorLicense: { findUnique: vi.fn() },
     clickwrapAcceptance: { findUnique: vi.fn() },
     user: { findUnique: vi.fn() },
@@ -56,6 +58,8 @@ import { ensureSchoolSignupComplete } from '@/lib/signup-resume';
 describe('ensureSchoolSignupComplete', () => {
   beforeEach(() => {
     mockUserProfileFindUnique.mockReset();
+    mockUserProfileUpdate.mockReset();
+    mockUserProfileUpdate.mockResolvedValue({});
     mockListMemberships.mockReset();
     mockCreateOrganization.mockReset();
     mockCompleteHandshake.mockReset();
@@ -76,6 +80,7 @@ describe('ensureSchoolSignupComplete', () => {
     });
     expect(result).toEqual({ ok: false, reason: 'not_school' });
     expect(mockCreateOrganization).not.toHaveBeenCalled();
+    expect(mockUserProfileUpdate).not.toHaveBeenCalled();
   });
 
   it('creates org when SCHOOL path has no membership', async () => {
@@ -95,8 +100,14 @@ describe('ensureSchoolSignupComplete', () => {
     });
 
     expect(result).toEqual({ ok: true, next: '/dashboard/school' });
+    expect(mockUserProfileUpdate).toHaveBeenCalledWith({
+      where: { userId: 'u1' },
+      data: { role: 'SCHOOL' },
+    });
     expect(mockCreateOrganization).toHaveBeenCalledOnce();
-    expect(mockCompleteHandshake).toHaveBeenCalledOnce();
+    expect(mockCompleteHandshake).toHaveBeenCalledWith(
+      expect.objectContaining({ requestedRole: 'SCHOOL' }),
+    );
   });
 
   it('is idempotent when OWNER membership already exists', async () => {

@@ -26,8 +26,8 @@ export type SchoolSignupCompleteResult =
   | { ok: false; reason: 'not_school' | 'missing_fields' | 'org_conflict' };
 
 /**
- * Idempotent SCHOOL path finish: Organization + OWNER Membership if missing.
- * role stays STUDENT; school access is Membership-based.
+ * Idempotent SCHOOL path finish: persist role SCHOOL, then Organization +
+ * OWNER Membership if missing.
  */
 export async function ensureSchoolSignupComplete(user: {
   id: string;
@@ -47,6 +47,11 @@ export async function ensureSchoolSignupComplete(user: {
   if (profile?.signupPath !== 'SCHOOL') {
     return { ok: false, reason: 'not_school' };
   }
+
+  await prisma.userProfile.update({
+    where: { userId: user.id },
+    data: { role: 'SCHOOL' },
+  });
 
   const schoolDestination =
     user.next?.startsWith('/invite/') ? user.next : '/dashboard/school';
@@ -84,15 +89,32 @@ export async function ensureSchoolSignupComplete(user: {
     userId: user.id,
     email: user.email,
     name: user.name,
-    requestedRole: 'STUDENT',
+    requestedRole: 'SCHOOL',
   });
   return { ok: true, next: schoolDestination };
 }
 
 export type SignedInSignupDisposition =
   | { kind: 'redirect'; to: string }
-  | { kind: 'already_signed_in'; home: string }
+  | { kind: 'already_signed_in'; home: string; email: string }
   | { kind: 'continue_wizard' };
+
+async function homeForSignedInUser(userId: string): Promise<string> {
+  const profile = await prisma.userProfile.findUnique({
+    where: { userId },
+    select: { role: true },
+  });
+  const memberships = await listMembershipsForUser(userId, { onlyActive: true });
+  if (
+    memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF') ||
+    profile?.role === 'SCHOOL'
+  ) {
+    return '/dashboard/school';
+  }
+  if (profile?.role === 'INSTRUCTOR') return '/dashboard/instructor';
+  if (profile?.role === 'HANDLEDARE') return '/dashboard/handledare';
+  return '/dashboard/student';
+}
 
 /**
  * Signed-in /signup routing: finish SCHOOL membership when missing, otherwise
@@ -101,6 +123,7 @@ export type SignedInSignupDisposition =
 export async function resolveSignedInSignup(
   user: { id: string; email: string; name: string | null | undefined; emailVerified: boolean },
   resumeNext?: string,
+  requestedPath?: 'LEARNER' | 'SCHOOL' | 'INSTRUCTOR',
 ): Promise<SignedInSignupDisposition> {
   if (!user.emailVerified) {
     return { kind: 'continue_wizard' };
@@ -118,6 +141,16 @@ export async function resolveSignedInSignup(
   // Missing org fields or org-number conflict — keep wizard / complete path.
   if (school.reason === 'missing_fields' || school.reason === 'org_conflict') {
     return { kind: 'continue_wizard' };
+  }
+
+  // A verified account that is not an in-progress school must not enter
+  // learner verification from /signup?role=school.
+  if (requestedPath === 'SCHOOL') {
+    return {
+      kind: 'already_signed_in',
+      home: await homeForSignedInUser(user.id),
+      email: user.email,
+    };
   }
 
   const profile = await prisma.userProfile.findUnique({
@@ -153,16 +186,12 @@ export async function resolveSignedInSignup(
     return { kind: 'continue_wizard' };
   }
 
-  const memberships = await listMembershipsForUser(user.id, { onlyActive: true });
-  const home = memberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')
-    ? '/dashboard/school'
-    : profile?.role === 'INSTRUCTOR'
-      ? '/dashboard/instructor'
-      : profile?.role === 'HANDLEDARE'
-        ? '/dashboard/handledare'
-        : '/dashboard/student';
+  const home =
+    profile?.role === 'SCHOOL'
+      ? '/dashboard/school'
+      : await homeForSignedInUser(user.id);
 
-  return { kind: 'already_signed_in', home };
+  return { kind: 'already_signed_in', home, email: user.email };
 }
 
 const HARD_BLOCK_STATES = new Set<LearnerVerificationState>(['BLOCKED_UNDERAGE', 'SUSPENDED']);
@@ -361,6 +390,10 @@ export async function requireSignupPrerequisites(
   // School owners/staff enter via Membership, not learner DOB / instructor docs.
   const schoolMemberships = await listMembershipsForUser(userId, { onlyActive: true });
   if (schoolMemberships.some((m) => m.role === 'OWNER' || m.role === 'STAFF')) {
+    return;
+  }
+
+  if (role === 'SCHOOL') {
     return;
   }
 

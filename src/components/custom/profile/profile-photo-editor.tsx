@@ -22,7 +22,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
-type Role = 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE';
+type Role = 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL';
 
 export function ProfilePhotoEditor({
   role,
@@ -40,7 +40,8 @@ export function ProfilePhotoEditor({
   const tProfile = useTranslations('profile.pictureUpload');
   // Per-role recognition copy lives under auth.signUp.segments.<role>.pictureUpload
   // — same keys as the signup photo step, so the sentence matches exactly.
-  const tSegment = useTranslations(`auth.signUp.segments.${role}.pictureUpload`);
+  const segmentRole = role === 'SCHOOL' ? 'STUDENT' : role;
+  const tSegment = useTranslations(`auth.signUp.segments.${segmentRole}.pictureUpload`);
   const tDefault = useTranslations('auth.signUp.pictureUpload');
   const [open, setOpen] = useState(false);
 

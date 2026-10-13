@@ -917,7 +917,7 @@
       "switchToSignin": "Logga in",
       "alreadySignedIn": {
         "title": "Du är redan inloggad",
-        "lead": "Fortsätt till din översikt, eller logga ut för att skapa ett annat konto.",
+        "lead": "Du är inloggad som {email}. Fortsätt till din översikt, eller logga ut för att skapa ett annat konto.",
         "continue": "Fortsätt till översikten",
         "signOut": "Logga ut",
         "signOutError": "Kunde inte logga ut. Försök igen."
@@ -1841,7 +1841,8 @@
       "label": "Roll",
       "learner": "Elev",
       "instructor": "Instruktör",
-      "handledare": "Handledare"
+      "handledare": "Handledare",
+      "school": "Trafikskola"
     },
     "pictureUpload": {
       "editButton": "Redigera foto",

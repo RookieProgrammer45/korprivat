@@ -32,7 +32,7 @@ export interface CompleteSignupHandshakeInput {
   // the welcome route effectively re-uses whatever's already on the row.
   // Required on the SOCIAL sign-up path (no signup-redirect happened),
   // since the OAuth callbackURL is the ONLY place the role is carried.
-  requestedRole?: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE';
+  requestedRole?: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL';
 }
 
 export interface CompleteSignupHandshakeResult {
@@ -44,11 +44,12 @@ export interface CompleteSignupHandshakeResult {
   welcomeSent: boolean;
 }
 
-function dashboardPathFor(role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE'): string {
+function dashboardPathFor(role: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL'): string {
   // Same-origin relative so the link works on every deployed host
   // (www.drivelinkup.com, custom brand domains) without baking a baseURL in.
   if (role === 'INSTRUCTOR') return '/dashboard/instructor';
   if (role === 'HANDLEDARE') return '/dashboard/handledare';
+  if (role === 'SCHOOL') return '/dashboard/school';
   return '/dashboard/student';
 }
 
@@ -101,7 +102,7 @@ export async function completeSignupHandshake(
   // valid: either the requestedRole (a fresh signup that wrote it), or
   // what the row already had (welcomeSentAt was already set, so we
   // skipped the write branch).
-  let effectiveRole: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' = 'STUDENT';
+  let effectiveRole: 'STUDENT' | 'INSTRUCTOR' | 'HANDLEDARE' | 'SCHOOL' = 'STUDENT';
   if (requestedRole && claimed.count > 0) {
     effectiveRole = requestedRole;
   } else {
@@ -113,7 +114,9 @@ export async function completeSignupHandshake(
         ? 'INSTRUCTOR'
         : existing?.role === 'HANDLEDARE'
           ? 'HANDLEDARE'
-          : 'STUDENT';
+          : existing?.role === 'SCHOOL'
+            ? 'SCHOOL'
+            : 'STUDENT';
   }
 
   if (claimed.count === 0) {

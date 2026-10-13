@@ -26,6 +26,12 @@ describe('buildDashboardNavItems', () => {
     expect(items.some((i) => i.labelKey.startsWith('school'))).toBe(false);
   });
 
+  it('returns school leaves for role SCHOOL without a membership flag', () => {
+    const items = buildDashboardNavItems({ role: 'SCHOOL', isSchoolOwner: false });
+    expect(items[0]?.href).toBe('/dashboard/school');
+    expect(items.some((i) => i.labelKey === 'studentTab')).toBe(false);
+  });
+
   it('returns school leaves when isSchoolOwner', () => {
     const items = buildDashboardNavItems({ role: 'INSTRUCTOR', isSchoolOwner: true });
     expect(items.map((i) => i.href)).toEqual([

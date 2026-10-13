@@ -53,6 +53,7 @@ export default async function SignupPage({
         emailVerified: Boolean(sessionUser.emailVerified),
       },
       next,
+      initialPath,
     );
     if (disposition.kind === 'redirect') {
       redirect(disposition.to);
@@ -60,7 +61,7 @@ export default async function SignupPage({
     if (disposition.kind === 'already_signed_in') {
       return (
         <AuthShell>
-          <AlreadySignedIn home={disposition.home} />
+          <AlreadySignedIn home={disposition.home} email={disposition.email} />
         </AuthShell>
       );
     }
