@@ -1921,3 +1921,19 @@ html .dlu-slot b {
   margin-top: 0.35rem;
   align-self: flex-start;
 }
+
+/* ------------------------------------------------------------------ */
+/* 17. Auth shell: art-panel HARD RIGHT at >=1024px                    */
+/* ------------------------------------------------------------------ */
+
+@media (min-width: 1024px) {
+  .auth-shell-grid.auth-shell-grid {
+    flex-direction: row;
+  }
+  .auth-shell-art.auth-shell-art {
+    order: 2;
+  }
+  .auth-shell-grid.auth-shell-grid > div:first-child {
+    order: 1;
+  }
+}
