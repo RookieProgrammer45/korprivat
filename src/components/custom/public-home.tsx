@@ -102,7 +102,7 @@ function formatSekChip(rate: number | null): string | null {
   return typeof rate === 'number' ? `fr. ${rate} kr` : null;
 }
 
-function formatSlot(iso: string): string {
+function formatSlot(iso: string): string | null {
   try {
     const date = new Date(iso);
     if (Number.isNaN(date.getTime())) return null;
