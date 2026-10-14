@@ -40,7 +40,9 @@
       "pricing": "Priser",
       "paymentMethods": "Betalningsmetoder",
       "southernSweden": "Södra Sverige",
-      "westernNorthernSweden": "Västra och norra Sverige"
+      "westernNorthernSweden": "Västra och norra Sverige",
+      "about": "Om oss",
+      "terms": "Villkor"
     },
     "language": {
       "sv": "Svenska",
@@ -54,6 +56,18 @@
       "fri": "F",
       "sat": "L",
       "sun": "S"
+    },
+    "footer": {
+      "headline": "Kom igång idag.",
+      "sub": "Jämför auktoriserade trafikskolor och boka körlektioner — med priserna synliga före kassan. Kostnadsfritt för elever.",
+      "cta": "Kom igång gratis",
+      "columnProduct": "Produkt",
+      "columnCompany": "Företag",
+      "columnResources": "Resurser",
+      "columnLegal": "Juridiskt",
+      "popularCities": "Populära orter",
+      "emailAria": "Mejla DriveLinkUp",
+      "copyright": "Copyright © {year} DriveLinkUp. Alla rättigheter förbehållna."
     }
   },
   "availability": {
@@ -3223,5 +3237,130 @@
     "linkHandledare": "Handledarguide",
     "linkPricing": "Priser",
     "linkBlog": "Guider"
+  },
+  "termsPage": {
+    "meta": {
+      "title": "Tjänstevillkor",
+      "description": "Villkor för DriveLinkUp: bokning och betalning, avbokning, provision för trafikskolor och instruktörer, konton och personuppgifter."
+    },
+    "hero": {
+      "eyebrow": "Tjänstevillkor",
+      "title": "Tjänstevillkor",
+      "lastUpdated": "Senast uppdaterad {version}",
+      "intro": "Dessa villkor gäller när du använder DriveLinkUp — som elev som bokar körlektioner eller som trafikskola eller instruktör som listar tjänster. Genom att använda plattformen godkänner du villkoren."
+    },
+    "sections": {
+      "0": {
+        "title": "Om tjänsten",
+        "body": "DriveLinkUp är en marknadsplats som kopplar ihop auktoriserade trafikskolor och certifierade instruktörer med elever. Vi visar publicerade priser, tillgänglighet och villkor innan du bokar. Att boka är kostnadsfritt för elever — DriveLinkUp tar ingen separat avgift av eleven.",
+        "items": [
+          "Vi granskar uppgifter från skolor och instruktörer före publicering.",
+          "Tjänsten är under utveckling och funktioner kan läggas till eller ändras."
+        ]
+      },
+      "1": {
+        "title": "Roller och ansvar",
+        "body": "När du bokar en lektion är avtalet mellan dig och trafikskolan eller instruktören. DriveLinkUp förmedlar bokningen och hanterar betalningen, men genomför inte körlektioner och är inte part i avtalet mellan elev och skola.",
+        "items": [
+          "Skolan eller instruktören ansvarar för lektionens innehåll, genomförande och sina uppgifter.",
+          "DriveLinkUp ansvarar för förmedlingen, betalningsflödet och kvitto."
+        ]
+      },
+      "2": {
+        "title": "Bokning, pris och betalning",
+        "body": "Priset som visas på skolans eller instruktörens sida är priset du betalar. Betalning sker via betaltjänsten Stripe i samband med bokningen. Betalade belopp frigörs till skolan eller instruktören först efter genomförd lektion.",
+        "items": []
+      },
+      "3": {
+        "title": "Avbokning och återbetalning",
+        "body": "Avbokningsregler sätts av den trafikskola eller instruktör du bokar hos och visas innan du bokar. Ställs en lektion in av skolan eller instruktören återbetalas beloppet i sin helhet.",
+        "items": [
+          "Kontakta skolan eller instruktören direkt för att ändra eller avboka en tid.",
+          "Löser det sig inte hanterar vi ärendet via support — frank@drivelinkup.com."
+        ]
+      },
+      "4": {
+        "title": "Provision",
+        "body": "DriveLinkUp tar ut provision av trafikskolor och instruktörer för förmedlade bokningar — först när tjänsten genomförts. Provisionen är 8 % för trafikskolor och 10 % för självständiga instruktörer. Elever betalar aldrig någon avgift till DriveLinkUp.",
+        "items": []
+      },
+      "5": {
+        "title": "Konto och bruk",
+        "body": "Du ansvarar för att uppgifterna du anger stämmer och för att inte dela dina inloggningsuppgifter. Det är inte tillåtet att missbruka plattformen — till exempel genom att ange vilseledande uppgifter, kringgå betalningsflödet eller störa tjänsten.",
+        "items": []
+      },
+      "6": {
+        "title": "Personuppgifter",
+        "body": "Vi behandlar personuppgifter enligt GDPR. Hur vi samlar in, använder och skyddar uppgifter beskrivs i vår integritetspolicy.",
+        "items": []
+      },
+      "7": {
+        "title": "Ändringar och kontakt",
+        "body": "Tjänsten utvecklas löpande och vi kan uppdatera dessa villkor. Versionen visas överst på sidan. Har du frågor skriver du till frank@drivelinkup.com — vi svarar.",
+        "items": []
+      }
+    },
+    "cta": {
+      "contact": "Kontakta support",
+      "faq": "Läs vanliga frågor"
+    }
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "Om oss",
+      "description": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever — med priserna på präntan och villkoren synliga innan du bokar."
+    },
+    "hero": {
+      "eyebrow": "Skolor och instruktörer. Elever. En marknadsplats.",
+      "title": "Vi bygger det tydligare sättet att bli körklar.",
+      "intro": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever — med priserna på präntan och villkoren synliga innan du bokar. Vi tror att när du ser hela bilden, fattar du ett bättre beslut.",
+      "chips": [
+        "Publicerat pris visas före kassan",
+        "Skolor och certifierade instruktörer",
+        "Ingen separat DriveLinkUp-avgift"
+      ],
+      "primaryCta": "Hitta lektioner",
+      "secondaryCta": "Så fungerar det"
+    },
+    "linkStory": {
+      "title": "Två länkar. En koppling.",
+      "body": "Märket är två kedjelänkar som kopplas ihop. Den ena är trafikskolan. Den andra är eleven. Vi är själva länken däremellan — synlig, pålitlig och stark nog att bära båda. Därav namnet: Drive Link Up.",
+      "learner": "Eleven",
+      "school": "Trafikskolan"
+    },
+    "origin": {
+      "title": "Det började med en fråga vi inte kunde släppa.",
+      "body": "Varför är det så svårt att ta reda på vad körkortet egentligen kostar? Priser gömda i kassan, villkör som aldrig syns — och val på magkänsla. Vi ställde frågan och fick inget bra svar. Så vi byggde det svar vi själva hade velat hitta.",
+      "body2": "DriveLinkUp föddes i Stockholm 2026. En marknadsplats där det som spelar roll — pris, kategori, stad, språk och villkor — ligger öppet innan du bokar, inte i kassan.",
+      "pillars": [
+        "Kunskap före tryck. Råd från fakta, inte säljargument.",
+        "Transparens i båda riktningar. Skolan styr sina uppgifter — vi granskar allt före publicering.",
+        "Kostnadsfritt för elever. Ingen separat DriveLinkUp-avgift."
+      ],
+      "facts": [
+        "Grundat 2026",
+        "Stockholm, Sverige",
+        "Oberoende"
+      ],
+      "closing": "Vi är ett ungt, oberoende bolag i ett tidigt skede. De första skolorna listas nu — och skriver du till oss, svarar vi."
+    },
+    "promise": {
+      "eyebrow": "Vårt löfte",
+      "title": "Publicerat pris visas före kassan.",
+      "body": "Alltid. På varje skola, varje lektion, varje bokning."
+    },
+    "goal": {
+      "title": "Vår målbild",
+      "label": "Listade trafikskolor",
+      "now": "Nu",
+      "note": "Riktmärket vi bygger mot: tydliga, ärliga jämförelser för elever i hela Norden — skola för skola, milstolpe för milstolpe."
+    },
+    "final": {
+      "eyebrow": "Redo för nästa steg?",
+      "title": "Börja från den sida av vägen där du är.",
+      "body": "Elever kan bläddra och boka. Trafikskolor och certifierade instruktörer kan publicera pris och tillgänglighet via onboarding.",
+      "primaryCta": "Hitta lektioner",
+      "secondaryCta": "Lista er profil"
+    }
   }
 }

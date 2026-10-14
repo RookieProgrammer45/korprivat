@@ -40,7 +40,9 @@
       "pricing": "Pricing",
       "paymentMethods": "Payment methods",
       "southernSweden": "Southern Sweden",
-      "westernNorthernSweden": "Western & Northern Sweden"
+      "westernNorthernSweden": "Western & Northern Sweden",
+      "about": "About",
+      "terms": "Terms"
     },
     "language": {
       "sv": "Svenska",
@@ -54,6 +56,18 @@
       "fri": "F",
       "sat": "S",
       "sun": "S"
+    },
+    "footer": {
+      "headline": "Get started today.",
+      "sub": "Compare authorized driving schools and book lessons — with prices visible before checkout. Free for learners.",
+      "cta": "Get started free",
+      "columnProduct": "Product",
+      "columnCompany": "Company",
+      "columnResources": "Resources",
+      "columnLegal": "Legal",
+      "popularCities": "Popular cities",
+      "emailAria": "Email DriveLinkUp",
+      "copyright": "Copyright © {year} DriveLinkUp. All rights reserved."
     }
   },
   "availability": {
@@ -3223,5 +3237,130 @@
     "linkHandledare": "Handledare guide",
     "linkPricing": "Pricing",
     "linkBlog": "Guides"
+  },
+  "termsPage": {
+    "meta": {
+      "title": "Terms of service",
+      "description": "DriveLinkUp terms: booking and payment, cancellations, commission for schools and instructors, accounts, and personal data."
+    },
+    "hero": {
+      "eyebrow": "Terms of service",
+      "title": "Terms of service",
+      "lastUpdated": "Last updated {version}",
+      "intro": "These terms apply when you use DriveLinkUp — as a learner booking driving lessons, or as a school or instructor listing services. By using the platform you accept these terms."
+    },
+    "sections": {
+      "0": {
+        "title": "About the service",
+        "body": "DriveLinkUp is a marketplace that connects authorized driving schools and certified instructors with learners. We show published prices, availability and terms before you book. Booking is free for learners — DriveLinkUp never charges learners a separate fee.",
+        "items": [
+          "We review school and instructor details before publishing.",
+          "The service is under development and features may be added or changed."
+        ]
+      },
+      "1": {
+        "title": "Roles and responsibility",
+        "body": "When you book a lesson, the contract is between you and the driving school or instructor. DriveLinkUp facilitates the booking and handles the payment flow, but does not deliver lessons and is not a party to the agreement between learner and school.",
+        "items": [
+          "The school or instructor is responsible for the lesson, its delivery, and their own details.",
+          "DriveLinkUp is responsible for the facilitation, the payment flow, and the receipt."
+        ]
+      },
+      "2": {
+        "title": "Booking, price and payment",
+        "body": "The price shown on the school's or instructor's page is the price you pay. Payment is handled by Stripe at the time of booking. Paid amounts are released to the school or instructor only after the lesson has been completed.",
+        "items": []
+      },
+      "3": {
+        "title": "Cancellations and refunds",
+        "body": "Cancellation terms are set by the school or instructor you book with and are shown before you book. If a lesson is cancelled by the school or instructor, the amount is refunded in full.",
+        "items": [
+          "Contact the school or instructor directly to change or cancel a time.",
+          "If that doesn't resolve it, we handle the issue via support — frank@drivelinkup.com."
+        ]
+      },
+      "4": {
+        "title": "Commission",
+        "body": "DriveLinkUp charges schools and instructors a commission on facilitated bookings — only once the service has been completed. The commission is 8% for driving schools and 10% for independent instructors. Learners never pay a fee to DriveLinkUp.",
+        "items": []
+      },
+      "5": {
+        "title": "Accounts and use",
+        "body": "You are responsible for the details you provide and for keeping your login credentials to yourself. Misusing the platform is not allowed — for example providing misleading information, circumventing the payment flow, or disrupting the service.",
+        "items": []
+      },
+      "6": {
+        "title": "Personal data",
+        "body": "We process personal data in accordance with GDPR. How we collect, use and protect data is described in our privacy policy.",
+        "items": []
+      },
+      "7": {
+        "title": "Changes and contact",
+        "body": "The service evolves continuously and we may update these terms. The version is shown at the top of the page. Questions? Write to frank@drivelinkup.com — we answer.",
+        "items": []
+      }
+    },
+    "cta": {
+      "contact": "Contact support",
+      "faq": "Read the FAQ"
+    }
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "About us",
+      "description": "DriveLinkUp connects driving schools and certified instructors with learners — with published prices and visible terms before you book."
+    },
+    "hero": {
+      "eyebrow": "Schools and instructors. Learners. One marketplace.",
+      "title": "Building the clearer way to get licence-ready.",
+      "intro": "DriveLinkUp connects driving schools and certified instructors with learners — prices on the table and terms visible before you book. We believe that when you can see the full picture, you make a better decision.",
+      "chips": [
+        "Published price shown before checkout",
+        "Schools and certified instructors",
+        "No separate DriveLinkUp fee"
+      ],
+      "primaryCta": "Find lessons",
+      "secondaryCta": "How it works"
+    },
+    "linkStory": {
+      "title": "Two links. One connection.",
+      "body": "The mark is two chain links joined together. One is the driving school. The other is the learner. We are the link in between — visible, dependable, and strong enough to carry both. Hence the name: Drive Link Up.",
+      "learner": "The learner",
+      "school": "The school"
+    },
+    "origin": {
+      "title": "It started with a question we couldn't let go of.",
+      "body": "Why is it so hard to find out what a driving licence actually costs? Prices hidden at checkout, terms you never see — and choices made on gut feeling. We asked the question and never got a good answer. So we built the answer we wished we'd found.",
+      "body2": "DriveLinkUp was born in Stockholm in 2026. A marketplace where what matters — price, licence category, city, language and terms — is out in the open before you book, not at checkout.",
+      "pillars": [
+        "Knowledge before pressure. Advice from facts, not sales pitches.",
+        "Transparency in both directions. The school owns its details — we review everything before publishing.",
+        "Free for learners. No separate DriveLinkUp fee."
+      ],
+      "facts": [
+        "Founded 2026",
+        "Stockholm, Sweden",
+        "Independent"
+      ],
+      "closing": "We are a young, independent company at an early stage. The first schools are being listed now — and if you write to us, we answer."
+    },
+    "promise": {
+      "eyebrow": "Our promise",
+      "title": "The published price appears before checkout.",
+      "body": "Always. On every school, every lesson, every booking."
+    },
+    "goal": {
+      "title": "Our goal",
+      "label": "Listed driving schools",
+      "now": "Now",
+      "note": "The benchmark we build towards: clear, honest comparisons for learners across the Nordics — school by school, milestone by milestone."
+    },
+    "final": {
+      "eyebrow": "Ready for the next step?",
+      "title": "Start from your side of the road.",
+      "body": "Learners can browse and book. Schools and certified instructors can publish prices and availability via onboarding.",
+      "primaryCta": "Find lessons",
+      "secondaryCta": "List your profile"
+    }
   }
 }

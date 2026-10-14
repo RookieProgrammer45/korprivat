@@ -56,5 +56,9 @@ export const llmsConfig: LlmsConfig = {
     '/handledare':
       'A Swedish legal explainer for private handledare and övningskörning. Handledare are distinct from authorized driving schools and are not marketplace school listings.',
     '/blog': 'Guides for learners: costs, handledare, and choosing a traffic school in Sweden.',
+    '/om-oss':
+      'About DriveLinkUp: why published prices appear before checkout, how the marketplace connects schools, certified instructors and learners, and the 100 to 1,000 to 10,000 listings goal.',
+    '/terms':
+      'Terms of service: booking and payment via Stripe with funds released after completed lessons, cancellation rules set by each school, 8% school / 10% independent-instructor commission, and account rules.',
   },
 };
