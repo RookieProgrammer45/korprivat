@@ -1937,3 +1937,29 @@ html .dlu-slot b {
     order: 1;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* 18. Deck cards: profile photo (front card)                          */
+/* ------------------------------------------------------------------ */
+
+.dlu-id {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.dlu-photo {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(19, 19, 18, 0.09);
+  object-fit: cover;
+  background: #ece9e2;
+}
+
+html.dark .dlu-photo {
+  border-color: rgba(244, 242, 237, 0.14);
+  background: #1a1a18;
+}

@@ -34,6 +34,7 @@ const LANGUAGE_LABELS: Record<string, string> = {
 type DeckProfile = {
   id: string;
   name: string;
+  photoUrl: string;
   type: 'Skola' | 'Instruktör';
   city: string;
   chip: string | null;
@@ -41,7 +42,7 @@ type DeckProfile = {
   nextSlot: string | null;
 };
 
-const MAX_DECK_PROFILES = 6;
+const MAX_DECK_PROFILES = 10;
 const ROTATION_MS = 4800;
 
 function formatSekChip(rate: number | null): string | null {
@@ -69,6 +70,7 @@ function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
   return {
     id: row.id,
     name: row.name,
+    photoUrl: row.photoUrl,
     type: row.providerType === 'INSTRUCTOR' ? 'Instruktör' : 'Skola',
     city: row.city,
     chip: formatSekChip(row.hourlyRateSek),
@@ -135,10 +137,14 @@ export function LiveAuthDeck() {
       >
         <article className="dlu-card" key={front.id}>
           <div className="dlu-top">
-            <div className="min-w-0">
-              <p className="dlu-type">{front.type}</p>
-              <p className="dlu-name">{front.name}</p>
-              <p className="dlu-city">{front.city}</p>
+            <div className="dlu-id min-w-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="dlu-photo" src={front.photoUrl} alt="" width={44} height={44} />
+              <div className="min-w-0">
+                <p className="dlu-type">{front.type}</p>
+                <p className="dlu-name">{front.name}</p>
+                <p className="dlu-city">{front.city}</p>
+              </div>
             </div>
             {front.chip ? <span className="dlu-chip">{front.chip}</span> : null}
           </div>

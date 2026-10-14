@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Fatima">
+  <rect width="200" height="200" rx="28" fill="#ece9e2"/>
+  <circle cx="100" cy="106" r="58" fill="#2d2a26"/>
+  <circle cx="100" cy="82" r="30" fill="#"/>
+  <path d="M42 200c10-32 32-52 58-52s48 20 58 52z" fill="#2d2a26"/>
+  <path d="M62 74a38 34 0 0 1 76 0l-4-16a38 30 0 0 0-68 0z" fill="#5b3a24"/><circle cx="100" cy="38" r="12" fill="#5b3a24"/>
+  <path d="M88 96c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5z" fill="c"/>
+  <path d="M122 96c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5z" fill="c"/>
+  <path d="M92 112q8 5 16 0" fill="none" stroke="c" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
