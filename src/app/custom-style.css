@@ -1131,9 +1131,9 @@ form > button[type="submit"] {
    ========================================================================== */
 
 html:root {
-  --background: #f4f2ed; /* bone */
+  --background: #ffffff; /* white (Samuel: hela siten vit) */
   --foreground: #131312; /* ink */
-  --muted: #eae7e0; /* bone-deep */
+  --muted: #f4f4f2; /* light neutral strip (white site) */
   --muted-foreground: #6b6862; /* ink-soft */
   --border: rgba(19, 19, 18, 0.09); /* line */
   --card: #ffffff;
@@ -1142,6 +1142,7 @@ html:root {
   --dlu-green-deep: #0b6b4a;
   --dlu-ink: #131312;
   --dlu-ink-faint: #8d8a83;
+  --dlu-ink-soft: #6b6862;
 }
 
 html:root.dark {
@@ -1172,7 +1173,7 @@ html:root.dark {
 /* hero right panel: bone card with the profile deck ------------------------ */
 
 .marketplace-hero-panel.marketplace-hero-panel {
-  background: #ece9e2;
+  background: #f7f7f5;
   border: 1px solid rgba(19, 19, 18, 0.09);
   border-radius: 1.25rem;
   box-shadow: none;
@@ -1518,18 +1519,11 @@ html.dark .dlu-arrow-note {
   flex-shrink: 0;
 }
 
-.dlu-glow {
-  position: absolute;
-  inset: auto 20% 42% 8%;
-  height: 12rem;
-  background: radial-gradient(closest-side, rgba(19, 19, 18, 0.06), transparent);
-}
-
 /* --- auth shell: övningskör carousel aside -------------------------------- */
 
 .auth-shell-art {
   min-height: 45rem;
-  background: #ece9e2;
+  background: #f7f7f5;
   border: 1px solid rgba(19, 19, 18, 0.09);
   border-radius: 1.25rem;
   padding: 1.75rem;
@@ -1765,7 +1759,7 @@ html.dark .dlu-nav-btn:hover {
 }
 
 html.dark .dlu-nav-btn:focus-visible {
-  outline-color: #f4f2ed;
+  outline-color: #ffffff;
 }
 
 .dlu-dot {
@@ -1798,7 +1792,7 @@ html.dark .dlu-dot:hover {
 }
 
 html.dark .dlu-dot.dlu-on {
-  background: #f4f2ed;
+  background: #ffffff;
 }
 
 a.dlu-btn {
@@ -1922,6 +1916,87 @@ html .dlu-slot b {
   align-self: flex-start;
 }
 
+
+/* Right rail: "N profiler i rotation" + arrows under the front card */
+.auth-shell-art .dlu-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+.auth-shell-art .dlu-rail .dlu-nav {
+  margin-top: 0;
+}
+
+/* Profile avatar on deck cards */
+.dlu-avatar {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid rgba(19, 19, 18, 0.09);
+  flex-shrink: 0;
+  background: #ffffff;
+}
+.dlu-id-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+/* Rotation progress: thin strip along the card top (no dots row) */
+.auth-shell-art .dlu-deck-live .dlu-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.22rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background: rgba(19, 19, 18, 0.07);
+}
+.auth-shell-art .dlu-deck-live .dlu-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--progress, 0%);
+  height: 0.22rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background: var(--dlu-ink);
+}
+
+
+/* Panel strip marker: centered breadcrumb above the deck */
+.auth-shell-art .dlu-tag {
+  position: relative;
+  inset: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0.1rem auto 0;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(19, 19, 18, 0.09);
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--dlu-ink-faint);
+  align-self: center;
+}
+.auth-shell-art .dlu-tag::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--dlu-green);
+}
+
 /* ------------------------------------------------------------------ */
 /* 17. Auth shell: art-panel HARD RIGHT at >=1024px                    */
 /* ------------------------------------------------------------------ */
@@ -1936,4 +2011,174 @@ html .dlu-slot b {
   .auth-shell-grid.auth-shell-grid > div:first-child {
     order: 1;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* 18. WHITE-ONLY SITE (Samuel 2026-10-14): no dark mode, no gradients */
+/* Layout: marketplace-hero-grid + auth-shell already ship the side-   */
+/* panel on the RIGHT (hero: copy left / panel right via tokens at     */
+/* lines ~1157-1170; signup: §17 hard-right at >=1024px). This section */
+/* enforces the white-only look everywhere the dark theme could leak   */
+/* through, and neutralises the remaining decorative gradients.        */
+/* ------------------------------------------------------------------ */
+
+/* 18a. Kill every dark-scope override: forced-light layout never adds
+   the .dark class, so these are inert — but neutralise them anyway so
+   a stray class can never flip a surface back to bone/ink. */
+html.dark .dlu-card,
+html.dark .dlu-chip,
+html.dark .dlu-nav-btn,
+html.dark .dlu-nav span,
+html.dark .auth-shell-art,
+html.dark .marketplace-hero-panel,
+html.dark .auth-shell,
+html.dark .site-header,
+html.dark .marketplace-hero,
+html.dark .marketplace-providers-section,
+html.dark .marketplace-entry-section,
+html.dark .marketplace-footer,
+html.dark body {
+  background-color: #ffffff;
+  color: #131312;
+  border-color: rgba(19, 19, 18, 0.09);
+}
+html.dark .dlu-btn,
+html.dark .dlu-dot.dlu-on,
+html.dark .dlu-dots i.dlu-on {
+  background: #131312;
+  color: #ffffff;
+}
+html.dark .dlu-type,
+html.dark .dlu-name,
+html.dark .dlu-city,
+html.dark .dlu-lang,
+html.dark .dlu-slot,
+html.dark .dlu-slot b,
+html.dark .dlu-count,
+html.dark .dlu-arrow-note,
+html.dark .dlu-tag {
+  color: inherit;
+}
+
+/* 18b. Force light tokens at the highest specificity we own, beating
+   both globals.css and the old bone seed regardless of load order. */
+html:root {
+  --background: #ffffff !important;
+  --card: #ffffff !important;
+  --popover: #ffffff !important;
+  --muted: #f4f4f2 !important;
+  color-scheme: light only;
+}
+
+/* 18c. Tailwind dark: utilities must never paint black surfaces while
+   dark mode is disabled. Neutralise the ones the marketing shell uses
+   (covers all breakpoints, any ancestor). */
+[class~="dark:bg-black"],
+[class*="dark:bg-black"] {
+  --tw-bg-opacity: 1;
+  background-color: #ffffff !important;
+}
+[class~="dark:bg-brand-900"],
+[class*="dark:bg-brand-900"] {
+  background-color: var(--brand-100) !important;
+}
+[class~="dark:text-brand-300"],
+[class*="dark:text-brand-300"] {
+  color: var(--brand-700) !important;
+}
+[class~="dark:hover:bg-brand-900"],
+[class*="dark:hover:bg-brand-900"] {
+  background-color: var(--brand-100);
+}
+[class~="dark:group-hover:text-brand-300"],
+[class*="dark:group-hover:text-brand-300"] {
+  color: inherit;
+}
+
+/* 18d. No gradients anywhere on the site (flat white design). */
+[class*="bg-gradient"],
+[class*="bg-gradient"] *,
+.hero-road-line {
+  background-image: none !important;
+}
+
+/* 18e. General light-mode hard white: any stray dark surface utility
+   or black token must lose against the white mandate. */
+[class~="bg-black"],
+[class*="bg-black"] {
+  background-color: #ffffff !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* 19. Signup deck on PHONES: compact carousel above the form          */
+/* (Samuel: "the web app should work well on phones and desktop")      */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 1023px) {
+  .auth-shell-grid.auth-shell-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .auth-shell-art.auth-shell-art {
+    order: -1;
+    width: 100%;
+    min-height: 0;
+    margin: 1.5rem 0 0;
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  /* Phone: hide stacked back cards, show front card + controls only */
+  .auth-shell-art .dlu-deck-live .dlu-card.dlu-back-1,
+  .auth-shell-art .dlu-deck-live .dlu-card.dlu-back-2 {
+    display: none;
+  }
+
+  .auth-shell-art .dlu-deck-live {
+    min-height: 0;
+    margin-top: 0.9rem;
+  }
+
+  .auth-shell-art .dlu-deck-live .dlu-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+
+  .auth-shell-art .dlu-rail {
+    margin-top: 0.9rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-shell-art.auth-shell-art-live {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* 19b. Hero: guarantee the deck panel lands in the RIGHT column (Samuel:
+   "move the carousel to the right of the hero page"). The DOM column order
+   is [copy, panel]; force panel to grid-column 2 regardless of order. */
+@media (min-width: 1024px) {
+  .marketplace-hero-grid > .marketplace-reveal.relative {
+    grid-column: 2;
+  }
+  .marketplace-hero-grid > .marketplace-hero-copy {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+/* 21. Deck geometry safety: identical card heights front/back at lg (fixed
+   offsets assume equal heights), and hide any stray nav trigger gap. */
+@media (min-width: 1024px) {
+  .auth-shell-art .dlu-deck-live .dlu-card {
+    min-height: 8.6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .site-header .site-nav-mobile-trigger { display: none; }
 }

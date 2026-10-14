@@ -9,7 +9,8 @@ import { LiveAuthDeck } from '@/components/custom/live-deck';
  * - One narrow column, no decorative card chrome
  * - Locale stays available without competing with the form
  * - 2026-10-14 restyle: on large screens the live profile carousel sits to the
- *   RIGHT of the form column (interactive, data-driven).
+ *   RIGHT of the form column (interactive, data-driven, auto-rotating 10
+ *   profiles with photos). On phones it renders compact above the form.
  */
 
 export function AuthShell({ children, footer }: { children: ReactNode; footer?: ReactNode }) {
@@ -75,8 +76,8 @@ export function AuthShell({ children, footer }: { children: ReactNode; footer?: 
               <div className="mt-8 text-center text-small text-muted-foreground">{footer}</div>
             ) : null}
           </div>
-        <aside className="auth-shell-art relative hidden overflow-hidden lg:flex lg:h-[45rem] lg:w-[460px] lg:shrink-0 lg:flex-col" aria-hidden>
-          <span className="dlu-glow" />
+        <aside className="auth-shell-art auth-shell-art-live relative flex shrink-0 flex-col overflow-hidden lg:h-[45rem] lg:w-[460px]">
+          <p className="dlu-tag">Övningskörning · nära dig</p>
           <LiveAuthDeck />
         </aside>
         </div>

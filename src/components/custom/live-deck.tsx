@@ -39,9 +39,10 @@ type DeckProfile = {
   chip: string | null;
   languages: string;
   nextSlot: string | null;
+  photo: string;
 };
 
-const MAX_DECK_PROFILES = 6;
+const MAX_DECK_PROFILES = 10;
 const ROTATION_MS = 4800;
 
 function formatSekChip(rate: number | null): string | null {
@@ -74,6 +75,7 @@ function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
     chip: formatSekChip(row.hourlyRateSek),
     languages: languages || 'Svenska',
     nextSlot: row.nextSlotAt ? formatSlot(row.nextSlotAt) : null,
+    photo: row.photoUrl || '',
   };
 }
 
@@ -108,17 +110,37 @@ export function LiveAuthDeck() {
   const back1 = count > 1 ? profiles[(active + 1) % count] : undefined;
   const back2 = count > 2 ? profiles[(active + 2) % count] : undefined;
 
+  const motionOk =
+    count >= 2 &&
+    !paused &&
+    typeof window !== 'undefined' &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   useEffect(() => {
-    if (paused || count < 2) return;
-    if (typeof window === 'undefined') return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!motionOk) return;
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % count);
     }, ROTATION_MS);
     return () => {
       window.clearInterval(timer);
     };
-  }, [paused, count]);
+  }, [motionOk, count]);
+
+  // Rotation progress: a local low-frequency clock (re-render every ~0.6 s)
+  // drives the thin progress strip on the front card. Re-created per profile
+  // so the strip restarts with each rotation — no state churn mid-animation.
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    if (!motionOk) return;
+    const startedAt = Date.now();
+    setProgress(0);
+    const tick = window.setInterval(() => {
+      setProgress(Math.min(100, ((Date.now() - startedAt) / ROTATION_MS) * 100));
+    }, 600);
+    return () => {
+      window.clearInterval(tick);
+    };
+  }, [motionOk, active]);
 
   if (!front) return null;
 
@@ -133,12 +155,21 @@ export function LiveAuthDeck() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <article className="dlu-card" key={front.id}>
+        <article
+          className="dlu-card"
+          key={front.id}
+          style={{ ['--progress' as string]: `${count > 1 ? Math.round(progress) : 0}%` }}
+        >
           <div className="dlu-top">
-            <div className="min-w-0">
-              <p className="dlu-type">{front.type}</p>
-              <p className="dlu-name">{front.name}</p>
-              <p className="dlu-city">{front.city}</p>
+            <div className="dlu-id-row">
+              {front.photo ? (
+                <img src={front.photo} alt="" className="dlu-avatar" aria-hidden />
+              ) : null}
+              <div className="min-w-0">
+                <p className="dlu-type">{front.type}</p>
+                <p className="dlu-name">{front.name}</p>
+                <p className="dlu-city">{front.city}</p>
+              </div>
             </div>
             {front.chip ? <span className="dlu-chip">{front.chip}</span> : null}
           </div>
@@ -179,38 +210,27 @@ export function LiveAuthDeck() {
           </article>
         ) : null}
       </div>
-      <div className="dlu-nav">
-        <button
-          type="button"
-          className="dlu-nav-btn"
-          aria-label="Föregående profil"
-          onClick={() => go(-1)}
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          className="dlu-nav-btn"
-          aria-label="Nästa profil"
-          onClick={() => go(1)}
-        >
-          →
-        </button>
-      </div>
-      <div className="dlu-dots">
-        {profiles.map((profile, index) => (
+      <div className="dlu-rail">
+        <p className="dlu-count">{count} profiler i rotation</p>
+        <div className="dlu-nav">
           <button
             type="button"
-            key={profile.id}
-            className={index === active ? 'dlu-dot dlu-on' : 'dlu-dot'}
-            aria-label={`Visa ${profile.name}`}
-            onClick={() => setActive(index)}
-          />
-        ))}
+            className="dlu-nav-btn"
+            aria-label="Föregående profil"
+            onClick={() => go(-1)}
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            className="dlu-nav-btn"
+            aria-label="Nästa profil"
+            onClick={() => go(1)}
+          >
+            →
+          </button>
+        </div>
       </div>
-      <p className="dlu-count">
-        {count} profiler i rotation
-      </p>
       <p className="dlu-free"><i aria-hidden />Kostnadsfritt för elever</p>
     </div>
   );
