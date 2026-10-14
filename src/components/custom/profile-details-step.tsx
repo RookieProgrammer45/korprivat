@@ -50,6 +50,8 @@ export type ProfileDetailsStepProps = {
   stepTotal: number;
   /** Learner photos get the 5 MB limit; other paths use 20 MB. */
   learnerPhoto: boolean;
+  /** When true, Continue stays disabled until a photo is staged/uploaded. */
+  photoRequired?: boolean;
   maxBytes: number;
   onBack: () => void;
   /** Parent refetches signup state and routes the next step. */
@@ -64,6 +66,7 @@ export function ProfileDetailsStep({
   stepCurrent,
   stepTotal,
   learnerPhoto,
+  photoRequired = false,
   maxBytes,
   onBack,
   onContinue,

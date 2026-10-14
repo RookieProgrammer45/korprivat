@@ -581,6 +581,7 @@ export function SignUpForm({
         stepCurrent={4}
         stepTotal={signupPath === 'SCHOOL' ? 4 : 5}
         learnerPhoto={isLearnerPhoto}
+        photoRequired={!isLearnerPhoto}
         maxBytes={isLearnerPhoto ? LEARNER_PHOTO_MAX_BYTES : MAX_IMAGE_BYTES}
         onBack={() => {
           // SCHOOL (and other email-verified resumes) must not return to a
@@ -595,7 +596,17 @@ export function SignUpForm({
           }
           setStep('account');
         }}
-        onContinue={() => void advanceAfterPhoto()}
+        onContinue={() => {
+          // LEARNER: the photo is optional — Continue finishes the signup
+          // (same as the old skip). Re-checking state here would bounce the
+          // user back to this step forever, since a learner with no photo
+          // still has nextPrerequisite 'complete' + photo != CONFIRMED.
+          if (isLearnerPhoto) {
+            void completeSignup();
+            return;
+          }
+          void advanceAfterPhoto();
+        }}
       />
     );
   }
