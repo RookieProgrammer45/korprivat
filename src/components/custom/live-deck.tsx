@@ -89,7 +89,16 @@ export function LiveAuthDeck() {
     apiFetch('/api/instructors', { schema: InstructorList })
       .then((data) => {
         if (!alive) return;
-        const rows = data.items
+        // Profilkarusellen (2026-10-14): de tio demo-profilerna med genererade
+        // profilbilder (/assets/profiles/) roterar först — riktiga skolor fyller
+        // på om demo-profilerna saknas.
+        const withPhoto = data.items.filter((row) =>
+          (row.photoUrl ?? '').startsWith('/assets/profiles/'),
+        );
+        const withoutPhoto = data.items.filter(
+          (row) => !(row.photoUrl ?? '').startsWith('/assets/profiles/'),
+        );
+        const rows = [...withPhoto, ...withoutPhoto]
           .slice(0, MAX_DECK_PROFILES)
           .map(toDeckProfile);
         if (rows.length > 0) {
