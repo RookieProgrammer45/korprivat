@@ -32,7 +32,7 @@ import { cn } from '@/lib/utils';
 // so privileged nav items render the brief "off" state until the cookie
 // resolves. The role lives on `data.user` (NOT `data.session.user`, which is
 // the Auth.js trap — `session` is the session RECORD, not a nested user).
-export function useIsAuthenticated(): boolean {
+function useIsAuthenticated(): boolean {
   const { data } = useSession();
   return Boolean(data?.user);
 }
@@ -129,6 +129,10 @@ export function SiteNav() {
   const barNav = secondary.filter(
     (item) => item.labelKey !== 'nav.drivingInstructor' && item.labelKey !== 'nav.drivingSchool',
   );
+  // ElevenLabs-style CTA order: outline "Logga in" first, black "Kom igång" last.
+  const ctaNav = [...barNav].sort(
+    (a, b) => Number(a.labelKey === 'nav.getStarted') - Number(b.labelKey === 'nav.getStarted'),
+  );
 
   // Top-bar slots (links + `menu` dropdowns); `inline` renders, `overflow` → "More".
   const slots = buildPrimarySlots(primary);
@@ -145,10 +149,10 @@ export function SiteNav() {
     slot.type === 'link' ? isActive(slot.item.href) : slot.items.some((i) => isActive(i.href));
 
   return (
-    <header className="site-header site-header-shell sticky top-0 z-40 w-full px-3 pt-3 sm:px-4 sm:pt-4">
+    <header className="site-header site-header-shell sticky top-0 z-40 w-full border-b border-border/60 bg-background">
       <nav
         aria-label={tNav('nav.primary')}
-        className="site-header-pill mx-auto flex h-14 min-w-0 max-w-screen-xl items-center gap-1.5 rounded-full border border-border bg-card px-3 sm:gap-2 sm:px-4"
+        className="mx-auto flex h-14 min-w-0 max-w-screen-xl items-center gap-2 px-4 sm:px-6"
       >
         <Link
           href="/"
@@ -180,7 +184,7 @@ export function SiteNav() {
                 variant="ghost"
                 size="sm"
                 className={cn(
-                  'nav-link rounded-full text-muted-foreground hover:bg-muted hover:text-foreground',
+                  'nav-link rounded-full text-foreground hover:bg-muted/70 hover:text-foreground',
                   isActive(slot.item.href) &&
                     'bg-muted text-foreground',
                 )}
@@ -199,7 +203,7 @@ export function SiteNav() {
                     variant="ghost"
                     size="sm"
                     className={cn(
-                      'nav-link rounded-full text-muted-foreground hover:bg-muted hover:text-foreground',
+                      'nav-link rounded-full text-foreground hover:bg-muted/70 hover:text-foreground',
                       isSlotActive(slot) &&
                         'bg-muted text-foreground',
                     )}
@@ -232,7 +236,7 @@ export function SiteNav() {
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    'nav-link rounded-full text-muted-foreground hover:bg-muted hover:text-foreground',
+                    'nav-link rounded-full text-foreground hover:bg-muted/70 hover:text-foreground',
                     overflow.some(isSlotActive) &&
                       'bg-muted text-foreground',
                   )}
@@ -281,52 +285,28 @@ export function SiteNav() {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
+
+          {/* Role entry points as plain links (flat nav) — visible lg+, in the mobile sheet below lg. */}
+          {roleNav.map((item) => (
+            <Button
+              key={item.href}
+              asChild
+              variant="ghost"
+              size="sm"
+              className="nav-link hidden rounded-full text-foreground hover:bg-muted/70 hover:text-foreground lg:inline-flex"
+            >
+              <Link href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                {tNav(item.labelKey)}
+              </Link>
+            </Button>
+          ))}
         </div>
 
         {/* Right cluster: ml-auto pushes it right at every breakpoint */}
         <div className="site-nav-actions ml-auto flex min-w-0 items-center gap-0.5 sm:gap-1">
-          {/* Desktop secondary buttons. Role CTAs collapse to a menu at lg only. */}
+          {/* Desktop CTAs: outline Logga in first, black Kom igång last (ElevenLabs-style). */}
           <div className="site-nav-secondary hidden items-center gap-1 md:flex">
-            {roleNav.length > 0 && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="site-nav-cta hidden lg:inline-flex xl:hidden"
-                  >
-                    {tNav('nav.forSchoolsMenu')}
-                    <ChevronDown className="ml-1 size-4 opacity-60" aria-hidden />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {roleNav.map((item) => (
-                    <DropdownMenuItem key={item.href} asChild>
-                      <Link
-                        href={item.href}
-                        aria-current={isActive(item.href) ? 'page' : undefined}
-                      >
-                        {tNav(item.labelKey)}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-            {roleNav.map((item) => (
-              <Button
-                key={item.href}
-                asChild
-                variant="outline"
-                size="sm"
-                className="site-nav-cta hidden whitespace-nowrap xl:inline-flex"
-              >
-                <Link href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-                  {tNav(item.labelKey)}
-                </Link>
-              </Button>
-            ))}
-            {barNav.map((item) => (
+            {ctaNav.map((item) => (
               <Button
                 key={item.href}
                 asChild
@@ -460,6 +440,45 @@ export function SiteNav() {
         </div>
       </nav>
     </header>
+  );
+}
+
+export function SiteFooter() {
+  const pathname = usePathname();
+  // Hooks before focused early-return — same soft-nav rule as SiteNav.
+  const isAuthenticated = useIsAuthenticated();
+  const tNav = useTranslations('common');
+
+  if (isFocusedShellPath(pathname)) {
+    return null;
+  }
+
+  const footer = visibleItems('footer', isAuthenticated);
+  if (footer.length === 0) return null;
+
+  return (
+    <footer className="border-t border-border">
+      <nav
+        aria-label={tNav('nav.footer')}
+        className="mx-auto flex max-w-screen-xl flex-wrap items-center gap-1 px-4 py-6 text-sm"
+      >
+        <Link
+          href="/"
+          aria-label={siteName}
+          className="mr-3 flex shrink-0 items-center gap-2 text-foreground"
+        >
+          <img src="/brand/logo-black.svg" alt="" width={20} height={20} className="h-5 w-5" />
+          <span className="font-display text-sm font-semibold tracking-[-0.01em]">
+            {siteName}
+          </span>
+        </Link>
+        {footer.map((item) => (
+          <Button key={item.href} asChild variant="link" size="sm">
+            <Link href={item.href}>{tNav(item.labelKey)}</Link>
+          </Button>
+        ))}
+      </nav>
+    </footer>
   );
 }
 
