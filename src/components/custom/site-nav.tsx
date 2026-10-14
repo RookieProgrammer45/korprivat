@@ -120,12 +120,9 @@ export function SiteNav() {
   // The brand links home, so drop a redundant '/' item from the rendered links.
   const primary = visibleItems('primary', isAuthenticated).filter((item) => item.href !== '/');
   const secondary = visibleItems('secondary', isAuthenticated);
-  // Instructor and school are separate paths. They share a "För skolor" menu
-  // only at lg, where the two Swedish labels don't fit beside Kom igång and
-  // Logga in. Below lg they live in the mobile sheet. At xl they are buttons.
-  const roleNav = secondary.filter(
-    (item) => item.labelKey === 'nav.drivingInstructor' || item.labelKey === 'nav.drivingSchool',
-  );
+  // Role entry points ("Jag är trafiklärare" / "Jag driver trafikskola") live in
+  // the hero CTA cluster (public-home), not in the top bar. barNav = the rest,
+  // used both by the desktop bar and the mobile sheet.
   const barNav = secondary.filter(
     (item) => item.labelKey !== 'nav.drivingInstructor' && item.labelKey !== 'nav.drivingSchool',
   );
@@ -286,20 +283,6 @@ export function SiteNav() {
             </DropdownMenu>
           )}
 
-          {/* Role entry points as plain links (flat nav) — visible lg+, in the mobile sheet below lg. */}
-          {roleNav.map((item) => (
-            <Button
-              key={item.href}
-              asChild
-              variant="ghost"
-              size="sm"
-              className="nav-link hidden rounded-full text-foreground hover:bg-muted/70 hover:text-foreground lg:inline-flex"
-            >
-              <Link href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-                {tNav(item.labelKey)}
-              </Link>
-            </Button>
-          ))}
         </div>
 
         {/* Right cluster: ml-auto pushes it right at every breakpoint */}
@@ -404,7 +387,7 @@ export function SiteNav() {
                   )}
                   {(secondary.length > 0 || isAuthenticated) && (
                     <div className="mt-2 flex flex-col gap-1 border-t border-border pt-4">
-                      {secondary.map((item) => (
+                      {barNav.map((item) => (
                         <Button
                           key={item.href}
                           asChild
