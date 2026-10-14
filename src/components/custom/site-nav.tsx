@@ -153,49 +153,21 @@ export function SiteNav() {
         <Link
           href="/"
           aria-label={siteName}
-          className="group mr-3 flex min-w-0 shrink-0 items-center text-foreground sm:mr-6"
+          className="group mr-3 flex min-w-0 shrink-0 items-center gap-2 text-foreground sm:mr-6"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 200 48"
-            width={140}
+          <img
+            src="/brand/logo-black.svg"
+            alt=""
+            width={28}
             height={28}
-            role="img"
-            aria-labelledby="site-logo-title"
-            className="site-header-wordmark h-6 w-auto max-w-full transition-colors group-hover:text-brand-700 dark:group-hover:text-brand-300"
+            className="h-7 w-7 shrink-0"
+          />
+          <span
+            id="site-logo-title"
+            className="site-header-wordmark truncate font-display text-lg font-semibold tracking-[-0.02em] text-foreground transition-colors group-hover:text-brand-700 dark:group-hover:text-brand-300"
           >
-            <title id="site-logo-title">{siteName}</title>
-            <g transform="translate(24 24)" fill="currentColor">
-              <g transform="rotate(-45)">
-                <path
-                  fillRule="evenodd"
-                  d="M-14.5 -3.8 h29 a5.3 5.3 0 0 1 0 10.6 h-29 a5.3 5.3 0 0 1 0 -10.6 z M-10.7 -2.65 h21.4 a2.65 2.65 0 0 1 0 5.3 h-21.4 a2.65 2.65 0 0 1 0 -5.3 z"
-                />
-              </g>
-              <rect x="-3.9" y="-3.9" width="7.8" height="7.8" transform="rotate(45)" />
-              <g transform="rotate(45)">
-                <path
-                  fillRule="evenodd"
-                  d="M-14.5 -3.8 h29 a5.3 5.3 0 0 1 0 10.6 h-29 a5.3 5.3 0 0 1 0 -10.6 z M-10.7 -2.65 h21.4 a2.65 2.65 0 0 1 0 5.3 h-21.4 a2.65 2.65 0 0 1 0 -5.3 z"
-                />
-                <circle cx="0" cy="0" r="1.6" />
-                <rect x="-0.55" y="-1.6" width="1.1" height="3.2" />
-              </g>
-              <circle cx="0" cy="0" r="1.6" transform="rotate(-45)" />
-              <rect x="-0.55" y="-1.6" width="1.1" height="3.2" transform="rotate(-45)" />
-            </g>
-            <text
-              x="62"
-              y="33"
-              fontFamily="Syne, Avenir Next, sans-serif"
-              fontSize="24"
-              fontWeight="600"
-              letterSpacing="-0.48"
-              fill="currentColor"
-            >
-              DriveLinkUp
-            </text>
-          </svg>
+            {siteName}
+          </span>
         </Link>
 
         {/* Desktop (md+): inline slots — direct links + `menu` dropdowns */}
