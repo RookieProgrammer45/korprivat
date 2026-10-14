@@ -7,7 +7,13 @@
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
+import { apiFetch } from '@/lib/api-client';
+import {
+  type InstructorFilteredItem,
+  InstructorList,
+} from '@/lib/contracts/instructors';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,8 +26,167 @@ const QUICK_CITIES = [
   { id: 'vasteras', href: '/locations/se/vasteras' },
 ] as const;
 
+const LANGUAGE_LABELS: Record<string, string> = {
+  sv: 'Svenska',
+  en: 'Engelska',
+  ar: 'Arabiska',
+  fa: 'Persiska',
+  so: 'Somaliska',
+  pl: 'Polska',
+  es: 'Spanska',
+  de: 'Tyska',
+  tr: 'Turkiska',
+  fr: 'Franska',
+  ur: 'Urdu',
+  fi: 'Finska',
+  no: 'Norska',
+  da: 'Danska',
+};
+
+type DeckProfile = {
+  id: string;
+  name: string;
+  type: 'Skola' | 'Instruktör';
+  city: string;
+  chip: string | null;
+  rating: string | null;
+  reviews: string | null;
+  languages: string;
+  nextSlot: string | null;
+  href: string;
+};
+
+const FALLBACK_PROFILES: DeckProfile[] = [
+  {
+    id: 'fallback-globen',
+    name: 'Globens Trafikskolan',
+    type: 'Skola',
+    city: 'Stockholm',
+    chip: 'fr. 299 kr',
+    rating: '4.9',
+    reviews: '1 403 omdömen',
+    languages: 'Svenska · Engelska',
+    nextSlot: 'tis 10:00',
+    href: '/instructors',
+  },
+  {
+    id: 'fallback-ari',
+    name: 'Ari Shoval',
+    type: 'Instruktör',
+    city: 'Sollentuna',
+    chip: 'fr. 350 kr',
+    rating: null,
+    reviews: null,
+    languages: 'Svenska · Engelska · Arabiska',
+    nextSlot: null,
+    href: '/instructors',
+  },
+  {
+    id: 'fallback-korhu',
+    name: 'Körkortshuset i Sollentuna',
+    type: 'Skola',
+    city: 'Sollentuna',
+    chip: 'fr. 350 kr',
+    rating: null,
+    reviews: null,
+    languages: 'Svenska',
+    nextSlot: null,
+    href: '/instructors',
+  },
+];
+
+const MAX_DECK_PROFILES = 6;
+const ROTATION_MS = 4800;
+
+function formatSekChip(rate: number | null): string | null {
+  return typeof rate === 'number' ? `fr. ${rate} kr` : null;
+}
+
+function formatSlot(iso: string): string {
+  try {
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return null;
+    return new Intl.DateTimeFormat('sv-SE', {
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(date);
+  } catch {
+    return null;
+  }
+}
+
+function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
+  const languages = (row.languages ?? [])
+    .map((code) => LANGUAGE_LABELS[code] ?? code.toUpperCase())
+    .join(' · ');
+  const rating = row.reviewSummary?.averageRating;
+  return {
+    id: row.id,
+    name: row.name,
+    type: row.providerType === 'INSTRUCTOR' ? 'Instruktör' : 'Skola',
+    city: row.city,
+    chip: formatSekChip(row.hourlyRateSek),
+    rating: typeof rating === 'number' ? rating.toFixed(1) : null,
+    reviews:
+      row.reviewSummary && row.reviewSummary.count > 0
+        ? `${row.reviewSummary.count} omdömen`
+        : null,
+    languages: languages || 'Svenska',
+    nextSlot: row.nextSlotAt ? formatSlot(row.nextSlotAt) : null,
+    href: `/instructors/${row.id}`,
+  };
+}
+
 export function PublicHome() {
   const t = useTranslations('publicHome');
+  const [profiles, setProfiles] = useState<DeckProfile[]>(FALLBACK_PROFILES);
+  const [live, setLive] = useState(false);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    apiFetch('/api/instructors', { schema: InstructorList })
+      .then((data) => {
+        if (!alive) return;
+        const rows = data.items
+          .slice(0, MAX_DECK_PROFILES)
+          .map(toDeckProfile);
+        if (rows.length > 0) {
+          setProfiles(rows);
+          setActive(0);
+          setLive(true);
+        }
+      })
+      .catch(() => {
+        if (!alive) return;
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const count = profiles.length;
+  const front = profiles[active % count];
+  const back1 = profiles[(active + 1) % count];
+  const back2 = profiles[(active + 2) % count];
+
+  useEffect(() => {
+    if (paused || count < 2) return;
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % count);
+    }, ROTATION_MS);
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [paused, count]);
+
+  const go = (step: number) => {
+    setActive((current) => (current + step + count) % count);
+  };
 
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
@@ -62,45 +227,96 @@ export function PublicHome() {
           <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
             <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden bg-white lg:block dark:bg-black">
               <p className="dlu-tag">Marknadsplats · Skolor &amp; instruktörer</p>
-              <div className="dlu-deck" aria-hidden>
-                <article className="dlu-card">
+              <div
+                className="dlu-deck"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
+                <article className="dlu-card" key={front.id}>
                   <div className="dlu-top">
                     <div className="min-w-0">
-                      <p className="dlu-type">Skola</p>
-                      <p className="dlu-name">Globens Trafikskolan</p>
-                      <p className="dlu-city">Stockholm</p>
+                      <p className="dlu-type">{front.type}</p>
+                      <p className="dlu-name">{front.name}</p>
+                      <p className="dlu-city">{front.city}</p>
                     </div>
-                    <span className="dlu-chip">fr. 299 kr</span>
+                    {front.chip ? <span className="dlu-chip">{front.chip}</span> : null}
                   </div>
-                  <p className="dlu-meta"><i aria-hidden />4.9 · 1 403 omdömen</p>
-                  <p className="dlu-lang">Svenska · Engelska</p>
-                  <div className="dlu-row"><span className="dlu-slot">Nästa lediga tid<b>tis 10:00</b></span><span className="dlu-btn">Boka</span></div>
-                </article>
-                <article className="dlu-card dlu-back-1">
-                  <div className="dlu-top">
-                    <div className="min-w-0">
-                      <p className="dlu-type">Instruktör</p>
-                      <p className="dlu-name">Ari Shoval</p>
-                      <p className="dlu-city">Sollentuna</p>
-                    </div>
-                    <span className="dlu-chip">fr. 350 kr</span>
-                  </div>
-                  <p className="dlu-lang">Svenska · Engelska · Arabiska</p>
-                </article>
-                <article className="dlu-card dlu-back-2">
-                  <div className="dlu-top">
-                    <div className="min-w-0">
-                      <p className="dlu-type">Skola</p>
-                      <p className="dlu-name">Körkortshuset i Sollentuna</p>
-                      <p className="dlu-city">Sollentuna</p>
-                    </div>
-                    <span className="dlu-chip">fr. 350 kr</span>
+                  {front.rating ? (
+                    <p className="dlu-meta">
+                      <i aria-hidden />
+                      {front.rating}
+                      {front.reviews ? ` · ${front.reviews}` : ''}
+                    </p>
+                  ) : null}
+                  <p className="dlu-lang">{front.languages}</p>
+                  <div className="dlu-row">
+                    <span className="dlu-slot">
+                      Nästa lediga tid
+                      <b>{front.nextSlot ?? 'Påförfrågan'}</b>
+                    </span>
+                    <Link href={front.href} className="dlu-btn">
+                      Boka
+                    </Link>
                   </div>
                 </article>
+                {count > 1 ? (
+                  <article className="dlu-card dlu-back-1" key={back1.id}>
+                    <div className="dlu-top">
+                      <div className="min-w-0">
+                        <p className="dlu-type">{back1.type}</p>
+                        <p className="dlu-name">{back1.name}</p>
+                        <p className="dlu-city">{back1.city}</p>
+                      </div>
+                      {back1.chip ? <span className="dlu-chip">{back1.chip}</span> : null}
+                    </div>
+                    <p className="dlu-lang">{back1.languages}</p>
+                  </article>
+                ) : null}
+                {count > 2 ? (
+                  <article className="dlu-card dlu-back-2" key={back2.id}>
+                    <div className="dlu-top">
+                      <div className="min-w-0">
+                        <p className="dlu-type">{back2.type}</p>
+                        <p className="dlu-name">{back2.name}</p>
+                        <p className="dlu-city">{back2.city}</p>
+                      </div>
+                      {back2.chip ? <span className="dlu-chip">{back2.chip}</span> : null}
+                    </div>
+                  </article>
+                ) : null}
               </div>
-              <div className="dlu-nav" aria-hidden><span>←</span><span>→</span></div>
-              <div className="dlu-dots" aria-hidden><i className="dlu-on" /><i /><i /><i /><i /><i /></div>
-              <p className="dlu-count">Alla profiler i rotation</p>
+              <div className="dlu-nav">
+                <button
+                  type="button"
+                  className="dlu-nav-btn"
+                  aria-label="Föregående profil"
+                  onClick={() => go(-1)}
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  className="dlu-nav-btn"
+                  aria-label="Nästa profil"
+                  onClick={() => go(1)}
+                >
+                  →
+                </button>
+              </div>
+              <div className="dlu-dots">
+                {profiles.map((profile, index) => (
+                  <button
+                    type="button"
+                    key={profile.id}
+                    className={index === active ? 'dlu-dot dlu-on' : 'dlu-dot'}
+                    aria-label={`Visa ${profile.name}`}
+                    onClick={() => setActive(index)}
+                  />
+                ))}
+              </div>
+              <p className="dlu-count">
+                {live ? `${count} profiler i rotation` : 'Alla profiler i rotation'}
+              </p>
               <p className="dlu-arrow-note">jämför → boka → kör</p>
               <p className="dlu-free"><i aria-hidden />Kostnadsfritt för elever</p>
             </div>
