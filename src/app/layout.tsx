@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang={locale.lang} dir={locale.dir} suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-body text-foreground antialiased">
+      <body className="min-h-dvh bg-background font-body text-foreground antialiased">
         <HeadContent nonce={nonce} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light" nonce={nonce}>
           <AppProviders>

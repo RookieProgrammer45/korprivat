@@ -7,10 +7,10 @@ export const siteDescription =
 // PWA + social-share colors. HEX only (the oklch() tokens in globals.css aren't
 // readable here) — set to match your brand seed.
 export const brandVisual = {
-  /** PWA browser-UI / status-bar color. */
-  themeColor: '#18D8CC',
-  /** PWA splash + install background. */
-  backgroundColor: '#031515',
+  /** PWA browser-UI / status-bar color — WHITE so overscroll/browser chrome never goes green. */
+  themeColor: '#ffffff',
+  /** PWA splash + install background — WHITE to match the page. */
+  backgroundColor: '#ffffff',
   /** Social-share (OG/Twitter) image. */
   og: {
     background: '#031515',

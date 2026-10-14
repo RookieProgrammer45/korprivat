@@ -4,6 +4,7 @@ html:root {
   color-scheme: light;
   --background: #fff;
   background-color: #fff;
+  overscroll-behavior: none; /* kill green overscroll glow/stretch (html) */
 }
 
 html.dark {
@@ -39,6 +40,7 @@ body {
   font-family: var(--font-body);
   font-size: 1rem;
   text-rendering: optimizeLegibility;
+  overscroll-behavior: none; /* kill green overscroll glow/stretch (body) */
 }
 
 html:not(.dark) body {
