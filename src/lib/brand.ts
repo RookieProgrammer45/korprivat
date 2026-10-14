@@ -13,8 +13,8 @@ export const brandVisual = {
   backgroundColor: '#ffffff',
   /** Social-share (OG/Twitter) image. */
   og: {
-    background: '#031515',
-    foreground: '#F1FAF9',
+    background: '#F1FAF9',
+    foreground: '#0D1312',
     /** Second line under the site name; '' hides it. */
     tagline: 'Schools and certified instructors. Learners. One marketplace.',
   },

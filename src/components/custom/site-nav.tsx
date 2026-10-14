@@ -482,6 +482,16 @@ export function SiteFooter() {
         aria-label={tNav('nav.footer')}
         className="mx-auto flex max-w-screen-xl flex-wrap items-center gap-1 px-4 py-6 text-sm"
       >
+        <Link
+          href="/"
+          aria-label={siteName}
+          className="mr-3 flex shrink-0 items-center gap-2 text-foreground"
+        >
+          <img src="/brand/logo-black.svg" alt="" width={20} height={20} className="h-5 w-5" />
+          <span className="font-display text-sm font-semibold tracking-[-0.01em]">
+            {siteName}
+          </span>
+        </Link>
         {footer.map((item) => (
           <Button key={item.href} asChild variant="link" size="sm">
             <Link href={item.href}>{tNav(item.labelKey)}</Link>
