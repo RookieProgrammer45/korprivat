@@ -12,6 +12,7 @@ import { LiveAuthDeck } from '@/components/custom/live-deck';
  *   RIGHT of the form column (interactive, data-driven).
  */
 
+export function AuthShell({ children, footer }: { children: ReactNode; footer?: ReactNode }) {
   return (
     <main className="auth-shell flex min-h-dvh min-w-0 flex-col bg-[var(--background)]">
       <div className="auth-shell-grid mx-auto flex w-full min-w-0 max-w-6xl flex-1 flex-col-reverse lg:flex-row-reverse lg:items-stretch lg:gap-12 lg:px-6">
