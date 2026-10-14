@@ -3308,12 +3308,12 @@
   "aboutPage": {
     "meta": {
       "title": "About us",
-      "description": "DriveLinkUp connects driving schools and certified instructors with learners — with published prices and visible terms before you book."
+      "description": "DriveLinkUp compares driving schools and certified instructors. Prices and terms are visible before you book, and learners never pay us a fee."
     },
     "hero": {
       "eyebrow": "Schools and instructors. Learners. One marketplace.",
-      "title": "Building the clearer way to get licence-ready.",
-      "intro": "DriveLinkUp connects driving schools and certified instructors with learners — prices on the table and terms visible before you book. We believe that when you can see the full picture, you make a better decision.",
+      "title": "We built the comparison we wished existed.",
+      "intro": "DriveLinkUp puts prices on the table before you book, not at checkout. Compare schools and instructors on price, licence category, city and language, and decide on facts instead of guesswork.",
       "chips": [
         "Published price shown before checkout",
         "Schools and certified instructors",
@@ -3324,25 +3324,25 @@
     },
     "linkStory": {
       "title": "Two links. One connection.",
-      "body": "The mark is two chain links joined together. One is the driving school. The other is the learner. We are the link in between — visible, dependable, and strong enough to carry both. Hence the name: Drive Link Up.",
+      "body": "The logo is two chain links: one for the school, one for the learner. We are the link that keeps them connected. Hence the name, DriveLinkUp.",
       "learner": "The learner",
       "school": "The school"
     },
     "origin": {
-      "title": "It started with a question we couldn't let go of.",
-      "body": "Why is it so hard to find out what a driving licence actually costs? Prices hidden at checkout, terms you never see — and choices made on gut feeling. We asked the question and never got a good answer. So we built the answer we wished we'd found.",
-      "body2": "DriveLinkUp was born in Stockholm in 2026. A marketplace where what matters — price, licence category, city, language and terms — is out in the open before you book, not at checkout.",
+      "title": "It started with a question.",
+      "body": "What does a driving licence actually cost? It should be a simple answer. Instead, prices hide at checkout, terms sit in the fine print, and the choice comes down to a hunch. We got tired of it and built the place we had been looking for.",
+      "body2": "DriveLinkUp started in Stockholm in 2026. A marketplace where the things that matter are out in the open from the first page: price, licence category, city, language and terms.",
       "pillars": [
-        "Knowledge before pressure. Advice from facts, not sales pitches.",
-        "Transparency in both directions. The school owns its details — we review everything before publishing.",
-        "Free for learners. No separate DriveLinkUp fee."
+        "Knowledge before sales pressure. Advice built on facts, not on what sells best.",
+        "Transparency in both directions. The school owns its details, and we review everything before it is published.",
+        "Free for learners. You never pay a fee to DriveLinkUp."
       ],
       "facts": [
         "Founded 2026",
         "Stockholm, Sweden",
         "Independent"
       ],
-      "closing": "We are a startup at an early stage. The first schools are being listed now — and if you write to us, we answer."
+      "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {
       "eyebrow": "Our promise",
@@ -3352,7 +3352,7 @@
     "final": {
       "eyebrow": "Ready for the next step?",
       "title": "Start from your side of the road.",
-      "body": "Learners can browse and book. Schools and certified instructors can publish prices and availability via onboarding.",
+      "body": "Learners browse, compare and book. Schools and instructors publish prices and availability through onboarding.",
       "primaryCta": "Find lessons",
       "secondaryCta": "List your profile"
     }

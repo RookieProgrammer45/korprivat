@@ -3308,12 +3308,12 @@
   "aboutPage": {
     "meta": {
       "title": "Om oss",
-      "description": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever — med priserna på präntan och villkoren synliga innan du bokar."
+      "description": "DriveLinkUp jämför trafikskolor och certifierade instruktörer. Priser och villkor syns före bokningen, och som elev betalar du aldrig någon avgift till oss."
     },
     "hero": {
       "eyebrow": "Skolor och instruktörer. Elever. En marknadsplats.",
-      "title": "Vi bygger det tydligare sättet att bli körklar.",
-      "intro": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever — med priserna på präntan och villkoren synliga innan du bokar. Vi tror att när du ser hela bilden, fattar du ett bättre beslut.",
+      "title": "Vi byggde jämförelsen vi själva saknade.",
+      "intro": "DriveLinkUp sätter priserna på präntan innan du bokar, inte i kassan. Jämför trafikskolor och instruktörer på pris, kategori, stad och språk, och välj utifrån fakta i stället för magkänsla.",
       "chips": [
         "Publicerat pris visas före kassan",
         "Skolor och certifierade instruktörer",
@@ -3324,25 +3324,25 @@
     },
     "linkStory": {
       "title": "Två länkar. En koppling.",
-      "body": "Märket är två kedjelänkar som kopplas ihop. Den ena är trafikskolan. Den andra är eleven. Vi är själva länken däremellan — synlig, pålitlig och stark nog att bära båda. Därav namnet: Drive Link Up.",
+      "body": "Loggan är två kedjelänkar: en för skolan, en för eleven. Vi är länken som får dem att hänga ihop. Därför heter vi DriveLinkUp.",
       "learner": "Eleven",
       "school": "Trafikskolan"
     },
     "origin": {
-      "title": "Det började med en fråga vi inte kunde släppa.",
-      "body": "Varför är det så svårt att ta reda på vad körkortet egentligen kostar? Priser gömda i kassan, villkör som aldrig syns — och val på magkänsla. Vi ställde frågan och fick inget bra svar. Så vi byggde det svar vi själva hade velat hitta.",
-      "body2": "DriveLinkUp föddes i Stockholm 2026. En marknadsplats där det som spelar roll — pris, kategori, stad, språk och villkor — ligger öppet innan du bokar, inte i kassan.",
+      "title": "Det började med en fråga.",
+      "body": "Vad kostar körkortet egentligen? Frågan borde vara enkel. I stället göms priserna i kassan och villkoren i finstilt, och valet hamnar på magkänsla. Vi tröttnade på det och byggde platsen vi själva hade letat efter.",
+      "body2": "DriveLinkUp startades i Stockholm 2026. En marknadsplats där det som spelar roll står öppet från första sidan: pris, kategori, stad, språk och villkor.",
       "pillars": [
-        "Kunskap före tryck. Råd från fakta, inte säljargument.",
-        "Transparens i båda riktningar. Skolan styr sina uppgifter — vi granskar allt före publicering.",
-        "Kostnadsfritt för elever. Ingen separat DriveLinkUp-avgift."
+        "Kunskap före säljtryck. Råden bygger på fakta, inte på vad som säljer bäst.",
+        "Transparens i båda riktningar. Skolan äger sina uppgifter, och vi granskar dem innan något publiceras.",
+        "Kostnadsfritt för elever. Du betalar aldrig någon avgift till DriveLinkUp."
       ],
       "facts": [
         "Grundat 2026",
         "Stockholm, Sverige",
         "Oberoende"
       ],
-      "closing": "Vi är en startup i ett tidigt skede. De första skolorna listas nu — och skriver du till oss, svarar vi."
+      "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."
     },
     "promise": {
       "eyebrow": "Vårt löfte",
@@ -3352,7 +3352,7 @@
     "final": {
       "eyebrow": "Redo för nästa steg?",
       "title": "Börja från den sida av vägen där du är.",
-      "body": "Elever kan bläddra och boka. Trafikskolor och certifierade instruktörer kan publicera pris och tillgänglighet via onboarding.",
+      "body": "Elever bläddrar, jämför och bokar. Skolor och instruktörer lägger upp pris och tillgänglighet via onboarding.",
       "primaryCta": "Hitta lektioner",
       "secondaryCta": "Lista er profil"
     }
