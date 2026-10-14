@@ -9,7 +9,6 @@ import * as React from 'react';
 import { toast } from 'sonner';
 import { AuthNav } from '@/components/custom/auth-nav';
 import { LanguageToggle } from '@/components/custom/language-toggle';
-import { ThemeToggle } from '@/components/custom/theme-toggle';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -371,11 +370,10 @@ export function SiteNav() {
             <AuthNav />
           </div>
 
-          {/* Language lives in the mobile drawer; keep theme on the bar for one-tap access. */}
+          {/* Language lives in the mobile drawer; the app is light-only, so no theme toggle. */}
           <div className="hidden md:contents">
             <LanguageToggle />
           </div>
-          <ThemeToggle />
 
           {/* Mobile (below md): burger + drawer — only when there's something to collapse */}
           {collapsedCount > 0 && (
