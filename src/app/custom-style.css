@@ -1528,6 +1528,7 @@ html.dark .dlu-arrow-note {
 /* --- auth shell: övningskör carousel aside -------------------------------- */
 
 .auth-shell-art {
+  min-height: 45rem;
   background: #ece9e2;
   border: 1px solid rgba(19, 19, 18, 0.09);
   border-radius: 1.25rem;
@@ -1856,4 +1857,67 @@ html .marketplace-secondary-cta {
 
 html .dlu-slot b {
   font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ */
+/* 16. Live deck on the auth shell (signup) — mirrors the hero deck    */
+/* ------------------------------------------------------------------ */
+
+.auth-shell-art .live-auth-deck {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.auth-shell-art .dlu-deck-live {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  flex: 1;
+  min-height: 21rem;
+  margin-top: 1.75rem;
+}
+
+.auth-shell-art .dlu-deck-live .dlu-card.dlu-back-1 {
+  top: 9.25rem;
+  left: 0.875rem;
+  transform: scale(0.965);
+  transform-origin: top left;
+  opacity: 0.62;
+}
+
+.auth-shell-art .dlu-deck-live .dlu-card.dlu-back-2 {
+  top: 15.5rem;
+  left: 1.75rem;
+  transform: scale(0.93);
+  transform-origin: top left;
+  opacity: 0.3;
+}
+
+.auth-shell-art .live-auth-deck .dlu-nav {
+  position: relative;
+  inset: auto;
+  margin-top: 1.1rem;
+  justify-content: flex-end;
+}
+
+.auth-shell-art .live-auth-deck .dlu-dots {
+  position: relative;
+  inset: auto;
+  margin-top: 0.9rem;
+}
+
+.auth-shell-art .live-auth-deck .dlu-count {
+  position: relative;
+  inset: auto;
+  margin-top: 1rem;
+}
+
+.auth-shell-art .live-auth-deck .dlu-free {
+  position: relative;
+  inset: auto;
+  margin-top: 0.35rem;
+  align-self: flex-start;
 }
