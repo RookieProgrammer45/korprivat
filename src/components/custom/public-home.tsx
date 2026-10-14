@@ -176,7 +176,6 @@ export function PublicHome() {
   useEffect(() => {
     if (paused || count < 2) return;
     if (typeof window === 'undefined') return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % count);
     }, ROTATION_MS);
