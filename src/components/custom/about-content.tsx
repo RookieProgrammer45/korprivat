@@ -5,14 +5,12 @@
 // furniture styles live in custom-style.css §17.
 
 import { ArrowRight } from 'lucide-react';
-import { Fragment } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 const CHIP_IDS = ['0', '1', '2'] as const;
 const PILLAR_IDS = ['0', '1', '2'] as const;
 const FACT_IDS = ['0', '1', '2'] as const;
-const GOAL_STEPS = ['100', '1\u00a0000', '10\u00a0000'] as const;
 
 export function AboutContent() {
   const t = useTranslations('aboutPage');
@@ -86,22 +84,6 @@ export function AboutContent() {
           <p className="text-body text-foreground/90">{t('promise.body')}</p>
         </section>
 
-        <section className="grid gap-3">
-          <h2 className="font-display text-h3 leading-snug tracking-tight text-foreground">
-            {t('goal.title')}
-          </h2>
-          <p className="text-caption text-muted-foreground">{t('goal.label')}</p>
-          <div className="dlu-about-steps">
-            <span className="dlu-about-step is-now">{t('goal.now')}</span>
-            {GOAL_STEPS.map((step) => (
-              <Fragment key={step}>
-                <ArrowRight className="size-4 text-muted-foreground" aria-hidden />
-                <span className="dlu-about-step">{step}</span>
-              </Fragment>
-            ))}
-          </div>
-          <p className="text-body text-foreground/90">{t('goal.note')}</p>
-        </section>
 
         <section className="dlu-about-promise">
           <p className="text-eyebrow text-muted-foreground">{t('final.eyebrow')}</p>
