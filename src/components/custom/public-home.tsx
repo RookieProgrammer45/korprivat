@@ -169,8 +169,9 @@ export function PublicHome() {
 
   const count = profiles.length;
   const front = profiles[active % count];
-  const back1 = profiles[(active + 1) % count];
-  const back2 = profiles[(active + 2) % count];
+  const back1 = count > 1 ? profiles[(active + 1) % count] : undefined;
+  const back2 = count > 2 ? profiles[(active + 2) % count] : undefined;
+
 
   useEffect(() => {
     if (paused || count < 2) return;
@@ -183,6 +184,8 @@ export function PublicHome() {
       window.clearInterval(timer);
     };
   }, [paused, count]);
+
+  if (!front) return null;
 
   const go = (step: number) => {
     setActive((current) => (current + step + count) % count);
@@ -259,7 +262,7 @@ export function PublicHome() {
                     </Link>
                   </div>
                 </article>
-                {count > 1 ? (
+                {back1 ? (
                   <article className="dlu-card dlu-back-1" key={back1.id}>
                     <div className="dlu-top">
                       <div className="min-w-0">
@@ -272,7 +275,7 @@ export function PublicHome() {
                     <p className="dlu-lang">{back1.languages}</p>
                   </article>
                 ) : null}
-                {count > 2 ? (
+                {back2 ? (
                   <article className="dlu-card dlu-back-2" key={back2.id}>
                     <div className="dlu-top">
                       <div className="min-w-0">
