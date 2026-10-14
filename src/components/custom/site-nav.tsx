@@ -145,10 +145,10 @@ export function SiteNav() {
     slot.type === 'link' ? isActive(slot.item.href) : slot.items.some((i) => isActive(i.href));
 
   return (
-    <header className="site-header site-header-shell sticky top-0 z-40 w-full border-b border-border bg-background shadow-sm">
+    <header className="site-header site-header-shell sticky top-0 z-40 w-full px-3 pt-3 sm:px-4 sm:pt-4">
       <nav
         aria-label={tNav('nav.primary')}
-        className="mx-auto flex h-16 min-w-0 max-w-screen-xl items-center gap-3 px-4 sm:px-6"
+        className="site-header-pill mx-auto flex h-14 min-w-0 max-w-screen-xl items-center gap-1.5 rounded-full border border-border bg-card px-3 sm:gap-2 sm:px-4"
       >
         <Link
           href="/"
@@ -180,9 +180,9 @@ export function SiteNav() {
                 variant="ghost"
                 size="sm"
                 className={cn(
-                  'nav-link rounded-md text-muted-foreground hover:bg-brand-100 hover:text-foreground dark:hover:bg-brand-900',
+                  'nav-link rounded-full text-muted-foreground hover:bg-muted hover:text-foreground',
                   isActive(slot.item.href) &&
-                    'bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300',
+                    'bg-muted text-foreground',
                 )}
               >
                 <Link
@@ -199,9 +199,9 @@ export function SiteNav() {
                     variant="ghost"
                     size="sm"
                     className={cn(
-                      'nav-link rounded-md text-muted-foreground hover:bg-brand-100 hover:text-foreground dark:hover:bg-brand-900',
+                      'nav-link rounded-full text-muted-foreground hover:bg-muted hover:text-foreground',
                       isSlotActive(slot) &&
-                        'bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300',
+                        'bg-muted text-foreground',
                     )}
                   >
                     {tNav(slot.labelKey)}
@@ -232,9 +232,9 @@ export function SiteNav() {
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    'nav-link rounded-md text-muted-foreground hover:bg-brand-100 hover:text-foreground dark:hover:bg-brand-900',
+                    'nav-link rounded-full text-muted-foreground hover:bg-muted hover:text-foreground',
                     overflow.some(isSlotActive) &&
-                      'bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300',
+                      'bg-muted text-foreground',
                   )}
                 >
                   {tNav('nav.more')}
@@ -382,7 +382,7 @@ export function SiteNav() {
                         className={cn(
                           'w-full justify-start',
                           isActive(slot.item.href) &&
-                            'bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300',
+                            'bg-muted text-foreground',
                         )}
                       >
                         <Link
@@ -406,7 +406,7 @@ export function SiteNav() {
                             className={cn(
                               'w-full justify-start pl-6',
                               isActive(item.href) &&
-                                'bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300',
+                                'bg-muted text-foreground',
                             )}
                           >
                             <Link

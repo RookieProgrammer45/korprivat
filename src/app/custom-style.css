@@ -501,20 +501,24 @@ html.dark .auth-shell {
 }
 
 .site-header {
-  background-color: #fff;
-  box-shadow: 0 1px 0 color-mix(in oklch, var(--brand-500) 24%, var(--border));
+  background-color: transparent;
+  box-shadow: none;
 }
 
-html.dark .site-header {
-  background-color: var(--background);
+/* Floating pill nav: rounded card container with a soft lift. */
+.site-header-pill {
+  background-color: var(--card);
+  box-shadow:
+    0 1px 2px oklch(0 0 0 / 0.04),
+    0 16px 40px -20px oklch(0 0 0 / 0.22);
 }
 
 .site-header nav {
-  min-height: 4.75rem;
+  min-height: 3.5rem;
 }
 
 .site-header .site-nav-cta {
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .site-header-wordmark {
@@ -532,7 +536,8 @@ html.dark .site-header {
 
 .site-header button[aria-current="page"],
 .site-header a[aria-current="page"] {
-  color: var(--brand-300);
+  color: var(--foreground);
+  background-color: var(--muted);
 }
 
 .directory-shell {
@@ -780,7 +785,7 @@ form > button[type="submit"] {
 
 @media (min-width: 768px) {
   .site-header nav {
-    padding-inline: clamp(1.5rem, 4vw, 3rem);
+    padding-inline: clamp(1rem, 2.5vw, 1.75rem);
   }
 
   .marketplace-home .marketplace-assurance-section .surface-card:nth-child(2) {
