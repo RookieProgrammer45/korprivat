@@ -154,7 +154,7 @@ html.dark .marketplace-hero {
 }
 
 .marketplace-hero-title {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 /* Flat PNG: wheels are baked in, so the car drifts and the road marks pass. */
@@ -231,7 +231,7 @@ html.dark .marketplace-hero {
 
 .marketplace-primary-cta {
   box-shadow: var(--shadow-md);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
@@ -1154,18 +1154,18 @@ html:root.dark {
   --dlu-ink: #f4f2ed;
 }
 
-/* --- hero: art panel to the LEFT, copy to the right ---------------------- */
+/* --- hero: copy to the LEFT, art panel to the right --------------------- */
 
 .marketplace-hero-grid.marketplace-hero-grid {
-  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-columns: 1.15fr 0.85fr;
 }
 
 @media (min-width: 1024px) {
   .marketplace-hero-grid > div:first-child {
-    order: 2;
+    order: 1;
   }
   .marketplace-hero-grid > div:nth-child(2) {
-    order: 1;
+    order: 2;
   }
 }
 
@@ -1813,4 +1813,47 @@ a.dlu-btn:hover {
   .dlu-card {
     animation: none;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* 15. No-bold policy: headings regular, emphasis max medium           */
+/* ------------------------------------------------------------------ */
+
+html h1,
+html h2,
+html h3,
+html h4,
+html .text-h1,
+html .text-h2,
+html .text-h3,
+html .text-h4,
+html .text-display,
+html .marketplace-hero-title {
+  font-weight: 400;
+}
+
+html b,
+html strong,
+.font-semibold.font-semibold,
+.font-bold.font-bold,
+.font-extrabold.font-extrabold {
+  font-weight: 500;
+}
+
+html .dlu-type,
+html .dlu-name,
+html .dlu-slot b,
+html .dlu-btn,
+html .dlu-count,
+html .dlu-tag,
+html .dlu-free,
+html .dlu-arrow-note,
+html .dlu-chip,
+html .marketplace-primary-cta,
+html .marketplace-secondary-cta {
+  font-weight: 500;
+}
+
+html .dlu-slot b {
+  font-weight: 500;
 }

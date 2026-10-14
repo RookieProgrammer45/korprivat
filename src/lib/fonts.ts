@@ -1,7 +1,7 @@
 
-import { DM_Sans, Manrope } from 'next/font/google';
+import { DM_Sans, Syne } from 'next/font/google';
 
-export const displayFont = Manrope({
+export const displayFont = Syne({
   subsets: ['latin'],
   variable: '--font-display-face',
   display: 'swap',
