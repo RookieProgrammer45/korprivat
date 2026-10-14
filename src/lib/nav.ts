@@ -36,7 +36,9 @@ export interface NavItem {
     | 'nav.paymentMethods'
     | 'nav.handledare'
     | 'nav.southernSweden'
-    | 'nav.westernNorthernSweden';
+    | 'nav.westernNorthernSweden'
+    | 'nav.about'
+    | 'nav.terms';
   /** Stable English label for non-localized consumers. */
   label: string;
   /** App route, e.g. '/' or '/dashboard'. */
@@ -105,6 +107,8 @@ export const navItems: NavItem[] = [
   { label: 'Pricing', labelKey: 'nav.pricing', href: '/pricing', group: 'footer', order: 1 },
   { label: 'Contact', labelKey: 'nav.contact', href: '/contact', group: 'footer', order: 1 },
   { label: 'Privacy', labelKey: 'nav.privacy', href: '/privacy', group: 'footer', order: 2 },
+  { label: 'About', labelKey: 'nav.about', href: '/om-oss', group: 'footer', order: 2 },
+  { label: 'Terms', labelKey: 'nav.terms', href: '/terms', group: 'footer', order: 2 },
   { label: 'Journal', labelKey: 'nav.blog', href: '/blog', group: 'footer', order: 3 },
   {
     label: 'Handledare guidance',

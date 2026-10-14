@@ -2026,3 +2026,265 @@ html.dark .dlu-photo {
   border-color: rgba(244, 242, 237, 0.14);
   background: #1a1a18;
 }
+
+/* ------------------------------------------------------------------ */
+/* 17. Site footer — Magic-UI footer-1 layout (all marketing pages)   */
+/* ------------------------------------------------------------------ */
+
+.dlu-footer {
+  border-top: 1px solid var(--border);
+  background: var(--background);
+}
+
+.dlu-footer-inner {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding: 3.5rem 1rem 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .dlu-footer-inner {
+    padding: 4.25rem 2rem 1.75rem;
+  }
+}
+
+.dlu-footer-top {
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .dlu-footer-top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+    gap: 4rem;
+  }
+}
+
+.dlu-footer-brand {
+  align-content: start;
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+}
+
+.dlu-footer-logo {
+  align-items: center;
+  color: var(--foreground);
+  display: inline-flex;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.dlu-footer-logo .font-display {
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.dlu-footer-headline {
+  color: var(--foreground);
+  font-family: var(--font-display-face);
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-top: 0.75rem;
+}
+
+.dlu-footer-sub {
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 36ch;
+}
+
+.dlu-footer-cta {
+  align-items: center;
+  background: var(--dlu-ink);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-family: var(--font-display-face);
+  font-size: 0.88rem;
+  font-weight: 500;
+  gap: 0.45rem;
+  letter-spacing: -0.01em;
+  margin-top: 0.4rem;
+  padding: 0.7rem 1.4rem;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+html.dark .dlu-footer-cta {
+  color: #0b0b0a;
+}
+
+.dlu-footer-cta:hover {
+  opacity: 0.88;
+}
+
+.dlu-footer-cta:active {
+  transform: translateY(1px);
+}
+
+.dlu-footer-cols {
+  display: grid;
+  gap: 2rem 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .dlu-footer-cols {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.dlu-footer-col ul {
+  display: grid;
+  gap: 0.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dlu-footer-coltitle {
+  color: var(--dlu-ink-faint);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+}
+
+.dlu-footer-link {
+  color: var(--muted-foreground);
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 0.22rem 0;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.dlu-footer-link:hover {
+  color: var(--foreground);
+}
+
+.dlu-footer-cities {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.6rem;
+  margin-top: 3rem;
+}
+
+.dlu-footer-cities-label {
+  color: var(--dlu-ink-faint);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  margin-right: 0.35rem;
+  text-transform: uppercase;
+}
+
+.dlu-footer-citychip {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  display: inline-flex;
+  font-size: 0.8rem;
+  padding: 0.32rem 0.85rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.dlu-footer-citychip:hover {
+  background: var(--card);
+  color: var(--foreground);
+}
+
+.dlu-footer-bottom {
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  justify-content: space-between;
+  margin-top: 2.25rem;
+  padding-top: 1.4rem;
+}
+
+.dlu-footer-social {
+  align-items: center;
+  color: var(--muted-foreground);
+  display: inline-flex;
+  font-size: 0.82rem;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+.dlu-footer-social:hover {
+  color: var(--foreground);
+}
+
+.dlu-footer-copy {
+  color: var(--muted-foreground);
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+/* Om oss page furniture ------------------------------------------------- */
+
+.dlu-about-chip {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  display: inline-flex;
+  font-size: 0.82rem;
+  padding: 0.4rem 0.95rem;
+}
+
+.dlu-about-promise {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+  padding: 2rem;
+}
+
+.dlu-about-steps {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dlu-about-step {
+  color: var(--foreground);
+  font-family: var(--font-display-face);
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+}
+
+.dlu-about-step.is-now {
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+}
+
+.dlu-about-ghost-cta {
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--foreground);
+  display: inline-flex;
+  font-family: var(--font-display-face);
+  font-size: 0.88rem;
+  font-weight: 500;
+  gap: 0.45rem;
+  padding: 0.7rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.dlu-about-ghost-cta:hover {
+  background: var(--card);
+}
