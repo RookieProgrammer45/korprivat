@@ -179,10 +179,15 @@ export async function resolveSignedInSignup(
     }
   }
 
-  // Learner mid-flow (claimed DOB collected, email verified) → wizard/verify,
-  // but completed visitors get the already-signed-in card instead of a hard
-  // dump into Didit via redirectLearnerAwayFromSignup.
-  if (profile?.role === 'STUDENT' && profile.signupPath !== 'SCHOOL' && !profile.dateOfBirth) {
+  // Learner mid-flow: still in the signup wizard until the profile photo step
+  // is confirmed (profileCompletedAt). Claimed DOB is collected at signup-start,
+  // so it must NOT be treated as flow completion — that dead-ended every
+  // verified learner on the already-signed-in card right after email verify.
+  if (profile?.role === 'STUDENT' && profile.signupPath !== 'SCHOOL') {
+    const learnerState = await getStoredLearnerState(user.id);
+    if (learnerState === 'ACTIVE') {
+      return { kind: 'already_signed_in', home: '/dashboard/student', email: user.email };
+    }
     return { kind: 'continue_wizard' };
   }
 
