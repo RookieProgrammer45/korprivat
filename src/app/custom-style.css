@@ -1215,14 +1215,14 @@ html.dark .dlu-tag {
 .dlu-deck {
   position: absolute;
   inset: 4.5rem 1.75rem auto;
-  height: 21rem;
+  height: 31rem;
 }
 
 .dlu-card {
   position: absolute;
   top: 0;
-  left: 50%;
-  width: min(22rem, 100%);
+  left: 0;
+  width: 100%;
   border-radius: 1.25rem;
   border: 1px solid rgba(19, 19, 18, 0.09);
   background: #fff;
@@ -1230,7 +1230,7 @@ html.dark .dlu-tag {
   display: grid;
   gap: 0.55rem;
   box-shadow: 0 24px 48px -32px rgba(19, 19, 18, 0.35);
-  transform: translateX(-50%);
+  transform: none;
   text-align: left;
 }
 
@@ -1240,13 +1240,21 @@ html.dark .dlu-card {
 }
 
 .dlu-card.dlu-back-1 {
+  top: 14.5rem;
+  left: 0.875rem;
+  transform: scale(0.965);
+  transform-origin: top left;
   opacity: 0.62;
-  transform: translateX(-46%) translateY(1.1rem) scale(0.94);
+  box-shadow: 0 8px 22px rgba(19, 19, 18, 0.07);
 }
 
 .dlu-card.dlu-back-2 {
+  top: 23rem;
+  left: 1.75rem;
+  transform: scale(0.93);
+  transform-origin: top left;
   opacity: 0.3;
-  transform: translateX(-42%) translateY(2.2rem) scale(0.88);
+  box-shadow: 0 6px 16px rgba(19, 19, 18, 0.06);
 }
 
 .dlu-top {
@@ -1536,18 +1544,24 @@ html.dark .auth-shell-art {
 .auth-shell-art .dlu-deck {
   position: relative;
   inset: auto;
-  height: 18.5rem;
+  height: 24rem;
   margin-top: 1.75rem;
 }
 
 .auth-shell-art .dlu-card.dlu-back-1 {
+  top: 10rem;
+  left: 0.875rem;
+  transform: scale(0.965);
+  transform-origin: top left;
   opacity: 0.62;
-  transform: translateX(-46%) translateY(0.9rem) scale(0.95);
 }
 
 .auth-shell-art .dlu-card.dlu-back-2 {
-  opacity: 0.32;
-  transform: translateX(-43%) translateY(1.7rem) scale(0.9);
+  top: 16.25rem;
+  left: 1.75rem;
+  transform: scale(0.93);
+  transform-origin: top left;
+  opacity: 0.3;
 }
 
 .auth-shell-art .dlu-nav {
