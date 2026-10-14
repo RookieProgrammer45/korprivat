@@ -32,7 +32,7 @@ import { cn } from '@/lib/utils';
 // so privileged nav items render the brief "off" state until the cookie
 // resolves. The role lives on `data.user` (NOT `data.session.user`, which is
 // the Auth.js trap — `session` is the session RECORD, not a nested user).
-function useIsAuthenticated(): boolean {
+export function useIsAuthenticated(): boolean {
   const { data } = useSession();
   return Boolean(data?.user);
 }
@@ -304,8 +304,9 @@ export function SiteNav() {
 
         {/* Right cluster: ml-auto pushes it right at every breakpoint */}
         <div className="site-nav-actions ml-auto flex min-w-0 items-center gap-0.5 sm:gap-1">
-          {/* Desktop CTAs: outline Logga in first, black Kom igång last (ElevenLabs-style). */}
+          {/* Desktop secondary buttons. Role CTAs collapse to a menu at lg only. */}
           <div className="site-nav-secondary hidden items-center gap-1 md:flex">
+            {/* Desktop CTAs: outline Logga in first, black Kom igång last (ElevenLabs-style). */}
             {ctaNav.map((item) => (
               <Button
                 key={item.href}
@@ -440,45 +441,6 @@ export function SiteNav() {
         </div>
       </nav>
     </header>
-  );
-}
-
-export function SiteFooter() {
-  const pathname = usePathname();
-  // Hooks before focused early-return — same soft-nav rule as SiteNav.
-  const isAuthenticated = useIsAuthenticated();
-  const tNav = useTranslations('common');
-
-  if (isFocusedShellPath(pathname)) {
-    return null;
-  }
-
-  const footer = visibleItems('footer', isAuthenticated);
-  if (footer.length === 0) return null;
-
-  return (
-    <footer className="border-t border-border">
-      <nav
-        aria-label={tNav('nav.footer')}
-        className="mx-auto flex max-w-screen-xl flex-wrap items-center gap-1 px-4 py-6 text-sm"
-      >
-        <Link
-          href="/"
-          aria-label={siteName}
-          className="mr-3 flex shrink-0 items-center gap-2 text-foreground"
-        >
-          <img src="/brand/logo-black.svg" alt="" width={20} height={20} className="h-5 w-5" />
-          <span className="font-display text-sm font-semibold tracking-[-0.01em]">
-            {siteName}
-          </span>
-        </Link>
-        {footer.map((item) => (
-          <Button key={item.href} asChild variant="link" size="sm">
-            <Link href={item.href}>{tNav(item.labelKey)}</Link>
-          </Button>
-        ))}
-      </nav>
-    </footer>
   );
 }
 
