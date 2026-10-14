@@ -165,7 +165,7 @@ export function SiteNav() {
           />
           <span
             id="site-logo-title"
-            className="site-header-wordmark truncate font-display text-lg font-semibold tracking-[-0.02em] text-foreground transition-colors group-hover:text-brand-700 dark:group-hover:text-brand-300"
+            className="site-header-wordmark truncate font-display text-xs font-bold tracking-[-0.02em] text-foreground transition-colors group-hover:text-brand-700 dark:group-hover:text-brand-300"
           >
             {siteName}
           </span>
