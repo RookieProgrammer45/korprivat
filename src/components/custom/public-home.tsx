@@ -228,7 +228,7 @@ export function PublicHome() {
 
           <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
             <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden bg-white lg:block dark:bg-black">
-              <p className="dlu-tag">Marknadsplats · Skolor &amp; instruktörer</p>
+              <p className="dlu-tag">{t('hero.marketplaceTag')}</p>
               <div
                 className="dlu-deck"
                 onMouseEnter={() => setPaused(true)}
