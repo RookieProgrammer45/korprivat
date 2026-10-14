@@ -5,14 +5,12 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 
 const QUICK_CATEGORIES = ['B', 'A', 'BE'] as const;
 const QUICK_CITIES = [
@@ -63,42 +61,49 @@ export function PublicHome() {
 
           <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
             <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden bg-white lg:block dark:bg-black">
-              <div className="hero-road" aria-hidden>
-                <span className="hero-road-line" />
-                <span className="hero-road-line hero-road-line-b" />
+              <p className="dlu-tag">Marknadsplats · Skolor &amp; instruktörer</p>
+              <div className="dlu-deck" aria-hidden>
+                <article className="dlu-card">
+                  <div className="dlu-top">
+                    <div className="min-w-0">
+                      <p className="dlu-type">Skola</p>
+                      <p className="dlu-name">Globens Trafikskolan</p>
+                      <p className="dlu-city">Stockholm</p>
+                    </div>
+                    <span className="dlu-chip">fr. 299 kr</span>
+                  </div>
+                  <p className="dlu-meta"><i aria-hidden />4.9 · 1 403 omdömen</p>
+                  <p className="dlu-lang">Svenska · Engelska</p>
+                  <div className="dlu-row"><span className="dlu-slot">Nästa lediga tid<b>tis 10:00</b></span><span className="dlu-btn">Boka</span></div>
+                </article>
+                <article className="dlu-card dlu-back-1">
+                  <div className="dlu-top">
+                    <div className="min-w-0">
+                      <p className="dlu-type">Instruktör</p>
+                      <p className="dlu-name">Ari Shoval</p>
+                      <p className="dlu-city">Sollentuna</p>
+                    </div>
+                    <span className="dlu-chip">fr. 350 kr</span>
+                  </div>
+                  <p className="dlu-lang">Svenska · Engelska · Arabiska</p>
+                </article>
+                <article className="dlu-card dlu-back-2">
+                  <div className="dlu-top">
+                    <div className="min-w-0">
+                      <p className="dlu-type">Skola</p>
+                      <p className="dlu-name">Körkortshuset i Sollentuna</p>
+                      <p className="dlu-city">Sollentuna</p>
+                    </div>
+                    <span className="dlu-chip">fr. 350 kr</span>
+                  </div>
+                </article>
               </div>
-              <div className="hero-car marketplace-hero-illustration absolute inset-x-0 top-0 bottom-[22rem]">
-                <Image
-                  src="/images/hero-driving.png"
-                  alt={t('hero.imageAlt')}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain p-3 lg:p-2"
-                  style={{ objectPosition: 'center 55%' }}
-                />
-              </div>
+              <div className="dlu-nav" aria-hidden><span>←</span><span>→</span></div>
+              <div className="dlu-dots" aria-hidden><i className="dlu-on" /><i /><i /><i /><i /><i /></div>
+              <p className="dlu-count">Alla profiler i rotation</p>
+              <p className="dlu-arrow-note">jämför → boka → kör</p>
+              <p className="dlu-free"><i aria-hidden />Kostnadsfritt för elever</p>
             </div>
-
-            <Card className="marketplace-hero-card z-10 min-w-0 rounded-2xl border border-neutral-200 bg-white/95 shadow-none backdrop-blur-sm lg:absolute lg:bottom-6 lg:left-6 lg:max-w-[400px] dark:border-white/10 dark:bg-black/85">
-              <CardContent className="grid gap-6 p-6 sm:p-8">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-eyebrow text-brand-700 dark:text-brand-300">
-                    {t('hero.previewEyebrow')}
-                  </p>
-                  <span className="size-2 rounded-full bg-brand-500" aria-hidden />
-                </div>
-                <p className="font-display text-h3 leading-tight tracking-tight text-foreground">
-                  {t('hero.previewTitle')}
-                </p>
-                <Separator className="bg-border/60" />
-                <div className="grid gap-4">
-                  <PreviewLine index="01" text={t('hero.previewLines.profile')} />
-                  <PreviewLine index="02" text={t('hero.previewLines.price')} />
-                  <PreviewLine index="03" text={t('hero.previewLines.time')} />
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
 
@@ -238,14 +243,6 @@ export function PublicHome() {
   );
 }
 
-function PreviewLine({ index, text }: { index: string; text: string }) {
-  return (
-    <div className="grid grid-cols-[2.25rem_1fr] items-start gap-3">
-      <span className="font-display text-small text-brand-700 dark:text-brand-300">{index}</span>
-      <span className="text-small text-muted-foreground">{text}</span>
-    </div>
-  );
-}
 
 function JourneyStep({ number, title, body }: { number: string; title: string; body: string }) {
   return (

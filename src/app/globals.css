@@ -114,9 +114,9 @@
    --brand-h ALONE recolors the entire site. Keep values in range. */
 :root {
   --brand-h: 178; /* brand hue, 0–360 — electric sea-glass with a cyan signal accent */
-  --brand-c: 0.22; /* brand chroma (saturation), 0–0.3 — vivid but readable */
-  --brand-l: 0.63; /* lightness of the brand-500 step, 0.40–0.70 */
-  --radius: 0.65rem; /* compact, softened corners for a confident marketplace feel */
+  --brand-c: 0.02; /* brand chroma — 2026-10-14 restyle: neutral ink ramp (black logo/CTA) */
+  --brand-l: 0.2; /* brand lightness — near-black ink for the ElevenLabs-style restyle */
+  --radius: 1.25rem; /* 20px cards, 999px pills — ElevenLabs-style restyle */
 
   --font-display: var(--font-display-face, "Syne"), "Avenir Next", sans-serif;
   --font-body: var(--font-body-face, "DM Sans"), "Avenir Next", sans-serif;
