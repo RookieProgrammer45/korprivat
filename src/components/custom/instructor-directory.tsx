@@ -801,7 +801,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               {tr('nextAvailableLabel')}
             </span>
             <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {nextSlotPill?.label ?? tr('noUpcomingSlot')}
+              {nextSlotPill?.whenLabel ?? tr('noUpcomingSlot')}
             </span>
           </div>
           <div className="grid min-w-0 gap-1">
@@ -1041,9 +1041,9 @@ function formatNextSlotPill(
   iso: string,
   t: ReturnType<typeof useTranslations<'instructorDirectory'>>,
   locale: string,
-): { label: string; iso: string } {
+): { whenLabel: string; iso: string } {
   const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return { label: t('slotLabel'), iso };
+  if (Number.isNaN(date.getTime())) return { whenLabel: t('slotLabel'), iso };
   const intlLocale = locale === 'sv' ? 'sv-SE' : 'en-GB';
   const dateOptions = { timeZone: 'Europe/Stockholm' } as const;
   const day = new Intl.DateTimeFormat(intlLocale, { ...dateOptions, day: 'numeric' }).format(date);
@@ -1076,7 +1076,7 @@ function formatNextSlotPill(
     diffDays >= 0 && diffDays < 7
       ? t('slotTimeAndWeekday', { weekday, time })
       : `${t('slotMonthDay', { monthShort, day })} · ${t('slotTime', { time })}`;
-  return { label: t('slotLabelRelative', { when }), iso };
+  return { whenLabel: when, iso };
 }
 
 function formatDayKey(iso: string): string {

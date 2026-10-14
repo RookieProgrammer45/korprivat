@@ -459,6 +459,8 @@
   },
   "instructorDirectory": {
     "categoryLabel": "Licence category",
+    "typeInstructor": "Instructor",
+    "typeSchool": "Driving school",
     "cityLabel": "City",
     "cityPlaceholder": "All cities",
     "cityAllOption": "All cities",
@@ -499,7 +501,6 @@
     "englishAvailable": "English available",
     "swedishAvailable": "Swedish",
     "slotLabel": "Next available",
-    "slotLabelRelative": "Next available · {when}",
     "slotMonthDay": "{monthShort} {day}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",

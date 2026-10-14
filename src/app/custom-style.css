@@ -1939,6 +1939,62 @@ html .dlu-slot b {
 }
 
 /* ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------ */
+/* 19. Mobile hardening (390px-first QA pass)                           */
+/* ------------------------------------------------------------------ */
+
+/* 19a. Home hero: single full-width column on mobile — never a squeezed
+   half-column. The two-column split only exists from lg up. */
+.marketplace-hero-grid.marketplace-hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 1024px) {
+  .marketplace-hero-grid.marketplace-hero-grid {
+    grid-template-columns: 1.12fr 0.88fr;
+  }
+}
+
+/* 19b. Home hero eyebrow badge: let it wrap gracefully on narrow screens
+   (uppercase + tracking overflows 390px as a single line). */
+.marketplace-hero-copy span.inline-flex {
+  max-width: 100%;
+  height: auto;
+  min-height: 2rem;
+  padding-block: 0.4rem;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* 19c. Directory card header: never let the rate badge collide with the
+   school name on narrow screens. */
+.marketplace-directory-card-header {
+  row-gap: 0.75rem;
+}
+
+.marketplace-directory-card-header .marketplace-rate-badge {
+  min-width: 5.5rem;
+  max-width: 100%;
+  text-align: center;
+  margin-left: 3.75rem; /* clears the 3rem avatar + gap on wrap */
+}
+
+@media (min-width: 480px) {
+  .marketplace-directory-card-header .marketplace-rate-badge {
+    margin-left: 0;
+  }
+}
+
+/* 19d. Booking availability box: single column on mobile so the value
+   never wraps under the label column. */
+@media (max-width: 639px) {
+  .surface-card .grid.rounded-lg.border {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* 18. Deck cards: profile photo (front card)                          */
 /* ------------------------------------------------------------------ */
 

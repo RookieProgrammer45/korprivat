@@ -459,6 +459,8 @@
   },
   "instructorDirectory": {
     "categoryLabel": "Körkortskategori",
+    "typeInstructor": "Instruktör",
+    "typeSchool": "Trafikskola",
     "cityLabel": "Stad",
     "cityPlaceholder": "Alla städer",
     "cityAllOption": "Alla städer",
@@ -499,7 +501,6 @@
     "englishAvailable": "Engelska tillgängligt",
     "swedishAvailable": "Svenska",
     "slotLabel": "Nästa lediga tid",
-    "slotLabelRelative": "Nästa lediga tid · {when}",
     "slotMonthDay": "{day} {monthShort}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
