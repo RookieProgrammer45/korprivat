@@ -9,6 +9,9 @@ alwaysApply: false
 
 ## Page backgrounds
 - Light mode: solid white or neutral-50. No gradients.
+- Approved exception (2026-10-14): the ElevenLabs-style restyle uses a
+  solid bone surface #f4f2ed as the light page background (--background
+  in custom-style.css). Still a SOLID color — no gradients.
 - Dark mode: solid #0a0a0a or black. No gradients.
 - Never apply radial or linear gradients to a page-level container.
 - Gradients are allowed only on small elements (buttons, badges,

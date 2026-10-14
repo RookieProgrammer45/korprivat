@@ -1,7 +1,7 @@
 {
   "common": {
     "nav": {
-      "findProvider": "Find driving schools",
+      "findProvider": "Marketplace",
       "howItWorks": "How it works",
       "licenceCategories": "Licence categories",
       "drivingInstructor": "I'm a driving instructor",
@@ -267,7 +267,7 @@
   "instructorsPage": {
     "header": {
       "eyebrow": "Schools and instructors marketplace",
-      "title": "Find a driving school or certified instructor",
+      "title": "Schools & instructors",
       "subtitle": "Compare listings by category, city, language, published price, availability and booking policy. Booking has no separate DriveLinkUp fee."
     },
     "directoryCta": "View all driving schools",
@@ -1817,7 +1817,9 @@
     "slotLabelRelative": "Next available · {when}",
     "slotMonthDay": "{monthShort} {day}",
     "slotTime": "{time}",
-    "slotTimeAndWeekday": "{weekday} {time}"
+    "slotTimeAndWeekday": "{weekday} {time}",
+    "typeSchool": "School",
+    "typeInstructor": "Instructor"
   },
   "reviewForm": {
     "title": "Leave a review",
@@ -2161,8 +2163,8 @@
     },
     "providers": {
       "eyebrow": "Live profiles",
-      "title": "Compare authorized schools",
-      "cta": "See all schools"
+      "title": "Compare schools and instructors",
+      "cta": "View all profiles"
     },
     "assurance": {
       "eyebrow": "Before you book",

@@ -1,7 +1,7 @@
 {
   "common": {
     "nav": {
-      "findProvider": "Hitta trafikskolor",
+      "findProvider": "Marknadsplats",
       "howItWorks": "Så fungerar det",
       "licenceCategories": "Körkortskategorier",
       "drivingInstructor": "Jag är trafiklärare",
@@ -267,7 +267,7 @@
   "instructorsPage": {
     "header": {
       "eyebrow": "Marknadsplats för skolor och instruktörer",
-      "title": "Hitta en trafikskola eller certifierad instruktör",
+      "title": "Skolor & instruktörer",
       "subtitle": "Jämför annonser efter kategori, stad, språk, publicerat pris, tillgänglighet och bokningspolicy. Bokning har ingen separat DriveLinkUp-avgift."
     },
     "directoryCta": "Se alla trafikskolor",
@@ -1817,7 +1817,9 @@
     "slotLabelRelative": "Nästa lediga tid · {when}",
     "slotMonthDay": "{day} {monthShort}",
     "slotTime": "{time}",
-    "slotTimeAndWeekday": "{weekday} {time}"
+    "slotTimeAndWeekday": "{weekday} {time}",
+    "typeSchool": "Skola",
+    "typeInstructor": "Instruktör"
   },
   "reviewForm": {
     "title": "Lämna en recension",
@@ -2161,8 +2163,8 @@
     },
     "providers": {
       "eyebrow": "Aktuella profiler",
-      "title": "Jämför auktoriserade trafikskolor",
-      "cta": "Se alla skolor"
+      "title": "Jämför skolor och instruktörer",
+      "cta": "Se alla profiler"
     },
     "assurance": {
       "eyebrow": "Innan du bokar",

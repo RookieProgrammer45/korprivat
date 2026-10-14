@@ -680,6 +680,7 @@ function CardGrid({
             <Link
               href={`/instructors/${row.id}`}
               className="marketplace-provider-card group block min-w-0 rounded-xl outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-brand-500/60"
+              data-provider-type={row.providerType}
             >
               <InstructorCard row={row} />
             </Link>
@@ -754,6 +755,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               </div>
             )}
             <div className="min-w-0">
+              <p className="dlu-type">{row.providerType === "SCHOOL" ? tr("typeSchool") : tr("typeInstructor")}</p>
               <div className="break-words font-display text-base font-semibold text-foreground">
                 {row.name}
               </div>
