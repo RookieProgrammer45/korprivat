@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Aisha">
   <rect width="200" height="200" rx="28" fill="#ece9e2"/>
   <circle cx="100" cy="106" r="58" fill="#14343d"/>
-  <circle cx="100" cy="82" r="30" fill="#"/>
+  <circle cx="100" cy="82" r="30" fill="#f5e0d0"/>
   <path d="M42 200c10-32 32-52 58-52s48 20 58 52z" fill="#14343d"/>
   <path d="M64 70c-4-26 12-40 36-40s40 14 36 40c-2-10-10-16-14-16 2 4 2 8 0 12-4-10-10-14-16-14-10 0-16 6-18 12-4-2-8-4-10 2z" fill="#4a3524"/>
-  <path d="M88 96c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5z" fill="f"/>
-  <path d="M122 96c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5z" fill="f"/>
-  <path d="M92 112q8 5 16 0" fill="none" stroke="f" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M88 96c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5z" fill="#2b2b2b"/>
+  <path d="M122 96c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5z" fill="#2b2b2b"/>
+  <path d="M92 112q8 5 16 0" fill="none" stroke="#2b2b2b" stroke-width="2.5" stroke-linecap="round"/>
 </svg>
