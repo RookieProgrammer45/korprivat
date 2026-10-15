@@ -40,7 +40,7 @@ const BADGE_TINT: Record<DashboardShellRole, string> = {
   instructor:
     'border-blue-500/25 bg-blue-500/10 text-blue-800 dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-200',
   school:
-    'border-purple-500/25 bg-purple-500/10 text-purple-800 dark:border-purple-400/30 dark:bg-purple-400/10 dark:text-purple-200',
+    'border-stone-500/25 bg-stone-500/10 text-stone-800 dark:border-stone-400/30 dark:bg-stone-400/10 dark:text-stone-200',
   admin:
     'border-red-500/25 bg-red-500/10 text-red-800 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-200',
 };
@@ -83,7 +83,10 @@ export function DashboardShell({
   }
 
   return (
-    <main data-shell-role={shellRole} className="dashboard-shell min-h-dvh text-foreground">
+    <main
+      data-shell-role={shellRole}
+      className="dashboard-shell min-h-dvh text-foreground"
+    >
       <div className="flex min-h-dvh flex-col">
         <header className="border-b border-border/70 bg-background">
           <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-gutter">

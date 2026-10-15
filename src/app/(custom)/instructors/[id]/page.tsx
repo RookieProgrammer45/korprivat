@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingForm } from '@/components/custom/booking-form';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
-import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorSeo } from '@/lib/seo/public-instructor';
@@ -41,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       rate: instructor.hourlyRateSek,
     });
   return {
-    title: { absolute: title },
+    title,
     description,
     alternates: publicAlternates(path),
     robots: instructor.indexable ? { index: true, follow: true } : { index: false, follow: true },
@@ -69,31 +68,31 @@ export default async function InstructorPage({ params, searchParams }: PageProps
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
-  const jsonLd = instructor?.indexable
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'DrivingSchool',
-        name: instructor.name,
-        description: instructor.bio?.slice(0, 300) || undefined,
-        url: absoluteUrl(`/instructors/${instructor.id}`),
-        image: instructor.photoUrl || undefined,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: instructor.city,
-          addressCountry: 'SE',
-        },
-        priceRange: `${instructor.hourlyRateSek} SEK`,
-        areaServed: instructor.city,
-        knowsLanguage: instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
-      }
-    : null;
+  const jsonLd =
+    instructor && instructor.indexable
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'DrivingSchool',
+          name: instructor.name,
+          description: instructor.bio?.slice(0, 300) || undefined,
+          url: absoluteUrl(`/instructors/${instructor.id}`),
+          image: instructor.photoUrl || undefined,
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: instructor.city,
+            addressCountry: 'SE',
+          },
+          priceRange: `${instructor.hourlyRateSek} SEK`,
+          areaServed: instructor.city,
+          knowsLanguage: instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+        }
+      : null;
 
   return (
-    <main className="container-page min-w-0">
-      <div className="mx-auto grid w-full max-w-6xl gap-6 py-section lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+    <main className="container-page section min-w-0">
+      <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
         <div className="grid min-w-0 gap-6">
           <InstructorDetail instructorId={id} />
-          <InstructorOfferingsSection instructorId={id} />
           <ReviewSection instructorId={id} reviewBookingId={reviewBookingId} />
         </div>
         <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
@@ -105,7 +104,9 @@ export default async function InstructorPage({ params, searchParams }: PageProps
           />
         </div>
       </div>
-      {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
+      {jsonLd ? (
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      ) : null}
     </main>
   );
 }

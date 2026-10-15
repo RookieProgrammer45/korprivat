@@ -193,7 +193,7 @@ export function PublicHome() {
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
       <section className="marketplace-hero border-b border-border">
-        <div className="marketplace-hero-grid container-page grid min-w-0 gap-10 py-16 md:py-28 lg:grid-cols-[1.12fr_0.88fr] lg:gap-20">
+        <div className="marketplace-hero-grid container-page grid min-w-0 gap-10 py-section-lg lg:grid-cols-[1.12fr_0.88fr] lg:gap-20">
           <div className="marketplace-hero-copy marketplace-reveal flex min-w-0 flex-col gap-7">
             <Badge
               variant="outline"

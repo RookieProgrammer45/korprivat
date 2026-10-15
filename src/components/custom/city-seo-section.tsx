@@ -11,7 +11,7 @@ export async function CitySeoSection({ city }: { city: CityHubKey }) {
   ];
 
   return (
-    <section className="container-page border-t border-border/60 bg-muted/20 py-10">
+    <section className="container-page border-t border-border/60 bg-muted/20 py-section">
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="grid gap-4 text-body text-foreground">
           <h2 className="font-display text-h3 leading-tight tracking-tight">{tSeo('lead')}</h2>

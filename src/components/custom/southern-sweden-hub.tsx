@@ -1,3 +1,4 @@
+
 'use client';
 
 import { ArrowUpRight, ChevronRight, MapPinned, RotateCcw, Route } from 'lucide-react';
@@ -77,7 +78,7 @@ export function SouthernSwedenHub() {
   return (
     <main className="southern-sweden-hub min-w-0 bg-background">
       <section className="relative overflow-hidden border-b border-border bg-muted/35">
-        <div className="container-page grid min-w-0 gap-12 py-16 md:py-24 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-20">
+        <div className="container-page grid min-w-0 gap-12 py-section-lg lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-20">
           <div className="grid min-w-0 gap-7">
             <Badge
               className="w-fit border-brand-500/35 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"

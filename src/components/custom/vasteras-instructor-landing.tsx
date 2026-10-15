@@ -1,3 +1,4 @@
+
 'use client';
 
 import { ArrowUpRight, CarFront, ShieldCheck } from 'lucide-react';
@@ -13,7 +14,7 @@ export function VasterasInstructorLanding() {
   const t = useTranslations('instructorsPage.vasterasCity');
 
   return (
-    <main className="directory-shell min-h-[calc(100dvh-3.5rem)]">
+    <main className="min-h-[calc(100dvh-3.5rem)]">
       <section className="border-b border-border bg-muted/40">
         <div className="container-page section grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div className="grid max-w-3xl gap-5">
