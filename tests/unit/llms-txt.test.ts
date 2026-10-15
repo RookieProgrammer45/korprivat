@@ -45,7 +45,7 @@ vi.mock('@/lib/llms-config', () => ({
   },
 }));
 
-import { siteUrl } from '@/lib/site';
+import { siteDescription, siteName, siteUrl } from '@/lib/site';
 import { GET } from '../../src/app/llms.txt/route';
 
 const ORIGIN = siteUrl.replace(/\/+$/, '');
@@ -94,7 +94,7 @@ describe('/llms.txt route', () => {
     it('starts with the site name heading and description blockquote', () => {
       expect(
         body.startsWith(
-          '# DriveLinkUp\n\n> The marketplace that connects driving schools and certified instructors to learners in Sweden — compare, book, and learn with no separate DriveLinkUp fee.',
+          `# ${siteName}\n\n> ${siteDescription}`,
         ),
       ).toBe(true);
     });
