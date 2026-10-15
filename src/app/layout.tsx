@@ -9,6 +9,7 @@ import { SiteNav } from '@/components/custom/site-nav';
 import { AppProviders } from '@/components/providers';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import { bodyFont, displayFont } from '@/lib/fonts';
 import { locale } from '@/lib/locale';
 import { siteDescription, siteName, siteUrl } from '@/lib/site';
 import { viewportConfig } from '@/lib/viewport-config';
@@ -41,7 +42,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const nonce = (await headers()).get('x-nonce') ?? undefined;
 
   return (
-    <html lang={locale.lang} dir={locale.dir} suppressHydrationWarning>
+    <html
+      lang={locale.lang}
+      dir={locale.dir}
+      suppressHydrationWarning
+      className={`${displayFont.variable} ${bodyFont.variable}`}
+    >
       <body className="min-h-dvh bg-background font-body text-foreground antialiased">
         <HeadContent nonce={nonce} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light" nonce={nonce}>

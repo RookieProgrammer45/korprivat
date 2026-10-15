@@ -12,12 +12,9 @@
 // nest them inside <I18nProvider>, e.g. <AuthClientProviders>.
 
 import { I18nProvider } from '@/i18n/i18n-provider';
-import { bodyFont, displayFont } from '@/lib/fonts';
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <I18nProvider>
-      <div className={`${displayFont.variable} ${bodyFont.variable}`}>{children}</div>
-    </I18nProvider>
+    <I18nProvider>{children}</I18nProvider>
   );
 }
