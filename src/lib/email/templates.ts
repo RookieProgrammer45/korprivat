@@ -1069,3 +1069,103 @@ export function instructorUpgradeApprovedEmail(input: {
 // charge a subscription. The per-booking fee model that replaced them sends
 // the `paymentHeldReceiptEmail` template at held_escrow and the same string
 // functions the lesson-complete side effects use.)
+
+// ─── Marketplace offerings — "request to book" notifications ───────────────
+//
+// v1 offering requests are contact-style: the learner fills name/phone/
+// preferred start on the public profile, the request row is persisted, and
+// both parties are emailed. The school answers the learner directly by
+// email (the learner's address is embedded in the body — SendEmailInput has
+// no reply-to support yet). Swedish is the default voice; `locale: 'en'`
+// switches the learner-facing copy. School-facing copy stays Swedish-first
+// because the marketplace supply side reads Swedish.
+
+export function offeringRequestSchoolEmail(input: {
+  schoolName: string;
+  schoolCity: string;
+  offeringName: string;
+  offeringPriceSek: number;
+  studentName: string;
+  studentEmail: string;
+  studentPhone: string;
+  preferredStart?: string | null;
+  message?: string | null;
+  locale?: string;
+}): EmailContent {
+  const isSwedish = input.locale !== 'en';
+  const lines = [
+    isSwedish ? `Hej ${input.schoolName},` : `Hi ${input.schoolName},`,
+    isSwedish
+      ? `En elev vill boka "${input.offeringName}" (${input.offeringPriceSek} kr) hos er.`
+      : `A learner wants to book "${input.offeringName}" (${input.offeringPriceSek} SEK) with you.`,
+    '',
+    `  ${isSwedish ? 'Erbjudande' : 'Offering'}: ${input.offeringName}`,
+    `  ${isSwedish ? 'Pris' : 'Price'}:      ${input.offeringPriceSek} kr`,
+    `  ${isSwedish ? 'Namn' : 'Name'}:      ${input.studentName}`,
+    `  ${isSwedish ? 'E-post' : 'Email'}:     ${input.studentEmail}`,
+    `  ${isSwedish ? 'Telefon' : 'Phone'}:    ${input.studentPhone}`,
+    `  ${isSwedish ? 'Önskad start' : 'Preferred start'}: ${input.preferredStart || '—'}`,
+    `  ${isSwedish ? 'Meddelande' : 'Message'}:  ${input.message || '—'}`,
+    '',
+    isSwedish
+      ? 'Svara eleven direkt på den här mejladressen och kom överens om upplägget och startdatum.'
+      : 'Reply to the learner directly on this address and agree on the setup and start date.',
+  ];
+  const { html, text } = renderEmail({
+    heading: isSwedish
+      ? `Ny bokningsförfrågan — ${input.offeringName}`
+      : `New booking request — ${input.offeringName}`,
+    body: lines,
+    footer: isSwedish
+      ? 'DriveLinkUp — jämför behöriga trafikskolor och boka med trygghet.'
+      : 'DriveLinkUp — compare licensed driving schools and book with confidence.',
+  });
+  return {
+    subject: isSwedish
+      ? `Bokningsförfrågan: ${input.offeringName} — ${input.studentName}`
+      : `Booking request: ${input.offeringName} — ${input.studentName}`,
+    html,
+    text,
+  };
+}
+
+export function offeringRequestLearnerEmail(input: {
+  schoolName: string;
+  schoolCity: string;
+  offeringName: string;
+  studentName: string;
+  locale?: string;
+}): EmailContent {
+  const isSwedish = input.locale !== 'en';
+  const lines = isSwedish
+    ? [
+        `Hej ${input.studentName},`,
+        `Din förfrågan om "${input.offeringName}" är skickad till ${input.schoolName} (${input.schoolCity}).`,
+        'Skolan svarar dig direkt på den här mejladressen — oftast inom en arbetsdag.',
+        '',
+        'Här kan du jämföra fler skolor när du väntar: https://www.drivelinkup.com/instructors',
+      ]
+    : [
+        `Hi ${input.studentName},`,
+        `Your request for "${input.offeringName}" has been sent to ${input.schoolName} (${input.schoolCity}).`,
+        'The school will reply directly to this address — usually within one business day.',
+        '',
+        'While you wait you can compare more schools here: https://www.drivelinkup.com/instructors',
+      ];
+  const { html, text } = renderEmail({
+    heading: isSwedish
+      ? `Förfrågan mottagen — ${input.offeringName}`
+      : `Request received — ${input.offeringName}`,
+    body: lines,
+    footer: isSwedish
+      ? 'DriveLinkUp — jämför behöriga trafikskolor och boka med trygghet. Du betalar aldrig någon avgift till DriveLinkUp som elev.'
+      : 'DriveLinkUp — compare licensed driving schools and book with confidence. Learners never pay a DriveLinkUp fee.',
+  });
+  return {
+    subject: isSwedish
+      ? `Din förfrågan om ${input.offeringName} är skickad`
+      : `Your request for ${input.offeringName} has been sent`,
+    html,
+    text,
+  };
+}

@@ -19,10 +19,10 @@ import {
 } from '@/components/custom/instructor/instructor-payouts-card';
 import { InstructorLicenseStatusBanner } from '@/components/custom/instructor-license-status-banner';
 import { InstructorPayoutCard } from '@/components/custom/instructor-payout-card';
+import { InstructorOfferingsEditor } from '@/components/custom/dashboard/instructor-offerings-editor';
 import { InstructorPolicyEditor } from '@/components/custom/instructor-policy-editor';
 import { Button } from '@/components/ui/button';
 import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
-// biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
 import { refreshInstructorConnectStatus } from '@/lib/payments/connect';
 
@@ -125,6 +125,7 @@ export default async function InstructorDashboardPage() {
       ) : null}
       <InstructorPayoutCard />
       {hasListing ? <InstructorPolicyEditor /> : null}
+      {hasListing ? <InstructorOfferingsEditor /> : null}
       <ProviderOperations />
       <InstructorReviewInbox />
       <InstructorBookingHistory />

@@ -62,6 +62,9 @@ model Instructor {
   // booked slots. Persisted slot.times are addressed via AvailabilitySlot
   // .instructorId, not via include across User, so no FK to a foreign model.
   availabilitySlots      AvailabilitySlot[]
+  // Marketplace offerings (intensive courses / packages) published by
+  // this provider — see prisma/schema/offerings.prisma.
+  offerings              Offering[]
   // Stripe Connect Express — independent instructor payouts (phase 2).
   stripeAccountId        String?            @unique
   chargesEnabled         Boolean            @default(false)

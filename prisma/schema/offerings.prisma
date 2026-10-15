@@ -1,0 +1,62 @@
+//
+// Marketplace offerings — everything a school sells beyond the single hourly
+// lesson: intensive courses (intensivkurser) and multi-lesson packages.
+// v1 scope: seller CRUD on the dashboard, public price list on the profile,
+// and a lightweight email-based "request to book" flow (OfferingRequest).
+// Deliberately OUT of scope: per-offering Stripe pricing — the booking money
+// pipeline keeps running on Instructor.hourlyRateSek; offering requests are
+// contact-style until per-offering checkout ships.
+//
+// Every scalar is nullable/defaulted so the deploy-gate `prisma db push`
+// (run without --accept-data-loss) accepts any pre-existing row shape.
+
+model Offering {
+  id           String     @id @default(cuid())
+  instructorId String
+  // LEKTION | INTENSIVKURS | PAKET — plain string (not an enum) to match the
+  // providerRole/bookingMode convention and keep db push lossless.
+  kind         String     @default("PAKET")
+  name         String
+  description  String?
+  priceSek     Int
+  // Package/course shape — optional so a school can publish a simple
+  // "handledarkurs 500 kr" row without counting sessions.
+  sessions     Int?
+  weeks        Int?
+  // Profile sort order — lower renders first; new rows land after the last.
+  sortOrder    Int        @default(0)
+  // Hidden offerings stay manageable in the dashboard (history) but leave
+  // the public profile.
+  active       Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  instructor   Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+
+  @@index([instructorId, active])
+}
+
+// Learner "request to book" against an Offering. Self-contained like
+// ContactMessage — scalar references only, NO @relation — so deleting an
+// offering (or an instructor) never destroys request history. Name/price are
+// snapshotted at request time so later edits can't rewrite what was asked.
+model OfferingRequest {
+  id               String   @id @default(cuid())
+  offeringId       String
+  offeringName     String
+  offeringPriceSek Int
+  instructorId     String
+  studentName      String
+  studentEmail     String
+  studentPhone     String
+  // Free-text preferred start, e.g. "vecka 45" — deliberately not a DateTime
+  // because intensive courses start by week/month, not by slot.
+  preferredStart   String?
+  message          String?
+  // new | handled — enough for v1 triage; a dashboard inbox can build on it.
+  status           String   @default("new")
+  locale           String   @default("sv")
+  createdAt        DateTime @default(now())
+
+  @@index([instructorId])
+  @@index([offeringId])
+}
