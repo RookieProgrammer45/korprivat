@@ -91,7 +91,10 @@ function timingSafeEqualHex(expected: string, provided: string): boolean {
   return crypto.timingSafeEqual(a, b);
 }
 
-function isTimestampFresh(timestampHeader: string | null, nowSec = Math.floor(Date.now() / 1000)): boolean {
+function isTimestampFresh(
+  timestampHeader: string | null,
+  nowSec = Math.floor(Date.now() / 1000),
+): boolean {
   if (!timestampHeader) return false;
   const ts = Number.parseInt(timestampHeader, 10);
   if (!Number.isFinite(ts)) return false;
@@ -252,8 +255,7 @@ export function parseDiditWebhook(payload: unknown): ParsedDiditWebhook {
   const webhookType = strOrNull(root.webhook_type) ?? '';
   const statusLabel = strOrNull(root.status) ?? '';
   const sessionId = strOrNull(root.session_id);
-  const vendorData =
-    strOrNull(root.vendor_data) ?? strOrNull(root.vendor_user_id) ?? '';
+  const vendorData = strOrNull(root.vendor_data) ?? strOrNull(root.vendor_user_id) ?? '';
 
   if (!eventId) {
     throw new DiditWebhookParseError('missing_event_id');
@@ -271,9 +273,7 @@ export function parseDiditWebhook(payload: unknown): ParsedDiditWebhook {
   const liveness = firstArrayItem(decisionObj?.liveness_checks);
 
   const dobRaw =
-    strOrNull(idVerification?.date_of_birth) ??
-    strOrNull(decisionObj?.date_of_birth) ??
-    null;
+    strOrNull(idVerification?.date_of_birth) ?? strOrNull(decisionObj?.date_of_birth) ?? null;
 
   const verifiedDob = dobRaw ? new Date(dobRaw) : null;
   if (verifiedDob && Number.isNaN(verifiedDob.getTime())) {
@@ -281,10 +281,7 @@ export function parseDiditWebhook(payload: unknown): ParsedDiditWebhook {
   }
 
   const warnings = collectWarnings(decisionObj);
-  const reason =
-    warnings[0] ??
-    strOrNull(decisionObj?.reason) ??
-    strOrNull(root.reason);
+  const reason = warnings[0] ?? strOrNull(decisionObj?.reason) ?? strOrNull(root.reason);
 
   return {
     eventId,
@@ -298,27 +295,19 @@ export function parseDiditWebhook(payload: unknown): ParsedDiditWebhook {
     lastName: strOrNull(idVerification?.last_name),
     documentType: strOrNull(idVerification?.document_type),
     documentNumber: strOrNull(idVerification?.document_number),
-    nationality:
-      strOrNull(idVerification?.nationality) ??
-      strOrNull(idVerification?.issuing_state),
+    nationality: strOrNull(idVerification?.nationality) ?? strOrNull(idVerification?.issuing_state),
     livenessPassed:
-      typeof liveness?.status === 'string'
-        ? liveness.status.toLowerCase() === 'approved'
-        : null,
+      typeof liveness?.status === 'string' ? liveness.status.toLowerCase() === 'approved' : null,
     reason,
     sessionKind: root.session_kind === 'business' ? 'business' : null,
     decisionTrusted: false,
   };
 }
 
-function firstArrayItem(
-  value: unknown,
-): Record<string, unknown> | null {
+function firstArrayItem(value: unknown): Record<string, unknown> | null {
   if (!Array.isArray(value) || value.length === 0) return null;
   const first = value[0];
-  return first && typeof first === 'object'
-    ? (first as Record<string, unknown>)
-    : null;
+  return first && typeof first === 'object' ? (first as Record<string, unknown>) : null;
 }
 
 function collectWarnings(decisionObj: Record<string, unknown> | null): string[] {
@@ -382,10 +371,7 @@ export function normalizeSessionStatus(raw: string): DiditDecision | null {
 }
 
 /** Stable client-facing failure classes — never include secrets. */
-export type DiditSessionErrorCode =
-  | 'didit_missing_env'
-  | 'didit_upstream'
-  | 'didit_bad_payload';
+export type DiditSessionErrorCode = 'didit_missing_env' | 'didit_upstream' | 'didit_bad_payload';
 
 export class DiditSessionCreateError extends Error {
   readonly status: number;

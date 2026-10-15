@@ -173,8 +173,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     return NextResponse.json(
       {
         errors: {
-          state:
-            'This lesson was already paid out. Support has been notified to review a refund.',
+          state: 'This lesson was already paid out. Support has been notified to review a refund.',
         },
       },
       { status: 409 },
@@ -359,7 +358,11 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     let refundAmountSek: number | null = null;
     if (outcome === 'cancelled_full_refund') {
       refundAmountSek = null; // full PaymentIntent refund
-    } else if (outcome === 'cancelled_partial' && feePercentApplied > 0 && feePercentApplied < 100) {
+    } else if (
+      outcome === 'cancelled_partial' &&
+      feePercentApplied > 0 &&
+      feePercentApplied < 100
+    ) {
       refundAmountSek = Math.max(0, Math.round(gross * (1 - feePercentApplied / 100)));
     } else if (outcome === 'cancelled_late') {
       refundAmountSek = 0; // 100% fee retained — no Stripe refund

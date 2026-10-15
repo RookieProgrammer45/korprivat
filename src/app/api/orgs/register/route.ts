@@ -2,10 +2,7 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { OrgRegisterRequest, OrgRegisterResponse } from '@/lib/contracts/orgs';
 import { prisma } from '@/lib/db';
-import {
-  createOrganization,
-  OrgAlreadyExistsError,
-} from '@/lib/orgs/service';
+import { createOrganization, OrgAlreadyExistsError } from '@/lib/orgs/service';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';

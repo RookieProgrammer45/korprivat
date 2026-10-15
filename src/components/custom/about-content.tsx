@@ -84,7 +84,6 @@ export function AboutContent() {
           <p className="text-body text-foreground/90">{t('promise.body')}</p>
         </section>
 
-
         <section className="dlu-about-promise">
           <p className="text-eyebrow text-muted-foreground">{t('final.eyebrow')}</p>
           <h2 className="font-display text-h2 leading-tight tracking-tight text-foreground">

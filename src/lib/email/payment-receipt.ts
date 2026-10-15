@@ -1,4 +1,4 @@
-import { renderEmail, type EmailContent } from '@/lib/email/templates';
+import { type EmailContent, renderEmail } from '@/lib/email/templates';
 
 /** Learner payment confirmation after checkout succeeds (held in escrow). */
 export function paymentReceiptEmail(input: {

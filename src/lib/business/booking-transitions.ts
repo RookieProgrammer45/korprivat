@@ -80,10 +80,8 @@ export function canTransition(
 ): boolean {
   if (to === 'declined' || to === 'pending')
     return actor === 'provider' && from === 'awaiting_approval';
-  if (to === 'awaiting_buyer_confirmation')
-    return actor === 'provider' && from === 'held_escrow';
-  if (to === 'release_ready')
-    return actor === 'learner' && from === 'awaiting_buyer_confirmation';
+  if (to === 'awaiting_buyer_confirmation') return actor === 'provider' && from === 'held_escrow';
+  if (to === 'release_ready') return actor === 'learner' && from === 'awaiting_buyer_confirmation';
   if (to === 'disputed') return actor === 'learner' && from === 'awaiting_buyer_confirmation';
   if (to === 'released')
     return from === 'release_ready' || from === 'payout_pending' || from === 'payout_failed';

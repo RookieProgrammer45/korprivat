@@ -4,6 +4,7 @@
 
 import 'server-only';
 import { after, NextResponse } from 'next/server';
+import type Stripe from 'stripe';
 import { ensureBookingReceipts } from '@/lib/business/receipts';
 import { prisma } from '@/lib/db';
 import { applyConnectAccountUpdated, applyInstructorAccountUpdated } from '@/lib/payments/connect';
@@ -16,11 +17,7 @@ import {
   handleCheckoutSessionExpired,
   handleTransferFailed,
 } from '@/lib/payments/stripe-webhook-handlers';
-import {
-  claimStripeWebhookEvent,
-  hashStripePayload,
-} from '@/lib/payments/stripe-webhook-ledger';
-import type Stripe from 'stripe';
+import { claimStripeWebhookEvent, hashStripePayload } from '@/lib/payments/stripe-webhook-ledger';
 
 export const dynamic = 'force-dynamic';
 

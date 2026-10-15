@@ -34,9 +34,7 @@ describe('GET /api/western-northern-sweden', () => {
     expect(body.regions[2]?.cities.map((city) => city.href)).toContain(
       '/locations/se/ornskoldsvik',
     );
-    expect(body.regions[3]?.cities.map((city) => city.href)).toContain(
-      '/locations/se/skelleftea',
-    );
+    expect(body.regions[3]?.cities.map((city) => city.href)).toContain('/locations/se/skelleftea');
   });
 
   it('returns the English copy from the same validated response shape', async () => {

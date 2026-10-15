@@ -6,10 +6,7 @@ import { buildDashboardNavItems } from '@/lib/dashboard-nav-items';
 describe('buildDashboardNavItems', () => {
   it('returns student leaf for learners', () => {
     const items = buildDashboardNavItems({ role: 'STUDENT', isSchoolOwner: false });
-    expect(items.map((i) => i.href)).toEqual([
-      '/dashboard/student',
-      '/dashboard/messages',
-    ]);
+    expect(items.map((i) => i.href)).toEqual(['/dashboard/student', '/dashboard/messages']);
     expect(items.map((i) => i.labelKey)).toContain('studentTab');
   });
 
@@ -46,9 +43,7 @@ describe('buildDashboardNavItems', () => {
 
 describe('instructor chrome copy', () => {
   it('does not label the instructor tab Driving school in EN', () => {
-    const en = JSON.parse(
-      readFileSync(join(process.cwd(), 'messages/en.json'), 'utf8'),
-    ) as {
+    const en = JSON.parse(readFileSync(join(process.cwd(), 'messages/en.json'), 'utf8')) as {
       dashboard: { nav: { instructorTab: string }; instructor: { eyebrow: string; title: string } };
     };
     expect(en.dashboard.nav.instructorTab).toBe('Instructor');

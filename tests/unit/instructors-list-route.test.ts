@@ -383,9 +383,11 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: Array<{ id: string }> };
     expect(body.items.map((item) => item.id)).toEqual([instructorId]);
-    expect(mockInstructorFindMany.mock.calls[0]?.[0]?.where
-      ? hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0][0].where)
-      : undefined).toEqual({ lte: 550 });
+    expect(
+      mockInstructorFindMany.mock.calls[0]?.[0]?.where
+        ? hourlyRateFromWhere(mockInstructorFindMany.mock.calls[0][0].where)
+        : undefined,
+    ).toEqual({ lte: 550 });
   });
 
   it('returns zero items when no valid review meets the rating threshold', async () => {

@@ -8,8 +8,8 @@ import { syncBookingReceiptStatuses } from '@/lib/business/receipts';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { notificationEmail } from '@/lib/email/templates';
-import { getStripe } from '@/lib/payments/stripe';
 import { OWNER_EMAIL } from '@/lib/ownership';
+import { getStripe } from '@/lib/payments/stripe';
 
 export type PayoutResult =
   | { kind: 'sent'; transferId: string; amountSek: number; recipientType: string }
@@ -56,10 +56,7 @@ async function alertOps(subject: string, lines: string[]) {
   }
 }
 
-export async function payoutBooking(
-  bookingId: string,
-  actor?: PayoutActor,
-): Promise<PayoutResult> {
+export async function payoutBooking(bookingId: string, actor?: PayoutActor): Promise<PayoutResult> {
   const existing = await prisma.payoutRecord.findUnique({ where: { bookingId } });
   if (existing) {
     return { kind: 'duplicate', transferId: existing.transferId };

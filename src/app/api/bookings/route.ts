@@ -14,8 +14,8 @@ import {
   bookingRequestSubmittedEmail,
   studentBookingRequestReceivedEmail,
 } from '@/lib/email/templates';
-import { resolveOrigin } from '@/lib/payments/origin';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
+import { resolveOrigin } from '@/lib/payments/origin';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
@@ -169,8 +169,7 @@ export async function POST(req: Request) {
         }
 
         const lessonEndsAt =
-          slot.endsAt ??
-          new Date(slot.startsAt.getTime() + (slot.durationMinutes || 60) * 60_000);
+          slot.endsAt ?? new Date(slot.startsAt.getTime() + (slot.durationMinutes || 60) * 60_000);
 
         const created = await tx.booking.create({
           data: {

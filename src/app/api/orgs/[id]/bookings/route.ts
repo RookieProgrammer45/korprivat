@@ -147,8 +147,7 @@ export async function GET(req: Request, context: RouteContext) {
       : 'unpaid';
     // School staff: read-only — zero action capabilities.
     const capabilities = bookingCapabilities(paymentStatus, null, null);
-    const providerRole =
-      instructor?.providerRole === 'HANDLEDARE' ? 'HANDLEDARE' : 'INSTRUCTOR';
+    const providerRole = instructor?.providerRole === 'HANDLEDARE' ? 'HANDLEDARE' : 'INSTRUCTOR';
     return {
       id: b.id,
       instructorId: b.instructorId,

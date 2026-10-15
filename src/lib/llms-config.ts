@@ -38,8 +38,7 @@ export const llmsConfig: LlmsConfig = {
       'Sweden country hub with län and city pages for authorized driving-school discovery.',
     '/locations/se/stockholm':
       'City hub for authorized driving schools in Stockholm with booking, pricing context, and FAQ.',
-    '/locations/se/goteborg':
-      'City hub for authorized driving schools in Gothenburg (Göteborg).',
+    '/locations/se/goteborg': 'City hub for authorized driving schools in Gothenburg (Göteborg).',
     '/locations/se/malmo': 'City hub for authorized driving schools in Malmö and Skåne.',
     '/pricing':
       'Learner booking is free of marketplace fees. Schools pay 8% after completion; independent instructors 10%.',

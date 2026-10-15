@@ -105,7 +105,11 @@ export function ProfilePage() {
 
   const { user, role, upcoming, photo } = state.data;
   const eyebrow =
-    role === 'INSTRUCTOR' ? 'instructorEyebrow' : role === 'SCHOOL' ? 'schoolEyebrow' : 'studentEyebrow';
+    role === 'INSTRUCTOR'
+      ? 'instructorEyebrow'
+      : role === 'SCHOOL'
+        ? 'schoolEyebrow'
+        : 'studentEyebrow';
 
   return (
     <div className="grid gap-6">

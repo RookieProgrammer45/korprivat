@@ -10,10 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import {
-  type SchoolBookingItem,
-  SchoolBookingList,
-} from '@/lib/contracts/provider-operations';
+import { type SchoolBookingItem, SchoolBookingList } from '@/lib/contracts/provider-operations';
 
 type Props = { organizationId: string };
 

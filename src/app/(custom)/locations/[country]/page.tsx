@@ -4,14 +4,14 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import {
-  NORDIC_COUNTRIES,
-  NORDIC_COUNTRY_META,
   countryPath,
   displayName,
   isNordicCountry,
-  listRegions,
   listLocationsForCountry,
+  listRegions,
   locationPath,
+  NORDIC_COUNTRIES,
+  NORDIC_COUNTRY_META,
 } from '@/lib/seo/nordic-locations';
 import { siteName } from '@/lib/site';
 

@@ -1,4 +1,3 @@
-
 /** Youngest learner age accepted on DriveLinkUp. */
 export const MIN_LEARNER_AGE_YEARS = 16;
 

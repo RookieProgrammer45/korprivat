@@ -3,10 +3,7 @@
 import 'server-only';
 import { after, NextResponse } from 'next/server';
 import { resolveBookingActor } from '@/lib/business/booking-actor';
-import {
-  BookingConfirmRequest,
-  BookingConfirmResponse,
-} from '@/lib/contracts/bookings';
+import { BookingConfirmRequest, BookingConfirmResponse } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { notificationEmail } from '@/lib/email/templates';

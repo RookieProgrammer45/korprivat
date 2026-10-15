@@ -1,25 +1,19 @@
 'use client';
+import { useTranslations } from 'next-intl';
 //
 // Public offerings price list on the instructor profile. Fetches its own
 // data and renders NOTHING (null) when the school has no active offerings,
 // so profiles without offerings stay byte-identical to before this feature.
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { InstructorOfferingsRequestForm } from '@/components/custom/instructor-offerings-request-form';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import {
-  type PublicOffering,
-  PublicOfferingList,
-} from '@/lib/contracts/offerings';
-import { InstructorOfferingsRequestForm } from '@/components/custom/instructor-offerings-request-form';
+import { type PublicOffering, PublicOfferingList } from '@/lib/contracts/offerings';
 
-type Status =
-  | { kind: 'loading' }
-  | { kind: 'hidden' }
-  | { kind: 'ready'; items: PublicOffering[] };
+type Status = { kind: 'loading' } | { kind: 'hidden' } | { kind: 'ready'; items: PublicOffering[] };
 
 export function InstructorOfferingsSection({ instructorId }: { instructorId: string }) {
   const tr = useTranslations('offerings.section');
@@ -33,9 +27,7 @@ export function InstructorOfferingsSection({ instructorId }: { instructorId: str
       .then((data) => {
         if (!active) return;
         setStatus(
-          data.items.length > 0
-            ? { kind: 'ready', items: data.items }
-            : { kind: 'hidden' },
+          data.items.length > 0 ? { kind: 'ready', items: data.items } : { kind: 'hidden' },
         );
       })
       .catch(() => {

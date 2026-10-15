@@ -35,8 +35,8 @@ vi.mock('stripe', () => {
 });
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { POST as checkoutPOST } from '@/app/api/checkout/route';
 import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
+import { POST as checkoutPOST } from '@/app/api/checkout/route';
 import { BookingPaymentLinkResponse, BookingPaymentPollResponse } from '@/lib/contracts/bookings';
 import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
 import { authMock } from './_setup/auth-mock';
@@ -91,7 +91,9 @@ function learnerGet(url: string): Request {
 
 describe('POST /api/checkout', () => {
   it('mints a Checkout Session in SEK and persists stripeSessionId', async () => {
-    prismaMock.booking.findUnique.mockResolvedValue(bookingRow({ id: 'booking_pay', paymentStatus: null }));
+    prismaMock.booking.findUnique.mockResolvedValue(
+      bookingRow({ id: 'booking_pay', paymentStatus: null }),
+    );
     prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
     prismaMock.booking.update.mockResolvedValue({ id: 'booking_pay' });
 

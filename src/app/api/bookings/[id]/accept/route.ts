@@ -184,7 +184,11 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     await prisma.booking
       .updateMany({
         where: { id: booking.id },
-        data: { paymentStatus: 'awaiting_approval', stripeSessionId: null, stripeCheckoutSessionId: null },
+        data: {
+          paymentStatus: 'awaiting_approval',
+          stripeSessionId: null,
+          stripeCheckoutSessionId: null,
+        },
       })
       .catch(() => undefined);
     if (error instanceof CheckoutConfigurationError) {

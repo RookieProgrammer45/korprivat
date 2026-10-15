@@ -755,7 +755,9 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               </div>
             )}
             <div className="min-w-0">
-              <p className="dlu-type">{row.providerType === "SCHOOL" ? tr("typeSchool") : tr("typeInstructor")}</p>
+              <p className="dlu-type">
+                {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
+              </p>
               <div className="break-words font-display text-base font-semibold text-foreground">
                 {row.name}
               </div>
@@ -974,8 +976,7 @@ function normaliseFromUrl(q: InstructorQuery): Filters {
     nearKm: typeof q.nearKm === 'number' ? q.nearKm : '',
     sort: q.sort === 'distance' ? 'distance' : 'default',
     providerRole: q.providerRole ?? '',
-    affiliation:
-      q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
+    affiliation: q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
   };
 }
 

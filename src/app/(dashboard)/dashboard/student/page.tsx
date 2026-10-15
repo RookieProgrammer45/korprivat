@@ -13,7 +13,11 @@ import { getTranslations } from 'next-intl/server';
 import { RecommendedInstructors } from '@/components/custom/dashboard/recommended-instructors';
 import { StudentDashboard } from '@/components/custom/dashboard/student-dashboard';
 import { StudentNextActionBanner } from '@/components/custom/dashboard/student-next-action-banner';
-import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
+import {
+  dashboardPathFor,
+  requireDashboardSession,
+  resolveDashboardHome,
+} from '@/lib/dashboard-guard';
 import { ensureSchoolSignupComplete } from '@/lib/signup-resume';
 
 export async function generateMetadata(): Promise<Metadata> {

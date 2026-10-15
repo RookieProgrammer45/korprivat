@@ -11,8 +11,8 @@
 // `cacheComponents: true`. Re-enable per app after re-bug telemetry
 // stabilizes on the new agent.
 
-import type { NextConfig } from 'next';
 import path from 'node:path';
+import type { NextConfig } from 'next';
 
 // Eager-load so @t3-oss validates env on every build (relative path: @/ won't resolve here).
 import './src/lib/env';

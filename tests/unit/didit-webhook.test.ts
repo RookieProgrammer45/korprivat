@@ -87,8 +87,7 @@ function fixturePayload(overrides: {
   const vendorData = overrides.vendorData ?? 'user_learner_1';
   const status = overrides.status ?? 'Approved';
   const webhookType = overrides.webhookType ?? 'status.updated';
-  const dateOfBirth =
-    overrides.dateOfBirth === undefined ? dobYearsAgo(25) : overrides.dateOfBirth;
+  const dateOfBirth = overrides.dateOfBirth === undefined ? dobYearsAgo(25) : overrides.dateOfBirth;
 
   const body: Record<string, unknown> = {
     event_id: overrides.eventId ?? 'evt_test_1',
@@ -138,9 +137,7 @@ function signedRequest(
 ): Request {
   const headers = new Headers({ 'content-type': 'application/json' });
   const ts =
-    opts.timestamp === null
-      ? null
-      : (opts.timestamp ?? String(Math.floor(Date.now() / 1000)));
+    opts.timestamp === null ? null : (opts.timestamp ?? String(Math.floor(Date.now() / 1000)));
   if (ts) headers.set('x-timestamp', ts);
 
   if (opts.signatureV2 !== null && opts.signatureV2 !== undefined) {
@@ -201,20 +198,17 @@ describe('Didit signature helpers', () => {
 
   it('verifySignatureSimple accepts envelope fields', () => {
     const payload = fixturePayload({});
-    const sig = signSimple(payload.body as {
-      timestamp: number;
-      session_id: string;
-      status: string;
-      webhook_type: string;
-    });
+    const sig = signSimple(
+      payload.body as {
+        timestamp: number;
+        session_id: string;
+        status: string;
+        webhook_type: string;
+      },
+    );
     const ts = String(payload.body.timestamp);
     expect(
-      verifySignatureSimple(
-        payload.body as Record<string, unknown>,
-        sig,
-        ts,
-        WEBHOOK_SECRET,
-      ),
+      verifySignatureSimple(payload.body as Record<string, unknown>, sig, ts, WEBHOOK_SECRET),
     ).toBe(true);
   });
 
@@ -222,12 +216,7 @@ describe('Didit signature helpers', () => {
     const payload = fixturePayload({ timestamp: Math.floor(Date.now() / 1000) - 400 });
     const sig = signV2(payload.body);
     expect(
-      verifySignatureV2(
-        payload.body,
-        sig,
-        String(payload.body.timestamp),
-        WEBHOOK_SECRET,
-      ),
+      verifySignatureV2(payload.body, sig, String(payload.body.timestamp), WEBHOOK_SECRET),
     ).toBe(false);
   });
 });
@@ -413,12 +402,14 @@ describe('POST /api/webhooks/didit', () => {
     const res = await POST(
       signedRequest(payload.raw, {
         signatureV2: null,
-        signatureSimple: signSimple(payload.body as {
-          timestamp: number;
-          session_id: string;
-          status: string;
-          webhook_type: string;
-        }),
+        signatureSimple: signSimple(
+          payload.body as {
+            timestamp: number;
+            session_id: string;
+            status: string;
+            webhook_type: string;
+          },
+        ),
         timestamp: String(payload.body.timestamp),
       }),
     );

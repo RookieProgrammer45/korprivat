@@ -10,9 +10,9 @@
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import type { Role } from '@/lib/contracts/auth';
-import { loginHrefWithNext, signupHrefWithNext } from '@/lib/auth-next';
 import { signIn } from '@/lib/auth-client';
+import { loginHrefWithNext, signupHrefWithNext } from '@/lib/auth-next';
+import type { Role } from '@/lib/contracts/auth';
 
 function GoogleMark({ className }: { className?: string }) {
   return (
@@ -72,8 +72,7 @@ export function SocialAuthButtons({
       const { data, error } = await signIn.social({
         provider: 'google',
         callbackURL,
-        errorCallbackURL:
-          mode === 'signup' ? signupHrefWithNext(next) : loginHrefWithNext(next),
+        errorCallbackURL: mode === 'signup' ? signupHrefWithNext(next) : loginHrefWithNext(next),
         disableRedirect: true,
       });
 

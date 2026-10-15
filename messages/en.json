@@ -1938,18 +1938,18 @@
       "released": "Completed",
       "refunded": "Refunded",
       "awaitingApproval": "Awaiting approval",
-    "deleteAccount": {
-      "title": "Delete account",
-      "body": "Permanently deletes your account, your bookings and all personal data. This cannot be undone.",
-      "cta": "Delete account",
-      "dialogTitle": "Delete your account?",
-      "dialogBody": "All of your personal data is permanently erased: your profile, your bookings and your listings. This cannot be undone.",
-      "confirm": "Delete permanently",
-      "cancel": "Cancel",
-      "deleting": "Deleting…",
-      "done": "Your account has been deleted.",
-      "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
-    },
+      "deleteAccount": {
+        "title": "Delete account",
+        "body": "Permanently deletes your account, your bookings and all personal data. This cannot be undone.",
+        "cta": "Delete account",
+        "dialogTitle": "Delete your account?",
+        "dialogBody": "All of your personal data is permanently erased: your profile, your bookings and your listings. This cannot be undone.",
+        "confirm": "Delete permanently",
+        "cancel": "Cancel",
+        "deleting": "Deleting…",
+        "done": "Your account has been deleted.",
+        "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
+      },
       "declined": "Declined",
       "cancelled": "Cancelled"
     }
@@ -3349,11 +3349,7 @@
         "Transparency in both directions. The school owns its details, and we review everything before it is published.",
         "Free for learners. You never pay a fee to DriveLinkUp."
       ],
-      "facts": [
-        "Founded 2026",
-        "Stockholm, Sweden",
-        "Independent"
-      ],
+      "facts": ["Founded 2026", "Stockholm, Sweden", "Independent"],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {

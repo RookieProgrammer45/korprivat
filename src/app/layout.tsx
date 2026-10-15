@@ -50,7 +50,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <body className="min-h-dvh bg-background font-body text-foreground antialiased">
         <HeadContent nonce={nonce} />
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light" nonce={nonce}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          forcedTheme="light"
+          nonce={nonce}
+        >
           <AppProviders>
             <SiteNav />
             {children}

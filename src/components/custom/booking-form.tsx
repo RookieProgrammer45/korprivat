@@ -34,12 +34,8 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { useSession } from '@/lib/auth-client';
+import { clearBookingDraft, persistBookingDraft, readBookingDraft } from '@/lib/booking-form-draft';
 import type { CancellationTier } from '@/lib/business/cancellation-policy';
-import {
-  clearBookingDraft,
-  persistBookingDraft,
-  readBookingDraft,
-} from '@/lib/booking-form-draft';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import {
   BookingCreate,
@@ -51,8 +47,8 @@ import {
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { RebookSuggestResponse } from '@/lib/contracts/saved-payment-methods';
 import { applyServerErrors } from '@/lib/forms';
-import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/state';
 import { cn } from '@/lib/utils';
+import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/state';
 
 type FormValues = BookingCreate;
 
@@ -290,8 +286,10 @@ export function BookingForm({
     const draft = readBookingDraft(instructorId);
     if (!draft) return;
     if (draft.studentName) form.setValue('studentName', draft.studentName, { shouldDirty: true });
-    if (draft.studentEmail) form.setValue('studentEmail', draft.studentEmail, { shouldDirty: true });
-    if (draft.studentPhone) form.setValue('studentPhone', draft.studentPhone, { shouldDirty: true });
+    if (draft.studentEmail)
+      form.setValue('studentEmail', draft.studentEmail, { shouldDirty: true });
+    if (draft.studentPhone)
+      form.setValue('studentPhone', draft.studentPhone, { shouldDirty: true });
     if (draft.category) {
       form.setValue('category', draft.category as FormValues['category'], { shouldDirty: true });
     }
@@ -355,105 +353,104 @@ export function BookingForm({
 
   const onSubmit = form.handleSubmit(
     async (values) => {
-    if (!values.slotId || slots.kind !== 'ready') {
-      form.setError('slotId', {
-        type: 'server',
-        message:
-          slots.kind === 'empty' ? t('slots.noSlotsAvailable') : t('slots.pickPrompt'),
-      });
-      toast.error(
-        slots.kind === 'empty' ? t('slots.noSlotsAvailable') : t('validation.slotRequired'),
-      );
-      return;
-    }
+      if (!values.slotId || slots.kind !== 'ready') {
+        form.setError('slotId', {
+          type: 'server',
+          message: slots.kind === 'empty' ? t('slots.noSlotsAvailable') : t('slots.pickPrompt'),
+        });
+        toast.error(
+          slots.kind === 'empty' ? t('slots.noSlotsAvailable') : t('validation.slotRequired'),
+        );
+        return;
+      }
 
-    if (sessionPending) return;
-    if (!session?.user) {
-      persistBookingDraft(instructorId, {
-        studentName: values.studentName,
-        studentEmail: values.studentEmail,
-        studentPhone: values.studentPhone,
-        category: values.category ?? '',
-        slotId: values.slotId,
-      });
-      const next =
-        typeof window !== 'undefined'
-          ? `${window.location.pathname}${window.location.search}`
-          : pathname;
-      router.push(`/login?next=${encodeURIComponent(next)}`);
-      return;
-    }
+      if (sessionPending) return;
+      if (!session?.user) {
+        persistBookingDraft(instructorId, {
+          studentName: values.studentName,
+          studentEmail: values.studentEmail,
+          studentPhone: values.studentPhone,
+          category: values.category ?? '',
+          slotId: values.slotId,
+        });
+        const next =
+          typeof window !== 'undefined'
+            ? `${window.location.pathname}${window.location.search}`
+            : pathname;
+        router.push(`/login?next=${encodeURIComponent(next)}`);
+        return;
+      }
 
-    setEligibilityError(null);
+      setEligibilityError(null);
 
-    try {
-      // Always POST with the matching `mode` so the route does not 400
-      // when the instructor's published mode is `request`. Mirrors the
-      // server-side branch on `data.mode === 'request'`.
-      const submittedMode: 'instant' | 'request' =
-        instructor?.bookingMode === 'request' ? 'request' : 'instant';
-      const created = await apiFetch('/api/bookings', {
-        method: 'POST',
-        body: JSON.stringify({
-          ...values,
-          mode: submittedMode,
-          locale: locale === 'en' ? 'en' : 'sv',
-        }),
-        schema: BookingCreated,
-      });
-      clearBookingDraft(instructorId);
-      setSentRate(created.hourlyRateSek);
-      setSentInstructorName(instructor?.name ?? null);
-      router.replace(
-        `/bookings/${encodeURIComponent(created.id)}?token=${encodeURIComponent(created.learnerAccessToken)}`,
-      );
-    } catch (err) {
-      const body = err instanceof Error ? err.cause : null;
-      if (
-        body &&
-        typeof body === 'object' &&
-        'error' in body &&
-        (body as { error?: string }).error === 'learner_not_eligible'
-      ) {
-        const payload = body as {
-          error: string;
-          state?: string;
-          redirectTo?: string;
-        };
-        const state = payload.state;
-        const redirectTo =
-          typeof payload.redirectTo === 'string'
-            ? payload.redirectTo
-            : state && typeof state === 'string'
-              ? stateToRoute(state as LearnerVerificationState)
-              : '/onboarding/learner/verify';
-        if (state === 'BLOCKED_UNDERAGE' || state === 'SUSPENDED') {
-          setEligibilityError(t('learnerNotEligible'));
+      try {
+        // Always POST with the matching `mode` so the route does not 400
+        // when the instructor's published mode is `request`. Mirrors the
+        // server-side branch on `data.mode === 'request'`.
+        const submittedMode: 'instant' | 'request' =
+          instructor?.bookingMode === 'request' ? 'request' : 'instant';
+        const created = await apiFetch('/api/bookings', {
+          method: 'POST',
+          body: JSON.stringify({
+            ...values,
+            mode: submittedMode,
+            locale: locale === 'en' ? 'en' : 'sv',
+          }),
+          schema: BookingCreated,
+        });
+        clearBookingDraft(instructorId);
+        setSentRate(created.hourlyRateSek);
+        setSentInstructorName(instructor?.name ?? null);
+        router.replace(
+          `/bookings/${encodeURIComponent(created.id)}?token=${encodeURIComponent(created.learnerAccessToken)}`,
+        );
+      } catch (err) {
+        const body = err instanceof Error ? err.cause : null;
+        if (
+          body &&
+          typeof body === 'object' &&
+          'error' in body &&
+          (body as { error?: string }).error === 'learner_not_eligible'
+        ) {
+          const payload = body as {
+            error: string;
+            state?: string;
+            redirectTo?: string;
+          };
+          const state = payload.state;
+          const redirectTo =
+            typeof payload.redirectTo === 'string'
+              ? payload.redirectTo
+              : state && typeof state === 'string'
+                ? stateToRoute(state as LearnerVerificationState)
+                : '/onboarding/learner/verify';
+          if (state === 'BLOCKED_UNDERAGE' || state === 'SUSPENDED') {
+            setEligibilityError(t('learnerNotEligible'));
+            return;
+          }
+          setEligibilityError(t('learnerNeedsVerification'));
+          router.push(redirectTo);
           return;
         }
-        setEligibilityError(t('learnerNeedsVerification'));
-        router.push(redirectTo);
-        return;
+        const slotError = getServerErrors(body).slotId;
+        const localized = localizeBookingErrors(body, t);
+        if (localized.general) {
+          toast.error(localized.general);
+          return;
+        }
+        const applied = err instanceof Error && applyServerErrors(localized.body, form.setError);
+        if (!applied) {
+          toast.error(t('submitError'));
+          return;
+        }
+        // Slot-related errors → refetch the slot list so the picker reflects
+        // the loss (a "Slot no longer available" 409 means another learner
+        // booked it while this one was loading the page).
+        if (slotError) {
+          toast.error(t('slots.slotTaken'));
+          await refetchSlots();
+        }
       }
-      const slotError = getServerErrors(body).slotId;
-      const localized = localizeBookingErrors(body, t);
-      if (localized.general) {
-        toast.error(localized.general);
-        return;
-      }
-      const applied = err instanceof Error && applyServerErrors(localized.body, form.setError);
-      if (!applied) {
-        toast.error(t('submitError'));
-        return;
-      }
-      // Slot-related errors → refetch the slot list so the picker reflects
-      // the loss (a "Slot no longer available" 409 means another learner
-      // booked it while this one was loading the page).
-      if (slotError) {
-        toast.error(t('slots.slotTaken'));
-        await refetchSlots();
-      }
-    }
     },
     (fieldErrors) => {
       toast.error(t('validation.formIncomplete'));
@@ -463,8 +460,7 @@ export function BookingForm({
         ['studentName', 'studentEmail', 'studentPhone', 'category', 'slotId'];
       const first = order.find((key) => fieldErrors[key]);
       if (!first) return;
-      const selector =
-        first === 'slotId' ? '[data-slot-picker]' : `[name="${first}"]`;
+      const selector = first === 'slotId' ? '[data-slot-picker]' : `[name="${first}"]`;
       const el = document.querySelector<HTMLElement>(selector);
       if (!el) return;
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -819,7 +815,10 @@ export function BookingForm({
 
             {slots.kind === 'empty' ? (
               // biome-ignore lint/a11y/useSemanticElements: status-text i grid-layout - role=status avsiktlig
-              <div className="grid gap-1.5 rounded-md border border-border bg-muted p-3" role="status">
+              <div
+                className="grid gap-1.5 rounded-md border border-border bg-muted p-3"
+                role="status"
+              >
                 <p className="text-small font-medium text-foreground">
                   {t('slots.noSlotsAvailable')}
                 </p>

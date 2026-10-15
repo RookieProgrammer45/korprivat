@@ -25,13 +25,7 @@ export type SetupChecklistProps = {
  * Presentational setup list — title, description, and step rows with
  * optional CTAs. Callers own step selection / completion logic.
  */
-export function SetupChecklist({
-  title,
-  description,
-  steps,
-  id,
-  className,
-}: SetupChecklistProps) {
+export function SetupChecklist({ title, description, steps, id, className }: SetupChecklistProps) {
   if (steps.length === 0) return null;
 
   return (

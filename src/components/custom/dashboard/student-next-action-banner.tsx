@@ -10,10 +10,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { apiFetch } from '@/lib/api-client';
-import {
-  BookingHistoryList,
-  type BookingHistoryItem,
-} from '@/lib/contracts/bookings';
+import { type BookingHistoryItem, BookingHistoryList } from '@/lib/contracts/bookings';
 
 type NextAction =
   | { kind: 'pay'; bookingId: string; instructorName: string }

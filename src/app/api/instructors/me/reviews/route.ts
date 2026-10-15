@@ -44,7 +44,10 @@ export async function GET(req: Request) {
     throw error;
   }
   if (!instructor) {
-    return NextResponse.json({ errors: { id: 'No instructor row for this account' } }, { status: 404 });
+    return NextResponse.json(
+      { errors: { id: 'No instructor row for this account' } },
+      { status: 404 },
+    );
   }
 
   const rows = await prisma.review.findMany({

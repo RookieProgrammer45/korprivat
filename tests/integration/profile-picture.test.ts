@@ -38,12 +38,12 @@ vi.mock('next/headers', () => ({
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as picturePOST } from '@/app/api/profile/picture/route';
 import { authMock } from './_setup/auth-mock';
+import { blobPutMock, resetBlobMock } from './_setup/blob-mock';
 import type { ContactsMockFixture } from './_setup/contacts-mock';
 import { installContactsProxy } from './_setup/contacts-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
 import { mockCallArg } from './_setup/mock-call';
 import { prismaMock, resetPrisma } from './_setup/prisma-mock';
-import { blobPutMock, resetBlobMock } from './_setup/blob-mock';
 
 const SESSION_USER = {
   id: 'user_alice',

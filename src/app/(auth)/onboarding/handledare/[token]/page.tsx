@@ -18,8 +18,8 @@ export default async function HandledareApprovePage({
         Godkänn handledarskap
       </h1>
       <p className="text-muted-foreground">
-        Bekräfta att du tar handledaransvar för övningskörning enligt Trafikverket. Detta är
-        inte föräldramedgivande — det är handledarskap.
+        Bekräfta att du tar handledaransvar för övningskörning enligt Trafikverket. Detta är inte
+        föräldramedgivande — det är handledarskap.
       </p>
       <HandledareApproveClient token={token} />
     </div>

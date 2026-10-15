@@ -8,10 +8,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { SetupChecklist } from '@/components/custom/dashboard/setup-checklist';
 import { apiFetch } from '@/lib/api-client';
-import {
-  type HostChecklistAction,
-  pickHostChecklistAction,
-} from '@/lib/business/host-checklist';
+import { type HostChecklistAction, pickHostChecklistAction } from '@/lib/business/host-checklist';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import { LicenseStatusResponse } from '@/lib/contracts/instructor-license';
 

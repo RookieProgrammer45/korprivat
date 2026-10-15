@@ -1,4 +1,4 @@
-import { renderEmail, type EmailContent } from '@/lib/email/templates';
+import { type EmailContent, renderEmail } from '@/lib/email/templates';
 
 /** Notify instructor or school that a Connect transfer was sent. */
 export function payoutNotificationEmail(input: {

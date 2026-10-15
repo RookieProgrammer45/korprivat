@@ -1,5 +1,5 @@
 import 'server-only';
-import { isProviderActivated, isMarketplaceSchoolRole } from '@/lib/business/provider-activation';
+import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
 
 export type PublicInstructorSeo = {

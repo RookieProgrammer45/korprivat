@@ -82,9 +82,7 @@ export async function GET(req: Request) {
     instructor.name.trim().length > 0 &&
     instructor.city.trim().length > 0 &&
     instructor.categories.length > 0;
-  const connectReady = Boolean(
-    connectRow?.chargesEnabled && connectRow?.payoutsEnabled,
-  );
+  const connectReady = Boolean(connectRow?.chargesEnabled && connectRow?.payoutsEnabled);
   const hasAvailability = openSlot != null;
 
   return NextResponse.json(

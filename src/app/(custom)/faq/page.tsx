@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { PublicFaq } from '@/components/custom/public-faq';

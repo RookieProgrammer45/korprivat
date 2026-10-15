@@ -76,8 +76,6 @@ export async function listSchoolListedInstructors(
   });
 }
 
-export async function getOrganizationBySlug(
-  slug: string,
-): Promise<Organization | null> {
+export async function getOrganizationBySlug(slug: string): Promise<Organization | null> {
   return prisma.organization.findUnique({ where: { slug } });
 }

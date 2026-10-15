@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import {
-  NORDIC_COUNTRIES,
-  NORDIC_LOCATIONS,
   allLocationSitemapPaths,
   getLocation,
   listCitiesInRegion,
   listLocationsForCountry,
   locationPath,
+  NORDIC_COUNTRIES,
+  NORDIC_LOCATIONS,
 } from '@/lib/seo/nordic-locations';
 
 describe('nordic-locations registry', () => {

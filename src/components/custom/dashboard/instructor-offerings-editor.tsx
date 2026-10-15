@@ -1,4 +1,5 @@
 'use client';
+import { useTranslations } from 'next-intl';
 //
 // Seller-side CRUD for marketplace offerings (intensive courses / packages).
 // Mounted on the instructor dashboard; loads /api/instructors/me/offerings
@@ -6,7 +7,6 @@
 // island. Mobile-safe: every row is flex-wrap with min-w-0 so nothing gets
 // squeezed on phones.
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -25,10 +25,10 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { apiFetch } from '@/lib/api-client';
 import {
-  type OfferingKind,
-  type OwnOffering,
   OfferingDeleted,
+  type OfferingKind,
   OfferingUpserted,
+  type OwnOffering,
   OwnOfferingList,
 } from '@/lib/contracts/offerings';
 

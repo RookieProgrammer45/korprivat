@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { InstructorPreview } from '@/components/custom/instructor-preview';

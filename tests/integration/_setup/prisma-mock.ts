@@ -39,7 +39,12 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       upsert: vi.fn(async (_args?: unknown): Promise<unknown> => ({})),
@@ -48,7 +53,12 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       upsert: vi.fn(async (_args?: unknown): Promise<unknown> => ({})),
@@ -57,27 +67,47 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       delete: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     account: {
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       delete: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     session: {
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       delete: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     instructor: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 0 })),
     },
@@ -85,27 +115,52 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     bookingReceipt: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
-      upsert: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_receipt', ...((args as object) ?? {}) })),
+      upsert: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_receipt',
+          ...((args as object) ?? {}),
+        }),
+      ),
     },
     dispute: {
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     lateCancellationFee: {
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
@@ -113,7 +168,12 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       upsert: vi.fn(async (_args?: unknown): Promise<unknown> => ({})),
@@ -122,7 +182,12 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 0 })),
     },
@@ -130,13 +195,23 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_payout', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_payout',
+          ...((args as object) ?? {}),
+        }),
+      ),
     },
     subscription: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       upsert: vi.fn(async (_args?: unknown): Promise<unknown> => ({})),
@@ -145,13 +220,23 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
     },
     instructorLicense: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       upsert: vi.fn(async (_args?: unknown): Promise<unknown> => ({})),
@@ -160,7 +245,12 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({ id: 'mock_created', ...((args as object) ?? {}) })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       upsert: vi.fn(async (_args?: unknown): Promise<unknown> => ({})),
@@ -169,20 +259,24 @@ const prisma = vi.hoisted(() => {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({
-        id: 'conversation_created',
-        ...((args as object) ?? {}),
-      })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'conversation_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     conversationParticipant: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({
-        id: 'participant_created',
-        ...((args as object) ?? {}),
-      })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'participant_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     message: {
@@ -190,47 +284,57 @@ const prisma = vi.hoisted(() => {
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
       count: vi.fn(async (_args?: unknown) => 0),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({
-        id: 'message_created',
-        ...((args as object) ?? {}),
-      })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'message_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
     },
     messageReport: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({
-        id: 'report_created',
-        ...((args as object) ?? {}),
-      })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'report_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
     },
     stripeWebhookEvent: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({
-        id: 'stripe_webhook_event',
-        ...((args as object) ?? {}),
-      })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'stripe_webhook_event',
+          ...((args as object) ?? {}),
+        }),
+      ),
     },
     handledareEnrollment: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({
-        id: 'handledare_enrollment',
-        ...((args as object) ?? {}),
-      })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'handledare_enrollment',
+          ...((args as object) ?? {}),
+        }),
+      ),
       update: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
       updateMany: vi.fn(async (_args?: unknown): Promise<unknown> => ({ count: 1 })),
     },
     verificationEvent: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
-      create: vi.fn(async (args: unknown): Promise<unknown> => ({
-        id: 'verification_event',
-        ...((args as object) ?? {}),
-      })),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'verification_event',
+          ...((args as object) ?? {}),
+        }),
+      ),
     },
     $transaction: vi.fn(async (...args: unknown[]) => {
       if (typeof args[0] === 'function') {

@@ -28,8 +28,8 @@
 // rules; blob cleanup is a follow-up ops sweep.
 
 import 'server-only';
-import { NextResponse } from 'next/server';
 import { Prisma } from '@prisma/client';
+import { NextResponse } from 'next/server';
 import { DeleteAccountResponse } from '@/lib/contracts/profile';
 import { prisma } from '@/lib/db';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';

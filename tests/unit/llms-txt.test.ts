@@ -92,11 +92,7 @@ describe('/llms.txt route', () => {
     });
 
     it('starts with the site name heading and description blockquote', () => {
-      expect(
-        body.startsWith(
-          `# ${siteName}\n\n> ${siteDescription}`,
-        ),
-      ).toBe(true);
+      expect(body.startsWith(`# ${siteName}\n\n> ${siteDescription}`)).toBe(true);
     });
 
     it('renders the intro paragraph after the blockquote', () => {

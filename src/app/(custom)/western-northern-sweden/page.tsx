@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { WesternNorthernSwedenHub } from '@/components/custom/western-northern-sweden-hub';

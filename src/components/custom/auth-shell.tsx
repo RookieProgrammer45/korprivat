@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { LocaleSwitcher } from '@/components/locale-switcher';
 import { LiveAuthDeck } from '@/components/custom/live-deck';
+import { LocaleSwitcher } from '@/components/locale-switcher';
 
 /**
  * Shared auth layout contract:
@@ -16,7 +16,6 @@ export function AuthShell({ children, footer }: { children: ReactNode; footer?: 
   return (
     <main className="auth-shell flex min-h-dvh min-w-0 flex-col bg-[var(--background)]">
       <div className="auth-shell-grid mx-auto flex w-full min-w-0 max-w-6xl flex-1 flex-col lg:flex-row lg:items-stretch lg:gap-12 lg:px-6">
-
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="auth-shell-topbar mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-gutter pt-6 sm:pt-8">
             <Link
@@ -77,7 +76,10 @@ export function AuthShell({ children, footer }: { children: ReactNode; footer?: 
           </div>
         </div>
 
-        <aside className="auth-shell-art relative hidden overflow-hidden lg:flex lg:h-[45rem] lg:w-[460px] lg:shrink-0 lg:flex-col" aria-hidden>
+        <aside
+          className="auth-shell-art relative hidden overflow-hidden lg:flex lg:h-[45rem] lg:w-[460px] lg:shrink-0 lg:flex-col"
+          aria-hidden
+        >
           <span className="dlu-glow" />
           <LiveAuthDeck />
         </aside>

@@ -6,9 +6,5 @@ import { FocusedAppShell } from '@/components/custom/focused-app-shell';
  * Marketing SiteNav is suppressed for `/instructors/new` via shell-mode.
  */
 export default function InstructorsNewLayout({ children }: { children: ReactNode }) {
-  return (
-    <FocusedAppShell contentClassName="max-w-2xl">
-      {children}
-    </FocusedAppShell>
-  );
+  return <FocusedAppShell contentClassName="max-w-2xl">{children}</FocusedAppShell>;
 }

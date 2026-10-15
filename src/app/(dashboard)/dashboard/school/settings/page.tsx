@@ -32,9 +32,7 @@ export default async function SchoolSettingsPage() {
     <section className="grid gap-6">
       <header className="grid gap-2">
         <h1 className="font-display text-h2 text-foreground">{t('title')}</h1>
-        {!isOwner ? (
-          <p className="text-small text-muted-foreground">{tDash('body')}</p>
-        ) : null}
+        {!isOwner ? <p className="text-small text-muted-foreground">{tDash('body')}</p> : null}
       </header>
       <SchoolSettingsForm
         organizationId={org.id}

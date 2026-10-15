@@ -1,4 +1,3 @@
-
 import { type EmailContent, renderEmail } from '@/lib/email/templates';
 
 export function verifyEmailTemplate(input: {

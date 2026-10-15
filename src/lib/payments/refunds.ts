@@ -5,13 +5,21 @@ import 'server-only';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { notificationEmail } from '@/lib/email/templates';
-import { getStripe } from '@/lib/payments/stripe';
 import { OWNER_EMAIL } from '@/lib/ownership';
+import { getStripe } from '@/lib/payments/stripe';
 
 export type RefundResult =
   | { kind: 'refunded'; refundId: string; amountSek: number | null }
   | { kind: 'duplicate'; refundId: string }
-  | { kind: 'skipped'; reason: 'no_session' | 'no_payment_intent' | 'already_refunded' | 'missing_booking' | 'zero_amount' }
+  | {
+      kind: 'skipped';
+      reason:
+        | 'no_session'
+        | 'no_payment_intent'
+        | 'already_refunded'
+        | 'missing_booking'
+        | 'zero_amount';
+    }
   | { kind: 'error'; message: string };
 
 function alertRecipient(): string {
@@ -123,10 +131,7 @@ export async function refundBooking(
       return { kind: 'duplicate', refundId: 'existing' };
     }
     console.error('[refunds] refund failed', { bookingId, message });
-    await alertOps('Refund failed', [
-      `Booking ${bookingId}: Stripe refund failed.`,
-      message,
-    ]);
+    await alertOps('Refund failed', [`Booking ${bookingId}: Stripe refund failed.`, message]);
     return { kind: 'error', message };
   }
 }

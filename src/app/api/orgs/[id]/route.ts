@@ -1,11 +1,7 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { OrgUpdateRequest } from '@/lib/contracts/orgs';
-import {
-  OrgForbiddenError,
-  OrgNotFoundError,
-  updateOrganization,
-} from '@/lib/orgs/service';
+import { OrgForbiddenError, OrgNotFoundError, updateOrganization } from '@/lib/orgs/service';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';

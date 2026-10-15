@@ -1,4 +1,3 @@
-
 import { type EmailContent, renderEmail } from '@/lib/email/templates';
 
 /** Password-reset link after requestPasswordReset (1h expiry by default). */

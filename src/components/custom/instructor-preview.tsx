@@ -104,7 +104,7 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
     <Link
       href={`/instructors/${row.id}`}
       className="marketplace-provider-card group block h-full min-w-0 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
-              data-provider-type={row.providerType}
+      data-provider-type={row.providerType}
     >
       <Card className="surface-card marketplace-preview-card lift h-full border-border bg-card transition-colors duration-200 group-hover:border-brand-500/40 group-hover:shadow-md">
         <CardContent className="flex h-full min-w-0 flex-col gap-4 p-5">
@@ -119,7 +119,9 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
                 className="marketplace-provider-avatar size-12 shrink-0 rounded-full border border-brand-500/35 bg-brand-100 object-cover dark:bg-brand-900"
               />
               <div className="min-w-0">
-                <p className="dlu-type">{row.providerType === "SCHOOL" ? tr("typeSchool") : tr("typeInstructor")}</p>
+                <p className="dlu-type">
+                  {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
+                </p>
                 <p className="break-words font-display text-base font-semibold text-foreground">
                   {row.name}
                 </p>

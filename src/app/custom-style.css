@@ -1,4 +1,3 @@
-
 /* Beat globals.css :root / .dark page tint — pure white / pure black site-wide. */
 html:root {
   color-scheme: light;
@@ -815,14 +814,14 @@ form > button[type="submit"] {
   }
 
   .auth-shell .surface-panel,
-  .auth-shell [data-slot='card'] {
+  .auth-shell [data-slot="card"] {
     width: 100%;
     max-width: 100%;
   }
 
   .auth-shell input,
   .auth-shell button,
-  .auth-shell [role='radio'] {
+  .auth-shell [role="radio"] {
     max-width: 100%;
   }
 
@@ -1656,13 +1655,13 @@ html.dark .dlu-bar {
   border-radius: 1.25rem;
 }
 
-.marketplace-provider-card[data-provider-type='SCHOOL'] .marketplace-provider-avatar {
+.marketplace-provider-card[data-provider-type="SCHOOL"] .marketplace-provider-avatar {
   background: var(--dlu-ink);
   color: #fff;
   border-radius: 0.75rem;
 }
 
-html.dark .marketplace-provider-card[data-provider-type='SCHOOL'] .marketplace-provider-avatar {
+html.dark .marketplace-provider-card[data-provider-type="SCHOOL"] .marketplace-provider-avatar {
   background: var(--dlu-ink);
   color: #0b0b0a;
 }
@@ -1741,7 +1740,9 @@ html.dark .marketplace-provider-card.marketplace-provider-card:hover {
 
 .dlu-nav-btn {
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.12s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.12s ease;
 }
 
 .dlu-nav-btn:hover {
@@ -1774,7 +1775,9 @@ html.dark .dlu-nav-btn:focus-visible {
   border-radius: 999px;
   background: rgba(19, 19, 18, 0.18);
   cursor: pointer;
-  transition: width 0.25s ease, background 0.25s ease;
+  transition:
+    width 0.25s ease,
+    background 0.25s ease;
 }
 
 .dlu-dot:hover {
@@ -2094,7 +2097,9 @@ html.dark .dlu-photo {
   margin-top: 0.4rem;
   padding: 0.7rem 1.4rem;
   text-decoration: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 html.dark .dlu-footer-cta {
@@ -2177,7 +2182,9 @@ html.dark .dlu-footer-cta {
   font-size: 0.8rem;
   padding: 0.32rem 0.85rem;
   text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .dlu-footer-citychip:hover {

@@ -148,9 +148,7 @@ describe('POST /api/admin/payouts/retry', () => {
       id: 'b1',
       paymentStatus: 'held_escrow',
     });
-    const res = await payoutRetryPOST(
-      jsonPost('/api/admin/payouts/retry', { bookingId: 'b1' }),
-    );
+    const res = await payoutRetryPOST(jsonPost('/api/admin/payouts/retry', { bookingId: 'b1' }));
     expect(res.status).toBe(409);
     const body = (await res.json()) as {
       error: string;
@@ -168,9 +166,7 @@ describe('POST /api/admin/payouts/retry', () => {
       id: 'b2',
       paymentStatus: 'awaiting_buyer_confirmation',
     });
-    const res = await payoutRetryPOST(
-      jsonPost('/api/admin/payouts/retry', { bookingId: 'b2' }),
-    );
+    const res = await payoutRetryPOST(jsonPost('/api/admin/payouts/retry', { bookingId: 'b2' }));
     expect(res.status).toBe(409);
     const body = (await res.json()) as { currentState: string; message: string };
     expect(body.currentState).toBe('awaiting_buyer_confirmation');
@@ -183,9 +179,7 @@ describe('POST /api/admin/payouts/retry', () => {
       id: 'b3',
       paymentStatus: 'disputed',
     });
-    const res = await payoutRetryPOST(
-      jsonPost('/api/admin/payouts/retry', { bookingId: 'b3' }),
-    );
+    const res = await payoutRetryPOST(jsonPost('/api/admin/payouts/retry', { bookingId: 'b3' }));
     expect(res.status).toBe(409);
     const body = (await res.json()) as { currentState: string };
     expect(body.currentState).toBe('disputed');
@@ -197,9 +191,7 @@ describe('POST /api/admin/payouts/retry', () => {
       id: 'b4',
       paymentStatus: 'payout_failed',
     });
-    const res = await payoutRetryPOST(
-      jsonPost('/api/admin/payouts/retry', { bookingId: 'b4' }),
-    );
+    const res = await payoutRetryPOST(jsonPost('/api/admin/payouts/retry', { bookingId: 'b4' }));
     expect(res.status).toBe(200);
     expect(mockPayoutBooking).toHaveBeenCalledWith(
       'b4',

@@ -2,12 +2,12 @@
 
 import 'server-only';
 import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/db';
 import {
   ConnectInstructorNotFoundError,
   ConnectNotConfiguredError,
   refreshInstructorConnectStatus,
 } from '@/lib/payments/connect';
-import { prisma } from '@/lib/db';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';

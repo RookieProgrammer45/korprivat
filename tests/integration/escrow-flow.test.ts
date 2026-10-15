@@ -54,8 +54,8 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { POST as completePOST } from '@/app/api/bookings/[id]/complete/route';
 import { POST as confirmPOST } from '@/app/api/bookings/[id]/confirm/route';
 import { POST as deliverPOST } from '@/app/api/bookings/[id]/deliver/route';
-import { POST as disputeEscrowPOST } from '@/app/api/bookings/[id]/dispute-escrow/route';
 import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
+import { POST as disputeEscrowPOST } from '@/app/api/bookings/[id]/dispute-escrow/route';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
 
 const VALID_TOKEN = 'token_abc123';

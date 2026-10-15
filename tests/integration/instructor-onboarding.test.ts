@@ -17,9 +17,9 @@ import { POST as instructorPOST } from '@/app/api/instructors/route';
 import { InstructorPhotoUploaded } from '@/lib/contracts/instructor-photo';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
 import { authMock } from './_setup/auth-mock';
+import { blobPutMock, resetBlobMock } from './_setup/blob-mock';
 import type { ContactsMockFixture } from './_setup/contacts-mock';
 import { installContactsProxy } from './_setup/contacts-mock';
-import { blobPutMock, resetBlobMock } from './_setup/blob-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';
 import { prismaMock, resetPrisma } from './_setup/prisma-mock';
 

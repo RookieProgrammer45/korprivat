@@ -75,9 +75,7 @@ export function InstructorReviewInbox() {
                     <p className="font-display text-base font-semibold text-foreground">
                       {item.reviewerName}
                     </p>
-                    <Badge variant="outline">
-                      {t('rating', { rating: item.rating })}
-                    </Badge>
+                    <Badge variant="outline">{t('rating', { rating: item.rating })}</Badge>
                   </div>
                   <p className="text-small text-foreground">{item.comment}</p>
                   <p className="text-caption text-muted-foreground">

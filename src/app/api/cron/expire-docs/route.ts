@@ -4,8 +4,8 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { authorizeCron } from '@/lib/payments/cron-auth';
 import { reportError } from '@/lib/observability/report-error';
+import { authorizeCron } from '@/lib/payments/cron-auth';
 
 export const dynamic = 'force-dynamic';
 

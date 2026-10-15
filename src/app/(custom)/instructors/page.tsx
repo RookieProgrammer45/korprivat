@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { PublicDirectoryPage } from '@/components/custom/public-directory-page';

@@ -1,14 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {
-  LocationHubLanding,
-  locationHubMetadata,
-} from '@/components/custom/location-hub-landing';
-import {
-  NORDIC_LOCATIONS,
-  getLocation,
-  isNordicCountry,
-} from '@/lib/seo/nordic-locations';
+import { LocationHubLanding, locationHubMetadata } from '@/components/custom/location-hub-landing';
+import { getLocation, isNordicCountry, NORDIC_LOCATIONS } from '@/lib/seo/nordic-locations';
 
 export const dynamic = 'force-dynamic';
 

@@ -5,10 +5,7 @@ import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { SignupPath, SignupRole, SignupState } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { requireAuth } from '@/lib/require-auth';
-import {
-  loadLearnerVerificationFacts,
-  resolveLearnerStateFromFacts,
-} from '@/lib/signup-resume';
+import { loadLearnerVerificationFacts, resolveLearnerStateFromFacts } from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
 

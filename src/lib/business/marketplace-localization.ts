@@ -1,4 +1,3 @@
-
 export type MarketplaceLocale = 'en' | 'sv';
 
 export const PROVIDER_TIME_ZONE = 'Europe/Stockholm';

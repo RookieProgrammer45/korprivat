@@ -53,8 +53,7 @@ export async function ensureSchoolSignupComplete(user: {
     data: { role: 'SCHOOL' },
   });
 
-  const schoolDestination =
-    user.next?.startsWith('/invite/') ? user.next : '/dashboard/school';
+  const schoolDestination = user.next?.startsWith('/invite/') ? user.next : '/dashboard/school';
 
   const existing = await listMembershipsForUser(user.id, { onlyActive: true });
   const alreadyMember = existing.some((m) => m.role === 'OWNER' || m.role === 'STAFF');
@@ -136,7 +135,10 @@ export async function resolveSignedInSignup(
     next: resumeNext,
   });
   if (school.ok) {
-    return { kind: 'redirect', to: school.next.includes('?') ? school.next : `${school.next}?signup=1` };
+    return {
+      kind: 'redirect',
+      to: school.next.includes('?') ? school.next : `${school.next}?signup=1`,
+    };
   }
   // Missing org fields or org-number conflict — keep wizard / complete path.
   if (school.reason === 'missing_fields' || school.reason === 'org_conflict') {
@@ -192,9 +194,7 @@ export async function resolveSignedInSignup(
   }
 
   const home =
-    profile?.role === 'SCHOOL'
-      ? '/dashboard/school'
-      : await homeForSignedInUser(user.id);
+    profile?.role === 'SCHOOL' ? '/dashboard/school' : await homeForSignedInUser(user.id);
 
   return { kind: 'already_signed_in', home, email: user.email };
 }
@@ -323,14 +323,14 @@ const BOOKABLE_WITHOUT_DIDIT = new Set<LearnerVerificationState>([
   'DIDIT_FAILED',
 ]);
 
-export async function resolveLearnerBookingGate(userId: string): Promise<
+export async function resolveLearnerBookingGate(
+  userId: string,
+): Promise<
   | { eligible: true; state: LearnerVerificationState }
   | { eligible: false; state: LearnerVerificationState; redirectTo: string }
 > {
   const facts = await loadLearnerVerificationFacts(userId);
-  const state = facts
-    ? resolveLearnerStateFromFacts(facts)
-    : resolveStoredLearnerState(null);
+  const state = facts ? resolveLearnerStateFromFacts(facts) : resolveStoredLearnerState(null);
 
   if (BOOKABLE_WITHOUT_DIDIT.has(state)) {
     return { eligible: true, state };

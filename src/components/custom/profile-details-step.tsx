@@ -26,11 +26,8 @@ import { Switch } from '@/components/ui/switch';
 import { apiFetch } from '@/lib/api-client';
 import { authClient } from '@/lib/auth-client';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/auth';
-import {
-  PhotoConfirmationResponse,
-  PhotoUploadResponse,
-} from '@/lib/contracts/photo-verification';
-import { type SignupPath as SignupPathType } from '@/lib/contracts/signup';
+import { PhotoConfirmationResponse, PhotoUploadResponse } from '@/lib/contracts/photo-verification';
+import type { SignupPath as SignupPathType } from '@/lib/contracts/signup';
 
 const SUPPORTED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
 const SUPPORTED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp']);

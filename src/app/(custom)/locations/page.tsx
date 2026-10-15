@@ -2,11 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
-import {
-  NORDIC_COUNTRIES,
-  NORDIC_COUNTRY_META,
-  countryPath,
-} from '@/lib/seo/nordic-locations';
+import { countryPath, NORDIC_COUNTRIES, NORDIC_COUNTRY_META } from '@/lib/seo/nordic-locations';
 import { siteName } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';

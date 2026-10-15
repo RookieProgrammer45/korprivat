@@ -2,8 +2,8 @@
 // Do not put security headers / CSP / a full `images` block here.
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
-import type { AppCapabilities } from './src/lib/permissions-policy';
 import { cspExtraSources } from './src/lib/csp-extra-sources';
+import type { AppCapabilities } from './src/lib/permissions-policy';
 
 export { cspExtraSources };
 

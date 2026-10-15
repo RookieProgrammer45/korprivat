@@ -4,10 +4,7 @@
 import 'server-only';
 import { after, NextResponse } from 'next/server';
 import { autoReleaseAtFrom, resolveBookingActor } from '@/lib/business/booking-actor';
-import {
-  BookingDeliverRequest,
-  BookingDeliverResponse,
-} from '@/lib/contracts/bookings';
+import { BookingDeliverRequest, BookingDeliverResponse } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { notificationEmail } from '@/lib/email/templates';

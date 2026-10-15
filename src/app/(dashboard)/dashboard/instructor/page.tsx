@@ -11,6 +11,7 @@ import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { InstructorBookingHistory } from '@/components/custom/dashboard/instructor-booking-history';
 import { InstructorHostChecklist } from '@/components/custom/dashboard/instructor-host-checklist';
+import { InstructorOfferingsEditor } from '@/components/custom/dashboard/instructor-offerings-editor';
 import { InstructorReviewInbox } from '@/components/custom/dashboard/instructor-review-inbox';
 import { ProviderOperations } from '@/components/custom/dashboard/provider-operations';
 import {
@@ -19,10 +20,13 @@ import {
 } from '@/components/custom/instructor/instructor-payouts-card';
 import { InstructorLicenseStatusBanner } from '@/components/custom/instructor-license-status-banner';
 import { InstructorPayoutCard } from '@/components/custom/instructor-payout-card';
-import { InstructorOfferingsEditor } from '@/components/custom/dashboard/instructor-offerings-editor';
 import { InstructorPolicyEditor } from '@/components/custom/instructor-policy-editor';
 import { Button } from '@/components/ui/button';
-import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
+import {
+  dashboardPathFor,
+  requireDashboardSession,
+  resolveDashboardHome,
+} from '@/lib/dashboard-guard';
 // biome-ignore lint/style/noRestrictedImports: legacy direktimport - routes-monstret refaktoreras separat
 import { prisma } from '@/lib/db';
 import { refreshInstructorConnectStatus } from '@/lib/payments/connect';

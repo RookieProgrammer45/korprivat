@@ -1,4 +1,3 @@
-
 import { getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { DashboardShell } from '@/components/custom/dashboard/dashboard-shell';

@@ -32,12 +32,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { apiFetch } from '@/lib/api-client';
-import { signUp, useSession, authClient } from '@/lib/auth-client';
-import {
-  clearPersistedAuthNext,
-  persistAuthNext,
-  readPersistedAuthNext,
-} from '@/lib/auth-next';
+import { authClient, signUp, useSession } from '@/lib/auth-client';
+import { clearPersistedAuthNext, persistAuthNext, readPersistedAuthNext } from '@/lib/auth-next';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/auth';
 import { HANDLEDARE_TERMS_VERSION } from '@/lib/contracts/clickwrap';
 import { LicenseUploadResponse } from '@/lib/contracts/instructor-license';
@@ -54,10 +50,7 @@ import {
 } from '@/lib/signup-eligibility';
 import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
 import { ClickwrapStep } from './clickwrap-step';
-import {
-  claimedDobIsUnderage,
-  LearnerDobConsentFields,
-} from './learner-dob-consent-fields';
+import { claimedDobIsUnderage, LearnerDobConsentFields } from './learner-dob-consent-fields';
 import { ProfileDetailsStep } from './profile-details-step';
 import { SocialAuthButtons } from './social-auth-buttons';
 
@@ -548,9 +541,7 @@ export function SignUpForm({
         <div className="grid gap-2">
           <p className="text-eyebrow text-muted-foreground">{t('step.verifyEmail.eyebrow')}</p>
           <p className="text-h4 text-foreground">{t('step.verifyEmail.title')}</p>
-          <p className="text-body text-muted-foreground">
-            {t('step.verifyEmail.body', { email })}
-          </p>
+          <p className="text-body text-muted-foreground">{t('step.verifyEmail.body', { email })}</p>
         </div>
         <p className="text-small text-muted-foreground" aria-live="polite">
           {t('step.verifyEmail.polling')}
@@ -765,267 +756,267 @@ export function SignUpForm({
           <FormField
             control={form.control}
             name="name"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('fields.nameLabel')}</FormLabel>
-              <FormControl>
-                <Input
-                  autoComplete="name"
-                  className="auth-input h-12"
-                  placeholder={t('fields.namePlaceholder')}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('fields.emailLabel')}</FormLabel>
-              <FormControl>
-                <Input
-                  type="email"
-                  autoComplete="email"
-                  spellCheck={false}
-                  inputMode="email"
-                  className="auth-input h-12"
-                  placeholder={t('fields.emailPlaceholder')}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          rules={{ required: true, minLength: 8 }}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('fields.passwordLabel')}</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  autoComplete="new-password"
-                  className="auth-input h-12"
-                  placeholder={t('fields.passwordPlaceholder')}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('fields.nameLabel')}</FormLabel>
+                <FormControl>
+                  <Input
+                    autoComplete="name"
+                    className="auth-input h-12"
+                    placeholder={t('fields.namePlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('fields.emailLabel')}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    spellCheck={false}
+                    inputMode="email"
+                    className="auth-input h-12"
+                    placeholder={t('fields.emailPlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            rules={{ required: true, minLength: 8 }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('fields.passwordLabel')}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    autoComplete="new-password"
+                    className="auth-input h-12"
+                    placeholder={t('fields.passwordPlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        {selectedPath === 'LEARNER' ? (
-          <div className="grid gap-4 border-t border-border pt-4">
-            <LearnerDobConsentFields
-              idPrefix="signup-dob"
-              includeDob
-              includeConsent={false}
-              dob={dateOfBirthValue ?? ''}
-              onDobChange={(value) => {
-                form.setValue('dateOfBirth', value, { shouldDirty: true, shouldValidate: true });
-                if (claimedDobIsUnderage(value)) {
-                  form.setError('dateOfBirth', {
-                    message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
-                  });
-                } else if (value) {
-                  form.clearErrors('dateOfBirth');
-                }
-              }}
-              consent={false}
-              onConsentChange={() => {}}
-              errors={{
-                dateOfBirth: form.formState.errors.dateOfBirth?.message,
-              }}
-            />
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.phoneLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="tel"
-                      autoComplete="tel"
-                      inputMode="tel"
-                      className="auth-input h-12"
-                      placeholder={t('fields.phonePlaceholder')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.cityLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      autoComplete="address-level2"
-                      className="auth-input h-12"
-                      placeholder={t('fields.cityPlaceholder')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        ) : null}
+          {selectedPath === 'LEARNER' ? (
+            <div className="grid gap-4 border-t border-border pt-4">
+              <LearnerDobConsentFields
+                idPrefix="signup-dob"
+                includeDob
+                includeConsent={false}
+                dob={dateOfBirthValue ?? ''}
+                onDobChange={(value) => {
+                  form.setValue('dateOfBirth', value, { shouldDirty: true, shouldValidate: true });
+                  if (claimedDobIsUnderage(value)) {
+                    form.setError('dateOfBirth', {
+                      message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
+                    });
+                  } else if (value) {
+                    form.clearErrors('dateOfBirth');
+                  }
+                }}
+                consent={false}
+                onConsentChange={() => {}}
+                errors={{
+                  dateOfBirth: form.formState.errors.dateOfBirth?.message,
+                }}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fields.phoneLabel')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="tel"
+                        autoComplete="tel"
+                        inputMode="tel"
+                        className="auth-input h-12"
+                        placeholder={t('fields.phonePlaceholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fields.cityLabel')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        autoComplete="address-level2"
+                        className="auth-input h-12"
+                        placeholder={t('fields.cityPlaceholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          ) : null}
 
-        {selectedPath === 'SCHOOL' ? (
-          <div className="grid gap-4 border-t border-border pt-4">
-            <FormField
-              control={form.control}
-              name="schoolName"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.schoolNameLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      autoComplete="organization"
-                      className="auth-input h-12"
-                      placeholder={t('fields.schoolNamePlaceholder')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="organizationNumber"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.organizationNumberLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      spellCheck={false}
-                      className="auth-input h-12"
-                      placeholder={t('fields.organizationNumberPlaceholder')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="city"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.cityLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      autoComplete="address-level2"
-                      className="auth-input h-12"
-                      placeholder={t('fields.cityPlaceholder')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        ) : null}
+          {selectedPath === 'SCHOOL' ? (
+            <div className="grid gap-4 border-t border-border pt-4">
+              <FormField
+                control={form.control}
+                name="schoolName"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fields.schoolNameLabel')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        autoComplete="organization"
+                        className="auth-input h-12"
+                        placeholder={t('fields.schoolNamePlaceholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="organizationNumber"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fields.organizationNumberLabel')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        spellCheck={false}
+                        className="auth-input h-12"
+                        placeholder={t('fields.organizationNumberPlaceholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="city"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fields.cityLabel')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        autoComplete="address-level2"
+                        className="auth-input h-12"
+                        placeholder={t('fields.cityPlaceholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          ) : null}
 
-        {selectedPath === 'INSTRUCTOR' ? (
-          <div className="grid gap-4 border-t border-border pt-4">
-            <FormField
-              control={form.control}
-              name="licenseHeldYears"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.licenseHeldYearsLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      inputMode="numeric"
-                      min={MIN_INSTRUCTOR_LICENSE_YEARS}
-                      max={80}
-                      className="auth-input h-12"
-                      placeholder={t('fields.licenseHeldYearsPlaceholder')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <p className="text-caption text-muted-foreground">
-                    {t('fields.licenseHeldYearsHelp', { years: MIN_INSTRUCTOR_LICENSE_YEARS })}
-                  </p>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="city"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('fields.cityLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      autoComplete="address-level2"
-                      className="auth-input h-12"
-                      placeholder={t('fields.cityPlaceholder')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        ) : null}
+          {selectedPath === 'INSTRUCTOR' ? (
+            <div className="grid gap-4 border-t border-border pt-4">
+              <FormField
+                control={form.control}
+                name="licenseHeldYears"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fields.licenseHeldYearsLabel')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        inputMode="numeric"
+                        min={MIN_INSTRUCTOR_LICENSE_YEARS}
+                        max={80}
+                        className="auth-input h-12"
+                        placeholder={t('fields.licenseHeldYearsPlaceholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <p className="text-caption text-muted-foreground">
+                      {t('fields.licenseHeldYearsHelp', { years: MIN_INSTRUCTOR_LICENSE_YEARS })}
+                    </p>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="city"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fields.cityLabel')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        autoComplete="address-level2"
+                        className="auth-input h-12"
+                        placeholder={t('fields.cityPlaceholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          ) : null}
 
-        <LearnerDobConsentFields
-          idPrefix="signup"
-          includeDob={false}
-          dob=""
-          onDobChange={() => {}}
-          consent={consentValue === true}
-          onConsentChange={(value) => {
-            form.setValue('consent', value, { shouldDirty: true, shouldValidate: true });
-            if (value) form.clearErrors('consent');
-            else {
-              form.setError('consent', { message: tConsentForm('signupCheckboxError') });
-            }
-          }}
-          errors={{
-            consent: form.formState.errors.consent?.message,
-          }}
-        />
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitting || learnerUnderage}
-          className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
-        >
-          {form.formState.isSubmitting ? t('submitting') : t('submit')}
-        </Button>
-      </form>
-    </Form>
+          <LearnerDobConsentFields
+            idPrefix="signup"
+            includeDob={false}
+            dob=""
+            onDobChange={() => {}}
+            consent={consentValue === true}
+            onConsentChange={(value) => {
+              form.setValue('consent', value, { shouldDirty: true, shouldValidate: true });
+              if (value) form.clearErrors('consent');
+              else {
+                form.setError('consent', { message: tConsentForm('signupCheckboxError') });
+              }
+            }}
+            errors={{
+              consent: form.formState.errors.consent?.message,
+            }}
+          />
+          <Button
+            type="submit"
+            size="lg"
+            disabled={form.formState.isSubmitting || learnerUnderage}
+            className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
+          >
+            {form.formState.isSubmitting ? t('submitting') : t('submit')}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }

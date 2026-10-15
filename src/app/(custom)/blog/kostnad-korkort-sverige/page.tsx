@@ -37,8 +37,8 @@ export default function KostnadKorkortPage() {
       </p>
       <div className="grid gap-4 text-body text-foreground">
         <p>
-          På DriveLinkUp betalar elever ingen separat plattformsavgift. Du ser skolans pris i SEK per
-          timme, bokar en ledig tid och betalar det publicerade beloppet till escrow.
+          På DriveLinkUp betalar elever ingen separat plattformsavgift. Du ser skolans pris i SEK
+          per timme, bokar en ledig tid och betalar det publicerade beloppet till escrow.
         </p>
         <p>
           Skolans provision till DriveLinkUp (8% för skolbokningar, 10% för oberoende instruktörer)

@@ -2,15 +2,12 @@
 
 import 'server-only';
 import { NextResponse } from 'next/server';
+import { assertActiveOwner, OrgForbiddenError } from '@/lib/orgs/service';
 import {
   ConnectNotConfiguredError,
   ConnectOrgNotFoundError,
   refreshConnectStatus,
 } from '@/lib/payments/connect';
-import {
-  assertActiveOwner,
-  OrgForbiddenError,
-} from '@/lib/orgs/service';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';

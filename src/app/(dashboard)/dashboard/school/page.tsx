@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { SchoolSetupChecklist } from '@/components/custom/dashboard/school-setup-checklist';
+import { SchoolBookingsPanel } from '@/components/custom/school/school-bookings-panel';
 import {
-  SchoolInstructorRoster,
   type RosterInvite,
   type RosterMember,
+  SchoolInstructorRoster,
 } from '@/components/custom/school/school-instructor-roster';
-import { SchoolBookingsPanel } from '@/components/custom/school/school-bookings-panel';
 import {
   SchoolPayoutsCard,
   type SchoolPayoutsState,
@@ -17,14 +17,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { requireDashboardSession } from '@/lib/dashboard-guard';
-import {
-  listMembershipsForUser,
-  listOrgInvites,
-  listOrgMembers,
-} from '@/lib/orgs/service';
-import { refreshConnectStatus } from '@/lib/payments/connect';
 // biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
+import { listMembershipsForUser, listOrgInvites, listOrgMembers } from '@/lib/orgs/service';
+import { refreshConnectStatus } from '@/lib/payments/connect';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dashboardSchool');
@@ -113,7 +109,9 @@ export default async function SchoolDashboardPage({
   }));
 
   const payoutsState = resolvePayoutsState(org, currentlyDue);
-  const detailsComplete = Boolean(org.address?.trim() && org.city?.trim() && org.contactEmail?.trim());
+  const detailsComplete = Boolean(
+    org.address?.trim() && org.city?.trim() && org.contactEmail?.trim(),
+  );
   const hasInstructorMember = members.some((m) => m.status === 'ACTIVE' && m.role !== 'OWNER');
   const connectReady = Boolean(org.stripeAccountId && org.chargesEnabled);
 

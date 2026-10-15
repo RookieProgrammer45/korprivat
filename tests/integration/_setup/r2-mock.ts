@@ -49,23 +49,25 @@ const happyPath: R2UploadResponse = {
 };
 
 const hoisted = vi.hoisted(() => {
-  const upload = vi.fn(async (_input?: unknown): Promise<R2UploadResponse> => ({
-    status: 200,
-    ok: true,
-    json: async () => ({
-      success: true as const,
-      file: {
-        id: 'mock-r2-id',
-        key: 'mock/key.png',
-        url: 'https://cdn.polsia.com/mock/key.png',
-        filename: 'avatar.png',
-        mime_type: 'image/png',
-        size: 1024,
-        created_at: '2026-07-31T00:00:00Z',
-      },
+  const upload = vi.fn(
+    async (_input?: unknown): Promise<R2UploadResponse> => ({
+      status: 200,
+      ok: true,
+      json: async () => ({
+        success: true as const,
+        file: {
+          id: 'mock-r2-id',
+          key: 'mock/key.png',
+          url: 'https://cdn.polsia.com/mock/key.png',
+          filename: 'avatar.png',
+          mime_type: 'image/png',
+          size: 1024,
+          created_at: '2026-07-31T00:00:00Z',
+        },
+      }),
+      text: async () => '',
     }),
-    text: async () => '',
-  }));
+  );
   return { upload };
 });
 

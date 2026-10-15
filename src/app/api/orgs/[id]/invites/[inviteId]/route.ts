@@ -1,11 +1,7 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
-import {
-  cancelInvite,
-  OrgForbiddenError,
-  OrgNotFoundError,
-} from '@/lib/orgs/service';
 import { prisma } from '@/lib/db';
+import { cancelInvite, OrgForbiddenError, OrgNotFoundError } from '@/lib/orgs/service';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';

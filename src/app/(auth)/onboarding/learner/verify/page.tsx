@@ -5,10 +5,7 @@ import { LearnerVerifyDobStep } from '@/components/custom/verification/learner-v
 // biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
 import { getSessionUser } from '@/lib/require-auth';
-import {
-  loadLearnerVerificationFacts,
-  resolveLearnerStateFromFacts,
-} from '@/lib/signup-resume';
+import { loadLearnerVerificationFacts, resolveLearnerStateFromFacts } from '@/lib/signup-resume';
 import { stateToRoute } from '@/lib/verification/state';
 
 export async function generateMetadata(): Promise<Metadata> {

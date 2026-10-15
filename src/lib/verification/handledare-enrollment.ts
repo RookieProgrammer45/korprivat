@@ -109,7 +109,9 @@ export async function createHandledareInvite(input: {
   return { enrollmentId: row.id, inviteUrl, expiresAt };
 }
 
-export async function approveHandledareInvite(rawToken: string): Promise<
+export async function approveHandledareInvite(
+  rawToken: string,
+): Promise<
   | { ok: true; learnerUserId: string }
   | { ok: false; reason: 'not_found' | 'expired' | 'not_pending' }
 > {

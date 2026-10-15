@@ -7,13 +7,13 @@ import type { Metadata } from 'next';
 // biome-ignore lint/style/noRestrictedImports: legacy server page - header read predates the proxy/route-handler rule; refactor pending
 import { headers } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
-import { CheckoutSuccessIsland } from './checkout-success';
 // biome-ignore lint/style/noRestrictedImports: legacy server page - session read predates the route-handler rule; refactor pending
 import { auth } from '@/lib/auth';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
+import { resolveDashboardHome } from '@/lib/dashboard-guard';
 // biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
-import { resolveDashboardHome } from '@/lib/dashboard-guard';
+import { CheckoutSuccessIsland } from './checkout-success';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('checkout.success.meta');
@@ -54,10 +54,7 @@ export default async function CheckoutSuccessPage() {
     dashboardHref === '/dashboard/student' ? '/dashboard/student/bookings' : undefined;
   return (
     <main className="container-page section min-h-[calc(100dvh-3.5rem)]">
-      <CheckoutSuccessIsland
-        dashboardHref={dashboardHref}
-        bookingsHref={bookingsHref}
-      />
+      <CheckoutSuccessIsland dashboardHref={dashboardHref} bookingsHref={bookingsHref} />
     </main>
   );
 }

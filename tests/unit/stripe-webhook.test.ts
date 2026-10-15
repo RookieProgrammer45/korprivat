@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import Stripe from 'stripe';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const {
   mockBookingFindUnique,

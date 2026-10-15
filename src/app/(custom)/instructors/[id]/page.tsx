@@ -69,25 +69,24 @@ export default async function InstructorPage({ params, searchParams }: PageProps
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
-  const jsonLd =
-    instructor?.indexable
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'DrivingSchool',
-          name: instructor.name,
-          description: instructor.bio?.slice(0, 300) || undefined,
-          url: absoluteUrl(`/instructors/${instructor.id}`),
-          image: instructor.photoUrl || undefined,
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: instructor.city,
-            addressCountry: 'SE',
-          },
-          priceRange: `${instructor.hourlyRateSek} SEK`,
-          areaServed: instructor.city,
-          knowsLanguage: instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
-        }
-      : null;
+  const jsonLd = instructor?.indexable
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'DrivingSchool',
+        name: instructor.name,
+        description: instructor.bio?.slice(0, 300) || undefined,
+        url: absoluteUrl(`/instructors/${instructor.id}`),
+        image: instructor.photoUrl || undefined,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: instructor.city,
+          addressCountry: 'SE',
+        },
+        priceRange: `${instructor.hourlyRateSek} SEK`,
+        areaServed: instructor.city,
+        knowsLanguage: instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+      }
+    : null;
 
   return (
     <main className="container-page min-w-0">
@@ -106,9 +105,7 @@ export default async function InstructorPage({ params, searchParams }: PageProps
           />
         </div>
       </div>
-      {jsonLd ? (
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      ) : null}
+      {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
     </main>
   );
 }

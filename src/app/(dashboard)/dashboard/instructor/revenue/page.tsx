@@ -5,7 +5,11 @@ import { getTranslations } from 'next-intl/server';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
+import {
+  dashboardPathFor,
+  requireDashboardSession,
+  resolveDashboardHome,
+} from '@/lib/dashboard-guard';
 // biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
 
@@ -48,7 +52,13 @@ export default async function InstructorRevenuePage() {
     where: {
       instructorId: instructor.id,
       paymentStatus: {
-        in: ['held_escrow', 'awaiting_buyer_confirmation', 'release_ready', 'payout_pending', 'payout_failed'],
+        in: [
+          'held_escrow',
+          'awaiting_buyer_confirmation',
+          'release_ready',
+          'payout_pending',
+          'payout_failed',
+        ],
       },
     },
     _sum: { payoutAmountSek: true },

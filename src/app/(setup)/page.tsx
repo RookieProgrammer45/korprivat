@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { PublicHome } from '@/components/custom/public-home';
 import { siteDescription, siteName } from '@/lib/brand';

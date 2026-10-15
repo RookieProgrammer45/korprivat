@@ -9,9 +9,7 @@ export type HostChecklistSteps = {
 
 export type HostChecklistAction = 'licence' | 'listing' | 'connect' | 'availability';
 
-export function pickHostChecklistAction(
-  steps: HostChecklistSteps,
-): HostChecklistAction | null {
+export function pickHostChecklistAction(steps: HostChecklistSteps): HostChecklistAction | null {
   if (!steps.licenceVerified) return 'licence';
   if (!steps.hasListing) return 'listing';
   if (!steps.connectReady) return 'connect';

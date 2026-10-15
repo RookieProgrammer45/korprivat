@@ -93,10 +93,7 @@ export async function createConnectAccount(orgId: string): Promise<{ accountId: 
     return { accountId: account.id };
   } catch (err) {
     // Unique on stripeAccountId — another writer claimed this account id (rare).
-    if (
-      err instanceof Prisma.PrismaClientKnownRequestError &&
-      err.code === 'P2002'
-    ) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
       const winner = await requireOrg(orgId);
       if (winner.stripeAccountId) {
         return { accountId: winner.stripeAccountId };
@@ -266,11 +263,14 @@ export async function createInstructorConnectAccount(
     if (claimed.count === 0) {
       const winner = await requireInstructor(instructorId);
       if (winner.stripeAccountId) {
-        console.warn('[connect] race: Express account orphaned after concurrent instructor create', {
-          instructorId,
-          orphanedAccountId: account.id,
-          keptAccountId: winner.stripeAccountId,
-        });
+        console.warn(
+          '[connect] race: Express account orphaned after concurrent instructor create',
+          {
+            instructorId,
+            orphanedAccountId: account.id,
+            keptAccountId: winner.stripeAccountId,
+          },
+        );
         return { accountId: winner.stripeAccountId };
       }
       throw new Error('connect_instructor_account_claim_failed');
@@ -278,10 +278,7 @@ export async function createInstructorConnectAccount(
 
     return { accountId: account.id };
   } catch (err) {
-    if (
-      err instanceof Prisma.PrismaClientKnownRequestError &&
-      err.code === 'P2002'
-    ) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
       const winner = await requireInstructor(instructorId);
       if (winner.stripeAccountId) {
         return { accountId: winner.stripeAccountId };
@@ -345,9 +342,7 @@ export async function getInstructorConnectStatus(instructorId: string): Promise<
   };
 }
 
-export async function refreshInstructorConnectStatus(
-  instructorId: string,
-): Promise<ConnectStatus> {
+export async function refreshInstructorConnectStatus(instructorId: string): Promise<ConnectStatus> {
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new ConnectNotConfiguredError();
   }

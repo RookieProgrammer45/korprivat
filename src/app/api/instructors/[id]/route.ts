@@ -49,9 +49,7 @@ export async function GET(_req: Request, ctx: Ctx) {
   return NextResponse.json(
     InstructorItem.parse({
       ...toPublicInstructor(instructor, aggregate, slot?.startsAt.toISOString() ?? null),
-      affiliation: affiliation
-        ? { name: affiliation.name, slug: affiliation.slug }
-        : null,
+      affiliation: affiliation ? { name: affiliation.name, slug: affiliation.slug } : null,
     }),
   );
 }

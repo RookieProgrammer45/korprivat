@@ -182,8 +182,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
   });
 
   const learnerToken =
-    mark.learnerAccessToken ??
-    (learnerTokenAuthorized ? (suppliedToken ?? undefined) : undefined);
+    mark.learnerAccessToken ?? (learnerTokenAuthorized ? (suppliedToken ?? undefined) : undefined);
   const deliveryBooking = {
     id: booking.id,
     studentName: booking.studentName,

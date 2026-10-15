@@ -39,10 +39,7 @@ const INVITE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 /** Canonical Swedish org number: digits only (e.g. 5561234567). */
 export function normalizeOrganizationNumber(raw: string): string {
-  return raw
-    .trim()
-    .replace(/^SE/i, '')
-    .replace(/[\s-]/g, '');
+  return raw.trim().replace(/^SE/i, '').replace(/[\s-]/g, '');
 }
 
 export function slugify(baseName: string): string {
@@ -213,9 +210,7 @@ export async function updateOrganization(
     ...(data.contactEmail !== undefined
       ? { contactEmail: data.contactEmail?.trim().toLowerCase() || null }
       : {}),
-    ...(data.contactPhone !== undefined
-      ? { contactPhone: data.contactPhone?.trim() || null }
-      : {}),
+    ...(data.contactPhone !== undefined ? { contactPhone: data.contactPhone?.trim() || null } : {}),
   };
 
   try {
@@ -335,10 +330,9 @@ export async function inviteMember(
   return { invite, inviteToken };
 }
 
-export async function getInviteByToken(token: string): Promise<
-  | (MembershipInvite & { organization: Organization })
-  | null
-> {
+export async function getInviteByToken(
+  token: string,
+): Promise<(MembershipInvite & { organization: Organization }) | null> {
   return prisma.membershipInvite.findUnique({
     where: { token },
     include: { organization: true },
@@ -400,10 +394,7 @@ export async function acceptInviteByToken(
   return { organizationId: invite.organizationId };
 }
 
-export async function revokeMembership(
-  membershipId: string,
-  actorId: string,
-): Promise<Membership> {
+export async function revokeMembership(membershipId: string, actorId: string): Promise<Membership> {
   const membership = await prisma.membership.findUnique({ where: { id: membershipId } });
   if (!membership) throw new OrgNotFoundError();
   await requireOwnerMembership(membership.organizationId, actorId);

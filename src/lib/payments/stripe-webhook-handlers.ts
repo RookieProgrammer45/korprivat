@@ -2,11 +2,11 @@
 // Keep each handler idempotent against booking / connect state.
 
 import 'server-only';
+import type Stripe from 'stripe';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { notificationEmail } from '@/lib/email/templates';
 import { OWNER_EMAIL } from '@/lib/ownership';
-import type Stripe from 'stripe';
 
 function alertRecipient(): string {
   return (
@@ -61,9 +61,7 @@ export async function handleChargeDisputeCreated(dispute: Stripe.Dispute): Promi
   const metaBookingId = dispute.metadata?.bookingId;
   const target =
     booking ??
-    (metaBookingId
-      ? await prisma.booking.findUnique({ where: { id: metaBookingId } })
-      : null);
+    (metaBookingId ? await prisma.booking.findUnique({ where: { id: metaBookingId } }) : null);
 
   if (!target) {
     await alertOps('Stripe dispute with unmatched booking', [
@@ -77,7 +75,9 @@ export async function handleChargeDisputeCreated(dispute: Stripe.Dispute): Promi
   await prisma.booking.updateMany({
     where: {
       id: target.id,
-      paymentStatus: { in: ['held_escrow', 'awaiting_buyer_confirmation', 'release_ready', 'released'] },
+      paymentStatus: {
+        in: ['held_escrow', 'awaiting_buyer_confirmation', 'release_ready', 'released'],
+      },
     },
     data: {
       paymentStatus: 'disputed',

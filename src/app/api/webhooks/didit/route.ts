@@ -2,29 +2,23 @@
 
 import 'server-only';
 import crypto from 'node:crypto';
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import {
   alertDiditWebhook,
   DiditWebhookParseError,
+  type ParsedDiditWebhook,
   parseDiditWebhook,
   verifyDiditRequest,
-  type ParsedDiditWebhook,
 } from '@/lib/verification/didit';
-import {
-  type LearnerVerificationState,
-  resolveLearnerState,
-} from '@/lib/verification/state';
+import { type LearnerVerificationState, resolveLearnerState } from '@/lib/verification/state';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /** Session webhook families that can drive the learner age-gate writer. */
-const LEARNER_SESSION_WEBHOOK_TYPES = new Set([
-  'status.updated',
-  'data.updated',
-]);
+const LEARNER_SESSION_WEBHOOK_TYPES = new Set(['status.updated', 'data.updated']);
 
 function isLearnerState(value: string): value is LearnerVerificationState {
   return (
@@ -40,10 +34,7 @@ function isLearnerState(value: string): value is LearnerVerificationState {
   );
 }
 
-function claimedVerifiedMismatchYears(
-  claimed: Date | null,
-  verified: Date | null,
-): number | null {
+function claimedVerifiedMismatchYears(claimed: Date | null, verified: Date | null): number | null {
   if (!claimed || !verified) return null;
   const ms = Math.abs(claimed.getTime() - verified.getTime());
   return ms / (365.25 * 24 * 60 * 60 * 1000);
@@ -192,9 +183,7 @@ export async function POST(req: Request) {
     parsed.decision === 'declined' ||
     parsed.decision === 'expired' ||
     parsed.decision === 'abandoned';
-  const nextAttempts = isFailedAttempt
-    ? profile.diditAttempts + 1
-    : profile.diditAttempts;
+  const nextAttempts = isFailedAttempt ? profile.diditAttempts + 1 : profile.diditAttempts;
 
   const currentState = isLearnerState(profile.verificationState)
     ? profile.verificationState
@@ -217,10 +206,7 @@ export async function POST(req: Request) {
   });
 
   // §8 — claimed vs verified mismatch > 1 year → flag for review.
-  const mismatchYears = claimedVerifiedMismatchYears(
-    profile.dateOfBirth,
-    parsed.verifiedDob,
-  );
+  const mismatchYears = claimedVerifiedMismatchYears(profile.dateOfBirth, parsed.verifiedDob);
   if (
     parsed.decision === 'approved' &&
     mismatchYears !== null &&
@@ -235,9 +221,7 @@ export async function POST(req: Request) {
     await tx.userProfile.update({
       where: { userId },
       data: {
-        ...(parsed.decision === 'approved' &&
-        parsed.decisionTrusted &&
-        parsed.verifiedDob
+        ...(parsed.decision === 'approved' && parsed.decisionTrusted && parsed.verifiedDob
           ? { dateOfBirthVerified: parsed.verifiedDob }
           : {}),
         verificationState: nextState,

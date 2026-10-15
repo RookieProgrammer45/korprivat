@@ -3,10 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api-client';
-import {
-  type InstructorFilteredItem,
-  InstructorList,
-} from '@/lib/contracts/instructors';
+import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
 
 /**
  * The live profile deck used on the auth shell (signup/login).
@@ -98,9 +95,7 @@ export function LiveAuthDeck() {
         const withoutPhoto = data.items.filter(
           (row) => !(row.photoUrl ?? '').startsWith('/assets/profiles/'),
         );
-        const rows = [...withPhoto, ...withoutPhoto]
-          .slice(0, MAX_DECK_PROFILES)
-          .map(toDeckProfile);
+        const rows = [...withPhoto, ...withoutPhoto].slice(0, MAX_DECK_PROFILES).map(toDeckProfile);
         if (rows.length > 0) {
           setProfiles(rows);
           setActive(0);
@@ -223,10 +218,11 @@ export function LiveAuthDeck() {
           />
         ))}
       </div>
-      <p className="dlu-count">
-        {count} profiler i rotation
+      <p className="dlu-count">{count} profiler i rotation</p>
+      <p className="dlu-free">
+        <i aria-hidden />
+        Kostnadsfritt för elever
       </p>
-      <p className="dlu-free"><i aria-hidden />Kostnadsfritt för elever</p>
     </div>
   );
 }

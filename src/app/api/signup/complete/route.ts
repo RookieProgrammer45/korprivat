@@ -6,10 +6,7 @@ import { SignupComplete, SignupCompleteResponse } from '@/lib/contracts/signup';
 import { prisma } from '@/lib/db';
 import { completeSignupHandshake } from '@/lib/email/onboarding';
 import { requireAuth } from '@/lib/require-auth';
-import {
-  ensureSchoolSignupComplete,
-  resolveStoredLearnerState,
-} from '@/lib/signup-resume';
+import { ensureSchoolSignupComplete, resolveStoredLearnerState } from '@/lib/signup-resume';
 import { stateToRoute } from '@/lib/verification/state';
 
 export const dynamic = 'force-dynamic';
@@ -115,8 +112,7 @@ export async function POST(req: Request) {
   // over the Didit soft-gate so demand-side auth does not drop context.
   const destination =
     role === 'STUDENT'
-      ? (parsed.data.next ??
-        stateToRoute(resolveStoredLearnerState(profile?.dateOfBirth ?? null)))
+      ? (parsed.data.next ?? stateToRoute(resolveStoredLearnerState(profile?.dateOfBirth ?? null)))
       : (parsed.data.next ?? result.dashboardPath);
   return NextResponse.json(
     SignupCompleteResponse.parse({ ok: true, next: destination, to: destination }),

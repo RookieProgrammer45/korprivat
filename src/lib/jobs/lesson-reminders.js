@@ -160,7 +160,9 @@ async function main() {
       bookingId: booking.id,
     });
 
-    const tasks = [sendViaResend(booking.studentEmail, studentContent.subject, studentContent.text)];
+    const tasks = [
+      sendViaResend(booking.studentEmail, studentContent.subject, studentContent.text),
+    ];
 
     let instructorContent = null;
     if (instructor.email) {
@@ -172,7 +174,9 @@ async function main() {
         lessonCity,
         bookingId: booking.id,
       });
-      tasks.push(sendViaResend(instructor.email, instructorContent.subject, instructorContent.text));
+      tasks.push(
+        sendViaResend(instructor.email, instructorContent.subject, instructorContent.text),
+      );
     }
 
     const results = await Promise.allSettled(tasks);

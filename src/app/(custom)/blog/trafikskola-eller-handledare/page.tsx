@@ -42,9 +42,9 @@ export default function TrafikskolaEllerHandledarePage() {
           bokningsflöde.
         </p>
         <p>
-          <strong>Handledare:</strong> för privat övningskörning — särskilt relevant för 16–17-åringar
-          som behöver godkänt handledarskap innan de kan boka på DriveLinkUp. Det är inte samma sak
-          som en skolannons.
+          <strong>Handledare:</strong> för privat övningskörning — särskilt relevant för
+          16–17-åringar som behöver godkänt handledarskap innan de kan boka på DriveLinkUp. Det är
+          inte samma sak som en skolannons.
         </p>
         <p>
           Läs den juridiska översikten på{' '}

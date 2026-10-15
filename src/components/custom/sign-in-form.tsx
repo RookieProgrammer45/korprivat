@@ -64,61 +64,61 @@ export function SignInForm({ next }: { next?: string }) {
           <FormField
             control={form.control}
             name="email"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('fields.emailLabel')}</FormLabel>
-              <FormControl>
-                <Input
-                  type="email"
-                  autoComplete="email"
-                  className="auth-input h-12"
-                  placeholder={t('fields.emailPlaceholder')}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex items-center justify-between gap-3">
-                <FormLabel>{t('fields.passwordLabel')}</FormLabel>
-                <Link
-                  href="/forgot-password"
-                  className="text-caption font-medium text-brand-600 underline-offset-2 hover:underline dark:text-brand-400"
-                >
-                  {t('forgotPassword')}
-                </Link>
-              </div>
-              <FormControl>
-                <Input
-                  type="password"
-                  autoComplete="current-password"
-                  className="auth-input h-12"
-                  placeholder={t('fields.passwordPlaceholder')}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitting}
-          className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
-        >
-          {form.formState.isSubmitting ? t('submitting') : t('submit')}
-        </Button>
-      </form>
-    </Form>
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('fields.emailLabel')}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    className="auth-input h-12"
+                    placeholder={t('fields.emailPlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex items-center justify-between gap-3">
+                  <FormLabel>{t('fields.passwordLabel')}</FormLabel>
+                  <Link
+                    href="/forgot-password"
+                    className="text-caption font-medium text-brand-600 underline-offset-2 hover:underline dark:text-brand-400"
+                  >
+                    {t('forgotPassword')}
+                  </Link>
+                </div>
+                <FormControl>
+                  <Input
+                    type="password"
+                    autoComplete="current-password"
+                    className="auth-input h-12"
+                    placeholder={t('fields.passwordPlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            size="lg"
+            disabled={form.formState.isSubmitting}
+            className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
+          >
+            {form.formState.isSubmitting ? t('submitting') : t('submit')}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }

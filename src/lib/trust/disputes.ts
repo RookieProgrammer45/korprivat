@@ -9,10 +9,10 @@
  * Partial refund 200 to learner → transfer min(payoutSnapshot, gross - refund - platformKeep)
  * Simplest v1: transfer = max(0, payoutAmountSek - refundSek).
  */
-export function partialPayoutAfterRefund(input: {
-  payoutAmountSek: number;
+export function partialPayoutAfterRefund(input: { payoutAmountSek: number; refundSek: number }): {
+  transferSek: number;
   refundSek: number;
-}): { transferSek: number; refundSek: number } {
+} {
   const refundSek = Math.max(0, Math.round(input.refundSek));
   const payoutAmountSek = Math.max(0, Math.round(input.payoutAmountSek));
   return {

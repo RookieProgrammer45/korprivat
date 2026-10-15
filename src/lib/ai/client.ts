@@ -35,9 +35,7 @@ export interface ChatOptions {
 function openaiClient(): OpenAI {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    throw new AiConfigurationError(
-      'OPENAI_API_KEY is missing. Set it in .env.local / Vercel env.',
-    );
+    throw new AiConfigurationError('OPENAI_API_KEY is missing. Set it in .env.local / Vercel env.');
   }
   return new OpenAI({
     apiKey,

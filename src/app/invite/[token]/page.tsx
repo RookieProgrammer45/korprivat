@@ -14,11 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function InviteAcceptPage({
-  params,
-}: {
-  params: Promise<{ token: string }>;
-}) {
+export default async function InviteAcceptPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
   const t = await getTranslations('inviteAccept');
   const invite = await getInviteByToken(token);
@@ -79,9 +75,7 @@ export default async function InviteAcceptPage({
     return (
       <main className="mx-auto grid min-h-[60vh] max-w-lg content-center gap-4 px-4 py-16">
         <h1 className="font-display text-h2 text-foreground">{t('title')}</h1>
-        <p className="text-body text-destructive">
-          {t('wrongEmail', { email: invite.email })}
-        </p>
+        <p className="text-body text-destructive">{t('wrongEmail', { email: invite.email })}</p>
       </main>
     );
   }

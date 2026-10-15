@@ -41,6 +41,7 @@ import {
   resetPrisma,
   TEST_LEARNER_ACCESS_TOKEN,
 } from './_setup/prisma-mock';
+
 const createCheckoutSession = vi.fn();
 const retrieveCheckoutSession = vi.fn();
 
@@ -81,10 +82,10 @@ vi.mock('stripe', () => {
 });
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { POST as checkoutPOST } from '@/app/api/checkout/route';
-import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
 import { POST as disputeResolvePOST } from '@/app/api/bookings/[id]/dispute/resolve/route';
 import { POST as disputePOST } from '@/app/api/bookings/[id]/dispute/route';
+import { GET as paymentPollGET } from '@/app/api/bookings/[id]/payment-poll/route';
+import { POST as checkoutPOST } from '@/app/api/checkout/route';
 
 import { authMock } from './_setup/auth-mock';
 import { resetEmailMock, sendEmailMock } from './_setup/email-mock';

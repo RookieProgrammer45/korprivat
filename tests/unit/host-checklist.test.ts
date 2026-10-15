@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  isHostSetupComplete,
-  pickHostChecklistAction,
-} from '@/lib/business/host-checklist';
+import { isHostSetupComplete, pickHostChecklistAction } from '@/lib/business/host-checklist';
 
 describe('pickHostChecklistAction', () => {
   it('prioritises licence then listing then connect then availability', () => {

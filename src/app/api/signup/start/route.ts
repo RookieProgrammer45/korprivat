@@ -95,7 +95,5 @@ export async function POST(req: Request) {
     create: { userId: user.id, signupRole: role, signupStartedAt: startedAt },
     update: { signupRole: role, signupStartedAt: startedAt },
   });
-  return NextResponse.json(
-    SignupStartResponse.parse({ role, startedAt: startedAt.toISOString() }),
-  );
+  return NextResponse.json(SignupStartResponse.parse({ role, startedAt: startedAt.toISOString() }));
 }

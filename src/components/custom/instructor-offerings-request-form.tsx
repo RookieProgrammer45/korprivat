@@ -1,10 +1,10 @@
 'use client';
+import { useLocale, useTranslations } from 'next-intl';
 //
 // Learner "request to book" form for one offering. Opens inline under the
 // offering row on the public profile; submits to the public requests route
 // and surfaces server field errors under the matching inputs.
 import type { FormEvent } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -12,10 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { apiFetch } from '@/lib/api-client';
-import {
-  OfferingRequestCreated,
-  type PublicOffering,
-} from '@/lib/contracts/offerings';
+import { OfferingRequestCreated, type PublicOffering } from '@/lib/contracts/offerings';
 
 type FormState = {
   studentName: string;
@@ -58,22 +55,19 @@ export function InstructorOfferingsRequestForm({
     setSubmitting(true);
     setFieldErrors({});
     try {
-      await apiFetch(
-        `/api/instructors/${encodeURIComponent(instructorId)}/offerings/requests`,
-        {
-          method: 'POST',
-          schema: OfferingRequestCreated,
-          body: JSON.stringify({
-            offeringId: offering.id,
-            studentName: form.studentName,
-            studentEmail: form.studentEmail,
-            studentPhone: form.studentPhone,
-            preferredStart: form.preferredStart || undefined,
-            message: form.message || undefined,
-            locale: locale === 'en' ? 'en' : 'sv',
-          }),
-        },
-      );
+      await apiFetch(`/api/instructors/${encodeURIComponent(instructorId)}/offerings/requests`, {
+        method: 'POST',
+        schema: OfferingRequestCreated,
+        body: JSON.stringify({
+          offeringId: offering.id,
+          studentName: form.studentName,
+          studentEmail: form.studentEmail,
+          studentPhone: form.studentPhone,
+          preferredStart: form.preferredStart || undefined,
+          message: form.message || undefined,
+          locale: locale === 'en' ? 'en' : 'sv',
+        }),
+      });
       toast.success(tr('success'));
       setForm(EMPTY_FORM);
       onDone();
@@ -95,7 +89,9 @@ export function InstructorOfferingsRequestForm({
       onSubmit={submit}
       className="grid min-w-0 gap-3 rounded-lg border border-border bg-muted/40 p-4"
     >
-      <p className="text-small font-medium text-foreground">{tr('title', { name: offering.name })}</p>
+      <p className="text-small font-medium text-foreground">
+        {tr('title', { name: offering.name })}
+      </p>
       <div className="grid min-w-0 gap-3 sm:grid-cols-2">
         <div className="grid min-w-0 gap-1.5">
           <Label htmlFor={`offering-name-${offering.id}`}>{tr('nameLabel')}</Label>

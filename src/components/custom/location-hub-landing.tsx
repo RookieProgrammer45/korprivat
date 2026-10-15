@@ -4,13 +4,13 @@ import { getTranslations } from 'next-intl/server';
 import { LocationDirectory } from '@/components/custom/location-directory';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import {
-  type NordicLocation,
-  NORDIC_COUNTRY_META,
   countryPath,
   displayName,
   listCitiesInRegion,
   listRegions,
   locationPath,
+  NORDIC_COUNTRY_META,
+  type NordicLocation,
 } from '@/lib/seo/nordic-locations';
 import { siteName, siteUrl } from '@/lib/site';
 
@@ -119,9 +119,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
     <>
       <main className="directory-shell container-page min-h-[calc(100dvh-3.5rem)] min-w-0">
         <header className="mx-auto flex w-full max-w-6xl flex-col gap-3">
-          <p className="text-eyebrow">
-            {t('eyebrow', { country: country.nameLocal })}
-          </p>
+          <p className="text-eyebrow">{t('eyebrow', { country: country.nameLocal })}</p>
           <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
             {t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name })}
           </h1>
@@ -135,10 +133,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
               {t('breadcrumbLocations')}
             </Link>
             {' / '}
-            <Link
-              className="underline underline-offset-4"
-              href={countryPath(location.country)}
-            >
+            <Link className="underline underline-offset-4" href={countryPath(location.country)}>
               {country.nameLocal}
             </Link>
           </p>

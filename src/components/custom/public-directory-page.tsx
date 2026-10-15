@@ -11,13 +11,7 @@ import { InstructorDirectory } from '@/components/custom/instructor-directory';
 import { Button } from '@/components/ui/button';
 import type { CityHubKey } from '@/lib/seo/city-hubs';
 
-export function PublicDirectoryPage({
-  city,
-  cityName,
-}: {
-  city?: CityHubKey;
-  cityName?: string;
-}) {
+export function PublicDirectoryPage({ city, cityName }: { city?: CityHubKey; cityName?: string }) {
   const t = useTranslations('instructorsPage');
   const prefix = city ? `${city}City.header` : 'header';
   const title = t(`${prefix}.title`);

@@ -44,9 +44,7 @@ export async function buildVerifiedProviderActivationWhere(): Promise<Prisma.Ins
       {
         OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
       },
-      verifiedUserIds.length > 0
-        ? { userId: { in: verifiedUserIds } }
-        : { id: { in: [] } },
+      verifiedUserIds.length > 0 ? { userId: { in: verifiedUserIds } } : { id: { in: [] } },
     ],
   };
 }

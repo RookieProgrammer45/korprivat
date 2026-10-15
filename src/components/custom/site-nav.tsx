@@ -1,4 +1,3 @@
-
 'use client';
 
 import { ChevronDown, Menu } from 'lucide-react';
@@ -183,8 +182,7 @@ export function SiteNav() {
                 size="sm"
                 className={cn(
                   'nav-link rounded-full text-foreground hover:bg-muted/70 hover:text-foreground',
-                  isActive(slot.item.href) &&
-                    'bg-muted text-foreground',
+                  isActive(slot.item.href) && 'bg-muted text-foreground',
                 )}
               >
                 <Link
@@ -202,8 +200,7 @@ export function SiteNav() {
                     size="sm"
                     className={cn(
                       'nav-link rounded-full text-foreground hover:bg-muted/70 hover:text-foreground',
-                      isSlotActive(slot) &&
-                        'bg-muted text-foreground',
+                      isSlotActive(slot) && 'bg-muted text-foreground',
                     )}
                   >
                     {tNav(slot.labelKey)}
@@ -235,8 +232,7 @@ export function SiteNav() {
                   size="sm"
                   className={cn(
                     'nav-link rounded-full text-foreground hover:bg-muted/70 hover:text-foreground',
-                    overflow.some(isSlotActive) &&
-                      'bg-muted text-foreground',
+                    overflow.some(isSlotActive) && 'bg-muted text-foreground',
                   )}
                 >
                   {tNav('nav.more')}
@@ -283,7 +279,6 @@ export function SiteNav() {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
-
         </div>
 
         {/* Right cluster: ml-auto pushes it right at every breakpoint */}
@@ -346,8 +341,7 @@ export function SiteNav() {
                         variant="ghost"
                         className={cn(
                           'w-full justify-start',
-                          isActive(slot.item.href) &&
-                            'bg-muted text-foreground',
+                          isActive(slot.item.href) && 'bg-muted text-foreground',
                         )}
                       >
                         <Link
@@ -370,8 +364,7 @@ export function SiteNav() {
                             variant="ghost"
                             className={cn(
                               'w-full justify-start pl-6',
-                              isActive(item.href) &&
-                                'bg-muted text-foreground',
+                              isActive(item.href) && 'bg-muted text-foreground',
                             )}
                           >
                             <Link
