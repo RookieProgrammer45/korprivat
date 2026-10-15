@@ -17,7 +17,6 @@ import { signIn } from '@/lib/auth-client';
 function GoogleMark({ className }: { className?: string }) {
   return (
     <svg
-      aria-hidden="true"
       className={className}
       viewBox="0 0 24 24"
       width="18"

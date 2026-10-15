@@ -138,6 +138,7 @@ export function LiveAuthDeck() {
 
   return (
     <div className="live-auth-deck">
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: dekorativ hover-paus for kortspel - grafik, ej interaktiv kontroll */}
       <div
         className="dlu-deck dlu-deck-live"
         onMouseEnter={() => setPaused(true)}

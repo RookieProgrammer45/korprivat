@@ -818,7 +818,7 @@ export function BookingForm({
             </div>
 
             {slots.kind === 'empty' ? (
-              {/* biome-ignore lint/a11y/useSemanticElements: status-text i grid-layout - role=status avsiktlig */}
+              // biome-ignore lint/a11y/useSemanticElements: status-text i grid-layout - role=status avsiktlig
               <div className="grid gap-1.5 rounded-md border border-border bg-muted p-3" role="status">
                 <p className="text-small font-medium text-foreground">
                   {t('slots.noSlotsAvailable')}
