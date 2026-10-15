@@ -41,7 +41,7 @@ export default function OpengraphImage() {
           marginBottom: 40,
         }}
       >
-        <svg width="104" height="104" viewBox="-24 -24 48 48">
+        <svg aria-hidden="true" width="104" height="104" viewBox="-24 -24 48 48">
           <g transform="rotate(-45)" fill="#0E7C7B">
             <path fillRule="evenodd" d={LINK_D} />
           </g>

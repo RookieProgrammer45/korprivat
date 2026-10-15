@@ -65,10 +65,6 @@ export async function createBookingCheckoutSession(input: {
   }
 
   const appUrl = resolveOrigin(input.req).replace(/\/+$/, '');
-  const detailPath = `/bookings/${encodeURIComponent(booking.id)}${
-    input.accessToken ? `?token=${encodeURIComponent(input.accessToken)}` : ''
-  }`;
-
   const stripe = getStripe();
   const session = await stripe.checkout.sessions.create(
     {

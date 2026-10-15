@@ -66,7 +66,6 @@ export function ProfileDetailsStep({
   stepCurrent,
   stepTotal,
   learnerPhoto,
-  photoRequired = false,
   maxBytes,
   onBack,
   onContinue,

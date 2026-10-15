@@ -1830,6 +1830,7 @@ html .marketplace-hero-title {
   font-weight: 400;
 }
 
+/* biome-ignore lint/style/noDescendingSpecificity: legacy-brand CSS - omordning riskerar rendering */
 html b,
 html strong,
 .font-semibold.font-semibold,

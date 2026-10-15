@@ -31,6 +31,7 @@ export function ManualReviewTable() {
     }
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: mount-only load - load ar komponentfunktion, dep skulle trigga omkörning varje render
   useEffect(() => {
     void load();
   }, []);

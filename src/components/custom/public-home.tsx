@@ -238,6 +238,7 @@ export function PublicHome() {
           <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
             <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden bg-white lg:block dark:bg-black">
               <p className="dlu-tag">{t('hero.marketplaceTag')}</p>
+              {/* biome-ignore lint/a11y/noStaticElementInteractions: dekorativ hover-paus for kortspel - grafik, ej interaktiv kontroll */}
               <div
                 className="dlu-deck"
                 onMouseEnter={() => setPaused(true)}

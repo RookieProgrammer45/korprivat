@@ -13,10 +13,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { registerKnownContact } from '@/lib/business/escrow';
 import { haversineKm, resolveInstructorCoords } from '@/lib/business/geo';
 import { confirmedPhotoUrl } from '@/lib/business/photo-verification';
-import {
-  buildProviderActivationWhere,
-  buildVerifiedProviderActivationWhere,
-} from '@/lib/business/provider-activation';
+import { buildVerifiedProviderActivationWhere } from '@/lib/business/provider-activation';
 import { providerTimezoneForCity } from '@/lib/business/provider-timezone';
 import {
   hasCanonicalCategory,

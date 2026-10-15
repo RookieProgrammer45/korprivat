@@ -17,6 +17,7 @@ import { signIn } from '@/lib/auth-client';
 function GoogleMark({ className }: { className?: string }) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       viewBox="0 0 24 24"
       width="18"
@@ -100,6 +101,9 @@ export function SocialAuthButtons({
         <GoogleMark className="shrink-0" />
         {t('social.google')}
       </button>
+      {/* biome-ignore lint/a11y/useFocusableInteractive: dekorativ avdelare - ej interaktiv per design */}
+      {/* biome-ignore lint/a11y/useSemanticElements: innehaller text-span, hr kan inte vara foralder */}
+      {/* biome-ignore lint/a11y/useAriaPropsForRole: aria-label avsiktlig for skarmlass */}
       <div className="flex items-center gap-3" role="separator" aria-label={t('divider.or')}>
         <span className="h-px flex-1 bg-border" />
         <span className="text-caption uppercase tracking-wide text-muted-foreground">
