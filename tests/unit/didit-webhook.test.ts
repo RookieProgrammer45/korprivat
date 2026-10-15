@@ -301,7 +301,7 @@ describe('POST /api/webhooks/didit', () => {
     expect(await res.json()).toEqual({ ok: true, state: 'ACTIVE' });
 
     expect(mockUserProfileUpdate).toHaveBeenCalledOnce();
-    const update = mockUserProfileUpdate.mock.calls[0]![0] as {
+    const update = mockUserProfileUpdate.mock.calls[0]?.[0] as {
       data: { verificationState: string; dateOfBirthVerified: Date };
     };
     expect(update.data.verificationState).toBe('ACTIVE');
@@ -339,7 +339,7 @@ describe('POST /api/webhooks/didit', () => {
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({ ok: true, state: 'DIDIT_FAILED' });
 
-    const update = mockUserProfileUpdate.mock.calls[0]![0] as {
+    const update = mockUserProfileUpdate.mock.calls[0]?.[0] as {
       data: { diditAttempts: number; verificationState: string };
     };
     expect(update.data.diditAttempts).toBe(2);
@@ -386,7 +386,7 @@ describe('POST /api/webhooks/didit', () => {
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({ ok: true, state: 'ACTIVE' });
 
-    const update = mockUserProfileUpdate.mock.calls[0]![0] as {
+    const update = mockUserProfileUpdate.mock.calls[0]?.[0] as {
       data: { verificationState: string; dateOfBirthVerified?: Date };
     };
     expect(update.data.verificationState).toBe('ACTIVE');
