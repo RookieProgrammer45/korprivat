@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { PublicDirectoryPage } from '@/components/custom/public-directory-page';
+import { PublicDirectorySeo } from '@/components/custom/public-directory-seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,5 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function InstructorsPage() {
-  return <PublicDirectoryPage />;
+  return (
+    <PublicDirectoryPage>
+      <PublicDirectorySeo />
+    </PublicDirectoryPage>
+  );
 }

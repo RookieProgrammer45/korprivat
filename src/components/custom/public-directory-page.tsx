@@ -1,17 +1,27 @@
 //
 // The directory itself owns all filtering and data fetching. This wrapper only
 // provides the learner-oriented heading and, for city routes, the initial city
-// filter.
+// filter. Server-rendered children (e.g. the crawlable PublicDirectorySeo
+// index) render inside <main> below the interactive directory.
 
 'use client';
 
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { InstructorDirectory } from '@/components/custom/instructor-directory';
 import { Button } from '@/components/ui/button';
 import type { CityHubKey } from '@/lib/seo/city-hubs';
 
-export function PublicDirectoryPage({ city, cityName }: { city?: CityHubKey; cityName?: string }) {
+export function PublicDirectoryPage({
+  city,
+  cityName,
+  children,
+}: {
+  city?: CityHubKey;
+  cityName?: string;
+  children?: ReactNode;
+}) {
   const t = useTranslations('instructorsPage');
   const prefix = city ? `${city}City.header` : 'header';
   const title = t(`${prefix}.title`);
@@ -32,6 +42,7 @@ export function PublicDirectoryPage({ city, cityName }: { city?: CityHubKey; cit
         ) : null}
       </header>
       <InstructorDirectory initialFilters={cityName ? { city: cityName } : undefined} />
+      {children}
     </main>
   );
 }
