@@ -18,9 +18,11 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Auto-fix biome issues (format + organizeImports)
-        run: npx biome check --write
-      - name: Verify remaining diagnostics
-        run: npx biome check
+        run: npx biome check --write --max-diagnostics=200
+      - name: List remaining errors (full)
+        run: npx biome check --max-diagnostics=200 --diagnostic-level=error || true
+      - name: Verify no errors remain
+        run: npx biome check --max-diagnostics=200 --diagnostic-level=error
       - name: Commit fixes
         run: |
           git config user.name "drivelinkup-ci"
