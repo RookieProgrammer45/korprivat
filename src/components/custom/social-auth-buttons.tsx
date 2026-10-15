@@ -21,7 +21,7 @@ function GoogleMark({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       width="18"
       height="18"
-      aria-hidden
+      aria-hidden="true"
       focusable="false"
     >
       <path

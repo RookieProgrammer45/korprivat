@@ -70,7 +70,7 @@ export default async function InstructorPage({ params, searchParams }: PageProps
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
   const jsonLd =
-    instructor && instructor.indexable
+    instructor?.indexable
       ? {
           '@context': 'https://schema.org',
           '@type': 'DrivingSchool',

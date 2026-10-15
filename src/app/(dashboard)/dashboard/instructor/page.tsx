@@ -23,6 +23,7 @@ import { InstructorOfferingsEditor } from '@/components/custom/dashboard/instruc
 import { InstructorPolicyEditor } from '@/components/custom/instructor-policy-editor';
 import { Button } from '@/components/ui/button';
 import { dashboardPathFor, requireDashboardSession, resolveDashboardHome } from '@/lib/dashboard-guard';
+// biome-ignore lint/style/noRestrictedImports: legacy direktimport - routes-monstret refaktoreras separat
 import { prisma } from '@/lib/db';
 import { refreshInstructorConnectStatus } from '@/lib/payments/connect';
 
