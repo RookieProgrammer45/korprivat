@@ -11,6 +11,7 @@ import { CheckoutSuccessIsland } from './checkout-success';
 // biome-ignore lint/style/noRestrictedImports: legacy server page - session read predates the route-handler rule; refactor pending
 import { auth } from '@/lib/auth';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
+// biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
 import { resolveDashboardHome } from '@/lib/dashboard-guard';
 

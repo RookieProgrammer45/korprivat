@@ -23,6 +23,7 @@ import {
   listOrgMembers,
 } from '@/lib/orgs/service';
 import { refreshConnectStatus } from '@/lib/payments/connect';
+// biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
 
 export async function generateMetadata(): Promise<Metadata> {
