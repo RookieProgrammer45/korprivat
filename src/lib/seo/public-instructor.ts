@@ -75,3 +75,30 @@ export async function listIndexableInstructorIds(limit = 500): Promise<string[]>
   });
   return rows.filter((r) => isProviderActivated(r.categories)).map((r) => r.id);
 }
+
+/** Full SEO rows for verified marketplace listings (crawlable directory index). */
+export async function listIndexableInstructors(limit = 200) {
+  const verified = await prisma.instructorLicense.findMany({
+    where: { status: 'VERIFIED' },
+    select: { userId: true },
+    take: limit,
+  });
+  if (verified.length === 0) return [];
+  const rows = await prisma.instructor.findMany({
+    where: {
+      userId: { in: verified.map((v) => v.userId) },
+      OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
+    },
+    select: {
+      id: true,
+      name: true,
+      city: true,
+      bio: true,
+      hourlyRateSek: true,
+      categories: true,
+    },
+    orderBy: { name: 'asc' },
+    take: limit,
+  });
+  return rows.filter((r) => isProviderActivated(r.categories));
+}

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       rate: instructor.hourlyRateSek,
     });
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: publicAlternates(path),
     robots: instructor.indexable ? { index: true, follow: true } : { index: false, follow: true },
