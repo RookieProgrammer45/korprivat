@@ -20,7 +20,7 @@ html.dark {
   --secondary: oklch(0.205 0.03 184);
   --secondary-foreground: var(--foreground);
   --muted: oklch(0.18 0.027 184);
-  --muted-foreground: oklch(0.65 0.02 184); /* match darker-gray token — Samuel 2026-10-15 */
+  --muted-foreground: oklch(0.72 0.025 184);
   --accent: oklch(0.205 0.03 184);
   --accent-foreground: var(--foreground);
   --border: oklch(0.72 0.06 184 / 0.19);
@@ -1128,7 +1128,7 @@ html:root {
   --background: #f4f2ed; /* bone */
   --foreground: #131312; /* ink */
   --muted: #eae7e0; /* bone-deep */
-  --muted-foreground: #565349; /* ink-soft, darker gray explanation text — Samuel 2026-10-15 */
+  --muted-foreground: #6b6862; /* ink-soft */
   --border: rgba(19, 19, 18, 0.09); /* line */
   --card: #ffffff;
   --dlu-green: #00a876;
@@ -1142,7 +1142,7 @@ html:root.dark {
   --background: #0b0b0a;
   --foreground: #f4f2ed;
   --muted: #1a1a18;
-  --muted-foreground: #8a877f; /* darker gray explanation text — Samuel 2026-10-15 */
+  --muted-foreground: #a6a39c;
   --border: rgba(244, 242, 237, 0.1);
   --card: #131312;
   --dlu-ink: #f4f2ed;
@@ -1972,13 +1972,6 @@ html .dlu-slot b {
   min-width: 5.5rem;
   max-width: 100%;
   text-align: center;
-  margin-left: 3.75rem; /* clears the 3rem avatar + gap on wrap */
-}
-
-@media (min-width: 480px) {
-  .marketplace-directory-card-header .marketplace-rate-badge {
-    margin-left: 0;
-  }
 }
 
 /* 19d. Booking availability box: single column on mobile so the value

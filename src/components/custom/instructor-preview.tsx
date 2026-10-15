@@ -109,7 +109,7 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
       <Card className="surface-card marketplace-preview-card lift h-full border-border bg-card transition-colors duration-200 group-hover:border-brand-500/40 group-hover:shadow-md">
         <CardContent className="flex h-full min-w-0 flex-col gap-4 p-5">
           <div className="marketplace-preview-card-header flex min-w-0 flex-wrap items-start justify-between gap-3">
-            <div className="flex min-w-0 flex-1 items-center gap-3">
+            <div className="flex min-w-0 flex-1 max-sm:flex-auto items-center gap-3">
               <Image
                 src={row.photoUrl}
                 alt={tr('portraitAlt', { name: row.name })}
