@@ -1830,7 +1830,7 @@
     "swedishAvailable": "Swedish",
     "profileCta": "View profile",
     "slotLabel": "Next available",
-    "slotLabelRelative": "Next available · {when}",
+    "slotLabelRelative": "{when}",
     "slotMonthDay": "{monthShort} {day}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",

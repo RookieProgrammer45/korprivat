@@ -263,7 +263,7 @@ export function PublicHome() {
                   <div className="dlu-row">
                     <span className="dlu-slot">
                       Nästa lediga tid
-                      <b>{front.nextSlot ?? 'Påförfrågan'}</b>
+                      <b>{front.nextSlot ?? 'På förfrågan'}</b>
                     </span>
                     <Link href={front.href} className="dlu-btn">
                       Boka
@@ -326,7 +326,7 @@ export function PublicHome() {
                 ))}
               </div>
               <p className="dlu-count">
-                {live ? `${count} profiler i rotation` : 'Alla profiler i rotation'}
+                {live ? `${count} profiler just nu` : 'Alla profiler just nu'}
               </p>
               <p className="dlu-arrow-note">jämför → boka → kör</p>
               <p className="dlu-free"><i aria-hidden />Kostnadsfritt för elever</p>

@@ -1,5 +1,4 @@
-
-import { DM_Sans, Syne } from 'next/font/google';
+import { Hanken_Grotesk, Syne } from 'next/font/google';
 
 export const displayFont = Syne({
   subsets: ['latin'],
@@ -7,7 +6,7 @@ export const displayFont = Syne({
   display: 'swap',
 });
 
-export const bodyFont = DM_Sans({
+export const bodyFont = Hanken_Grotesk({
   subsets: ['latin'],
   variable: '--font-body-face',
   display: 'swap',

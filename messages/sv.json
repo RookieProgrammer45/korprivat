@@ -1830,7 +1830,7 @@
     "swedishAvailable": "Svenska",
     "profileCta": "Visa profil",
     "slotLabel": "Nästa lediga tid",
-    "slotLabelRelative": "Nästa lediga tid · {when}",
+    "slotLabelRelative": "{when}",
     "slotMonthDay": "{day} {monthShort}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
@@ -2052,7 +2052,7 @@
     }
   },
   "consentBanner": {
-    "intro": "Vi använder nödvändiga cookies för att driva marknadsplatsen. Med ditt samtycke vill vi också sätta analyscookies för att förbättra den. Du kan ändra ditt val när som helst.",
+    "intro": "Vi använder cookies som krävs för att marknadsplatsen ska fungera. Med ditt samtycke använder vi även cookies för statistik, så vi vet vad vi kan förbättra. Du kan ändra ditt val när som helst.",
     "essentialLabel": "Nödvändiga",
     "essentialBody": "Autentisering, CSRF-skydd, språkinställning. Krävs — går inte att stänga av.",
     "analyticsLabel": "Analys",
@@ -2123,18 +2123,18 @@
   },
   "publicHome": {
     "hero": {
-      "eyebrow": "Skolor och instruktörer. Elever. En marknadsplats.",
-      "title": "Jämför trafikskolor och certifierade instruktörer. Boka med trygghet.",
-      "body": "DriveLinkUp kopplar ihop trafikskolor och certifierade instruktörer med elever. Upptäck efter kategori, stad, språk, publicerat pris och tillgänglighet — kostnadsfritt för elever.",
+      "eyebrow": "Trafikskolor och instruktörer — på ett ställe",
+      "title": "Jämför trafikskolor och instruktörer. Boka direkt.",
+      "body": "DriveLinkUp samlar behöriga trafikskolor och instruktörer på ett ställe. Jämför priser, språk och lediga tider — hos skolor nära dig.",
       "primaryCta": "Hitta lektioner",
       "instructorCta": "Jag är trafiklärare",
       "marketplaceTag": "Marknadsplats · Skolor & instruktörer",
       "schoolCta": "Jag driver trafikskola",
       "contactCta": "Starta en konversation",
       "assurance": {
-        "price": "Publicerat pris visas före kassan",
-        "safety": "Skolor och certifierade instruktörer",
-        "choice": "Ingen separat DriveLinkUp-avgift"
+        "price": "Priset syns innan du bokar",
+        "safety": "Avbokningsvillkoren visas i förväg",
+        "choice": "Kostnadsfritt för dig som elev"
       },
       "previewEyebrow": "Beslutet, samlat på ett ställe",
       "previewTitle": "Profil → tid → total",
@@ -2161,59 +2161,59 @@
     },
     "how": {
       "eyebrow": "Så fungerar det",
-      "title": "En kort väg till rätt trafikskola.",
-      "body": "Jämför det som spelar roll innan du bokar.",
+      "title": "Tre steg till rätt trafikskola.",
+      "body": "Från sökning till bokad lektion.",
       "steps": {
         "choose": {
           "title": "Välj vad du behöver",
-          "body": "Filtrera efter körkortskategori, stad, språk och högsta skolpris."
+          "body": "Filtrera på körkortskategori, stad, språk och pris."
         },
         "compare": {
           "title": "Jämför detaljerna",
-          "body": "Öppna en annons för att se skolans publicerade tillgänglighet, bokningsläge och avbokningspolicy."
+          "body": "Öppna en profil för att se priser, lediga tider och avbokningsvillkor."
         },
         "book": {
-          "title": "Boka med hela totalen",
-          "body": "Välj en ledig tid hos skolan, se det publicerade priset i SEK och fortsätt utan separat DriveLinkUp-avgift."
+          "title": "Boka din tid",
+          "body": "Välj en tid som passar. Hela priset syns före bokningen — du betalar aldrig något extra till DriveLinkUp."
         }
       }
     },
     "providers": {
-      "eyebrow": "Aktuella profiler",
-      "title": "Jämför skolor och instruktörer",
+      "eyebrow": "Just nu på marknadsplatsen",
+      "title": "Skolor och instruktörer",
       "cta": "Se alla profiler"
     },
     "assurance": {
       "eyebrow": "Innan du bokar",
-      "title": "De viktiga detaljerna är synliga.",
+      "title": "Inget gömt i småtexten.",
       "cards": {
         "price": {
-          "title": "Ett pris du kan förstå",
-          "body": "Skolans publicerade pris visas i SEK före kassan; DriveLinkUp lägger inte på någon separat elevavgift."
+          "title": "Priset du ser gäller",
+          "body": "Du ser skolans pris i kronor innan du bokar. DriveLinkUp lägger inte på några extra avgifter."
         },
         "safety": {
-          "title": "Veta vad du ska kontrollera",
-          "body": "Kontrollera skolans behörighet, lektionsupplägg och avbokningsvillkor före lektionen."
+          "title": "Behörighet — kontrollerad i förväg",
+          "body": "Trafikskolorna är auktoriserade och instruktörernas behörighet kontrolleras. Upplägg och villkor finns på varje profil."
         },
         "cancellation": {
-          "title": "Avbokningspolicy i förväg",
-          "body": "Flexibel, måttlig och strikt nivå visas före bokning, med alla återbetalnings- och avgiftsfönster tydligt angivna."
+          "title": "Avbokning utan överraskningar",
+          "body": "Varje profil visar om villkoren är flexibla, måttliga eller strikta — och vad en avbokning kostar."
         }
       }
     },
     "entry": {
       "eyebrow": "Redo för nästa steg?",
-      "title": "Börja från den sida av vägen där du är.",
-      "body": "Elever kan bläddra och boka. Trafikskolor och certifierade instruktörer kan publicera pris och tillgänglighet via onboarding.",
+      "title": "Hitta lektioner — eller lista din skola.",
+      "body": "Som elev jämför du och bokar direkt. Driver du skola eller ger lektioner? Listan är kostnadsfri — du styr själv över pris och tider.",
       "learnerCta": "Hitta lektioner",
       "providerCta": "Lista er profil"
     },
     "footer": {
-      "prompt": "Behöver du mer information?",
+      "prompt": "Behöver du veta mer?",
       "label": "Hjälplänkar",
-      "faq": "FAQ",
-      "privacy": "Integritet",
-      "contact": "Kontakta support"
+      "faq": "Vanliga frågor",
+      "privacy": "Integritetspolicy",
+      "contact": "Kontakta oss"
     }
   },
   "forSkolor": {
