@@ -1128,7 +1128,7 @@ html:root {
   --background: #f4f2ed; /* bone */
   --foreground: #131312; /* ink */
   --muted: #eae7e0; /* bone-deep */
-  --muted-foreground: #6b6862; /* ink-soft */
+  --muted-foreground: #565349; /* ink-soft, darker gray explanation text — Samuel 2026-10-15 */
   --border: rgba(19, 19, 18, 0.09); /* line */
   --card: #ffffff;
   --dlu-green: #00a876;
@@ -1142,7 +1142,7 @@ html:root.dark {
   --background: #0b0b0a;
   --foreground: #f4f2ed;
   --muted: #1a1a18;
-  --muted-foreground: #a6a39c;
+  --muted-foreground: #8a877f; /* darker gray explanation text — Samuel 2026-10-15 */
   --border: rgba(244, 242, 237, 0.1);
   --card: #131312;
   --dlu-ink: #f4f2ed;
