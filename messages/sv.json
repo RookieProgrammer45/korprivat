@@ -190,7 +190,7 @@
       },
       "price": {
         "q": "Vad betalar jag?",
-        "a": "Du ser trafikskolans publicerade lektionspris och totalen i SEK före kassan. Att upptäcka, jämföra och boka är kostnadsfritt för elever: DriveLinkUp lägger inte på någon separat avgift."
+        "a": "Du ser trafikskolans publicerade lektionspris och totalen i SEK före kassan. Att upptäcka, jämföra och boka är kostnadsfritt för elever — inga separata avgifter läggs på."
       },
       "safety": {
         "q": "Vilka trygghets- och behörighetskrav gäller?",
@@ -259,7 +259,7 @@
     "hero": {
       "eyebrow": "För trafikskolor och instruktörer",
       "title": "Nå fler elever — med priser och tider synliga.",
-      "body": "DriveLinkUp samlar trafikskolor och behöriga instruktörer på ett ställe. Lägg upp era lektioner, priser och tider — eleverna jämför och bokar direkt.",
+      "body": "Alla trafikskolor och behöriga instruktörer på ett ställe. Lägg upp era lektioner, priser och tider — eleverna jämför och bokar direkt.",
       "primaryCta": "Skapa din profil",
       "learnerCta": "Se elevvyn"
     },
@@ -282,7 +282,7 @@
     "header": {
       "eyebrow": "Marknadsplats för skolor och instruktörer",
       "title": "Skolor & instruktörer",
-      "subtitle": "Jämför annonser efter kategori, stad, språk, publicerat pris, tillgänglighet och bokningspolicy. Bokning har ingen separat DriveLinkUp-avgift."
+      "subtitle": "Jämför annonser efter kategori, stad, språk, publicerat pris, tillgänglighet och bokningspolicy. Bokning utan separata avgifter."
     },
     "directoryCta": "Se alla trafikskolor",
     "stockholmCity": {
@@ -300,7 +300,7 @@
       "slug": "stockholm",
       "seo": {
         "lead": "Boka en auktoriserad trafikskola i Stockholm",
-        "p1": "I Stockholm jämför du B-skolor efter publicerat lektionspris, engelska och lediga tider—och bokar utan separat DriveLinkUp-avgift. Endast verifierade behörigheter visas.",
+        "p1": "I Stockholm jämför du B-skolor efter publicerat lektionspris, engelska och lediga tider—och bokar utan separata avgifter. Endast verifierade behörigheter visas.",
         "p2": "Många kombinerar skollektioner med privat övningskörning. Är du 16–17 krävs godkänt handledarskap före bokning. Vuxna bokar efter ID-verifiering.",
         "howTitle": "Så fungerar bokning i Stockholm",
         "howBody": "Öppna en skolannons, välj tid, betala skolans publicerade pris till escrow, genomför lektionen och bekräfta så skolan får betalt. Avbokning följer skolans policy.",
@@ -311,7 +311,7 @@
         "linkBlog": "Guider för elever i Sverige",
         "faqTitle": "Vanliga frågor Stockholm",
         "faq1q": "Betalar elever en DriveLinkUp-avgift i Stockholm?",
-        "faq1a": "Nej. Du betalar skolans publicerade lektionspris. DriveLinkUp lägger inte på en separat elevavgift.",
+        "faq1a": "Nej. Du betalar skolans publicerade lektionspris — inga separata avgifter.",
         "faq2q": "Visas privata handledare som trafikskolor?",
         "faq2a": "Nej. Handledare är en separat juridisk väg för övningskörning. Skolannonser är auktoriserade trafikskolor.",
         "faq3q": "Kan jag boka som 16 eller 17 åring?",
@@ -453,7 +453,7 @@
       "seo": {
         "lead": "Auktoriserade lektioner i Västerås",
         "p1": "Annonser i Västerås visar kategori, språk, pris och bokningspolicy så du kan välja skola utan gissningar.",
-        "p2": "Kombinera skollektioner med privat övning bara när handledarreglerna är uppfyllda—DriveLinkUp håller vägarna åtskilda.",
+        "p2": "Kombinera skollektioner med privat övning bara när handledarreglerna är uppfyllda—de två vägarna hålls åtskilda.",
         "howTitle": "Så bokar du i Västerås",
         "howBody": "Jämför skolor, öppna profil, boka ledig tid till publicerat pris och bekräfta efter lektionen så utbetalning kan ske.",
         "relatedTitle": "Relaterade guider",
@@ -578,7 +578,7 @@
       "serviceArea": "Serviceområde",
       "rate": "Lektionspris",
       "fee": "Marknadsplatsavgift",
-      "feeValue": "Ingen separat DriveLinkUp-avgift; skolans pris visas före betalning",
+      "feeValue": "Inga separata avgifter; skolans pris visas före betalning",
       "rateValue": "{amount} / tim",
       "availability": "Tillgänglighet",
       "noAvailability": "Ingen kommande tid listad",
@@ -1235,17 +1235,18 @@
           "failed": "Vi kunde inte verifiera din legitimation. Försök igen."
         }
       }
-    }
+    },
+    "accountLeadLearner": "Hitta och boka lektioner hos trafikskolor och behöriga instruktörer."
   },
   "bookingFees": {
-    "serviceFeeLabel": "Ingen separat DriveLinkUp-avgift",
+    "serviceFeeLabel": "Ingen separat avgift",
     "commissionLabel": "Skolans provisionsinställning",
     "learnerBreakdown": {
       "eyebrow": "Ditt pris",
       "priceLine": "Lektionspris",
       "feeLine": "DriveLinkUp-avgift",
       "totalLine": "Skolans pris / elevens total",
-      "note": "DriveLinkUp lägger inte på någon separat elevavgift. Skolans publicerade pris är elevens total före kassan.",
+      "note": "Skolans publicerade pris är elevens total före kassan — inga separata avgifter läggs på.",
       "error": "Den aktuella totalen kunde inte laddas.",
       "retry": "Försök igen"
     },
@@ -1263,7 +1264,7 @@
     "payoutLine": "Skolan styr sitt publicerade pris och sin tillgänglighet; ingen provision tas före genomförd tjänst.",
     "exampleTitle": "Exempel vid 600 SEK/h",
     "exampleLine": "En genomförd bokning på {price} SEK → {fee} SEK provision och {payout} SEK kvar till skolan.",
-    "exampleLearnerLine": "Eleven betalar skolans publicerade pris {price} SEK; DriveLinkUp lägger inte på någon separat avgift.",
+    "exampleLearnerLine": "Eleven betalar skolans publicerade pris {price} SEK — inga separata avgifter.",
     "errorTitle": "Kunde inte ladda provisionsinformationen.",
     "retry": "Försök igen"
   },
@@ -1938,18 +1939,18 @@
       "released": "Genomförd",
       "refunded": "Återbetald",
       "awaitingApproval": "Väntar på godkännande",
-      "deleteAccount": {
-        "title": "Radera konto",
-        "body": "Raderar ditt konto, dina bokningar och all personlig data permanent. Du kan inte ångra detta.",
-        "cta": "Radera konto",
-        "dialogTitle": "Radera ditt konto?",
-        "dialogBody": "All din personliga data tas bort permanent: din profil, dina bokningar och dina listningar. Detta kan inte ångras.",
-        "confirm": "Radera permanent",
-        "cancel": "Avbryt",
-        "deleting": "Raderar…",
-        "done": "Ditt konto har raderats.",
-        "error": "Kunde inte radera kontot. Försök igen, eller mejla support@drivelinkup.com."
-      },
+    "deleteAccount": {
+      "title": "Radera konto",
+      "body": "Raderar ditt konto, dina bokningar och all personlig data permanent. Du kan inte ångra detta.",
+      "cta": "Radera konto",
+      "dialogTitle": "Radera ditt konto?",
+      "dialogBody": "All din personliga data tas bort permanent: din profil, dina bokningar och dina listningar. Detta kan inte ångras.",
+      "confirm": "Radera permanent",
+      "cancel": "Avbryt",
+      "deleting": "Raderar…",
+      "done": "Ditt konto har raderats.",
+      "error": "Kunde inte radera kontot. Försök igen, eller mejla support@drivelinkup.com."
+    },
       "declined": "Avböjd",
       "cancelled": "Avbokad"
     }
@@ -2135,9 +2136,9 @@
   },
   "publicHome": {
     "hero": {
-      "eyebrow": "Trafikskolor och instruktörer — på ett ställe",
+      "eyebrow": "En marknadsplats för körlektioner",
       "title": "Jämför trafikskolor och instruktörer. Boka direkt.",
-      "body": "DriveLinkUp samlar behöriga trafikskolor och instruktörer på ett ställe. Jämför priser, språk och lediga tider — hos skolor nära dig.",
+      "body": "Publicerade priser, språk och lediga tider — allt synligt innan du bokar.",
       "primaryCta": "Hitta lektioner",
       "instructorCta": "Jag är trafiklärare",
       "marketplaceTag": "Marknadsplats · Skolor & instruktörer",
@@ -2153,7 +2154,7 @@
       "imageAlt": "Illustration av en körlektion",
       "previewLines": {
         "profile": "Jämför kategori, språk och plats.",
-        "price": "Se skolans publicerade pris; ingen separat DriveLinkUp-avgift.",
+        "price": "Se skolans publicerade pris — inga tilläggsavgifter.",
         "time": "Välj en tid och se policyn före kassan."
       }
     },
@@ -2186,7 +2187,7 @@
         },
         "book": {
           "title": "Boka din tid",
-          "body": "Välj en tid som passar. Hela priset syns före bokningen — du betalar aldrig något extra till DriveLinkUp."
+          "body": "Välj en tid som passar. Hela priset syns före bokningen — du betalar aldrig mer än skolans pris."
         }
       }
     },
@@ -2201,7 +2202,7 @@
       "cards": {
         "price": {
           "title": "Priset du ser gäller",
-          "body": "Du ser skolans pris i kronor innan du bokar. DriveLinkUp lägger inte på några extra avgifter."
+          "body": "Du ser skolans pris i kronor innan du bokar — inga extra avgifter tillkommer."
         },
         "safety": {
           "title": "Behörighet — kontrollerad i förväg",
@@ -2237,7 +2238,7 @@
     "title": "Få fler elever med DriveLinkUp",
     "body": "Publicera skolans lektioner, priser och tillgänglighet så elever kan jämföra och boka med tydliga villkor. Ni behåller kontrollen över erbjudandet — vi tar hand om marknadsplatsen.",
     "benefit1": "Synlighet hos elever som aktivt söker lektioner i er stad.",
-    "benefit2": "Tydliga bokningar utan separat elevavgift på DriveLinkUp.",
+    "benefit2": "Tydliga bokningar utan separat elevavgift.",
     "benefit3": "Skolägare kan bjuda in instruktörer från dashboarden (kommer snart).",
     "ctaSignedOut": "Skapa skolkonto",
     "ctaSignIn": "Logga in",
@@ -2845,7 +2846,7 @@
       "title": "Auktoriserade trafikskolor i södra Sverige",
       "description": "Jämför auktoriserade trafikskolor i Skåne, Halland, Blekinge och Småland.",
       "ogTitle": "Hitta din väg genom södra Sverige",
-      "ogDescription": "Jämför skolannonser nära dig och boka utan separat DriveLinkUp-avgift."
+      "ogDescription": "Jämför skolannonser nära dig och boka utan separata avgifter."
     },
     "hero": {
       "eyebrow": "DriveLinkUp · södra Sverige",
@@ -3113,13 +3114,13 @@
     "hero": {
       "eyebrow": "Enkel marknadsekonomi",
       "title": "Skolans pris är elevens total.",
-      "body": "Upptäck, jämför och boka auktoriserade trafikskolor utan separat DriveLinkUp-avgift."
+      "body": "Upptäck, jämför och boka auktoriserade trafikskolor — utan separata avgifter."
     },
     "learner": {
       "title": "För elever",
       "body": "Bläddra bland auktoriserade trafikskolor, jämför deras publicerade priser och tillgänglighet och boka det alternativ som passar.",
       "price": "0 % elevavgift",
-      "detail": "Du betalar skolans publicerade bokningspris. DriveLinkUp lägger inte på någon separat marknadsplatsavgift."
+      "detail": "Du betalar skolans publicerade bokningspris — ingen separat marknadsplatsavgift."
     },
     "school": {
       "title": "För auktoriserade trafikskolor",
@@ -3150,7 +3151,7 @@
     },
     "schools": {
       "title": "Auktoriserade trafikskolor",
-      "body": "För professionella lektioner kan du jämföra auktoriserade trafikskolors annonser, publicerade priser och tillgänglighet. Upptäckt, jämförelse och bokning har ingen separat DriveLinkUp-avgift."
+      "body": "För professionella lektioner kan du jämföra auktoriserade trafikskolors annonser, publicerade priser och tillgänglighet. Upptäckt, jämförelse och bokning utan separata avgifter."
     },
     "cta": {
       "schools": "Jämför trafikskolor",
@@ -3219,7 +3220,7 @@
     "headerTitleCity": "Trafikskolor i {name}",
     "headerTitleRegion": "Trafikskolor i {name}",
     "headerTitleCountry": "Trafikskolor i {name}",
-    "subtitleLive": "Jämför verifierade skolannonser i {name} efter kategori, språk, publicerat pris i SEK och tillgänglighet — boka utan separat DriveLinkUp-avgift.",
+    "subtitleLive": "Jämför verifierade skolannonser i {name} efter kategori, språk, publicerat pris i SEK och tillgänglighet — boka utan separata avgifter.",
     "subtitleExpansion": "{name} i {country} är en expansionshub. Bokning är live i Sverige i dag; använd dessa sidor för nordisk täckning när vi växer.",
     "subtitleCountryLive": "Bläddra regioner och städer i {name}. Öppna en stadshubb för att jämföra annonser.",
     "subtitleCountryExpansion": "Hubbar för {name} är redo för SEO och expansion. Marknadsplatsbokning är live i Sverige först (ADR-001).",
@@ -3349,7 +3350,11 @@
         "Transparens i båda riktningar. Skolan äger sina uppgifter, och vi granskar dem innan något publiceras.",
         "Kostnadsfritt för elever. Du betalar aldrig någon avgift till DriveLinkUp."
       ],
-      "facts": ["Grundat 2026", "Stockholm, Sverige", "Oberoende"],
+      "facts": [
+        "Grundat 2026",
+        "Stockholm, Sverige",
+        "Oberoende"
+      ],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."
     },
     "promise": {
@@ -3363,79 +3368,6 @@
       "body": "Som elev jämför du och bokar direkt. Driver du skola eller ger lektioner? Listan är kostnadsfri — du styr själv över pris och tider.",
       "primaryCta": "Hitta lektioner",
       "secondaryCta": "Lista er profil"
-    }
-  },
-  "offerings": {
-    "section": {
-      "eyebrow": "Erbjudanden & paket",
-      "title": "Intensivkurser och paket",
-      "lead": "Priser utanför lektionen. Begär bokning — skolan svarar dig direkt.",
-      "kind": {
-        "LEKTION": "Lektion",
-        "INTENSIVKURS": "Intensivkurs",
-        "PAKET": "Paket"
-      },
-      "sessionsCount": "{count, plural, =1 {# lektion} other {# lektioner}}",
-      "weeksCount": "{count, plural, =1 {# vecka} other {# veckor}}",
-      "priceFrom": "fr. {price} kr",
-      "requestCta": "Begär bokning"
-    },
-    "requestForm": {
-      "title": "Begär bokning — {name}",
-      "nameLabel": "Namn",
-      "namePlaceholder": "För- och efternamn",
-      "emailLabel": "E-post",
-      "emailPlaceholder": "dig@exempel.se",
-      "phoneLabel": "Telefon",
-      "phonePlaceholder": "070-123 45 67",
-      "startLabel": "Önskad start",
-      "startPlaceholder": "t.ex. vecka 45 eller 1 november",
-      "messageLabel": "Meddelande",
-      "messagePlaceholder": "Berätta kort vad du behöver — t.ex. kategori och upplägg.",
-      "submit": "Skicka förfrågan",
-      "submitting": "Skickar …",
-      "cancel": "Avbryt",
-      "success": "Skickat! Skolan svarar dig direkt.",
-      "error": "Kunde inte skicka — försök igen."
-    },
-    "editor": {
-      "title": "Erbjudanden & paket",
-      "description": "Lägg upp intensivkurser och paket med fast pris. De syns på din publika profil och elever kan begära bokning.",
-      "addCta": "Lägg till erbjudande",
-      "editCta": "Ändra",
-      "deleteCta": "Ta bort",
-      "empty": "Inga erbjudanden ännu. Lägg upp din intensivkurs eller ditt paket — det syns direkt på profilen.",
-      "noListing": "Skapa din listning först. Då kan du lägga upp erbjudanden här.",
-      "priceFrom": "fr. {price} kr",
-      "sessionsShort": "lektioner",
-      "weeksShort": "veckor",
-      "kind": {
-        "LEKTION": "Lektion",
-        "INTENSIVKURS": "Intensivkurs",
-        "PAKET": "Paket"
-      },
-      "fields": {
-        "kind": "Typ",
-        "name": "Namn",
-        "namePlaceholder": "t.ex. Intensivkurs B — 2 veckor",
-        "price": "Pris (kr)",
-        "pricePlaceholder": "t.ex. 4950",
-        "sessions": "Antal lektioner",
-        "sessionsPlaceholder": "t.ex. 10",
-        "weeks": "Längd (veckor)",
-        "weeksPlaceholder": "t.ex. 2",
-        "description": "Beskrivning",
-        "descriptionPlaceholder": "Vad ingår och hur är upplägget?",
-        "active": "Synlig på profilen"
-      },
-      "save": "Spara",
-      "saving": "Sparar …",
-      "cancel": "Avbryt",
-      "deleteConfirm": "Ta bort erbjudandet? Det försvinner från din profil.",
-      "requiredMissing": "Fyll i namn och pris.",
-      "saved": "Sparat.",
-      "deleted": "Borttaget.",
-      "error": "Något gick fel — försök igen."
     }
   }
 }

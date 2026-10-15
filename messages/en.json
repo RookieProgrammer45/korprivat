@@ -190,7 +190,7 @@
       },
       "price": {
         "q": "What will I pay?",
-        "a": "You see the school's published lesson price and the total in SEK before checkout. Discovery, comparison and booking are free for learners: DriveLinkUp adds no separate learner fee."
+        "a": "You see the school's published lesson price and the total in SEK before checkout. Discovery, comparison and booking are free for learners — no added fees."
       },
       "safety": {
         "q": "What safety and credential checks should I expect?",
@@ -259,7 +259,7 @@
     "hero": {
       "eyebrow": "For schools and certified instructors",
       "title": "Turn your availability into clearer bookings.",
-      "body": "DriveLinkUp connects driving schools and certified instructors to learners. Publish authorization, prices and availability so learners can compare and book with clear expectations.",
+      "body": "Everything driving schools and certified instructors need in one place. Publish authorization, prices and availability so learners can compare and book with clear expectations.",
       "primaryCta": "Create your profile",
       "learnerCta": "See the learner view"
     },
@@ -282,7 +282,7 @@
     "header": {
       "eyebrow": "Schools and instructors marketplace",
       "title": "Schools & instructors",
-      "subtitle": "Compare listings by category, city, language, published price, availability and booking policy. Booking has no separate DriveLinkUp fee."
+      "subtitle": "Compare listings by category, city, language, published price, availability and booking policy. Booking without added fees."
     },
     "directoryCta": "View all driving schools",
     "stockholmCity": {
@@ -300,7 +300,7 @@
       "slug": "stockholm",
       "seo": {
         "lead": "Book an authorized driving school in Stockholm",
-        "p1": "Stockholm learners compare B-category schools by published lesson price, English availability, and live slots—then book without a separate DriveLinkUp fee. Listings are limited to verified Transportstyrelsen credentials.",
+        "p1": "Stockholm learners compare B-category schools by published lesson price, English availability, and live slots—then book without added fees. Listings are limited to verified Transportstyrelsen credentials.",
         "p2": "Typical journeys combine school lessons with optional private övningskörning. If you are 16–17, complete handledare enrollment before booking. Adults book directly after ID verification.",
         "howTitle": "How booking works in Stockholm",
         "howBody": "Open a school listing, pick an available slot, pay the school’s published price into escrow, take the lesson, then confirm completion so the school is paid. Cancellations follow the school’s published policy.",
@@ -311,7 +311,7 @@
         "linkBlog": "Guides for learners in Sweden",
         "faqTitle": "Stockholm FAQ",
         "faq1q": "Do learners pay a DriveLinkUp fee in Stockholm?",
-        "faq1a": "No. You pay the school’s published lesson price. DriveLinkUp does not add a separate learner fee.",
+        "faq1a": "No. You pay the school’s published lesson price — no added fees.",
         "faq2q": "Are private handledare listed as schools?",
         "faq2a": "No. Handledare are a separate legal path for övningskörning. Use the handledare guide; school listings stay authorized traffic schools.",
         "faq3q": "Can I book if I am 16 or 17?",
@@ -453,7 +453,7 @@
       "seo": {
         "lead": "Authorized lessons in Västerås",
         "p1": "Västerås listings highlight category, language, price and booking policy so you can choose a school without guesswork.",
-        "p2": "Combine school lessons with private practice only when handledare rules are met—DriveLinkUp keeps those paths distinct.",
+        "p2": "Combine school lessons with private practice only when handledare rules are met—the two paths stay distinct.",
         "howTitle": "How to book in Västerås",
         "howBody": "Compare schools, open a profile, book an open slot at the published price, then confirm after the lesson so payout can proceed.",
         "relatedTitle": "Related guides",
@@ -578,7 +578,7 @@
       "serviceArea": "Service area",
       "rate": "Lesson price",
       "fee": "Marketplace fee",
-      "feeValue": "No separate DriveLinkUp fee; the school price is shown before checkout",
+      "feeValue": "No added fees; the school price is shown before checkout",
       "rateValue": "{amount} / h",
       "availability": "Availability",
       "noAvailability": "No upcoming time listed",
@@ -1238,14 +1238,14 @@
     }
   },
   "bookingFees": {
-    "serviceFeeLabel": "No separate DriveLinkUp fee",
+    "serviceFeeLabel": "No separate fee",
     "commissionLabel": "School commission configuration",
     "learnerBreakdown": {
       "eyebrow": "Your price",
       "priceLine": "Lesson price",
       "feeLine": "DriveLinkUp fee",
       "totalLine": "School price / learner total",
-      "note": "DriveLinkUp adds no separate learner fee. The school's published price is the learner total before checkout.",
+      "note": "The school's published price is the learner total before checkout — nothing is added on top.",
       "error": "We could not load the current total.",
       "retry": "Try again"
     },
@@ -1263,7 +1263,7 @@
     "payoutLine": "The school controls its published price and availability; no commission is due before completed service.",
     "exampleTitle": "Example at 600 SEK/hr",
     "exampleLine": "A {price} SEK completed booking → {fee} SEK commission and {payout} SEK retained by the school.",
-    "exampleLearnerLine": "Learner pays the published {price} SEK school price; DriveLinkUp adds no separate fee.",
+    "exampleLearnerLine": "Learner pays the published {price} SEK school price — nothing added.",
     "errorTitle": "Could not load the commission disclosure.",
     "retry": "Try again"
   },
@@ -1938,18 +1938,18 @@
       "released": "Completed",
       "refunded": "Refunded",
       "awaitingApproval": "Awaiting approval",
-      "deleteAccount": {
-        "title": "Delete account",
-        "body": "Permanently deletes your account, your bookings and all personal data. This cannot be undone.",
-        "cta": "Delete account",
-        "dialogTitle": "Delete your account?",
-        "dialogBody": "All of your personal data is permanently erased: your profile, your bookings and your listings. This cannot be undone.",
-        "confirm": "Delete permanently",
-        "cancel": "Cancel",
-        "deleting": "Deleting…",
-        "done": "Your account has been deleted.",
-        "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
-      },
+    "deleteAccount": {
+      "title": "Delete account",
+      "body": "Permanently deletes your account, your bookings and all personal data. This cannot be undone.",
+      "cta": "Delete account",
+      "dialogTitle": "Delete your account?",
+      "dialogBody": "All of your personal data is permanently erased: your profile, your bookings and your listings. This cannot be undone.",
+      "confirm": "Delete permanently",
+      "cancel": "Cancel",
+      "deleting": "Deleting…",
+      "done": "Your account has been deleted.",
+      "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
+    },
       "declined": "Declined",
       "cancelled": "Cancelled"
     }
@@ -2135,9 +2135,9 @@
   },
   "publicHome": {
     "hero": {
-      "eyebrow": "Schools and instructors. Learners. One marketplace.",
+      "eyebrow": "A marketplace for driving lessons",
       "title": "Compare driving schools and certified instructors. Book with confidence.",
-      "body": "DriveLinkUp connects driving schools and certified instructors to learners. Discover by category, city, language, published price and availability — free for learners.",
+      "body": "Published prices, languages and available times — all visible before you book.",
       "primaryCta": "Find lessons",
       "instructorCta": "I'm a certified instructor",
       "marketplaceTag": "Marketplace · Schools & instructors",
@@ -2146,14 +2146,14 @@
       "assurance": {
         "price": "Published price shown before checkout",
         "safety": "Schools and certified instructors",
-        "choice": "No separate DriveLinkUp fee"
+        "choice": "Free for learners"
       },
       "previewEyebrow": "The decision, in one place",
       "previewTitle": "Profile → time → total",
       "imageAlt": "Driving lesson illustration",
       "previewLines": {
         "profile": "Compare categories, language and location.",
-        "price": "Review the school's published price; no separate DriveLinkUp fee.",
+        "price": "Review the school's published price — no added fees.",
         "time": "Choose a slot and see the policy before checkout."
       }
     },
@@ -2186,7 +2186,7 @@
         },
         "book": {
           "title": "Book with the full total",
-          "body": "Choose an open school time, see the published SEK price, then continue with no separate DriveLinkUp fee."
+          "body": "Choose an open school time and see the published SEK price — you never pay more than the school's price."
         }
       }
     },
@@ -2201,7 +2201,7 @@
       "cards": {
         "price": {
           "title": "Price you can understand",
-          "body": "The school's published price is shown in SEK before checkout; DriveLinkUp adds no separate learner fee."
+          "body": "The school's published price is shown in SEK before checkout, with nothing added on top."
         },
         "safety": {
           "title": "Know what to check",
@@ -2237,7 +2237,7 @@
     "title": "Get more learners with DriveLinkUp",
     "body": "Publish your school’s lessons, prices and availability so learners can compare and book with clear terms. You stay in control of the offer — we run the marketplace.",
     "benefit1": "Visibility with learners actively searching in your city.",
-    "benefit2": "Clear bookings with no separate learner fee on DriveLinkUp.",
+    "benefit2": "Clear bookings with no separate learner fee.",
     "benefit3": "School owners can invite instructors from the dashboard (coming soon).",
     "ctaSignedOut": "Create school account",
     "ctaSignIn": "Sign in",
@@ -3113,13 +3113,13 @@
     "hero": {
       "eyebrow": "Simple marketplace economics",
       "title": "The school price is the learner total.",
-      "body": "Discover, compare and book authorized driving schools without a separate DriveLinkUp fee."
+      "body": "Discover, compare and book authorized driving schools — without added fees."
     },
     "learner": {
       "title": "For learners",
       "body": "Browse authorized schools, compare their published prices and availability, and book the option that fits.",
       "price": "0% learner fee",
-      "detail": "You pay the school's published booking price. DriveLinkUp does not add a separate marketplace fee."
+      "detail": "You pay the school's published booking price — no separate marketplace fee."
     },
     "school": {
       "title": "For authorized schools",
@@ -3150,7 +3150,7 @@
     },
     "schools": {
       "title": "Authorized driving schools",
-      "body": "For professional lessons, use the marketplace to compare authorized-school listings, published prices and availability. Learner discovery, comparison and booking have no separate DriveLinkUp fee."
+      "body": "For professional lessons, use the marketplace to compare authorized-school listings, published prices and availability. Learner discovery, comparison and booking without added fees."
     },
     "cta": {
       "schools": "Compare driving schools",
@@ -3219,7 +3219,7 @@
     "headerTitleCity": "Driving schools in {name}",
     "headerTitleRegion": "Driving schools in {name}",
     "headerTitleCountry": "Driving schools in {name}",
-    "subtitleLive": "Compare verified school listings in {name} by category, language, published SEK price and availability — then book without a separate DriveLinkUp fee.",
+    "subtitleLive": "Compare verified school listings in {name} by category, language, published SEK price and availability — then book without added fees.",
     "subtitleExpansion": "{name} in {country} is an expansion hub. Booking is live in Sweden today; use these pages to explore Nordic coverage as we grow.",
     "subtitleCountryLive": "Browse regions and cities across {name}. Open a city hub to compare listings.",
     "subtitleCountryExpansion": "{name} hubs are ready for SEO and expansion. Marketplace booking is live in Sweden first (ADR-001).",
@@ -3329,7 +3329,7 @@
       "chips": [
         "Published price shown before checkout",
         "Schools and certified instructors",
-        "No separate DriveLinkUp fee"
+        "No added fees"
       ],
       "primaryCta": "Find lessons",
       "secondaryCta": "How it works"
@@ -3349,7 +3349,11 @@
         "Transparency in both directions. The school owns its details, and we review everything before it is published.",
         "Free for learners. You never pay a fee to DriveLinkUp."
       ],
-      "facts": ["Founded 2026", "Stockholm, Sweden", "Independent"],
+      "facts": [
+        "Founded 2026",
+        "Stockholm, Sweden",
+        "Independent"
+      ],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {
@@ -3363,79 +3367,6 @@
       "body": "Learners browse, compare and book. Schools and instructors publish prices and availability through onboarding.",
       "primaryCta": "Find lessons",
       "secondaryCta": "List your profile"
-    }
-  },
-  "offerings": {
-    "section": {
-      "eyebrow": "Offers & packages",
-      "title": "Intensive courses and packages",
-      "lead": "Prices beyond the single lesson. Request a booking — the school replies directly.",
-      "kind": {
-        "LEKTION": "Lesson",
-        "INTENSIVKURS": "Intensive course",
-        "PAKET": "Package"
-      },
-      "sessionsCount": "{count, plural, =1 {# lesson} other {# lessons}}",
-      "weeksCount": "{count, plural, =1 {# week} other {# weeks}}",
-      "priceFrom": "from {price} SEK",
-      "requestCta": "Request booking"
-    },
-    "requestForm": {
-      "title": "Request booking — {name}",
-      "nameLabel": "Name",
-      "namePlaceholder": "First and last name",
-      "emailLabel": "Email",
-      "emailPlaceholder": "you@example.com",
-      "phoneLabel": "Phone",
-      "phonePlaceholder": "070-123 45 67",
-      "startLabel": "Preferred start",
-      "startPlaceholder": "e.g. week 45 or 1 November",
-      "messageLabel": "Message",
-      "messagePlaceholder": "Briefly describe what you need — e.g. licence category and setup.",
-      "submit": "Send request",
-      "submitting": "Sending …",
-      "cancel": "Cancel",
-      "success": "Sent! The school will reply to you directly.",
-      "error": "Could not send — please try again."
-    },
-    "editor": {
-      "title": "Offers & packages",
-      "description": "Publish intensive courses and packages with a fixed price. They appear on your public profile and learners can request a booking.",
-      "addCta": "Add offering",
-      "editCta": "Edit",
-      "deleteCta": "Delete",
-      "empty": "No offerings yet. Publish your intensive course or package — it appears on your profile right away.",
-      "noListing": "Create your listing first. You can then publish offerings here.",
-      "priceFrom": "from {price} SEK",
-      "sessionsShort": "lessons",
-      "weeksShort": "weeks",
-      "kind": {
-        "LEKTION": "Lesson",
-        "INTENSIVKURS": "Intensive course",
-        "PAKET": "Package"
-      },
-      "fields": {
-        "kind": "Type",
-        "name": "Name",
-        "namePlaceholder": "e.g. Intensive course B — 2 weeks",
-        "price": "Price (SEK)",
-        "pricePlaceholder": "e.g. 4950",
-        "sessions": "Number of lessons",
-        "sessionsPlaceholder": "e.g. 10",
-        "weeks": "Length (weeks)",
-        "weeksPlaceholder": "e.g. 2",
-        "description": "Description",
-        "descriptionPlaceholder": "What is included and how does it work?",
-        "active": "Visible on profile"
-      },
-      "save": "Save",
-      "saving": "Saving …",
-      "cancel": "Cancel",
-      "deleteConfirm": "Delete this offering? It disappears from your profile.",
-      "requiredMissing": "Fill in name and price.",
-      "saved": "Saved.",
-      "deleted": "Deleted.",
-      "error": "Something went wrong — please try again."
     }
   }
 }

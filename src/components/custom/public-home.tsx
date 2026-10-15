@@ -9,11 +9,14 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
+import { apiFetch } from '@/lib/api-client';
+import {
+  type InstructorFilteredItem,
+  InstructorList,
+} from '@/lib/contracts/instructors';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { apiFetch } from '@/lib/api-client';
-import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
 
 const QUICK_CATEGORIES = ['B', 'A', 'BE'] as const;
 const QUICK_CITIES = [
@@ -147,7 +150,9 @@ export function PublicHome() {
     apiFetch('/api/instructors', { schema: InstructorList })
       .then((data) => {
         if (!alive) return;
-        const rows = data.items.slice(0, MAX_DECK_PROFILES).map(toDeckProfile);
+        const rows = data.items
+          .slice(0, MAX_DECK_PROFILES)
+          .map(toDeckProfile);
         if (rows.length > 0) {
           setProfiles(rows);
           setActive(0);
@@ -166,6 +171,7 @@ export function PublicHome() {
   const front = profiles[active % count];
   const back1 = count > 1 ? profiles[(active + 1) % count] : undefined;
   const back2 = count > 2 ? profiles[(active + 2) % count] : undefined;
+
 
   useEffect(() => {
     if (paused || count < 2) return;
@@ -200,14 +206,7 @@ export function PublicHome() {
               {t('hero.title')}
             </h1>
             <p className="max-w-2xl min-w-0 text-body-lg text-muted-foreground">
-              {t('hero.body').startsWith('DriveLinkUp') ? (
-                <>
-                  <strong className="font-bold text-foreground">DriveLinkUp</strong>
-                  {t('hero.body').slice('DriveLinkUp'.length)}
-                </>
-              ) : (
-                t('hero.body')
-              )}
+              {t('hero.body')}
             </p>
             <div className="marketplace-hero-actions flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:flex-nowrap">
               <Button asChild size="lg" className="marketplace-primary-cta">
@@ -232,7 +231,6 @@ export function PublicHome() {
           <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
             <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden bg-white lg:block dark:bg-black">
               <p className="dlu-tag">{t('hero.marketplaceTag')}</p>
-              {/* biome-ignore lint/a11y/noStaticElementInteractions: dekorativ hover-paus for kortspel - grafik, ej interaktiv kontroll */}
               <div
                 className="dlu-deck"
                 onMouseEnter={() => setPaused(true)}
@@ -324,10 +322,7 @@ export function PublicHome() {
                 {live ? `${count} profiler just nu` : 'Alla profiler just nu'}
               </p>
               <p className="dlu-arrow-note">jämför → boka → kör</p>
-              <p className="dlu-free">
-                <i aria-hidden />
-                Kostnadsfritt för elever
-              </p>
+              <p className="dlu-free"><i aria-hidden />Kostnadsfritt för elever</p>
             </div>
           </div>
         </div>
@@ -467,6 +462,7 @@ export function PublicHome() {
     </main>
   );
 }
+
 
 function JourneyStep({ number, title, body }: { number: string; title: string; body: string }) {
   return (
