@@ -17,7 +17,9 @@ import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
 /**
  * OAuth learners land on /onboarding/learner/verify without having posted
  * /api/signup/start. This phase collects claimed DOB + privacy consent
- * inline, then reloads so the server page can render Didit (phase 2).
+ * inline, then reloads so the server page routes on. Didit ID verification is
+ * not part of the learner workflow right now — the server page redirects on
+ * to the state-machine route (the student dashboard).
  */
 export function LearnerVerifyDobStep() {
   const t = useTranslations('onboarding.verify');
