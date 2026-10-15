@@ -3368,5 +3368,78 @@
       "primaryCta": "Find lessons",
       "secondaryCta": "List your profile"
     }
+  },
+  "offerings": {
+    "section": {
+      "eyebrow": "Offers & packages",
+      "title": "Intensive courses and packages",
+      "lead": "Prices beyond the single lesson. Request a booking — the school replies directly.",
+      "kind": {
+        "LEKTION": "Lesson",
+        "INTENSIVKURS": "Intensive course",
+        "PAKET": "Package"
+      },
+      "sessionsCount": "{count, plural, =1 {# lesson} other {# lessons}}",
+      "weeksCount": "{count, plural, =1 {# week} other {# weeks}}",
+      "priceFrom": "from {price} SEK",
+      "requestCta": "Request booking"
+    },
+    "requestForm": {
+      "title": "Request booking — {name}",
+      "nameLabel": "Name",
+      "namePlaceholder": "First and last name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "070-123 45 67",
+      "startLabel": "Preferred start",
+      "startPlaceholder": "e.g. week 45 or 1 November",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Briefly describe what you need — e.g. licence category and setup.",
+      "submit": "Send request",
+      "submitting": "Sending …",
+      "cancel": "Cancel",
+      "success": "Sent! The school will reply to you directly.",
+      "error": "Could not send — please try again."
+    },
+    "editor": {
+      "title": "Offers & packages",
+      "description": "Publish intensive courses and packages with a fixed price. They appear on your public profile and learners can request a booking.",
+      "addCta": "Add offering",
+      "editCta": "Edit",
+      "deleteCta": "Delete",
+      "empty": "No offerings yet. Publish your intensive course or package — it appears on your profile right away.",
+      "noListing": "Create your listing first. You can then publish offerings here.",
+      "priceFrom": "from {price} SEK",
+      "sessionsShort": "lessons",
+      "weeksShort": "weeks",
+      "kind": {
+        "LEKTION": "Lesson",
+        "INTENSIVKURS": "Intensive course",
+        "PAKET": "Package"
+      },
+      "fields": {
+        "kind": "Type",
+        "name": "Name",
+        "namePlaceholder": "e.g. Intensive course B — 2 weeks",
+        "price": "Price (SEK)",
+        "pricePlaceholder": "e.g. 4950",
+        "sessions": "Number of lessons",
+        "sessionsPlaceholder": "e.g. 10",
+        "weeks": "Length (weeks)",
+        "weeksPlaceholder": "e.g. 2",
+        "description": "Description",
+        "descriptionPlaceholder": "What is included and how does it work?",
+        "active": "Visible on profile"
+      },
+      "save": "Save",
+      "saving": "Saving …",
+      "cancel": "Cancel",
+      "deleteConfirm": "Delete this offering? It disappears from your profile.",
+      "requiredMissing": "Fill in name and price.",
+      "saved": "Saved.",
+      "deleted": "Deleted.",
+      "error": "Something went wrong — please try again."
+    }
   }
 }

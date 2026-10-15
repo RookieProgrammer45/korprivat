@@ -1235,7 +1235,8 @@
           "failed": "Vi kunde inte verifiera din legitimation. Försök igen."
         }
       }
-    }
+    },
+    "accountLeadLearner": "Hitta och boka lektioner hos trafikskolor och behöriga instruktörer."
   },
   "bookingFees": {
     "serviceFeeLabel": "Ingen separat DriveLinkUp-avgift",
@@ -3367,6 +3368,79 @@
       "body": "Som elev jämför du och bokar direkt. Driver du skola eller ger lektioner? Listan är kostnadsfri — du styr själv över pris och tider.",
       "primaryCta": "Hitta lektioner",
       "secondaryCta": "Lista er profil"
+    }
+  },
+  "offerings": {
+    "section": {
+      "eyebrow": "Erbjudanden & paket",
+      "title": "Intensivkurser och paket",
+      "lead": "Priser utanför lektionen. Begär bokning — skolan svarar dig direkt.",
+      "kind": {
+        "LEKTION": "Lektion",
+        "INTENSIVKURS": "Intensivkurs",
+        "PAKET": "Paket"
+      },
+      "sessionsCount": "{count, plural, =1 {# lektion} other {# lektioner}}",
+      "weeksCount": "{count, plural, =1 {# vecka} other {# veckor}}",
+      "priceFrom": "fr. {price} kr",
+      "requestCta": "Begär bokning"
+    },
+    "requestForm": {
+      "title": "Begär bokning — {name}",
+      "nameLabel": "Namn",
+      "namePlaceholder": "För- och efternamn",
+      "emailLabel": "E-post",
+      "emailPlaceholder": "dig@exempel.se",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "070-123 45 67",
+      "startLabel": "Önskad start",
+      "startPlaceholder": "t.ex. vecka 45 eller 1 november",
+      "messageLabel": "Meddelande",
+      "messagePlaceholder": "Berätta kort vad du behöver — t.ex. kategori och upplägg.",
+      "submit": "Skicka förfrågan",
+      "submitting": "Skickar …",
+      "cancel": "Avbryt",
+      "success": "Skickat! Skolan svarar dig direkt.",
+      "error": "Kunde inte skicka — försök igen."
+    },
+    "editor": {
+      "title": "Erbjudanden & paket",
+      "description": "Lägg upp intensivkurser och paket med fast pris. De syns på din publika profil och elever kan begära bokning.",
+      "addCta": "Lägg till erbjudande",
+      "editCta": "Ändra",
+      "deleteCta": "Ta bort",
+      "empty": "Inga erbjudanden ännu. Lägg upp din intensivkurs eller ditt paket — det syns direkt på profilen.",
+      "noListing": "Skapa din listning först. Då kan du lägga upp erbjudanden här.",
+      "priceFrom": "fr. {price} kr",
+      "sessionsShort": "lektioner",
+      "weeksShort": "veckor",
+      "kind": {
+        "LEKTION": "Lektion",
+        "INTENSIVKURS": "Intensivkurs",
+        "PAKET": "Paket"
+      },
+      "fields": {
+        "kind": "Typ",
+        "name": "Namn",
+        "namePlaceholder": "t.ex. Intensivkurs B — 2 veckor",
+        "price": "Pris (kr)",
+        "pricePlaceholder": "t.ex. 4950",
+        "sessions": "Antal lektioner",
+        "sessionsPlaceholder": "t.ex. 10",
+        "weeks": "Längd (veckor)",
+        "weeksPlaceholder": "t.ex. 2",
+        "description": "Beskrivning",
+        "descriptionPlaceholder": "Vad ingår och hur är upplägget?",
+        "active": "Synlig på profilen"
+      },
+      "save": "Spara",
+      "saving": "Sparar …",
+      "cancel": "Avbryt",
+      "deleteConfirm": "Ta bort erbjudandet? Det försvinner från din profil.",
+      "requiredMissing": "Fyll i namn och pris.",
+      "saved": "Sparat.",
+      "deleted": "Borttaget.",
+      "error": "Något gick fel — försök igen."
     }
   }
 }
