@@ -148,7 +148,7 @@
   --secondary: oklch(0.96 0.006 var(--brand-h));
   --secondary-foreground: oklch(0.25 0.02 var(--brand-h));
   --muted: oklch(0.96 0.006 var(--brand-h));
-  --muted-foreground: oklch(0.5 0.02 var(--brand-h));
+  --muted-foreground: oklch(0.45 0.02 var(--brand-h)); /* darker gray explanation text — Samuel 2026-10-15 */
   --accent: oklch(0.96 0.006 var(--brand-h));
   --accent-foreground: oklch(0.25 0.02 var(--brand-h));
   --destructive: oklch(0.577 0.245 27.325);
@@ -174,7 +174,7 @@
   --secondary: oklch(0.26 0.014 var(--brand-h));
   --secondary-foreground: var(--foreground);
   --muted: oklch(0.26 0.014 var(--brand-h));
-  --muted-foreground: oklch(0.7 0.02 var(--brand-h));
+  --muted-foreground: oklch(0.65 0.02 var(--brand-h)); /* darker gray explanation text — Samuel 2026-10-15 */
   --accent: oklch(0.26 0.014 var(--brand-h));
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.704 0.191 22.216);
