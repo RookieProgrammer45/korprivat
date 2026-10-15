@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { LearnerVerifyDobStep } from '@/components/custom/verification/learner-verify-dob-step';
+// biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
 import { getSessionUser } from '@/lib/require-auth';
 import {

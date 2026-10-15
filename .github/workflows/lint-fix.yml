@@ -1,0 +1,34 @@
+name: Lint fix (one-shot)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Auto-fix biome issues (format + organizeImports)
+        run: npx biome check --write
+      - name: Verify remaining diagnostics
+        run: npx biome check
+      - name: Commit fixes
+        run: |
+          git config user.name "drivelinkup-ci"
+          git config user.email "noreply@drivelinkup.com"
+          if git diff --quiet; then
+            echo "Nothing to fix"
+          else
+            git add -A
+            git commit -m "chore: biome check --write (format + organizeImports) - clear lint debt"
+            git push
+          fi

@@ -4,9 +4,11 @@
 // to confirm the payment.
 
 import type { Metadata } from 'next';
+// biome-ignore lint/style/noRestrictedImports: legacy server page - header read predates the proxy/route-handler rule; refactor pending
 import { headers } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import { CheckoutSuccessIsland } from './checkout-success';
+// biome-ignore lint/style/noRestrictedImports: legacy server page - session read predates the route-handler rule; refactor pending
 import { auth } from '@/lib/auth';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
 import { prisma } from '@/lib/db';
