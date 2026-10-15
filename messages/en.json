@@ -1938,6 +1938,18 @@
       "released": "Completed",
       "refunded": "Refunded",
       "awaitingApproval": "Awaiting approval",
+    "deleteAccount": {
+      "title": "Delete account",
+      "body": "Permanently deletes your account, your bookings and all personal data. This cannot be undone.",
+      "cta": "Delete account",
+      "dialogTitle": "Delete your account?",
+      "dialogBody": "All of your personal data is permanently erased: your profile, your bookings and your listings. This cannot be undone.",
+      "confirm": "Delete permanently",
+      "cancel": "Cancel",
+      "deleting": "Deleting…",
+      "done": "Your account has been deleted.",
+      "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
+    },
       "declined": "Declined",
       "cancelled": "Cancelled"
     }

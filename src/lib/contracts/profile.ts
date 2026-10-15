@@ -32,3 +32,12 @@ export const Profile = z.object({
   photo: PhotoVerificationState,
 });
 export type Profile = z.infer<typeof Profile>;
+
+// Response for POST /api/profile/delete — the self-service GDPR erasure.
+// `deleted: true` is only returned after the full transactional erase has
+// committed; the caller's session is dead by then (Session cascades with
+// User), so the client signs out and redirects home.
+export const DeleteAccountResponse = z.object({
+  deleted: z.boolean(),
+});
+export type DeleteAccountResponse = z.infer<typeof DeleteAccountResponse>;

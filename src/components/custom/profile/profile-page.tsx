@@ -4,6 +4,8 @@
 //      `image` is empty) + name/email + a soft role chip on the right
 //   2. the role-correct upcoming-list (re-using the BookingList shape from
 //      the dashboard), role-branched eyebrow + empty body copy
+//   3. a quiet danger-zone card at the very bottom — the self-service GDPR
+//      erasure (POST /api/profile/delete) behind a confirm dialog
 //
 // Loading / empty / error states per the data-plane pattern (see
 // student-dashboard / instructor-dashboard for the canonical example).
@@ -12,15 +14,27 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import * as React from 'react';
+import { toast } from 'sonner';
 import { ProfilePhotoEditor } from '@/components/custom/profile/profile-photo-editor';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import { Profile } from '@/lib/contracts/profile';
+import { signOut } from '@/lib/auth-client';
+import { DeleteAccountResponse, Profile } from '@/lib/contracts/profile';
 
 type ProfileResponse = ReturnType<typeof Profile.parse>;
 type UpcomingItem = ProfileResponse['upcoming']['items'][number];
@@ -154,6 +168,7 @@ export function ProfilePage() {
           </ul>
         )}
       </section>
+      <DeleteAccountSection />
     </div>
   );
 }
@@ -339,4 +354,92 @@ function formatDate(iso: string, locale: string): string {
   } catch {
     return iso;
   }
+}
+
+//
+// Danger zone — the GDPR art. 17 erasure promised on /privacy, wired to the
+// button at the bottom of the profile. Two-step confirm so
+// a stray click can't nuke an account: the dialog restates what disappears,
+// and the POST runs the full transactional erase server-side. On success the
+// session row is already cascade-deleted, so we sign the stale cookie out
+// (best effort) and send the user home.
+//
+function DeleteAccountSection() {
+  const t = useTranslations('profile');
+  const router = useRouter();
+  const [open, setOpen] = React.useState(false);
+  const [deleting, setDeleting] = React.useState(false);
+
+  async function confirmDelete() {
+    setDeleting(true);
+    try {
+      await apiFetch('/api/profile/delete', {
+        method: 'POST',
+        schema: DeleteAccountResponse,
+      });
+      toast.success(t('deleteAccount.done'));
+      setOpen(false);
+      try {
+        await signOut();
+      } catch {
+        // The session row is already gone — an error here means the cookie
+        // is inert; the redirect below lands on a logged-out app either way.
+      }
+      router.push('/');
+      router.refresh();
+    } catch {
+      toast.error(t('deleteAccount.error'));
+    } finally {
+      setDeleting(false);
+    }
+  }
+
+  return (
+    <Card className="border-destructive/30 bg-destructive/5">
+      <CardContent className="flex flex-col gap-3 p-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="grid gap-1">
+          <p className="text-body font-medium text-foreground">{t('deleteAccount.title')}</p>
+          <p className="text-small text-muted-foreground">{t('deleteAccount.body')}</p>
+        </div>
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button
+              type="button"
+              variant="destructive"
+              size="sm"
+              className="shrink-0 self-start sm:self-auto"
+            >
+              {t('deleteAccount.cta')}
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{t('deleteAccount.dialogTitle')}</DialogTitle>
+              <DialogDescription>{t('deleteAccount.dialogBody')}</DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setOpen(false)}
+                disabled={deleting}
+              >
+                {t('deleteAccount.cancel')}
+              </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                size="sm"
+                onClick={confirmDelete}
+                disabled={deleting}
+              >
+                {deleting ? t('deleteAccount.deleting') : t('deleteAccount.confirm')}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </CardContent>
+    </Card>
+  );
 }
