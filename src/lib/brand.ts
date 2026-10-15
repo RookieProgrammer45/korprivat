@@ -2,7 +2,7 @@
 
 export const siteName = 'DriveLinkUp';
 export const siteDescription =
-  'The marketplace that connects driving schools and certified instructors to learners in Sweden — compare, book, and learn with no separate DriveLinkUp fee.';
+  'Jämför auktoriserade trafikskolor och behöriga instruktörer. Priser och villkor syns före bokningen — kostnadsfritt för elever.';
 
 // PWA + social-share colors. HEX only (the oklch() tokens in globals.css aren't
 // readable here) — set to match your brand seed.
@@ -16,6 +16,6 @@ export const brandVisual = {
     background: '#F1FAF9',
     foreground: '#0D1312',
     /** Second line under the site name; '' hides it. */
-    tagline: 'Schools and certified instructors. Learners. One marketplace.',
+    tagline: 'Trafikskolor och instruktörer — på ett ställe.',
   },
 } as const;
