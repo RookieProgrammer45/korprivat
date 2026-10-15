@@ -12,6 +12,8 @@
 //   3. Bookings (as student AND as the deleted listings' instructor)
 //   4. Instructor rows themselves (AvailabilitySlot cascades along)
 //   5. User-owned marketplace rows (scalar userId links)
+//   5b. Memberships — plus any Organization left with zero members (the
+//       user was the school's last member; ownerless shells serve nobody)
 //   6. Email-linked pre-signup rows (waitlist, contact) — same person
 //   7. User LAST — cascades Session, Account, Membership (auth.prisma)
 //
@@ -103,6 +105,23 @@ export async function POST(req: Request) {
       await tx.rebookingCache.deleteMany({ where: { userId: user.id } });
       await tx.conversationParticipant.deleteMany({ where: { userId: user.id } });
 
+      // School memberships: the school (Organization) is an entity, not the
+      // person — keep it alive when other members remain. But if this user
+      // was the LAST member, the org would linger as an ownerless shell
+      // nobody can manage or claim, so it dies with them. (Membership also
+      // cascades at the user.delete below; the explicit deleteMany is what
+      // lets the orphan check observe the post-removal state.)
+      const memberships = await tx.membership.findMany({
+        where: { userId: user.id },
+        select: { organizationId: true },
+      });
+      await tx.membership.deleteMany({ where: { userId: user.id } });
+      if (memberships.length > 0) {
+        const orgIds = Array.from(new Set(memberships.map((m) => m.organizationId)));
+        await tx.organization.deleteMany({
+          where: { id: { in: orgIds }, memberships: { none: {} } },
+        });
+      }
       await tx.waitlistProfile.deleteMany({ where: { email } });
       await tx.waitlistEntry.deleteMany({ where: { email } });
       await tx.contactMessage.deleteMany({ where: { email } });

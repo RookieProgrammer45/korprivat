@@ -57,6 +57,16 @@ export async function POST(req: Request) {
       ownerUserId: user.id,
       ownerEmail: user.email,
     });
+    // The /for-skolor register form is a school-owner path — the profile
+    // role must follow. The signup wizard's SCHOOL path writes 'SCHOOL'
+    // via /api/signup/start, but this route historically left the default
+    // STUDENT behind, so real school owners got a learner chip on /profile
+    // and learner routing elsewhere. Upgrade only the default — never
+    // clobber an explicit INSTRUCTOR/HANDLEDARE choice.
+    await prisma.userProfile.updateMany({
+      where: { userId: user.id, role: 'STUDENT' },
+      data: { role: 'SCHOOL' },
+    });
     return NextResponse.json(
       OrgRegisterResponse.parse({
         organizationId: organization.id,
