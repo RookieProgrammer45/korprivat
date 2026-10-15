@@ -338,7 +338,7 @@ describe('POST /api/bookings/[id]/cancel — late window', () => {
     const feeCreateOrder = prismaMock.lateCancellationFee.create.mock.invocationCallOrder[0];
     expect(bookingClaimOrder).toBeDefined();
     expect(feeCreateOrder).toBeDefined();
-    expect(bookingClaimOrder!).toBeLessThan(feeCreateOrder!);
+    expect(bookingClaimOrder as number).toBeLessThan(feeCreateOrder as number);
     const feeCreateArgs = mockCallArg<{
       data: {
         bookingId: string;

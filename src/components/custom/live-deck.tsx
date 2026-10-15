@@ -146,7 +146,7 @@ export function LiveAuthDeck() {
         <article className="dlu-card" key={front.id}>
           <div className="dlu-top">
             <div className="dlu-id min-w-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* biome-ignore lint/performance/noImgElement: avatar-URL fran data, fast 44px - next/image lar ingen vinst */}
               <img className="dlu-photo" src={front.photoUrl} alt="" width={44} height={44} />
               <div className="min-w-0">
                 <p className="dlu-type">{front.type}</p>

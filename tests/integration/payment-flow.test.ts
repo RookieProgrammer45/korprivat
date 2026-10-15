@@ -28,6 +28,7 @@ vi.mock('stripe', () => {
       },
     };
     webhooks = { constructEvent: vi.fn() };
+    // biome-ignore lint/complexity/noUselessConstructor: Stripe-mock: tom konstruktor avsiktlig - super() ska inte fa mock-nyckeln
     constructor(_key: string, _opts?: unknown) {}
   }
   return { default: StripeMock };

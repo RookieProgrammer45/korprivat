@@ -28,6 +28,7 @@ vi.mock('stripe', () => {
       },
     };
     webhooks = { constructEvent: vi.fn() };
+    // biome-ignore lint/complexity/noUselessConstructor: Stripe-mock: tom konstruktor avsiktlig - super() ska inte fa mock-nyckeln
     constructor(_key: string, _opts?: unknown) {}
   }
   return { default: StripeMock };
@@ -116,10 +117,10 @@ describe('payment-poll race guard', () => {
     const b2 = bodies[1];
     expect(b1).toBeDefined();
     expect(b2).toBeDefined();
-    expect(b1!.verified).toBe(true);
-    expect(b2!.verified).toBe(true);
-    expect(b1!.paymentStatus).toBe('held_escrow');
-    expect(b2!.paymentStatus).toBe('held_escrow');
+    expect(b1?.verified).toBe(true);
+    expect(b2?.verified).toBe(true);
+    expect(b1?.paymentStatus).toBe('held_escrow');
+    expect(b2?.paymentStatus).toBe('held_escrow');
     expect(prismaMock.booking.updateMany).toHaveBeenCalledTimes(2);
     expect(sendEmailMock).toHaveBeenCalledTimes(2);
   });

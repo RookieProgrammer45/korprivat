@@ -74,6 +74,7 @@ vi.mock('stripe', () => {
       },
     };
     webhooks = { constructEvent: vi.fn() };
+    // biome-ignore lint/complexity/noUselessConstructor: Stripe-mock: tom konstruktor avsiktlig - super() ska inte fa mock-nyckeln
     constructor(_key: string, _opts?: unknown) {}
   }
   return { default: StripeMock };
@@ -508,7 +509,7 @@ describe('booking: dispute → resolve refunded (cancel-before-payout)', () => {
         'refunded',
     );
     expect(bookingUpdateCall).toBeDefined();
-    const refundData = (bookingUpdateCall![0] as { data: object }).data;
+    const refundData = (bookingUpdateCall?.[0] as { data: object }).data;
     expect(refundData).not.toHaveProperty('payoutReleasedAt');
 
     // After open (1 counterparty email) + resolve (2 parties notified),

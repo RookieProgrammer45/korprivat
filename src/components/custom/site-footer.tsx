@@ -106,6 +106,7 @@ export function SiteFooter() {
         <div className="dlu-footer-top">
           <div className="dlu-footer-brand">
             <Link href="/" aria-label={siteName} className="dlu-footer-logo">
+              {/* biome-ignore lint/performance/noImgElement: statisk brand-logo SVG - next/image lar ingen vinst */}
               <img
                 src="/brand/logo-black.svg"
                 alt=""

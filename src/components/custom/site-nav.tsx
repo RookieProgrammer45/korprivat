@@ -156,6 +156,7 @@ export function SiteNav() {
           aria-label={siteName}
           className="group mr-3 flex min-w-0 shrink-0 items-center gap-2 text-foreground sm:mr-6"
         >
+          {/* biome-ignore lint/performance/noImgElement: statisk brand-logo SVG - next/image lar ingen vinst */}
           <img
             src="/brand/logo-black.svg"
             alt=""

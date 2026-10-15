@@ -216,7 +216,9 @@ html.dark .marketplace-hero {
 @media (prefers-reduced-motion: reduce) {
   .hero-car,
   .hero-road-line {
+    /* biome-ignore lint/complexity/noImportantStyles: avsiktlig override - rulling av animation (reduced motion) */
     animation: none !important;
+    /* biome-ignore lint/complexity/noImportantStyles: avsiktlig override - rulling av transform */
     transform: none !important;
   }
 }
@@ -1179,6 +1181,7 @@ html.dark .marketplace-hero-panel {
 
 .marketplace-hero-panel .hero-car,
 .marketplace-hero-panel .hero-road {
+  /* biome-ignore lint/complexity/noImportantStyles: avsiktlig override - doljer arvt hero-element */
   display: none !important;
 }
 

@@ -34,7 +34,9 @@ export const auth = betterAuth({
   trustedOrigins,
   socialProviders: {
     google: {
+      // biome-ignore lint/style/noNonNullAssertion: env satt vid deploy (check-env); Better Auth kraver strang-typ
       clientId: process.env.GOOGLE_CLIENT_ID!,
+      // biome-ignore lint/style/noNonNullAssertion: env satt vid deploy (check-env); Better Auth kraver strang-typ
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
   },
