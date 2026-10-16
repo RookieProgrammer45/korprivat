@@ -195,13 +195,15 @@ export function PublicHome() {
       <section className="marketplace-hero border-b border-border">
         <div className="marketplace-hero-grid container-page grid min-w-0 gap-10 py-section-lg lg:grid-cols-[1.12fr_0.88fr] lg:gap-20">
           <div className="marketplace-hero-copy marketplace-reveal flex min-w-0 flex-col gap-7">
-            <Badge
-              variant="outline"
-              className="w-fit border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-            >
-              <span className="mr-2 inline-block size-1.5 rounded-full bg-brand-500" aria-hidden />
-              {t('hero.eyebrow')}
-            </Badge>
+            {t('hero.eyebrow') ? (
+              <Badge
+                variant="outline"
+                className="w-fit border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
+              >
+                <span className="mr-2 inline-block size-1.5 rounded-full bg-brand-500" aria-hidden />
+                {t('hero.eyebrow')}
+              </Badge>
+            ) : null}
             <h1 className="marketplace-hero-title max-w-4xl font-display text-3xl leading-[1.05] tracking-tight text-balance text-foreground sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
               {t('hero.title')}
             </h1>
