@@ -213,5 +213,8 @@ function formatNextSlotPill(
 }
 
 function formatSek(amount: number, locale: 'en' | 'sv', suffix: string): string {
+  if (!amount) {
+    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
+  }
   return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} ${suffix}`;
 }

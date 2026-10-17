@@ -1099,5 +1099,8 @@ function formatNumber(value: number, locale: string): string {
 }
 
 function formatSek(value: number, locale: string, suffix: string): string {
+  if (!value) {
+    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
+  }
   return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(value)} ${suffix}`;
 }
