@@ -105,7 +105,12 @@ export function BookingPriceSummary({
     <Card className="booking-summary surface-panel border-border bg-muted">
       <CardContent className="grid gap-3 p-4">
         <p className="text-eyebrow text-muted-foreground">{tr('eyebrow')}</p>
-        <dl className="grid gap-2 text-small">
+        {quote.priceAmountSek === 0 ? (
+          <p className="font-display text-h4 font-semibold tracking-tight text-foreground">
+            {locale === 'en' ? 'Price on request' : 'Pris på förfrågan'}
+          </p>
+        ) : (
+<dl className="grid gap-2 text-small">
           <div className="flex items-center justify-between gap-3">
             <dt className="text-muted-foreground">{tr('priceLine')}</dt>
             <dd className="font-medium text-foreground">
@@ -127,6 +132,7 @@ export function BookingPriceSummary({
             </dd>
           </div>
         </dl>
+        )}
         <p className="text-caption text-muted-foreground">{tr('note')}</p>
       </CardContent>
     </Card>
