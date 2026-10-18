@@ -32,6 +32,7 @@ import {
   type InstructorQuery,
   parseInstructorQuery,
 } from '@/lib/contracts/instructors';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 type SortMode = 'default' | 'distance';
 
@@ -678,7 +679,7 @@ function CardGrid({
         <li key={row.id} data-next-slot-at={row.nextSlotAt ?? ''}>
           <div className="grid min-w-0 gap-2">
             <Link
-              href={`/instructors/${row.id}`}
+              href={schoolPath(row)}
               className="marketplace-provider-card group block min-w-0 rounded-xl outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-brand-500/60"
               data-provider-type={row.providerType}
             >
