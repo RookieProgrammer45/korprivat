@@ -1,6 +1,7 @@
 import 'server-only';
 import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { parseSchoolSlug, schoolPath } from '@/lib/seo/school-slugs';
 
 export type PublicInstructorSeo = {
   id: string;
@@ -101,4 +102,31 @@ export async function listIndexableInstructors(limit = 200) {
     take: limit,
   });
   return rows.filter((r) => isProviderActivated(r.categories));
+}
+
+export type PublicInstructorSlugResult = {
+  instructor: PublicInstructorSeo;
+  canonicalPath: string;
+};
+
+/**
+ * Resolves /trafikskola/<city>/<name>-<id8> to its instructor row.
+ * `canonicalPath` lets the page 308 any non-canonical spelling (wrong city,
+ * renamed school, missing id suffix) onto the right URL.
+ */
+export async function loadPublicInstructorBySchoolSlug(
+  citySlug: string,
+  slug: string,
+): Promise<PublicInstructorSlugResult | null> {
+  const parsed = parseSchoolSlug(slug);
+  if (!parsed) return null;
+  const row = await prisma.instructor.findFirst({
+    where: { id: { startsWith: parsed.id8 } },
+    select: { id: true },
+    orderBy: { createdAt: 'asc' },
+  });
+  if (!row) return null;
+  const instructor = await loadPublicInstructorSeo(row.id);
+  if (!instructor) return null;
+  return { instructor, canonicalPath: schoolPath(instructor) };
 }
