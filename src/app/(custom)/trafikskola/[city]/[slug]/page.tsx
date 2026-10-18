@@ -97,7 +97,10 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
             addressLocality: resolved.instructor.city,
             addressCountry: 'SE',
           },
-          priceRange: `${resolved.instructor.hourlyRateSek} SEK`,
+          priceRange:
+            resolved.instructor.hourlyRateSek > 0
+              ? `${resolved.instructor.hourlyRateSek} SEK`
+              : undefined,
           areaServed: resolved.instructor.city,
           knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
         }
