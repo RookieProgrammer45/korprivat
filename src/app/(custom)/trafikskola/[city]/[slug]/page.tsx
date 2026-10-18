@@ -69,10 +69,6 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   const requested = `/trafikskola/${city}/${slug}`;
   if (resolved.canonicalPath !== requested) permanentRedirect(resolved.canonicalPath);
 
-  const { city } = await params;
-  const requested = `/trafikskola/${city}/${slug}`;
-  if (resolved.canonicalPath !== requested) permanentRedirect(resolved.canonicalPath);
-
   const instructorId = resolved.instructor.id;
   const rawBooking = Array.isArray(sp.booking) ? sp.booking[0] : sp.booking;
   const rawToken = Array.isArray(sp.token) ? sp.token[0] : sp.token;
