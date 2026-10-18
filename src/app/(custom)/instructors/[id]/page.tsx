@@ -4,6 +4,7 @@ import { BookingForm } from '@/components/custom/booking-form';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { ReviewSection } from '@/components/custom/review-section';
 import { GoogleReviewsSection } from '@/components/custom/google-reviews-section';
+import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorSeo } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
@@ -94,6 +95,7 @@ export default async function InstructorPage({ params, searchParams }: PageProps
       <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
         <div className="grid min-w-0 gap-6">
           <InstructorDetail instructorId={id} />
+          <InstructorOfferingsSection instructorId={id} />
           <ReviewSection instructorId={id} reviewBookingId={reviewBookingId} />
           <GoogleReviewsSection instructorId={id} />
         </div>
