@@ -12,6 +12,7 @@ import {
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
+import { schoolPath } from '@/lib/seo/school-slugs';
 import { siteName, siteUrl } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
@@ -168,7 +169,7 @@ export default async function SchoolProfilePage({ params }: PageProps) {
                         <p className="truncate font-medium text-foreground">{instructor.name}</p>
                         <p className="text-small text-muted-foreground">{instructor.city}</p>
                         <Button asChild variant="link" size="sm" className="h-auto w-fit p-0">
-                          <Link href={`/instructors/${instructor.id}`}>{instructor.name}</Link>
+                          <Link href={schoolPath(instructor)}>{instructor.name}</Link>
                         </Button>
                       </div>
                     </CardContent>

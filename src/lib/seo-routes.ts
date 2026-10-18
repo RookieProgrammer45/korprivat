@@ -2,7 +2,8 @@
 // locations registry over one-off city files — add a row in nordic-locations.ts.
 import type { MetadataRoute } from 'next';
 import { allLocationSitemapPaths } from '@/lib/seo/nordic-locations';
-import { listIndexableInstructorIds } from '@/lib/seo/public-instructor';
+import { listIndexableInstructors } from '@/lib/seo/public-instructor';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 /** App-absolute `path` (e.g. /items/aatrox) + optional Next sitemap fields. */
 export type SeoRoute = { path: string } & Omit<MetadataRoute.Sitemap[number], 'url'>;
@@ -53,9 +54,9 @@ export async function seoRoutes(): Promise<SeoRoute[]> {
 
   let instructorRoutes: SeoRoute[] = [];
   try {
-    const ids = await listIndexableInstructorIds(500);
-    instructorRoutes = ids.map((id) => ({
-      path: `/instructors/${id}`,
+    const rows = await listIndexableInstructors(500);
+    instructorRoutes = rows.map((row) => ({
+      path: schoolPath(row),
       priority: 0.65,
       changeFrequency: 'weekly' as const,
     }));

@@ -11,6 +11,7 @@
 import Link from 'next/link';
 import { absoluteUrl } from '@/lib/seo/alternates';
 import { listIndexableInstructors } from '@/lib/seo/public-instructor';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 export async function PublicDirectorySeo() {
   const instructors = await listIndexableInstructors(200);
@@ -24,7 +25,7 @@ export async function PublicDirectorySeo() {
     itemListElement: instructors.map((instructor, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      url: absoluteUrl(`/instructors/${instructor.id}`),
+      url: absoluteUrl(schoolPath(instructor)),
       name: `${instructor.name} — ${instructor.city}`,
     })),
   };
@@ -41,7 +42,7 @@ export async function PublicDirectorySeo() {
         {instructors.map((instructor) => (
           <li key={instructor.id}>
             <Link
-              href={`/instructors/${instructor.id}`}
+              href={schoolPath(instructor)}
               className="flex min-w-0 flex-col gap-0.5 rounded-xl border border-border px-4 py-3 transition-colors hover:border-foreground/30"
             >
               <span className="truncate font-medium text-foreground">{instructor.name}</span>
