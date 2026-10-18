@@ -498,7 +498,7 @@
     "affiliationAll": "All",
     "affiliationSchool": "Schools only",
     "affiliationIndependent": "Independent only",
-    "rateSuffix": "SEK / hour",
+    "rateSuffix": "SEK / lesson",
     "rateSuffixShort": "kr",
     "rateRangeError": "The minimum price must be less than or equal to the maximum price.",
     "clearFilters": "Clear filters",
@@ -604,12 +604,12 @@
     "meta": {
       "title": "Driving-school listing",
       "description": "Review a school's categories, published price, availability, booking mode and cancellation policy before you book.",
-      "descriptionNamed": "{name} in {city} — from {rate} SEK/hour. Compare categories, availability and booking policy on DriveLinkUp."
+      "descriptionNamed": "{name} in {city} — from {rate} SEK/lesson. Compare categories, availability and booking policy on DriveLinkUp."
     },
     "profileEyebrow": "Driving-school listing",
     "locatedIn": "Based in {city}",
     "hourlyRate": "Lesson price",
-    "rateSuffix": "SEK / hour",
+    "rateSuffix": "SEK / lesson",
     "portraitAlt": "Profile photo of {name}",
     "facts": {
       "city": "City",
@@ -719,7 +719,7 @@
     "successEyebrow": "Booking saved",
     "successBody": "Your booking with {instructor} is saved. Review the school price, payment status and next step below.",
     "rateLabel": "Lesson price",
-    "rateSuffix": "SEK / hour",
+    "rateSuffix": "SEK / lesson",
     "paymentLabel": "Payment",
     "rateFallback": "the school",
     "paidBadge": "Paid",
@@ -1395,7 +1395,7 @@
         "nextSlot": "Next open slot · {when}",
         "portraitAlt": "Image for {name}, driving school",
         "englishAvailable": "English available",
-        "rateSuffix": "SEK / hour",
+        "rateSuffix": "SEK / lesson",
         "errorTitle": "We couldn't load your recommendations just now.",
         "retry": "Try again"
       },
@@ -1823,7 +1823,7 @@
     "errorTitle": "The instructor preview could not load.",
     "empty": "No instructors are listed yet.",
     "portraitAlt": "Profile photo of {name}",
-    "rateSuffix": "SEK / hour",
+    "rateSuffix": "SEK / lesson",
     "nextAvailableLabel": "Next available",
     "noUpcomingSlot": "No upcoming slot listed",
     "englishAvailable": "English available",
@@ -1938,18 +1938,18 @@
       "released": "Completed",
       "refunded": "Refunded",
       "awaitingApproval": "Awaiting approval",
-    "deleteAccount": {
-      "title": "Delete account",
-      "body": "Permanently deletes your account, your bookings and all personal data. This cannot be undone.",
-      "cta": "Delete account",
-      "dialogTitle": "Delete your account?",
-      "dialogBody": "All of your personal data is permanently erased: your profile, your bookings and your listings. This cannot be undone.",
-      "confirm": "Delete permanently",
-      "cancel": "Cancel",
-      "deleting": "Deleting…",
-      "done": "Your account has been deleted.",
-      "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
-    },
+      "deleteAccount": {
+        "title": "Delete account",
+        "body": "Permanently deletes your account, your bookings and all personal data. This cannot be undone.",
+        "cta": "Delete account",
+        "dialogTitle": "Delete your account?",
+        "dialogBody": "All of your personal data is permanently erased: your profile, your bookings and your listings. This cannot be undone.",
+        "confirm": "Delete permanently",
+        "cancel": "Cancel",
+        "deleting": "Deleting…",
+        "done": "Your account has been deleted.",
+        "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
+      },
       "declined": "Declined",
       "cancelled": "Cancelled"
     }
