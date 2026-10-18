@@ -498,7 +498,7 @@
     "affiliationAll": "Alla",
     "affiliationSchool": "Endast skolor",
     "affiliationIndependent": "Endast fristående",
-    "rateSuffix": "SEK / timme",
+    "rateSuffix": "SEK / lektion",
     "rateSuffixShort": "kr",
     "rateRangeError": "Lägsta priset måste vara mindre än eller lika med det högsta priset.",
     "clearFilters": "Rensa filter",
@@ -604,12 +604,12 @@
     "meta": {
       "title": "Trafikskolans annons",
       "description": "Se skolans kategorier, publicerade pris, tillgänglighet, bokningsläge och avbokningspolicy före bokning.",
-      "descriptionNamed": "{name} i {city} — från {rate} SEK/timme. Jämför kategorier, tillgänglighet och bokningspolicy på DriveLinkUp."
+      "descriptionNamed": "{name} i {city} — från {rate} SEK/lektion. Jämför kategorier, tillgänglighet och bokningspolicy på DriveLinkUp."
     },
     "profileEyebrow": "Trafikskolans annons",
     "locatedIn": "Finns i {city}",
     "hourlyRate": "Lektionspris",
-    "rateSuffix": "SEK / timme",
+    "rateSuffix": "SEK / lektion",
     "portraitAlt": "Profilbild på {name}",
     "facts": {
       "city": "Stad",
@@ -719,7 +719,7 @@
     "successEyebrow": "Bokningen är sparad",
     "successBody": "Din bokning med {instructor} är sparad. Se skolans pris, betalningsstatus och nästa steg nedan.",
     "rateLabel": "Lektionspris",
-    "rateSuffix": "SEK / timme",
+    "rateSuffix": "SEK / lektion",
     "paymentLabel": "Betalning",
     "rateFallback": "skolan",
     "paidBadge": "Betald",
@@ -1396,7 +1396,7 @@
         "nextSlot": "Nästa lediga tid · {when}",
         "portraitAlt": "Bild för {name}, trafikskola",
         "englishAvailable": "Engelska tillgängligt",
-        "rateSuffix": "SEK / timme",
+        "rateSuffix": "SEK / lektion",
         "errorTitle": "Vi kunde inte hämta dina rekommendationer just nu.",
         "retry": "Försök igen"
       },
@@ -1824,7 +1824,7 @@
     "errorTitle": "Förhandsvisningen kunde inte laddas.",
     "empty": "Inga instruktörer är listade ännu.",
     "portraitAlt": "Profilbild på {name}",
-    "rateSuffix": "SEK / timme",
+    "rateSuffix": "SEK / lektion",
     "nextAvailableLabel": "Nästa lediga tid",
     "noUpcomingSlot": "Ingen kommande tid listad",
     "englishAvailable": "Engelska tillgängligt",
@@ -1939,18 +1939,18 @@
       "released": "Genomförd",
       "refunded": "Återbetald",
       "awaitingApproval": "Väntar på godkännande",
-    "deleteAccount": {
-      "title": "Radera konto",
-      "body": "Raderar ditt konto, dina bokningar och all personlig data permanent. Du kan inte ångra detta.",
-      "cta": "Radera konto",
-      "dialogTitle": "Radera ditt konto?",
-      "dialogBody": "All din personliga data tas bort permanent: din profil, dina bokningar och dina listningar. Detta kan inte ångras.",
-      "confirm": "Radera permanent",
-      "cancel": "Avbryt",
-      "deleting": "Raderar…",
-      "done": "Ditt konto har raderats.",
-      "error": "Kunde inte radera kontot. Försök igen, eller mejla support@drivelinkup.com."
-    },
+      "deleteAccount": {
+        "title": "Radera konto",
+        "body": "Raderar ditt konto, dina bokningar och all personlig data permanent. Du kan inte ångra detta.",
+        "cta": "Radera konto",
+        "dialogTitle": "Radera ditt konto?",
+        "dialogBody": "All din personliga data tas bort permanent: din profil, dina bokningar och dina listningar. Detta kan inte ångras.",
+        "confirm": "Radera permanent",
+        "cancel": "Avbryt",
+        "deleting": "Raderar…",
+        "done": "Ditt konto har raderats.",
+        "error": "Kunde inte radera kontot. Försök igen, eller mejla support@drivelinkup.com."
+      },
       "declined": "Avböjd",
       "cancelled": "Avbokad"
     }
