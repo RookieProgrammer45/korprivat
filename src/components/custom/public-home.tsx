@@ -14,6 +14,7 @@ import {
   type InstructorFilteredItem,
   InstructorList,
 } from '@/lib/contracts/instructors';
+import { schoolPath } from '@/lib/seo/school-slugs';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -134,7 +135,7 @@ function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
         : null,
     languages: languages || 'Svenska',
     nextSlot: row.nextSlotAt ? formatSlot(row.nextSlotAt) : null,
-    href: `/instructors/${row.id}`,
+    href: schoolPath(row),
   };
 }
 
