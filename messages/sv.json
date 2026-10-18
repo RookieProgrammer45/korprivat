@@ -3381,5 +3381,21 @@
     "source": "Källa: Google",
     "syncedAt": "Hämtat {date}",
     "reviewRating": "Betyg {rating} av 5"
+  },
+  "offerings": {
+    "section": {
+      "eyebrow": "Priser & kurser",
+      "title": "Skolans priser",
+      "lead": "Publicerade priser från skolans egen webbplats. Intresserad? Skicka en förfrågan — eleven betalar ingen avgift till DriveLinkUp.",
+      "kind": {
+        "PAKET": "Kurs",
+        "LEKTION": "Lektion",
+        "INTENSIVKURS": "Intensivkurs"
+      },
+      "sessionsCount": "{count, plural, =1 {1 tillfälle} other {# tillfällen}}",
+      "weeksCount": "{count, plural, =1 {1 vecka} other {# veckor}}",
+      "priceFrom": "Från {price} SEK",
+      "requestCta": "Begär bokning"
+    }
   }
 }

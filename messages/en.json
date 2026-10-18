@@ -3380,5 +3380,21 @@
     "source": "Source: Google",
     "syncedAt": "Fetched {date}",
     "reviewRating": "Rated {rating} out of 5"
+  },
+  "offerings": {
+    "section": {
+      "eyebrow": "Prices & courses",
+      "title": "School prices",
+      "lead": "Published prices from the school's own website. Interested? Send a request — students pay no fee to DriveLinkUp.",
+      "kind": {
+        "PAKET": "Course",
+        "LEKTION": "Lesson",
+        "INTENSIVKURS": "Intensive course"
+      },
+      "sessionsCount": "{count, plural, =1 {1 session} other {# sessions}}",
+      "weeksCount": "{count, plural, =1 {1 week} other {# weeks}}",
+      "priceFrom": "From {price} SEK",
+      "requestCta": "Request booking"
+    }
   }
 }
