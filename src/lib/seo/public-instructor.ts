@@ -123,7 +123,7 @@ export async function loadPublicInstructorBySchoolSlug(
   const row = await prisma.instructor.findFirst({
     where: { id: { startsWith: parsed.id8 } },
     select: { id: true },
-    orderBy: { createdAt: 'asc' },
+    orderBy: { name: 'asc' },
   });
   if (!row) return null;
   const instructor = await loadPublicInstructorSeo(row.id);
