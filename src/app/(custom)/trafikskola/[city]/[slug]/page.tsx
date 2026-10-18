@@ -24,14 +24,9 @@ type PageProps = {
 
 type Resolved = NonNullable<Awaited<ReturnType<typeof loadPublicInstructorBySchoolSlug>>>;
 
-/** Any spelling other than the canonical /trafikskola/<city>/<name>-<id8> 308s onto it. */
-function isCanonical(resolved: Resolved, city: string, slug: string): boolean {
-  return resolved.canonicalPath === `/trafikskola/${city}/${slug}`;
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { city, slug } = await params;
-  const resolved = await loadPublicInstructorBySchoolSlug(city, slug);
+  const { slug } = await params;
+  const resolved = await loadPublicInstructorBySchoolSlug(slug);
   const t = await getTranslations('instructorDetail.meta');
   if (!resolved) {
     return {
@@ -65,12 +60,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
   };
 }
-
 export default async function SchoolPage({ params, searchParams }: PageProps) {
+
   const [{ city, slug }, sp] = await Promise.all([params, searchParams]);
-  const resolved = await loadPublicInstructorBySchoolSlug(city, slug);
+  const resolved = await loadPublicInstructorBySchoolSlug(slug);
   if (!resolved) notFound();
-  if (!isCanonical(resolved, city, slug)) permanentRedirect(resolved.canonicalPath);
+
+  const requested = `/trafikskola/${city}/${slug}`;
+  if (resolved.canonicalPath !== requested) permanentRedirect(resolved.canonicalPath);
+
+  const { city } = await params;
+  const requested = `/trafikskola/${city}/${slug}`;
+  if (resolved.canonicalPath !== requested) permanentRedirect(resolved.canonicalPath);
 
   const instructorId = resolved.instructor.id;
   const rawBooking = Array.isArray(sp.booking) ? sp.booking[0] : sp.booking;

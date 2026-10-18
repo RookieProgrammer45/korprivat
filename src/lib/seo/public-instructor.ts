@@ -115,7 +115,6 @@ export type PublicInstructorSlugResult = {
  * renamed school, missing id suffix) onto the right URL.
  */
 export async function loadPublicInstructorBySchoolSlug(
-  citySlug: string,
   slug: string,
 ): Promise<PublicInstructorSlugResult | null> {
   const parsed = parseSchoolSlug(slug);

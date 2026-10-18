@@ -237,6 +237,7 @@ export function PublicHome() {
               <div
                 className="dlu-deck"
                 onMouseEnter={() => setPaused(true)}
+                role="group"
                 onMouseLeave={() => setPaused(false)}
               >
                 <article className="dlu-card" key={front.id}>
