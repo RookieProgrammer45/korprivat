@@ -16,9 +16,29 @@ import type { CspExtraSources } from './csp';
  *   imgSrc     → images beyond the base `https:` allowance (rare)
  * e.g. { frameSrc: ['https://js.stripe.com'], connectSrc: ['https://*.supabase.co'] }
  */
+
+// Google AdSense (auto ads) is enabled ONLY when NEXT_PUBLIC_ADSENSE_CLIENT is
+// set to a valid publisher ID — fail closed. It needs iframes + beacons to the
+// Google ad hosts. script-src stays untouched: the AdSenseLoader injects the
+// loader script WITH the per-request nonce, and 'strict-dynamic' admits the
+// child scripts AdSense injects itself.
+const adsOn = /^ca-pub-\d+$/.test(process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? '');
+
 export const cspExtraSources: CspExtraSources = {
-  frameSrc: [],
-  connectSrc: [],
+  frameSrc: adsOn
+    ? [
+        'https://googleads.g.doubleclick.net',
+        'https://tpc.googlesyndication.com',
+        'https://googleadservices.com',
+      ]
+    : [],
+  connectSrc: adsOn
+    ? [
+        'https://pagead2.googlesyndication.com',
+        'https://googleads.g.doubleclick.net',
+        'https://fundingchoicesmessages.google.com',
+      ]
+    : [],
   mediaSrc: [],
   fontSrc: [],
   imgSrc: [],
