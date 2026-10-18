@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { BookingForm } from '@/components/custom/booking-form';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { ReviewSection } from '@/components/custom/review-section';
+import { GoogleReviewsSection } from '@/components/custom/google-reviews-section';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorSeo } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
@@ -94,6 +95,7 @@ export default async function InstructorPage({ params, searchParams }: PageProps
         <div className="grid min-w-0 gap-6">
           <InstructorDetail instructorId={id} />
           <ReviewSection instructorId={id} reviewBookingId={reviewBookingId} />
+          <GoogleReviewsSection instructorId={id} />
         </div>
         <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
           <BookingForm

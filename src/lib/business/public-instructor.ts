@@ -21,6 +21,11 @@ type PublicInstructorSource = {
   cancellationPolicyTier: string | null;
   bookingMode: string | null;
   providerRole?: string | null;
+  // Google Places snapshot columns — optional so every existing caller of
+  // this helper keeps compiling; toPublicInstructor null-fills them.
+  googleRating?: number | null;
+  googleReviewCount?: number | null;
+  googleMapsUri?: string | null;
 };
 
 type ReviewRow = { instructorId: string; rating: number };
@@ -111,6 +116,10 @@ export function toPublicInstructor(
     languages: row.englishSpeaking === true ? (['sv', 'en'] as const) : (['sv'] as const),
     verificationStatus: aggregate.verificationStatus,
     reviewSummary: aggregate.reviewSummary,
+    // Google Places snapshot (cached; the backfill job refreshes weekly).
+    googleRating: row.googleRating ?? null,
+    googleReviewCount: row.googleReviewCount ?? null,
+    googleMapsUri: row.googleMapsUri ?? null,
     nextSlotAt,
     cancellationPolicyTier:
       row.cancellationPolicyTier === 'moderate' || row.cancellationPolicyTier === 'strict'

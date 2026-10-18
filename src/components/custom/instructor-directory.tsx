@@ -727,7 +727,12 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
   const reviewLabel =
     row.reviewSummary.averageRating === null
-      ? tr('reviewsNone')
+      ? row.googleRating != null
+        ? tr('reviewsGoogleSummary', {
+            count: row.googleReviewCount ?? 0,
+            average: formatNumber(row.googleRating, locale),
+          })
+        : tr('reviewsNone')
       : tr('reviewsSummary', {
           count: row.reviewSummary.count,
           average: formatNumber(row.reviewSummary.averageRating, locale),

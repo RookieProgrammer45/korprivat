@@ -173,7 +173,12 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             </Fact>
             <Fact label={tr('facts.reviews')}>
               {instructor.reviewSummary.averageRating === null
-                ? tr('reviews.none')
+                ? instructor.googleRating == null
+                  ? tr('reviews.none')
+                  : tr('reviews.googleSummary', {
+                      count: instructor.googleReviewCount ?? 0,
+                      average: formatNumber(instructor.googleRating, locale),
+                    })
                 : tr('reviews.summary', {
                     count: instructor.reviewSummary.count,
                     average: formatNumber(instructor.reviewSummary.averageRating, locale),

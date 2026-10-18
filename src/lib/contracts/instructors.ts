@@ -62,6 +62,12 @@ export const PUBLIC_INSTRUCTOR_SELECT = {
   // server's read path when missing.
   bookingMode: true,
   providerRole: true,
+  // Google Places snapshot columns (see prisma/schema/instructors.prisma).
+  // Nullable; surfaced as the Google rating fallback on directory cards and
+  // the detail "Omdömen" fact, and consumed by the google-reviews route.
+  googleRating: true,
+  googleReviewCount: true,
+  googleMapsUri: true,
 } as const;
 
 // Read shape: persisted instructor record returned by the detail endpoint.
@@ -86,6 +92,12 @@ export const InstructorItem = z.object({
     count: z.number().int().nonnegative(),
     averageRating: z.number().min(0).max(5).nullable(),
   }),
+  // Google Places snapshot (cached, weekly-refreshed). Nullable + optional
+  // so every existing caller keeps parsing unchanged; the UI falls back to
+  // the student-review summary whenever these are absent.
+  googleRating: z.number().min(0).max(5).nullable().optional(),
+  googleReviewCount: z.number().int().nonnegative().nullable().optional(),
+  googleMapsUri: z.string().nullable().optional(),
   nextSlotAt: z.string().datetime().nullable(),
   // Cancellation-policy tier published on the instructor's profile.
   // Nullable on the storage column; nullable on the contract too so a

@@ -41,6 +41,19 @@ model Instructor {
   // Provider discriminator for the two marketplace supply roles. Nullable
   // with an INSTRUCTOR default so legacy rows remain valid during db push.
   providerRole           String?            @default("INSTRUCTOR")
+
+  // ── Google Places snapshot (cached; refreshed weekly by the backfill job
+  // against the Places (New) Details endpoint). Nullable so legacy rows and
+  // listings without a confident Google match survive db push. Rendered as
+  // the "Omdömen från Google" section on the detail page and as the Google
+  // rating fallback on directory cards.
+  googlePlaceId           String?
+  googleRating            Float?
+  googleReviewCount       Int?
+  googleMapsUri           String?
+  googleSyncedAt          DateTime?
+  // Back-relation for GoogleReview — see prisma/schema/google-reviews.prisma.
+  googleReviews           GoogleReview[]
   bookings               Booking[]
   reviews                Review[]
   // Cancellation-policy tier the instructor publishes on their profile.

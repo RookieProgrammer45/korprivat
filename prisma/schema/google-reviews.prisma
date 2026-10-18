@@ -1,0 +1,28 @@
+// Google-review snapshot for the public "Omdömen från Google" section.
+// Rows are maintained OUTSIDE app traffic by the weekly backfill job
+// (Google Places (New) Details, `reviews` field): the public route is
+// GET-only, so no handler re-validates the FK — same discipline as
+// reviews.prisma (db push does not add the FK; the job only writes
+// instructorId values that came straight from the Instructor table).
+//
+// `googleReviewId` is Google's stable review identifier; the composite
+// unique [instructorId, googleReviewId] keeps the weekly re-sync idempotent.
+model GoogleReview {
+  id             String     @id @default(cuid())
+  instructorId   String
+  googleReviewId String
+  authorName     String
+  rating         Int
+  comment        String
+  // `publishTime` is Google's authoritative timestamp; `relativeTime` keeps
+  // Google's locale descriptor ("för 2 månader sedan") as a display fallback.
+  publishTime    DateTime?
+  relativeTime   String?
+  // Cache marker — Google's display guidelines cap review caching at 30
+  // days, which is why the backfill job refreshes weekly.
+  fetchedAt      DateTime   @default(now())
+  instructor     Instructor @relation(fields: [instructorId], references: [id])
+
+  @@unique([instructorId, googleReviewId])
+  @@index([instructorId])
+}
