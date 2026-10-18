@@ -598,7 +598,8 @@
       "noReviews": "Inga omdömen ännu",
       "reviewsValue": "{average}/5 ({count})",
       "viewProfile": "Visa profil"
-    }
+    },
+    "reviewsGoogleSummary": "{average} ★ på Google · {count, plural, one {# omdöme} other {# omdömen}}"
   },
   "instructorDetail": {
     "meta": {
@@ -639,7 +640,8 @@
     },
     "reviews": {
       "none": "Inga omdömen ännu",
-      "summary": "{average} · {count, plural, one {# omdöme} other {# omdömen}}"
+      "summary": "{average} · {count, plural, one {# omdöme} other {# omdömen}}",
+      "googleSummary": "{average} · {count, plural, one {# omdöme} other {# omdömen}} på Google"
     },
     "availability": {
       "none": "Ingen kommande tid listad"
@@ -3369,5 +3371,15 @@
       "primaryCta": "Hitta lektioner",
       "secondaryCta": "Lista er profil"
     }
+  },
+  "googleReviews": {
+    "heading": "Omdömen från Google",
+    "summaryText": "{average} · {count, plural, one {# omdöme} other {# omdömen}}",
+    "viewAll": "Se alla på Google Maps",
+    "showMore": "Visa mer",
+    "showLess": "Visa mindre",
+    "source": "Källa: Google",
+    "syncedAt": "Hämtat {date}",
+    "reviewRating": "Betyg {rating} av 5"
   }
 }
