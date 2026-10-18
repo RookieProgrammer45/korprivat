@@ -4,6 +4,7 @@
 
 'use client';
 
+import { AdSenseLoader } from '@/components/custom/adsense-loader';
 import { ChatbotMount } from '@/components/custom/chatbot-mount';
 import { ConsentBanner } from '@/components/custom/consent-banner';
 
@@ -12,6 +13,7 @@ export function GlobalMounts() {
     <>
       <ChatbotMount />
       <ConsentBanner />
+      <AdSenseLoader />
     </>
   );
 }
