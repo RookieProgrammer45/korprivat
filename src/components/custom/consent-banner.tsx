@@ -63,6 +63,8 @@ function writeStored(scope: ConsentDecisionScope): void {
       STORAGE_KEY,
       JSON.stringify({ policyVersion: PRIVACY_POLICY_VERSION, scope }),
     );
+    // Tell consent-gated mounts (e.g. AdSenseLoader) a decision was recorded.
+    window.dispatchEvent(new CustomEvent('dl:consent', { detail: scope }));
   } catch {
     // localStorage may be blocked (private mode, quota) — the cookie still
     // exists, so next visit still resolves to "decided".
