@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { BookingForm } from '@/components/custom/booking-form';
-import { InstructorDetail } from '@/components/custom/instructor-detail';
-import { ReviewSection } from '@/components/custom/review-section';
 import { GoogleReviewsSection } from '@/components/custom/google-reviews-section';
+import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
+import { ReviewSection } from '@/components/custom/review-section';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
@@ -57,9 +57,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: instructor.photoUrl ? [{ url: instructor.photoUrl }] : undefined,
     },
   };
-}
-export default async function SchoolPage({ params, searchParams }: PageProps) {
 
+}
+
+export default async function SchoolPage({ params, searchParams }: PageProps) {
   const [{ city, slug }, sp] = await Promise.all([params, searchParams]);
   const resolved = await loadPublicInstructorBySchoolSlug(slug);
   if (!resolved) notFound();
@@ -67,11 +68,9 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   const requested = `/trafikskola/${city}/${slug}`;
   if (resolved.canonicalPath !== requested) permanentRedirect(resolved.canonicalPath);
 
-  const instructorId = resolved.instructor.id;
   const rawBooking = Array.isArray(sp.booking) ? sp.booking[0] : sp.booking;
   const rawToken = Array.isArray(sp.token) ? sp.token[0] : sp.token;
-  const rawRebook = Array.isArray(sp.rebook) ? sp.rebook[0] : sp.rebook;
-  const rawReview = Array.isArray(sp.review) ? sp.review[0] : sp.review;
+  const instructorId = resolved.instructor.id;
   const bookingId = typeof rawBooking === 'string' && rawBooking.length > 0 ? rawBooking : null;
   const bookingToken = typeof rawToken === 'string' && rawToken.length > 0 ? rawToken : undefined;
   const rebookId = typeof rawRebook === 'string' && rawRebook.length > 0 ? rawRebook : null;
