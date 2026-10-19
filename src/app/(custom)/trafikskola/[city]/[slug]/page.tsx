@@ -117,9 +117,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
           />
         </div>
       </div>
-      {jsonLd ? (
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      ) : null}
+      {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
     </main>
   );
 }
