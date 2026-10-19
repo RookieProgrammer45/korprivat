@@ -53,11 +53,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName,
       title,
       description,
-      url: absoluteUrl(path),
       images: instructor.photoUrl ? [{ url: instructor.photoUrl }] : undefined,
     },
   };
-
 }
 
 export default async function SchoolPage({ params, searchParams }: PageProps) {
