@@ -22,8 +22,6 @@ type PageProps = {
   }>;
 };
 
-type Resolved = NonNullable<Awaited<ReturnType<typeof loadPublicInstructorBySchoolSlug>>>;
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const resolved = await loadPublicInstructorBySchoolSlug(slug);
@@ -81,7 +79,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
   const jsonLd =
-    resolved.instructor && resolved.instructor.indexable
+    resolved.instructor?.indexable
       ? {
           '@context': 'https://schema.org',
           '@type': 'DrivingSchool',
