@@ -54,9 +54,7 @@ export async function GET(_req: Request, ctx: Ctx) {
           rating: instructor.googleRating,
           count: instructor.googleReviewCount,
           mapsUri: instructor.googleMapsUri,
-          syncedAt: instructor.googleSyncedAt
-            ? instructor.googleSyncedAt.toISOString()
-            : null,
+          syncedAt: instructor.googleSyncedAt ? instructor.googleSyncedAt.toISOString() : null,
         }
       : null,
   });
