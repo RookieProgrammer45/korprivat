@@ -70,6 +70,8 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
 
   const rawBooking = Array.isArray(sp.booking) ? sp.booking[0] : sp.booking;
   const rawToken = Array.isArray(sp.token) ? sp.token[0] : sp.token;
+  const rawRebook = Array.isArray(sp.rebook) ? sp.rebook[0] : sp.rebook;
+  const rawReview = Array.isArray(sp.review) ? sp.review[0] : sp.review;
   const instructorId = resolved.instructor.id;
   const bookingId = typeof rawBooking === 'string' && rawBooking.length > 0 ? rawBooking : null;
   const bookingToken = typeof rawToken === 'string' && rawToken.length > 0 ? rawToken : undefined;
