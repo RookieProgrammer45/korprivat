@@ -77,28 +77,27 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
-  const jsonLd =
-    resolved.instructor?.indexable
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'DrivingSchool',
-          name: resolved.instructor.name,
-          description: resolved.instructor.bio?.slice(0, 300) || undefined,
-          url: absoluteUrl(resolved.canonicalPath),
-          image: resolved.instructor.photoUrl || undefined,
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: resolved.instructor.city,
-            addressCountry: 'SE',
-          },
-          priceRange:
-            resolved.instructor.hourlyRateSek > 0
-              ? `${resolved.instructor.hourlyRateSek} SEK`
-              : undefined,
-          areaServed: resolved.instructor.city,
-          knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
-        }
-      : null;
+  const jsonLd = resolved.instructor?.indexable
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'DrivingSchool',
+        name: resolved.instructor.name,
+        description: resolved.instructor.bio?.slice(0, 300) || undefined,
+        url: absoluteUrl(resolved.canonicalPath),
+        image: resolved.instructor.photoUrl || undefined,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: resolved.instructor.city,
+          addressCountry: 'SE',
+        },
+        priceRange:
+          resolved.instructor.hourlyRateSek > 0
+            ? `${resolved.instructor.hourlyRateSek} SEK`
+            : undefined,
+        areaServed: resolved.instructor.city,
+        knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+      }
+    : null;
 
   return (
     <main className="container-page section min-w-0">
