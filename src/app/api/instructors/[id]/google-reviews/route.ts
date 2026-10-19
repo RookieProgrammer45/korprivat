@@ -42,8 +42,7 @@ export async function GET(_req: Request, ctx: Ctx) {
     orderBy: [{ publishTime: 'desc' }, { fetchedAt: 'desc' }],
     take: 10,
   });
-  const hasSummary =
-    instructor.googleRating != null && instructor.googleReviewCount != null;
+  const hasSummary = instructor.googleRating != null && instructor.googleReviewCount != null;
   const payload = GoogleReviewList.parse({
     items: rows.map((row) => ({
       ...row,
