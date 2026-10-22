@@ -123,6 +123,15 @@ export async function POST(req: Request) {
     );
   }
 
+  // Directory-only ('contact') listing: the school has restricted booking —
+  // reject server-side so no client can bypass the hidden UI.
+  if (instructor.bookingMode === 'contact') {
+    return NextResponse.json(
+      { errors: { instructorId: 'This listing does not accept bookings' } },
+      { status: 403 },
+    );
+  }
+
   const instructorMode: BookingCreateMode =
     instructor.bookingMode === 'request' ? 'request' : 'instant';
   const submittedMode: BookingCreateMode = data.mode ?? instructorMode;
