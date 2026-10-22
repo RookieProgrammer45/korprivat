@@ -954,7 +954,7 @@
         "roleInstructor": "Jag är certifierad instruktör",
         "roleLearnerDesc": "Boka lektioner. Du måste vara minst 16 år.",
         "roleSchoolDesc": "Lista er auktoriserade skola med priser och tillgänglighet.",
-        "roleInstructorDesc": "Undervisa elever. Körkort i minst 5 år.",
+        "roleInstructorDesc": "Undervisa elever. Kräver godkänd trafiklärare ansluten till en trafikskola.",
         "learnerSection": "Uppgifter för elev",
         "schoolSection": "Uppgifter för trafikskola",
         "instructorSection": "Uppgifter för instruktör",
@@ -1156,10 +1156,10 @@
           "licenseUpload": {
             "stepEyebrow": "Undervisningsbehörighet",
             "stepTitle": "Ladda upp ditt lärarintyg",
-            "stepLead": "Vi verifierar Transportstyrelsen-behörighet innan din annons går live. Du måste ha haft körkort i minst 5 år.",
+            "stepLead": "Vi granskar ditt lärarintyg innan din annons går live. Betald körundervisning kräver att du är godkänd trafiklärare och ansluten till en trafikskola med giltigt tillstånd.",
             "fields": {
               "licenseLabel": "Lärarintygsfil",
-              "attestationLabel": "Jag bekräftar att intyget är mitt, att jag får undervisa med det, och att jag har haft fullständigt körkort i minst 5 år."
+              "attestationLabel": "Jag bekräftar att intyget är mitt och att jag är behörig att undervisa med det."
             }
           }
         },
@@ -1180,7 +1180,7 @@
       "accountTitleSchool": "Lista er trafikskola",
       "accountLeadSchool": "Lägg till skolans uppgifter så att elever kan hitta och boka er.",
       "accountTitleInstructor": "Skapa ditt instruktörskonto",
-      "accountLeadInstructor": "Undervisa som certifierad instruktör med körkort i minst 5 år.",
+      "accountLeadInstructor": "Undervisa som godkänd trafiklärare ansluten till en trafikskola.",
       "step": {
         "account": {
           "title": "Skapa konto"
@@ -2207,8 +2207,8 @@
           "body": "Du ser skolans pris i kronor innan du bokar — inga extra avgifter tillkommer."
         },
         "safety": {
-          "title": "Behörighet — kontrollerad i förväg",
-          "body": "Trafikskolorna är auktoriserade och instruktörernas behörighet kontrolleras. Upplägg och villkor finns på varje profil."
+          "title": "Behörighet — granskas innan publicering",
+          "body": "Trafikskolor laddar upp sitt Transportstyrelsen-tillstånd och instruktörer sitt lärarintyg. Dokumenten granskas innan annonsen publiceras. Upplägg och villkor finns på varje profil."
         },
         "cancellation": {
           "title": "Avbokning utan överraskningar",
@@ -3352,11 +3352,7 @@
         "Transparens i båda riktningar. Skolan äger sina uppgifter, och vi granskar dem innan något publiceras.",
         "Kostnadsfritt för elever. Du betalar aldrig någon avgift till DriveLinkUp."
       ],
-      "facts": [
-        "Grundat 2026",
-        "Stockholm, Sverige",
-        "Oberoende"
-      ],
+      "facts": ["Grundat 2026", "Stockholm, Sverige", "Oberoende"],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."
     },
     "promise": {
@@ -3396,6 +3392,59 @@
       "weeksCount": "{count, plural, =1 {1 vecka} other {# veckor}}",
       "priceFrom": "Från {price} SEK",
       "requestCta": "Begär bokning"
+    },
+    "requestForm": {
+      "title": "Skicka en förfrågan till {name}",
+      "nameLabel": "Namn",
+      "namePlaceholder": "Ditt namn",
+      "emailLabel": "E-post",
+      "emailPlaceholder": "din.epost@exempel.se",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "07X-XXX XX XX",
+      "startLabel": "Önskad starttid",
+      "startPlaceholder": "Välj ett datum och en tid",
+      "messageLabel": "Meddelande",
+      "messagePlaceholder": "Berätta kort vad du behöver hjälp med…",
+      "submit": "Skicka förfrågan",
+      "submitting": "Skickar…",
+      "cancel": "Avbryt",
+      "success": "Förfrågan skickad! Vi återkommer så snart vi kan.",
+      "error": "Något gick fel. Försök igen."
+    },
+    "editor": {
+      "title": "Priser & kurser",
+      "description": "Lägg upp era priser och kurser så att elever kan jämföra.",
+      "addCta": "Lägg till",
+      "editCta": "Redigera",
+      "deleteCta": "Ta bort",
+      "deleteConfirm": "Är du säker på att du vill ta bort detta?",
+      "empty": "Inga priser eller kurser tillagda ännu.",
+      "noListing": "Du har ingen publicerad annons ännu.",
+      "priceFrom": "Från",
+      "sessionsShort": "tillf.",
+      "weeksShort": "v.",
+      "save": "Spara",
+      "saving": "Sparar…",
+      "saved": "Sparat!",
+      "cancel": "Avbryt",
+      "error": "Något gick fel. Försök igen.",
+      "requiredMissing": "Fyll i alla obligatoriska fält.",
+      "kind": {
+        "PAKET": "Kurs",
+        "LEKTION": "Lektion",
+        "INTENSIVKURS": "Intensivkurs"
+      }
     }
+  },
+  "dashboardNav": {
+    "ariaLabel": "Användarmeny",
+    "studentTab": "Elev",
+    "instructorTab": "Instruktör",
+    "handledareTab": "Handledare",
+    "messagesTab": "Meddelanden",
+    "adminBadge": "Admin",
+    "signOut": "Logga ut",
+    "signingOut": "Loggar ut…",
+    "signOutError": "Kunde inte logga ut. Försök igen."
   }
 }
