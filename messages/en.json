@@ -660,6 +660,10 @@
       "request": {
         "title": "Request to book",
         "body": "Choose an open slot and send a request. The school confirms before payment is collected."
+      },
+      "contact": {
+        "title": "Directory listing",
+        "body": "This school is listed with its information and prices. DriveLinkUp does not handle bookings or requests for this school — contact the school directly to book."
       }
     },
     "safetyEyebrow": "Before you book",
@@ -750,7 +754,8 @@
     },
     "bookingModeLabel": {
       "instant": "Instant",
-      "request": "Request"
+      "request": "Request",
+      "contact": "Directory listing"
     },
     "bookingMode": {
       "title": "Booking mode",
@@ -760,7 +765,9 @@
       "instantName": "Instant booking",
       "requestLabel": "Request",
       "requestSummary": "Learners choose an open time and wait for your approval before payment.",
-      "requestName": "Request to book"
+      "requestName": "Request to book",
+      "contactLockedTitle": "Booking disabled",
+      "contactLockedBody": "Your school is currently listed as a directory listing — information and prices, without booking or requests via DriveLinkUp. Only DriveLinkUp can change this, following a new decision from your school. Contact us if you want to change it."
     },
     "validation": {
       "nameRequired": "Enter your name.",

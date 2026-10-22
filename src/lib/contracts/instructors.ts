@@ -28,7 +28,11 @@ const CANCELLATION_TIERS = ['flexible', 'moderate', 'strict'] as const;
 // Booking mode enum — same reason as CANCELLATION_TIERS for keeping
 // this as a literal tuple of strings. 'instant' / 'request' drives the
 // booking-flow mechanic per the brief.
-export const InstructorBookingModeEnum = z.enum(['instant', 'request']);
+// 'contact' = directory-only listing: the school is visible (info +
+// prices) but no booking, request, or availability surfaces render, and
+// the server rejects bookings/requests/slot creation for that row. It is
+// set by the platform (complaint/restriction workflow), not self-service.
+export const InstructorBookingModeEnum = z.enum(['instant', 'request', 'contact']);
 export type InstructorBookingMode = z.infer<typeof InstructorBookingModeEnum>;
 
 // Public Prisma `select` shape returned by every instructor endpoint. Server

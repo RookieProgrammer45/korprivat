@@ -99,23 +99,36 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
       }
     : null;
 
+  // 'contact' (directory-only) listings hide every booking surface: the
+  // booking sidebar, the offering request forms, and availability. Info,
+  // prices, and reviews stay — per-school restriction workflow.
+  const directoryOnly = resolved.instructor.bookingMode === 'contact';
+
   return (
     <main className="container-page section min-w-0">
-      <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+      <div
+        className={
+          directoryOnly
+            ? 'mx-auto grid w-full max-w-6xl gap-6'
+            : 'mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start'
+        }
+      >
         <div className="grid min-w-0 gap-6">
           <InstructorDetail instructorId={instructorId} />
-          <InstructorOfferingsSection instructorId={instructorId} />
+          <InstructorOfferingsSection instructorId={instructorId} requestEnabled={!directoryOnly} />
           <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
           <GoogleReviewsSection instructorId={instructorId} />
         </div>
-        <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
-          <BookingForm
-            instructorId={instructorId}
-            bookingId={bookingId}
-            bookingToken={bookingToken}
-            rebookBookingId={rebookId}
-          />
-        </div>
+        {directoryOnly ? null : (
+          <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
+            <BookingForm
+              instructorId={instructorId}
+              bookingId={bookingId}
+              bookingToken={bookingToken}
+              rebookBookingId={rebookId}
+            />
+          </div>
+        )}
       </div>
       {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
     </main>

@@ -127,7 +127,12 @@ export function toPublicInstructor(
         : row.cancellationPolicyTier === 'flexible'
           ? 'flexible'
           : null,
-    bookingMode: row.bookingMode === 'request' ? 'request' : 'instant',
+    bookingMode:
+      row.bookingMode === 'request'
+        ? 'request'
+        : row.bookingMode === 'contact'
+          ? 'contact'
+          : 'instant',
     // Raw marketplace kind as stored (SCHOOL | INSTRUCTOR | HANDLEDARE) — a
     // school-owned listing reports SCHOOL (QA 2026-10-13: the previous
     // collapse made /api/instructors describe every school as INSTRUCTOR).

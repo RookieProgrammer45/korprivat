@@ -53,7 +53,10 @@ export const ProviderProfile = z.object({
   providerRole: ProviderRoleEnum,
   timezone: z.string(),
   setupComplete: z.boolean(),
-  bookingMode: z.enum(['instant', 'request']),
+  // 'contact' = platform-set directory-only restriction (school complaint
+  // workflow). The dashboard renders it as a locked state — it cannot be
+  // lifted self-service (the /api/instructors/me PATCH guard enforces it).
+  bookingMode: z.enum(['instant', 'request', 'contact']),
   cancellationPolicyTier: z.enum(['flexible', 'moderate', 'strict']),
 });
 export type ProviderProfile = z.infer<typeof ProviderProfile>;
