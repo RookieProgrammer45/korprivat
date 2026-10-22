@@ -717,7 +717,11 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   // Tier pill surfaces the cancellation tier the instructor publishes on
   // their profile. Falls back to "flexible" on a missing tier field
   // (a pre-tier row) so the page never shows an empty pill.
-  const tierBadge = tierBadgeLabel(row.cancellationPolicyTier, trTier);
+  // Directory-only ('contact') listings show no cancellation-policy pill:
+  // no booking flows through DriveLinkUp, and an unconfirmed tier would
+  // misrepresent the school's own terms.
+  const tierBadge =
+    row.bookingMode === 'contact' ? null : tierBadgeLabel(row.cancellationPolicyTier, trTier);
   // Booking-mode badge mirrors the same "renders next to the hourly rate"
   // styling the tier badge uses. Default to 'instant' on a missing field
   // so legacy pre-mode rows still get the badge copy.
