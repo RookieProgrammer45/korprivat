@@ -204,7 +204,12 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
           <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
 
           <BookingModeSection bookingMode={instructor.bookingMode} />
-          <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
+          {/* Directory-only listings show no cancellation policy: no booking
+              flows through DriveLinkUp for this school, and an unconfirmed
+              tier would misrepresent the school's own terms. */}
+          {instructor.bookingMode === 'contact' ? null : (
+            <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
+          )}
           <SafetyExpectations />
         </div>
       </CardContent>
