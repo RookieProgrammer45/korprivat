@@ -938,7 +938,7 @@
       "accountTitleSchool": "List your driving school",
       "accountLeadSchool": "Add your school details so learners can find and book you.",
       "accountTitleInstructor": "Create your instructor account",
-      "accountLeadInstructor": "Teach as a certified instructor with a licence held for at least 5 years.",
+      "accountLeadInstructor": "Teach as an approved driving instructor (trafiklärare) affiliated with a driving school.",
       "submit": "Continue",
       "submitting": "Creating account…",
       "switchToSigninLead": "Already have an account?",
@@ -963,7 +963,7 @@
         "roleInstructor": "I'm a certified instructor",
         "roleLearnerDesc": "Book lessons. You must be at least 16.",
         "roleSchoolDesc": "List your authorized school with prices and availability.",
-        "roleInstructorDesc": "Teach learners. Licence held for at least 5 years.",
+        "roleInstructorDesc": "Teach learners. Requires an approved driving instructor (trafiklärare) affiliated with a driving school.",
         "learnerSection": "Learner details",
         "schoolSection": "School details",
         "instructorSection": "Instructor details",
@@ -1165,10 +1165,10 @@
           "licenseUpload": {
             "stepEyebrow": "Teaching credentials",
             "stepTitle": "Upload your teaching licence",
-            "stepLead": "We verify Transportstyrelsen teaching credentials before your listing goes live. You must have held a driving licence for at least 5 years.",
+            "stepLead": "We review your teaching certificate before your listing goes live. Paid driving instruction in Sweden requires an approved instructor (trafiklärare) affiliated with a licensed driving school.",
             "fields": {
               "licenseLabel": "Teaching licence file",
-              "attestationLabel": "I confirm this licence is mine, I am authorised to teach with it, and I have held a full driving licence for at least 5 years."
+              "attestationLabel": "I confirm this licence is mine and that I am authorised to teach with it."
             }
           }
         },
@@ -1237,7 +1237,8 @@
           "failed": "We could not verify your ID document. Please try again."
         }
       }
-    }
+    },
+    "accountLeadLearner": "Find and book lessons with driving schools and approved instructors."
   },
   "bookingFees": {
     "serviceFeeLabel": "No separate fee",
@@ -3351,11 +3352,7 @@
         "Transparency in both directions. The school owns its details, and we review everything before it is published.",
         "Free for learners. You never pay a fee to DriveLinkUp."
       ],
-      "facts": [
-        "Founded 2026",
-        "Stockholm, Sweden",
-        "Independent"
-      ],
+      "facts": ["Founded 2026", "Stockholm, Sweden", "Independent"],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {
@@ -3395,6 +3392,59 @@
       "weeksCount": "{count, plural, =1 {1 week} other {# weeks}}",
       "priceFrom": "From {price} SEK",
       "requestCta": "Request booking"
+    },
+    "requestForm": {
+      "title": "Send a request to {name}",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "07X-XXX XX XX",
+      "startLabel": "Preferred start time",
+      "startPlaceholder": "Pick a date and time",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell us briefly what you need help with…",
+      "submit": "Send request",
+      "submitting": "Sending…",
+      "cancel": "Cancel",
+      "success": "Request sent! We'll get back to you as soon as we can.",
+      "error": "Something went wrong. Please try again."
+    },
+    "editor": {
+      "title": "Prices & courses",
+      "description": "Publish your prices and courses so learners can compare.",
+      "addCta": "Add",
+      "editCta": "Edit",
+      "deleteCta": "Delete",
+      "deleteConfirm": "Are you sure you want to remove this?",
+      "empty": "No prices or courses added yet.",
+      "noListing": "You don't have a published listing yet.",
+      "priceFrom": "From",
+      "sessionsShort": "sessions",
+      "weeksShort": "wks",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved!",
+      "cancel": "Cancel",
+      "error": "Something went wrong. Please try again.",
+      "requiredMissing": "Please fill in all required fields.",
+      "kind": {
+        "PAKET": "Course",
+        "LEKTION": "Lesson",
+        "INTENSIVKURS": "Intensive course"
+      }
     }
+  },
+  "dashboardNav": {
+    "ariaLabel": "User menu",
+    "studentTab": "Learner",
+    "instructorTab": "Instructor",
+    "handledareTab": "Handledare (supervisor)",
+    "messagesTab": "Messages",
+    "adminBadge": "Admin",
+    "signOut": "Sign out",
+    "signingOut": "Signing out…",
+    "signOutError": "Could not sign out. Please try again."
   }
 }
