@@ -82,10 +82,17 @@ export async function POST(req: Request, ctx: Ctx) {
   }
   const instructor = await prisma.instructor.findUnique({
     where: { id },
-    select: { id: true, name: true, city: true, email: true },
+    select: { id: true, name: true, city: true, email: true, bookingMode: true },
   });
   if (!instructor) {
     return NextResponse.json({ errors: { offeringId: 'Offering not found' } }, { status: 404 });
+  }
+  // Directory-only ('contact') listing: no request forms may be submitted.
+  if (instructor.bookingMode === 'contact') {
+    return NextResponse.json(
+      { errors: { offeringId: 'This listing does not accept requests' } },
+      { status: 403 },
+    );
   }
   await prisma.offeringRequest.create({
     data: {

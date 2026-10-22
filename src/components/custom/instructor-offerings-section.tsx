@@ -15,7 +15,15 @@ import { type PublicOffering, PublicOfferingList } from '@/lib/contracts/offerin
 
 type Status = { kind: 'loading' } | { kind: 'hidden' } | { kind: 'ready'; items: PublicOffering[] };
 
-export function InstructorOfferingsSection({ instructorId }: { instructorId: string }) {
+export function InstructorOfferingsSection({
+  instructorId,
+  requestEnabled = true,
+}: {
+  instructorId: string;
+  // false for directory-only ('contact') listings: prices render, the
+  // per-offering request form does not.
+  requestEnabled?: boolean;
+}) {
   const tr = useTranslations('offerings.section');
   const [status, setStatus] = useState<Status>({ kind: 'loading' });
 
@@ -60,7 +68,12 @@ export function InstructorOfferingsSection({ instructorId }: { instructorId: str
         </div>
         <div className="grid gap-3">
           {status.items.map((offering) => (
-            <OfferingRow key={offering.id} instructorId={instructorId} offering={offering} />
+            <OfferingRow
+              key={offering.id}
+              instructorId={instructorId}
+              offering={offering}
+              requestEnabled={requestEnabled}
+            />
           ))}
         </div>
       </CardContent>
@@ -71,9 +84,11 @@ export function InstructorOfferingsSection({ instructorId }: { instructorId: str
 function OfferingRow({
   instructorId,
   offering,
+  requestEnabled,
 }: {
   instructorId: string;
   offering: PublicOffering;
+  requestEnabled: boolean;
 }) {
   const tr = useTranslations('offerings.section');
   const [open, setOpen] = useState(false);
@@ -105,7 +120,7 @@ function OfferingRow({
           <span className="text-small font-medium text-foreground">
             {tr('priceFrom', { price: offering.priceSek })}
           </span>
-          {!open ? (
+          {!open && requestEnabled ? (
             <Button variant="secondary" size="sm" onClick={() => setOpen(true)}>
               {tr('requestCta')}
             </Button>

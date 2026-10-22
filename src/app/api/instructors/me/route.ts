@@ -97,7 +97,12 @@ export async function GET(req: Request) {
         instructor.cancellationPolicyTier === 'flexible'
           ? instructor.cancellationPolicyTier
           : 'flexible',
-      bookingMode: instructor.bookingMode === 'request' ? 'request' : 'instant',
+      bookingMode:
+        instructor.bookingMode === 'request'
+          ? 'request'
+          : instructor.bookingMode === 'contact'
+            ? 'contact'
+            : 'instant',
       providerRole: instructor.providerRole,
       timezone: providerTimezoneForCity(instructor.city),
       // Licence stays a separate banner gate; setupComplete tracks
@@ -160,9 +165,22 @@ export async function PATCH(req: Request) {
   // its absence here as "no change to tier".
   const data: {
     cancellationPolicyTier?: 'flexible' | 'moderate' | 'strict';
-    bookingMode?: 'instant' | 'request';
+    bookingMode?: 'instant' | 'request' | 'contact';
   } = {};
   if (parsed.data.tier) data.cancellationPolicyTier = parsed.data.tier;
+  // A 'contact' (directory-only) booking mode is a platform-set restriction
+  // (school complaint workflow). The owner cannot lift it self-service — it
+  // requires fresh authorization from the school recorded by the platform.
+  if (parsed.data.bookingMode && existing.bookingMode === 'contact') {
+    return NextResponse.json(
+      {
+        errors: {
+          bookingMode: 'This listing is restricted by the platform and cannot be re-enabled here.',
+        },
+      },
+      { status: 403 },
+    );
+  }
   if (parsed.data.bookingMode) data.bookingMode = parsed.data.bookingMode;
 
   const updated = await prisma.instructor.update({

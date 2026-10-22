@@ -234,6 +234,14 @@ export async function POST(req: Request) {
       { status: 403 },
     );
   }
+  // Directory-only ('contact') listing: the school may not publish new
+  // availability while the restriction is in place.
+  if (owned.bookingMode === 'contact') {
+    return NextResponse.json(
+      { errors: { slots: 'This listing is restricted and cannot publish availability.' } },
+      { status: 403 },
+    );
+  }
 
   let expansions: ExpandedSlot[];
   if (data.mode === 'weekly') {

@@ -660,6 +660,10 @@
       "request": {
         "title": "Bokningsförfrågan",
         "body": "Välj en ledig tid och skicka en förfrågan. Skolan bekräftar innan betalning tas."
+      },
+      "contact": {
+        "title": "Kataloglista",
+        "body": "Skolan visas med sin information och sina priser. DriveLinkUp förmedlar inte bokningar eller förfrågningar för den här skolan — kontakta skolan direkt för att boka."
       }
     },
     "safetyEyebrow": "Innan du bokar",
@@ -750,7 +754,8 @@
     },
     "bookingModeLabel": {
       "instant": "Direkt",
-      "request": "Förfrågan"
+      "request": "Förfrågan",
+      "contact": "Kataloglista"
     },
     "bookingMode": {
       "title": "Bokningsläge",
@@ -760,7 +765,9 @@
       "instantName": "Direktbokning",
       "requestLabel": "Förfrågan",
       "requestSummary": "Elever väljer en ledig tid och väntar på ditt godkännande före betalning.",
-      "requestName": "Bokningsförfrågan"
+      "requestName": "Bokningsförfrågan",
+      "contactLockedTitle": "Bokning avstängd",
+      "contactLockedBody": "Din skola visas just nu som kataloglista — information och priser, utan bokning eller förfrågningar via DriveLinkUp. Det här kan bara ändras av DriveLinkUp efter ett nytt ställningstagande från er. Kontakta oss om ni vill ändra."
     },
     "validation": {
       "nameRequired": "Ange ditt namn.",

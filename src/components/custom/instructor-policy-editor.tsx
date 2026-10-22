@@ -30,8 +30,8 @@ type Status =
       kind: 'ready';
       selected: CancellationTier;
       original: CancellationTier | null;
-      bookingMode: 'instant' | 'request';
-      bookingModeOriginal: 'instant' | 'request';
+      bookingMode: 'instant' | 'request' | 'contact';
+      bookingModeOriginal: 'instant' | 'request' | 'contact';
       saving: boolean;
       dirty: boolean;
     };
@@ -52,8 +52,12 @@ export function InstructorPolicyEditor() {
           data.cancellationPolicyTier === 'moderate' || data.cancellationPolicyTier === 'strict'
             ? data.cancellationPolicyTier
             : 'flexible';
-        const liveBookingMode: 'instant' | 'request' =
-          data.bookingMode === 'request' ? 'request' : 'instant';
+        const liveBookingMode: 'instant' | 'request' | 'contact' =
+          data.bookingMode === 'request'
+            ? 'request'
+            : data.bookingMode === 'contact'
+              ? 'contact'
+              : 'instant';
         setStatus({
           kind: 'ready',
           selected: liveTier,
@@ -138,7 +142,10 @@ export function InstructorPolicyEditor() {
     try {
       const body: InstructorPolicyUpdateRequest = {
         tier: status.selected,
-        bookingMode: status.bookingMode,
+        // A platform-set 'contact' restriction is never re-submitted: the
+        // PATCH guard rejects any bookingMode change while restricted, and
+        // the tier must still be editable independently.
+        ...(status.bookingMode === 'contact' ? {} : { bookingMode: status.bookingMode }),
       };
       const result: InstructorPolicyUpdated = await apiFetch('/api/instructors/me', {
         method: 'PATCH',
@@ -149,8 +156,12 @@ export function InstructorPolicyEditor() {
         result.cancellationPolicyTier === 'moderate' || result.cancellationPolicyTier === 'strict'
           ? result.cancellationPolicyTier
           : 'flexible';
-      const newBookingMode: 'instant' | 'request' =
-        result.bookingMode === 'request' ? 'request' : 'instant';
+      const newBookingMode: 'instant' | 'request' | 'contact' =
+        result.bookingMode === 'request'
+          ? 'request'
+          : result.bookingMode === 'contact'
+            ? 'contact'
+            : 'instant';
       setStatus({
         kind: 'ready',
         selected: newTier,
@@ -204,24 +215,35 @@ export function InstructorPolicyEditor() {
       <div className="flex flex-col gap-3">
         <p className="text-eyebrow text-muted-foreground">{trBooking('title')}</p>
         <p className="text-small text-muted-foreground">{trBooking('description')}</p>
-        <RadioGroup
-          value={status.bookingMode}
-          onValueChange={(v) => onBookingModeSelect(v === 'request' ? 'request' : 'instant')}
-          className="grid gap-3 sm:grid-cols-2"
-        >
-          <BookingModeOption
-            value="instant"
-            label={trBooking('instantLabel')}
-            summary={trBooking('instantSummary')}
-            modeName={trBooking('instantName')}
-          />
-          <BookingModeOption
-            value="request"
-            label={trBooking('requestLabel')}
-            summary={trBooking('requestSummary')}
-            modeName={trBooking('requestName')}
-          />
-        </RadioGroup>
+        {status.bookingMode === 'contact' ? (
+          <div className="rounded-lg border border-border bg-muted p-4">
+            <p className="font-display text-h4 font-semibold tracking-tight text-foreground">
+              {trBooking('contactLockedTitle')}
+            </p>
+            <p className="mt-1 text-small text-muted-foreground">
+              {trBooking('contactLockedBody')}
+            </p>
+          </div>
+        ) : (
+          <RadioGroup
+            value={status.bookingMode}
+            onValueChange={(v) => onBookingModeSelect(v === 'request' ? 'request' : 'instant')}
+            className="grid gap-3 sm:grid-cols-2"
+          >
+            <BookingModeOption
+              value="instant"
+              label={trBooking('instantLabel')}
+              summary={trBooking('instantSummary')}
+              modeName={trBooking('instantName')}
+            />
+            <BookingModeOption
+              value="request"
+              label={trBooking('requestLabel')}
+              summary={trBooking('requestSummary')}
+              modeName={trBooking('requestName')}
+            />
+          </RadioGroup>
+        )}
       </div>
       <div className="dl-action-group">
         <Button

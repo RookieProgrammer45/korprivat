@@ -246,7 +246,8 @@ function formatSlotDate(iso: string, locale: string): string {
 
 function BookingModeSection({ bookingMode }: { bookingMode: InstructorItem['bookingMode'] }) {
   const tr = useTranslations('instructorDetail');
-  const mode = bookingMode === 'request' ? 'request' : 'instant';
+  const mode =
+    bookingMode === 'request' ? 'request' : bookingMode === 'contact' ? 'contact' : 'instant';
   return (
     <section className="grid min-w-0 gap-2 rounded-xl border border-border bg-muted p-4">
       <p className="text-eyebrow text-muted-foreground">{tr('bookingModeEyebrow')}</p>

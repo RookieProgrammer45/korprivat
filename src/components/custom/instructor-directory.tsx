@@ -721,9 +721,18 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   // Booking-mode badge mirrors the same "renders next to the hourly rate"
   // styling the tier badge uses. Default to 'instant' on a missing field
   // so legacy pre-mode rows still get the badge copy.
-  const bookingMode: 'instant' | 'request' = row.bookingMode === 'request' ? 'request' : 'instant';
+  const bookingMode: 'instant' | 'request' | 'contact' =
+    row.bookingMode === 'request'
+      ? 'request'
+      : row.bookingMode === 'contact'
+        ? 'contact'
+        : 'instant';
   const bookingModeLabel = trBooking(
-    bookingMode === 'request' ? 'bookingModeLabel.request' : 'bookingModeLabel.instant',
+    bookingMode === 'request'
+      ? 'bookingModeLabel.request'
+      : bookingMode === 'contact'
+        ? 'bookingModeLabel.contact'
+        : 'bookingModeLabel.instant',
   );
   const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
   const reviewLabel =
