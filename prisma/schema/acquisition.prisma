@@ -140,3 +140,25 @@ model CategoryBookingSnapshot {
 
   @@index([offeringId])
 }
+
+// Operator-prefilled listing draft. CONCIERGE_ONBOARDING defaults off.
+// Storing a draft never manufactures policy approval, verification, or scopes.
+
+model ConciergeDraft {
+  id               String    @id @default(cuid())
+  listingId        String
+  source           String
+  provenance       Json
+  payload          Json
+  // DRAFT | SCHOOL_CORRECTED | SCHOOL_APPROVED | PUBLISHED
+  state            String    @default("DRAFT")
+  approvedAt       DateTime?
+  approvedByUserId String?
+  publishedAt      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  listing Instructor @relation(fields: [listingId], references: [id])
+
+  @@index([listingId])
+}

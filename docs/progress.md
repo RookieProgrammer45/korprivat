@@ -12,7 +12,8 @@
 - **ACQ-1:** merged in [#35](https://github.com/RookieProgrammer45/korprivat/pull/35). `CLAIM_FUNNEL` defaults off. A claim does not grant scopes.
 - **ACQ-3:** merged in [#36](https://github.com/RookieProgrammer45/korprivat/pull/36). `SCHOOL_MEDIATED_INSTRUCTORS` defaults off.
 - **ACQ-2:** merged in [#37](https://github.com/RookieProgrammer45/korprivat/pull/37). `LEAD_DASHBOARD` defaults off.
-- **ACQ-4 (PR open, not merged):** [#38](https://github.com/RookieProgrammer45/korprivat/pull/38). `CATEGORY_OFFERINGS` defaults off.
+- **ACQ-4:** merged in [#38](https://github.com/RookieProgrammer45/korprivat/pull/38). `CATEGORY_OFFERINGS` defaults off.
+- **ACQ-5 (in progress):** concierge drafts on `feat/acq-5-concierge-tooling`. `CONCIERGE_ONBOARDING` defaults off.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
 - Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.
