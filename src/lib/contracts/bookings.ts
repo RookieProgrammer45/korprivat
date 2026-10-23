@@ -51,6 +51,7 @@ export const BookingCreate = z.object({
   // Omitted means the native slot path. `connector` is refused unless the
   // listing's production certification has transactional_booking enabled.
   commitmentRoute: z.enum(['native', 'connector']).optional(),
+  offeringId: z.string().min(1).optional(),
 });
 
 // Response shape returned by the server after a successful booking insert.

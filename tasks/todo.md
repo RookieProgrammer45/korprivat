@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-2 (PR #37, not merged)
+## Spec v1.2 — ACQ-4 (branch feat/acq-4-category-offerings)
 
-Plan: docs/v1.2-acq-2-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/37. `LEAD_DASHBOARD` defaults off. Do not start ACQ-4 until this pull request is merged.
+Plan: docs/v1.2-acq-4-plan.md. `CATEGORY_OFFERINGS` defaults off. Do not start ACQ-5 until this pull request is merged.
+
+- [x] Teaching permission matches legal entity, location, and category
+- [x] B-only permission refuses A/C/D publication
+- [x] Approved policy version is snapshotted; a draft is refused
+- [x] Tests: SC-22
+
+## Spec v1.2 — ACQ-2 (merged #37)
+
+Plan: docs/v1.2-acq-2-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/37. `LEAD_DASHBOARD` defaults off.
 
 - [x] Zero-scope representative sees historical inquiry count and no booking surface
 - [x] New inquiries stay off without inquiry_collection

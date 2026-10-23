@@ -1,6 +1,8 @@
 import 'server-only';
 import { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';
+import { isCategoryOfferingsOn } from '@/lib/acquisition/category-offering-policy';
+import { categorySnapshotForBooking } from '@/lib/acquisition/category-offering-store';
 import { generateLearnerAccessToken } from '@/lib/business/booking-access';
 import { instructorPayoutSek, learnerTotalSek } from '@/lib/business/booking-fees';
 import { generateBookingToken } from '@/lib/business/escrow';
@@ -176,6 +178,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: { code: 'connector_unavailable' } }, { status: 403 });
   }
 
+  let categorySnapshot: Awaited<ReturnType<typeof categorySnapshotForBooking>>['snapshot'] = null;
+  if (data.offeringId && isCategoryOfferingsOn()) {
+    const snap = await categorySnapshotForBooking(data.offeringId, instructor.id);
+    if (!snap.ok) {
+      return NextResponse.json({ error: { code: snap.code } }, { status: snap.status });
+    }
+    categorySnapshot = snap.snapshot;
+  }
+
   const totals = learnerTotalSek(instructor.hourlyRateSek);
   const payoutSnapshot = instructorPayoutSek(totals.priceSek, { organizationId });
   const learnerAccess = generateLearnerAccessToken();
@@ -233,6 +244,17 @@ export async function POST(req: Request) {
           },
           select: { id: true },
         });
+
+        const categorySnapshots = (
+          tx as unknown as {
+            categoryBookingSnapshot?: { create: (args: unknown) => Promise<unknown> };
+          }
+        ).categoryBookingSnapshot;
+        if (categorySnapshot && categorySnapshots) {
+          await categorySnapshots.create({
+            data: { bookingId: created.id, ...categorySnapshot },
+          });
+        }
 
         const outbox = (
           tx as unknown as { commandOutbox?: { create: (args: unknown) => Promise<unknown> } }

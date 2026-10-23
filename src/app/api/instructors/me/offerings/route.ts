@@ -8,6 +8,14 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import {
+  isCategoryOfferingsOn,
+  OFFERING_CATEGORIES,
+} from '@/lib/acquisition/category-offering-policy';
+import {
+  gateCategoryOffering,
+  saveCategoryOffering,
+} from '@/lib/acquisition/category-offering-store';
 import { TEACHING_CATEGORIES } from '@/lib/acquisition/claim-policy';
 import {
   isSchoolMediatedInstructorsOn,
@@ -121,6 +129,28 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: { code: decision.code } }, { status: 403 });
     }
   }
+  let categoryGate: Awaited<ReturnType<typeof gateCategoryOffering>> | null = null;
+  if (isCategoryOfferingsOn()) {
+    const tagged = z
+      .object({
+        teachingCategory: z.enum(OFFERING_CATEGORIES),
+        cancellationPolicyId: z.string().min(1).optional(),
+      })
+      .safeParse(bodyJson);
+    if (!tagged.success) {
+      return NextResponse.json({ error: { code: 'category_required' } }, { status: 422 });
+    }
+    categoryGate = await gateCategoryOffering({
+      listingId: instructor.id,
+      userId: user.id,
+      city: instructor.city,
+      offeringCategory: tagged.data.teachingCategory,
+      cancellationPolicyId: tagged.data.cancellationPolicyId,
+    });
+    if (!categoryGate.allowed) {
+      return NextResponse.json({ error: { code: categoryGate.code } }, { status: 403 });
+    }
+  }
   const last = await prisma.offering.findFirst({
     where: { instructorId: instructor.id },
     orderBy: { sortOrder: 'desc' },
@@ -140,5 +170,13 @@ export async function POST(req: Request) {
     },
     select: { id: true },
   });
+  if (categoryGate?.allowed) {
+    await saveCategoryOffering({
+      offeringId: created.id,
+      listingId: instructor.id,
+      category: categoryGate.category,
+      snapshot: categoryGate.snapshot,
+    });
+  }
   return NextResponse.json(OfferingUpserted.parse({ id: created.id }), { status: 201 });
 }

@@ -3462,5 +3462,10 @@
     "signOut": "Sign out",
     "signingOut": "Signing out…",
     "signOutError": "Could not sign out. Please try again."
+  },
+  "categoryLanding": {
+    "title": "{category} training",
+    "body": "Offerings appear here only when the school holds current teaching permission for this category. This page has no booking surface.",
+    "empty": "No offerings in this category."
   }
 }

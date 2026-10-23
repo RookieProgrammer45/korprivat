@@ -11,7 +11,8 @@
 - **Phase 6:** merged in [#34](https://github.com/RookieProgrammer45/korprivat/pull/34). A passing local harness run is not vendor evidence and does not enable production.
 - **ACQ-1:** merged in [#35](https://github.com/RookieProgrammer45/korprivat/pull/35). `CLAIM_FUNNEL` defaults off. A claim does not grant scopes.
 - **ACQ-3:** merged in [#36](https://github.com/RookieProgrammer45/korprivat/pull/36). `SCHOOL_MEDIATED_INSTRUCTORS` defaults off.
-- **ACQ-2 (PR open, not merged):** [#37](https://github.com/RookieProgrammer45/korprivat/pull/37). `LEAD_DASHBOARD` defaults off.
+- **ACQ-2:** merged in [#37](https://github.com/RookieProgrammer45/korprivat/pull/37). `LEAD_DASHBOARD` defaults off.
+- **ACQ-4 (in progress):** category offerings on `feat/acq-4-category-offerings`. `CATEGORY_OFFERINGS` defaults off.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
 - Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.
