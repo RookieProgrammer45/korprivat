@@ -10,6 +10,7 @@ import {
   type RosterMember,
   SchoolInstructorRoster,
 } from '@/components/custom/school/school-instructor-roster';
+import { SchoolLeadPanel } from '@/components/custom/school/school-lead-panel';
 import {
   SchoolPayoutsCard,
   type SchoolPayoutsState,
@@ -137,6 +138,7 @@ export default async function SchoolDashboardPage({
       </header>
 
       <SchoolConnectionStatus userId={session.userId} />
+      <SchoolLeadPanel userId={session.userId} />
 
       {showSetupChecklist ? (
         <SchoolSetupChecklist
