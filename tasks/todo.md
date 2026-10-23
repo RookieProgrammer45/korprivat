@@ -1,8 +1,8 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-3 (branch feat/acq-3-school-instructors)
+## Spec v1.2 — ACQ-3 (PR #36, not merged)
 
-Plan: docs/v1.2-acq-3-plan.md. `SCHOOL_MEDIATED_INSTRUCTORS` defaults off. Do not start ACQ-2 until this pull request is merged.
+Plan: docs/v1.2-acq-3-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/36. `SCHOOL_MEDIATED_INSTRUCTORS` defaults off. Do not start ACQ-2 until this pull request is merged.
 
 - [x] School invitation and verified affiliation grant no scopes
 - [x] Flag on: independent publish, sale, and undelegated diary are refused
