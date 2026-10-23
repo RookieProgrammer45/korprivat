@@ -48,3 +48,47 @@ model ProspectClaim {
 
   @@index([prospectId])
 }
+
+// School-mediated instructors. An invitation does not grant commercial scopes.
+// Native diary control is copied only when the school sets inventoryDelegated.
+
+model SchoolInstructorInvitation {
+  id                  String   @id @default(cuid())
+  schoolListingId     String
+  email               String
+  teachingCategories  String[]
+  inventoryDelegated  Boolean  @default(false)
+  // PENDING | VERIFIED | REVOKED
+  status              String   @default("PENDING")
+  invitedByUserId     String
+  acceptedByUserId    String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  schoolListing Instructor                  @relation("SchoolInvitesInstructor", fields: [schoolListingId], references: [id])
+  affiliation   SchoolInstructorAffiliation?
+
+  @@index([schoolListingId])
+  @@index([email])
+}
+
+model SchoolInstructorAffiliation {
+  id                  String   @id @default(cuid())
+  invitationId        String   @unique
+  schoolListingId     String
+  instructorUserId    String
+  instructorListingId String?
+  teachingCategories  String[]
+  inventoryDelegated  Boolean  @default(false)
+  // VERIFIED
+  status              String   @default("VERIFIED")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  invitation    SchoolInstructorInvitation @relation(fields: [invitationId], references: [id])
+  schoolListing Instructor                 @relation("SchoolAffiliatedInstructors", fields: [schoolListingId], references: [id])
+
+  @@index([schoolListingId])
+  @@index([instructorUserId])
+  @@index([instructorListingId])
+}

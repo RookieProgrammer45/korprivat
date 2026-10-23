@@ -9,7 +9,8 @@
 - **Phase 4:** merged in [#32](https://github.com/RookieProgrammer45/korprivat/pull/32). `CONNECTIVITY_API` defaults off.
 - **Phase 5:** merged in [#33](https://github.com/RookieProgrammer45/korprivat/pull/33). `CERTIFICATION_ENFORCEMENT` defaults off. Availability certification does not enable booking.
 - **Phase 6:** merged in [#34](https://github.com/RookieProgrammer45/korprivat/pull/34). A passing local harness run is not vendor evidence and does not enable production.
-- **ACQ-1 (PR open, not merged):** [#35](https://github.com/RookieProgrammer45/korprivat/pull/35). `CLAIM_FUNNEL` defaults off. A claim does not grant scopes.
+- **ACQ-1:** merged in [#35](https://github.com/RookieProgrammer45/korprivat/pull/35). `CLAIM_FUNNEL` defaults off. A claim does not grant scopes.
+- **ACQ-3 (in progress):** school-mediated instructors on `feat/acq-3-school-instructors`. `SCHOOL_MEDIATED_INSTRUCTORS` defaults off.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
 - Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.
