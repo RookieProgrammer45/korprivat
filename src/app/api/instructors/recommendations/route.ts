@@ -122,6 +122,7 @@ async function loadCandidates(category: string): Promise<Candidate[]> {
       photoUrl: true,
       bookedHours: true,
       englishSpeaking: true,
+      bookingMode: true,
     },
     take: MAX_CANDIDATES,
     orderBy: [{ city: 'asc' }, { name: 'asc' }],
@@ -133,6 +134,28 @@ async function loadCandidates(category: string): Promise<Candidate[]> {
   // instructor (bookedAt IS NULL && startsAt > now). Empty map filters
   // the candidate list down to "available" rows.
   const ids = matching.map((r) => r.id);
+  const { loadFoldsByListing } = await import('@/lib/orgs/school-authorization');
+  const { isSchoolAuthzEnforcementOn, listingSurfaces } = await import(
+    '@/lib/orgs/school-authorization-policy'
+  );
+  const folds = await loadFoldsByListing(ids);
+  const enforcementOn = isSchoolAuthzEnforcementOn();
+  const visibleIds = new Set(
+    matching
+      .filter((row) =>
+        listingSurfaces({
+          bookingMode: row.bookingMode,
+          folded: folds.get(row.id) ?? {
+            granted: [],
+            withdrawn: [],
+            decisionVersion: 0,
+            headSequence: 0,
+          },
+          enforcementOn,
+        }).availabilityDisplay,
+      )
+      .map((row) => row.id),
+  );
   const upcoming = await prisma.availabilitySlot.findMany({
     where: {
       instructorId: { in: ids },
@@ -144,6 +167,7 @@ async function loadCandidates(category: string): Promise<Candidate[]> {
   });
   const nextSlotByInstructor = new Map<string, Date>();
   for (const row of upcoming) {
+    if (!visibleIds.has(row.instructorId)) continue;
     if (!nextSlotByInstructor.has(row.instructorId)) {
       nextSlotByInstructor.set(row.instructorId, row.startsAt);
     }

@@ -113,6 +113,17 @@ export const InstructorItem = z.object({
   // missing so legacy pre-mode rows behave like the legacy
   // always-instant flow.
   bookingMode: InstructorBookingModeEnum.nullable(),
+  // Independent of legacy bookingMode. When present, the UI follows these
+  // flags so a withdrawn scope cannot leave times or forms visible.
+  surfaces: z
+    .object({
+      availabilityDisplay: z.boolean(),
+      inquiryCollection: z.boolean(),
+      requestToBook: z.boolean(),
+      transactionalBooking: z.boolean(),
+      directoryOnly: z.boolean(),
+    })
+    .optional(),
   // Mirrors the raw marketplace kind (SCHOOL | INSTRUCTOR | HANDLEDARE) so a
   // school-owned listing no longer reports itself as INSTRUCTOR (QA
   // 2026-10-13). Kept alongside the redundant `providerType` alias so

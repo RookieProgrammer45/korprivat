@@ -185,9 +185,11 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
                   })}
             </Fact>
             <Fact label={tr('facts.availability')}>
-              {instructor.nextSlotAt
-                ? formatSlotDate(instructor.nextSlotAt, locale)
-                : tr('availability.none')}
+              {instructor.surfaces?.availabilityDisplay === false
+                ? tr('availability.none')
+                : instructor.nextSlotAt
+                  ? formatSlotDate(instructor.nextSlotAt, locale)
+                  : tr('availability.none')}
             </Fact>
             <div className="min-w-0 sm:col-span-2">
               <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
@@ -203,11 +205,12 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
 
           <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
 
-          <BookingModeSection bookingMode={instructor.bookingMode} />
+          <BookingModeSection bookingMode={instructor.bookingMode} surfaces={instructor.surfaces} />
           {/* Directory-only listings show no cancellation policy: no booking
               flows through DriveLinkUp for this school, and an unconfirmed
               tier would misrepresent the school's own terms. */}
-          {instructor.bookingMode === 'contact' ? null : (
+          {instructor.surfaces?.directoryOnly ||
+          (!instructor.surfaces && instructor.bookingMode === 'contact') ? null : (
             <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
           )}
           <SafetyExpectations />
@@ -249,10 +252,25 @@ function formatSlotDate(iso: string, locale: string): string {
   }).format(new Date(iso));
 }
 
-function BookingModeSection({ bookingMode }: { bookingMode: InstructorItem['bookingMode'] }) {
+function BookingModeSection({
+  bookingMode,
+  surfaces,
+}: {
+  bookingMode: InstructorItem['bookingMode'];
+  surfaces: InstructorItem['surfaces'];
+}) {
   const tr = useTranslations('instructorDetail');
-  const mode =
-    bookingMode === 'request' ? 'request' : bookingMode === 'contact' ? 'contact' : 'instant';
+  const mode = surfaces?.directoryOnly
+    ? 'contact'
+    : surfaces?.requestToBook && !surfaces.transactionalBooking
+      ? 'request'
+      : surfaces?.transactionalBooking
+        ? 'instant'
+        : bookingMode === 'request'
+          ? 'request'
+          : bookingMode === 'contact'
+            ? 'contact'
+            : 'instant';
   return (
     <section className="grid min-w-0 gap-2 rounded-xl border border-border bg-muted p-4">
       <p className="text-eyebrow text-muted-foreground">{tr('bookingModeEyebrow')}</p>

@@ -81,6 +81,14 @@ export async function PATCH(req: Request, ctx: Ctx) {
   if (!owned) {
     return NextResponse.json({ errors: { slots: 'Not found' } }, { status: 404 });
   }
+  const { loadListingSurfaces } = await import('@/lib/orgs/school-authorization');
+  const surfaces = await loadListingSurfaces(owned.id, owned.bookingMode);
+  if (!surfaces.availabilityDisplay) {
+    return NextResponse.json(
+      { errors: { slots: 'This listing is not authorized to publish availability.' } },
+      { status: 403 },
+    );
+  }
 
   const slot = await loadOwnedSlot(owned.id, slotId);
   if (!slot) {
@@ -166,6 +174,14 @@ export async function DELETE(req: Request, ctx: Ctx) {
   if (owned instanceof Response) return owned;
   if (!owned) {
     return NextResponse.json({ errors: { slots: 'Not found' } }, { status: 404 });
+  }
+  const { loadListingSurfaces } = await import('@/lib/orgs/school-authorization');
+  const surfaces = await loadListingSurfaces(owned.id, owned.bookingMode);
+  if (!surfaces.availabilityDisplay) {
+    return NextResponse.json(
+      { errors: { slots: 'This listing is not authorized to publish availability.' } },
+      { status: 403 },
+    );
   }
 
   const slot = await loadOwnedSlot(owned.id, slotId);

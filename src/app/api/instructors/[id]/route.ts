@@ -8,6 +8,7 @@ import {
 import { InstructorItem, PUBLIC_INSTRUCTOR_SELECT } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
+import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
 
 export const dynamic = 'force-dynamic';
 
@@ -46,10 +47,13 @@ export async function GET(_req: Request, ctx: Ctx) {
     verificationStatus: 'unverified' as const,
     reviewSummary: { count: 0, averageRating: null },
   };
+  const surfaces = await loadListingSurfaces(instructor.id, instructor.bookingMode);
+  const nextSlotAt = surfaces.availabilityDisplay ? (slot?.startsAt.toISOString() ?? null) : null;
   return NextResponse.json(
     InstructorItem.parse({
-      ...toPublicInstructor(instructor, aggregate, slot?.startsAt.toISOString() ?? null),
+      ...toPublicInstructor(instructor, aggregate, nextSlotAt),
       affiliation: affiliation ? { name: affiliation.name, slug: affiliation.slug } : null,
+      surfaces,
     }),
   );
 }

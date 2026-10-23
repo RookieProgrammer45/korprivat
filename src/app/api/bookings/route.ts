@@ -15,6 +15,16 @@ import {
   studentBookingRequestReceivedEmail,
 } from '@/lib/email/templates';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
+import {
+  loadFoldedAuthorization,
+  loadListingBindings,
+  notAuthorizedBody,
+} from '@/lib/orgs/school-authorization';
+import {
+  decideBookingCreate,
+  isSchoolAuthzEnforcementOn,
+  snapshotOrganizationId,
+} from '@/lib/orgs/school-authorization-policy';
 import { resolveOrigin } from '@/lib/payments/origin';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
@@ -103,14 +113,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { instructorId: 'Unknown instructor' } }, { status: 400 });
   }
 
-  // Snapshot school affiliation at booking time (ADR-004: 8% when organizationId set).
-  // Multi-org: show first by createdAt. Revisit if any user has >1 ACTIVE membership.
-  // Resolve BEFORE the booking transaction so a Membership read never holds the write lock.
-  // On lookup failure, fall back to null — never fail the booking for affiliation.
+  // Snapshot the verified listing binding when one exists. With no binding rows,
+  // keep the legacy affiliation so an empty table does not drop organizationId.
+  // A pending or foreign binding never falls through to "first membership".
   let organizationId: string | null = null;
   try {
     const affiliation = await getActiveAffiliationForUser(instructor.userId);
-    organizationId = affiliation?.organizationId ?? null;
+    const bindings = await loadListingBindings([instructor.id]);
+    organizationId = snapshotOrganizationId({
+      bindings,
+      listingId: instructor.id,
+      legacyOrganizationId: affiliation?.organizationId ?? null,
+    });
   } catch (err) {
     console.error('[bookings] affiliation lookup failed; proceeding with organizationId=null', err);
     organizationId = null;
@@ -123,24 +137,23 @@ export async function POST(req: Request) {
     );
   }
 
-  // Directory-only ('contact') listing: the school has restricted booking —
-  // reject server-side so no client can bypass the hidden UI.
-  if (instructor.bookingMode === 'contact') {
-    return NextResponse.json(
-      { errors: { instructorId: 'This listing does not accept bookings' } },
-      { status: 403 },
-    );
-  }
-
-  const instructorMode: BookingCreateMode =
-    instructor.bookingMode === 'request' ? 'request' : 'instant';
-  const submittedMode: BookingCreateMode = data.mode ?? instructorMode;
-  if (submittedMode !== instructorMode) {
+  const folded = await loadFoldedAuthorization(instructor.id);
+  const bookingDecision = decideBookingCreate({
+    bookingMode: instructor.bookingMode,
+    folded,
+    enforcementOn: isSchoolAuthzEnforcementOn(),
+    submittedMode: data.mode,
+  });
+  if (!bookingDecision.ok) {
+    if (bookingDecision.status === 403) {
+      return NextResponse.json(notAuthorizedBody(), { status: 403 });
+    }
+    const legacyMode = instructor.bookingMode === 'request' ? 'request' : 'instant';
     return NextResponse.json(
       {
         errors: {
           mode:
-            instructorMode === 'instant'
+            legacyMode === 'instant'
               ? 'This school listing only accepts instant bookings'
               : 'This school listing only accepts request-to-book',
         },
@@ -148,6 +161,8 @@ export async function POST(req: Request) {
       { status: 409 },
     );
   }
+
+  const instructorMode: BookingCreateMode = bookingDecision.mode;
 
   const totals = learnerTotalSek(instructor.hourlyRateSek);
   const payoutSnapshot = instructorPayoutSek(totals.priceSek, { organizationId });

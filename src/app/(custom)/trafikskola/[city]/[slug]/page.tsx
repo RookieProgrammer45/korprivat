@@ -6,6 +6,7 @@ import { GoogleReviewsSection } from '@/components/custom/google-reviews-section
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
+import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
@@ -99,27 +100,34 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
       }
     : null;
 
-  // 'contact' (directory-only) listings hide every booking surface: the
-  // booking sidebar, the offering request forms, and availability. Info,
-  // prices, and reviews stay — per-school restriction workflow.
-  const directoryOnly = resolved.instructor.bookingMode === 'contact';
+  // Surfaces come from authorization, not legacy bookingMode, so a withdrawal
+  // hides the booking sidebar and offering request even if bookingMode is still
+  // instant or request. Info, prices, and reviews stay.
+  const surfaces = await loadListingSurfaces(
+    resolved.instructor.id,
+    resolved.instructor.bookingMode,
+  );
+  const showBooking = surfaces.transactionalBooking || surfaces.requestToBook;
 
   return (
     <main className="container-page section min-w-0">
       <div
         className={
-          directoryOnly
-            ? 'mx-auto grid w-full max-w-6xl gap-6'
-            : 'mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start'
+          showBooking
+            ? 'mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start'
+            : 'mx-auto grid w-full max-w-6xl gap-6'
         }
       >
         <div className="grid min-w-0 gap-6">
           <InstructorDetail instructorId={instructorId} />
-          <InstructorOfferingsSection instructorId={instructorId} requestEnabled={!directoryOnly} />
+          <InstructorOfferingsSection
+            instructorId={instructorId}
+            requestEnabled={surfaces.inquiryCollection}
+          />
           <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
           <GoogleReviewsSection instructorId={instructorId} />
         </div>
-        {directoryOnly ? null : (
+        {showBooking ? (
           <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
             <BookingForm
               instructorId={instructorId}
@@ -128,7 +136,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
               rebookBookingId={rebookId}
             />
           </div>
-        )}
+        ) : null}
       </div>
       {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
     </main>

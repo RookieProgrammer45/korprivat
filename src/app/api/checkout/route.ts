@@ -21,6 +21,7 @@ import {
 } from '@/lib/payments/create-booking-checkout';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
 import { getStripe } from '@/lib/payments/stripe';
+import { existingBookingLifecycleAllowed } from '@/lib/orgs/school-authorization-policy';
 import { getSessionUser, requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -29,6 +30,9 @@ const checkoutBodySchema = z.object({
   bookingId: z.string().min(1),
   token: z.string().min(1).optional(),
 });
+
+// Checkout pays an existing booking. Scope withdrawal must not block it.
+void existingBookingLifecycleAllowed();
 
 const TERMINAL_STATES = new Set<BookingPaymentStatus>([
   'paid',

@@ -78,6 +78,11 @@ model Instructor {
   // Marketplace offerings (intensive courses / packages) published by
   // this provider — see prisma/schema/offerings.prisma.
   offerings              Offering[]
+  authorizationEvents    SchoolAuthorizationEvent[]
+  representativeAuthorities ListingRepresentativeAuthority[]
+  orgBindings            ListingOrgBinding[]
+  complaints             SchoolComplaint[]
+  bookingModeAuditNote   BookingModeAuditNote?
   // Stripe Connect Express — independent instructor payouts (phase 2).
   stripeAccountId        String?            @unique
   chargesEnabled         Boolean            @default(false)

@@ -242,6 +242,14 @@ export async function POST(req: Request) {
       { status: 403 },
     );
   }
+  const { loadListingSurfaces } = await import('@/lib/orgs/school-authorization');
+  const publishSurfaces = await loadListingSurfaces(owned.id, owned.bookingMode);
+  if (!publishSurfaces.availabilityDisplay) {
+    return NextResponse.json(
+      { errors: { slots: 'This listing is not authorized to publish availability.' } },
+      { status: 403 },
+    );
+  }
 
   let expansions: ExpandedSlot[];
   if (data.mode === 'weekly') {

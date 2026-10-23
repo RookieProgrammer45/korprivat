@@ -1,5 +1,15 @@
 # DriveLinkUp — active tasks
 
+## Spec v1.2 — Phase 1 (branch phase-1-school-authorization)
+
+Plan: docs/v1.2-phase-1-plan.md. Flag `SCHOOL_AUTHZ_ENFORCEMENT` defaults off. Withdrawals apply while off.
+
+- [x] Append-only SchoolAuthorizationEvent + representative authority + ListingOrgBinding + complaints
+- [x] Server gates on booking create, accept, availability read/publish, offering inquiry, directory times
+- [x] Operator complaint page and verified-representative grant/binding routes
+- [x] Idempotent bookingMode audit script (zero grants; contact stays restricted)
+- [x] Tests: SC-1, SC-2, SC-3, SC-4, SC-13, SC-14, SC-17, SC-19, both flag states, availability route
+
 ## Now (P0)
 
 - [x] Install agent-skills pack + routing rule

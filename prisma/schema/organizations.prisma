@@ -27,6 +27,7 @@ model Organization {
 
   memberships Membership[]
   invites     MembershipInvite[]
+  listingBindings ListingOrgBinding[]
 
   @@index([verificationState])
 }
