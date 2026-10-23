@@ -1,0 +1,42 @@
+---
+description: DriveLinkUp non-negotiable product rules — evidence standards, verification gating, booking authority, and build boundaries. Applies to every file.
+alwaysApply: true
+globs:
+---
+
+# DriveLinkUp project rules
+
+## Evidence and claims
+
+1. Never claim a school/instructor is "verified" or "authorized" without a stored `verification_record` (check_type, subject, method, evidence_ref, date, expiry). Badges render only from stored evidence.
+2. Identity verification and teaching permission are separate facts with separate expiries. Never derive one from the other.
+3. "Not found" in a consent-based or public directory is never an automatic rejection — it routes to manual review.
+4. Vendor claims are "Advertised" until independently verified. Do not hard-code vendor adoption numbers, prices, or capabilities from marketing pages.
+5. "No public API documentation found" means access unverified — never implement a guessed vendor endpoint. Use the mock adapter.
+
+## Verification gating
+
+6. A never-verified school cannot activate a bookable offering.
+7. A confirmed expired/revoked permit, or a mismatch of legal entity/location/category/scope, disables the affected offering (pending resolution) while preserving identity verification.
+8. A temporary directory outage with previously valid evidence keeps the offering live, flagged for re-check.
+9. Store verification results and protected evidence references — the canonical retention policy is in specs/02-data-model.md (evidence_refs): no retained document images by default; explicitly authorized temporary documentary collection follows the review/deletion workflow and retains only the result + protected reference.
+
+## Booking authority
+
+10. Instant booking requires an authoritative control: transaction-capable connector (milestone 5 complete), verified allocation, or native scheduling. Calendar sync alone never enables instant booking.
+11. Every booking carries `origin`, `ingestion_method`, and `external_ref`. Importing never initiates a charge; commission follows documented acquisition origin.
+12. Every booking action calls the canonical policy service (specs/03-booking-engine.md §1) with its action-specific checks (E0–E4). Do not re-implement eligibility logic per endpoint; do not apply blanket E0–E4 to actions that the matrix exempts (manual acceptance does not require E4; request submission creates no holds).
+13. UI shows instant booking only where the school's capability flags support it AND the school granted the matching authorization scope. Authorization is scope-specific: withdrawing a scope removes only that scope's surfaces; directory-only (info + prices, no booking surfaces) applies when zero scopes remain — never an unauthorized fallback. Times require availability_display independently of booking/inquiry permissions.
+
+## Engineering boundaries
+
+14. Follow the existing live-MVP stack discovered in Gate 0. Do not propose a framework rewrite.
+15. Server-side authorization on every endpoint; roles from `specs/02-data-model.md` (member roles are school-scoped).
+16. Connector code ships disabled until its capability is certified per specs/09 §8: the **five-milestone chain is required for the transactional-booking capability**; limited capabilities (availability, content, events) follow their own evidence and approval gates. Mock adapters in staging; mock passes never count as milestone evidence.
+17. Payment provider is not assumed (Stripe or otherwise). Commission/refund/earnings logic is provider-independent and driven by authoritative records.
+18. Do not extend the Swedish TABS sunset (31 Dec 2026) to Norwegian TABS, and do not build a TABS-Sweden adapter.
+19. All user-facing strings go through i18n resources (fixes the raw-key bug B5).
+20. `specs/09-scalable-platform-specification.md` is the implementation authority; where it conflicts with specs 00–08, specs 09 wins. Its §16 maps every earlier requirement into it. The detailed test series (BK, VF, UX, CN, API) in specs 03–08 remain the test record.
+21. Migration never fabricates consent: legacy `bookingMode` values and legacy cancellation-policy tiers are historical configuration, never authorization or approval evidence (specs/09 §1, §11). Grants come only from documented school authorization; legacy policy tiers import as draft.
+22. Unresolved remote reservations quarantine inventory: timeout, TTL expiry, and retry exhaustion never release uncertainty about a potentially committed booking (specs/09 §6.4). Release requires an authoritative result or an audited operational decision.
+23. Capability certification is scoped: availability, content, events, transactional booking, and atomic rescheduling are each separately certified and separately production-enabled; the transactional capability alone requires milestone 5 (specs/09 §8).

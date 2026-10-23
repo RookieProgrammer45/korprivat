@@ -1,0 +1,88 @@
+# 06 — UX Journeys and Screen Requirements
+
+**Req ID prefix:** UX. Swedish-first; all strings through i18n (fixes B5).
+
+## 1. Student discovery (existing — [OBSERVED-MVP])
+
+Filters: category, city, price, rating, availability, school-vs-independent, English, geolocation; sorting; comparison. Availability display must follow capability flags (B6 fix): profiles show "Nästa lediga tid" only where the derived booking mode is instant; otherwise request-to-book CTA or "Kontakta oss om tider."
+
+## 2. Student booking
+
+- **Authorization-first:** the profile surfaces only what the school has authorized (DM `school_authorizations`). **Directory-only** (zero scopes): information and prices only — no times, no request form, no contact CTA presented as booking. For a directory-only school the school's own published contact details may be shown as plain factual information, never wrapped in a DriveLinkUp lead form.
+- **Instant:** only where a control route applies **and the school granted `transactional_booking`** (spec 03 §3). Post-booking states shown match the state machine.
+- **Request-to-book:** existing request form (fix i18n raw keys), only where the school granted `request_to_book`. No charge up front.
+- **Recipient clarity (canonical):** wherever an authorized inquiry/request form exists, the form identifies **DriveLinkUp as the recipient before submission** — it must not imply delivery to, acceptance by, or action on behalf of the school.
+- **Payment clarity:** wherever payment is collected, the UI states who receives the payment and when the booking becomes confirmed; nothing may imply the school receives or processes the payment unless that is the recorded route.
+- **Brand representation:** school names, logos, and brand assets are used for identification only. No "partner," endorsement, booking-agent, or equivalent implication without a supporting authorization record. **Logos and other brand assets require a separately documented rights basis** — a school's consent to display its information and prices does not extend to brand assets; where no rights basis exists, render text identification only.
+- **B4 fix:** third-party review content (ratings/counts, Google Maps link) is removed or replaced with transaction-verified reviews until the rights basis is documented. Placeholder must not claim unverifiable ratings.
+- **Student verification:** verified contact required for booking confirmation (Twilio); e-ID optional; a failed Twilio verification blocks confirmation, not browsing (VF-e).
+- **Guardian flow (minors):** per-market; completes without student e-ID (VF-g); consent scope explicit (account creation, booking, data processing).
+- **Cancellation policy display:** the profile shows the school's approved policy **verbatim** (DM cancellation_policies, active version). Unknown policy → no policy is displayed (never a platform-invented "24 hours" default); for directory-only schools the booking-policy presentation is removed entirely rather than shown with a warning.
+
+## 3. School onboarding (the verification-centric journey)
+
+```
+1. Company details → company_exists check (register API or manual)
+2. Representative e-ID (broker) → identity check
+3. Signatory/authority check → Bolagsverket mode logic (VF-a…a4):
+   JA ENSAM → proceed; JA TILLSAMMANS → collect co-signatures/delegation;
+   JA LÖPANDE → documented scope review; JA FULLMAKT → manual mandate inspection
+4. Teaching-permit evidence (Transportstyrelsen workflow; dated evidence)
+5. Instructors: individual approval + school affiliation (B3 fix)
+6. Capability/connection selection (vendor-neutral, spec 05 §8)
+7. Listing review → listing_status: active only when verification gates pass (NN1)
+```
+
+- Review queue (admin console): not-found and ambiguous cases route to manual review — never silent rejection or silent permission (NN3).
+- Claim alignment (B2 fix): homepage and FAQ copy must match stored-evidence reality exactly; "Verifierad/auktoriserad" badges render only from stored evidence (date + method).
+
+## 4. School dashboard (scoping note)
+
+The MVP dashboard internals were not inspected ([OBSERVED-MVP boundary]). This iteration adds: capability flags view, connection status per vendor route, verification status per check with expiry/re-check dates, booking list with origin/ingestion columns.
+
+## 5. Instructor journey
+
+- Signup requires school affiliation **and** documented individual approval where rules require both (Sweden: yes — Lag 1998:493). The "körkort 5 år" criterion is removed as a certification claim (B3 fix).
+- Instructor badge (verified) requires positive instructor-permit evidence (per-market rules; VF-i for Finland, VF-j for Denmark).
+
+## 6. Earnings surface (scoped)
+
+- Shows only authoritative-record-derived entries (spec 03 §8). UI must not imply whole-school accounting.
+- Payout status shown from authoritative settlement records only.
+
+## 7. Growth surfaces (this iteration)
+
+- **R8 cancellation-slot alerts (hypothesis):** opt-in follow (explicit consent); cancelled lesson → instant alert → one-tap rebooking; cooldown rules prevent duplicate alerts for the same slot; a rebooking attempt re-validates E1–E4 (eligibility is never assumed from the alert). Measured as a growth hypothesis.
+- **R9 widget:** embeddable page per school; `origin = school_direct` assigned **server-side from the school's registered widget token** — never from a client-controlled parameter; 0 kr acquisition commission. **Gate:** pricing/terms pages updated with the widget attribution statement before ship (spec 03 §8).
+- **Referrals after completed lessons:** measured, attributable, capped.
+
+## 8. Admin console
+
+- Review queue (open/resolved/rejected with reasons), re-check scheduler view, connector milestone dashboard, reconciliation conflict view, ops tasks, audit log surface, **school-authorization registry** (granted scopes, history, withdrawal) and **school-complaints workflow**. All admin actions audited (DM audit_log).
+
+**School-complaints workflow (canonical):** a school complaint or restriction request (1) is recorded as an ops task with the requested restrictions; (2) **suspends the disputed functions immediately** (authorization scopes set accordingly); (3) is verified corrected on the live surface; (4) requires **fresh affirmative authorization** from the school before any disputed function is re-enabled. Future reconsideration invited by a school is recorded as a note, never as present authorization. No response-time promises are invented.
+
+**Growth metrics (definitions + recorded events — canonical):**
+
+| Metric | Definition | Recorded events |
+|---|---|---|
+| Connected-school activation rate | schools with ≥1 active control route ÷ onboarded schools, per month | school_connection state changes |
+| Published bookable hours | sum of accepted-allocation + native-published bookable windows in the period | allocations accepted/withdrawn; availability published |
+| Booking fulfilment rate | bookings reaching `completed` ÷ bookings reaching `confirmed` | booking_state_transitions |
+| Connection failures per 100 bookings | connector errors + staleness degradations ÷ bookings × 100 | booking_events processing failures; staleness flags |
+| Supplier retention | schools still active after 90 days ÷ cohort | listing_status history |
+| Support minutes per booking | support time logged ÷ bookings in period | ops_tasks resolution records |
+| Contribution per booking | retained platform commission/fee revenue per completed booking (gross commission recorded on earnings_entries) minus **platform-borne** variable costs where recorded; school-side costs and unrecorded costs stay unknown and are never invented as "contribution" | payment_records + earnings_entries |
+| R8 alert funnel | alerts sent → rebookings attempted → rebookings confirmed | alert + rebooking events |
+| Widget attribution (R9) | bookings by origin (school_direct vs marketplace) | bookings.origin |
+
+Instrumentation for each metric is part of the phase that builds the surface (07 delivery plan).
+
+## Acceptance scenarios
+
+- **UX-1:** Given a school whose verification is pending, when its public profile is viewed, then no bookable offering CTA renders (contact only).
+- **UX-2:** Given the i18n booking form, when rendered in any locale, then no raw keys appear (B5).
+- **UX-3:** Given a school whose permit evidence is unexpired during a temporary directory outage, when viewed, then the offering stays live, flagged for re-check in admin.
+- **UX-3b:** Given a school whose permit is confirmed expired/revoked, when gating runs, then the affected offering is disabled pending resolution (per VF-c) — it does not stay live.
+- **UX-4 (directory-only):** Given a school with zero granted scopes, when its profile is viewed, then information and prices render with no times, no request form, and no contact CTA presented as booking (BK-17).
+- **UX-5 (recipient labeling):** Given an authorized request form, when rendered, then DriveLinkUp is identified as the recipient before submission and nothing implies the school receives or accepts it.
