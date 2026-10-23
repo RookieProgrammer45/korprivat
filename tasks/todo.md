@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — Phase 6 (PR #34, not merged)
+## Spec v1.2 — ACQ-1 (PR #35, not merged)
 
-Plan: docs/v1.2-phase-6-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/34. Local harness only. Do not treat a passing run as milestone 5 evidence.
+Plan: docs/v1.2-acq-1-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/35. `CLAIM_FUNNEL` defaults off. Do not start ACQ-3 until this pull request is merged.
+
+- [x] Private prospects; public only after eligibility and data-quality pass, with no claim required
+- [x] Synthetic fixtures only; register collection refused
+- [x] Claim review never grants commercial scopes
+- [x] Tests: SC-21
+
+## Spec v1.2 — Phase 6 (merged #34)
+
+Plan: docs/v1.2-phase-6-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/34. Local harness only. Do not treat a passing run as milestone 5 evidence.
 
 - [x] Five failure checks against an in-process double
 - [x] Harness evidence refused; no certification write
