@@ -1,0 +1,50 @@
+// Acquisition context. Empty on deploy. CLAIM_FUNNEL defaults off, so public
+// profile and claim routes do not read these tables until the flag is on.
+// A claim never writes SchoolAuthorizationEvent.
+
+model ListingProspect {
+  id           String   @id @default(cuid())
+  legalName    String
+  orgNumber    String
+  country      String
+  city         String
+  // Teaching permission categories A, B, C, D. Not commercial authorization scopes.
+  categories   String[]
+  // SYNTHETIC_FIXTURE is the only source this build accepts.
+  source       String
+  // PENDING | ELIGIBLE | REJECTED
+  eligibility  String   @default("PENDING")
+  // PENDING | PASS | FAIL
+  dataQuality  String   @default("PENDING")
+  // PRIVATE | PUBLIC
+  visibility   String   @default("PRIVATE")
+  // UNCLAIMED | SUBMITTED
+  claimState   String   @default("UNCLAIMED")
+  policyDraft  Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  claims ProspectClaim[]
+
+  @@unique([country, orgNumber])
+  @@index([visibility])
+}
+
+model ProspectClaim {
+  id                     String   @id @default(cuid())
+  prospectId             String
+  claimantUserId         String
+  identityEvidenceRef    String
+  mandateEvidenceRef     String
+  // PENDING_REVIEW | VERIFIED | REJECTED
+  identityStatus         String   @default("PENDING_REVIEW")
+  mandateStatus          String   @default("PENDING_REVIEW")
+  representativeStatus   String   @default("PENDING_REVIEW")
+  scopesGranted          String[]
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  prospect ListingProspect @relation(fields: [prospectId], references: [id])
+
+  @@index([prospectId])
+}
