@@ -92,3 +92,51 @@ model SchoolInstructorAffiliation {
   @@index([instructorUserId])
   @@index([instructorListingId])
 }
+
+// Legal teaching permission. Separate from commercial authorization scopes.
+// Empty on deploy. CATEGORY_OFFERINGS defaults off.
+
+model TeachingPermission {
+  id             String   @id @default(cuid())
+  listingId      String
+  category       String
+  legalEntityRef String
+  locationRef    String
+  // CURRENT | EXPIRED
+  status         String   @default("CURRENT")
+  evidenceRef    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  listing Instructor @relation(fields: [listingId], references: [id])
+
+  @@index([listingId, category])
+}
+
+// Category tag for an offering. The offering row itself stays in its own context.
+model CategoryOffering {
+  id            String   @id @default(cuid())
+  offeringId    String
+  listingId     String
+  category      String
+  policyId      String?
+  policyVersion Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([offeringId])
+  @@index([listingId, category])
+}
+
+// Immutable copy of the category and policy version chosen for a booking.
+model CategoryBookingSnapshot {
+  id            String   @id @default(cuid())
+  bookingId     String   @unique
+  offeringId    String
+  category      String
+  policyId      String?
+  policyVersion Int?
+  createdAt     DateTime @default(now())
+
+  @@index([offeringId])
+}

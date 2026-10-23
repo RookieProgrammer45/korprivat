@@ -3462,5 +3462,10 @@
     "signOut": "Logga ut",
     "signingOut": "Loggar ut…",
     "signOutError": "Kunde inte logga ut. Försök igen."
+  },
+  "categoryLanding": {
+    "title": "{category}-utbildning",
+    "body": "Utbud visas här bara när skolan har aktuell undervisningsbehörighet för kategorin. Sidan har ingen bokningsyta.",
+    "empty": "Inget utbud i den här kategorin."
   }
 }
