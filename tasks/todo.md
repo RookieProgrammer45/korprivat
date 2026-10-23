@@ -1,8 +1,8 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-2 (branch feat/acq-2-lead-dashboard)
+## Spec v1.2 — ACQ-2 (PR #37, not merged)
 
-Plan: docs/v1.2-acq-2-plan.md. `LEAD_DASHBOARD` defaults off. Do not start ACQ-4 until this pull request is merged.
+Plan: docs/v1.2-acq-2-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/37. `LEAD_DASHBOARD` defaults off. Do not start ACQ-4 until this pull request is merged.
 
 - [x] Zero-scope representative sees historical inquiry count and no booking surface
 - [x] New inquiries stay off without inquiry_collection
