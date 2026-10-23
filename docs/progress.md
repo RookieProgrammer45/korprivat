@@ -5,7 +5,8 @@
 - **Phase 0:** Gap map + migration plan (shipped). Known correction: `contact` + 403s are live on `main`; the gap map’s MISSING verdict for contact is stale.
 - **Phase 1:** merged in [#29](https://github.com/RookieProgrammer45/korprivat/pull/29). `SCHOOL_AUTHZ_ENFORCEMENT` defaults off. Withdrawals still apply.
 - **Phase 2:** merged in [#30](https://github.com/RookieProgrammer45/korprivat/pull/30). `CANCELLATION_POLICY_ENFORCE` defaults off. `paymentStatus` and fee math are unchanged.
-- **Phase 3 (in progress):** [`docs/v1.2-phase-3-plan.md`](./v1.2-phase-3-plan.md). `RELIABLE_PROCESSING` defaults off. No partner HTTP.
+- **Phase 3:** merged in [#31](https://github.com/RookieProgrammer45/korprivat/pull/31). `RELIABLE_PROCESSING` defaults off.
+- **Phase 4 (in progress):** connectivity API on `feat/phase-4-connectivity`. `CONNECTIVITY_API` defaults off. Mock evidence cannot enable production.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
 - Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.

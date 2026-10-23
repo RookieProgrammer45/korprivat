@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — Phase 3 (branch feat/phase-3-reliable-processing)
+## Spec v1.2 — Phase 4 (branch feat/phase-4-connectivity)
 
-Plan: docs/v1.2-phase-3-plan.md. `RELIABLE_PROCESSING` defaults off. PR: https://github.com/RookieProgrammer45/korprivat/pull/31. Do not start Phase 4 until this pull request is merged.
+Plan: docs/v1.2-phase-4-plan.md. `CONNECTIVITY_API` defaults off. Do not start Phase 5 until this pull request is merged.
+
+- [x] HMAC partner auth, sandbox/production isolation, rate limits, idempotency namespaces
+- [x] DriveLinkUp-hosted `/v1/connections` routes; content stays unpublished
+- [x] Adapter request/response schemas and mock hold with no partial reservation
+- [x] SC-7 mock evidence cannot enable production; SC-9 cross-connection is 403
+
+## Spec v1.2 — Phase 3 (merged #31)
+
+Plan: docs/v1.2-phase-3-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/31. `RELIABLE_PROCESSING` defaults off.
 
 - [x] Inbox dedup, stale rejection, and authoritative retrieval when order is missing
 - [x] Outbox write in the same transaction as booking create when the flag is on
