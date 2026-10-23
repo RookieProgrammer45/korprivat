@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { SchoolSetupChecklist } from '@/components/custom/dashboard/school-setup-checklist';
 import { SchoolBookingsPanel } from '@/components/custom/school/school-bookings-panel';
+import { SchoolConnectionStatus } from '@/components/custom/school/school-connection-status';
 import {
   type RosterInvite,
   type RosterMember,
@@ -134,6 +135,8 @@ export default async function SchoolDashboardPage({
           {t('orgNumber', { number: org.organizationNumber })}
         </p>
       </header>
+
+      <SchoolConnectionStatus userId={session.userId} />
 
       {showSetupChecklist ? (
         <SchoolSetupChecklist

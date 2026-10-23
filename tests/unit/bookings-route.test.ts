@@ -14,6 +14,8 @@ const {
   mockHandledareFindFirst,
   mockTransaction,
   mockGetSessionUser,
+  mockConnectionFindFirst,
+  mockCertificationFindFirst,
 } = vi.hoisted(() => ({
   sendEmailMock: vi.fn(async () => ({ id: 'mock_email_id' })),
   mockInstructorFindUnique: vi.fn(),
@@ -25,6 +27,8 @@ const {
   mockHandledareFindFirst: vi.fn(async () => null),
   mockTransaction: vi.fn(),
   mockGetSessionUser: vi.fn(),
+  mockConnectionFindFirst: vi.fn(),
+  mockCertificationFindFirst: vi.fn(),
 }));
 
 const LEARNER_SESSION = {
@@ -53,6 +57,8 @@ vi.mock('@/lib/db', () => ({
     availabilitySlot: { findFirst: mockSlotFindFirst, updateMany: mockSlotUpdateMany },
     userProfile: { findUnique: mockUserProfileFindUnique },
     handledareEnrollment: { findFirst: mockHandledareFindFirst },
+    schoolConnection: { findFirst: mockConnectionFindFirst },
+    certification: { findFirst: mockCertificationFindFirst },
     $transaction: mockTransaction,
   },
 }));
@@ -130,6 +136,8 @@ describe('POST /api/bookings — email dispatch', () => {
     mockUserProfileFindUnique.mockReset();
     mockTransaction.mockReset();
     mockGetSessionUser.mockReset();
+    mockConnectionFindFirst.mockReset();
+    mockCertificationFindFirst.mockReset();
     mockGetSessionUser.mockResolvedValue(LEARNER_SESSION);
     mockUserProfileFindUnique.mockResolvedValue({
       dateOfBirth: dobYearsAgo(25),
@@ -260,6 +268,39 @@ describe('POST /api/bookings — email dispatch', () => {
       1,
       expect.objectContaining({ to: 'learner@example.test' }),
     );
+  });
+
+  it('SC-8 refuses connector instant booking when only availability is certified', async () => {
+    process.env.CERTIFICATION_ENFORCEMENT = '1';
+    mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+    mockConnectionFindFirst.mockResolvedValueOnce({ partnerId: 'partner_1' });
+    mockCertificationFindFirst.mockResolvedValueOnce({
+      prodEnabled: { availability_display: true, transactional_booking: false },
+    });
+    try {
+      const res = await POST(jsonRequest({ ...VALID_BODY, commitmentRoute: 'connector' }));
+      expect(res.status).toBe(403);
+      expect(await res.json()).toEqual({ error: { code: 'capability_not_certified' } });
+      expect(mockBookingCreate).not.toHaveBeenCalled();
+    } finally {
+      delete process.env.CERTIFICATION_ENFORCEMENT;
+    }
+  });
+
+  it('keeps the native booking path when certification enforcement is on', async () => {
+    process.env.CERTIFICATION_ENFORCEMENT = '1';
+    mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+    mockBookingCreate.mockResolvedValueOnce({
+      id: 'booking_native',
+      preferredAt: new Date('2030-08-10T14:30:00.000Z'),
+    });
+    try {
+      const res = await POST(jsonRequest(VALID_BODY));
+      expect(res.status).toBe(201);
+      expect(mockConnectionFindFirst).not.toHaveBeenCalled();
+    } finally {
+      delete process.env.CERTIFICATION_ENFORCEMENT;
+    }
   });
 
   it('SC-6 returns 409 when the slot claim updates zero rows', async () => {

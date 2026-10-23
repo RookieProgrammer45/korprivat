@@ -1,0 +1,37 @@
+// Certification context. Empty on deploy. CERTIFICATION_ENFORCEMENT defaults
+// off, so native booking does not read these tables until the flag is on.
+// prodEnabled is per capability. Availability never implies booking.
+
+model Partner {
+  id          String   @id @default(cuid())
+  legalName   String
+  orgNumber   String
+  country     String
+  // CANDIDATE | CERTIFIED | SUSPENDED. Separate from capability prodEnabled.
+  status      String   @default("CANDIDATE")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  certifications Certification[]
+  connections    SchoolConnection[]
+
+  @@unique([country, orgNumber])
+}
+
+model Certification {
+  id                 String   @id @default(cuid())
+  partnerId          String
+  product            String
+  version            String
+  market             String
+  capabilities       String[]
+  milestoneEvidence  Json
+  prodEnabled        Json
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  partner Partner @relation(fields: [partnerId], references: [id])
+
+  @@unique([partnerId, product, version, market])
+  @@index([partnerId])
+}
