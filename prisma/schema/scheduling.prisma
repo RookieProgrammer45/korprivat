@@ -1,0 +1,70 @@
+// Scheduling context — canonical booking log, versioned cancellation
+// policies, and payment records derived from Stripe. Additive empty tables.
+// Do not update or delete BookingStateTransition rows.
+
+model BookingStateTransition {
+  id            String   @id @default(cuid())
+  bookingId     String
+  fromState     String?
+  toState       String
+  actor         String
+  correlationId String?
+  createdAt     DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id])
+
+  @@index([bookingId, createdAt])
+}
+
+model CancellationPolicy {
+  id               String    @id @default(cuid())
+  listingId        String
+  version          Int
+  deadlineType     String
+  deadlineValue    Json
+  timezone         String
+  businessCalendar Json
+  wording          String?
+  source           String
+  approvedAt       DateTime?
+  // draft | active | withdrawn
+  state            String
+  activeListingKey String?   @unique
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  listing Instructor @relation(fields: [listingId], references: [id])
+
+  @@unique([listingId, version])
+  @@index([listingId, state])
+}
+
+model PaymentRecord {
+  id            String   @id @default(cuid())
+  bookingId     String
+  // none | authorized | captured | refunded | voided | disputed
+  state         String
+  lateCaptured  Boolean  @default(false)
+  amountMinor   Int?
+  currency      String   @default("SEK")
+  stripeEventId String?  @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  booking Booking @relation(fields: [bookingId], references: [id])
+
+  @@index([bookingId])
+}
+
+model OpsTask {
+  id             String   @id @default(cuid())
+  bookingId      String?
+  kind           String
+  allowedActions String[]
+  // open | resolved
+  state          String   @default("open")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([bookingId])
+}

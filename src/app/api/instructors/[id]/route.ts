@@ -9,6 +9,10 @@ import { InstructorItem, PUBLIC_INSTRUCTOR_SELECT } from '@/lib/contracts/instru
 import { prisma } from '@/lib/db';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
+import {
+  isCancellationPolicyEnforced,
+  listingHasActiveCancellationPolicy,
+} from '@/lib/scheduling/cancellation-policy-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,11 +53,14 @@ export async function GET(_req: Request, ctx: Ctx) {
   };
   const surfaces = await loadListingSurfaces(instructor.id, instructor.bookingMode);
   const nextSlotAt = surfaces.availabilityDisplay ? (slot?.startsAt.toISOString() ?? null) : null;
+  const hidePolicy =
+    isCancellationPolicyEnforced() && !(await listingHasActiveCancellationPolicy(instructor.id));
   return NextResponse.json(
     InstructorItem.parse({
       ...toPublicInstructor(instructor, aggregate, nextSlotAt),
       affiliation: affiliation ? { name: affiliation.name, slug: affiliation.slug } : null,
       surfaces,
+      ...(hidePolicy ? { cancellationPolicyTier: null, showCancellationPolicy: false } : {}),
     }),
   );
 }

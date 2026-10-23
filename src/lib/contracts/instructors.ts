@@ -108,6 +108,9 @@ export const InstructorItem = z.object({
   // pre-tier row reads as `null` and the consuming island falls back to
   // a "Flexible" badge upstream.
   cancellationPolicyTier: z.enum(CANCELLATION_TIERS).nullable(),
+  // False when enforcement is on and the listing has no approved policy.
+  // Omitted means the legacy tier display stays.
+  showCancellationPolicy: z.boolean().optional(),
   // Booking mode the instructor publishes on their profile. Nullable on
   // the storage column; the read path defaults to 'instant' when
   // missing so legacy pre-mode rows behave like the legacy

@@ -27,6 +27,7 @@ import {
 } from '@/lib/orgs/school-authorization-policy';
 import { resolveOrigin } from '@/lib/payments/origin';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
+import { slotClaimOutcome } from '@/lib/scheduling/booking-policy';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
@@ -222,12 +223,29 @@ export async function POST(req: Request) {
           select: { id: true },
         });
 
+        const transitions = (
+          tx as unknown as {
+            bookingStateTransition?: { create: (args: unknown) => Promise<unknown> };
+          }
+        ).bookingStateTransition;
+        if (transitions) {
+          await transitions.create({
+            data: {
+              bookingId: created.id,
+              fromState: null,
+              toState: 'pending',
+              actor: 'student',
+              correlationId: created.id,
+            },
+          });
+        }
+
         if (instructorMode === 'instant') {
           const slotUpdated = await tx.availabilitySlot.updateMany({
             where: { id: slot.id, bookedAt: null },
             data: { bookedAt: new Date(), bookedBookingId: created.id },
           });
-          if (slotUpdated.count !== 1) throw new BookingConflictError();
+          if (slotClaimOutcome(slotUpdated.count) === 'conflict') throw new BookingConflictError();
         }
 
         return { id: created.id, startsAt: slot.startsAt };

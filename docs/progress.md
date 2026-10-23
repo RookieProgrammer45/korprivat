@@ -4,9 +4,10 @@
 
 - **Phase 0:** Gap map + migration plan (shipped). Known correction: `contact` + 403s are live on `main`; the gap map’s MISSING verdict for contact is stale.
 - **Phase 1 (in review):** [`docs/v1.2-phase-1-plan.md`](./v1.2-phase-1-plan.md) on branch `phase-1-school-authorization`. `SCHOOL_AUTHZ_ENFORCEMENT` defaults off. Withdrawals still apply. SC-19 included.
+- **Phase 2 (in progress):** [`docs/v1.2-phase-2-plan.md`](./v1.2-phase-2-plan.md) on `phase-2-booking-services`. `CANCELLATION_POLICY_ENFORCE` defaults off. `paymentStatus` and fee math are unchanged.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
-- Do **not** start Phase 1 schema / scope enforcement until the Phase 1 plan is approved.
+- Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.
 - Where packs disagree, **v1.2** wins for marketplace authorization and booking architecture.
 
 ## Database migration baseline (follow-up)

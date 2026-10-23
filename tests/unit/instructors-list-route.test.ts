@@ -237,6 +237,27 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(body.items[0]).not.toHaveProperty('userId');
   });
 
+  it('SC-10 hides the cancellation tier when enforcement is on and no policy is approved', async () => {
+    process.env.CANCELLATION_POLICY_ENFORCE = '1';
+    try {
+      mockInstructorFindMany.mockResolvedValueOnce([
+        instructorRow({ cancellationPolicyTier: 'flexible' }),
+      ]);
+      mockSlotFindMany.mockResolvedValueOnce([]);
+
+      const res = await GET(req());
+      const body = (await res.json()) as { items: Array<Record<string, unknown>> };
+
+      expect(res.status).toBe(200);
+      expect(body.items[0]).toMatchObject({
+        cancellationPolicyTier: null,
+        showCancellationPolicy: false,
+      });
+    } finally {
+      delete process.env.CANCELLATION_POLICY_ENFORCE;
+    }
+  });
+
   it('applies an inclusive minimum hourly rate filter', async () => {
     mockInstructorFindMany.mockResolvedValueOnce([instructorRow()]);
 

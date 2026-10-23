@@ -209,7 +209,8 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
           {/* Directory-only listings show no cancellation policy: no booking
               flows through DriveLinkUp for this school, and an unconfirmed
               tier would misrepresent the school's own terms. */}
-          {instructor.surfaces?.directoryOnly ||
+          {instructor.showCancellationPolicy === false ||
+          instructor.surfaces?.directoryOnly ||
           (!instructor.surfaces && instructor.bookingMode === 'contact') ? null : (
             <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
           )}
