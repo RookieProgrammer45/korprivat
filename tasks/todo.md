@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-3 (PR #36, not merged)
+## Spec v1.2 — ACQ-2 (PR #37, not merged)
 
-Plan: docs/v1.2-acq-3-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/36. `SCHOOL_MEDIATED_INSTRUCTORS` defaults off. Do not start ACQ-2 until this pull request is merged.
+Plan: docs/v1.2-acq-2-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/37. `LEAD_DASHBOARD` defaults off. Do not start ACQ-4 until this pull request is merged.
+
+- [x] Zero-scope representative sees historical inquiry count and no booking surface
+- [x] New inquiries stay off without inquiry_collection
+- [x] Lead conversion creates neither a booking nor a scope
+- [x] Tests: SC-24
+
+## Spec v1.2 — ACQ-3 (merged #36)
+
+Plan: docs/v1.2-acq-3-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/36. `SCHOOL_MEDIATED_INSTRUCTORS` defaults off.
 
 - [x] School invitation and verified affiliation grant no scopes
 - [x] Flag on: independent publish, sale, and undelegated diary are refused
