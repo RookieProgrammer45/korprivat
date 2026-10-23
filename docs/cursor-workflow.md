@@ -54,6 +54,13 @@ Operational guide for driving Cursor through the product specification. The buil
 - **Build:** partner registry, milestone evidence tracking, capability-scoped `prod_enabled`, admin console, school-facing connection UX, partner directory.
 - **Done when:** SC-8 covered; capability gating enforced server-side (availability-only certification can never enable booking).
 
+### Acquisition track — supply-side acquisition (specs/09 §13 ACQ; docs/acquisition-strategy.md)
+- **Model/mode:** standard pattern — Plan with Opus 5.5, execute with Composer 2.5.
+- **Read first:** specs/09 §13 ACQ track and docs/acquisition-strategy.md (the strategy: segments, stages, bounded pilot, and the execution boundary in its §6).
+- **Build in priority order:** ACQ-1 (claim funnel, with the category model shared from the start — no B-only claim flow) → ACQ-3 (school-mediated instructor onboarding) → ACQ-2 (lead dashboard) → ACQ-4 (professional-category supply) → ACQ-5 (concierge tooling). Per-capability prerequisites are in specs/09 §13 — the tracks are eligible to run alongside each other, but do not restart or silently expand an in-flight phase, and do not launch concurrent agents against the same files.
+- **Hard rules:** no seeding before the register route is verified (synthetic fixtures for development; documented manual prospecting is the alternative); imported candidates private until eligibility checks; claim verification grants no commercial scopes; no independent instructor publication/selling; review-capacity throttle respected (verification ops scale with acquisition); consent firewall and verification gates unchanged. Bounded execution (docs/acquisition-strategy.md §6): no outreach, no bulk publication, no spend, no vendor contact, no production activation without separate explicit authorization — software completion is not supplier-acquisition success.
+- **Done when:** SC-21…25 covered and the prerequisite phases' acceptance stays green (no regressions).
+
 ### Phase 6 — Pilot and production
 - **Model/mode:** **Grok 4.7** for long unattended test runs and background agents; human decisions on vendor/pilot terms ([EXTERNAL]).
 - **Build:** milestone 4/5 **test harnesses and tooling** — these may be built before any vendor agrees. Real vendor-environment tests, milestone evidence, and certification remain blocked on a partner. **This workflow does not authorize production changes or unattended deployment.** No vendor invitations are code.

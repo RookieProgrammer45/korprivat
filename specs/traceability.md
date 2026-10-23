@@ -18,6 +18,7 @@
 | §15 SC-1…20 | 03 (BK), 04 (VF), 08 (API) consolidated |
 | Appendix A | 04 §9 (VF-a…j2, verbatim) |
 | Appendix B | 08 (API-1…9, expanded) |
+| §13 ACQ track + SC-21…25 (v1.3) | docs/acquisition-strategy.md (from plan v5 §9A, R12–R15) |
 
 Every requirement below has one canonical spec location and an acceptance hook. Dependencies marked ⛔ are blocked on external access (do not fake). The full §8.7 release-test paragraph (a, a2, a3, a4, b, c, c2, d, e, f, g, h, i, j, j2) was recovered in full from the plan and is covered in spec 04 §9 — nothing truncated.
 

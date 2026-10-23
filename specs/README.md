@@ -24,6 +24,7 @@ Buildable product specifications derived from the Product Development Plan v5 (O
 | 9 | `specs/07-delivery-plan.md` | Build order, acceptance criteria, bounded Cursor prompts |
 | 10 | `specs/08-api-contracts.md` | Proposed application API contracts |
 | 11 | `traceability.md` | Every plan requirement → spec location → acceptance → dependency |
+| — | `docs/acquisition-strategy.md` | The supply-side acquisition strategy (segments, stages, pilot, execution boundary) — implemented via specs/09 §13 ACQ |
 
 ## First bounded implementation task
 
