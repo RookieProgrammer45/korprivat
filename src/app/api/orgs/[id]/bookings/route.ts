@@ -18,6 +18,8 @@ import {
   OrgForbiddenError,
   OrgNotFoundError,
 } from '@/lib/orgs/service';
+import { loadListingBindings } from '@/lib/orgs/school-authorization';
+import { bookingVisibleToOrganization } from '@/lib/orgs/school-authorization-policy';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -98,7 +100,17 @@ export async function GET(req: Request, context: RouteContext) {
     },
   });
 
-  const instructorIds = [...new Set(rows.map((r) => r.instructorId))];
+  const candidateIds = [...new Set(rows.map((r) => r.instructorId))];
+  const bindings = await loadListingBindings(candidateIds);
+  const visibleRows = rows.filter((row) =>
+    bookingVisibleToOrganization({
+      bookingOrganizationId: orgId,
+      bookingListingId: row.instructorId,
+      organizationId: orgId,
+      bindings,
+    }),
+  );
+  const instructorIds = [...new Set(visibleRows.map((r) => r.instructorId))];
   const instructors = instructorIds.length
     ? await prisma.instructor.findMany({
         where: { id: { in: instructorIds } },
@@ -107,17 +119,17 @@ export async function GET(req: Request, context: RouteContext) {
     : [];
   const instructorById = new Map(instructors.map((i) => [i.id, i]));
 
-  const slots = rows.length
+  const slots = visibleRows.length
     ? await prisma.availabilitySlot.findMany({
-        where: { id: { in: rows.flatMap((row) => (row.slotId ? [row.slotId] : [])) } },
+        where: { id: { in: visibleRows.flatMap((row) => (row.slotId ? [row.slotId] : [])) } },
         select: { id: true, startsAt: true, durationMinutes: true },
       })
     : [];
   const slotById = new Map(slots.map((slot) => [slot.id, slot]));
 
-  const receiptRows = rows.length
+  const receiptRows = visibleRows.length
     ? await prisma.bookingReceipt.findMany({
-        where: { bookingId: { in: rows.map((row) => row.id) }, recipientRole: 'instructor' },
+        where: { bookingId: { in: visibleRows.map((row) => row.id) }, recipientRole: 'instructor' },
         select: {
           bookingId: true,
           priceAmountSek: true,
@@ -132,7 +144,7 @@ export async function GET(req: Request, context: RouteContext) {
     : [];
   const receiptByBooking = new Map(receiptRows.map((row) => [row.bookingId, row]));
 
-  const items = rows.map((b) => {
+  const items = visibleRows.map((b) => {
     const instructor = instructorById.get(b.instructorId);
     const slot = b.slotId ? slotById.get(b.slotId) : undefined;
     const receipt = receiptByBooking.get(b.id);

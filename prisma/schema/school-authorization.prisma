@@ -1,0 +1,93 @@
+// Organizations context — school commercial authorization.
+// Additive tables only. Empty on deploy (`prisma db push` must not rewrite
+// existing columns). Events are append-only: never update or delete rows.
+
+model SchoolAuthorizationEvent {
+  id              String   @id @default(cuid())
+  listingId       String
+  sequence        Int
+  // grant | withdraw | admin_suspend
+  kind            String
+  scopes          String[]
+  actorUserId     String
+  evidenceRef     String?
+  note            String?
+  decisionVersion Int
+  idempotencyKey  String   @unique
+  createdAt       DateTime @default(now())
+
+  listing Instructor @relation(fields: [listingId], references: [id])
+
+  @@unique([listingId, sequence])
+  @@index([listingId, sequence])
+}
+
+model ListingAuthzHead {
+  listingId       String   @id
+  headSequence    Int      @default(0)
+  decisionVersion Int      @default(0)
+  updatedAt       DateTime @updatedAt
+}
+
+model ListingRepresentativeAuthority {
+  id          String   @id @default(cuid())
+  listingId   String
+  userId      String
+  evidenceRef String
+  verifiedAt  DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  listing Instructor @relation(fields: [listingId], references: [id])
+
+  @@unique([listingId, userId])
+  @@index([listingId])
+}
+
+model ListingOrgBinding {
+  id               String    @id @default(cuid())
+  listingId        String
+  organizationId   String
+  // ACTIVE | PENDING_REVIEW | REVOKED
+  state            String
+  verifiedAt       DateTime?
+  verifiedByUserId String?
+  evidenceRef      String?
+  // Set to listingId only while ACTIVE so one active binding exists per listing.
+  activeListingKey String?   @unique
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  listing      Instructor   @relation(fields: [listingId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@index([listingId, state])
+  @@index([organizationId])
+}
+
+model SchoolComplaint {
+  id             String   @id @default(cuid())
+  listingId      String
+  summary        String
+  evidenceRef    String
+  disputedScopes String[]
+  // OPEN | SUSPENDED | VERIFIED_DISABLED | RESOLVED
+  state          String
+  verification   Json?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  listing Instructor @relation(fields: [listingId], references: [id])
+
+  @@index([listingId])
+}
+
+model BookingModeAuditNote {
+  id          String   @id @default(cuid())
+  listingId   String   @unique
+  bookingMode String
+  note        String
+  createdAt   DateTime @default(now())
+
+  listing Instructor @relation(fields: [listingId], references: [id])
+}

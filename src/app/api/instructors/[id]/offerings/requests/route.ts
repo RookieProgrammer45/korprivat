@@ -87,12 +87,13 @@ export async function POST(req: Request, ctx: Ctx) {
   if (!instructor) {
     return NextResponse.json({ errors: { offeringId: 'Offering not found' } }, { status: 404 });
   }
-  // Directory-only ('contact') listing: no request forms may be submitted.
-  if (instructor.bookingMode === 'contact') {
-    return NextResponse.json(
-      { errors: { offeringId: 'This listing does not accept requests' } },
-      { status: 403 },
-    );
+  // OfferingRequest is a public name/email/phone message (inquiry_collection),
+  // not a slot request-to-book. Contact listings and a withdrawn inquiry scope
+  // both refuse. General platform /api/contact is a different route.
+  const { loadListingSurfaces, notAuthorizedBody } = await import('@/lib/orgs/school-authorization');
+  const inquirySurfaces = await loadListingSurfaces(instructor.id, instructor.bookingMode);
+  if (!inquirySurfaces.inquiryCollection) {
+    return NextResponse.json(notAuthorizedBody(), { status: 403 });
   }
   await prisma.offeringRequest.create({
     data: {

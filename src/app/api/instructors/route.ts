@@ -20,6 +20,11 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
+import { loadFoldsByListing } from '@/lib/orgs/school-authorization';
+import {
+  isSchoolAuthzEnforcementOn,
+  listingSurfaces,
+} from '@/lib/orgs/school-authorization-policy';
 import {
   InstructorCreate,
   InstructorCreated,
@@ -160,6 +165,19 @@ export async function GET(req: NextRequest) {
   const nextSlotByInstructor = new Map<string, string>();
   let filteredRows = ratedRows;
   const availability = q.availability;
+  const folds = await loadFoldsByListing(instructorIds);
+  const enforcementOn = isSchoolAuthzEnforcementOn();
+  const surfacesFor = (row: { id: string; bookingMode: string | null }) =>
+    listingSurfaces({
+      bookingMode: row.bookingMode,
+      folded: folds.get(row.id) ?? {
+        granted: [],
+        withdrawn: [],
+        decisionVersion: 0,
+        headSequence: 0,
+      },
+      enforcementOn,
+    });
   if (instructorIds.length > 0) {
     const upcoming = await prisma.availabilitySlot.findMany({
       where: {
@@ -172,14 +190,18 @@ export async function GET(req: NextRequest) {
     });
 
     const rowById = new Map(ratedRows.map(({ row }) => [row.id, row]));
+    const visibleSlots = upcoming.filter((slot) => {
+      const instructor = rowById.get(slot.instructorId);
+      return instructor != null && surfacesFor(instructor).availabilityDisplay;
+    });
     const matchingSlots = availability
-      ? upcoming.filter((slot) => {
+      ? visibleSlots.filter((slot) => {
           const instructor = rowById.get(slot.instructorId);
           return (
             instructor != null && matchesAvailability(slot.startsAt, instructor.city, availability)
           );
         })
-      : upcoming;
+      : visibleSlots;
 
     if (availability) {
       const availableIds = new Set(matchingSlots.map((slot) => slot.instructorId));
@@ -193,17 +215,24 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  const items = filteredRows.map(({ row, distanceKm }) =>
-    toPublicInstructor(
-      row,
-      aggregates.get(row.id) ?? {
-        verificationStatus: 'unverified',
-        reviewSummary: { count: 0, averageRating: null },
-      },
-      nextSlotByInstructor.get(row.id) ?? null,
-      distanceKm,
-    ),
-  );
+  const items = filteredRows.map(({ row, distanceKm }) => {
+    const surfaces = surfacesFor(row);
+    const nextSlotAt = surfaces.availabilityDisplay
+      ? (nextSlotByInstructor.get(row.id) ?? null)
+      : null;
+    return {
+      ...toPublicInstructor(
+        row,
+        aggregates.get(row.id) ?? {
+          verificationStatus: 'unverified',
+          reviewSummary: { count: 0, averageRating: null },
+        },
+        nextSlotAt,
+        distanceKm,
+      ),
+      surfaces,
+    };
+  });
 
   const cities = Array.from(new Set(canonicalRows.map((r) => r.city))).sort();
 

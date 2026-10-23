@@ -2,10 +2,11 @@
 
 ## Product Spec v1.2 — build authority
 
-- **Phase 0 (current):** Gap map + `bookingMode` → `SchoolAuthorization` migration plan only.
+- **Phase 0:** Gap map + migration plan (shipped). Known correction: `contact` + 403s are live on `main`; the gap map’s MISSING verdict for contact is stale.
+- **Phase 1 (in review):** [`docs/v1.2-phase-1-plan.md`](./v1.2-phase-1-plan.md) on branch `phase-1-school-authorization`. `SCHOOL_AUTHZ_ENFORCEMENT` defaults off. Withdrawals still apply. SC-19 included.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
-- Do **not** start Phase 1 schema / scope enforcement until PM approves Phase 0.
+- Do **not** start Phase 1 schema / scope enforcement until the Phase 1 plan is approved.
 - Where packs disagree, **v1.2** wins for marketplace authorization and booking architecture.
 
 ## Database migration baseline (follow-up)

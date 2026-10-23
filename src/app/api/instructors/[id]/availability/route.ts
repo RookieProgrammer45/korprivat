@@ -12,6 +12,7 @@ import { NextResponse } from 'next/server';
 import { providerTimezoneForCity } from '@/lib/business/provider-timezone';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import { prisma } from '@/lib/db';
+import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,10 +22,14 @@ export async function GET(_req: Request, ctx: Ctx) {
   const { id } = await ctx.params;
   const instructor = await prisma.instructor.findUnique({
     where: { id },
-    select: { providerRole: true, city: true },
+    select: { providerRole: true, city: true, bookingMode: true },
   });
   if (!instructor)
     return NextResponse.json({ errors: { id: 'Provider not found' } }, { status: 404 });
+  const surfaces = await loadListingSurfaces(id, instructor.bookingMode);
+  if (!surfaces.availabilityDisplay) {
+    return NextResponse.json(AvailabilitySlotList.parse({ items: [] }));
+  }
   const rows = await prisma.availabilitySlot.findMany({
     where: {
       instructorId: id,

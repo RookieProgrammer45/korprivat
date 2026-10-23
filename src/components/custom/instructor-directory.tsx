@@ -709,7 +709,9 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   const locale = useLocale();
   const trTier = useTranslations('cancellationPolicy.tierBadge');
   const trBooking = useTranslations('bookingForm');
-  const nextSlotPill = row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, tr, locale) : null;
+  const showTimes = row.surfaces ? row.surfaces.availabilityDisplay : row.bookingMode !== 'contact';
+  const nextSlotPill =
+    showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, tr, locale) : null;
   const distancePill =
     row.distanceKm != null
       ? tr('distancePill', { km: formatNumber(row.distanceKm, locale) })
@@ -720,13 +722,17 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   // Directory-only ('contact') listings show no cancellation-policy pill:
   // no booking flows through DriveLinkUp, and an unconfirmed tier would
   // misrepresent the school's own terms.
-  const tierBadge =
-    row.bookingMode === 'contact' ? null : tierBadgeLabel(row.cancellationPolicyTier, trTier);
-  // Booking-mode badge mirrors the same "renders next to the hourly rate"
-  // styling the tier badge uses. Default to 'instant' on a missing field
-  // so legacy pre-mode rows still get the badge copy.
-  const bookingMode: 'instant' | 'request' | 'contact' =
-    row.bookingMode === 'request'
+  const directoryOnly = row.surfaces?.directoryOnly ?? row.bookingMode === 'contact';
+  const tierBadge = directoryOnly ? null : tierBadgeLabel(row.cancellationPolicyTier, trTier);
+  // Badge follows authorization surfaces when the API sent them, so a
+  // withdrawn scope cannot keep an instant/request label on the card.
+  const bookingMode: 'instant' | 'request' | 'contact' = row.surfaces
+    ? row.surfaces.directoryOnly
+      ? 'contact'
+      : row.surfaces.requestToBook && !row.surfaces.transactionalBooking
+        ? 'request'
+        : 'instant'
+    : row.bookingMode === 'request'
       ? 'request'
       : row.bookingMode === 'contact'
         ? 'contact'

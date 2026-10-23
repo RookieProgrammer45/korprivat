@@ -25,6 +25,11 @@ import {
   createBookingCheckoutSession,
 } from '@/lib/payments/create-booking-checkout';
 import { resolveOrigin } from '@/lib/payments/origin';
+import { loadFoldedAuthorization, notAuthorizedBody } from '@/lib/orgs/school-authorization';
+import {
+  canAcceptPendingRequest,
+  isSchoolAuthzEnforcementOn,
+} from '@/lib/orgs/school-authorization-policy';
 import { getSessionUser } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -60,7 +65,15 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   }
   const instructor = await prisma.instructor.findUnique({
     where: { id: booking.instructorId },
-    select: { id: true, name: true, email: true, city: true, userId: true, hourlyRateSek: true },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      city: true,
+      userId: true,
+      hourlyRateSek: true,
+      bookingMode: true,
+    },
   });
   if (!instructor) {
     return NextResponse.json({ errors: { id: 'Instructor not found' } }, { status: 404 });
@@ -102,6 +115,17 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       }),
       { status: 200 },
     );
+  }
+
+  const folded = await loadFoldedAuthorization(instructor.id);
+  if (
+    !canAcceptPendingRequest({
+      bookingMode: instructor.bookingMode,
+      folded,
+      enforcementOn: isSchoolAuthzEnforcementOn(),
+    })
+  ) {
+    return NextResponse.json(notAuthorizedBody(), { status: 403 });
   }
   if (!booking.slotId) {
     return NextResponse.json(
