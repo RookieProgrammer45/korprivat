@@ -54,6 +54,8 @@ The marketplace covers **A (motorcycle)**, **C (truck)**, **D (bus)**, and combi
 
 **Cursor may NOT (without separate explicit authorization):** send outreach, publish imported listings in bulk, spend on acquisition, contact vendors, activate production capabilities, or treat software completion as supplier-acquisition success. Operational pilot outcomes are **pending until measured** — no invented outcomes. Registers: real collection/reuse blocked until rights are verified.
 
+**Outreach identity:** all outreach email is sent from **marketing@drivelinkup.com** (Google Workspace; subscription confirmation pending — no outreach until the mailbox is live), with the signature exactly: `frank - founder of drivelinkup.com`. Every draft, template, and playbook carries this from-address and signature; sending remains a separately authorized human action.
+
 ## 7. Bounded pilot playbook
 
 1. Choose one city/category supply–demand cell with available evidence.

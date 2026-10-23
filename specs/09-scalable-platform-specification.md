@@ -305,7 +305,7 @@ Leading: schools by mode; active connections; partner applications in flight; mi
 - **Phase 2 — Canonical booking services:** policy service (§6.1), state machine (§6.2) with transition rows, payment/commission/concurrency rules (§6.3), cancellation-policy versioning + snapshots. *Acceptance: SC-5, SC-6, SC-10, SC-15, SC-16.*
 - **Phase 3 — Reliable processing:** inbox/outbox per §6.4, idempotent processing, bounded retries, dead-letter, reconciliation. *Acceptance: SC-11, SC-12.*
 - **Phase 4 — Connectivity API:** partner auth (§7.1), adapter contract (§7.2), webhook signing, sandbox/production isolation, rate limits. *Acceptance: SC-7, SC-9.*
-- **Phase 5 — Certification and admin tooling:** partner registry, milestone evidence tracking, capability-scoped `prod_enabled`, admin console surfaces, school-facing connection UX, partner directory. *Acceptance: SC-8.*
+- **Phase 5 — Certification and admin tooling:** partner registry, milestone evidence tracking, capability-scoped `prod_enabled`, admin console surfaces, school-facing connection UX, partner directory, **ops alerting (thresholds on inbox depth, dead-letter rate, unresolved-quarantine age, reconciliation drift)**, and the cutover runbook. *Acceptance: SC-8; alerting surfaces exist for every §12 leading metric.*
 - **Phase 6 — Pilot and production:** approved vendor pilot [EXTERNAL], milestone 4/5 runs, production certification, broader rollout. No vendor invitations are part of the build.
 
 ### Acquisition track (ACQ — supply-side acquisition, per docs/acquisition-strategy.md)

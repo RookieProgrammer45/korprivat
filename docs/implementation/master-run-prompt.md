@@ -53,6 +53,13 @@ ACQUISITION TRACK (specs/09 §13 ACQ; docs/acquisition-strategy.md):
   acquisition, contact vendors, or activate production capabilities — and
   software completion is never reported as supplier-acquisition success.
 
+- OUTREACH IDENTITY: all outreach email is sent from
+  marketing@drivelinkup.com (Google Workspace; subscription confirmation
+  pending) with the signature exactly: frank - founder of drivelinkup.com.
+  Until the mailbox is live, no outreach is sent. Every outreach draft,
+  template, and playbook you build must carry this from-address and signature;
+  sending itself remains a separately authorized human action.
+
 HARD RULES (every phase and ACQ item):
 - specs/09 is the implementation authority; .cursor/rules/drivelinkup.mdc
   (rules 1–24) and AGENTS.md invariants apply always. Conflicts: record and
