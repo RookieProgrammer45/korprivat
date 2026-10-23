@@ -1,8 +1,16 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — Phase 5 (PR #33, not merged)
+## Spec v1.2 — Phase 6 (branch feat/phase-6-harnesses)
 
-Plan: docs/v1.2-phase-5-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/33. `CERTIFICATION_ENFORCEMENT` defaults off. Do not start Phase 6 until this pull request is merged.
+Plan: docs/v1.2-phase-6-plan.md. Local harness only. Do not treat a passing run as milestone 5 evidence.
+
+- [x] Five failure checks against an in-process double
+- [x] Harness evidence refused; no certification write
+- [x] Script exits 0 only when the local pass still cannot enable production
+
+## Spec v1.2 — Phase 5 (merged #33)
+
+Plan: docs/v1.2-phase-5-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/33. `CERTIFICATION_ENFORCEMENT` defaults off.
 
 - [x] Partner and certification records with per-capability prodEnabled
 - [x] Server gate: availability-only certification cannot enable transactional booking
