@@ -83,6 +83,7 @@ model Instructor {
   orgBindings            ListingOrgBinding[]
   complaints             SchoolComplaint[]
   bookingModeAuditNote   BookingModeAuditNote?
+  cancellationPolicies   CancellationPolicy[]
   // Stripe Connect Express — independent instructor payouts (phase 2).
   stripeAccountId        String?            @unique
   chargesEnabled         Boolean            @default(false)
@@ -192,6 +193,14 @@ model Booking {
   // null. New Request rows are born at `paymentStatus='awaiting_approval'`
   // until the instructor accepts.
   bookingMode             String?           @default("instant")
+  // Phase 2: school's recorded commitment on manual accept. Nullable so
+  // existing rows survive db push. Does not replace paymentStatus.
+  commitmentRoute         String?
+  // Snapshot of an approved cancellation deadline. Null while enforcement
+  // is off or no active policy exists.
+  cancellationDeadlineAt  DateTime?
+  stateTransitions        BookingStateTransition[]
+  paymentRecords          PaymentRecord[]
   // Locale active when the learner created the booking. Receipt copy uses
   // this snapshot so a later cookie change cannot rewrite transactional copy.
   locale                  String?           @default("sv")

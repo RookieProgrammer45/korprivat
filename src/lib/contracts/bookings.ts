@@ -417,6 +417,7 @@ export type BookingCancelResponse = z.infer<typeof BookingCancelResponse>;
 export const BookingAcceptRequest = z.object({
   token: z.string().min(1, 'Missing action token').optional(),
   acceptedByLabel: z.string().min(1, 'Name is required').max(120),
+  commitmentRoute: z.enum(['native', 'external_manual']).optional(),
 });
 export type BookingAcceptRequest = z.infer<typeof BookingAcceptRequest>;
 

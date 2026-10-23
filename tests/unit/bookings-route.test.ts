@@ -262,6 +262,18 @@ describe('POST /api/bookings — email dispatch', () => {
     );
   });
 
+  it('SC-6 returns 409 when the slot claim updates zero rows', async () => {
+    mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+    mockSlotUpdateMany.mockResolvedValueOnce({ count: 0 });
+
+    const res = await POST(jsonRequest(VALID_BODY));
+    const body = await res.json();
+
+    expect(res.status).toBe(409);
+    expect(body).toEqual({ errors: { slotId: 'Slot no longer available' } });
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
   it('returns 201 even when sendEmail rejects for the instructor (student still sent)', async () => {
     mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
     mockBookingCreate.mockResolvedValueOnce({

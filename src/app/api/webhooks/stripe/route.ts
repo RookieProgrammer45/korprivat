@@ -71,6 +71,25 @@ export async function POST(req: Request) {
         return NextResponse.json({ received: true, skipped: 'no_booking_id' }, { status: 200 });
       }
 
+      if (prisma.bookingStateTransition) {
+        const existing = await prisma.booking.findUnique({
+          where: { id: bookingId },
+          select: { paymentStatus: true },
+        });
+        const { recordLateCaptureIfExpired } = await import(
+          '@/lib/scheduling/cancellation-policy-store'
+        );
+        const late = await recordLateCaptureIfExpired({
+          bookingId,
+          paymentStatus: existing?.paymentStatus ?? null,
+          stripeEventId: event.id,
+          amountMinor: typeof session.amount_total === 'number' ? session.amount_total : null,
+        });
+        if (late) {
+          return NextResponse.json({ ok: true, lateCaptured: true }, { status: 200 });
+        }
+      }
+
       const result = await markBookingPaidFromCheckout({
         bookingId,
         stripeSessionId: session.id,

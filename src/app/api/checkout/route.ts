@@ -15,14 +15,19 @@ import {
   BookingPaymentStatusEnum,
 } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
+import { existingBookingLifecycleAllowed } from '@/lib/orgs/school-authorization-policy';
 import {
   CheckoutConfigurationError,
   createBookingCheckoutSession,
 } from '@/lib/payments/create-booking-checkout';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
 import { getStripe } from '@/lib/payments/stripe';
-import { existingBookingLifecycleAllowed } from '@/lib/orgs/school-authorization-policy';
 import { getSessionUser, requireAuth } from '@/lib/require-auth';
+import { checkoutAllowedByPolicy } from '@/lib/scheduling/booking-policy';
+import {
+  isCancellationPolicyEnforced,
+  listingHasActiveCancellationPolicy,
+} from '@/lib/scheduling/cancellation-policy-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -149,6 +154,16 @@ export async function POST(req: Request) {
   });
   if (!instructor) {
     return NextResponse.json({ errors: { id: 'Instructor not found' } }, { status: 404 });
+  }
+
+  if (isCancellationPolicyEnforced()) {
+    const approved = await listingHasActiveCancellationPolicy(instructor.id);
+    if (!checkoutAllowedByPolicy({ enforced: true, hasActiveApprovedPolicy: approved })) {
+      return NextResponse.json(
+        { error: { code: 'cancellation_policy_unapproved' } },
+        { status: 403 },
+      );
+    }
   }
 
   const suppliedToken = bodyToken ?? getBookingAccessToken(req);

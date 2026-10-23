@@ -1,5 +1,15 @@
 # DriveLinkUp — active tasks
 
+## Spec v1.2 — Phase 2 (branch feat/phase-2-booking-services)
+
+Plan: docs/v1.2-phase-2-plan.md. `CANCELLATION_POLICY_ENFORCE` defaults off. PR: https://github.com/RookieProgrammer45/korprivat/pull/30 (base: Phase 1). Do not start Phase 3 until PR #30 and Phase 1 PR #29 are merged.
+
+- [x] Policy service E0–E4 with action-specific checks
+- [x] BookingStateTransition log; do not replace paymentStatus
+- [x] CancellationPolicy versions; legacy tiers import as draft; CANCELLATION_POLICY_ENFORCE defaults off
+- [x] Tests: SC-5, SC-6, SC-10, SC-15, SC-16, SC-18
+- [x] Route tests: slot conflict, directory policy hide, late capture, manual accept, checkout refusal
+
 ## Spec v1.2 — Phase 1 (branch phase-1-school-authorization)
 
 Plan: docs/v1.2-phase-1-plan.md. Flag `SCHOOL_AUTHZ_ENFORCEMENT` defaults off. Withdrawals apply while off.

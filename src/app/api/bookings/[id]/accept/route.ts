@@ -20,17 +20,18 @@ import {
   bookingRequestApprovedEmail,
   bookingRequestApprovedInstructorCopyEmail,
 } from '@/lib/email/templates';
-import {
-  CheckoutConfigurationError,
-  createBookingCheckoutSession,
-} from '@/lib/payments/create-booking-checkout';
-import { resolveOrigin } from '@/lib/payments/origin';
 import { loadFoldedAuthorization, notAuthorizedBody } from '@/lib/orgs/school-authorization';
 import {
   canAcceptPendingRequest,
   isSchoolAuthzEnforcementOn,
 } from '@/lib/orgs/school-authorization-policy';
+import {
+  CheckoutConfigurationError,
+  createBookingCheckoutSession,
+} from '@/lib/payments/create-booking-checkout';
+import { resolveOrigin } from '@/lib/payments/origin';
 import { getSessionUser } from '@/lib/require-auth';
+import { evaluateBookingPolicy } from '@/lib/scheduling/booking-policy';
 
 export const dynamic = 'force-dynamic';
 
@@ -73,6 +74,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       userId: true,
       hourlyRateSek: true,
       bookingMode: true,
+      categories: true,
     },
   });
   if (!instructor) {
@@ -117,6 +119,17 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     );
   }
 
+  const policy = evaluateBookingPolicy({
+    action: 'manual_accept',
+    categoryAllowed: instructor.categories.includes(booking.category),
+    studentContactVerified: true,
+    nativeSlotId: booking.slotId,
+    commitmentRoute: parsed.data.commitmentRoute ?? (booking.slotId ? 'native' : null),
+  });
+  if (!policy.ok) {
+    return NextResponse.json({ error: { component: policy.component } }, { status: 403 });
+  }
+
   const folded = await loadFoldedAuthorization(instructor.id);
   if (
     !canAcceptPendingRequest({
@@ -127,31 +140,33 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   ) {
     return NextResponse.json(notAuthorizedBody(), { status: 403 });
   }
-  if (!booking.slotId) {
-    return NextResponse.json(
-      { errors: { slot: 'This request has no reservable lesson slot' } },
-      { status: 409 },
-    );
-  }
+  if (policy.commitmentRoute !== 'external_manual') {
+    if (!booking.slotId) {
+      return NextResponse.json(
+        { errors: { slot: 'This request has no reservable lesson slot' } },
+        { status: 409 },
+      );
+    }
 
-  const reserved = await prisma.availabilitySlot.updateMany({
-    where: {
-      id: booking.slotId,
-      instructorId: booking.instructorId,
-      startsAt: { gt: new Date() },
-      bookedAt: null,
-    },
-    data: { bookedAt: new Date(), bookedBookingId: booking.id },
-  });
-  if (reserved.count !== 1) {
-    return NextResponse.json(
-      {
-        errors: {
-          slot: 'Another learner has taken this slot — decline the request to release it.',
-        },
+    const reserved = await prisma.availabilitySlot.updateMany({
+      where: {
+        id: booking.slotId,
+        instructorId: booking.instructorId,
+        startsAt: { gt: new Date() },
+        bookedAt: null,
       },
-      { status: 409 },
-    );
+      data: { bookedAt: new Date(), bookedBookingId: booking.id },
+    });
+    if (reserved.count !== 1) {
+      return NextResponse.json(
+        {
+          errors: {
+            slot: 'Another learner has taken this slot — decline the request to release it.',
+          },
+        },
+        { status: 409 },
+      );
+    }
   }
 
   const totals =
@@ -181,8 +196,21 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       priceAmountSek: totals.priceSek,
       serviceFeeSek: totals.serviceFeeSek,
       grossChargedSek: totals.totalSek,
+      commitmentRoute: policy.commitmentRoute,
     },
   });
+  if (preAccept.count === 1 && prisma.bookingStateTransition) {
+    await prisma.bookingStateTransition.create({
+      data: {
+        bookingId: booking.id,
+        fromState: 'pending',
+        toState: 'confirmed',
+        actor: 'school',
+        correlationId: booking.id,
+      },
+    });
+  }
+
   if (preAccept.count !== 1) {
     await releaseSlot(booking.id);
     const fresh = await prisma.booking.findUnique({ where: { id: booking.id } });

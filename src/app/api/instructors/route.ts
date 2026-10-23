@@ -20,11 +20,6 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
-import { loadFoldsByListing } from '@/lib/orgs/school-authorization';
-import {
-  isSchoolAuthzEnforcementOn,
-  listingSurfaces,
-} from '@/lib/orgs/school-authorization-policy';
 import {
   InstructorCreate,
   InstructorCreated,
@@ -38,7 +33,16 @@ import { sendEmail } from '@/lib/email/send';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
 import { env } from '@/lib/env';
 import { listActiveMemberUserIds } from '@/lib/orgs/public';
+import { loadFoldsByListing } from '@/lib/orgs/school-authorization';
+import {
+  isSchoolAuthzEnforcementOn,
+  listingSurfaces,
+} from '@/lib/orgs/school-authorization-policy';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
+import {
+  activePolicyListingIds,
+  isCancellationPolicyEnforced,
+} from '@/lib/scheduling/cancellation-policy-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -215,6 +219,9 @@ export async function GET(req: NextRequest) {
     }
   }
 
+  const approvedListings = isCancellationPolicyEnforced()
+    ? await activePolicyListingIds(filteredRows.map(({ row }) => row.id))
+    : null;
   const items = filteredRows.map(({ row, distanceKm }) => {
     const surfaces = surfacesFor(row);
     const nextSlotAt = surfaces.availabilityDisplay
@@ -231,6 +238,9 @@ export async function GET(req: NextRequest) {
         distanceKm,
       ),
       surfaces,
+      ...(approvedListings && !approvedListings.has(row.id)
+        ? { cancellationPolicyTier: null, showCancellationPolicy: false as const }
+        : {}),
     };
   });
 
