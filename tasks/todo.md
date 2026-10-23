@@ -1,8 +1,8 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — Phase 5 (branch feat/phase-5-certification)
+## Spec v1.2 — Phase 5 (PR #33, not merged)
 
-Plan: docs/v1.2-phase-5-plan.md. `CERTIFICATION_ENFORCEMENT` defaults off. Do not start Phase 6 until this pull request is merged.
+Plan: docs/v1.2-phase-5-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/33. `CERTIFICATION_ENFORCEMENT` defaults off. Do not start Phase 6 until this pull request is merged.
 
 - [x] Partner and certification records with per-capability prodEnabled
 - [x] Server gate: availability-only certification cannot enable transactional booking
