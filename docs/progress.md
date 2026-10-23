@@ -1,5 +1,13 @@
 # Progress
 
+## Product Spec v1.2 — build authority
+
+- **Phase 0 (current):** Gap map + `bookingMode` → `SchoolAuthorization` migration plan only.
+  - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
+  - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
+- Do **not** start Phase 1 schema / scope enforcement until PM approves Phase 0.
+- Where packs disagree, **v1.2** wins for marketplace authorization and booking architecture.
+
 ## Database migration baseline (follow-up)
 
 - [ ] The following tables exist in the DB but have no migration
