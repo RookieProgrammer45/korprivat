@@ -7,7 +7,8 @@
 - **Phase 2:** merged in [#30](https://github.com/RookieProgrammer45/korprivat/pull/30). `CANCELLATION_POLICY_ENFORCE` defaults off. `paymentStatus` and fee math are unchanged.
 - **Phase 3:** merged in [#31](https://github.com/RookieProgrammer45/korprivat/pull/31). `RELIABLE_PROCESSING` defaults off.
 - **Phase 4:** merged in [#32](https://github.com/RookieProgrammer45/korprivat/pull/32). `CONNECTIVITY_API` defaults off.
-- **Phase 5 (PR open, not merged):** [#33](https://github.com/RookieProgrammer45/korprivat/pull/33). `CERTIFICATION_ENFORCEMENT` defaults off. Availability certification does not enable booking.
+- **Phase 5:** merged in [#33](https://github.com/RookieProgrammer45/korprivat/pull/33). `CERTIFICATION_ENFORCEMENT` defaults off. Availability certification does not enable booking.
+- **Phase 6 (PR open, not merged):** [#34](https://github.com/RookieProgrammer45/korprivat/pull/34). A passing local harness run is not vendor evidence and does not enable production.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
 - Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.
