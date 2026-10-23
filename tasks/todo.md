@@ -2,7 +2,7 @@
 
 ## Spec v1.2 — Phase 3 (branch feat/phase-3-reliable-processing)
 
-Plan: docs/v1.2-phase-3-plan.md. `RELIABLE_PROCESSING` defaults off. Do not start Phase 4 until this pull request is merged.
+Plan: docs/v1.2-phase-3-plan.md. `RELIABLE_PROCESSING` defaults off. PR: https://github.com/RookieProgrammer45/korprivat/pull/31. Do not start Phase 4 until this pull request is merged.
 
 - [x] Inbox dedup, stale rejection, and authoritative retrieval when order is missing
 - [x] Outbox write in the same transaction as booking create when the flag is on
