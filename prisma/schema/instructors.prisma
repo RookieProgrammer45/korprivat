@@ -85,6 +85,8 @@ model Instructor {
   bookingModeAuditNote   BookingModeAuditNote?
   cancellationPolicies   CancellationPolicy[]
   schoolConnections      SchoolConnection[]
+  instructorInvitations  SchoolInstructorInvitation[] @relation("SchoolInvitesInstructor")
+  instructorAffiliations SchoolInstructorAffiliation[] @relation("SchoolAffiliatedInstructors")
   // Stripe Connect Express — independent instructor payouts (phase 2).
   stripeAccountId        String?            @unique
   chargesEnabled         Boolean            @default(false)

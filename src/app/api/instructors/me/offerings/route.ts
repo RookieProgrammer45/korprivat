@@ -7,6 +7,13 @@
 // /api/instructors/me.
 import 'server-only';
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import { TEACHING_CATEGORIES } from '@/lib/acquisition/claim-policy';
+import {
+  isSchoolMediatedInstructorsOn,
+  offeringCategoryDecision,
+} from '@/lib/acquisition/mediated-instructor-policy';
+import { verifiedAffiliationForUser } from '@/lib/acquisition/mediated-instructor-store';
 import {
   type OwnedProvider,
   ProviderOwnershipError,
@@ -98,6 +105,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors }, { status: 400 });
   }
   const data = parsed.data;
+  if (isSchoolMediatedInstructorsOn() && instructor.providerRole === 'INSTRUCTOR') {
+    const categories = z
+      .object({ categories: z.array(z.enum(TEACHING_CATEGORIES)).optional() })
+      .safeParse(bodyJson);
+    const affiliation = await verifiedAffiliationForUser(user.id);
+    const decision = offeringCategoryDecision({
+      enforced: true,
+      providerRole: instructor.providerRole,
+      affiliationVerified: affiliation != null,
+      offeringCategories: categories.success ? (categories.data.categories ?? []) : [],
+      schoolCategories: affiliation?.teachingCategories ?? [],
+    });
+    if (!decision.allowed) {
+      return NextResponse.json({ error: { code: decision.code } }, { status: 403 });
+    }
+  }
   const last = await prisma.offering.findFirst({
     where: { instructorId: instructor.id },
     orderBy: { sortOrder: 'desc' },

@@ -10,6 +10,10 @@
 import 'server-only';
 import { Prisma } from '@prisma/client';
 import { type NextRequest, NextResponse } from 'next/server';
+import {
+  independentInstructorBlock,
+  stampInstructorListing,
+} from '@/lib/acquisition/mediated-instructor-store';
 import { registerKnownContact } from '@/lib/business/escrow';
 import { haversineKm, resolveInstructorCoords } from '@/lib/business/geo';
 import { confirmedPhotoUrl } from '@/lib/business/photo-verification';
@@ -358,6 +362,10 @@ export async function POST(req: Request) {
       status: 200,
     });
   }
+  const publication = await independentInstructorBlock(userId, requestedRole);
+  if (publication?.status === 403) {
+    return NextResponse.json({ error: { code: publication.code } }, { status: 403 });
+  }
   const confirmedImageUrl = await confirmedPhotoUrl(user.id);
   if (!confirmedImageUrl) {
     return NextResponse.json(
@@ -380,6 +388,9 @@ export async function POST(req: Request) {
       where: { id: legacyRows[0].id },
       data: { userId, providerRole: requestedRole },
     });
+    if (publication?.status === 200 && publication.affiliation) {
+      await stampInstructorListing(publication.affiliation.id, claimed.id);
+    }
     return NextResponse.json(InstructorCreated.parse({ id: claimed.id, emailSent: false }), {
       status: 200,
     });
@@ -400,6 +411,9 @@ export async function POST(req: Request) {
         providerRole: requestedRole,
       },
     });
+    if (publication?.status === 200 && publication.affiliation) {
+      await stampInstructorListing(publication.affiliation.id, created.id);
+    }
 
     // Register before sending so this transactional email is treated as a
     // known-contact message. Neither side effect can roll back the created

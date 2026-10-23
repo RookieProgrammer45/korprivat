@@ -5,6 +5,10 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import {
+  isSchoolMediatedInstructorsOn,
+  scopeGrantByRoleDecision,
+} from '@/lib/acquisition/mediated-instructor-policy';
 import { prisma } from '@/lib/db';
 import {
   AuthorizationCommandError,
@@ -35,6 +39,23 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     return response as Response;
   }
   const { id: listingId } = await ctx.params;
+  if (isSchoolMediatedInstructorsOn()) {
+    const profile = await prisma.userProfile.findUnique({
+      where: { userId: user.id },
+      select: { signupPath: true },
+    });
+    const representative = await prisma.listingRepresentativeAuthority.findUnique({
+      where: { listingId_userId: { listingId, userId: user.id } },
+    });
+    const grant = scopeGrantByRoleDecision({
+      enforced: true,
+      actorIsSchool: profile?.signupPath === 'SCHOOL',
+      representativeVerified: Boolean(representative?.verifiedAt && representative.evidenceRef),
+    });
+    if (!grant.allowed) {
+      return NextResponse.json({ error: { code: grant.code } }, { status: 403 });
+    }
+  }
   let json: unknown;
   try {
     json = await req.json();

@@ -17,6 +17,11 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import {
+  inventoryDiaryDecision,
+  isSchoolMediatedInstructorsOn,
+} from '@/lib/acquisition/mediated-instructor-policy';
+import { verifiedAffiliationForUser } from '@/lib/acquisition/mediated-instructor-store';
+import {
   type OwnedProvider,
   ProviderOwnershipError,
   resolveOwnedProvider,
@@ -241,6 +246,18 @@ export async function POST(req: Request) {
       { errors: { slots: 'This listing is restricted and cannot publish availability.' } },
       { status: 403 },
     );
+  }
+  if (isSchoolMediatedInstructorsOn() && owned.providerRole === 'INSTRUCTOR') {
+    const affiliation = await verifiedAffiliationForUser(user.id);
+    const diary = inventoryDiaryDecision({
+      enforced: true,
+      providerRole: owned.providerRole,
+      affiliationVerified: affiliation != null,
+      inventoryDelegated: affiliation?.inventoryDelegated === true,
+    });
+    if (!diary.allowed) {
+      return NextResponse.json({ error: { code: diary.code } }, { status: 403 });
+    }
   }
   const { loadListingSurfaces } = await import('@/lib/orgs/school-authorization');
   const publishSurfaces = await loadListingSurfaces(owned.id, owned.bookingMode);

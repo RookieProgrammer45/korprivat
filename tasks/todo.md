@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-1 (PR #35, not merged)
+## Spec v1.2 — ACQ-3 (PR #36, not merged)
 
-Plan: docs/v1.2-acq-1-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/35. `CLAIM_FUNNEL` defaults off. Do not start ACQ-3 until this pull request is merged.
+Plan: docs/v1.2-acq-3-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/36. `SCHOOL_MEDIATED_INSTRUCTORS` defaults off. Do not start ACQ-2 until this pull request is merged.
+
+- [x] School invitation and verified affiliation grant no scopes
+- [x] Flag on: independent publish, sale, and undelegated diary are refused
+- [x] Instructor role alone cannot grant scopes; a verified representative still can
+- [x] Tests: SC-23
+
+## Spec v1.2 — ACQ-1 (merged #35)
+
+Plan: docs/v1.2-acq-1-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/35. `CLAIM_FUNNEL` defaults off.
 
 - [x] Private prospects; public only after eligibility and data-quality pass, with no claim required
 - [x] Synthetic fixtures only; register collection refused
