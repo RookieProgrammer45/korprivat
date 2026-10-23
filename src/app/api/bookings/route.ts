@@ -26,6 +26,7 @@ import {
   snapshotOrganizationId,
 } from '@/lib/orgs/school-authorization-policy';
 import { resolveOrigin } from '@/lib/payments/origin';
+import { isReliableProcessingOn, nativeOutboxData } from '@/lib/reliability/inbox-policy';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 import { slotClaimOutcome } from '@/lib/scheduling/booking-policy';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
@@ -222,6 +223,13 @@ export async function POST(req: Request) {
           },
           select: { id: true },
         });
+
+        const outbox = (
+          tx as unknown as { commandOutbox?: { create: (args: unknown) => Promise<unknown> } }
+        ).commandOutbox;
+        if (isReliableProcessingOn() && outbox) {
+          await outbox.create({ data: nativeOutboxData(created.id) });
+        }
 
         const transitions = (
           tx as unknown as {

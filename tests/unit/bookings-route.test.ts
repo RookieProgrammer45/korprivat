@@ -274,6 +274,84 @@ describe('POST /api/bookings — email dispatch', () => {
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
+  it('writes the outbox row in the booking transaction when reliable processing is on', async () => {
+    process.env.RELIABLE_PROCESSING = '1';
+    const outboxCreate = vi.fn(async () => ({ id: 'outbox_1' }));
+    let committed = false;
+    mockTransaction.mockImplementation(async (callback: unknown) => {
+      try {
+        const result = await (callback as (tx: unknown) => Promise<unknown>)({
+          booking: { findFirst: mockBookingFindFirst, create: mockBookingCreate },
+          availabilitySlot: { findFirst: mockSlotFindFirst, updateMany: mockSlotUpdateMany },
+          commandOutbox: { create: outboxCreate },
+        });
+        committed = true;
+        return result;
+      } catch (error) {
+        committed = false;
+        throw error;
+      }
+    });
+    mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+    mockBookingCreate.mockResolvedValueOnce({
+      id: 'booking_outbox',
+      preferredAt: new Date('2030-08-10T14:30:00.000Z'),
+    });
+
+    try {
+      const res = await POST(jsonRequest(VALID_BODY));
+      expect(res.status).toBe(201);
+      expect(committed).toBe(true);
+      expect(outboxCreate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.objectContaining({
+            bookingId: 'booking_outbox',
+            commandType: 'native_state',
+            idempotencyKey: 'booking:booking_outbox:pending',
+          }),
+        }),
+      );
+    } finally {
+      delete process.env.RELIABLE_PROCESSING;
+    }
+  });
+
+  it('rolls the booking transaction back when the outbox write fails', async () => {
+    process.env.RELIABLE_PROCESSING = '1';
+    let committed = false;
+    mockTransaction.mockImplementation(async (callback: unknown) => {
+      try {
+        const result = await (callback as (tx: unknown) => Promise<unknown>)({
+          booking: { findFirst: mockBookingFindFirst, create: mockBookingCreate },
+          availabilitySlot: { findFirst: mockSlotFindFirst, updateMany: mockSlotUpdateMany },
+          commandOutbox: {
+            create: async () => {
+              throw new Error('outbox failed');
+            },
+          },
+        });
+        committed = true;
+        return result;
+      } catch (error) {
+        committed = false;
+        throw error;
+      }
+    });
+    mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+    mockBookingCreate.mockResolvedValueOnce({
+      id: 'booking_rollback',
+      preferredAt: new Date('2030-08-10T14:30:00.000Z'),
+    });
+
+    try {
+      await expect(POST(jsonRequest(VALID_BODY))).rejects.toThrow('outbox failed');
+      expect(committed).toBe(false);
+      expect(sendEmailMock).not.toHaveBeenCalled();
+    } finally {
+      delete process.env.RELIABLE_PROCESSING;
+    }
+  });
+
   it('returns 201 even when sendEmail rejects for the instructor (student still sent)', async () => {
     mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
     mockBookingCreate.mockResolvedValueOnce({

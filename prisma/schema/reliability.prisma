@@ -1,0 +1,85 @@
+// Reliability context — inbox, outbox, and the connection row they attach to.
+// Empty on deploy. RELIABLE_PROCESSING defaults off, so booking create does
+// not write these tables until the flag is on. Rows are never deleted.
+// Processing status is updated in place because specs/09 §6.4 requires it.
+
+model SchoolConnection {
+  id                      String    @id @default(cuid())
+  listingId               String
+  // sandbox | production. Sandbox rows must not feed production surfaces.
+  environment             String
+  // inactive until a later phase certifies the connection.
+  status                  String    @default("inactive")
+  eventWatermarkRevision  Int?
+  eventWatermarkAt        DateTime?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+
+  listing         Instructor       @relation(fields: [listingId], references: [id])
+  inboxEvents     BookingEvent[]
+  outboxCommands  CommandOutbox[]
+
+  @@unique([listingId, environment])
+  @@index([listingId])
+}
+
+model BookingEvent {
+  id                 String    @id @default(cuid())
+  schoolConnectionId String
+  providerEventId    String
+  externalRef        String?
+  eventType          String
+  payloadHash        String
+  revision           Int?
+  occurredAt         DateTime?
+  receivedAt         DateTime  @default(now())
+  // received | applied | rejected_duplicate | rejected_stale | dead_letter
+  processingStatus   String
+  // Set when ordering is equal or missing: authoritative_required.
+  disposition        String?
+  attemptCount       Int       @default(0)
+  deadLetterAt       DateTime?
+  redactedPayload    Json?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  connection SchoolConnection @relation(fields: [schoolConnectionId], references: [id])
+
+  @@unique([schoolConnectionId, providerEventId])
+  @@index([schoolConnectionId, receivedAt])
+}
+
+model CommandOutbox {
+  id                    String    @id @default(cuid())
+  commandType           String
+  schoolConnectionId    String?
+  bookingId             String?
+  correlationId         String
+  idempotencyKey        String    @unique
+  payload               Json
+  // pending | claimed | delivered | failed_terminal
+  state                 String    @default("pending")
+  // pending | confirmed | not_confirmed | unresolved
+  outcome               String    @default("pending")
+  quarantineResourceRef String?
+  quarantineStartsAt    DateTime?
+  quarantineEndsAt      DateTime?
+  resolutionRef         String?
+  // authoritative | audited_decision
+  resolutionKind        String?
+  resolutionRationale   String?
+  leaseExpiresAt        DateTime?
+  attemptCount          Int       @default(0)
+  nextRetryAt           DateTime?
+  deadLetterAt          DateTime?
+  redactedPayload       Json?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  connection SchoolConnection? @relation(fields: [schoolConnectionId], references: [id])
+  booking    Booking?          @relation(fields: [bookingId], references: [id])
+
+  @@index([state, nextRetryAt])
+  @@index([bookingId])
+  @@index([schoolConnectionId])
+}

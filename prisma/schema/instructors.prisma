@@ -84,6 +84,7 @@ model Instructor {
   complaints             SchoolComplaint[]
   bookingModeAuditNote   BookingModeAuditNote?
   cancellationPolicies   CancellationPolicy[]
+  schoolConnections      SchoolConnection[]
   // Stripe Connect Express — independent instructor payouts (phase 2).
   stripeAccountId        String?            @unique
   chargesEnabled         Boolean            @default(false)
@@ -201,6 +202,7 @@ model Booking {
   cancellationDeadlineAt  DateTime?
   stateTransitions        BookingStateTransition[]
   paymentRecords          PaymentRecord[]
+  outboxCommands          CommandOutbox[]
   // Locale active when the learner created the booking. Receipt copy uses
   // this snapshot so a later cookie change cannot rewrite transactional copy.
   locale                  String?           @default("sv")
