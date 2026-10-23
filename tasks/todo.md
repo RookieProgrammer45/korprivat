@@ -1,8 +1,8 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-4 (branch feat/acq-4-category-offerings)
+## Spec v1.2 — ACQ-4 (PR #38, not merged)
 
-Plan: docs/v1.2-acq-4-plan.md. `CATEGORY_OFFERINGS` defaults off. Do not start ACQ-5 until this pull request is merged.
+Plan: docs/v1.2-acq-4-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/38. `CATEGORY_OFFERINGS` defaults off. Do not start ACQ-5 until this pull request is merged.
 
 - [x] Teaching permission matches legal entity, location, and category
 - [x] B-only permission refuses A/C/D publication
