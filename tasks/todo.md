@@ -2,7 +2,7 @@
 
 ## Spec v1.2 — Phase 2 (branch feat/phase-2-booking-services)
 
-Plan: docs/v1.2-phase-2-plan.md. `CANCELLATION_POLICY_ENFORCE` defaults off. Do not start Phase 3 until this PR and Phase 1 PR #29 are merged.
+Plan: docs/v1.2-phase-2-plan.md. `CANCELLATION_POLICY_ENFORCE` defaults off. PR: https://github.com/RookieProgrammer45/korprivat/pull/30 (base: Phase 1). Do not start Phase 3 until PR #30 and Phase 1 PR #29 are merged.
 
 - [x] Policy service E0–E4 with action-specific checks
 - [x] BookingStateTransition log; do not replace paymentStatus
