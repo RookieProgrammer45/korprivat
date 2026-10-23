@@ -1,0 +1,61 @@
+// Connectivity context. Empty on deploy. CONNECTIVITY_API defaults off.
+// Partner secrets are not stored here. A credential row only binds an id
+// to one connection and one environment.
+
+model PartnerCredential {
+  id                 String    @id
+  partnerKey         String
+  environment        String
+  schoolConnectionId String
+  revokedAt          DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  connection SchoolConnection @relation(fields: [schoolConnectionId], references: [id])
+
+  @@index([partnerKey, environment])
+  @@index([schoolConnectionId])
+}
+
+model ConnectivityIdempotency {
+  id                 String   @id @default(cuid())
+  schoolConnectionId String
+  operationType      String
+  idempotencyKey     String
+  payloadHash        String
+  responseStatus     Int
+  responseBody       Json
+  correlationId      String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  connection SchoolConnection @relation(fields: [schoolConnectionId], references: [id])
+
+  @@unique([schoolConnectionId, operationType, idempotencyKey])
+  @@index([schoolConnectionId])
+}
+
+model ConnectionContentDraft {
+  id                 String    @id @default(cuid())
+  schoolConnectionId String
+  payload            Json
+  payloadHash        String
+  publishedAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  connection SchoolConnection @relation(fields: [schoolConnectionId], references: [id])
+
+  @@index([schoolConnectionId])
+}
+
+model ConnectionReadiness {
+  id                 String   @id @default(cuid())
+  schoolConnectionId String   @unique
+  // mock | vendor_environment. Mock evidence cannot enable production.
+  evidenceSource     String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  connection SchoolConnection @relation(fields: [schoolConnectionId], references: [id])
+}

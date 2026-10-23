@@ -18,6 +18,10 @@ model SchoolConnection {
   listing         Instructor       @relation(fields: [listingId], references: [id])
   inboxEvents     BookingEvent[]
   outboxCommands  CommandOutbox[]
+  credentials     PartnerCredential[]
+  idempotencyKeys ConnectivityIdempotency[]
+  contentDrafts   ConnectionContentDraft[]
+  readiness       ConnectionReadiness?
 
   @@unique([listingId, environment])
   @@index([listingId])
