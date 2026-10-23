@@ -2,7 +2,7 @@
 
 ## Spec v1.2 — Phase 4 (branch feat/phase-4-connectivity)
 
-Plan: docs/v1.2-phase-4-plan.md. `CONNECTIVITY_API` defaults off. Do not start Phase 5 until this pull request is merged.
+Plan: docs/v1.2-phase-4-plan.md. `CONNECTIVITY_API` defaults off. PR: https://github.com/RookieProgrammer45/korprivat/pull/32. Do not start Phase 5 until this pull request is merged.
 
 - [x] HMAC partner auth, sandbox/production isolation, rate limits, idempotency namespaces
 - [x] DriveLinkUp-hosted `/v1/connections` routes; content stays unpublished
