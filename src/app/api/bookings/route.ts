@@ -7,6 +7,8 @@ import { generateBookingToken } from '@/lib/business/escrow';
 import { isLicenceCategoryCode } from '@/lib/business/licence-categories';
 import { formatProviderDate, providerTimezoneForCity } from '@/lib/business/provider-timezone';
 import { recordRebookingContext } from '@/lib/business/rebooking-cache';
+import { isCertificationEnforced } from '@/lib/certification/capability-policy';
+import { listingConnectorCertified } from '@/lib/certification/capability-store';
 import { BookingCreate, BookingCreated, type BookingCreateMode } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
@@ -165,6 +167,14 @@ export async function POST(req: Request) {
   }
 
   const instructorMode: BookingCreateMode = bookingDecision.mode;
+
+  if (data.commitmentRoute === 'connector' && isCertificationEnforced()) {
+    const certified = await listingConnectorCertified(instructor.id);
+    if (!certified) {
+      return NextResponse.json({ error: { code: 'capability_not_certified' } }, { status: 403 });
+    }
+    return NextResponse.json({ error: { code: 'connector_unavailable' } }, { status: 403 });
+  }
 
   const totals = learnerTotalSek(instructor.hourlyRateSek);
   const payoutSnapshot = instructorPayoutSek(totals.priceSek, { organizationId });

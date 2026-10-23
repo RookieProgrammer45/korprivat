@@ -48,6 +48,9 @@ export const BookingCreate = z.object({
   instructorId: z.string().min(1),
   mode: BookingCreateModeEnum.optional(),
   locale: z.enum(['sv', 'en']).optional(),
+  // Omitted means the native slot path. `connector` is refused unless the
+  // listing's production certification has transactional_booking enabled.
+  commitmentRoute: z.enum(['native', 'connector']).optional(),
 });
 
 // Response shape returned by the server after a successful booking insert.

@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — Phase 4 (branch feat/phase-4-connectivity)
+## Spec v1.2 — Phase 5 (branch feat/phase-5-certification)
 
-Plan: docs/v1.2-phase-4-plan.md. `CONNECTIVITY_API` defaults off. PR: https://github.com/RookieProgrammer45/korprivat/pull/32. Do not start Phase 5 until this pull request is merged.
+Plan: docs/v1.2-phase-5-plan.md. `CERTIFICATION_ENFORCEMENT` defaults off. Do not start Phase 6 until this pull request is merged.
+
+- [x] Partner and certification records with per-capability prodEnabled
+- [x] Server gate: availability-only certification cannot enable transactional booking
+- [x] Admin partner list and school connection status
+- [x] Tests: SC-8
+
+## Spec v1.2 — Phase 4 (merged #32)
+
+Plan: docs/v1.2-phase-4-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/32. `CONNECTIVITY_API` defaults off.
 
 - [x] HMAC partner auth, sandbox/production isolation, rate limits, idempotency namespaces
 - [x] DriveLinkUp-hosted `/v1/connections` routes; content stays unpublished

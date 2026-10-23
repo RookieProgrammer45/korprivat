@@ -12,10 +12,12 @@ model SchoolConnection {
   status                  String    @default("inactive")
   eventWatermarkRevision  Int?
   eventWatermarkAt        DateTime?
+  partnerId               String?
   createdAt               DateTime  @default(now())
   updatedAt               DateTime  @updatedAt
 
   listing         Instructor       @relation(fields: [listingId], references: [id])
+  partner         Partner?         @relation(fields: [partnerId], references: [id])
   inboxEvents     BookingEvent[]
   outboxCommands  CommandOutbox[]
   credentials     PartnerCredential[]
@@ -25,6 +27,7 @@ model SchoolConnection {
 
   @@unique([listingId, environment])
   @@index([listingId])
+  @@index([partnerId])
 }
 
 model BookingEvent {

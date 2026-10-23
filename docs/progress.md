@@ -6,7 +6,8 @@
 - **Phase 1:** merged in [#29](https://github.com/RookieProgrammer45/korprivat/pull/29). `SCHOOL_AUTHZ_ENFORCEMENT` defaults off. Withdrawals still apply.
 - **Phase 2:** merged in [#30](https://github.com/RookieProgrammer45/korprivat/pull/30). `CANCELLATION_POLICY_ENFORCE` defaults off. `paymentStatus` and fee math are unchanged.
 - **Phase 3:** merged in [#31](https://github.com/RookieProgrammer45/korprivat/pull/31). `RELIABLE_PROCESSING` defaults off.
-- **Phase 4 (in progress):** connectivity API on `feat/phase-4-connectivity`. `CONNECTIVITY_API` defaults off. Mock evidence cannot enable production.
+- **Phase 4:** merged in [#32](https://github.com/RookieProgrammer45/korprivat/pull/32). `CONNECTIVITY_API` defaults off.
+- **Phase 5 (in progress):** certification on `feat/phase-5-certification`. `CERTIFICATION_ENFORCEMENT` defaults off. Availability certification does not enable booking.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
 - Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.
