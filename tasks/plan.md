@@ -1,5 +1,7 @@
 # DriveLinkUp technology roadmap
 
+> **SUPERSEDED (2026-10-23):** this roadmap is historical. Its phase map (P0–P2) and product assumptions (including the instructor "licence ≥ 5 years" criterion, removed 2026-10-22) are obsolete. The current build sequence and requirements live in `specs/09-scalable-platform-specification.md` (§13 build sequence, §15 acceptance scenarios); the working pattern for Cursor is `docs/cursor-workflow.md`. `tasks/todo.md` remains the live task tracker.
+
 Last updated: 2026-09-26
 
 ## Product assumptions (correct if wrong)
