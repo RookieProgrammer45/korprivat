@@ -1,8 +1,8 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-1 (branch feat/acq-1-claim-funnel)
+## Spec v1.2 — ACQ-1 (PR #35, not merged)
 
-Plan: docs/v1.2-acq-1-plan.md. `CLAIM_FUNNEL` defaults off. Do not start ACQ-3 until this pull request is merged.
+Plan: docs/v1.2-acq-1-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/35. `CLAIM_FUNNEL` defaults off. Do not start ACQ-3 until this pull request is merged.
 
 - [x] Private prospects; public only after eligibility and data-quality pass, with no claim required
 - [x] Synthetic fixtures only; register collection refused
