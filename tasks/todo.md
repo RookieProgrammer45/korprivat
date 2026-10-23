@@ -1,8 +1,8 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-5 (branch feat/acq-5-concierge-tooling)
+## Spec v1.2 — ACQ-5 (PR #39, not merged)
 
-Plan: docs/v1.2-acq-5-plan.md. `CONCIERGE_ONBOARDING` defaults off.
+Plan: docs/v1.2-acq-5-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/39. `CONCIERGE_ONBOARDING` defaults off. The acquisition track ends here.
 
 - [x] Draft store preserves provenance and stays unpublished
 - [x] School approval is required to publish; admin cannot manufacture it
