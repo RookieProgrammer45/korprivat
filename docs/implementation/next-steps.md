@@ -1,24 +1,11 @@
 # Next steps — build complete; rehearsal then founder decisions
 
-**Status (2026-10-24):** specs/09 v1.3 is fully implemented — Phases 0–6, ACQ-1…5, and the Phase 5 alerting/cutover-runbook slice are on `main`; the suite is green (342/342). What remains is one buildable piece (the rehearsal below) and founder decisions. **Cursor does not flip production flags, contact vendors, or decide open questions without a named founder authorization — one flag at a time, by name.**
+**Status (2026-10-24):** specs/09 v1.3 is fully implemented — Phases 0–6, ACQ-1…5, and the Phase 5 alerting/cutover-runbook slice are on `main`. The cutover rehearsal (#41) and the staging flag-on walkthrough (#42) are on `main`. **Cursor does not flip production flags, contact vendors, or decide open questions without a named founder authorization — one flag at a time, by name.**
 
-## 1. Cutover rehearsal (Cursor executes this now)
+## 1. Cutover rehearsal (done — #41) and staging walkthrough (done — #42)
 
-```
-Execute the cutover rehearsal from docs/v1.2-cutover-runbook.md — in a NON-PRODUCTION
-environment only. Do NOT flip any production flag; the founder decides flips one at a time.
-
-1. For each flag in runbook order: enable it in the test environment, run the full suite
-   plus the route-level acceptance scenarios (SC-1…25), and record the outcome.
-2. Produce a production readiness report:
-   - For step 1 (SCHOOL_AUTHZ_ENFORCEMENT): list every live school and its authorization
-     state — exactly which schools would go directory-only at flip, and which confirmed
-     bookings keep their cancel/refund/support lifecycle paths.
-   - For each later flag: the expected blast radius and its preconditions (e.g. step 2
-     requires at least one active approved cancellation policy).
-3. Report gaps as gaps — do not fix anything without instruction.
-4. Open a PR with the rehearsal script and the readiness report.
-```
+Reports: `docs/v1.2-cutover-readiness.md`, `docs/v1.2-production-readiness-walkthrough.md`.
+Collection-plan §10 tooling: `npm run cohorts:assign` writes the worklists and the §6 coverage report from the roster. The current roster has no teaching categories, so 634 schools are unclassified and usable supply is zero. No production flag was flipped.
 
 ## 2. Founder decision order (recommended — the founder decides)
 

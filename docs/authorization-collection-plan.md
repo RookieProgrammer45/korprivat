@@ -1,6 +1,6 @@
 # School authorization collection plan — pre-enforcement
 
-**Purpose:** collect documented school authorizations (scope grants) so the enforcement flip preserves a working, honest marketplace. Per specs/09 §1, a grant exists only as the school's own recorded decision by a **verified representative** — legacy `bookingMode` values, certified-partner pushes, email replies, and owner logins are never grants. **Status: [PROPOSED] preparation — no flag flips, no outreach sends, no vendor contact without separate founder authorization.**
+**Purpose:** collect documented school authorizations (scope grants) so the enforcement flip preserves a working, honest marketplace. Per specs/09 §1, a grant exists only as the school's own recorded decision by a **verified representative** — legacy `bookingMode` values, certified-partner pushes, email replies, and owner logins are never grants. **Status: [PROPOSED] preparation — §0 staging walkthrough completed (PR #42, 2026-10-24). No flag flips, no outreach sends, no vendor contact without separate founder authorization.**
 
 **Where this sits:** between the acquisition-surface prerequisites (runbook step 6 — enabled one at a time, only after verified behavior and separate approval) and the enforcement flip (runbook step 1). Companions: `docs/v1.2-cutover-runbook.md`, `docs/cutover-school-roster.json`, `docs/acquisition-strategy.md`.
 
@@ -16,6 +16,8 @@ The plan assumes the claim → verification → scope-decision → grant flow wo
 4. Prove tenant isolation, withdrawal, and contact-restriction preservation in the same walkthrough.
 
 If a prerequisite is missing, it is recorded as **blocked** — this plan does not quietly expand into implementation. Note: the rehearsal found tests resetting environment flags, so "all acquisition flags are safe to flip first" is **not established** — each named flag is enabled only after its behavior is verified and separately approved.
+
+**§0 result (2026-10-24):** `docs/v1.2-production-readiness-walkthrough.md`. Part B proofs passed. VERIFIED flags: `SCHOOL_MEDIATED_INSTRUCTORS`, `LEAD_DASHBOARD`, `CONCIERGE_ONBOARDING`, `OPS_ALERTING`, `RELIABLE_PROCESSING`. PARTIAL (not an enable-list): `CLAIM_FUNNEL`, `CATEGORY_OFFERINGS`, `CONNECTIVITY_API`, `CERTIFICATION_ENFORCEMENT`. `SCHOOL_AUTHZ_ENFORCEMENT` stayed off. The walkthrough used evidence-ref + manual review — e-ID was not assumed.
 
 ## 1. Starting state (snapshot 2026-10-24 — refresh immediately before any go/no-go)
 
@@ -103,8 +105,9 @@ Per school: owner, representative-review status, requested/granted/withdrawn sco
 
 ## 10. Cursor's buildable support (small, bounded)
 
-- Cohort-assignment script: reads the roster, applies §3 precedence + dedup + unclassified queue, outputs worklists.
-- Coverage report: the five §6 buckets, per-city density, roster delta for a hypothetical flip — the go/no-go input.
-- Outreach sequence drafts in the concierge tooling (from-address + signature per policy; sending remains a separately authorized human action).
+- Cohort-assignment script: `npm run cohorts:assign` reads `docs/cutover-school-roster.json`, applies §3 precedence + dedup + unclassified queue, writes `docs/authorization-cohort-worklists.json`.
+- Coverage report: `docs/authorization-coverage-report.md` — the five §6 buckets, per-city density, roster delta for a hypothetical flip.
+- Optional `--enrichment` JSON may add categories, offerings, grants, and E0–E4 facts. Missing fields stay unclassified / not-eligible — they are never inferred from a school name.
+- Outreach sequence drafts in the concierge tooling (from-address + signature per policy; sending remains a separately authorized human action). **Not in this slice.**
 
 No flag flips, no sends, no vendor contact — founder actions per `docs/implementation/next-steps.md`.

@@ -1,8 +1,18 @@
 # DriveLinkUp — active tasks
 
-## Production-readiness walkthrough (staging, not merged)
+## Authorization collection tooling (§10)
 
-Report: docs/v1.2-production-readiness-walkthrough.md. Staging Neon preview only. Open: https://github.com/RookieProgrammer45/korprivat/pull/42. `SCHOOL_AUTHZ_ENFORCEMENT` stayed off.
+Script: `npm run cohorts:assign`. Report: docs/authorization-coverage-report.md. Worklists: docs/authorization-cohort-worklists.json.
+
+- [x] File-based cohort assignment + §6 coverage (no DB, no outreach, no flag flips)
+- [x] Roster-only run: 1 contact excluded, 634 unclassified (no teaching categories on the roster)
+- [x] Hypothetical flip delta: 634 schools go directory-only; usable supply is 0
+- [ ] Do not pick a pilot city/category or send outreach without a named founder authorization
+- [ ] Do not flip production flags without a named founder authorization
+
+## Production-readiness walkthrough (merged #42)
+
+Report: docs/v1.2-production-readiness-walkthrough.md. Staging Neon preview only. Merged: https://github.com/RookieProgrammer45/korprivat/pull/42. `SCHOOL_AUTHZ_ENFORCEMENT` stayed off.
 
 - [x] Part A: nine flags exercised on staging with synthetic fixtures
 - [x] Part B: tenant isolation, withdrawal, contact restriction — PASS
