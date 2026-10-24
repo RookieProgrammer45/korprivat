@@ -7,13 +7,13 @@
 - **Phase 2:** merged in [#30](https://github.com/RookieProgrammer45/korprivat/pull/30). `CANCELLATION_POLICY_ENFORCE` defaults off. `paymentStatus` and fee math are unchanged.
 - **Phase 3:** merged in [#31](https://github.com/RookieProgrammer45/korprivat/pull/31). `RELIABLE_PROCESSING` defaults off.
 - **Phase 4:** merged in [#32](https://github.com/RookieProgrammer45/korprivat/pull/32). `CONNECTIVITY_API` defaults off.
-- **Phase 5:** merged in [#33](https://github.com/RookieProgrammer45/korprivat/pull/33). `CERTIFICATION_ENFORCEMENT` defaults off. Availability certification does not enable booking.
+- **Phase 5:** merged in [#33](https://github.com/RookieProgrammer45/korprivat/pull/33). Completeness PR open, not merged: [#40](https://github.com/RookieProgrammer45/korprivat/pull/40). `CERTIFICATION_ENFORCEMENT` and `OPS_ALERTING` default off. Availability certification does not enable booking.
 - **Phase 6:** merged in [#34](https://github.com/RookieProgrammer45/korprivat/pull/34). A passing local harness run is not vendor evidence and does not enable production.
 - **ACQ-1:** merged in [#35](https://github.com/RookieProgrammer45/korprivat/pull/35). `CLAIM_FUNNEL` defaults off. A claim does not grant scopes.
 - **ACQ-3:** merged in [#36](https://github.com/RookieProgrammer45/korprivat/pull/36). `SCHOOL_MEDIATED_INSTRUCTORS` defaults off.
 - **ACQ-2:** merged in [#37](https://github.com/RookieProgrammer45/korprivat/pull/37). `LEAD_DASHBOARD` defaults off.
 - **ACQ-4:** merged in [#38](https://github.com/RookieProgrammer45/korprivat/pull/38). `CATEGORY_OFFERINGS` defaults off.
-- **ACQ-5 (PR open, not merged):** [#39](https://github.com/RookieProgrammer45/korprivat/pull/39). `CONCIERGE_ONBOARDING` defaults off.
+- **ACQ-5:** merged in [#39](https://github.com/RookieProgrammer45/korprivat/pull/39). `CONCIERGE_ONBOARDING` defaults off.
   - [`docs/v1.2-gap-map.md`](./v1.2-gap-map.md)
   - [`docs/v1.2-migration-bookingMode-to-SchoolAuthorization.md`](./v1.2-migration-bookingMode-to-SchoolAuthorization.md)
 - Phase 2 schema is additive. Draft policy import never approves a policy and never rewrites booking tiers.

@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-5 (PR #39, not merged)
+## Spec v1.2 — Phase 5 completeness (PR #40, not merged)
 
-Plan: docs/v1.2-acq-5-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/39. `CONCIERGE_ONBOARDING` defaults off. The acquisition track ends here.
+Plan: docs/v1.2-phase-5-alerting-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/40. Runbook: docs/v1.2-cutover-runbook.md. `OPS_ALERTING` defaults off.
+
+- [x] Alerting surfaces for every §12 leading metric
+- [x] Thresholds on inbox depth, dead-letter rate, quarantine age, and reconciliation drift stay unmeasured until configured
+- [x] Cutover runbook recorded; no flag is turned on
+- [x] Tests: SC-8 unchanged
+
+## Spec v1.2 — ACQ-5 (merged #39)
+
+Plan: docs/v1.2-acq-5-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/39. `CONCIERGE_ONBOARDING` defaults off.
 
 - [x] Draft store preserves provenance and stays unpublished
 - [x] School approval is required to publish; admin cannot manufacture it
