@@ -1,0 +1,133 @@
+{
+  "environment": "local-vitest",
+  "productionFlagsTouched": false,
+  "productionSchemaTouched": false,
+  "startedAt": "2026-10-24T09:57:28.427Z",
+  "finishedAt": "2026-10-24T10:44:14.972Z",
+  "notes": [
+    "Flags were set only in the child Vitest process. Vercel production env was not written.",
+    "Step 1 counts were parsed from dedicated SCHOOL_AUTHZ_ENFORCEMENT=1 reruns because the first script revision only matched 'Tests N passed' and missed '13 failed | 329 passed'. The parser on this branch now handles the mixed format.",
+    "docs/implementation/next-steps.md is not in the repo. This rehearsal follows docs/v1.2-cutover-runbook.md flag order."
+  ],
+  "results": [
+    {
+      "step": "0-baseline-flags-off",
+      "flags": [],
+      "suite": {
+        "exitCode": 0,
+        "passed": 342,
+        "failed": 0,
+        "files": 64,
+        "failures": []
+      },
+      "scenarios": {
+        "exitCode": 0,
+        "passed": 43,
+        "failed": 0,
+        "files": 22,
+        "failures": []
+      }
+    },
+    {
+      "step": "1",
+      "flags": ["SCHOOL_AUTHZ_ENFORCEMENT"],
+      "suite": {
+        "exitCode": 1,
+        "passed": 329,
+        "failed": 13,
+        "files": 64,
+        "failures": [
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > sends exactly two transactional emails on the happy path (201)",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > still returns 201 and sends the student email when the instructor has no email",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > SC-8 refuses connector instant booking when only availability is certified",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > keeps the native booking path when certification enforcement is on",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > SC-6 returns 409 when the slot claim updates zero rows",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > writes the outbox row in the booking transaction when reliable processing is on",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > rolls the booking transaction back when the outbox write fails",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > returns 201 even when sendEmail rejects for the instructor (student still sent)",
+          "tests/unit/instructors-list-route.test.ts > GET /api/instructors — next-open-slot projection > attaches non-null nextSlotAt for an instructor with an upcoming open slot",
+          "tests/unit/instructors-list-route.test.ts > GET /api/instructors — next-open-slot projection > keeps the earliest startsAt per instructor when several slots are returned",
+          "tests/unit/instructors-list-route.test.ts > GET /api/instructors — next-open-slot projection > matches weekday slots in the provider timezone and projects the matching next slot",
+          "tests/unit/instructors-list-route.test.ts > GET /api/instructors — next-open-slot projection > matches weekend slots without advertising a weekday slot",
+          "tests/unit/instructors-list-route.test.ts > GET /api/instructors — next-open-slot projection > composes price, rating, and availability filters with an AND result"
+        ]
+      },
+      "scenarios": {
+        "exitCode": 1,
+        "passed": 41,
+        "failed": 2,
+        "files": 22,
+        "failures": [
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > SC-8 refuses connector instant booking when only availability is certified",
+          "tests/unit/bookings-route.test.ts > POST /api/bookings — email dispatch > SC-6 returns 409 when the slot claim updates zero rows"
+        ]
+      },
+      "observed": [
+        "Booking happy-path tests received 403 not_authorized_by_school because the route tests do not mock school grants.",
+        "SC-8 expected capability_not_certified; the authz gate fired first.",
+        "SC-6 expected 409 slot contention; the authz gate returned 403 first.",
+        "Instructor list tests lost nextSlotAt / filtered rows because availability_display is withheld without grants."
+      ]
+    },
+    {
+      "step": "2",
+      "flags": ["CANCELLATION_POLICY_ENFORCE"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "3",
+      "flags": ["RELIABLE_PROCESSING"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "4",
+      "flags": ["CONNECTIVITY_API"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "5",
+      "flags": ["CERTIFICATION_ENFORCEMENT"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "6a",
+      "flags": ["CLAIM_FUNNEL"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "6b",
+      "flags": ["SCHOOL_MEDIATED_INSTRUCTORS"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "6c",
+      "flags": ["LEAD_DASHBOARD"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "6d",
+      "flags": ["CATEGORY_OFFERINGS"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "6e",
+      "flags": ["CONCIERGE_ONBOARDING"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    },
+    {
+      "step": "7",
+      "flags": ["OPS_ALERTING"],
+      "suite": { "exitCode": 0, "passed": 342, "failed": 0, "files": 64, "failures": [] },
+      "scenarios": { "exitCode": 0, "passed": 43, "failed": 0, "files": 22, "failures": [] }
+    }
+  ]
+}

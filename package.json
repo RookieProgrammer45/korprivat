@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "harness:milestones": "tsx scripts/run-milestone-harness.ts",
+    "rehearse:cutover": "tsx scripts/run-cutover-rehearsal.ts",
     "test:integration": "vitest run --config vitest.config.integration.ts --exclude '**/profile-picture.test.ts'",
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
