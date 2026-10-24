@@ -7,7 +7,8 @@ Report: docs/v1.2-cutover-readiness.md. Roster: docs/cutover-school-roster.json.
 - [x] Local rehearsal in runbook flag order; production flags and schema untouched
 - [x] Step 1 (`SCHOOL_AUTHZ_ENFORCEMENT`) recorded 13 suite failures / 2 SC failures (route tests without mocked grants)
 - [x] Steps 2–7 green under the flag-delete caveat
-- [ ] Production additive schema still missing — do not flip any flag
+- [x] Production additive schema applied 2026-10-24 (`b7d2d87` migrate-on-deploy; `prisma migrate status` clean)
+- [ ] 0 grant events / 0 cancellation policies / 0 partner secrets or certifications — do not flip any flag
 
 ## Spec v1.2 — Phase 5 completeness (merged #40)
 
