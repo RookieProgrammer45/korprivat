@@ -2,7 +2,7 @@
 
 ## Production-readiness walkthrough (staging, not merged)
 
-Report: docs/v1.2-production-readiness-walkthrough.md. Staging Neon preview only. `SCHOOL_AUTHZ_ENFORCEMENT` stayed off.
+Report: docs/v1.2-production-readiness-walkthrough.md. Staging Neon preview only. Open: https://github.com/RookieProgrammer45/korprivat/pull/42. `SCHOOL_AUTHZ_ENFORCEMENT` stayed off.
 
 - [x] Part A: nine flags exercised on staging with synthetic fixtures
 - [x] Part B: tenant isolation, withdrawal, contact restriction — PASS
