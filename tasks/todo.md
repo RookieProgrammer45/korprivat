@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — ACQ-4 (PR #38, not merged)
+## Spec v1.2 — ACQ-5 (PR #39, not merged)
 
-Plan: docs/v1.2-acq-4-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/38. `CATEGORY_OFFERINGS` defaults off. Do not start ACQ-5 until this pull request is merged.
+Plan: docs/v1.2-acq-5-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/39. `CONCIERGE_ONBOARDING` defaults off. The acquisition track ends here.
+
+- [x] Draft store preserves provenance and stays unpublished
+- [x] School approval is required to publish; admin cannot manufacture it
+- [x] Approval and publication grant no policy, verification, or scopes
+- [x] Tests: SC-25
+
+## Spec v1.2 — ACQ-4 (merged #38)
+
+Plan: docs/v1.2-acq-4-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/38. `CATEGORY_OFFERINGS` defaults off.
 
 - [x] Teaching permission matches legal entity, location, and category
 - [x] B-only permission refuses A/C/D publication
