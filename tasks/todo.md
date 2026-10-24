@@ -2,7 +2,7 @@
 
 ## Cutover rehearsal (non-production)
 
-Report: docs/v1.2-cutover-readiness.md. Roster: docs/cutover-school-roster.json. Machine results: docs/cutover-rehearsal-results.json. Script: `npm run rehearse:cutover`. `docs/implementation/next-steps.md` is not in the repo.
+Report: docs/v1.2-cutover-readiness.md. Roster: docs/cutover-school-roster.json. Machine results: docs/cutover-rehearsal-results.json. Script: `npm run rehearse:cutover`. Open: https://github.com/RookieProgrammer45/korprivat/pull/41. `docs/implementation/next-steps.md` is not in the repo.
 
 - [x] Local rehearsal in runbook flag order; production flags and schema untouched
 - [x] Step 1 (`SCHOOL_AUTHZ_ENFORCEMENT`) recorded 13 suite failures / 2 SC failures (route tests without mocked grants)
