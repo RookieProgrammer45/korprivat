@@ -1,0 +1,156 @@
+{
+  "environment": "staging-neon-preview",
+  "hostGuard": "ep-dawn-smoke-b7btfhhc",
+  "productionTouched": false,
+  "schoolAuthzEnforcement": false,
+  "startedAt": "2026-10-24T13:27:40.166Z",
+  "results": [
+    {
+      "flag": "CLAIM_FUNNEL",
+      "exercised": [
+        "importSyntheticProspect via store rules; submit claim with evidence refs; admin review VERIFIED; grant via appendAuthorizationEvent with SCHOOL_AUTHZ_ENFORCEMENT OFF"
+      ],
+      "works": [
+        "Non-synthetic import refused (register_rights_unverified); SYNTHETIC_FIXTURE allowed",
+        "Claim submit stays verification_incomplete and writes 0 grant events",
+        "Available identity route is evidence-ref + admin/manual review (Didit/manual). e-ID broker is [EXTERNAL] / not assumed. Verified claim still grants 0 scopes",
+        "Grant persisted with enforcement OFF (sequence 1); idempotent replay returned replay=true and did not insert a second row"
+      ],
+      "broken": [],
+      "blocked": [
+        "No dedicated per-scope decision UI was found (no form with nothing pre-selected). Grant is API-only: POST /api/listings/[id]/authorizations with explicit scopes"
+      ],
+      "verdict": "PARTIAL"
+    },
+    {
+      "flag": "SCHOOL_MEDIATED_INSTRUCTORS",
+      "exercised": [
+        "inviteSchoolInstructor store path; invitation category gate; independent publication; instructor cannot grant scopes"
+      ],
+      "works": [
+        "School invite within B allowed; A exceeds school categories and is refused",
+        "Independent instructor self-signup/publication refused when flag is on",
+        "Instructor role cannot grant scopes",
+        "Synthetic school invitation persisted; instructor affiliation VERIFIED without scope grants"
+      ],
+      "broken": [],
+      "blocked": [],
+      "verdict": "VERIFIED"
+    },
+    {
+      "flag": "CATEGORY_OFFERINGS",
+      "exercised": [
+        "B-only teaching permission vs A/C/D publication; approved B policy snapshot"
+      ],
+      "works": [
+        "B-only permission refuses A (and would refuse C/D the same way); B offering selects the approved policy snapshot"
+      ],
+      "broken": [],
+      "blocked": [
+        "No live resource-bundle renderer was exercised beyond policy snapshot fields (policyId/version). Offering UI category landing is flag-gated (`/kategori/[category]`)."
+      ],
+      "verdict": "PARTIAL"
+    },
+    {
+      "flag": "LEAD_DASHBOARD",
+      "exercised": [
+        "zero-scope school with historical inquiry count; convert decision"
+      ],
+      "works": [
+        "Zero-scope representative sees historical inquiries, no new-inquiry collection, no booking surfaces; convert cannot mint a booking or a scope"
+      ],
+      "broken": [],
+      "blocked": [],
+      "verdict": "VERIFIED"
+    },
+    {
+      "flag": "RELIABLE_PROCESSING",
+      "exercised": [
+        "booking+outbox same transaction; inbox duplicate/order (SC-11)"
+      ],
+      "works": [
+        "Booking create and outbox row committed together (same transaction)",
+        "SC-11: inbox apply / duplicate / stale decisions; unique (connection, providerEventId) blocks replay insert"
+      ],
+      "broken": [],
+      "blocked": [],
+      "verdict": "VERIFIED"
+    },
+    {
+      "flag": "CONNECTIVITY_API",
+      "exercised": [
+        "/v1 routes exist; unauthenticated reject; sandbox cannot act on production"
+      ],
+      "works": [
+        "Routes present: GET /v1/connections, PUT /v1/connections/[id]/availability, /content, /events. requirePartner 401s when signature headers are missing",
+        "Sandbox credentials cannot sign for a production connection (environment must match)"
+      ],
+      "broken": [],
+      "blocked": [
+        "No CONNECTIVITY_PARTNER_SECRETS in this walkthrough process — live HMAC round-trip against a partner was not run (synthetic environment match only)"
+      ],
+      "verdict": "PARTIAL"
+    },
+    {
+      "flag": "CERTIFICATION_ENFORCEMENT",
+      "exercised": [
+        "productionCapabilityDecision for transactional_booking; mock evidence refused"
+      ],
+      "works": [
+        "Surfaces exist; mock/sandbox evidence cannot enable connector instant booking"
+      ],
+      "broken": [],
+      "blocked": [
+        "No partner is CERTIFIED. Local harness is not vendor-environment evidence."
+      ],
+      "verdict": "PARTIAL"
+    },
+    {
+      "flag": "CONCIERGE_ONBOARDING",
+      "exercised": [
+        "draft store, admin cannot manufacture approval, publish requires school approval (SC-25)"
+      ],
+      "works": [
+        "SC-25: drafts stay unpublished; admin/non-representative cannot approve; school approval still grants no policy/verification/scopes",
+        "Draft row persisted (cmvmfofmr000s7il5qp6260z4) in DRAFT; no grant events created"
+      ],
+      "broken": [],
+      "blocked": [],
+      "verdict": "VERIFIED"
+    },
+    {
+      "flag": "OPS_ALERTING",
+      "exercised": [
+        "threshold evaluation with no env baselines; snapshot tables readable"
+      ],
+      "works": [
+        "Admin snapshot path can read; unset thresholds stay unmeasured and do not fire. No SLO numbers invented",
+        "Staging synthetic listings visible to count queries (3 walkthrough-prefixed)"
+      ],
+      "broken": [],
+      "blocked": [],
+      "verdict": "VERIFIED"
+    }
+  ],
+  "proofs": {
+    "tenantIsolation": {
+      "ok": true,
+      "detail": "Other-school actor refused (not_representative). Representative must match the listing."
+    },
+    "withdrawal": {
+      "ok": true,
+      "detail": "withdraw={\"ok\":true,\"replay\":false,\"sequence\":2} withdrawn=inquiry_collection inquiryCollection=false historyRows=2"
+    },
+    "contactRestriction": {
+      "ok": true,
+      "detail": "grant={\"ok\":false,\"code\":\"contact_locked\"} directoryOnly=true"
+    }
+  },
+  "verifiedFlags": [
+    "SCHOOL_MEDIATED_INSTRUCTORS",
+    "LEAD_DASHBOARD",
+    "RELIABLE_PROCESSING",
+    "CONCIERGE_ONBOARDING",
+    "OPS_ALERTING"
+  ]
+}

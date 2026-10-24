@@ -1,5 +1,15 @@
 # DriveLinkUp — active tasks
 
+## Production-readiness walkthrough (staging, not merged)
+
+Report: docs/v1.2-production-readiness-walkthrough.md. Staging Neon preview only. `SCHOOL_AUTHZ_ENFORCEMENT` stayed off.
+
+- [x] Part A: nine flags exercised on staging with synthetic fixtures
+- [x] Part B: tenant isolation, withdrawal, contact restriction — PASS
+- [x] VERIFIED enable-list: SCHOOL_MEDIATED_INSTRUCTORS, LEAD_DASHBOARD, CONCIERGE_ONBOARDING, OPS_ALERTING, RELIABLE_PROCESSING
+- [ ] CLAIM_FUNNEL / CATEGORY_OFFERINGS / CONNECTIVITY_API / CERTIFICATION_ENFORCEMENT remain PARTIAL — do not treat as verified
+- [ ] Do not flip production flags without a named founder authorization
+
 ## Cutover rehearsal (non-production)
 
 Report: docs/v1.2-cutover-readiness.md. Roster: docs/cutover-school-roster.json. Machine results: docs/cutover-rehearsal-results.json. Script: `npm run rehearse:cutover`. Open: https://github.com/RookieProgrammer45/korprivat/pull/41. `docs/implementation/next-steps.md` is not in the repo.
