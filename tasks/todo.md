@@ -1,8 +1,8 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — Phase 5 completeness (branch feat/phase-5-ops-alerting)
+## Spec v1.2 — Phase 5 completeness (PR #40, not merged)
 
-Plan: docs/v1.2-phase-5-alerting-plan.md. Runbook: docs/v1.2-cutover-runbook.md. `OPS_ALERTING` defaults off.
+Plan: docs/v1.2-phase-5-alerting-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/40. Runbook: docs/v1.2-cutover-runbook.md. `OPS_ALERTING` defaults off.
 
 - [x] Alerting surfaces for every §12 leading metric
 - [x] Thresholds on inbox depth, dead-letter rate, quarantine age, and reconciliation drift stay unmeasured until configured
