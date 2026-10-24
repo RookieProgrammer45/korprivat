@@ -144,3 +144,11 @@ Plan: docs/v1.2-phase-1-plan.md. Merged: https://github.com/RookieProgrammer45/k
 
 - [ ] Didit ID document verification for school/instructor credentials
 - [ ] Browser smoke before promote
+
+## UX — request-to-book journey (specs/06 §2A; canonical mechanism specs/09 §6.5)
+
+- [ ] UX-6 route-level acceptance test: a submitted request renders as `pending` (not a reservation; no resources held), cancellation available while pending, the creation-time policy snapshot is shown, no charge is presented on submission, and the success copy is receipt-honest ("Request saved by DriveLinkUp; awaiting school review") with no implication of guaranteed delivery, review, or acceptance.
+- [ ] UX-7 route-level acceptance test: the school accept flow requires a school-scoped role, revalidates `request_to_book` + E0–E3, and records a commitment route — `external_manual` instructs recording in the school's own authoritative diary first; native/allocation commit through the platform's conflict checks; no route → the request stays pending (SC-16). No surface implies the platform verified availability or that acceptance equals payment.
+- [ ] UX-8 route-level acceptance test: a `request_to_book` withdrawal (or relevant booking-action suspension) blocks acceptance visibly — never silently — while `availability_display`/`inquiry_collection` withdrawal does not block it; no invented cancellation/confirmation transitions; existing confirmed bookings keep lifecycle paths (SC-4).
+- [ ] Build the decline-reason categories (proposed UX addition, specs/06 §2A school-side step 4 — not existing implementation): honest reason categories for `pending → cancelled` by the school before confirmation; terminal for that request; student notified without exposing the school's diary details.
+- [ ] Map the new tests in specs/traceability.md once merged (UX-6/7/8 ↔ specs/06 §2A ↔ specs/09 §6.5).
