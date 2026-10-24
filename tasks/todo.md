@@ -1,8 +1,18 @@
 # DriveLinkUp — active tasks
 
-## Spec v1.2 — Phase 5 completeness (PR #40, not merged)
+## Cutover rehearsal (non-production)
 
-Plan: docs/v1.2-phase-5-alerting-plan.md. Open: https://github.com/RookieProgrammer45/korprivat/pull/40. Runbook: docs/v1.2-cutover-runbook.md. `OPS_ALERTING` defaults off.
+Report: docs/v1.2-cutover-readiness.md. Roster: docs/cutover-school-roster.json. Machine results: docs/cutover-rehearsal-results.json. Script: `npm run rehearse:cutover`. Open: https://github.com/RookieProgrammer45/korprivat/pull/41. `docs/implementation/next-steps.md` is not in the repo.
+
+- [x] Local rehearsal in runbook flag order; production flags and schema untouched
+- [x] Step 1 (`SCHOOL_AUTHZ_ENFORCEMENT`) recorded 13 suite failures / 2 SC failures (route tests without mocked grants)
+- [x] Steps 2–7 green under the flag-delete caveat
+- [x] Production additive schema applied 2026-10-24 (`b7d2d87` migrate-on-deploy; `prisma migrate status` clean)
+- [ ] 0 grant events / 0 cancellation policies / 0 partner secrets or certifications — do not flip any flag
+
+## Spec v1.2 — Phase 5 completeness (merged #40)
+
+Plan: docs/v1.2-phase-5-alerting-plan.md. Merged: https://github.com/RookieProgrammer45/korprivat/pull/40. Runbook: docs/v1.2-cutover-runbook.md. `OPS_ALERTING` defaults off.
 
 - [x] Alerting surfaces for every §12 leading metric
 - [x] Thresholds on inbox depth, dead-letter rate, quarantine age, and reconciliation drift stay unmeasured until configured
