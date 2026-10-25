@@ -271,7 +271,7 @@ POST /adapter/reservations/res_a91/hold
 
 Risk 1 (Riskettan) and Risk 2 (Risktvåan) — the mandatory Swedish risk courses (required for licences A1/A2/A and B per Transportstyrelsen) — are first-class offering types on the platform: **dated group sessions with capacity (seats), price, and location, per provider**. The student-facing surface takes the established aggregator pattern (körkortsjakten.se's dated-session listing) as UX inspiration only — its reservation mechanics are unverified and are not a contract here.
 
-**Provider eligibility gate (verified):** conducting risk training requires a **separate Transportstyrelsen permit** ("tillstånd att bedriva riskutbildning"), distinct from a traffic school permit, issued per licence category ([Transportstyrelsen — Bedriva riskutbildning](https://www.transportstyrelsen.se/sv/vagtrafik/korkort/foretag/forarutbildning-och-kunskapsprov/tillstand/riskutbildning/)). A risk-course session can be published **only** for a provider with stored evidence of the applicable permit for the session's licence category; publication without that evidence is blocked. **Licence category is a first-class session field (A or B); the initial launch scope (B only vs B+A) is a founder decision — open question 8.** Session capacity is school-declared within applicable regulatory bounds (e.g. max 16 participants per part-1 session; the platform records and displays capacity, it does not verify regulatory compliance).
+**Provider eligibility gate (verified):** conducting risk training requires a **separate Transportstyrelsen permit** ("tillstånd att bedriva riskutbildning"), distinct from a traffic school permit, issued per licence category ([Transportstyrelsen — Bedriva riskutbildning](https://www.transportstyrelsen.se/sv/vagtrafik/korkort/foretag/forarutbildning-och-kunskapsprov/tillstand/riskutbildning/)). A risk-course session can be published **only** for a provider with stored evidence of the applicable permit for the session's licence category; publication without that evidence is blocked. **Licence category is a first-class session field (A or B); the founder decided on 26 Oct 2026: both categories (B + A) at launch — motorcycle risk training is included from day one.** Session capacity is school-declared within applicable regulatory bounds (e.g. max 16 participants per part-1 session; the platform records and displays capacity, it does not verify regulatory compliance).
 
 **Canonical rules:**
 
@@ -470,7 +470,7 @@ All mutating endpoints take an `Idempotency-Key` header; responses scoped server
 5. Legal review of liability caps, SLA values, DPAs [EXTERNAL — counsel].
 6. Per-market register/e-ID access [EXTERNAL per market].
 7. Refund-commission policy (pro-rata vs clawback) — explicit commercial gate before Phase 2 implementation.
-8. Risk-course launch scope: B only, or B + A (motorcycle risk training) at launch — the licence-category field supports both; the provider permit gate is per category (§9A).
+8. ~~Risk-course launch scope~~ **RESOLVED 26 Oct 2026 (founder): B + A together at launch** — the licence-category field and per-category permit gate support both (§9A).
 
 ---
 
