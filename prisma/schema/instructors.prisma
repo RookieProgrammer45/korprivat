@@ -89,6 +89,7 @@ model Instructor {
   instructorAffiliations SchoolInstructorAffiliation[] @relation("SchoolAffiliatedInstructors")
   teachingPermissions    TeachingPermission[]
   conciergeDrafts        ConciergeDraft[]
+  riskCourseSessions     RiskCourseSession[]
   // Stripe Connect Express — independent instructor payouts (phase 2).
   stripeAccountId        String?            @unique
   chargesEnabled         Boolean            @default(false)

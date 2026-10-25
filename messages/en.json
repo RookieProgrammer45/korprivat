@@ -3492,5 +3492,24 @@
     "title": "{category} training",
     "body": "Offerings appear here only when the school holds current teaching permission for this category. This page has no booking surface.",
     "empty": "No offerings in this category."
+  },
+  "riskCourses": {
+    "title": "{course} in {municipality}",
+    "course": {
+      "RISK_1": "Risk 1",
+      "RISK_2": "Risk 2"
+    },
+    "lead": "Upcoming dated group sessions published or approved by the school. DriveLinkUp is the recipient of a request.",
+    "honestSeats": "Remaining seats and prices are displays, not a hold or a confirmation.",
+    "empty": "No published sessions in this municipality.",
+    "when": "{when}",
+    "price": "{price} SEK",
+    "seats": "{count, plural, one {# seat shown} other {# seats shown}}",
+    "requestCta": "Request this session",
+    "recipient": "The request is saved by DriveLinkUp and awaits school review. It does not reserve a seat.",
+    "name": "Name",
+    "email": "Email",
+    "requestSaved": "Request saved by DriveLinkUp; awaiting school review.",
+    "requestError": "The request could not be saved."
   }
 }
