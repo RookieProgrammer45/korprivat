@@ -2316,6 +2316,26 @@
       "stepConnect": "Anslut bankkonto för utbetalningar",
       "stepConnectCta": "Öppna utbetalningar"
     },
+    "scopeForm": {
+      "title": "Behörighetsomfattning",
+      "open": "Registrera ett beslut per omfattning",
+      "lead": "Varje omfattning är ett eget val. Ingenting är förvalt. Tidigare beslut visas som historik, inte som ifyllda rutor.",
+      "scopesLegend": "Omfattningar för det här beslutet",
+      "scopes": {
+        "availability_display": "Visa tider (endast visning — inte en reservation)",
+        "inquiry_collection": "Samla in nya förfrågningar",
+        "request_to_book": "Ta emot bokningsförfrågningar",
+        "transactional_booking": "Direktbokning (kräver en giltig kontrollväg)",
+        "payment_collection": "Ta emot betalning"
+      },
+      "evidence": "Bevisreferens",
+      "submit": "Registrera beslut",
+      "noneSelected": "Välj minst en omfattning. En tom inlämning är inte ett beslut.",
+      "error": "Beslutet kunde inte registreras.",
+      "replayed": "Samma beslut spelades upp — ingen andra grant skrevs.",
+      "history": "Redan beviljat (inte förvalt): {scopes}",
+      "nothingPreselected": "Ingen omfattning är förvald."
+    },
     "emptyInstructors": "Inga instruktörer ännu",
     "inviteInstructor": "Bjud in instruktör",
     "comingSoon": "Kommer snart",

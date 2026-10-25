@@ -2316,6 +2316,26 @@
       "stepConnect": "Connect a bank account for payouts",
       "stepConnectCta": "Open payouts"
     },
+    "scopeForm": {
+      "title": "Authorization scopes",
+      "open": "Record a scope decision",
+      "lead": "Each scope is a separate choice. Nothing is pre-selected. A previous grant is shown as history, not as a checked box.",
+      "scopesLegend": "Scopes for this decision",
+      "scopes": {
+        "availability_display": "Show times (display only — not a hold)",
+        "inquiry_collection": "Collect new inquiries",
+        "request_to_book": "Receive booking requests",
+        "transactional_booking": "Instant booking (needs a valid control route)",
+        "payment_collection": "Collect payment"
+      },
+      "evidence": "Evidence reference",
+      "submit": "Record decision",
+      "noneSelected": "Select at least one scope. Empty submit is not a grant.",
+      "error": "The decision could not be recorded.",
+      "replayed": "Same decision replayed — no second grant was written.",
+      "history": "Already granted (not pre-selected): {scopes}",
+      "nothingPreselected": "No scope is pre-selected."
+    },
     "emptyInstructors": "No instructors yet",
     "inviteInstructor": "Invite instructor",
     "comingSoon": "Coming soon",

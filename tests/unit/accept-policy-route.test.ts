@@ -6,12 +6,14 @@ const {
   mockInstructorFindUnique,
   mockSlotUpdateMany,
   mockCreateCheckout,
+  mockAuthzEvents,
 } = vi.hoisted(() => ({
   mockBookingFindUnique: vi.fn(),
   mockBookingUpdateMany: vi.fn(),
   mockInstructorFindUnique: vi.fn(),
   mockSlotUpdateMany: vi.fn(),
   mockCreateCheckout: vi.fn(async () => ({ url: 'https://checkout.test/session' })),
+  mockAuthzEvents: vi.fn(),
 }));
 
 vi.mock('server-only', () => ({}));
@@ -20,6 +22,7 @@ vi.mock('@/lib/db', () => ({
     booking: { findUnique: mockBookingFindUnique, updateMany: mockBookingUpdateMany },
     instructor: { findUnique: mockInstructorFindUnique },
     availabilitySlot: { updateMany: mockSlotUpdateMany },
+    schoolAuthorizationEvent: { findMany: mockAuthzEvents },
   },
 }));
 vi.mock('@/lib/require-auth', () => ({ getSessionUser: vi.fn(async () => null) }));
@@ -61,6 +64,8 @@ beforeEach(() => {
   mockInstructorFindUnique.mockReset();
   mockSlotUpdateMany.mockReset();
   mockCreateCheckout.mockClear();
+  mockAuthzEvents.mockReset();
+  mockAuthzEvents.mockResolvedValue([]);
   delete process.env.SCHOOL_AUTHZ_ENFORCEMENT;
 });
 
@@ -144,5 +149,58 @@ describe('POST /api/bookings/[id]/accept policy', () => {
       }),
     );
     expect(mockCreateCheckout).toHaveBeenCalledOnce();
+  });
+
+  it('blocks acceptance after request_to_book withdrawal while enforcement is OFF', async () => {
+    mockAuthzEvents.mockResolvedValue([
+      {
+        sequence: 1,
+        kind: 'withdraw',
+        scopes: ['request_to_book'],
+        decisionVersion: 1,
+        actorUserId: 'rep-1',
+        evidenceRef: 'ev',
+        note: null,
+        idempotencyKey: 'w1',
+        createdAt: new Date('2026-10-26T00:00:00.000Z'),
+        listingId: 'inst_1',
+      },
+    ]);
+    mockBookingFindUnique.mockResolvedValue({
+      id: 'booking_1',
+      instructorId: 'inst_1',
+      paymentStatus: 'awaiting_approval',
+      category: 'B',
+      slotId: null,
+      actionToken: 'stored',
+      userId: 'learner_1',
+      studentName: 'Ada',
+      studentEmail: 'ada@example.test',
+      preferredAt: new Date('2026-11-02T09:00:00.000Z'),
+      locale: 'sv',
+    });
+    mockInstructorFindUnique.mockResolvedValue({
+      id: 'inst_1',
+      name: 'School',
+      email: null,
+      city: 'Stockholm',
+      userId: 'owner_1',
+      hourlyRateSek: 500,
+      bookingMode: 'request',
+      categories: ['B'],
+    });
+
+    const res = await POST(
+      acceptRequest({
+        token: 'stored',
+        acceptedByLabel: 'School desk',
+        commitmentRoute: 'external_manual',
+      }),
+      ctx,
+    );
+
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: { code: 'not_authorized_by_school' } });
+    expect(mockBookingUpdateMany).not.toHaveBeenCalled();
   });
 });
