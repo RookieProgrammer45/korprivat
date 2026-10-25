@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-10-24T13:46:03.917Z",
+  "productionTouched": false,
+  "flagsChanged": [],
+  "outreachSent": 0,
+  "from": "marketing@drivelinkup.com",
+  "send": {
+    "allowed": false,
+    "code": "channel_not_authorized",
+    "sent": false
+  },
+  "template": {
+    "allowed": true,
+    "kind": "OUTREACH_SEQUENCE",
+    "from": "marketing@drivelinkup.com",
+    "signature": "frank - founder of drivelinkup.com",
+    "sent": false,
+    "sendBlocked": "channel_not_authorized",
+    "scopesPreselected": [],
+    "authorizationEventsCreated": 0,
+    "policyApproved": false,
+    "verificationManufactured": false,
+    "bookingSurfaces": false,
+    "claimPage": "missing",
+    "schoolName": "[school name]",
+    "listingId": null,
+    "listingUrl": null,
+    "cadence": [
+      {
+        "day": 0,
+        "subject": "Your school controls authorization on DriveLinkUp",
+        "body": "Hello [school name],\n\nDriveLinkUp is a Sweden-first directory for driving schools. Being listed has no fee.\nYour listing stays visible in the directory.\n\nAuthorization is your control. Each scope is a separate choice — times, inquiries, request-to-book, and transactional booking are independent, and none of them is pre-selected. You can withdraw a scope the same day. We will not run a second diary next to yours.\n\nA public claim page is not shipped yet. If you want to decide scopes, use the available verification or manual-review route — a reply to this draft does not create a grant.\n\nDirectory-only is a valid choice. Collection records permission; it does not pressure a school into granting it.\n\nThis is the first note in a three-step cadence (day 0 / 4 / 10).\n\nfrank - founder of drivelinkup.com"
+      },
+      {
+        "day": 4,
+        "subject": "Follow-up: authorization stays your decision",
+        "body": "Hello [school name],\n\nDriveLinkUp is a Sweden-first directory for driving schools. Being listed has no fee.\nYour listing stays visible in the directory.\n\nAuthorization is your control. Each scope is a separate choice — times, inquiries, request-to-book, and transactional booking are independent, and none of them is pre-selected. You can withdraw a scope the same day. We will not run a second diary next to yours.\n\nA public claim page is not shipped yet. If you want to decide scopes, use the available verification or manual-review route — a reply to this draft does not create a grant.\n\nDirectory-only is a valid choice. Collection records permission; it does not pressure a school into granting it.\n\nThis is the day-4 follow-up. Directory-only remains available.\n\nfrank - founder of drivelinkup.com"
+      },
+      {
+        "day": 10,
+        "subject": "Last note from this cadence",
+        "body": "Hello [school name],\n\nDriveLinkUp is a Sweden-first directory for driving schools. Being listed has no fee.\nYour listing stays visible in the directory.\n\nAuthorization is your control. Each scope is a separate choice — times, inquiries, request-to-book, and transactional booking are independent, and none of them is pre-selected. You can withdraw a scope the same day. We will not run a second diary next to yours.\n\nA public claim page is not shipped yet. If you want to decide scopes, use the available verification or manual-review route — a reply to this draft does not create a grant.\n\nDirectory-only is a valid choice. Collection records permission; it does not pressure a school into granting it.\n\nThis is the last note. No further rounds are a flip prerequisite.\n\nfrank - founder of drivelinkup.com"
+      }
+    ]
+  },
+  "syntheticExample": {
+    "allowed": true,
+    "kind": "OUTREACH_SEQUENCE",
+    "from": "marketing@drivelinkup.com",
+    "signature": "frank - founder of drivelinkup.com",
+    "sent": false,
+    "sendBlocked": "channel_not_authorized",
+    "scopesPreselected": [],
+    "authorizationEventsCreated": 0,
+    "policyApproved": false,
+    "verificationManufactured": false,
+    "bookingSurfaces": false,
+    "claimPage": "missing",
+    "schoolName": "Example Trafikskola (synthetic)",
+    "listingId": "listing-synthetic",
+    "listingUrl": "https://www.drivelinkup.com/instructors/listing-synthetic",
+    "cadence": [
+      {
+        "day": 0,
+        "subject": "Your school controls authorization on DriveLinkUp",
+        "body": "Hello Example Trafikskola (synthetic),\n\nDriveLinkUp is a Sweden-first directory for driving schools. Being listed has no fee.\nYour current listing: https://www.drivelinkup.com/instructors/listing-synthetic\n\nAuthorization is your control. Each scope is a separate choice — times, inquiries, request-to-book, and transactional booking are independent, and none of them is pre-selected. You can withdraw a scope the same day. We will not run a second diary next to yours.\n\nA public claim page is not shipped yet. If you want to decide scopes, use the available verification or manual-review route — a reply to this draft does not create a grant.\n\nDirectory-only is a valid choice. Collection records permission; it does not pressure a school into granting it.\n\nThis is the first note in a three-step cadence (day 0 / 4 / 10).\n\nfrank - founder of drivelinkup.com"
+      },
+      {
+        "day": 4,
+        "subject": "Follow-up: authorization stays your decision",
+        "body": "Hello Example Trafikskola (synthetic),\n\nDriveLinkUp is a Sweden-first directory for driving schools. Being listed has no fee.\nYour current listing: https://www.drivelinkup.com/instructors/listing-synthetic\n\nAuthorization is your control. Each scope is a separate choice — times, inquiries, request-to-book, and transactional booking are independent, and none of them is pre-selected. You can withdraw a scope the same day. We will not run a second diary next to yours.\n\nA public claim page is not shipped yet. If you want to decide scopes, use the available verification or manual-review route — a reply to this draft does not create a grant.\n\nDirectory-only is a valid choice. Collection records permission; it does not pressure a school into granting it.\n\nThis is the day-4 follow-up. Directory-only remains available.\n\nfrank - founder of drivelinkup.com"
+      },
+      {
+        "day": 10,
+        "subject": "Last note from this cadence",
+        "body": "Hello Example Trafikskola (synthetic),\n\nDriveLinkUp is a Sweden-first directory for driving schools. Being listed has no fee.\nYour current listing: https://www.drivelinkup.com/instructors/listing-synthetic\n\nAuthorization is your control. Each scope is a separate choice — times, inquiries, request-to-book, and transactional booking are independent, and none of them is pre-selected. You can withdraw a scope the same day. We will not run a second diary next to yours.\n\nA public claim page is not shipped yet. If you want to decide scopes, use the available verification or manual-review route — a reply to this draft does not create a grant.\n\nDirectory-only is a valid choice. Collection records permission; it does not pressure a school into granting it.\n\nThis is the last note. No further rounds are a flip prerequisite.\n\nfrank - founder of drivelinkup.com"
+      }
+    ]
+  }
+}

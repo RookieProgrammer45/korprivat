@@ -1,8 +1,17 @@
 # DriveLinkUp — active tasks
 
+## Authorization outreach drafts (§10 remaining)
+
+Script: `npm run outreach:draft`. Playbook: docs/authorization-outreach-sequence.md. From marketing@drivelinkup.com. Unsent.
+
+- [x] Day 0/4/10 sequence drafts with founder signature; no scopes pre-selected
+- [x] Send path stays `channel_not_authorized`; contact listings excluded
+- [x] Concierge POST accepts `OUTREACH_SEQUENCE` without granting scopes
+- [ ] Do not send outreach or flip production flags without a named founder authorization
+
 ## Authorization collection tooling (§10)
 
-Script: `npm run cohorts:assign`. Report: docs/authorization-coverage-report.md. Worklists: docs/authorization-cohort-worklists.json.
+Script: `npm run cohorts:assign`. Report: docs/authorization-coverage-report.md. Worklists: docs/authorization-cohort-worklists.json. Merged: https://github.com/RookieProgrammer45/korprivat/pull/43.
 
 - [x] File-based cohort assignment + §6 coverage (no DB, no outreach, no flag flips)
 - [x] Roster-only run: 1 contact excluded, 634 unclassified (no teaching categories on the roster)

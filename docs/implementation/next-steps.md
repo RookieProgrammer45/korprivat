@@ -5,7 +5,7 @@
 ## 1. Cutover rehearsal (done — #41) and staging walkthrough (done — #42)
 
 Reports: `docs/v1.2-cutover-readiness.md`, `docs/v1.2-production-readiness-walkthrough.md`.
-Collection-plan §10 tooling: `npm run cohorts:assign` writes the worklists and the §6 coverage report from the roster. The current roster has no teaching categories, so 634 schools are unclassified and usable supply is zero. No production flag was flipped.
+Collection-plan §10 tooling: `npm run cohorts:assign` writes the worklists and the §6 coverage report from the roster. `npm run outreach:draft` writes the unsent day 0/4/10 playbook — it does not send. The current roster has no teaching categories, so 634 schools are unclassified and usable supply is zero. No production flag was flipped.
 
 ## 2. Founder decision order (recommended — the founder decides)
 
