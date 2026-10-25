@@ -17,9 +17,39 @@ import {
   loadListingSurfaces,
 } from '@/lib/orgs/school-authorization';
 import { AUTHORIZATION_SCOPES } from '@/lib/orgs/school-authorization-policy';
+import { emptyScopeDecisionForm } from '@/lib/orgs/scope-decision-form';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
+
+async function requireRepresentative(listingId: string, userId: string) {
+  const representative = await prisma.listingRepresentativeAuthority.findUnique({
+    where: { listingId_userId: { listingId, userId } },
+  });
+  return Boolean(representative?.verifiedAt && representative.evidenceRef);
+}
+
+export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }) {
+  let user: Awaited<ReturnType<typeof requireAuth>>;
+  try {
+    user = await requireAuth(req);
+  } catch (response) {
+    return response as Response;
+  }
+  const { id: listingId } = await ctx.params;
+  if (!(await requireRepresentative(listingId, user.id))) {
+    return NextResponse.json({ error: { code: 'not_representative' } }, { status: 403 });
+  }
+  const folded = await loadFoldedAuthorization(listingId);
+  return NextResponse.json({
+    listingId,
+    headSequence: folded.headSequence,
+    decisionVersion: folded.decisionVersion,
+    granted: folded.granted,
+    withdrawn: folded.withdrawn,
+    form: emptyScopeDecisionForm(),
+  });
+}
 
 const bodySchema = z.object({
   kind: z.enum(['grant', 'withdraw']),

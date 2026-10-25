@@ -1,6 +1,6 @@
 # DriveLinkUp — Scalable Marketplace Product Specification
 
-**Version 1.3 — [PROPOSED].** *(v1.3: adds the supply-acquisition track — §13 ACQ and SC-21…25 — from the founder-approved acquisition strategy, now in `docs/acquisition-strategy.md`: school-mediated instructors, professional categories A/C/D, claim funnel, lead dashboard, concierge tooling. §6.5 (request-to-book mechanism) added 2026-10-24; §9A risk-course discovery (Risk 1/2) added 2026-10-26.)* This document consolidates the earlier DriveLinkUp Cursor spec pack (specs 00–08), the Connectivity Partner Program Design (v0.1), and the verified state of the live application into one canonical, self-contained product specification for build-out. Where this document and the earlier pack overlap, **this document is the implementation authority**; §16 maps every earlier requirement to a section *inside this document*. Essential contracts are reproduced in the body and Appendices A–B.
+**Version 1.3 — [PROPOSED].** *(v1.3: adds the supply-acquisition track — §13 ACQ and SC-21…25 — from the founder-approved acquisition strategy, now in `docs/acquisition-strategy.md`: school-mediated instructors, professional categories A/C/D, claim funnel, lead dashboard, concierge tooling. §6.5 (request-to-book mechanism) added 2026-10-24; §9A risk-course discovery (Risk 1/2) and §6.6 booking rules added 2026-10-26; SC-21a (scope decision form) added 2026-10-26.)* This document consolidates the earlier DriveLinkUp Cursor spec pack (specs 00–08), the Connectivity Partner Program Design (v0.1), and the verified state of the live application into one canonical, self-contained product specification for build-out. Where this document and the earlier pack overlap, **this document is the implementation authority**; §16 maps every earlier requirement to a section *inside this document*. Essential contracts are reproduced in the body and Appendices A–B.
 
 **Statement kinds:** [OBSERVED-MVP] = verified in the live application; [PROPOSED] = specified here for build; [EXTERNAL] = requires parties or decisions outside the codebase; [VENDOR-REPORTED] = a vendor's own statement, not verified by DriveLinkUp.
 
@@ -150,6 +150,23 @@ Request-to-book allows an **eligible, explicitly authorized school** to receive 
 **Rules preserved:** displayed availability is a separate permission (`availability_display`) — **displaying a time is neither a hold nor a confirmation**; no double-managed diary — DriveLinkUp is the demand layer, never a mirror of an external system (§5); the school's own diary and tools remain authoritative for its schedule.
 
 **Trade-off (honest):** the student waits for a human, and any shown times are only as fresh as the school keeps them. Instant booking is the upgrade path and is where E4 applies — a certified transactional connector, the native diary for genuinely delegated inventory, or accepted allocations (§6.1).
+
+### 6.6 Risk-course discovery — Risk 1 (Riskettan) and Risk 2 (Risktvåan)
+
+Product authority for this surface is **§9A**. This subsection states the booking and offering rules only.
+
+Risk 1 and Risk 2 are **first-class dated group-session offering types**, not a new authorization scope and not a new teaching-permission letter. A session belongs to a school listing and carries: `course_type` (`RISK_1` | `RISK_2`), the licence **category** used for E1 (typically B; A/C/D when the school teaches that category), municipality, location, `starts_at` / `ends_at`, seat capacity, and price. [PROPOSED] product surface; the public discoverability shape (dated sessions, displayed remaining seats, price) is a **reference** to existing Swedish directories such as körkortsjakten.se — [VENDOR-REPORTED] competitor UX, not a capability or partnership claim.
+
+**Canonical rules:**
+
+1. **Seat display is neither a hold nor a confirmation.** Remaining seats and prices are honest displays of published facts. A displayed seat does not reserve inventory, promise a place, or confirm a booking.
+2. **Supply exists only where a school published it or approved an ACQ draft.** Concierge / ACQ drafts never auto-publish (SC-25). No synthetic listings on production surfaces. Staging and tests may use synthetic fixtures, labelled as such.
+3. **Permission match is E1, not a new scope.** Publication and request/instant actions reuse the existing policy service: teaching permission must be current for the session's legal entity, location, and licence category (SC-22). Do not invent `risk_1` / `risk_2` commercial scopes.
+4. **Booking follows §6.5 by default.** Request-to-book (E0–E3, no E4) is the default path. Instant booking requires a valid E4 control route **and** `transactional_booking`. A committed booking consumes a seat only through the platform's conflict rules on a native/allocation route; `external_manual` follows §6.5 — the school records the place in its own system first. Pending requests do not consume seats.
+5. **Existing-booking lifecycle is preserved (SC-4).** Withdrawal of `request_to_book` blocks new acceptance even while enforcement is OFF; confirmed risk-course bookings keep cancel/refund/support. Expired sessions are never auto-rebooked — the student's path is a new request.
+6. **Ship dark.** The surface is gated by `RISK_COURSES`, default OFF. Flag-off pages and APIs are not found.
+
+Discovery URLs (SEO, server-rendered, no client-only content): Swedish `/riskettan/{municipality}` and `/risktvåan/{municipality}`; English `/risk-1/{municipality}` and `/risk-2/{municipality}`. Filters: municipality (path) and date (query). All strings through i18n (rule 19).
 
 ---
 
@@ -326,6 +343,8 @@ A market = a country launch. Each market adds a **plugin, not a fork**: official
 | `CommandOutbox` | id, command_type, school_connection_id FK, correlation_id, idempotency_key, payload, state('pending'/'claimed'/'delivered'/'failed_terminal'), **`outcome`('pending'/'confirmed'/'not_confirmed'/'unresolved')**, `quarantine`: affected resource refs + interval (persisted, overrides ordinary TTL-expiry hold release), `resolution_ref` (authoritative reconciliation result or audited ops decision), lease_expires_at, attempt_count, next_retry_at, dead_letter_at. Retry bounds per §6.4. **TTL expiry and retry exhaustion never release quarantine** on a potentially committed remote reservation. |
 | `ListingOrgBinding` | id, listing_id FK, organization_id FK, verified_at, verified_by_user_id, state. Unique active binding per listing. Change requires review. |
 | `BookingStateTransition` / `PaymentRecord` / `OpsTask` / `AuditLog` | transition rows (from, to, actor, correlation_id); payment state only from authoritative records (`late_captured` flag); ops queue with redacted-payload retention; every authorization/certification/admin action audited. |
+| `RiskCourseSession` [PROPOSED] | id, listing_id FK, course_type(`RISK_1`/`RISK_2`), licence_category (E1 letter, not a new scope), municipality, location, starts_at, ends_at, seat_capacity, price_sek, published_at (null = unpublished), approved_at (required for ACQ-draft origin), source(`SCHOOL_PUBLISHED`/`ACQ_DRAFT`), created_at, updated_at. Unique enough for listing+start+type. Unpublished and unapproved drafts never appear on discovery pages. |
+| `RiskCourseRequest` [PROPOSED] | id, session_id FK, listing_id FK, student fields, status(`pending`/`confirmed`/`cancelled`), commitment_route nullable, created_at, updated_at. Pending does not decrement displayed remaining seats. Confirmed on native/allocation decrements; `external_manual` records the school's commitment without inventing a platform hold. |
 
 Constraints: tenant isolation from authenticated grants; no request-trusted school IDs; environment separation; audit on every authorization, certification, and admin action.
 
@@ -357,7 +376,7 @@ Implementation of the supply acquisition strategy. **Per-capability prerequisite
 
 ### Risk-course track (RC — Risk 1/2 discovery)
 
-- **RC-1 — Risk-course discovery.** Session-offering data model (course part, licence category, provider, venue, start/end, language, capacity, publication status, approved per-participant price), provider Transportstyrelsen permit-evidence gate, `/riskettan/[city]` + `/risktvåan/[city]` discovery pages, group-capacity conflict rules, booking per §6.5 with the independent authorization gates. Additive schema only; behind `RISK_COURSES` (default OFF). **[PROPOSED] — this track is not implemented; the build sequence above being complete does not cover it.** *Acceptance: SC-26…28.*
+- **RC-1 — Risk-course discovery.** Session-offering data model (course part, licence category, provider, venue, start/end, language, capacity, publication status, approved per-participant price), provider Transportstyrelsen permit-evidence gate, `/riskettan/[city]` + `/risktvåan/[city]` discovery pages, group-capacity conflict rules, booking per §6.5 with the independent authorization gates. Additive schema only; behind `RISK_COURSES` (default OFF). **[PROPOSED] — implementation ships dark; public surfaces stay hidden while the flag is off.** *Acceptance: SC-26…28.*
 
 Priority order: ACQ-1 (critical path for ACQ-4) → ACQ-3 → ACQ-2 → ACQ-4 → ACQ-5. **Review capacity is the throttle:** the funnel feeds the verification review queue; verification operations must scale with acquisition. Bounded execution per docs/acquisition-strategy.md §6: Cursor builds tools and drafts; sending outreach, bulk publication, spend, vendor contact, and production activation require separate explicit authorization.
 
@@ -388,6 +407,10 @@ First-party adapters and outreach continue (16 vendors contacted 22 Oct 2026; on
 - **SC-20 (quarantine survives expiry):** Given a commit that timed out, when the hold TTL lapses and retries are exhausted, then the affected inventory remains unavailable (quarantine persists) until an authoritative reconciliation result or an audited operational decision releases it.
 - **SC-17 (directory visibility without onboarding):** Given a school that permits directory display but has not completed booking onboarding and has no active offerings, when its profile is viewed, then info, prices, and reviews render with **no booking surfaces**, and verification badges reflect only stored evidence.
 - **SC-21 (claim funnel):** Given a newly imported private prospect, when its profile is requested publicly, then nothing renders until it passes eligibility and data-quality checks — but an eligible public directory listing does not require a completed claim or booking onboarding; given a claim, when submitted, then identity and company/mandate verification run and representative authority is verified before any scope decision — claim verification never itself grants commercial scopes; imported cancellation policies stay draft/unverified (SC-18).
+- **SC-21a (scope decision form):** Given a verified representative, when the per-scope decision form renders, then nothing is pre-selected (`availability_display`, `inquiry_collection`, `request_to_book`, `transactional_booking`, `payment_collection` are independent opt-ins); a concierge draft never pre-fills a scope; a grant records `evidenceRef` and `decisionVersion`; an idempotent replay writes no second event; granting one scope does not imply another; a `request_to_book` withdrawal blocks acceptance even while `SCHOOL_AUTHZ_ENFORCEMENT` is OFF (SC-4 for existing confirmed bookings).
+- **SC-26 (risk-course supply):** Given an unpublished ACQ draft risk-course session, when the municipality landing is rendered, then the session is absent; given a school-published or school-approved session with current E1 permission, when the landing is rendered with `RISK_COURSES` on, then the dated session, displayed remaining seats, and price appear.
+- **SC-27 (seat display honesty):** Given a published session with remaining seats shown, when a student views the landing or submits a request, then the displayed seat is neither a hold nor a confirmation; a pending request does not consume a seat; only a committed native/allocation booking decrements remaining seats through the platform conflict rules.
+- **SC-28 (risk-course request and lifecycle):** Given a published Risk 1 or Risk 2 session, when the student requests, then the path is §6.5 request-to-book by default (instant only with valid E4); an expired session is never auto-rebooked; after `request_to_book` withdrawal, acceptance is blocked and an existing confirmed booking keeps cancel/refund/support (SC-4).
 - **SC-22 (category scope):** Given a school with current teaching permission for category B only (legal permission — a different axis from commercial authorization scopes), when an A/C/D offering is submitted, then publication is refused by E1 scope matching on legal entity, location, and category (with applicable instructor qualification/affiliation), not a category dropdown; given a school holding the permission, when category offerings render, then category-specific policy selection applies per offering and the booking snapshots the applicable policy immutably at creation.
 - **SC-23 (school-mediated instructors):** Given the instructor surfaces, when an instructor attempts to publish or sell independently, then it is refused — scope grants are never based solely on an instructor role (an instructor who separately qualifies as a verified school representative may act in that representative role); given a school invitation, when the instructor joins, then affiliation is verified, the listing is school-scoped, offerings cannot exceed the school's category permissions, and the instructor cannot grant scopes.
 - **SC-24 (lead dashboard):** Given a zero-scope directory school, when the dashboard is viewed by a user with verified school-role authorization, then permitted listing analytics and historical inquiries render with authorization prompts — but no new inquiries are collected without `inquiry_collection`, no booking surfaces render, and a lead converts to a booking only through the applicable booking permissions and eligibility checks, never merely a scope.
@@ -454,12 +477,12 @@ All mutating endpoints take an `Idempotency-Key` header; responses scoped server
 | Pack specs/03 (booking engine, E0–E4, BK-1…21) | §4, §6 (BK series remains the pack's detailed test record; SC-1…17 here cover the consolidated rules) |
 | Pack specs/04 (verification, VF-a…j2) | §9 + **Appendix A** |
 | Pack specs/05 (connectors, CN-1…5) | §6.4, §7, §8 |
-| Pack specs/06 (UX journeys, UX-1…10) | §9, §9A |
+| Pack specs/06 (UX journeys, UX-1…13) | §9, §6.5, §9A |
 | Pack specs/07 (delivery plan) | §13 |
 | Pack specs/08 (API contracts, API-1…9) | §7 + **Appendix B** |
 | Connectivity Program Design v0.1 | §7, §8, §14 |
-| Acquisition strategy (docs/acquisition-strategy.md; plan v5 §9A + R12–R15) | §13 ACQ track, §15 SC-21…25 |
-| Körkortsjakten teardown (plan v3 Appendix A — /riskettan pages; UX inspiration only) + specs/06 §2B | §9A, §13 RC-1, §15 SC-26…28 |
+| Acquisition strategy (docs/acquisition-strategy.md; plan v5 §9A + R12–R15) | §13 ACQ track, §15 SC-21…25, SC-21a |
+| Körkortsjakten teardown (plan v3 Appendix A — /riskettan pages; UX inspiration only) + specs/06 §2B | §9A, §6.6, §13 RC-1, §15 SC-26…28 |
 
 ## 17. Open questions (owner: founder unless noted)
 

@@ -20,6 +20,7 @@
 | Appendix A | 04 §9 (VF-a…j2, verbatim) |
 | Appendix B | 08 (API-1…9, expanded) |
 | §13 ACQ track + SC-21…25 (v1.3) | docs/acquisition-strategy.md (from plan v5 §9A, R12–R15) |
+| §6.6 Risk-course discovery + SC-21a / SC-26…28 | 03 §1 (E0–E4), 03 §3 (scopes), 06 §2B + UX-9…13 |
 
 Every requirement below has one canonical spec location and an acceptance hook. Dependencies marked ⛔ are blocked on external access (do not fake). The full §8.7 release-test paragraph (a, a2, a3, a4, b, c, c2, d, e, f, g, h, i, j, j2) was recovered in full from the plan and is covered in spec 04 §9 — nothing truncated.
 
@@ -101,6 +102,8 @@ Every requirement below has one canonical spec location and an acceptance hook. 
 | Requirement | Spec | Acceptance |
 |---|---|---|
 | School authorization model (scopes: availability_display, inquiry_collection, request_to_book, transactional_booking, payment_collection; directory-only default) | 02 school_authorizations; 03 §3 | BK-17 (withdrawal blocks server-side), BK-19 (no auto-enable), API-7, UX-4 |
+| Per-scope decision form (nothing pre-selected; concierge never pre-fills) | 09 SC-21a; 06 §3 | UX-13 |
+| Risk 1 / Risk 2 dated sessions, honest seat display, request-to-book default | 09 §9A + §6.6; 06 §2B | UX-9, UX-10; SC-26, SC-27, SC-28 |
 | Withdrawal persistence across data refresh | 02; 03 §3 | BK-18 |
 | Recipient clarity (DriveLinkUp identified as form recipient) | 06 §2 | UX-5 |
 | Payment clarity (who receives payment; when confirmed) | 06 §2 | — |

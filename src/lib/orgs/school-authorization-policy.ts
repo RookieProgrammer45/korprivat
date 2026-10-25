@@ -266,7 +266,15 @@ export type AppendPlan =
       decisionVersion: number;
       scopes: AuthorizationScope[];
     }
-  | { ok: false; code: 'stale' | 'not_representative' | 'evidence_required' | 'contact_locked' };
+  | {
+      ok: false;
+      code:
+        | 'stale'
+        | 'not_representative'
+        | 'evidence_required'
+        | 'contact_locked'
+        | 'no_scopes_selected';
+    };
 
 export function planAuthorizationAppend(
   head: FoldedAuthorization,
@@ -294,6 +302,7 @@ export function planAuthorizationAppend(
     if (isContactRestriction(command.bookingMode)) {
       return { ok: false, code: 'contact_locked' };
     }
+    if (scopes.length === 0) return { ok: false, code: 'no_scopes_selected' };
   } else if (!command.evidenceRef?.trim()) {
     return { ok: false, code: 'evidence_required' };
   }

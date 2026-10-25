@@ -19,6 +19,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { isClaimFunnelOn } from '@/lib/acquisition/claim-policy';
 import { requireDashboardSession } from '@/lib/dashboard-guard';
 // biome-ignore lint/style/noRestrictedImports: legacy server page - DB read predates the route-handler rule; refactor pending
 import { prisma } from '@/lib/db';
@@ -141,6 +142,16 @@ export default async function SchoolDashboardPage({
       <SchoolConnectionStatus userId={session.userId} />
       <SchoolLeadPanel userId={session.userId} />
       <SchoolConciergePanel userId={session.userId} />
+      {isClaimFunnelOn() ? (
+        <Card className="border-border bg-card">
+          <CardContent className="grid gap-2 p-5">
+            <p className="font-medium text-foreground">{t('scopeForm.title')}</p>
+            <Button asChild variant="link" size="sm" className="h-auto w-fit p-0">
+              <Link href="/dashboard/school/authorizations">{t('scopeForm.open')}</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      ) : null}
 
       {showSetupChecklist ? (
         <SchoolSetupChecklist

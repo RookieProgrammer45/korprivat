@@ -39,12 +39,25 @@ export function conciergeSourceDecision(source: string): { allowed: boolean; cod
   return { allowed: false, code: 'register_rights_unverified' };
 }
 
+export function conciergePayloadHasScopes(payload: unknown): boolean {
+  if (!payload || typeof payload !== 'object') return false;
+  const row = payload as Record<string, unknown>;
+  return Array.isArray(row.scopes) || Array.isArray(row.grantedScopes);
+}
+
 export function conciergeStoreDecision(input: {
   source: string;
   provenance: unknown;
+  payload?: unknown;
 }):
   | ({ allowed: true; state: 'DRAFT'; published: false } & typeof NO_MANUFACTURED)
-  | { allowed: false; code: 'provenance_required' | 'register_rights_unverified' } {
+  | {
+      allowed: false;
+      code: 'provenance_required' | 'register_rights_unverified' | 'scopes_not_prefillable';
+    } {
+  if (conciergePayloadHasScopes(input.payload)) {
+    return { allowed: false, code: 'scopes_not_prefillable' };
+  }
   if (!isConciergeProvenance(input.provenance)) {
     return { allowed: false, code: 'provenance_required' };
   }
