@@ -10,6 +10,15 @@ Script: `npm run cohorts:assign`. Report: docs/authorization-coverage-report.md.
 - [ ] Do not pick a pilot city/category or send outreach without a named founder authorization
 - [ ] Do not flip production flags without a named founder authorization
 
+## Risk-course discovery — Risk 1 / Risk 2 (specs/09 §9A [PROPOSED], specs/06 §2B)
+
+- [ ] Data model: Risk 1 / Risk 2 session offerings — course part, licence category (A/B), provider, venue/municipality, start/end with timezone, teaching language, capacity, publication status, school-approved price per participant. Additive schema only; behind `RISK_COURSES` (default OFF).
+- [ ] Provider eligibility gate: stored evidence of the Transportstyrelsen risk-training permit for the session's licence category; no permit evidence → the session stays unpublished (SC-26 test).
+- [ ] Discovery pages: `/riskettan/[city]` + `/risktvåan/[city]` per the existing `/trafikskola/[city]` convention; app's existing i18n mechanism (no invented English slugs); server-rendered; municipality/date filters.
+- [ ] Group capacity: one seat per booking; pending requests consume no seats; confirmed + holds ≤ capacity, atomic and idempotent; release/expiry/cancellation reconcile exactly once; shared sessions never exclusively unavailable; `external_manual` shows unknown availability without valid provenance/freshness (SC-28 test).
+- [ ] Booking gates independent: display needs availability authorization; requests need `request_to_book` + E0–E3; instant needs transactional + all eligibility incl. E4; withdrawal scope-specific (SC-27 test).
+- [ ] Route-level acceptance tests mapping to UX-9/UX-10 + specs/traceability.md update.
+
 ## Production-readiness walkthrough (merged #42)
 
 Report: docs/v1.2-production-readiness-walkthrough.md. Staging Neon preview only. Merged: https://github.com/RookieProgrammer45/korprivat/pull/42. `SCHOOL_AUTHZ_ENFORCEMENT` stayed off.

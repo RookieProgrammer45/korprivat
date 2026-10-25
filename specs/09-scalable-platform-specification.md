@@ -1,6 +1,6 @@
 # DriveLinkUp — Scalable Marketplace Product Specification
 
-**Version 1.3 — [PROPOSED].** *(v1.3: adds the supply-acquisition track — §13 ACQ and SC-21…25 — from the founder-approved acquisition strategy, now in `docs/acquisition-strategy.md`: school-mediated instructors, professional categories A/C/D, claim funnel, lead dashboard, concierge tooling. §6.5 (request-to-book mechanism) added 2026-10-24.)* This document consolidates the earlier DriveLinkUp Cursor spec pack (specs 00–08), the Connectivity Partner Program Design (v0.1), and the verified state of the live application into one canonical, self-contained product specification for build-out. Where this document and the earlier pack overlap, **this document is the implementation authority**; §16 maps every earlier requirement to a section *inside this document*. Essential contracts are reproduced in the body and Appendices A–B.
+**Version 1.3 — [PROPOSED].** *(v1.3: adds the supply-acquisition track — §13 ACQ and SC-21…25 — from the founder-approved acquisition strategy, now in `docs/acquisition-strategy.md`: school-mediated instructors, professional categories A/C/D, claim funnel, lead dashboard, concierge tooling. §6.5 (request-to-book mechanism) added 2026-10-24; §9A risk-course discovery (Risk 1/2) added 2026-10-26.)* This document consolidates the earlier DriveLinkUp Cursor spec pack (specs 00–08), the Connectivity Partner Program Design (v0.1), and the verified state of the live application into one canonical, self-contained product specification for build-out. Where this document and the earlier pack overlap, **this document is the implementation authority**; §16 maps every earlier requirement to a section *inside this document*. Essential contracts are reproduced in the body and Appendices A–B.
 
 **Statement kinds:** [OBSERVED-MVP] = verified in the live application; [PROPOSED] = specified here for build; [EXTERNAL] = requires parties or decisions outside the codebase; [VENDOR-REPORTED] = a vendor's own statement, not verified by DriveLinkUp.
 
@@ -267,6 +267,25 @@ POST /adapter/reservations/res_a91/hold
 
 **Verification essentials (canonical):** displayed claims match stored evidence exactly (date + method); permit verification per market via the official-source matrix (Bolagsverket/Transportstyrelsen, Brreg/Vegvesen, CVR/virk.dk, PRH/YTJ, Traficom, Skatturinn — each with its own access status [EXTERNAL]); e-ID brokers per market with age rules; exception-based document verification where registers don't expose data; instructor claims use the correct criterion (approved trafiklärare with school affiliation — not licence duration); guardian consent per market; evidence retention minimal (no document images by default; temporary authorized collection only). **All release scenarios are reproduced in Appendix A.**
 
+## 9A. Risk-course discovery (Risk 1 / Risk 2) — [PROPOSED]
+
+Risk 1 (Riskettan) and Risk 2 (Risktvåan) — the mandatory Swedish risk courses (required for licences A1/A2/A and B per Transportstyrelsen) — are first-class offering types on the platform: **dated group sessions with capacity (seats), price, and location, per provider**. The student-facing surface takes the established aggregator pattern (körkortsjakten.se's dated-session listing) as UX inspiration only — its reservation mechanics are unverified and are not a contract here.
+
+**Provider eligibility gate (verified):** conducting risk training requires a **separate Transportstyrelsen permit** ("tillstånd att bedriva riskutbildning"), distinct from a traffic school permit, issued per licence category ([Transportstyrelsen — Bedriva riskutbildning](https://www.transportstyrelsen.se/sv/vagtrafik/korkort/foretag/forarutbildning-och-kunskapsprov/tillstand/riskutbildning/)). A risk-course session can be published **only** for a provider with stored evidence of the applicable permit for the session's licence category; publication without that evidence is blocked. **Licence category is a first-class session field (A or B); the founder decided on 26 Oct 2026: both categories (B + A) at launch — motorcycle risk training is included from day one.** Session capacity is school-declared within applicable regulatory bounds (e.g. max 16 participants per part-1 session; the platform records and displays capacity, it does not verify regulatory compliance).
+
+**Canonical rules:**
+
+- **Session fields (minimum):** course part (1 or 2), licence category (A or B), provider, venue/municipality, start/end with timezone, teaching language, capacity, publication status, and a school-approved price per participant (following the approved-price and checkout/snapshot contract — prices are approved values, and **remaining seats** are displays, not promises).
+- **Supply is consent- and eligibility-gated.** A session exists publicly only where the school published it or approved an ACQ-imported draft, **and** the provider-eligibility gate passed. Imported drafts never auto-publish; no synthetic listings in production; synthetic fixtures exist only in tests/staging.
+- **Publication approval is necessary but not sufficient — the authorization gates apply independently:** public times/availability require the applicable display authorization; requests require `request_to_book` and the E0–E3 checks; instant booking requires the transactional scope **and all applicable eligibility/capability checks, including E4** — not E4 alone. Withdrawal is scope-specific (§5).
+- **Group capacity (the new mechanism — explicit):** the initial release supports **one participant (one seat) per booking**. Pending requests consume no seats. For platform-controlled capacity: confirmed seats plus valid holds never exceed capacity; reservation and confirmation are atomic and idempotent; a shared class session never becomes exclusively unavailable merely because the first participant booked (group capacity is a capacity-aware conflict path, not the exclusive instructor/vehicle hold); release, expiry, and cancellation reconcile capacity **exactly once**. For `external_manual` sessions, recording acceptance does not establish an authoritative synchronized seat count — numeric availability is shown only with valid provenance/freshness; otherwise the page shows unknown availability and the request path.
+- **Session dates are not booking expiry.** Elapsed or cancelled sessions are historical records (preserved, with their bookings' lifecycle paths — SC-4); request and hold deadlines are separately defined per §6.2/§6.3; no manual-request TTL is implied by this section.
+- **Discovery.** `/riskettan/[city]` and `/risktvåan/[city]` pages following the existing `/trafikskola/[city]` route convention, localized through the app's existing i18n mechanism (no invented English URL slugs), server-rendered (SEO landing pages per the acquisition strategy), filterable by municipality and date.
+- **Booking.** Request-to-book by default (§6.5 — no integration required); instant booking only where the full instant gate (above) passes. `external_manual` follows §6.5 (the school records in its own system first).
+- **Ship dark.** Behind `RISK_COURSES`, default OFF; flag OFF hides the new public surfaces without removing existing-booking support.
+
+*Acceptance: SC-26, SC-27, SC-28.*
+
 ## 10. Market scalability
 
 A market = a country launch. Each market adds a **plugin, not a fork**: official-source verification matrix, e-ID broker rules, languages, currency, timezones, school-approved business-day calendars and cancellation rules. Launch gates [EXTERNAL per market]: register API access or documented manual verification route; e-ID broker terms; payment-provider coverage; language completeness (i18n parity test canonical); legal review of permit-disclosure routes. No market launches on invented access.
@@ -336,6 +355,10 @@ Implementation of the supply acquisition strategy. **Per-capability prerequisite
 - **ACQ-4 — Professional-category supply (product side).** Category-tagged offerings (A motorcycle, C truck, D bus, plus combinations) with category-specific policies and resource bundles; category landing pages. One approved active policy per listing remains the rule — category-specific policy selection applies per offering, and the booking snapshots the applicable policy immutably at creation. *Prerequisites: taxonomy/filters/draft offerings after Phase 1; active offerings, allocation, policy snapshots and bookings need Phase 2 services + E0–E4. Acceptance: SC-22.*
 - **ACQ-5 — Concierge onboarding tooling.** Draft prefill from public sources with provenance preserved; the school approves or corrects; publication requires school approval. *Acceptance: SC-25.*
 
+### Risk-course track (RC — Risk 1/2 discovery)
+
+- **RC-1 — Risk-course discovery.** Session-offering data model (course part, licence category, provider, venue, start/end, language, capacity, publication status, approved per-participant price), provider Transportstyrelsen permit-evidence gate, `/riskettan/[city]` + `/risktvåan/[city]` discovery pages, group-capacity conflict rules, booking per §6.5 with the independent authorization gates. Additive schema only; behind `RISK_COURSES` (default OFF). **[PROPOSED] — this track is not implemented; the build sequence above being complete does not cover it.** *Acceptance: SC-26…28.*
+
 Priority order: ACQ-1 (critical path for ACQ-4) → ACQ-3 → ACQ-2 → ACQ-4 → ACQ-5. **Review capacity is the throttle:** the funnel feeds the verification review queue; verification operations must scale with acquisition. Bounded execution per docs/acquisition-strategy.md §6: Cursor builds tools and drafts; sending outreach, bulk publication, spend, vendor contact, and production activation require separate explicit authorization.
 
 ## 14. Rollout posture
@@ -369,6 +392,9 @@ First-party adapters and outreach continue (16 vendors contacted 22 Oct 2026; on
 - **SC-23 (school-mediated instructors):** Given the instructor surfaces, when an instructor attempts to publish or sell independently, then it is refused — scope grants are never based solely on an instructor role (an instructor who separately qualifies as a verified school representative may act in that representative role); given a school invitation, when the instructor joins, then affiliation is verified, the listing is school-scoped, offerings cannot exceed the school's category permissions, and the instructor cannot grant scopes.
 - **SC-24 (lead dashboard):** Given a zero-scope directory school, when the dashboard is viewed by a user with verified school-role authorization, then permitted listing analytics and historical inquiries render with authorization prompts — but no new inquiries are collected without `inquiry_collection`, no booking surfaces render, and a lead converts to a booking only through the applicable booking permissions and eligibility checks, never merely a scope.
 - **SC-25 (concierge imports):** Given a concierge-prefilled listing, when the draft is stored, then provenance is preserved and it remains a draft requiring school approval — the tooling never manufactures policy approval, verification, or authorization.
+- **SC-26 (risk-course supply and eligibility consent):** Given an ACQ-imported or school-published risk-course draft session — including one whose provider lacks stored Transportstyrelsen risk-training permit evidence for the session's licence category — when it is stored, then it remains unpublished (a draft or an ineligible provider never reaches the public surface), no synthetic session appears in production, and with `RISK_COURSES` off the public surfaces are hidden without removing existing-booking support.
+- **SC-27 (risk-course honest discovery and scope-specific gating):** Given a school-published Risk 1 session with seats remaining, when the student views the municipality page, then dated sessions, remaining seats, and prices render per the approved values (a displayed seat is neither a hold nor a confirmation), and the action path follows the school's scopes independently — times/availability only with the display authorization, requests only with `request_to_book` and E0–E3, instant only with the transactional scope and all eligibility checks including E4; withdrawal is scope-specific (§5).
+- **SC-28 (risk-course group capacity):** Given a session with capacity N, when concurrent bookings attempt the last seat, then confirmed seats plus valid holds never exceed N, the winner is decided atomically, retries with the same idempotency key do not double-consume, release/expiry/cancellation reconciles capacity exactly once, a shared session never becomes exclusively unavailable after the first participant books, and an `external_manual` session shows unknown availability (not a synchronized seat count) unless valid provenance/freshness exists.
 
 ## Appendix A — Verification release scenarios (canonical)
 
@@ -428,11 +454,12 @@ All mutating endpoints take an `Idempotency-Key` header; responses scoped server
 | Pack specs/03 (booking engine, E0–E4, BK-1…21) | §4, §6 (BK series remains the pack's detailed test record; SC-1…17 here cover the consolidated rules) |
 | Pack specs/04 (verification, VF-a…j2) | §9 + **Appendix A** |
 | Pack specs/05 (connectors, CN-1…5) | §6.4, §7, §8 |
-| Pack specs/06 (UX journeys, UX-1…5) | §9 |
+| Pack specs/06 (UX journeys, UX-1…10) | §9, §9A |
 | Pack specs/07 (delivery plan) | §13 |
 | Pack specs/08 (API contracts, API-1…9) | §7 + **Appendix B** |
 | Connectivity Program Design v0.1 | §7, §8, §14 |
 | Acquisition strategy (docs/acquisition-strategy.md; plan v5 §9A + R12–R15) | §13 ACQ track, §15 SC-21…25 |
+| Körkortsjakten teardown (plan v3 Appendix A — /riskettan pages; UX inspiration only) + specs/06 §2B | §9A, §13 RC-1, §15 SC-26…28 |
 
 ## 17. Open questions (owner: founder unless noted)
 
@@ -443,6 +470,7 @@ All mutating endpoints take an `Idempotency-Key` header; responses scoped server
 5. Legal review of liability caps, SLA values, DPAs [EXTERNAL — counsel].
 6. Per-market register/e-ID access [EXTERNAL per market].
 7. Refund-commission policy (pro-rata vs clawback) — explicit commercial gate before Phase 2 implementation.
+8. ~~Risk-course launch scope~~ **RESOLVED 26 Oct 2026 (founder): B + A together at launch** — the licence-category field and per-category permit gate support both (§9A).
 
 ---
 

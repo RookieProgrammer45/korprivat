@@ -13,6 +13,7 @@
 | §7 Connectivity API | 05 + Connectivity Program Design v0.1 §4 |
 | §8 Partner lifecycle | 05 §3 + Program Design §5–§6 |
 | §9–§10 Domains, markets | 00, 04, 06 |
+| §9A Risk-course discovery [PROPOSED] | 06 §2B (UX-9…10) + Transportstyrelsen permit rules (verified Oct 2026) |
 | §11 Data model | 02 + live-repo entity verification |
 | §13 Build sequence | 07 (Phase 0 unchanged: repository discovery first) |
 | §15 SC-1…20 | 03 (BK), 04 (VF), 08 (API) consolidated |
