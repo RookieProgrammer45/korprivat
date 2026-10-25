@@ -159,8 +159,9 @@ export async function publishRiskCourseSession(input: {
   listingLocation: string;
 }) {
   if (!isRiskCoursesOn()) return { status: 404 as const, body: { error: { code: 'not_found' } } };
-  const permissions = db().teachingPermission
-    ? await db().teachingPermission.findMany({
+  const permissionsTable = db().teachingPermission;
+  const permissions = permissionsTable
+    ? await permissionsTable.findMany({
         where: { listingId: input.listingId, status: 'CURRENT' },
       })
     : [];
