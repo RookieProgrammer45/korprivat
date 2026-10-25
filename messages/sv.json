@@ -3472,5 +3472,24 @@
     "title": "{category}-utbildning",
     "body": "Utbud visas här bara när skolan har aktuell undervisningsbehörighet för kategorin. Sidan har ingen bokningsyta.",
     "empty": "Inget utbud i den här kategorin."
+  },
+  "riskCourses": {
+    "title": "{course} i {municipality}",
+    "course": {
+      "RISK_1": "Riskettan",
+      "RISK_2": "Risktvåan"
+    },
+    "lead": "Kommande grupptillfällen som skolan har publicerat eller godkänt. DriveLinkUp tar emot förfrågan.",
+    "honestSeats": "Kvarvarande platser och priser är visning, inte en reservation eller en bekräftelse.",
+    "empty": "Inga publicerade tillfällen i den här kommunen.",
+    "when": "{when}",
+    "price": "{price} kr",
+    "seats": "{count, plural, one {# plats visas} other {# platser visas}}",
+    "requestCta": "Skicka förfrågan",
+    "recipient": "Förfrågan sparas av DriveLinkUp och väntar på skolans granskning. Den reserverar inte en plats.",
+    "name": "Namn",
+    "email": "E-post",
+    "requestSaved": "Förfrågan sparad av DriveLinkUp; väntar på skolans granskning.",
+    "requestError": "Förfrågan kunde inte sparas."
   }
 }
