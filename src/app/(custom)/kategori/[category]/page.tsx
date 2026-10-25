@@ -9,9 +9,17 @@ import { listCategoryOfferings } from '@/lib/acquisition/category-offering-store
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}): Promise<Metadata> {
   const t = await getTranslations('categoryLanding');
-  return { title: t('title', { category: '' }), robots: { index: false, follow: false } };
+  const { category } = await params;
+  return {
+    title: t('title', { category: isOfferingCategory(category) ? category : '' }),
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function CategoryLandingPage({
