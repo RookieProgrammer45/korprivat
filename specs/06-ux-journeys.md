@@ -38,6 +38,15 @@ Filters: category, city, price, rating, availability, school-vs-independent, Eng
 
 **School withdrawal after submission:** if `request_to_book` is withdrawn or the relevant booking action is suspended, acceptance is blocked visibly; the UI does not invent a cancellation or confirmation transition, and existing confirmed bookings keep their cancel/refund/support lifecycle paths (SC-4) — withdrawal messaging must not imply otherwise.
 
+## 2B. Risk-course discovery (Risk 1 / Risk 2 — student journey)
+
+Server-rendered SEO landings, gated by `RISK_COURSES` (default OFF). Swedish paths `/riskettan/{municipality}` and `/risktvåan/{municipality}`; English `/risk-1/{municipality}` and `/risk-2/{municipality}`. Optional date filter. No client-only content. All strings through i18n (UX-2).
+
+1. **Discovery** — the page lists schools that **published or approved** upcoming dated sessions for that course type in the municipality. Unpublished ACQ drafts do not appear. Each row shows school identification, session date/time, location, **displayed** remaining seats, and price. Competitor directories that show the same facts with direct booking are a [VENDOR-REPORTED] reference for discoverability, not a DriveLinkUp capability claim.
+2. **Honest seat and price display** — remaining seats and prices are published facts. Copy states that a displayed seat is **neither a hold nor a confirmation**. A pending request does not change the displayed remaining count.
+3. **Request flow** — the CTA is request-to-book per §2A / spec 09 §6.5 (DriveLinkUp identified as recipient; no charge on submit; success copy is receipt-honest). Instant booking renders only where the school has a valid E4 control route and `transactional_booking`. Times shown require `availability_display` independently.
+4. **After submission** — pending, not a reservation. Expired sessions are never auto-rebooked. Withdrawal of `request_to_book` blocks acceptance visibly; confirmed bookings keep lifecycle paths (SC-4 / UX-8).
+
 ## 3. School onboarding (the verification-centric journey)
 
 ```
@@ -54,6 +63,7 @@ Filters: category, city, price, rating, availability, school-vs-independent, Eng
 
 - Review queue (admin console): not-found and ambiguous cases route to manual review — never silent rejection or silent permission (NN3).
 - Claim alignment (B2 fix): homepage and FAQ copy must match stored-evidence reality exactly; "Verifierad/auktoriserad" badges render only from stored evidence (date + method).
+- **Scope decision form (SC-21a):** after identity, mandate, and representative authority, the verified representative sees an explicit per-scope form. **Nothing is pre-selected.** Each of `availability_display`, `inquiry_collection`, `request_to_book`, `transactional_booking`, and `payment_collection` is an independent opt-in. A concierge draft never pre-fills a scope. Submit records `evidenceRef` and `decisionVersion` and is idempotent. Empty submit is refused (`no_scopes_selected`), not stored as a grant of zero.
 
 ## 4. School dashboard (scoping note)
 
@@ -108,3 +118,8 @@ Instrumentation for each metric is part of the phase that builds the surface (07
 - **UX-6 (student request journey):** Given a submitted request on an eligible offering, when the student views their bookings, then the request renders as `pending` (not a reservation; no resources held), cancellation is available while pending, the policy snapshot from creation is shown, no charge is presented on submission, and the success copy says the request was saved and awaits school review — implying nothing about delivery, review, or acceptance.
 - **UX-7 (school accept flow):** Given a pending request, when the school accepts, then the flow requires a school-scoped role, revalidates `request_to_book` and E0–E3, and requires a commitment route — for `external_manual` instructing the school to record the reservation in its own diary first; for native/allocation routes committing through the platform's conflict checks; with no route the request stays pending (SC-16) — and never implies the platform verified availability or that acceptance equals payment.
 - **UX-8 (withdrawal visible and scope-specific):** Given a school that withdrew `request_to_book` (or suspended the relevant booking action) after a request was submitted, when the school or student views the request, then acceptance is blocked and visibly so — never silently — while a withdrawal of `availability_display` or `inquiry_collection` does not block acceptance; the UI invents no cancellation or confirmation transition, and existing confirmed bookings keep their lifecycle paths (SC-4).
+- **UX-9 (risk-course landing):** Given `RISK_COURSES` on and at least one school-published or school-approved upcoming session in a municipality, when `/riskettan/{municipality}` or `/risktvåan/{municipality}` (and the English equivalents) is rendered, then the page is server-rendered with dated sessions, displayed remaining seats, and prices, and no raw i18n keys appear. Unpublished drafts are absent. Flag off → not found.
+- **UX-10 (honest seats and prices):** Given a risk-course landing row, when the student reads remaining seats and price, then the copy does not promise a hold or a confirmation, and submitting a request does not by itself decrement the displayed remaining seats.
+- **UX-11 (risk-course request):** Given an eligible published session, when the student submits a request, then the §2A request journey applies (recipient labeling, pending, no charge, no E4 required); instant booking is shown only with a valid E4 control route.
+- **UX-12 (risk-course withdrawal / no auto-rebook):** Given a pending risk-course request, when `request_to_book` is withdrawn, then acceptance is blocked visibly and an existing confirmed booking keeps cancel/refund/support; an expired session is never auto-rebooked.
+- **UX-13 (nothing pre-selected):** Given the representative scope-decision form, when it first renders, then every scope checkbox is unchecked, including when the listing already holds grants (history is shown separately); a concierge draft does not check any scope.
