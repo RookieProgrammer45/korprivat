@@ -48,3 +48,4 @@ lerna-debug.log*
 # Agent skill installs from Vercel integrations (local only)
 .agents/
 skills-lock.json
+data/school-prices/.cache/

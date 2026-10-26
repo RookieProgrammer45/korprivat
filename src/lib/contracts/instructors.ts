@@ -123,6 +123,31 @@ export const InstructorItem = z.object({
     )
     .max(5)
     .optional(),
+  // Prices read off the school's website (data/school-prices). Display only,
+  // labelled with their source and date; never a booking amount.
+  publishedPrices: z
+    .object({
+      lesson: z
+        .object({
+          priceSek: z.number().int().positive(),
+          minutes: z.number().int().positive().nullable(),
+        })
+        .nullable(),
+      risk1Sek: z.number().int().positive().nullable(),
+      risk2Sek: z.number().int().positive().nullable(),
+      packages: z.array(
+        z.object({
+          name: z.string(),
+          kind: z.enum(['package', 'intensive']),
+          lessons: z.number().int().positive().nullable(),
+          priceSek: z.number().int().positive(),
+        }),
+      ),
+      sourceUrl: z.string().nullable(),
+      collectedAt: z.string(),
+    })
+    .nullable()
+    .optional(),
   nextSlotAt: z.string().datetime().nullable(),
   // Cancellation-policy tier published on the instructor's profile.
   // Nullable on the storage column; nullable on the contract too so a
@@ -231,7 +256,7 @@ export const InstructorQuery = z
     lat: z.coerce.number().min(-90).max(90).optional(),
     lng: z.coerce.number().min(-180).max(180).optional(),
     nearKm: z.coerce.number().int().positive().max(20_000).optional(),
-    sort: z.enum(['distance', 'default']).optional(),
+    sort: z.enum(['distance', 'default', 'lessonPrice', 'packagePrice']).optional(),
     providerRole: ProviderRoleEnum.optional(),
     /** Marketplace affiliation filter — school Membership vs independent. */
     affiliation: z.enum(['school', 'independent', 'all']).optional(),
@@ -434,8 +459,12 @@ function parseInteger(raw: string | null | undefined): number | undefined {
   return n;
 }
 
-function parseSort(raw: string | null | undefined): 'distance' | 'default' | undefined {
-  if (raw === 'distance' || raw === 'default') return raw;
+function parseSort(
+  raw: string | null | undefined,
+): 'distance' | 'default' | 'lessonPrice' | 'packagePrice' | undefined {
+  if (raw === 'distance' || raw === 'default' || raw === 'lessonPrice' || raw === 'packagePrice') {
+    return raw;
+  }
   return undefined;
 }
 

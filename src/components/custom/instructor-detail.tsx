@@ -13,6 +13,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
 import { BookingPriceSummary } from '@/components/custom/booking-price-summary';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
+import { PublishedPriceList } from '@/components/custom/published-price';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -29,6 +30,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
   const [instructor, setInstructor] = useState<InstructorItem | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const tr = useTranslations('instructorDetail');
+  const trPrice = useTranslations('publishedPrice');
   const tAffiliation = useTranslations('instructorAffiliation');
   const locale = useLocale();
 
@@ -193,14 +195,26 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
                   ? formatSlotDate(instructor.nextSlotAt, locale)
                   : tr('availability.none')}
             </Fact>
-            <div className="min-w-0 sm:col-span-2">
-              <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {tr('hourlyRate')}
-              </dt>
-              <dd className="mt-1 break-words font-display text-h2 font-semibold tracking-tight text-foreground">
-                {formatSek(instructor.hourlyRateSek, locale, tr('rateSuffix'))}
-              </dd>
-            </div>
+            {instructor.hourlyRateSek > 0 && !instructor.publishedPrices?.lesson ? (
+              <div className="min-w-0 sm:col-span-2">
+                <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  {tr('hourlyRate')}
+                </dt>
+                <dd className="mt-1 break-words font-display text-h2 font-normal tracking-tight text-foreground">
+                  {formatSek(instructor.hourlyRateSek, locale, tr('rateSuffix'))}
+                </dd>
+              </div>
+            ) : null}
+            {instructor.publishedPrices ? (
+              <div className="min-w-0 sm:col-span-2">
+                <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  {trPrice('heading')}
+                </dt>
+                <dd className="mt-2">
+                  <PublishedPriceList prices={instructor.publishedPrices} showSourceLink />
+                </dd>
+              </div>
+            ) : null}
           </dl>
 
           {instructor.canCollectPayment === false || instructor.surfaces?.directoryOnly ? null : (

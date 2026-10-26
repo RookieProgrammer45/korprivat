@@ -7,6 +7,7 @@ import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'rea
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { categoryChipLabel, SchoolMark } from '@/components/custom/instructor-preview';
 import { MAX_COMPARISON_ITEMS, ProviderComparison } from '@/components/custom/provider-comparison';
+import { PublishedLessonPrice, PublishedPackageFrom } from '@/components/custom/published-price';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -36,7 +37,7 @@ import {
 } from '@/lib/contracts/instructors';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
-type SortMode = 'default' | 'distance';
+type SortMode = 'default' | 'distance' | 'lessonPrice' | 'packagePrice';
 
 // Local mirror of the typed filter spec, derived from URL state. The island
 // also keeps a parallel `initialCities` array so the city dropdown is populated
@@ -319,7 +320,12 @@ export function InstructorDirectory({
           onAffiliationChange={(value) => updateFilters({ affiliation: value })}
           onLocationRequest={onLocationRequest}
           onClearGeolocation={() =>
-            updateFilters({ lat: null, lng: null, sort: 'default', nearKm: '' })
+            updateFilters({
+              lat: null,
+              lng: null,
+              sort: filters.sort === 'distance' ? 'default' : filters.sort,
+              nearKm: '',
+            })
           }
         />
 
@@ -638,15 +644,15 @@ function FilterBar({
               <Label htmlFor="sort-select">{tr('sortLabel')}</Label>
               <Select
                 value={filters.sort}
-                onValueChange={(value) =>
-                  onSortChange(value === 'distance' ? 'distance' : 'default')
-                }
+                onValueChange={(value) => onSortChange(toSortMode(value))}
               >
                 <SelectTrigger id="sort-select" className="bg-background">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="default">{tr('sortNewest')}</SelectItem>
+                  <SelectItem value="lessonPrice">{tr('sortLessonPrice')}</SelectItem>
+                  <SelectItem value="packagePrice">{tr('sortPackagePrice')}</SelectItem>
                   <SelectItem value="distance" disabled={!hasLocation}>
                     {tr('sortNearest')}
                   </SelectItem>
@@ -817,12 +823,14 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               </div>
             </div>
           </div>
-          {row.hourlyRateSek > 0 ? (
+          {row.hourlyRateSek > 0 && !row.publishedPrices?.lesson ? (
             <p className="dlu-school-price">
               {formatSek(row.hourlyRateSek, locale, tr('rateSuffixShort'))}
             </p>
           ) : null}
         </div>
+        {row.publishedPrices?.lesson ? <PublishedLessonPrice prices={row.publishedPrices} /> : null}
+        {row.publishedPrices ? <PublishedPackageFrom prices={row.publishedPrices} /> : null}
         {showBookingMode && bookingModeLabel ? (
           <p className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
             <span
@@ -1010,12 +1018,18 @@ function buildQueryString(filters: Filters): string {
   if (typeof filters.nearKm === 'number' && Number.isFinite(filters.nearKm)) {
     params.set('nearKm', String(filters.nearKm));
   }
-  if (filters.sort === 'distance') params.set('sort', 'distance');
+  if (filters.sort !== 'default') params.set('sort', filters.sort);
   if (filters.providerRole) params.set('providerRole', filters.providerRole);
   if (filters.affiliation === 'school' || filters.affiliation === 'independent') {
     params.set('affiliation', filters.affiliation);
   }
   return params.toString();
+}
+
+function toSortMode(value: string | undefined): SortMode {
+  return value === 'distance' || value === 'lessonPrice' || value === 'packagePrice'
+    ? value
+    : 'default';
 }
 
 function normaliseFromUrl(q: InstructorQuery): Filters {
@@ -1030,7 +1044,7 @@ function normaliseFromUrl(q: InstructorQuery): Filters {
     lat: typeof q.lat === 'number' ? q.lat : null,
     lng: typeof q.lng === 'number' ? q.lng : null,
     nearKm: typeof q.nearKm === 'number' ? q.nearKm : '',
-    sort: q.sort === 'distance' ? 'distance' : 'default',
+    sort: toSortMode(q.sort),
     providerRole: q.providerRole ?? '',
     affiliation: q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
   };
@@ -1075,7 +1089,7 @@ function hasActiveFilter(f: Filters): boolean {
     f.lat != null ||
     f.lng != null ||
     f.nearKm !== '' ||
-    f.sort === 'distance' ||
+    f.sort !== 'default' ||
     f.providerRole !== '' ||
     f.affiliation === 'school' ||
     f.affiliation === 'independent'

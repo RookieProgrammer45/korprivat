@@ -162,7 +162,8 @@ export async function GET(req: NextRequest) {
   // aggregate, slot and payment loads; otherwise we cut after filtering.
   const limit = parseLimit(req.nextUrl.searchParams.get('limit'));
   const minRating = q.minRating;
-  const cutEarly = limit != null && minRating == null && q.availability === undefined;
+  const priceSort = q.sort === 'lessonPrice' || q.sort === 'packagePrice';
+  const cutEarly = limit != null && minRating == null && q.availability === undefined && !priceSort;
   const candidateRows = cutEarly ? prunedRows.slice(0, limit) : prunedRows;
 
   // Load review aggregates once for the candidate rows. A minimum-rating
@@ -227,7 +228,7 @@ export async function GET(req: NextRequest) {
       const availableIds = new Set(matchingSlots.map((slot) => slot.instructorId));
       filteredRows = ratedRows.filter(({ row }) => availableIds.has(row.id));
     }
-    if (limit != null) filteredRows = filteredRows.slice(0, limit);
+    if (limit != null && !priceSort) filteredRows = filteredRows.slice(0, limit);
 
     for (const row of matchingSlots) {
       if (!nextSlotByInstructor.has(row.instructorId)) {
@@ -246,7 +247,7 @@ export async function GET(req: NextRequest) {
       providerRole: row.providerRole,
     })),
   );
-  const items = filteredRows.map(({ row, distanceKm }) => {
+  const unsortedItems = filteredRows.map(({ row, distanceKm }) => {
     const canCollectPayment = paymentByListing.get(row.id) === true;
     const surfaces = maskSurfacesForPayment(surfacesFor(row), canCollectPayment);
     const nextSlotAt = surfaces.availabilityDisplay
@@ -269,6 +270,12 @@ export async function GET(req: NextRequest) {
         : {}),
     };
   });
+  const items = priceSort
+    ? sortByPrice(unsortedItems, q.sort === 'packagePrice' ? 'package' : 'lesson').slice(
+        0,
+        limit ?? undefined,
+      )
+    : unsortedItems;
 
   const cityDelegate = (
     prisma as unknown as {
@@ -538,6 +545,36 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
   }
 
   return { AND: clauses };
+}
+
+type PricedItem = {
+  name: string;
+  hourlyRateSek: number;
+  publishedPrices: {
+    lesson: { priceSek: number } | null;
+    packages: Array<{ priceSek: number }>;
+  } | null;
+};
+
+// Cheapest first; listings without the price sort last, then by name.
+function sortByPrice<T extends PricedItem>(items: T[], by: 'lesson' | 'package'): T[] {
+  const key = (item: T): number => {
+    if (by === 'lesson') {
+      const website = item.publishedPrices?.lesson?.priceSek;
+      if (website) return website;
+      return item.hourlyRateSek > 0 ? item.hourlyRateSek : Number.POSITIVE_INFINITY;
+    }
+    const packages = item.publishedPrices?.packages ?? [];
+    return packages.length > 0
+      ? Math.min(...packages.map((pack) => pack.priceSek))
+      : Number.POSITIVE_INFINITY;
+  };
+  return [...items].sort((a, b) => {
+    const difference = key(a) - key(b);
+    if (Number.isFinite(difference) && difference !== 0) return difference;
+    if (key(a) !== key(b)) return Number.isFinite(key(a)) ? -1 : 1;
+    return a.name.localeCompare(b.name, 'sv');
+  });
 }
 
 function parseLimit(raw: string | null): number | null {

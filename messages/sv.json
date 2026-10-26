@@ -539,6 +539,8 @@
     "sortLabel": "Sortering",
     "sortNewest": "Standardordning",
     "sortNearest": "Närmast först",
+    "sortLessonPrice": "Lektionspris, billigast först",
+    "sortPackagePrice": "Paketpris, billigast först",
     "distancePill": "{km} km",
     "clearGeolocation": "Rensa plats",
     "profileCta": "Visa profil",
@@ -3593,5 +3595,19 @@
     "email": "E-post",
     "requestSaved": "Förfrågan sparad av DriveLinkUp; väntar på skolans granskning.",
     "requestError": "Förfrågan kunde inte sparas."
+  },
+  "publishedPrice": {
+    "amount": "{amount} kr",
+    "minutes": "{minutes} min",
+    "source": "Från skolans webbplats, {date}.",
+    "sourceLink": "Se prislistan",
+    "packageFrom": "Paket från {amount} kr",
+    "lesson": "Körlektion",
+    "risk1": "Riskettan",
+    "risk2": "Risktvåan (halkbana)",
+    "package": "Paket",
+    "intensive": "Intensivkurs",
+    "lessons": "{count, plural, one {# lektion} other {# lektioner}}",
+    "heading": "Priser"
   }
 }

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
+import { PublishedPriceList } from '@/components/custom/published-price';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,6 +23,7 @@ export function ProviderComparison({
   onClear: () => void;
 }) {
   const t = useTranslations('instructorDirectory.comparison');
+  const tPrice = useTranslations('publishedPrice');
   const locale = useLocale();
 
   if (providers.length === 0) return null;
@@ -72,10 +74,18 @@ export function ProviderComparison({
                     .join(' · ')}
                 />
                 <Fact label={t('serviceArea')} value={provider.serviceArea} />
-                <Fact
-                  label={t('rate')}
-                  value={t('rateValue', { amount: formatSek(provider.hourlyRateSek, locale) })}
-                />
+                {provider.hourlyRateSek > 0 && !provider.publishedPrices?.lesson ? (
+                  <Fact
+                    label={t('rate')}
+                    value={t('rateValue', { amount: formatSek(provider.hourlyRateSek, locale) })}
+                  />
+                ) : null}
+                {provider.publishedPrices ? (
+                  <PublishedPricesFact
+                    label={tPrice('heading')}
+                    prices={provider.publishedPrices}
+                  />
+                ) : null}
                 {provider.surfaces?.availabilityDisplay && provider.nextSlotAt ? (
                   <Fact label={t('availability')} value={formatDate(provider.nextSlotAt, locale)} />
                 ) : null}
@@ -123,6 +133,23 @@ function Fact({ label, value }: { label: string; value: string }) {
     <div className="grid gap-0.5 border-b border-border/70 pb-2 last:border-b-0 last:pb-0">
       <dt className="text-caption uppercase tracking-[0.1em] text-muted-foreground">{label}</dt>
       <dd className="break-words font-medium text-foreground">{value}</dd>
+    </div>
+  );
+}
+
+function PublishedPricesFact({
+  label,
+  prices,
+}: {
+  label: string;
+  prices: NonNullable<InstructorFilteredItem['publishedPrices']>;
+}) {
+  return (
+    <div className="grid gap-1 border-b border-border/70 pb-2 last:border-b-0 last:pb-0">
+      <dt className="text-caption uppercase tracking-[0.1em] text-muted-foreground">{label}</dt>
+      <dd className="min-w-0">
+        <PublishedPriceList prices={prices} />
+      </dd>
     </div>
   );
 }

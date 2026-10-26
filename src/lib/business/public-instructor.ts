@@ -1,6 +1,7 @@
 import 'server-only';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { publishedPrices } from '@/lib/discovery/published-prices';
 import { resolveSchoolContact } from '@/lib/discovery/school-contact';
 
 export type PublicGoogleReview = {
@@ -175,6 +176,7 @@ export function toPublicInstructor(
     googleReviewCount: row.googleReviewCount ?? null,
     googleMapsUri: row.googleMapsUri ?? null,
     googleReviews: aggregate.googleReviews ?? [],
+    publishedPrices: publishedPrices(row.id),
     nextSlotAt,
     cancellationPolicyTier:
       row.cancellationPolicyTier === 'moderate' || row.cancellationPolicyTier === 'strict'

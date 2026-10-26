@@ -5,6 +5,7 @@ import { BookingForm } from '@/components/custom/booking-form';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
+import { publishedPrices } from '@/lib/discovery/published-prices';
 import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
 import {
   loadInstructorPaymentEligibility,
@@ -26,6 +27,10 @@ type PageProps = {
   }>;
 };
 
+function publicLessonRate(instructor: { id: string; hourlyRateSek: number }): number {
+  return publishedPrices(instructor.id)?.lesson?.priceSek ?? instructor.hourlyRateSek;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const resolved = await loadPublicInstructorBySchoolSlug(slug);
@@ -40,13 +45,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { instructor, canonicalPath } = resolved;
   const path = canonicalPath;
   const title = `${instructor.name} — ${instructor.city} | DriveLinkUp`;
+  const rate = publicLessonRate(instructor);
   const description =
     instructor.bio?.trim().slice(0, 155) ||
-    t('descriptionNamed', {
-      name: instructor.name,
-      city: instructor.city,
-      rate: instructor.hourlyRateSek,
-    });
+    (rate > 0
+      ? t('descriptionNamed', { name: instructor.name, city: instructor.city, rate })
+      : t('description'));
   return {
     title,
     description,
@@ -95,8 +99,8 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
           addressCountry: 'SE',
         },
         priceRange:
-          resolved.instructor.hourlyRateSek > 0
-            ? `${resolved.instructor.hourlyRateSek} SEK`
+          publicLessonRate(resolved.instructor) > 0
+            ? `${publicLessonRate(resolved.instructor)} SEK`
             : undefined,
         areaServed: resolved.instructor.city,
         knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],

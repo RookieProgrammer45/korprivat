@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
+import { PublishedLessonPrice } from '@/components/custom/published-price';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -134,7 +135,11 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
               {row.name}
             </h3>
           </div>
-          {price ? <p className="dlu-school-price">{price}</p> : null}
+          {row.publishedPrices?.lesson ? (
+            <PublishedLessonPrice prices={row.publishedPrices} />
+          ) : price ? (
+            <p className="dlu-school-price">{price}</p>
+          ) : null}
           <div className="mt-auto flex flex-wrap gap-2">
             {row.categories.map((category) => (
               <span key={category} className="dlu-chip">

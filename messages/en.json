@@ -539,6 +539,8 @@
     "sortLabel": "Sort order",
     "sortNewest": "Standard order",
     "sortNearest": "Nearest first",
+    "sortLessonPrice": "Lesson price, cheapest first",
+    "sortPackagePrice": "Package price, cheapest first",
     "distancePill": "{km} km away",
     "clearGeolocation": "Clear location",
     "profileCta": "View profile",
@@ -3593,5 +3595,19 @@
     "email": "Email",
     "requestSaved": "Request saved by DriveLinkUp; awaiting school review.",
     "requestError": "The request could not be saved."
+  },
+  "publishedPrice": {
+    "amount": "SEK {amount}",
+    "minutes": "{minutes} min",
+    "source": "From the school’s website, {date}.",
+    "sourceLink": "See the price list",
+    "packageFrom": "Packages from SEK {amount}",
+    "lesson": "Driving lesson",
+    "risk1": "Risk 1",
+    "risk2": "Risk 2 (skid pan)",
+    "package": "Package",
+    "intensive": "Intensive course",
+    "lessons": "{count, plural, one {# lesson} other {# lessons}}",
+    "heading": "Prices"
   }
 }
