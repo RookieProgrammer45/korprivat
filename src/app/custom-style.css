@@ -1508,6 +1508,67 @@ html.dark .dlu-arrow-note {
   background: radial-gradient(closest-side, rgba(19, 19, 18, 0.06), transparent);
 }
 
+.auth-visual-slide {
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-visual-slide.is-active {
+  opacity: 1;
+}
+
+.auth-visual-caption {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 3.5rem;
+  z-index: 1;
+  margin: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 8px rgba(19, 19, 18, 0.45);
+}
+
+.auth-visual-dots {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.auth-visual-dot {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.auth-visual-dot::after {
+  content: '';
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: auto;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.auth-visual-dot.is-on::after {
+  background: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-visual-slide {
+    transition: none;
+  }
+}
+
 /* --- auth shell: övningskör carousel aside -------------------------------- */
 
 .auth-shell-art {
@@ -1913,7 +1974,8 @@ html .dlu-slot b {
   .auth-shell-grid.auth-shell-grid {
     flex-direction: row;
   }
-  .auth-shell-art.auth-shell-art {
+  .auth-shell-art.auth-shell-art,
+  .auth-visual.auth-visual {
     order: 2;
   }
   .auth-shell-grid.auth-shell-grid > div:first-child {
@@ -2283,12 +2345,72 @@ html.dark .dlu-footer-cta {
     0 24px 48px -20px rgb(19 19 18 / 0.22);
 }
 
+.dlu-hero-in-1 {
+  animation-delay: 40ms;
+}
+
+.dlu-hero-in-2 {
+  animation-delay: 120ms;
+}
+
+.dlu-hero-in-3 {
+  animation-delay: 200ms;
+}
+
+.dlu-hero-in-visual {
+  animation-delay: 160ms;
+}
+
+.dlu-hero-search {
+  transition:
+    transform 200ms var(--ease-out-expo),
+    box-shadow 200ms var(--ease-out-expo);
+}
+
+.dlu-hero-search:hover,
+.dlu-hero-search:focus-within {
+  transform: translateY(-2px);
+}
+
+.dlu-hero .dlu-ink-pill {
+  transition:
+    transform 160ms var(--ease-out-expo),
+    opacity 160ms var(--ease-out-expo);
+}
+
+.dlu-hero .dlu-ink-pill:active {
+  transform: scale(0.98);
+}
+
+.dlu-hero-popular-link {
+  transition:
+    transform 200ms var(--ease-out-expo),
+    box-shadow 200ms var(--ease-out-expo),
+    border-color 200ms var(--ease-out-expo);
+}
+
+.dlu-hero-popular-link:hover {
+  transform: translateY(-2px);
+  border-color: rgb(19 19 18 / 0.25);
+  box-shadow: 0 8px 20px -14px rgb(19 19 18 / 0.28);
+}
+
+@keyframes hero-photo-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 .dlu-hero-select option {
   color: var(--foreground);
   background-color: var(--card);
 }
 
 .dlu-hero-visual img {
+  animation: hero-photo-settle 18s var(--ease-out-expo) both;
   transition: transform 1.2s var(--ease-out-expo);
 }
 
@@ -2321,7 +2443,8 @@ html.dark .dlu-footer-cta {
 }
 
 .dlu-hero-visual:hover img {
-  transform: scale(1.015);
+  animation: none;
+  transform: scale(1.03);
 }
 
 .dlu-hero-chip {
@@ -2340,7 +2463,10 @@ html.dark .dlu-hero-visual img {
 
 @media (prefers-reduced-motion: reduce) {
   .dlu-hero-visual img,
-  .dlu-hero-chip {
+  .dlu-hero-chip,
+  .dlu-hero-search,
+  .dlu-hero-popular-link,
+  .dlu-hero .marketplace-reveal {
     animation: none !important;
     transition: none !important;
     transform: none !important;

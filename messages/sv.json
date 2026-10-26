@@ -914,6 +914,13 @@
     "divider": {
       "or": "eller"
     },
+    "visual": {
+      "label": "Körlektioner",
+      "role": "karusell",
+      "goTo": "Visa bild {n}",
+      "lessonAlt": "En förare håller ratten i skymning",
+      "schoolAlt": "{name} i {city}"
+    },
     "signIn": {
       "title": "Logga in",
       "subtitle": "Välkommen tillbaka till DriveLinkUp.",

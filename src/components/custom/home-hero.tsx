@@ -52,15 +52,15 @@ export function HomeHero() {
   return (
     <section className="marketplace-hero dlu-hero border-b border-border">
       <div className="container-page grid items-center gap-10 pt-12 pb-10 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20 lg:pb-14">
-        <div className="marketplace-reveal flex min-w-0 flex-col">
-          <h1 className="marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]">
+        <div className="dlu-hero-copy flex min-w-0 flex-col">
+          <h1 className="marketplace-reveal dlu-hero-in-1 marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]">
             {t('title')}
           </h1>
 
           <form
             onSubmit={onSubmit}
             aria-label={t('search.label')}
-            className="dlu-hero-search mt-8 grid w-full max-w-2xl gap-1 rounded-[1.25rem] border border-border bg-card p-2 sm:grid-cols-[1fr_1.25fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
+            className="marketplace-reveal dlu-hero-in-2 dlu-hero-search mt-8 grid w-full max-w-2xl gap-1 rounded-[1.25rem] border border-border bg-card p-2 sm:grid-cols-[1fr_1.25fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
           >
             <SearchField
               id={categoryId}
@@ -101,20 +101,20 @@ export function HomeHero() {
             </button>
           </form>
 
-          <div className="mt-5 flex min-w-0 flex-wrap items-center gap-2 text-sm">
+          <div className="marketplace-reveal dlu-hero-in-3 mt-5 flex min-w-0 flex-wrap items-center gap-2 text-sm">
             <span className="mr-1 text-muted-foreground">{t('popular.label')}</span>
             {POPULAR_LINKS.map((link) => (
               <Link
                 key={link.key}
                 href={link.href}
-                className="inline-flex min-h-11 items-center rounded-full border border-border bg-card px-4 text-foreground transition-colors hover:border-foreground/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                className="dlu-hero-popular-link inline-flex min-h-11 items-center rounded-full border border-border bg-card px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               >
                 {t(`popular.links.${link.key}`)}
               </Link>
             ))}
           </div>
         </div>
-        <aside className="dlu-hero-visual relative hidden min-h-[28rem] overflow-hidden rounded-[1.25rem] border border-border lg:block lg:min-h-[32rem]">
+        <aside className="marketplace-reveal dlu-hero-in-visual dlu-hero-visual relative hidden min-h-[28rem] overflow-hidden rounded-[1.25rem] border border-border lg:block lg:min-h-[32rem]">
           <Image
             src="/images/hero-lesson.jpg"
             alt={t('imageAlt')}

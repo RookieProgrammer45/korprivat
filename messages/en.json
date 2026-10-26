@@ -914,6 +914,13 @@
     "divider": {
       "or": "or"
     },
+    "visual": {
+      "label": "Driving lessons",
+      "role": "carousel",
+      "goTo": "Show photo {n}",
+      "lessonAlt": "A driver holding the steering wheel on a dusk road",
+      "schoolAlt": "{name} in {city}"
+    },
     "signIn": {
       "title": "Log in",
       "subtitle": "Welcome back to DriveLinkUp.",
