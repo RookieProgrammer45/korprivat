@@ -138,6 +138,17 @@ override.
 4. If the task isn't covered by a spec or ADR, stop and ask — don't invent.
 5. After writing, run `npm run typecheck && npm test` and fix failures.
 
+## UI and design
+
+- Every UI change follows `.cursor/rules/design-system.mdc` (auto-attached for
+  `src/app/**`, `src/components/**` and the CSS files). Product honesty rules in
+  `.cursor/rules/drivelinkup.mdc` win on conflict.
+- Reference implementation: `src/components/custom/home-hero.tsx`.
+- Workflow: `/design-plan` (Plan mode, writes `tasks/design-plan.md`) →
+  `/design-apply <task>` (Agent mode, one section per run). Commands live in
+  `.cursor/commands/`.
+- Visual references come from the Mobbin MCP (`.cursor/mcp.json`).
+
 ## Never
 
 - Never trust a client-provided DOB, role, price, or fee split.
