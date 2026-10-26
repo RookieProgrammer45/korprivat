@@ -1,11 +1,11 @@
 {
   "note": "Catalogue listings hidden from the public site because the school publishes no usable price on its own website (rule: src/lib/discovery/published-prices.ts). Rows stay in the database; a listing reappears once the price dataset has a website price for it.",
   "generatedAt": "2026-10-26",
-  "total": 164,
+  "total": 155,
   "byReason": {
     "SITE_BLOCKED": 29,
     "NOT_IN_DATASET": 54,
-    "PRICE_NOT_PUBLISHED": 64,
+    "PRICE_NOT_PUBLISHED": 55,
     "NO_WEBSITE": 12,
     "NOT_A_B_SCHOOL_SITE": 2,
     "SITE_UNREACHABLE": 3
@@ -30,16 +30,6 @@
       "website": null,
       "hasContactEmail": false,
       "storedRateSek": 995
-    },
-    {
-      "listingId": "16f9ca95-b54f-4bdc-9d58-d8ee02f9069a",
-      "name": "Yrkestrafikskolan Dalarna AB",
-      "city": "Borlänge",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://ytsdalarna.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
     },
     {
       "listingId": "cffb8174-c35d-49ff-828a-1f9fc9545ff8",
@@ -130,16 +120,6 @@
       "website": "https://naringslivetfalkenberg.se",
       "hasContactEmail": false,
       "storedRateSek": 1460
-    },
-    {
-      "listingId": "111a24d3-b85b-41c2-8fca-2b2416976962",
-      "name": "YrkesAkademin",
-      "city": "Falkenberg",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://ya.se",
-      "hasContactEmail": true,
-      "storedRateSek": null
     },
     {
       "listingId": "727c4b4f-0187-4f38-8fff-16c05f90f63b",
@@ -482,36 +462,6 @@
       "storedRateSek": 1500
     },
     {
-      "listingId": "3d979f7a-d215-4a14-acaf-4bd17e42cd1b",
-      "name": "EDU Gruppen i Sverige AB",
-      "city": "Kalix",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://edugruppen.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "4ccbe7fc-c8a3-49ce-ac92-d36e5ed98a1e",
-      "name": "On Via Kalmar Trafikskola",
-      "city": "Kalmar",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://syab.se",
-      "hasContactEmail": false,
-      "storedRateSek": 1995
-    },
-    {
-      "listingId": "5f66018a-f2d2-46d6-a840-00d2b55692c9",
-      "name": "On Via Trafikskola AB",
-      "city": "Kalmar",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://syab.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "ec899134-197d-425c-bb86-e3a3d4ed9cbc",
       "name": "Widéns Åkeri",
       "city": "Kalmar",
@@ -772,16 +722,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "73ae2c5f-949d-433e-8d34-7ea8b38d4752",
-      "name": "Yrkeskompetens",
-      "city": "Lund",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://ykskane.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "74c814b5-38c4-496b-9478-e519bb9ac929",
       "name": "Kaspersson & Odell Trafikskola AB",
       "city": "Lysekil",
@@ -969,16 +909,6 @@
       "reasonText": "Website does not publish prices",
       "website": "https://martenstrafikskola.se",
       "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "8a2ccc75-fa87-4bc4-bdec-b9179f6dc276",
-      "name": "Blommenhof Utbildning AB",
-      "city": "Nyköping",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://blommenhofutbildning.se",
-      "hasContactEmail": false,
       "storedRateSek": null
     },
     {
@@ -1272,16 +1202,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "550f35a2-66b3-4293-9004-8c92f22ebf28",
-      "name": "MT Bokföring & Utbildning AB",
-      "city": "Täby",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://mt-utbildning.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "8c6a983e-5a7f-4a58-bf32-edf0eab56ef1",
       "name": "Grönlunds Yrkesutbildningar AB Uddevalla",
       "city": "Uddevalla",
@@ -1298,16 +1218,6 @@
       "reason": "NOT_IN_DATASET",
       "reasonText": "Not matched to a school in the price dataset",
       "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "138525e6-42bf-474f-873b-2a19843be4c3",
-      "name": "Utbildarna Väst AB",
-      "city": "Uddevalla",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://utbildarnavast.se",
       "hasContactEmail": false,
       "storedRateSek": null
     },
