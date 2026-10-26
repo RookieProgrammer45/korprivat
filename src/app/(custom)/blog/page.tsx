@@ -13,6 +13,11 @@ import { getTranslations } from 'next-intl/server';
 
 const POSTS = [
   {
+    slug: 'kunskapsprov-korkort-b',
+    index: '5',
+    minutes: 8,
+  },
+  {
     slug: 'korkort-b-steg-for-steg',
     index: '4',
     minutes: 7,

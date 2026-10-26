@@ -57,6 +57,8 @@ export const llmsConfig: LlmsConfig = {
     '/blog': 'Guides for learners: costs, handledare, and choosing a traffic school in Sweden.',
     '/blog/korkort-b-steg-for-steg':
       'Swedish guide to category B: learner permit, risk education, theory test, driving test, and how to compare published school prices.',
+    '/blog/kunskapsprov-korkort-b':
+      'Swedish guide to the category B theory test at Trafikverket: learner permit, risk education, scoring, validity, and published school prices.',
     '/om-oss':
       'About DriveLinkUp: a catalog of driving schools. Published prices are visible on the listing. Instructors teach through a school. Founded in Stockholm in 2026.',
     '/terms':

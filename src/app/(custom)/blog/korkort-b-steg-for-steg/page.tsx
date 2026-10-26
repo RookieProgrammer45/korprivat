@@ -102,7 +102,12 @@ export default function KorkortBStegForStegPage() {
             </p>
             <p>
               Det finns inget fast antal studietimmar. Det som räknas är att du kan reglerna när du
-              sitter i provlokalen, inte hur många böcker du har köpt.
+              sitter i provlokalen, inte hur många böcker du har köpt. Hur provet är uppbyggt och
+              hur länge ett godkänt resultat gäller står i{' '}
+              <Link className="underline underline-offset-4" href="/blog/kunskapsprov-korkort-b">
+                guiden om kunskapsprovet
+              </Link>
+              .
             </p>
           </section>
           <section className="grid gap-3">
