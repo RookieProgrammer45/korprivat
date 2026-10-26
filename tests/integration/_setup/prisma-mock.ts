@@ -227,6 +227,17 @@ const prisma = vi.hoisted(() => {
         }),
       ),
     },
+    googleReview: {
+      findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
+      findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),
+      findMany: vi.fn(async (_args?: unknown): Promise<unknown> => []),
+      create: vi.fn(
+        async (args: unknown): Promise<unknown> => ({
+          id: 'mock_created',
+          ...((args as object) ?? {}),
+        }),
+      ),
+    },
     instructorLicense: {
       findUnique: vi.fn(async (_args?: unknown): Promise<unknown> => null),
       findFirst: vi.fn(async (_args?: unknown): Promise<unknown> => null),

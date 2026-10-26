@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { BookingForm } from '@/components/custom/booking-form';
-import { GoogleReviewsSection } from '@/components/custom/google-reviews-section';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
@@ -134,7 +133,6 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
             requestEnabled={surfaces.inquiryCollection}
           />
           <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
-          <GoogleReviewsSection instructorId={instructorId} />
         </div>
         {showBooking ? (
           <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">

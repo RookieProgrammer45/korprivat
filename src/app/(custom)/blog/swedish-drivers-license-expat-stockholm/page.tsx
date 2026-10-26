@@ -51,7 +51,7 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
               A Swedish category B licence normally involves a learner&apos;s permit from
               Transportstyrelsen, risk education, theory preparation and a practical driving test
               through Trafikverket. Requirements depend on your situation, so check current official
-              guidance before booking.
+              guidance before you start.
             </p>
             <p>
               Driving schools help learners build practical skills. If you also practise privately,
@@ -63,30 +63,23 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
             <h2 className="font-display text-h2 leading-tight">Compare the details that matter</h2>
             <p>
               Stockholm has different lesson formats, languages, locations and calendars. Use
-              DriveLinkUp to compare driving-school listings by licence category, published
-              price, availability, language and cancellation policy. The school controls what it
-              publishes, so confirm remaining questions before the lesson.
+              DriveLinkUp to compare driving-school listings by licence category, published price
+              and language. The school controls what it publishes.
             </p>
             <ol className="ml-6 list-decimal space-y-2">
               <li>Choose the licence category and Stockholm area that fit your plan.</li>
-              <li>Compare school prices, languages, open slots and booking policies.</li>
-              <li>Book the school and time that fit; the school price is your learner total.</li>
+              <li>Compare school prices and languages.</li>
+              <li>Contact the school.</li>
             </ol>
           </section>
           <section className="grid gap-3">
-            <h2 className="font-display text-h2 leading-tight">
-              What booking costs on DriveLinkUp
-            </h2>
+            <h2 className="font-display text-h2 leading-tight">What a listing shows</h2>
             <p>
-              Learners can discover and compare listings for free. DriveLinkUp adds no
-              learner fee. The school&apos;s published price is the figure on the listing.
-              Lessons are arranged with the school.
+              Learners can discover and compare listings for free. DriveLinkUp adds no learner fee.
+              The school&apos;s published price is the figure on the listing. Lessons are arranged
+              with the school.
             </p>
-            <p>
-              This explains the marketplace relationship; it does not promise booking volume, lesson
-              outcomes or settlement timing. Cancellation terms remain the policy shown on the
-              school listing and saved with the booking.
-            </p>
+            <p>Ask the school about times, the car and cancellation.</p>
           </section>
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">A useful Stockholm checklist</h2>

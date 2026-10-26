@@ -209,6 +209,14 @@ export function ReviewSection({
     }
   });
 
+  const hideEmptyNativeList =
+    list.kind === 'empty' &&
+    (reviewContext.kind === 'not-eligible' || reviewContext.kind === 'already-reviewed');
+  const hideLoadingNativeList = list.kind === 'loading' && reviewContext.kind === 'not-eligible';
+  if (hideEmptyNativeList || hideLoadingNativeList) {
+    return null;
+  }
+
   return (
     <Card className="surface-panel border-border bg-card shadow-sm">
       <CardHeader>

@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
 import { BookingPriceSummary } from '@/components/custom/booking-price-summary';
+import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -212,6 +213,13 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             name={instructor.name}
             contact={instructor.contact}
             className="w-full sm:w-auto"
+          />
+
+          <GoogleReviewQuotes
+            items={instructor.googleReviews ?? []}
+            average={instructor.googleRating}
+            count={instructor.googleReviewCount}
+            mapsUri={instructor.googleMapsUri}
           />
           {instructor.surfaces?.directoryOnly ? null : (
             <BookingModeSection instructor={instructor} />

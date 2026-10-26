@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
+import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
@@ -74,34 +76,19 @@ export function ProviderComparison({
                   label={t('rate')}
                   value={t('rateValue', { amount: formatSek(provider.hourlyRateSek, locale) })}
                 />
-                <Fact label={t('fee')} value={t('feeValue')} />
-                <Fact
-                  label={t('availability')}
-                  value={
-                    provider.nextSlotAt
-                      ? formatDate(provider.nextSlotAt, locale)
-                      : t('noAvailability')
-                  }
-                />
-                <Fact
-                  label={t('bookingMode')}
-                  value={t(
-                    `bookingModes.${provider.bookingMode === 'request' ? 'request' : 'instant'}`,
-                  )}
-                />
-                <Fact
-                  label={t('cancellation')}
-                  value={
-                    provider.cancellationPolicyTier
-                      ? t(`policies.${provider.cancellationPolicyTier}`)
-                      : t('policyUnknown')
-                  }
-                />
+                {provider.surfaces?.availabilityDisplay && provider.nextSlotAt ? (
+                  <Fact label={t('availability')} value={formatDate(provider.nextSlotAt, locale)} />
+                ) : null}
                 <Fact
                   label={t('reviews')}
                   value={
                     provider.reviewSummary.averageRating === null
-                      ? t('noReviews')
+                      ? provider.googleRating != null
+                        ? t('reviewsValue', {
+                            average: formatNumber(provider.googleRating, locale),
+                            count: provider.googleReviewCount ?? 0,
+                          })
+                        : t('noReviews')
                       : t('reviewsValue', {
                           average: formatNumber(provider.reviewSummary.averageRating, locale),
                           count: provider.reviewSummary.count,
@@ -109,6 +96,15 @@ export function ProviderComparison({
                   }
                 />
               </dl>
+              {(provider.googleReviews?.length ?? 0) > 0 ? (
+                <GoogleReviewQuotes items={provider.googleReviews ?? []} limit={2} compact />
+              ) : null}
+              <SchoolContactButton
+                name={provider.name}
+                contact={provider.contact}
+                size="sm"
+                className="w-full"
+              />
               <Button asChild variant="secondary" size="sm" className="w-full">
                 <Link href={`/instructors/${encodeURIComponent(provider.id)}`}>
                   {t('viewProfile')}

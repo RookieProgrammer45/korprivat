@@ -24,7 +24,7 @@ const SEARCH_CITIES = [
 ] as const;
 
 const POPULAR_LINKS = [
-  { key: 'categoryB', href: '/instructors?categories=B' },
+  { key: 'categoryA', href: '/instructors?categories=A' },
   { key: 'stockholm', href: '/locations/se/stockholm' },
   { key: 'goteborg', href: '/locations/se/goteborg' },
   { key: 'malmo', href: '/locations/se/malmo' },
@@ -91,7 +91,10 @@ export function HomeHero() {
               ))}
             </SearchField>
 
-            <button type="submit" className="dlu-ink-pill mt-1 cursor-pointer border-0 sm:mt-0">
+            <button
+              type="submit"
+              className="dlu-ink-pill mt-1 cursor-pointer justify-center border-0 sm:mt-0"
+            >
               <Search className="size-4" strokeWidth={2} aria-hidden />
               {t('search.submit')}
             </button>
@@ -103,7 +106,7 @@ export function HomeHero() {
               <Link
                 key={link.key}
                 href={link.href}
-                className="rounded-full border border-border bg-card px-3.5 py-1.5 text-foreground transition-colors hover:border-foreground/25"
+                className="inline-flex min-h-11 items-center rounded-full border border-border bg-card px-4 text-foreground transition-colors hover:border-foreground/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               >
                 {t(`popular.links.${link.key}`)}
               </Link>

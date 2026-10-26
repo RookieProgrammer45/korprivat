@@ -33,17 +33,11 @@ export default function KostnadKorkortPage() {
       </h1>
       <p className="text-lg text-muted-foreground">
         Totalkostnaden varierar med antal lektioner, teori och prov. Det du kan jämföra tidigt är
-        skolans publicerade lektionspris — och om någon lägger på dolda marknadsplatsavgifter.
+        skolans publicerade lektionspris.
       </p>
       <div className="grid gap-4 text-body text-foreground">
-        <p>
-          På DriveLinkUp betalar elever ingen separat plattformsavgift. Du ser skolans pris i SEK
-          per timme. En kataloglista är inte en bokning. Lektioner ordnas med skolan.
-        </p>
-        <p>
-          En kataloglista är gratis. DriveLinkUp tar ingen andel av skolans publicerade
-          pris för att skolan är listad. Instruktörer tar betalt via sin skola.
-        </p>
+        <p>Du ser skolans pris i SEK per timme. Kontakta skolan för att ordna lektionen.</p>
+        <p>Listningen är gratis. Instruktörer tar betalt via sin skola.</p>
         <p>
           Börja i{' '}
           <Link className="underline underline-offset-4" href="/locations/se/stockholm">

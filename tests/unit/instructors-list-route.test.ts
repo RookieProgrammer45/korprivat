@@ -10,6 +10,7 @@ const {
   mockSlotFindMany,
   mockLicenseFindMany,
   mockReviewFindMany,
+  mockGoogleReviewFindMany,
   mockGetSessionUser,
   mockAuthzFindMany,
 } = vi.hoisted(() => ({
@@ -17,6 +18,7 @@ const {
   mockSlotFindMany: vi.fn(),
   mockLicenseFindMany: vi.fn(),
   mockReviewFindMany: vi.fn(),
+  mockGoogleReviewFindMany: vi.fn(),
   mockGetSessionUser: vi.fn(),
   mockAuthzFindMany: vi.fn(),
 }));
@@ -27,6 +29,7 @@ vi.mock('@/lib/db', () => ({
     availabilitySlot: { findMany: mockSlotFindMany },
     instructorLicense: { findMany: mockLicenseFindMany },
     review: { findMany: mockReviewFindMany },
+    googleReview: { findMany: mockGoogleReviewFindMany },
     schoolAuthorizationEvent: { findMany: mockAuthzFindMany },
   },
 }));
@@ -127,10 +130,12 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     mockSlotFindMany.mockReset();
     mockLicenseFindMany.mockReset();
     mockReviewFindMany.mockReset();
+    mockGoogleReviewFindMany.mockReset();
     mockAuthzFindMany.mockReset();
     mockSlotFindMany.mockResolvedValue([]);
     mockLicenseFindMany.mockResolvedValue([]);
     mockReviewFindMany.mockResolvedValue([]);
+    mockGoogleReviewFindMany.mockResolvedValue([]);
     mockAuthzFindMany.mockImplementation(
       async (args: { where?: { listingId?: { in?: string[] } } }) => {
         const ids = args.where?.listingId?.in ?? [];
@@ -260,6 +265,51 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       bookingMode: 'request',
     });
     expect(body.items[0]).not.toHaveProperty('userId');
+  });
+
+  it('lists stored Google reviews on each school item', async () => {
+    const instructorId = 'school_globen';
+    mockInstructorFindMany.mockResolvedValueOnce([
+      instructorRow({
+        id: instructorId,
+        name: 'Globens Trafikskola AB',
+        userId: 'user_verified',
+      }),
+    ]);
+    mockLicenseFindMany.mockResolvedValue([{ userId: 'user_verified', status: 'VERIFIED' }]);
+    mockGoogleReviewFindMany.mockResolvedValueOnce([
+      {
+        id: 'rev-1',
+        instructorId,
+        authorName: 'Lilly Ask',
+        rating: 5,
+        comment: 'Bra skola',
+        relativeTime: 'för 2 månader sedan',
+      },
+      {
+        id: 'rev-skip',
+        instructorId,
+        authorName: 'Bad',
+        rating: 99,
+        comment: 'invalid',
+        relativeTime: null,
+      },
+    ]);
+
+    const res = await GET(req());
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as {
+      items: Array<{ googleReviews?: Array<Record<string, unknown>> }>;
+    };
+    expect(body.items[0]?.googleReviews).toEqual([
+      {
+        id: 'rev-1',
+        authorName: 'Lilly Ask',
+        rating: 5,
+        comment: 'Bra skola',
+        relativeTime: 'för 2 månader sedan',
+      },
+    ]);
   });
 
   it('resolves school contact to mailto and never serializes email', async () => {

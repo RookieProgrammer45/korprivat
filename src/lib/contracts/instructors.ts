@@ -109,6 +109,20 @@ export const InstructorItem = z.object({
   googleRating: z.number().min(0).max(5).nullable().optional(),
   googleReviewCount: z.number().int().nonnegative().nullable().optional(),
   googleMapsUri: z.string().nullable().optional(),
+  // Stored Google Places review texts (weekly snapshot). Optional so older
+  // list payloads still parse; the UI hides the list when this is empty.
+  googleReviews: z
+    .array(
+      z.object({
+        id: z.string(),
+        authorName: z.string(),
+        rating: z.number().int().min(1).max(5),
+        comment: z.string(),
+        relativeTime: z.string().nullable(),
+      }),
+    )
+    .max(5)
+    .optional(),
   nextSlotAt: z.string().datetime().nullable(),
   // Cancellation-policy tier published on the instructor's profile.
   // Nullable on the storage column; nullable on the contract too so a

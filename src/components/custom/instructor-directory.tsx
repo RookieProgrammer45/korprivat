@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { SchoolMark } from '@/components/custom/instructor-preview';
+import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
+import { categoryChipLabel, SchoolMark } from '@/components/custom/instructor-preview';
 import { MAX_COMPARISON_ITEMS, ProviderComparison } from '@/components/custom/provider-comparison';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
@@ -429,7 +430,7 @@ function FilterBar({
                   }
                   onClick={() => onToggleCategory(code)}
                 >
-                  {tr(`category.${code}`)}
+                  {categoryChipLabel(tr(`category.${code}`), code)}
                 </Button>
               );
             })}
@@ -767,15 +768,18 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               : 'contact'
         : 'contact';
   const bookingModeLabel = trBooking(`bookingModeLabel.${bookingMode}`);
+  const showBookingMode = bookingMode === 'instant' || bookingMode === 'request';
   const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
+  const hasGoogleQuotes = (row.googleReviews?.length ?? 0) > 0;
+  const showServiceArea = Boolean(row.serviceArea) && row.serviceArea !== row.city;
   const reviewLabel =
     row.reviewSummary.averageRating === null
-      ? row.googleRating != null
+      ? row.googleRating != null && !hasGoogleQuotes
         ? tr('reviewsGoogleSummary', {
             count: row.googleReviewCount ?? 0,
             average: formatNumber(row.googleRating, locale),
           })
-        : tr('reviewsNone')
+        : null
       : tr('reviewsSummary', {
           count: row.reviewSummary.count,
           average: formatNumber(row.reviewSummary.averageRating, locale),
@@ -795,7 +799,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               <p className="dlu-type">
                 {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
               </p>
-              <div className="break-words font-display text-base font-semibold text-foreground">
+              <div className="break-words font-display text-base font-normal text-foreground">
                 {row.name}
               </div>
               <div className="flex flex-wrap items-center gap-1.5 text-small text-muted-foreground">
@@ -819,7 +823,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
             </p>
           ) : null}
         </div>
-        {bookingModeLabel ? (
+        {showBookingMode && bookingModeLabel ? (
           <p className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
             <span
               className={
@@ -852,14 +856,16 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               {languageLabel}
             </span>
           </div>
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('serviceAreaLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {row.serviceArea}
-            </span>
-          </div>
+          {showServiceArea ? (
+            <div className="grid min-w-0 gap-1">
+              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                {tr('serviceAreaLabel')}
+              </span>
+              <span className="min-w-0 break-words text-small font-medium text-foreground">
+                {row.serviceArea}
+              </span>
+            </div>
+          ) : null}
           <div className="grid min-w-0 gap-1">
             <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
               {tr('verificationLabel')}
@@ -868,18 +874,30 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               {tr(`verification.${row.verificationStatus}`)}
             </span>
           </div>
-          <div className="grid min-w-0 gap-1 sm:col-span-2">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('reviewsLabel')}
-            </span>
-            <span className="text-small font-medium text-foreground">{reviewLabel}</span>
-          </div>
+          {reviewLabel ? (
+            <div className="grid min-w-0 gap-1 sm:col-span-2">
+              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                {tr('reviewsLabel')}
+              </span>
+              <span className="text-small font-medium text-foreground">{reviewLabel}</span>
+            </div>
+          ) : null}
         </div>
+
+        {hasGoogleQuotes ? (
+          <GoogleReviewQuotes
+            items={row.googleReviews ?? []}
+            average={row.googleRating}
+            count={row.googleReviewCount}
+            limit={2}
+            compact
+          />
+        ) : null}
 
         <div className="flex flex-wrap items-center gap-1.5">
           {row.categories.map((code) => (
             <span key={code} className="dlu-chip">
-              {tr(`category.${code}`)}
+              {categoryChipLabel(tr(`category.${code}`), code)}
             </span>
           ))}
         </div>

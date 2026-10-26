@@ -25,7 +25,7 @@ export function PublicHome() {
               {t('providers.cta')}
             </Link>
           </div>
-          <InstructorPreview limit={3} showContact={false} />
+          <InstructorPreview limit={3} />
         </div>
       </section>
 

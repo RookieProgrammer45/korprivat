@@ -9,9 +9,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import {
@@ -120,7 +120,7 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
       className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       data-provider-type={row.providerType}
     >
-      <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-white dark:bg-card">
+      <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-foreground/20 group-hover:shadow-md motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 dark:bg-card">
         <SchoolMark
           name={row.name}
           photoUrl={row.photoUrl}
@@ -138,7 +138,7 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
           <div className="mt-auto flex flex-wrap gap-2">
             {row.categories.map((category) => (
               <span key={category} className="dlu-chip">
-                {tr(`category.${category}`)}
+                {categoryChipLabel(tr(`category.${category}`), category)}
               </span>
             ))}
             {row.englishSpeaking ? (
@@ -147,6 +147,15 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
           </div>
           {nextSlotPill ? (
             <p className="text-small text-muted-foreground">{nextSlotPill.label}</p>
+          ) : null}
+          {(row.googleReviews?.length ?? 0) > 0 ? (
+            <GoogleReviewQuotes
+              items={row.googleReviews ?? []}
+              average={row.googleRating}
+              count={row.googleReviewCount}
+              limit={1}
+              compact
+            />
           ) : null}
         </div>
       </article>
@@ -190,7 +199,7 @@ export function SchoolMark({
         height={48}
         unoptimized
         onError={() => setFailed(true)}
-        className="size-12 shrink-0 rounded-full border border-border object-cover"
+        className="size-12 shrink-0 rounded-full border border-border bg-white object-contain p-1.5"
       />
     );
   }
@@ -207,6 +216,12 @@ export function SchoolMark({
       />
     </span>
   );
+}
+
+// Named categories read "Bil · B" so the chip matches the search field;
+// codes without a name (AM, A1, A2) stay as the bare code.
+export function categoryChipLabel(label: string, code: string): string {
+  return label === code ? code : `${label} · ${code}`;
 }
 
 function isPhotograph(url: string): boolean {
@@ -231,20 +246,19 @@ function PreviewSkeleton({ limit }: { limit: number }) {
   return (
     <ul className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {ids.map((skeletonId) => (
-        <li key={skeletonId}>
-          <Card className="surface-card border-border">
-            <CardContent className="flex min-w-0 flex-col gap-5 p-6">
-              <div className="flex items-center gap-3">
-                <Skeleton className="size-12 rounded-full" />
-                <div className="flex flex-1 flex-col gap-2">
-                  <Skeleton className="h-4 w-2/3" />
-                  <Skeleton className="h-3 w-1/3" />
-                </div>
+        <li key={skeletonId} aria-hidden>
+          <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-white dark:bg-card">
+            <Skeleton className="aspect-[4/3] w-full rounded-none" />
+            <div className="flex flex-col gap-3 p-5">
+              <Skeleton className="h-3 w-1/4" />
+              <Skeleton className="h-5 w-3/4" />
+              <Skeleton className="h-7 w-1/3" />
+              <div className="flex gap-2">
+                <Skeleton className="h-7 w-20 rounded-full" />
+                <Skeleton className="h-7 w-16 rounded-full" />
               </div>
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-5/6" />
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </li>
       ))}
     </ul>

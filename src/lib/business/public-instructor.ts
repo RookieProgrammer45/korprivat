@@ -3,10 +3,21 @@ import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
 import { resolveSchoolContact } from '@/lib/discovery/school-contact';
 
+export type PublicGoogleReview = {
+  id: string;
+  authorName: string;
+  rating: number;
+  comment: string;
+  relativeTime: string | null;
+};
+
 export type PublicInstructorAggregate = {
   verificationStatus: 'verified' | 'pending' | 'rejected' | 'unverified';
   reviewSummary: { count: number; averageRating: number | null };
+  googleReviews?: PublicGoogleReview[];
 };
+
+const MAX_PUBLIC_GOOGLE_REVIEWS = 5;
 
 type PublicInstructorSource = {
   id: string;
@@ -32,6 +43,14 @@ type PublicInstructorSource = {
 
 type ReviewRow = { instructorId: string; rating: number };
 type LicenseRow = { userId: string; status: string };
+type GoogleReviewRow = {
+  id: string;
+  instructorId: string;
+  authorName: string;
+  rating: number;
+  comment: string;
+  relativeTime: string | null;
+};
 
 export async function loadPublicInstructorAggregates(
   rows: Array<Pick<PublicInstructorSource, 'id' | 'userId'>>,
@@ -40,7 +59,7 @@ export async function loadPublicInstructorAggregates(
   const instructorIds = rows.map((row) => row.id);
   const userIds = rows.flatMap((row) => (row.userId ? [row.userId] : []));
 
-  const [licenses, reviews] = await Promise.all([
+  const [licenses, reviews, googleReviews] = await Promise.all([
     userIds.length > 0 && prisma.instructorLicense
       ? prisma.instructorLicense.findMany({
           where: { userId: { in: userIds } },
@@ -53,6 +72,21 @@ export async function loadPublicInstructorAggregates(
           select: { instructorId: true, rating: true },
         })
       : Promise.resolve([] as ReviewRow[]),
+    instructorIds.length > 0 && prisma.googleReview
+      ? prisma.googleReview.findMany({
+          where: { instructorId: { in: instructorIds } },
+          select: {
+            id: true,
+            instructorId: true,
+            authorName: true,
+            rating: true,
+            comment: true,
+            relativeTime: true,
+            publishTime: true,
+          },
+          orderBy: { publishTime: 'desc' },
+        })
+      : Promise.resolve([] as GoogleReviewRow[]),
   ]);
 
   const statusByUser = new Map<string, PublicInstructorAggregate['verificationStatus']>();
@@ -81,6 +115,23 @@ export async function loadPublicInstructorAggregates(
     reviewsByInstructor.set(review.instructorId, existing);
   }
 
+  const googleByInstructor = new Map<string, PublicGoogleReview[]>();
+  for (const review of googleReviews) {
+    if (!Number.isInteger(review.rating) || review.rating < 1 || review.rating > 5) {
+      continue;
+    }
+    const existing = googleByInstructor.get(review.instructorId) ?? [];
+    if (existing.length >= MAX_PUBLIC_GOOGLE_REVIEWS) continue;
+    existing.push({
+      id: review.id,
+      authorName: review.authorName,
+      rating: review.rating,
+      comment: review.comment,
+      relativeTime: review.relativeTime,
+    });
+    googleByInstructor.set(review.instructorId, existing);
+  }
+
   for (const row of rows) {
     const ratings = reviewsByInstructor.get(row.id) ?? [];
     const average =
@@ -92,6 +143,7 @@ export async function loadPublicInstructorAggregates(
         ? (statusByUser.get(row.userId) ?? 'unverified')
         : 'unverified',
       reviewSummary: { count: ratings.length, averageRating: average },
+      googleReviews: googleByInstructor.get(row.id) ?? [],
     });
   }
 
@@ -122,6 +174,7 @@ export function toPublicInstructor(
     googleRating: row.googleRating ?? null,
     googleReviewCount: row.googleReviewCount ?? null,
     googleMapsUri: row.googleMapsUri ?? null,
+    googleReviews: aggregate.googleReviews ?? [],
     nextSlotAt,
     cancellationPolicyTier:
       row.cancellationPolicyTier === 'moderate' || row.cancellationPolicyTier === 'strict'
