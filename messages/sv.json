@@ -555,6 +555,11 @@
     "sortNearest": "Närmast först",
     "sortLessonPrice": "Lektionspris, billigast först",
     "sortPackagePrice": "Paketpris, billigast först",
+    "heavyLabel": "Tung trafik",
+    "heavyAll": "Alla skolor",
+    "heavyTruck": "Lastbil (C1, C, CE)",
+    "heavyBus": "Buss (D1, D, DE)",
+    "heavyYkb": "YKB",
     "distancePill": "{km} km",
     "clearGeolocation": "Rensa plats",
     "profileCta": "Visa profil",
@@ -3637,6 +3642,12 @@
     "package": "Paket",
     "intensive": "Intensivkurs",
     "lessons": "{count, plural, one {# lektion} other {# lektioner}}",
-    "heading": "Priser"
+    "heading": "Priser",
+    "hours": "{hours} h",
+    "heavyHeading": "Tung trafik",
+    "heavyOffered": "Utbildar enligt webbplatsen: {list}",
+    "heavyTruck": "Lastbil",
+    "heavyBus": "Buss",
+    "heavyFrom": "från {amount} kr"
   }
 }

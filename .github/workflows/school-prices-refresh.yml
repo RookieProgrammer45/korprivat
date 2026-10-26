@@ -1,0 +1,46 @@
+name: School prices refresh
+
+# Re-reads every school's own website once a month and opens a pull request
+# with the new prices. Nothing goes live until the pull request is merged, so
+# a crawl that hit blocked or unreachable sites can be reviewed first.
+on:
+  schedule:
+    - cron: '0 3 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: B prices
+        run: npx tsx scripts/school-prices/refresh.ts --fetch --extract --write
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Heavy-vehicle prices
+        run: npx tsx scripts/school-prices/refresh.ts --heavy --linked --fetch --extract --write
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data/school-prices-refresh
+          delete-branch: true
+          add-paths: data/school-prices/school-prices.*
+          commit-message: 'data: monthly school price refresh'
+          title: 'data: monthly school price refresh'
+          body: |
+            Prices re-read from each school's own website.
+
+            Before merging, check `meta.counts` in `school-prices.json` against the previous month. A large drop usually means sites blocked the crawler or were unreachable, not that schools removed their prices; schools that lose every price leave the public site when this is merged.

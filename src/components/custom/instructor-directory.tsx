@@ -7,7 +7,11 @@ import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'rea
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { categoryChipLabel, SchoolMark } from '@/components/custom/instructor-preview';
 import { MAX_COMPARISON_ITEMS, ProviderComparison } from '@/components/custom/provider-comparison';
-import { PublishedLessonPrice, PublishedPackageFrom } from '@/components/custom/published-price';
+import {
+  PublishedHeavyOffer,
+  PublishedLessonPrice,
+  PublishedPackageFrom,
+} from '@/components/custom/published-price';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -26,6 +30,8 @@ import { type LocationStatus, useUserLocation } from '@/hooks/use-user-location'
 import { apiFetch } from '@/lib/api-client';
 import { nearestKnownCity } from '@/lib/business/geo';
 import {
+  HEAVY_FILTERS,
+  type HeavyFilter,
   LICENCE_CATEGORY_CODES,
   type LicenceCategoryCode,
 } from '@/lib/business/licence-categories';
@@ -59,6 +65,7 @@ type Filters = {
   sort: SortMode;
   providerRole: 'INSTRUCTOR' | 'HANDLEDARE' | '';
   affiliation: 'school' | 'independent' | 'all' | '';
+  heavy: HeavyFilter | '';
 };
 
 const EMPTY_FILTERS: Filters = {
@@ -75,7 +82,10 @@ const EMPTY_FILTERS: Filters = {
   sort: 'default',
   providerRole: '',
   affiliation: '',
+  heavy: '',
 };
+
+const HEAVY_ALL = '__all_heavy__';
 
 // Radix `<Select.Item value="">` throws on hydration — use a non-empty
 // sentinel for the "All cities" option and translate ↔ '' at the binding
@@ -318,6 +328,7 @@ export function InstructorDirectory({
           onNearKmChange={(value) => updateFilters({ nearKm: value })}
           onSortChange={(value) => updateFilters({ sort: value })}
           onAffiliationChange={(value) => updateFilters({ affiliation: value })}
+          onHeavyChange={(value) => updateFilters({ heavy: value })}
           onLocationRequest={onLocationRequest}
           onClearGeolocation={() =>
             updateFilters({
@@ -387,6 +398,7 @@ function FilterBar({
   onNearKmChange,
   onSortChange,
   onAffiliationChange,
+  onHeavyChange,
   onLocationRequest,
   onClearGeolocation,
 }: {
@@ -403,6 +415,7 @@ function FilterBar({
   onNearKmChange: (value: number | '') => void;
   onSortChange: (value: SortMode) => void;
   onAffiliationChange: (value: 'school' | 'independent' | 'all' | '') => void;
+  onHeavyChange: (value: HeavyFilter | '') => void;
   onLocationRequest: () => void;
   onClearGeolocation: () => void;
 }) {
@@ -578,6 +591,26 @@ function FilterBar({
                 <SelectItem value={AFFILIATION_ALL}>{tr('affiliationAll')}</SelectItem>
                 <SelectItem value="school">{tr('affiliationSchool')}</SelectItem>
                 <SelectItem value="independent">{tr('affiliationIndependent')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex min-w-0 flex-col gap-2">
+            <Label htmlFor="heavy-select">{tr('heavyLabel')}</Label>
+            <Select
+              value={filters.heavy === '' ? HEAVY_ALL : filters.heavy}
+              onValueChange={(value) =>
+                onHeavyChange(HEAVY_FILTERS.find((filter) => filter === value) ?? '')
+              }
+            >
+              <SelectTrigger id="heavy-select" className="bg-background">
+                <SelectValue placeholder={tr('heavyAll')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={HEAVY_ALL}>{tr('heavyAll')}</SelectItem>
+                <SelectItem value="truck">{tr('heavyTruck')}</SelectItem>
+                <SelectItem value="bus">{tr('heavyBus')}</SelectItem>
+                <SelectItem value="ykb">{tr('heavyYkb')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -814,6 +847,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
         </div>
         {row.publishedPrices?.lesson ? <PublishedLessonPrice prices={row.publishedPrices} /> : null}
         {row.publishedPrices ? <PublishedPackageFrom prices={row.publishedPrices} /> : null}
+        {row.publishedPrices ? <PublishedHeavyOffer prices={row.publishedPrices} /> : null}
 
         <div className="grid min-w-0 gap-3 rounded-lg border border-border bg-muted p-4 sm:grid-cols-2">
           {nextSlotPill ? (
@@ -993,6 +1027,7 @@ function buildQueryString(filters: Filters): string {
   if (filters.affiliation === 'school' || filters.affiliation === 'independent') {
     params.set('affiliation', filters.affiliation);
   }
+  if (filters.heavy) params.set('heavy', filters.heavy);
   return params.toString();
 }
 
@@ -1017,6 +1052,7 @@ function normaliseFromUrl(q: InstructorQuery): Filters {
     sort: toSortMode(q.sort),
     providerRole: q.providerRole ?? '',
     affiliation: q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
+    heavy: q.heavy ?? '',
   };
 }
 
@@ -1062,7 +1098,8 @@ function hasActiveFilter(f: Filters): boolean {
     f.sort !== 'default' ||
     f.providerRole !== '' ||
     f.affiliation === 'school' ||
-    f.affiliation === 'independent'
+    f.affiliation === 'independent' ||
+    f.heavy !== ''
   );
 }
 

@@ -67,8 +67,27 @@ type SchoolPriceRecord = {
     | 'SITE_UNREACHABLE'
     | 'NOT_A_B_SCHOOL_SITE';
   sourceUrl: string | null;   // page the prices were read from
+  // Heavy-vehicle training advertised on the site (linked schools only);
+  // null when the site advertises none, absent when not yet crawled.
+  heavy?: {
+    categories: ('C1' | 'C1E' | 'C' | 'CE' | 'D1' | 'D1E' | 'D' | 'DE')[];
+    ykb: boolean;             // YKB grundutbildning / fortbildning offered
+    prices: {
+      category: 'C1' | 'C1E' | 'C' | 'CE' | 'D1' | 'D1E' | 'D' | 'DE' | 'YKB';
+      kind: 'LESSON' | 'COURSE';
+      name: string;
+      minutes: number | null; // lesson length
+      hours: number | null;   // stated course length, e.g. YKB 35 or 140 h
+      priceSek: number;
+    }[];
+    sourceUrl: string | null;
+    checkedAt: string;
+  } | null;
 };
 ```
+
+Heavy-vehicle categories come from the school's website, not from the permit
+register, so they are shown as "according to the school's website".
 
 ## Refreshing
 
@@ -78,6 +97,12 @@ per host) into `.cache/` (git-ignored), `--extract` turns the cached pages into
 prices with OpenAI (needs `OPENAI_API_KEY`), and `--write` rebuilds the JSON,
 the CSV and `meta`. Social media is never crawled; Facebook and Instagram
 terms forbid automated collection, so only profile links are recorded.
+
+Add `--heavy` to run the same three steps for C/D and YKB into `heavy` (B
+prices are left untouched) and `--linked` to limit a run to schools linked to
+a listing. `.github/workflows/school-prices-refresh.yml` runs both on the 1st
+of every month and opens a pull request; it needs the `OPENAI_API_KEY`
+repository secret.
 
 ## Coverage (see `meta.counts`)
 

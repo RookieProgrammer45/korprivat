@@ -6,6 +6,17 @@ export const LICENCE_CATEGORY_CODES = ['AM', 'A1', 'A2', 'A', 'B', 'BE'] as cons
 
 export type LicenceCategoryCode = (typeof LICENCE_CATEGORY_CODES)[number];
 
+// Heavy-vehicle categories come from each school's website (data/school-prices),
+// not from the listing's permit categories, so they stay out of the booking enum.
+export const HEAVY_LICENCE_CODES = ['C1', 'C1E', 'C', 'CE', 'D1', 'D1E', 'D', 'DE'] as const;
+
+export type HeavyLicenceCode = (typeof HEAVY_LICENCE_CODES)[number];
+
+/** Directory filter: truck = C1/C1E/C/CE, bus = D1/D1E/D/DE, ykb = YKB courses. */
+export const HEAVY_FILTERS = ['truck', 'bus', 'ykb'] as const;
+
+export type HeavyFilter = (typeof HEAVY_FILTERS)[number];
+
 export const MOTORCYCLE_LICENCE_CODES = ['A1', 'A2', 'A'] as const;
 
 const CODE_SET: ReadonlySet<string> = new Set(LICENCE_CATEGORY_CODES);

@@ -4,6 +4,9 @@
 //   npx tsx scripts/school-prices/refresh.ts --extract   extract prices from .cache/ (needs OPENAI_API_KEY)
 //   npx tsx scripts/school-prices/refresh.ts --write     rebuild school-prices.json + .csv from .cache/
 //   Options: --limit N, --ids id1,id2, --concurrency N, --model NAME
+//   --heavy   run the same stages for heavy vehicles (C1/C1E/C/CE, D1/D1E/D/DE,
+//             YKB) into school.heavy; B prices are left untouched
+//   --linked  only schools linked to a DriveLinkUp listing
 //
 // Only each school's own website is crawled, robots.txt is honoured, and one
 // request per host is in flight at a time. Social profiles are recorded as
@@ -18,6 +21,11 @@ const JSON_PATH = path.join(DATA_DIR, 'school-prices.json');
 const CSV_PATH = path.join(DATA_DIR, 'school-prices.csv');
 const USER_AGENT = 'DriveLinkUpPriceBot/1.0 (+https://www.drivelinkup.com/kontakt)';
 const PRICE_LINK = /pris|priser|prislista|paket|risk|halk|kurs|intensiv|shop|butik|erbjud|price/i;
+const HEAVY_LINK =
+  /lastbil|buss|tung|yrkesf[öo]rar|ykb|heavy|truck|\bbus\b|[cd]1?e?-?(k[öo]rkort|beh[öo]righet|utbildning)|\/(c|ce|c1|c1e|d|de|d1|d1e)(\/|-|$)/i;
+const HEAVY_SIGNAL =
+  /lastbil|buss|tung trafik|ykb|yrkesf[öo]rar|\b(C1?E?|D1?E?)[- ]?(k[öo]rkort|beh[öo]righet|utbildning)|beh[öo]righet (C1?E?|D1?E?)\b/i;
+const HEAVY_CATEGORIES = ['C1', 'C1E', 'C', 'CE', 'D1', 'D1E', 'D', 'DE'] as const;
 const SOCIAL_LINK = /^https?:\/\/(www\.)?(facebook|instagram|tiktok)\.com\/[^\s"'?#]+/i;
 const SOCIAL_POST = /\/(p|reel|reels|posts|photo|sharer|share|watch|video)\b|sharer\.php/i;
 const MAX_PAGES = 6;
@@ -53,7 +61,24 @@ type School = {
   status: string;
   sourceUrl: string | null;
   checkedAt?: string;
+  heavy?: Heavy | null;
 };
+type HeavyCategory = (typeof HEAVY_CATEGORIES)[number];
+type HeavyPrice = {
+  category: HeavyCategory | 'YKB';
+  kind: 'LESSON' | 'COURSE';
+  name: string;
+  minutes: number | null;
+  hours: number | null;
+  priceSek: number;
+};
+type HeavyExtraction = {
+  categories: HeavyCategory[];
+  ykb: boolean;
+  prices: HeavyPrice[];
+  sourceUrl: string | null;
+};
+type Heavy = HeavyExtraction & { checkedAt: string };
 type Dataset = { meta: Record<string, unknown> & { collectedAt: string }; schools: School[] };
 
 type CachedPage = { url: string; text: string };
@@ -63,6 +88,8 @@ type FetchCache = {
   error?: string;
   pages: CachedPage[];
   social: string[];
+  // --heavy only: whether any page mentions heavy-vehicle training at all.
+  heavySignal?: boolean;
 };
 type Extraction = {
   lesson: { priceSek: number | null; minutes: number | null; note: string | null };
@@ -86,16 +113,29 @@ async function main() {
   const ids = option('ids')?.split(',');
   const limit = Number(option('limit') ?? Number.POSITIVE_INFINITY);
   const concurrency = Number(option('concurrency') ?? 8);
+  const heavy = flag('heavy');
   const targets = dataset.schools
-    .filter((school) => school.website && (!ids || ids.includes(school.id)))
+    .filter(
+      (school) =>
+        school.website &&
+        (!ids || ids.includes(school.id)) &&
+        (!flag('linked') || school.listingIds.length > 0),
+    )
     .slice(0, limit);
   mkdirSync(CACHE_DIR, { recursive: true });
 
   if (flag('fetch')) {
     await pool(targets, concurrency, async (school, index) => {
-      const cache = await crawlSchool(school);
-      writeFileSync(cachePath(school.id, 'fetch'), JSON.stringify(cache));
-      log(index, targets.length, school.id, cache.ok ? `${cache.pages.length} pages` : cache.error);
+      const cache = await crawlSchool(school, heavy);
+      writeFileSync(cachePath(school.id, 'fetch', heavy), JSON.stringify(cache));
+      log(
+        index,
+        targets.length,
+        school.id,
+        cache.ok
+          ? `${cache.pages.length} pages${heavy ? (cache.heavySignal ? ', heavy' : ', no heavy') : ''}`
+          : cache.error,
+      );
     });
   }
 
@@ -104,19 +144,36 @@ async function main() {
     const client = new OpenAI();
     const model = option('model') ?? 'gpt-4.1-mini';
     await pool(targets, Math.min(concurrency, 6), async (school, index) => {
-      const fetched = readJson<FetchCache>(cachePath(school.id, 'fetch'));
+      const fetched = readJson<FetchCache>(cachePath(school.id, 'fetch', heavy));
       if (!fetched?.ok || fetched.pages.length === 0) return;
+      if (heavy && !fetched.heavySignal) return;
       try {
-        const extraction = sanitize(await extract(client, model, school, fetched));
-        writeFileSync(cachePath(school.id, 'extract'), JSON.stringify(extraction));
-        log(index, targets.length, school.id, summary(extraction));
+        if (heavy) {
+          const extraction = sanitizeHeavy(await extractHeavy(client, model, school, fetched));
+          writeFileSync(cachePath(school.id, 'extract', true), JSON.stringify(extraction));
+          log(index, targets.length, school.id, heavySummary(extraction));
+        } else {
+          const extraction = sanitize(await extract(client, model, school, fetched));
+          writeFileSync(cachePath(school.id, 'extract'), JSON.stringify(extraction));
+          log(index, targets.length, school.id, summary(extraction));
+        }
       } catch (error) {
         log(index, targets.length, school.id, `extract failed: ${String(error)}`);
       }
     });
   }
 
-  if (flag('write')) {
+  if (flag('write') && heavy) {
+    for (const school of dataset.schools) mergeHeavy(school);
+    dataset.meta.counts = {
+      ...(dataset.meta.counts as Record<string, number>),
+      withHeavyTraining: dataset.schools.filter((s) => s.heavy).length,
+      withHeavyPrice: dataset.schools.filter((s) => (s.heavy?.prices.length ?? 0) > 0).length,
+    };
+    writeFileSync(JSON_PATH, `${JSON.stringify(dataset, null, 2)}\n`);
+    writeFileSync(CSV_PATH, toCsv(dataset.schools));
+    console.log('wrote', JSON_PATH, dataset.meta.counts);
+  } else if (flag('write')) {
     const today = new Date().toISOString().slice(0, 10);
     for (const school of dataset.schools) merge(school, today);
     dataset.meta.collectedAt = today;
@@ -139,7 +196,7 @@ async function main() {
 
 // --- crawl -------------------------------------------------------------------
 
-async function crawlSchool(school: School): Promise<FetchCache> {
+async function crawlSchool(school: School, heavy: boolean): Promise<FetchCache> {
   const fetchedAt = new Date().toISOString();
   const home = normalizeUrl(school.website);
   if (!home) return { fetchedAt, ok: false, error: 'bad url', pages: [], social: [] };
@@ -156,12 +213,17 @@ async function crawlSchool(school: School): Promise<FetchCache> {
           .filter((url) => SOCIAL_LINK.test(url) && !SOCIAL_POST.test(url)),
       ),
     ].slice(0, 5);
-    const candidates = [
-      ...(school.sourceUrl ? [school.sourceUrl] : []),
-      ...links
-        .filter((link) => sameHost(link.url, home) && looksLikePricePage(link))
-        .map((link) => link.url),
-    ];
+    const own = links.filter((link) => sameHost(link.url, home));
+    const candidates = heavy
+      ? [
+          ...own.filter((link) => matchesLink(link, HEAVY_LINK)).map((link) => link.url),
+          ...(school.sourceUrl ? [school.sourceUrl] : []),
+          ...own.filter((link) => matchesLink(link, PRICE_LINK)).map((link) => link.url),
+        ]
+      : [
+          ...(school.sourceUrl ? [school.sourceUrl] : []),
+          ...own.filter((link) => matchesLink(link, PRICE_LINK)).map((link) => link.url),
+        ];
     const pages: CachedPage[] = [{ url: home, text: htmlToText(homeHtml) }];
     for (const url of [...new Set(candidates.map((candidate) => normalizeUrl(candidate) ?? ''))]) {
       if (pages.length >= MAX_PAGES) break;
@@ -169,7 +231,11 @@ async function crawlSchool(school: School): Promise<FetchCache> {
       const html = await getHtml(url, disallow);
       if (html) pages.push({ url, text: htmlToText(html) });
     }
-    return { fetchedAt, ok: true, pages, social };
+    if (!heavy) return { fetchedAt, ok: true, pages, social };
+    const heavySignal =
+      pages.some((page) => HEAVY_SIGNAL.test(page.text)) ||
+      own.some((link) => matchesLink(link, HEAVY_LINK));
+    return { fetchedAt, ok: true, pages, social, heavySignal };
   } catch (error) {
     return { fetchedAt, ok: false, error: String(error), pages: [], social: [] };
   }
@@ -223,12 +289,12 @@ function extractLinks(html: string, base: string): Array<{ url: string; label: s
   return links;
 }
 
-function looksLikePricePage(link: { url: string; label: string }): boolean {
+function matchesLink(link: { url: string; label: string }, pattern: RegExp): boolean {
   let decoded = link.url;
   try {
     decoded = decodeURIComponent(link.url);
   } catch {}
-  return PRICE_LINK.test(decoded) || PRICE_LINK.test(link.label);
+  return pattern.test(decoded) || pattern.test(link.label);
 }
 
 function htmlToText(html: string): string {
@@ -238,7 +304,17 @@ function htmlToText(html: string): string {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;|&#160;/g, ' ')
     .replace(/&amp;/g, '&')
-    .replace(/&[a-z]+;|&#\d+;/gi, ' ')
+    .replace(
+      /&([aAoO])uml;/g,
+      (_, letter: string) => ({ a: 'ä', A: 'Ä', o: 'ö', O: 'Ö' })[letter] ?? letter,
+    )
+    .replace(/&([aA])ring;/g, (_, letter: string) => (letter === 'a' ? 'å' : 'Å'))
+    .replace(/&eacute;/g, 'é')
+    .replace(/&#(\d+);/g, (_, code: string) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([\da-f]+);/gi, (_, code: string) =>
+      String.fromCodePoint(Number.parseInt(code, 16)),
+    )
+    .replace(/&[a-z]+;/gi, ' ')
     .replace(/[ \t]+/g, ' ')
     .replace(/\n\s*\n+/g, '\n')
     .trim()
@@ -359,6 +435,122 @@ async function extract(
   return extraction;
 }
 
+const HEAVY_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['categories', 'ykb', 'prices', 'sourceUrl'],
+  properties: {
+    categories: { type: 'array', items: { type: 'string', enum: [...HEAVY_CATEGORIES] } },
+    ykb: { type: 'boolean' },
+    prices: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['category', 'kind', 'name', 'minutes', 'hours', 'priceSek'],
+        properties: {
+          category: { type: 'string', enum: [...HEAVY_CATEGORIES, 'YKB'] },
+          kind: { type: 'string', enum: ['LESSON', 'COURSE'] },
+          name: { type: 'string' },
+          minutes: { type: ['integer', 'null'] },
+          hours: { type: ['integer', 'null'] },
+          priceSek: { type: 'integer' },
+        },
+      },
+    },
+    sourceUrl: { type: ['string', 'null'] },
+  },
+} as const;
+
+const HEAVY_INSTRUCTIONS = `You read Swedish driving-school web pages and extract what the school publishes about heavy-vehicle training, in SEK including VAT.
+Categories: C1, C1E (light truck), C, CE (truck, truck with trailer), D1, D1E (minibus), D, DE (bus). YKB = yrkeskompetensbevis (grundutbildning or fortbildning for professional drivers).
+Rules:
+- Only use what is written on the pages. Never estimate or infer. Ignore categories B, BE, A, AM and tractors.
+- categories: the C/D categories the pages say this school trains for. Empty if none are stated.
+- ykb: true only if the pages say the school offers YKB courses.
+- prices: every stated price for those categories. kind = LESSON for one driving lesson (minutes = its length), COURSE for a full education, package or YKB course (hours = stated course length in hours, e.g. 35 or 140). category = the licence category, or YKB for YKB courses. name = the product name as written (Swedish, short).
+- Skip prices that apply to a company only (offert), and prices "från" ranges without a number.
+- sourceUrl: the page URL where most of these prices appear; must be one of the given URLs, or null when no price is stated.`;
+
+async function extractHeavy(
+  client: OpenAI,
+  model: string,
+  school: School,
+  fetched: FetchCache,
+): Promise<HeavyExtraction> {
+  let budget = MAX_CHARS_TOTAL;
+  const pages = fetched.pages
+    .map((page) => {
+      const text = page.text.slice(0, Math.max(0, budget));
+      budget -= text.length;
+      return `URL: ${page.url}\n${text}`;
+    })
+    .filter((page) => page.length > 10)
+    .join('\n\n-----\n\n');
+  const response = await client.chat.completions.create({
+    model,
+    temperature: 0,
+    response_format: {
+      type: 'json_schema',
+      json_schema: { name: 'heavy_prices', strict: true, schema: HEAVY_SCHEMA },
+    },
+    messages: [
+      { role: 'system', content: HEAVY_INSTRUCTIONS },
+      { role: 'user', content: `School: ${school.name}\n\n${pages}` },
+    ],
+  });
+  const content = response.choices[0]?.message.content;
+  if (!content) throw new Error('empty response');
+  const extraction = JSON.parse(content) as HeavyExtraction;
+  const urls = new Set(fetched.pages.map((page) => page.url));
+  if (extraction.sourceUrl && !urls.has(extraction.sourceUrl)) extraction.sourceUrl = null;
+  return extraction;
+}
+
+function sanitizeHeavy(extraction: HeavyExtraction): HeavyExtraction {
+  const bounds = (price: HeavyPrice): [number, number] =>
+    price.kind === 'LESSON'
+      ? [900, 5_000]
+      : price.category === 'YKB'
+        ? [1_500, 80_000]
+        : [2_000, 150_000];
+  const prices = extraction.prices
+    .filter((price) => {
+      const [min, max] = bounds(price);
+      return price.priceSek >= min && price.priceSek <= max;
+    })
+    .map((price) => ({
+      ...price,
+      minutes:
+        price.minutes != null && price.minutes >= 20 && price.minutes <= 180 ? price.minutes : null,
+      hours: price.hours != null && price.hours >= 1 && price.hours <= 400 ? price.hours : null,
+    }))
+    .filter(
+      (price, index, all) =>
+        all.findIndex(
+          (other) =>
+            other.category === price.category &&
+            other.priceSek === price.priceSek &&
+            other.name.trim().toLowerCase() === price.name.trim().toLowerCase(),
+        ) === index,
+    )
+    .slice(0, 20);
+  const categories = [
+    ...new Set([
+      ...extraction.categories,
+      ...prices.flatMap((price) => (price.category === 'YKB' ? [] : [price.category])),
+    ]),
+  ].filter((category): category is HeavyCategory =>
+    (HEAVY_CATEGORIES as readonly string[]).includes(category),
+  );
+  return {
+    categories: HEAVY_CATEGORIES.filter((category) => categories.includes(category)),
+    ykb: extraction.ykb || prices.some((price) => price.category === 'YKB'),
+    prices,
+    sourceUrl: prices.length > 0 ? extraction.sourceUrl : null,
+  };
+}
+
 // Plausibility bounds drop extraction slips (package totals read as a lesson
 // price, öre, phone numbers).
 function sanitize(extraction: Extraction): Extraction {
@@ -432,6 +624,47 @@ function merge(school: School, today: string) {
   school.checkedAt = today;
 }
 
+const HEAVY_NAME_CODE = /(^|[^A-Za-z0-9])(C1E?|CE|C|D1E?|DE|D)([^A-Za-z0-9]|$)/;
+const HEAVY_NAME_WORD = /lastbil|buss|tung|ykb|yrkes|fortbildning|grundutbildning|kran/i;
+const CAR_NAME =
+  /(^|[^A-Za-z0-9])(B|BE|B96)([^A-Za-z0-9]|$)|personbil|halk|risk|moped|motorcykel|(^|\s)mc(\s|$)/i;
+
+// Keeps only prices whose amount is written on one of the crawled pages (as
+// 13500, 13 500, 13.500 or 13,500) and that belong to heavy-vehicle training:
+// car and trailer items listed on the same page are dropped, and a name that
+// names no category at all must come from a heavy-vehicle page.
+function onlyPricesOnPage(extraction: HeavyExtraction, fetched: FetchCache): HeavyExtraction {
+  const pageWith = (amount: number) => {
+    const grouped = String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, '[ .,]?');
+    const pattern = new RegExp(`(^|[^\\d])${grouped}([^\\d]|$)`);
+    return fetched.pages.find((page) => pattern.test(page.text.replace(/\u00a0|\u202f/g, ' ')));
+  };
+  const prices = extraction.prices.filter((price) => {
+    const page = pageWith(price.priceSek);
+    if (!page) return false;
+    const heavyName = HEAVY_NAME_CODE.test(price.name) || HEAVY_NAME_WORD.test(price.name);
+    if (CAR_NAME.test(price.name) && !heavyName) return false;
+    return heavyName || HEAVY_LINK.test(decodeURIComponent(page.url));
+  });
+  return { ...extraction, prices };
+}
+
+// A fresh heavy crawl replaces school.heavy entirely, so training a school no
+// longer advertises disappears instead of lingering from an older run.
+function mergeHeavy(school: School) {
+  const fetched = readJson<FetchCache>(cachePath(school.id, 'fetch', true));
+  if (!fetched?.ok) return;
+  const cached = fetched.heavySignal
+    ? readJson<HeavyExtraction>(cachePath(school.id, 'extract', true))
+    : null;
+  if (fetched.heavySignal && !cached) return;
+  const extraction = cached ? sanitizeHeavy(onlyPricesOnPage(cached, fetched)) : null;
+  school.heavy =
+    extraction && (extraction.categories.length > 0 || extraction.ykb)
+      ? { ...extraction, checkedAt: fetched.fetchedAt.slice(0, 10) }
+      : null;
+}
+
 function toCsv(schools: School[]): string {
   const header = [
     'Län',
@@ -452,6 +685,8 @@ function toCsv(schools: School[]): string {
     'Källa (skolans webbplats)',
     'Sociala medier',
     'Kontrollerad',
+    'Tung trafik (behörigheter)',
+    'Tung trafik (pris)',
   ];
   const cell = (value: unknown) => {
     const text = value == null ? '' : String(value);
@@ -490,6 +725,12 @@ function toCsv(schools: School[]): string {
       school.sourceUrl,
       (school.social ?? []).join(' '),
       school.checkedAt,
+      school.heavy
+        ? [...school.heavy.categories, ...(school.heavy.ykb ? ['YKB'] : [])].join(', ')
+        : '',
+      (school.heavy?.prices ?? [])
+        .map((price) => `${price.category} ${price.name} – ${price.priceSek}`)
+        .join(' | '),
     ]
       .map(cell)
       .join(';'),
@@ -541,8 +782,8 @@ function sameHost(url: string, home: string): boolean {
   return site(url) != null && site(url) === site(home);
 }
 
-function cachePath(id: string, stage: 'fetch' | 'extract'): string {
-  return path.join(CACHE_DIR, `${id}.${stage}.json`);
+function cachePath(id: string, stage: 'fetch' | 'extract', heavy = false): string {
+  return path.join(CACHE_DIR, `${id}.${heavy ? 'heavy-' : ''}${stage}.json`);
 }
 
 function readJson<T>(file: string): T | null {
@@ -553,6 +794,12 @@ function summary(extraction: Extraction): string {
   return `lesson ${extraction.lesson.priceSek ?? '-'} risk1 ${extraction.risk1Sek ?? '-'} risk2 ${
     extraction.risk2Sek ?? '-'
   } packages ${extraction.packages.length}`;
+}
+
+function heavySummary(extraction: HeavyExtraction): string {
+  return `categories ${extraction.categories.join('/') || '-'} ykb ${extraction.ykb ? 'yes' : 'no'} prices ${
+    extraction.prices.length
+  }`;
 }
 
 function log(index: number, total: number, id: string, message: string | undefined) {

@@ -555,6 +555,11 @@
     "sortNearest": "Nearest first",
     "sortLessonPrice": "Lesson price, cheapest first",
     "sortPackagePrice": "Package price, cheapest first",
+    "heavyLabel": "Heavy vehicles",
+    "heavyAll": "All schools",
+    "heavyTruck": "Truck (C1, C, CE)",
+    "heavyBus": "Bus (D1, D, DE)",
+    "heavyYkb": "YKB (professional driver)",
     "distancePill": "{km} km away",
     "clearGeolocation": "Clear location",
     "profileCta": "View profile",
@@ -3637,6 +3642,12 @@
     "package": "Package",
     "intensive": "Intensive course",
     "lessons": "{count, plural, one {# lesson} other {# lessons}}",
-    "heading": "Prices"
+    "heading": "Prices",
+    "hours": "{hours} h",
+    "heavyHeading": "Heavy vehicles",
+    "heavyOffered": "Trains, according to its website: {list}",
+    "heavyTruck": "Truck",
+    "heavyBus": "Bus",
+    "heavyFrom": "from SEK {amount}"
   }
 }

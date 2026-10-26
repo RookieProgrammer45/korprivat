@@ -36,6 +36,7 @@ import {
   parseInstructorQuery,
 } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
+import { heavyListingWhere } from '@/lib/discovery/published-prices';
 import { sendEmail } from '@/lib/email/send';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
 import { env } from '@/lib/env';
@@ -91,7 +92,8 @@ export async function GET(req: NextRequest) {
     q.nearKm !== undefined ||
     q.sort !== undefined ||
     q.providerRole !== undefined ||
-    q.affiliation !== undefined;
+    q.affiliation !== undefined ||
+    q.heavy !== undefined;
   const publicPreview =
     !sessionUser &&
     limit != null &&
@@ -535,6 +537,7 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
     await buildVerifiedProviderActivationWhere(),
     filters,
   ];
+  if (q.heavy) clauses.push(heavyListingWhere(q.heavy));
   if (q.city) {
     const names = cityFilterCandidates(q.city);
     clauses.push({
