@@ -2187,6 +2187,13 @@ html.dark .dlu-footer-cta {
   padding-top: 1.4rem;
 }
 
+.dlu-footer-socials {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+}
+
 .dlu-footer-social {
   align-items: center;
   color: var(--muted-foreground);
