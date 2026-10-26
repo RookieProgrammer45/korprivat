@@ -52,6 +52,12 @@ import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/
 
 type FormValues = BookingCreate;
 
+function listingCreateMode(instructor: InstructorItem | null): 'instant' | 'request' | null {
+  if (instructor?.surfaces?.transactionalBooking) return 'instant';
+  if (instructor?.surfaces?.requestToBook) return 'request';
+  return null;
+}
+
 const POLL_INTERVAL_MS = 1500;
 const POLL_MAX_ATTEMPTS = 10;
 
@@ -387,8 +393,11 @@ export function BookingForm({
         // Always POST with the matching `mode` so the route does not 400
         // when the instructor's published mode is `request`. Mirrors the
         // server-side branch on `data.mode === 'request'`.
-        const submittedMode: 'instant' | 'request' =
-          instructor?.bookingMode === 'request' ? 'request' : 'instant';
+        const submittedMode = listingCreateMode(instructor);
+        if (!submittedMode) {
+          toast.error(t('validation.notAuthorizedBySchool'));
+          return;
+        }
         const created = await apiFetch('/api/bookings', {
           method: 'POST',
           body: JSON.stringify({
@@ -694,14 +703,18 @@ export function BookingForm({
             {instructor ? (
               <div className="min-w-0 rounded-lg border border-brand-500/25 bg-brand-100 p-4 dark:bg-brand-900">
                 <p className="text-small font-medium text-foreground">
-                  {instructor.bookingMode === 'request'
+                  {listingCreateMode(instructor) === 'request'
                     ? tDetail('bookingMode.request.title')
-                    : tDetail('bookingMode.instant.title')}
+                    : listingCreateMode(instructor) === 'instant'
+                      ? tDetail('bookingMode.instant.title')
+                      : tDetail('bookingMode.contact.title')}
                 </p>
                 <p className="mt-1 text-small text-muted-foreground">
-                  {instructor.bookingMode === 'request'
+                  {listingCreateMode(instructor) === 'request'
                     ? tDetail('bookingMode.request.body')
-                    : tDetail('bookingMode.instant.body')}
+                    : listingCreateMode(instructor) === 'instant'
+                      ? tDetail('bookingMode.instant.body')
+                      : tDetail('bookingMode.contact.body')}
                 </p>
               </div>
             ) : null}
@@ -848,12 +861,14 @@ export function BookingForm({
               className="shadow-sm"
             >
               {form.formState.isSubmitting
-                ? instructor?.bookingMode === 'request'
+                ? listingCreateMode(instructor) === 'request'
                   ? t('submittingRequest')
                   : t('submittingInstant')
-                : instructor?.bookingMode === 'request'
+                : listingCreateMode(instructor) === 'request'
                   ? t('submitRequest')
-                  : t('submitInstant')}
+                  : listingCreateMode(instructor) === 'instant'
+                    ? t('submitInstant')
+                    : t('submitDirectoryOnly')}
             </Button>
             {eligibilityError ? (
               <p className="text-small text-destructive" role="alert">

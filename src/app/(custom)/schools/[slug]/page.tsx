@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const city = org.city?.trim() || 'Sverige';
   const title = `${org.name} — trafikskola i ${city}`;
-  const description = `${org.name} på DriveLinkUp — auktoriserad trafikskola i ${city}.`;
+  const description = `${org.name} på DriveLinkUp — trafikskola i katalogen i ${city}. En katalogannons är inte en bokningsbehörighet.`;
   const canonical = `/schools/${org.slug}`;
   return {
     title,
@@ -62,7 +62,6 @@ export default async function SchoolProfilePage({ params }: PageProps) {
     return toPublicInstructor(row, aggregate, null);
   });
 
-  const verified = org.verificationState === 'APPROVED';
   const city = org.city?.trim() || null;
   const pageUrl = `${siteUrl}/schools/${org.slug}`;
 
@@ -120,13 +119,9 @@ export default async function SchoolProfilePage({ params }: PageProps) {
             </h1>
             <Badge
               variant="outline"
-              className={
-                verified
-                  ? 'border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300'
-                  : 'border-border bg-muted text-muted-foreground'
-              }
+              className="border-border bg-muted text-muted-foreground"
             >
-              {verified ? t('verifiedBadge') : t('pendingBadge')}
+              {t('listedBadge')}
             </Badge>
           </div>
           {city ? <p className="text-body text-muted-foreground">{city}</p> : null}

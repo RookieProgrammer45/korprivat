@@ -11,12 +11,14 @@ const {
   mockLicenseFindMany,
   mockReviewFindMany,
   mockGetSessionUser,
+  mockAuthzFindMany,
 } = vi.hoisted(() => ({
   mockInstructorFindMany: vi.fn(),
   mockSlotFindMany: vi.fn(),
   mockLicenseFindMany: vi.fn(),
   mockReviewFindMany: vi.fn(),
   mockGetSessionUser: vi.fn(),
+  mockAuthzFindMany: vi.fn(),
 }));
 
 vi.mock('@/lib/db', () => ({
@@ -25,6 +27,7 @@ vi.mock('@/lib/db', () => ({
     availabilitySlot: { findMany: mockSlotFindMany },
     instructorLicense: { findMany: mockLicenseFindMany },
     review: { findMany: mockReviewFindMany },
+    schoolAuthorizationEvent: { findMany: mockAuthzFindMany },
   },
 }));
 
@@ -120,9 +123,25 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     mockSlotFindMany.mockReset();
     mockLicenseFindMany.mockReset();
     mockReviewFindMany.mockReset();
+    mockAuthzFindMany.mockReset();
     mockSlotFindMany.mockResolvedValue([]);
     mockLicenseFindMany.mockResolvedValue([]);
     mockReviewFindMany.mockResolvedValue([]);
+    mockAuthzFindMany.mockImplementation(async (args: { where?: { listingId?: { in?: string[] } } }) => {
+      const ids = args.where?.listingId?.in ?? [];
+      return ids.map((listingId) => ({
+        listingId,
+        sequence: 1,
+        kind: 'grant',
+        scopes: ['availability_display'],
+        decisionVersion: 1,
+        actorUserId: 'rep-1',
+        evidenceRef: 'ev',
+        note: null,
+        idempotencyKey: `avail-${listingId}`,
+        createdAt: new Date('2026-10-23T00:00:00.000Z'),
+      }));
+    });
   });
 
   afterEach(() => {

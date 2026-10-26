@@ -16,6 +16,8 @@ const {
   mockGetSessionUser,
   mockConnectionFindFirst,
   mockCertificationFindFirst,
+  mockAuthzFindMany,
+  mockLicenseFindUnique,
 } = vi.hoisted(() => ({
   sendEmailMock: vi.fn(async () => ({ id: 'mock_email_id' })),
   mockInstructorFindUnique: vi.fn(),
@@ -29,6 +31,8 @@ const {
   mockGetSessionUser: vi.fn(),
   mockConnectionFindFirst: vi.fn(),
   mockCertificationFindFirst: vi.fn(),
+  mockAuthzFindMany: vi.fn(),
+  mockLicenseFindUnique: vi.fn(),
 }));
 
 const LEARNER_SESSION = {
@@ -59,6 +63,8 @@ vi.mock('@/lib/db', () => ({
     handledareEnrollment: { findFirst: mockHandledareFindFirst },
     schoolConnection: { findFirst: mockConnectionFindFirst },
     certification: { findFirst: mockCertificationFindFirst },
+    schoolAuthorizationEvent: { findMany: mockAuthzFindMany },
+    instructorLicense: { findUnique: mockLicenseFindUnique },
     $transaction: mockTransaction,
   },
 }));
@@ -109,6 +115,8 @@ function instructorRecord(
     email: string | null;
     cancellationPolicyTier: string | null;
     bookingMode: 'instant' | 'request' | null;
+    userId?: string;
+    providerRole?: string;
   }> = {},
 ) {
   return {
@@ -120,6 +128,8 @@ function instructorRecord(
     email: 'erik@drivelinkup.test',
     cancellationPolicyTier: 'flexible',
     bookingMode: 'instant',
+    userId: 'user_erik',
+    providerRole: 'SCHOOL',
     ...overrides,
   };
 }
@@ -138,6 +148,23 @@ describe('POST /api/bookings — email dispatch', () => {
     mockGetSessionUser.mockReset();
     mockConnectionFindFirst.mockReset();
     mockCertificationFindFirst.mockReset();
+    mockAuthzFindMany.mockReset();
+    mockLicenseFindUnique.mockReset();
+    mockAuthzFindMany.mockResolvedValue([
+      {
+        sequence: 1,
+        kind: 'grant',
+        scopes: ['transactional_booking'],
+        decisionVersion: 1,
+        actorUserId: 'rep-1',
+        evidenceRef: 'ev',
+        note: null,
+        idempotencyKey: 'g1',
+        createdAt: new Date('2026-10-23T00:00:00.000Z'),
+        listingId: 'instructor_erik',
+      },
+    ]);
+    mockLicenseFindUnique.mockResolvedValue({ status: 'VERIFIED' });
     mockGetSessionUser.mockResolvedValue(LEARNER_SESSION);
     mockUserProfileFindUnique.mockResolvedValue({
       dateOfBirth: dobYearsAgo(25),
@@ -175,6 +202,15 @@ describe('POST /api/bookings — email dispatch', () => {
 
   afterEach(() => {
     vi.restoreAllMocks();
+  });
+
+  it('refuses instant create from bookingMode when the listing has no grant', async () => {
+    mockAuthzFindMany.mockResolvedValueOnce([]);
+    mockInstructorFindUnique.mockResolvedValueOnce(instructorRecord());
+    const res = await POST(jsonRequest(VALID_BODY));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: { code: 'not_authorized_by_school' } });
+    expect(mockBookingCreate).not.toHaveBeenCalled();
   });
 
   it('does NOT send email when zod parse fails (400)', async () => {

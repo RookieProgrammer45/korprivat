@@ -32,6 +32,8 @@ import {
 import { resolveOrigin } from '@/lib/payments/origin';
 import { getSessionUser } from '@/lib/require-auth';
 import { evaluateBookingPolicy } from '@/lib/scheduling/booking-policy';
+import { loadListingEligibilityFacts } from '@/lib/scheduling/listing-eligibility';
+import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
 
@@ -75,6 +77,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       hourlyRateSek: true,
       bookingMode: true,
       categories: true,
+      providerRole: true,
     },
   });
   if (!instructor) {
@@ -119,12 +122,24 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     );
   }
 
+  const learnerGate = booking.userId
+    ? await resolveLearnerBookingGate(booking.userId)
+    : { eligible: false as const };
+  const eligibility = await loadListingEligibilityFacts({
+    listingId: instructor.id,
+    userId: instructor.userId,
+    category: booking.category,
+    listingCategories: instructor.categories,
+    providerRole: instructor.providerRole,
+  });
   const policy = evaluateBookingPolicy({
     action: 'manual_accept',
-    categoryAllowed: instructor.categories.includes(booking.category),
-    studentContactVerified: true,
+    categoryAllowed: eligibility.categoryAllowed,
+    licenceStatus: eligibility.licenceStatus,
+    instructorAffiliated: eligibility.instructorAffiliated,
+    studentContactVerified: learnerGate.eligible,
     nativeSlotId: booking.slotId,
-    commitmentRoute: parsed.data.commitmentRoute ?? (booking.slotId ? 'native' : null),
+    commitmentRoute: parsed.data.commitmentRoute ?? null,
   });
   if (!policy.ok) {
     return NextResponse.json({ error: { component: policy.component } }, { status: 403 });
@@ -139,6 +154,16 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     })
   ) {
     return NextResponse.json(notAuthorizedBody(), { status: 403 });
+  }
+  if (!policy.commitmentRoute) {
+    return NextResponse.json(
+      BookingAcceptResponse.parse({
+        id: booking.id,
+        paymentStatus: currentStatus,
+        actionUrl: null,
+      }),
+      { status: 200 },
+    );
   }
   if (policy.commitmentRoute !== 'external_manual') {
     if (!booking.slotId) {

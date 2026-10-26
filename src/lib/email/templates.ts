@@ -102,7 +102,7 @@ export function waitlistConfirmationEmail(input: {
     const { html, text } = renderEmail({
       heading: `You're on the DriveLinkUp early-access list — thanks, ${name}`,
       body: [
-        `We've got you down as an authorized driving school interested in listing on DriveLinkUp.`,
+        `We've got you down as a driving school interested in listing on DriveLinkUp.`,
         `We'll review your school information and walk through the listing before it goes live.`,
         `In the meantime, we'd love to hear what scheduling categories you teach and a few openings you typically have, so we can prioritise the right city and category in the pilot.`,
       ],
@@ -118,7 +118,7 @@ export function waitlistConfirmationEmail(input: {
     heading: `You're on the DriveLinkUp early-access list — thanks, ${name}`,
     body: [
       `We've saved your spot on the DriveLinkUp launch list.`,
-      `When we go live, you'll be able to compare authorized schools by licence category, language, neighbourhood, published price and availability.`,
+      `When we go live, you'll be able to compare driving-school listings by licence category, language, neighbourhood, published price and availability.`,
       `No spam — you'll get one launch email, then only updates that matter for you.`,
     ],
     footer: 'DriveLinkUp · launching in Sweden',
@@ -134,7 +134,7 @@ export function waitlistLaunchNotifyEmail(input: { name: string; ctaUrl: string 
   const { html, text } = renderEmail({
     heading: `DriveLinkUp is live — sign in, ${input.name}`,
     body: [
-      'The marketplace is open. Create your learner profile, compare authorized schools, and book your first slot with no separate DriveLinkUp fee.',
+      'The marketplace is open. Create your learner profile, compare driving-school listings, and request a time where the school has authorized that path. There is no separate DriveLinkUp learner fee.',
       'If you signed up as a school, your listing can show the price and availability your school controls.',
     ],
     cta: { label: 'Sign in to DriveLinkUp', url: input.ctaUrl },
@@ -246,7 +246,7 @@ export function signedUpWelcomeEmail(input: {
     };
   }
   const baseBody = [
-    `Your learner account is live. Tell us your licence goal, preferred language, neighbourhood, schedule, and budget so you can compare authorized schools nearby.`,
+    `Your learner account is live. Tell us your licence goal, preferred language, neighbourhood, schedule, and budget so you can compare driving-school listings nearby.`,
     `You can browse the pilot cohort right now, or wait for the launch email with the full marketplace.`,
     avatar ? `Your profile is set up and you're ready to start.` : null,
   ].filter((line): line is string => line !== null);
@@ -967,12 +967,12 @@ export function instructorProfileLiveEmail(input: {
     : `Your driving-school listing is live — welcome aboard, ${name}`;
   const baseBody = isSwedish
     ? [
-        'Tack för att du listar din trafikskola på DriveLinkUp. Skolprofilen är live och synlig för elever som jämför auktoriserade trafikskolor i din stad.',
+        'Tack för att du listar din trafikskola på DriveLinkUp. Skolprofilen är live och synlig för elever som jämför trafikskolor i din stad. En katalogannons är inte en bokningsbehörighet.',
         'Nästa steg: DriveLinkUp-teamet återkommer separat om verifieringen av ditt lärartillstånd från Transportstyrelsen.',
         'Du kan när som helst uppdatera skolans priser, tillgänglighet och presentation från skolöversikten.',
       ]
     : [
-        'Thanks for listing your driving school on DriveLinkUp. Your school listing is live and visible to learners comparing authorized schools in your city.',
+        'Thanks for listing your driving school on DriveLinkUp. Your school listing is live and visible to learners comparing schools in your city. A directory listing is not a booking authorization.',
         'Next: the DriveLinkUp team will follow up separately about verification of your Transportstyrelsen teaching licence.',
         'You can update your school prices, availability, and profile anytime from your school dashboard.',
       ];

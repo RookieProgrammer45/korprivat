@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { isRiskCoursesOn } from '@/lib/discovery/risk-course-policy';
 import { requestRiskCourseSession } from '@/lib/discovery/risk-course-store';
 import { requireAuth } from '@/lib/require-auth';
+import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +12,6 @@ const bodySchema = z.object({
   studentName: z.string().trim().min(1).max(200),
   studentEmail: z.string().email(),
   instant: z.boolean().optional(),
-  hasE4: z.boolean().optional(),
 });
 
 export async function POST(req: Request, ctx: { params: Promise<{ id: string }> }) {
@@ -35,14 +35,21 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     return NextResponse.json({ error: { code: 'invalid_body' } }, { status: 422 });
   }
   const { id } = await ctx.params;
+  const gate = await resolveLearnerBookingGate(user.id);
+  if (!gate.eligible) {
+    return NextResponse.json(
+      { error: { code: 'learner_not_eligible', state: gate.state } },
+      { status: 403 },
+    );
+  }
   const result = await requestRiskCourseSession({
     sessionId: id,
     studentName: parsed.data.studentName,
     studentEmail: parsed.data.studentEmail,
     studentUserId: user.id,
     instant: parsed.data.instant,
-    hasE4: parsed.data.hasE4,
-    studentContactVerified: true,
+    hasE4: false,
+    studentContactVerified: gate.eligible,
   });
   return NextResponse.json(result.body, { status: result.status });
 }

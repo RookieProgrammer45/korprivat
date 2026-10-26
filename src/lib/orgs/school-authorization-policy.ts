@@ -144,19 +144,20 @@ export function surfacePermissions(input: {
   folded: FoldedAuthorization;
   enforcementOn: boolean;
 }): SurfacePermissions {
+  void input.enforcementOn;
   if (isContactRestriction(input.bookingMode)) {
     return fromBookingMode('contact');
   }
-  const base = input.enforcementOn
-    ? fromGrants(input.folded.granted.filter((scope) => !input.folded.withdrawn.includes(scope)))
-    : fromBookingMode(input.bookingMode);
+  // Legacy bookingMode is never a grant — empty grants stay directory-only
+  // whether SCHOOL_AUTHZ_ENFORCEMENT is on or off (specs/09 §1, SC-14).
   const withdrawn = new Set(input.folded.withdrawn);
+  const base = fromGrants(input.folded.granted.filter((scope) => !withdrawn.has(scope)));
   return {
     availabilityDisplay: base.availabilityDisplay && !withdrawn.has('availability_display'),
     inquiryCollection: base.inquiryCollection && !withdrawn.has('inquiry_collection'),
     requestToBook: base.requestToBook && !withdrawn.has('request_to_book'),
     transactionalBooking: base.transactionalBooking && !withdrawn.has('transactional_booking'),
-    directoryOnly: false,
+    directoryOnly: base.directoryOnly,
   };
 }
 
@@ -196,35 +197,23 @@ export function decideBookingCreate(input: {
   submittedMode: 'instant' | 'request' | null | undefined;
 }): BookingCreateDecision {
   const surfaces = listingSurfaces(input);
-  const legacyMode = input.bookingMode === 'request' ? 'request' : 'instant';
-  const mode = input.submittedMode ?? (input.enforcementOn ? null : legacyMode);
-  if (input.enforcementOn) {
-    if (mode === 'request') {
-      return surfaces.requestToBook
-        ? { ok: true, mode: 'request' }
-        : { ok: false, status: 403, code: 'not_authorized_by_school' };
-    }
-    if (mode === 'instant') {
-      return surfaces.transactionalBooking
-        ? { ok: true, mode: 'instant' }
-        : { ok: false, status: 403, code: 'not_authorized_by_school' };
-    }
-    return { ok: false, status: 403, code: 'not_authorized_by_school' };
-  }
   if (isContactRestriction(input.bookingMode) || isClosed(surfaces)) {
     return { ok: false, status: 403, code: 'not_authorized_by_school' };
   }
-  const resolved = mode === 'request' || mode === 'instant' ? mode : legacyMode;
-  if (resolved === 'request' && !surfaces.requestToBook) {
-    return { ok: false, status: 403, code: 'not_authorized_by_school' };
+  const mode = input.submittedMode;
+  if (mode === 'request') {
+    return surfaces.requestToBook
+      ? { ok: true, mode: 'request' }
+      : { ok: false, status: 403, code: 'not_authorized_by_school' };
   }
-  if (resolved === 'instant' && !surfaces.transactionalBooking) {
-    return { ok: false, status: 403, code: 'not_authorized_by_school' };
+  if (mode === 'instant') {
+    return surfaces.transactionalBooking
+      ? { ok: true, mode: 'instant' }
+      : { ok: false, status: 403, code: 'not_authorized_by_school' };
   }
-  if (resolved !== legacyMode) {
-    return { ok: false, status: 409, code: 'mode_mismatch' };
-  }
-  return { ok: true, mode: resolved };
+  if (surfaces.requestToBook) return { ok: true, mode: 'request' };
+  if (surfaces.transactionalBooking) return { ok: true, mode: 'instant' };
+  return { ok: false, status: 403, code: 'not_authorized_by_school' };
 }
 
 export function canAcceptPendingRequest(input: {
@@ -232,9 +221,9 @@ export function canAcceptPendingRequest(input: {
   folded: FoldedAuthorization;
   enforcementOn: boolean;
 }): boolean {
+  void input.enforcementOn;
   if (isContactRestriction(input.bookingMode)) return false;
   if (input.folded.withdrawn.includes('request_to_book')) return false;
-  if (!input.enforcementOn) return true;
   return input.folded.granted.includes('request_to_book');
 }
 
@@ -352,16 +341,17 @@ export type ListingBinding = {
   verifiedAt: string | null;
 };
 
-/** Empty binding table keeps the legacy snapshot. Any row for the listing ends that fallback. */
+/** Unknown, pending, revoked, or conflicting bindings never copy a membership snapshot. */
 export function snapshotOrganizationId(input: {
   bindings: ListingBinding[];
   listingId: string;
   legacyOrganizationId: string | null;
 }): string | null {
+  void input.legacyOrganizationId;
   const mine = input.bindings.filter((row) => row.listingId === input.listingId);
-  if (mine.length === 0) return input.legacyOrganizationId;
-  const active = mine.find((row) => row.state === 'ACTIVE' && row.verifiedAt);
-  return active?.organizationId ?? null;
+  const active = mine.filter((row) => row.state === 'ACTIVE' && row.verifiedAt);
+  if (active.length !== 1) return null;
+  return active[0]?.organizationId ?? null;
 }
 
 export function bookingVisibleToOrganization(input: {
@@ -371,11 +361,12 @@ export function bookingVisibleToOrganization(input: {
   bindings: ListingBinding[];
 }): boolean {
   const mine = input.bindings.filter((row) => row.listingId === input.bookingListingId);
-  if (mine.length === 0) return input.bookingOrganizationId === input.organizationId;
-  const active = mine.find((row) => row.state === 'ACTIVE' && row.verifiedAt);
-  if (!active) return false;
+  const active = mine.filter((row) => row.state === 'ACTIVE' && row.verifiedAt);
+  if (active.length !== 1) return false;
+  const binding = active[0];
+  if (!binding) return false;
   return (
-    active.organizationId === input.organizationId &&
+    binding.organizationId === input.organizationId &&
     input.bookingOrganizationId === input.organizationId
   );
 }

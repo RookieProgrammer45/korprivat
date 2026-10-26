@@ -709,7 +709,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   const locale = useLocale();
   const trTier = useTranslations('cancellationPolicy.tierBadge');
   const trBooking = useTranslations('bookingForm');
-  const showTimes = row.surfaces ? row.surfaces.availabilityDisplay : row.bookingMode !== 'contact';
+  const showTimes = row.surfaces?.availabilityDisplay === true;
   const nextSlotPill =
     showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, tr, locale) : null;
   const distancePill =
@@ -722,7 +722,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   // Directory-only ('contact') listings show no cancellation-policy pill:
   // no booking flows through DriveLinkUp, and an unconfirmed tier would
   // misrepresent the school's own terms.
-  const directoryOnly = row.surfaces?.directoryOnly ?? row.bookingMode === 'contact';
+  const directoryOnly = row.surfaces ? row.surfaces.directoryOnly : true;
   const tierBadge =
     directoryOnly || row.showCancellationPolicy === false
       ? null
@@ -732,14 +732,12 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   const bookingMode: 'instant' | 'request' | 'contact' = row.surfaces
     ? row.surfaces.directoryOnly
       ? 'contact'
-      : row.surfaces.requestToBook && !row.surfaces.transactionalBooking
-        ? 'request'
-        : 'instant'
-    : row.bookingMode === 'request'
-      ? 'request'
-      : row.bookingMode === 'contact'
-        ? 'contact'
-        : 'instant';
+      : row.surfaces.transactionalBooking
+        ? 'instant'
+        : row.surfaces.requestToBook
+          ? 'request'
+          : 'contact'
+    : 'contact';
   const bookingModeLabel = trBooking(
     bookingMode === 'request'
       ? 'bookingModeLabel.request'

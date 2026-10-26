@@ -19,7 +19,7 @@ export default function KostnadKorkortPage() {
     '@type': 'Article',
     headline: 'Vad kostar körkortet i Sverige?',
     description:
-      'Hur lektionspriser och skolavgifter hänger ihop, och hur du jämför auktoriserade trafikskolor.',
+      'Hur lektionspriser och skolavgifter hänger ihop, och hur du jämför trafikskolor i katalogen.',
     author: { '@type': 'Organization', name: siteName },
     mainEntityOfPage: url,
     inLanguage: 'sv-SE',

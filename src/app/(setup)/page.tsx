@@ -4,7 +4,7 @@ import { siteDescription, siteName } from '@/lib/brand';
 import { absoluteUrl } from '@/lib/seo/alternates';
 
 export const metadata: Metadata = {
-  title: { absolute: `${siteName} – Jämför trafikskolor & boka körlektioner` },
+  title: { absolute: `${siteName} – Jämför trafikskolor i katalogen` },
   description: siteDescription,
   alternates: { canonical: '/' },
 };
