@@ -1107,7 +1107,7 @@ form > button[type="submit"] {
 /* ==========================================================================
    ELEVENLABS-STYLE RESTYLE — 2026-10-14
    Design language: warm bone surfaces, ink typography, 20px cards, 999px
-   pills, one small green accent. Fonts (Syne/DM Sans) and language/theme
+   pills, one small green accent. Fonts (Syne) and language/theme
    toggles are intentionally untouched.
    NOTE: this file is imported BEFORE globals.css's own :root seed, so token
    overrides below use `html:root` (higher specificity) to win the cascade.
