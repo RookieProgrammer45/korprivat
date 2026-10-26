@@ -1,5 +1,6 @@
 // Kept out of next.user-config.ts so the edge proxy does not import
 // next-intl/plugin (and its WASM extractor) into the proxy graph.
+import { adsenseClient, isAdsenseClient } from '@/lib/adsense';
 import type { CspExtraSources } from './csp';
 
 /**
@@ -17,12 +18,10 @@ import type { CspExtraSources } from './csp';
  * e.g. { frameSrc: ['https://js.stripe.com'], connectSrc: ['https://*.supabase.co'] }
  */
 
-// Google AdSense (auto ads) is enabled ONLY when NEXT_PUBLIC_ADSENSE_CLIENT is
-// set to a valid publisher ID — fail closed. It needs iframes + beacons to the
-// Google ad hosts. script-src stays untouched: the AdSenseLoader injects the
-// loader script WITH the per-request nonce, and 'strict-dynamic' admits the
-// child scripts AdSense injects itself.
-const adsOn = /^ca-pub-\d+$/.test(process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? '');
+// Google AdSense (auto ads). Needs iframes + beacons to the Google ad hosts.
+// script-src stays untouched: the root-layout Script carries the per-request
+// nonce, and 'strict-dynamic' admits the child scripts AdSense injects itself.
+const adsOn = isAdsenseClient(adsenseClient());
 
 export const cspExtraSources: CspExtraSources = {
   frameSrc: adsOn
