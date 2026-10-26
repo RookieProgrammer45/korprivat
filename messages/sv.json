@@ -59,7 +59,7 @@
     },
     "footer": {
       "headline": "Kom igång idag.",
-      "sub": "Jämför trafikskolor i katalogen och se priser före bokning. DriveLinkUp är en marknadsplats, inte en trafikskola. En annons är inte samma sak som en bokningsbehörighet. Kostnadsfritt för elever.",
+      "sub": "Jämför trafikskolor i katalogen och se priser före bokning. DriveLinkUp är en marknadsplats, inte en trafikskola. En annons är inte samma sak som en bokningsbehörighet. Kostnadsfritt för alla användare.",
       "cta": "Kom igång gratis",
       "columnProduct": "Produkt",
       "columnCompany": "Företag",
@@ -190,7 +190,7 @@
       },
       "price": {
         "q": "Vad betalar jag?",
-        "a": "Du ser trafikskolans publicerade lektionspris och totalen i SEK före kassan. Att upptäcka, jämföra och boka är kostnadsfritt för elever — inga separata avgifter läggs på."
+        "a": "Du ser trafikskolans publicerade lektionspris och totalen i SEK före kassan. DriveLinkUp är kostnadsfritt för alla användare — inga avgifter läggs på."
       },
       "safety": {
         "q": "Vilka trygghets- och behörighetskrav gäller?",
@@ -339,14 +339,14 @@
         "howBody": "Välj verifierad skola, reservera tid, betala till escrow, genomför lektionen och bekräfta så utbetalning kan ske. Tvistverktyg finns vid behov.",
         "relatedTitle": "Relaterade guider",
         "linkHandledare": "Handledare och övningskörning",
-        "linkPricing": "Priser och provision",
+        "linkPricing": "Priser",
         "linkFaq": "FAQ",
         "linkBlog": "Elevguider",
         "faqTitle": "Vanliga frågor Göteborg",
         "faq1q": "Finns undervisning på engelska?",
         "faq1a": "Många annonser markerar engelska. Filtrera katalogen eller läs profilen före bokning.",
         "faq2q": "Vad betalar skolan till DriveLinkUp?",
-        "faq2a": "Skolbokningar betalar 8% efter genomförd tjänst. En instruktör kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola. Elevavgift 0%.",
+        "faq2a": "Ingenting. DriveLinkUp är kostnadsfritt för alla användare — skolor, instruktörer och elever. En instruktör kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola.",
         "faq3q": "När betalar jag?",
         "faq3a": "Vid checkout för bokad tid. Medlen hålls i escrow tills leverans bekräftas eller auto-release körs."
       }
@@ -792,7 +792,7 @@
   },
   "instructorOnboarding": {
     "title": "Skapa skolans annons",
-    "subtitle": "Publicera den trafikskolans uppgifter, pris och tillgänglighet som elever behöver för att jämföra. Håll annonsen aktuell; 10 % gäller först efter genomförd tjänst.",
+    "subtitle": "Publicera den trafikskolans uppgifter, pris och tillgänglighet som elever behöver för att jämföra. Håll annonsen aktuell. Det är kostnadsfritt att lista er skola.",
     "submit": "Publicera annonsen",
     "submitting": "Skapar annons…",
     "error": "Något gick fel. Försök igen.",
@@ -2575,9 +2575,9 @@
         "expectation": "Håll dina kategorier, pris och tillgänglighet aktuella."
       },
       "commission": {
-        "title": "10 % efter genomförande",
-        "body": "DriveLinkUp tillämpar 10 % på hänförligt bokningsvärde först efter genomförd tjänst.",
-        "expectation": "Ingen separat elevavgift och inget löfte om bokningsvolym."
+        "title": "Kostnadsfritt att lista",
+        "body": "DriveLinkUp tar ingen provision eller avgift — varken av skolor, instruktörer eller elever.",
+        "expectation": "Inget löfte om bokningsvolym."
       }
     },
     "safety": {
@@ -3208,29 +3208,29 @@
   },
   "pricingPage": {
     "meta": {
-      "title": "Priser och avgifter",
-      "description": "Elever upptäcker, jämför och bokar trafikskolor i katalogen utan separat elevavgift. Skolor betalar 10 % först efter genomförd tjänst."
+      "title": "Priser",
+      "description": "DriveLinkUp är kostnadsfritt för alla användare. Elever och trafikskolor betalar ingen avgift eller provision till DriveLinkUp."
     },
     "hero": {
       "eyebrow": "Enkel marknadsekonomi",
       "title": "Skolans pris är elevens total.",
-      "body": "Upptäck, jämför och boka trafikskolor i katalogen — utan separata avgifter."
+      "body": "Upptäck, jämför och boka trafikskolor i katalogen — kostnadsfritt för alla användare."
     },
     "learner": {
       "title": "För elever",
       "body": "Bläddra bland trafikskolor i katalogen, jämför deras publicerade priser och tillgänglighet och boka det alternativ som passar.",
-      "price": "0 % elevavgift",
+      "price": "Kostnadsfritt",
       "detail": "Du betalar skolans publicerade bokningspris — ingen separat marknadsplatsavgift."
     },
     "school": {
       "title": "För trafikskolor i katalogen",
       "body": "Publicera det pris och den tillgänglighet ni styr över och ta emot kvalificerade, mätbara bokningar från elever som valt er annons.",
-      "price": "10 % efter genomförande",
-      "detail": "Provisionen gäller på hänförligt bokningsvärde först efter genomförd tjänst."
+      "price": "Kostnadsfritt",
+      "detail": "Ingen provision och ingen avgift till DriveLinkUp. Instruktörer tar betalt endast via en trafikskola de tillhör."
     },
     "notes": {
-      "title": "Första marknadens boknings- och provisionsregler (Sverige)",
-      "body": "En bokning är hänförlig när eleven slutför den via DriveLinkUp. Provisionen är 10 % av det hänförliga bokningsvärdet och utgår först efter genomförd tjänst—inte för bläddring, registrering eller ofullbordad förfrågan. Avbokning, återbetalning och utebliven ankomst följer skolans publicerade policy och bokningsposten. Elever betalar aldrig någon separat DriveLinkUp-avgift; skolans publicerade pris förblir elevens total. Utbetalningstid och ansvar bekräftas per deltagande skola innan skarpa bokningar marknadsförs."
+      "title": "Bokningsregler (Sverige)",
+      "body": "DriveLinkUp tar ingen avgift eller provision av elever, trafikskolor eller instruktörer. Avbokning, återbetalning och utebliven ankomst följer skolans publicerade policy och bokningsposten. Skolans publicerade pris förblir elevens total. Utbetalningstid och ansvar bekräftas per deltagande skola innan skarpa bokningar marknadsförs."
     },
     "cta": {
       "learner": "Jämför trafikskolor",
@@ -3331,7 +3331,7 @@
     "seoLead": "Lär dig och boka i {name}, {country}",
     "seoP1Live": "Annonser i {name} visar endast aktiverade skolor med verifierad Transportstyrelsen-behörighet. Jämför innan du skapar konto.",
     "seoP1Expansion": "Vi publicerar en strukturerad hubb för {name}, {country} så sök och AI kan dirigera elever rätt medan utbud onboards.",
-    "seoP2": "Elever betalar 0% marknadsplatsavgift. Skolbokningar betalar 8% efter genomförd tjänst. Instruktörer tar betalt endast via en trafikskola de tillhör. Handledare är en separat juridisk väg.",
+    "seoP2": "DriveLinkUp är kostnadsfritt för alla användare — ingen avgift och ingen provision. Instruktörer tar betalt endast via en trafikskola de tillhör. Handledare är en separat juridisk väg.",
     "howTitle": "Så fungerar DriveLinkUp",
     "howBodyLive": "Öppna en annons, välj tid, betala publicerat pris till escrow, genomför lektionen och bekräfta så skolan får betalt.",
     "howBodyExpansion": "När annonser går live på den här marknaden gäller samma escrow-flöde som i Sverige — verifierade skolor, publicerade priser, ingen elevavgift.",
@@ -3354,7 +3354,7 @@
   "termsPage": {
     "meta": {
       "title": "Tjänstevillkor",
-      "description": "Villkor för DriveLinkUp: bokning och betalning, avbokning, provision för trafikskolor och instruktörer, konton och personuppgifter."
+      "description": "Villkor för DriveLinkUp: bokning och betalning, avbokning, avgifter, konton och personuppgifter."
     },
     "hero": {
       "eyebrow": "Tjänstevillkor",
@@ -3365,7 +3365,7 @@
     "sections": {
       "0": {
         "title": "Om tjänsten",
-        "body": "DriveLinkUp är en marknadsplats som kopplar ihop trafikskolor i katalogen och certifierade instruktörer med elever. Vi visar publicerade priser, tillgänglighet och villkor innan du bokar. Att boka är kostnadsfritt för elever — DriveLinkUp tar ingen separat avgift av eleven.",
+        "body": "DriveLinkUp är en marknadsplats som kopplar ihop trafikskolor i katalogen och certifierade instruktörer med elever. Vi visar publicerade priser, tillgänglighet och villkor innan du bokar. DriveLinkUp är kostnadsfritt för alla användare.",
         "items": [
           "Vi granskar uppgifter från skolor och instruktörer före publicering.",
           "Tjänsten är under utveckling och funktioner kan läggas till eller ändras."
@@ -3393,8 +3393,8 @@
         ]
       },
       "4": {
-        "title": "Provision",
-        "body": "DriveLinkUp tar ut 8 % provision av trafikskolor för förmedlade bokningar — först när tjänsten genomförts. Instruktörer tar betalt endast via en skola de tillhör. Elever betalar aldrig någon avgift till DriveLinkUp.",
+        "title": "Avgifter",
+        "body": "DriveLinkUp tar inte ut någon avgift eller provision av elever, trafikskolor eller instruktörer. Instruktörer tar betalt endast via en skola de tillhör.",
         "items": []
       },
       "5": {
@@ -3421,7 +3421,7 @@
   "aboutPage": {
     "meta": {
       "title": "Om oss",
-      "description": "DriveLinkUp jämför trafikskolor och certifierade instruktörer. Priser och villkor syns före bokningen, och som elev betalar du aldrig någon avgift till oss."
+      "description": "DriveLinkUp jämför trafikskolor och certifierade instruktörer. Priser och villkor syns före bokningen, och tjänsten är kostnadsfri för alla användare."
     },
     "hero": {
       "eyebrow": "Trafikskolor och instruktörer — på ett ställe",
@@ -3448,7 +3448,7 @@
       "pillars": [
         "Kunskap före säljtryck. Råden bygger på fakta, inte på vad som säljer bäst.",
         "Transparens i båda riktningar. Skolan äger sina uppgifter, och vi granskar dem innan något publiceras.",
-        "Kostnadsfritt för elever. Du betalar aldrig någon avgift till DriveLinkUp."
+        "Kostnadsfritt för alla. Varken elever eller skolor betalar någon avgift till DriveLinkUp."
       ],
       "facts": ["Grundat 2026", "Stockholm, Sverige", "Oberoende"],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."

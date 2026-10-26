@@ -59,7 +59,7 @@
     },
     "footer": {
       "headline": "Get started today.",
-      "sub": "Compare driving-school listings and see prices before you book. DriveLinkUp is a marketplace, not a driving school. A listing is not a booking authorization. Free for learners.",
+      "sub": "Compare driving-school listings and see prices before you book. DriveLinkUp is a marketplace, not a driving school. A listing is not a booking authorization. Free for all users.",
       "cta": "Get started free",
       "columnProduct": "Product",
       "columnCompany": "Company",
@@ -190,7 +190,7 @@
       },
       "price": {
         "q": "What will I pay?",
-        "a": "You see the school's published lesson price and the total in SEK before checkout. Discovery, comparison and booking are free for learners — no added fees."
+        "a": "You see the school's published lesson price and the total in SEK before checkout. DriveLinkUp is free for all users — no added fees."
       },
       "safety": {
         "q": "What safety and credential checks should I expect?",
@@ -339,14 +339,14 @@
         "howBody": "Choose a verified school, reserve a slot, pay into escrow at the published price, complete the lesson, and confirm so funds release. Dispute tools exist if something goes wrong.",
         "relatedTitle": "Related guides",
         "linkHandledare": "Handledare and övningskörning",
-        "linkPricing": "Pricing and commissions",
+        "linkPricing": "Pricing",
         "linkFaq": "FAQ",
         "linkBlog": "Learner guides",
         "faqTitle": "Gothenburg FAQ",
         "faq1q": "Is English-speaking instruction available?",
         "faq1a": "Many listings flag English. Filter the directory or open a school profile to confirm before you book.",
         "faq2q": "What does a school pay DriveLinkUp?",
-        "faq2a": "School-affiliated bookings pay 8% after completed service. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Learners pay 0%.",
+        "faq2a": "Nothing. DriveLinkUp is free for all users — schools, instructors and learners. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school.",
         "faq3q": "When do I pay?",
         "faq3a": "At checkout for the booked slot. Funds stay in escrow until delivery is confirmed or auto-release runs."
       }
@@ -792,7 +792,7 @@
   },
   "instructorOnboarding": {
     "title": "Create your school listing",
-    "subtitle": "Publish the school details, price and availability learners need to compare. Keep the listing accurate; the 8% school commission applies only after completed service.",
+    "subtitle": "Publish the school details, price and availability learners need to compare. Keep the listing accurate. Listing your school is free.",
     "submit": "Publish my listing",
     "submitting": "Creating listing…",
     "error": "Something went wrong. Please try again.",
@@ -2575,9 +2575,9 @@
         "expectation": "Keep your categories, price and availability up to date."
       },
       "commission": {
-        "title": "10% after delivery",
-        "body": "DriveLinkUp applies 10% to the applicable booking value only after the lesson is delivered.",
-        "expectation": "No separate learner fee and no promise of booking volume."
+        "title": "Free to list",
+        "body": "DriveLinkUp charges no commission or fee — not to schools, instructors or learners.",
+        "expectation": "No promise of booking volume."
       }
     },
     "safety": {
@@ -3208,29 +3208,29 @@
   },
   "pricingPage": {
     "meta": {
-      "title": "Pricing and fees",
-      "description": "Learners discover, compare and book driving-school listings for free. Schools pay 8% only after completed service."
+      "title": "Pricing",
+      "description": "DriveLinkUp is free for all users. Learners and driving schools pay no fee or commission to DriveLinkUp."
     },
     "hero": {
       "eyebrow": "Simple marketplace economics",
       "title": "The school price is the learner total.",
-      "body": "Discover, compare and book driving-school listings — without added fees."
+      "body": "Discover, compare and book driving-school listings — free for all users."
     },
     "learner": {
       "title": "For learners",
       "body": "Browse listed driving schools, compare their published prices and availability, and book the option that fits.",
-      "price": "0% learner fee",
+      "price": "Free",
       "detail": "You pay the school's published booking price — no separate marketplace fee."
     },
     "school": {
       "title": "For driving schools",
       "body": "Publish the price and availability you control, then receive qualified, measurable bookings from learners who chose your listing.",
-      "price": "8% after completion",
-      "detail": "School-affiliated bookings pay 8% of attributable booking value only after completed service. Instructors collect payment only through a driving school they belong to."
+      "price": "Free",
+      "detail": "No commission and no fee to DriveLinkUp. Instructors collect payment only through a driving school they belong to."
     },
     "notes": {
-      "title": "First-market booking and commission rules (Sweden)",
-      "body": "A booking is attributable when the learner completes it through DriveLinkUp. School-affiliated commission is 8% of that attributable booking value and is due only after completed service—not for browsing, registration, or an uncompleted enquiry. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Cancellation, refund and no-show outcomes follow the school’s published policy and the booking record. Learners never pay a separate DriveLinkUp fee; the school’s published price stays the learner total. Settlement timing and payout responsibilities are confirmed per participating school before live transactions are promoted."
+      "title": "Booking rules (Sweden)",
+      "body": "DriveLinkUp charges no fee or commission to learners, driving schools or instructors. Cancellation, refund and no-show outcomes follow the school’s published policy and the booking record. The school’s published price stays the learner total. Settlement timing and payout responsibilities are confirmed per participating school before live transactions are promoted."
     },
     "cta": {
       "learner": "Compare schools",
@@ -3331,7 +3331,7 @@
     "seoLead": "Learn and book in {name}, {country}",
     "seoP1Live": "Listings in {name} show only marketplace-activated schools with verified Transportstyrelsen credentials. Compare before you create an account.",
     "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
-    "seoP2": "Learners pay 0% marketplace fee. School-affiliated bookings pay 8% after completion. Instructors collect payment only through a driving school they belong to. Handledare / private practice is a separate legal path.",
+    "seoP2": "DriveLinkUp is free for all users — no fee and no commission. Instructors collect payment only through a driving school they belong to. Handledare / private practice is a separate legal path.",
     "howTitle": "How DriveLinkUp works",
     "howBodyLive": "Open a listing, pick a slot, pay the published price into escrow, complete the lesson, then confirm so the school is paid.",
     "howBodyExpansion": "When listings go live in this market, the same escrow booking flow used in Sweden will apply — verified schools, published prices, no learner marketplace fee.",
@@ -3354,7 +3354,7 @@
   "termsPage": {
     "meta": {
       "title": "Terms of service",
-      "description": "DriveLinkUp terms: booking and payment, cancellations, commission for schools and instructors, accounts, and personal data."
+      "description": "DriveLinkUp terms: booking and payment, cancellations, fees, accounts, and personal data."
     },
     "hero": {
       "eyebrow": "Terms of service",
@@ -3365,7 +3365,7 @@
     "sections": {
       "0": {
         "title": "About the service",
-        "body": "DriveLinkUp is a marketplace that connects driving-school listings and certified instructors with learners. We show published prices, availability and terms before you book. Booking is free for learners — DriveLinkUp never charges learners a separate fee.",
+        "body": "DriveLinkUp is a marketplace that connects driving-school listings and certified instructors with learners. We show published prices, availability and terms before you book. DriveLinkUp is free for all users.",
         "items": [
           "We review school and instructor details before publishing.",
           "The service is under development and features may be added or changed."
@@ -3393,8 +3393,8 @@
         ]
       },
       "4": {
-        "title": "Commission",
-        "body": "DriveLinkUp charges driving schools 8% commission on facilitated bookings — only once the service has been completed. Instructors collect payment only through a school they belong to. Learners never pay a fee to DriveLinkUp.",
+        "title": "Fees",
+        "body": "DriveLinkUp charges no fee or commission to learners, driving schools or instructors. Instructors collect payment only through a school they belong to.",
         "items": []
       },
       "5": {
@@ -3421,7 +3421,7 @@
   "aboutPage": {
     "meta": {
       "title": "About us",
-      "description": "DriveLinkUp compares driving schools and certified instructors. Prices and terms are visible before you book, and learners never pay us a fee."
+      "description": "DriveLinkUp compares driving schools and certified instructors. Prices and terms are visible before you book, and the service is free for all users."
     },
     "hero": {
       "eyebrow": "Schools and instructors. Learners. One marketplace.",
@@ -3448,7 +3448,7 @@
       "pillars": [
         "Knowledge before sales pressure. Advice built on facts, not on what sells best.",
         "Transparency in both directions. The school owns its details, and we review everything before it is published.",
-        "Free for learners. You never pay a fee to DriveLinkUp."
+        "Free for everyone. Neither learners nor schools pay a fee to DriveLinkUp."
       ],
       "facts": ["Founded 2026", "Stockholm, Sweden", "Independent"],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
