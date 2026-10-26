@@ -397,9 +397,7 @@ export function bookingReceiptEmail(input: {
           `Lektion: ${input.category} · ${lessonDate}`,
           `Brutto betalt av eleven: ${input.grossChargedSek} SEK`,
           ...(input.serviceFeeSek > 0 ? [`DriveLinkUp-avgift: ${input.serviceFeeSek} SEK`] : []),
-          `Skolans provision efter genomförande: ${input.commissionSek} SEK`,
           `Nettoutbetalning: ${input.netPayoutSek} SEK`,
-          'Nettoutbetalning = skolans pris − hänförlig skolprovision efter genomförd tjänst.',
           ...actionLines,
         ]
     : learner
@@ -418,9 +416,7 @@ export function bookingReceiptEmail(input: {
           `Lesson: ${input.category} · ${lessonDate}`,
           `Gross paid by learner: ${input.grossChargedSek} SEK`,
           ...(input.serviceFeeSek > 0 ? [`DriveLinkUp fee: ${input.serviceFeeSek} SEK`] : []),
-          `School commission after completion: ${input.commissionSek} SEK`,
           `Net payout: ${input.netPayoutSek} SEK`,
-          'Net payout = school price − attributable school commission after completion.',
           ...actionLines,
         ];
   const { html, text } = renderEmail({

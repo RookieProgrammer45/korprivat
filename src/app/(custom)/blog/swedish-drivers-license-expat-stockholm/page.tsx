@@ -78,10 +78,9 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
               What booking costs on DriveLinkUp
             </h2>
             <p>
-              Learners can discover, compare and book for free. DriveLinkUp adds no separate learner
-              fee: checkout uses the school&apos;s published booking price. Schools
-              control their prices and availability and pay 8% of the lesson price only
-              after the service is completed.
+              Learners can discover and compare listings for free. DriveLinkUp adds no
+              learner fee. The school&apos;s published price is the figure on the listing.
+              Lessons are arranged with the school.
             </p>
             <p>
               This explains the marketplace relationship; it does not promise booking volume, lesson

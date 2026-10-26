@@ -266,7 +266,7 @@ describe('receipt contract and copy', () => {
     });
     expect(instructor.text).toContain('Gross paid by learner: 578 SEK');
     expect(instructor.text).toContain('DriveLinkUp fee: 28 SEK');
-    expect(instructor.text).toContain('School commission after completion: 55 SEK');
+    expect(instructor.text).not.toContain('commission');
     expect(instructor.text).toContain('Net payout: 495 SEK');
   });
 });
