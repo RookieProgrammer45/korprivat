@@ -7,120 +7,17 @@
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { HomeHero } from '@/components/custom/home-hero';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-
-const QUICK_CATEGORIES = ['B', 'A', 'BE'] as const;
-const QUICK_CITIES = [
-  { id: 'stockholm', href: '/locations/se/stockholm' },
-  { id: 'goteborg', href: '/locations/se/goteborg' },
-  { id: 'malmo', href: '/locations/se/malmo' },
-  { id: 'vasteras', href: '/locations/se/vasteras' },
-] as const;
 
 export function PublicHome() {
   const t = useTranslations('publicHome');
 
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
-      <section className="marketplace-hero border-b border-border">
-        <div className="marketplace-hero-grid container-page grid min-w-0 gap-10 pt-10 pb-section-lg lg:pt-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-20">
-          <div className="marketplace-hero-copy marketplace-reveal flex min-w-0 flex-col gap-7">
-            {t('hero.eyebrow') ? (
-              <Badge
-                variant="outline"
-                className="w-fit border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-              >
-                <span
-                  className="mr-2 inline-block size-1.5 rounded-full bg-brand-500"
-                  aria-hidden
-                />
-                {t('hero.eyebrow')}
-              </Badge>
-            ) : null}
-            <h1 className="marketplace-hero-title max-w-4xl font-display text-3xl leading-[1.05] tracking-tight text-balance text-foreground sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
-              {t('hero.title')}
-            </h1>
-            <p className="max-w-2xl min-w-0 text-body-lg text-muted-foreground">{t('hero.body')}</p>
-            <div className="marketplace-hero-actions flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:flex-nowrap">
-              <Button asChild size="lg" className="marketplace-primary-cta">
-                <Link href="/instructors">
-                  {t('hero.primaryCta')} <span aria-hidden>→</span>
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="marketplace-secondary-cta">
-                <Link href="/for-skolor">{t('hero.schoolCta')}</Link>
-              </Button>
-            </div>
-            <div className="grid min-w-0 gap-2 border-t border-border pt-4 text-small text-muted-foreground sm:grid-cols-3 sm:gap-4">
-              <p>{t('hero.assurance.price')}</p>
-              <p>{t('hero.assurance.safety')}</p>
-              <p>{t('hero.assurance.choice')}</p>
-            </div>
-          </div>
-
-          <div className="marketplace-reveal relative min-w-0">
-            <Card className="surface-card border-border bg-card">
-              <CardContent className="grid gap-4 p-6">
-                <p className="text-eyebrow">{t('hero.panelEyebrow')}</p>
-                <h2 className="font-display text-h3 tracking-tight text-foreground">
-                  {t('hero.panelTitle')}
-                </h2>
-                <p className="text-body text-muted-foreground">{t('hero.panelBody')}</p>
-                <ul className="grid gap-3 text-small text-foreground">
-                  <li className="flex items-start gap-2">
-                    <span
-                      className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500"
-                      aria-hidden
-                    />
-                    {t('hero.panelPoints.directory')}
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span
-                      className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500"
-                      aria-hidden
-                    />
-                    {t('hero.panelPoints.prices')}
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span
-                      className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500"
-                      aria-hidden
-                    />
-                    {t('hero.panelPoints.schools')}
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        <div className="marketplace-quick-links container-page flex min-w-0 flex-col gap-3 border-t border-border py-5 text-small text-muted-foreground sm:flex-row sm:items-center sm:gap-5">
-          <span className="font-medium text-foreground">{t('quickLinks.label')}</span>
-          <div className="flex min-w-0 flex-wrap gap-2">
-            {QUICK_CATEGORIES.map((category) => (
-              <Link
-                key={category}
-                href={`/instructors?categories=${category}`}
-                className="rounded-md border border-border px-3 py-1 transition-colors hover:border-brand-500 hover:text-foreground"
-              >
-                {t(`quickLinks.categories.${category}`)}
-              </Link>
-            ))}
-            {QUICK_CITIES.map((city) => (
-              <Link
-                key={city.id}
-                href={city.href}
-                className="rounded-md border border-border px-3 py-1 transition-colors hover:border-brand-500 hover:text-foreground"
-              >
-                {t(`quickLinks.cities.${city.id}`)}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HomeHero />
 
       <section id="how" className="marketplace-how-section section scroll-mt-20">
         <div className="container-page grid min-w-0 gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">

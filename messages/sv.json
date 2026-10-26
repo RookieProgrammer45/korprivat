@@ -2177,11 +2177,50 @@
       },
       "previewEyebrow": "Beslutet, samlat på ett ställe",
       "previewTitle": "Profil → tid → total",
-      "imageAlt": "Illustration av en körlektion",
+      "imageAlt": "Illustration av en bil som kör längs en slingrande väg genom svensk skog",
       "previewLines": {
         "profile": "Jämför kategori, språk och plats.",
         "price": "Se skolans publicerade pris — inga tilläggsavgifter.",
         "time": "Välj en tid och se policyn före kassan."
+      },
+      "lead": "Jämför trafikskolor efter stad och körkortstyp. Se publicerade priser och avbokningsvillkor innan du bestämmer dig.",
+      "note": "DriveLinkUp är en marknadsplats. En katalogannons är inte ett bokningstillstånd — kontrollera alltid skolans villkor.",
+      "schoolLink": "Driver du trafikskola? Lista er skola",
+      "search": {
+        "label": "Sök trafikskola",
+        "categoryLabel": "Körkort",
+        "cityLabel": "Stad",
+        "cityAny": "Alla städer",
+        "submit": "Sök",
+        "categories": {
+          "B": "Bil · B",
+          "A": "Motorcykel · A",
+          "BE": "Bil + släp · BE"
+        },
+        "cities": {
+          "stockholm": "Stockholm",
+          "goteborg": "Göteborg",
+          "malmo": "Malmö",
+          "uppsala": "Uppsala",
+          "vasteras": "Västerås",
+          "linkoping": "Linköping",
+          "orebro": "Örebro",
+          "helsingborg": "Helsingborg"
+        }
+      },
+      "popular": {
+        "label": "Populärt:",
+        "links": {
+          "categoryB": "Bil · B",
+          "stockholm": "Stockholm",
+          "goteborg": "Göteborg",
+          "malmo": "Malmö",
+          "categoryA": "Motorcykel · A"
+        }
+      },
+      "chips": {
+        "price": "Priset i kronor syns före bokning",
+        "cancellation": "Avbokningsvillkoren visas i förväg"
       }
     },
     "quickLinks": {

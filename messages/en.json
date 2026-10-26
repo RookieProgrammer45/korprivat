@@ -2177,11 +2177,50 @@
       },
       "previewEyebrow": "The decision, in one place",
       "previewTitle": "Profile → time → total",
-      "imageAlt": "Driving lesson illustration",
+      "imageAlt": "Illustration of a car driving along a winding road through a Swedish forest",
       "previewLines": {
         "profile": "Compare categories, language and location.",
         "price": "Review the school's published price — no added fees.",
         "time": "Choose a slot and see the policy before checkout."
+      },
+      "lead": "Compare driving schools by city and licence type. See published prices and cancellation terms before you decide.",
+      "note": "DriveLinkUp is a marketplace. A listing is not a booking authorization — always check the school's terms.",
+      "schoolLink": "Run a driving school? List your school",
+      "search": {
+        "label": "Search driving schools",
+        "categoryLabel": "Licence",
+        "cityLabel": "City",
+        "cityAny": "All cities",
+        "submit": "Search",
+        "categories": {
+          "B": "Car · B",
+          "A": "Motorcycle · A",
+          "BE": "Car + trailer · BE"
+        },
+        "cities": {
+          "stockholm": "Stockholm",
+          "goteborg": "Gothenburg",
+          "malmo": "Malmö",
+          "uppsala": "Uppsala",
+          "vasteras": "Västerås",
+          "linkoping": "Linköping",
+          "orebro": "Örebro",
+          "helsingborg": "Helsingborg"
+        }
+      },
+      "popular": {
+        "label": "Popular:",
+        "links": {
+          "categoryB": "Car · B",
+          "stockholm": "Stockholm",
+          "goteborg": "Gothenburg",
+          "malmo": "Malmö",
+          "categoryA": "Motorcycle · A"
+        }
+      },
+      "chips": {
+        "price": "Price in SEK shown before booking",
+        "cancellation": "Cancellation terms shown upfront"
       }
     },
     "quickLinks": {
