@@ -12,6 +12,7 @@ DriveLinkUp.
 | `school-prices.json` | Canonical dataset: `meta` plus `schools[]`. Use this in code. |
 | `school-prices.csv` | Same data flattened (Swedish headers, `;`-separated, UTF-8 BOM) for Excel. |
 | `unmatched-listings.json` | DriveLinkUp listings from `docs/cutover-school-roster.json` that could not be linked to exactly one record. |
+| `unlisted-schools.json` / `.csv` | Catalogue listings hidden from the public site because the school publishes no usable price on its website, with the reason. Snapshot; rows stay in the database. |
 
 ## Provenance
 
