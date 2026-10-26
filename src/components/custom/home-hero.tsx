@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { type FormEvent, useId, useState } from 'react';
+import { AnimatedTitle } from '@/components/custom/animated-title';
 
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
 
@@ -53,9 +54,10 @@ export function HomeHero() {
     <section className="marketplace-hero dlu-hero border-b border-border">
       <div className="container-page grid items-center gap-10 pt-12 pb-10 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20 lg:pb-14">
         <div className="dlu-hero-copy flex min-w-0 flex-col">
-          <h1 className="marketplace-reveal dlu-hero-in-1 marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]">
-            {t('title')}
-          </h1>
+          <AnimatedTitle
+            text={t('title')}
+            className="marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
+          />
 
           <form
             onSubmit={onSubmit}

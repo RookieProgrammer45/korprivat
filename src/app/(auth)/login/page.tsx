@@ -5,6 +5,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { AnimatedTitle } from '@/components/custom/animated-title';
 import { AuthSchoolCarousel } from '@/components/custom/auth-school-carousel';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignInForm } from '@/components/custom/sign-in-form';
@@ -45,9 +46,10 @@ export default async function LoginPage({
       }
     >
       <div className="mb-8 grid gap-2">
-        <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          {t('title')}
-        </h1>
+        <AnimatedTitle
+          text={t('title')}
+          className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+        />
         <p className="text-pretty text-body text-muted-foreground">{t('subtitle')}</p>
       </div>
       <SignInForm next={next} />

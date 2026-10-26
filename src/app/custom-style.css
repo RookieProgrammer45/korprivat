@@ -159,6 +159,28 @@ html.dark .marketplace-hero {
   font-weight: 400;
 }
 
+@keyframes dlu-title-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.65em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dlu-title-word {
+  display: inline-block;
+  animation: dlu-title-in 720ms var(--ease-out-expo) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dlu-title-word {
+    animation: none;
+  }
+}
+
 /* Flat PNG: wheels are baked in, so the car drifts and the road marks pass. */
 @keyframes hero-car-drift {
   from {
@@ -1744,7 +1766,7 @@ html .marketplace-hero.marketplace-hero {
 }
 
 html .auth-shell.auth-shell {
-  background-color: var(--background);
+  background-color: #fff;
 }
 
 html .marketplace-quick-links.marketplace-quick-links {

@@ -49,6 +49,7 @@ import {
   MIN_INSTRUCTOR_LICENSE_YEARS,
 } from '@/lib/signup-eligibility';
 import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
+import { AnimatedTitle } from './animated-title';
 import { ClickwrapStep } from './clickwrap-step';
 import { claimedDobIsUnderage, LearnerDobConsentFields } from './learner-dob-consent-fields';
 import { ProfileDetailsStep } from './profile-details-step';
@@ -497,9 +498,10 @@ export function SignUpForm({
     return (
       <div className="grid gap-8">
         <div className="grid gap-2">
-          <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            {t('pathTitle')}
-          </h1>
+          <AnimatedTitle
+            text={t('pathTitle')}
+            className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+          />
           <p className="text-pretty text-body text-muted-foreground">{t('pathSubtitle')}</p>
         </div>
         <ul className="grid gap-3">
@@ -734,9 +736,10 @@ export function SignUpForm({
           ← {t('backToPaths')}
         </button>
         <div className="grid gap-2">
-          <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            {t(accountTitleKey)}
-          </h1>
+          <AnimatedTitle
+            text={t(accountTitleKey)}
+            className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+          />
           <p className="text-pretty text-body text-muted-foreground">{t(accountLeadKey)}</p>
         </div>
       </div>

@@ -19,7 +19,7 @@ export function AuthShell({
   visual?: ReactNode;
 }) {
   return (
-    <main className="auth-shell flex min-h-dvh min-w-0 flex-col bg-[var(--background)]">
+    <main className="auth-shell flex min-h-dvh min-w-0 flex-col">
       <div
         className={
           visual

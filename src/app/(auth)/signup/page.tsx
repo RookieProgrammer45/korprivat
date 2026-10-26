@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { AlreadySignedIn } from '@/components/custom/already-signed-in';
-import { AuthSchoolCarousel } from '@/components/custom/auth-school-carousel';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignUpForm } from '@/components/custom/sign-up-form';
 import { loginHrefWithNext, sanitizeNext } from '@/lib/auth-next';
@@ -62,7 +61,7 @@ export default async function SignupPage({
     }
     if (disposition.kind === 'already_signed_in') {
       return (
-        <AuthShell visual={<AuthSchoolCarousel />}>
+        <AuthShell>
           <AlreadySignedIn home={disposition.home} email={disposition.email} />
         </AuthShell>
       );
@@ -71,7 +70,6 @@ export default async function SignupPage({
 
   return (
     <AuthShell
-      visual={<AuthSchoolCarousel />}
       footer={
         sessionUser ? undefined : (
           <>
