@@ -107,10 +107,6 @@ function TransactionCard({
             value={formatNullableSek(item.serviceFeeSek, locale, true)}
           />
           <MoneyRow
-            label={t('commission')}
-            value={formatNullableSek(item.commissionSek, locale, true)}
-          />
-          <MoneyRow
             emphasized
             label={t('netPayout')}
             value={formatNullableSek(item.netPayoutSek, locale)}

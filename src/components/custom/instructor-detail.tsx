@@ -213,7 +213,9 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             contact={instructor.contact}
             className="w-full sm:w-auto"
           />
-          <BookingModeSection instructor={instructor} />
+          {instructor.surfaces?.directoryOnly ? null : (
+            <BookingModeSection instructor={instructor} />
+          )}
           {/* Directory-only listings show no cancellation policy: no booking
               flows through DriveLinkUp for this school, and an unconfirmed
               tier would misrepresent the school's own terms. Independent
@@ -224,7 +226,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
           (!instructor.surfaces && instructor.bookingMode === 'contact') ? null : (
             <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
           )}
-          <SafetyExpectations />
+          {instructor.surfaces?.directoryOnly ? null : <SafetyExpectations />}
         </div>
       </CardContent>
     </Card>

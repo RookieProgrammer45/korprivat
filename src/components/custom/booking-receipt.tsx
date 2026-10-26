@@ -192,18 +192,11 @@ export function BookingReceipt({ bookingId, token }: { bookingId: string; token?
                   />
                 ) : null}
                 <MoneyRow
-                  label={t('items.commission')}
-                  value={`−${formatSek(receipt.commissionSek, locale)}`}
-                />
-                <MoneyRow
                   emphasized
                   label={t('netPayout')}
                   value={formatSek(receipt.netPayoutSek, locale)}
                 />
                 <MoneyRow label={t('payoutStatus')} value={payoutLabel(receipt.payoutStatus, t)} />
-                <p className="border-t pt-3 text-small text-muted-foreground">
-                  {t('reconciliation')}
-                </p>
               </>
             )}
           </div>

@@ -128,8 +128,6 @@ const PDF_COPY = {
     lesson: 'Lesson price (SEK)',
     serviceFee: 'DriveLinkUp fee (SEK)',
     grossPaid: 'Learner-paid gross total (SEK)',
-    commission: 'School commission (SEK)',
-    reconciliation: 'Net payout = school price − attributable school commission after completion.',
     note: (usd: string) => `Verified checkout charge: ${usd}. Amounts are shown in SEK.`,
   },
   sv: {
@@ -139,9 +137,6 @@ const PDF_COPY = {
     lesson: 'Lektionspris (SEK)',
     serviceFee: 'DriveLinkUp-avgift (SEK)',
     grossPaid: 'Elevens brutto betalda belopp (SEK)',
-    commission: 'Skolprovision (SEK)',
-    reconciliation:
-      'Nettoutbetalning = skolans pris − hänförlig skolprovision efter genomförd tjänst.',
     note: (usd: string) => `Verifierad kassabetalning: ${usd}. Beloppen visas i SEK.`,
   },
 } as const;
@@ -192,11 +187,6 @@ export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec 
                 },
               ]
             : []),
-          {
-            description: copy.commission,
-            quantity: 1,
-            unitAmountCents: -receipt.commissionSek * 100,
-          },
         ];
 
   return {
@@ -209,10 +199,7 @@ export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec 
     lineItems,
     totalCents:
       (receipt.recipientRole === 'learner' ? receipt.grossChargedSek : receipt.netPayoutSek) * 100,
-    notes:
-      receipt.recipientRole === 'instructor'
-        ? `${copy.note(formattedUsd)} ${copy.reconciliation}`
-        : copy.note(formattedUsd),
+    notes: copy.note(formattedUsd),
     footer: 'DriveLinkUp',
   };
 }

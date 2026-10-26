@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -28,9 +27,11 @@ type Status = 'loading' | 'ready' | 'empty' | 'error';
 export function InstructorPreview({
   limit = MAX_PREVIEW_ROWS,
   pageIntro = false,
+  showContact = true,
 }: {
   limit?: number;
   pageIntro?: boolean;
+  showContact?: boolean;
 }) {
   const tr = useTranslations('instructorPreview');
   const [status, setStatus] = useState<Status>('loading');
@@ -65,14 +66,21 @@ export function InstructorPreview({
     ) : (
       <ul className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {rows.map((row) => (
-          <li key={row.id} className="grid min-w-0 gap-2">
+          <li
+            key={row.id}
+            className={
+              showContact ? 'grid h-full min-w-0 grid-rows-[1fr_auto] gap-2' : 'h-full min-w-0'
+            }
+          >
             <PreviewCard row={row} />
-            <SchoolContactButton
-              name={row.name}
-              contact={row.contact}
-              size="sm"
-              className="w-full"
-            />
+            {showContact ? (
+              <SchoolContactButton
+                name={row.name}
+                contact={row.contact}
+                size="sm"
+                className="w-full"
+              />
+            ) : null}
           </li>
         ))}
       </ul>
@@ -101,97 +109,118 @@ export function InstructorPreview({
 
 function PreviewCard({ row }: { row: InstructorFilteredItem }) {
   const tr = useTranslations('instructorPreview');
-  const trTier = useTranslations('cancellationPolicy.tierBadge');
-  const trBooking = useTranslations('bookingForm');
   const locale = normalizeMarketplaceLocale(useLocale());
   const showTimes = row.surfaces?.availabilityDisplay === true;
   const nextSlotPill =
     showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, locale, tr) : null;
-  const mode =
-    row.providerRole === 'INSTRUCTOR' && row.canCollectPayment === false
-      ? 'paymentThroughSchool'
-      : row.surfaces
-        ? row.surfaces.directoryOnly
-          ? 'contact'
-          : row.surfaces.transactionalBooking
-            ? 'instant'
-            : row.surfaces.requestToBook
-              ? 'request'
-              : 'contact'
-        : 'contact';
-  const directoryOnly = row.surfaces ? row.surfaces.directoryOnly : true;
-  const tier = row.cancellationPolicyTier ?? 'flexible';
+  const price = formatSek(row.hourlyRateSek, locale, tr('rateSuffixShort'));
   return (
     <Link
       href={`/instructors/${row.id}`}
-      className="marketplace-provider-card group block h-full min-w-0 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
+      className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       data-provider-type={row.providerType}
     >
-      <Card className="surface-card marketplace-preview-card lift h-full border-border bg-card transition-colors duration-200 group-hover:border-brand-500/40 group-hover:shadow-md">
-        <CardContent className="flex h-full min-w-0 flex-col gap-4 p-5">
-          <div className="marketplace-preview-card-header flex min-w-0 flex-wrap items-start justify-between gap-3">
-            <div className="flex min-w-0 flex-1 max-sm:flex-auto items-center gap-3">
-              <Image
-                src={row.photoUrl}
-                alt={tr('portraitAlt', { name: row.name })}
-                width={48}
-                height={48}
-                unoptimized
-                className="marketplace-provider-avatar size-12 shrink-0 rounded-full border border-brand-500/35 bg-brand-100 object-cover dark:bg-brand-900"
-              />
-              <div className="min-w-0">
-                <p className="dlu-type">
-                  {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
-                </p>
-                <p className="break-words font-display text-base font-semibold text-foreground">
-                  {row.name}
-                </p>
-                <p className="break-words text-small text-muted-foreground">{row.city}</p>
-              </div>
-            </div>
-            <Badge
-              variant="secondary"
-              className="marketplace-rate-badge max-w-full shrink-0 whitespace-normal bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-            >
-              {formatSek(row.hourlyRateSek, locale, tr('rateSuffix'))}
-            </Badge>
+      <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-white dark:bg-card">
+        <SchoolMark
+          name={row.name}
+          photoUrl={row.photoUrl}
+          alt={tr('portraitAlt', { name: row.name })}
+          size="cover"
+        />
+        <div className="flex flex-1 flex-col gap-3 p-5">
+          <div className="min-w-0">
+            <p className="text-small text-muted-foreground">{row.city}</p>
+            <h3 className="break-words font-display text-h4 font-normal tracking-tight text-foreground">
+              {row.name}
+            </h3>
           </div>
-
-          <div className="flex flex-wrap gap-1.5">
+          {price ? <p className="dlu-school-price">{price}</p> : null}
+          <div className="mt-auto flex flex-wrap gap-2">
             {row.categories.map((category) => (
-              <Badge key={category} variant="outline" className="border-border text-foreground">
-                {category}
-              </Badge>
-            ))}
-          </div>
-
-          <div className="grid min-w-0 gap-1 text-small text-muted-foreground">
-            <span>
-              {tr('nextAvailableLabel')}:{' '}
-              <span className="font-medium text-foreground">
-                {nextSlotPill?.label ?? tr('noUpcomingSlot')}
+              <span key={category} className="dlu-chip">
+                {tr(`category.${category}`)}
               </span>
-            </span>
-            <span>{row.englishSpeaking ? tr('englishAvailable') : tr('swedishAvailable')}</span>
+            ))}
+            {row.englishSpeaking ? (
+              <span className="dlu-chip">{tr('englishAvailable')}</span>
+            ) : null}
           </div>
-
-          <div className="mt-auto flex min-w-0 flex-wrap items-center gap-2 border-t border-border pt-4">
-            <Badge variant="outline" className="border-border">
-              {trBooking(`bookingModeLabel.${mode}`)}
-            </Badge>
-            {directoryOnly || row.showCancellationPolicy === false ? null : (
-              <Badge variant="outline" className="border-border">
-                {trTier(tier)}
-              </Badge>
-            )}
-            <span className="ml-auto min-w-0 text-right text-small font-medium text-foreground">
-              {tr('profileCta')} <span aria-hidden>→</span>
-            </span>
-          </div>
-        </CardContent>
-      </Card>
+          {nextSlotPill ? (
+            <p className="text-small text-muted-foreground">{nextSlotPill.label}</p>
+          ) : null}
+        </div>
+      </article>
     </Link>
   );
+}
+
+export function SchoolMark({
+  name,
+  photoUrl,
+  alt,
+  size,
+}: {
+  name: string;
+  photoUrl: string;
+  alt: string;
+  size: 'cover' | 'avatar';
+}) {
+  const [failed, setFailed] = useState(false);
+  const photograph = isPhotograph(photoUrl) && !failed;
+  if (!photograph) {
+    return (
+      <span
+        aria-hidden
+        className={
+          size === 'cover'
+            ? 'dlu-school-photo flex items-center justify-center font-display text-4xl font-normal text-foreground'
+            : 'flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-[#ece9e2] font-display text-sm font-normal text-foreground dark:bg-[#1a1a18]'
+        }
+      >
+        {initials(name)}
+      </span>
+    );
+  }
+  if (size === 'avatar') {
+    return (
+      <Image
+        src={photoUrl}
+        alt={alt}
+        width={48}
+        height={48}
+        unoptimized
+        onError={() => setFailed(true)}
+        className="size-12 shrink-0 rounded-full border border-border object-cover"
+      />
+    );
+  }
+  return (
+    <span className="dlu-school-photo">
+      <Image
+        src={photoUrl}
+        alt={alt}
+        fill
+        unoptimized
+        sizes="(min-width: 1024px) 24rem, 100vw"
+        onError={() => setFailed(true)}
+        className="object-contain p-8"
+      />
+    </span>
+  );
+}
+
+function isPhotograph(url: string): boolean {
+  const path = url.split('?')[0]?.trim().toLowerCase() ?? '';
+  if (!path) return false;
+  return !path.endsWith('.svg');
+}
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean).slice(0, 2);
+  return parts
+    .map((part) => part[0] ?? '')
+    .join('')
+    .toUpperCase();
 }
 
 function PreviewSkeleton({ limit }: { limit: number }) {
@@ -235,9 +264,7 @@ function formatNextSlotPill(
   return { label: t('slotLabelRelative', { when }), iso };
 }
 
-function formatSek(amount: number, locale: 'en' | 'sv', suffix: string): string {
-  if (!amount) {
-    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  }
+function formatSek(amount: number, locale: 'en' | 'sv', suffix: string): string | null {
+  if (!amount) return null;
   return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} ${suffix}`;
 }

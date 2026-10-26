@@ -774,12 +774,6 @@ form > button[type="submit"] {
   box-shadow: var(--shadow-lg);
 }
 
-@media (min-width: 768px) {
-  .marketplace-home .marketplace-assurance-section .surface-card:nth-child(2) {
-    transform: translateY(1.5rem);
-  }
-}
-
 @keyframes marketplace-rise {
   from {
     opacity: 0;
@@ -901,11 +895,6 @@ form > button[type="submit"] {
     min-height: 3.5rem;
     gap: 0.35rem;
     padding-inline: 0.75rem;
-  }
-
-  .site-header-wordmark {
-    max-width: clamp(6.5rem, 34vw, 8rem);
-    height: 1.35rem;
   }
 
   .site-nav-actions {
@@ -2321,4 +2310,125 @@ html.dark .dlu-hero-visual img {
     transition: none !important;
     transform: none !important;
   }
+}
+
+/* 21. Public marketing: bone bar, ink pill, photo cards, slim consent */
+/* ------------------------------------------------------------------ */
+
+.site-header {
+  background-color: var(--background);
+}
+
+.site-header-wordmark {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  max-width: none;
+  height: auto;
+}
+
+.dlu-ink-pill {
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--dlu-ink);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-family: var(--font-display-face);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  min-height: 3rem;
+  padding: 0.7rem 1.4rem;
+  text-decoration: none;
+}
+
+.dlu-ink-pill:hover {
+  opacity: 0.88;
+}
+
+.dlu-ink-pill:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+html.dark .dlu-ink-pill {
+  color: #0b0b0a;
+}
+
+.dlu-text-link {
+  color: var(--foreground);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.dlu-text-link:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+.dlu-chip {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--foreground);
+  display: inline-flex;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  padding: 0.35rem 0.8rem;
+  text-decoration: none;
+}
+
+.dlu-chip:hover {
+  background: var(--card);
+}
+
+.dlu-chip:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+.dlu-school-price {
+  color: var(--foreground);
+  font-family: var(--font-display-face);
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.dlu-school-photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #ece9e2;
+}
+
+html.dark .dlu-school-photo {
+  background: #1a1a18;
+}
+
+.consent-banner {
+  max-height: 25vh;
+  overflow: auto;
+}
+
+.consent-banner.is-open {
+  max-height: min(70vh, 28rem);
+}
+
+.consent-banner-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.consent-banner-actions > button {
+  width: auto;
+  flex: 0 0 auto;
 }

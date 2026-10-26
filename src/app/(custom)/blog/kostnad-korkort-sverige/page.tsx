@@ -38,11 +38,11 @@ export default function KostnadKorkortPage() {
       <div className="grid gap-4 text-body text-foreground">
         <p>
           På DriveLinkUp betalar elever ingen separat plattformsavgift. Du ser skolans pris i SEK
-          per timme, bokar en ledig tid och betalar det publicerade beloppet till escrow.
+          per timme. En kataloglista är inte en bokning. Lektioner ordnas med skolan.
         </p>
         <p>
-          På skolans bokningar tar DriveLinkUp 8 % av lektionspriset efter genomförd
-          lektion. Det ändrar inte vad eleven betalar. Instruktörer tar betalt via sin skola.
+          En kataloglista är gratis. DriveLinkUp tar ingen andel av skolans publicerade
+          pris för att skolan är listad. Instruktörer tar betalt via sin skola.
         </p>
         <p>
           Börja i{' '}

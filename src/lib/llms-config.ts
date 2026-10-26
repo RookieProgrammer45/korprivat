@@ -27,7 +27,7 @@ import type { LlmsConfig } from '@/lib/llms';
 
 export const llmsConfig: LlmsConfig = {
   intro:
-    'DriveLinkUp is a Sweden-first marketplace that lists driving schools and instructors. It is not a driving school, licensing authority, or government service. Learners discover and compare listings for free (0% learner fee). A listing is not a booking authorization. Instant booking appears only where the school granted that path. School-affiliated bookings pay 8% commission after completed service. Instructors collect payment only through a driving school they belong to. Handledare / övningskörning is a separate legal path, not a school listing.',
+    'DriveLinkUp is a Sweden-first marketplace that lists driving schools and instructors. It is not a driving school, licensing authority, or government service. Learners discover and compare listings for free. A listing is not a booking authorization. Instant booking appears only where the school granted that path. A catalog listing is free. Instructors collect payment only through a driving school they belong to. Handledare / övningskörning is a separate legal path, not a school listing.',
   pageDescriptions: {
     '/': 'Marketplace for comparing driving-school listings, published prices, availability, and lessons in Sweden. Displayed times are not a reserved lesson.',
     '/instructors':
@@ -41,11 +41,11 @@ export const llmsConfig: LlmsConfig = {
     '/locations/se/goteborg': 'City hub for driving-school listings in Gothenburg (Göteborg).',
     '/locations/se/malmo': 'City hub for driving-school listings in Malmö and Skåne.',
     '/pricing':
-      'Learner booking is free of marketplace fees. Schools pay 8% after completion. Instructors collect payment only through a driving school they belong to.',
+      'A catalog listing is free. DriveLinkUp does not add a learner fee. Instructors collect payment only through a driving school they belong to.',
     '/faq':
       'Answers about directory listings, requests, availability, cancellations, and the separate Swedish handledare path.',
     '/for-instructors':
-      'Information for driving schools about listings, school-controlled prices, and post-completion commission. Listing is not an endorsement.',
+      'Information for driving schools about listings and school-controlled prices. Listing is not an endorsement.',
     '/for-skolor':
       'School onboarding: publish prices and availability. A listing is not a booking authorization.',
     '/southern-sweden':
@@ -56,8 +56,8 @@ export const llmsConfig: LlmsConfig = {
       'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
     '/blog': 'Guides for learners: costs, handledare, and choosing a traffic school in Sweden.',
     '/om-oss':
-      'About DriveLinkUp: school prices are visible before checkout. The marketplace lists driving schools. Instructors teach through a school. Founded in Stockholm in 2026.',
+      'About DriveLinkUp: a catalog of driving schools. Published prices are visible on the listing. Instructors teach through a school. Founded in Stockholm in 2026.',
     '/terms':
-      'Terms of service: booking and payment via Stripe with funds released after completed lessons, cancellation rules set by each school, 8% school commission, instructor payment only through a school, and account rules.',
+      'Terms of service: directory listings, cancellation rules set by each school, instructor payment only through a school, and account rules.',
   },
 };
