@@ -3,7 +3,6 @@ import type { Organization, Prisma } from '@prisma/client';
 import { buildProviderActivationWhere } from '@/lib/business/provider-activation';
 import { PUBLIC_INSTRUCTOR_SELECT } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
-import { publishedListingWhere } from '@/lib/discovery/published-prices';
 
 export type SchoolAffiliation = {
   organizationId: string;
@@ -70,7 +69,7 @@ export async function listSchoolListedInstructors(
   return prisma.instructor.findMany({
     where: {
       userId: { in: userIds },
-      AND: [buildProviderActivationWhere(), publishedListingWhere()],
+      AND: [buildProviderActivationWhere()],
     },
     select: PUBLIC_INSTRUCTOR_SELECT,
     orderBy: { name: 'asc' },

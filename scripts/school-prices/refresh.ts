@@ -7,6 +7,7 @@
 //   --heavy   run the same stages for heavy vehicles (C1/C1E/C/CE, D1/D1E/D/DE,
 //             YKB) into school.heavy; B prices are left untouched
 //   --linked  only schools linked to a DriveLinkUp listing
+//   --phones  only refresh school.phone from the cached pages (--write also does)
 //
 // Only each school's own website is crawled, robots.txt is honoured, and one
 // request per host is in flight at a time. Social profiles are recorded as
@@ -14,6 +15,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import OpenAI from 'openai';
+import { emailFromPages, type Inbox } from './email';
+import { type Phone, phoneFromPages } from './phone';
 
 const DATA_DIR = path.join(process.cwd(), 'data/school-prices');
 const CACHE_DIR = path.join(DATA_DIR, '.cache');
@@ -62,6 +65,8 @@ type School = {
   sourceUrl: string | null;
   checkedAt?: string;
   heavy?: Heavy | null;
+  phone?: Phone | null;
+  inbox?: Inbox | null;
 };
 type HeavyCategory = (typeof HEAVY_CATEGORIES)[number];
 type HeavyPrice = {
@@ -163,7 +168,23 @@ async function main() {
     });
   }
 
-  if (flag('write') && heavy) {
+  if (flag('phones')) {
+    for (const school of dataset.schools) {
+      const fetched = readJson<FetchCache>(cachePath(school.id, 'fetch'));
+      if (fetched?.ok) {
+        school.phone = phoneFromPages(fetched.pages);
+        school.inbox = emailFromPages(fetched.pages);
+      }
+    }
+    dataset.meta.counts = {
+      ...(dataset.meta.counts as Record<string, number>),
+      withPhone: dataset.schools.filter((s) => s.phone).length,
+      withInbox: dataset.schools.filter((s) => s.inbox).length,
+    };
+    writeFileSync(JSON_PATH, `${JSON.stringify(dataset, null, 2)}\n`);
+    writeFileSync(CSV_PATH, toCsv(dataset.schools));
+    console.log('wrote', JSON_PATH, dataset.meta.counts);
+  } else if (flag('write') && heavy) {
     for (const school of dataset.schools) mergeHeavy(school);
     dataset.meta.counts = {
       ...(dataset.meta.counts as Record<string, number>),
@@ -586,6 +607,10 @@ function merge(school: School, today: string) {
   if (fetched?.social.length) school.social = fetched.social;
   if (!fetched) return;
   school.checkedAt = fetched.fetchedAt.slice(0, 10);
+  if (fetched.ok) {
+    school.phone = phoneFromPages(fetched.pages);
+    school.inbox = emailFromPages(fetched.pages);
+  }
   if (!fetched.ok) {
     if (school.status === 'OK') school.status = 'SITE_UNREACHABLE';
     return;
@@ -687,6 +712,8 @@ function toCsv(schools: School[]): string {
     'Kontrollerad',
     'Tung trafik (behörigheter)',
     'Tung trafik (pris)',
+    'Telefon',
+    'E-post',
   ];
   const cell = (value: unknown) => {
     const text = value == null ? '' : String(value);
@@ -731,6 +758,8 @@ function toCsv(schools: School[]): string {
       (school.heavy?.prices ?? [])
         .map((price) => `${price.category} ${price.name} – ${price.priceSek}`)
         .join(' | '),
+      school.phone?.display,
+      school.inbox?.address,
     ]
       .map(cell)
       .join(';'),

@@ -533,6 +533,7 @@
     "nextAvailableLabel": "Next available",
     "noUpcomingSlot": "No upcoming slot listed",
     "languageLabel": "Language",
+    "phoneLabel": "Phone",
     "englishAvailable": "English available",
     "swedishAvailable": "Swedish",
     "slotLabel": "Next available",
@@ -604,6 +605,7 @@
         "en": "English"
       },
       "serviceArea": "Service area",
+      "phone": "Phone",
       "rate": "Lesson price",
       "fee": "Listing",
       "feeValue": "Free to compare. You pay the school.",
@@ -632,7 +634,14 @@
   "schoolContact": {
     "label": "Contact the school",
     "inboxAria": "Email {name}",
-    "websiteAria": "Open {name}'s website"
+    "websiteAria": "Open {name}'s website",
+    "phoneLabel": "Call {number}",
+    "phoneAria": "Call {name} on {number}",
+    "priceRequest": "Ask for prices",
+    "priceRequestAria": "Ask {name} for prices",
+    "priceRequestSubject": "Price enquiry",
+    "priceRequestBody": "Hi {name},\n\nI found you on DriveLinkUp and would like to know what your driving lessons and packages cost.\n\nThank you!",
+    "noPrice": "No prices on the school's website yet"
   },
   "instructorDetail": {
     "meta": {
@@ -647,6 +656,7 @@
     "portraitAlt": "Profile photo of {name}",
     "facts": {
       "city": "City",
+      "phone": "Phone",
       "serviceArea": "Service area",
       "language": "Language",
       "verification": "Verification",

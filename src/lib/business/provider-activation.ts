@@ -6,7 +6,6 @@ import 'server-only';
 import type { Prisma } from '@prisma/client';
 import { isLicenceCategoryCode, LICENCE_CATEGORY_CODES } from '@/lib/business/licence-categories';
 import { prisma } from '@/lib/db';
-import { publishedListingWhere } from '@/lib/discovery/published-prices';
 
 export function isProviderActivated(categories: readonly string[]): boolean {
   return categories.some(isLicenceCategoryCode);
@@ -31,8 +30,7 @@ export function buildProviderActivationWhere(): Prisma.InstructorWhereInput {
 
 /**
  * Public directory / search eligibility (AGENTS.md invariant 6):
- * marketplace categories, not HANDLEDARE, InstructorLicense VERIFIED, and at
- * least one price published on the school's website.
+ * marketplace categories, not HANDLEDARE, and InstructorLicense VERIFIED.
  */
 export async function buildVerifiedProviderActivationWhere(): Promise<Prisma.InstructorWhereInput> {
   const verified = await prisma.instructorLicense.findMany({
@@ -45,7 +43,6 @@ export async function buildVerifiedProviderActivationWhere(): Promise<Prisma.Ins
     {
       OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
     },
-    publishedListingWhere(),
   ];
   if (verifiedUserIds.length === 0) {
     return { AND: [...categoryAndRole, { id: { in: [] } }] };

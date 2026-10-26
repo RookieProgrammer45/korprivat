@@ -85,6 +85,11 @@ export const LISTING_CONTACT_SELECT = {
   email: true,
 } as const;
 
+const SchoolContactSchema = z.object({
+  kind: z.enum(['inbox', 'website']),
+  href: z.string().min(1),
+});
+
 // Read shape: persisted instructor record returned by the detail endpoint.
 // `categories` is a free-form `String[]` at the storage layer (categories are
 // a small, versioned enum at the business layer — see licence-categories.ts),
@@ -216,15 +221,21 @@ export const InstructorItem = z.object({
     })
     .nullable()
     .optional(),
-  // Resolved outbound contact for schools. Inbox (mailto) first, then the
-  // school's own website. Raw email is never included — only this href.
-  contact: z
+  // Phone number printed on the school's website. Listed with the other
+  // facts; the contact button never dials it.
+  phone: z
     .object({
-      kind: z.enum(['inbox', 'website']),
+      display: z.string().min(1),
       href: z.string().min(1),
     })
     .nullable()
     .optional(),
+  // Resolved outbound contact for schools: inbox (mailto) for every school
+  // that has an email, then the school's own website. Raw email is never
+  // included — only this href.
+  contact: SchoolContactSchema.nullable().optional(),
+  // Only for schools with no price on their website: where to ask for one.
+  priceRequest: SchoolContactSchema.nullable().optional(),
 });
 
 // Read shape for list rows: same as detail plus the directory-required

@@ -64,6 +64,8 @@ type DatasetSchool = {
     sourceUrl: string | null;
     checkedAt: string;
   } | null;
+  phone?: { display: string; e164: string; sourceUrl: string } | null;
+  inbox?: { address: string; sourceUrl: string } | null;
 };
 
 const MAX_PACKAGES = 6;
@@ -94,8 +96,17 @@ function toHeavy(school: DatasetSchool): PublishedHeavy | null {
 }
 
 const byListing = new Map<string, PublishedPrices>();
+const phoneByListing = new Map<string, { display: string; e164: string }>();
+const inboxByListing = new Map<string, string>();
 for (const school of dataset.schools as DatasetSchool[]) {
   if (school.listingIds.length === 0) continue;
+  if (school.phone) {
+    const phone = { display: school.phone.display, e164: school.phone.e164 };
+    for (const listingId of school.listingIds) phoneByListing.set(listingId, phone);
+  }
+  if (school.inbox) {
+    for (const listingId of school.listingIds) inboxByListing.set(listingId, school.inbox.address);
+  }
   const heavy = toHeavy(school);
   const hasB = school.status === 'OK';
   const packages: PublishedPackage[] = !hasB
@@ -184,14 +195,13 @@ export function publishedPrices(listingId: string): PublishedPrices | null {
   return byListing.get(listingId) ?? null;
 }
 
-// Only schools with at least one price on their own website are listed
-// publicly; the rest stay in the database but off every public surface.
-export function hasPublishedPrices(listingId: string): boolean {
-  return byListing.has(listingId);
+// The school's phone number as printed on its own website.
+export function publishedPhone(listingId: string): { display: string; e164: string } | null {
+  return phoneByListing.get(listingId) ?? null;
 }
 
-const listedIds = [...byListing.keys()];
-
-export function publishedListingWhere(): { id: { in: string[] } } {
-  return { id: { in: listedIds } };
+// The inbox printed on the school's own website. Fed into the contact
+// button when the listing itself has no email; never rendered as text.
+export function publishedInbox(listingId: string): string | null {
+  return inboxByListing.get(listingId) ?? null;
 }

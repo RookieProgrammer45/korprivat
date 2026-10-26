@@ -37,7 +37,6 @@ import {
   RecommendationScore,
 } from '@/lib/contracts/instructor-recommendations';
 import { prisma } from '@/lib/db';
-import { publishedListingWhere } from '@/lib/discovery/published-prices';
 import { resolveLocale } from '@/lib/i18n';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 
@@ -113,7 +112,7 @@ type Candidate = {
 
 async function loadCandidates(category: string): Promise<Candidate[]> {
   const matching = await prisma.instructor.findMany({
-    where: { categories: { has: category }, ...publishedListingWhere() },
+    where: { categories: { has: category } },
     select: {
       id: true,
       name: true,

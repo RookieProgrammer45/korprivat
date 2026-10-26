@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { PublishedPriceList } from '@/components/custom/published-price';
-import { SchoolContactButton } from '@/components/custom/school-contact-button';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
@@ -74,6 +74,7 @@ export function ProviderComparison({
                     .join(' · ')}
                 />
                 <Fact label={t('serviceArea')} value={provider.serviceArea} />
+                {provider.phone ? <Fact label={t('phone')} value={provider.phone.display} /> : null}
                 {provider.hourlyRateSek > 0 && !provider.publishedPrices?.lesson ? (
                   <Fact
                     label={t('rate')}
@@ -109,9 +110,10 @@ export function ProviderComparison({
               {(provider.googleReviews?.length ?? 0) > 0 ? (
                 <GoogleReviewQuotes items={provider.googleReviews ?? []} limit={2} compact />
               ) : null}
-              <SchoolContactButton
+              <SchoolContactActions
                 name={provider.name}
                 contact={provider.contact}
+                priceRequest={provider.priceRequest}
                 size="sm"
                 className="w-full"
               />

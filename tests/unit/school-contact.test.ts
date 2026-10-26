@@ -1,21 +1,34 @@
 import { describe, expect, it } from 'vitest';
-import { resolveSchoolContact } from '@/lib/discovery/school-contact';
+import {
+  phoneFact,
+  resolvePriceRequest,
+  resolveSchoolContact,
+} from '@/lib/discovery/school-contact';
 
 describe('resolveSchoolContact', () => {
-  it('prefers the school inbox over a website in the bio', () => {
+  it('emails the school even when a phone number and a website exist', () => {
     expect(
       resolveSchoolContact({
         providerRole: 'SCHOOL',
-        email: 'info@sjobotrafikskola.se',
-        bio: 'Auktoriserad trafikskola. https://www.sjobotrafikskola.se',
+        email: 'info@alvesta-trafikskola.se',
+        bio: 'https://alvesta-trafikskola.se',
+        inbox: 'other@alvesta-trafikskola.se',
       }),
-    ).toEqual({
-      kind: 'inbox',
-      href: 'mailto:info@sjobotrafikskola.se',
-    });
+    ).toEqual({ kind: 'inbox', href: 'mailto:info@alvesta-trafikskola.se' });
   });
 
-  it('falls back to the first safe website when the listing has no email', () => {
+  it('uses the address printed on the school website when the listing has none', () => {
+    expect(
+      resolveSchoolContact({
+        providerRole: 'SCHOOL',
+        email: null,
+        bio: 'https://alvesta-trafikskola.se',
+        inbox: 'info@alvesta-trafikskola.se',
+      }),
+    ).toEqual({ kind: 'inbox', href: 'mailto:info@alvesta-trafikskola.se' });
+  });
+
+  it('falls back to the first safe website when the school has no email', () => {
     expect(
       resolveSchoolContact({
         providerRole: 'SCHOOL',
@@ -59,5 +72,40 @@ describe('resolveSchoolContact', () => {
         bio: 'javascript:alert(1)',
       }),
     ).toBeNull();
+  });
+});
+
+describe('phoneFact', () => {
+  it('keeps the number as printed, for the information section', () => {
+    expect(phoneFact({ display: '0472-124 70', e164: '+4647212470' })).toEqual({
+      display: '0472-124 70',
+      href: 'tel:+4647212470',
+    });
+  });
+
+  it('drops a number that is not a Swedish phone', () => {
+    expect(phoneFact({ display: 'x', e164: 'javascript:alert(1)' })).toBeNull();
+  });
+});
+
+describe('resolvePriceRequest', () => {
+  it('asks by email first, so the message can be pre-filled', () => {
+    expect(
+      resolvePriceRequest({
+        providerRole: 'SCHOOL',
+        email: 'info@alvesta-trafikskola.se',
+        bio: 'https://alvesta-trafikskola.se',
+      }),
+    ).toEqual({ kind: 'inbox', href: 'mailto:info@alvesta-trafikskola.se' });
+  });
+
+  it('falls back to the website when the school has no email', () => {
+    expect(resolvePriceRequest({ providerRole: 'SCHOOL', bio: 'https://a.se' })?.kind).toBe(
+      'website',
+    );
+  });
+
+  it('returns null for a non-school listing', () => {
+    expect(resolvePriceRequest({ providerRole: 'INSTRUCTOR' })).toBeNull();
   });
 });

@@ -2,8 +2,12 @@ import 'server-only';
 import { withUsualMotorcycleCategories } from '@/lib/business/licence-categories';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
-import { publishedPrices } from '@/lib/discovery/published-prices';
-import { resolveSchoolContact } from '@/lib/discovery/school-contact';
+import { publishedInbox, publishedPhone, publishedPrices } from '@/lib/discovery/published-prices';
+import {
+  phoneFact,
+  resolvePriceRequest,
+  resolveSchoolContact,
+} from '@/lib/discovery/school-contact';
 
 export type PublicGoogleReview = {
   id: string;
@@ -161,6 +165,13 @@ export function toPublicInstructor(
   const categories = withUsualMotorcycleCategories(row.categories).filter((category) =>
     isProviderActivated([category]),
   );
+  const prices = publishedPrices(row.id);
+  const contactInput = {
+    providerRole: row.providerRole,
+    email: row.email,
+    bio: row.bio,
+    inbox: publishedInbox(row.id),
+  };
   return {
     id: row.id,
     name: row.name,
@@ -179,7 +190,7 @@ export function toPublicInstructor(
     googleReviewCount: row.googleReviewCount ?? null,
     googleMapsUri: row.googleMapsUri ?? null,
     googleReviews: aggregate.googleReviews ?? [],
-    publishedPrices: publishedPrices(row.id),
+    publishedPrices: prices,
     nextSlotAt,
     cancellationPolicyTier:
       row.cancellationPolicyTier === 'moderate' || row.cancellationPolicyTier === 'strict'
@@ -207,11 +218,9 @@ export function toPublicInstructor(
       row.providerRole === 'SCHOOL' || row.providerRole === 'HANDLEDARE'
         ? row.providerRole
         : 'INSTRUCTOR',
-    contact: resolveSchoolContact({
-      providerRole: row.providerRole,
-      email: row.email,
-      bio: row.bio,
-    }),
+    phone: row.providerRole === 'SCHOOL' ? phoneFact(publishedPhone(row.id)) : null,
+    contact: resolveSchoolContact(contactInput),
+    priceRequest: prices ? null : resolvePriceRequest(contactInput),
     ...(distanceKm == null ? {} : { distanceKm }),
   };
 }

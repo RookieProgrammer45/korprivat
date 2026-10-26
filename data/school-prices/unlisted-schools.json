@@ -1,5 +1,5 @@
 {
-  "note": "Catalogue listings hidden from the public site because the school publishes no usable price on its own website (rule: src/lib/discovery/published-prices.ts). Rows stay in the database; a listing reappears once the price dataset has a website price for it.",
+  "note": "Listings whose school publishes no usable price on its own website. Since 2026-10-26 they are listed publicly with a price-request button instead of prices; a listing shows prices once the price dataset has a website price for it.",
   "generatedAt": "2026-10-26",
   "total": 155,
   "byReason": {

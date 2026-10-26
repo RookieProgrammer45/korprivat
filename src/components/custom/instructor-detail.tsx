@@ -9,7 +9,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { PublishedPriceList } from '@/components/custom/published-price';
-import { SchoolContactButton } from '@/components/custom/school-contact-button';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -25,6 +25,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const tr = useTranslations('instructorDetail');
   const trPrice = useTranslations('publishedPrice');
+  const trContact = useTranslations('schoolContact');
   const tAffiliation = useTranslations('instructorAffiliation');
   const locale = useLocale();
 
@@ -159,6 +160,13 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
 
           <dl className="grid min-w-0 gap-3 rounded-xl border border-border bg-muted p-4 sm:grid-cols-2">
             <Fact label={tr('facts.city')}>{instructor.city}</Fact>
+            {instructor.phone ? (
+              <Fact label={tr('facts.phone')}>
+                <a href={instructor.phone.href} className="underline-offset-4 hover:underline">
+                  {instructor.phone.display}
+                </a>
+              </Fact>
+            ) : null}
             <Fact label={tr('facts.serviceArea')}>{instructor.serviceArea}</Fact>
             <Fact label={tr('facts.language')}>
               {instructor.languages.map((language) => tr(`language.${language}`)).join(' · ')}
@@ -208,16 +216,26 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
                   <PublishedPriceList prices={instructor.publishedPrices} showSourceLink />
                 </dd>
               </div>
-            ) : null}
+            ) : instructor.hourlyRateSek > 0 ? null : (
+              <div className="min-w-0 sm:col-span-2">
+                <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  {trPrice('heading')}
+                </dt>
+                <dd className="mt-1 text-small text-muted-foreground">{trContact('noPrice')}</dd>
+              </div>
+            )}
           </dl>
 
           <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
 
-          <SchoolContactButton
-            name={instructor.name}
-            contact={instructor.contact}
-            className="w-full sm:w-auto"
-          />
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <SchoolContactActions
+              name={instructor.name}
+              contact={instructor.contact}
+              priceRequest={instructor.priceRequest}
+              className="w-full sm:w-auto"
+            />
+          </div>
 
           <GoogleReviewQuotes
             items={instructor.googleReviews ?? []}

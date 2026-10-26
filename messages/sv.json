@@ -533,6 +533,7 @@
     "nextAvailableLabel": "Nästa lediga tid",
     "noUpcomingSlot": "Ingen kommande tid listad",
     "languageLabel": "Språk",
+    "phoneLabel": "Telefon",
     "englishAvailable": "Engelska tillgängligt",
     "swedishAvailable": "Svenska",
     "slotLabel": "Nästa lediga tid",
@@ -604,6 +605,7 @@
         "en": "Engelska"
       },
       "serviceArea": "Serviceområde",
+      "phone": "Telefon",
       "rate": "Lektionspris",
       "fee": "Lista",
       "feeValue": "Gratis att jämföra. Du betalar skolan.",
@@ -632,7 +634,14 @@
   "schoolContact": {
     "label": "Kontakta skolan",
     "inboxAria": "Mejla {name}",
-    "websiteAria": "Öppna {name}s webbplats"
+    "websiteAria": "Öppna {name}s webbplats",
+    "phoneLabel": "Ring {number}",
+    "phoneAria": "Ring {name} på {number}",
+    "priceRequest": "Prisförfrågan",
+    "priceRequestAria": "Fråga {name} om priser",
+    "priceRequestSubject": "Prisförfrågan",
+    "priceRequestBody": "Hej {name}!\n\nJag hittade er på DriveLinkUp och undrar vad era körlektioner och paket kostar.\n\nTack på förhand!",
+    "noPrice": "Inga priser på skolans webbplats ännu"
   },
   "instructorDetail": {
     "meta": {
@@ -647,6 +656,7 @@
     "portraitAlt": "Profilbild på {name}",
     "facts": {
       "city": "Stad",
+      "phone": "Telefon",
       "serviceArea": "Serviceområde",
       "language": "Språk",
       "verification": "Verifiering",

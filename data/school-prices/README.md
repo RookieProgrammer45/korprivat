@@ -12,7 +12,7 @@ DriveLinkUp.
 | `school-prices.json` | Canonical dataset: `meta` plus `schools[]`. Use this in code. |
 | `school-prices.csv` | Same data flattened (Swedish headers, `;`-separated, UTF-8 BOM) for Excel. |
 | `unmatched-listings.json` | DriveLinkUp listings from `docs/cutover-school-roster.json` that could not be linked to exactly one record. |
-| `unlisted-schools.json` / `.csv` | Catalogue listings hidden from the public site because the school publishes no usable price on its website, with the reason. Snapshot; rows stay in the database. |
+| `unlisted-schools.json` / `.csv` | Listings whose school publishes no usable price on its website, with the reason. They are listed with a "Prisförfrågan" (price request) button instead of prices. Snapshot. |
 
 ## Provenance
 
@@ -83,6 +83,12 @@ type SchoolPriceRecord = {
     sourceUrl: string | null;
     checkedAt: string;
   } | null;
+  // The school's phone number as printed on its own site; null when the
+  // pages show none or several of equal weight (usually branches).
+  phone?: { display: string; e164: string; sourceUrl: string } | null;
+  // Inbox printed on the site. Used as the contact button's mailto when the
+  // listing has no email of its own; the address is never shown as text.
+  inbox?: { address: string; sourceUrl: string } | null;
 };
 ```
 
@@ -100,7 +106,8 @@ terms forbid automated collection, so only profile links are recorded.
 
 Add `--heavy` to run the same three steps for C/D and YKB into `heavy` (B
 prices are left untouched) and `--linked` to limit a run to schools linked to
-a listing. `.github/workflows/school-prices-refresh.yml` runs both on the 1st
+a listing. `--write` also refreshes `phone` from the cached pages; `--phones`
+does only that. `.github/workflows/school-prices-refresh.yml` runs both on the 1st
 of every month and opens a pull request; it needs the `OPENAI_API_KEY`
 repository secret.
 
@@ -108,7 +115,7 @@ repository secret.
 
 - 1,101 schools (refreshed 2026-10-26): 481 with a lesson price, 428 with a
   Risk 1 price, 371 with a Risk 2 price, 414 with package prices, 153 with a
-  priced intensive course.
+  priced intensive course; 387 with a phone number (302 of them linked).
 - 581 of the 635 DriveLinkUp listings are linked via `listingIds`; the other
   54 are listed in `unmatched-listings.json`. 49 links were added by hand
   (2026-10-26): each needs a priced record in the same city and either the

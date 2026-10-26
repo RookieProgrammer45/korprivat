@@ -12,7 +12,7 @@ import {
   PublishedLessonPrice,
   PublishedPackageFrom,
 } from '@/components/custom/published-price';
-import { SchoolContactButton } from '@/components/custom/school-contact-button';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -744,9 +744,10 @@ function CardGrid({
             >
               <InstructorCard row={row} />
             </Link>
-            <SchoolContactButton
+            <SchoolContactActions
               name={row.name}
               contact={row.contact}
+              priceRequest={row.priceRequest}
               size="sm"
               className="w-full"
             />
@@ -857,6 +858,16 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               </span>
               <span className="min-w-0 break-words text-small text-foreground">
                 {nextSlotPill.whenLabel}
+              </span>
+            </div>
+          ) : null}
+          {row.phone ? (
+            <div className="grid min-w-0 gap-1">
+              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                {tr('phoneLabel')}
+              </span>
+              <span className="min-w-0 break-words text-small font-medium text-foreground">
+                {row.phone.display}
               </span>
             </div>
           ) : null}

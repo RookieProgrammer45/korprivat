@@ -11,7 +11,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { PublishedLessonPrice } from '@/components/custom/published-price';
-import { SchoolContactButton } from '@/components/custom/school-contact-button';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
@@ -75,12 +75,15 @@ export function InstructorPreview({
           >
             <PreviewCard row={row} />
             {showContact ? (
-              <SchoolContactButton
-                name={row.name}
-                contact={row.contact}
-                size="sm"
-                className="w-full"
-              />
+              <div className="grid gap-2">
+                <SchoolContactActions
+                  name={row.name}
+                  contact={row.contact}
+                  priceRequest={row.priceRequest}
+                  size="sm"
+                  className="w-full"
+                />
+              </div>
             ) : null}
           </li>
         ))}
@@ -130,7 +133,9 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
         />
         <div className="flex flex-1 flex-col gap-3 p-5">
           <div className="min-w-0">
-            <p className="text-small text-muted-foreground">{row.city}</p>
+            <p className="text-small text-muted-foreground">
+              {row.phone ? `${row.city} · ${row.phone.display}` : row.city}
+            </p>
             <h3 className="break-words font-display text-h4 font-normal tracking-tight text-foreground">
               {row.name}
             </h3>
