@@ -221,6 +221,13 @@
       "subtitle": "Short guides for people learning on Swedish roads. We cover Transportstyrelsen steps, school comparison, local requirements and clear SEK prices."
     },
     "posts": {
+      "4": {
+        "eyebrow": "Category B",
+        "title": "Swedish category B licence: from learner permit to the driving test",
+        "excerpt": "Learner permit, risk education, theory test and driving test — and how to compare a school's published lesson price.",
+        "meta": "{minutes} min read · 26 October 2026",
+        "readCta": "Read guide"
+      },
       "0": {
         "eyebrow": "Article · Stockholm expats",
         "title": "How to get a Swedish driver's license as an expat in Stockholm",
@@ -2169,7 +2176,7 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "See what the lesson costs.",
+      "title": "Find the best driving school near you.",
       "body": "Compare schools. Listing is free.",
       "primaryCta": "Find a school",
       "instructorCta": "I work at a driving school",

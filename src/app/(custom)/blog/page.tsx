@@ -13,6 +13,11 @@ import { getTranslations } from 'next-intl/server';
 
 const POSTS = [
   {
+    slug: 'korkort-b-steg-for-steg',
+    index: '4',
+    minutes: 7,
+  },
+  {
     slug: 'swedish-drivers-license-expat-stockholm',
     index: '0',
     minutes: 7,

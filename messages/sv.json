@@ -221,6 +221,13 @@
       "subtitle": "Korta guider för dig som lär dig köra på svenska vägar. Vi tar upp Transportstyrelsens steg, skoljämförelse, lokala krav och tydliga priser i SEK."
     },
     "posts": {
+      "4": {
+        "eyebrow": "Körkort B",
+        "title": "Körkort B i Sverige: stegen från körkortstillstånd till uppkörning",
+        "excerpt": "Körkortstillstånd, riskutbildning, kunskapsprov och körprov — och hur du jämför trafikskolors publicerade priser.",
+        "meta": "{minutes} min läsning · 26 oktober 2026",
+        "readCta": "Läs guiden"
+      },
       "0": {
         "eyebrow": "Artikel · Stockholmsexpater",
         "title": "Så skaffar du svenskt körkort som expat i Stockholm",
@@ -2169,7 +2176,7 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "Se vad lektionen kostar.",
+      "title": "Hitta den bästa trafikskolan nära dig.",
       "body": "Jämför skolor. Listan är gratis.",
       "primaryCta": "Hitta en skola",
       "instructorCta": "Jag undervisar på en trafikskola",
