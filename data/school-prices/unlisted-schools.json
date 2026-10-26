@@ -1,10 +1,10 @@
 {
   "note": "Catalogue listings hidden from the public site because the school publishes no usable price on its own website (rule: src/lib/discovery/published-prices.ts). Rows stay in the database; a listing reappears once the price dataset has a website price for it.",
   "generatedAt": "2026-10-26",
-  "total": 213,
+  "total": 164,
   "byReason": {
     "SITE_BLOCKED": 29,
-    "NOT_IN_DATASET": 103,
+    "NOT_IN_DATASET": 54,
     "PRICE_NOT_PUBLISHED": 64,
     "NO_WEBSITE": 12,
     "NOT_A_B_SCHOOL_SITE": 2,
@@ -22,26 +22,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "6e4adbb7-478c-4b66-85b9-238446918391",
-      "name": "Arvika Trafikskola",
-      "city": "Arvika",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 550
-    },
-    {
-      "listingId": "a3808ff7-7405-479c-ac33-c81be3d1cfd0",
-      "name": "Expansa Trafikskola",
-      "city": "Boden",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "de1bc2bc-b231-432b-b588-19ab9726b5e1",
       "name": "On Via Nyströms Trafikskola",
       "city": "Boden",
@@ -52,16 +32,6 @@
       "storedRateSek": 995
     },
     {
-      "listingId": "708d870a-511f-4b51-884f-25fc520dca99",
-      "name": "Ranheimers Trafikskola",
-      "city": "Boden",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "16f9ca95-b54f-4bdc-9d58-d8ee02f9069a",
       "name": "Yrkestrafikskolan Dalarna AB",
       "city": "Borlänge",
@@ -69,16 +39,6 @@
       "reasonText": "Website does not publish prices",
       "website": "https://ytsdalarna.se",
       "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "194e2bcf-97e0-4352-89da-d4c26e70e8e6",
-      "name": "Nya Trafikskolan AB",
-      "city": "Borås",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
       "storedRateSek": null
     },
     {
@@ -112,16 +72,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "cabdd5a8-a3c9-472c-9974-4eca4bad62ef",
-      "name": "Danderyds Trafikskola",
-      "city": "Danderyd",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": 4050
-    },
-    {
       "listingId": "e63a9bd2-b636-4e6c-9585-28b3ac988276",
       "name": "Grönlunds Yrkesutbildningar AB Danderyd",
       "city": "Danderyd",
@@ -130,16 +80,6 @@
       "website": null,
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "034382ce-6351-4f7c-aa7c-24a7e10085b3",
-      "name": "On Via Eksjö Trafikutbildning",
-      "city": "Eksjö",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": 750
     },
     {
       "listingId": "fea88428-4fc0-437d-a516-dad58ac04547",
@@ -182,16 +122,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "504bf25c-3e7d-45b5-b821-c629182f004b",
-      "name": "On Via Murtans Trafikskola",
-      "city": "Falkenberg",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "8f8c9cc8-cfee-47cd-862a-81bd466a8a94",
       "name": "Stjärnornas Trafikskola",
       "city": "Falkenberg",
@@ -222,16 +152,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "b0dd762e-969f-45f9-8672-19517bc6898d",
-      "name": "Hökis Trafikskola",
-      "city": "Farsta",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": 5000
-    },
-    {
       "listingId": "8d529c50-bc80-45ee-ba17-4b5d5ab12af5",
       "name": "JR Logistic AB",
       "city": "Farsta",
@@ -260,16 +180,6 @@
       "website": "https://hassestrafikskola.se",
       "hasContactEmail": false,
       "storedRateSek": 950
-    },
-    {
-      "listingId": "be275da1-535d-49e1-830e-b6b004c904a5",
-      "name": "Nya Trafikskolan",
-      "city": "Grästorp",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
     },
     {
       "listingId": "84f88725-5981-4499-9e0e-acd4d5426b2e",
@@ -310,16 +220,6 @@
       "website": null,
       "hasContactEmail": true,
       "storedRateSek": 100
-    },
-    {
-      "listingId": "77d06185-2d59-408b-a64a-633533129e35",
-      "name": "My Driving Academy Ullevi",
-      "city": "Göteborg",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 699
     },
     {
       "listingId": "2c806a10-ab5f-4f42-86e4-f9d30923e99b",
@@ -382,26 +282,6 @@
       "storedRateSek": 500
     },
     {
-      "listingId": "22970da7-c7a8-4f30-9e4a-58c041c87960",
-      "name": "Z Motor och Trafik AB",
-      "city": "Göteborg",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "1b8fe927-89f9-4484-94ab-1a521d4f01de",
-      "name": "Halmstad Trafikskola",
-      "city": "Halmstad",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "084cb538-5443-4c30-83cc-0ac323df3478",
       "name": "Vallås Trafikskola",
       "city": "Halmstad",
@@ -422,16 +302,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "7b3e4a8a-dedb-435d-bd08-0b325e854003",
-      "name": "Utbildarna",
-      "city": "Helsingborg",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "3018e286-5df7-4dc1-b92e-0f79102bdad9",
       "name": "Utbildarna AB Trafiklärarutbildningen",
       "city": "Helsingborg",
@@ -440,16 +310,6 @@
       "website": null,
       "hasContactEmail": true,
       "storedRateSek": null
-    },
-    {
-      "listingId": "bf68af19-4f7f-48f7-ad04-1948bd51a32b",
-      "name": "Bergmans Trafikskola AB",
-      "city": "Herrljunga",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 900
     },
     {
       "listingId": "99a463a1-a0cd-42ed-9d4d-ff3de8a0ee2a",
@@ -502,16 +362,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "e3f67ed6-ca0c-4c51-8255-5c28ae4da675",
-      "name": "Trafikhuset Sverige AB",
-      "city": "Hudiksvall",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 1350
-    },
-    {
       "listingId": "f16c5d13-c6ca-443c-abff-7f80a677de66",
       "name": "Hultsfred Trafikskola",
       "city": "Hultsfred",
@@ -558,16 +408,6 @@
       "reason": "NOT_A_B_SCHOOL_SITE",
       "reasonText": "Website is not a B driving-school site",
       "website": "https://presto.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "3ed9d961-6146-4247-8126-4a2801352214",
-      "name": "TT Trafikteamet",
-      "city": "Hässleholm",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
       "hasContactEmail": false,
       "storedRateSek": null
     },
@@ -632,16 +472,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "129d7a88-18ad-45e1-9c17-e0e0ab3b450e",
-      "name": "On Via Egert & Ulfs Trafikskola",
-      "city": "Jönköping",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": 990
-    },
-    {
       "listingId": "21e667ca-554a-46e5-8984-de52d7e832bb",
       "name": "On Via Ta Körkort Jönköping",
       "city": "Jönköping",
@@ -660,16 +490,6 @@
       "website": "https://edugruppen.se",
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "a7f74acc-a15e-47ee-b09c-3a1f89dcb240",
-      "name": "City Trafikskola Kalmar",
-      "city": "Kalmar",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 789
     },
     {
       "listingId": "4ccbe7fc-c8a3-49ce-ac92-d36e5ed98a1e",
@@ -722,16 +542,6 @@
       "storedRateSek": 2600
     },
     {
-      "listingId": "54fb37be-c59d-4191-8cf8-5d66bc8f26c5",
-      "name": "Centrala Trafikskolan AB",
-      "city": "Karlskoga",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "bd9e1e45-8bf1-4955-922f-a8faff3d5fb2",
       "name": "Sjögrens Trafikskola AB",
       "city": "Katrineholm",
@@ -744,16 +554,6 @@
     {
       "listingId": "78331c00-0c6b-49e9-952e-3cfe506b097d",
       "name": "J&A Risk  & Förarutbildning",
-      "city": "Klippan",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "fc69e412-e751-4fd5-aab9-bb25edf6e387",
-      "name": "Klippans Trafikskola AB",
       "city": "Klippan",
       "reason": "NOT_IN_DATASET",
       "reasonText": "Not matched to a school in the price dataset",
@@ -812,16 +612,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "68f57d82-63d1-46e7-b0b5-935715224b80",
-      "name": "Rhodins Trafikskola AB",
-      "city": "Kristianstad",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "a5f688f8-0f01-49b6-ba6c-ee500d69d8e4",
       "name": "Sanells Trafikskola AB",
       "city": "Kristianstad",
@@ -840,16 +630,6 @@
       "website": "https://husenstrafikskola.se",
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "666d8eaf-aec0-41fe-8df1-d78063c91334",
-      "name": "Kungsbacka Trafikskola AB",
-      "city": "Kungsbacka",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 710
     },
     {
       "listingId": "082f4a77-f509-4579-98b1-38f75016e7bf",
@@ -922,16 +702,6 @@
       "storedRateSek": 850
     },
     {
-      "listingId": "abee8ccb-efbd-44c7-aed1-c419dd36a1c4",
-      "name": "Nya Trafikskolan",
-      "city": "Lidköping",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "00e7afe2-9267-4b6f-99ba-9f79ac9a33a5",
       "name": "Widells TU",
       "city": "Lidköping",
@@ -972,32 +742,12 @@
       "storedRateSek": 3150
     },
     {
-      "listingId": "7746ca4b-25de-42c5-bfd0-4099b2c63f77",
-      "name": "On Via Ingelas för körkort",
-      "city": "Linköping",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "98f27b3b-3dae-4633-a367-9d2b715baf5e",
       "name": "Trafikskolan i Ljungby AB",
       "city": "Ljungby",
       "reason": "SITE_BLOCKED",
       "reasonText": "Website blocked automated reading",
       "website": "https://trafikskolan-ljungby.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "b3a65768-3bc7-4c8b-9231-9b6fb63571cd",
-      "name": "LiLos & Mattias Trafikskola AB",
-      "city": "Ludvika",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
       "hasContactEmail": false,
       "storedRateSek": null
     },
@@ -1262,26 +1012,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "9041a6e9-f1e2-4c0d-b310-0566712a8706",
-      "name": "Trafikskolan i Olofström",
-      "city": "Olofström",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 670
-    },
-    {
-      "listingId": "958c6bdb-4f4c-44ea-bad4-6e6865346a76",
-      "name": "Partille Trafikskola",
-      "city": "Partille",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "7a75e548-54da-49a1-9bac-49ad15525b6b",
       "name": "Körskolan i Piteå AB",
       "city": "Piteå",
@@ -1290,26 +1020,6 @@
       "website": "https://korskolan.com",
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "7088fffe-558d-4593-af49-d69421c97104",
-      "name": "Nya Trafikskolan i Sandviken, Lassas 24 AB",
-      "city": "Sandviken",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "c4f75d9b-5454-4fec-99d2-10c2ef33b619",
-      "name": "On Via Lovéns Sandviken",
-      "city": "Sandviken",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 1490
     },
     {
       "listingId": "daf16b18-fa25-4729-91b1-0dd11762d82b",
@@ -1362,16 +1072,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "875e199d-7e5d-4eb4-ac21-c4ed7fcf821b",
-      "name": "Rembjers Trafikskola",
-      "city": "Solna",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "f2c62f4d-4fef-4746-bfb0-5b4c8e6cab99",
       "name": "Allians Trafikskola · Kungsholmen",
       "city": "Stockholm",
@@ -1412,16 +1112,6 @@
       "storedRateSek": 499
     },
     {
-      "listingId": "78c1b599-f98b-45ea-963e-702b32549aff",
-      "name": "My Driving Academy Kungsholmen",
-      "city": "Stockholm",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 699
-    },
-    {
       "listingId": "0fd9de34-3fa5-40af-b8f7-32b89d6c420b",
       "name": "PostNord Sverige AB",
       "city": "Stockholm",
@@ -1430,16 +1120,6 @@
       "website": "https://postnord.se",
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "f9143f93-9a36-4af1-b674-878012508589",
-      "name": "Strängnäs Trafikskola AB",
-      "city": "Strängnäs",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 4500
     },
     {
       "listingId": "a32c0ddc-107a-4ed2-b003-6e3d48f18123",
@@ -1492,16 +1172,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "adb785bd-8fc1-4591-8620-2f202963bbd2",
-      "name": "Amzone Trafikskola i Säffle AB",
-      "city": "Säffle",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "4245b7ed-9412-42cd-9101-b2175ff1ac79",
       "name": "Freedomoutdoor",
       "city": "Sävar",
@@ -1519,16 +1189,6 @@
       "reasonText": "Not matched to a school in the price dataset",
       "website": null,
       "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "1ab65914-8e10-4cf0-a051-988d25593047",
-      "name": "Helens för Körkort AB",
-      "city": "Söderköping",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
       "storedRateSek": null
     },
     {
@@ -1602,16 +1262,6 @@
       "storedRateSek": 770
     },
     {
-      "listingId": "60d2da6f-360b-4a0a-9004-3ab043c73d97",
-      "name": "On Via Tranås Trafikskola",
-      "city": "Tranås",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 700
-    },
-    {
       "listingId": "6eaeef4e-8f61-4ae1-8fe8-83c963451126",
       "name": "Anders Ekberg Consulting AB",
       "city": "Tullinge",
@@ -1620,16 +1270,6 @@
       "website": "https://ykb.nu",
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "c9902cd9-419a-4453-8cbb-4767c7608be4",
-      "name": "Körkortcenter i Tumba",
-      "city": "Tumba",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": 300
     },
     {
       "listingId": "550f35a2-66b3-4293-9004-8c92f22ebf28",
@@ -1682,16 +1322,6 @@
       "storedRateSek": 870
     },
     {
-      "listingId": "87133423-fc58-4c72-b22b-ccd1f1728741",
-      "name": "Centrala Trafikskolan AB",
-      "city": "Ulricehamn",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 620
-    },
-    {
       "listingId": "5d71d3ec-d489-41f2-8e22-36f45fb29afd",
       "name": "Grönlunds Yrkesutbildningar AB Umeå",
       "city": "Umeå",
@@ -1699,26 +1329,6 @@
       "reasonText": "Website does not publish prices",
       "website": "https://gronlunds.se",
       "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "b6b92320-bed3-47d8-ad2c-68e4ab0caf2f",
-      "name": "On Via Umeå Trafikskola",
-      "city": "Umeå",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "e8b10727-5ed4-4fc8-bae6-3f34ed9b04ea",
-      "name": "Ellströms Trafikskola i Väsby AB",
-      "city": "Upplands Väsby",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
       "storedRateSek": null
     },
     {
@@ -1742,16 +1352,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "20db78e3-ce20-4c3f-97a8-cf9c964a89c1",
-      "name": "Uppsala Trafikskola AB",
-      "city": "Uppsala",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": 700
-    },
-    {
       "listingId": "b73a145d-2734-4d18-9fa3-a6b23a5c9146",
       "name": "On Via Åbergs Trafikskola",
       "city": "Vaggeryd",
@@ -1772,16 +1372,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "dcc44f68-53d9-4c4e-a629-5b56e3b175f9",
-      "name": "STU - Svensk Trafikutbildning",
-      "city": "Vallentuna",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 2096
-    },
-    {
       "listingId": "fdcb96eb-5406-4e61-8add-dc76ca27dd85",
       "name": "C-R Utbildning AB",
       "city": "Varberg",
@@ -1800,16 +1390,6 @@
       "website": null,
       "hasContactEmail": false,
       "storedRateSek": 1600
-    },
-    {
-      "listingId": "4c3d483f-76cc-430f-9975-e56e6b5b83fd",
-      "name": "On via TS Körskolan i Varberg",
-      "city": "Varberg",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
     },
     {
       "listingId": "61534687-a58b-495e-a606-042fae757ea3",
@@ -1862,16 +1442,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "0168ab44-0f85-42e1-9fcc-235f5698ce32",
-      "name": "On Via Björkmans Bilskola",
-      "city": "Visby",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
       "listingId": "53b90568-7d7d-4d29-8606-addbfef55464",
       "name": "Rauk n Rull AB",
       "city": "Visby",
@@ -1890,16 +1460,6 @@
       "website": "https://hantverkskollen.se",
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "4b97e5ba-0b3c-4eea-8993-1b4ecfab1910",
-      "name": "Hillengard Trafikskola",
-      "city": "Vänersborg",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 740
     },
     {
       "listingId": "9bb1988c-6762-44e5-81cc-e10d140db131",
@@ -1932,16 +1492,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "474251a6-040e-407d-b229-321ae72712fb",
-      "name": "On Via City Västerås",
-      "city": "Västerås",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": true,
-      "storedRateSek": 710
-    },
-    {
       "listingId": "088b38f7-4b8e-4a24-b7dd-125b01c3eec9",
       "name": "Roldan TrafikCenter",
       "city": "Västerås",
@@ -1970,16 +1520,6 @@
       "website": null,
       "hasContactEmail": false,
       "storedRateSek": null
-    },
-    {
-      "listingId": "719008ec-99f7-40fc-a061-1d5d75c514d7",
-      "name": "My Driving Academy Högsbo",
-      "city": "Västra Frölunda",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 699
     },
     {
       "listingId": "a381fd71-d912-44c4-a4ab-2932d8418178",
@@ -2092,42 +1632,12 @@
       "storedRateSek": null
     },
     {
-      "listingId": "2cfb0670-a624-4bde-836a-1fb63ade94ed",
-      "name": "Windahls Trafikskola AB",
-      "city": "Örebro",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 820
-    },
-    {
-      "listingId": "07dfb578-b3a6-4427-b303-82a26da6c53b",
-      "name": "Örebro Trafikskola AB",
-      "city": "Örebro",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": 740
-    },
-    {
       "listingId": "d81a8445-328d-407e-8794-714f283f0a47",
       "name": "Ekologg o Görans Bygg AB",
       "city": "Örsundsbro",
       "reason": "PRICE_NOT_PUBLISHED",
       "reasonText": "Website does not publish prices",
       "website": "https://gbos.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "882ca08d-9083-4e01-bfa2-a8ec46782b08",
-      "name": "On Via Reveljens Trafikskola",
-      "city": "Östersund",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
       "hasContactEmail": false,
       "storedRateSek": null
     },

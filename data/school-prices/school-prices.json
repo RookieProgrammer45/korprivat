@@ -10,8 +10,8 @@
       "schools": 1101,
       "withLessonPrice": 481,
       "withIntensivePrice": 153,
-      "linkedToListings": 453,
-      "listingIdsLinked": 532,
+      "linkedToListings": 488,
+      "listingIdsLinked": 581,
       "withRisk1Price": 428,
       "withRisk2Price": 371,
       "withPackagePrice": 414
@@ -439,7 +439,9 @@
     {
       "id": "trafikolof-se",
       "name": "Hagbergs Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "9041a6e9-f1e2-4c0d-b310-0566712a8706"
+      ],
       "counties": [
         "Blekinge län"
       ],
@@ -2151,7 +2153,8 @@
       "id": "mattiastrafikskola-se",
       "name": "Mattias Trafikskola",
       "listingIds": [
-        "dae7a0a9-42aa-4c97-99e7-3111c29250fd"
+        "dae7a0a9-42aa-4c97-99e7-3111c29250fd",
+        "b3a65768-3bc7-4c8b-9231-9b6fb63571cd"
       ],
       "counties": [
         "Dalarnas län"
@@ -2770,7 +2773,9 @@
     {
       "id": "bjorkmansbilskola-se",
       "name": "Björkmans Bilskola",
-      "listingIds": [],
+      "listingIds": [
+        "0168ab44-0f85-42e1-9fcc-235f5698ce32"
+      ],
       "counties": [
         "Gotlands län"
       ],
@@ -3662,7 +3667,9 @@
     {
       "id": "trafikhuset-se",
       "name": "Trafikhuset",
-      "listingIds": [],
+      "listingIds": [
+        "e3f67ed6-ca0c-4c51-8255-5c28ae4da675"
+      ],
       "counties": [
         "Gävleborgs län"
       ],
@@ -3910,7 +3917,9 @@
     {
       "id": "lovens-se",
       "name": "Lovéns Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "c4f75d9b-5454-4fec-99d2-10c2ef33b619"
+      ],
       "counties": [
         "Gävleborgs län"
       ],
@@ -3968,7 +3977,9 @@
     {
       "id": "nyatrafikskolan-nu",
       "name": "Nya Trafiksskolan i Sandviken",
-      "listingIds": [],
+      "listingIds": [
+        "7088fffe-558d-4593-af49-d69421c97104"
+      ],
       "counties": [
         "Gävleborgs län"
       ],
@@ -4120,7 +4131,9 @@
     {
       "id": "murtans-se",
       "name": "Murtans Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "504bf25c-3e7d-45b5-b821-c629182f004b"
+      ],
       "counties": [
         "Hallands län"
       ],
@@ -4444,7 +4457,8 @@
       "id": "citytrafikskolahalmstad-se",
       "name": "City Trafikskola Halmstad",
       "listingIds": [
-        "744a805b-e003-40d9-887f-862eed8b8e24"
+        "744a805b-e003-40d9-887f-862eed8b8e24",
+        "1b8fe927-89f9-4484-94ab-1a521d4f01de"
       ],
       "counties": [
         "Hallands län"
@@ -5321,7 +5335,8 @@
       "id": "korskolanvarberg-se",
       "name": "Körskolan i Varberg",
       "listingIds": [
-        "fa5cec27-fc5d-4e37-882d-5e621ccddfb7"
+        "fa5cec27-fc5d-4e37-882d-5e621ccddfb7",
+        "4c3d483f-76cc-430f-9975-e56e6b5b83fd"
       ],
       "counties": [
         "Hallands län"
@@ -6217,7 +6232,9 @@
     {
       "id": "reveljens-se",
       "name": "Reveljens Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "882ca08d-9083-4e01-bfa2-a8ec46782b08"
+      ],
       "counties": [
         "Jämtlands län"
       ],
@@ -6426,7 +6443,9 @@
     {
       "id": "eksjotrafikutbildning-se",
       "name": "Eksjö Trafikutbildning",
-      "listingIds": [],
+      "listingIds": [
+        "034382ce-6351-4f7c-aa7c-24a7e10085b3"
+      ],
       "counties": [
         "Jönköpings län"
       ],
@@ -6861,7 +6880,9 @@
     {
       "id": "egertulfs-se",
       "name": "Egert & Ulfs Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "129d7a88-18ad-45e1-9c17-e0e0ab3b450e"
+      ],
       "counties": [
         "Jönköpings län"
       ],
@@ -7667,7 +7688,9 @@
     {
       "id": "korkortpartners-se",
       "name": "Körkortpartners",
-      "listingIds": [],
+      "listingIds": [
+        "60d2da6f-360b-4a0a-9004-3ab043c73d97"
+      ],
       "counties": [
         "Jönköpings län"
       ],
@@ -8201,7 +8224,9 @@
     {
       "id": "citytrafikskolakalmar-se",
       "name": "City Trafikskola i Kalmar",
-      "listingIds": [],
+      "listingIds": [
+        "a7f74acc-a15e-47ee-b09c-3a1f89dcb240"
+      ],
       "counties": [
         "Kalmar län"
       ],
@@ -10163,7 +10188,9 @@
     {
       "id": "expansa-se",
       "name": "Expansa",
-      "listingIds": [],
+      "listingIds": [
+        "a3808ff7-7405-479c-ac33-c81be3d1cfd0"
+      ],
       "counties": [
         "Norrbottens län"
       ],
@@ -10236,7 +10263,8 @@
       "id": "ranheimers-se",
       "name": "Trafikteknik i Norr AB, Ranheimers Trafikskola",
       "listingIds": [
-        "e906ef86-24e1-463b-a6dd-8332f6479917"
+        "e906ef86-24e1-463b-a6dd-8332f6479917",
+        "708d870a-511f-4b51-884f-25fc520dca99"
       ],
       "counties": [
         "Norrbottens län"
@@ -12799,7 +12827,9 @@
     {
       "id": "trafikteamet-se",
       "name": "Trafikteamet",
-      "listingIds": [],
+      "listingIds": [
+        "3ed9d961-6146-4247-8126-4a2801352214"
+      ],
       "counties": [
         "Skåne län"
       ],
@@ -12966,7 +12996,9 @@
     {
       "id": "klippanstrafikskola-se",
       "name": "Klippans Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "fc69e412-e751-4fd5-aab9-bb25edf6e387"
+      ],
       "counties": [
         "Skåne län"
       ],
@@ -13131,7 +13163,9 @@
     {
       "id": "citytrafikskola-net",
       "name": "City Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "474251a6-040e-407d-b229-321ae72712fb"
+      ],
       "counties": [
         "Skåne län",
         "Västmanlands län"
@@ -13495,7 +13529,9 @@
     {
       "id": "takortet-se",
       "name": "Rhodins Trafikskola AB",
-      "listingIds": [],
+      "listingIds": [
+        "68f57d82-63d1-46e7-b0b5-935715224b80"
+      ],
       "counties": [
         "Skåne län"
       ],
@@ -18687,7 +18723,9 @@
     {
       "id": "danderydstrafikskola-se",
       "name": "Danderyds Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "cabdd5a8-a3c9-472c-9974-4eca4bad62ef"
+      ],
       "counties": [
         "Stockholms län"
       ],
@@ -18953,7 +18991,9 @@
     {
       "id": "hokis-se",
       "name": "Hökis Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "b0dd762e-969f-45f9-8672-19517bc6898d"
+      ],
       "counties": [
         "Stockholms län"
       ],
@@ -24658,7 +24698,9 @@
     {
       "id": "rembjer-se",
       "name": "Rembjers Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "875e199d-7e5d-4eb4-ac21-c4ed7fcf821b"
+      ],
       "counties": [
         "Stockholms län"
       ],
@@ -25539,7 +25581,11 @@
         "1283b3d2-4b6a-4085-bfef-4ba17ff51de4",
         "250b0b1d-5a41-49e6-b505-bb8621104c8a",
         "03f16657-fcbf-4aa6-979e-7dab8203d300",
-        "1a2a9845-4281-46a4-a50a-e1a1b9b1a8e1"
+        "1a2a9845-4281-46a4-a50a-e1a1b9b1a8e1",
+        "77d06185-2d59-408b-a64a-633533129e35",
+        "666d8eaf-aec0-41fe-8df1-d78063c91334",
+        "78c1b599-f98b-45ea-963e-702b32549aff",
+        "719008ec-99f7-40fc-a061-1d5d75c514d7"
       ],
       "counties": [
         "Stockholms län",
@@ -27132,7 +27178,8 @@
       "id": "korkortcenter-se",
       "name": "Tumba Körkortcenter",
       "listingIds": [
-        "80041e00-e32a-49d9-9753-80b43212087e"
+        "80041e00-e32a-49d9-9753-80b43212087e",
+        "c9902cd9-419a-4453-8cbb-4767c7608be4"
       ],
       "counties": [
         "Stockholms län"
@@ -27753,7 +27800,9 @@
     {
       "id": "vasby-ellstroms-se",
       "name": "Ellströms Trafikskola Väsby",
-      "listingIds": [],
+      "listingIds": [
+        "e8b10727-5ed4-4fc8-bae6-3f34ed9b04ea"
+      ],
       "counties": [
         "Stockholms län"
       ],
@@ -28036,7 +28085,9 @@
     {
       "id": "svensktrafikutbildning-se",
       "name": "Svensk Trafikutbildning",
-      "listingIds": [],
+      "listingIds": [
+        "dcc44f68-53d9-4c4e-a629-5b56e3b175f9"
+      ],
       "counties": [
         "Stockholms län"
       ],
@@ -30222,7 +30273,9 @@
     {
       "id": "strangnastrafikskola-se",
       "name": "Strängnäs Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "f9143f93-9a36-4af1-b674-878012508589"
+      ],
       "counties": [
         "Södermanlands län"
       ],
@@ -31533,7 +31586,9 @@
     {
       "id": "uppsalatrafikskola-se",
       "name": "Uppsala Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "20db78e3-ce20-4c3f-97a8-cf9c964a89c1"
+      ],
       "counties": [
         "Uppsala län"
       ],
@@ -31844,7 +31899,9 @@
     {
       "id": "arvikatrafikskola-se",
       "name": "Arvika Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "6e4adbb7-478c-4b66-85b9-238446918391"
+      ],
       "counties": [
         "Värmlands län"
       ],
@@ -32868,7 +32925,9 @@
     {
       "id": "amazonetrafikskola-se",
       "name": "Amazon Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "adb785bd-8fc1-4591-8620-2f202963bbd2"
+      ],
       "counties": [
         "Värmlands län"
       ],
@@ -34107,7 +34166,9 @@
     {
       "id": "umeatrafikskola-se",
       "name": "Umeå Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "b6b92320-bed3-47d8-ad2c-68e4ab0caf2f"
+      ],
       "counties": [
         "Västerbottens län"
       ],
@@ -38234,7 +38295,9 @@
     {
       "id": "ntib-se",
       "name": "Nya Trafikskolan i Borås AB",
-      "listingIds": [],
+      "listingIds": [
+        "194e2bcf-97e0-4352-89da-d4c26e70e8e6"
+      ],
       "counties": [
         "Västra Götalands län"
       ],
@@ -40834,7 +40897,9 @@
     {
       "id": "ztrafik-se",
       "name": "Z motor & trafik",
-      "listingIds": [],
+      "listingIds": [
+        "22970da7-c7a8-4f30-9e4a-58c041c87960"
+      ],
       "counties": [
         "Västra Götalands län"
       ],
@@ -41043,7 +41108,8 @@
       "id": "bergmanstrafikskola-se",
       "name": "Bergmans trafikskola",
       "listingIds": [
-        "b121617d-baa1-458a-ab60-a9ce621ee93f"
+        "b121617d-baa1-458a-ab60-a9ce621ee93f",
+        "bf68af19-4f7f-48f7-ad04-1948bd51a32b"
       ],
       "counties": [
         "Västra Götalands län"
@@ -41450,7 +41516,9 @@
     {
       "id": "utbildarna-com",
       "name": "Utbildarna i Helsingborg AB, Kungsbacka",
-      "listingIds": [],
+      "listingIds": [
+        "7b3e4a8a-dedb-435d-bd08-0b325e854003"
+      ],
       "counties": [
         "Västra Götalands län",
         "Skåne län"
@@ -42131,7 +42199,9 @@
       "id": "nya-se",
       "name": "Nya Trafikskolan Lidköping",
       "listingIds": [
-        "c5dc1487-667a-462d-aff5-ecf305e093a0"
+        "c5dc1487-667a-462d-aff5-ecf305e093a0",
+        "be275da1-535d-49e1-830e-b6b004c904a5",
+        "abee8ccb-efbd-44c7-aed1-c419dd36a1c4"
       ],
       "counties": [
         "Västra Götalands län"
@@ -42927,7 +42997,9 @@
     {
       "id": "partilletrafikskola-se",
       "name": "Partille Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "958c6bdb-4f4c-44ea-bad4-6e6865346a76"
+      ],
       "counties": [
         "Västra Götalands län"
       ],
@@ -45376,7 +45448,9 @@
     {
       "id": "trafikskola-ulricehamn-se",
       "name": "Centrala Trafikskolan Ulricehamn AB",
-      "listingIds": [],
+      "listingIds": [
+        "87133423-fc58-4c72-b22b-ccd1f1728741"
+      ],
       "counties": [
         "Västra Götalands län"
       ],
@@ -45482,7 +45556,9 @@
     {
       "id": "hillengardtrafikskola-se",
       "name": "Hillengard Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "4b97e5ba-0b3c-4eea-8993-1b4ecfab1910"
+      ],
       "counties": [
         "Västra Götalands län"
       ],
@@ -46114,7 +46190,9 @@
     {
       "id": "centrala-trafikskolan-se",
       "name": "Centrala Trafikskolan i Karlskoga",
-      "listingIds": [],
+      "listingIds": [
+        "54fb37be-c59d-4191-8cf8-5d66bc8f26c5"
+      ],
       "counties": [
         "Örebro län"
       ],
@@ -46628,7 +46706,8 @@
       "id": "citytrafikskolan-se",
       "name": "AB City Trafikskola i Örebro",
       "listingIds": [
-        "1b0a655d-fe19-4427-89b6-ea142ead9a1b"
+        "1b0a655d-fe19-4427-89b6-ea142ead9a1b",
+        "2cfb0670-a624-4bde-836a-1fb63ade94ed"
       ],
       "counties": [
         "Örebro län"
@@ -47650,7 +47729,9 @@
     {
       "id": "orebrotrafikskola-se",
       "name": "Örebro Trafikskola",
-      "listingIds": [],
+      "listingIds": [
+        "07dfb578-b3a6-4427-b303-82a26da6c53b"
+      ],
       "counties": [
         "Örebro län"
       ],
@@ -48123,7 +48204,9 @@
     {
       "id": "ingelas-se",
       "name": "Ingelas för Körkort",
-      "listingIds": [],
+      "listingIds": [
+        "7746ca4b-25de-42c5-bfd0-4099b2c63f77"
+      ],
       "counties": [
         "Östergötlands län"
       ],
@@ -49630,7 +49713,8 @@
       "id": "helensforkorkort-se",
       "name": "Helens för körkort",
       "listingIds": [
-        "c2d219e7-399f-424e-899a-a463b10ec0c4"
+        "c2d219e7-399f-424e-899a-a463b10ec0c4",
+        "1ab65914-8e10-4cf0-a051-988d25593047"
       ],
       "counties": [
         "Östergötlands län"

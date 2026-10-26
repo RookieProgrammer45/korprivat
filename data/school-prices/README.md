@@ -84,8 +84,11 @@ terms forbid automated collection, so only profile links are recorded.
 - 1,101 schools (refreshed 2026-10-26): 481 with a lesson price, 428 with a
   Risk 1 price, 371 with a Risk 2 price, 414 with package prices, 153 with a
   priced intensive course.
-- 532 of the 635 DriveLinkUp listings are linked via `listingIds`; the other
-  103 are listed in `unmatched-listings.json`.
+- 581 of the 635 DriveLinkUp listings are linked via `listingIds`; the other
+  54 are listed in `unmatched-listings.json`. 49 links were added by hand
+  (2026-10-26): each needs a priced record in the same city and either the
+  same school name or the exact register company for that website. Links to
+  the generic On Via chain page and ambiguous names were left unmatched.
 
 ## Rules for using this data
 
