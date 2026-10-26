@@ -1,6 +1,6 @@
 // Kept out of next.user-config.ts so the edge proxy does not import
 // next-intl/plugin (and its WASM extractor) into the proxy graph.
-import { adsenseClient, isAdsenseClient } from '@/lib/adsense';
+import { adsenseClient, isAdsenseClient } from './adsense';
 import type { CspExtraSources } from './csp';
 
 /**
