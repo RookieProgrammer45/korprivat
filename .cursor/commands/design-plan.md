@@ -13,6 +13,13 @@ Optional argument: a page or section to limit the plan to (e.g. `/design-plan sc
 
 ## Do NOT write code. Produce a plan only.
 
+### 0. Empathize and Define (design-system.mdc §12)
+For each section in scope:
+- Name the actor (learner, supervisor, school, instructor) and the journey stage (discover → compare → choose → book → pay → lesson → after).
+- Write one point-of-view statement and one "How might we…?" question.
+- Note the hand-offs to the stages just before and just after, and any front-stage/back-stage mismatch (the UI promising something the system doesn't do).
+- Use only evidence from the repo (`docs/`, specs, ADRs, copy) and Mobbin. Label anything else as an **assumption to test**. Never invent users, quotes or research.
+
 ### 1. Collect references (Mobbin MCP)
 For each section in scope, pull 4–8 references from shipped products: Airbnb, Booking.com, Treatwell, Doctolib, Zocdoc, Thumbtack, Linear, ElevenLabs. Summarise each section's shared pattern in 5 bullets: layout, hierarchy, above-the-fold content, how trust is shown, mobile behaviour. If the Mobbin MCP is not connected, say so and stop.
 
@@ -24,6 +31,9 @@ List every violation of design-system.mdc with `file:line`. Default scope:
 - `src/components/custom/site-nav.tsx` — header
 - site footer (custom-style.css §17, "Magic-UI footer-1")
 - `src/app/custom-style.css` rules that fight the system (e.g. the `nth-child(2)` offset on assurance cards, double-class specificity overrides)
+
+### 2b. Ideate
+For each section, give at least 3 distinct directions in one line each. Choose one and name the Laws of UX (§13) that decided it (e.g. "Hick's Law: one primary CTA", "Fitts's Law: full-width search on mobile").
 
 ### 3. Confirm these known problems in code and plan a fix for each
 - **School cards:** broken logo shows alt text; no initials fallback; "Ingen kommande tid listad" rendered when empty; unlabeled "B" chip; price not prominent.
@@ -39,11 +49,14 @@ An ordered task list, **one section per task**, each with:
 - files to touch
 - the Mobbin pattern it follows
 - new i18n keys (sv + en)
-- acceptance checks from design-system.mdc §11
+- the POV statement and the chosen direction
+- the Laws of UX applied (§13)
+- acceptance checks from design-system.mdc §11, plus how to **test** it (what result would send us back to Define)
 
 Save the plan to `tasks/design-plan.md` and stop.
 
 ## Hard constraints
+- Copy must match the business model: DriveLinkUp is **free for all users**. Never write "free for learners/elever" as if schools pay.
 - No invented data: no fake ratings, counts, slots, names, prices or testimonials. Numbers only if computed from the database.
 - All strings in `messages/sv.json` + `messages/en.json`, both in the same change.
 - Solid page backgrounds, one green accent, no-bold policy (headings 400, emphasis 500).

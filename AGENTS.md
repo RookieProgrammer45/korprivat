@@ -148,6 +148,10 @@ override.
   `/design-apply <task>` (Agent mode, one section per run). Commands live in
   `.cursor/commands/`.
 - Visual references come from the Mobbin MCP (`.cursor/mcp.json`).
+- Method: Stanford d.school design thinking applied to service design (§12) and
+  the Laws of UX (§13). Every plan and report names the laws it used.
+- Copy: DriveLinkUp is free for all users. Never phrase it as free only for
+  learners.
 
 ## Never
 

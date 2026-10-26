@@ -15,6 +15,11 @@ Run in **Agent mode** (Composer 2.5 or Auto). Pass the task as the argument, e.g
 - Add sv + en strings together. Use only compliance copy that was approved in the plan.
 - Touch only the files listed for this task. UI only — no booking, payment, verification, consent or API logic.
 
+## Prototype → Test (design-system.mdc §12–13)
+- Build the direction chosen in the plan as the smallest reversible change. Re-read its POV statement first.
+- Check that the hand-offs to the journey stages before and after still work (e.g. hero search → `/instructors` with the right filters).
+- Apply the Laws of UX listed for the task. If you find a better option on the way, explain which law it follows.
+
 ## Verify before reporting
 1. `npm run typecheck && npx biome check <touched files>` — fix any issues you introduced.
 2. `npm run dev:check`, then `npm run dev`. Screenshot `http://localhost:3000` at **390×844** and **1440×900** with the browser tool. Check:
@@ -30,6 +35,8 @@ Run in **Agent mode** (Composer 2.5 or Auto). Pass the task as the argument, e.g
 - What changed (files + one line each)
 - Screenshots (mobile + desktop)
 - Pre-existing test/lint failures — report them, do **not** "fix" unrelated tests
+- Laws of UX applied and how (one line each)
+- Test result versus the POV statement: what worked, what didn't, and whether we need to go back to Define
 - Anything that needs my decision
 
 Then tick the task in `tasks/design-plan.md` and commit: `feat(design): <section>`.
