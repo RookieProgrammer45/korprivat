@@ -10,6 +10,21 @@ export function isTeachingCategory(value: string): value is TeachingCategory {
   return (TEACHING_CATEGORIES as readonly string[]).includes(value);
 }
 
+/** Payment is collected only by a school, or by an instructor through a school. */
+export function instructorPaymentDecision(input: {
+  providerRole: string | null | undefined;
+  affiliationVerified: boolean;
+}): { allowed: boolean; code: string } {
+  if (input.providerRole === 'HANDLEDARE') {
+    return { allowed: false, code: 'handledare_not_payable' };
+  }
+  if (input.providerRole === 'SCHOOL') {
+    return { allowed: true, code: 'school_listing' };
+  }
+  if (input.affiliationVerified) return { allowed: true, code: 'school_affiliated' };
+  return { allowed: false, code: 'independent_payment_refused' };
+}
+
 export function independentPublicationDecision(input: {
   enforced: boolean;
   providerRole: string;

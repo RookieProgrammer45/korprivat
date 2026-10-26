@@ -28,6 +28,7 @@ import {
 import {
   CheckoutConfigurationError,
   createBookingCheckoutSession,
+  IndependentInstructorPaymentError,
 } from '@/lib/payments/create-booking-checkout';
 import { resolveOrigin } from '@/lib/payments/origin';
 import { getSessionUser } from '@/lib/require-auth';
@@ -268,6 +269,9 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
         },
       })
       .catch(() => undefined);
+    if (error instanceof IndependentInstructorPaymentError) {
+      return NextResponse.json({ error: { code: error.code } }, { status: 403 });
+    }
     if (error instanceof CheckoutConfigurationError) {
       return NextResponse.json({ errors: { payments: 'not_enabled' } }, { status: 403 });
     }

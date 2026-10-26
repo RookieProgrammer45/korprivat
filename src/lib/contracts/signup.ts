@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { PhotoVerificationState } from '@/lib/contracts/photo-verification';
 import {
+  isIndependentInstructorSignupOpen,
   isInstructorLicenseTenureEligible,
   isLearnerAgeEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
@@ -100,6 +101,15 @@ export const SignupStart = z
       }
     }
     if (data.path === 'INSTRUCTOR') {
+      if (!isIndependentInstructorSignupOpen()) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['path'],
+          message:
+            'Independent instructors cannot sign up in the Nordics. Join through a driving school.',
+        });
+        return;
+      }
       if (data.licenseHeldYears === undefined) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,

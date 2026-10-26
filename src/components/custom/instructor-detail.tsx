@@ -201,15 +201,19 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             </div>
           </dl>
 
-          <BookingPriceSummary instructorId={instructor.id} />
+          {instructor.canCollectPayment === false ? null : (
+            <BookingPriceSummary instructorId={instructor.id} />
+          )}
 
           <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
 
-          <BookingModeSection bookingMode={instructor.bookingMode} surfaces={instructor.surfaces} />
+          <BookingModeSection instructor={instructor} />
           {/* Directory-only listings show no cancellation policy: no booking
               flows through DriveLinkUp for this school, and an unconfirmed
-              tier would misrepresent the school's own terms. */}
-          {instructor.showCancellationPolicy === false ||
+              tier would misrepresent the school's own terms. Independent
+              instructors also cannot take payment here. */}
+          {instructor.canCollectPayment === false ||
+          instructor.showCancellationPolicy === false ||
           instructor.surfaces?.directoryOnly ||
           (!instructor.surfaces && instructor.bookingMode === 'contact') ? null : (
             <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
@@ -253,22 +257,20 @@ function formatSlotDate(iso: string, locale: string): string {
   }).format(new Date(iso));
 }
 
-function BookingModeSection({
-  bookingMode: _bookingMode,
-  surfaces,
-}: {
-  bookingMode: InstructorItem['bookingMode'];
-  surfaces: InstructorItem['surfaces'];
-}) {
+function BookingModeSection({ instructor }: { instructor: InstructorItem }) {
   const tr = useTranslations('instructorDetail');
-  const mode = surfaces?.directoryOnly
-    ? 'contact'
-    : surfaces?.transactionalBooking
-      ? 'instant'
-      : surfaces?.requestToBook
-        ? 'request'
-        : 'contact';
-  void _bookingMode;
+  const surfaces = instructor.surfaces;
+  const independentInstructor =
+    instructor.providerRole === 'INSTRUCTOR' && instructor.canCollectPayment === false;
+  const mode = independentInstructor
+    ? 'paymentThroughSchool'
+    : surfaces?.directoryOnly
+      ? 'contact'
+      : surfaces?.transactionalBooking
+        ? 'instant'
+        : surfaces?.requestToBook
+          ? 'request'
+          : 'contact';
   return (
     <section className="grid min-w-0 gap-2 rounded-xl border border-border bg-muted p-4">
       <p className="text-eyebrow text-muted-foreground">{tr('bookingModeEyebrow')}</p>

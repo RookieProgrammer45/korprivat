@@ -213,6 +213,16 @@ describe('POST /api/bookings — email dispatch', () => {
     expect(mockBookingCreate).not.toHaveBeenCalled();
   });
 
+  it('refuses payment when the instructor is not part of a driving school', async () => {
+    mockInstructorFindUnique.mockResolvedValueOnce(
+      instructorRecord({ providerRole: 'INSTRUCTOR' }),
+    );
+    const res = await POST(jsonRequest(VALID_BODY));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: { code: 'independent_payment_refused' } });
+    expect(mockBookingCreate).not.toHaveBeenCalled();
+  });
+
   it('does NOT send email when zod parse fails (400)', async () => {
     const res = await POST(jsonRequest({ ...VALID_BODY, studentEmail: 'not-an-email' }));
     expect(res.status).toBe(400);

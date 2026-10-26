@@ -7,6 +7,10 @@ import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
 import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
+import {
+  loadInstructorPaymentEligibility,
+  maskSurfacesForPayment,
+} from '@/lib/scheduling/listing-eligibility';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
@@ -103,9 +107,14 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   // Surfaces come from authorization, not legacy bookingMode, so a withdrawal
   // hides the booking sidebar and offering request even if bookingMode is still
   // instant or request. Info, prices, and reviews stay.
-  const surfaces = await loadListingSurfaces(
-    resolved.instructor.id,
-    resolved.instructor.bookingMode,
+  const payment = await loadInstructorPaymentEligibility({
+    listingId: resolved.instructor.id,
+    userId: resolved.instructor.userId,
+    providerRole: resolved.instructor.providerRole,
+  });
+  const surfaces = maskSurfacesForPayment(
+    await loadListingSurfaces(resolved.instructor.id, resolved.instructor.bookingMode),
+    payment.allowed,
   );
   const showBooking = surfaces.transactionalBooking || surfaces.requestToBook;
 

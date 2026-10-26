@@ -13,6 +13,10 @@ import {
   isCancellationPolicyEnforced,
   listingHasActiveCancellationPolicy,
 } from '@/lib/scheduling/cancellation-policy-store';
+import {
+  loadInstructorPaymentEligibility,
+  maskSurfacesForPayment,
+} from '@/lib/scheduling/listing-eligibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -51,7 +55,15 @@ export async function GET(_req: Request, ctx: Ctx) {
     verificationStatus: 'unverified' as const,
     reviewSummary: { count: 0, averageRating: null },
   };
-  const surfaces = await loadListingSurfaces(instructor.id, instructor.bookingMode);
+  const payment = await loadInstructorPaymentEligibility({
+    listingId: instructor.id,
+    userId: instructor.userId,
+    providerRole: instructor.providerRole,
+  });
+  const surfaces = maskSurfacesForPayment(
+    await loadListingSurfaces(instructor.id, instructor.bookingMode),
+    payment.allowed,
+  );
   const nextSlotAt = surfaces.availabilityDisplay ? (slot?.startsAt.toISOString() ?? null) : null;
   const hidePolicy =
     isCancellationPolicyEnforced() && !(await listingHasActiveCancellationPolicy(instructor.id));
@@ -59,6 +71,7 @@ export async function GET(_req: Request, ctx: Ctx) {
     InstructorItem.parse({
       ...toPublicInstructor(instructor, aggregate, nextSlotAt),
       affiliation: affiliation ? { name: affiliation.name, slug: affiliation.slug } : null,
+      canCollectPayment: payment.allowed,
       surfaces,
       ...(hidePolicy ? { cancellationPolicyTier: null, showCancellationPolicy: false } : {}),
     }),

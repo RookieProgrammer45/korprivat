@@ -27,6 +27,7 @@ import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { PostLoginRedirect, SocialRoleRequest } from '@/lib/contracts/auth';
 import { completeSignupHandshake } from '@/lib/email/onboarding';
+import { isIndependentInstructorSignupOpen } from '@/lib/signup-eligibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,7 +42,9 @@ export async function POST(req: Request) {
   if (!parsed.success) {
     return NextResponse.json({ errors: { form: 'Invalid request' } }, { status: 400 });
   }
-  const { role: requestedRole, next } = parsed.data;
+  const { role: parsedRole, next } = parsed.data;
+  const requestedRole =
+    parsedRole === 'INSTRUCTOR' && !isIndependentInstructorSignupOpen() ? 'STUDENT' : parsedRole;
 
   // Session gate — Google and Facebook both set a session cookie by the
   // time we get here. If the session is missing, the OAuth flow either

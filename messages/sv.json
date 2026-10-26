@@ -346,7 +346,7 @@
         "faq1q": "Finns undervisning på engelska?",
         "faq1a": "Många annonser markerar engelska. Filtrera katalogen eller läs profilen före bokning.",
         "faq2q": "Vad betalar skolan till DriveLinkUp?",
-        "faq2a": "Skolbokningar betalar 8% efter genomförd tjänst. Oberoende instruktörer 10%. Elevavgift 0%.",
+        "faq2a": "Skolbokningar betalar 8% efter genomförd tjänst. En instruktör kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola. Elevavgift 0%.",
         "faq3q": "När betalar jag?",
         "faq3a": "Vid checkout för bokad tid. Medlen hålls i escrow tills leverans bekräftas eller auto-release körs."
       }
@@ -664,6 +664,10 @@
       "contact": {
         "title": "Kataloglista",
         "body": "Skolan visas med sin information och sina priser. DriveLinkUp förmedlar inte bokningar eller förfrågningar för den här skolan — kontakta skolan direkt för att boka."
+      },
+      "paymentThroughSchool": {
+        "title": "Betalning via trafikskola",
+        "body": "En instruktör kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola. Boka via skolans annons, eller fråga instruktören vilken skola hen undervisar för."
       }
     },
     "safetyEyebrow": "Innan du bokar",
@@ -688,6 +692,7 @@
     "submitInstant": "Boka och betala",
     "submitRequest": "Skicka bokningsförfrågan",
     "submitDirectoryOnly": "Den här annonsen tar inte emot bokningar här",
+    "submitIndependentPayment": "Betalning tas av en trafikskola",
     "submitting": "Skickar…",
     "submittingInstant": "Bokar…",
     "submittingRequest": "Skickar…",
@@ -756,7 +761,8 @@
     "bookingModeLabel": {
       "instant": "Direkt",
       "request": "Förfrågan",
-      "contact": "Kataloglista"
+      "contact": "Kataloglista",
+      "paymentThroughSchool": "Betalar via skola"
     },
     "bookingMode": {
       "title": "Bokningsläge",
@@ -780,7 +786,8 @@
       "slotRequired": "Välj en ledig tid.",
       "formIncomplete": "Fyll i obligatoriska fält och välj en ledig tid.",
       "bookingModeChanged": "Skolans bokningsläge har ändrats. Uppdatera sidan och försök igen.",
-      "notAuthorizedBySchool": "Den här annonsen tar inte emot bokningar via DriveLinkUp."
+      "notAuthorizedBySchool": "Den här annonsen tar inte emot bokningar via DriveLinkUp.",
+      "independentPaymentRefused": "Den här instruktören kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola."
     }
   },
   "instructorOnboarding": {
@@ -1264,7 +1271,7 @@
     "instructorBreakdown": {
       "rateLine": "Publicerat lektionspris",
       "commissionLine": "Skolans provision efter genomförande",
-      "payoutLine": "10 % gäller på hänförligt bokningsvärde först efter genomförd tjänst.",
+      "payoutLine": "Skolbokningar betalar 8 % provision efter genomförd tjänst. Instruktörer tar betalt endast via en trafikskola de tillhör.",
       "exampleTitle": "Exempel"
     }
   },
@@ -2149,11 +2156,19 @@
     "hero": {
       "eyebrow": "",
       "title": "En billigare och smidigare väg till körkortet",
-      "body": "Jämför trafikskolor och instruktörer — publicerade priser, språk och lediga tider syns allt innan du bokar.",
+      "body": "Jämför trafikskolornas annonser och publicerade priser. DriveLinkUp är en marknadsplats — en katalogannons är inte ett bokningstillstånd.",
       "primaryCta": "Hitta lektioner",
-      "instructorCta": "Jag är trafiklärare",
-      "marketplaceTag": "Marknadsplats · Skolor & instruktörer",
+      "instructorCta": "Jag undervisar på en trafikskola",
+      "marketplaceTag": "Marknadsplats · Trafikskolor",
       "schoolCta": "Jag driver trafikskola",
+      "panelEyebrow": "Så funkar det",
+      "panelTitle": "Skolor först, ärliga annonser",
+      "panelBody": "Bläddra bland trafikskolor efter stad och kategori. Betalning på DriveLinkUp tas av en skola, inte av en fristående instruktör.",
+      "panelPoints": {
+        "directory": "Se skolans uppgifter och publicerade priser i katalogen.",
+        "prices": "Inga påhittade betyg, lediga tider eller bokaknappar på annonser som inte tar bokning här.",
+        "schools": "Certifierade instruktörer ansluter via skolan de undervisar för."
+      },
       "contactCta": "Starta en konversation",
       "assurance": {
         "price": "Priset syns innan du bokar",
@@ -3277,7 +3292,7 @@
     "seoLead": "Lär dig och boka i {name}, {country}",
     "seoP1Live": "Annonser i {name} visar endast aktiverade skolor med verifierad Transportstyrelsen-behörighet. Jämför innan du skapar konto.",
     "seoP1Expansion": "Vi publicerar en strukturerad hubb för {name}, {country} så sök och AI kan dirigera elever rätt medan utbud onboards.",
-    "seoP2": "Elever betalar 0% marknadsplatsavgift. Skolbokningar betalar 8% efter genomförd tjänst; oberoende instruktörer 10%. Handledare är en separat juridisk väg.",
+    "seoP2": "Elever betalar 0% marknadsplatsavgift. Skolbokningar betalar 8% efter genomförd tjänst. Instruktörer tar betalt endast via en trafikskola de tillhör. Handledare är en separat juridisk väg.",
     "howTitle": "Så fungerar DriveLinkUp",
     "howBodyLive": "Öppna en annons, välj tid, betala publicerat pris till escrow, genomför lektionen och bekräfta så skolan får betalt.",
     "howBodyExpansion": "När annonser går live på den här marknaden gäller samma escrow-flöde som i Sverige — verifierade skolor, publicerade priser, ingen elevavgift.",
@@ -3340,7 +3355,7 @@
       },
       "4": {
         "title": "Provision",
-        "body": "DriveLinkUp tar ut provision av trafikskolor och instruktörer för förmedlade bokningar — först när tjänsten genomförts. Provisionen är 8 % för trafikskolor och 10 % för självständiga instruktörer. Elever betalar aldrig någon avgift till DriveLinkUp.",
+        "body": "DriveLinkUp tar ut 8 % provision av trafikskolor för förmedlade bokningar — först när tjänsten genomförts. Instruktörer tar betalt endast via en skola de tillhör. Elever betalar aldrig någon avgift till DriveLinkUp.",
         "items": []
       },
       "5": {

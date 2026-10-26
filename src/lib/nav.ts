@@ -80,14 +80,6 @@ export const navItems: NavItem[] = [
   // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
   // primary bar — keeps marketing chrome short once a session exists.
   {
-    label: "I'm a driving instructor",
-    labelKey: 'nav.drivingInstructor',
-    href: '/signup?role=instructor',
-    group: 'secondary',
-    order: 0,
-    hideWhenAuthenticated: true,
-  },
-  {
     label: 'I run a driving school',
     labelKey: 'nav.drivingSchool',
     href: '/for-skolor',

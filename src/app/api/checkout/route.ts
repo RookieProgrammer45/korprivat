@@ -19,6 +19,7 @@ import { existingBookingLifecycleAllowed } from '@/lib/orgs/school-authorization
 import {
   CheckoutConfigurationError,
   createBookingCheckoutSession,
+  IndependentInstructorPaymentError,
 } from '@/lib/payments/create-booking-checkout';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
 import { getStripe } from '@/lib/payments/stripe';
@@ -227,6 +228,9 @@ export async function POST(req: Request) {
       { status: 200 },
     );
   } catch (error) {
+    if (error instanceof IndependentInstructorPaymentError) {
+      return NextResponse.json({ error: { code: error.code } }, { status: 403 });
+    }
     if (error instanceof CheckoutConfigurationError) {
       return NextResponse.json({ errors: { payments: 'not_enabled' } }, { status: 403 });
     }

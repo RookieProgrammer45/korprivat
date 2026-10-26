@@ -22,6 +22,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { type LocationStatus, useUserLocation } from '@/hooks/use-user-location';
 import { apiFetch } from '@/lib/api-client';
+import { nearestKnownCity } from '@/lib/business/geo';
 import {
   LICENCE_CATEGORY_CODES,
   type LicenceCategoryCode,
@@ -146,7 +147,17 @@ export function InstructorDirectory({
   // valid source of truth is the URL itself.
   useEffect(() => {
     const sp = new URLSearchParams(searchParams.toString());
-    setFilters(filtersFromSearchParams(sp) ?? EMPTY_FILTERS);
+    const parsed = filtersFromSearchParams(sp);
+    if (parsed) {
+      setFilters(parsed);
+      return;
+    }
+    const seed = initialFiltersRef.current;
+    if (seed && Object.keys(seed).length > 0) {
+      setFilters({ ...EMPTY_FILTERS, ...seed });
+      return;
+    }
+    setFilters(EMPTY_FILTERS);
   }, [searchParams]);
 
   // Keep the geolocation badge in sync with the URL: when the learner clears
@@ -274,7 +285,15 @@ export function InstructorDirectory({
     const grantedLng = location.coords.longitude;
     setFilters((curr) => {
       if (curr.lat === grantedLat && curr.lng === grantedLng) return curr;
-      const next: Filters = { ...curr, lat: grantedLat, lng: grantedLng };
+      const city = curr.city || nearestKnownCity(grantedLat, grantedLng);
+      const next: Filters = {
+        ...curr,
+        lat: grantedLat,
+        lng: grantedLng,
+        sort: 'distance',
+        ...(city ? { city } : {}),
+        ...(curr.nearKm === '' ? { nearKm: 40 } : {}),
+      };
       replaceUrl(next);
       return next;
     });
@@ -729,22 +748,19 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
       : tierBadgeLabel(row.cancellationPolicyTier, trTier);
   // Badge follows authorization surfaces when the API sent them, so a
   // withdrawn scope cannot keep an instant/request label on the card.
-  const bookingMode: 'instant' | 'request' | 'contact' = row.surfaces
-    ? row.surfaces.directoryOnly
-      ? 'contact'
-      : row.surfaces.transactionalBooking
-        ? 'instant'
-        : row.surfaces.requestToBook
-          ? 'request'
-          : 'contact'
-    : 'contact';
-  const bookingModeLabel = trBooking(
-    bookingMode === 'request'
-      ? 'bookingModeLabel.request'
-      : bookingMode === 'contact'
-        ? 'bookingModeLabel.contact'
-        : 'bookingModeLabel.instant',
-  );
+  const bookingMode: 'instant' | 'request' | 'contact' | 'paymentThroughSchool' =
+    row.providerRole === 'INSTRUCTOR' && row.canCollectPayment === false
+      ? 'paymentThroughSchool'
+      : row.surfaces
+        ? row.surfaces.directoryOnly
+          ? 'contact'
+          : row.surfaces.transactionalBooking
+            ? 'instant'
+            : row.surfaces.requestToBook
+              ? 'request'
+              : 'contact'
+        : 'contact';
+  const bookingModeLabel = trBooking(`bookingModeLabel.${bookingMode}`);
   const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
   const reviewLabel =
     row.reviewSummary.averageRating === null

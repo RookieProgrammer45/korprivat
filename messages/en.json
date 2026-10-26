@@ -346,7 +346,7 @@
         "faq1q": "Is English-speaking instruction available?",
         "faq1a": "Many listings flag English. Filter the directory or open a school profile to confirm before you book.",
         "faq2q": "What does a school pay DriveLinkUp?",
-        "faq2a": "School-affiliated bookings pay 8% after completed service. Independent instructors pay 10%. Learners pay 0%.",
+        "faq2a": "School-affiliated bookings pay 8% after completed service. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Learners pay 0%.",
         "faq3q": "When do I pay?",
         "faq3a": "At checkout for the booked slot. Funds stay in escrow until delivery is confirmed or auto-release runs."
       }
@@ -664,6 +664,10 @@
       "contact": {
         "title": "Directory listing",
         "body": "This school is listed with its information and prices. DriveLinkUp does not handle bookings or requests for this school — contact the school directly to book."
+      },
+      "paymentThroughSchool": {
+        "title": "Pays through a driving school",
+        "body": "An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Book the school listing, or ask the instructor which school they teach with."
       }
     },
     "safetyEyebrow": "Before you book",
@@ -688,6 +692,7 @@
     "submitInstant": "Book and pay",
     "submitRequest": "Send booking request",
     "submitDirectoryOnly": "This listing does not take bookings here",
+    "submitIndependentPayment": "Payment is collected by a driving school",
     "submitting": "Sending…",
     "submittingInstant": "Booking…",
     "submittingRequest": "Sending…",
@@ -756,7 +761,8 @@
     "bookingModeLabel": {
       "instant": "Instant",
       "request": "Request",
-      "contact": "Directory listing"
+      "contact": "Directory listing",
+      "paymentThroughSchool": "Pays through a school"
     },
     "bookingMode": {
       "title": "Booking mode",
@@ -780,7 +786,8 @@
       "slotRequired": "Choose an available time.",
       "formIncomplete": "Fill in the required fields and choose an available time.",
       "bookingModeChanged": "This school's booking mode changed. Refresh and try again.",
-      "notAuthorizedBySchool": "This listing does not accept bookings through DriveLinkUp."
+      "notAuthorizedBySchool": "This listing does not accept bookings through DriveLinkUp.",
+      "independentPaymentRefused": "This instructor cannot take payment on DriveLinkUp unless they belong to a driving school."
     }
   },
   "instructorOnboarding": {
@@ -1264,7 +1271,7 @@
     "instructorBreakdown": {
       "rateLine": "Published lesson price",
       "commissionLine": "School commission after completion",
-      "payoutLine": "School-affiliated bookings pay 8% commission (independent instructors 10%) after completed service.",
+      "payoutLine": "School-affiliated bookings pay 8% commission after completed service. Instructors collect payment only through a driving school they belong to.",
       "exampleTitle": "Example"
     }
   },
@@ -2149,15 +2156,23 @@
     "hero": {
       "eyebrow": "",
       "title": "A cheaper, smoother way to get your licence",
-      "body": "Compare driving schools and certified instructors — published prices, languages and available times, all visible before you book.",
+      "body": "Compare driving-school listings and published prices. DriveLinkUp is a marketplace — a listing is not a booking authorization.",
       "primaryCta": "Find lessons",
-      "instructorCta": "I'm a certified instructor",
-      "marketplaceTag": "Marketplace · Schools & instructors",
+      "instructorCta": "I work at a driving school",
+      "marketplaceTag": "Marketplace · Driving schools",
       "schoolCta": "I run a driving school",
+      "panelEyebrow": "How it works",
+      "panelTitle": "Schools first, honest listings",
+      "panelBody": "Browse driving schools by city and category. Payment on DriveLinkUp is collected by a school, not by an independent instructor.",
+      "panelPoints": {
+        "directory": "See school information and published prices in the directory.",
+        "prices": "No invented ratings, next-slot claims, or book buttons on listings that do not take bookings here.",
+        "schools": "Certified instructors join through the school they teach with."
+      },
       "contactCta": "Start a conversation",
       "assurance": {
         "price": "Published price shown before checkout",
-        "safety": "Schools and certified instructors",
+        "safety": "School listings and published prices",
         "choice": "Free for learners"
       },
       "previewEyebrow": "The decision, in one place",
@@ -3172,11 +3187,11 @@
       "title": "For driving schools",
       "body": "Publish the price and availability you control, then receive qualified, measurable bookings from learners who chose your listing.",
       "price": "8% after completion",
-      "detail": "School-affiliated bookings pay 8% (independent instructors 10%) of attributable booking value only after completed service."
+      "detail": "School-affiliated bookings pay 8% of attributable booking value only after completed service. Instructors collect payment only through a driving school they belong to."
     },
     "notes": {
       "title": "First-market booking and commission rules (Sweden)",
-      "body": "A booking is attributable when the learner completes it through DriveLinkUp. School-affiliated commission is 8% of that attributable booking value (10% for independent instructors) and is due only after completed service—not for browsing, registration, or an uncompleted enquiry. Cancellation, refund and no-show outcomes follow the school’s published policy and the booking record. Learners never pay a separate DriveLinkUp fee; the school’s published price stays the learner total. Settlement timing and payout responsibilities are confirmed per participating school before live transactions are promoted."
+      "body": "A booking is attributable when the learner completes it through DriveLinkUp. School-affiliated commission is 8% of that attributable booking value and is due only after completed service—not for browsing, registration, or an uncompleted enquiry. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Cancellation, refund and no-show outcomes follow the school’s published policy and the booking record. Learners never pay a separate DriveLinkUp fee; the school’s published price stays the learner total. Settlement timing and payout responsibilities are confirmed per participating school before live transactions are promoted."
     },
     "cta": {
       "learner": "Compare schools",
@@ -3277,7 +3292,7 @@
     "seoLead": "Learn and book in {name}, {country}",
     "seoP1Live": "Listings in {name} show only marketplace-activated schools with verified Transportstyrelsen credentials. Compare before you create an account.",
     "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
-    "seoP2": "Learners pay 0% marketplace fee. School-affiliated bookings pay 8% after completion; independent instructors 10%. Handledare / private practice is a separate legal path.",
+    "seoP2": "Learners pay 0% marketplace fee. School-affiliated bookings pay 8% after completion. Instructors collect payment only through a driving school they belong to. Handledare / private practice is a separate legal path.",
     "howTitle": "How DriveLinkUp works",
     "howBodyLive": "Open a listing, pick a slot, pay the published price into escrow, complete the lesson, then confirm so the school is paid.",
     "howBodyExpansion": "When listings go live in this market, the same escrow booking flow used in Sweden will apply — verified schools, published prices, no learner marketplace fee.",
@@ -3340,7 +3355,7 @@
       },
       "4": {
         "title": "Commission",
-        "body": "DriveLinkUp charges schools and instructors a commission on facilitated bookings — only once the service has been completed. The commission is 8% for driving schools and 10% for independent instructors. Learners never pay a fee to DriveLinkUp.",
+        "body": "DriveLinkUp charges driving schools 8% commission on facilitated bookings — only once the service has been completed. Instructors collect payment only through a school they belong to. Learners never pay a fee to DriveLinkUp.",
         "items": []
       },
       "5": {

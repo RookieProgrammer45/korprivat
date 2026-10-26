@@ -32,7 +32,10 @@ import { resolveOrigin } from '@/lib/payments/origin';
 import { isReliableProcessingOn, nativeOutboxData } from '@/lib/reliability/inbox-policy';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 import { evaluateBookingPolicy, slotClaimOutcome } from '@/lib/scheduling/booking-policy';
-import { loadListingEligibilityFacts } from '@/lib/scheduling/listing-eligibility';
+import {
+  loadInstructorPaymentEligibility,
+  loadListingEligibilityFacts,
+} from '@/lib/scheduling/listing-eligibility';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
@@ -149,6 +152,15 @@ export async function POST(req: Request) {
   });
   if (!bookingDecision.ok) {
     return NextResponse.json(notAuthorizedBody(), { status: 403 });
+  }
+
+  const payment = await loadInstructorPaymentEligibility({
+    listingId: instructor.id,
+    userId: instructor.userId,
+    providerRole: instructor.providerRole,
+  });
+  if (!payment.allowed) {
+    return NextResponse.json({ error: { code: payment.code } }, { status: 403 });
   }
 
   const instructorMode: BookingCreateMode = bookingDecision.mode;

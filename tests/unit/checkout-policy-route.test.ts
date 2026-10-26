@@ -22,6 +22,12 @@ vi.mock('@/lib/require-auth', () => ({
 vi.mock('@/lib/payments/create-booking-checkout', () => ({
   createBookingCheckoutSession: mockCreateCheckout,
   CheckoutConfigurationError: class CheckoutConfigurationError extends Error {},
+  IndependentInstructorPaymentError: class IndependentInstructorPaymentError extends Error {
+    constructor(readonly code = 'independent_payment_refused') {
+      super(code);
+      this.name = 'IndependentInstructorPaymentError';
+    }
+  },
 }));
 vi.mock('@/lib/payments/fulfill-checkout', () => ({
   markBookingPaidFromCheckout: vi.fn(),

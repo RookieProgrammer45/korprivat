@@ -53,9 +53,19 @@ import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/
 type FormValues = BookingCreate;
 
 function listingCreateMode(instructor: InstructorItem | null): 'instant' | 'request' | null {
+  if (instructor?.canCollectPayment === false) return null;
   if (instructor?.surfaces?.transactionalBooking) return 'instant';
   if (instructor?.surfaces?.requestToBook) return 'request';
   return null;
+}
+
+function listingModeCopy(
+  instructor: InstructorItem,
+): 'instant' | 'request' | 'contact' | 'paymentThroughSchool' {
+  if (instructor.providerRole === 'INSTRUCTOR' && instructor.canCollectPayment === false) {
+    return 'paymentThroughSchool';
+  }
+  return listingCreateMode(instructor) ?? 'contact';
 }
 
 const POLL_INTERVAL_MS = 1500;
@@ -395,7 +405,11 @@ export function BookingForm({
         // server-side branch on `data.mode === 'request'`.
         const submittedMode = listingCreateMode(instructor);
         if (!submittedMode) {
-          toast.error(t('validation.notAuthorizedBySchool'));
+          toast.error(
+            instructor?.canCollectPayment === false
+              ? t('validation.independentPaymentRefused')
+              : t('validation.notAuthorizedBySchool'),
+          );
           return;
         }
         const created = await apiFetch('/api/bookings', {
@@ -703,22 +717,16 @@ export function BookingForm({
             {instructor ? (
               <div className="min-w-0 rounded-lg border border-brand-500/25 bg-brand-100 p-4 dark:bg-brand-900">
                 <p className="text-small font-medium text-foreground">
-                  {listingCreateMode(instructor) === 'request'
-                    ? tDetail('bookingMode.request.title')
-                    : listingCreateMode(instructor) === 'instant'
-                      ? tDetail('bookingMode.instant.title')
-                      : tDetail('bookingMode.contact.title')}
+                  {tDetail(`bookingMode.${listingModeCopy(instructor)}.title`)}
                 </p>
                 <p className="mt-1 text-small text-muted-foreground">
-                  {listingCreateMode(instructor) === 'request'
-                    ? tDetail('bookingMode.request.body')
-                    : listingCreateMode(instructor) === 'instant'
-                      ? tDetail('bookingMode.instant.body')
-                      : tDetail('bookingMode.contact.body')}
+                  {tDetail(`bookingMode.${listingModeCopy(instructor)}.body`)}
                 </p>
               </div>
             ) : null}
-            {instructor ? <BookingPriceSummary instructorId={instructor.id} /> : null}
+            {instructor && instructor.canCollectPayment !== false ? (
+              <BookingPriceSummary instructorId={instructor.id} />
+            ) : null}
             <FormField
               control={form.control}
               name="studentName"
@@ -868,7 +876,9 @@ export function BookingForm({
                   ? t('submitRequest')
                   : listingCreateMode(instructor) === 'instant'
                     ? t('submitInstant')
-                    : t('submitDirectoryOnly')}
+                    : instructor?.canCollectPayment === false
+                      ? t('submitIndependentPayment')
+                      : t('submitDirectoryOnly')}
             </Button>
             {eligibilityError ? (
               <p className="text-small text-destructive" role="alert">

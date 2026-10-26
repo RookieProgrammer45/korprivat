@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 function resolveInitialPath(
   role: string | undefined,
 ): 'LEARNER' | 'SCHOOL' | 'INSTRUCTOR' | undefined {
-  if (role === 'instructor') return 'INSTRUCTOR';
+  if (role === 'instructor') return 'SCHOOL';
   if (role === 'school') return 'SCHOOL';
   if (role === 'student') return 'LEARNER';
   return undefined;

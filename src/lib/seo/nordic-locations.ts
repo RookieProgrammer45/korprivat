@@ -313,6 +313,28 @@ export function displayName(loc: NordicLocation): string {
   return loc.nameLocal ?? loc.name;
 }
 
+function foldCity(value: string): string {
+  return value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim();
+}
+
+/** Values that should match a directory `city` filter, including slug aliases. */
+export function cityFilterCandidates(input: string): string[] {
+  const raw = input.trim();
+  if (!raw) return [];
+  const folded = foldCity(raw);
+  const names = new Set<string>([raw]);
+  for (const loc of NORDIC_LOCATIONS) {
+    if (!loc.marketplaceLive) continue;
+    const hay = [loc.slug, loc.name, loc.nameLocal, loc.filterCity].filter(
+      (value): value is string => Boolean(value),
+    );
+    if (!hay.some((value) => foldCity(value) === folded)) continue;
+    names.add(loc.name);
+    if (loc.filterCity) names.add(loc.filterCity);
+  }
+  return [...names];
+}
+
 export function allLocationSitemapPaths(): string[] {
   const paths = ['/locations'];
   for (const code of NORDIC_COUNTRIES) {

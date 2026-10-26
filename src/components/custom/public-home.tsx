@@ -7,14 +7,7 @@
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
-import { apiFetch } from '@/lib/api-client';
-import {
-  type InstructorFilteredItem,
-  InstructorList,
-} from '@/lib/contracts/instructors';
-import { schoolPath } from '@/lib/seo/school-slugs';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -27,169 +20,8 @@ const QUICK_CITIES = [
   { id: 'vasteras', href: '/locations/se/vasteras' },
 ] as const;
 
-const LANGUAGE_LABELS: Record<string, string> = {
-  sv: 'Svenska',
-  en: 'Engelska',
-  ar: 'Arabiska',
-  fa: 'Persiska',
-  so: 'Somaliska',
-  pl: 'Polska',
-  es: 'Spanska',
-  de: 'Tyska',
-  tr: 'Turkiska',
-  fr: 'Franska',
-  ur: 'Urdu',
-  fi: 'Finska',
-  no: 'Norska',
-  da: 'Danska',
-};
-
-type DeckProfile = {
-  id: string;
-  name: string;
-  type: 'Skola' | 'Instruktör';
-  city: string;
-  chip: string | null;
-  rating: string | null;
-  reviews: string | null;
-  languages: string;
-  nextSlot: string | null;
-  href: string;
-};
-
-const FALLBACK_PROFILES: DeckProfile[] = [
-  {
-    id: 'fallback-globen',
-    name: 'Globens Trafikskolan',
-    type: 'Skola',
-    city: 'Stockholm',
-    chip: 'fr. 299 kr',
-    rating: '4.9',
-    reviews: '1 403 omdömen',
-    languages: 'Svenska · Engelska',
-    nextSlot: 'tis 10:00',
-    href: '/instructors',
-  },
-  {
-    id: 'fallback-ari',
-    name: 'Ari Shoval',
-    type: 'Instruktör',
-    city: 'Sollentuna',
-    chip: 'fr. 350 kr',
-    rating: null,
-    reviews: null,
-    languages: 'Svenska · Engelska · Arabiska',
-    nextSlot: null,
-    href: '/instructors',
-  },
-  {
-    id: 'fallback-korhu',
-    name: 'Körkortshuset i Sollentuna',
-    type: 'Skola',
-    city: 'Sollentuna',
-    chip: 'fr. 350 kr',
-    rating: null,
-    reviews: null,
-    languages: 'Svenska',
-    nextSlot: null,
-    href: '/instructors',
-  },
-];
-
-const MAX_DECK_PROFILES = 6;
-const ROTATION_MS = 4800;
-
-function formatSekChip(rate: number | null): string | null {
-  return typeof rate === 'number' ? `fr. ${rate} kr` : null;
-}
-
-function formatSlot(iso: string): string | null {
-  try {
-    const date = new Date(iso);
-    if (Number.isNaN(date.getTime())) return null;
-    return new Intl.DateTimeFormat('sv-SE', {
-      weekday: 'short',
-      hour: '2-digit',
-      minute: '2-digit',
-    }).format(date);
-  } catch {
-    return null;
-  }
-}
-
-function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
-  const languages = (row.languages ?? [])
-    .map((code) => LANGUAGE_LABELS[code] ?? code.toUpperCase())
-    .join(' · ');
-  const rating = row.reviewSummary?.averageRating;
-  return {
-    id: row.id,
-    name: row.name,
-    type: row.providerType === 'INSTRUCTOR' ? 'Instruktör' : 'Skola',
-    city: row.city,
-    chip: formatSekChip(row.hourlyRateSek),
-    rating: typeof rating === 'number' ? rating.toFixed(1) : null,
-    reviews:
-      row.reviewSummary && row.reviewSummary.count > 0
-        ? `${row.reviewSummary.count} omdömen`
-        : null,
-    languages: languages || 'Svenska',
-    nextSlot: row.nextSlotAt ? formatSlot(row.nextSlotAt) : null,
-    href: schoolPath(row),
-  };
-}
-
 export function PublicHome() {
   const t = useTranslations('publicHome');
-  const [profiles, setProfiles] = useState<DeckProfile[]>(FALLBACK_PROFILES);
-  const [live, setLive] = useState(false);
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    let alive = true;
-    apiFetch('/api/instructors', { schema: InstructorList })
-      .then((data) => {
-        if (!alive) return;
-        const rows = data.items
-          .slice(0, MAX_DECK_PROFILES)
-          .map(toDeckProfile);
-        if (rows.length > 0) {
-          setProfiles(rows);
-          setActive(0);
-          setLive(true);
-        }
-      })
-      .catch(() => {
-        if (!alive) return;
-      });
-    return () => {
-      alive = false;
-    };
-  }, []);
-
-  const count = profiles.length;
-  const front = profiles[active % count];
-  const back1 = count > 1 ? profiles[(active + 1) % count] : undefined;
-  const back2 = count > 2 ? profiles[(active + 2) % count] : undefined;
-
-
-  useEffect(() => {
-    if (paused || count < 2) return;
-    if (typeof window === 'undefined') return;
-    const timer = window.setInterval(() => {
-      setActive((current) => (current + 1) % count);
-    }, ROTATION_MS);
-    return () => {
-      window.clearInterval(timer);
-    };
-  }, [paused, count]);
-
-  if (!front) return null;
-
-  const go = (step: number) => {
-    setActive((current) => (current + step + count) % count);
-  };
 
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
@@ -201,24 +33,22 @@ export function PublicHome() {
                 variant="outline"
                 className="w-fit border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
               >
-                <span className="mr-2 inline-block size-1.5 rounded-full bg-brand-500" aria-hidden />
+                <span
+                  className="mr-2 inline-block size-1.5 rounded-full bg-brand-500"
+                  aria-hidden
+                />
                 {t('hero.eyebrow')}
               </Badge>
             ) : null}
             <h1 className="marketplace-hero-title max-w-4xl font-display text-3xl leading-[1.05] tracking-tight text-balance text-foreground sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
               {t('hero.title')}
             </h1>
-            <p className="max-w-2xl min-w-0 text-body-lg text-muted-foreground">
-              {t('hero.body')}
-            </p>
+            <p className="max-w-2xl min-w-0 text-body-lg text-muted-foreground">{t('hero.body')}</p>
             <div className="marketplace-hero-actions flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:flex-nowrap">
               <Button asChild size="lg" className="marketplace-primary-cta">
                 <Link href="/instructors">
                   {t('hero.primaryCta')} <span aria-hidden>→</span>
                 </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="marketplace-secondary-cta">
-                <Link href="/signup?role=instructor">{t('hero.instructorCta')}</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="marketplace-secondary-cta">
                 <Link href="/for-skolor">{t('hero.schoolCta')}</Link>
@@ -231,103 +61,39 @@ export function PublicHome() {
             </div>
           </div>
 
-          <div className="marketplace-reveal relative min-w-0 lg:min-h-[720px]">
-            <div className="marketplace-hero-panel absolute inset-0 hidden overflow-hidden bg-white lg:block dark:bg-black">
-              <p className="dlu-tag">{t('hero.marketplaceTag')}</p>
-              <div
-                className="dlu-deck"
-                onMouseEnter={() => setPaused(true)}
-                role="group"
-                onMouseLeave={() => setPaused(false)}
-              >
-                <article className="dlu-card" key={front.id}>
-                  <div className="dlu-top">
-                    <div className="min-w-0">
-                      <p className="dlu-type">{front.type}</p>
-                      <p className="dlu-name">{front.name}</p>
-                      <p className="dlu-city">{front.city}</p>
-                    </div>
-                    {front.chip ? <span className="dlu-chip">{front.chip}</span> : null}
-                  </div>
-                  {front.rating ? (
-                    <p className="dlu-meta">
-                      <i aria-hidden />
-                      {front.rating}
-                      {front.reviews ? ` · ${front.reviews}` : ''}
-                    </p>
-                  ) : null}
-                  <p className="dlu-lang">{front.languages}</p>
-                  <div className="dlu-row">
-                    <span className="dlu-slot">
-                      Nästa lediga tid
-                      <b>{front.nextSlot ?? 'På förfrågan'}</b>
-                    </span>
-                    <Link href={front.href} className="dlu-btn">
-                      Boka
-                    </Link>
-                  </div>
-                </article>
-                {back1 ? (
-                  <article className="dlu-card dlu-back-1" key={back1.id}>
-                    <div className="dlu-top">
-                      <div className="min-w-0">
-                        <p className="dlu-type">{back1.type}</p>
-                        <p className="dlu-name">{back1.name}</p>
-                        <p className="dlu-city">{back1.city}</p>
-                      </div>
-                      {back1.chip ? <span className="dlu-chip">{back1.chip}</span> : null}
-                    </div>
-                    <p className="dlu-lang">{back1.languages}</p>
-                  </article>
-                ) : null}
-                {back2 ? (
-                  <article className="dlu-card dlu-back-2" key={back2.id}>
-                    <div className="dlu-top">
-                      <div className="min-w-0">
-                        <p className="dlu-type">{back2.type}</p>
-                        <p className="dlu-name">{back2.name}</p>
-                        <p className="dlu-city">{back2.city}</p>
-                      </div>
-                      {back2.chip ? <span className="dlu-chip">{back2.chip}</span> : null}
-                    </div>
-                  </article>
-                ) : null}
-              </div>
-              <div className="dlu-nav">
-                <button
-                  type="button"
-                  className="dlu-nav-btn"
-                  aria-label="Föregående profil"
-                  onClick={() => go(-1)}
-                >
-                  ←
-                </button>
-                <button
-                  type="button"
-                  className="dlu-nav-btn"
-                  aria-label="Nästa profil"
-                  onClick={() => go(1)}
-                >
-                  →
-                </button>
-              </div>
-              <div className="dlu-dots">
-                {profiles.map((profile, index) => (
-                  <button
-                    type="button"
-                    key={profile.id}
-                    className={index === active ? 'dlu-dot dlu-on' : 'dlu-dot'}
-                    aria-label={`Visa ${profile.name}`}
-                    onClick={() => setActive(index)}
-                  />
-                ))}
-              </div>
-              <p className="dlu-count">
-                {live ? `${count} profiler just nu` : 'Alla profiler just nu'}
-              </p>
-              <p className="dlu-arrow-note">jämför → boka → kör</p>
-              <p className="dlu-free"><i aria-hidden />Kostnadsfritt för elever</p>
-            </div>
+          <div className="marketplace-reveal relative min-w-0">
+            <Card className="surface-card border-border bg-card">
+              <CardContent className="grid gap-4 p-6">
+                <p className="text-eyebrow">{t('hero.panelEyebrow')}</p>
+                <h2 className="font-display text-h3 tracking-tight text-foreground">
+                  {t('hero.panelTitle')}
+                </h2>
+                <p className="text-body text-muted-foreground">{t('hero.panelBody')}</p>
+                <ul className="grid gap-3 text-small text-foreground">
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500"
+                      aria-hidden
+                    />
+                    {t('hero.panelPoints.directory')}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500"
+                      aria-hidden
+                    />
+                    {t('hero.panelPoints.prices')}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500"
+                      aria-hidden
+                    />
+                    {t('hero.panelPoints.schools')}
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
@@ -441,7 +207,7 @@ export function PublicHome() {
               <Link href="/instructors">{t('entry.learnerCta')}</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="/for-instructors">{t('entry.providerCta')}</Link>
+              <Link href="/for-skolor">{t('entry.providerCta')}</Link>
             </Button>
           </div>
         </div>
@@ -466,7 +232,6 @@ export function PublicHome() {
     </main>
   );
 }
-
 
 function JourneyStep({ number, title, body }: { number: string; title: string; body: string }) {
   return (

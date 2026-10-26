@@ -41,12 +41,21 @@ vi.mock('@/lib/email/templates', () => ({
 vi.mock('@/lib/payments/create-booking-checkout', () => ({
   createBookingCheckoutSession: mockCreateCheckout,
   CheckoutConfigurationError: class CheckoutConfigurationError extends Error {},
+  IndependentInstructorPaymentError: class IndependentInstructorPaymentError extends Error {
+    constructor(readonly code = 'independent_payment_refused') {
+      super(code);
+      this.name = 'IndependentInstructorPaymentError';
+    }
+  },
 }));
 vi.mock('@/lib/payments/origin', () => ({
   resolveOrigin: () => 'https://www.drivelinkup.com',
 }));
 vi.mock('@/lib/scheduling/listing-eligibility', () => ({
-  loadListingEligibilityFacts: async (input: { listingCategories: string[]; category: string }) => ({
+  loadListingEligibilityFacts: async (input: {
+    listingCategories: string[];
+    category: string;
+  }) => ({
     categoryAllowed: input.listingCategories.includes(input.category),
     licenceStatus: 'VERIFIED',
     instructorAffiliated: true,

@@ -47,7 +47,11 @@ import {
   activePolicyListingIds,
   isCancellationPolicyEnforced,
 } from '@/lib/scheduling/cancellation-policy-store';
-
+import {
+  loadInstructorPaymentEligibilityByListings,
+  maskSurfacesForPayment,
+} from '@/lib/scheduling/listing-eligibility';
+import { cityFilterCandidates } from '@/lib/seo/nordic-locations';
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
@@ -226,8 +230,16 @@ export async function GET(req: NextRequest) {
   const approvedListings = isCancellationPolicyEnforced()
     ? await activePolicyListingIds(filteredRows.map(({ row }) => row.id))
     : null;
+  const paymentByListing = await loadInstructorPaymentEligibilityByListings(
+    filteredRows.map(({ row }) => ({
+      id: row.id,
+      userId: row.userId,
+      providerRole: row.providerRole,
+    })),
+  );
   const items = filteredRows.map(({ row, distanceKm }) => {
-    const surfaces = surfacesFor(row);
+    const canCollectPayment = paymentByListing.get(row.id) === true;
+    const surfaces = maskSurfacesForPayment(surfacesFor(row), canCollectPayment);
     const nextSlotAt = surfaces.availabilityDisplay
       ? (nextSlotByInstructor.get(row.id) ?? null)
       : null;
@@ -241,6 +253,7 @@ export async function GET(req: NextRequest) {
         nextSlotAt,
         distanceKm,
       ),
+      canCollectPayment,
       surfaces,
       ...(approvedListings && !approvedListings.has(row.id)
         ? { cancellationPolicyTier: null, showCancellationPolicy: false as const }
@@ -248,7 +261,22 @@ export async function GET(req: NextRequest) {
     };
   });
 
-  const cities = Array.from(new Set(canonicalRows.map((r) => r.city))).sort();
+  const cityDelegate = (
+    prisma as unknown as {
+      instructor?: {
+        groupBy?: (args: unknown) => Promise<Array<{ city: string }>>;
+      };
+    }
+  ).instructor;
+  const marketplaceCities = cityDelegate?.groupBy
+    ? await cityDelegate.groupBy({
+        by: ['city'],
+        where: await buildVerifiedProviderActivationWhere(),
+      })
+    : canonicalRows.map((row) => ({ city: row.city }));
+  const cities = Array.from(
+    new Set(marketplaceCities.map((row) => row.city).filter(Boolean)),
+  ).sort();
 
   // We DO return the `englishSpeaking` flag on each row — the directory island
   // surfaces it in the filter toggle (and could surface it as a badge later).
@@ -458,7 +486,6 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
     // "any-of" idiom is `OR` of `has`. No-op when the array is empty.
     filters.OR = q.categories.map((code) => ({ categories: { has: code } }));
   }
-  if (q.city) filters.city = q.city;
   if (typeof q.minRate === 'number' || typeof q.maxRate === 'number') {
     filters.hourlyRateSek = {
       ...(typeof q.minRate === 'number' ? { gte: q.minRate } : {}),
@@ -477,6 +504,12 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
     await buildVerifiedProviderActivationWhere(),
     filters,
   ];
+  if (q.city) {
+    const names = cityFilterCandidates(q.city);
+    clauses.push({
+      OR: names.map((city) => ({ city: { equals: city, mode: 'insensitive' } })),
+    });
+  }
 
   // Affiliation via Membership (ACTIVE), not Instructor.providerRole —
   // providerRole describes the listing kind, not the owner's membership.

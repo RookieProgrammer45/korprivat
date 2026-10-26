@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   allLocationSitemapPaths,
+  cityFilterCandidates,
   getLocation,
   listCitiesInRegion,
   listLocationsForCountry,
@@ -25,6 +26,12 @@ describe('nordic-locations registry', () => {
         expect(loc.filterCity).toBeUndefined();
       }
     }
+  });
+
+  it('maps city slugs and ascii aliases onto stored city names', () => {
+    expect(cityFilterCandidates('stockholm')).toEqual(expect.arrayContaining(['Stockholm']));
+    expect(cityFilterCandidates('Goteborg')).toEqual(expect.arrayContaining(['Göteborg']));
+    expect(cityFilterCandidates('malmo')).toEqual(expect.arrayContaining(['Malmö']));
   });
 
   it('resolves featured SE hubs and region children', () => {

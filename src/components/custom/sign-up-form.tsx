@@ -67,11 +67,6 @@ const PATH_OPTIONS = [
     labelKey: 'roleSchool' as const,
     descKey: 'roleSchoolDesc' as const,
   },
-  {
-    value: 'INSTRUCTOR' as const,
-    labelKey: 'roleInstructor' as const,
-    descKey: 'roleInstructorDesc' as const,
-  },
 ];
 
 type AccountValues = {
@@ -113,8 +108,9 @@ export function SignUpForm({
   const tConsentBanner = useTranslations('consentBanner');
   const { data: session } = useSession();
 
-  const resolvedPath: SignupPathType = initialPath ?? 'LEARNER';
-  // Deep-link from hero (role=instructor) skips the path picker; user can go back.
+  const resolvedPath: SignupPathType =
+    initialPath === 'INSTRUCTOR' ? 'SCHOOL' : (initialPath ?? 'LEARNER');
+  // Deep-link from hero (role=school) skips the path picker; user can go back.
   const [step, setStep] = useState<Step>(
     initialStep === 'photo' ? 'photo' : initialPath ? 'account' : 'path',
   );
@@ -747,7 +743,7 @@ export function SignUpForm({
 
       <SocialAuthButtons
         mode="signup"
-        role={selectedPath === 'INSTRUCTOR' ? 'INSTRUCTOR' : 'STUDENT'}
+        role={selectedPath === 'SCHOOL' ? 'STUDENT' : 'STUDENT'}
         next={selectedPath === 'SCHOOL' ? (resumeNext ?? '/for-skolor') : resumeNext}
       />
 

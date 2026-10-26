@@ -97,8 +97,22 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
   const trTier = useTranslations('cancellationPolicy.tierBadge');
   const trBooking = useTranslations('bookingForm');
   const locale = normalizeMarketplaceLocale(useLocale());
-  const nextSlotPill = row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, locale, tr) : null;
-  const mode = row.bookingMode === 'request' ? 'request' : 'instant';
+  const showTimes = row.surfaces?.availabilityDisplay === true;
+  const nextSlotPill =
+    showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, locale, tr) : null;
+  const mode =
+    row.providerRole === 'INSTRUCTOR' && row.canCollectPayment === false
+      ? 'paymentThroughSchool'
+      : row.surfaces
+        ? row.surfaces.directoryOnly
+          ? 'contact'
+          : row.surfaces.transactionalBooking
+            ? 'instant'
+            : row.surfaces.requestToBook
+              ? 'request'
+              : 'contact'
+        : 'contact';
+  const directoryOnly = row.surfaces ? row.surfaces.directoryOnly : true;
   const tier = row.cancellationPolicyTier ?? 'flexible';
   return (
     <Link
@@ -158,9 +172,11 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
             <Badge variant="outline" className="border-border">
               {trBooking(`bookingModeLabel.${mode}`)}
             </Badge>
-            <Badge variant="outline" className="border-border">
-              {trTier(tier)}
-            </Badge>
+            {directoryOnly || row.showCancellationPolicy === false ? null : (
+              <Badge variant="outline" className="border-border">
+                {trTier(tier)}
+              </Badge>
+            )}
             <span className="ml-auto min-w-0 text-right text-small font-medium text-foreground">
               {tr('profileCta')} <span aria-hidden>→</span>
             </span>

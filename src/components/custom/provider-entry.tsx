@@ -31,7 +31,7 @@ export function ProviderEntry() {
           <p className="text-body-lg text-muted-foreground">{t('body')}</p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">
-              <Link href="/instructors/new">{t('primaryCta')}</Link>
+              <Link href="/signup?role=school">{t('primaryCta')}</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link href="/instructors">{t('learnerCta')}</Link>

@@ -64,6 +64,7 @@ function instructorRow(
     userId: string | null;
     cancellationPolicyTier: string | null;
     bookingMode: 'instant' | 'request' | null;
+    providerRole?: 'SCHOOL' | 'INSTRUCTOR' | 'HANDLEDARE' | null;
   }> = {},
 ) {
   return {
@@ -82,6 +83,7 @@ function instructorRow(
     userId: null,
     cancellationPolicyTier: 'flexible',
     bookingMode: 'instant',
+    providerRole: 'SCHOOL',
     ...overrides,
   };
 }
@@ -127,21 +129,23 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     mockSlotFindMany.mockResolvedValue([]);
     mockLicenseFindMany.mockResolvedValue([]);
     mockReviewFindMany.mockResolvedValue([]);
-    mockAuthzFindMany.mockImplementation(async (args: { where?: { listingId?: { in?: string[] } } }) => {
-      const ids = args.where?.listingId?.in ?? [];
-      return ids.map((listingId) => ({
-        listingId,
-        sequence: 1,
-        kind: 'grant',
-        scopes: ['availability_display'],
-        decisionVersion: 1,
-        actorUserId: 'rep-1',
-        evidenceRef: 'ev',
-        note: null,
-        idempotencyKey: `avail-${listingId}`,
-        createdAt: new Date('2026-10-23T00:00:00.000Z'),
-      }));
-    });
+    mockAuthzFindMany.mockImplementation(
+      async (args: { where?: { listingId?: { in?: string[] } } }) => {
+        const ids = args.where?.listingId?.in ?? [];
+        return ids.map((listingId) => ({
+          listingId,
+          sequence: 1,
+          kind: 'grant',
+          scopes: ['availability_display'],
+          decisionVersion: 1,
+          actorUserId: 'rep-1',
+          evidenceRef: 'ev',
+          note: null,
+          idempotencyKey: `avail-${listingId}`,
+          createdAt: new Date('2026-10-23T00:00:00.000Z'),
+        }));
+      },
+    );
   });
 
   afterEach(() => {
@@ -256,6 +260,58 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(body.items[0]).not.toHaveProperty('userId');
   });
 
+  it('hides payment surfaces for an instructor who is not part of a driving school', async () => {
+    mockAuthzFindMany.mockImplementation(
+      async (args: { where?: { listingId?: { in?: string[] } } }) => {
+        const ids = args.where?.listingId?.in ?? [];
+        return ids.map((listingId) => ({
+          listingId,
+          sequence: 1,
+          kind: 'grant',
+          scopes: ['availability_display', 'request_to_book', 'transactional_booking'],
+          decisionVersion: 1,
+          actorUserId: 'rep-1',
+          evidenceRef: 'ev',
+          note: null,
+          idempotencyKey: `grant-${listingId}`,
+          createdAt: new Date('2026-10-23T00:00:00.000Z'),
+        }));
+      },
+    );
+    mockInstructorFindMany.mockResolvedValueOnce([
+      instructorRow({ id: 'school_one', providerRole: 'SCHOOL' }),
+      instructorRow({
+        id: 'solo_instructor',
+        providerRole: 'INSTRUCTOR',
+        userId: 'user_solo',
+      }),
+    ]);
+
+    const res = await GET(req());
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as {
+      items: Array<{
+        id: string;
+        canCollectPayment?: boolean;
+        surfaces?: {
+          requestToBook: boolean;
+          transactionalBooking: boolean;
+          directoryOnly: boolean;
+        };
+      }>;
+    };
+    const school = body.items.find((item) => item.id === 'school_one');
+    const instructor = body.items.find((item) => item.id === 'solo_instructor');
+    expect(school).toMatchObject({
+      canCollectPayment: true,
+      surfaces: { requestToBook: true, transactionalBooking: true, directoryOnly: false },
+    });
+    expect(instructor).toMatchObject({
+      canCollectPayment: false,
+      surfaces: { requestToBook: false, transactionalBooking: false },
+    });
+  });
+
   it('SC-10 hides the cancellation tier when enforcement is on and no policy is approved', async () => {
     process.env.CANCELLATION_POLICY_ENFORCE = '1';
     try {
@@ -318,7 +374,15 @@ describe('GET /api/instructors — next-open-slot projection', () => {
 
     expect(res.status).toBe(200);
     const where = mockInstructorFindMany.mock.calls[0]?.[0]?.where;
-    expect(whereField(where, 'city')).toBe('Stockholm');
+    expect(where).toEqual(
+      expect.objectContaining({
+        AND: expect.arrayContaining([
+          expect.objectContaining({
+            OR: expect.arrayContaining([{ city: { equals: 'Stockholm', mode: 'insensitive' } }]),
+          }),
+        ]),
+      }),
+    );
     expect(whereField(where, 'englishSpeaking')).toBe(true);
     expect(hourlyRateFromWhere(where)).toEqual({ gte: 500, lte: 600 });
     expect(whereField(where, 'OR')).toEqual([{ categories: { has: 'B' } }]);

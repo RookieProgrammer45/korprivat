@@ -1,5 +1,16 @@
 # DriveLinkUp — active tasks
 
+## Instructor payment via school (branch `feat/instructor-payment-via-school`)
+
+Always-on: an instructor cannot collect payment unless they belong to a driving school. Do not merge, deploy, or flip flags without a named founder authorization.
+
+- [x] `instructorPaymentDecision` — SCHOOL or verified affiliation only
+- [x] Booking create / accept / checkout refuse `independent_payment_refused`
+- [x] Directory and profile mask request + transactional surfaces
+- [x] Public copy: payment collected by the school; instructor listing stays visible
+- [ ] Browser iterate directory / profile / booking form
+- [ ] Do not merge or deploy this slice without a named founder authorization
+
 ## Compliance remediation (branch `feat/compliance-remediation`)
 
 Do not merge, deploy, production-migrate, or flip flags without a named founder authorization.

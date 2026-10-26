@@ -13,6 +13,8 @@ export type PublicInstructorSeo = {
   photoUrl: string;
   englishSpeaking: boolean;
   indexable: boolean;
+  userId: string | null;
+  providerRole: string | null;
   // 'contact' = directory-only: the school page hides the booking sidebar
   // and offering request forms for this row (school restriction workflow).
   bookingMode: 'instant' | 'request' | 'contact';
@@ -59,6 +61,8 @@ export async function loadPublicInstructorSeo(id: string): Promise<PublicInstruc
     photoUrl: row.photoUrl,
     englishSpeaking: row.englishSpeaking,
     indexable,
+    userId: row.userId,
+    providerRole: row.providerRole,
     bookingMode:
       row.bookingMode === 'request'
         ? 'request'

@@ -127,6 +127,7 @@ export const InstructorItem = z.object({
       directoryOnly: z.boolean(),
     })
     .optional(),
+  canCollectPayment: z.boolean().optional(),
   // Mirrors the raw marketplace kind (SCHOOL | INSTRUCTOR | HANDLEDARE) so a
   // school-owned listing no longer reports itself as INSTRUCTOR (QA
   // 2026-10-13). Kept alongside the redundant `providerType` alias so
