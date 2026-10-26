@@ -117,8 +117,22 @@ describe('school authorization policy', () => {
     );
     expect(
       canAcceptPendingRequest({ bookingMode: 'instant', folded: empty, enforcementOn: false }),
-    ).toBe(true);
+    ).toBe(false);
     expect(existingBookingLifecycleAllowed()).toBe(true);
+    expect(
+      canAcceptPendingRequest({
+        bookingMode: 'request',
+        folded: foldAuthorizationEvents([
+          event({
+            sequence: 1,
+            kind: 'grant',
+            scopes: ['request_to_book'],
+            decisionVersion: 1,
+          }),
+        ]),
+        enforcementOn: false,
+      }),
+    ).toBe(true);
   });
 
   it('SC-13 inquiry-only returns no times and no booking scopes', () => {
@@ -224,10 +238,44 @@ describe('school authorization policy', () => {
         listingId: 'listing-a',
         legacyOrganizationId: 'org-legacy',
       }),
-    ).toBe('org-legacy');
+    ).toBeNull();
+    expect(
+      snapshotOrganizationId({
+        bindings: [
+          {
+            listingId: 'listing-a',
+            organizationId: 'org-a',
+            state: 'REVOKED',
+            verifiedAt: '2026-10-23T00:00:00.000Z',
+          },
+        ],
+        listingId: 'listing-a',
+        legacyOrganizationId: 'org-a',
+      }),
+    ).toBeNull();
+    expect(
+      snapshotOrganizationId({
+        bindings: [
+          {
+            listingId: 'listing-a',
+            organizationId: 'org-a',
+            state: 'ACTIVE',
+            verifiedAt: '2026-10-23T00:00:00.000Z',
+          },
+          {
+            listingId: 'listing-a',
+            organizationId: 'org-c',
+            state: 'ACTIVE',
+            verifiedAt: '2026-10-24T00:00:00.000Z',
+          },
+        ],
+        listingId: 'listing-a',
+        legacyOrganizationId: 'org-a',
+      }),
+    ).toBeNull();
   });
 
-  it('enforces withdrawals while the flag is off and requires grants only while it is on', () => {
+  it('never treats bookingMode as a grant while enforcement is off', () => {
     const folded = foldAuthorizationEvents([
       event({
         sequence: 1,
@@ -250,8 +298,8 @@ describe('school authorization policy', () => {
         folded: empty,
         enforcementOn: false,
         submittedMode: 'instant',
-      }),
-    ).toEqual({ ok: true, mode: 'instant' });
+      }).ok,
+    ).toBe(false);
     expect(
       decideBookingCreate({
         bookingMode: 'instant',

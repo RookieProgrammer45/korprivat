@@ -18,6 +18,7 @@ import {
   foldAuthorizationEvents,
   isSchoolAuthzEnforcementOn,
 } from '@/lib/orgs/school-authorization-policy';
+import { loadListingEligibilityFacts } from '@/lib/scheduling/listing-eligibility';
 
 type SessionRow = {
   id: string;
@@ -217,6 +218,13 @@ export async function requestRiskCourseSession(input: {
   });
   if (!session) return { status: 404 as const, body: { error: { code: 'not_found' } } };
   const folded = await foldedFor(session.listingId);
+  const eligibility = await loadListingEligibilityFacts({
+    listingId: session.listingId,
+    userId: null,
+    category: session.licenceCategory,
+    listingCategories: [session.licenceCategory],
+    providerRole: 'SCHOOL',
+  });
   const decision = riskCourseRequestDecision({
     discoverable: isSessionDiscoverable({
       publishedAt: session.publishedAt?.toISOString() ?? null,
@@ -227,10 +235,12 @@ export async function requestRiskCourseSession(input: {
     folded,
     enforcementOn: isSchoolAuthzEnforcementOn(),
     expired: Date.parse(session.startsAt.toISOString()) <= Date.now(),
-    categoryAllowed: true,
+    categoryAllowed: eligibility.categoryAllowed,
     studentContactVerified: input.studentContactVerified,
     instant: Boolean(input.instant),
     hasE4: Boolean(input.hasE4),
+    licenceStatus: eligibility.licenceStatus,
+    instructorAffiliated: eligibility.instructorAffiliated,
   });
   if (!decision.allowed) return { status: 403 as const, body: { error: { code: decision.code } } };
   const row = await requests.create({

@@ -27,12 +27,12 @@ function deriveRateRange(rows = seedRows): RateRange {
 
 const CATEGORY_FACTS: Record<Locale, string> = {
   en: [
-    'DriveLinkUp lists authorized driving schools for Swedish licence categories including AM, A1, A2, A, B and BE.',
+    'DriveLinkUp is a marketplace that lists driving-school profiles for Swedish licence categories including AM, A1, A2, A, B and BE. A listing is not a booking authorization.',
     'AM covers moped, A1 and A2 cover light and mid-size motorcycles, A covers unrestricted motorcycles, B covers cars, and BE covers cars with heavier trailers.',
     'The exact categories are shown on each school listing; not every school covers every category.',
   ].join('\n'),
   sv: [
-    'DriveLinkUp listar auktoriserade trafikskolor för svenska körkortskategorier som AM, A1, A2, A, B och BE.',
+    'DriveLinkUp är en marknadsplats som listar trafikskoleprofiler för svenska körkortskategorier som AM, A1, A2, A, B och BE. En annons är inte en bokningsbehörighet.',
     'AM gäller moped, A1 och A2 lätta och medeltunga motorcyklar, A motorcyklar utan begränsning, B personbil och BE bil med tyngre släp.',
     'De exakta kategorierna visas på varje skolannons; alla skolor täcker inte alla kategorier.',
   ].join('\n'),
@@ -91,12 +91,12 @@ const CANCELLATION_FACTS: Record<Locale, string> = {
 
 const SAFETY_FACTS: Record<Locale, string> = {
   en: [
-    'Authorized schools are responsible for the authorization and lesson information they publish.',
+    'A listing is not a teaching permit. Identity verification does not prove permission to teach. Confirm the school’s permission for the category and location before booking.',
     'Swedish handledare follow a separate private practice path with their own requirements; they are not authorized driving schools.',
     'Learners should read the listing, ask questions and confirm the lesson setup before starting.',
   ].join('\n'),
   sv: [
-    'Auktoriserade trafikskolor ansvarar för den behörighet och lektionsinformation de publicerar.',
+    'En annons är inte ett undervisningstillstånd. Identitetskontroll visar inte att någon får undervisa. Bekräfta skolans behörighet för kategori och plats före bokning.',
     'Svenska handledare följer en separat privat väg med egna krav och är inte auktoriserade trafikskolor.',
     'Elever bör läsa annonsen, ställa frågor och bekräfta lektionsupplägget före start.',
   ].join('\n'),
@@ -104,23 +104,23 @@ const SAFETY_FACTS: Record<Locale, string> = {
 
 const PROVIDER_PATH_FACTS: Record<Locale, string> = {
   en: [
-    'An authorized driving school offers professional lessons and publishes its own categories, prices and availability.',
+    'A driving school listing can publish categories, prices and availability. Professional instruction requires the school’s own teaching permission; DriveLinkUp does not grant that permission.',
     'A supervisor (handledare) supports supervised practice driving and must meet the applicable Swedish requirements. The learner and supervisor should confirm the requirements for their situation before driving.',
   ].join('\n'),
   sv: [
-    'En auktoriserad trafikskola erbjuder professionella lektioner och publicerar sina kategorier, priser och tider.',
+    'En trafikskoleannons kan visa kategorier, priser och tider. Professionell undervisning kräver skolans eget tillstånd; DriveLinkUp ger inte det tillståndet.',
     'En handledare stöttar vid övningskörning och måste uppfylla tillämpliga svenska krav. Elev och handledare bör bekräfta kraven för sin situation före körningen.',
   ].join('\n'),
 };
 
 const RECEIVE_GUIDANCE: Record<Locale, string> = {
   en: [
-    'You are the DriveLinkUp support assistant. Answer routine learner questions about licence categories, authorized-school listings, published prices, free learner booking, booking modes, safety expectations, and the three cancellation tiers.',
+    'You are the DriveLinkUp support assistant. Answer routine learner questions about licence categories, directory listings, published prices, free learner booking, booking modes, safety expectations, and the three cancellation tiers. Do not say a listing is authorized, regulator-approved, or able to take instant bookings unless that is stored evidence.',
     'Keep replies short: one short paragraph or a small bullet list. Use a friendly, factual tone. Do not invent provider credentials, availability, prices, refunds, payment status or booking outcomes.',
     'Do not discuss private provider-account operations or private booking details. For a personal booking, payment, refund, safety or credential case, hand off to support.',
   ].join('\n'),
   sv: [
-    'Du är DriveLinkUps supportassistent. Svara på rutinfrågor om körkortskategorier, auktoriserade skolannonser, publicerade priser, kostnadsfri elevbokning, bokningslägen, trygghetsförväntningar och de tre avbokningsnivåerna.',
+    'Du är DriveLinkUps supportassistent. Svara på rutinfrågor om körkortskategorier, katalogannonser, publicerade priser, kostnadsfri elevbokning, bokningslägen, trygghetsförväntningar och de tre avbokningsnivåerna. Säg inte att en annons är auktoriserad, myndighetsgodkänd eller kan ta direktbokning utan lagrad evidens.',
     'Håll svaren korta: en kort paragraf eller en liten punktlista. Använd en vänlig och faktamässig ton. Hitta inte på leverantörsbehörighet, tillgänglighet, priser, återbetalningar, betalningsstatus eller bokningsresultat.',
     'Diskutera inte leverantörskontots interna drift eller privata bokningsuppgifter. Vid ett personligt boknings-, betalnings-, återbetalnings-, trygghets- eller behörighetsärende ska du hänvisa till support.',
   ].join('\n'),

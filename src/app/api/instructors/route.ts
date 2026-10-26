@@ -275,7 +275,7 @@ export async function POST(req: Request) {
   // accounts use the guidance surfaces, not public school inventory.
   if (profile?.role !== 'INSTRUCTOR') {
     return NextResponse.json(
-      { errors: { role: 'An authorized driving-school account is required.' } },
+      { errors: { role: 'A driving-school account is required.' } },
       { status: 403 },
     );
   }

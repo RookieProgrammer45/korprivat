@@ -254,7 +254,7 @@ function formatSlotDate(iso: string, locale: string): string {
 }
 
 function BookingModeSection({
-  bookingMode,
+  bookingMode: _bookingMode,
   surfaces,
 }: {
   bookingMode: InstructorItem['bookingMode'];
@@ -263,15 +263,12 @@ function BookingModeSection({
   const tr = useTranslations('instructorDetail');
   const mode = surfaces?.directoryOnly
     ? 'contact'
-    : surfaces?.requestToBook && !surfaces.transactionalBooking
-      ? 'request'
-      : surfaces?.transactionalBooking
-        ? 'instant'
-        : bookingMode === 'request'
-          ? 'request'
-          : bookingMode === 'contact'
-            ? 'contact'
-            : 'instant';
+    : surfaces?.transactionalBooking
+      ? 'instant'
+      : surfaces?.requestToBook
+        ? 'request'
+        : 'contact';
+  void _bookingMode;
   return (
     <section className="grid min-w-0 gap-2 rounded-xl border border-border bg-muted p-4">
       <p className="text-eyebrow text-muted-foreground">{tr('bookingModeEyebrow')}</p>

@@ -8,7 +8,7 @@ const path = '/blog/trafikskola-eller-handledare';
 export const metadata: Metadata = {
   title: 'Trafikskola eller handledare?',
   description:
-    'Skillnaden mellan auktoriserad trafikskola och privat handledare för övningskörning i Sverige — och hur DriveLinkUp håller vägarna isär.',
+    'Skillnaden mellan trafikskola och privat handledare för övningskörning i Sverige — och hur DriveLinkUp håller vägarna isär.',
   alternates: publicAlternates(path),
 };
 
@@ -37,9 +37,9 @@ export default function TrafikskolaEllerHandledarePage() {
       </p>
       <div className="grid gap-4 text-body text-foreground">
         <p>
-          <strong>Trafikskola:</strong> boka verifierade annonser i katalogen, betala publicerat
-          pris, få lektion med auktoriserad verksamhet. Det är marknadsplatsens huvudsakliga
-          bokningsflöde.
+          <strong>Trafikskola:</strong> jämför skolannonser i katalogen och se publicerat pris.
+          En annons är inte ett undervisningstillstånd, och en förfrågan är inte en bekräftad
+          bokning. Professionell undervisning kräver skolans eget tillstånd.
         </p>
         <p>
           <strong>Handledare:</strong> för privat övningskörning — särskilt relevant för

@@ -31,6 +31,13 @@ const {
 }));
 
 vi.mock('server-only', () => ({}));
+vi.mock('@/lib/scheduling/listing-eligibility', () => ({
+  loadListingEligibilityFacts: async () => ({
+    categoryAllowed: true,
+    licenceStatus: 'VERIFIED',
+    instructorAffiliated: true,
+  }),
+}));
 vi.mock('@/lib/db', () => ({
   prisma: {
     riskCourseSession: {
@@ -67,7 +74,19 @@ beforeEach(() => {
   mockFindFirstRequest.mockReset();
   mockPermissions.mockReset();
   mockAuthz.mockReset();
-  mockAuthz.mockResolvedValue([]);
+  mockAuthz.mockResolvedValue([
+    {
+      sequence: 1,
+      kind: 'grant',
+      scopes: ['request_to_book'],
+      decisionVersion: 1,
+      actorUserId: 'rep',
+      evidenceRef: 'ev',
+      note: null,
+      idempotencyKey: 'g1',
+      createdAt: new Date(),
+    },
+  ]);
   delete process.env.RISK_COURSES;
   delete process.env.SCHOOL_AUTHZ_ENFORCEMENT;
 });
@@ -192,6 +211,19 @@ describe('SC-26 / SC-27 / SC-28 risk-course discovery', () => {
       listing: { name: 'Live School', bookingMode: 'request' },
       requests: [],
     });
+    mockAuthz.mockResolvedValue([
+      {
+        sequence: 1,
+        kind: 'grant',
+        scopes: ['request_to_book'],
+        decisionVersion: 1,
+        actorUserId: 'rep',
+        evidenceRef: 'ev',
+        note: null,
+        idempotencyKey: 'g1',
+        createdAt: new Date(),
+      },
+    ]);
     mockCreateRequest.mockResolvedValue({ id: 'req-1', status: 'pending' });
     const created = await requestRiskCourseSession({
       sessionId: 'live',
@@ -271,15 +303,29 @@ describe('SC-26 / SC-27 / SC-28 risk-course discovery', () => {
         enforcementOn: false,
         expired: false,
       }).allowed,
-    ).toBe(true);
+    ).toBe(false);
     expect(
       riskCourseRequestDecision({
         discoverable: true,
-        folded: foldAuthorizationEvents([]),
+        folded: foldAuthorizationEvents([
+          {
+            sequence: 1,
+            kind: 'grant',
+            scopes: ['transactional_booking'],
+            decisionVersion: 1,
+            actorUserId: 'rep',
+            evidenceRef: 'ev',
+            note: null,
+            idempotencyKey: 'g1',
+            createdAt: '2026-10-23T00:00:00.000Z',
+          },
+        ]),
         enforcementOn: false,
         expired: false,
         categoryAllowed: true,
         studentContactVerified: true,
+        licenceStatus: 'VERIFIED',
+        instructorAffiliated: true,
         instant: true,
         hasE4: false,
       }),

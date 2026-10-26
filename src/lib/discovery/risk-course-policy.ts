@@ -71,19 +71,31 @@ export function riskCourseRequestDecision(input: {
   studentContactVerified: boolean;
   instant: boolean;
   hasE4: boolean;
+  licenceStatus?: 'VERIFIED' | 'EXPIRED' | 'PENDING' | 'REVOKED' | null;
+  instructorAffiliated?: boolean | null;
 }): { allowed: true; mode: 'request' | 'instant' } | { allowed: false; code: string } {
+  void input.enforcementOn;
   if (input.expired) return { allowed: false, code: 'session_expired' };
   if (!input.discoverable) return { allowed: false, code: 'not_published' };
-  if (input.folded.withdrawn.includes('request_to_book') && !input.instant) {
-    return { allowed: false, code: 'not_authorized_by_school' };
-  }
-  if (input.enforcementOn && !input.folded.granted.includes('request_to_book') && !input.instant) {
+  if (input.instant) {
+    if (
+      input.folded.withdrawn.includes('transactional_booking') ||
+      !input.folded.granted.includes('transactional_booking')
+    ) {
+      return { allowed: false, code: 'not_authorized_by_school' };
+    }
+  } else if (
+    input.folded.withdrawn.includes('request_to_book') ||
+    !input.folded.granted.includes('request_to_book')
+  ) {
     return { allowed: false, code: 'not_authorized_by_school' };
   }
   const policy = evaluateBookingPolicy({
     action: input.instant ? 'instant_create' : 'request_submission',
     categoryAllowed: input.categoryAllowed,
     studentContactVerified: input.studentContactVerified,
+    licenceStatus: input.licenceStatus ?? null,
+    instructorAffiliated: input.instructorAffiliated ?? null,
     nativeSlotId: input.instant && input.hasE4 ? 'e4' : null,
   });
   if (!policy.ok) return { allowed: false, code: policy.component };

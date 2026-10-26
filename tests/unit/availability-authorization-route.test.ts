@@ -51,23 +51,13 @@ describe('GET /api/instructors/[id]/availability', () => {
     expect(findMany).not.toHaveBeenCalled();
   });
 
-  it('returns times when enforcement is off and nothing has been withdrawn', async () => {
+  it('returns no times when enforcement is off and availability_display is not granted', async () => {
     vi.stubEnv('SCHOOL_AUTHZ_ENFORCEMENT', '0');
     findUnique.mockResolvedValue({
       providerRole: 'SCHOOL',
       city: 'Malmö',
       bookingMode: 'instant',
     });
-    findMany.mockResolvedValue([
-      {
-        id: 'slot-1',
-        instructorId: 'listing-1',
-        startsAt: new Date('2030-01-01T10:00:00.000Z'),
-        endsAt: new Date('2030-01-01T11:00:00.000Z'),
-        durationMinutes: 60,
-        bookedAt: null,
-      },
-    ]);
     const response = await GET(
       new Request('http://localhost/api/instructors/listing-1/availability'),
       {
@@ -76,6 +66,7 @@ describe('GET /api/instructors/[id]/availability', () => {
     );
     expect(response.status).toBe(200);
     const body = (await response.json()) as { items: { id: string }[] };
-    expect(body.items.map((item) => item.id)).toEqual(['slot-1']);
+    expect(body.items).toEqual([]);
+    expect(findMany).not.toHaveBeenCalled();
   });
 });

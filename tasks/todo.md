@@ -1,5 +1,20 @@
 # DriveLinkUp — active tasks
 
+## Compliance remediation (branch `feat/compliance-remediation`)
+
+Do not merge, deploy, production-migrate, or flip flags without a named founder authorization.
+
+- [x] E0–E3 fail closed when required facts are missing
+- [x] `bookingMode` and `cancellationPolicyTier` never grant surfaces or accept rights
+- [x] Canonical `evaluateBookingPolicy` on booking create and accept; no client `hasE4`
+- [x] Manual accept without a recorded commitment route stays pending (SC-16)
+- [x] Empty / pending / revoked / conflicting org bindings snapshot `null` (SC-19)
+- [x] Directory UI no longer invents instant booking from missing surfaces
+- [x] Public copy: marketplace role, listing ≠ authorization, badge honesty, sv/en key parity
+- [x] Isolated local browser pass: homepage footer, FAQ header, directory API surfaces
+- [ ] Profile page client islands stayed on skeleton in the browser session (API 200, ~19s)
+- [x] Founder go-ahead 2026-10-26: merge + production deploy, no flag flips
+
 ## Authorization collection tooling (§10)
 
 Script: `npm run cohorts:assign`. Report: docs/authorization-coverage-report.md. Worklists: docs/authorization-cohort-worklists.json.

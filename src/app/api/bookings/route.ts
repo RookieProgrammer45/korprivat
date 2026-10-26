@@ -18,7 +18,6 @@ import {
   bookingRequestSubmittedEmail,
   studentBookingRequestReceivedEmail,
 } from '@/lib/email/templates';
-import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 import {
   loadFoldedAuthorization,
   loadListingBindings,
@@ -32,7 +31,8 @@ import {
 import { resolveOrigin } from '@/lib/payments/origin';
 import { isReliableProcessingOn, nativeOutboxData } from '@/lib/reliability/inbox-policy';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
-import { slotClaimOutcome } from '@/lib/scheduling/booking-policy';
+import { evaluateBookingPolicy, slotClaimOutcome } from '@/lib/scheduling/booking-policy';
+import { loadListingEligibilityFacts } from '@/lib/scheduling/listing-eligibility';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
 
 export const dynamic = 'force-dynamic';
@@ -113,26 +113,23 @@ export async function POST(req: Request) {
       cancellationPolicyTier: true,
       bookingMode: true,
       userId: true,
+      providerRole: true,
     },
   });
   if (!instructor) {
     return NextResponse.json({ errors: { instructorId: 'Unknown instructor' } }, { status: 400 });
   }
 
-  // Snapshot the verified listing binding when one exists. With no binding rows,
-  // keep the legacy affiliation so an empty table does not drop organizationId.
-  // A pending or foreign binding never falls through to "first membership".
   let organizationId: string | null = null;
   try {
-    const affiliation = await getActiveAffiliationForUser(instructor.userId);
     const bindings = await loadListingBindings([instructor.id]);
     organizationId = snapshotOrganizationId({
       bindings,
       listingId: instructor.id,
-      legacyOrganizationId: affiliation?.organizationId ?? null,
+      legacyOrganizationId: null,
     });
   } catch (err) {
-    console.error('[bookings] affiliation lookup failed; proceeding with organizationId=null', err);
+    console.error('[bookings] binding lookup failed; proceeding with organizationId=null', err);
     organizationId = null;
   }
 
@@ -151,21 +148,7 @@ export async function POST(req: Request) {
     submittedMode: data.mode,
   });
   if (!bookingDecision.ok) {
-    if (bookingDecision.status === 403) {
-      return NextResponse.json(notAuthorizedBody(), { status: 403 });
-    }
-    const legacyMode = instructor.bookingMode === 'request' ? 'request' : 'instant';
-    return NextResponse.json(
-      {
-        errors: {
-          mode:
-            legacyMode === 'instant'
-              ? 'This school listing only accepts instant bookings'
-              : 'This school listing only accepts request-to-book',
-        },
-      },
-      { status: 409 },
-    );
+    return NextResponse.json(notAuthorizedBody(), { status: 403 });
   }
 
   const instructorMode: BookingCreateMode = bookingDecision.mode;
@@ -185,6 +168,27 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: { code: snap.code } }, { status: snap.status });
     }
     categorySnapshot = snap.snapshot;
+  }
+
+  const eligibility = await loadListingEligibilityFacts({
+    listingId: instructor.id,
+    userId: instructor.userId,
+    category: data.category,
+    listingCategories: instructor.categories,
+    providerRole: instructor.providerRole,
+  });
+  const policy = evaluateBookingPolicy({
+    action: instructorMode === 'instant' ? 'instant_create' : 'request_submission',
+    offeringInScope: Boolean(data.offeringId && isCategoryOfferingsOn()),
+    offeringActive: categorySnapshot ? true : null,
+    categoryAllowed: eligibility.categoryAllowed,
+    licenceStatus: eligibility.licenceStatus,
+    instructorAffiliated: eligibility.instructorAffiliated,
+    studentContactVerified: gate.eligible,
+    nativeSlotId: instructorMode === 'instant' ? data.slotId : null,
+  });
+  if (!policy.ok) {
+    return NextResponse.json({ error: { component: policy.component } }, { status: 403 });
   }
 
   const totals = learnerTotalSek(instructor.hourlyRateSek);

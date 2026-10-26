@@ -6,7 +6,7 @@ import { siteName, siteUrl } from '@/lib/site';
 
 const TITLE = "How to compare driving schools for a Swedish driver's licence in Stockholm";
 const DESCRIPTION =
-  'A practical Stockholm guide to the Swedish licence path, authorized driving schools, published prices, availability and booking through DriveLinkUp.';
+  'A practical Stockholm guide to the Swedish licence path, driving-school listings, published prices, availability and how DriveLinkUp works as a marketplace.';
 const PUBLISHED = '2026-08-02';
 const MODIFIED = '2026-09-05';
 
@@ -63,7 +63,7 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
             <h2 className="font-display text-h2 leading-tight">Compare the details that matter</h2>
             <p>
               Stockholm has different lesson formats, languages, locations and calendars. Use
-              DriveLinkUp to compare authorized-school listings by licence category, published
+              DriveLinkUp to compare driving-school listings by licence category, published
               price, availability, language and cancellation policy. The school controls what it
               publishes, so confirm remaining questions before the lesson.
             </p>
@@ -79,7 +79,7 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
             </h2>
             <p>
               Learners can discover, compare and book for free. DriveLinkUp adds no separate learner
-              fee: checkout uses the authorized school&apos;s published booking price. Schools
+              fee: checkout uses the school&apos;s published booking price. Schools
               control their prices and availability and pay 10% of attributable booking value only
               after the service is completed.
             </p>

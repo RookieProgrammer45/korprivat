@@ -12,14 +12,12 @@ export type CommitmentRoute = 'native' | 'external_manual';
 
 export type PolicyFacts = {
   action: BookingPolicyAction;
-  /** False only when an offering is in scope and inactive. Null skips E0. */
+  /** When true, E0 requires offeringActive === true. Missing required facts fail closed. */
+  offeringInScope?: boolean;
   offeringActive?: boolean | null;
-  /** False when the listing categories exclude the requested category. */
   categoryAllowed?: boolean | null;
-  /** Stored licence status. Null means no row — do not invent a result. */
   licenceStatus?: 'VERIFIED' | 'EXPIRED' | 'PENDING' | 'REVOKED' | null;
   studentContactVerified?: boolean | null;
-  /** Explicit false fails E2. Null means affiliation was not loaded. */
   instructorAffiliated?: boolean | null;
   nativeSlotId?: string | null;
   commitmentRoute?: CommitmentRoute | null;
@@ -32,19 +30,18 @@ export type PolicyDecision =
 const REQUIRES_E4 = new Set<BookingPolicyAction>(['instant_create', 'confirm']);
 
 export function evaluateBookingPolicy(facts: PolicyFacts): PolicyDecision {
-  if (facts.offeringActive === false) return { ok: false, component: 'E0' };
-  if (facts.categoryAllowed === false) return { ok: false, component: 'E1' };
-  if (facts.licenceStatus != null && facts.licenceStatus !== 'VERIFIED') {
-    return { ok: false, component: 'E1' };
+  if (facts.offeringInScope && facts.offeringActive !== true) {
+    return { ok: false, component: 'E0' };
   }
-  if (facts.instructorAffiliated === false) return { ok: false, component: 'E2' };
-  if (facts.studentContactVerified === false) return { ok: false, component: 'E3' };
+  if (facts.categoryAllowed !== true) return { ok: false, component: 'E1' };
+  if (facts.licenceStatus !== 'VERIFIED') return { ok: false, component: 'E1' };
+  if (facts.instructorAffiliated !== true) return { ok: false, component: 'E2' };
+  if (facts.studentContactVerified !== true) return { ok: false, component: 'E3' };
   if (REQUIRES_E4.has(facts.action) && !facts.nativeSlotId) {
     return { ok: false, component: 'E4' };
   }
   if (facts.action === 'manual_accept') {
-    const route = facts.commitmentRoute ?? (facts.nativeSlotId ? 'native' : null);
-    return { ok: true, commitmentRoute: route };
+    return { ok: true, commitmentRoute: facts.commitmentRoute ?? null };
   }
   return {
     ok: true,
