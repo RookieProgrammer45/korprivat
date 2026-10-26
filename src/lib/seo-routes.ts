@@ -17,6 +17,12 @@ const EDITORIAL: SeoRoute[] = [
   { path: '/for-skolor', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.6, changeFrequency: 'weekly' },
   {
+    path: '/blog/kunskapsprov-korkort-b',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+    lastModified: '2026-10-26',
+  },
+  {
     path: '/blog/korkort-b-steg-for-steg',
     priority: 0.75,
     changeFrequency: 'monthly',
