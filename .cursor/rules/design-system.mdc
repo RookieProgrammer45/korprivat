@@ -1,0 +1,256 @@
+---
+description: DriveLinkUp visual design system — tokens, type, layout, components, imagery, Mobbin reference workflow, and UI QA. Apply to every UI change.
+globs:
+  - "src/app/**/*.tsx"
+  - "src/components/**/*.tsx"
+  - "src/app/custom-style.css"
+  - "src/app/globals.css"
+alwaysApply: false
+---
+
+# DriveLinkUp design system
+
+Goal: a calm, premium Swedish marketplace — think ElevenLabs/Linear restraint
+with Airbnb/Treatwell marketplace clarity. Warm bone surfaces, ink type, one
+green accent, real imagery, generous space. Never "a legal document with
+buttons".
+
+This rule sits under `drivelinkup.mdc` (product honesty) and
+`page-backgrounds.mdc` (solid backgrounds). Where they conflict, they win.
+
+## 1. Tokens (use these — never hard-code new hex values in components)
+
+Defined in `src/app/custom-style.css` (ELEVENLABS-STYLE RESTYLE block).
+
+| Role | Token | Value |
+| --- | --- | --- |
+| Page | `--background` | `#f4f2ed` bone (dark: `#0b0b0a`) |
+| Deep surface / panels | `--muted` | `#eae7e0` |
+| Card | `--card` | `#ffffff` (dark: `#131312`) |
+| Text | `--foreground` / `--dlu-ink` | `#131312` |
+| Secondary text | `--muted-foreground` | `#565349` |
+| Faint text / meta | `--dlu-ink-faint` | `#8d8a83` (decorative only, never body copy) |
+| Accent | `--dlu-green` | `#00a876` |
+| Accent tint | `--dlu-green-chip` | `#e4f5ec` |
+| Accent text on tint | `--dlu-green-deep` | `#0b6b4a` |
+| Hairline | `--border` | `rgba(19,19,18,.09)` |
+
+Rules
+- One accent only. Green marks *meaning* (active, confirmed, "free", focus,
+  check icons, the dot in an eyebrow). It is not a decoration colour. Never
+  more than ~5% of a viewport.
+- Primary actions are ink pills (`bg-foreground text-background`), not green.
+- Solid backgrounds only (see `page-backgrounds.mdc`). Depth comes from
+  white cards on bone + hairline borders + soft shadow, not tints.
+- Body text must hit WCAG AA (4.5:1). `--dlu-ink-faint` fails AA on bone —
+  use it only for decorative meta ≥ 14px medium or icons.
+
+## 2. Typography
+
+- Display: `font-display` (headings), body: `font-body`. Do not add fonts.
+- No-bold policy: headings weight 400, emphasis max 500 (section 15 in
+  custom-style.css). Hierarchy comes from size and spacing, not weight.
+- Scale (mobile → desktop):
+  - Hero H1: `text-[2.6rem] sm:text-6xl xl:text-7xl`, `leading-[1.02]`,
+    `tracking-[-0.035em]`, max ~14 words, `text-balance`.
+  - Section H2: `text-h2` (`text-3xl` on mobile), `tracking-tight`.
+  - Lead: `text-body-lg`, `max-w-xl`, `text-muted-foreground`.
+  - Eyebrow: `text-eyebrow` — max 3 words, sentence case in the source string.
+- Line length 45–75 characters for paragraphs.
+
+## 3. Layout and spacing
+
+- Container: `container-page` (max-w-screen-xl, px-4 sm:px-6).
+- 8-pt spacing. Section padding: `py-16 sm:py-24`. Hero: `pt-10 pb-16
+  sm:pt-16 lg:pt-20 lg:pb-24`.
+- No dead bands: a section never has more than one empty viewport-third.
+  If something feels empty, add a visual or tighten — don't add a border.
+- Desktop hero: two columns `lg:grid-cols-[1.05fr_0.95fr]`, copy left,
+  visual right, vertically centred. Mobile: one column, copy → search →
+  visual (visual may be shortened/cropped, never removed entirely).
+- Cards in a row share height (`grid auto-rows-fr` or `h-full`). Never
+  stagger cards with `nth-child` offsets.
+
+## 4. Radius, borders, elevation
+
+- Cards / panels: `rounded-[1.25rem]` (20px). Inputs inside cards: `rounded-xl`.
+- Buttons, chips, pills: `rounded-full`.
+- Border: `border border-border` (1px hairline). Never two borders stacked.
+- Shadows (light mode): resting card `shadow-[0_1px_2px_rgba(19,19,18,.04),0_8px_24px_-12px_rgba(19,19,18,.12)]`;
+  raised (search, floating chips) `shadow-[0_2px_4px_rgba(19,19,18,.04),0_24px_48px_-20px_rgba(19,19,18,.22)]`.
+  Dark mode: no shadows; rely on borders.
+
+## 5. Components
+
+Buttons
+- Primary: ink pill, `h-12 px-6` (hero) / `h-10 px-5` (sections), `→` or a
+  lucide icon at `size-4`. One primary per view.
+- Secondary: white pill with hairline border, or a plain text link with
+  arrow. Never two equally-weighted buttons side by side in a hero.
+
+Search (marketplace entry point)
+- The hero leads with search, not a CTA. Fields: körkortskategori + stad,
+  then an ink "Sök" button. Native `<select>` is fine and accessible; label
+  every field (visible label or `sr-only`).
+- Submits to `/instructors` with only the non-empty params (`categories`,
+  `city`). Never send empty params — the parser rejects `city=`.
+- Below the search: popular chips (category + city). These replace any
+  separate "quick links" strip.
+
+Chips
+- `rounded-full border border-border bg-card px-3.5 py-1.5 text-sm`,
+  hover `border-foreground/25`. Selected: `bg-foreground text-background`.
+
+Listing cards
+- Logo/avatar with a fallback (initials on `--muted`) — never a broken
+  `<img>` or visible alt text.
+- Hide empty fields. "Ingen kommande tid listad" etc. is not shown; omit the
+  row instead.
+- Price is the most prominent data point after the name. Category chips are
+  labelled (`Bil · B`, not `B`).
+
+Icons
+- lucide-react only, `size-4` inline / `size-5` in feature lists,
+  `strokeWidth={1.75}`. Check marks for assurances use `--dlu-green`.
+
+## 6. Imagery
+
+- Every marketing section above the fold needs a visual: product UI,
+  photography or illustration. Text-only heroes are not allowed.
+- Illustration style: flat editorial, top-down or 3/4, warm bone palette,
+  ink linework, one green accent, lots of negative space. No clip-art, no
+  gradients-as-background, no stock "thumbs up" photos.
+- Images via `next/image` with explicit `sizes`, `priority` only for the
+  hero image, meaningful Swedish `alt` from i18n.
+- Floating overlay chips on imagery may only state **product facts that are
+  true for every listing** (e.g. "Priset i kronor före bokning"). Never
+  invented ratings, counts, slots, names or prices — see `drivelinkup.mdc`.
+
+## 7. Content and honesty in UI
+
+- All strings through `messages/sv.json` + `messages/en.json` (rule 19).
+  Add both languages in the same change.
+- Legal/compliance clarifications (e.g. "en katalogannons är inte ett
+  bokningstillstånd") are shown **once per page**, as a small footnote near
+  the relevant action — not repeated in the lead paragraph, a card and the
+  footer. Never delete them; relocate and shorten only with the same meaning.
+- Lead copy says what the learner gets, in their words, before it says what
+  DriveLinkUp is not.
+- No fake social proof. Show numbers only when computed from the database.
+
+## 8. Motion
+
+- Entrance: existing `marketplace-reveal` (rise 700ms, ease-out-expo),
+  staggered 60–120ms. Hover: `-translate-y-0.5` + shadow step, 200ms.
+- Respect `prefers-reduced-motion` (no transforms, no loops).
+- No auto-rotating carousels in the hero.
+
+## 9. Mobile (390px first)
+
+- Tap targets ≥ 44px. Search fields stack full-width; button full-width.
+- H1 ≤ 4 lines at 390px. No horizontal scroll at 320px.
+- The cookie banner must not cover more than ~25% of the first viewport.
+
+## 10. Mobbin reference workflow (Cursor + Mobbin MCP)
+
+Before redesigning any screen or section:
+1. Use the Mobbin MCP to pull 4–8 references from shipped products in the
+   same pattern. Default reference set for DriveLinkUp: Airbnb, Booking.com,
+   Treatwell, Doctolib, Thumbtack, Zocdoc, Linear (type/spacing), ElevenLabs
+   (bone/ink restraint).
+2. Summarise the shared pattern (layout, hierarchy, what's above the fold,
+   how search/CTA is handled, how trust is shown) in 5–8 bullets.
+3. Map it onto these tokens. Do not copy another product's colours or fonts.
+4. Implement one section per change.
+5. Run the method in §12 and name the Laws of UX (§13) that drove each
+   decision.
+
+## 11. QA checklist (every UI change)
+
+- [ ] Screenshot at 390 × 844 and 1440 × 900, light and dark.
+- [ ] No overflow, clipped text, broken images, or alt text visible.
+- [ ] Contrast AA on all text; focus rings visible on every control.
+- [ ] Strings exist in sv and en; no raw i18n keys rendered.
+- [ ] No fabricated data introduced; compliance copy still present once.
+- [ ] `npm run typecheck && npx biome check` clean for touched files.
+- [ ] Laws of UX (§13) named; POV statement (§12) still holds; the
+      journey stages before and after are unbroken.
+
+## 12. Design method: Stanford design thinking for service design
+
+Every design iteration runs the d.school's five modes
+(Empathize → Define → Ideate → Prototype → Test, see
+https://dschool.stanford.edu/tools/design-thinking-bootleg), applied to the
+**whole service**, not just one screen. DriveLinkUp is a service with
+several actors: learner, supervisor (handledare), driving school, instructor
+and DriveLinkUp itself.
+
+1. **Empathize.** Name the actor and the journey stage before touching the UI:
+   discover → compare → choose → book → pay → lesson → after the lesson.
+   Base this on evidence in the repo (`docs/`, specs, ADRs, support copy) and
+   the Mobbin references. Never invent users, quotes, interviews or research
+   results. If evidence is missing, write it down as an assumption to test.
+2. **Define.** Write one point-of-view statement and one "How might we…?"
+   question per section, e.g. "A learner in Göteborg needs to see the total
+   price before choosing a school, because hidden fees break trust."
+3. **Ideate.** Sketch at least 3 distinct directions (in words or ASCII)
+   before choosing one. Pick using the Laws of UX in §13, and say which law
+   decided it.
+4. **Prototype.** Build the smallest change that can be tested: one section
+   per change, behind real data only, and reversible.
+5. **Test.** Check the result against the POV statement, the §11 QA
+   checklist and the §13 laws. Write down what you learned and what would
+   send you back to Define. Prototype as if you're right; test as if you're
+   wrong.
+
+Service-design checks for every iteration:
+- **Journey map.** Which stage does this change affect, and what happens in the
+  stage just before and just after? The hand-offs (search → profile →
+  booking → confirmation e-mail) must not break.
+- **Front stage / back stage.** What the user sees has to match what the
+  system actually does (booking rules, verification, consent). The UI never
+  promises something the back end doesn't do.
+- **Every actor.** A change for learners must not make things worse for schools,
+  and the other way round. Check the school-facing pages too (`/for-skolor`,
+  dashboard).
+- **Touchpoints.** Copy and tone match across web, e-mail and SMS.
+
+## 13. Laws of UX (https://lawsofux.com) — apply and cite
+
+Name the laws you applied in every plan and every report. The ones that matter
+most for DriveLinkUp:
+
+- **Jakob's Law:** search, filters, cards and checkout work like Airbnb or
+  Booking.com. Don't reinvent familiar patterns.
+- **Hick's Law / Choice Overload:** at most 1 primary CTA per view. Keep
+  filters progressive (the essentials first, "fler filter" for the rest).
+  Results must be sortable.
+- **Fitts's Law:** primary actions are big and close to the thumb. Tap targets are at least
+  44 px, and the search button is full width on mobile.
+- **Miller's Law / Chunking / Cognitive Load:** group the information on a
+  card as price · category · city · language. Show at most about 5 facts per card.
+  Split long forms into steps.
+- **Law of Proximity / Common Region / Similarity / Uniform Connectedness:**
+  related controls sit together in one bordered surface (like the hero
+  search). The same kinds of things look the same.
+- **Von Restorff Effect:** only one element per view gets the accent or ink
+  emphasis. That is the primary action.
+- **Serial Position Effect:** the most important item comes first or last
+  in lists, navigation and footers.
+- **Aesthetic-Usability Effect:** visual polish matters, but it never hides
+  a usability or honesty problem.
+- **Doherty Threshold:** respond in under 400 ms. Show a skeleton or optimistic
+  state for search and booking, never a blank screen.
+- **Goal-Gradient / Zeigarnik:** show the progress in multi-step flows
+  (signup, booking, verification) and let users pick up where they left off.
+- **Peak-End Rule:** make the booking confirmation and the "after the
+  lesson" moment clear and calm. Those are what users remember.
+- **Tesler's Law:** complexity that can't be removed (ID checks, supervisor
+  rules) is handled by the system and explained once, not pushed onto the
+  user.
+- **Postel's Law:** accept flexible input (city spelling, phone formats,
+  å/ä/ö). Output exact, consistent formats (SEK, dates in sv-SE).
+- **Paradox of the Active User / Mental Model:** no instructions needed. Labels
+  use the learner's own words ("körkort B", "pris per lektion").
+- **Occam's Razor / Prägnanz:** when two designs work equally well, pick the
+  simpler one.

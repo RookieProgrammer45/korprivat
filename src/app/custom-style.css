@@ -2275,3 +2275,50 @@ html.dark .dlu-footer-cta {
 .dlu-about-ghost-cta:hover {
   background: var(--card);
 }
+
+/* ------------------------------------------------------------------ */
+/* 20. Home hero v2 — search-first (see .cursor/rules/design-system)   */
+/* ------------------------------------------------------------------ */
+
+.dlu-hero-search,
+.dlu-hero-chip {
+  box-shadow:
+    0 2px 4px rgb(19 19 18 / 0.04),
+    0 24px 48px -20px rgb(19 19 18 / 0.22);
+}
+
+.dlu-hero-select option {
+  color: var(--foreground);
+  background-color: var(--card);
+}
+
+.dlu-hero-visual img {
+  transition: transform 1.2s var(--ease-out-expo);
+}
+
+.dlu-hero-visual:hover img {
+  transform: scale(1.015);
+}
+
+.dlu-hero-chip {
+  animation: marketplace-rise 700ms var(--ease-out-expo) 260ms both;
+}
+
+html.dark .dlu-hero-search,
+html.dark .dlu-hero-chip {
+  box-shadow: none;
+}
+
+/* The illustration is bone-toned; soften it so it doesn't glare on #0b0b0a. */
+html.dark .dlu-hero-visual img {
+  filter: brightness(0.82) saturate(0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dlu-hero-visual img,
+  .dlu-hero-chip {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
