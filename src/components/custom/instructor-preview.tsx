@@ -39,7 +39,7 @@ export function InstructorPreview({
 
   useEffect(() => {
     let active = true;
-    apiFetch('/api/instructors', { schema: InstructorList })
+    apiFetch(`/api/instructors?limit=${Math.max(1, limit)}`, { schema: InstructorList })
       .then((data) => {
         if (!active) return;
         setRows(data.items.slice(0, Math.max(1, limit)));

@@ -157,17 +157,24 @@ export async function GET(req: NextRequest) {
     prunedRows.push(...resolved, ...fallback);
   }
 
+  // `limit` (1–50) serves small previews such as the home page. Without rating
+  // or availability filters the order is already final, so we cut before the
+  // aggregate, slot and payment loads; otherwise we cut after filtering.
+  const limit = parseLimit(req.nextUrl.searchParams.get('limit'));
+  const minRating = q.minRating;
+  const cutEarly = limit != null && minRating == null && q.availability === undefined;
+  const candidateRows = cutEarly ? prunedRows.slice(0, limit) : prunedRows;
+
   // Load review aggregates once for the candidate rows. A minimum-rating
   // filter is deliberately applied after the base Prisma read because ratings
   // are validated and averaged by the shared public aggregate loader.
   const aggregates = await loadPublicInstructorAggregates(
-    canonicalRows.map((row) => ({ id: row.id, userId: row.userId })),
+    candidateRows.map(({ row }) => ({ id: row.id, userId: row.userId })),
   );
-  const minRating = q.minRating;
   const ratedRows =
     minRating == null
-      ? prunedRows
-      : prunedRows.filter(({ row }) => {
+      ? candidateRows
+      : candidateRows.filter(({ row }) => {
           const average = aggregates.get(row.id)?.reviewSummary.averageRating;
           return average != null && average >= minRating;
         });
@@ -220,6 +227,7 @@ export async function GET(req: NextRequest) {
       const availableIds = new Set(matchingSlots.map((slot) => slot.instructorId));
       filteredRows = ratedRows.filter(({ row }) => availableIds.has(row.id));
     }
+    if (limit != null) filteredRows = filteredRows.slice(0, limit);
 
     for (const row of matchingSlots) {
       if (!nextSlotByInstructor.has(row.instructorId)) {
@@ -530,6 +538,13 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
   }
 
   return { AND: clauses };
+}
+
+function parseLimit(raw: string | null): number | null {
+  if (raw == null) return null;
+  const value = Number.parseInt(raw, 10);
+  if (!Number.isFinite(value) || value < 1) return null;
+  return Math.min(value, 50);
 }
 
 function matchesAvailability(

@@ -112,10 +112,6 @@ export function HomeHero() {
               </Link>
             ))}
           </div>
-
-          <Link href="/for-skolor" className="dlu-text-link mt-6 w-fit">
-            {t('schoolLink')}
-          </Link>
         </div>
       </div>
     </section>
