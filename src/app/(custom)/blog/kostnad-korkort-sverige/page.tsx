@@ -41,8 +41,8 @@ export default function KostnadKorkortPage() {
           per timme, bokar en ledig tid och betalar det publicerade beloppet till escrow.
         </p>
         <p>
-          Skolans provision till DriveLinkUp (8% för skolbokningar, 10% för oberoende instruktörer)
-          tas efter genomförd tjänst och påverkar inte elevens checkout-total.
+          På skolans bokningar tar DriveLinkUp 8 % av lektionspriset efter genomförd
+          lektion. Det ändrar inte vad eleven betalar. Instruktörer tar betalt via sin skola.
         </p>
         <p>
           Börja i{' '}

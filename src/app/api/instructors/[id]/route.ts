@@ -5,7 +5,7 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
-import { InstructorItem, PUBLIC_INSTRUCTOR_SELECT } from '@/lib/contracts/instructors';
+import { InstructorItem, LISTING_CONTACT_SELECT } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
@@ -26,7 +26,7 @@ export async function GET(_req: Request, ctx: Ctx) {
   const { id } = await ctx.params;
   const instructor = await prisma.instructor.findUnique({
     where: { id },
-    select: PUBLIC_INSTRUCTOR_SELECT,
+    select: LISTING_CONTACT_SELECT,
   });
   if (!instructor) {
     // Same envelope the form's `applyServerErrors` consumes, so the client

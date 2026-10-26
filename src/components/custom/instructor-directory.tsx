@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MAX_COMPARISON_ITEMS, ProviderComparison } from '@/components/custom/provider-comparison';
+import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -704,6 +705,12 @@ function CardGrid({
             >
               <InstructorCard row={row} />
             </Link>
+            <SchoolContactButton
+              name={row.name}
+              contact={row.contact}
+              size="sm"
+              className="w-full"
+            />
             <Button
               type="button"
               variant={comparisonIds.includes(row.id) ? 'secondary' : 'outline'}

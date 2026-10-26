@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
 import { BookingPriceSummary } from '@/components/custom/booking-price-summary';
+import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -201,12 +202,17 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             </div>
           </dl>
 
-          {instructor.canCollectPayment === false ? null : (
+          {instructor.canCollectPayment === false || instructor.surfaces?.directoryOnly ? null : (
             <BookingPriceSummary instructorId={instructor.id} />
           )}
 
           <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
 
+          <SchoolContactButton
+            name={instructor.name}
+            contact={instructor.contact}
+            className="w-full sm:w-auto"
+          />
           <BookingModeSection instructor={instructor} />
           {/* Directory-only listings show no cancellation policy: no booking
               flows through DriveLinkUp for this school, and an unconfirmed

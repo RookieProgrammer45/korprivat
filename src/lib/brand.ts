@@ -2,7 +2,7 @@
 
 export const siteName = 'DriveLinkUp';
 export const siteDescription =
-  'Jämför trafikskolor och instruktörer i katalogen. DriveLinkUp är en marknadsplats, inte en trafikskola. Priser och villkor syns före bokningen — kostnadsfritt för elever.';
+  'Jämför trafikskolor i katalogen. DriveLinkUp är en marknadsplats, inte en trafikskola. Priset syns före bokning. En annons är inte ett bokningstillstånd. Kostnadsfritt för elever.';
 
 // PWA + social-share colors. HEX only (the oklch() tokens in globals.css aren't
 // readable here) — set to match your brand seed.

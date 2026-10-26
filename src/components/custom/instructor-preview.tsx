@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -64,8 +65,14 @@ export function InstructorPreview({
     ) : (
       <ul className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {rows.map((row) => (
-          <li key={row.id}>
+          <li key={row.id} className="grid min-w-0 gap-2">
             <PreviewCard row={row} />
+            <SchoolContactButton
+              name={row.name}
+              contact={row.contact}
+              size="sm"
+              className="w-full"
+            />
           </li>
         ))}
       </ul>

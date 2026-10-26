@@ -65,6 +65,7 @@ function instructorRow(
     cancellationPolicyTier: string | null;
     bookingMode: 'instant' | 'request' | null;
     providerRole?: 'SCHOOL' | 'INSTRUCTOR' | 'HANDLEDARE' | null;
+    email?: string | null;
   }> = {},
 ) {
   return {
@@ -84,6 +85,7 @@ function instructorRow(
     cancellationPolicyTier: 'flexible',
     bookingMode: 'instant',
     providerRole: 'SCHOOL',
+    email: null,
     ...overrides,
   };
 }
@@ -258,6 +260,27 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       bookingMode: 'request',
     });
     expect(body.items[0]).not.toHaveProperty('userId');
+  });
+
+  it('resolves school contact to mailto and never serializes email', async () => {
+    mockInstructorFindMany.mockResolvedValue([
+      instructorRow({
+        id: 'school_sjobo',
+        name: 'Sjöbo Trafikskola',
+        email: 'info@sjobotrafikskola.se',
+        bio: 'https://www.sjobotrafikskola.se',
+        userId: 'user_verified',
+      }),
+    ]);
+    mockLicenseFindMany.mockResolvedValue([{ userId: 'user_verified', status: 'VERIFIED' }]);
+
+    const res = await GET(req());
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as { items: Array<Record<string, unknown>> };
+    expect(body.items[0]).toMatchObject({
+      contact: { kind: 'inbox', href: 'mailto:info@sjobotrafikskola.se' },
+    });
+    expect(body.items[0]).not.toHaveProperty('email');
   });
 
   it('hides payment surfaces for an instructor who is not part of a driving school', async () => {

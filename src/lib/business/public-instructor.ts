@@ -1,6 +1,7 @@
 import 'server-only';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { resolveSchoolContact } from '@/lib/discovery/school-contact';
 
 export type PublicInstructorAggregate = {
   verificationStatus: 'verified' | 'pending' | 'rejected' | 'unverified';
@@ -26,6 +27,7 @@ type PublicInstructorSource = {
   googleRating?: number | null;
   googleReviewCount?: number | null;
   googleMapsUri?: string | null;
+  email?: string | null;
 };
 
 type ReviewRow = { instructorId: string; rating: number };
@@ -147,6 +149,11 @@ export function toPublicInstructor(
       row.providerRole === 'SCHOOL' || row.providerRole === 'HANDLEDARE'
         ? row.providerRole
         : 'INSTRUCTOR',
+    contact: resolveSchoolContact({
+      providerRole: row.providerRole,
+      email: row.email,
+      bio: row.bio,
+    }),
     ...(distanceKm == null ? {} : { distanceKm }),
   };
 }

@@ -56,7 +56,7 @@ export const llmsConfig: LlmsConfig = {
       'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
     '/blog': 'Guides for learners: costs, handledare, and choosing a traffic school in Sweden.',
     '/om-oss':
-      'About DriveLinkUp: why published prices appear before checkout, how the marketplace connects schools, certified instructors and learners. DriveLinkUp is a startup founded in Stockholm in 2026.',
+      'About DriveLinkUp: school prices are visible before checkout. The marketplace lists driving schools. Instructors teach through a school. Founded in Stockholm in 2026.',
     '/terms':
       'Terms of service: booking and payment via Stripe with funds released after completed lessons, cancellation rules set by each school, 8% school commission, instructor payment only through a school, and account rules.',
   },

@@ -74,6 +74,13 @@ export const PUBLIC_INSTRUCTOR_SELECT = {
   googleMapsUri: true,
 } as const;
 
+// List/detail reads may load `email` to resolve `contact`. The raw address
+// is stripped before InstructorItem parse — never serialized.
+export const LISTING_CONTACT_SELECT = {
+  ...PUBLIC_INSTRUCTOR_SELECT,
+  email: true,
+} as const;
+
 // Read shape: persisted instructor record returned by the detail endpoint.
 // `categories` is a free-form `String[]` at the storage layer (categories are
 // a small, versioned enum at the business layer — see licence-categories.ts),
@@ -143,6 +150,15 @@ export const InstructorItem = z.object({
     .object({
       name: z.string().min(1),
       slug: z.string().min(1),
+    })
+    .nullable()
+    .optional(),
+  // Resolved outbound contact for schools. Inbox (mailto) first, then the
+  // school's own website. Raw email is never included — only this href.
+  contact: z
+    .object({
+      kind: z.enum(['inbox', 'website']),
+      href: z.string().min(1),
     })
     .nullable()
     .optional(),

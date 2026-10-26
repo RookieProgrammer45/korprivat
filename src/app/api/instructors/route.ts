@@ -5,8 +5,9 @@
 // payload from `/instructors/new`, inserts a new instructor row, fires the
 // profile-live confirmation mail, and returns the new id. The shape is
 // validated by `InstructorCreate`. The new `email` field lands in the
-// optional `Instructor.email String?` column and is intentionally kept OUT
-// of `PUBLIC_INSTRUCTOR_SELECT` so it never leaks through any public read.
+// optional `Instructor.email String?` column. Public reads load it only
+// via `LISTING_CONTACT_SELECT` to resolve an outbound contact href; the
+// raw address is never serialized.
 import 'server-only';
 import { Prisma } from '@prisma/client';
 import { type NextRequest, NextResponse } from 'next/server';
@@ -29,7 +30,7 @@ import {
   InstructorCreated,
   InstructorList,
   type InstructorQuery,
-  PUBLIC_INSTRUCTOR_SELECT,
+  LISTING_CONTACT_SELECT,
   parseInstructorQuery,
 } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
@@ -108,7 +109,7 @@ export async function GET(req: NextRequest) {
   // indexed read.
   const rawRows = await prisma.instructor.findMany({
     where: await buildWhere(q),
-    select: PUBLIC_INSTRUCTOR_SELECT,
+    select: LISTING_CONTACT_SELECT,
     orderBy:
       q.sort === 'distance' && hasGeo
         ? undefined
