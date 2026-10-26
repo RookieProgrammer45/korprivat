@@ -135,20 +135,18 @@ export function ConsentBanner() {
 
   return (
     <div
-      className="consent-banner pointer-events-auto fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background px-4 py-3 shadow-lg"
+      className={`consent-banner pointer-events-auto fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background shadow-lg ${expanded ? 'is-open' : ''}`}
       role="dialog"
       aria-label={t('intro')}
     >
-      <div className="container-page mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-        <div className="flex-1 text-small text-foreground">
-          <p className="leading-relaxed">{t('intro')}</p>
-          <p className="mt-1 text-caption text-muted-foreground">
-            <Link href="/privacy" className="underline-offset-2 hover:underline">
-              {t('privacy')}
-            </Link>
-          </p>
-        </div>
-        <div className="dl-action-group sm:flex-nowrap">
+      <div className="container-page mx-auto flex max-w-5xl flex-col gap-2 px-4 py-2 sm:flex-row sm:items-center sm:gap-4">
+        <p className="min-w-0 flex-1 text-small leading-snug text-foreground">
+          {t('intro')}{' '}
+          <Link href="/privacy" className="underline-offset-2 hover:underline">
+            {t('privacy')}
+          </Link>
+        </p>
+        <div className="consent-banner-actions">
           <Button
             type="button"
             variant="outline"
@@ -201,7 +199,7 @@ export function ConsentBanner() {
             checked={marketing}
             onChange={setMarketing}
           />
-          <div className="dl-action-group justify-end">
+          <div className="consent-banner-actions justify-end">
             <Button
               type="button"
               size="sm"

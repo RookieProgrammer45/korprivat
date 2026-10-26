@@ -1,13 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { SchoolMark } from '@/components/custom/instructor-preview';
 import { MAX_COMPARISON_ITEMS, ProviderComparison } from '@/components/custom/provider-comparison';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -786,23 +785,12 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
       <CardContent className="flex h-full min-w-0 flex-col gap-5 p-6">
         <div className="marketplace-directory-card-header flex min-w-0 flex-wrap items-start justify-between gap-4">
           <div className="flex min-w-0 flex-1 max-sm:flex-auto items-center gap-3">
-            {row.photoUrl ? (
-              <Image
-                src={row.photoUrl}
-                alt={tr('portraitAlt', { name: row.name })}
-                width={48}
-                height={48}
-                unoptimized
-                className="marketplace-provider-avatar size-12 shrink-0 rounded-full border border-brand-500/35 bg-brand-100 object-cover dark:bg-brand-900"
-              />
-            ) : (
-              <div
-                aria-hidden
-                className="marketplace-provider-avatar flex size-12 shrink-0 items-center justify-center rounded-full border border-brand-500/35 bg-brand-100 font-display text-sm font-semibold text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-              >
-                {row.name.slice(0, 1).toUpperCase()}
-              </div>
-            )}
+            <SchoolMark
+              name={row.name}
+              photoUrl={row.photoUrl}
+              alt={tr('portraitAlt', { name: row.name })}
+              size="avatar"
+            />
             <div className="min-w-0">
               <p className="dlu-type">
                 {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
@@ -825,12 +813,11 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               </div>
             </div>
           </div>
-          <Badge
-            variant="secondary"
-            className="marketplace-rate-badge max-w-full shrink-0 whitespace-normal bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-          >
-            {formatSek(row.hourlyRateSek, locale, tr('rateSuffix'))}
-          </Badge>
+          {row.hourlyRateSek > 0 ? (
+            <p className="dlu-school-price">
+              {formatSek(row.hourlyRateSek, locale, tr('rateSuffixShort'))}
+            </p>
+          ) : null}
         </div>
         {bookingModeLabel ? (
           <p className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
@@ -847,14 +834,16 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
         ) : null}
 
         <div className="grid min-w-0 gap-3 rounded-lg border border-border bg-muted p-4 sm:grid-cols-2">
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('nextAvailableLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {nextSlotPill?.whenLabel ?? tr('noUpcomingSlot')}
-            </span>
-          </div>
+          {nextSlotPill ? (
+            <div className="grid min-w-0 gap-1">
+              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                {tr('nextAvailableLabel')}
+              </span>
+              <span className="min-w-0 break-words text-small text-foreground">
+                {nextSlotPill.whenLabel}
+              </span>
+            </div>
+          ) : null}
           <div className="grid min-w-0 gap-1">
             <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
               {tr('languageLabel')}
@@ -889,9 +878,9 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
 
         <div className="flex flex-wrap items-center gap-1.5">
           {row.categories.map((code) => (
-            <Badge key={code} variant="outline" className="border-border text-foreground">
+            <span key={code} className="dlu-chip">
               {tr(`category.${code}`)}
-            </Badge>
+            </span>
           ))}
         </div>
 
