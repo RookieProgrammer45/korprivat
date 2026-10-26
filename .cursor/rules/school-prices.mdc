@@ -1,5 +1,5 @@
 ---
-description: Reference dataset of published Swedish driving-school prices (lesson, Risk 1/2, intensive courses). Use when working on school pages, price display, comparisons, search filters, or risk-course/intensive features.
+description: Reference dataset of published Swedish driving-school prices for schools with a website and Google reviews (lesson, Risk 1/2, intensive courses). Use when working on school pages, price display, comparisons, search filters, or risk-course/intensive features.
 globs:
   - "data/school-prices/**"
 alwaysApply: false
@@ -8,8 +8,9 @@ alwaysApply: false
 # School prices dataset
 
 - Source of truth: `data/school-prices/school-prices.json` (`meta` + `schools[]`). The schema and provenance are in `data/school-prices/README.md`; read it first.
-- Join to DriveLinkUp listings through `schools[].listingIds` (ids from `docs/cutover-school-roster.json`). Do not join on name; names are ambiguous. Unlinked listings are in `unmatched-listings.json`.
+- Join to DriveLinkUp listings through `schools[].listingIds` (ids from `docs/cutover-school-roster.json`). Do not join on name; names are ambiguous. Only schools with a website, published prices and Google reviews are included; a listing missing from the file has no price data here.
 - Compare lesson prices with `lesson.pricePerMinuteSek`, because lesson lengths range from 30 to 80 min.
 - Label prices as "published on the school's website" with `meta.collectedAt` and link `sourceUrl`. Never label them verified or confirmed, and never use them as booking or checkout amounts.
+- `google` is a snapshot for filtering only; show live ratings from `Instructor.googleRating`/`googleReviewCount`.
 - `null` means "not published", not "free". Respect `status` when explaining missing prices.
 - Importing into the DB needs a Discovery-owned migration plus a script under `scripts/` (see `database.mdc`). Do not edit the JSON by hand; regenerate it and update `meta`.

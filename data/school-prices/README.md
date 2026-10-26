@@ -1,7 +1,8 @@
 # School prices dataset (B licence, Sweden)
 
-Snapshot of published prices for every Swedish driving school with B (car)
-permission, collected **2026-10-26**. Use it as reference data. It is not
+Snapshot of published prices for Swedish driving schools with B (car)
+permission, collected **2026-10-26**. Filtered to schools that have a website,
+published prices and Google reviews (see Filter below). Use it as reference data. It is not
 verified evidence: a school has not confirmed any of these prices to
 DriveLinkUp.
 
@@ -10,8 +11,20 @@ DriveLinkUp.
 | File | What it is |
 | --- | --- |
 | `school-prices.json` | Canonical dataset: `meta` plus `schools[]`. Use this in code. |
-| `school-prices.csv` | Same data flattened (Swedish headers, `;`-separated, UTF-8 BOM) for Excel. |
-| `unmatched-listings.json` | DriveLinkUp listings from `docs/cutover-school-roster.json` that could not be linked to exactly one record. |
+| `school-prices.csv` | Same data flattened: English snake_case headers, `,`-separated, UTF-8 (no BOM). Multi-value fields use `;`; intensive courses are `name: contents = N SEK` joined by ` \| `. |
+
+## Filter
+
+A school is included only if all of these hold:
+
+- `status` is `OK` (prices were published on its site),
+- it has a `website`,
+- at least one linked DriveLinkUp listing has Google reviews
+  (`Instructor.googleReviewCount > 0` in the DB, Google Places snapshot synced
+  2026-10-18).
+
+When a school has several listings, `google` comes from the listing with the
+most reviews (`google.fromListingId`).
 
 ## Provenance
 
@@ -58,15 +71,24 @@ type SchoolPriceRecord = {
     | 'SITE_UNREACHABLE'
     | 'NOT_A_B_SCHOOL_SITE';
   sourceUrl: string | null;   // page the prices were read from
+  google: {
+    rating: number;           // Google rating 1–5
+    reviewCount: number;
+    mapsUri: string | null;
+    placeId: string | null;
+    fromListingId: string;    // listing the Google data was taken from
+  };
 };
 ```
 
 ## Coverage (see `meta.counts`)
 
-- 1,101 schools: 347 with a lesson price, 160 with a priced intensive course
-  (287 say they offer intensive courses).
-- 532 of the 635 DriveLinkUp listings are linked via `listingIds`; the other
-  103 are listed in `unmatched-listings.json`.
+- 157 schools in 21 counties: 153 with a lesson price, 65 with a priced
+  intensive course; 183 DriveLinkUp listing ids linked.
+- Excluded from the full 1,101-school collection: 201 priced schools without
+  Google data in the DB (112 listed on DriveLinkUp but with no confident
+  Google match, 89 not on DriveLinkUp), plus every school without published
+  prices or a website.
 
 ## Rules for using this data
 
@@ -78,6 +100,8 @@ type SchoolPriceRecord = {
 - Do not write this data into another bounded context's tables. If it goes
   into the DB, add a migration in the owning context (Discovery) plus an
   import script under `scripts/`.
+- Google ratings are a cached snapshot; render them from the DB
+  (`Instructor.googleRating`), not from this file, so they stay fresh.
 - Campaign prices go stale. Re-collect before relying on a price, and refresh
   `meta.collectedAt`.
 - Lesson lengths and intensive-course contents were extracted automatically;
