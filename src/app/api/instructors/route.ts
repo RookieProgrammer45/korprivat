@@ -17,6 +17,7 @@ import {
 } from '@/lib/acquisition/mediated-instructor-store';
 import { registerKnownContact } from '@/lib/business/escrow';
 import { haversineKm, resolveInstructorCoords } from '@/lib/business/geo';
+import { categoryFilterMatches } from '@/lib/business/licence-categories';
 import { confirmedPhotoUrl } from '@/lib/business/photo-verification';
 import { buildVerifiedProviderActivationWhere } from '@/lib/business/provider-activation';
 import { providerTimezoneForCity } from '@/lib/business/provider-timezone';
@@ -511,7 +512,10 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
   if (q.categories && q.categories.length > 0) {
     // Postgres `String[]` exposes per-value `has` (single); the canonical
     // "any-of" idiom is `OR` of `has`. No-op when the array is empty.
-    filters.OR = q.categories.map((code) => ({ categories: { has: code } }));
+    // Motorcycle searches also match stored B-only listings.
+    filters.OR = categoryFilterMatches(q.categories).map((code) => ({
+      categories: { has: code },
+    }));
   }
   if (typeof q.minRate === 'number' || typeof q.maxRate === 'number') {
     filters.hourlyRateSek = {

@@ -1,4 +1,5 @@
 import 'server-only';
+import { withUsualMotorcycleCategories } from '@/lib/business/licence-categories';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
 import { publishedPrices } from '@/lib/discovery/published-prices';
@@ -157,7 +158,9 @@ export function toPublicInstructor(
   nextSlotAt: string | null,
   distanceKm?: number,
 ) {
-  const categories = row.categories.filter((category) => isProviderActivated([category]));
+  const categories = withUsualMotorcycleCategories(row.categories).filter((category) =>
+    isProviderActivated([category]),
+  );
   return {
     id: row.id,
     name: row.name,

@@ -468,6 +468,17 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(whereField(where, 'OR')).toEqual([{ categories: { has: 'B' } }]);
   });
 
+  it('lets a motorcycle category search also match B listings', async () => {
+    mockInstructorFindMany.mockResolvedValueOnce([instructorRow({ categories: ['B'] })]);
+    const res = await GET(req('?categories=A'));
+    expect(res.status).toBe(200);
+    expect(whereField(mockInstructorFindMany.mock.calls[0]?.[0]?.where, 'OR')).toEqual(
+      expect.arrayContaining([{ categories: { has: 'A' } }, { categories: { has: 'B' } }]),
+    );
+    const body = (await res.json()) as { items: Array<{ categories: string[] }> };
+    expect(body.items[0]?.categories).toEqual(expect.arrayContaining(['A', 'A1', 'A2', 'B']));
+  });
+
   it('keeps instructors at or above the inclusive minimum rating threshold', async () => {
     const highId = 'high-rated';
     const lowId = 'low-rated';
