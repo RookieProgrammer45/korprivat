@@ -38,13 +38,30 @@ export async function buildVerifiedProviderActivationWhere(): Promise<Prisma.Ins
     select: { userId: true },
   });
   const verifiedUserIds = verified.map((r) => r.userId);
+  const categoryAndRole: Prisma.InstructorWhereInput[] = [
+    { OR: LICENCE_CATEGORY_CODES.map((code) => ({ categories: { has: code } })) },
+    {
+      OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
+    },
+  ];
+  if (verifiedUserIds.length === 0) {
+    return { AND: [...categoryAndRole, { id: { in: [] } }] };
+  }
+
+  const ownerOrgs = await prisma.membership.findMany({
+    where: { status: 'ACTIVE', role: 'OWNER', userId: { in: verifiedUserIds } },
+    select: { organizationId: true },
+  });
+  const eligibleOrgIds = [...new Set(ownerOrgs.map((row) => row.organizationId))];
+  const staff =
+    eligibleOrgIds.length === 0
+      ? []
+      : await prisma.membership.findMany({
+          where: { status: 'ACTIVE', organizationId: { in: eligibleOrgIds } },
+          select: { userId: true },
+        });
+  const catalogUserIds = [...new Set([...verifiedUserIds, ...staff.map((row) => row.userId)])];
   return {
-    AND: [
-      { OR: LICENCE_CATEGORY_CODES.map((code) => ({ categories: { has: code } })) },
-      {
-        OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
-      },
-      verifiedUserIds.length > 0 ? { userId: { in: verifiedUserIds } } : { id: { in: [] } },
-    ],
+    AND: [...categoryAndRole, { userId: { in: catalogUserIds } }],
   };
 }

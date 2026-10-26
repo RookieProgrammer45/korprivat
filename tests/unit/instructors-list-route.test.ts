@@ -13,6 +13,7 @@ const {
   mockGoogleReviewFindMany,
   mockGetSessionUser,
   mockAuthzFindMany,
+  mockMembershipFindMany,
 } = vi.hoisted(() => ({
   mockInstructorFindMany: vi.fn(),
   mockSlotFindMany: vi.fn(),
@@ -21,6 +22,7 @@ const {
   mockGoogleReviewFindMany: vi.fn(),
   mockGetSessionUser: vi.fn(),
   mockAuthzFindMany: vi.fn(),
+  mockMembershipFindMany: vi.fn(),
 }));
 
 vi.mock('@/lib/db', () => ({
@@ -31,6 +33,7 @@ vi.mock('@/lib/db', () => ({
     review: { findMany: mockReviewFindMany },
     googleReview: { findMany: mockGoogleReviewFindMany },
     schoolAuthorizationEvent: { findMany: mockAuthzFindMany },
+    membership: { findMany: mockMembershipFindMany },
   },
 }));
 
@@ -132,6 +135,8 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     mockReviewFindMany.mockReset();
     mockGoogleReviewFindMany.mockReset();
     mockAuthzFindMany.mockReset();
+    mockMembershipFindMany.mockReset();
+    mockMembershipFindMany.mockResolvedValue([]);
     mockGetSessionUser.mockReset();
     mockGetSessionUser.mockResolvedValue({ id: 'user_signed_in' });
     mockSlotFindMany.mockResolvedValue([]);
