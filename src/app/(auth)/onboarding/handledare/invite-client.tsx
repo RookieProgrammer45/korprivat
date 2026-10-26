@@ -37,7 +37,7 @@ export function HandledareInviteClient() {
   if (status === 'ok') {
     return (
       <p className="rounded-md border border-border bg-muted/40 p-4 text-sm">
-        Inbjudan skickad. Din handledare måste godkänna innan du kan boka.
+        Inbjudan skickad. Din handledare måste godkänna.
       </p>
     );
   }

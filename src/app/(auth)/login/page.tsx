@@ -5,6 +5,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { AuthSchoolCarousel } from '@/components/custom/auth-school-carousel';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignInForm } from '@/components/custom/sign-in-form';
 import { sanitizeNext, signupHrefWithNext } from '@/lib/auth-next';
@@ -30,6 +31,7 @@ export default async function LoginPage({
 
   return (
     <AuthShell
+      visual={<AuthSchoolCarousel />}
       footer={
         <>
           {t('switchToSignupLead')}{' '}

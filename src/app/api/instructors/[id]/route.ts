@@ -9,6 +9,7 @@ import { InstructorItem, LISTING_CONTACT_SELECT } from '@/lib/contracts/instruct
 import { prisma } from '@/lib/db';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
+import { requireAuth } from '@/lib/require-auth';
 import {
   isCancellationPolicyEnforced,
   listingHasActiveCancellationPolicy,
@@ -22,7 +23,12 @@ export const dynamic = 'force-dynamic';
 
 type Ctx = { params: Promise<{ id: string }> };
 
-export async function GET(_req: Request, ctx: Ctx) {
+export async function GET(req: Request, ctx: Ctx) {
+  try {
+    await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
   const { id } = await ctx.params;
   const instructor = await prisma.instructor.findUnique({
     where: { id },

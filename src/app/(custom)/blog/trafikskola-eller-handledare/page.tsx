@@ -19,7 +19,7 @@ export default function TrafikskolaEllerHandledarePage() {
     '@type': 'Article',
     headline: 'Trafikskola eller handledare?',
     description:
-      'När du ska boka lektioner hos en trafikskola och när privat övningskörning med handledare gäller.',
+      'När en trafikskola passar och när privat övningskörning med handledare gäller.',
     author: { '@type': 'Organization', name: siteName },
     mainEntityOfPage: url,
     inLanguage: 'sv-SE',
@@ -38,12 +38,12 @@ export default function TrafikskolaEllerHandledarePage() {
       <div className="grid gap-4 text-body text-foreground">
         <p>
           <strong>Trafikskola:</strong> jämför skolannonser i katalogen och se publicerat pris.
-          En annons är inte ett undervisningstillstånd, och en förfrågan är inte en bekräftad
-          bokning. Professionell undervisning kräver skolans eget tillstånd.
+          En annons är inte ett undervisningstillstånd. Professionell undervisning kräver skolans
+          eget tillstånd. Kontakta skolan för tider och villkor.
         </p>
         <p>
           <strong>Handledare:</strong> för privat övningskörning — särskilt relevant för
-          16–17-åringar som behöver godkänt handledarskap innan de kan boka på DriveLinkUp. Det är
+          16–17-åringar som behöver godkänt handledarskap innan privat övningskörning. Det är
           inte samma sak som en skolannons.
         </p>
         <p>

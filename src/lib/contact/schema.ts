@@ -58,7 +58,7 @@ export function isContactTopic(raw: string | null | undefined): raw is ContactTo
 // Human-readable label per topic — sent in the founder email so the founder
 // doesn't need to memorise enum IDs.
 export const CONTACT_TOPIC_LABELS: Record<ContactTopic, { en: string; sv: string }> = {
-  booking_issue: { en: 'Booking issue / cancellation', sv: 'Bokning / avbokning' },
+  booking_issue: { en: 'Question about a school', sv: 'Fråga om en skola' },
   instructor_question: { en: 'Instructor question', sv: 'Instruktörsfråga' },
   payment: { en: 'Payment & refund', sv: 'Betalning & återbetalning' },
   technical: { en: 'Site / technical problem', sv: 'Sajt / tekniskt problem' },

@@ -86,7 +86,7 @@
       "eyebrow": "Support",
       "headingLead": "Hur kan vi hjälpa",
       "headingAccent": "dig idag?",
-      "lead": "Fråga om en bokning, avbokning, trygghet eller integritet. Välj ett ämne så dirigerar supportteamet ditt meddelande rätt.",
+      "lead": "Fråga om katalogen, en skolannons, trygghet eller integritet. Välj ett ämne så dirigerar supportteamet ditt meddelande rätt.",
       "step": {
         "backToTopics": "Välj ett annat ämne",
         "heading": "Berätta vad som har hänt",
@@ -104,16 +104,16 @@
       },
       "topics": [
         {
-          "title": "Bokning eller avbokning",
-          "description": "En tid, bokningsförfrågan, ändring eller avbokning."
+          "title": "Fråga om en skola",
+          "description": "En skolannons, kategori, pris eller hur du når skolan."
         },
         {
           "title": "Fråga om en skolannons",
           "description": "En fråga om skolprofil, kategori, tillgänglighet eller lektion."
         },
         {
-          "title": "Betalning",
-          "description": "En fråga om kassa, debitering, återbetalning eller betalningsstatus."
+          "title": "Betalning hos skolan",
+          "description": "En fråga om betalning eller villkor som skolan sätter. DriveLinkUp tar inte betalt för lektioner."
         },
         {
           "title": "Tekniskt problem",
@@ -185,8 +185,8 @@
         "a": "Filtrera på stad, kategori och pris."
       },
       "booking": {
-        "q": "Hur bokar jag?",
-        "a": "Kontakta skolan."
+        "q": "Hur når jag en skola?",
+        "a": "Öppna annonsen och använd Kontakta skolan."
       },
       "price": {
         "q": "Vad kostar det?",
@@ -197,8 +197,8 @@
         "a": "Ett märke visas bara när vi har en sparad kontroll. Fråga skolan om deras tillstånd."
       },
       "cancellation": {
-        "q": "Avbokning?",
-        "a": "Fråga skolan."
+        "q": "Vad gäller för tider och villkor?",
+        "a": "Fråga skolan. DriveLinkUp sätter inte skolans villkor."
       },
       "prerequisites": {
         "q": "Vad behöver jag innan en lektion?",
@@ -245,7 +245,7 @@
       "1": {
         "eyebrow": "Handledare",
         "title": "Handledare och övningskörning i Sverige",
-        "excerpt": "Så kompletterar 16–17-åringar handledarskap innan bokning på DriveLinkUp.",
+        "excerpt": "Så kompletterar 16–17-åringar handledarskap för privat övningskörning.",
         "meta": "{minutes} min läsning",
         "readCta": "Läs guiden"
       },
@@ -259,7 +259,7 @@
       "3": {
         "eyebrow": "Val",
         "title": "Trafikskola eller handledare?",
-        "excerpt": "När du ska boka trafikskola i katalogen respektive privat övningskörning med handledare.",
+        "excerpt": "När en trafikskola i katalogen passar, och när privat övningskörning med handledare gäller.",
         "meta": "{minutes} min läsning",
         "readCta": "Läs guiden"
       }
@@ -328,7 +328,7 @@
         "faq1a": "Nej. Du betalar skolans publicerade lektionspris — inga separata avgifter.",
         "faq2q": "Visas privata handledare som trafikskolor?",
         "faq2a": "Nej. Handledare är en separat juridisk väg för övningskörning. Skolannonser är trafikskolor i katalogen.",
-        "faq3q": "Hur bokar jag?",
+        "faq3q": "Hur når jag en skola?",
         "faq3a": "Kontakta skolan."
       }
     },
@@ -347,7 +347,7 @@
       "slug": "goteborg",
       "seo": {
         "lead": "Trafikskolor i Göteborg",
-        "p1": "Jämför Göteborgsskolor efter behörighet, språk, publicerat pris i SEK och tillgänglighet. Endast verifierade instruktörer syns i sök.",
+        "p1": "Jämför Göteborgsskolor efter behörighet, språk och publicerat pris i SEK.",
         "p2": "Jämför publicerat pris och ort. Kontakta skolan.",
         "howTitle": "Så gör du",
         "howBody": "Öppna en annons. Kontakta skolan.",
@@ -358,7 +358,7 @@
         "linkBlog": "Elevguider",
         "faqTitle": "Vanliga frågor Göteborg",
         "faq1q": "Finns undervisning på engelska?",
-        "faq1a": "Många annonser markerar engelska. Filtrera katalogen eller läs profilen före bokning.",
+        "faq1a": "Många annonser markerar engelska. Filtrera katalogen eller läs profilen.",
         "faq2q": "Betalar skolan för att vara listad?",
         "faq2a": "Nej. En kataloglista är gratis. DriveLinkUp tar inte betalt för kataloglistor. Lektioner ordnas med skolan.",
         "faq3q": "När betalar jag?",
@@ -393,7 +393,7 @@
         "faq1q": "Syns priser före registrering?",
         "faq1a": "Ja. Timpris publiceras på varje annons så du kan jämföra innan konto skapas.",
         "faq2q": "Kan jag övningsköra privat också?",
-        "faq2a": "Ja, via den separata handledarvägen. Skolbokning och privat övning är olika produkter.",
+        "faq2a": "Ja, via den separata handledarvägen. Skollektioner och privat övning är olika vägar.",
         "faq3q": "Vilka närliggande städer finns?",
         "faq3a": "Börja i Malmö och använd hubben för södra Sverige för fler orter i Skåne."
       }
@@ -425,9 +425,9 @@
         "faqTitle": "Vanliga frågor Uppsala",
         "faq1q": "Måste hela utbildningen ske hos skola?",
         "faq1a": "Skolor ger strukturerade lektioner. Privat övningskörning med handledare är valfritt och separat.",
-        "faq2q": "Hur bokar jag?",
+        "faq2q": "Hur når jag en skola?",
         "faq2a": "Kontakta skolan.",
-        "faq3q": "Avbokning?",
+        "faq3q": "Vad gäller för tider och villkor?",
         "faq3a": "Fråga skolan."
       }
     },
@@ -477,7 +477,7 @@
         "linkBlog": "Blogg",
         "faqTitle": "Vanliga frågor Västerås",
         "faq1q": "Vem syns i sök?",
-        "faq1a": "Endast aktiverade skolor/instruktörer med verifierad behörighet.",
+        "faq1a": "Trafikskolor i katalogen. Ett märke visas bara när vi har en sparad kontroll.",
         "faq2q": "Finns elevavgift på marknadsplatsen?",
         "faq2a": "Nej. Skolans publicerade pris är det du betalar.",
         "faq3q": "Var läser jag om privat övningskörning?",
@@ -684,7 +684,7 @@
       },
       "contact": {
         "title": "Kataloglista",
-        "body": "Skolan visas med sin information och sina priser. DriveLinkUp tar inte emot bokningar eller betalning för den här skolan — använd Kontakta skolan för att nå dem direkt."
+        "body": "Skolan visas med sin information och sina priser. Använd Kontakta skolan för att nå dem direkt."
       },
       "paymentThroughSchool": {
         "title": "Betalning via trafikskola",
@@ -813,7 +813,7 @@
   },
   "instructorOnboarding": {
     "title": "Skapa skolans annons",
-    "subtitle": "Publicera skolans uppgifter och pris så elever kan jämföra. Håll annonsen aktuell. En annons är inte en bokning.",
+    "subtitle": "Publicera skolans uppgifter och pris så elever kan jämföra. Håll annonsen aktuell.",
     "submit": "Publicera annonsen",
     "submitting": "Skapar annons…",
     "error": "Något gick fel. Försök igen.",
@@ -857,7 +857,7 @@
     },
     "eyebrow": "För trafikskolor i katalogen",
     "title": "Skapa skol konto",
-    "lead": "Fyll i formuläret för att skapa annonsen. Publicera det pris och den tillgänglighet som skolan styr över så att elever kan jämföra och boka.",
+    "lead": "Fyll i formuläret för att skapa annonsen. Publicera det pris skolan styr över så att elever kan jämföra.",
     "back": "Tillbaka till översikten",
     "loading": "Kontrollerar ditt konto…",
     "error": "Vi kunde inte läsa in din skolregistrering. Försök igen.",
@@ -924,6 +924,11 @@
       "errors": {
         "invalidCredentials": "E-post eller lösenord stämmer inte. Försök igen.",
         "generic": "Kunde inte logga in. Försök igen."
+      },
+      "visual": {
+        "label": "Skolor i katalogen",
+        "fallbackAlt": "En förare håller ratten i skymning",
+        "schoolAlt": "{name} i {city}"
       }
     },
     "forgotPassword": {
@@ -989,8 +994,8 @@
         "roleLearner": "Jag är elev",
         "roleSchool": "Jag är en trafikskola",
         "roleInstructor": "Jag undervisar på en trafikskola",
-        "roleLearnerDesc": "Jämför och boka lektioner. Du måste vara minst 16 år.",
-        "roleSchoolDesc": "Lägg upp skolan med pris och tider. En katalogannons är inte en bokningsbehörighet.",
+        "roleLearnerDesc": "Jämför trafikskolor. Du måste vara minst 16 år.",
+        "roleSchoolDesc": "Lägg upp skolan med pris och uppgifter. Elever jämför och kontaktar er.",
         "roleInstructorDesc": "Du går med via skolan du undervisar för. Skolans tillstånd styr vad du kan erbjuda.",
         "learnerSection": "Uppgifter för elev",
         "schoolSection": "Uppgifter för trafikskola",
@@ -1073,7 +1078,7 @@
         "confirmationLabel": "Jag bekräftar att det här är fotot jag vill använda på min profil.",
         "staged": "Förhandsvisningen är uppladdad — bekräfta den för att fortsätta.",
         "back": "Tillbaka",
-        "whyWeAsk": "Vi visar ditt foto på din profil så att elever vet vem de bokar.",
+        "whyWeAsk": "Vi visar ditt foto på din profil så att elever känner igen skolan.",
         "errors": {
           "pictureRequired": "Välj ett foto för att fortsätta.",
           "pictureWrongType": "Den filen är inte en giltig bild.",
@@ -1088,7 +1093,7 @@
         "STUDENT": {
           "pictureUpload": {
             "stepEyebrow": "Lägg till ditt foto",
-            "stepTitle": "Sätt ett ansikte på dina bokningar",
+            "stepTitle": "Lägg till ett foto",
             "stepLead": "Den här bilden hjälper elever att känna igen skolannonsen.",
             "placeholderAria": "Profilfoto",
             "chooseButton": "Välj ett foto",
@@ -1096,7 +1101,7 @@
             "submit": "Fortsätt",
             "submitting": "Laddar upp…",
             "back": "Tillbaka",
-            "whyWeAsk": "Vi visar bilden med bokningsförfrågan så att skolan vet vem som kommer.",
+            "whyWeAsk": "Vi visar bilden på din profil så att skolan känner igen dig.",
             "errors": {
               "pictureRequired": "Välj ett foto för att fortsätta.",
               "pictureWrongType": "Den filen är inte en giltig bild.",
@@ -1136,7 +1141,7 @@
             "submit": "Fortsätt",
             "submitting": "Laddar upp…",
             "back": "Tillbaka",
-            "whyWeAsk": "Vi visar ditt foto på din profil så att elever vet vem de bokar.",
+            "whyWeAsk": "Vi visar ditt foto på din profil så att elever känner igen dig.",
             "errors": {
               "pictureRequired": "Välj ett foto för att fortsätta.",
               "pictureWrongType": "Den filen är inte en giltig bild.",
@@ -1170,7 +1175,7 @@
           "pictureUpload": {
             "stepEyebrow": "Skolfoto",
             "stepTitle": "Lägg till ett foto för skolannonsen",
-            "stepLead": "Elever använder bilden för att känna igen skolan innan de bokar.",
+            "stepLead": "Elever använder bilden för att känna igen skolan.",
             "whyWeAsk": "Vi visar fotot på er skolannons."
           },
           "licenseUpload": {
@@ -1187,7 +1192,7 @@
           "pictureUpload": {
             "stepEyebrow": "Instruktörsfoto",
             "stepTitle": "Lägg till ett foto för din instruktörsprofil",
-            "stepLead": "Elever använder bilden för att känna igen dig innan de bokar.",
+            "stepLead": "Elever använder bilden för att känna igen dig.",
             "whyWeAsk": "Vi visar fotot på din instruktörsannons."
           },
           "licenseUpload": {
@@ -1204,8 +1209,8 @@
           "pictureUpload": {
             "stepEyebrow": "Lägg till ett profilfoto",
             "stepTitle": "Lägg till ett profilfoto",
-            "stepLead": "Elever och lärare ser ditt foto när ni bokar lektioner.",
-            "whyWeAsk": "Ditt foto visas vid bokningar så att andra vet vem de möter."
+            "stepLead": "Elever och skolor ser ditt foto på profilen.",
+            "whyWeAsk": "Ditt foto visas på profilen så att andra vet vem de möter."
           }
         }
       },
@@ -1215,7 +1220,7 @@
       "accountTitleLearner": "Skapa ditt elevkonto",
       "accountLeadLearner": "Hitta lektioner hos trafikskolor. Instruktörer undervisar via en skola.",
       "accountTitleSchool": "Lista er trafikskola",
-      "accountLeadSchool": "Lägg till skolans uppgifter så att elever kan hitta och boka er.",
+      "accountLeadSchool": "Lägg till skolans uppgifter så att elever kan hitta er.",
       "accountTitleInstructor": "Skapa ditt instruktörskonto",
       "accountLeadInstructor": "Undervisa som godkänd trafiklärare ansluten till en trafikskola.",
       "step": {
@@ -1244,7 +1249,7 @@
           "lastNamePlaceholder": "Efternamn…",
           "firstNameError": "Ange ditt förnamn.",
           "emailLabel": "E-post",
-          "emailHelp": "Används för inloggning och bokningskvitton.",
+          "emailHelp": "Används för inloggning.",
           "subscribeLabel": "Få produktuppdateringar",
           "subscribeDesc": "Få de senaste nyheterna om nya funktioner och förbättringar.",
           "nameUpdateFailed": "Kunde inte spara namnet. Försök igen.",
@@ -1261,7 +1266,7 @@
         },
         "photo": {
           "title": "Lägg till ett profilfoto",
-          "body": "Elever och lärare ser ditt foto när ni bokar lektioner.",
+          "body": "Elever och skolor ser ditt foto på profilen.",
           "upload": "Ladda upp",
           "skip": "Hoppa över"
         },
@@ -1275,7 +1280,7 @@
         }
       }
     },
-    "accountLeadLearner": "Hitta och boka lektioner hos trafikskolor och behöriga instruktörer."
+    "accountLeadLearner": "Hitta och jämför trafikskolor i katalogen."
   },
   "bookingFees": {
     "serviceFeeLabel": "Ingen separat avgift",
@@ -1300,7 +1305,7 @@
     "title": "Lista",
     "eyebrow": "Katalog",
     "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för att skolan syns här.",
-    "payoutLine": "Skolan styr sitt publicerade pris. En lista är inte en bokning och inte en betalning.",
+    "payoutLine": "Skolan styr sitt publicerade pris. En lista är inte en betalning.",
     "exampleTitle": "Exempel vid 600 SEK/h",
     "exampleLine": "Ett publicerat pris på {price} SEK är det eleven ser. DriveLinkUp lägger inte på någon avgift.",
     "exampleLearnerLine": "Det publicerade priset {price} SEK är siffran på listan.",
@@ -1390,12 +1395,12 @@
     "student": {
       "eyebrow": "Elev",
       "title": "Min dashboard",
-      "lead": "Dina bokningsförfrågningar och kommande lektioner. Klicka på en rad för att se full status, betalning och bekräftelsesteg.",
+      "lead": "Jämför trafikskolor i katalogen. Använd Kontakta skolan för tider och villkor.",
       "upcomingBookings": "Bokade lektioner",
       "count": "{count, plural, one {# bokning} other {# bokningar}}",
       "open": "Öppna",
       "emptyTitle": "Inga bokningar ännu.",
-      "emptyBody": "Bläddra bland pilotkullen, välj en trafikskola och skicka din första bokningsförfrågan — den hamnar här så snart skolan svarar.",
+      "emptyBody": "Jämför trafikskolor i katalogen och använd Kontakta skolan.",
       "emptyCta": "Bläddra bland trafikskolor",
       "loadError": "Vi kunde inte hämta dina bokningar just nu.",
       "retry": "Försök igen",
@@ -1467,7 +1472,7 @@
         "loadError": "Vi kunde inte hämta din bokningshistorik just nu.",
         "retry": "Försök igen",
         "emptyTitle": "Inga bokningar ännu.",
-        "emptyBody": "När du skickat din första bokningsförfrågan hamnar den här — både genomförda och kommande.",
+        "emptyBody": "Jämför trafikskolor i katalogen och använd Kontakta skolan.",
         "emptyCta": "Bläddra bland trafikskolor",
         "backToDashboard": "Tillbaka till dashboard",
         "statusCancelled": "Avbokad",
@@ -1500,7 +1505,7 @@
         "forget": "Glöm"
       },
       "verifyBanner": {
-        "body": "Verifiera din identitet för att börja boka lektioner.",
+        "body": "Verifiera din identitet.",
         "disclosure": "Vi använder Didit för att bekräfta din ålder och identitet via din ID-handling. Dina uppgifter behandlas enligt vår integritetspolicy och Didits villkor.",
         "consent": "Jag samtycker till identitetsverifiering via Didit och förstår att DriveLinkUp tar emot mitt verifierade födelsedatum.",
         "consentRequired": "Bekräfta samtycke innan du startar verifieringen.",
@@ -1713,7 +1718,7 @@
       "upgrade": {
         "eyebrow": "Verifiera skolans behörigheter",
         "title": "Slutför verifieringen av trafikskolan",
-        "lead": "Ladda upp bevis på skolans Transportstyrelsen-behörigheter här. Vi verifierar dem; när de är godkända kan kontot publicera en trafikskola i katalogennnons.",
+        "lead": "Ladda upp bevis på skolans Transportstyrelsen-behörigheter här. Vi verifierar dem; när de är godkända kan kontot publicera en trafikskola i katalogannons.",
         "loadErrorEyebrow": "Något gick fel",
         "loadErrorBody": "Vi kunde inte läsa din licensstatus. Försök ladda om sidan.",
         "retry": "Försök igen",
@@ -1726,7 +1731,7 @@
         "pepBody": "Behörigheterna är verifierade — vi växlar kontot till skolvyn nu…",
         "verifiedEyebrow": "Uppgraderad",
         "verifiedTitle": "Välkommen ombord",
-        "verifiedBody": "Kontot kan nu fungera som en trafikskola i katalogennnons. Vi tar dig till skolans dashboard strax.",
+        "verifiedBody": "Kontot kan nu fungera som en trafikskola i katalogannons. Vi tar dig till skolans dashboard strax.",
         "autoUpgradeSuccess": "Skolans verifiering är klar — vi tar dig dit…",
         "autoUpgradeFailed": "Något gick fel när vi växlade över. Ladda om sidan eller logga ut och in igen för att försöka igen.",
         "form": {
@@ -1955,7 +1960,7 @@
       "confirmationLabel": "Jag bekräftar att det här är fotot jag vill använda på min profil.",
       "staged": "Förhandsvisningen är uppladdad — bekräfta den för att slutföra.",
       "cancel": "Avbryt",
-      "whyWeAsk": "Vi visar ditt foto på din profil och dina bokningar så att andra vet vem de träffar.",
+      "whyWeAsk": "Vi visar ditt foto på din profil så att andra vet vem de träffar.",
       "successToast": "Ditt foto har uppdaterats.",
       "errors": {
         "pictureWrongType": "Den filen är inte en giltig bild.",
@@ -1969,12 +1974,12 @@
       "count": "{count, plural, one {# bokning} other {# bokningar}}",
       "open": "Öppna",
       "emptyTitle": "Inga kommande bokningar ännu.",
-      "emptyBodyStudent": "Välj en kategori, bläddra bland pilotinstruktörerna och boka din nästa lektion — den hamnar här så snart din instruktör bekräftar.",
-      "emptyBodyInstructor": "Släpp några lediga tider på din tillgänglighetssida så ser eleverna dem — bokningar hamnar här så snart de bekräftar.",
+      "emptyBodyStudent": "Jämför trafikskolor i katalogen och använd Kontakta skolan.",
+      "emptyBodyInstructor": "Publicera skolans uppgifter och pris så elever kan jämföra er.",
       "emptyCtaStudent": "Bläddra bland trafikskolor",
       "emptyCtaInstructor": "Hantera tillgänglighet",
       "schoolEyebrow": "Kommande bokningar",
-      "emptyBodySchool": "Så snart skolans instruktörer är kopplade och tillgängligheten är publicerad hamnar inkommande bokningar här.",
+      "emptyBodySchool": "När skolans instruktörer är kopplade syns de på er annons.",
       "emptyCtaSchool": "Öppna skolans dashboard"
     },
     "loadError": "Kunde inte ladda din profil.",
@@ -2006,11 +2011,11 @@
   "chatbot": {
     "fabLabel": "Fråga DriveLinkUp",
     "title": "Fråga DriveLinkUp",
-    "lead": "Få ett snabbt svar om kategorier, priser, bokning, trygghet eller avbokning. Personliga betalnings-, återbetalnings- och trygghetsärenden går till supporten.",
-    "placeholder": "Fråga om kategori, pris eller bokning…",
+    "lead": "Få ett snabbt svar om kategorier, priser och hur du når en skola. Personliga betalnings-, återbetalnings- och trygghetsärenden går till supporten.",
+    "placeholder": "Fråga om kategori, pris eller en skola…",
     "sendAria": "Skicka",
     "inputAria": "Skriv din fråga",
-    "emptyState": "Hej! Fråga mig om kategorier, priser, bokning, trygghet eller avbokningspolicyer.",
+    "emptyState": "Hej! Fråga mig om kategorier, priser eller hur du når en skola.",
     "errorGeneric": "Assistenten är inte tillgänglig just nu. Försök igen snart.",
     "rateLimited": "Vänta en stund innan du skickar ett nytt meddelande.",
     "handoffLabel": "Behöver du personlig hjälp? Kontakta support →",
@@ -2019,13 +2024,13 @@
   "privacyPage": {
     "meta": {
       "title": "Integritetspolicy",
-      "description": "Så behandlar DriveLinkUp personuppgifter för konton, bokningar, betalningar, skolbehörigheter och trygghet."
+      "description": "Så behandlar DriveLinkUp personuppgifter för konton, katalogannonser, skolbehörigheter och support."
     },
     "hero": {
       "eyebrow": "Integritet",
       "title": "Integritetspolicy",
       "lastUpdated": "Senast uppdaterad: 26 augusti 2026 · policyversion {version}",
-      "intro": "Den här policyn beskriver hur DriveLinkUp behandlar personuppgifter när du bläddrar bland skolannonser, skapar ett konto, bokar en lektion eller registrerar dig som skola eller handledare.",
+      "intro": "Den här policyn beskriver hur DriveLinkUp behandlar personuppgifter när du bläddrar bland skolannonser, skapar ett konto eller registrerar dig som skola eller handledare.",
       "reviewNotice": "Juridisk granskningsnotis: detta kundutkast ska granskas och kompletteras av DriveLinkUps juridiska rådgivare före publicering."
     },
     "sections": {
@@ -2040,7 +2045,7 @@
         "items": [
           "Kontouppgifter som namn, e-postadress, inloggningsuppgifter och kontoroll.",
           "Profiluppgifter som stad, språk, körkortskategorier, profilbild, lektionspris och biografi.",
-          "Bokningsuppgifter som vald skola, kategori, tid, bokningsstatus, avbokningspolicy och supportkommunikation.",
+          "Supportmeddelanden och frågor om en skolannons som du skickar till oss.",
           "Betalningsuppgifter och transaktionsstatus som behandlas via den externa betalningsleverantören. Kortuppgifter hanteras av leverantören och lagras inte av DriveLinkUp.",
           "Behörighets-, körkorts-, försäkrings- och onboardinguppgifter som skickas in för skol- eller handledarkontot.",
           "Tekniska uppgifter som IP-adress, webbläsarinformation, enhetsinformation och samtyckesval.",
@@ -2052,8 +2057,8 @@
         "body": "Vi använder personuppgifter endast för att tillhandahålla, skydda och förbättra tjänsten. Tillämplig grund kan vara fullgörande av avtal, berättigat intresse, samtycke eller rättslig skyldighet.",
         "items": [
           "För att skapa och hantera konton och skol- eller handledarprofiler.",
-          "För att visa skolannonser, tillgänglighet, priser och bokningspolicyer för personer som överväger att boka.",
-          "För att skapa bokningar, skicka transaktionsmeddelanden och ge support.",
+          "För att visa skolannonser och publicerade priser så att du kan jämföra och kontakta skolan.",
+          "För att skicka kontomeddelanden och ge support.",
           "För att behandla betalningar, återbetalningar och betalningsrelaterade register via vår betalningsleverantör.",
           "För att granska behörighets- och trygghetsuppgifter som skickas in under onboarding.",
           "För att skydda tjänsten, förhindra missbruk och uppfylla bokförings- eller andra rättsliga skyldigheter."
@@ -2064,14 +2069,14 @@
         "body": "Vi sparar uppgifter endast så länge det behövs för ändamålet, för att lösa tvister, uppfylla lagkrav och tillämpa våra avtal. Exakta tider beror på uppgiftstyp och tillämpligt lagkrav.",
         "items": [
           "Konto- och profiluppgifter sparas medan kontot är aktivt och under en begränsad tid därefter för trygghet och support.",
-          "Boknings-, betalnings- och bokföringsuppgifter kan sparas under den tid svensk lag kräver.",
+          "Konto-, support- och bokföringsuppgifter kan sparas under den tid svensk lag kräver.",
           "Behörighets- och försäkringsmaterial sparas endast så länge det behövs för onboarding, granskning, trygghet och lagkrav.",
           "Supportmeddelanden och tekniska loggar sparas under en begränsad tid som passar ärendet eller trygghetsändamålet."
         ]
       },
       "4": {
         "title": "5. Delning och personuppgiftsbiträden",
-        "body": "Vi säljer inte personuppgifter. Vi delar dem endast med leverantörer och myndigheter när det behövs för att driva tjänsten, behandla en betalning, ge bokningssupport, skydda användare eller följa lag.",
+        "body": "Vi säljer inte personuppgifter. Vi delar dem endast med leverantörer och myndigheter när det behövs för att driva tjänsten, behandla en betalning, ge support, skydda användare eller följa lag.",
         "items": [
           "Externa betalningsleverantörer, inklusive Stripe, hanterar kassa och betalningsrelaterad behandling.",
           "Molnlagringsleverantörer kan lagra profilbilder eller leverantörsdokument som skickas till tjänsten.",
@@ -2196,18 +2201,18 @@
       "panelBody": "Bläddra på stad och kategori. Instruktörer undervisar för en skola.",
       "panelPoints": {
         "directory": "Skolans uppgifter och publicerade pris.",
-        "prices": "Ingen bokningsknapp på en annons som inte tar emot bokningar här.",
+        "prices": "Publicerat pris när skolan har fyllt i det.",
         "schools": "Instruktörer går med via skolan de undervisar för."
       },
       "contactCta": "Starta en konversation",
       "assurance": {
         "price": "Publicerat pris i kronor",
-        "safety": "En annons är inte en bokning",
+        "safety": "Fråga skolan om tillstånd",
         "choice": "Gratis att bläddra"
       },
       "previewEyebrow": "Beslutet, samlat på ett ställe",
       "previewTitle": "Skola → ort → pris",
-      "imageAlt": "Illustration av en körlektion",
+      "imageAlt": "En förare håller ratten i skymning",
       "previewLines": {
         "profile": "Jämför kategori, språk och plats.",
         "price": "Se skolans publicerade pris — inga tilläggsavgifter.",
@@ -2246,7 +2251,7 @@
         }
       },
       "lead": "Gratis. Du betalar skolans pris.",
-      "note": "DriveLinkUp är en katalog. En annons är inte en bokning. Vi tar inte betalt för en kataloglista.",
+      "note": "DriveLinkUp är en katalog. Vi tar inte betalt för en kataloglista.",
       "schoolLink": "Jag driver en skola",
       "chips": {
         "price": "Publicerat pris i kronor",
@@ -2297,10 +2302,10 @@
       "cards": {
         "price": {
           "title": "Det publicerade priset",
-          "body": "När skolan har publicerat ett pris ser du det i kronor. DriveLinkUp lägger inte på någon avgift. Ett pris är inte en bokning."
+          "body": "När skolan har publicerat ett pris ser du det i kronor. DriveLinkUp lägger inte på någon avgift."
         },
         "safety": {
-          "title": "En annons är inte en bokning",
+          "title": "En annons är en kataloglista",
           "body": "En katalogannons är inte ett undervisningstillstånd och inte ett avtal. Bekräfta behörighet, lektionsupplägg och villkor med skolan."
         },
         "cancellation": {
@@ -2327,11 +2332,11 @@
   "forSkolor": {
     "meta": {
       "title": "För trafikskolor",
-      "description": "Registrera trafikskolan på DriveLinkUp. Elever jämför ert pris. Bokning öppnas när ni själva sagt ja."
+      "description": "Registrera trafikskolan på DriveLinkUp. Elever jämför ert pris och kontaktar er."
     },
     "badge": "FÖR TRAFIKSKOLOR",
     "title": "Er skola. Ert pris. Er kontroll.",
-    "body": "Publicera de behörigheter ni har tillstånd för. Elever jämför ert pris. Bokning här öppnas bara när ni själva sagt ja.",
+    "body": "Publicera de behörigheter ni har tillstånd för. Elever jämför ert pris och kontaktar er.",
     "benefit1": "Elever som söker körlektioner i er stad kan hitta er.",
     "benefit2": "Eleven betalar ert publicerade pris. Vi lägger inte på en elevavgift.",
     "benefit3": "Bjud in instruktörerna som undervisar hos er.",
@@ -3260,7 +3265,7 @@
     },
     "notes": {
       "title": "Så fungerar listan (Sverige)",
-      "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för kataloglistor och lägger inte på en elevavgift. En instruktör kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola. Lektioner, avbokning och återbetalning ordnas med skolan."
+      "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för kataloglistor och lägger inte på en elevavgift. En instruktör kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola. Lektioner och villkor ordnas med skolan."
     },
     "cta": {
       "learner": "Jämför trafikskolor",
@@ -3291,7 +3296,7 @@
   "onboarding": {
     "learner": {
       "title": "Låt oss verifiera dig",
-      "body": "Vi behöver bekräfta din ålder och identitet innan du kan boka lektioner."
+      "body": "Vi behöver bekräfta din ålder och identitet."
     },
     "verify": {
       "title": "Verifiering pågår",
@@ -3324,7 +3329,7 @@
     },
     "handledare": {
       "title": "Väntar på din handledare",
-      "body": "Din handledare behöver godkänna registreringen innan du kan boka."
+      "body": "Din handledare behöver godkänna registreringen."
     }
   },
   "verifyEmail": {
@@ -3359,7 +3364,7 @@
     "expansionBody": "DriveLinkUp listar trafikskolor i Sverige först. Den här nordiska sidan är indexerbar så elever hittar oss när vi växer — utforska svenska städer i dag.",
     "expansionCtaSweden": "Bläddra svenska trafikskolor",
     "seoLead": "Jämför trafikskolor i {name}, {country}",
-    "seoP1Live": "Annonser i {name} visar skolor som syns i katalogen. En annons är inte en bokning. Jämför innan du kontaktar skolan.",
+    "seoP1Live": "Annonser i {name} visar skolor som syns i katalogen. Jämför innan du kontaktar skolan.",
     "seoP1Expansion": "Vi publicerar en strukturerad hubb för {name}, {country} så sök och AI kan dirigera elever rätt medan utbud onboards.",
     "seoP2": "En kataloglista är gratis. DriveLinkUp lägger inte på en elevavgift. Instruktörer tar betalt endast via en trafikskola de tillhör. Handledare är en separat juridisk väg.",
     "howTitle": "Så fungerar DriveLinkUp",
@@ -3371,7 +3376,10 @@
     "countriesTitle": "Nordiska länder",
     "faqTitle": "Vanliga frågor",
     "faq1q": "Kan jag hitta en skola i {name} i dag?",
-    "faq1aLive": "Ja, om en skolannons visas nedan. Kontakta skolan för att ordna en lektion. DriveLinkUp tar inte betalt för en kataloglista.",
+    "faq1aLive": "Ja. Logga in för att se skolannonserna i {name}. Kontakta skolan för att ordna en lektion.",
+    "signInTitle": "Logga in för att se skolorna",
+    "signInBody": "Katalogen är öppen för inloggade användare. Efter inloggning kommer du tillbaka hit.",
+    "signInCta": "Logga in",
     "faq1aExpansion": "Katalogen är live i Sverige först. Den här sidan förbereder orten för lansering; använd svenska stadshubbar för att bläddra nu.",
     "faq2q": "Betalar elever en DriveLinkUp-avgift?",
     "faq2a": "Nej. En kataloglista är gratis att bläddra. Du betalar skolan, inte DriveLinkUp.",
@@ -3384,7 +3392,7 @@
   "termsPage": {
     "meta": {
       "title": "Tjänstevillkor",
-      "description": "Villkor för DriveLinkUp: kataloglistor, avbokning, konton och personuppgifter."
+      "description": "Villkor för DriveLinkUp: kataloglistor, konton och personuppgifter."
     },
     "hero": {
       "eyebrow": "Tjänstevillkor",
@@ -3395,7 +3403,7 @@
     "sections": {
       "0": {
         "title": "Om tjänsten",
-        "body": "DriveLinkUp är en katalog över trafikskolor. Instruktörer undervisar via en skola. Vi visar publicerade priser när skolan har fyllt i dem. En annons är inte en bokning.",
+        "body": "DriveLinkUp är en katalog över trafikskolor. Instruktörer undervisar via en skola. Vi visar publicerade priser när skolan har fyllt i dem.",
         "items": [
           "Skolan publicerar sina uppgifter. Ett märke visas bara när kontrollen finns sparad.",
           "Tjänsten är under utveckling och funktioner kan läggas till eller ändras."
@@ -3415,10 +3423,10 @@
         "items": []
       },
       "3": {
-        "title": "Avbokning och återbetalning",
-        "body": "Avbokningsregler sätts av skolan. Bekräfta dem med skolan innan du ordnar en lektion med dem.",
+        "title": "Tider och villkor",
+        "body": "Villkor sätts av skolan. Bekräfta dem med skolan innan du ordnar en lektion med dem.",
         "items": [
-          "Kontakta skolan direkt för att ändra eller avboka en tid.",
+          "Kontakta skolan direkt för att ändra en tid.",
           "Löser det sig inte hanterar vi ärendet via support — frank@drivelinkup.com."
         ]
       },
@@ -3463,7 +3471,7 @@
         "Listningen är gratis"
       ],
       "primaryCta": "Hitta lektioner",
-      "secondaryCta": "Så fungerar det"
+      "secondaryCta": "Vanliga frågor"
     },
     "linkStory": {
       "title": "Två länkar. En koppling.",
@@ -3514,7 +3522,7 @@
     "section": {
       "eyebrow": "Priser & kurser",
       "title": "Skolans priser",
-      "lead": "Publicerade priser från skolans egen webbplats. Intresserad? Skicka en förfrågan — eleven betalar ingen avgift till DriveLinkUp.",
+      "lead": "Publicerade priser från skolans egen webbplats. Intresserad? Använd Kontakta skolan.",
       "kind": {
         "PAKET": "Kurs",
         "LEKTION": "Lektion",
@@ -3523,7 +3531,7 @@
       "sessionsCount": "{count, plural, =1 {1 tillfälle} other {# tillfällen}}",
       "weeksCount": "{count, plural, =1 {1 vecka} other {# veckor}}",
       "priceFrom": "Från {price} SEK",
-      "requestCta": "Begär bokning"
+      "requestCta": "Kontakta skolan"
     },
     "requestForm": {
       "title": "Skicka en förfrågan till {name}",

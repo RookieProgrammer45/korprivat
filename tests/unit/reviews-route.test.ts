@@ -175,6 +175,11 @@ describe('GET /api/reviews', () => {
     mockReviewCreate.mockReset();
     mockTransaction.mockReset();
     mockRequireAuth.mockReset();
+    mockRequireAuth.mockResolvedValue({
+      id: 'user_signed_in',
+      email: 'user@example.test',
+      name: 'User',
+    });
     mockTransaction.mockImplementation(async (callback: (tx: unknown) => unknown) =>
       callback({ review: { findFirst: mockReviewFindFirst, create: mockReviewCreate } }),
     );

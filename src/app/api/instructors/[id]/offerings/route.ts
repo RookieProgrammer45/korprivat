@@ -8,12 +8,18 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { PublicOfferingList } from '@/lib/contracts/offerings';
 import { prisma } from '@/lib/db';
+import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
 
 type Ctx = { params: Promise<{ id: string }> };
 
-export async function GET(_req: Request, ctx: Ctx) {
+export async function GET(req: Request, ctx: Ctx) {
+  try {
+    await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
   const { id } = await ctx.params;
   if (!/^[A-Za-z0-9_-]{1,120}$/.test(id)) {
     return NextResponse.json(PublicOfferingList.parse({ items: [] }), { status: 200 });

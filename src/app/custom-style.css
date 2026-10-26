@@ -2285,6 +2285,34 @@ html.dark .dlu-footer-cta {
   transition: transform 1.2s var(--ease-out-expo);
 }
 
+.dlu-phone-bezel {
+  position: relative;
+  border-radius: 2rem;
+  border: 7px solid #131312;
+  background: #131312;
+  box-shadow:
+    0 2px 4px rgb(19 19 18 / 0.06),
+    0 24px 48px -16px rgb(19 19 18 / 0.35);
+}
+
+.dlu-phone-notch {
+  position: absolute;
+  top: 0.45rem;
+  left: 50%;
+  z-index: 2;
+  width: 4.5rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: #131312;
+  transform: translateX(-50%);
+}
+
+.dlu-phone-screen {
+  overflow: hidden;
+  border-radius: 1.4rem;
+  background: var(--background);
+}
+
 .dlu-hero-visual:hover img {
   transform: scale(1.015);
 }

@@ -13,12 +13,18 @@ import { providerTimezoneForCity } from '@/lib/business/provider-timezone';
 import { AvailabilitySlotList } from '@/lib/contracts/availability';
 import { prisma } from '@/lib/db';
 import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
+import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
 
 type Ctx = { params: Promise<{ id: string }> };
 
-export async function GET(_req: Request, ctx: Ctx) {
+export async function GET(req: Request, ctx: Ctx) {
+  try {
+    await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
   const { id } = await ctx.params;
   const instructor = await prisma.instructor.findUnique({
     where: { id },

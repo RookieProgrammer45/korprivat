@@ -132,6 +132,8 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     mockReviewFindMany.mockReset();
     mockGoogleReviewFindMany.mockReset();
     mockAuthzFindMany.mockReset();
+    mockGetSessionUser.mockReset();
+    mockGetSessionUser.mockResolvedValue({ id: 'user_signed_in' });
     mockSlotFindMany.mockResolvedValue([]);
     mockLicenseFindMany.mockResolvedValue([]);
     mockReviewFindMany.mockResolvedValue([]);
@@ -588,5 +590,27 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       errors: { minRate: 'Minimum rate cannot exceed maximum rate' },
     });
     expect(mockInstructorFindMany).not.toHaveBeenCalled();
+  });
+
+  it('rejects an unsigned full-catalog list', async () => {
+    mockGetSessionUser.mockResolvedValueOnce(null);
+    const res = await GET(req());
+    expect(res.status).toBe(401);
+    expect(mockInstructorFindMany).not.toHaveBeenCalled();
+  });
+
+  it('rejects an unsigned filtered preview even when limit is 3', async () => {
+    mockGetSessionUser.mockResolvedValueOnce(null);
+    const res = await GET(req('?limit=3&city=Stockholm'));
+    expect(res.status).toBe(401);
+    expect(mockInstructorFindMany).not.toHaveBeenCalled();
+  });
+
+  it('allows an unsigned home teaser of at most three unfiltered listings', async () => {
+    mockGetSessionUser.mockResolvedValueOnce(null);
+    mockInstructorFindMany.mockResolvedValueOnce([instructorRow({ id: 'teaser' })]);
+    const res = await GET(req('?limit=3'));
+    expect(res.status).toBe(200);
+    expect(mockInstructorFindMany).toHaveBeenCalled();
   });
 });

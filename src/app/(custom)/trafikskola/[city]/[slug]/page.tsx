@@ -1,16 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { BookingForm } from '@/components/custom/booking-form';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
+import { requireCatalogSession } from '@/lib/catalog-guard';
 import { publishedPrices } from '@/lib/discovery/published-prices';
-import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
-import {
-  loadInstructorPaymentEligibility,
-  maskSurfacesForPayment,
-} from '@/lib/scheduling/listing-eligibility';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
@@ -68,20 +63,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function SchoolPage({ params, searchParams }: PageProps) {
   const [{ city, slug }, sp] = await Promise.all([params, searchParams]);
+  await requireCatalogSession(`/trafikskola/${city}/${slug}`);
   const resolved = await loadPublicInstructorBySchoolSlug(slug);
   if (!resolved) notFound();
 
   const requested = `/trafikskola/${city}/${slug}`;
   if (resolved.canonicalPath !== requested) permanentRedirect(resolved.canonicalPath);
 
-  const rawBooking = Array.isArray(sp.booking) ? sp.booking[0] : sp.booking;
-  const rawToken = Array.isArray(sp.token) ? sp.token[0] : sp.token;
-  const rawRebook = Array.isArray(sp.rebook) ? sp.rebook[0] : sp.rebook;
   const rawReview = Array.isArray(sp.review) ? sp.review[0] : sp.review;
   const instructorId = resolved.instructor.id;
-  const bookingId = typeof rawBooking === 'string' && rawBooking.length > 0 ? rawBooking : null;
-  const bookingToken = typeof rawToken === 'string' && rawToken.length > 0 ? rawToken : undefined;
-  const rebookId = typeof rawRebook === 'string' && rawRebook.length > 0 ? rawRebook : null;
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
@@ -107,47 +97,14 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
       }
     : null;
 
-  // Surfaces come from authorization, not legacy bookingMode, so a withdrawal
-  // hides the booking sidebar and offering request even if bookingMode is still
-  // instant or request. Info, prices, and reviews stay.
-  const payment = await loadInstructorPaymentEligibility({
-    listingId: resolved.instructor.id,
-    userId: resolved.instructor.userId,
-    providerRole: resolved.instructor.providerRole,
-  });
-  const surfaces = maskSurfacesForPayment(
-    await loadListingSurfaces(resolved.instructor.id, resolved.instructor.bookingMode),
-    payment.allowed,
-  );
-  const showBooking = surfaces.transactionalBooking || surfaces.requestToBook;
-
   return (
     <main className="container-page section min-w-0">
-      <div
-        className={
-          showBooking
-            ? 'mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start'
-            : 'mx-auto grid w-full max-w-6xl gap-6'
-        }
-      >
+      <div className="mx-auto grid w-full max-w-6xl gap-6">
         <div className="grid min-w-0 gap-6">
           <InstructorDetail instructorId={instructorId} />
-          <InstructorOfferingsSection
-            instructorId={instructorId}
-            requestEnabled={surfaces.inquiryCollection}
-          />
+          <InstructorOfferingsSection instructorId={instructorId} requestEnabled={false} />
           <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
         </div>
-        {showBooking ? (
-          <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
-            <BookingForm
-              instructorId={instructorId}
-              bookingId={bookingId}
-              bookingToken={bookingToken}
-              rebookBookingId={rebookId}
-            />
-          </div>
-        ) : null}
       </div>
       {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
     </main>

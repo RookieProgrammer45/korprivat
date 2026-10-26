@@ -11,6 +11,7 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
+import { requireCatalogSession } from '@/lib/catalog-guard';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
 import { schoolPath } from '@/lib/seo/school-slugs';
 import { siteName, siteUrl } from '@/lib/site';
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const city = org.city?.trim() || 'Sverige';
   const title = `${org.name} — trafikskola i ${city}`;
-  const description = `${org.name} på DriveLinkUp — trafikskola i katalogen i ${city}. En katalogannons är inte en bokningsbehörighet.`;
+  const description = `${org.name} på DriveLinkUp — trafikskola i katalogen i ${city}.`;
   const canonical = `/schools/${org.slug}`;
   return {
     title,
@@ -45,6 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function SchoolProfilePage({ params }: PageProps) {
   const { slug } = await params;
+  await requireCatalogSession(`/schools/${slug}`);
   const org = await getOrganizationBySlug(slug);
   if (!org) notFound();
 
@@ -117,10 +119,7 @@ export default async function SchoolProfilePage({ params }: PageProps) {
             <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
               {org.name}
             </h1>
-            <Badge
-              variant="outline"
-              className="border-border bg-muted text-muted-foreground"
-            >
+            <Badge variant="outline" className="border-border bg-muted text-muted-foreground">
               {t('listedBadge')}
             </Badge>
           </div>

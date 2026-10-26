@@ -38,7 +38,6 @@ const COLUMNS: readonly FooterColumn[] = [
     titleKey: 'footer.columnProduct',
     items: [
       { labelKey: 'nav.findProvider', href: '/instructors' },
-      { labelKey: 'nav.howItWorks', href: '/#how' },
       { labelKey: 'nav.pricing', href: '/pricing' },
       { labelKey: 'nav.drivingSchool', href: '/for-skolor' },
     ],

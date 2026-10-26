@@ -36,7 +36,7 @@ export function AboutContent() {
               {t('hero.primaryCta')}
               <ArrowRight className="size-4" aria-hidden />
             </Link>
-            <Link href="/#how" className="dlu-about-ghost-cta">
+            <Link href="/faq" className="dlu-about-ghost-cta">
               {t('hero.secondaryCta')}
             </Link>
           </div>

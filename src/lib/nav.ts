@@ -69,14 +69,6 @@ export const navItems: NavItem[] = [
     group: 'primary',
     order: 1,
   },
-  {
-    label: 'How it works',
-    labelKey: 'nav.howItWorks',
-    href: '/#how',
-    group: 'primary',
-    order: 2,
-    hideWhenAuthenticated: true,
-  },
   // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
   // primary bar — keeps marketing chrome short once a session exists.
   {

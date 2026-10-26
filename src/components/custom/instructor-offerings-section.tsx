@@ -17,7 +17,7 @@ type Status = { kind: 'loading' } | { kind: 'hidden' } | { kind: 'ready'; items:
 
 export function InstructorOfferingsSection({
   instructorId,
-  requestEnabled = true,
+  requestEnabled = false,
 }: {
   instructorId: string;
   // false for directory-only ('contact') listings: prices render, the

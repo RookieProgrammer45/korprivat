@@ -1,8 +1,9 @@
-// Search-first entry. School photographs live on the cards below.
+// Search-first entry. Desktop-only photograph sits to the right of the copy.
 
 'use client';
 
 import { ChevronDown, Search } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -50,8 +51,8 @@ export function HomeHero() {
 
   return (
     <section className="marketplace-hero dlu-hero border-b border-border">
-      <div className="container-page pt-12 pb-10 sm:pt-16 lg:pt-20 lg:pb-14">
-        <div className="marketplace-reveal flex min-w-0 max-w-3xl flex-col">
+      <div className="container-page grid items-center gap-10 pt-12 pb-10 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20 lg:pb-14">
+        <div className="marketplace-reveal flex min-w-0 flex-col">
           <h1 className="marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]">
             {t('title')}
           </h1>
@@ -113,6 +114,16 @@ export function HomeHero() {
             ))}
           </div>
         </div>
+        <aside className="dlu-hero-visual relative hidden min-h-[28rem] overflow-hidden rounded-[1.25rem] border border-border lg:block lg:min-h-[32rem]">
+          <Image
+            src="/images/hero-lesson.jpg"
+            alt={t('imageAlt')}
+            fill
+            priority
+            sizes="(min-width: 1024px) 28rem, 0px"
+            className="object-cover"
+          />
+        </aside>
       </div>
     </section>
   );

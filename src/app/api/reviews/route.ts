@@ -4,6 +4,7 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { ReviewList } from '@/lib/contracts/reviews';
 import { prisma } from '@/lib/db';
+import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,7 +19,12 @@ const PUBLIC_REVIEW_SELECT = {
   createdAt: true,
 } as const;
 
-export async function GET() {
+export async function GET(req: Request) {
+  try {
+    await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
   const rows = await prisma.review.findMany({
     select: PUBLIC_REVIEW_SELECT,
     orderBy: { createdAt: 'desc' },

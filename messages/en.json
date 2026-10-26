@@ -86,7 +86,7 @@
       "eyebrow": "Support",
       "headingLead": "How can we help",
       "headingAccent": "today?",
-      "lead": "Ask about a booking, cancellation, safety or privacy. Choose a topic and the support team will route your message.",
+      "lead": "Ask about the catalog, a school listing, safety or privacy. Choose a topic and the support team will route your message.",
       "step": {
         "backToTopics": "Choose another topic",
         "heading": "Tell us what happened",
@@ -104,16 +104,16 @@
       },
       "topics": [
         {
-          "title": "Booking or cancellation",
-          "description": "A time, booking request, change or cancellation."
+          "title": "Question about a school",
+          "description": "A school listing, category, price or how to reach the school."
         },
         {
           "title": "Question about a school listing",
           "description": "A school profile, category, availability or lesson question."
         },
         {
-          "title": "Payment",
-          "description": "A checkout, charge, refund or payment-status question."
+          "title": "Payment at the school",
+          "description": "A question about payment or terms set by the school. DriveLinkUp does not take lesson payments."
         },
         {
           "title": "Technical issue",
@@ -185,8 +185,8 @@
         "a": "Filter by city, category and price."
       },
       "booking": {
-        "q": "How do I book?",
-        "a": "Contact the school."
+        "q": "How do I reach a school?",
+        "a": "Open the listing and use Contact the school."
       },
       "price": {
         "q": "What does it cost?",
@@ -197,8 +197,8 @@
         "a": "A badge appears only when we have a stored check. Ask the school about their permit."
       },
       "cancellation": {
-        "q": "Cancellations?",
-        "a": "Ask the school."
+        "q": "What about times and terms?",
+        "a": "Ask the school. DriveLinkUp does not set the school's terms."
       },
       "prerequisites": {
         "q": "What do I need before a lesson?",
@@ -245,7 +245,7 @@
       "1": {
         "eyebrow": "Handledare",
         "title": "Handledare and supervised practice in Sweden",
-        "excerpt": "How 16–17-year-olds complete handledare enrollment before booking on DriveLinkUp.",
+        "excerpt": "How 16–17-year-olds complete handledare enrollment for private practice driving.",
         "meta": "{minutes} min read",
         "readCta": "Read guide"
       },
@@ -259,7 +259,7 @@
       "3": {
         "eyebrow": "Paths",
         "title": "Traffic school or handledare?",
-        "excerpt": "When to book a listed driving school versus private övningskörning with a handledare.",
+        "excerpt": "When a listed driving school fits, and when private övningskörning with a handledare applies.",
         "meta": "{minutes} min read",
         "readCta": "Read guide"
       }
@@ -328,7 +328,7 @@
         "faq1a": "No. You pay the school’s published lesson price — no added fees.",
         "faq2q": "Are private handledare listed as schools?",
         "faq2a": "No. Handledare are a separate legal path for övningskörning. Use the handledare guide. A school listing is a directory profile, not a teaching permit.",
-        "faq3q": "How do I book?",
+        "faq3q": "How do I reach a school?",
         "faq3a": "Contact the school."
       }
     },
@@ -347,7 +347,7 @@
       "slug": "goteborg",
       "seo": {
         "lead": "Driving schools in Gothenburg",
-        "p1": "Compare Göteborg traffic schools by licence category, language, published SEK price and availability. Only verified instructors appear in search.",
+        "p1": "Compare Göteborg traffic schools by licence category, language and published SEK price.",
         "p2": "Compare the published price and city. Contact the school.",
         "howTitle": "How to start",
         "howBody": "Open a listing. Contact the school.",
@@ -425,10 +425,10 @@
         "faqTitle": "Uppsala FAQ",
         "faq1q": "Do I need a school for the whole licence?",
         "faq1a": "Schools provide structured lessons. Private övningskörning with a handledare is optional and separate.",
-        "faq2q": "How do I book?",
+        "faq2q": "How do I reach a school?",
         "faq2a": "Contact the school.",
-        "faq3q": "How do cancellations work?",
-        "faq3a": "Ask the school. Cancellation terms are set by the school, not by DriveLinkUp."
+        "faq3q": "What about times and terms?",
+        "faq3a": "Ask the school. Terms are set by the school, not by DriveLinkUp."
       }
     },
     "vasterasCity": {
@@ -684,7 +684,7 @@
       },
       "contact": {
         "title": "Directory listing",
-        "body": "This school is listed with its information and prices. DriveLinkUp does not take bookings or payment for this school — use Contact the school to reach them directly."
+        "body": "This school is listed with its information and prices. Use Contact the school to reach them directly."
       },
       "paymentThroughSchool": {
         "title": "Pays through a driving school",
@@ -813,7 +813,7 @@
   },
   "instructorOnboarding": {
     "title": "Create your school listing",
-    "subtitle": "Publish the school details and price learners need to compare. Keep the listing accurate. A listing is not a booking.",
+    "subtitle": "Publish the school details and price learners need to compare. Keep the listing accurate.",
     "submit": "Publish my listing",
     "submitting": "Creating listing…",
     "error": "Something went wrong. Please try again.",
@@ -857,7 +857,7 @@
     },
     "eyebrow": "For driving schools",
     "title": "Create a school account",
-    "lead": "Complete the form to create your listing. Publish the price and availability your school controls so learners can compare and book.",
+    "lead": "Complete the form to create your listing. Publish the price your school controls so learners can compare.",
     "back": "Back to overview",
     "loading": "Checking your account…",
     "error": "We couldn't load your school onboarding. Please try again.",
@@ -924,6 +924,11 @@
       "errors": {
         "invalidCredentials": "Email or password didn't match. Try again.",
         "generic": "Could not sign in. Please try again."
+      },
+      "visual": {
+        "label": "Schools in the directory",
+        "fallbackAlt": "A driver holding the steering wheel on a dusk road",
+        "schoolAlt": "{name} in {city}"
       }
     },
     "forgotPassword": {
@@ -973,7 +978,7 @@
       "accountTitleLearner": "Create your student account",
       "accountLeadLearner": "Find lessons at driving schools. Instructors teach through a school.",
       "accountTitleSchool": "List your driving school",
-      "accountLeadSchool": "Add your school details so learners can find and book you.",
+      "accountLeadSchool": "Add your school details so learners can find you.",
       "accountTitleInstructor": "Create your instructor account",
       "accountLeadInstructor": "Teach as an approved driving instructor (trafiklärare) affiliated with a driving school.",
       "submit": "Continue",
@@ -998,8 +1003,8 @@
         "roleLearner": "I'm a student",
         "roleSchool": "I'm a driving school",
         "roleInstructor": "I teach at a driving school",
-        "roleLearnerDesc": "Book lessons. You must be at least 16.",
-        "roleSchoolDesc": "List your driving school with prices and availability. A directory listing is not a booking authorization.",
+        "roleLearnerDesc": "Compare driving schools. You must be at least 16.",
+        "roleSchoolDesc": "List your driving school with prices and details. Learners compare and contact you.",
         "roleInstructorDesc": "You join through the school you teach for. The school's permission sets what you can offer.",
         "learnerSection": "Learner details",
         "schoolSection": "School details",
@@ -1082,7 +1087,7 @@
         "confirmationLabel": "I confirm this is the photo I want to use on my profile.",
         "staged": "Preview uploaded — confirm it to continue.",
         "back": "Back",
-        "whyWeAsk": "We use your photo on your profile so learners know who they're booking.",
+        "whyWeAsk": "We use your photo on your profile so learners recognize the school.",
         "errors": {
           "pictureRequired": "Pick a photo to continue.",
           "pictureWrongType": "That file isn't a supported image.",
@@ -1097,7 +1102,7 @@
         "STUDENT": {
           "pictureUpload": {
             "stepEyebrow": "Add your photo",
-            "stepTitle": "Put a face to your bookings",
+            "stepTitle": "Add a photo",
             "stepLead": "This image helps learners recognize your school listing.",
             "placeholderAria": "Profile photo",
             "chooseButton": "Choose a photo",
@@ -1105,7 +1110,7 @@
             "submit": "Continue",
             "submitting": "Uploading…",
             "back": "Back",
-            "whyWeAsk": "We show your image with your booking requests so schools know who is coming.",
+            "whyWeAsk": "We show your image on your profile so the school recognizes you.",
             "errors": {
               "pictureRequired": "Pick a photo to continue.",
               "pictureWrongType": "That file isn't a supported image.",
@@ -1145,7 +1150,7 @@
             "submit": "Continue",
             "submitting": "Uploading…",
             "back": "Back",
-            "whyWeAsk": "We use your photo on your profile so learners know who they're booking.",
+            "whyWeAsk": "We use your photo on your profile so learners recognize the school.",
             "errors": {
               "pictureRequired": "Pick a photo to continue.",
               "pictureWrongType": "That file isn't a supported image.",
@@ -1179,7 +1184,7 @@
           "pictureUpload": {
             "stepEyebrow": "School photo",
             "stepTitle": "Add a photo for your school listing",
-            "stepLead": "Learners use this image to recognise your school before they book.",
+            "stepLead": "Learners use this image to recognise your school.",
             "whyWeAsk": "We show this photo on your school listing."
           },
           "licenseUpload": {
@@ -1196,7 +1201,7 @@
           "pictureUpload": {
             "stepEyebrow": "Instructor photo",
             "stepTitle": "Add a photo for your instructor profile",
-            "stepLead": "Learners use this image to recognise you before they book.",
+            "stepLead": "Learners use this image to recognise you.",
             "whyWeAsk": "We show this photo on your instructor listing."
           },
           "licenseUpload": {
@@ -1213,8 +1218,8 @@
           "pictureUpload": {
             "stepEyebrow": "Add a profile photo",
             "stepTitle": "Add a profile photo",
-            "stepLead": "Learners and instructors see your photo when you book lessons.",
-            "whyWeAsk": "Your photo appears on booking requests so people know who they are meeting."
+            "stepLead": "Learners and schools see your photo on the profile.",
+            "whyWeAsk": "Your photo appears on the profile so people know who they are meeting."
           }
         }
       },
@@ -1244,7 +1249,7 @@
           "lastNamePlaceholder": "Last name…",
           "firstNameError": "Enter your first name.",
           "emailLabel": "Email",
-          "emailHelp": "Used for sign-in and booking receipts.",
+          "emailHelp": "Used for sign-in.",
           "subscribeLabel": "Subscribe to product update emails",
           "subscribeDesc": "Get the latest updates about features and product improvements.",
           "nameUpdateFailed": "We couldn't save your name. Try again.",
@@ -1261,7 +1266,7 @@
         },
         "photo": {
           "title": "Add a profile photo",
-          "body": "Learners and instructors see your photo when you book lessons.",
+          "body": "Learners and schools see your photo on the profile.",
           "upload": "Upload",
           "skip": "Skip for now"
         },
@@ -1275,7 +1280,7 @@
         }
       }
     },
-    "accountLeadLearner": "Find and book lessons with driving schools and approved instructors."
+    "accountLeadLearner": "Find and compare driving schools in the catalog."
   },
   "bookingFees": {
     "serviceFeeLabel": "No separate fee",
@@ -1300,7 +1305,7 @@
     "title": "Listing",
     "eyebrow": "Directory",
     "body": "A catalog listing is free. DriveLinkUp does not charge a school to be listed.",
-    "payoutLine": "The school controls its published price. Listing is not a booking and not a payment.",
+    "payoutLine": "The school controls its published price. Listing is not a payment.",
     "exampleTitle": "Example at 600 SEK/hr",
     "exampleLine": "A published price of {price} SEK is what the learner sees. DriveLinkUp does not add a fee.",
     "exampleLearnerLine": "The published {price} SEK school price is the figure on the listing.",
@@ -1390,12 +1395,12 @@
     "student": {
       "eyebrow": "Student",
       "title": "My dashboard",
-      "lead": "Your booking requests and upcoming lessons. Click a row to see full status, payment, and confirm steps.",
+      "lead": "Compare driving schools in the catalog. Use Contact the school for times and terms.",
       "upcomingBookings": "Booked lessons",
       "count": "{count, plural, one {# booking} other {# bookings}}",
       "open": "Open",
       "emptyTitle": "No bookings yet.",
-      "emptyBody": "Browse the pilot cohort, pick a driving school, and send your first booking request — it lands here as soon as the school replies.",
+      "emptyBody": "Compare driving schools in the catalog and use Contact the school.",
       "emptyCta": "Browse driving schools",
       "loadError": "We couldn't load your bookings just now.",
       "retry": "Try again",
@@ -1467,7 +1472,7 @@
         "loadError": "We couldn't load your booking history just now.",
         "retry": "Try again",
         "emptyTitle": "No bookings yet.",
-        "emptyBody": "Once you've sent your first booking request it will land here — past and upcoming alike.",
+        "emptyBody": "Compare driving schools in the catalog and use Contact the school.",
         "emptyCta": "Browse driving schools",
         "backToDashboard": "Back to dashboard",
         "statusCancelled": "Cancelled",
@@ -1500,7 +1505,7 @@
         "forget": "Forget"
       },
       "verifyBanner": {
-        "body": "Verify your identity to start booking lessons.",
+        "body": "Verify your identity.",
         "disclosure": "We use Didit to confirm your age and identity from your ID document. Your data is processed according to our privacy policy and Didit's terms.",
         "consent": "I consent to identity verification via Didit and understand DriveLinkUp will receive my verified date of birth.",
         "consentRequired": "Please confirm consent before starting verification.",
@@ -1955,7 +1960,7 @@
       "confirmationLabel": "I confirm this is the photo I want to use on my profile.",
       "staged": "Preview uploaded — confirm it to finish.",
       "cancel": "Cancel",
-      "whyWeAsk": "We show your photo on your profile and bookings so others know who they're meeting.",
+      "whyWeAsk": "We show your photo on your profile so others know who they're meeting.",
       "successToast": "Your photo was updated.",
       "errors": {
         "pictureWrongType": "That file isn't a supported image.",
@@ -1969,12 +1974,12 @@
       "count": "{count, plural, one {# booking} other {# bookings}}",
       "open": "Open",
       "emptyTitle": "No upcoming bookings yet.",
-      "emptyBodyStudent": "Pick a category, browse pilot instructors, and book your next lesson — it lands here as soon as your instructor confirms.",
-      "emptyBodyInstructor": "Release a few open slots on your availability page and learners will see them — bookings land here as soon as they confirm.",
+      "emptyBodyStudent": "Compare driving schools in the catalog and use Contact the school.",
+      "emptyBodyInstructor": "Publish the school details and price so learners can compare you.",
       "emptyCtaStudent": "Browse driving schools",
       "emptyCtaInstructor": "Manage availability",
       "schoolEyebrow": "Upcoming bookings",
-      "emptyBodySchool": "As soon as the school's instructors are connected and availability is published, incoming bookings land here.",
+      "emptyBodySchool": "When the school's instructors are connected they appear on your listing.",
       "emptyCtaSchool": "Open the school dashboard"
     },
     "loadError": "Could not load your profile.",
@@ -2006,11 +2011,11 @@
   "chatbot": {
     "fabLabel": "Ask DriveLinkUp",
     "title": "Ask DriveLinkUp",
-    "lead": "Get a quick answer about categories, pricing, booking, safety or cancellations. Personal payment, refund and safety cases go to support.",
-    "placeholder": "Ask about categories, price or booking…",
+    "lead": "Get a quick answer about categories, prices and how to reach a school. Personal payment, refund and safety cases go to support.",
+    "placeholder": "Ask about a category, price or school…",
     "sendAria": "Send",
     "inputAria": "Write your question",
-    "emptyState": "Hi! Ask me about categories, prices, booking, safety or cancellation policies.",
+    "emptyState": "Hi! Ask me about categories, prices or how to reach a school.",
     "errorGeneric": "The assistant is unavailable right now. Try again shortly.",
     "rateLimited": "Please wait a moment before sending another message.",
     "handoffLabel": "Need personal help? Contact support →",
@@ -2019,13 +2024,13 @@
   "privacyPage": {
     "meta": {
       "title": "Privacy policy",
-      "description": "How DriveLinkUp processes personal data for accounts, bookings, payments, school credentials and safety."
+      "description": "How DriveLinkUp processes personal data for accounts, directory listings, school credentials and support."
     },
     "hero": {
       "eyebrow": "Privacy",
       "title": "Privacy policy",
       "lastUpdated": "Last updated: 26 August 2026 · policy version {version}",
-      "intro": "This policy explains how DriveLinkUp processes personal data when you browse school listings, create an account, book a lesson or join as a school or handledare.",
+      "intro": "This policy explains how DriveLinkUp processes personal data when you browse school listings, create an account or join as a school or handledare.",
       "reviewNotice": "Legal review note: this customer-facing draft should be reviewed and completed by DriveLinkUp's legal adviser before publication."
     },
     "sections": {
@@ -2040,7 +2045,7 @@
         "items": [
           "Account data such as name, email address, sign-in credentials and account role.",
           "Profile data such as city, languages, licence categories, profile photo, lesson price and biography.",
-          "Booking data such as selected school, category, slot, booking status, cancellation policy and support correspondence.",
+          "Support messages and questions about a school listing that you send to us.",
           "Payment data and transaction status processed through the hosted payment provider. Card details are handled by that provider rather than stored by DriveLinkUp.",
           "School credential, licence, insurance and onboarding information submitted for the school or handledare account.",
           "Technical data such as IP address, browser information, device information and consent preferences.",
@@ -2052,8 +2057,8 @@
         "body": "We use personal data only for the purposes needed to provide, secure and improve the service. The applicable basis may be performance of a contract, legitimate interests, consent or compliance with a legal obligation.",
         "items": [
           "To create and manage accounts and school or handledare profiles.",
-          "To show school listings, availability, pricing and booking policies to people who are deciding whether to book.",
-          "To create bookings, send transactional messages and provide support.",
+          "To show school listings and published prices so you can compare and contact the school.",
+          "To send account messages and provide support.",
           "To process payments, refunds and payment-related records through our payment provider.",
           "To review school credentials and safety information submitted during onboarding.",
           "To protect the service, prevent abuse and meet accounting or other legal duties."
@@ -2071,7 +2076,7 @@
       },
       "4": {
         "title": "5. Sharing and processors",
-        "body": "We do not sell personal data. We share it only with service providers and authorities where needed to operate the service, process a payment, support a booking, protect users or comply with law.",
+        "body": "We do not sell personal data. We share it only with service providers and authorities where needed to operate the service, process a payment, provide support, protect users or comply with law.",
         "items": [
           "Hosted payment processors, including Stripe, handle checkout and payment-related processing.",
           "Cloud storage providers may host profile images or provider documents submitted to the service.",
@@ -2196,18 +2201,18 @@
       "panelBody": "Browse by city and category. Instructors teach for a school.",
       "panelPoints": {
         "directory": "The school's details and published price.",
-        "prices": "No book button on a listing that does not take bookings here.",
+        "prices": "A published price when the school has added one.",
         "schools": "Instructors join through the school they teach for."
       },
       "contactCta": "Start a conversation",
       "assurance": {
         "price": "Published price in kronor",
-        "safety": "A listing is not a booking",
+        "safety": "Ask the school about their permit",
         "choice": "Free to browse"
       },
       "previewEyebrow": "The decision, in one place",
       "previewTitle": "School → city → price",
-      "imageAlt": "Driving lesson illustration",
+      "imageAlt": "A driver holding the steering wheel on a dusk road",
       "previewLines": {
         "profile": "Compare categories, language and location.",
         "price": "Review the school's published price — no added fees.",
@@ -2246,7 +2251,7 @@
         }
       },
       "lead": "Free. You pay the school's price.",
-      "note": "DriveLinkUp is a catalog. A listing is not a booking. We do not take payment for a catalog listing.",
+      "note": "DriveLinkUp is a catalog. We do not take payment for a catalog listing.",
       "schoolLink": "I run a school",
       "chips": {
         "price": "Published price in kronor",
@@ -2297,10 +2302,10 @@
       "cards": {
         "price": {
           "title": "The published price",
-          "body": "When a school has published a price, you see it in kronor. DriveLinkUp does not add a fee. A price is not a booking."
+          "body": "When a school has published a price, you see it in kronor. DriveLinkUp does not add a fee."
         },
         "safety": {
-          "title": "A listing is not a booking",
+          "title": "A listing is a catalog card",
           "body": "A catalog card is not a teaching permit and not an agreement. Confirm permission, lesson setup and terms with the school."
         },
         "cancellation": {
@@ -2327,11 +2332,11 @@
   "forSkolor": {
     "meta": {
       "title": "For driving schools",
-      "description": "Register your driving school on DriveLinkUp. Learners compare your price. Booking opens when you say yes."
+      "description": "Register your driving school on DriveLinkUp. Learners compare your price and contact you."
     },
     "badge": "FOR DRIVING SCHOOLS",
     "title": "Your school. Your price. Your call.",
-    "body": "Publish the licences you are permitted to teach. Learners compare your price. Booking here opens only when you say yes.",
+    "body": "Publish the licences you are permitted to teach. Learners compare your price and contact you.",
     "benefit1": "Learners searching for lessons in your city can find you.",
     "benefit2": "The learner pays your published price. We add no learner fee.",
     "benefit3": "Invite the instructors who teach at your school.",
@@ -3260,7 +3265,7 @@
     },
     "notes": {
       "title": "How listing works (Sweden)",
-      "body": "A catalog listing is free. DriveLinkUp does not take payment for directory listings and does not add a learner fee. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Lessons, cancellations and refunds are arranged with the school."
+      "body": "A catalog listing is free. DriveLinkUp does not take payment for directory listings and does not add a learner fee. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Lessons and terms are arranged with the school."
     },
     "cta": {
       "learner": "Compare schools",
@@ -3274,7 +3279,7 @@
     },
     "eyebrow": "Swedish legal guidance",
     "title": "Handledare are a separate private path.",
-    "lead": "In Sweden, a handledare supports private övningskörning under the applicable rules. This is different from booking an driving-school listing through DriveLinkUp.",
+    "lead": "In Sweden, a handledare supports private övningskörning under the applicable rules. This is different from a driving-school listing.",
     "private": {
       "title": "Private övningskörning",
       "body": "Learners and handledare must meet the current Swedish requirements, permissions and vehicle rules. Check Transportstyrelsen guidance before practice. DriveLinkUp does not present handledare as authorized schools."
@@ -3291,7 +3296,7 @@
   "onboarding": {
     "learner": {
       "title": "Let's get you verified",
-      "body": "We need to confirm your age and identity before you can book lessons."
+      "body": "We need to confirm your age and identity."
     },
     "verify": {
       "title": "Verification in progress",
@@ -3324,7 +3329,7 @@
     },
     "handledare": {
       "title": "Waiting for your handledare",
-      "body": "Your handledare needs to approve enrollment before you can book."
+      "body": "Your handledare needs to approve enrollment."
     }
   },
   "verifyEmail": {
@@ -3359,7 +3364,7 @@
     "expansionBody": "DriveLinkUp lists driving schools in Sweden first. This Nordic location page is indexable so learners can find us as we expand — explore Swedish cities today.",
     "expansionCtaSweden": "Browse Swedish driving schools",
     "seoLead": "Compare driving schools in {name}, {country}",
-    "seoP1Live": "Listings in {name} show schools that appear in the catalog. A listing is not a booking. Compare before you contact the school.",
+    "seoP1Live": "Listings in {name} show schools that appear in the catalog. Compare before you contact the school.",
     "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
     "seoP2": "A catalog listing is free. DriveLinkUp does not add a learner fee. Instructors collect payment only through a driving school they belong to. Handledare / private practice is a separate legal path.",
     "howTitle": "How DriveLinkUp works",
@@ -3371,7 +3376,10 @@
     "countriesTitle": "Nordic countries",
     "faqTitle": "FAQ",
     "faq1q": "Can I find a school in {name} today?",
-    "faq1aLive": "Yes, if a school listing appears below. Contact the school to arrange a lesson. DriveLinkUp does not take payment for a catalog listing.",
+    "faq1aLive": "Yes. Sign in to see the school listings in {name}. Contact the school to arrange a lesson.",
+    "signInTitle": "Sign in to see the schools",
+    "signInBody": "The catalog is open to signed-in users. After you sign in you will come back here.",
+    "signInCta": "Sign in",
     "faq1aExpansion": "The catalog is live in Sweden first. This page prepares the location for launch; use Swedish city hubs to browse now.",
     "faq2q": "Do learners pay a DriveLinkUp fee?",
     "faq2a": "No. A catalog listing is free to browse. You pay the school, not DriveLinkUp.",
@@ -3384,7 +3392,7 @@
   "termsPage": {
     "meta": {
       "title": "Terms of service",
-      "description": "DriveLinkUp terms: directory listings, cancellations, accounts, and personal data."
+      "description": "DriveLinkUp terms: directory listings, accounts, and personal data."
     },
     "hero": {
       "eyebrow": "Terms of service",
@@ -3395,7 +3403,7 @@
     "sections": {
       "0": {
         "title": "About the service",
-        "body": "DriveLinkUp is a catalog of driving schools. Instructors teach through a school. We show published prices when the school has added them. A listing is not a booking.",
+        "body": "DriveLinkUp is a catalog of driving schools. Instructors teach through a school. We show published prices when the school has added them.",
         "items": [
           "The school publishes its own details. A badge appears only when the check is stored.",
           "The service is under development and features may be added or changed."
@@ -3415,10 +3423,10 @@
         "items": []
       },
       "3": {
-        "title": "Cancellations and refunds",
-        "body": "Cancellation terms are set by the school. Confirm them with the school before you arrange a lesson with them.",
+        "title": "Times and terms",
+        "body": "Terms are set by the school. Confirm them with the school before you arrange a lesson with them.",
         "items": [
-          "Contact the school directly to change or cancel a time.",
+          "Contact the school directly to change a time.",
           "If that doesn't resolve it, we handle the issue via support — frank@drivelinkup.com."
         ]
       },
@@ -3463,7 +3471,7 @@
         "Listing is free"
       ],
       "primaryCta": "Find lessons",
-      "secondaryCta": "How it works"
+      "secondaryCta": "Common questions"
     },
     "linkStory": {
       "title": "Two links. One connection.",
@@ -3514,7 +3522,7 @@
     "section": {
       "eyebrow": "Prices & courses",
       "title": "School prices",
-      "lead": "Published prices from the school's own website. Interested? Send a request — students pay no fee to DriveLinkUp.",
+      "lead": "Published prices from the school's own website. Interested? Use Contact the school.",
       "kind": {
         "PAKET": "Course",
         "LEKTION": "Lesson",
@@ -3523,7 +3531,7 @@
       "sessionsCount": "{count, plural, =1 {1 session} other {# sessions}}",
       "weeksCount": "{count, plural, =1 {1 week} other {# weeks}}",
       "priceFrom": "From {price} SEK",
-      "requestCta": "Request booking"
+      "requestCta": "Contact the school"
     },
     "requestForm": {
       "title": "Send a request to {name}",

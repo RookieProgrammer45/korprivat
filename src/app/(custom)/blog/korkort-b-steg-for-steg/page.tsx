@@ -68,7 +68,7 @@ export default function KorkortBStegForStegPage() {
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">Börja med körkortstillstånd</h2>
             <p>
-              Körkort B är personbilskortet de flesta söker. Innan du bokar körlektioner eller
+              Körkort B är personbilskortet de flesta söker. Innan du börjar med körlektioner eller
               övningskörning behöver du ett körkortstillstånd från Transportstyrelsen. Tillståndet
               är ett godkännande att du får övningsköra, inte själva körkortet.
             </p>
@@ -88,14 +88,15 @@ export default function KorkortBStegForStegPage() {
               med övningskörningen, och på vad den godkända utbildaren kräver.
             </p>
             <p>
-              Boka riskutbildningen hos en aktör som har tillstånd för just den delen. DriveLinkUp
-              är en katalog över trafikskolor, inte den myndighet som godkänner riskutbildare.
+              Anmäl dig till riskutbildningen hos en aktör som har tillstånd för just den delen.
+              DriveLinkUp är en katalog över trafikskolor, inte den myndighet som godkänner
+              riskutbildare.
             </p>
           </section>
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">Kunskapsprov och teori</h2>
             <p>
-              Kunskapsprovet, teoriprovet, bokas hos Trafikverket. Du läser trafikregler, vägmärken
+              Kunskapsprovet, teoriprovet, görs hos Trafikverket. Du läser trafikregler, vägmärken
               och säkerhet i din egen takt, ofta parallellt med körlektionerna. Ett godkänt prov
               gäller bara en begränsad tid. Kontrollera det aktuella fönstret hos Trafikverket så
               att teori och uppkörning inte glider isär.
@@ -118,7 +119,7 @@ export default function KorkortBStegForStegPage() {
               Du kan övningsköra på en trafikskola, privat med en godkänd handledare, eller
               kombinera båda. Det är två olika vägar. En skolannons är en trafikskola i katalogen.
               En handledare är en privat handledare för övningskörning, inte en skola och inte en
-              bokningsbar lärare i katalogen.
+              lärare i katalogen.
             </p>
             <p>
               Privat övningskörning kräver att både elev och handledare uppfyller
@@ -155,7 +156,7 @@ export default function KorkortBStegForStegPage() {
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">Körprov, uppkörningen</h2>
             <p>
-              Körprovet bokas hos Trafikverket när körkortstillstånd, riskutbildning och
+              Körprovet görs hos Trafikverket när körkortstillstånd, riskutbildning och
               kunskapsprov är på plats enligt de regler som gäller då. Provet bedömer hur du kör i
               trafik, inte hur många lektioner du har betalat. Efter ett godkänt prov utfärdar
               Transportstyrelsen körkortet.
@@ -168,7 +169,7 @@ export default function KorkortBStegForStegPage() {
           </section>
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">
-              Jämför trafikskolor innan du bokar
+              Jämför trafikskolor i katalogen
             </h2>
             <p>
               När tillståndet är på gång kan du jämföra trafikskolor efter ort, körkortskategori,
@@ -179,7 +180,7 @@ export default function KorkortBStegForStegPage() {
             <ol className="ml-6 list-decimal space-y-2">
               <li>Välj körkort B och den stad du faktiskt kan ta dig till.</li>
               <li>Jämför publicerat pris, språk och vad skolan skriver om upplägget.</li>
-              <li>Kontakta skolan för tider, bil och avbokningsvillkor.</li>
+              <li>Kontakta skolan för tider, bil och villkor.</li>
             </ol>
             <p>
               Börja i{' '}

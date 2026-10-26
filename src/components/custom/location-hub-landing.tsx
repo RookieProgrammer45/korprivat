@@ -2,15 +2,17 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { LocationDirectory } from '@/components/custom/location-directory';
+import { loginHrefWithNext } from '@/lib/auth-next';
+import { getSessionUser } from '@/lib/require-auth';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import {
-  type NordicLocation,
-  NORDIC_COUNTRY_META,
   countryPath,
   displayName,
   listCitiesInRegion,
   listRegions,
   locationPath,
+  NORDIC_COUNTRY_META,
+  type NordicLocation,
 } from '@/lib/seo/nordic-locations';
 import { siteName, siteUrl } from '@/lib/site';
 
@@ -46,6 +48,7 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
 export async function LocationHubLanding({ location }: { location: NordicLocation }) {
   const t = await getTranslations('locationHub');
   const path = locationPath(location);
+  const sessionUser = await getSessionUser();
   const name = displayName(location);
   const country = NORDIC_COUNTRY_META[location.country];
   const url = absoluteUrl(path);
@@ -62,7 +65,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
   const faq = [
     {
       q: t('faq1q', { name }),
-      a: location.marketplaceLive ? t('faq1aLive') : t('faq1aExpansion'),
+      a: location.marketplaceLive ? t('faq1aLive', { name }) : t('faq1aExpansion'),
     },
     { q: t('faq2q'), a: t('faq2a') },
     { q: t('faq3q'), a: t('faq3a') },
@@ -119,9 +122,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
     <>
       <main className="directory-shell container-page min-h-[calc(100dvh-3.5rem)] min-w-0">
         <header className="mx-auto flex w-full max-w-6xl flex-col gap-3">
-          <p className="text-eyebrow">
-            {t('eyebrow', { country: country.nameLocal })}
-          </p>
+          <p className="text-eyebrow">{t('eyebrow', { country: country.nameLocal })}</p>
           <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
             {t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name })}
           </h1>
@@ -135,17 +136,26 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
               {t('breadcrumbLocations')}
             </Link>
             {' / '}
-            <Link
-              className="underline underline-offset-4"
-              href={countryPath(location.country)}
-            >
+            <Link className="underline underline-offset-4" href={countryPath(location.country)}>
               {country.nameLocal}
             </Link>
           </p>
         </header>
 
         {location.marketplaceLive && location.filterCity ? (
-          <LocationDirectory cityName={location.filterCity} />
+          sessionUser ? (
+            <LocationDirectory cityName={location.filterCity} />
+          ) : (
+            <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
+              <h2 className="font-display text-h3">{t('signInTitle')}</h2>
+              <p className="text-body text-muted-foreground">{t('signInBody')}</p>
+              <p>
+                <Link className="dlu-ink-pill inline-flex" href={loginHrefWithNext(path)}>
+                  {t('signInCta')}
+                </Link>
+              </p>
+            </section>
+          )
         ) : (
           <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
             <h2 className="font-display text-h3">{t('expansionTitle')}</h2>

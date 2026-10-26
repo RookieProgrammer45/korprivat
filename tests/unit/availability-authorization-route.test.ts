@@ -6,6 +6,9 @@ const { findUnique, findMany } = vi.hoisted(() => ({
 }));
 
 vi.mock('server-only', () => ({}));
+vi.mock('@/lib/require-auth', () => ({
+  requireAuth: vi.fn().mockResolvedValue({ id: 'user_signed_in' }),
+}));
 vi.mock('@/lib/db', () => ({
   prisma: {
     instructor: { findUnique },

@@ -25,6 +25,7 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
+import { PUBLIC_CATALOG_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import {
   InstructorCreate,
   InstructorCreated,
@@ -43,7 +44,7 @@ import {
   isSchoolAuthzEnforcementOn,
   listingSurfaces,
 } from '@/lib/orgs/school-authorization-policy';
-import { requireAuth, type SessionUser } from '@/lib/require-auth';
+import { getSessionUser, requireAuth, type SessionUser } from '@/lib/require-auth';
 import {
   activePolicyListingIds,
   isCancellationPolicyEnforced,
@@ -68,6 +69,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ errors }, { status: 400 });
   }
   const q = parsed.value;
+  const sessionUser = await getSessionUser();
+  const limit = parseLimit(req.nextUrl.searchParams.get('limit'));
 
   // `countOnly=1` short-circuits into a single Prisma `count()` and skips the
   // full row hydrate / slot projection. Used by the contact page's instructor-
@@ -88,6 +91,15 @@ export async function GET(req: NextRequest) {
     q.sort !== undefined ||
     q.providerRole !== undefined ||
     q.affiliation !== undefined;
+  const publicPreview =
+    !sessionUser &&
+    limit != null &&
+    limit <= PUBLIC_CATALOG_PREVIEW_LIMIT &&
+    !hasDirectoryFilters &&
+    !countOnly;
+  if (!sessionUser && !publicPreview && !(countOnly && !hasDirectoryFilters)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   if (countOnly && !hasDirectoryFilters) {
     const count = await prisma.instructor.count({
       where: await buildVerifiedProviderActivationWhere(),
@@ -160,7 +172,6 @@ export async function GET(req: NextRequest) {
   // `limit` (1–50) serves small previews such as the home page. Without rating
   // or availability filters the order is already final, so we cut before the
   // aggregate, slot and payment loads; otherwise we cut after filtering.
-  const limit = parseLimit(req.nextUrl.searchParams.get('limit'));
   const minRating = q.minRating;
   const priceSort = q.sort === 'lessonPrice' || q.sort === 'packagePrice';
   const cutEarly = limit != null && minRating == null && q.availability === undefined && !priceSort;

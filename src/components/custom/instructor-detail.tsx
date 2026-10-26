@@ -1,9 +1,5 @@
 //
-// The profile is intentionally a small decision surface: live identity,
-// categories, rate, learner fee quote, booking mode, cancellation schedule,
-// and platform safety expectations. Availability and booking remain in the
-// adjacent BookingForm island so every mutation still uses the REST data
-// plane.
+// School listing: identity, categories, published price, contact, and reviews.
 
 'use client';
 
@@ -11,7 +7,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
-import { BookingPriceSummary } from '@/components/custom/booking-price-summary';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { PublishedPriceList } from '@/components/custom/published-price';
 import { SchoolContactButton } from '@/components/custom/school-contact-button';
@@ -20,7 +15,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import { getPolicyForTier } from '@/lib/business/cancellation-policy';
 import { InstructorItem } from '@/lib/contracts/instructors';
 
 type Status = 'loading' | 'not-found' | 'error' | 'profile';
@@ -217,10 +211,6 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             ) : null}
           </dl>
 
-          {instructor.canCollectPayment === false || instructor.surfaces?.directoryOnly ? null : (
-            <BookingPriceSummary instructorId={instructor.id} />
-          )}
-
           <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
 
           <SchoolContactButton
@@ -235,19 +225,6 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             count={instructor.googleReviewCount}
             mapsUri={instructor.googleMapsUri}
           />
-          {instructor.surfaces?.directoryOnly ? null : (
-            <BookingModeSection instructor={instructor} />
-          )}
-          {/* Directory-only listings show no cancellation policy: no booking
-              flows through DriveLinkUp for this school, and an unconfirmed
-              tier would misrepresent the school's own terms. Independent
-              instructors also cannot take payment here. */}
-          {instructor.canCollectPayment === false ||
-          instructor.showCancellationPolicy === false ||
-          instructor.surfaces?.directoryOnly ||
-          (!instructor.surfaces && instructor.bookingMode === 'contact') ? null : (
-            <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
-          )}
           {instructor.surfaces?.directoryOnly ? null : <SafetyExpectations />}
         </div>
       </CardContent>
@@ -285,64 +262,6 @@ function formatSlotDate(iso: string, locale: string): string {
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
   }).format(new Date(iso));
-}
-
-function BookingModeSection({ instructor }: { instructor: InstructorItem }) {
-  const tr = useTranslations('instructorDetail');
-  const surfaces = instructor.surfaces;
-  const independentInstructor =
-    instructor.providerRole === 'INSTRUCTOR' && instructor.canCollectPayment === false;
-  const mode = independentInstructor
-    ? 'paymentThroughSchool'
-    : surfaces?.directoryOnly
-      ? 'contact'
-      : surfaces?.transactionalBooking
-        ? 'instant'
-        : surfaces?.requestToBook
-          ? 'request'
-          : 'contact';
-  return (
-    <section className="grid min-w-0 gap-2 rounded-xl border border-border bg-muted p-4">
-      <p className="text-eyebrow text-muted-foreground">{tr('bookingModeEyebrow')}</p>
-      <p className="font-display text-h4 font-semibold tracking-tight text-foreground">
-        {tr(`bookingMode.${mode}.title`)}
-      </p>
-      <p className="text-small text-muted-foreground">{tr(`bookingMode.${mode}.body`)}</p>
-    </section>
-  );
-}
-
-function CancellationPolicySection({ tier }: { tier: InstructorItem['cancellationPolicyTier'] }) {
-  const tr = useTranslations('cancellationPolicy');
-  const tierKey = tier ?? 'flexible';
-  const policy = getPolicyForTier(tierKey);
-  return (
-    <section className="grid min-w-0 gap-3 rounded-xl border border-border bg-muted p-4">
-      <div>
-        <p className="text-eyebrow text-muted-foreground">{tr('sectionEyebrow')}</p>
-        <p className="mt-1 font-display text-h4 font-semibold tracking-tight text-foreground">
-          {tr(`${tierKey}.name`)}
-        </p>
-        <p className="mt-1 text-small text-muted-foreground">{tr(`${tierKey}.summary`)}</p>
-      </div>
-      <ul className="grid gap-2 text-small text-foreground">
-        <li className="flex items-start gap-2">
-          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden />
-          <span>{tr(`${tierKey}.fullRefundBefore`)}</span>
-        </li>
-        {policy.partialFeePercent > 0 ? (
-          <li className="flex items-start gap-2">
-            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden />
-            <span>{tr(`${tierKey}.partialBetween`)}</span>
-          </li>
-        ) : null}
-        <li className="flex items-start gap-2">
-          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-destructive" aria-hidden />
-          <span>{tr(`${tierKey}.noRefundAfter`)}</span>
-        </li>
-      </ul>
-    </section>
-  );
 }
 
 function SafetyExpectations() {

@@ -34,6 +34,11 @@ const PUBLIC_REVIEW_SELECT = {
 type Ctx = { params: Promise<{ id: string }> };
 
 export async function GET(req: Request, ctx: Ctx) {
+  try {
+    await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
   const { id } = await ctx.params;
   const rows = await prisma.review.findMany({
     where: { instructorId: id },

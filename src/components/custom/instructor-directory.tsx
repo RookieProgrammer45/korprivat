@@ -740,7 +740,6 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   const tr = useTranslations('instructorDirectory');
   const locale = useLocale();
   const trTier = useTranslations('cancellationPolicy.tierBadge');
-  const trBooking = useTranslations('bookingForm');
   const showTimes = row.surfaces?.availabilityDisplay === true;
   const nextSlotPill =
     showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, tr, locale) : null;
@@ -759,22 +758,6 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
     directoryOnly || row.showCancellationPolicy === false
       ? null
       : tierBadgeLabel(row.cancellationPolicyTier, trTier);
-  // Badge follows authorization surfaces when the API sent them, so a
-  // withdrawn scope cannot keep an instant/request label on the card.
-  const bookingMode: 'instant' | 'request' | 'contact' | 'paymentThroughSchool' =
-    row.providerRole === 'INSTRUCTOR' && row.canCollectPayment === false
-      ? 'paymentThroughSchool'
-      : row.surfaces
-        ? row.surfaces.directoryOnly
-          ? 'contact'
-          : row.surfaces.transactionalBooking
-            ? 'instant'
-            : row.surfaces.requestToBook
-              ? 'request'
-              : 'contact'
-        : 'contact';
-  const bookingModeLabel = trBooking(`bookingModeLabel.${bookingMode}`);
-  const showBookingMode = bookingMode === 'instant' || bookingMode === 'request';
   const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
   const hasGoogleQuotes = (row.googleReviews?.length ?? 0) > 0;
   const showServiceArea = Boolean(row.serviceArea) && row.serviceArea !== row.city;
@@ -831,19 +814,6 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
         </div>
         {row.publishedPrices?.lesson ? <PublishedLessonPrice prices={row.publishedPrices} /> : null}
         {row.publishedPrices ? <PublishedPackageFrom prices={row.publishedPrices} /> : null}
-        {showBookingMode && bookingModeLabel ? (
-          <p className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-            <span
-              className={
-                bookingMode === 'request'
-                  ? 'inline-flex items-center rounded-md border border-brand-500/40 bg-brand-100 px-2 py-0.5 text-brand-700 dark:bg-brand-900 dark:text-brand-300'
-                  : 'inline-flex items-center rounded-md border border-border bg-muted px-2 py-0.5 text-muted-foreground'
-              }
-            >
-              {bookingModeLabel}
-            </span>
-          </p>
-        ) : null}
 
         <div className="grid min-w-0 gap-3 rounded-lg border border-border bg-muted p-4 sm:grid-cols-2">
           {nextSlotPill ? (
