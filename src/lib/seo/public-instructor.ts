@@ -1,6 +1,7 @@
 import 'server-only';
 import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { hasPublishedPrices, publishedListingWhere } from '@/lib/discovery/published-prices';
 import { parseSchoolSlug, schoolPath } from '@/lib/seo/school-slugs';
 
 export type PublicInstructorSeo = {
@@ -37,7 +38,7 @@ export async function loadPublicInstructorSeo(id: string): Promise<PublicInstruc
       bookingMode: true,
     },
   });
-  if (!row) return null;
+  if (!row || !hasPublishedPrices(row.id)) return null;
 
   const license = row.userId
     ? await prisma.instructorLicense.findUnique({
@@ -84,6 +85,7 @@ export async function listIndexableInstructorIds(limit = 500): Promise<string[]>
     where: {
       userId: { in: verified.map((v) => v.userId) },
       OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
+      AND: [publishedListingWhere()],
     },
     select: { id: true, categories: true },
     take: limit,
@@ -103,6 +105,7 @@ export async function listIndexableInstructors(limit = 200) {
     where: {
       userId: { in: verified.map((v) => v.userId) },
       OR: [{ providerRole: null }, { providerRole: { not: 'HANDLEDARE' } }],
+      AND: [publishedListingWhere()],
     },
     select: {
       id: true,

@@ -93,3 +93,15 @@ for (const school of dataset.schools as DatasetSchool[]) {
 export function publishedPrices(listingId: string): PublishedPrices | null {
   return byListing.get(listingId) ?? null;
 }
+
+// Only schools with at least one price on their own website are listed
+// publicly; the rest stay in the database but off every public surface.
+export function hasPublishedPrices(listingId: string): boolean {
+  return byListing.has(listingId);
+}
+
+const listedIds = [...byListing.keys()];
+
+export function publishedListingWhere(): { id: { in: string[] } } {
+  return { id: { in: listedIds } };
+}
