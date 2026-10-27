@@ -50,15 +50,17 @@ export function PublishedPackageFrom({ prices }: { prices: Prices }) {
 export function PublishedPriceList({
   prices,
   showSourceLink = false,
+  heavyOnly = false,
 }: {
   prices: Prices;
   showSourceLink?: boolean;
+  heavyOnly?: boolean;
 }) {
   const t = useTranslations('publishedPrice');
   const locale = useLocale();
   const amount = (value: number) => t('amount', { amount: formatAmount(value, locale) });
   const rows: Row[] = [];
-  if (prices.lesson) {
+  if (!heavyOnly && prices.lesson) {
     rows.push({
       key: 'lesson',
       label: t('lesson'),
@@ -66,25 +68,27 @@ export function PublishedPriceList({
       value: amount(prices.lesson.priceSek),
     });
   }
-  if (prices.risk1Sek)
+  if (!heavyOnly && prices.risk1Sek)
     rows.push({ key: 'risk1', label: t('risk1'), value: amount(prices.risk1Sek) });
-  if (prices.risk2Sek)
+  if (!heavyOnly && prices.risk2Sek)
     rows.push({ key: 'risk2', label: t('risk2'), value: amount(prices.risk2Sek) });
-  prices.packages.forEach((pack, index) => {
-    rows.push({
-      key: `package-${index}`,
-      label: pack.name,
-      detail:
-        pack.kind === 'intensive'
-          ? /intensiv/i.test(pack.name)
-            ? undefined
-            : t('intensive')
-          : pack.lessons
-            ? t('lessons', { count: pack.lessons })
-            : t('package'),
-      value: amount(pack.priceSek),
+  if (!heavyOnly) {
+    prices.packages.forEach((pack, index) => {
+      rows.push({
+        key: `package-${index}`,
+        label: pack.name,
+        detail:
+          pack.kind === 'intensive'
+            ? /intensiv/i.test(pack.name)
+              ? undefined
+              : t('intensive')
+            : pack.lessons
+              ? t('lessons', { count: pack.lessons })
+              : t('package'),
+        value: amount(pack.priceSek),
+      });
     });
-  });
+  }
   const heavy = prices.heavy;
   if (rows.length === 0 && !heavy) return null;
 

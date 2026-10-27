@@ -548,6 +548,7 @@
       "requesting": "Hämtar din plats…",
       "granted": "Visar skolor nära din plats.",
       "denied": "Platstillstånd nekades. Du kan fortfarande filtrera på stad.",
+      "failed": "Vi kunde inte hitta din plats. Försök igen, eller filtrera på stad.",
       "unsupported": "Plats är inte tillgängligt i den här webbläsaren. Du kan fortfarande filtrera på stad."
     },
     "nearKmLabel": "Inom (km)",

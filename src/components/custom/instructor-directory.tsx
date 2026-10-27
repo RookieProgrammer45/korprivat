@@ -146,6 +146,8 @@ export function InstructorDirectory({
   // happens only when `onLocationRequest` is wired to its `request()` from
   // the user clicking "Use my location".
   const location = useUserLocation();
+  const requestLocation = location.request;
+  const resetLocation = location.reset;
 
   // Stable, sorted query string snapshot used to key the fetch effect and to
   // build the URL when filters change.
@@ -174,15 +176,8 @@ export function InstructorDirectory({
     setFilters(EMPTY_FILTERS);
   }, [searchParams]);
 
-  // Keep the geolocation badge in sync with the URL: when the learner clears
-  // their coordinates via "Rensa filter" / manual URL edit, reset the hook back
-  // to `idle` so the next click re-prompts cleanly instead of showing a stale
-  // "granted" badge for a location no longer in flight.
-  useEffect(() => {
-    if (filters.lat == null && filters.lng == null && location.status === 'granted') {
-      location.reset();
-    }
-  }, [filters.lat, filters.lng, location]);
+  // Do not reset the hook whenever `location` changes identity. That raced
+  // the granted write and cleared a successful fix before lat/lng landed.
 
   // Run the data fetch whenever the canonical query string changes. We track
   // liveness with `active` so an in-flight response from a stale query can't
@@ -260,11 +255,12 @@ export function InstructorDirectory({
   );
 
   const clearFilters = useCallback(() => {
+    resetLocation();
     const next: Filters = heavyScope ? { ...EMPTY_FILTERS, heavy: 'all' } : EMPTY_FILTERS;
     setFilters(next);
     const qs = buildQueryString(next);
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [heavyScope, pathname, router]);
+  }, [heavyScope, pathname, resetLocation, router]);
 
   const toggleComparison = useCallback((id: string) => {
     setComparisonLimitReached(false);
@@ -288,8 +284,8 @@ export function InstructorDirectory({
   const showingCurrentResults = status === 'ready' && loadedQuery === queryString;
 
   const onLocationRequest = useCallback(() => {
-    location.request();
-  }, [location]);
+    requestLocation();
+  }, [requestLocation]);
 
   // When the hook resolves to `granted`, write the coords into filters so the
   // `?lat=…&lng=…` URL becomes canonical (shareable, bookmarkable, refresh-
@@ -335,14 +331,15 @@ export function InstructorDirectory({
           onHeavyChange={(value) => updateFilters({ heavy: value })}
           heavyScope={heavyScope}
           onLocationRequest={onLocationRequest}
-          onClearGeolocation={() =>
+          onClearGeolocation={() => {
+            resetLocation();
             updateFilters({
               lat: null,
               lng: null,
               sort: filters.sort === 'distance' ? 'default' : filters.sort,
               nearKm: '',
-            })
-          }
+            });
+          }}
         />
 
         {hasAnyFilter && (
@@ -366,6 +363,7 @@ export function InstructorDirectory({
             providers={comparisonItems}
             onRemove={toggleComparison}
             onClear={() => setComparisonIds([])}
+            heavyScope={heavyScope}
           />
         ) : null}
         <div aria-live="polite" className="min-h-5 text-small text-muted-foreground">
@@ -380,6 +378,7 @@ export function InstructorDirectory({
             items={items}
             comparisonIds={comparisonIds}
             onToggleComparison={toggleComparison}
+            heavyScope={heavyScope}
           />
         )}
       </Suspense>
@@ -437,31 +436,33 @@ function FilterBar({
   return (
     <Card className="surface-panel border-border bg-card">
       <CardContent className="flex min-w-0 flex-col gap-6 p-6">
-        <div className="flex flex-col gap-2">
-          <p className="text-eyebrow">{tr('categoryLabel')}</p>
-          <div className="flex flex-wrap gap-2">
-            {LICENCE_CATEGORY_CODES.map((code) => {
-              const active = filters.categories.includes(code);
-              return (
-                <Button
-                  key={code}
-                  type="button"
-                  variant={active ? 'secondary' : 'outline'}
-                  size="sm"
-                  aria-pressed={active}
-                  className={
-                    active
-                      ? 'border border-brand-500/40 bg-brand-100 text-brand-700 shadow-sm hover:bg-brand-200 dark:bg-brand-900 dark:text-brand-300'
-                      : undefined
-                  }
-                  onClick={() => onToggleCategory(code)}
-                >
-                  {categoryChipLabel(tr(`category.${code}`), code)}
-                </Button>
-              );
-            })}
+        {heavyScope ? null : (
+          <div className="flex flex-col gap-2">
+            <p className="text-eyebrow">{tr('categoryLabel')}</p>
+            <div className="flex flex-wrap gap-2">
+              {LICENCE_CATEGORY_CODES.map((code) => {
+                const active = filters.categories.includes(code);
+                return (
+                  <Button
+                    key={code}
+                    type="button"
+                    variant={active ? 'secondary' : 'outline'}
+                    size="sm"
+                    aria-pressed={active}
+                    className={
+                      active
+                        ? 'border border-brand-500/40 bg-brand-100 text-brand-700 shadow-sm hover:bg-brand-200 dark:bg-brand-900 dark:text-brand-300'
+                        : undefined
+                    }
+                    onClick={() => onToggleCategory(code)}
+                  >
+                    {categoryChipLabel(tr(`category.${code}`), code)}
+                  </Button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:items-end">
           <div className="flex min-w-0 flex-col gap-2">
@@ -484,55 +485,59 @@ function FilterBar({
             </Select>
           </div>
 
-          <div className="flex min-w-0 flex-col gap-2">
-            <Label htmlFor="min-rate-input">{tr('minRateLabel')}</Label>
-            <div className="relative">
-              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
-                {tr('rateSuffixShort')}
-              </span>
-              <Input
-                id="min-rate-input"
-                type="number"
-                inputMode="numeric"
-                min={1}
-                step={1}
-                value={filters.minRate}
-                onChange={(event) => {
-                  const raw = event.target.value;
-                  onMinRateChange(raw === '' ? '' : Number(raw));
-                }}
-                className="bg-background pl-12"
-                placeholder={tr('minRatePlaceholder')}
-                aria-invalid={hasInvalidRateRange}
-                aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
-              />
-            </div>
-          </div>
+          {heavyScope ? null : (
+            <>
+              <div className="flex min-w-0 flex-col gap-2">
+                <Label htmlFor="min-rate-input">{tr('minRateLabel')}</Label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
+                    {tr('rateSuffixShort')}
+                  </span>
+                  <Input
+                    id="min-rate-input"
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    step={1}
+                    value={filters.minRate}
+                    onChange={(event) => {
+                      const raw = event.target.value;
+                      onMinRateChange(raw === '' ? '' : Number(raw));
+                    }}
+                    className="bg-background pl-12"
+                    placeholder={tr('minRatePlaceholder')}
+                    aria-invalid={hasInvalidRateRange}
+                    aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
+                  />
+                </div>
+              </div>
 
-          <div className="flex min-w-0 flex-col gap-2">
-            <Label htmlFor="max-rate-input">{tr('maxRateLabel')}</Label>
-            <div className="relative">
-              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
-                {tr('rateSuffixShort')}
-              </span>
-              <Input
-                id="max-rate-input"
-                type="number"
-                inputMode="numeric"
-                min={1}
-                step={1}
-                value={filters.maxRate}
-                onChange={(event) => {
-                  const raw = event.target.value;
-                  onMaxRateChange(raw === '' ? '' : Number(raw));
-                }}
-                className="bg-background pl-12"
-                placeholder={tr('maxRatePlaceholder')}
-                aria-invalid={hasInvalidRateRange}
-                aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
-              />
-            </div>
-          </div>
+              <div className="flex min-w-0 flex-col gap-2">
+                <Label htmlFor="max-rate-input">{tr('maxRateLabel')}</Label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
+                    {tr('rateSuffixShort')}
+                  </span>
+                  <Input
+                    id="max-rate-input"
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    step={1}
+                    value={filters.maxRate}
+                    onChange={(event) => {
+                      const raw = event.target.value;
+                      onMaxRateChange(raw === '' ? '' : Number(raw));
+                    }}
+                    className="bg-background pl-12"
+                    placeholder={tr('maxRatePlaceholder')}
+                    aria-invalid={hasInvalidRateRange}
+                    aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="flex min-w-0 flex-col gap-2">
             <Label htmlFor="rating-select">{tr('ratingLabel')}</Label>
@@ -693,8 +698,12 @@ function FilterBar({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="default">{tr('sortNewest')}</SelectItem>
-                  <SelectItem value="lessonPrice">{tr('sortLessonPrice')}</SelectItem>
-                  <SelectItem value="packagePrice">{tr('sortPackagePrice')}</SelectItem>
+                  {heavyScope ? null : (
+                    <>
+                      <SelectItem value="lessonPrice">{tr('sortLessonPrice')}</SelectItem>
+                      <SelectItem value="packagePrice">{tr('sortPackagePrice')}</SelectItem>
+                    </>
+                  )}
                   <SelectItem value="distance" disabled={!hasLocation}>
                     {tr('sortNearest')}
                   </SelectItem>
@@ -721,6 +730,8 @@ function locationStatusCopy(
       return tr('locationStatus.granted');
     case 'denied':
       return tr('locationStatus.denied');
+    case 'failed':
+      return tr('locationStatus.failed');
     case 'unsupported':
       return tr('locationStatus.unsupported');
   }
@@ -732,10 +743,12 @@ function CardGrid({
   items,
   comparisonIds,
   onToggleComparison,
+  heavyScope = false,
 }: {
   items: InstructorFilteredItem[];
   comparisonIds: string[];
   onToggleComparison: (id: string) => void;
+  heavyScope?: boolean;
 }) {
   const tr = useTranslations('instructorDirectory');
   return (
@@ -751,7 +764,7 @@ function CardGrid({
               className="marketplace-provider-card group block min-w-0 rounded-xl outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-brand-500/60"
               data-provider-type={row.providerType}
             >
-              <InstructorCard row={row} />
+              <InstructorCard row={row} heavyScope={heavyScope} />
             </Link>
             <SchoolContactActions
               name={row.name}
@@ -779,7 +792,13 @@ function CardGrid({
   );
 }
 
-function InstructorCard({ row }: { row: InstructorFilteredItem }) {
+function InstructorCard({
+  row,
+  heavyScope = false,
+}: {
+  row: InstructorFilteredItem;
+  heavyScope?: boolean;
+}) {
   const tr = useTranslations('instructorDirectory');
   const locale = useLocale();
   const trTier = useTranslations('cancellationPolicy.tierBadge');
@@ -804,6 +823,7 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
   const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
   const hasGoogleQuotes = (row.googleReviews?.length ?? 0) > 0;
   const showServiceArea = Boolean(row.serviceArea) && row.serviceArea !== row.city;
+  const categoryCodes = heavyScope ? heavyCategoryLabels(row) : row.categories;
   const reviewLabel =
     row.reviewSummary.averageRating === null
       ? row.googleRating != null && !hasGoogleQuotes
@@ -850,8 +870,12 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
             </div>
           </div>
         </div>
-        {row.publishedPrices?.lesson ? <PublishedLessonPrice prices={row.publishedPrices} /> : null}
-        {row.publishedPrices ? <PublishedPackageFrom prices={row.publishedPrices} /> : null}
+        {heavyScope ? null : row.publishedPrices?.lesson ? (
+          <PublishedLessonPrice prices={row.publishedPrices} />
+        ) : null}
+        {heavyScope ? null : row.publishedPrices ? (
+          <PublishedPackageFrom prices={row.publishedPrices} />
+        ) : null}
         {row.publishedPrices ? <PublishedHeavyOffer prices={row.publishedPrices} /> : null}
 
         <div className="grid min-w-0 gap-3 rounded-lg border border-border bg-muted p-4 sm:grid-cols-2">
@@ -921,13 +945,15 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
           />
         ) : null}
 
-        <div className="flex flex-wrap items-center gap-1.5">
-          {row.categories.map((code) => (
-            <span key={code} className="dlu-chip">
-              {categoryChipLabel(tr(`category.${code}`), code)}
-            </span>
-          ))}
-        </div>
+        {categoryCodes.length > 0 ? (
+          <div className="flex flex-wrap items-center gap-1.5">
+            {categoryCodes.map((code) => (
+              <span key={code} className="dlu-chip">
+                {heavyScope ? code : categoryChipLabel(tr(`category.${code}`), code)}
+              </span>
+            ))}
+          </div>
+        ) : null}
 
         <div className="mt-auto flex items-center justify-between border-t border-border pt-4 text-small">
           <span className="min-w-0 font-medium text-foreground">{tr('profileCta')}</span>
@@ -1096,6 +1122,12 @@ function filtersFromSearchParams(searchParams: URLSearchParams): Filters | null 
     ...normaliseFromUrl(minParsed.value),
     maxRate: maxParsed.value.maxRate ?? '',
   };
+}
+
+function heavyCategoryLabels(row: InstructorFilteredItem): string[] {
+  const heavy = row.publishedPrices?.heavy;
+  if (!heavy) return [];
+  return [...heavy.categories, ...(heavy.ykb ? ['YKB'] : [])];
 }
 
 function hasActiveFilter(f: Filters): boolean {

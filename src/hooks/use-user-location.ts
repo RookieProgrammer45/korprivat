@@ -2,7 +2,18 @@
 
 import { useCallback, useState } from 'react';
 
-export type LocationStatus = 'idle' | 'requesting' | 'granted' | 'denied' | 'unsupported';
+export type LocationStatus =
+  | 'idle'
+  | 'requesting'
+  | 'granted'
+  | 'denied'
+  | 'failed'
+  | 'unsupported';
+
+/** 1 = PERMISSION_DENIED. Timeout / unavailable stay retryable. */
+export function classifyGeolocationError(code: number): 'denied' | 'failed' {
+  return code === 1 ? 'denied' : 'failed';
+}
 
 export type Coords = { latitude: number; longitude: number };
 
@@ -21,7 +32,11 @@ export function useUserLocation() {
   const [state, setState] = useState<State>({ status: 'idle', coords: null, error: null });
 
   const request = useCallback(() => {
-    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+    if (
+      typeof navigator === 'undefined' ||
+      !navigator.geolocation ||
+      (typeof window !== 'undefined' && !window.isSecureContext)
+    ) {
       setState({ status: 'unsupported', coords: null, error: null });
       return;
     }
@@ -39,15 +54,13 @@ export function useUserLocation() {
         });
       },
       (err) => {
-        if (err.code === err.PERMISSION_DENIED) {
-          setState({ status: 'denied', coords: null, error: null });
-          return;
-        }
-        // TIMEOUT / POSITION_UNAVAILABLE — surface as "denied" so the
-        // learner can retry; the directory still works via the city filter.
-        setState({ status: 'denied', coords: null, error: err.message });
+        setState({
+          status: classifyGeolocationError(err.code),
+          coords: null,
+          error: err.message || null,
+        });
       },
-      { enableHighAccuracy: false, timeout: 10_000, maximumAge: 60_000 },
+      { enableHighAccuracy: false, timeout: 20_000, maximumAge: 300_000 },
     );
   }, []);
 

@@ -548,6 +548,7 @@
       "requesting": "Finding your location…",
       "granted": "Showing schools near your location.",
       "denied": "Location access was denied. You can still filter by city.",
+      "failed": "We could not find your location. Try again, or filter by city.",
       "unsupported": "Location is not available in this browser. You can still filter by city."
     },
     "nearKmLabel": "Within (km)",
