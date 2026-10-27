@@ -1518,7 +1518,7 @@
       "rebook": {
         "ariaLabel": "Schools you have already booked",
         "title": "Schools you have already booked",
-        "lead": "Open the school in the directory and use Contact the school. DriveLinkUp does not book a new lesson.",
+        "lead": "Contact the school. DriveLinkUp does not book a new lesson.",
         "cta": "Open {teacher}"
       },
       "paymentMethods": {
@@ -2708,8 +2708,8 @@
     "cancelledBody": "This booking is no longer active.",
     "accessTitle": "Booking access expired",
     "accessBody": "Open the latest booking link from your email, or sign in to view a booking that belongs to you.",
-    "payClosedTitle": "DriveLinkUp does not take payment",
-    "payClosedBody": "The lesson is paid at the school. Open the school in the directory and use Contact the school.",
+    "payClosedTitle": "Contact the school",
+    "payClosedBody": "DriveLinkUp does not book the lesson. Contact the school opens their inbox or website.",
     "payCta": "Continue to hosted checkout",
     "openingCheckout": "Opening checkout…",
     "paymentHelp": "Need help with payment?",

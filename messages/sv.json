@@ -1518,7 +1518,7 @@
       "rebook": {
         "ariaLabel": "Skolor du redan har bokat",
         "title": "Skolor du redan har bokat",
-        "lead": "Öppna skolan i katalogen och använd Kontakta skolan. DriveLinkUp bokar inte en ny lektion.",
+        "lead": "Kontakta skolan. DriveLinkUp bokar inte en ny lektion.",
         "cta": "Öppna {teacher}"
       },
       "paymentMethods": {
@@ -2708,8 +2708,8 @@
     "cancelledBody": "Den här bokningen är inte längre aktiv.",
     "accessTitle": "Åtkomsten till bokningen har gått ut",
     "accessBody": "Öppna den senaste bokningslänken från din e-post, eller logga in för att se en bokning som tillhör dig.",
-    "payClosedTitle": "DriveLinkUp tar inte betalt",
-    "payClosedBody": "Lektionen betalas hos skolan. Öppna skolan i katalogen och använd Kontakta skolan.",
+    "payClosedTitle": "Hör av dig till skolan",
+    "payClosedBody": "DriveLinkUp bokar inte lektionen. Kontakta skolan öppnar deras inkorg eller webbplats.",
     "payCta": "Fortsätt till extern kassa",
     "openingCheckout": "Öppnar kassan…",
     "paymentHelp": "Behöver du hjälp med betalningen?",

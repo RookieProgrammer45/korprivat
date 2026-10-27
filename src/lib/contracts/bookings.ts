@@ -200,6 +200,15 @@ export const BookingRead = z.object({
   locale: z.enum(['sv', 'en']).nullable(),
   receiptEmailStatus: ReceiptEmailDeliveryStatusEnum.nullable(),
   providerRole: z.enum(['INSTRUCTOR', 'HANDLEDARE']),
+  // Present when the listing is a school with an inbox or website. The
+  // directory release uses this instead of a booking or payment button.
+  schoolContact: z
+    .object({
+      kind: z.enum(['inbox', 'website']),
+      href: z.string().min(1),
+    })
+    .nullable()
+    .optional(),
   capabilities: z.object({
     canAccept: z.boolean(),
     canDecline: z.boolean(),

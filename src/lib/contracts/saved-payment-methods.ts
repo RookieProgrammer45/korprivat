@@ -72,6 +72,13 @@ const ProfileLastBookedInstructor = z.object({
   // href the user actually lands on so /instructors/[id]?rebook=… can
   // pre-fill from this same-row contract.
   lastBookingId: z.string(),
+  // The school's contact button. Null when the listing has no inbox or website.
+  schoolContact: z
+    .object({
+      kind: z.enum(['inbox', 'website']),
+      href: z.string().min(1),
+    })
+    .nullable(),
 });
 export type ProfileLastBookedInstructor = z.infer<typeof ProfileLastBookedInstructor>;
 

@@ -1,32 +1,12 @@
-//
-// One-line affordance that the dashboard's "Booking history" page
-// mounts ABOVE the history list. Renders the user's most-recent
-// distinct instructors (read from `/api/profile/me`'s `lastInstructors`)
-// as compact cards, each with a "Rebook" CTA that deep-links to
-// `/instructors/[id]?rebook=<bookingId>` so the rebook form prefills.
-//
-// Why a LEFT-ALIGNED rail that ships on the same screen as the rest of
-// the history: the marketplace rebook pattern relies on the
-// learner recognising an instructor they already used, so the panel is
-// visually adjacent to the history (the same row, the same key) —
-// clicking on the matching row in the history below this card
-// surfaces the same booking numbers from the `lastBookingId`.
-//
-// Behaviour:
-//   - The `?rebook=<bookingId>` deep-link on `/instructors/[id]` is
-//     decoded and pre-fills the booking form. The page itself is the
-//     `BookingForm` island we already have; the rebook card on the
-//     history page just slots the parameter on its <Link>'s href.
-//   - We DO NOT issue the "rebook" request from this island — that
-//     would be a server-side mutation. The rebook flow is one tap on
-//     the card → `/instructors/[id]?rebook=<bookingId>` → form
-//     pre-fill → "Pay for the lesson".
+// Schools the learner has already booked. The action is the school's
+// contact button. DriveLinkUp does not start a new booking from here.
 
 'use client';
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { apiFetch } from '@/lib/api-client';
@@ -92,11 +72,15 @@ export function RebookPanel() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <Button asChild size="sm">
-                    <Link href={`/instructors/${encodeURIComponent(row.id)}`}>
-                      {t('cta', { teacher: row.name.split(' ')[0] ?? row.name })}
-                    </Link>
-                  </Button>
+                  {row.schoolContact ? (
+                    <SchoolContactButton name={row.name} contact={row.schoolContact} size="sm" />
+                  ) : (
+                    <Button asChild size="sm" variant="outline">
+                      <Link href={`/instructors/${encodeURIComponent(row.id)}`}>
+                        {t('cta', { teacher: row.name.split(' ')[0] ?? row.name })}
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>

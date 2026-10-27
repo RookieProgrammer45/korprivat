@@ -32,6 +32,8 @@ import {
   type SavedPaymentMethodItem,
 } from '@/lib/contracts/saved-payment-methods';
 import { prisma } from '@/lib/db';
+import { publishedInbox } from '@/lib/discovery/published-prices';
+import { resolveSchoolContact } from '@/lib/discovery/school-contact';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -71,7 +73,15 @@ export async function GET(req: Request) {
   const instructors = instructorIds.length
     ? await prisma.instructor.findMany({
         where: { id: { in: instructorIds } },
-        select: { id: true, name: true, city: true, hourlyRateSek: true },
+        select: {
+          id: true,
+          name: true,
+          city: true,
+          hourlyRateSek: true,
+          providerRole: true,
+          email: true,
+          bio: true,
+        },
       })
     : [];
   const instructorById = new Map(instructors.map((i) => [i.id, i]));
@@ -88,6 +98,12 @@ export async function GET(req: Request) {
       hourlyRateSek: inst.hourlyRateSek,
       preferredAt: row.preferredAt.toISOString(),
       lastBookingId: row.id,
+      schoolContact: resolveSchoolContact({
+        providerRole: inst.providerRole,
+        email: inst.email,
+        bio: inst.bio,
+        inbox: publishedInbox(id),
+      }),
     });
   }
 

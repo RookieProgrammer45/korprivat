@@ -1,7 +1,8 @@
-// New reservations and customer checkout stay off in the directory-first
-// release. Set BOOKING_CREATION_ENABLED=true only when booking and payment
-// are deliberately turned back on. Cancel, refund, dispute, and receipt
-// routes for bookings that already exist do not use this.
+// The booking API stays in the repo for a later phase. Turn this on only
+// when the directory has shown demand AND schools use booking systems this
+// API can connect to. Neither is true yet, so production leaves
+// BOOKING_CREATION_ENABLED unset. Do not delete the booking routes because
+// this returns false. Cancel, refund, dispute, and receipt do not use it.
 export function newBookingCreationEnabled(): boolean {
   return process.env.BOOKING_CREATION_ENABLED === 'true';
 }

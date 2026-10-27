@@ -368,6 +368,11 @@ describe('GET /api/bookings/[id]', () => {
     expect(json.hourlyRateSek).toBe(550);
     expect(json.paymentStatus).toBe('unpaid');
     expect(json.heldAt).toBeNull();
+    expect(json.schoolContact).toEqual({
+      kind: 'inbox',
+      href: 'mailto:erik@drivelinkup.test',
+    });
+    expect(json).not.toHaveProperty('email');
     expect(json).not.toHaveProperty('studentName');
     expect(json).not.toHaveProperty('studentEmail');
     expect(json).not.toHaveProperty('payoutAmountSek');

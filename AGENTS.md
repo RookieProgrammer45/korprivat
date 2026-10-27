@@ -7,7 +7,8 @@ authoritative. Read it before every task.
 
 **Decisions:** [ADR-001 Sweden-first](docs/decisions/ADR-001-sweden-first.md) ·
 [ADR-002 better-auth](docs/decisions/ADR-002-better-auth.md) ·
-[ADR-003 canonical webhook host](docs/decisions/ADR-003-canonical-webhook-host.md)
+[ADR-003 canonical webhook host](docs/decisions/ADR-003-canonical-webhook-host.md) ·
+[ADR-006 directory-first](docs/decisions/ADR-006-directory-first.md)
 
 ## Invariants (never violate)
 
@@ -33,6 +34,11 @@ authoritative. Read it before every task.
 7. **Handledare enrollment for supervised practice is a legal artefact.** Model
    `HandledareEnrollment` (not parental guardian consent). Never hard-delete;
    mark revoked/expired only.
+8. **Keep the booking API.** Customers use the school contact button until
+   the directory has shown demand and schools use booking systems the API
+   can connect to. Both are still false. Leave `BOOKING_CREATION_ENABLED`
+   unset. Do not delete booking, checkout, or connector code because the
+   directory does not call it ([ADR-006](docs/decisions/ADR-006-directory-first.md)).
 
 ## Bounded contexts
 

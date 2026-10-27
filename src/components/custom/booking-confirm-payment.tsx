@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
 import { BookingPriceSummary } from '@/components/custom/booking-price-summary';
 import { BookingMessagingEntry } from '@/components/custom/messaging/booking-messaging-entry';
+import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -266,7 +267,7 @@ export function BookingPaymentLink({
             </div>
             <p className="text-small text-muted-foreground">{t('refundedBody')}</p>
           </div>
-        ) : isAwaiting ? (
+        ) : isAwaiting && paymentsEnabled ? (
           <StateNotice title={t('awaitingTitle')} body={t('awaitingBody')} />
         ) : isDeclined ? (
           <StateNotice title={t('declinedTitle')} body={t('declinedBody')} />
@@ -280,8 +281,8 @@ export function BookingPaymentLink({
           >
             {status.paymentLoading ? t('openingCheckout') : t('payCta')}
           </Button>
-        ) : canPay ? (
-          <StateNotice title={t('payClosedTitle')} body={t('payClosedBody')} />
+        ) : canPay || isAwaiting ? (
+          <SchoolReferral name={booking.providerName} contact={booking.schoolContact} />
         ) : null}
 
         {paymentPollError ? (
@@ -307,12 +308,14 @@ export function BookingPaymentLink({
           </div>
         ) : null}
         {status.error ? <p className="text-small text-destructive">{status.error}</p> : null}
-        <Link
-          href="/contact?topic=payment"
-          className="text-small text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          {t('paymentHelp')}
-        </Link>
+        {paymentsEnabled ? (
+          <Link
+            href="/contact?topic=payment"
+            className="text-small text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+          >
+            {t('paymentHelp')}
+          </Link>
+        ) : null}
       </CardContent>
     </Card>
   );
@@ -327,6 +330,22 @@ function DetailFact({ label, children }: { label: string; children: ReactNode })
         {label}
       </dt>
       <dd className="text-small font-medium text-foreground">{children}</dd>
+    </div>
+  );
+}
+
+function SchoolReferral({
+  name,
+  contact,
+}: {
+  name: string;
+  contact: { kind: 'inbox' | 'website'; href: string } | null | undefined;
+}) {
+  const t = useTranslations('bookingConfirmPayment');
+  return (
+    <div className="grid gap-3">
+      <StateNotice title={t('payClosedTitle')} body={t('payClosedBody')} />
+      <SchoolContactButton name={name} contact={contact} size="default" className="w-fit" />
     </div>
   );
 }
