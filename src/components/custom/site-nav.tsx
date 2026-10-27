@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown, Menu, Truck } from 'lucide-react';
+import { Car, ChevronDown, Menu, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -37,10 +37,11 @@ export function useIsAuthenticated(): boolean {
 }
 
 function NavLabel({ href, children }: { href: string; children: React.ReactNode }) {
-  if (href !== '/tung-trafik') return children;
+  const Icon = href === '/tung-trafik' ? Truck : href === '/instructors' ? Car : null;
+  if (!Icon) return children;
   return (
     <span className="inline-flex items-center gap-1.5">
-      <Truck className="size-4" aria-hidden />
+      <Icon className="size-4" aria-hidden />
       {children}
     </span>
   );
