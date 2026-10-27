@@ -2024,20 +2024,20 @@
       "released": "Genomförd",
       "refunded": "Återbetald",
       "awaitingApproval": "Väntar på godkännande",
-      "deleteAccount": {
-        "title": "Radera konto",
-        "body": "Raderar ditt konto, dina bokningar och all personlig data permanent. Du kan inte ångra detta.",
-        "cta": "Radera konto",
-        "dialogTitle": "Radera ditt konto?",
-        "dialogBody": "All din personliga data tas bort permanent: din profil, dina bokningar och dina listningar. Detta kan inte ångras.",
-        "confirm": "Radera permanent",
-        "cancel": "Avbryt",
-        "deleting": "Raderar…",
-        "done": "Ditt konto har raderats.",
-        "error": "Kunde inte radera kontot. Försök igen, eller mejla support@drivelinkup.com."
-      },
       "declined": "Avböjd",
       "cancelled": "Avbokad"
+    },
+    "deleteAccount": {
+      "title": "Radera konto",
+      "body": "Raderar ditt konto och all personlig data permanent. Du kan inte ångra detta.",
+      "cta": "Radera konto",
+      "dialogTitle": "Radera ditt konto?",
+      "dialogBody": "All din personliga data tas bort permanent: din profil och dina listningar. Detta kan inte ångras.",
+      "confirm": "Radera permanent",
+      "cancel": "Avbryt",
+      "deleting": "Raderar…",
+      "done": "Ditt konto har raderats.",
+      "error": "Kunde inte radera kontot. Försök igen, eller mejla support@drivelinkup.com."
     }
   },
   "chatbot": {

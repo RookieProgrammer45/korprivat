@@ -120,11 +120,13 @@ export function ProfilePage() {
         onPhotoUploaded={loadProfile}
       />
       <section className="grid gap-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           <p className="text-eyebrow text-muted-foreground">{t(`upcoming.${eyebrow}`)}</p>
-          <p className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-            {t('upcoming.count', { count: upcoming.items.length })}
-          </p>
+          {upcoming.items.length > 0 ? (
+            <p className="text-small text-muted-foreground">
+              {t('upcoming.count', { count: upcoming.items.length })}
+            </p>
+          ) : null}
         </div>
         {upcoming.items.length === 0 ? (
           <Card className="surface-panel border-border bg-card">
