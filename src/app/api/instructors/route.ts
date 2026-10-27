@@ -36,7 +36,7 @@ import {
   parseInstructorQuery,
 } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
-import { heavyListingWhere } from '@/lib/discovery/published-prices';
+import { heavyListingWhere, lightCatalogueWhere } from '@/lib/discovery/published-prices';
 import { sendEmail } from '@/lib/email/send';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
 import { env } from '@/lib/env';
@@ -538,6 +538,7 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
     filters,
   ];
   if (q.heavy) clauses.push(heavyListingWhere(q.heavy));
+  else clauses.push(lightCatalogueWhere());
   if (q.city) {
     const names = cityFilterCandidates(q.city);
     clauses.push({

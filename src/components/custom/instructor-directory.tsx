@@ -85,8 +85,6 @@ const EMPTY_FILTERS: Filters = {
   heavy: '',
 };
 
-const HEAVY_ALL = '__all_heavy__';
-
 // Radix `<Select.Item value="">` throws on hydration — use a non-empty
 // sentinel for the "All cities" option and translate ↔ '' at the binding
 // sites so filters/URL/API keep using empty string as "no city filter".
@@ -429,7 +427,6 @@ function FilterBar({
   onClearGeolocation: () => void;
 }) {
   const tr = useTranslations('instructorDirectory');
-  const router = useRouter();
   const hasLocation = filters.lat != null || filters.lng != null;
   const statusCopy = locationStatusCopy(locationStatus, tr);
   const hasInvalidRateRange =
@@ -605,32 +602,27 @@ function FilterBar({
             </Select>
           </div>
 
-          <div className="flex min-w-0 flex-col gap-2">
-            <Label htmlFor="heavy-select">{tr('heavyLabel')}</Label>
-            <Select
-              value={filters.heavy === '' ? (heavyScope ? 'all' : HEAVY_ALL) : filters.heavy}
-              onValueChange={(value) => {
-                if (value === HEAVY_ALL) {
-                  if (heavyScope) router.push('/instructors');
-                  else onHeavyChange('');
-                  return;
-                }
-                onHeavyChange(HEAVY_FILTERS.find((filter) => filter === value) ?? '');
-              }}
-            >
-              <SelectTrigger id="heavy-select" className="bg-background">
-                <SelectValue placeholder={tr(heavyScope ? 'heavyAllVehicles' : 'heavyAll')} />
-              </SelectTrigger>
-              <SelectContent>
-                {heavyScope ? null : <SelectItem value={HEAVY_ALL}>{tr('heavyAll')}</SelectItem>}
-                <SelectItem value="all">{tr('heavyAllVehicles')}</SelectItem>
-                <SelectItem value="truck">{tr('heavyTruck')}</SelectItem>
-                <SelectItem value="bus">{tr('heavyBus')}</SelectItem>
-                <SelectItem value="ykb">{tr('heavyYkb')}</SelectItem>
-                {heavyScope ? <SelectItem value={HEAVY_ALL}>{tr('heavyAll')}</SelectItem> : null}
-              </SelectContent>
-            </Select>
-          </div>
+          {heavyScope ? (
+            <div className="flex min-w-0 flex-col gap-2">
+              <Label htmlFor="heavy-select">{tr('heavyLabel')}</Label>
+              <Select
+                value={filters.heavy === '' ? 'all' : filters.heavy}
+                onValueChange={(value) => {
+                  onHeavyChange(HEAVY_FILTERS.find((filter) => filter === value) ?? 'all');
+                }}
+              >
+                <SelectTrigger id="heavy-select" className="bg-background">
+                  <SelectValue placeholder={tr('heavyAllVehicles')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{tr('heavyAllVehicles')}</SelectItem>
+                  <SelectItem value="truck">{tr('heavyTruck')}</SelectItem>
+                  <SelectItem value="bus">{tr('heavyBus')}</SelectItem>
+                  <SelectItem value="ykb">{tr('heavyYkb')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          ) : null}
 
           <div className="flex min-w-0 flex-wrap items-center gap-3 self-end sm:pb-0.5">
             <Switch

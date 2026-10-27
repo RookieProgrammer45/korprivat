@@ -181,15 +181,36 @@ function offersHeavy(prices: PublishedPrices, filter: HeavyFilter): boolean {
   return prices.heavy.categories.some((code) => HEAVY_FILTER_CODES[filter].includes(code));
 }
 
-const heavyIds = Object.fromEntries(
-  (['truck', 'bus', 'ykb'] as const).map((filter) => [
-    filter,
-    [...byListing].flatMap(([id, prices]) => (offersHeavy(prices, filter) ? [id] : [])),
-  ]),
-) as Record<HeavyFilter, string[]>;
+function hasLightWebsitePrice(prices: PublishedPrices): boolean {
+  return Boolean(prices.lesson || prices.risk1Sek || prices.risk2Sek || prices.packages.length);
+}
+
+function listingIdsFor(filter: HeavyFilter): string[] {
+  return [...byListing].flatMap(([id, prices]) => (offersHeavy(prices, filter) ? [id] : []));
+}
+
+const heavyIds: Record<HeavyFilter, string[]> = {
+  all: listingIdsFor('all'),
+  truck: listingIdsFor('truck'),
+  bus: listingIdsFor('bus'),
+  ykb: listingIdsFor('ykb'),
+};
+
+const heavyOnlyIds = [...byListing]
+  .filter(([, prices]) => offersHeavy(prices, 'all') && !hasLightWebsitePrice(prices))
+  .map(([id]) => id);
+
+function idIn(ids: string[]): { id: { in: string[] } } {
+  return { id: { in: ids.length > 0 ? ids : ['__none__'] } };
+}
 
 export function heavyListingWhere(filter: HeavyFilter): { id: { in: string[] } } {
-  return { id: { in: heavyIds[filter] } };
+  return idIn(heavyIds[filter] ?? []);
+}
+
+// Light catalogue: B/A/BE schools. C/D-only rows stay on /tung-trafik.
+export function lightCatalogueWhere(): { id: { notIn: string[] } } {
+  return { id: { notIn: heavyOnlyIds } };
 }
 
 // Public pages show the website lesson price over the listing's stored rate;
