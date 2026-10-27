@@ -2,6 +2,7 @@
   "common": {
     "nav": {
       "findProvider": "Marketplace",
+      "heavyVehicles": "Heavy vehicles",
       "howItWorks": "How it works",
       "licenceCategories": "Licence categories",
       "drivingInstructor": "I teach at a driving school",
@@ -556,6 +557,7 @@
     "sortNearest": "Nearest first",
     "sortLessonPrice": "Lesson price, cheapest first",
     "sortPackagePrice": "Package price, cheapest first",
+    "heavyAllVehicles": "All heavy vehicles",
     "heavyLabel": "Heavy vehicles",
     "heavyAll": "All schools",
     "heavyTruck": "Truck (C1, C, CE)",
@@ -1513,18 +1515,18 @@
         "reviewCta": "Leave a review"
       },
       "rebook": {
-        "ariaLabel": "Quick rebook",
-        "title": "Rebook a familiar school",
-        "lead": "Pick a school you've already booked. We pre-fill your details — you only confirm.",
-        "cta": "Rebook {teacher}"
+        "ariaLabel": "Schools you have already booked",
+        "title": "Schools you have already booked",
+        "lead": "Open the school in the directory and use Contact the school. DriveLinkUp does not book a new lesson.",
+        "cta": "Open {teacher}"
       },
       "paymentMethods": {
         "eyebrow": "Saved details",
         "title": "Saved payment methods",
         "lead": "We never store the card itself — only the email of the buyer who paid. The list below shows the most-recent payers on your bookings.",
         "emptyTitle": "No saved payment methods yet.",
-        "emptyBody": "Once you've paid for a lesson, the buyer's email will land here so rebooking a familiar school is one tap.",
-        "emptyHint": "Use the booking history above to rebook a previously-used school in one tap.",
+        "emptyBody": "Once you've paid for a lesson, the buyer's email will land here. A new lesson is arranged with the school.",
+        "emptyHint": "Open a previous school from the list above and use Contact the school.",
         "loadError": "We couldn't load your saved details just now.",
         "last4WithBrand": "{brand} ending in {last4}",
         "brandOnly": "{brand} on file",
@@ -2276,7 +2278,8 @@
           "stockholm": "Stockholm",
           "goteborg": "Gothenburg",
           "malmo": "Malmö",
-          "categoryA": "Motorcycle · A"
+          "categoryA": "Motorcycle · A",
+          "heavy": "Heavy vehicles"
         }
       },
       "lead": "Free. You pay the school's price.",
@@ -2308,15 +2311,15 @@
       "steps": {
         "choose": {
           "title": "Choose a place",
-          "body": "Car, motorcycle or trailer."
+          "body": "Car, truck, bus or trailer."
         },
         "compare": {
           "title": "Read the price",
-          "body": "What you see is what you pay."
+          "body": "The price is shown when the school publishes it."
         },
         "book": {
-          "title": "Book with the school",
-          "body": "You pay the school."
+          "title": "Contact the school",
+          "body": "You contact the school. DriveLinkUp does not book the lesson."
         }
       }
     },
@@ -3517,11 +3520,7 @@
         "The school owns its details. A badge appears only when the check is stored.",
         "No fee for learners. You pay the school's price."
       ],
-      "facts": [
-        "Founded 2026",
-        "Stockholm, Sweden",
-        "Sweden first"
-      ],
+      "facts": ["Founded 2026", "Stockholm, Sweden", "Sweden first"],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {
@@ -3659,5 +3658,10 @@
     "heavyTruck": "Truck",
     "heavyBus": "Bus",
     "heavyFrom": "from SEK {amount}"
+  },
+  "heavyVehiclesPage": {
+    "eyebrow": "Truck, bus and YKB",
+    "title": "Heavy vehicles",
+    "subtitle": "Driving schools whose websites say they train for a C or D licence, or for YKB. The price is shown when the school publishes it."
   }
 }

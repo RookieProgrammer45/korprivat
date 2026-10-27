@@ -197,16 +197,6 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
                   ? formatSlotDate(instructor.nextSlotAt, locale)
                   : tr('availability.none')}
             </Fact>
-            {instructor.hourlyRateSek > 0 && !instructor.publishedPrices?.lesson ? (
-              <div className="min-w-0 sm:col-span-2">
-                <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                  {tr('hourlyRate')}
-                </dt>
-                <dd className="mt-1 break-words font-display text-h2 font-normal tracking-tight text-foreground">
-                  {formatSek(instructor.hourlyRateSek, locale, tr('rateSuffix'))}
-                </dd>
-              </div>
-            ) : null}
             {instructor.publishedPrices ? (
               <div className="min-w-0 sm:col-span-2">
                 <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
@@ -216,7 +206,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
                   <PublishedPriceList prices={instructor.publishedPrices} showSourceLink />
                 </dd>
               </div>
-            ) : instructor.hourlyRateSek > 0 ? null : (
+            ) : (
               <div className="min-w-0 sm:col-span-2">
                 <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
                   {trPrice('heading')}
@@ -265,13 +255,6 @@ function formatNumber(value: number, locale: string): string {
   return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
     maximumFractionDigits: 1,
   }).format(value);
-}
-
-function formatSek(value: number, locale: string, suffix: string): string {
-  if (!value) {
-    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  }
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(value)} ${suffix}`;
 }
 
 function formatSlotDate(iso: string, locale: string): string {

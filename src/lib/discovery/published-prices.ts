@@ -162,11 +162,13 @@ for (const school of dataset.schools as DatasetSchool[]) {
   };
   const hasBPrice = Boolean(prices.lesson || prices.risk1Sek || prices.risk2Sek || packages.length);
   const hasHeavyPrice = (heavy?.prices.length ?? 0) > 0;
-  if (!hasBPrice && !hasHeavyPrice) continue;
+  const hasHeavyTraining = Boolean(heavy && (heavy.categories.length > 0 || heavy.ykb));
+  if (!hasBPrice && !hasHeavyPrice && !hasHeavyTraining) continue;
   for (const listingId of school.listingIds) byListing.set(listingId, prices);
 }
 
 const HEAVY_FILTER_CODES: Record<HeavyFilter, ReadonlyArray<string>> = {
+  all: [],
   truck: ['C1', 'C1E', 'C', 'CE'],
   bus: ['D1', 'D1E', 'D', 'DE'],
   ykb: [],
@@ -174,6 +176,7 @@ const HEAVY_FILTER_CODES: Record<HeavyFilter, ReadonlyArray<string>> = {
 
 function offersHeavy(prices: PublishedPrices, filter: HeavyFilter): boolean {
   if (!prices.heavy) return false;
+  if (filter === 'all') return prices.heavy.categories.length > 0 || prices.heavy.ykb;
   if (filter === 'ykb') return prices.heavy.ykb;
   return prices.heavy.categories.some((code) => HEAVY_FILTER_CODES[filter].includes(code));
 }
@@ -193,6 +196,19 @@ export function heavyListingWhere(filter: HeavyFilter): { id: { in: string[] } }
 // the stored rate stays untouched for a future checkout.
 export function publishedPrices(listingId: string): PublishedPrices | null {
   return byListing.get(listingId) ?? null;
+}
+
+// A heavy-vehicle school can be listed with categories and no amount. The
+// price-request button stays until a lesson, risk, package, or heavy price exists.
+export function hasWebsitePrice(prices: PublishedPrices | null): boolean {
+  if (!prices) return false;
+  return Boolean(
+    prices.lesson ||
+      prices.risk1Sek ||
+      prices.risk2Sek ||
+      prices.packages.length > 0 ||
+      (prices.heavy?.prices.length ?? 0) > 0,
+  );
 }
 
 // The school's phone number as printed on its own website.

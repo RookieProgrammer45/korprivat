@@ -117,7 +117,6 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
   const showTimes = row.surfaces?.availabilityDisplay === true;
   const nextSlotPill =
     showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, locale, tr) : null;
-  const price = formatSek(row.hourlyRateSek, locale, tr('rateSuffixShort'));
   return (
     <Link
       href={`/instructors/${row.id}`}
@@ -142,8 +141,6 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
           </div>
           {row.publishedPrices?.lesson ? (
             <PublishedLessonPrice prices={row.publishedPrices} />
-          ) : price ? (
-            <p className="dlu-school-price">{price}</p>
           ) : null}
           <div className="mt-auto flex flex-wrap gap-2">
             {row.categories.map((category) => (
@@ -286,9 +283,4 @@ function formatNextSlotPill(
     ? t('slotTimeAndWeekday', { weekday: parts.weekday, time: parts.time })
     : `${t('slotMonthDay', { monthShort: parts.monthShort, day: parts.day })} · ${t('slotTime', { time: parts.time })}`;
   return { label: t('slotLabelRelative', { when }), iso };
-}
-
-function formatSek(amount: number, locale: 'en' | 'sv', suffix: string): string | null {
-  if (!amount) return null;
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} ${suffix}`;
 }

@@ -22,8 +22,8 @@ type PageProps = {
   }>;
 };
 
-function publicLessonRate(instructor: { id: string; hourlyRateSek: number }): number {
-  return publishedPrices(instructor.id)?.lesson?.priceSek ?? instructor.hourlyRateSek;
+function publicLessonRate(instructor: { id: string }): number {
+  return publishedPrices(instructor.id)?.lesson?.priceSek ?? 0;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

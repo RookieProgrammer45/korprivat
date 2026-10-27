@@ -169,10 +169,7 @@ function RecommendationCard({ row }: { row: RecommendedInstructor }) {
           ))}
         </div>
 
-        <div className="flex items-center justify-between border-t border-border pt-4">
-          <span className="font-display font-semibold text-foreground">
-            {formatSek(row.hourlyRateSek, locale, t('rateSuffix'))}
-          </span>
+        <div className="flex items-center justify-end border-t border-border pt-4">
           <Button asChild variant="ghost" size="sm">
             <Link href={`/instructors/${row.id}`}>{t('viewProfile')}</Link>
           </Button>
@@ -188,11 +185,6 @@ function formatNextSlotPill(iso: string, locale: 'en' | 'sv'): string {
   return parts.isWithinNextWeek
     ? `${parts.weekday} ${parts.time}`
     : `${parts.monthShort} ${parts.day} · ${parts.time}`;
-}
-
-function formatSek(amount: number, locale: 'en' | 'sv', suffix: string): string {
-  if (!amount) return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} ${suffix}`;
 }
 
 function formatPercent(value: number, locale: 'en' | 'sv'): string {

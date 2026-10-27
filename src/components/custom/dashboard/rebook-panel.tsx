@@ -92,13 +92,8 @@ export function RebookPanel() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-display font-semibold tabular-nums text-foreground">
-                    {formatSek(row.hourlyRateSek)}
-                  </span>
                   <Button asChild size="sm">
-                    <Link
-                      href={`/instructors/${encodeURIComponent(row.id)}?rebook=${encodeURIComponent(row.lastBookingId)}`}
-                    >
+                    <Link href={`/instructors/${encodeURIComponent(row.id)}`}>
                       {t('cta', { teacher: row.name.split(' ')[0] ?? row.name })}
                     </Link>
                   </Button>
@@ -110,17 +105,4 @@ export function RebookPanel() {
       </ul>
     </section>
   );
-}
-
-function formatSek(amountSek: number): string {
-  try {
-    return new Intl.NumberFormat('sv-SE', {
-      style: 'currency',
-      currency: 'SEK',
-      useGrouping: true,
-      maximumFractionDigits: 0,
-    }).format(amountSek);
-  } catch {
-    return `${amountSek} SEK`;
-  }
 }

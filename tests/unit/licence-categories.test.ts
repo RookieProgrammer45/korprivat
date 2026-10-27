@@ -4,17 +4,17 @@ import {
   withUsualMotorcycleCategories,
 } from '@/lib/business/licence-categories';
 
-describe('usual motorcycle offer on B schools', () => {
-  it('adds A, A1 and A2 when a school already offers B', () => {
-    expect(withUsualMotorcycleCategories(['B'])).toEqual(['A1', 'A2', 'A', 'B']);
+describe('published licence categories', () => {
+  it('does not add motorcycle categories to a car school', () => {
+    expect(withUsualMotorcycleCategories(['B'])).toEqual(['B']);
   });
 
-  it('does not invent motorcycle categories without B', () => {
-    expect(withUsualMotorcycleCategories(['BE'])).toEqual(['BE']);
+  it('keeps a motorcycle category the school actually stores', () => {
+    expect(withUsualMotorcycleCategories(['A', 'B'])).toEqual(['A', 'B']);
   });
 
-  it('lets a motorcycle search also match B listings', () => {
-    expect(categoryFilterMatches(['A'])).toEqual(expect.arrayContaining(['A', 'B']));
+  it('does not let a motorcycle search match car-only listings', () => {
+    expect(categoryFilterMatches(['A'])).toEqual(['A']);
     expect(categoryFilterMatches(['B'])).toEqual(['B']);
   });
 });

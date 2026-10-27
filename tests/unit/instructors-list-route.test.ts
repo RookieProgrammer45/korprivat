@@ -269,7 +269,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       languages: ['sv', 'en'],
       verificationStatus: 'verified',
       reviewSummary: { count: 2, averageRating: 4.5 },
-      bookingMode: 'request',
+      bookingMode: 'contact',
     });
     expect(body.items[0]).not.toHaveProperty('userId');
   });
@@ -468,15 +468,15 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(whereField(where, 'OR')).toEqual([{ categories: { has: 'B' } }]);
   });
 
-  it('lets a motorcycle category search also match B listings', async () => {
+  it('does not treat a car listing as motorcycle when the search asks for A', async () => {
     mockInstructorFindMany.mockResolvedValueOnce([instructorRow({ categories: ['B'] })]);
     const res = await GET(req('?categories=A'));
     expect(res.status).toBe(200);
-    expect(whereField(mockInstructorFindMany.mock.calls[0]?.[0]?.where, 'OR')).toEqual(
-      expect.arrayContaining([{ categories: { has: 'A' } }, { categories: { has: 'B' } }]),
-    );
+    expect(whereField(mockInstructorFindMany.mock.calls[0]?.[0]?.where, 'OR')).toEqual([
+      { categories: { has: 'A' } },
+    ]);
     const body = (await res.json()) as { items: Array<{ categories: string[] }> };
-    expect(body.items[0]?.categories).toEqual(expect.arrayContaining(['A', 'A1', 'A2', 'B']));
+    expect(body.items[0]?.categories).toEqual(['B']);
   });
 
   it('keeps instructors at or above the inclusive minimum rating threshold', async () => {

@@ -136,6 +136,7 @@ function instructorRecord(
 
 describe('POST /api/bookings — email dispatch', () => {
   beforeEach(() => {
+    vi.stubEnv('BOOKING_CREATION_ENABLED', 'true');
     sendEmailMock.mockClear();
     sendEmailMock.mockResolvedValue({ id: 'mock_email_id' });
     mockInstructorFindUnique.mockReset();
@@ -201,7 +202,18 @@ describe('POST /api/bookings — email dispatch', () => {
   });
 
   afterEach(() => {
+    vi.unstubAllEnvs();
     vi.restoreAllMocks();
+  });
+
+  it('does not create a booking while the directory release has creation closed', async () => {
+    vi.stubEnv('BOOKING_CREATION_ENABLED', '');
+    mockGetSessionUser.mockResolvedValue(LEARNER_SESSION);
+    const res = await POST(jsonRequest(VALID_BODY));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: 'booking_not_available' });
+    expect(mockInstructorFindUnique).not.toHaveBeenCalled();
+    expect(mockBookingCreate).not.toHaveBeenCalled();
   });
 
   it('refuses instant create from bookingMode when the listing has no grant', async () => {

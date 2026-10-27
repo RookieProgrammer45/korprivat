@@ -75,12 +75,6 @@ export function ProviderComparison({
                 />
                 <Fact label={t('serviceArea')} value={provider.serviceArea} />
                 {provider.phone ? <Fact label={t('phone')} value={provider.phone.display} /> : null}
-                {provider.hourlyRateSek > 0 && !provider.publishedPrices?.lesson ? (
-                  <Fact
-                    label={t('rate')}
-                    value={t('rateValue', { amount: formatSek(provider.hourlyRateSek, locale) })}
-                  />
-                ) : null}
                 {provider.publishedPrices ? (
                   <PublishedPricesFact
                     label={tPrice('heading')}
@@ -154,14 +148,6 @@ function PublishedPricesFact({
       </dd>
     </div>
   );
-}
-
-function formatSek(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
-    style: 'currency',
-    currency: 'SEK',
-    maximumFractionDigits: 0,
-  }).format(amount);
 }
 
 function formatNumber(amount: number, locale: string): string {

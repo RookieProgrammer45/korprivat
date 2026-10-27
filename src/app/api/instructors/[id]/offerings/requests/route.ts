@@ -90,10 +90,16 @@ export async function POST(req: Request, ctx: Ctx) {
   // OfferingRequest is a public name/email/phone message (inquiry_collection),
   // not a slot request-to-book. Contact listings and a withdrawn inquiry scope
   // both refuse. General platform /api/contact is a different route.
-  const { loadListingSurfaces, notAuthorizedBody } = await import('@/lib/orgs/school-authorization');
+  const { loadListingSurfaces, notAuthorizedBody } = await import(
+    '@/lib/orgs/school-authorization'
+  );
   const inquirySurfaces = await loadListingSurfaces(instructor.id, instructor.bookingMode);
   if (!inquirySurfaces.inquiryCollection) {
     return NextResponse.json(notAuthorizedBody(), { status: 403 });
+  }
+  const { newBookingCreationEnabled } = await import('@/lib/scheduling/booking-creation');
+  if (!newBookingCreationEnabled()) {
+    return NextResponse.json({ error: 'booking_not_available' }, { status: 403 });
   }
   await prisma.offeringRequest.create({
     data: {

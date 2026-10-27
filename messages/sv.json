@@ -2,6 +2,7 @@
   "common": {
     "nav": {
       "findProvider": "Marknadsplats",
+      "heavyVehicles": "Tung trafik",
       "howItWorks": "Så fungerar det",
       "licenceCategories": "Körkortskategorier",
       "drivingInstructor": "Jag undervisar på en trafikskola",
@@ -558,6 +559,7 @@
     "sortPackagePrice": "Paketpris, billigast först",
     "heavyLabel": "Tung trafik",
     "heavyAll": "Alla skolor",
+    "heavyAllVehicles": "Alla tunga fordon",
     "heavyTruck": "Lastbil (C1, C, CE)",
     "heavyBus": "Buss (D1, D, DE)",
     "heavyYkb": "YKB",
@@ -1513,18 +1515,18 @@
         "reviewCta": "Lämna en recension"
       },
       "rebook": {
-        "ariaLabel": "Snabb ombokning",
-        "title": "Boka om hos en bekant skola",
-        "lead": "Välj en skola du redan bokat hos. Vi fyller i dina uppgifter — du bekräftar bara.",
-        "cta": "Boka om {teacher}"
+        "ariaLabel": "Skolor du redan har bokat",
+        "title": "Skolor du redan har bokat",
+        "lead": "Öppna skolan i katalogen och använd Kontakta skolan. DriveLinkUp bokar inte en ny lektion.",
+        "cta": "Öppna {teacher}"
       },
       "paymentMethods": {
         "eyebrow": "Sparade uppgifter",
         "title": "Sparade betalningsmetoder",
         "lead": "Vi lagrar aldrig själva kortet — bara e-postadressen för den som betalade. Listan nedan visar de senaste betalarna för dina bokningar.",
         "emptyTitle": "Inga sparade betalningsmetoder ännu.",
-        "emptyBody": "När du betalat för en lektion hamnar köparens e-post här, så att ombokning hos en bekant skola går snabbt.",
-        "emptyHint": "Använd bokningshistoriken ovan för att boka om hos en tidigare skola i ett klick.",
+        "emptyBody": "När du betalat för en lektion hamnar köparens e-post här. En ny lektion ordnar du med skolan.",
+        "emptyHint": "Öppna en tidigare skola från listan ovan och använd Kontakta skolan.",
         "loadError": "Vi kunde inte hämta dina sparade uppgifter just nu.",
         "last4WithBrand": "{brand} som slutar på {last4}",
         "brandOnly": "{brand} på fil",
@@ -2276,7 +2278,8 @@
           "stockholm": "Stockholm",
           "goteborg": "Göteborg",
           "malmo": "Malmö",
-          "categoryA": "Motorcykel · A"
+          "categoryA": "Motorcykel · A",
+          "heavy": "Tung trafik"
         }
       },
       "lead": "Gratis. Du betalar skolans pris.",
@@ -2308,15 +2311,15 @@
       "steps": {
         "choose": {
           "title": "Välj ort",
-          "body": "Bil, motorcykel eller släp."
+          "body": "Bil, lastbil, buss eller släp."
         },
         "compare": {
           "title": "Läs priset",
-          "body": "Det du ser är det du betalar."
+          "body": "Priset visas när skolan publicerar det."
         },
         "book": {
-          "title": "Boka hos skolan",
-          "body": "Du betalar skolan."
+          "title": "Kontakta skolan",
+          "body": "Du hör av dig till skolan. DriveLinkUp bokar inte lektionen."
         }
       }
     },
@@ -3517,11 +3520,7 @@
         "Skolan äger sina uppgifter. Ett märke visas bara när kontrollen finns sparad.",
         "Ingen avgift för elever. Du betalar skolans pris."
       ],
-      "facts": [
-        "Grundat 2026",
-        "Stockholm, Sverige",
-        "Sverige först"
-      ],
+      "facts": ["Grundat 2026", "Stockholm, Sverige", "Sverige först"],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."
     },
     "promise": {
@@ -3659,5 +3658,10 @@
     "heavyTruck": "Lastbil",
     "heavyBus": "Buss",
     "heavyFrom": "från {amount} kr"
+  },
+  "heavyVehiclesPage": {
+    "eyebrow": "Lastbil, buss och YKB",
+    "title": "Tung trafik",
+    "subtitle": "Trafikskolor som enligt sin webbplats utbildar för C- och D-behörighet eller YKB. Priset visas när skolan publicerar det."
   }
 }

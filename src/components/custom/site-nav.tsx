@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown, Menu } from 'lucide-react';
+import { ChevronDown, Menu, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -34,6 +34,16 @@ import { cn } from '@/lib/utils';
 export function useIsAuthenticated(): boolean {
   const { data } = useSession();
   return Boolean(data?.user);
+}
+
+function NavLabel({ href, children }: { href: string; children: React.ReactNode }) {
+  if (href !== '/tung-trafik') return children;
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <Truck className="size-4" aria-hidden />
+      {children}
+    </span>
+  );
 }
 
 function visibleItems(group: NavGroup, isAuthenticated: boolean): NavItem[] {
@@ -189,7 +199,7 @@ export function SiteNav() {
                   href={slot.item.href}
                   aria-current={isActive(slot.item.href) ? 'page' : undefined}
                 >
-                  {tNav(slot.item.labelKey)}
+                  <NavLabel href={slot.item.href}>{tNav(slot.item.labelKey)}</NavLabel>
                 </Link>
               </Button>
             ) : (
@@ -255,7 +265,7 @@ export function SiteNav() {
                             href={slot.item.href}
                             aria-current={isActive(slot.item.href) ? 'page' : undefined}
                           >
-                            {tNav(slot.item.labelKey)}
+                            <NavLabel href={slot.item.href}>{tNav(slot.item.labelKey)}</NavLabel>
                           </Link>
                         </DropdownMenuItem>
                       ) : (
@@ -349,7 +359,7 @@ export function SiteNav() {
                           aria-current={isActive(slot.item.href) ? 'page' : undefined}
                           onClick={() => setOpen(false)}
                         >
-                          {tNav(slot.item.labelKey)}
+                          <NavLabel href={slot.item.href}>{tNav(slot.item.labelKey)}</NavLabel>
                         </Link>
                       </Button>
                     ) : (

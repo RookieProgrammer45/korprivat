@@ -2,7 +2,7 @@
 
 'use client';
 
-import { ChevronDown, Search } from 'lucide-react';
+import { ChevronDown, Search, Truck } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -26,6 +26,7 @@ const SEARCH_CITIES = [
 ] as const;
 
 const POPULAR_LINKS = [
+  { key: 'heavy', href: '/tung-trafik' },
   { key: 'categoryA', href: '/instructors?categories=A' },
   { key: 'stockholm', href: '/locations/se/stockholm' },
   { key: 'goteborg', href: '/locations/se/goteborg' },
@@ -109,8 +110,11 @@ export function HomeHero() {
               <Link
                 key={link.key}
                 href={link.href}
-                className="dlu-hero-popular-link inline-flex min-h-11 items-center rounded-full border border-border bg-card px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                className="dlu-hero-popular-link inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-card px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               >
+                {link.key === 'heavy' ? (
+                  <Truck className="size-4" strokeWidth={1.75} aria-hidden />
+                ) : null}
                 {t(`popular.links.${link.key}`)}
               </Link>
             ))}

@@ -1,6 +1,7 @@
 import 'server-only';
 import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
 import { parseSchoolSlug, schoolPath } from '@/lib/seo/school-slugs';
 
 export type PublicInstructorSeo = {
@@ -63,12 +64,7 @@ export async function loadPublicInstructorSeo(id: string): Promise<PublicInstruc
     indexable,
     userId: row.userId,
     providerRole: row.providerRole,
-    bookingMode:
-      row.bookingMode === 'request'
-        ? 'request'
-        : row.bookingMode === 'contact'
-          ? 'contact'
-          : 'instant',
+    bookingMode: publishedBookingMode(row.bookingMode),
   };
 }
 

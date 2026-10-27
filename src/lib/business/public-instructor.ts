@@ -2,12 +2,18 @@ import 'server-only';
 import { withUsualMotorcycleCategories } from '@/lib/business/licence-categories';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
-import { publishedInbox, publishedPhone, publishedPrices } from '@/lib/discovery/published-prices';
+import {
+  hasWebsitePrice,
+  publishedInbox,
+  publishedPhone,
+  publishedPrices,
+} from '@/lib/discovery/published-prices';
 import {
   phoneFact,
   resolvePriceRequest,
   resolveSchoolContact,
 } from '@/lib/discovery/school-contact';
+import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
 
 export type PublicGoogleReview = {
   id: string;
@@ -198,12 +204,7 @@ export function toPublicInstructor(
         : row.cancellationPolicyTier === 'flexible'
           ? 'flexible'
           : null,
-    bookingMode:
-      row.bookingMode === 'request'
-        ? 'request'
-        : row.bookingMode === 'contact'
-          ? 'contact'
-          : 'instant',
+    bookingMode: publishedBookingMode(row.bookingMode),
     // Raw marketplace kind as stored (SCHOOL | INSTRUCTOR | HANDLEDARE) — a
     // school-owned listing reports SCHOOL (QA 2026-10-13: the previous
     // collapse made /api/instructors describe every school as INSTRUCTOR).
@@ -220,7 +221,7 @@ export function toPublicInstructor(
         : 'INSTRUCTOR',
     phone: row.providerRole === 'SCHOOL' ? phoneFact(publishedPhone(row.id)) : null,
     contact: resolveSchoolContact(contactInput),
-    priceRequest: prices ? null : resolvePriceRequest(contactInput),
+    priceRequest: hasWebsitePrice(prices) ? null : resolvePriceRequest(contactInput),
     ...(distanceKm == null ? {} : { distanceKm }),
   };
 }

@@ -31,6 +31,7 @@ import {
 import { resolveOrigin } from '@/lib/payments/origin';
 import { isReliableProcessingOn, nativeOutboxData } from '@/lib/reliability/inbox-policy';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
+import { newBookingCreationEnabled } from '@/lib/scheduling/booking-creation';
 import { evaluateBookingPolicy, slotClaimOutcome } from '@/lib/scheduling/booking-policy';
 import {
   loadInstructorPaymentEligibility,
@@ -89,6 +90,12 @@ export async function POST(req: Request) {
     sessionUser = await requireAuth(req);
   } catch (res) {
     return res as Response;
+  }
+
+  // Directory-first release: no new instant or request booking. Existing
+  // rows still move through accept, pay, cancel, and dispute routes.
+  if (!newBookingCreationEnabled()) {
+    return NextResponse.json({ error: 'booking_not_available' }, { status: 403 });
   }
 
   // Invariant 1: verified DOB / ACTIVE only — never trust signup claimed DOB alone.

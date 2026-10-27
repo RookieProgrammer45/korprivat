@@ -13,20 +13,18 @@ export const HEAVY_LICENCE_CODES = ['C1', 'C1E', 'C', 'CE', 'D1', 'D1E', 'D', 'D
 export type HeavyLicenceCode = (typeof HEAVY_LICENCE_CODES)[number];
 
 /** Directory filter: truck = C1/C1E/C/CE, bus = D1/D1E/D/DE, ykb = YKB courses. */
-export const HEAVY_FILTERS = ['truck', 'bus', 'ykb'] as const;
+export const HEAVY_FILTERS = ['all', 'truck', 'bus', 'ykb'] as const;
 
 export type HeavyFilter = (typeof HEAVY_FILTERS)[number];
 
-export const MOTORCYCLE_LICENCE_CODES = ['A1', 'A2', 'A'] as const;
-
 const CODE_SET: ReadonlySet<string> = new Set(LICENCE_CATEGORY_CODES);
-const MOTORCYCLE_SET: ReadonlySet<string> = new Set(MOTORCYCLE_LICENCE_CODES);
 
 export function isLicenceCategoryCode(value: string): value is LicenceCategoryCode {
   return CODE_SET.has(value);
 }
 
-/** Swedish B schools usually also teach motorcycle. Read-time only — not a permit. */
+// Stored permit categories only. Car training is not evidence of motorcycle,
+// taxi, or heavy-vehicle training.
 export function withUsualMotorcycleCategories(
   categories: readonly string[],
 ): LicenceCategoryCode[] {
@@ -34,15 +32,9 @@ export function withUsualMotorcycleCategories(
   for (const code of categories) {
     if (isLicenceCategoryCode(code)) present.add(code);
   }
-  if (present.has('B')) {
-    for (const code of MOTORCYCLE_LICENCE_CODES) present.add(code);
-  }
   return LICENCE_CATEGORY_CODES.filter((code) => present.has(code));
 }
 
-/** A motorcycle filter must also match stored B-only listings. */
 export function categoryFilterMatches(requested: readonly string[]): string[] {
-  const next = new Set(requested);
-  if (requested.some((code) => MOTORCYCLE_SET.has(code))) next.add('B');
-  return [...next];
+  return [...new Set(requested)];
 }

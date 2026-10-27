@@ -3,7 +3,7 @@ import { InstructorItem, parseInstructorQuery } from '@/lib/contracts/instructor
 
 describe('heavy-vehicle directory filter', () => {
   it('accepts truck, bus and ykb', () => {
-    for (const heavy of ['truck', 'bus', 'ykb'] as const) {
+    for (const heavy of ['all', 'truck', 'bus', 'ykb'] as const) {
       const parsed = parseInstructorQuery(new URLSearchParams({ heavy }));
       expect(parsed.ok && parsed.value.heavy).toBe(heavy);
     }

@@ -99,8 +99,12 @@ type Status = 'loading' | 'ready' | 'empty' | 'error' | 'invalid';
 
 export function InstructorDirectory({
   initialFilters,
+  heavyScope = false,
 }: {
   initialFilters?: Partial<Filters>;
+  // The heavy-vehicle page stays on truck, bus and YKB schools. Clearing
+  // filters returns to that list instead of the whole catalogue.
+  heavyScope?: boolean;
 } = {}) {
   const router = useRouter();
   const pathname = usePathname();
@@ -258,9 +262,11 @@ export function InstructorDirectory({
   );
 
   const clearFilters = useCallback(() => {
-    setFilters(EMPTY_FILTERS);
-    router.replace(pathname, { scroll: false });
-  }, [pathname, router]);
+    const next: Filters = heavyScope ? { ...EMPTY_FILTERS, heavy: 'all' } : EMPTY_FILTERS;
+    setFilters(next);
+    const qs = buildQueryString(next);
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [heavyScope, pathname, router]);
 
   const toggleComparison = useCallback((id: string) => {
     setComparisonLimitReached(false);
@@ -329,6 +335,7 @@ export function InstructorDirectory({
           onSortChange={(value) => updateFilters({ sort: value })}
           onAffiliationChange={(value) => updateFilters({ affiliation: value })}
           onHeavyChange={(value) => updateFilters({ heavy: value })}
+          heavyScope={heavyScope}
           onLocationRequest={onLocationRequest}
           onClearGeolocation={() =>
             updateFilters({
@@ -399,6 +406,7 @@ function FilterBar({
   onSortChange,
   onAffiliationChange,
   onHeavyChange,
+  heavyScope = false,
   onLocationRequest,
   onClearGeolocation,
 }: {
@@ -416,10 +424,12 @@ function FilterBar({
   onSortChange: (value: SortMode) => void;
   onAffiliationChange: (value: 'school' | 'independent' | 'all' | '') => void;
   onHeavyChange: (value: HeavyFilter | '') => void;
+  heavyScope?: boolean;
   onLocationRequest: () => void;
   onClearGeolocation: () => void;
 }) {
   const tr = useTranslations('instructorDirectory');
+  const router = useRouter();
   const hasLocation = filters.lat != null || filters.lng != null;
   const statusCopy = locationStatusCopy(locationStatus, tr);
   const hasInvalidRateRange =
@@ -598,19 +608,26 @@ function FilterBar({
           <div className="flex min-w-0 flex-col gap-2">
             <Label htmlFor="heavy-select">{tr('heavyLabel')}</Label>
             <Select
-              value={filters.heavy === '' ? HEAVY_ALL : filters.heavy}
-              onValueChange={(value) =>
-                onHeavyChange(HEAVY_FILTERS.find((filter) => filter === value) ?? '')
-              }
+              value={filters.heavy === '' ? (heavyScope ? 'all' : HEAVY_ALL) : filters.heavy}
+              onValueChange={(value) => {
+                if (value === HEAVY_ALL) {
+                  if (heavyScope) router.push('/instructors');
+                  else onHeavyChange('');
+                  return;
+                }
+                onHeavyChange(HEAVY_FILTERS.find((filter) => filter === value) ?? '');
+              }}
             >
               <SelectTrigger id="heavy-select" className="bg-background">
-                <SelectValue placeholder={tr('heavyAll')} />
+                <SelectValue placeholder={tr(heavyScope ? 'heavyAllVehicles' : 'heavyAll')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value={HEAVY_ALL}>{tr('heavyAll')}</SelectItem>
+                {heavyScope ? null : <SelectItem value={HEAVY_ALL}>{tr('heavyAll')}</SelectItem>}
+                <SelectItem value="all">{tr('heavyAllVehicles')}</SelectItem>
                 <SelectItem value="truck">{tr('heavyTruck')}</SelectItem>
                 <SelectItem value="bus">{tr('heavyBus')}</SelectItem>
                 <SelectItem value="ykb">{tr('heavyYkb')}</SelectItem>
+                {heavyScope ? <SelectItem value={HEAVY_ALL}>{tr('heavyAll')}</SelectItem> : null}
               </SelectContent>
             </Select>
           </div>
@@ -840,11 +857,6 @@ function InstructorCard({ row }: { row: InstructorFilteredItem }) {
               </div>
             </div>
           </div>
-          {row.hourlyRateSek > 0 && !row.publishedPrices?.lesson ? (
-            <p className="dlu-school-price">
-              {formatSek(row.hourlyRateSek, locale, tr('rateSuffixShort'))}
-            </p>
-          ) : null}
         </div>
         {row.publishedPrices?.lesson ? <PublishedLessonPrice prices={row.publishedPrices} /> : null}
         {row.publishedPrices ? <PublishedPackageFrom prices={row.publishedPrices} /> : null}
@@ -1184,11 +1196,4 @@ function formatNumber(value: number, locale: string): string {
   return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
     maximumFractionDigits: 1,
   }).format(value);
-}
-
-function formatSek(value: number, locale: string, suffix: string): string {
-  if (!value) {
-    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  }
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(value)} ${suffix}`;
 }
