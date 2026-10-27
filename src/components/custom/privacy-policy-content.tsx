@@ -9,7 +9,24 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { PRIVACY_POLICY_VERSION } from '@/lib/contracts/privacy';
 
-const SECTION_IDS = ['0', '1', '2', '3', '4', '5', '6', '7', '8'] as const;
+const SECTION_IDS = [
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+] as const;
 
 export function PrivacyPolicyContent() {
   const t = useTranslations('privacyPage');
@@ -38,9 +55,6 @@ export function PrivacyPolicyContent() {
             {t('hero.lastUpdated', { version: PRIVACY_POLICY_VERSION })}
           </p>
           <p className="text-body-lg text-foreground/90">{t('hero.intro')}</p>
-          <p className="rounded-lg border border-border bg-muted p-4 text-small text-foreground">
-            {t('hero.reviewNotice')}
-          </p>
         </header>
 
         <article className="grid gap-8 text-body text-foreground/90">

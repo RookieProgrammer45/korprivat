@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   ADSENSE_CLIENT_DEFAULT,
+  adsenseAllowedByConsent,
   adsenseClient,
   adsenseScriptSrc,
   isAdsenseClient,
@@ -21,5 +22,11 @@ describe('AdSense publisher id', () => {
     expect(adsenseScriptSrc(ADSENSE_CLIENT_DEFAULT)).toBe(
       `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_DEFAULT}`,
     );
+  });
+
+  it('loads AdSense only when marketing consent is on', () => {
+    expect(adsenseAllowedByConsent(null)).toBe(false);
+    expect(adsenseAllowedByConsent({ marketing: false })).toBe(false);
+    expect(adsenseAllowedByConsent({ marketing: true })).toBe(true);
   });
 });

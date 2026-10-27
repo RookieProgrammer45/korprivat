@@ -1068,9 +1068,9 @@
         "stepLead": "As a handledare you sit alongside a learner during supervised practice driving. Read the terms below, then tick the box to confirm you meet the requirements.",
         "versionEyebrow": "Terms version {version}",
         "bodyParagraphs": {
-          "0": "DriveLinkUp connects learners and handledare — the marketplace itself. We do not arrange insurance, supervise the sessions, or carry liability for what happens at the wheel. By ticking the box below you confirm that your motor insurance covers supervised practice driving (övningskörning) with a learner driver, and that you have evidence of it (your insurer's confirmation or the policy schedule).",
-          "1": "Liability for supervised sessions rests with you and the learner during those sessions. DriveLinkUp is not a party to the arrangement between handledare and learner, and our marketplace role ends once the session is agreed and held. If an incident occurs, the involved parties' insurance — not the marketplace — is the right first conversation.",
-          "2": "These terms may be updated from time to time. When we change them materially we'll reach out and ask you to re-attest. A record of every acceptance — including the version of the terms you accepted and the date — is stored against your account. This is placeholder text; the founding team will replace it with lawyer-reviewed copy."
+          "0": "DriveLinkUp is a directory. If you sign up as handledare we connect learners and handledare for supervised-practice guidance. We do not arrange insurance, supervise the sessions, or carry liability for what happens at the wheel. By ticking the box you confirm that your motor insurance covers supervised practice driving (övningskörning) with a learner, and that you can show evidence of it (your insurer’s confirmation or the policy schedule).",
+          "1": "Liability for supervised sessions rests with you and the learner during those sessions. DriveLinkUp is not a party to the arrangement between handledare and learner. If an incident occurs, the involved parties’ insurance — not DriveLinkUp — is the right first conversation.",
+          "2": "These terms may be updated. When we change them materially we will ask you to accept again. A record of every acceptance — version and date — is stored against your account."
         },
         "checkboxLabel": "I confirm I carry valid motor insurance covering supervised practice driving (övningskörning) with a learner driver, that liability for supervised sessions rests with me and the learner (not DriveLinkUp), and that I have read and agree to the handledare terms below.",
         "submit": "Confirm and continue",
@@ -1722,9 +1722,9 @@
         "currentBadge": "Handledare terms accepted",
         "versionEyebrow": "Terms version {version}",
         "bodyParagraphs": {
-          "0": "DriveLinkUp connects learners and handledare — the marketplace itself. We do not arrange insurance, supervise the sessions, or carry liability for what happens at the wheel. By ticking the box below you confirm that your motor insurance covers supervised practice driving (övningskörning) with a learner driver, and that you have evidence of it (your insurer's confirmation or the policy schedule).",
-          "1": "Liability for supervised sessions rests with you and the learner during those sessions. DriveLinkUp is not a party to the arrangement between handledare and learner, and our marketplace role ends once the session is agreed and held. If an incident occurs, the involved parties' insurance — not the marketplace — is the right first conversation.",
-          "2": "These terms may be updated from time to time. When we change them materially we'll reach out and ask you to re-attest. A record of every acceptance — including the version of the terms you accepted and the date — is stored against your account. This is placeholder text; the founding team will replace it with lawyer-reviewed copy."
+          "0": "DriveLinkUp is a directory. If you sign up as handledare we connect learners and handledare for supervised-practice guidance. We do not arrange insurance, supervise the sessions, or carry liability for what happens at the wheel. By ticking the box you confirm that your motor insurance covers supervised practice driving (övningskörning) with a learner, and that you can show evidence of it (your insurer’s confirmation or the policy schedule).",
+          "1": "Liability for supervised sessions rests with you and the learner during those sessions. DriveLinkUp is not a party to the arrangement between handledare and learner. If an incident occurs, the involved parties’ insurance — not DriveLinkUp — is the right first conversation.",
+          "2": "These terms may be updated. When we change them materially we will ask you to accept again. A record of every acceptance — version and date — is stored against your account."
         },
         "checkboxLabel": "I confirm I carry valid motor insurance covering supervised practice driving (övningskörning) with a learner driver, that liability for supervised sessions rests with me and the learner (not DriveLinkUp), and that I have read and agree to the handledare terms below.",
         "submit": "Confirm and continue",
@@ -2055,92 +2055,153 @@
   },
   "privacyPage": {
     "meta": {
-      "title": "Privacy policy",
-      "description": "How DriveLinkUp processes personal data for accounts, directory listings, school credentials and support."
+      "title": "Privacy Policy",
+      "description": "How DriveLinkUp processes personal data for accounts, the school directory, cookies, and support."
     },
     "hero": {
       "eyebrow": "Privacy",
-      "title": "Privacy policy",
-      "lastUpdated": "Last updated: 26 August 2026 · policy version {version}",
-      "intro": "This policy explains how DriveLinkUp processes personal data when you browse school listings, create an account or join as a school or handledare.",
-      "reviewNotice": "Legal review note: this customer-facing draft should be reviewed and completed by DriveLinkUp's legal adviser before publication."
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: 27 October 2026 · policy version {version}",
+      "intro": "This notice explains how DriveLinkUp processes personal data when you browse the directory, create an account, contact a school, or write to us. It describes current processing only. DriveLinkUp does not book lessons or take lesson payments."
     },
     "sections": {
       "0": {
         "title": "1. Controller and contact",
-        "body": "DriveLinkUp is the controller for the personal data described here. For privacy questions or requests, email support@drivelinkup.com with “Privacy” in the subject line.",
+        "body": "DriveLinkUp is the controller for the personal data described here. We have not published a registered company name or organisation number on this page. Write to support@drivelinkup.com with “Privacy” in the subject. If we register a Swedish company we will add the legal name and organisation number here.",
         "items": []
       },
       "1": {
-        "title": "2. Data we collect",
-        "body": "Depending on how you use the service, we may process:",
+        "title": "2. Personal data we collect",
+        "body": "What we collect depends on how you use the site. We do not currently collect card numbers, and learner signup does not scan identity documents.",
         "items": [
-          "Account data such as name, email address, sign-in credentials and account role.",
-          "Profile data such as city, languages, licence categories, profile photo, lesson price and biography.",
-          "Support messages and questions about a school listing that you send to us.",
-          "Payment data and transaction status processed through the hosted payment provider. Card details are handled by that provider rather than stored by DriveLinkUp.",
-          "School credential, licence, insurance and onboarding information submitted for the school or handledare account.",
-          "Technical data such as IP address, browser information, device information and consent preferences.",
-          "Messages or contact details you choose to send to support."
+          "Account details: name, email address, hashed password, and role (learner, school, or handledare).",
+          "The date of birth you enter at learner signup. We use it only to check that you are 16 or older. It is not treated as a verified date of birth for booking.",
+          "Optional profile photo that you choose to upload.",
+          "School onboarding details such as school name, organisation number, and city.",
+          "A teaching-licence file if you upload one. We store it to review the listing. That is not an automatic check with Transportstyrelsen.",
+          "Handledare insurance attestation (your confirmation and the time you gave it), not the insurance document unless you send that to support.",
+          "Support messages you send on the contact form. Those are emailed to support@drivelinkup.com. We do not keep a separate public contact database.",
+          "Questions you type into the on-site assistant. The text is sent to OpenAI to generate a reply.",
+          "Approximate coordinates when you click “Use my location”, sent with the directory request so we can sort schools. We do not save that location on your account.",
+          "Cookie choice, policy version, and a hash of IP address plus browser information. We do not store the raw IP on the consent record.",
+          "Technical logs such as IP address, browser information, and security events needed to run and protect the site.",
+          "Name, email, and profile photo that Google shares if you sign in with Google.",
+          "Published prices, categories, and listing text taken from a school's own website so the directory can show what the school already publishes.",
+          "Google reviews we store and show on a listing, marked as coming from Google. We do not verify those reviews.",
+          "Details about another person if you include them in a support message or an assistant question."
         ]
       },
       "2": {
         "title": "3. Purposes and legal bases",
-        "body": "We use personal data only for the purposes needed to provide, secure and improve the service. The applicable basis may be performance of a contract, legitimate interests, consent or compliance with a legal obligation.",
+        "body": "We process personal data only for the purposes below. Each purpose has a GDPR Article 6 basis.",
         "items": [
-          "To create and manage accounts and school or handledare profiles.",
-          "To show school listings and published prices so you can compare and contact the school.",
-          "To send account messages and provide support.",
-          "To process payments, refunds and payment-related records through our payment provider.",
-          "To review school credentials and safety information submitted during onboarding.",
-          "To protect the service, prevent abuse and meet accounting or other legal duties."
+          "Provide the directory, your account, and a school listing — Article 6(1)(b) contract.",
+          "Check that a learner account is 16 or older from the date you enter — Article 6(1)(b) contract and Article 6(1)(f) legitimate interest in keeping the service off-limits to children.",
+          "Send product email such as address verification, password reset, and school invites — Article 6(1)(b) contract.",
+          "Answer support and contact-form messages — Article 6(1)(b) contract or Article 6(1)(f) legitimate interest in helping you.",
+          "Reply to assistant questions you choose to type — Article 6(1)(f) legitimate interest in answering routine questions.",
+          "Review an optional teaching-licence file — Article 6(1)(b) contract and Article 6(1)(f) legitimate interest in reviewing a listing.",
+          "Record cookie choices and keep the site secure — Article 6(1)(c) legal obligation and Article 6(1)(f) legitimate interest in security and proof of consent.",
+          "Load Google AdSense after you accept marketing cookies — Article 6(1)(a) consent.",
+          "We do not currently take lesson payments. If checkout is turned on later, this notice will be updated before that processing starts."
         ]
       },
       "3": {
-        "title": "4. Retention",
-        "body": "We keep data only for as long as needed for the purpose collected, to resolve disputes, meet legal duties and enforce our agreements. Exact periods depend on the data type and the applicable legal obligation.",
+        "title": "4. Cookies and similar technologies",
+        "body": "Essential cookies run the site. Optional cookies wait for your choice in the banner. Changing the banner or clearing cookies lets you choose again. A new policy version also asks again.",
         "items": [
-          "Account and profile data is kept while the account is active and for a limited period afterward for security and support.",
-          "Booking, payment and accounting records may be retained for the period required by Swedish law.",
-          "Credential and insurance material is retained only as long as needed for onboarding, review, safety and legal obligations.",
-          "Support messages and technical logs are retained for a limited period appropriate to the case or security purpose."
+          "Essential: session, security, language, and the cookie that remembers this choice. These stay on.",
+          "Analytics: we do not currently load a separate analytics tool. The toggle is reserved. Leaving it off keeps it off.",
+          "Marketing: Google AdSense loads only after you accept marketing cookies. Google may set its own cookies and collect device and usage data to show ads. See Google’s advertising policy at https://policies.google.com/technologies/ads.",
+          "If you withdraw marketing consent we stop loading new AdSense scripts. Cookies Google already set may remain until you clear them in the browser."
         ]
       },
       "4": {
-        "title": "5. Sharing and processors",
-        "body": "We do not sell personal data. We share it only with service providers and authorities where needed to operate the service, process a payment, provide support, protect users or comply with law.",
+        "title": "5. Recipients",
+        "body": "We do not sell personal data. We share it only with the vendors that run the site, the school you contact yourself, or when the law requires it.",
         "items": [
-          "Hosted payment processors, including Stripe, handle checkout and payment-related processing.",
-          "Cloud storage providers may host profile images or provider documents submitted to the service.",
-          "Email, authentication, hosting and monitoring providers help deliver messages, secure accounts and operate the site.",
-          "Authorities, advisers or other recipients may receive data where required by law or needed to establish, exercise or defend legal claims."
+          "Vercel hosts the website and may store profile photos.",
+          "Neon hosts the PostgreSQL database.",
+          "Cloudflare R2 may store uploaded photos or teaching-licence files.",
+          "Resend sends product email.",
+          "Google provides optional sign-in and, after marketing consent, AdSense.",
+          "OpenAI processes assistant messages you type.",
+          "A school you email or visit becomes a separate controller for the details you send them.",
+          "Authorities or advisors may receive data when Swedish or EU law requires it, or to establish, exercise, or defend a legal claim."
         ]
       },
       "5": {
         "title": "6. International transfers",
-        "body": "Some processors may process data outside the EU/EEA. Where required, DriveLinkUp will use an adequacy decision, standard contractual clauses or another lawful safeguard and make relevant information available on request.",
+        "body": "Some vendors process data outside the EU/EEA, including in the United States (Vercel, Google, OpenAI, and Resend). Where required we rely on an adequacy decision or the European Commission’s Standard Contractual Clauses. Ask support@drivelinkup.com if you want more detail on a transfer.",
         "items": []
       },
       "6": {
-        "title": "7. Your rights",
-        "body": "Subject to the conditions in GDPR, you may request:",
+        "title": "7. How long we keep data",
+        "body": "We keep data only as long as the purpose needs, then delete or anonymise it, unless Swedish law requires a longer period.",
         "items": [
-          "Access to your personal data.",
-          "Correction of inaccurate or incomplete data.",
-          "Deletion, restriction or objection where the legal conditions are met.",
-          "Data portability for data processed by automated means on the basis of consent or contract.",
-          "Withdrawal of consent at any time where processing is based on consent.",
-          "A complaint to the relevant supervisory authority; in Sweden, Integritetsskyddsmyndigheten (IMY)."
+          "Account and profile data stay while the account is open. You can delete the account from Profile.",
+          "After deletion we may keep hashed consent events and append-only verification logs as an audit trail. A handledare enrollment is revoked, not erased.",
+          "Teaching-licence files stay until the review ends or the account is deleted.",
+          "Support email stays as long as the request needs.",
+          "Technical logs stay for a limited security period.",
+          "Assistant messages are processed to answer you. We do not keep a public chat history on your profile."
         ]
       },
       "7": {
-        "title": "8. Cookies",
-        "body": "DriveLinkUp uses necessary cookies for authentication, language and security. Optional analytics or marketing cookies are used only where required consent has been given. You can manage consent through the cookie controls provided on the site.",
-        "items": []
+        "title": "8. Your rights",
+        "body": "Under the GDPR you may request access, rectification, erasure, restriction, objection, and data portability where the legal conditions are met. Where we rely on consent you may withdraw it at any time. Withdrawal does not affect processing that already happened.",
+        "items": [
+          "Delete your account from Profile. That is the self-service erasure path.",
+          "Write to support@drivelinkup.com for access, correction, or another rights request.",
+          "Object to processing based on legitimate interest, including the assistant, and we will stop unless we have a compelling ground to continue.",
+          "Lodge a complaint with Integritetsskyddsmyndigheten (IMY), https://www.imy.se."
+        ]
       },
       "8": {
-        "title": "9. Changes and contact",
-        "body": "We may update this policy when the service, law or processing changes. The latest version and date appear above. For questions or a rights request, contact support@drivelinkup.com.",
+        "title": "9. Age",
+        "body": "DriveLinkUp is for people aged 16 and over. It is not a service for children. We do not knowingly create accounts for anyone under 16. If you believe a child has an account, write to support@drivelinkup.com and we will close it.",
+        "items": []
+      },
+      "9": {
+        "title": "10. Automated decisions",
+        "body": "We do not make solely automated decisions that produce legal effects or similarly significant effects. The 16+ check is a simple age rule from the date you enter.",
+        "items": []
+      },
+      "10": {
+        "title": "11. Schools you contact",
+        "body": "Contact the school is between you and the school. If you send them your name, email, or phone number, that school decides how to handle those details. DriveLinkUp is not their processor for that conversation.",
+        "items": []
+      },
+      "11": {
+        "title": "12. Changes",
+        "body": "We update this notice when the service or the processing changes. The date and version above are the current ones. A material change bumps the version and the cookie banner asks again. Questions: support@drivelinkup.com.",
+        "items": []
+      },
+      "12": {
+        "title": "13. How we collect data",
+        "body": "Like other directories, we collect data in three ways. We only use each source for the purposes in this notice.",
+        "items": [
+          "You give it to us: account details, the date of birth you enter, photos, school onboarding, a teaching-licence file, handledare attestation, support messages, and assistant questions.",
+          "It is collected automatically when you use the site: technical logs, cookie choice, and approximate coordinates if you click Use my location.",
+          "We receive it from others: Google if you sign in with Google; a school's public website for prices and listing facts; Google for reviews we display; and a school you write to, if they reply to us about that message."
+        ]
+      },
+      "13": {
+        "title": "14. What is public on a listing",
+        "body": "A school listing is public. Anyone can see the school's name, city, published prices, categories, bio, photo, and Google reviews we display. Your learner account, date of birth, password, teaching-licence file, and support messages are not shown on the public listing.",
+        "items": [
+          "If you run a school listing, do not put another person's private details in the public bio.",
+          "We may hide or remove a listing that is inaccurate, unlawful, or that we must take down to protect users or comply with law."
+        ]
+      },
+      "14": {
+        "title": "15. Security",
+        "body": "No site can promise perfect security. We use administrative and technical measures that fit a service of this size: hashed passwords, access limited to people who operate the site, HTTPS, and storage of uploads with our hosting vendors. If we become aware of a personal-data breach that must be notified under the GDPR, we will notify IMY and affected people when the law requires it.",
+        "items": []
+      },
+      "15": {
+        "title": "16. Other sites and apps",
+        "body": "Listings may link to a school's website, maps, or social profiles. Those sites have their own controllers and policies. DriveLinkUp is not responsible for how they handle personal data. The same applies if you leave a review on Google or open an ad that Google shows after marketing consent.",
         "items": []
       }
     },
@@ -2150,13 +2211,13 @@
     }
   },
   "consentBanner": {
-    "intro": "We use essential cookies to run the marketplace. With your consent, we'd also like to set analytics cookies to improve it. You can change your choice any time.",
+    "intro": "We use cookies that the directory needs to run. With your consent we may also load ads. You can change your choice at any time.",
     "essentialLabel": "Essential",
-    "essentialBody": "Authentication, CSRF protection, locale preference. Required — can't be switched off.",
+    "essentialBody": "Sign-in, security, language, and remembering this choice. Required — cannot be turned off.",
     "analyticsLabel": "Analytics",
-    "analyticsBody": "Anonymous usage data so we can see which licence categories are most searched and which pages need work.",
+    "analyticsBody": "No separate analytics tool runs today. This toggle is reserved. Leave it off unless you want that processing if we add it later.",
     "marketingLabel": "Marketing",
-    "marketingBody": "Email updates about new supervisors in your area and promotions you opt into.",
+    "marketingBody": "Google AdSense, which can show ads and set Google cookies. Loads only if you accept.",
     "acceptAll": "Accept all",
     "rejectNonEssential": "Reject non-essential",
     "customize": "Customize",
@@ -2169,7 +2230,7 @@
     "signupCheckbox": "I have read and agree to the Privacy Policy.",
     "signupCheckboxLinkText": "Privacy policy",
     "signupCheckboxError": "Tick the box to confirm you've read the Privacy Policy.",
-    "licenseCheckbox": "I agree that DriveLinkUp may process my driver's licence document and personal data per the Privacy Policy in order to verify my teaching licence with Transportstyrelsen.",
+    "licenseCheckbox": "I agree that DriveLinkUp may store the teaching-licence file I upload, and related personal data, so it can review the listing. This is not an automatic check with Transportstyrelsen.",
     "licenseCheckboxError": "Tick the box to confirm you consent to processing your licence data."
   },
   "learnerSubscription": {
@@ -3427,62 +3488,106 @@
   "termsPage": {
     "meta": {
       "title": "Terms of service",
-      "description": "DriveLinkUp terms: directory listings, accounts, and personal data."
+      "description": "Terms for using DriveLinkUp: the school directory, accounts, and personal data."
     },
     "hero": {
       "eyebrow": "Terms of service",
       "title": "Terms of service",
       "lastUpdated": "Last updated {version}",
-      "intro": "These terms apply when you use DriveLinkUp — as a learner browsing driving-school listings, or as a school listing services. By using the platform you accept these terms."
+      "intro": "These terms apply when you use DriveLinkUp — as a learner browsing driving-school listings or as a school that lists itself. By using the site you accept the terms."
     },
     "sections": {
       "0": {
-        "title": "About the service",
-        "body": "DriveLinkUp is a catalog of driving schools. Instructors teach through a school. We show published prices when the school has added them.",
+        "title": "The service",
+        "body": "DriveLinkUp is a directory of driving schools in Sweden. Instructors teach through a school. We show published prices when the school has filled them in. DriveLinkUp does not book the lesson and does not take payment for the lesson.",
         "items": [
-          "The school publishes its own details. A badge appears only when the check is stored.",
-          "The service is under development and features may be added or changed."
+          "The school publishes its own details. A badge appears only when the matching check is stored.",
+          "You arrange time and payment with the school, including through Contact the school."
         ]
       },
       "1": {
         "title": "Roles and responsibility",
-        "body": "When you take a lesson, the agreement is between you and the driving school. DriveLinkUp lists schools. It does not deliver lessons and is not a party to that agreement.",
+        "body": "When you take a lesson the agreement is between you and the driving school. DriveLinkUp lists schools. We do not give the lesson and we are not a party to that agreement.",
         "items": [
-          "The school is responsible for the lesson, its delivery, and its own details.",
-          "DriveLinkUp is responsible for the directory."
+          "The school is responsible for the lesson, how it is given, and the details it publishes.",
+          "DriveLinkUp is responsible for the directory and the account tools on this site."
         ]
       },
       "2": {
         "title": "Price and payment",
-        "body": "The figure on the listing is the school's published price. DriveLinkUp does not take payment for a catalog listing. Payment is arranged with the school.",
+        "body": "The figure on the listing is the school’s published price. DriveLinkUp does not charge for a directory listing. Payment is arranged with the school.",
         "items": []
       },
       "3": {
-        "title": "Times and terms",
-        "body": "Terms are set by the school. Confirm them with the school before you arrange a lesson with them.",
+        "title": "Times and school terms",
+        "body": "Lesson terms are set by the school. Confirm them with the school before you arrange a lesson.",
         "items": [
           "Contact the school directly to change a time.",
-          "If that doesn't resolve it, we handle the issue via support — frank@drivelinkup.com."
+          "If that does not resolve it, write to support@drivelinkup.com."
         ]
       },
       "4": {
-        "title": "Listing",
-        "body": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. Instructors collect payment only through a school they belong to. Learners never pay a fee to DriveLinkUp.",
-        "items": []
+        "title": "Listings and accounts",
+        "body": "A directory listing is free. DriveLinkUp does not charge the school to appear here. Instructors charge only through a school they belong to. Learners never pay a fee to DriveLinkUp. You must be 16 or older to create an account, and you are responsible for the details you enter and for keeping your sign-in to yourself.",
+        "items": [
+          "Do not misuse the site, for example by posting misleading details or disrupting the service.",
+          "We may close an account that breaks these terms or that we must close to protect users or comply with law."
+        ]
       },
       "5": {
-        "title": "Accounts and use",
-        "body": "You are responsible for the details you provide and for keeping your login credentials to yourself. Misusing the platform is not allowed — for example providing misleading information or disrupting the service.",
+        "title": "Personal data",
+        "body": "We process personal data under the GDPR. How we collect, use, and protect data is described in the privacy policy.",
         "items": []
       },
       "6": {
-        "title": "Personal data",
-        "body": "We process personal data in accordance with GDPR. How we collect, use and protect data is described in our privacy policy.",
+        "title": "Liability",
+        "body": "The directory shows information the school has published or that we have stored from a listed source. We do not warrant that every listing is complete or current. We are not liable for the lesson, the vehicle, or an agreement you make with a school, except where Swedish law does not allow that limit.",
         "items": []
       },
       "7": {
+        "title": "Governing law",
+        "body": "These terms are governed by Swedish law. A dispute may be brought before the Swedish courts. Consumers in the EU also keep any mandatory rights that apply in their country of residence.",
+        "items": []
+      },
+      "8": {
         "title": "Changes and contact",
-        "body": "The service evolves continuously and we may update these terms. The version is shown at the top of the page. Questions? Write to frank@drivelinkup.com — we answer.",
+        "body": "We may update these terms when the service changes. The version is shown at the top of the page. Questions: support@drivelinkup.com.",
+        "items": []
+      },
+      "9": {
+        "title": "Your content and listings",
+        "body": "If you publish a school listing you grant DriveLinkUp a non-exclusive licence to host, copy, and display that content on the website and in the app so people can compare schools. You must own the content or have the right to give us that licence. You are responsible for the accuracy of what you publish.",
+        "items": [
+          "We may edit the display length, hide, or remove content that is misleading, unlawful, or that we must take down.",
+          "Write to support@drivelinkup.com to report a listing or other content that you believe is illegal or wrong."
+        ]
+      },
+      "10": {
+        "title": "Reviews",
+        "body": "Some listings show Google reviews that we store and label as coming from Google. DriveLinkUp does not write those reviews and does not verify them. A review can be incomplete or out of date. It is not a DriveLinkUp verification badge.",
+        "items": []
+      },
+      "11": {
+        "title": "Intellectual property and acceptable use",
+        "body": "The DriveLinkUp name, site design, and software are ours or our licensors'. You may use the directory to compare schools and contact them. You may not copy the catalogue in bulk, scrape it, frame it, or use it to build a competing directory without our written permission.",
+        "items": [
+          "Do not impersonate a school, post another school's content as your own, or interfere with the service.",
+          "Do not collect personal data from the site except as needed to contact a school about a lesson."
+        ]
+      },
+      "12": {
+        "title": "How listings appear",
+        "body": "DriveLinkUp is not a party to any lesson you arrange with a school and does not act as the school's agent. Search and catalogue order can change. Near-me sorts by distance when you share your location. Light and heavy catalogues filter by the licence categories the listing covers. Third-party ads from Google may appear after marketing consent. Those ads are not a paid rank for a school listing unless we later mark a listing as advertised.",
+        "items": []
+      },
+      "13": {
+        "title": "Ending the account",
+        "body": "You may delete your account from Profile at any time. We may suspend or close an account, or hide a listing, if you break these terms, if we must protect users, or if the law requires it. We will write to the email on the account when we can.",
+        "items": []
+      },
+      "14": {
+        "title": "Other legal terms",
+        "body": "These terms and the privacy policy are the agreement for using the site. If a court finds one part unenforceable, the rest still applies. If we do not enforce a part, we do not waive it. You may not assign this agreement without our consent. We may assign it if we transfer the service. Notices go to support@drivelinkup.com and to the email on your account.",
         "items": []
       }
     },
@@ -3523,7 +3628,11 @@
         "The school owns its details. A badge appears only when the check is stored.",
         "No fee for learners. You pay the school's price."
       ],
-      "facts": ["Founded 2026", "Stockholm, Sweden", "Sweden first"],
+      "facts": [
+        "Founded 2026",
+        "Stockholm, Sweden",
+        "Sweden first"
+      ],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {

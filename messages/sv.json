@@ -1059,9 +1059,9 @@
         "stepLead": "Som handledare sitter du bredvid en körkortselev under övningskörning. Läs villkoren nedan och bocka sedan i rutan för att bekräfta att du uppfyller kraven.",
         "versionEyebrow": "Villkorsversion {version}",
         "bodyParagraphs": {
-          "0": "DriveLinkUp kopplar ihop körkortselever och handledare — det är hela vår roll som marknadsplats. Vi förmedlar inte försäkringar, övervakar inte lektionerna och vi bär inte ansvar för vad som händer bakom ratten. Genom att bocka i rutan nedan bekräftar du att din bilförsäkring täcker övningskörning med en körkortselev, och att du kan visa bevis på det (försäkringsbolagets bekräftelse eller ditt försäkringsbrev).",
-          "1": "Ansvaret för handledda lektioner ligger hos dig och eleven under själva lektionen. DriveLinkUp är inte part i upplägget mellan handledare och elev, och vår roll som marknadsplats tar slut när lektionen har bokats och hålls. Om en incident inträffar är det de inblandade parternas försäkringar — inte marknadsplatsen — som är rätt första samtal.",
-          "2": "Dessa villkor kan uppdateras då och då. När vi gör väsentliga ändringar hör vi av oss och ber dig bekräfta på nytt. En logg över varje acceptans — inklusive vilken version av villkoren du godkände och datum — sparas mot ditt konto. Det här är en platsmarkering; grundarteamet ersätter texten med juristgranskad version."
+          "0": "DriveLinkUp är en katalog. Om du registrerar dig som handledare kopplar vi ihop elever och handledare för vägledning om övningskörning. Vi ordnar inte försäkring, övervakar inte passen och bär inte ansvar för det som händer bakom ratten. Genom att bocka i rutan bekräftar du att din trafikförsäkring täcker övningskörning med en körkortselev, och att du kan visa det (försäkringsbolagets bekräftelse eller försäkringsbrevet).",
+          "1": "Ansvaret för handledda pass ligger hos dig och eleven under passen. DriveLinkUp är inte part i upplägget mellan handledare och elev. Om något händer är det de inblandade parternas försäkringar — inte DriveLinkUp — som är rätt första samtal.",
+          "2": "Villkoren kan uppdateras. Vid en väsentlig ändring ber vi dig bekräfta på nytt. En logg över varje acceptans — version och datum — sparas mot ditt konto."
         },
         "checkboxLabel": "Jag bekräftar att jag har giltig bilförsäkring som täcker övningskörning med en körkortselev, att ansvaret för handledda lektioner ligger hos mig och eleven (inte DriveLinkUp), och att jag har läst och godkänner handledare-villkoren nedan.",
         "submit": "Bekräfta och fortsätt",
@@ -1722,9 +1722,9 @@
         "currentBadge": "Handledare-villkor godkända",
         "versionEyebrow": "Villkorsversion {version}",
         "bodyParagraphs": {
-          "0": "DriveLinkUp kopplar ihop körkortselever och handledare — det är hela vår roll som marknadsplats. Vi förmedlar inte försäkringar, övervakar inte lektionerna och vi bär inte ansvar för vad som händer bakom ratten. Genom att bocka i rutan nedan bekräftar du att din bilförsäkring täcker övningskörning med en körkortselev, och att du kan visa bevis på det (försäkringsbolagets bekräftelse eller ditt försäkringsbrev).",
-          "1": "Ansvaret för handledda lektioner ligger hos dig och eleven under själva lektionen. DriveLinkUp är inte part i upplägget mellan handledare och elev, och vår roll som marknadsplats tar slut när lektionen har bokats och hålls. Om en incident inträffar är det de inblandade parternas försäkringar — inte marknadsplatsen — som är rätt första samtal.",
-          "2": "Dessa villkor kan uppdateras då och då. När vi gör väsentliga ändringar hör vi av oss och ber dig bekräfta på nytt. En logg över varje acceptans — inklusive vilken version av villkoren du godkände och datum — sparas mot ditt konto. Det här är en platsmarkering; grundarteamet ersätter texten med juristgranskad version."
+          "0": "DriveLinkUp är en katalog. Om du registrerar dig som handledare kopplar vi ihop elever och handledare för vägledning om övningskörning. Vi ordnar inte försäkring, övervakar inte passen och bär inte ansvar för det som händer bakom ratten. Genom att bocka i rutan bekräftar du att din trafikförsäkring täcker övningskörning med en körkortselev, och att du kan visa det (försäkringsbolagets bekräftelse eller försäkringsbrevet).",
+          "1": "Ansvaret för handledda pass ligger hos dig och eleven under passen. DriveLinkUp är inte part i upplägget mellan handledare och elev. Om något händer är det de inblandade parternas försäkringar — inte DriveLinkUp — som är rätt första samtal.",
+          "2": "Villkoren kan uppdateras. Vid en väsentlig ändring ber vi dig bekräfta på nytt. En logg över varje acceptans — version och datum — sparas mot ditt konto."
         },
         "checkboxLabel": "Jag bekräftar att jag har giltig bilförsäkring som täcker övningskörning med en körkortselev, att ansvaret för handledda lektioner ligger hos mig och eleven (inte DriveLinkUp), och att jag har läst och godkänner handledare-villkoren nedan.",
         "submit": "Bekräfta och fortsätt",
@@ -2056,91 +2056,152 @@
   "privacyPage": {
     "meta": {
       "title": "Integritetspolicy",
-      "description": "Så behandlar DriveLinkUp personuppgifter för konton, katalogannonser, skolbehörigheter och support."
+      "description": "Så behandlar DriveLinkUp personuppgifter för konton, skolkatalogen, cookies och support."
     },
     "hero": {
       "eyebrow": "Integritet",
       "title": "Integritetspolicy",
-      "lastUpdated": "Senast uppdaterad: 26 augusti 2026 · policyversion {version}",
-      "intro": "Den här policyn beskriver hur DriveLinkUp behandlar personuppgifter när du bläddrar bland skolannonser, skapar ett konto eller registrerar dig som skola eller handledare.",
-      "reviewNotice": "Juridisk granskningsnotis: detta kundutkast ska granskas och kompletteras av DriveLinkUps juridiska rådgivare före publicering."
+      "lastUpdated": "Senast uppdaterad: 27 oktober 2026 · policyversion {version}",
+      "intro": "Den här informationen beskriver hur DriveLinkUp behandlar personuppgifter när du bläddrar i katalogen, skapar ett konto, kontaktar en skola eller skriver till oss. Den beskriver bara den behandling som sker nu. DriveLinkUp bokar inte lektioner och tar inte betalt för lektioner."
     },
     "sections": {
       "0": {
         "title": "1. Personuppgiftsansvarig och kontakt",
-        "body": "DriveLinkUp är personuppgiftsansvarig för personuppgifterna som beskrivs här. För integritetsfrågor eller begäranden, mejla support@drivelinkup.com med ”Integritet” i ämnesraden.",
+        "body": "DriveLinkUp är personuppgiftsansvarig för de personuppgifter som beskrivs här. Vi har inte publicerat något registrerat bolagsnamn eller organisationsnummer på den här sidan. Skriv till support@drivelinkup.com med ”Integritet” i ämnesraden. Om vi registrerar ett svenskt bolag lägger vi till firma och organisationsnummer här.",
         "items": []
       },
       "1": {
         "title": "2. Personuppgifter vi samlar in",
-        "body": "Beroende på hur du använder tjänsten kan vi behandla:",
+        "body": "Vad vi samlar in beror på hur du använder sajten. Vi samlar just nu inte in kortnummer, och elevregistreringen skannar inte identitetshandlingar.",
         "items": [
-          "Kontouppgifter som namn, e-postadress, inloggningsuppgifter och kontoroll.",
-          "Profiluppgifter som stad, språk, körkortskategorier, profilbild, lektionspris och biografi.",
-          "Supportmeddelanden och frågor om en skolannons som du skickar till oss.",
-          "Betalningsuppgifter och transaktionsstatus som behandlas via den externa betalningsleverantören. Kortuppgifter hanteras av leverantören och lagras inte av DriveLinkUp.",
-          "Behörighets-, körkorts-, försäkrings- och onboardinguppgifter som skickas in för skol- eller handledarkontot.",
-          "Tekniska uppgifter som IP-adress, webbläsarinformation, enhetsinformation och samtyckesval.",
-          "Meddelanden eller kontaktuppgifter som du väljer att skicka till supporten."
+          "Kontouppgifter: namn, e-postadress, hashat lösenord och roll (elev, skola eller handledare).",
+          "Det födelsedatum du anger vid elevregistrering. Vi använder det bara för att kontrollera att du är 16 år eller äldre. Det behandlas inte som ett verifierat födelsedatum för bokning.",
+          "Valfri profilbild som du själv laddar upp.",
+          "Uppgifter vid skolregistrering som skolnamn, organisationsnummer och stad.",
+          "En fil med lärarbehörighet om du laddar upp en. Vi sparar den för att granska annonsen. Det är inte en automatisk kontroll hos Transportstyrelsen.",
+          "Handledares försäkringsbekräftelse (din bekräftelse och tidpunkten), inte försäkringsbrevet om du inte skickar det till support.",
+          "Supportmeddelanden som du skickar i kontaktformuläret. De mejlas till support@drivelinkup.com. Vi har ingen separat publik kontaktdatabas.",
+          "Frågor som du skriver till assistenten på sajten. Texten skickas till OpenAI för att ta fram ett svar.",
+          "Ungefärliga koordinater när du klickar på ”Använd min plats”, som skickas med katalogförfrågan så att vi kan sortera skolor. Vi sparar inte den platsen på ditt konto.",
+          "Cookieval, policyversion och en hash av IP-adress plus webbläsarinformation. Vi sparar inte den råa IP-adressen på samtyckesposten.",
+          "Tekniska loggar som IP-adress, webbläsarinformation och säkerhetshändelser som behövs för att driva och skydda sajten.",
+          "Namn, e-post och profilbild som Google delar om du loggar in med Google.",
+          "Publicerade priser, kategorier och annonstext från skolans egen webbplats, så att katalogen kan visa det skolan redan publicerar.",
+          "Google-omdömen som vi sparar och visar på en annons, märkta som från Google. Vi kontrollerar inte de omdömena.",
+          "Uppgifter om en annan person om du tar med dem i ett supportmeddelande eller en fråga till assistenten."
         ]
       },
       "2": {
         "title": "3. Ändamål och rättslig grund",
-        "body": "Vi använder personuppgifter endast för att tillhandahålla, skydda och förbättra tjänsten. Tillämplig grund kan vara fullgörande av avtal, berättigat intresse, samtycke eller rättslig skyldighet.",
+        "body": "Vi behandlar personuppgifter bara för ändamålen nedan. Varje ändamål har en rättslig grund enligt artikel 6 i GDPR.",
         "items": [
-          "För att skapa och hantera konton och skol- eller handledarprofiler.",
-          "För att visa skolannonser och publicerade priser så att du kan jämföra och kontakta skolan.",
-          "För att skicka kontomeddelanden och ge support.",
-          "För att behandla betalningar, återbetalningar och betalningsrelaterade register via vår betalningsleverantör.",
-          "För att granska behörighets- och trygghetsuppgifter som skickas in under onboarding.",
-          "För att skydda tjänsten, förhindra missbruk och uppfylla bokförings- eller andra rättsliga skyldigheter."
+          "Tillhandahålla katalogen, ditt konto och en skolannons — artikel 6.1 b avtal.",
+          "Kontrollera att ett elevkonto är 16 år eller äldre utifrån det datum du anger — artikel 6.1 b avtal och artikel 6.1 f berättigat intresse av att tjänsten inte riktas till barn.",
+          "Skicka produktmejl som e-postverifiering, återställning av lösenord och skolinbjudningar — artikel 6.1 b avtal.",
+          "Svara på support och kontaktformulär — artikel 6.1 b avtal eller artikel 6.1 f berättigat intresse av att hjälpa dig.",
+          "Svara på frågor du själv skriver till assistenten — artikel 6.1 f berättigat intresse av att besvara vanliga frågor.",
+          "Granska en valfri fil med lärarbehörighet — artikel 6.1 b avtal och artikel 6.1 f berättigat intresse av att granska en annons.",
+          "Spara cookieval och hålla sajten säker — artikel 6.1 c rättslig förpliktelse och artikel 6.1 f berättigat intresse av säkerhet och bevis om samtycke.",
+          "Ladda Google AdSense efter att du godkänt marknadsföringscookies — artikel 6.1 a samtycke.",
+          "Vi tar just nu inte betalt för lektioner. Om kassan slås på senare uppdateras den här informationen innan den behandlingen börjar."
         ]
       },
       "3": {
-        "title": "4. Lagringstid",
-        "body": "Vi sparar uppgifter endast så länge det behövs för ändamålet, för att lösa tvister, uppfylla lagkrav och tillämpa våra avtal. Exakta tider beror på uppgiftstyp och tillämpligt lagkrav.",
+        "title": "4. Cookies och liknande teknik",
+        "body": "Nödvändiga cookies får sajten att fungera. Valfria cookies väntar på ditt val i bannern. Om du ändrar valet eller rensar cookies kan du välja igen. En ny policyversion frågar också igen.",
         "items": [
-          "Konto- och profiluppgifter sparas medan kontot är aktivt och under en begränsad tid därefter för trygghet och support.",
-          "Konto-, support- och bokföringsuppgifter kan sparas under den tid svensk lag kräver.",
-          "Behörighets- och försäkringsmaterial sparas endast så länge det behövs för onboarding, granskning, trygghet och lagkrav.",
-          "Supportmeddelanden och tekniska loggar sparas under en begränsad tid som passar ärendet eller trygghetsändamålet."
+          "Nödvändiga: session, säkerhet, språk och cookien som kommer ihåg det här valet. De är alltid på.",
+          "Analys: vi laddar just nu inget separat analysverktyg. Växeln är reserverad. Om den är av stängs den av.",
+          "Marknadsföring: Google AdSense laddas bara efter att du godkänt marknadsföringscookies. Google kan sätta egna cookies och samla enhets- och användningsdata för att visa annonser. Se Googles annonspolicy på https://policies.google.com/technologies/ads.",
+          "Om du tar tillbaka marknadsföringssamtycket slutar vi ladda nya AdSense-skript. Cookies som Google redan satt kan finnas kvar tills du rensar dem i webbläsaren."
         ]
       },
       "4": {
-        "title": "5. Delning och personuppgiftsbiträden",
-        "body": "Vi säljer inte personuppgifter. Vi delar dem endast med leverantörer och myndigheter när det behövs för att driva tjänsten, behandla en betalning, ge support, skydda användare eller följa lag.",
+        "title": "5. Mottagare",
+        "body": "Vi säljer inte personuppgifter. Vi delar dem bara med de leverantörer som driver sajten, skolan du själv kontaktar eller när lagen kräver det.",
         "items": [
-          "Externa betalningsleverantörer, inklusive Stripe, hanterar kassa och betalningsrelaterad behandling.",
-          "Molnlagringsleverantörer kan lagra profilbilder eller leverantörsdokument som skickas till tjänsten.",
-          "Leverantörer för e-post, autentisering, hosting och övervakning hjälper till att skicka meddelanden, säkra konton och driva webbplatsen.",
-          "Myndigheter, rådgivare eller andra mottagare kan få uppgifter när lagen kräver det eller när det behövs för att fastställa, göra gällande eller försvara rättsliga anspråk."
+          "Vercel hostar webbplatsen och kan lagra profilbilder.",
+          "Neon hostar PostgreSQL-databasen.",
+          "Cloudflare R2 kan lagra uppladdade bilder eller filer med lärarbehörighet.",
+          "Resend skickar produktmejl.",
+          "Google ger valfri inloggning och, efter marknadsföringssamtycke, AdSense.",
+          "OpenAI behandlar assistentmeddelanden som du skriver.",
+          "En skola som du mejlar eller besöker blir personuppgiftsansvarig för de uppgifter du skickar dit.",
+          "Myndigheter eller rådgivare kan få uppgifter när svensk eller EU-rätt kräver det, eller för att fastställa, göra gällande eller försvara ett rättsligt anspråk."
         ]
       },
       "5": {
         "title": "6. Internationella överföringar",
-        "body": "Vissa personuppgiftsbiträden kan behandla uppgifter utanför EU/EES. När det krävs använder DriveLinkUp ett adekvansbeslut, standardavtalsklausuler eller annan laglig skyddsåtgärd och lämnar relevant information på begäran.",
+        "body": "Vissa leverantörer behandlar uppgifter utanför EU/EES, bland annat i USA (Vercel, Google, OpenAI och Resend). När det krävs använder vi ett adekvansbeslut eller EU-kommissionens standardavtalsklausuler. Skriv till support@drivelinkup.com om du vill ha mer om en överföring.",
         "items": []
       },
       "6": {
-        "title": "7. Dina rättigheter",
-        "body": "Med förbehåll för villkoren i GDPR kan du begära:",
+        "title": "7. Hur länge vi sparar uppgifter",
+        "body": "Vi sparar uppgifter bara så länge ändamålet kräver och raderar eller avidentifierar dem därefter, om inte svensk lag kräver en längre tid.",
         "items": [
-          "Tillgång till dina personuppgifter.",
-          "Rättelse av felaktiga eller ofullständiga uppgifter.",
-          "Radering, begränsning eller invändning när de rättsliga villkoren är uppfyllda.",
-          "Dataportabilitet för uppgifter som behandlas automatiserat med stöd av samtycke eller avtal.",
-          "Återkallelse av samtycke när som helst när behandlingen grundas på samtycke.",
-          "Klagomål till relevant tillsynsmyndighet; i Sverige Integritetsskyddsmyndigheten (IMY)."
+          "Konto- och profiluppgifter finns kvar medan kontot är öppet. Du kan radera kontot under Profil.",
+          "Efter radering kan hashade samtyckeshändelser och endast-tilläggs-loggar för verifiering finnas kvar som revisionsspår. En handledarinskrivning återkallas, den raderas inte.",
+          "Filer med lärarbehörighet sparas tills granskningen är klar eller kontot raderas.",
+          "Supportmejl sparas så länge ärendet kräver.",
+          "Tekniska loggar sparas under en begränsad säkerhetsperiod.",
+          "Assistentmeddelanden behandlas för att svara dig. Vi sparar ingen publik chattlogg på din profil."
         ]
       },
       "7": {
-        "title": "8. Cookies",
-        "body": "DriveLinkUp använder nödvändiga cookies för autentisering, språk och säkerhet. Valfria analys- eller marknadsföringscookies används endast när erforderligt samtycke har lämnats. Du kan hantera samtycke via webbplatsens cookieinställningar.",
-        "items": []
+        "title": "8. Dina rättigheter",
+        "body": "Enligt GDPR kan du begära tillgång, rättelse, radering, begränsning, invändning och dataportabilitet när de rättsliga villkoren är uppfyllda. När vi stödjer oss på samtycke kan du återkalla det när som helst. Ett återkallande påverkar inte behandling som redan skett.",
+        "items": [
+          "Radera kontot under Profil. Det är den självbetjänta raderingsvägen.",
+          "Skriv till support@drivelinkup.com för tillgång, rättelse eller en annan rättighetsbegäran.",
+          "Invänd mot behandling som grundas på berättigat intresse, inklusive assistenten, så slutar vi om vi inte har ett tvingande skäl att fortsätta.",
+          "Lämna klagomål till Integritetsskyddsmyndigheten (IMY), https://www.imy.se."
+        ]
       },
       "8": {
-        "title": "9. Ändringar och kontakt",
-        "body": "Vi kan uppdatera policyn när tjänsten, lagen eller behandlingen ändras. Senaste version och datum står ovan. För frågor eller en rättighetsbegäran, kontakta support@drivelinkup.com.",
+        "title": "9. Ålder",
+        "body": "DriveLinkUp är till för personer som är 16 år eller äldre. Det är inte en tjänst för barn. Vi skapar inte medvetet konton för någon under 16 år. Om du tror att ett barn har ett konto, skriv till support@drivelinkup.com så stänger vi det.",
+        "items": []
+      },
+      "9": {
+        "title": "10. Automatiserade beslut",
+        "body": "Vi fattar inga beslut som enbart grundas på automatiserad behandling och som har rättsliga följder eller liknande betydande verkan. 16+-kontrollen är en enkel åldersregel utifrån det datum du anger.",
+        "items": []
+      },
+      "10": {
+        "title": "11. Skolor du kontaktar",
+        "body": "Kontakta skolan är mellan dig och skolan. Om du skickar namn, e-post eller telefon dit bestämmer skolan hur de uppgifterna hanteras. DriveLinkUp är inte deras personuppgiftsbiträde för det samtalet.",
+        "items": []
+      },
+      "11": {
+        "title": "12. Ändringar",
+        "body": "Vi uppdaterar den här informationen när tjänsten eller behandlingen ändras. Datum och version ovan gäller. En väsentlig ändring höjer versionen och cookie-bannern frågar igen. Frågor: support@drivelinkup.com.",
+        "items": []
+      },
+      "12": {
+        "title": "13. Hur vi samlar in uppgifter",
+        "body": "Som andra kataloger samlar vi in uppgifter på tre sätt. Varje källa används bara för ändamålen i den här informationen.",
+        "items": [
+          "Du lämnar dem: kontouppgifter, det födelsedatum du anger, bilder, skolregistrering, en fil med lärarbehörighet, handledarbekräftelse, supportmeddelanden och frågor till assistenten.",
+          "De samlas in automatiskt när du använder sajten: tekniska loggar, cookieval och ungefärliga koordinater om du klickar på Använd min plats.",
+          "Vi får dem från andra: Google om du loggar in med Google; skolans publika webbplats för priser och annonsfakta; Google för omdömen vi visar; och en skola du skriver till, om de svarar oss om det meddelandet."
+        ]
+      },
+      "13": {
+        "title": "14. Vad som är publikt på en annons",
+        "body": "En skolannons är publik. Vem som helst kan se skolans namn, stad, publicerade priser, kategorier, presentation, bild och de Google-omdömen vi visar. Ditt elevkonto, födelsedatum, lösenord, fil med lärarbehörighet och supportmeddelanden visas inte på den publika annonsen.",
+        "items": [
+          "Om du driver en skolannons ska du inte lägga en annan persons privata uppgifter i den publika presentationen.",
+          "Vi kan dölja eller ta bort en annons som är felaktig, olaglig eller som vi måste ta bort för att skydda användare eller följa lag."
+        ]
+      },
+      "14": {
+        "title": "15. Säkerhet",
+        "body": "Ingen sajt kan lova fullständig säkerhet. Vi använder administrativa och tekniska åtgärder som passar en tjänst i den här storleken: hashade lösenord, åtkomst bara för dem som driver sajten, HTTPS och lagring av uppladdningar hos våra hostingleverantörer. Om vi får kännedom om en personuppgiftsincident som måste anmälas enligt GDPR underrättar vi IMY och berörda personer när lagen kräver det.",
+        "items": []
+      },
+      "15": {
+        "title": "16. Andra sajter och appar",
+        "body": "Annonser kan länka till skolans webbplats, kartor eller sociala profiler. De sajterna har egna personuppgiftsansvariga och egna policies. DriveLinkUp ansvarar inte för hur de behandlar personuppgifter. Detsamma gäller om du lämnar ett omdöme på Google eller öppnar en annons som Google visar efter marknadsföringssamtycke.",
         "items": []
       }
     },
@@ -2150,13 +2211,13 @@
     }
   },
   "consentBanner": {
-    "intro": "Vi använder cookies som krävs för att marknadsplatsen ska fungera. Med ditt samtycke använder vi även cookies för statistik, så vi vet vad vi kan förbättra. Du kan ändra ditt val när som helst.",
+    "intro": "Vi använder cookies som katalogen behöver för att fungera. Med ditt samtycke kan vi också visa annonser. Du kan ändra valet när som helst.",
     "essentialLabel": "Nödvändiga",
-    "essentialBody": "Autentisering, CSRF-skydd, språkinställning. Krävs — går inte att stänga av.",
+    "essentialBody": "Inloggning, säkerhet, språk och att valet sparas. Krävs — går inte att stänga av.",
     "analyticsLabel": "Analys",
-    "analyticsBody": "Anonym användardata så vi ser vilka körkortskategorier som efterfrågas mest och vilka sidor som behöver förbättras.",
+    "analyticsBody": "Inget separat analysverktyg körs i dag. Växeln är reserverad. Låt den vara av om du inte vill att den behandlingen ska kunna slås på senare.",
     "marketingLabel": "Marknadsföring",
-    "marketingBody": "Mejluppdateringar om nya handledare i ditt område och kampanjer du prenumererar på.",
+    "marketingBody": "Google AdSense, som kan visa annonser och sätta Google-cookies. Laddas bara om du godkänner.",
     "acceptAll": "Acceptera alla",
     "rejectNonEssential": "Avvisa icke-nödvändiga",
     "customize": "Anpassa",
@@ -2169,7 +2230,7 @@
     "signupCheckbox": "Jag har läst och godkänner integritetspolicyn.",
     "signupCheckboxLinkText": "Integritetspolicy",
     "signupCheckboxError": "Bocka i rutan för att bekräfta att du har läst integritetspolicyn.",
-    "licenseCheckbox": "Jag samtycker till att DriveLinkUp får behandla mitt körkort och mina personuppgifter enligt integritetspolicyn för att verifiera mitt lärarekörkortstillstånd hos Transportstyrelsen.",
+    "licenseCheckbox": "Jag samtycker till att DriveLinkUp får spara den fil med lärarbehörighet som jag laddar upp, och tillhörande personuppgifter, för att granska annonsen. Det är inte en automatisk kontroll hos Transportstyrelsen.",
     "licenseCheckboxError": "Bocka i rutan för att bekräfta att du samtycker till behandling av dina körkortsuppgifter."
   },
   "learnerSubscription": {
@@ -3433,23 +3494,23 @@
       "eyebrow": "Tjänstevillkor",
       "title": "Tjänstevillkor",
       "lastUpdated": "Senast uppdaterad {version}",
-      "intro": "Dessa villkor gäller när du använder DriveLinkUp — som elev som bläddrar bland trafikskoleannonser eller som trafikskola som listar tjänster. Genom att använda plattformen godkänner du villkoren."
+      "intro": "Dessa villkor gäller när du använder DriveLinkUp — som elev som bläddrar bland trafikskoleannonser eller som trafikskola som listar sig. Genom att använda sajten godkänner du villkoren."
     },
     "sections": {
       "0": {
         "title": "Om tjänsten",
-        "body": "DriveLinkUp är en katalog över trafikskolor. Instruktörer undervisar via en skola. Vi visar publicerade priser när skolan har fyllt i dem.",
+        "body": "DriveLinkUp är en katalog över trafikskolor i Sverige. Instruktörer undervisar via en skola. Vi visar publicerade priser när skolan har fyllt i dem. DriveLinkUp bokar inte lektionen och tar inte betalt för lektionen.",
         "items": [
-          "Skolan publicerar sina uppgifter. Ett märke visas bara när kontrollen finns sparad.",
-          "Tjänsten är under utveckling och funktioner kan läggas till eller ändras."
+          "Skolan publicerar sina uppgifter. Ett märke visas bara när den matchande kontrollen finns sparad.",
+          "Tid och betalning ordnar du med skolan, bland annat via Kontakta skolan."
         ]
       },
       "1": {
         "title": "Roller och ansvar",
         "body": "När du tar en lektion är avtalet mellan dig och trafikskolan. DriveLinkUp listar skolor. Vi genomför inte lektioner och är inte part i det avtalet.",
         "items": [
-          "Skolan ansvarar för lektionens innehåll, genomförande och sina uppgifter.",
-          "DriveLinkUp ansvarar för katalogen."
+          "Skolan ansvarar för lektionen, genomförandet och de uppgifter den publicerar.",
+          "DriveLinkUp ansvarar för katalogen och kontoverktygen på den här sajten."
         ]
       },
       "2": {
@@ -3458,31 +3519,75 @@
         "items": []
       },
       "3": {
-        "title": "Tider och villkor",
-        "body": "Villkor sätts av skolan. Bekräfta dem med skolan innan du ordnar en lektion med dem.",
+        "title": "Tider och skolans villkor",
+        "body": "Villkor för lektionen sätts av skolan. Bekräfta dem med skolan innan du ordnar en lektion.",
         "items": [
           "Kontakta skolan direkt för att ändra en tid.",
-          "Löser det sig inte hanterar vi ärendet via support — frank@drivelinkup.com."
+          "Löser det sig inte skriver du till support@drivelinkup.com."
         ]
       },
       "4": {
-        "title": "Lista",
-        "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för att skolan syns här. Instruktörer tar betalt endast via en skola de tillhör. Elever betalar aldrig någon avgift till DriveLinkUp.",
-        "items": []
+        "title": "Listor och konto",
+        "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för att skolan syns här. Instruktörer tar betalt endast via en skola de tillhör. Elever betalar aldrig någon avgift till DriveLinkUp. Du måste vara 16 år eller äldre för att skapa ett konto, och du ansvarar för uppgifterna du anger och för att inte dela inloggningen.",
+        "items": [
+          "Det är inte tillåtet att missbruka sajten, till exempel genom vilseledande uppgifter eller genom att störa tjänsten.",
+          "Vi kan stänga ett konto som bryter mot villkoren eller som vi måste stänga för att skydda användare eller följa lag."
+        ]
       },
       "5": {
-        "title": "Konto och bruk",
-        "body": "Du ansvarar för att uppgifterna du anger stämmer och för att inte dela dina inloggningsuppgifter. Det är inte tillåtet att missbruka plattformen — till exempel genom att ange vilseledande uppgifter eller störa tjänsten.",
+        "title": "Personuppgifter",
+        "body": "Vi behandlar personuppgifter enligt GDPR. Hur vi samlar in, använder och skyddar uppgifter beskrivs i integritetspolicyn.",
         "items": []
       },
       "6": {
-        "title": "Personuppgifter",
-        "body": "Vi behandlar personuppgifter enligt GDPR. Hur vi samlar in, använder och skyddar uppgifter beskrivs i vår integritetspolicy.",
+        "title": "Ansvar",
+        "body": "Katalogen visar uppgifter som skolan har publicerat eller som vi har sparat från en angiven källa. Vi garanterar inte att varje annons är fullständig eller aktuell. Vi ansvarar inte för lektionen, fordonet eller ett avtal du gör med en skola, utom där svensk lag inte tillåter den begränsningen.",
         "items": []
       },
       "7": {
+        "title": "Tillämplig lag",
+        "body": "Dessa villkor styrs av svensk rätt. En tvist får prövas av svensk domstol. Konsumenter i EU behåller också tvingande rättigheter som gäller i bosättningslandet.",
+        "items": []
+      },
+      "8": {
         "title": "Ändringar och kontakt",
-        "body": "Tjänsten utvecklas löpande och vi kan uppdatera dessa villkor. Versionen visas överst på sidan. Har du frågor skriver du till frank@drivelinkup.com — vi svarar.",
+        "body": "Vi kan uppdatera villkoren när tjänsten ändras. Versionen visas överst på sidan. Frågor: support@drivelinkup.com.",
+        "items": []
+      },
+      "9": {
+        "title": "Ditt innehåll och era annonser",
+        "body": "Om du publicerar en skolannons ger du DriveLinkUp en icke-exklusiv licens att lagra, kopiera och visa innehållet på webbplatsen och i appen så att andra kan jämföra skolor. Du måste äga innehållet eller ha rätt att ge oss den licensen. Du ansvarar för att det du publicerar stämmer.",
+        "items": [
+          "Vi kan korta visningen, dölja eller ta bort innehåll som är vilseledande, olagligt eller som vi måste ta bort.",
+          "Skriv till support@drivelinkup.com för att anmäla en annons eller annat innehåll som du menar är olagligt eller fel."
+        ]
+      },
+      "10": {
+        "title": "Omdömen",
+        "body": "Vissa annonser visar Google-omdömen som vi sparar och märker som från Google. DriveLinkUp skriver inte de omdömena och kontrollerar dem inte. Ett omdöme kan vara ofullständigt eller gammalt. Det är inte ett DriveLinkUp-verifieringsmärke.",
+        "items": []
+      },
+      "11": {
+        "title": "Immaterialrätt och tillåten användning",
+        "body": "Namnet DriveLinkUp, sajtdesignen och programvaran tillhör oss eller våra licensgivare. Du får använda katalogen för att jämföra skolor och kontakta dem. Du får inte kopiera katalogen i stor skala, skrapa den, rama in den eller använda den för att bygga en konkurrerande katalog utan vårt skriftliga tillstånd.",
+        "items": [
+          "Du får inte utge dig för att vara en skola, lägga upp en annan skolas innehåll som ditt eget eller störa tjänsten.",
+          "Du får inte samla personuppgifter från sajten utom när det behövs för att kontakta en skola om en lektion."
+        ]
+      },
+      "12": {
+        "title": "Hur annonser visas",
+        "body": "DriveLinkUp är inte part i någon lektion du ordnar med en skola och agerar inte som skolans ombud. Sök- och katalogordning kan ändras. Nära mig sorterar efter avstånd när du delar din plats. Lätt och tung katalog filtrerar på de körkortskategorier annonsen täcker. Tredjepartsannonser från Google kan visas efter marknadsföringssamtycke. De annonserna är inte en betald placering för en skolannons, om vi inte senare märker en annons som annonserad.",
+        "items": []
+      },
+      "13": {
+        "title": "Att avsluta kontot",
+        "body": "Du kan radera kontot under Profil när som helst. Vi kan stänga av eller stänga ett konto, eller dölja en annons, om du bryter mot villkoren, om vi måste skydda användare eller om lagen kräver det. Vi skriver till e-postadressen på kontot när vi kan.",
+        "items": []
+      },
+      "14": {
+        "title": "Övriga villkor",
+        "body": "Dessa villkor och integritetspolicyn är avtalet för att använda sajten. Om en domstol anser att en del inte kan tillämpas gäller resten. Om vi inte driver en del innebär det inte att vi avstår från den. Du får inte överlåta avtalet utan vårt samtycke. Vi får överlåta det om vi överlåter tjänsten. Meddelanden skickas till support@drivelinkup.com och till e-postadressen på ditt konto.",
         "items": []
       }
     },
@@ -3523,7 +3628,11 @@
         "Skolan äger sina uppgifter. Ett märke visas bara när kontrollen finns sparad.",
         "Ingen avgift för elever. Du betalar skolans pris."
       ],
-      "facts": ["Grundat 2026", "Stockholm, Sverige", "Sverige först"],
+      "facts": [
+        "Grundat 2026",
+        "Stockholm, Sverige",
+        "Sverige först"
+      ],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."
     },
     "promise": {

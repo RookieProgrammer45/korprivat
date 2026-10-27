@@ -17,3 +17,8 @@ export function isAdsenseClient(value: string): boolean {
 export function adsenseScriptSrc(client = adsenseClient()): string {
   return `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`;
 }
+
+/** AdSense is a marketing cookie. Load it only after that toggle is on. */
+export function adsenseAllowedByConsent(scope: { marketing?: boolean } | null | undefined): boolean {
+  return scope?.marketing === true;
+}

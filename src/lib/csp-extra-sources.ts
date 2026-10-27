@@ -19,8 +19,9 @@ import type { CspExtraSources } from './csp';
  */
 
 // Google AdSense (auto ads). Needs iframes + beacons to the Google ad hosts.
-// script-src stays untouched: the root-layout Script carries the per-request
-// nonce, and 'strict-dynamic' admits the child scripts AdSense injects itself.
+// script-src stays untouched: AdsenseMount stamps the per-request nonce, and
+// 'strict-dynamic' admits the child scripts AdSense injects itself. The
+// loader itself is injected only after marketing consent.
 const adsOn = isAdsenseClient(adsenseClient());
 
 export const cspExtraSources: CspExtraSources = {

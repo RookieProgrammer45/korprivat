@@ -8,7 +8,8 @@ authoritative. Read it before every task.
 **Decisions:** [ADR-001 Sweden-first](docs/decisions/ADR-001-sweden-first.md) ·
 [ADR-002 better-auth](docs/decisions/ADR-002-better-auth.md) ·
 [ADR-003 canonical webhook host](docs/decisions/ADR-003-canonical-webhook-host.md) ·
-[ADR-006 directory-first](docs/decisions/ADR-006-directory-first.md)
+[ADR-006 directory-first](docs/decisions/ADR-006-directory-first.md) ·
+[ADR-007 store shell](docs/decisions/ADR-007-store-shell.md)
 
 ## Invariants (never violate)
 

@@ -9,7 +9,6 @@ import { SiteNav } from '@/components/custom/site-nav';
 import { AppProviders } from '@/components/providers';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
-import { adsenseClient, adsenseScriptSrc } from '@/lib/adsense';
 import { bodyFont, displayFont } from '@/lib/fonts';
 import { locale } from '@/lib/locale';
 import { siteDescription, siteName, siteUrl } from '@/lib/site';
@@ -49,14 +48,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       suppressHydrationWarning
       className={`${displayFont.variable} ${bodyFont.variable}`}
     >
-      <head>
-        <script
-          async
-          src={adsenseScriptSrc(adsenseClient())}
-          crossOrigin="anonymous"
-          nonce={nonce}
-        />
-      </head>
       <body className="min-h-dvh bg-background font-body text-foreground antialiased">
         <HeadContent nonce={nonce} />
         <ThemeProvider
