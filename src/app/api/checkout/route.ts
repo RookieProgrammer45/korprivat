@@ -18,12 +18,14 @@ import { prisma } from '@/lib/db';
 import { existingBookingLifecycleAllowed } from '@/lib/orgs/school-authorization-policy';
 import {
   CheckoutConfigurationError,
+  CustomerPaymentClosedError,
   createBookingCheckoutSession,
   IndependentInstructorPaymentError,
 } from '@/lib/payments/create-booking-checkout';
 import { markBookingPaidFromCheckout } from '@/lib/payments/fulfill-checkout';
 import { getStripe } from '@/lib/payments/stripe';
 import { getSessionUser, requireAuth } from '@/lib/require-auth';
+import { newBookingCreationEnabled } from '@/lib/scheduling/booking-creation';
 import { checkoutAllowedByPolicy } from '@/lib/scheduling/booking-policy';
 import {
   isCancellationPolicyEnforced,
@@ -143,6 +145,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { bookingId: 'bookingId is required' } }, { status: 400 });
   }
 
+  if (!newBookingCreationEnabled()) {
+    return NextResponse.json({ error: 'booking_not_available' }, { status: 403 });
+  }
+
   const { bookingId, token: bodyToken } = parsed.data;
   const booking = await prisma.booking.findUnique({ where: { id: bookingId } });
   if (!booking) {
@@ -228,6 +234,9 @@ export async function POST(req: Request) {
       { status: 200 },
     );
   } catch (error) {
+    if (error instanceof CustomerPaymentClosedError) {
+      return NextResponse.json({ error: 'booking_not_available' }, { status: 403 });
+    }
     if (error instanceof IndependentInstructorPaymentError) {
       return NextResponse.json({ error: { code: error.code } }, { status: 403 });
     }

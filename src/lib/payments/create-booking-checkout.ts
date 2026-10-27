@@ -6,12 +6,20 @@ import { learnerTotalSek } from '@/lib/business/booking-fees';
 import { prisma } from '@/lib/db';
 import { resolveOrigin } from '@/lib/payments/origin';
 import { getStripe } from '@/lib/payments/stripe';
+import { newBookingCreationEnabled } from '@/lib/scheduling/booking-creation';
 import { loadInstructorPaymentEligibility } from '@/lib/scheduling/listing-eligibility';
 
 export class CheckoutConfigurationError extends Error {
   constructor(message = 'Stripe is not configured') {
     super(message);
     this.name = 'CheckoutConfigurationError';
+  }
+}
+
+export class CustomerPaymentClosedError extends Error {
+  constructor(readonly code = 'booking_not_available') {
+    super(code);
+    this.name = 'CustomerPaymentClosedError';
   }
 }
 
@@ -29,6 +37,9 @@ export async function createBookingCheckoutSession(input: {
   accessToken?: string | null;
   userId?: string | null;
 }): Promise<{ url: string; stripeSessionId: string }> {
+  if (!newBookingCreationEnabled()) {
+    throw new CustomerPaymentClosedError();
+  }
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new CheckoutConfigurationError();
   }

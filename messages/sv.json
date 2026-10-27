@@ -1,7 +1,7 @@
 {
   "common": {
     "nav": {
-      "findProvider": "Marknadsplats",
+      "findProvider": "Lätt trafik",
       "heavyVehicles": "Tung trafik",
       "howItWorks": "Så fungerar det",
       "licenceCategories": "Körkortskategorier",
@@ -302,9 +302,9 @@
   },
   "instructorsPage": {
     "header": {
-      "eyebrow": "Marknadsplats för trafikskolor",
-      "title": "Trafikskolor",
-      "subtitle": "Pris, stad och språk."
+      "eyebrow": "Personbil, motorcykel och släp",
+      "title": "Lätt trafik",
+      "subtitle": "Trafikskolor som enligt sin webbplats utbildar för AM, A, B eller BE. Priset visas när skolan publicerar det."
     },
     "directoryCta": "Se alla trafikskolor",
     "stockholmCity": {
@@ -2222,11 +2222,11 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "Hitta den bästa trafikskolan nära dig.",
-      "body": "Jämför skolor. Listan är gratis.",
+      "title": "Hitta en trafikskola nära dig.",
+      "body": "Trafikskolor som enligt sin webbplats utbildar för AM, A, B eller BE. Priset visas när skolan publicerar det.",
       "primaryCta": "Hitta en skola",
       "instructorCta": "Jag undervisar på en trafikskola",
-      "marketplaceTag": "Marknadsplats · Trafikskolor",
+      "marketplaceTag": "Lätt trafik · Trafikskolor",
       "schoolCta": "Jag driver en skola",
       "panelEyebrow": "Så funkar det",
       "panelTitle": "Skolan står för lektionen",
@@ -2634,7 +2634,7 @@
     "title": "Instruktörer kommer in via skolan.",
     "body": "Skolan bjuder in. Skolans tillstånd styr kategori, pris och villkor. En instruktör tar inte betalt på DriveLinkUp vid sidan av skolan.",
     "primaryCta": "Registrera skolan",
-    "learnerCta": "Se katalogen",
+    "learnerCta": "Bläddra i lätt trafik",
     "rolesEyebrow": "Så fungerar det",
     "roles": {
       "trafiklarare": {
@@ -2708,6 +2708,8 @@
     "cancelledBody": "Den här bokningen är inte längre aktiv.",
     "accessTitle": "Åtkomsten till bokningen har gått ut",
     "accessBody": "Öppna den senaste bokningslänken från din e-post, eller logga in för att se en bokning som tillhör dig.",
+    "payClosedTitle": "DriveLinkUp tar inte betalt",
+    "payClosedBody": "Lektionen betalas hos skolan. Öppna skolan i katalogen och använd Kontakta skolan.",
     "payCta": "Fortsätt till extern kassa",
     "openingCheckout": "Öppnar kassan…",
     "paymentHelp": "Behöver du hjälp med betalningen?",
@@ -2795,14 +2797,14 @@
     "errorTitle": "Något gick fel",
     "submitError": "Bokningen kunde inte accepteras.",
     "acceptedTitle": "Bokningen är godkänd",
-    "acceptedBody": "Eleven har skickats till kassan. Betalningen hålls i escrow tills lektionen är genomförd.",
+    "acceptedBody": "Bokningen är godkänd. Eleven betalar hos skolan. DriveLinkUp tar inte betalt.",
     "eyebrow": "Bekräfta bokning",
     "title": "Acceptera bokning",
     "bookingId": "Boknings-id: {id}",
     "nameLabel": "Ditt namn",
-    "submit": "Acceptera och skicka eleven till kassan",
+    "submit": "Acceptera bokningen",
     "submitting": "Accepterar…",
-    "continueToPayment": "Öppna boknings- och betalningsdetaljer",
+    "continueToPayment": "Öppna bokningen",
     "declineInstead": "Avslå denna förfrågan"
   },
   "bookingDecline": {

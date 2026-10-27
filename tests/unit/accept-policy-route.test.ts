@@ -99,6 +99,7 @@ beforeEach(() => {
     },
   ]);
   delete process.env.SCHOOL_AUTHZ_ENFORCEMENT;
+  vi.stubEnv('BOOKING_CREATION_ENABLED', 'true');
 });
 
 describe('POST /api/bookings/[id]/accept policy', () => {

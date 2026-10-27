@@ -29,7 +29,15 @@ type Status =
       error: string | null;
     };
 
-export function BookingPaymentLink({ bookingId, token }: { bookingId: string; token?: string }) {
+export function BookingPaymentLink({
+  bookingId,
+  token,
+  paymentsEnabled = false,
+}: {
+  bookingId: string;
+  token?: string;
+  paymentsEnabled?: boolean;
+}) {
   const t = useTranslations('bookingConfirmPayment');
   const locale = useLocale();
   const [status, setStatus] = useState<Status>({ kind: 'loading' });
@@ -264,7 +272,7 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
           <StateNotice title={t('declinedTitle')} body={t('declinedBody')} />
         ) : isCancelled ? (
           <StateNotice title={t('cancelledTitle')} body={t('cancelledBody')} />
-        ) : canPay ? (
+        ) : canPay && paymentsEnabled ? (
           <Button
             type="button"
             disabled={status.paymentLoading}
@@ -272,6 +280,8 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
           >
             {status.paymentLoading ? t('openingCheckout') : t('payCta')}
           </Button>
+        ) : canPay ? (
+          <StateNotice title={t('payClosedTitle')} body={t('payClosedBody')} />
         ) : null}
 
         {paymentPollError ? (

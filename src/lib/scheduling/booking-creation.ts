@@ -1,6 +1,7 @@
-// New reservations stay off in the directory-first release. Set
-// BOOKING_CREATION_ENABLED=true only when booking is deliberately turned
-// back on. Lifecycle routes for bookings that already exist do not use this.
+// New reservations and customer checkout stay off in the directory-first
+// release. Set BOOKING_CREATION_ENABLED=true only when booking and payment
+// are deliberately turned back on. Cancel, refund, dispute, and receipt
+// routes for bookings that already exist do not use this.
 export function newBookingCreationEnabled(): boolean {
   return process.env.BOOKING_CREATION_ENABLED === 'true';
 }

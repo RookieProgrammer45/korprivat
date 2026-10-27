@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const { mockBookingFindUnique, mockInstructorFindUnique, mockPayment } = vi.hoisted(() => ({
   mockBookingFindUnique: vi.fn(),
@@ -30,6 +30,26 @@ describe('createBookingCheckoutSession payment gate', () => {
     mockInstructorFindUnique.mockReset();
     mockPayment.mockReset();
     process.env.STRIPE_SECRET_KEY = 'sk_test_unit';
+    vi.stubEnv('BOOKING_CREATION_ENABLED', 'true');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('does not mint a checkout session while customer payment is closed', async () => {
+    vi.stubEnv('BOOKING_CREATION_ENABLED', '');
+
+    await expect(
+      createBookingCheckoutSession({
+        bookingId: 'booking_1',
+        req: new Request('http://localhost/api/checkout'),
+      }),
+    ).rejects.toMatchObject({
+      name: 'CustomerPaymentClosedError',
+      code: 'booking_not_available',
+    });
+    expect(mockBookingFindUnique).not.toHaveBeenCalled();
   });
 
   it('refuses to mint checkout when the instructor is not part of a school', async () => {

@@ -41,13 +41,32 @@ beforeEach(() => {
   mockInstructorFindUnique.mockReset();
   mockCreateCheckout.mockReset();
   delete process.env.CANCELLATION_POLICY_ENFORCE;
+  vi.stubEnv('BOOKING_CREATION_ENABLED', 'true');
 });
 
 afterEach(() => {
   delete process.env.CANCELLATION_POLICY_ENFORCE;
+  vi.unstubAllEnvs();
 });
 
 describe('POST /api/checkout cancellation policy', () => {
+  it('does not start checkout while customer payment is closed', async () => {
+    vi.stubEnv('BOOKING_CREATION_ENABLED', '');
+
+    const res = await POST(
+      new Request('http://localhost/api/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ bookingId: 'booking_1' }),
+      }),
+    );
+
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: 'booking_not_available' });
+    expect(mockBookingFindUnique).not.toHaveBeenCalled();
+    expect(mockCreateCheckout).not.toHaveBeenCalled();
+  });
+
   it('SC-18 refuses checkout when enforcement is on and no policy is approved', async () => {
     process.env.CANCELLATION_POLICY_ENFORCE = '1';
     mockBookingFindUnique.mockResolvedValueOnce({

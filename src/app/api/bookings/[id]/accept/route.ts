@@ -32,6 +32,7 @@ import {
 } from '@/lib/payments/create-booking-checkout';
 import { resolveOrigin } from '@/lib/payments/origin';
 import { getSessionUser } from '@/lib/require-auth';
+import { newBookingCreationEnabled } from '@/lib/scheduling/booking-creation';
 import { evaluateBookingPolicy } from '@/lib/scheduling/booking-policy';
 import { loadListingEligibilityFacts } from '@/lib/scheduling/listing-eligibility';
 import { resolveLearnerBookingGate } from '@/lib/signup-resume';
@@ -244,6 +245,17 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       BookingAcceptResponse.parse({
         id: booking.id,
         paymentStatus: safeStatus(fresh?.paymentStatus),
+        actionUrl: null,
+      }),
+      { status: 200 },
+    );
+  }
+
+  if (!newBookingCreationEnabled()) {
+    return NextResponse.json(
+      BookingAcceptResponse.parse({
+        id: booking.id,
+        paymentStatus: safeStatus(booking.paymentStatus),
         actionUrl: null,
       }),
       { status: 200 },

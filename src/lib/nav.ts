@@ -64,7 +64,7 @@ export interface NavItem {
 //   { labelKey: 'nav.contactUs', href: 'mailto:…',          group: 'secondary' },
 export const navItems: NavItem[] = [
   {
-    label: 'Find driving schools',
+    label: 'Light vehicles',
     labelKey: 'nav.findProvider',
     href: '/instructors',
     group: 'primary',

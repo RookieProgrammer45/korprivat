@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingConfirmPayment } from '@/components/custom/booking-confirm-payment';
+import { newBookingCreationEnabled } from '@/lib/scheduling/booking-creation';
 
 // Per-request so the deep-link page is never frozen at build time.
 export const dynamic = 'force-dynamic';
@@ -27,7 +28,11 @@ export default async function BookingConfirmPaymentPage({ params, searchParams }
   return (
     <main className="container-page section">
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-3">
-        <BookingConfirmPayment bookingId={id} token={token} />
+        <BookingConfirmPayment
+          bookingId={id}
+          token={token}
+          paymentsEnabled={newBookingCreationEnabled()}
+        />
       </div>
     </main>
   );

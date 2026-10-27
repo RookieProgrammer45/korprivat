@@ -50,6 +50,7 @@ import {
 } from './_setup/prisma-mock';
 
 beforeEach(() => {
+  vi.stubEnv('BOOKING_CREATION_ENABLED', 'true');
   resetPrisma();
   resetEmailMock();
   authMock.reset();
@@ -68,6 +69,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.unstubAllEnvs();
   createCheckoutSession.mockReset();
   retrieveCheckoutSession.mockReset();
 });

@@ -118,6 +118,7 @@ function learnerGet(url: string): Request {
 }
 
 beforeEach(() => {
+  vi.stubEnv('BOOKING_CREATION_ENABLED', 'true');
   resetPrisma();
   resetEmailMock();
   authMock.reset();
@@ -144,6 +145,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.unstubAllEnvs();
   createCheckoutSession.mockReset();
   retrieveCheckoutSession.mockReset();
 });

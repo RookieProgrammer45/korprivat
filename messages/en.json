@@ -1,7 +1,7 @@
 {
   "common": {
     "nav": {
-      "findProvider": "Marketplace",
+      "findProvider": "Light vehicles",
       "heavyVehicles": "Heavy vehicles",
       "howItWorks": "How it works",
       "licenceCategories": "Licence categories",
@@ -302,9 +302,9 @@
   },
   "instructorsPage": {
     "header": {
-      "eyebrow": "Marketplace for driving schools",
-      "title": "Driving schools",
-      "subtitle": "Price, city and language."
+      "eyebrow": "Car, motorcycle and trailer",
+      "title": "Light vehicles",
+      "subtitle": "Driving schools whose websites say they train for AM, A, B or BE. The price is shown when the school publishes it."
     },
     "directoryCta": "View all driving schools",
     "stockholmCity": {
@@ -2222,11 +2222,11 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "Find the best driving school near you.",
-      "body": "Compare schools. Listing is free.",
+      "title": "Find a driving school near you.",
+      "body": "Driving schools whose websites say they train for AM, A, B or BE. The price is shown when the school publishes it.",
       "primaryCta": "Find a school",
       "instructorCta": "I work at a driving school",
-      "marketplaceTag": "Marketplace · Driving schools",
+      "marketplaceTag": "Light vehicles · Driving schools",
       "schoolCta": "I run a school",
       "panelEyebrow": "How it works",
       "panelTitle": "The school stands behind the lesson",
@@ -2634,7 +2634,7 @@
     "title": "Instructors come in through the school.",
     "body": "The school sends the invite. The school's permission sets category, price and terms. An instructor does not take payment on DriveLinkUp apart from the school.",
     "primaryCta": "Register the school",
-    "learnerCta": "Browse the marketplace",
+    "learnerCta": "Browse light vehicles",
     "rolesEyebrow": "How it works",
     "roles": {
       "trafiklarare": {
@@ -2708,6 +2708,8 @@
     "cancelledBody": "This booking is no longer active.",
     "accessTitle": "Booking access expired",
     "accessBody": "Open the latest booking link from your email, or sign in to view a booking that belongs to you.",
+    "payClosedTitle": "DriveLinkUp does not take payment",
+    "payClosedBody": "The lesson is paid at the school. Open the school in the directory and use Contact the school.",
     "payCta": "Continue to hosted checkout",
     "openingCheckout": "Opening checkout…",
     "paymentHelp": "Need help with payment?",
@@ -2795,14 +2797,14 @@
     "errorTitle": "Something went wrong",
     "submitError": "Could not accept this booking.",
     "acceptedTitle": "Booking approved",
-    "acceptedBody": "The learner has been sent to checkout. Payment is held in escrow until the lesson is completed.",
+    "acceptedBody": "The booking is approved. The learner pays the school. DriveLinkUp does not take payment.",
     "eyebrow": "Confirm booking",
     "title": "Accept booking",
     "bookingId": "Booking ID: {id}",
     "nameLabel": "Your name",
-    "submit": "Accept and send learner to checkout",
+    "submit": "Accept the booking",
     "submitting": "Accepting…",
-    "continueToPayment": "Open booking and payment details",
+    "continueToPayment": "Open the booking",
     "declineInstead": "Decline this request"
   },
   "bookingDecline": {

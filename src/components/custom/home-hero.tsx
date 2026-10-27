@@ -35,6 +35,7 @@ const POPULAR_LINKS = [
 
 export function HomeHero() {
   const t = useTranslations('publicHome.hero');
+  const tHeavy = useTranslations('heavyVehiclesPage');
   const router = useRouter();
   const categoryId = useId();
   const cityId = useId();
@@ -59,6 +60,9 @@ export function HomeHero() {
             text={t('title')}
             className="marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
           />
+          <p className="marketplace-reveal dlu-hero-in-2 mt-4 max-w-xl text-body text-muted-foreground">
+            {t('body')}
+          </p>
 
           <form
             onSubmit={onSubmit}
@@ -104,20 +108,26 @@ export function HomeHero() {
             </button>
           </form>
 
-          <div className="marketplace-reveal dlu-hero-in-3 mt-5 flex min-w-0 flex-wrap items-center gap-2 text-sm">
-            <span className="mr-1 text-muted-foreground">{t('popular.label')}</span>
-            {POPULAR_LINKS.map((link) => (
-              <Link
-                key={link.key}
-                href={link.href}
-                className="dlu-hero-popular-link inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-card px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-              >
-                {link.key === 'heavy' ? (
-                  <Truck className="size-4" strokeWidth={1.75} aria-hidden />
-                ) : null}
-                {t(`popular.links.${link.key}`)}
-              </Link>
-            ))}
+          <div className="marketplace-reveal dlu-hero-in-3 mt-5 grid min-w-0 gap-3">
+            <div className="flex min-w-0 flex-wrap items-center gap-2 text-sm">
+              <span className="mr-1 text-muted-foreground">{t('popular.label')}</span>
+              {POPULAR_LINKS.map((link) => (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  aria-describedby={link.key === 'heavy' ? 'hero-heavy-note' : undefined}
+                  className="dlu-hero-popular-link inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-card px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                >
+                  {link.key === 'heavy' ? (
+                    <Truck className="size-4" strokeWidth={1.75} aria-hidden />
+                  ) : null}
+                  {t(`popular.links.${link.key}`)}
+                </Link>
+              ))}
+            </div>
+            <p id="hero-heavy-note" className="max-w-xl text-small text-muted-foreground">
+              {tHeavy('subtitle')}
+            </p>
           </div>
         </div>
         <aside className="marketplace-reveal dlu-hero-in-visual dlu-hero-visual relative hidden min-h-[28rem] overflow-hidden rounded-[1.25rem] border border-border lg:block lg:min-h-[32rem]">
