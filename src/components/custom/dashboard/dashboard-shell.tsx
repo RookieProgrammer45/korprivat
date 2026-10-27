@@ -1,15 +1,15 @@
 'use client';
 
-import { LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
-import { Separator } from '@/components/ui/separator';
+import { LocaleSwitcher } from '@/components/locale-switcher';
 import { useSession } from '@/lib/auth-client';
 import type { MarketplaceRole } from '@/lib/contracts/clickwrap';
 import type { DashboardShellRole } from '@/lib/dashboard-shell-role';
+import { siteName } from '@/lib/site';
 import { cn } from '@/lib/utils';
 import { SignupConfirmationBanner } from '../signup-confirmation-banner';
 import { DashboardNav } from './dashboard-nav';
@@ -21,7 +21,7 @@ export interface DashboardShellProps {
   userLabel: string;
   /** ACTIVE OWNER or STAFF Membership — drives school sidebar. */
   isSchoolOwner?: boolean;
-  /** Chrome identity: badge + header title. */
+  /** Chrome identity: role badge. */
   shellRole: DashboardShellRole;
 }
 
@@ -83,19 +83,25 @@ export function DashboardShell({
   }
 
   return (
-    <main
-      data-shell-role={shellRole}
-      className="dashboard-shell min-h-dvh text-foreground"
-    >
+    <main data-shell-role={shellRole} className="dashboard-shell min-h-dvh text-foreground">
       <div className="flex min-h-dvh flex-col">
-        <header className="border-b border-border/70 bg-background">
+        <header className="border-b border-border/70">
           <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-gutter">
-            <Link href="/dashboard" className="flex min-w-0 items-center gap-2">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-card">
-                <LayoutDashboard aria-hidden="true" className="size-4" />
-              </span>
-              <span className="truncate text-sm font-semibold text-foreground">
-                {t(`title.${shellRole}`)}
+            <Link
+              href="/"
+              aria-label={siteName}
+              className="group flex min-w-0 items-center gap-2 text-foreground"
+            >
+              {/* biome-ignore lint/performance/noImgElement: static brand mark — same asset as SiteNav */}
+              <img
+                src="/brand/logo-black.svg"
+                alt=""
+                width={28}
+                height={28}
+                className="h-7 w-7 shrink-0"
+              />
+              <span className="site-header-wordmark truncate font-display text-base tracking-[-0.02em] text-foreground">
+                {siteName}
               </span>
             </Link>
             <div className="flex min-w-0 items-center gap-2">
@@ -110,6 +116,7 @@ export function DashboardShell({
               <span className="hidden truncate text-xs font-medium text-muted-foreground sm:block">
                 {hasAdminRole && shellRole !== 'admin' ? t('adminAccess') : userLabel}
               </span>
+              <LocaleSwitcher />
             </div>
           </div>
         </header>
@@ -126,7 +133,6 @@ export function DashboardShell({
 
           <section className="min-w-0">
             <SignupConfirmationBanner />
-            <Separator className="mb-6" />
             {children}
           </section>
         </div>
