@@ -5,6 +5,9 @@ name: Regional school prices
 # price refresh. Nothing goes live until the pull request is merged.
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - regional-prices-*
 
 permissions:
   contents: write
