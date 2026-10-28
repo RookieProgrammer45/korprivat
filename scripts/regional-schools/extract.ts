@@ -201,6 +201,7 @@ async function main() {
     });
   }
 
+  const extractErrors = new Map<string, string>();
   if (flag('extract')) {
     if (!process.env.OPENAI_API_KEY) throw new Error('OPENAI_API_KEY is not set in this shell.');
     const client = new OpenAI();
@@ -219,7 +220,9 @@ async function main() {
           decided.lessonPrice == null ? 'no lesson price' : String(decided.lessonPrice),
         );
       } catch (error) {
-        log(index, targets.length, entry.school.id, `extract failed: ${String(error)}`);
+        const message = publicError(error);
+        extractErrors.set(entry.school.id, message);
+        log(index, targets.length, entry.school.id, `extract failed: ${message}`);
       }
     });
   }
@@ -227,18 +230,28 @@ async function main() {
   if (flag('write')) {
     const today = new Date().toISOString().slice(0, 10);
     for (const entry of datasets) {
-      let priced = 0;
+      const notes: PriceRunNote[] = [];
       for (const school of entry.dataset.schools) {
         if (!school.website) continue;
         const fetched = readJson<FetchCache>(cachePath(school, 'fetch'));
-        if (!fetched) continue;
+        const inCountry = !country || school.country === country;
+        if (!fetched) {
+          if (inCountry) notes.push(note(school, 'missing', 0, extractErrors.get(school.id) ?? null));
+          continue;
+        }
         school.checkedAt = today;
         if (!fetched.ok) {
           school.websiteStatus = 'SITE_UNREACHABLE';
+          if (inCountry) notes.push(note(school, 'unreachable', 0, fetched.error ?? null));
           continue;
         }
         const extraction = readJson<Extraction>(cachePath(school, 'extract'));
-        if (!extraction) continue;
+        if (!extraction) {
+          if (inCountry) {
+            notes.push(note(school, 'ok', fetched.pages.length, extractErrors.get(school.id) ?? null));
+          }
+          continue;
+        }
         const decided = decideLesson(school, extraction, fetched.pages);
         school.lessonPrice = decided.lessonPrice;
         school.lessonMinutes = decided.lessonMinutes;
@@ -249,16 +262,60 @@ async function main() {
         ) {
           school.sourceUrl = extraction.sourceUrl;
         }
-        if (decided.lessonPrice != null) priced += 1;
+        if (inCountry) notes.push(note(school, 'ok', fetched.pages.length, null));
       }
+      const priced = entry.dataset.schools.filter((school) => school.lessonPrice != null).length;
       entry.dataset.meta.collectedAt = today;
       entry.dataset.meta.priceSource =
         "Each school's own website. OpenAI may only return a price printed on the cited page, and the price is kept only when that page states it for one lesson, next to the school's currency. A from-price, a package total, or a rounded decimal is left empty.";
       entry.dataset.meta.withLessonPrice = priced;
       writeFileSync(entry.full, `${JSON.stringify(entry.dataset, null, 2)}\n`);
       console.log('wrote', entry.file, priced);
+      if (country && entry.file.includes('europe-schools')) writePriceRun(country, notes);
     }
   }
+}
+
+type PriceRunNote = {
+  id: string;
+  name: string;
+  fetch: 'missing' | 'unreachable' | 'ok';
+  pages: number;
+  error: string | null;
+  lessonPrice: number | null;
+};
+
+function note(
+  school: School,
+  fetch: PriceRunNote['fetch'],
+  pages: number,
+  error: string | null,
+): PriceRunNote {
+  return {
+    id: school.id,
+    name: school.name,
+    fetch,
+    pages,
+    error,
+    lessonPrice: school.lessonPrice,
+  };
+}
+
+function writePriceRun(country: string, notes: PriceRunNote[]) {
+  const directory = path.join(process.cwd(), 'data/europe-schools/price-runs');
+  mkdirSync(directory, { recursive: true });
+  const priced = notes.filter((item) => item.lessonPrice != null).length;
+  writeFileSync(
+    path.join(directory, `${country}.json`),
+    `${JSON.stringify({ country, priced, schools: notes }, null, 2)}\n`,
+  );
+  console.log('price run', country, 'priced', priced, 'noted', notes.length);
+}
+
+function publicError(error: unknown): string {
+  return String(error)
+    .replace(/sk-[A-Za-z0-9_-]+/g, 'sk-redacted')
+    .slice(0, 500);
 }
 
 async function crawlSchool(school: School): Promise<FetchCache> {

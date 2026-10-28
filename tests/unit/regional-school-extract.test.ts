@@ -64,6 +64,8 @@ describe('decideLesson', () => {
     expect(priced('GB', 'GBP', 36, 'Lessons from £36')).toBeNull();
     expect(priced('FR', 'EUR', 120, 'Forfait 10 heures 120 €')).toBeNull();
     expect(priced('ES', 'EUR', 45, 'Clase suelta 45,00 €')).toBe(45);
+    expect(priced('IE', 'EUR', 55, '1 Lesson € 55')).toBe(55);
+    expect(priced('IE', 'EUR', 65, '€65 per Lesson')).toBe(65);
     expect(priced('ES', 'EUR', 45, 'Clase suelta 45,90 €')).toBeNull();
     expect(
       decideLesson(
