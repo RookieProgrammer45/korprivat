@@ -1,7 +1,8 @@
 //
 // Fetches the signed-in profile envelope from GET /api/profile, then renders:
 //   1. a brand-tinted header card — avatar block (initial-letter fallback when
-//      `image` is empty) + name/email + a soft role chip on the right
+//      `image` is empty) + name/email + a soft role chip on the right, with
+//      Edit name (PATCH /api/profile) and Edit photo next to each other
 //   2. the role-correct upcoming-list (re-using the BookingList shape from
 //      the dashboard), role-branched eyebrow + empty body copy
 //   3. a quiet danger-zone card at the very bottom — the self-service GDPR
@@ -31,10 +32,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { signOut } from '@/lib/auth-client';
-import { DeleteAccountResponse, Profile } from '@/lib/contracts/profile';
+import {
+  DeleteAccountResponse,
+  normalizeDisplayName,
+  Profile,
+  ProfileNameUpdated,
+} from '@/lib/contracts/profile';
 
 type ProfileResponse = ReturnType<typeof Profile.parse>;
 type UpcomingItem = ProfileResponse['upcoming']['items'][number];
@@ -117,7 +125,7 @@ export function ProfilePage({ compact = false }: { compact?: boolean } = {}) {
         user={user}
         role={role}
         stagedImage={photo.status === 'STAGED' ? photo.imageUrl : null}
-        onPhotoUploaded={loadProfile}
+        onUpdated={loadProfile}
       />
       {compact ? (
         <Card className="surface-panel border-border bg-card">
@@ -129,61 +137,61 @@ export function ProfilePage({ compact = false }: { compact?: boolean } = {}) {
           </CardContent>
         </Card>
       ) : (
-      <section className="grid gap-3">
-        <div className="flex items-center justify-between gap-3">
-          <p className="text-eyebrow text-muted-foreground">{t(`upcoming.${eyebrow}`)}</p>
-          {upcoming.items.length > 0 ? (
-            <p className="text-small text-muted-foreground">
-              {t('upcoming.count', { count: upcoming.items.length })}
-            </p>
-          ) : null}
-        </div>
-        {upcoming.items.length === 0 ? (
-          <Card className="surface-panel border-border bg-card">
-            <CardContent className="flex flex-col gap-3 p-8">
-              <p className="text-body font-medium text-foreground">{t('upcoming.emptyTitle')}</p>
+        <section className="grid gap-3">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-eyebrow text-muted-foreground">{t(`upcoming.${eyebrow}`)}</p>
+            {upcoming.items.length > 0 ? (
               <p className="text-small text-muted-foreground">
-                {t(
-                  role === 'INSTRUCTOR'
-                    ? 'upcoming.emptyBodyInstructor'
-                    : role === 'SCHOOL'
-                      ? 'upcoming.emptyBodySchool'
-                      : 'upcoming.emptyBodyStudent',
-                )}
+                {t('upcoming.count', { count: upcoming.items.length })}
               </p>
-              <div className="mt-2">
-                <Button asChild size="sm" variant="secondary">
-                  <Link
-                    href={
-                      role === 'INSTRUCTOR'
-                        ? '/dashboard/instructor/availability'
-                        : role === 'SCHOOL'
-                          ? '/dashboard/school'
-                          : '/instructors'
-                    }
-                  >
-                    {t(
-                      role === 'INSTRUCTOR'
-                        ? 'upcoming.emptyCtaInstructor'
-                        : role === 'SCHOOL'
-                          ? 'upcoming.emptyCtaSchool'
-                          : 'upcoming.emptyCtaStudent',
-                    )}
-                  </Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ) : (
-          <ul className="grid gap-3">
-            {upcoming.items.map((row) => (
-              <li key={row.id}>
-                <UpcomingCard row={row} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+            ) : null}
+          </div>
+          {upcoming.items.length === 0 ? (
+            <Card className="surface-panel border-border bg-card">
+              <CardContent className="flex flex-col gap-3 p-8">
+                <p className="text-body font-medium text-foreground">{t('upcoming.emptyTitle')}</p>
+                <p className="text-small text-muted-foreground">
+                  {t(
+                    role === 'INSTRUCTOR'
+                      ? 'upcoming.emptyBodyInstructor'
+                      : role === 'SCHOOL'
+                        ? 'upcoming.emptyBodySchool'
+                        : 'upcoming.emptyBodyStudent',
+                  )}
+                </p>
+                <div className="mt-2">
+                  <Button asChild size="sm" variant="secondary">
+                    <Link
+                      href={
+                        role === 'INSTRUCTOR'
+                          ? '/dashboard/instructor/availability'
+                          : role === 'SCHOOL'
+                            ? '/dashboard/school'
+                            : '/instructors'
+                      }
+                    >
+                      {t(
+                        role === 'INSTRUCTOR'
+                          ? 'upcoming.emptyCtaInstructor'
+                          : role === 'SCHOOL'
+                            ? 'upcoming.emptyCtaSchool'
+                            : 'upcoming.emptyCtaStudent',
+                      )}
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <ul className="grid gap-3">
+              {upcoming.items.map((row) => (
+                <li key={row.id}>
+                  <UpcomingCard row={row} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
       )}
       <DeleteAccountSection />
     </div>
@@ -194,12 +202,12 @@ function ProfileHeader({
   user,
   role,
   stagedImage,
-  onPhotoUploaded,
+  onUpdated,
 }: {
   user: { name: string; email: string; image: string | null };
   role: ProfileResponse['role'];
   stagedImage: string | null;
-  onPhotoUploaded: () => void;
+  onUpdated: () => void;
 }) {
   const t = useTranslations('profile');
   const initial = user.name?.trim().charAt(0).toUpperCase() || '?';
@@ -246,16 +254,140 @@ function ProfileHeader({
                     : 'role.learner',
             )}
           </Badge>
-          <ProfilePhotoEditor
-            role={role}
-            name={user.name}
-            hasImage={Boolean(user.image)}
-            stagedImage={stagedImage}
-            onUploaded={onPhotoUploaded}
-          />
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+            <ProfileNameEditor name={user.name} onSaved={onUpdated} />
+            <ProfilePhotoEditor
+              role={role}
+              name={user.name}
+              hasImage={Boolean(user.image)}
+              stagedImage={stagedImage}
+              onUploaded={onUpdated}
+            />
+          </div>
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+function splitDisplayName(fullName: string): { first: string; last: string } {
+  const trimmed = fullName.trim();
+  if (!trimmed) return { first: '', last: '' };
+  const separator = trimmed.indexOf(' ');
+  if (separator === -1) return { first: trimmed, last: '' };
+  return {
+    first: trimmed.slice(0, separator),
+    last: trimmed.slice(separator + 1).trim(),
+  };
+}
+
+function ProfileNameEditor({ name, onSaved }: { name: string; onSaved: () => void }) {
+  const t = useTranslations('profile.nameEdit');
+  const inputId = React.useId();
+  const [open, setOpen] = React.useState(false);
+  const [saving, setSaving] = React.useState(false);
+  const [firstName, setFirstName] = React.useState(() => splitDisplayName(name).first);
+  const [lastName, setLastName] = React.useState(() => splitDisplayName(name).last);
+  const [nameError, setNameError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (open) return;
+    const parts = splitDisplayName(name);
+    setFirstName(parts.first);
+    setLastName(parts.last);
+    setNameError(null);
+  }, [name, open]);
+
+  async function saveName(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (saving) return;
+    const combined = normalizeDisplayName([firstName, lastName].filter(Boolean).join(' '));
+    if (!firstName.trim()) {
+      setNameError(t('firstNameError'));
+      return;
+    }
+    setNameError(null);
+    setSaving(true);
+    try {
+      await apiFetch('/api/profile', {
+        method: 'PATCH',
+        body: JSON.stringify({ name: combined }),
+        schema: ProfileNameUpdated,
+      });
+      toast.success(t('successToast'));
+      setOpen(false);
+      onSaved();
+    } catch {
+      toast.error(t('errorToast'));
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button type="button" variant="outline" size="sm">
+          {t('editButton')}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <form onSubmit={saveName} className="grid gap-4">
+          <DialogHeader>
+            <DialogTitle>{t('dialogTitle')}</DialogTitle>
+            <DialogDescription>{t('dialogBody')}</DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-3">
+            <div className="grid gap-2">
+              <Label htmlFor={`${inputId}-first`}>{t('firstNameLabel')}</Label>
+              <Input
+                id={`${inputId}-first`}
+                value={firstName}
+                autoComplete="given-name"
+                maxLength={120}
+                placeholder={t('firstNamePlaceholder')}
+                onChange={(event) => {
+                  setFirstName(event.target.value);
+                  if (nameError) setNameError(null);
+                }}
+                aria-invalid={Boolean(nameError)}
+                aria-describedby={nameError ? `${inputId}-error` : undefined}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor={`${inputId}-last`}>{t('lastNameLabel')}</Label>
+              <Input
+                id={`${inputId}-last`}
+                value={lastName}
+                autoComplete="family-name"
+                maxLength={120}
+                placeholder={t('lastNamePlaceholder')}
+                onChange={(event) => setLastName(event.target.value)}
+              />
+            </div>
+            {nameError ? (
+              <p id={`${inputId}-error`} className="text-small text-destructive" role="alert">
+                {nameError}
+              </p>
+            ) : null}
+          </div>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setOpen(false)}
+              disabled={saving}
+            >
+              {t('cancel')}
+            </Button>
+            <Button type="submit" size="sm" disabled={saving}>
+              {saving ? t('saving') : t('save')}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }
 

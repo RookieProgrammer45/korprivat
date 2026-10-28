@@ -1991,6 +1991,21 @@
       "handledare": "Supervisor",
       "school": "Driving school"
     },
+    "nameEdit": {
+      "editButton": "Edit name",
+      "dialogTitle": "Change your name",
+      "dialogBody": "This is the name on your account.",
+      "firstNameLabel": "First name",
+      "lastNameLabel": "Last name",
+      "firstNamePlaceholder": "First name",
+      "lastNamePlaceholder": "Last name",
+      "firstNameError": "Enter your first name.",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "successToast": "Your name was updated.",
+      "errorToast": "We could not save your name. Try again."
+    },
     "pictureUpload": {
       "editButton": "Edit photo",
       "editButtonAlt": "Add photo",

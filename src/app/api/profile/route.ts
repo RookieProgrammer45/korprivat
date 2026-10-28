@@ -25,7 +25,12 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { photoState } from '@/lib/business/photo-verification';
 import { type BookingPaymentStatus, BookingPaymentStatusEnum } from '@/lib/contracts/bookings';
-import { MarketplaceRole, Profile } from '@/lib/contracts/profile';
+import {
+  MarketplaceRole,
+  Profile,
+  ProfileNameUpdate,
+  ProfileNameUpdated,
+} from '@/lib/contracts/profile';
 import { prisma } from '@/lib/db';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 
@@ -66,12 +71,16 @@ export async function GET(req: Request) {
   const role = MarketplaceRole.parse(profile.role);
 
   const upcoming = await loadUpcoming(role, user);
+  const account = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: { name: true, email: true, image: true },
+  });
 
   const payload = Profile.parse({
     user: {
-      name: user.name ?? user.email,
-      email: user.email,
-      image: user.image ?? null,
+      name: account?.name?.trim() || user.name || user.email,
+      email: account?.email ?? user.email,
+      image: account?.image ?? user.image ?? null,
     },
     role,
     upcoming,
@@ -79,6 +88,36 @@ export async function GET(req: Request) {
   });
 
   return NextResponse.json(payload);
+}
+
+export async function PATCH(req: Request) {
+  let user: SessionUser;
+  try {
+    user = await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
+
+  let bodyJson: unknown;
+  try {
+    bodyJson = await req.json();
+  } catch {
+    return NextResponse.json({ errors: { name: 'Invalid JSON body' } }, { status: 400 });
+  }
+
+  const parsed = ProfileNameUpdate.safeParse(bodyJson);
+  if (!parsed.success) {
+    const message = parsed.error.flatten().fieldErrors.name?.[0] ?? 'Invalid name';
+    return NextResponse.json({ errors: { name: message } }, { status: 400 });
+  }
+
+  const updated = await prisma.user.update({
+    where: { id: user.id },
+    data: { name: parsed.data.name },
+    select: { name: true },
+  });
+
+  return NextResponse.json(ProfileNameUpdated.parse({ name: updated.name }));
 }
 
 async function loadUpcoming(

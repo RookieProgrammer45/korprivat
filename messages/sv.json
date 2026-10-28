@@ -1991,6 +1991,21 @@
       "handledare": "Handledare",
       "school": "Trafikskola"
     },
+    "nameEdit": {
+      "editButton": "Redigera namn",
+      "dialogTitle": "Ändra ditt namn",
+      "dialogBody": "Det här namnet visas på ditt konto.",
+      "firstNameLabel": "Förnamn",
+      "lastNameLabel": "Efternamn",
+      "firstNamePlaceholder": "Förnamn",
+      "lastNamePlaceholder": "Efternamn",
+      "firstNameError": "Ange ditt förnamn.",
+      "save": "Spara",
+      "saving": "Sparar…",
+      "cancel": "Avbryt",
+      "successToast": "Ditt namn har uppdaterats.",
+      "errorToast": "Vi kunde inte spara ditt namn. Försök igen."
+    },
     "pictureUpload": {
       "editButton": "Redigera foto",
       "editButtonAlt": "Lägg till foto",
