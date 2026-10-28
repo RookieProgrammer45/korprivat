@@ -49,3 +49,4 @@ lerna-debug.log*
 .agents/
 skills-lock.json
 data/school-prices/.cache/
+data/regional-schools/.cache/

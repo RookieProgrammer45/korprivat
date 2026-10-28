@@ -11,4 +11,4 @@ Nothing in this file is a verified permit. The directory shows these schools as 
 | Iceland | Ísland.is list of operating theory schools | Schools with a website on that list |
 | Finland | Suomen Autokoululiitto publishes names and street addresses only | Not listed. No school website is on that page, and a website is not guessed |
 
-Refresh with `python3 scripts/nordic-schools/collect.py`. The script reads `/tmp/ntsf-schools.json` (the public finder response) and fetches each homepage. Do not edit `schools.json` by hand.
+Refresh the school list with `python3 scripts/nordic-schools/collect.py`. The script reads `/tmp/ntsf-schools.json` (the public finder response) and fetches each homepage. Lesson prices are re-read by `scripts/regional-schools/extract.ts`, which sends the page text to OpenAI the same way as the Swedish price refresh. Do not edit `schools.json` by hand.

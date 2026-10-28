@@ -1,0 +1,43 @@
+name: Regional school prices
+
+# Re-reads lesson prices on each school's own website outside Sweden and opens
+# a pull request. The OpenAI key is the repository secret, same as the Swedish
+# price refresh. Nothing goes live until the pull request is merged.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Extract lesson prices
+        run: npx tsx scripts/regional-schools/extract.ts --fetch --extract --write
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data/regional-school-prices
+          delete-branch: true
+          add-paths: |
+            data/nordic-schools/schools.json
+            data/australia-schools/schools.json
+            data/uk-schools/schools.json
+          commit-message: 'data: extract regional school lesson prices'
+          title: 'data: extract regional school lesson prices'
+          body: |
+            Lesson prices re-read from each school's own website with the same OpenAI extract used for Swedish schools.
+
+            A null lesson price means the pages did not state a single lesson price. Before merging, compare how many schools still have a lessonPrice with the previous file. A large drop usually means sites blocked the crawler.

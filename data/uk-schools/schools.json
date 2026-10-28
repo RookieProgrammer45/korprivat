@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "collectedAt": "2026-10-28",
+    "note": "Only schools whose own website states a single-lesson price in GBP. Contact details are kept only when that same page shows them. Nothing here is a verified permit. Package-only prices and 'from' prices are not listed."
+  },
+  "schools": [
+    {
+      "id": "ukf0aba9-east-london-s-finest-driving-school",
+      "country": "GB",
+      "name": "East London's Finest Driving School",
+      "city": "London",
+      "website": "https://elfdrivingschool.co.uk/manual-driving-lessons-east-london/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": null,
+      "phone": "+447884776977",
+      "lessonPrice": 36,
+      "lessonMinutes": 60,
+      "currency": "GBP",
+      "sourceUrl": "https://elfdrivingschool.co.uk/manual-driving-lessons-east-london/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "uk734a04-lernin-no-1-driving-school",
+      "country": "GB",
+      "name": "Lernin No 1 Driving School",
+      "city": "London",
+      "website": "https://lernin.co.uk/best-driving-lessons-in-east-london/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": null,
+      "phone": null,
+      "lessonPrice": 37,
+      "lessonMinutes": 60,
+      "currency": "GBP",
+      "sourceUrl": "https://lernin.co.uk/best-driving-lessons-in-east-london/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "uk107e8d-drivecrest",
+      "country": "GB",
+      "name": "DriveCrest",
+      "city": "Manchester",
+      "website": "https://www.drivecrest.co.uk/driving-lesson-prices",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "hello@drivecrest.co.uk",
+      "phone": "+447594679988",
+      "lessonPrice": 36,
+      "lessonMinutes": 60,
+      "currency": "GBP",
+      "sourceUrl": "https://www.drivecrest.co.uk/driving-lesson-prices",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "ukedea58-leeds-automatic-school-of-motoring",
+      "country": "GB",
+      "name": "Leeds Automatic School of Motoring",
+      "city": "Leeds",
+      "website": "https://leedsautomatic.com/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": null,
+      "phone": "+447447417047",
+      "lessonPrice": 40,
+      "lessonMinutes": 60,
+      "currency": "GBP",
+      "sourceUrl": "https://leedsautomatic.com/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "uk93cdf6-4-wheelz",
+      "country": "GB",
+      "name": "4 Wheelz",
+      "city": "Birmingham",
+      "website": "https://www.4wheelz.co.uk/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": null,
+      "phone": null,
+      "lessonPrice": 35,
+      "lessonMinutes": 60,
+      "currency": "GBP",
+      "sourceUrl": "https://www.4wheelz.co.uk/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "ukf39f7e-glasgow-school-of-motoring",
+      "country": "GB",
+      "name": "Glasgow School of Motoring",
+      "city": "Glasgow",
+      "website": "https://www.glasgowschoolofmotoring.com/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "info@gsmdrivinginstructors.co.uk",
+      "phone": "+441414237777",
+      "lessonPrice": 40,
+      "lessonMinutes": 60,
+      "currency": "GBP",
+      "sourceUrl": "https://www.glasgowschoolofmotoring.com/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "uk8d14d9-streetwise-driving-school",
+      "country": "GB",
+      "name": "Streetwise Driving School",
+      "city": "Cardiff",
+      "website": "https://www.streetwisedrivingschool.net/driving-lesson-prices",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": null,
+      "phone": "+447761175552",
+      "lessonPrice": 39,
+      "lessonMinutes": 60,
+      "currency": "GBP",
+      "sourceUrl": "https://www.streetwisedrivingschool.net/driving-lesson-prices",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    }
+  ]
+}

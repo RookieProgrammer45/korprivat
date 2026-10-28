@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "collectedAt": "2026-10-28",
+    "note": "Only schools whose own website states a single-lesson price in AUD. Contact details are kept only when that same page shows them. Nothing here is a verified permit. Package-only prices and 'from' prices are not listed."
+  },
+  "schools": [
+    {
+      "id": "aue92015-drive-matrix",
+      "country": "AU",
+      "name": "Drive Matrix",
+      "city": "Sydney",
+      "website": "https://drivematrix.com.au/driving-lesson-prices/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "hello@drivematrix.com.au",
+      "phone": "+61494720978",
+      "lessonPrice": 80,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://drivematrix.com.au/driving-lesson-prices/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "au4c5296-dos-driving-school",
+      "country": "AU",
+      "name": "DOS Driving School",
+      "city": "Melbourne",
+      "website": "https://dosdriving.com.au/Lessons/Lessons",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "info@dosdriving.com.au",
+      "phone": "+61387385185",
+      "lessonPrice": 65,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://dosdriving.com.au/Lessons/Lessons",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "audfd9c4-auslink-driving-academy",
+      "country": "AU",
+      "name": "Auslink Driving Academy",
+      "city": "Melbourne",
+      "website": "https://www.auslinkdrivingacademy.com.au/automatic-driving-lessons-melbourne/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "info@auslinkdrivingacademy.com.au",
+      "phone": "+61450860035",
+      "lessonPrice": 75,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.auslinkdrivingacademy.com.au/automatic-driving-lessons-melbourne/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "au6ca0c1-uno-driving-school",
+      "country": "AU",
+      "name": "UNO Driving School",
+      "city": "Brisbane",
+      "website": "https://www.unodrivingschool.com.au/prices",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "hello@unodrivingschool.com.au",
+      "phone": "+61734351575",
+      "lessonPrice": 75,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.unodrivingschool.com.au/prices",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "au888b9b-ace-driving-school",
+      "country": "AU",
+      "name": "Ace Driving School",
+      "city": "Brisbane",
+      "website": "https://acedrivingschool.com.au/lessons-brisbane/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "info@acedrivingschool.com.au",
+      "phone": null,
+      "lessonPrice": 90,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://acedrivingschool.com.au/lessons-brisbane/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "au252202-briswide-driving-school",
+      "country": "AU",
+      "name": "Briswide Driving School",
+      "city": "Brisbane",
+      "website": "https://briswide.com.au/Lessons/Lessons",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "info@briswide.com.au",
+      "phone": "+61491042141",
+      "lessonPrice": 93,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://briswide.com.au/Lessons/Lessons",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "audbd175-u-can-drive",
+      "country": "AU",
+      "name": "U Can Drive",
+      "city": "Toowoomba",
+      "website": "https://www.ucandrive.com.au/index.php/pricing/single-lesson",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "office@ucandrive.com.au",
+      "phone": "+61414352697",
+      "lessonPrice": 90,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.ucandrive.com.au/index.php/pricing/single-lesson",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "au3afc2a-acme-driving-school",
+      "country": "AU",
+      "name": "Acme Driving School",
+      "city": "Perth",
+      "website": "https://www.acmedrivingschool.com.au/price-list/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": null,
+      "phone": null,
+      "lessonPrice": 80,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.acmedrivingschool.com.au/price-list/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "auc07211-my-driving-trainer",
+      "country": "AU",
+      "name": "My Driving Trainer",
+      "city": "Adelaide",
+      "website": "https://www.mydrivingtrainer.com.au/prices",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "admin@mydrivingtrainer.com.au",
+      "phone": "+61406870000",
+      "lessonPrice": 110,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.mydrivingtrainer.com.au/prices",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "au09410d-excel-drive",
+      "country": "AU",
+      "name": "Excel Drive",
+      "city": "Adelaide",
+      "website": "https://www.exceldriveschool.com.au/driving-lessons-adelaide",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "lessons@exceldrive.com",
+      "phone": null,
+      "lessonPrice": 121,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.exceldriveschool.com.au/driving-lessons-adelaide",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "auaccbbe-eastside-driving",
+      "country": "AU",
+      "name": "Eastside Driving",
+      "city": "Hobart",
+      "website": "https://www.eastsidedriving.com.au/pricing",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "info@eastsidedriving.com.au",
+      "phone": "+61400589987",
+      "lessonPrice": 80,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.eastsidedriving.com.au/pricing",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    },
+    {
+      "id": "au98f98d-jds-driving-school",
+      "country": "AU",
+      "name": "JDS Driving School",
+      "city": "Gold Coast",
+      "website": "https://www.jdsdrivingschool.com.au/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": "jdsdsgc@gmail.com",
+      "phone": "+61407817562",
+      "lessonPrice": 85,
+      "lessonMinutes": 60,
+      "currency": "AUD",
+      "sourceUrl": "https://www.jdsdrivingschool.com.au/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "OK"
+    }
+  ]
+}
