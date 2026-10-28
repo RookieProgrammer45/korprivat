@@ -3,6 +3,8 @@
 // API can connect to. Neither is true yet, so production leaves
 // BOOKING_CREATION_ENABLED unset. Do not delete the booking routes because
 // this returns false. Cancel, refund, dispute, and receipt do not use it.
+// Age verification (claimed DOB + Didit) ships with that same global booking
+// flip — not with directory signup.
 export function newBookingCreationEnabled(): boolean {
   return process.env.BOOKING_CREATION_ENABLED === 'true';
 }

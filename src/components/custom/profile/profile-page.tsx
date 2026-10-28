@@ -43,7 +43,7 @@ type LoadState = { kind: 'loading' } | { kind: 'ready'; data: ProfileResponse } 
 
 type PaymentStatus = UpcomingItem['paymentStatus'];
 
-export function ProfilePage() {
+export function ProfilePage({ compact = false }: { compact?: boolean } = {}) {
   const t = useTranslations('profile');
   const [state, setState] = React.useState<LoadState>({ kind: 'loading' });
 
@@ -119,6 +119,16 @@ export function ProfilePage() {
         stagedImage={photo.status === 'STAGED' ? photo.imageUrl : null}
         onPhotoUploaded={loadProfile}
       />
+      {compact ? (
+        <Card className="surface-panel border-border bg-card">
+          <CardContent className="flex flex-col items-start gap-3 p-8">
+            <p className="text-body text-muted-foreground">{t('upcoming.emptyBodyStudent')}</p>
+            <Link href="/instructors" className="dlu-ink-pill">
+              {t('upcoming.emptyCtaStudent')}
+            </Link>
+          </CardContent>
+        </Card>
+      ) : (
       <section className="grid gap-3">
         <div className="flex items-center justify-between gap-3">
           <p className="text-eyebrow text-muted-foreground">{t(`upcoming.${eyebrow}`)}</p>
@@ -174,6 +184,7 @@ export function ProfilePage() {
           </ul>
         )}
       </section>
+      )}
       <DeleteAccountSection />
     </div>
   );

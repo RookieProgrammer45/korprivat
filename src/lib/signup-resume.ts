@@ -98,6 +98,8 @@ export type SignedInSignupDisposition =
   | { kind: 'already_signed_in'; home: string; email: string }
   | { kind: 'continue_wizard' };
 
+const HARD_BLOCK_STATES = new Set<LearnerVerificationState>(['BLOCKED_UNDERAGE', 'SUSPENDED']);
+
 async function homeForSignedInUser(userId: string): Promise<string> {
   const profile = await prisma.userProfile.findUnique({
     where: { userId },
@@ -181,16 +183,14 @@ export async function resolveSignedInSignup(
     }
   }
 
-  // Learner mid-flow: still in the signup wizard until the profile photo step
-  // is confirmed (profileCompletedAt). Claimed DOB is collected at signup-start,
-  // so it must NOT be treated as flow completion — that dead-ended every
-  // verified learner on the already-signed-in card right after email verify.
+  // Learners finish on the dashboard. Name, photo and account live there —
+  // do not keep a verified Google/email session in the signup wizard.
   if (profile?.role === 'STUDENT' && profile.signupPath !== 'SCHOOL') {
     const learnerState = await getStoredLearnerState(user.id);
-    if (learnerState === 'ACTIVE') {
-      return { kind: 'already_signed_in', home: '/dashboard/student', email: user.email };
+    if (HARD_BLOCK_STATES.has(learnerState)) {
+      return { kind: 'redirect', to: stateToRoute(learnerState) };
     }
-    return { kind: 'continue_wizard' };
+    return { kind: 'redirect', to: '/dashboard/student' };
   }
 
   const home =
@@ -198,8 +198,6 @@ export async function resolveSignedInSignup(
 
   return { kind: 'already_signed_in', home, email: user.email };
 }
-
-const HARD_BLOCK_STATES = new Set<LearnerVerificationState>(['BLOCKED_UNDERAGE', 'SUSPENDED']);
 
 const LEARNER_STATES = new Set<LearnerVerificationState>([
   'SIGNED_UP',
@@ -435,15 +433,11 @@ export async function requireSignupPrerequisites(
     }
 
     const facts = await loadLearnerVerificationFacts(userId);
-
-    // Claimed DOB is collected on /signup. Until it exists, send them back.
-    if (!facts?.claimedDob) {
-      redirect('/signup');
-    }
+    if (!facts) return;
 
     const state = resolveLearnerStateFromFacts(facts);
-    // Soft-gate: only hard-block underage / suspended. Other states may browse
-    // /dashboard/student; booking uses requireActiveLearner later.
+    // Directory learners may use the dashboard without a claimed DOB or photo.
+    // Booking still uses requireActiveLearner. Only underage / suspended bounce.
     if (HARD_BLOCK_STATES.has(state)) {
       redirect(stateToRoute(state));
     }

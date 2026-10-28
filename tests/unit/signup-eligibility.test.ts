@@ -38,6 +38,16 @@ describe('signup eligibility', () => {
     ).toBe(false);
   });
 
+  it('lets a learner start directory signup without a date of birth', () => {
+    expect(SignupStart.safeParse({ path: 'LEARNER' }).success).toBe(true);
+  });
+
+  it('still rejects an underage date of birth if one is sent', () => {
+    expect(
+      SignupStart.safeParse({ path: 'LEARNER', dateOfBirth: '2015-01-01' }).success,
+    ).toBe(false);
+  });
+
   it('maps signup paths to roles and provider roles', () => {
     expect(roleForSignupPath('LEARNER')).toBe('STUDENT');
     expect(roleForSignupPath('SCHOOL')).toBe('SCHOOL');

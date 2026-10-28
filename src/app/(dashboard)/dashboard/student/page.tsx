@@ -6,9 +6,9 @@
 // here. Didit identity verification is not part of this dashboard.
 
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { ProfilePage } from '@/components/custom/profile/profile-page';
 import {
   dashboardPathFor,
   requireDashboardSession,
@@ -54,12 +54,7 @@ export default async function StudentDashboardPage() {
         </h1>
         <p className="max-w-2xl text-body text-muted-foreground">{t('lead')}</p>
       </header>
-      <div className="surface-panel flex flex-col items-start gap-5 rounded-[1.25rem] border border-border bg-card p-8">
-        <p className="max-w-xl text-body text-muted-foreground">{t('emptyBody')}</p>
-        <Link href="/instructors" className="dlu-ink-pill">
-          {t('emptyCta')}
-        </Link>
-      </div>
+      <ProfilePage compact />
     </section>
   );
 }

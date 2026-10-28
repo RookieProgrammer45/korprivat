@@ -1,6 +1,7 @@
 //
 // Auth shell owns brand + locale. SignUpForm owns the step contract:
-// path → account → verifyEmail → (photo|license|handledare) as required.
+// path → account → verifyEmail → (license|handledare) as required.
+// Learners skip the profile-photo wizard and finish on the dashboard.
 
 import type { Metadata } from 'next';
 import Link from 'next/link';

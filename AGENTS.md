@@ -15,7 +15,10 @@ authoritative. Read it before every task.
 
 1. **Verified DOB is the only age gate for booking.** Authoritative DOB is
    written only by the Didit webhook (or documented verification writer). Never
-   treat a signup-form DOB as verified for booking eligibility.
+   treat a signup-form DOB as verified for booking eligibility. Do not collect
+   claimed age or run Didit until booking is on for schools globally
+   (`BOOKING_CREATION_ENABLED`). The live directory does not age-gate browsing
+   or contacting a school.
 2. **Bookings cannot overlap.** Enforced by a Postgres exclusion constraint on
    the existing `Booking` table (`startsAt`/`endsAt`). Never check overlap in
    application code alone.
