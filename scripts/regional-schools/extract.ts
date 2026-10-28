@@ -270,9 +270,9 @@ async function crawlSchool(school: School): Promise<FetchCache> {
     const links = extractLinks(homeHtml, home);
     const candidates = [
       ...(school.sourceUrl ? [school.sourceUrl] : []),
-      ...links.filter(
-        (link) => sameHost(link.url, home) && PRICE_LINK.test(`${link.url} ${link.label}`),
-      ),
+      ...links
+        .filter((link) => sameHost(link.url, home) && PRICE_LINK.test(`${link.url} ${link.label}`))
+        .map((link) => link.url),
     ];
     const pages: CachedPage[] = [{ url: home, text: htmlToText(homeHtml) }];
     for (const candidate of candidates) {
