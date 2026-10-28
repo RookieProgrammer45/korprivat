@@ -7,6 +7,7 @@ import {
 } from '@/lib/business/public-instructor';
 import { InstructorItem, LISTING_CONTACT_SELECT } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
+import { nordicInstructorById } from '@/lib/discovery/nordic-catalogue';
 import { getActiveAffiliationForUser } from '@/lib/orgs/public';
 import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
 import { requireAuth } from '@/lib/require-auth';
@@ -30,6 +31,10 @@ export async function GET(req: Request, ctx: Ctx) {
     return res as Response;
   }
   const { id } = await ctx.params;
+  const nordic = nordicInstructorById(id);
+  if (nordic) {
+    return NextResponse.json(InstructorItem.parse(nordic));
+  }
   const instructor = await prisma.instructor.findUnique({
     where: { id },
     select: LISTING_CONTACT_SELECT,

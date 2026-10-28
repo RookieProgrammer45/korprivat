@@ -16,7 +16,7 @@ export function PublishedLessonPrice({ prices }: { prices: Prices }) {
   return (
     <div className="grid min-w-0 gap-1">
       <p className="dlu-school-price">
-        {t('amount', { amount: formatAmount(prices.lesson.priceSek, locale) })}
+        {money(t, prices.lesson.priceSek, prices.currency, locale)}
         {prices.lesson.minutes ? (
           <span className="ml-2 font-sans text-sm tracking-normal text-muted-foreground">
             {t('minutes', { minutes: prices.lesson.minutes })}
@@ -36,7 +36,12 @@ export function PublishedPackageFrom({ prices }: { prices: Prices }) {
   const cheapest = Math.min(...prices.packages.map((pack) => pack.priceSek));
   return (
     <p className="text-small text-foreground">
-      {t('packageFrom', { amount: formatAmount(cheapest, locale) })}
+      {prices.currency && prices.currency !== 'SEK'
+        ? t('packageFromCurrency', {
+            currency: prices.currency,
+            amount: formatAmount(cheapest, locale),
+          })
+        : t('packageFrom', { amount: formatAmount(cheapest, locale) })}
       {prices.lesson ? null : (
         <span className="ml-1.5 text-caption text-muted-foreground">
           {t('source', { date: formatDate(prices.collectedAt, locale) })}
@@ -58,7 +63,7 @@ export function PublishedPriceList({
 }) {
   const t = useTranslations('publishedPrice');
   const locale = useLocale();
-  const amount = (value: number) => t('amount', { amount: formatAmount(value, locale) });
+  const amount = (value: number) => money(t, value, prices.currency, locale);
   const rows: Row[] = [];
   if (!heavyOnly && prices.lesson) {
     rows.push({
@@ -100,7 +105,9 @@ export function PublishedPriceList({
           <SourceNote prices={prices} showSourceLink={showSourceLink} />
         </div>
       ) : null}
-      {heavy ? <HeavyPrices heavy={heavy} showSourceLink={showSourceLink} /> : null}
+      {heavy ? (
+        <HeavyPrices heavy={heavy} currency={prices.currency} showSourceLink={showSourceLink} />
+      ) : null}
     </div>
   );
 }
@@ -125,9 +132,11 @@ function PriceRows({ rows }: { rows: Row[] }) {
 
 function HeavyPrices({
   heavy,
+  currency,
   showSourceLink,
 }: {
   heavy: NonNullable<Prices['heavy']>;
+  currency: Prices['currency'];
   showSourceLink: boolean;
 }) {
   const t = useTranslations('publishedPrice');
@@ -145,7 +154,7 @@ function HeavyPrices({
     ]
       .filter(Boolean)
       .join(' · '),
-    value: t('amount', { amount: formatAmount(price.priceSek, locale) }),
+    value: money(t, price.priceSek, currency, locale),
   }));
   return (
     <div className="grid min-w-0 gap-2">
@@ -193,7 +202,12 @@ export function PublishedHeavyOffer({ prices }: { prices: Prices }) {
       {groups.join(' · ')}
       {cheapest != null ? (
         <span className="ml-1.5 text-muted-foreground">
-          {t('heavyFrom', { amount: formatAmount(cheapest, locale) })}
+          {prices.currency && prices.currency !== 'SEK'
+            ? t('heavyFromCurrency', {
+                currency: prices.currency,
+                amount: formatAmount(cheapest, locale),
+              })
+            : t('heavyFrom', { amount: formatAmount(cheapest, locale) })}
         </span>
       ) : null}
     </p>
@@ -227,6 +241,19 @@ function SourceNote({
       ) : null}
     </p>
   );
+}
+
+function money(
+  t: ReturnType<typeof useTranslations<'publishedPrice'>>,
+  amount: number,
+  currency: string | undefined,
+  locale: string,
+): string {
+  const formatted = formatAmount(amount, locale);
+  if (currency && currency !== 'SEK') {
+    return t('amountCurrency', { currency, amount: formatted });
+  }
+  return t('amount', { amount: formatted });
 }
 
 function formatAmount(amount: number, locale: string): string {

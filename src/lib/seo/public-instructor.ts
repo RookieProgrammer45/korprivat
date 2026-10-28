@@ -1,6 +1,7 @@
 import 'server-only';
 import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { nordicInstructorByShortId } from '@/lib/discovery/nordic-catalogue';
 import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
 import { parseSchoolSlug, schoolPath } from '@/lib/seo/school-slugs';
 
@@ -129,6 +130,25 @@ export async function loadPublicInstructorBySchoolSlug(
 ): Promise<PublicInstructorSlugResult | null> {
   const parsed = parseSchoolSlug(slug);
   if (!parsed) return null;
+  if (/^(no|dk|fi|is)/.test(parsed.id8)) {
+    const nordic = nordicInstructorByShortId(parsed.id8);
+    if (!nordic) return null;
+    const instructor: PublicInstructorSeo = {
+      id: nordic.id,
+      name: nordic.name,
+      city: nordic.city,
+      bio: nordic.bio,
+      hourlyRateSek: 0,
+      categories: [...nordic.categories],
+      photoUrl: nordic.photoUrl,
+      englishSpeaking: false,
+      indexable: false,
+      userId: null,
+      providerRole: 'SCHOOL',
+      bookingMode: 'contact',
+    };
+    return { instructor, canonicalPath: schoolPath(instructor) };
+  }
   const row = await prisma.instructor.findFirst({
     where: { id: { startsWith: parsed.id8 } },
     select: { id: true },

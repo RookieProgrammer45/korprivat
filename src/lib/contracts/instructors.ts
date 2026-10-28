@@ -106,7 +106,7 @@ export const InstructorItem = z.object({
   bio: z.string(),
   photoUrl: z.string(),
   englishSpeaking: z.boolean(),
-  languages: z.array(z.enum(['sv', 'en'])).min(1),
+  languages: z.array(z.enum(['sv', 'en', 'no', 'da', 'fi', 'is'])).min(1),
   verificationStatus: z.enum(['verified', 'pending', 'rejected', 'unverified']),
   reviewSummary: z.object({
     count: z.number().int().nonnegative(),
@@ -154,6 +154,8 @@ export const InstructorItem = z.object({
       ),
       sourceUrl: z.string().nullable(),
       collectedAt: z.string(),
+      // Present when the amount is not Swedish kronor. Omitted means SEK.
+      currency: z.enum(['SEK', 'NOK', 'DKK', 'EUR', 'ISK']).optional(),
       // Heavy-vehicle training the school's website advertises (C/D, YKB).
       heavy: z
         .object({

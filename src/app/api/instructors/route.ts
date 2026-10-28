@@ -36,6 +36,7 @@ import {
   parseInstructorQuery,
 } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
+import { listNordicInstructors, nordicCatalogueCities } from '@/lib/discovery/nordic-catalogue';
 import { heavyListingWhere, lightCatalogueWhere } from '@/lib/discovery/published-prices';
 import { sendEmail } from '@/lib/email/send';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
@@ -284,12 +285,25 @@ export async function GET(req: NextRequest) {
         : {}),
     };
   });
-  const items = priceSort
+  const swedishItems = priceSort
     ? sortByPrice(unsortedItems, q.sort === 'packagePrice' ? 'package' : 'lesson').slice(
         0,
         limit ?? undefined,
       )
     : unsortedItems;
+  // Nordic rows stay out of the public preview, the auth deck, and SEK price
+  // sorts. The directory asks for them explicitly. A NOK amount is never
+  // ranked against a SEK filter.
+  const websiteSchools = req.nextUrl.searchParams.get('websiteSchools') === '1';
+  const nordicItems = websiteSchools && limit == null && !priceSort ? listNordicInstructors(q) : [];
+  const items =
+    nordicItems.length === 0
+      ? swedishItems
+      : q.sort === 'distance'
+        ? [...swedishItems, ...nordicItems]
+        : [...swedishItems, ...nordicItems].sort(
+            (a, b) => a.city.localeCompare(b.city, 'sv') || a.name.localeCompare(b.name, 'sv'),
+          );
 
   const cityDelegate = (
     prisma as unknown as {
@@ -305,8 +319,13 @@ export async function GET(req: NextRequest) {
       })
     : canonicalRows.map((row) => ({ city: row.city }));
   const cities = Array.from(
-    new Set(marketplaceCities.map((row) => row.city).filter(Boolean)),
-  ).sort();
+    new Set(
+      [
+        ...marketplaceCities.map((row) => row.city),
+        ...(websiteSchools && limit == null ? nordicCatalogueCities() : []),
+      ].filter(Boolean),
+    ),
+  ).sort((a, b) => a.localeCompare(b, 'sv'));
 
   // We DO return the `englishSpeaking` flag on each row — the directory island
   // surfaces it in the filter toggle (and could surface it as a badge later).

@@ -588,7 +588,11 @@
     "reviewsSummary": "{average} · {count, plural, one {# review} other {# reviews}}",
     "language": {
       "sv": "Swedish",
-      "en": "English"
+      "en": "English",
+      "no": "Norwegian",
+      "da": "Danish",
+      "fi": "Finnish",
+      "is": "Icelandic"
     },
     "category": {
       "AM": "AM",
@@ -683,7 +687,11 @@
     },
     "language": {
       "sv": "Swedish",
-      "en": "English"
+      "en": "English",
+      "no": "Norwegian",
+      "da": "Danish",
+      "fi": "Finnish",
+      "is": "Icelandic"
     },
     "verification": {
       "verified": "Verified",
@@ -3756,10 +3764,12 @@
   },
   "publishedPrice": {
     "amount": "SEK {amount}",
+    "amountCurrency": "{currency} {amount}",
     "minutes": "{minutes} min",
     "source": "From the school’s website, {date}.",
     "sourceLink": "See the price list",
     "packageFrom": "Packages from SEK {amount}",
+    "packageFromCurrency": "Packages from {currency} {amount}",
     "lesson": "Driving lesson",
     "risk1": "Risk 1",
     "risk2": "Risk 2 (skid pan)",
@@ -3772,7 +3782,8 @@
     "heavyOffered": "Trains, according to its website: {list}",
     "heavyTruck": "Truck",
     "heavyBus": "Bus",
-    "heavyFrom": "from SEK {amount}"
+    "heavyFrom": "from SEK {amount}",
+    "heavyFromCurrency": "from {currency} {amount}"
   },
   "heavyVehiclesPage": {
     "eyebrow": "Truck, bus and YKB",

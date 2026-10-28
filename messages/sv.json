@@ -588,7 +588,11 @@
     "reviewsSummary": "{average} · {count, plural, one {# omdöme} other {# omdömen}}",
     "language": {
       "sv": "Svenska",
-      "en": "Engelska"
+      "en": "Engelska",
+      "no": "Norska",
+      "da": "Danska",
+      "fi": "Finska",
+      "is": "Isländska"
     },
     "category": {
       "AM": "AM",
@@ -683,7 +687,11 @@
     },
     "language": {
       "sv": "Svenska",
-      "en": "Engelska"
+      "en": "Engelska",
+      "no": "Norska",
+      "da": "Danska",
+      "fi": "Finska",
+      "is": "Isländska"
     },
     "verification": {
       "verified": "Verifierad",
@@ -3756,10 +3764,12 @@
   },
   "publishedPrice": {
     "amount": "{amount} kr",
+    "amountCurrency": "{amount} {currency}",
     "minutes": "{minutes} min",
     "source": "Från skolans webbplats, {date}.",
     "sourceLink": "Se prislistan",
     "packageFrom": "Paket från {amount} kr",
+    "packageFromCurrency": "Paket från {amount} {currency}",
     "lesson": "Körlektion",
     "risk1": "Riskettan",
     "risk2": "Risktvåan (halkbana)",
@@ -3772,7 +3782,8 @@
     "heavyOffered": "Utbildar enligt webbplatsen: {list}",
     "heavyTruck": "Lastbil",
     "heavyBus": "Buss",
-    "heavyFrom": "från {amount} kr"
+    "heavyFrom": "från {amount} kr",
+    "heavyFromCurrency": "från {amount} {currency}"
   },
   "heavyVehiclesPage": {
     "eyebrow": "Lastbil, buss och YKB",

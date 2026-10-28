@@ -43,7 +43,8 @@ const MAX_DECK_PROFILES = 10;
 const ROTATION_MS = 4800;
 
 function formatSekChip(rate: number | null): string | null {
-  return typeof rate === 'number' ? `fr. ${rate} kr` : null;
+  if (typeof rate !== 'number' || rate <= 0) return null;
+  return `fr. ${rate} kr`;
 }
 
 function formatSlot(iso: string): string | null {
