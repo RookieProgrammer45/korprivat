@@ -1,0 +1,46 @@
+{
+  "country": "IE",
+  "priced": 0,
+  "schools": [
+    {
+      "id": "euied98618-alexandra-school-of-motoring",
+      "name": "Alexandra School of Motoring",
+      "fetch": "ok",
+      "pages": 6,
+      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "lessonPrice": null
+    },
+    {
+      "id": "euieeb983a-bikecraft-motorcycle-training",
+      "name": "Bikecraft Motorcycle Training",
+      "fetch": "unreachable",
+      "pages": 0,
+      "error": "TypeError: fetch failed",
+      "lessonPrice": null
+    },
+    {
+      "id": "euiee22833-doyle-driving-school",
+      "name": "Doyle Driving School",
+      "fetch": "ok",
+      "pages": 1,
+      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "lessonPrice": null
+    },
+    {
+      "id": "euiee4d654-drive-wave-school-of-motoring",
+      "name": "Drive Wave School of Motoring",
+      "fetch": "ok",
+      "pages": 4,
+      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "lessonPrice": null
+    },
+    {
+      "id": "euie246274-galway-driving-school",
+      "name": "Galway Driving School",
+      "fetch": "ok",
+      "pages": 3,
+      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "lessonPrice": null
+    }
+  ]
+}
