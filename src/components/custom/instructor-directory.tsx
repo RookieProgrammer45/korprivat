@@ -770,6 +770,7 @@ function CardGrid({
               name={row.name}
               contact={row.contact}
               priceRequest={row.priceRequest}
+              listing={schoolPath(row)}
               size="sm"
               className="w-full"
             />

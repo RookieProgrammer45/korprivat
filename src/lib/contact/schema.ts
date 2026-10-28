@@ -10,7 +10,7 @@
 //                                  CONTACT_TOPICS) and `locale` (BCP-47-ish).
 //
 // Topics follow the format spec'd in messages/<locale>.json —
-// `landing.contactPage.topics.<i>` enumerates the canonical six in display
+// `landing.contactPage.topics.<i>` enumerates the topics in display
 // order; the FIRST enum member below is index 0, the second is index 1, etc.
 // Reorder both arrays together or you'll desync the tile-to-enum mapping.
 
@@ -23,6 +23,7 @@ export const CONTACT_TOPICS = [
   'technical',
   'press',
   'other',
+  'claim_listing',
 ] as const;
 
 export type ContactTopic = (typeof CONTACT_TOPICS)[number];
@@ -40,6 +41,9 @@ const TOPIC_URL_ALIASES: Record<string, ContactTopic> = {
   press: 'press',
   partnership: 'press',
   other: 'other',
+  claim: 'claim_listing',
+  listing: 'claim_listing',
+  'claim-listing': 'claim_listing',
 };
 
 export function resolveContactTopic(raw: string | null | undefined): ContactTopic | null {
@@ -64,6 +68,10 @@ export const CONTACT_TOPIC_LABELS: Record<ContactTopic, { en: string; sv: string
   technical: { en: 'Site / technical problem', sv: 'Sajt / tekniskt problem' },
   press: { en: 'Press / partnership', sv: 'Press / partnerskap' },
   other: { en: 'Something else', sv: 'Något annat' },
+  claim_listing: {
+    en: 'Claim or update a school listing',
+    sv: 'Anspråk på eller uppdatera en skolannons',
+  },
 };
 
 // Base module shape (kept as-is for the minimum module compatibility).

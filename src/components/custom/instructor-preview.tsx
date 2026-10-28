@@ -20,6 +20,7 @@ import {
   providerSlotDateParts,
 } from '@/lib/business/marketplace-localization';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 const MAX_PREVIEW_ROWS = 3;
 
@@ -80,6 +81,7 @@ export function InstructorPreview({
                   name={row.name}
                   contact={row.contact}
                   priceRequest={row.priceRequest}
+                  listing={schoolPath(row)}
                   size="sm"
                   className="w-full"
                 />

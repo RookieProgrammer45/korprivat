@@ -134,6 +134,10 @@
         {
           "title": "Annan fråga",
           "description": "Allt annat om DriveLinkUp."
+        },
+        {
+          "title": "Anspråk på eller uppdatera en annons",
+          "description": "Du driver den här skolan och vill att DriveLinkUp ska ändra namn, pris eller andra uppgifter."
         }
       ],
       "submit": "Skicka till support",
@@ -655,7 +659,11 @@
     "priceRequestAria": "Fråga {name} om priser",
     "priceRequestSubject": "Prisförfrågan",
     "priceRequestBody": "Hej {name}!\n\nJag hittade er på DriveLinkUp och undrar vad era körlektioner och paket kostar.\n\nTack på förhand!",
-    "noPrice": "Inga priser på skolans webbplats ännu"
+    "noPrice": "Inga priser på skolans webbplats ännu",
+    "claim": "Det här är min skola",
+    "claimAria": "Gör anspråk på {name} och be DriveLinkUp uppdatera annonsen",
+    "claimPrefill": "Jag företräder {name}. Uppdatera den här annonsen.\n{listing}",
+    "claimPrefillName": "Jag företräder {name}. Uppdatera den här annonsen."
   },
   "instructorDetail": {
     "meta": {

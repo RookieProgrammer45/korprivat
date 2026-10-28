@@ -134,6 +134,10 @@
         {
           "title": "Other question",
           "description": "Anything else about DriveLinkUp."
+        },
+        {
+          "title": "Claim or update a listing",
+          "description": "You run this school and need DriveLinkUp to change the name, price or other listing details."
         }
       ],
       "submit": "Send to support",
@@ -655,7 +659,11 @@
     "priceRequestAria": "Ask {name} for prices",
     "priceRequestSubject": "Price enquiry",
     "priceRequestBody": "Hi {name},\n\nI found you on DriveLinkUp and would like to know what your driving lessons and packages cost.\n\nThank you!",
-    "noPrice": "No prices on the school's website yet"
+    "noPrice": "No prices on the school's website yet",
+    "claim": "Claim this school",
+    "claimAria": "Claim {name} and ask DriveLinkUp to update this listing",
+    "claimPrefill": "I represent {name}. Please update this listing.\n{listing}",
+    "claimPrefillName": "I represent {name}. Please update this listing."
   },
   "instructorDetail": {
     "meta": {

@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
+import { claimListingHref } from '@/lib/contact/claim-listing';
 import { cn } from '@/lib/utils';
 
 export type SchoolContactHref = {
@@ -17,17 +19,27 @@ export function SchoolContactActions({
   name,
   contact,
   priceRequest,
+  listing,
   className,
   size = 'lg',
 }: {
   name: string;
   contact: SchoolContactHref | null | undefined;
   priceRequest?: SchoolContactHref | null;
+  listing?: string | null;
   className?: string;
   size?: Size;
 }) {
+  const claim = listing ? (
+    <ClaimSchoolButton name={name} listing={listing} size={size} className={className} />
+  ) : null;
   if (!priceRequest) {
-    return <SchoolContactButton name={name} contact={contact} size={size} className={className} />;
+    return (
+      <>
+        <SchoolContactButton name={name} contact={contact} size={size} className={className} />
+        {claim}
+      </>
+    );
   }
   return (
     <>
@@ -41,7 +53,29 @@ export function SchoolContactActions({
           className={className}
         />
       ) : null}
+      {claim}
     </>
+  );
+}
+
+export function ClaimSchoolButton({
+  name,
+  listing,
+  className,
+  size = 'lg',
+}: {
+  name: string;
+  listing: string;
+  className?: string;
+  size?: Size;
+}) {
+  const tr = useTranslations('schoolContact');
+  return (
+    <Button asChild size={size} variant="outline" className={cn(className)}>
+      <Link href={claimListingHref({ name, listing })} aria-label={tr('claimAria', { name })}>
+        {tr('claim')}
+      </Link>
+    </Button>
   );
 }
 

@@ -16,6 +16,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { InstructorItem } from '@/lib/contracts/instructors';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 type Status = 'loading' | 'not-found' | 'error' | 'profile';
 
@@ -223,6 +224,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
               name={instructor.name}
               contact={instructor.contact}
               priceRequest={instructor.priceRequest}
+              listing={schoolPath(instructor)}
               className="w-full sm:w-auto"
             />
           </div>

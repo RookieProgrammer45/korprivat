@@ -8,6 +8,7 @@ import { SchoolContactActions } from '@/components/custom/school-contact-button'
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 const MAX_COMPARISON_ITEMS = 3;
 
@@ -127,6 +128,7 @@ export function ProviderComparison({
                   name={provider.name}
                   contact={provider.contact}
                   priceRequest={provider.priceRequest}
+                  listing={schoolPath(provider)}
                   size="sm"
                   className="w-full"
                 />

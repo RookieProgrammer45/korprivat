@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { ClaimSchoolButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -123,6 +124,7 @@ export default async function SchoolProfilePage({ params }: PageProps) {
             </Badge>
           </div>
           {city ? <p className="text-body text-muted-foreground">{city}</p> : null}
+          <ClaimSchoolButton name={org.name} listing={`/schools/${org.slug}`} className="w-fit" />
         </header>
 
         {(org.contactEmail || org.contactPhone || addressParts.length > 0) && (

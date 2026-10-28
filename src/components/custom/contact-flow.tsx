@@ -54,6 +54,8 @@ export interface ContactFlowProps {
    * invalid alias silently falls back to no preselection (step 1).
    */
   initialTopic?: ContactTopic | null;
+  /** Prefill from a school listing "Claim this school" button. */
+  initialMessage?: string | null;
 }
 
 interface TopicDef {
@@ -63,7 +65,7 @@ interface TopicDef {
 
 const TOPIC_DEFS: TopicDef[] = CONTACT_TOPICS.map((value, index) => ({ value, index }));
 
-export function ContactFlow({ initialTopic = null }: ContactFlowProps) {
+export function ContactFlow({ initialTopic = null, initialMessage = null }: ContactFlowProps) {
   const t = useTranslations('landing.contactPage');
   const tFields = useTranslations('landing.contactPage.fields');
   const tTopics = useTranslations('landing.contactPage.topics');
@@ -78,7 +80,7 @@ export function ContactFlow({ initialTopic = null }: ContactFlowProps) {
     defaultValues: {
       name: '',
       email: '',
-      message: '',
+      message: initialMessage ?? '',
       topic: initialTopic ?? ('' as ContactTopic),
       locale,
     },
