@@ -22,6 +22,8 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+      - name: Stay on the main branch
+        run: git switch -C main origin/main
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -35,6 +37,7 @@ jobs:
       - name: Open pull request
         uses: peter-evans/create-pull-request@v7
         with:
+          base: main
           branch: data/europe-school-prices
           delete-branch: true
           add-paths: |
