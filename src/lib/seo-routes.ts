@@ -1,7 +1,8 @@
 // Programmatic SEO routes merged into /sitemap.xml. Prefer the Nordic
 // locations registry over one-off city files — add a row in nordic-locations.ts.
 import type { MetadataRoute } from 'next';
-import { allLocationSitemapPaths } from '@/lib/seo/nordic-locations';
+import { listCatalogueSchools } from '@/lib/discovery/nordic-catalogue';
+import { indexableLocationPaths } from '@/lib/seo/catalogue-locations';
 import { listIndexableInstructors } from '@/lib/seo/public-instructor';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
@@ -64,9 +65,15 @@ const EDITORIAL: SeoRoute[] = [
 ];
 
 export async function seoRoutes(): Promise<SeoRoute[]> {
-  const locationRoutes: SeoRoute[] = allLocationSitemapPaths().map((path) => ({
+  const locationRoutes: SeoRoute[] = indexableLocationPaths().map((path) => ({
     path,
     priority: path === '/locations' ? 0.85 : path.split('/').length <= 3 ? 0.8 : 0.7,
+    changeFrequency: 'weekly' as const,
+  }));
+
+  const catalogueRoutes: SeoRoute[] = listCatalogueSchools().map((school) => ({
+    path: schoolPath(school),
+    priority: 0.65,
     changeFrequency: 'weekly' as const,
   }));
 
@@ -82,5 +89,5 @@ export async function seoRoutes(): Promise<SeoRoute[]> {
     instructorRoutes = [];
   }
 
-  return [...EDITORIAL, ...locationRoutes, ...instructorRoutes];
+  return [...EDITORIAL, ...locationRoutes, ...catalogueRoutes, ...instructorRoutes];
 }

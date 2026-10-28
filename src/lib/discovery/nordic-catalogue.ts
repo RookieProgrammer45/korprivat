@@ -452,17 +452,17 @@ function rawSchools(): RawSchool[] {
   ];
 }
 
-const listed = rawSchools()
-  .map((school) => toNordicInstructor(school))
-  .filter((school): school is InstructorFilteredItem => school != null);
-
 const byId = new Map<string, InstructorFilteredItem>();
 const byShortId = new Map<string, InstructorFilteredItem>();
-for (const school of listed) {
-  const shortId = schoolShortId(school.id);
-  if (byId.has(school.id) || byShortId.has(shortId)) continue;
-  byId.set(school.id, school);
-  byShortId.set(shortId, school);
+const countryById = new Map<string, string>();
+for (const school of rawSchools()) {
+  const instructor = toNordicInstructor(school);
+  if (!instructor) continue;
+  const shortId = schoolShortId(instructor.id);
+  if (byId.has(instructor.id) || byShortId.has(shortId)) continue;
+  byId.set(instructor.id, instructor);
+  byShortId.set(shortId, instructor);
+  countryById.set(instructor.id, school.country.toLowerCase());
 }
 
 const catalogue = [...byId.values()];
@@ -504,6 +504,15 @@ export function nordicCatalogueCities(): string[] {
   return [...new Set(catalogue.map((school) => school.city))].sort((a, b) =>
     a.localeCompare(b, 'sv'),
   );
+}
+
+export function listCatalogueSchools(): readonly InstructorFilteredItem[] {
+  return catalogue;
+}
+
+/** ISO-like catalogue country (`de`, `gb`) for a listed school, or null. */
+export function catalogueCountryCode(id: string): string | null {
+  return countryById.get(id) ?? null;
 }
 
 export function nordicInstructorById(id: string): InstructorFilteredItem | null {

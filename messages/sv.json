@@ -691,7 +691,15 @@
       "A2": "A2",
       "A": "Motorcykel",
       "B": "Bil",
-      "BE": "Släp"
+      "BE": "Släp",
+      "C1": "C1",
+      "C1E": "C1E",
+      "C": "C",
+      "CE": "CE",
+      "D1": "D1",
+      "D1E": "D1E",
+      "D": "D",
+      "DE": "DE"
     },
     "language": {
       "sv": "Svenska",
@@ -699,7 +707,25 @@
       "no": "Norska",
       "da": "Danska",
       "fi": "Finska",
-      "is": "Isländska"
+      "is": "Isländska",
+      "es": "Spanska",
+      "fr": "Franska",
+      "de": "Tyska",
+      "it": "Italienska",
+      "pl": "Polska",
+      "nl": "Nederländska",
+      "pt": "Portugisiska",
+      "cs": "Tjeckiska",
+      "hu": "Ungerska",
+      "ro": "Rumänska",
+      "bg": "Bulgariska",
+      "hr": "Kroatiska",
+      "sl": "Slovenska",
+      "sk": "Slovakiska",
+      "el": "Grekiska",
+      "et": "Estniska",
+      "lv": "Lettiska",
+      "lt": "Litauiska"
     },
     "verification": {
       "verified": "Verifierad",

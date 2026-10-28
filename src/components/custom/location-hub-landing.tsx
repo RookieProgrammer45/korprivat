@@ -3,18 +3,20 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { LocationDirectory } from '@/components/custom/location-directory';
 import { loginHrefWithNext } from '@/lib/auth-next';
-import { nordicCountryHasSchools, nordicSchoolCountInCity } from '@/lib/discovery/nordic-catalogue';
+import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { getSessionUser } from '@/lib/require-auth';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { citiesInRegion, schoolsForLocation } from '@/lib/seo/catalogue-locations';
+import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,
   displayName,
-  listCitiesInRegion,
   listRegions,
   locationPath,
   NORDIC_COUNTRY_META,
   type NordicLocation,
 } from '@/lib/seo/nordic-locations';
+import { schoolPath } from '@/lib/seo/school-slugs';
 import { siteName, siteUrl } from '@/lib/site';
 
 export async function locationHubMetadata(location: NordicLocation): Promise<Metadata> {
@@ -22,12 +24,19 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
   const path = locationPath(location);
   const name = displayName(location);
   const country = NORDIC_COUNTRY_META[location.country];
-  const title =
-    location.kind === 'city'
+  const market = marketCopy(location.country);
+  const title = market
+    ? location.kind === 'city'
+      ? market.cityTitle(name, country.nameLocal)
+      : market.countryTitle(country.nameLocal)
+    : location.kind === 'city'
       ? t('titleCity', { name, country: country.nameLocal })
       : t('titleRegion', { name, country: country.nameLocal });
-  const description =
-    location.kind === 'city'
+  const description = market
+    ? location.kind === 'city'
+      ? market.cityDescription(name, country.nameLocal)
+      : market.countryDescription(country.nameLocal)
+    : location.kind === 'city'
       ? t('descriptionCity', { name, country: country.nameLocal })
       : t('descriptionRegion', { name, country: country.nameLocal });
   const brandedTitle = `${title} · ${siteName}`;
@@ -52,34 +61,50 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
   const sessionUser = await getSessionUser();
   const name = displayName(location);
   const country = NORDIC_COUNTRY_META[location.country];
+  const market = marketCopy(location.country);
   const url = absoluteUrl(path);
   const siblingCities =
     location.kind === 'region'
-      ? listCitiesInRegion(location.country, location.slug)
+      ? citiesInRegion(location.country, location.slug)
       : location.regionSlug
-        ? listCitiesInRegion(location.country, location.regionSlug).filter(
+        ? citiesInRegion(location.country, location.regionSlug).filter(
             (c) => c.slug !== location.slug,
           )
         : [];
   const regions = listRegions(location.country);
-  const catalogueCity = location.kind === 'city' ? (location.nameLocal ?? location.name) : null;
-  const catalogueHere = catalogueCity != null && nordicSchoolCountInCity(catalogueCity) > 0;
+  const schools = location.kind === 'city' ? schoolsForLocation(location) : [];
+  const catalogueHere = schools.length > 0;
   const countryCatalogue = location.country !== 'se' && nordicCountryHasSchools(location.country);
-  const showDirectory = (location.marketplaceLive && Boolean(location.filterCity)) || catalogueHere;
-  const directoryCity = location.filterCity ?? catalogueCity;
+  const showLiveDirectory = location.marketplaceLive && Boolean(location.filterCity);
+  const directoryCity = location.filterCity ?? null;
+  const heading = market
+    ? location.kind === 'city'
+      ? market.cityHeading(name)
+      : market.countryHeading(country.nameLocal)
+    : null;
+  const lead = market
+    ? location.kind === 'city'
+      ? market.cityLead(name)
+      : market.countryDescription(country.nameLocal)
+    : null;
 
-  const faq = [
-    {
-      q: t('faq1q', { name }),
-      a: showDirectory ? t('faq1aLive', { name }) : t('faq1aExpansion'),
-    },
-    { q: t('faq2q'), a: t('faq2a') },
-    { q: t('faq3q'), a: t('faq3a') },
-  ];
+  const faq = market
+    ? [{ q: market.faqQ, a: market.faqA }]
+    : [
+        {
+          q: t('faq1q', { name }),
+          a: showLiveDirectory ? t('faq1aLive', { name }) : t('faq1aExpansion'),
+        },
+        { q: t('faq2q'), a: t('faq2a') },
+        { q: t('faq3q'), a: t('faq3a') },
+      ];
 
   const tMeta = await getTranslations('locationHub.meta');
-  const pageDescription =
-    location.kind === 'city'
+  const pageDescription = market
+    ? location.kind === 'city'
+      ? market.cityDescription(name, country.nameLocal)
+      : market.countryDescription(country.nameLocal)
+    : location.kind === 'city'
       ? tMeta('descriptionCity', { name, country: country.nameLocal })
       : tMeta('descriptionRegion', { name, country: country.nameLocal });
 
@@ -88,10 +113,12 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
     '@graph': [
       {
         '@type': 'CollectionPage',
-        name: t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name }),
+        name:
+          heading ??
+          t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name }),
         description: pageDescription,
         url,
-        inLanguage: location.country === 'se' ? 'sv-SE' : 'en',
+        inLanguage: market?.schemaLang ?? 'sv-SE',
         isPartOf: { '@type': 'WebSite', name: siteName, url: `${siteUrl}/` },
       },
       {
@@ -121,25 +148,43 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           acceptedAnswer: { '@type': 'Answer', text: item.a },
         })),
       },
+      ...(schools.length > 0
+        ? [
+            {
+              '@type': 'ItemList',
+              name: heading ?? name,
+              numberOfItems: schools.length,
+              itemListElement: schools.map((school, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                name: school.name,
+                url: absoluteUrl(schoolPath(school)),
+              })),
+            },
+          ]
+        : []),
     ],
   };
 
   return (
     <>
       <main className="directory-shell container-page min-h-[calc(100dvh-3.5rem)] min-w-0">
-        <header className="mx-auto flex w-full max-w-6xl flex-col gap-3">
+        <header lang={market?.htmlLang} className="mx-auto flex w-full max-w-6xl flex-col gap-3">
           <p className="text-eyebrow">{t('eyebrow', { country: country.nameLocal })}</p>
           <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
-            {t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name })}
+            {heading ??
+              t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name })}
           </h1>
           <p className="max-w-2xl text-body-lg text-muted-foreground">
-            {location.marketplaceLive
-              ? t('subtitleLive', { name })
-              : catalogueHere
-                ? t('subtitleCatalogue', { name })
-                : countryCatalogue
-                  ? t('subtitleCountryCatalogue', { name })
-                  : t('subtitleExpansion', { name, country: country.nameLocal })}
+            {lead
+              ? lead
+              : location.marketplaceLive
+                ? t('subtitleLive', { name })
+                : catalogueHere
+                  ? t('subtitleCatalogue', { name })
+                  : countryCatalogue
+                    ? t('subtitleCountryCatalogue', { name })
+                    : t('subtitleExpansion', { name, country: country.nameLocal })}
           </p>
           <p className="text-small text-muted-foreground">
             <Link className="underline underline-offset-4" href="/locations">
@@ -152,7 +197,42 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           </p>
         </header>
 
-        {showDirectory && directoryCity ? (
+        {schools.length > 0 ? (
+          <section lang={market?.htmlLang} className="mx-auto mt-8 w-full max-w-6xl">
+            <h2 className="font-display text-h3">{market?.listHeading ?? t('citiesTitle')}</h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {schools.map((school) => {
+                const codes = [
+                  ...school.categories,
+                  ...(school.publishedPrices?.heavy?.categories ?? []),
+                ];
+                const lesson = school.publishedPrices?.lesson;
+                const currency = school.publishedPrices?.currency ?? 'SEK';
+                const price = lesson ? `${lesson.priceSek} ${currency}` : null;
+                return (
+                  <li
+                    key={school.id}
+                    className="rounded-[1.25rem] border border-border bg-card p-4"
+                  >
+                    <Link
+                      className="font-display text-body text-foreground underline-offset-4 hover:underline"
+                      href={schoolPath(school)}
+                    >
+                      {school.name}
+                    </Link>
+                    {codes.length > 0 || price ? (
+                      <p className="mt-1 text-small text-muted-foreground">
+                        {[codes.join(' · '), price].filter(Boolean).join(' · ')}
+                      </p>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ) : null}
+
+        {showLiveDirectory && directoryCity ? (
           sessionUser ? (
             <LocationDirectory cityName={directoryCity} />
           ) : (
@@ -166,11 +246,11 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
               </p>
             </section>
           )
-        ) : countryCatalogue ? (
+        ) : schools.length > 0 ? null : countryCatalogue ? (
           <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
             <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
             <ul className="grid gap-2 sm:grid-cols-2">
-              {(location.kind === 'region' ? siblingCities : []).slice(0, 12).map((c) => (
+              {(location.kind === 'region' ? siblingCities : []).map((c) => (
                 <li key={c.slug}>
                   <Link className="underline underline-offset-4" href={locationPath(c)}>
                     {displayName(c)}
@@ -194,23 +274,25 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
 
       <section className="container-page border-t border-border/60 bg-muted/20 py-section">
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
-          <div className="grid gap-4 text-body">
-            <h2 className="font-display text-h3 leading-tight">
-              {t('seoLead', { name, country: country.nameLocal })}
-            </h2>
-            <p className="text-muted-foreground">
-              {location.marketplaceLive
-                ? t('seoP1Live', { name })
-                : catalogueHere || countryCatalogue
-                  ? t('seoP1Catalogue', { name })
-                  : t('seoP1Expansion', { name, country: country.nameLocal })}
-            </p>
-            <p className="text-muted-foreground">{t('seoP2')}</p>
-            <h3 className="font-display text-h4">{t('howTitle')}</h3>
-            <p className="text-muted-foreground">
-              {showDirectory || countryCatalogue ? t('howBodyLive') : t('howBodyExpansion')}
-            </p>
-          </div>
+          {market ? null : (
+            <div className="grid gap-4 text-body">
+              <h2 className="font-display text-h3 leading-tight">
+                {t('seoLead', { name, country: country.nameLocal })}
+              </h2>
+              <p className="text-muted-foreground">
+                {location.marketplaceLive
+                  ? t('seoP1Live', { name })
+                  : catalogueHere || countryCatalogue
+                    ? t('seoP1Catalogue', { name })
+                    : t('seoP1Expansion', { name, country: country.nameLocal })}
+              </p>
+              <p className="text-muted-foreground">{t('seoP2')}</p>
+              <h3 className="font-display text-h4">{t('howTitle')}</h3>
+              <p className="text-muted-foreground">
+                {showLiveDirectory || countryCatalogue ? t('howBodyLive') : t('howBodyExpansion')}
+              </p>
+            </div>
+          )}
           <aside className="grid gap-4 rounded-xl border border-border bg-card p-5 shadow-sm">
             <h3 className="font-display text-h4">{t('nearbyTitle')}</h3>
             <ul className="grid gap-2 text-body">

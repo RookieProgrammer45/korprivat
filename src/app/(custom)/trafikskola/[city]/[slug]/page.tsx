@@ -4,8 +4,12 @@ import { getTranslations } from 'next-intl/server';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
+import { InstructorItem } from '@/lib/contracts/instructors';
 import { publishedPrices } from '@/lib/discovery/published-prices';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { locationForCatalogueSchool } from '@/lib/seo/catalogue-locations';
+import { marketCopy } from '@/lib/seo/market-copy';
+import { isNordicCountry, locationPath } from '@/lib/seo/nordic-locations';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
 
@@ -41,6 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = `${instructor.name} — ${instructor.city} | DriveLinkUp`;
   const rate = publicLessonRate(instructor);
   const description =
+    instructor.localDescription ||
     instructor.bio?.trim().slice(0, 155) ||
     (rate > 0
       ? t('descriptionNamed', { name: instructor.name, city: instructor.city, rate })
@@ -73,6 +78,13 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
+  const lesson = resolved.listing?.publishedPrices?.lesson ?? null;
+  const lessonCurrency = resolved.listing?.publishedPrices?.currency ?? 'SEK';
+  const swedishRate = publicLessonRate(resolved.instructor);
+  const cityHub = resolved.instructor.catalogue
+    ? locationForCatalogueSchool(resolved.instructor.id)
+    : null;
+  const market = cityHub && isNordicCountry(cityHub.country) ? marketCopy(cityHub.country) : null;
   const jsonLd = resolved.instructor?.indexable
     ? {
         '@context': 'https://schema.org',
@@ -85,7 +97,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
                 '@type': 'ListItem',
                 position: 2,
                 name: resolved.instructor.city,
-                item: absoluteUrl('/locations'),
+                item: cityHub ? absoluteUrl(locationPath(cityHub)) : absoluteUrl('/locations'),
               },
               {
                 '@type': 'ListItem',
@@ -98,32 +110,51 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
           {
             '@type': 'DrivingSchool',
             name: resolved.instructor.name,
-            description: resolved.instructor.bio?.slice(0, 300) || undefined,
+            description:
+              resolved.instructor.localDescription ||
+              resolved.instructor.bio?.slice(0, 300) ||
+              undefined,
             url: absoluteUrl(resolved.canonicalPath),
             image: resolved.instructor.photoUrl || undefined,
             address: {
               '@type': 'PostalAddress',
               addressLocality: resolved.instructor.city,
-              addressCountry: 'SE',
+              addressCountry: resolved.instructor.addressCountry,
             },
-            priceRange:
-              publicLessonRate(resolved.instructor) > 0
-                ? `${publicLessonRate(resolved.instructor)} SEK`
+            priceRange: lesson
+              ? `${lesson.priceSek} ${lessonCurrency}`
+              : swedishRate > 0
+                ? `${swedishRate} SEK`
                 : undefined,
             areaServed: resolved.instructor.city,
-            knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+            inLanguage: resolved.instructor.contentLanguage,
+            knowsLanguage:
+              resolved.listing?.languages ??
+              (resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv']),
           },
         ],
       }
     : null;
+  const initialListing = resolved.listing ? InstructorItem.parse(resolved.listing) : null;
 
   return (
     <main className="container-page section min-w-0">
       <div className="mx-auto grid w-full max-w-6xl gap-6">
         <div className="grid min-w-0 gap-6">
-          <InstructorDetail instructorId={instructorId} />
-          <InstructorOfferingsSection instructorId={instructorId} requestEnabled={false} />
-          <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
+          <InstructorDetail
+            instructorId={instructorId}
+            initial={initialListing}
+            intro={resolved.instructor.localDescription}
+            cityHref={cityHub ? locationPath(cityHub) : null}
+            cityLinkLabel={market ? market.cityHeading(resolved.instructor.city) : null}
+            contentLang={resolved.instructor.catalogue ? resolved.instructor.contentLanguage : null}
+          />
+          {resolved.instructor.catalogue ? null : (
+            <InstructorOfferingsSection instructorId={instructorId} requestEnabled={false} />
+          )}
+          {resolved.instructor.catalogue ? null : (
+            <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
+          )}
         </div>
       </div>
       {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}

@@ -4,11 +4,12 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { locationsForCountry } from '@/lib/seo/catalogue-locations';
+import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,
   displayName,
   isNordicCountry,
-  listLocationsForCountry,
   listRegions,
   locationPath,
   NORDIC_COUNTRIES,
@@ -29,9 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isNordicCountry(country)) return { title: 'Not found' };
   const meta = NORDIC_COUNTRY_META[country];
   const t = await getTranslations('locationHub.meta');
+  const market = marketCopy(country);
   const path = countryPath(country);
-  const title = t('titleCountry', { country: meta.nameLocal });
-  const description = t('descriptionCountry', { country: meta.nameLocal });
+  const title = market
+    ? market.countryTitle(meta.nameLocal)
+    : t('titleCountry', { country: meta.nameLocal });
+  const description = market
+    ? market.countryDescription(meta.nameLocal)
+    : t('descriptionCountry', { country: meta.nameLocal });
   const brandedTitle = `${title} · ${siteName}`;
   return {
     title,
@@ -52,8 +58,9 @@ export default async function CountryLocationsPage({ params }: Props) {
   if (!isNordicCountry(country)) notFound();
   const meta = NORDIC_COUNTRY_META[country];
   const t = await getTranslations('locationHub');
+  const market = marketCopy(country);
   const regions = listRegions(country);
-  const cities = listLocationsForCountry(country).filter((l) => l.kind === 'city');
+  const cities = locationsForCountry(country).filter((l) => l.kind === 'city');
 
   return (
     <main className="container-page section">
@@ -63,15 +70,19 @@ export default async function CountryLocationsPage({ params }: Props) {
             {t('breadcrumbLocations')}
           </Link>
         </p>
-        <h1 className="font-display text-h1 leading-tight tracking-tight">
-          {t('headerTitleCountry', { name: meta.nameLocal })}
+        <h1 lang={market?.htmlLang} className="font-display text-h1 leading-tight tracking-tight">
+          {market
+            ? market.countryHeading(meta.nameLocal)
+            : t('headerTitleCountry', { name: meta.nameLocal })}
         </h1>
-        <p className="text-body-lg text-muted-foreground">
-          {country === 'se'
-            ? t('subtitleCountryLive', { name: meta.nameLocal })
-            : nordicCountryHasSchools(country)
-              ? t('subtitleCountryCatalogue', { name: meta.nameLocal })
-              : t('subtitleCountryExpansion', { name: meta.nameLocal })}
+        <p lang={market?.htmlLang} className="text-body-lg text-muted-foreground">
+          {market
+            ? market.countryDescription(meta.nameLocal)
+            : country === 'se'
+              ? t('subtitleCountryLive', { name: meta.nameLocal })
+              : nordicCountryHasSchools(country)
+                ? t('subtitleCountryCatalogue', { name: meta.nameLocal })
+                : t('subtitleCountryExpansion', { name: meta.nameLocal })}
         </p>
       </header>
 

@@ -20,9 +20,24 @@ import { schoolPath } from '@/lib/seo/school-slugs';
 
 type Status = 'loading' | 'not-found' | 'error' | 'profile';
 
-export function InstructorDetail({ instructorId }: { instructorId: string }) {
-  const [status, setStatus] = useState<Status>('loading');
-  const [instructor, setInstructor] = useState<InstructorItem | null>(null);
+export function InstructorDetail({
+  instructorId,
+  initial = null,
+  intro = null,
+  cityHref = null,
+  cityLinkLabel = null,
+  contentLang = null,
+}: {
+  instructorId: string;
+  /** Server-rendered catalogue row. Skips the signed-in detail request. */
+  initial?: InstructorItem | null;
+  intro?: string | null;
+  cityHref?: string | null;
+  cityLinkLabel?: string | null;
+  contentLang?: string | null;
+}) {
+  const [status, setStatus] = useState<Status>(initial ? 'profile' : 'loading');
+  const [instructor, setInstructor] = useState<InstructorItem | null>(initial);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const tr = useTranslations('instructorDetail');
   const trPrice = useTranslations('publishedPrice');
@@ -31,6 +46,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
   const locale = useLocale();
 
   useEffect(() => {
+    if (initial) return;
     let active = true;
     setStatus('loading');
     setErrorMsg(null);
@@ -60,7 +76,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
     return () => {
       active = false;
     };
-  }, [instructorId, tr]);
+  }, [instructorId, initial, tr]);
 
   if (status === 'loading') {
     return (
@@ -104,7 +120,10 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
   }
 
   return (
-    <Card className="surface-card instructor-detail-card min-w-0 overflow-hidden border-brand-500/25 bg-card shadow-md">
+    <Card
+      lang={contentLang ?? undefined}
+      className="surface-card instructor-detail-card min-w-0 overflow-hidden border-brand-500/25 bg-card shadow-md"
+    >
       <CardContent className="grid min-w-0 gap-7 p-6 sm:p-8 md:grid-cols-[180px_minmax(0,1fr)] md:gap-9">
         <div className="instructor-detail-photo flex min-w-0 items-start justify-center">
           {instructor.photoUrl ? (
@@ -132,9 +151,17 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             <h1 className="mt-1 break-words font-display text-h1 leading-tight tracking-tight text-foreground">
               {instructor.name}
             </h1>
-            <p className="mt-1 text-body text-muted-foreground">
-              {tr('locatedIn', { city: instructor.city })}
-            </p>
+            {cityHref && cityLinkLabel ? (
+              <p className="mt-1 text-body">
+                <Link href={cityHref} className="text-foreground underline underline-offset-4">
+                  {cityLinkLabel}
+                </Link>
+              </p>
+            ) : (
+              <p className="mt-1 text-body text-muted-foreground">
+                {tr('locatedIn', { city: instructor.city })}
+              </p>
+            )}
             {instructor.affiliation ? (
               <p className="mt-2 text-body text-muted-foreground">
                 <Link
@@ -149,6 +176,15 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
 
           <div className="flex min-w-0 flex-wrap gap-2">
             {instructor.categories.map((category) => (
+              <Badge
+                key={category}
+                variant="secondary"
+                className="bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
+              >
+                {tr(`category.${category}`)}
+              </Badge>
+            ))}
+            {(instructor.publishedPrices?.heavy?.categories ?? []).map((category) => (
               <Badge
                 key={category}
                 variant="secondary"
@@ -217,7 +253,9 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             )}
           </dl>
 
-          <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
+          <p className="min-w-0 break-words text-body text-muted-foreground">
+            {intro?.trim() ? intro : instructor.bio}
+          </p>
 
           <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             <SchoolContactActions

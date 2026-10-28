@@ -1,8 +1,11 @@
 import 'server-only';
 import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
+import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
-import { nordicInstructorByShortId } from '@/lib/discovery/nordic-catalogue';
+import { catalogueCountryCode, nordicInstructorByShortId } from '@/lib/discovery/nordic-catalogue';
 import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
+import { marketCopy } from '@/lib/seo/market-copy';
+import { isNordicCountry } from '@/lib/seo/nordic-locations';
 import { parseSchoolSlug, schoolPath } from '@/lib/seo/school-slugs';
 
 export type PublicInstructorSeo = {
@@ -20,6 +23,14 @@ export type PublicInstructorSeo = {
   // 'contact' = directory-only: the school page hides the booking sidebar
   // and offering request forms for this row (school restriction workflow).
   bookingMode: 'instant' | 'request' | 'contact';
+  /** Website catalogue row. Indexed as a directory listing, not a verified school. */
+  catalogue: boolean;
+  /** ISO 3166-1 alpha-2. */
+  addressCountry: string;
+  contentLanguage: string;
+  heavyCategories: string[];
+  /** Local-language summary for catalogue schools. Null keeps the Swedish bio. */
+  localDescription: string | null;
 };
 
 export async function loadPublicInstructorSeo(id: string): Promise<PublicInstructorSeo | null> {
@@ -66,6 +77,11 @@ export async function loadPublicInstructorSeo(id: string): Promise<PublicInstruc
     userId: row.userId,
     providerRole: row.providerRole,
     bookingMode: publishedBookingMode(row.bookingMode),
+    catalogue: false,
+    addressCountry: 'SE',
+    contentLanguage: 'sv-SE',
+    heavyCategories: [],
+    localDescription: null,
   };
 }
 
@@ -118,6 +134,8 @@ export async function listIndexableInstructors(limit = 200) {
 export type PublicInstructorSlugResult = {
   instructor: PublicInstructorSeo;
   canonicalPath: string;
+  /** Present for a website catalogue school so the page can render without a session. */
+  listing: InstructorFilteredItem | null;
 };
 
 /**
@@ -133,6 +151,10 @@ export async function loadPublicInstructorBySchoolSlug(
   if (/^(no|dk|fi|is|au|uk|eu)/.test(parsed.id8)) {
     const nordic = nordicInstructorByShortId(parsed.id8);
     if (!nordic) return null;
+    const countryCode = catalogueCountryCode(nordic.id);
+    const country = countryCode && isNordicCountry(countryCode) ? countryCode : null;
+    const market = country ? marketCopy(country) : null;
+    const heavyCategories = nordic.publishedPrices?.heavy?.categories ?? [];
     const instructor: PublicInstructorSeo = {
       id: nordic.id,
       name: nordic.name,
@@ -142,12 +164,17 @@ export async function loadPublicInstructorBySchoolSlug(
       categories: [...nordic.categories],
       photoUrl: nordic.photoUrl,
       englishSpeaking: nordic.englishSpeaking,
-      indexable: false,
+      indexable: true,
       userId: null,
       providerRole: 'SCHOOL',
       bookingMode: 'contact',
+      catalogue: true,
+      addressCountry: country ? country.toUpperCase() : 'SE',
+      contentLanguage: market?.schemaLang ?? 'sv-SE',
+      heavyCategories: [...heavyCategories],
+      localDescription: market?.schoolDescription(nordic.name, nordic.city) ?? null,
     };
-    return { instructor, canonicalPath: schoolPath(instructor) };
+    return { instructor, canonicalPath: schoolPath(instructor), listing: nordic };
   }
   const row = await prisma.instructor.findFirst({
     where: { id: { startsWith: parsed.id8 } },
@@ -157,5 +184,5 @@ export async function loadPublicInstructorBySchoolSlug(
   if (!row) return null;
   const instructor = await loadPublicInstructorSeo(row.id);
   if (!instructor) return null;
-  return { instructor, canonicalPath: schoolPath(instructor) };
+  return { instructor, canonicalPath: schoolPath(instructor), listing: null };
 }
