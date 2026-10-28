@@ -34,20 +34,30 @@ jobs:
         run: npx tsx scripts/regional-schools/extract.ts --only europe-schools --fetch --extract --write
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      - name: Open pull request
-        uses: peter-evans/create-pull-request@v7
+      - name: Save the extracted file
+        uses: actions/upload-artifact@v4
         with:
-          base: main
-          branch: data/europe-school-prices
-          delete-branch: true
-          add-paths: |
-            data/nordic-schools/schools.json
-            data/australia-schools/schools.json
-            data/uk-schools/schools.json
-            data/europe-schools/schools.json
-          commit-message: 'data: extract regional school lesson prices'
-          title: 'data: extract regional school lesson prices'
-          body: |
-            Lesson prices re-read from each school's own website with the same OpenAI extract used for Swedish schools.
-
-            A null lesson price means the cited page did not state one lesson at that price. A from-price, a package total, and a rounded decimal are left empty. Before merging, compare how many schools still have a lessonPrice with the previous file. A large drop usually means sites blocked the crawler.
+          name: europe-school-prices
+          path: data/europe-schools/schools.json
+          retention-days: 14
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/europe-schools/schools.json
+          if git diff --cached --quiet; then
+            echo "No price changes to publish"
+            exit 0
+          fi
+          git commit -m "data: extract European school lesson prices"
+          git push --force origin "HEAD:refs/heads/data/europe-school-prices"
+          if gh pr view data/europe-school-prices --json url --jq .url; then
+            echo "Updated the existing pull request"
+          else
+            gh pr create --base main --head data/europe-school-prices \
+              --title "data: extract European school lesson prices" \
+              --body "Lesson prices re-read from each school's own website. A null lesson price means the cited page did not state one lesson at that price. A from-price, a package total, and a rounded decimal are left empty."
+          fi
