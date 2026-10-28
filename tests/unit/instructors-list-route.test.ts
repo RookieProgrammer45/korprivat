@@ -182,9 +182,9 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req());
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: Array<{ id: string; nextSlotAt: string | null }> };
-    expect(body.items).toHaveLength(1);
-    expect(body.items[0]?.nextSlotAt).toBe('2030-01-15T18:30:00.000Z');
-    expect(body.items[0]).not.toHaveProperty('bookedHours');
+    const row = body.items.find((item) => item.id === instructorId);
+    expect(row?.nextSlotAt).toBe('2030-01-15T18:30:00.000Z');
+    expect(row).not.toHaveProperty('bookedHours');
     expect(mockSlotFindMany).toHaveBeenCalledOnce();
   });
 
@@ -198,7 +198,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req());
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: Array<{ id: string; nextSlotAt: string | null }> };
-    expect(body.items[0]?.nextSlotAt).toBeNull();
+    expect(body.items.find((item) => item.id === 'instructor_anna')?.nextSlotAt).toBeNull();
   });
 
   it('keeps the earliest startsAt per instructor when several slots are returned', async () => {
@@ -237,7 +237,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       cities: string[];
     };
     expect(body.items.every((i) => i.nextSlotAt === null)).toBe(true);
-    expect(body.cities).toEqual(['Göteborg', 'Stockholm']);
+    expect(body.cities).toEqual(expect.arrayContaining(['Göteborg', 'Stockholm', 'Oslo']));
   });
 
   it('returns safe profile facts with coarse verification and review aggregates', async () => {
@@ -262,16 +262,17 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req());
     expect(res.status).toBe(200);
     const body = (await res.json()) as {
-      items: Array<Record<string, unknown>>;
+      items: Array<Record<string, unknown> & { id: string }>;
     };
-    expect(body.items[0]).toMatchObject({
+    const row = body.items.find((item) => item.id === instructorId);
+    expect(row).toMatchObject({
       serviceArea: 'Södermalm + 15 km',
       languages: ['sv', 'en'],
       verificationStatus: 'verified',
       reviewSummary: { count: 2, averageRating: 4.5 },
       bookingMode: 'contact',
     });
-    expect(body.items[0]).not.toHaveProperty('userId');
+    expect(row).not.toHaveProperty('userId');
   });
 
   it('lists stored Google reviews on each school item', async () => {
@@ -306,9 +307,9 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req());
     expect(res.status).toBe(200);
     const body = (await res.json()) as {
-      items: Array<{ googleReviews?: Array<Record<string, unknown>> }>;
+      items: Array<{ id: string; googleReviews?: Array<Record<string, unknown>> }>;
     };
-    expect(body.items[0]?.googleReviews).toEqual([
+    expect(body.items.find((item) => item.id === instructorId)?.googleReviews).toEqual([
       {
         id: 'rev-1',
         authorName: 'Lilly Ask',
@@ -333,11 +334,14 @@ describe('GET /api/instructors — next-open-slot projection', () => {
 
     const res = await GET(req());
     expect(res.status).toBe(200);
-    const body = (await res.json()) as { items: Array<Record<string, unknown>> };
-    expect(body.items[0]).toMatchObject({
+    const body = (await res.json()) as {
+      items: Array<Record<string, unknown> & { id: string }>;
+    };
+    const row = body.items.find((item) => item.id === 'school_sjobo');
+    expect(row).toMatchObject({
       contact: { kind: 'inbox', href: 'mailto:info@sjobotrafikskola.se' },
     });
-    expect(body.items[0]).not.toHaveProperty('email');
+    expect(row).not.toHaveProperty('email');
   });
 
   it('hides payment surfaces for an instructor who is not part of a driving school', async () => {
@@ -401,10 +405,12 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       mockSlotFindMany.mockResolvedValueOnce([]);
 
       const res = await GET(req());
-      const body = (await res.json()) as { items: Array<Record<string, unknown>> };
+      const body = (await res.json()) as {
+        items: Array<Record<string, unknown> & { id: string }>;
+      };
 
       expect(res.status).toBe(200);
-      expect(body.items[0]).toMatchObject({
+      expect(body.items.find((item) => item.id === 'instructor_erik')).toMatchObject({
         cancellationPolicyTier: null,
         showCancellationPolicy: false,
       });
@@ -475,8 +481,8 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(whereField(mockInstructorFindMany.mock.calls[0]?.[0]?.where, 'OR')).toEqual([
       { categories: { has: 'A' } },
     ]);
-    const body = (await res.json()) as { items: Array<{ categories: string[] }> };
-    expect(body.items[0]?.categories).toEqual(['B']);
+    const body = (await res.json()) as { items: Array<{ id: string; categories: string[] }> };
+    expect(body.items.find((item) => item.id === 'instructor_erik')?.categories).toEqual(['B']);
   });
 
   it('keeps instructors at or above the inclusive minimum rating threshold', async () => {
@@ -595,7 +601,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: unknown[]; cities: string[] };
     expect(body.items).toEqual([]);
-    expect(body.cities).toEqual(['Stockholm']);
+    expect(body.cities).toEqual(expect.arrayContaining(['Stockholm', 'Oslo']));
   });
 
   it('rejects a minimum hourly rate above the maximum with the standard error envelope', async () => {

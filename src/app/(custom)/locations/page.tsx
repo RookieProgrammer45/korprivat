@@ -9,8 +9,8 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('locationHub.meta');
-  const title = t('titleCountry', { country: 'Norden' });
-  const description = t('descriptionCountry', { country: 'Norden' });
+  const title = t('indexTitle');
+  const description = t('indexSubtitle');
   return {
     title,
     description,
@@ -31,12 +31,8 @@ export default async function LocationsIndexPage() {
     <main className="container-page section">
       <header className="mx-auto flex max-w-3xl flex-col gap-3">
         <p className="text-eyebrow">{t('countriesTitle')}</p>
-        <h1 className="font-display text-h1 leading-tight tracking-tight">
-          {t('headerTitleCountry', { name: 'Norden' })}
-        </h1>
-        <p className="text-body-lg text-muted-foreground">
-          {t('subtitleCountryExpansion', { name: 'Norden' })}
-        </p>
+        <h1 className="font-display text-h1 leading-tight tracking-tight">{t('indexTitle')}</h1>
+        <p className="text-body-lg text-muted-foreground">{t('indexSubtitle')}</p>
       </header>
       <ul className="mx-auto mt-10 grid max-w-3xl gap-4">
         {NORDIC_COUNTRIES.map((code) => {

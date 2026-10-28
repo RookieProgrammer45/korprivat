@@ -10,7 +10,10 @@ import { HEAVY_LICENCE_CODES, LICENCE_CATEGORY_CODES } from '@/lib/business/lice
 import type { InstructorFilteredItem, InstructorQuery } from '@/lib/contracts/instructors';
 import { cityFilterCandidates } from '@/lib/seo/nordic-locations';
 import { schoolShortId } from '@/lib/seo/school-slugs';
+import australia from '../../../data/australia-schools/schools.json';
+import europe from '../../../data/europe-schools/schools.json';
 import dataset from '../../../data/nordic-schools/schools.json';
+import unitedKingdom from '../../../data/uk-schools/schools.json';
 
 const LIGHT = new Set<string>(LICENCE_CATEGORY_CODES);
 const PRICE_CAP: Record<string, readonly [number, number]> = {
@@ -18,18 +21,99 @@ const PRICE_CAP: Record<string, readonly [number, number]> = {
   DK: [200, 1500],
   IS: [2000, 30000],
   FI: [20, 200],
+  AU: [50, 200],
+  GB: [20, 80],
+  ES: [15, 150],
+  FR: [15, 150],
+  DE: [15, 150],
+  IT: [15, 150],
+  AT: [15, 150],
+  BE: [15, 150],
+  NL: [15, 150],
+  PT: [15, 150],
+  IE: [15, 150],
+  LU: [15, 150],
+  SK: [15, 150],
+  HR: [15, 150],
+  SI: [15, 150],
+  GR: [15, 150],
+  CY: [15, 150],
+  MT: [15, 150],
+  EE: [15, 150],
+  LV: [15, 150],
+  LT: [15, 150],
+  PL: [40, 250],
+  CH: [40, 200],
+  CZ: [300, 1500],
+  HU: [4000, 25000],
+  RO: [40, 250],
+  BG: [20, 120],
 };
 const COUNTRY_NAME: Record<string, string> = {
   NO: 'Norge',
   DK: 'Danmark',
   FI: 'Finland',
   IS: 'Island',
+  AU: 'Australia',
+  GB: 'United Kingdom',
+  ES: 'Spain',
+  FR: 'France',
+  DE: 'Germany',
+  IT: 'Italy',
+  PL: 'Poland',
+  AT: 'Austria',
+  BE: 'Belgium',
+  NL: 'Netherlands',
+  PT: 'Portugal',
+  IE: 'Ireland',
+  LU: 'Luxembourg',
+  CH: 'Switzerland',
+  CZ: 'Czechia',
+  SK: 'Slovakia',
+  HU: 'Hungary',
+  RO: 'Romania',
+  BG: 'Bulgaria',
+  HR: 'Croatia',
+  SI: 'Slovenia',
+  GR: 'Greece',
+  CY: 'Cyprus',
+  MT: 'Malta',
+  EE: 'Estonia',
+  LV: 'Latvia',
+  LT: 'Lithuania',
 };
-const LANGUAGE: Record<string, 'no' | 'da' | 'fi' | 'is'> = {
+const LANGUAGE: Record<string, CatalogueLanguage> = {
   NO: 'no',
   DK: 'da',
   FI: 'fi',
   IS: 'is',
+  AU: 'en',
+  GB: 'en',
+  ES: 'es',
+  FR: 'fr',
+  DE: 'de',
+  IT: 'it',
+  PL: 'pl',
+  AT: 'de',
+  BE: 'nl',
+  NL: 'nl',
+  PT: 'pt',
+  IE: 'en',
+  LU: 'fr',
+  CH: 'de',
+  CZ: 'cs',
+  SK: 'sk',
+  HU: 'hu',
+  RO: 'ro',
+  BG: 'bg',
+  HR: 'hr',
+  SI: 'sl',
+  GR: 'el',
+  CY: 'el',
+  MT: 'en',
+  EE: 'et',
+  LV: 'lv',
+  LT: 'lt',
 };
 const BAD_LOCAL = new Set([
   'bruker',
@@ -59,8 +143,75 @@ const BAD_DOMAIN = [
   'wordpress.com',
 ];
 
-type NordicCountry = 'NO' | 'DK' | 'FI' | 'IS';
-type NordicCurrency = 'NOK' | 'DKK' | 'EUR' | 'ISK';
+type CatalogueLanguage =
+  | 'en'
+  | 'no'
+  | 'da'
+  | 'fi'
+  | 'is'
+  | 'es'
+  | 'fr'
+  | 'de'
+  | 'it'
+  | 'pl'
+  | 'nl'
+  | 'pt'
+  | 'cs'
+  | 'hu'
+  | 'ro'
+  | 'bg'
+  | 'hr'
+  | 'sl'
+  | 'sk'
+  | 'el'
+  | 'et'
+  | 'lv'
+  | 'lt';
+type NordicCountry =
+  | 'NO'
+  | 'DK'
+  | 'FI'
+  | 'IS'
+  | 'AU'
+  | 'GB'
+  | 'ES'
+  | 'FR'
+  | 'DE'
+  | 'IT'
+  | 'PL'
+  | 'AT'
+  | 'BE'
+  | 'NL'
+  | 'PT'
+  | 'IE'
+  | 'LU'
+  | 'CH'
+  | 'CZ'
+  | 'SK'
+  | 'HU'
+  | 'RO'
+  | 'BG'
+  | 'HR'
+  | 'SI'
+  | 'GR'
+  | 'CY'
+  | 'MT'
+  | 'EE'
+  | 'LV'
+  | 'LT';
+type NordicCurrency =
+  | 'NOK'
+  | 'DKK'
+  | 'EUR'
+  | 'ISK'
+  | 'AUD'
+  | 'GBP'
+  | 'PLN'
+  | 'CZK'
+  | 'HUF'
+  | 'RON'
+  | 'BGN'
+  | 'CHF';
 
 type RawSchool = {
   id: string;
@@ -75,6 +226,7 @@ type RawSchool = {
   lessonPrice: number | null;
   lessonMinutes: number | null;
   currency: NordicCurrency;
+  language?: CatalogueLanguage;
   sourceUrl: string | null;
   checkedAt: string;
   websiteStatus?: string;
@@ -143,6 +295,24 @@ function usablePhone(value: string | null, country: NordicCountry): string | nul
     const local = digits.slice(3);
     return local.length === 7 && validLocal(local) ? `+354${local}` : null;
   }
+  if (country === 'AU') {
+    const local = digits.startsWith('61')
+      ? digits.slice(2)
+      : digits.startsWith('0')
+        ? digits.slice(1)
+        : '';
+    if (local.length !== 9 || !/^[23478]/.test(local) || new Set(local).size < 3) return null;
+    return `+61${local}`;
+  }
+  if (country === 'GB') {
+    const local = digits.startsWith('44')
+      ? digits.slice(2)
+      : digits.startsWith('0')
+        ? digits.slice(1)
+        : '';
+    if (local.length !== 10 || !/^[127]/.test(local) || new Set(local).size < 3) return null;
+    return `+44${local}`;
+  }
   return null;
 }
 
@@ -151,6 +321,22 @@ function validLocal(digits: string): boolean {
 }
 
 function phoneFact(e164: string): { display: string; href: string } {
+  if (e164.startsWith('+61')) {
+    const body = e164.slice(3);
+    const display = body.startsWith('4')
+      ? `+61 ${body.slice(0, 3)} ${body.slice(3, 6)} ${body.slice(6)}`
+      : `+61 ${body.slice(0, 1)} ${body.slice(1, 5)} ${body.slice(5)}`;
+    return { display, href: `tel:${e164}` };
+  }
+  if (e164.startsWith('+44')) {
+    const body = e164.slice(3);
+    const display = body.startsWith('7')
+      ? `+44 ${body.slice(0, 4)} ${body.slice(4)}`
+      : body.startsWith('2')
+        ? `+44 20 ${body.slice(2, 6)} ${body.slice(6)}`
+        : `+44 ${body.slice(0, 3)} ${body.slice(3, 6)} ${body.slice(6)}`;
+    return { display, href: `tel:${e164}` };
+  }
   const body = e164.startsWith('+354') ? e164.slice(4) : e164.slice(3);
   const groups = e164.startsWith('+354')
     ? `${body.slice(0, 3)} ${body.slice(3)}`
@@ -179,16 +365,18 @@ export function toNordicInstructor(school: RawSchool): InstructorFilteredItem | 
   const website = usableWebsite(school.website);
   const categories = lightCategories(school.categories);
   const city = school.city?.trim();
-  const language = LANGUAGE[school.country];
+  const language = school.language ?? LANGUAGE[school.country];
   const countryName = COUNTRY_NAME[school.country];
   if (!website || !school.name?.trim() || !city || categories.length === 0) return null;
   if (!language || !countryName) return null;
+  const amount = lessonAmount(school);
+  // Australia is listed only when the school's own page states a lesson price.
+  if ((school.country === 'AU' || school.country === 'GB') && amount == null) return null;
   const email = usableEmail(school.email);
   const contact = email
     ? { kind: 'inbox' as const, href: `mailto:${email}` }
     : { kind: 'website' as const, href: website };
   const phone = usablePhone(school.phone, school.country);
-  const amount = lessonAmount(school);
   const heavy = heavyCategories(school.heavy);
   const collectedAt = /^\d{4}-\d{2}-\d{2}$/.test(school.checkedAt)
     ? school.checkedAt
@@ -232,7 +420,7 @@ export function toNordicInstructor(school: RawSchool): InstructorFilteredItem | 
     hourlyRateSek: 0,
     bio: 'Kontaktuppgifter och pris kommer från skolans webbplats. DriveLinkUp har inte verifierat tillståndet och bokar inte lektionen.',
     photoUrl: '',
-    englishSpeaking: false,
+    englishSpeaking: language === 'en',
     languages: [language],
     verificationStatus: 'unverified',
     reviewSummary: { count: 0, averageRating: null },
@@ -253,7 +441,12 @@ export function toNordicInstructor(school: RawSchool): InstructorFilteredItem | 
 }
 
 function rawSchools(): RawSchool[] {
-  return dataset.schools as RawSchool[];
+  return [
+    ...(dataset.schools as RawSchool[]),
+    ...(australia.schools as RawSchool[]),
+    ...(unitedKingdom.schools as RawSchool[]),
+    ...(europe.schools as RawSchool[]),
+  ];
 }
 
 const listed = rawSchools()
@@ -286,11 +479,8 @@ export function listNordicInstructors(query: NordicCatalogueQuery): InstructorFi
     query.minRating != null ||
     query.minRate != null ||
     query.maxRate != null ||
-    query.english === true ||
     query.providerRole === 'INSTRUCTOR' ||
-    query.affiliation === 'independent' ||
-    query.sort === 'lessonPrice' ||
-    query.sort === 'packagePrice'
+    query.affiliation === 'independent'
   ) {
     return [];
   }
@@ -299,6 +489,7 @@ export function listNordicInstructors(query: NordicCatalogueQuery): InstructorFi
     ? new Set(cityFilterCandidates(query.city).map((city) => city.toLocaleLowerCase('sv')))
     : null;
   return catalogue.filter((school) => {
+    if (query.english === true && !school.englishSpeaking) return false;
     if (wanted && !school.categories.some((code) => wanted.has(code))) return false;
     if (cities && !cities.has(school.city.toLocaleLowerCase('sv'))) return false;
     if (query.heavy) return offersHeavy(school, query.heavy);
@@ -322,4 +513,53 @@ export function nordicInstructorByShortId(id8: string): InstructorFilteredItem |
 
 export function nordicListedCount(): number {
   return catalogue.length;
+}
+
+function foldCityName(value: string): string {
+  return value.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase('sv').trim();
+}
+
+export function nordicSchoolCountInCity(city: string): number {
+  const wanted = foldCityName(city);
+  if (!wanted) return 0;
+  return catalogue.filter((school) => foldCityName(school.city) === wanted).length;
+}
+
+const COUNTRY_PREFIX = {
+  no: 'no',
+  dk: 'dk',
+  fi: 'fi',
+  is: 'is',
+  au: 'au',
+  gb: 'uk',
+  es: 'eues',
+  fr: 'eufr',
+  de: 'eude',
+  it: 'euit',
+  pl: 'eupl',
+  at: 'euat',
+  be: 'eube',
+  nl: 'eunl',
+  pt: 'eupt',
+  ie: 'euie',
+  lu: 'eulu',
+  ch: 'euch',
+  cz: 'eucz',
+  sk: 'eusk',
+  hu: 'euhu',
+  ro: 'euro',
+  bg: 'eubg',
+  hr: 'euhr',
+  si: 'eusi',
+  gr: 'eugr',
+  cy: 'eucy',
+  mt: 'eumt',
+  ee: 'euee',
+  lv: 'eulv',
+  lt: 'eult',
+} as const;
+
+export function nordicCountryHasSchools(country: keyof typeof COUNTRY_PREFIX): boolean {
+  const prefix = COUNTRY_PREFIX[country];
+  return catalogue.some((school) => school.id.startsWith(prefix));
 }

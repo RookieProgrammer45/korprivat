@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { InstructorItem } from '@/lib/contracts/instructors';
 import {
   listNordicInstructors,
+  nordicCountryHasSchools,
   nordicInstructorById,
   nordicListedCount,
+  nordicSchoolCountInCity,
   toNordicInstructor,
 } from '@/lib/discovery/nordic-catalogue';
 
@@ -70,6 +72,127 @@ describe('nordic catalogue', () => {
         (row) => row.categories.length === 1 && row.categories[0] === 'B',
       ),
     ).toBe(false);
+  });
+
+  it('lists an Australian school only with the lesson price on its own site', () => {
+    const item = toNordicInstructor({
+      ...base,
+      id: 'auabc123-example-driving-school',
+      country: 'AU',
+      name: 'Example Driving School',
+      city: 'Sydney',
+      website: 'https://example-driving-school.com.au',
+      email: 'hello@example-driving-school.com.au',
+      phone: '+61494720978',
+      lessonPrice: 80,
+      currency: 'AUD',
+    });
+    const parsed = InstructorItem.parse(item);
+    expect(parsed.publishedPrices?.currency).toBe('AUD');
+    expect(parsed.publishedPrices?.lesson?.priceSek).toBe(80);
+    expect(parsed.languages).toEqual(['en']);
+    expect(parsed.englishSpeaking).toBe(true);
+    expect(parsed.phone?.display).toBe('+61 494 720 978');
+    expect(parsed.verificationStatus).toBe('unverified');
+    expect(
+      toNordicInstructor({
+        ...base,
+        country: 'AU',
+        currency: 'AUD',
+        lessonPrice: null,
+        city: 'Sydney',
+      }),
+    ).toBeNull();
+  });
+
+  it('lists a UK school only with the lesson price on its own site', () => {
+    const item = toNordicInstructor({
+      ...base,
+      id: 'ukabc123-example-driving-school',
+      country: 'GB',
+      name: 'Example Driving School',
+      city: 'London',
+      website: 'https://example-driving-school.co.uk',
+      phone: '+441414237777',
+      lessonPrice: 40,
+      currency: 'GBP',
+    });
+    const parsed = InstructorItem.parse(item);
+    expect(parsed.publishedPrices?.currency).toBe('GBP');
+    expect(parsed.publishedPrices?.lesson?.priceSek).toBe(40);
+    expect(parsed.phone?.display).toBe('+44 141 423 7777');
+    expect(parsed.serviceArea).toBe('London, United Kingdom');
+    expect(
+      toNordicInstructor({
+        ...base,
+        country: 'GB',
+        currency: 'GBP',
+        lessonPrice: null,
+        city: 'London',
+      }),
+    ).toBeNull();
+  });
+
+  it('lists a European school with no lesson price yet, unverified and in euros', () => {
+    const item = toNordicInstructor({
+      ...base,
+      id: 'euesabc123-example-autoescuela',
+      country: 'ES',
+      name: 'Example Autoescuela',
+      city: 'Madrid',
+      website: 'https://example-autoescuela.es',
+      email: null,
+      phone: null,
+      lessonPrice: null,
+      lessonMinutes: null,
+      currency: 'EUR',
+      language: 'es',
+    });
+    const parsed = InstructorItem.parse(item);
+    expect(parsed.verificationStatus).toBe('unverified');
+    expect(parsed.bookingMode).toBe('contact');
+    expect(parsed.canCollectPayment).toBe(false);
+    expect(parsed.publishedPrices).toBeNull();
+    expect(parsed.priceRequest?.kind).toBe('website');
+    expect(parsed.languages).toEqual(['es']);
+    expect(parsed.englishSpeaking).toBe(false);
+    expect(parsed.serviceArea).toBe('Madrid, Spain');
+  });
+
+  it('puts collected schools in the catalogue for the cities that have them', () => {
+    expect(nordicSchoolCountInCity('Oslo')).toBeGreaterThan(0);
+    expect(nordicSchoolCountInCity('Odense')).toBeGreaterThan(0);
+    expect(nordicSchoolCountInCity('Reykjavík')).toBeGreaterThan(0);
+    expect(nordicSchoolCountInCity('Helsinki')).toBe(0);
+    expect(nordicCountryHasSchools('no')).toBe(true);
+    expect(nordicCountryHasSchools('dk')).toBe(true);
+    expect(nordicCountryHasSchools('is')).toBe(true);
+    expect(nordicCountryHasSchools('fi')).toBe(false);
+    expect(nordicCountryHasSchools('au')).toBe(true);
+    expect(nordicCountryHasSchools('gb')).toBe(true);
+    expect(nordicSchoolCountInCity('Sydney')).toBeGreaterThan(0);
+    expect(nordicSchoolCountInCity('London')).toBeGreaterThan(0);
+    expect(listNordicInstructors({ city: 'Oslo' }).length).toBeGreaterThan(0);
+    const sydney = listNordicInstructors({ city: 'Sydney', english: true });
+    expect(sydney.length).toBeGreaterThan(0);
+    expect(sydney.every((row) => row.publishedPrices?.currency === 'AUD')).toBe(true);
+    const london = listNordicInstructors({ city: 'London', english: true });
+    expect(london.length).toBeGreaterThan(0);
+    expect(london.every((row) => row.publishedPrices?.currency === 'GBP')).toBe(true);
+    expect(listNordicInstructors({ city: 'Oslo', english: true })).toEqual([]);
+    const madrid = listNordicInstructors({ city: 'Madrid' });
+    expect(madrid.length).toBeGreaterThan(0);
+    expect(madrid.every((row) => row.id.startsWith('eues'))).toBe(true);
+    expect(madrid.every((row) => row.verificationStatus === 'unverified')).toBe(true);
+    expect(madrid.every((row) => row.publishedPrices == null)).toBe(true);
+    expect(nordicCountryHasSchools('es')).toBe(true);
+    expect(nordicCountryHasSchools('fr')).toBe(true);
+    expect(nordicCountryHasSchools('de')).toBe(true);
+    expect(nordicCountryHasSchools('hr')).toBe(true);
+    expect(nordicCountryHasSchools('cy')).toBe(false);
+    expect(nordicCountryHasSchools('mt')).toBe(false);
+    expect(nordicSchoolCountInCity('Paris')).toBeGreaterThan(0);
+    expect(nordicSchoolCountInCity('Liège')).toBeGreaterThan(0);
   });
 
   it('loads the collected file without a verified badge', () => {

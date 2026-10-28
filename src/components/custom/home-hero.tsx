@@ -12,8 +12,7 @@ import { AnimatedTitle } from '@/components/custom/animated-title';
 
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
 
-// Values are the Swedish city names stored on listings (the API expands
-// variants via cityFilterCandidates); labels come from i18n.
+// Values are the city names stored on listings. Labels come from i18n.
 const SEARCH_CITIES = [
   { id: 'stockholm', value: 'Stockholm' },
   { id: 'goteborg', value: 'Göteborg' },
@@ -23,6 +22,31 @@ const SEARCH_CITIES = [
   { id: 'linkoping', value: 'Linköping' },
   { id: 'orebro', value: 'Örebro' },
   { id: 'helsingborg', value: 'Helsingborg' },
+  { id: 'oslo', value: 'Oslo' },
+  { id: 'bergen', value: 'Bergen' },
+  { id: 'trondheim', value: 'Trondheim' },
+  { id: 'stavanger', value: 'Stavanger' },
+  { id: 'tromso', value: 'Tromsø' },
+  { id: 'odense', value: 'Odense' },
+  { id: 'reykjavik', value: 'Reykjavík' },
+  { id: 'sydney', value: 'Sydney' },
+  { id: 'melbourne', value: 'Melbourne' },
+  { id: 'brisbane', value: 'Brisbane' },
+  { id: 'perth', value: 'Perth' },
+  { id: 'adelaide', value: 'Adelaide' },
+  { id: 'hobart', value: 'Hobart' },
+  { id: 'goldCoast', value: 'Gold Coast' },
+  { id: 'london', value: 'London' },
+  { id: 'manchester', value: 'Manchester' },
+  { id: 'birmingham', value: 'Birmingham' },
+  { id: 'leeds', value: 'Leeds' },
+  { id: 'glasgow', value: 'Glasgow' },
+  { id: 'cardiff', value: 'Cardiff' },
+  { id: 'madrid', value: 'Madrid' },
+  { id: 'paris', value: 'Paris' },
+  { id: 'berlin', value: 'Berlin' },
+  { id: 'roma', value: 'Roma' },
+  { id: 'warszawa', value: 'Warszawa' },
 ] as const;
 
 const POPULAR_LINKS = [
@@ -31,6 +55,10 @@ const POPULAR_LINKS = [
   { key: 'stockholm', href: '/locations/se/stockholm' },
   { key: 'goteborg', href: '/locations/se/goteborg' },
   { key: 'malmo', href: '/locations/se/malmo' },
+  { key: 'oslo', href: '/locations/no/oslo' },
+  { key: 'sydney', href: '/locations/au/sydney' },
+  { key: 'london', href: '/locations/gb/london' },
+  { key: 'paris', href: '/locations/fr/paris' },
 ] as const;
 
 export function HomeHero() {

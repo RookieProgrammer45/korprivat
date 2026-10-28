@@ -11,8 +11,41 @@ import {
 } from '@/lib/seo/nordic-locations';
 
 describe('nordic-locations registry', () => {
-  it('covers all five Nordic countries with unique country/slug keys', () => {
-    expect(NORDIC_COUNTRIES).toEqual(['se', 'no', 'dk', 'fi', 'is']);
+  it('covers the catalogue countries with unique country/slug keys', () => {
+    expect(NORDIC_COUNTRIES).toEqual([
+      'se',
+      'no',
+      'dk',
+      'fi',
+      'is',
+      'au',
+      'gb',
+      'es',
+      'fr',
+      'de',
+      'it',
+      'pl',
+      'at',
+      'be',
+      'nl',
+      'pt',
+      'ie',
+      'lu',
+      'ch',
+      'cz',
+      'sk',
+      'hu',
+      'ro',
+      'bg',
+      'hr',
+      'si',
+      'gr',
+      'cy',
+      'mt',
+      'ee',
+      'lv',
+      'lt',
+    ]);
     const keys = NORDIC_LOCATIONS.map((l) => `${l.country}/${l.slug}`);
     expect(new Set(keys).size).toBe(keys.length);
   });

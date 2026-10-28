@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import {
   countryPath,
@@ -68,7 +69,9 @@ export default async function CountryLocationsPage({ params }: Props) {
         <p className="text-body-lg text-muted-foreground">
           {country === 'se'
             ? t('subtitleCountryLive', { name: meta.nameLocal })
-            : t('subtitleCountryExpansion', { name: meta.nameLocal })}
+            : nordicCountryHasSchools(country)
+              ? t('subtitleCountryCatalogue', { name: meta.nameLocal })
+              : t('subtitleCountryExpansion', { name: meta.nameLocal })}
         </p>
       </header>
 

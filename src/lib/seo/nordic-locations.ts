@@ -6,7 +6,40 @@
  * only for SE locations that can filter the live directory.
  */
 
-export const NORDIC_COUNTRIES = ['se', 'no', 'dk', 'fi', 'is'] as const;
+export const NORDIC_COUNTRIES = [
+  'se',
+  'no',
+  'dk',
+  'fi',
+  'is',
+  'au',
+  'gb',
+  'es',
+  'fr',
+  'de',
+  'it',
+  'pl',
+  'at',
+  'be',
+  'nl',
+  'pt',
+  'ie',
+  'lu',
+  'ch',
+  'cz',
+  'sk',
+  'hu',
+  'ro',
+  'bg',
+  'hr',
+  'si',
+  'gr',
+  'cy',
+  'mt',
+  'ee',
+  'lv',
+  'lt',
+] as const;
 export type NordicCountryCode = (typeof NORDIC_COUNTRIES)[number];
 
 export type NordicLocationKind = 'city' | 'region';
@@ -40,6 +73,33 @@ export const NORDIC_COUNTRY_META: Record<NordicCountryCode, NordicCountryMeta> =
   dk: { code: 'dk', name: 'Denmark', nameLocal: 'Danmark', adjective: 'Danish' },
   fi: { code: 'fi', name: 'Finland', nameLocal: 'Suomi', adjective: 'Finnish' },
   is: { code: 'is', name: 'Iceland', nameLocal: 'Ísland', adjective: 'Icelandic' },
+  au: { code: 'au', name: 'Australia', nameLocal: 'Australia', adjective: 'Australian' },
+  gb: { code: 'gb', name: 'United Kingdom', nameLocal: 'United Kingdom', adjective: 'British' },
+  es: { code: 'es', name: 'Spain', nameLocal: 'España', adjective: 'Spanish' },
+  fr: { code: 'fr', name: 'France', nameLocal: 'France', adjective: 'French' },
+  de: { code: 'de', name: 'Germany', nameLocal: 'Deutschland', adjective: 'German' },
+  it: { code: 'it', name: 'Italy', nameLocal: 'Italia', adjective: 'Italian' },
+  pl: { code: 'pl', name: 'Poland', nameLocal: 'Polska', adjective: 'Polish' },
+  at: { code: 'at', name: 'Austria', nameLocal: 'Österreich', adjective: 'Austrian' },
+  be: { code: 'be', name: 'Belgium', nameLocal: 'België', adjective: 'Belgian' },
+  nl: { code: 'nl', name: 'Netherlands', nameLocal: 'Nederland', adjective: 'Dutch' },
+  pt: { code: 'pt', name: 'Portugal', nameLocal: 'Portugal', adjective: 'Portuguese' },
+  ie: { code: 'ie', name: 'Ireland', nameLocal: 'Ireland', adjective: 'Irish' },
+  lu: { code: 'lu', name: 'Luxembourg', nameLocal: 'Luxembourg', adjective: 'Luxembourgish' },
+  ch: { code: 'ch', name: 'Switzerland', nameLocal: 'Schweiz', adjective: 'Swiss' },
+  cz: { code: 'cz', name: 'Czechia', nameLocal: 'Česko', adjective: 'Czech' },
+  sk: { code: 'sk', name: 'Slovakia', nameLocal: 'Slovensko', adjective: 'Slovak' },
+  hu: { code: 'hu', name: 'Hungary', nameLocal: 'Magyarország', adjective: 'Hungarian' },
+  ro: { code: 'ro', name: 'Romania', nameLocal: 'România', adjective: 'Romanian' },
+  bg: { code: 'bg', name: 'Bulgaria', nameLocal: 'България', adjective: 'Bulgarian' },
+  hr: { code: 'hr', name: 'Croatia', nameLocal: 'Hrvatska', adjective: 'Croatian' },
+  si: { code: 'si', name: 'Slovenia', nameLocal: 'Slovenija', adjective: 'Slovenian' },
+  gr: { code: 'gr', name: 'Greece', nameLocal: 'Ελλάδα', adjective: 'Greek' },
+  cy: { code: 'cy', name: 'Cyprus', nameLocal: 'Κύπρος', adjective: 'Cypriot' },
+  mt: { code: 'mt', name: 'Malta', nameLocal: 'Malta', adjective: 'Maltese' },
+  ee: { code: 'ee', name: 'Estonia', nameLocal: 'Eesti', adjective: 'Estonian' },
+  lv: { code: 'lv', name: 'Latvia', nameLocal: 'Latvija', adjective: 'Latvian' },
+  lt: { code: 'lt', name: 'Lithuania', nameLocal: 'Lietuva', adjective: 'Lithuanian' },
 };
 
 function city(
@@ -244,6 +304,80 @@ const IS_CITIES: NordicLocation[] = [
   city('is', 'selfoss', 'Selfoss', 'sudurland'),
 ];
 
+const AU_REGIONS: NordicLocation[] = [
+  region('au', 'new-south-wales', 'New South Wales'),
+  region('au', 'victoria', 'Victoria'),
+  region('au', 'queensland', 'Queensland'),
+  region('au', 'western-australia', 'Western Australia'),
+  region('au', 'south-australia', 'South Australia'),
+  region('au', 'tasmania', 'Tasmania'),
+];
+
+const AU_CITIES: NordicLocation[] = [
+  city('au', 'sydney', 'Sydney', 'new-south-wales'),
+  city('au', 'melbourne', 'Melbourne', 'victoria'),
+  city('au', 'brisbane', 'Brisbane', 'queensland'),
+  city('au', 'gold-coast', 'Gold Coast', 'queensland'),
+  city('au', 'toowoomba', 'Toowoomba', 'queensland'),
+  city('au', 'perth', 'Perth', 'western-australia'),
+  city('au', 'adelaide', 'Adelaide', 'south-australia'),
+  city('au', 'hobart', 'Hobart', 'tasmania'),
+];
+
+const GB_REGIONS: NordicLocation[] = [
+  region('gb', 'england', 'England'),
+  region('gb', 'scotland', 'Scotland'),
+  region('gb', 'wales', 'Wales'),
+];
+
+const GB_CITIES: NordicLocation[] = [
+  city('gb', 'london', 'London', 'england'),
+  city('gb', 'manchester', 'Manchester', 'england'),
+  city('gb', 'birmingham', 'Birmingham', 'england'),
+  city('gb', 'leeds', 'Leeds', 'england'),
+  city('gb', 'glasgow', 'Glasgow', 'scotland'),
+  city('gb', 'cardiff', 'Cardiff', 'wales'),
+];
+
+const EU_PLACES: ReadonlyArray<readonly [NordicCountryCode, string, string, string, string]> = [
+  ['es', 'spain', 'Spain', 'madrid', 'Madrid'],
+  ['fr', 'france', 'France', 'paris', 'Paris'],
+  ['de', 'germany', 'Germany', 'berlin', 'Berlin'],
+  ['it', 'italy', 'Italy', 'roma', 'Roma'],
+  ['pl', 'poland', 'Poland', 'warszawa', 'Warszawa'],
+  ['at', 'austria', 'Austria', 'wien', 'Wien'],
+  ['be', 'belgium', 'Belgium', 'bruxelles', 'Bruxelles'],
+  ['nl', 'netherlands', 'Netherlands', 'amsterdam', 'Amsterdam'],
+  ['pt', 'portugal', 'Portugal', 'lisboa', 'Lisboa'],
+  ['ie', 'ireland', 'Ireland', 'dublin', 'Dublin'],
+  ['lu', 'luxembourg', 'Luxembourg', 'luxembourg-city', 'Luxembourg'],
+  ['ch', 'switzerland', 'Switzerland', 'zuerich', 'Zürich'],
+  ['cz', 'czechia', 'Czechia', 'praha', 'Praha'],
+  ['sk', 'slovakia', 'Slovakia', 'bratislava', 'Bratislava'],
+  ['hu', 'hungary', 'Hungary', 'budapest', 'Budapest'],
+  ['ro', 'romania', 'Romania', 'bucuresti', 'București'],
+  ['bg', 'bulgaria', 'Bulgaria', 'sofia', 'София'],
+  ['hr', 'croatia', 'Croatia', 'zagreb', 'Zagreb'],
+  ['si', 'slovenia', 'Slovenia', 'ljubljana', 'Ljubljana'],
+  ['gr', 'greece', 'Greece', 'athina', 'Αθήνα'],
+  ['cy', 'cyprus', 'Cyprus', 'nicosia', 'Λευκωσία'],
+  ['mt', 'malta', 'Malta', 'valletta', 'Valletta'],
+  ['ee', 'estonia', 'Estonia', 'tallinn', 'Tallinn'],
+  ['lv', 'latvia', 'Latvia', 'riga', 'Rīga'],
+  ['lt', 'lithuania', 'Lithuania', 'vilnius', 'Vilnius'],
+];
+
+const EU_REGIONS: NordicLocation[] = EU_PLACES.map(([country, slug, name]) =>
+  region(country, slug, name),
+);
+const EU_CITIES: NordicLocation[] = [
+  ...EU_PLACES.map(([country, regionSlug, , citySlug, capital]) =>
+    city(country, citySlug, capital, regionSlug),
+  ),
+  city('be', 'liege', 'Liège', 'belgium'),
+  city('be', 'namur', 'Namur', 'belgium'),
+];
+
 export const NORDIC_LOCATIONS: readonly NordicLocation[] = [
   ...SE_REGIONS,
   ...SE_CITIES,
@@ -255,6 +389,12 @@ export const NORDIC_LOCATIONS: readonly NordicLocation[] = [
   ...FI_CITIES,
   ...IS_REGIONS,
   ...IS_CITIES,
+  ...AU_REGIONS,
+  ...AU_CITIES,
+  ...GB_REGIONS,
+  ...GB_CITIES,
+  ...EU_REGIONS,
+  ...EU_CITIES,
 ];
 
 const byKey = new Map<string, NordicLocation>();

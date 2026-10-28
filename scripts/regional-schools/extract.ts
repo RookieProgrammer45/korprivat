@@ -3,6 +3,7 @@
 //   npx tsx scripts/regional-schools/extract.ts --fetch
 //   npx tsx scripts/regional-schools/extract.ts --extract   needs OPENAI_API_KEY
 //   npx tsx scripts/regional-schools/extract.ts --write
+//   npx tsx scripts/regional-schools/extract.ts --only europe-schools --fetch --extract --write
 //
 // Same rules as scripts/school-prices/refresh.ts: each school's own website,
 // robots.txt honoured, one request per host at a time. OpenAI may only return
@@ -16,11 +17,12 @@ const FILES = [
   'data/nordic-schools/schools.json',
   'data/australia-schools/schools.json',
   'data/uk-schools/schools.json',
+  'data/europe-schools/schools.json',
 ];
 const CACHE_DIR = path.join(process.cwd(), 'data/regional-schools/.cache');
 const USER_AGENT = 'DriveLinkUpPriceBot/1.0 (+https://www.drivelinkup.com/kontakt)';
 const PRICE_LINK =
-  /pris|price|pricing|cost|fee|hinta|ver[ðd]|leksjon|lektion|lesson|k[øo]retime|timpris|timepris|tariff/i;
+  /pris|price|pricing|cost|fee|hinta|ver[ðd]|leksjon|lektion|lesson|k[øo]retime|timpris|timepris|tariff|preis|precio|prix|prezzo|cena|cennik|prijs|pre[cç]o|kosten/i;
 const MAX_PAGES = 6;
 const MAX_CHARS_PER_PAGE = 12_000;
 const MAX_CHARS_TOTAL = 40_000;
@@ -31,6 +33,31 @@ const PRICE_CAP: Record<string, readonly [number, number]> = {
   FI: [20, 200],
   AU: [50, 200],
   GB: [20, 80],
+  ES: [15, 150],
+  FR: [15, 150],
+  DE: [15, 150],
+  IT: [15, 150],
+  AT: [15, 150],
+  BE: [15, 150],
+  NL: [15, 150],
+  PT: [15, 150],
+  IE: [15, 150],
+  LU: [15, 150],
+  SK: [15, 150],
+  HR: [15, 150],
+  SI: [15, 150],
+  GR: [15, 150],
+  CY: [15, 150],
+  MT: [15, 150],
+  EE: [15, 150],
+  LV: [15, 150],
+  LT: [15, 150],
+  PL: [40, 250],
+  CH: [40, 200],
+  CZ: [300, 1500],
+  HU: [4000, 25000],
+  RO: [40, 250],
+  BG: [20, 120],
 };
 
 type School = {
@@ -88,7 +115,7 @@ function amountNearCurrency(amount: number, text: string): boolean {
   const normalized = text.replace(/\u00a0|\u202f/g, ' ');
   const grouped = String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, '[ .,]?');
   const money =
-    '(?:£|€|\\$|\\bkr\\b|kroner|kronur|kronor|\\bnok\\b|\\bdkk\\b|\\bisk\\b|\\baud\\b|\\bgbp\\b|pounds?)';
+    '(?:£|€|\\$|\\bkr\\b|kroner|kronur|kronor|\\bnok\\b|\\bdkk\\b|\\bisk\\b|\\baud\\b|\\bgbp\\b|pounds?|z[łl]|k[čc]|\\bft\\b|\\blei\\b|лв|\\bchf\\b|francs?)';
   const pattern = new RegExp(
     `${money}[^\\d]{0,24}${grouped}(?!\\d)|${grouped}(?!\\d)[^\\d]{0,24}${money}`,
     'i',
@@ -97,7 +124,9 @@ function amountNearCurrency(amount: number, text: string): boolean {
 }
 
 async function main() {
+  const only = option('only');
   const datasets = FILES.flatMap((file) => {
+    if (only && !file.includes(only)) return [];
     const full = path.join(process.cwd(), file);
     if (!existsSync(full)) return [];
     return [{ file, full, dataset: JSON.parse(readFileSync(full, 'utf8')) as Dataset }];
@@ -290,7 +319,23 @@ const EXTRACTION_SCHEMA = {
     minutes: { type: ['integer', 'null'] },
     currency: {
       anyOf: [
-        { type: 'string', enum: ['NOK', 'DKK', 'ISK', 'EUR', 'AUD', 'GBP'] },
+        {
+          type: 'string',
+          enum: [
+            'NOK',
+            'DKK',
+            'ISK',
+            'EUR',
+            'AUD',
+            'GBP',
+            'PLN',
+            'CZK',
+            'HUF',
+            'RON',
+            'BGN',
+            'CHF',
+          ],
+        },
         { type: 'null' },
       ],
     },
@@ -303,7 +348,7 @@ Rules:
 - Only use a price written on the pages. Never estimate, average, or divide a package into a lesson price. Use null when a single lesson price is not stated.
 - lessonAmount is an integer in the currency printed beside it. Ignore "from" / "fra" / "från" prices, block discounts, and package totals.
 - When the page states both a manual and an automatic lesson, use the manual or standard lesson the page leads with.
-- minutes is the length of that lesson. currency is NOK, DKK, ISK, EUR, AUD, or GBP.
+- minutes is the length of that lesson. currency is NOK, DKK, ISK, EUR, AUD, GBP, PLN, CZK, HUF, RON, BGN, or CHF.
 - sourceUrl must be one of the given URLs, or null when no lesson price is stated.`;
 
 async function extract(

@@ -194,7 +194,7 @@ export function InstructorDirectory({
     // retryNonce is a ticks-only trigger bumped by the Retry button — it
     // re-runs this effect without changing the canonical query string.
     void retryNonce;
-    apiFetch(`/api/instructors?${queryString ? `${queryString}&` : ''}websiteSchools=1`, {
+    apiFetch(`/api/instructors${queryString ? `?${queryString}` : ''}`, {
       schema: InstructorList,
     })
       .then((data) => {

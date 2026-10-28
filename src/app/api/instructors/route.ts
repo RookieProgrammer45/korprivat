@@ -291,15 +291,14 @@ export async function GET(req: NextRequest) {
         limit ?? undefined,
       )
     : unsortedItems;
-  // Nordic rows stay out of the public preview, the auth deck, and SEK price
-  // sorts. The directory asks for them explicitly. A NOK amount is never
-  // ranked against a SEK filter.
-  const websiteSchools = req.nextUrl.searchParams.get('websiteSchools') === '1';
-  const nordicItems = websiteSchools && limit == null && !priceSort ? listNordicInstructors(q) : [];
+  // The full catalogue includes website schools outside Sweden. A short preview
+  // stays the Swedish slice. A price in another currency is not ranked inside a
+  // SEK price sort; those schools stay in the list after the Swedish prices.
+  const nordicItems = limit == null ? listNordicInstructors(q) : [];
   const items =
     nordicItems.length === 0
       ? swedishItems
-      : q.sort === 'distance'
+      : priceSort || q.sort === 'distance'
         ? [...swedishItems, ...nordicItems]
         : [...swedishItems, ...nordicItems].sort(
             (a, b) => a.city.localeCompare(b.city, 'sv') || a.name.localeCompare(b.name, 'sv'),
@@ -322,7 +321,7 @@ export async function GET(req: NextRequest) {
     new Set(
       [
         ...marketplaceCities.map((row) => row.city),
-        ...(websiteSchools && limit == null ? nordicCatalogueCities() : []),
+        ...(limit == null ? nordicCatalogueCities() : []),
       ].filter(Boolean),
     ),
   ).sort((a, b) => a.localeCompare(b, 'sv'));

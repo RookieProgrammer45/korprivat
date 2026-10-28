@@ -130,7 +130,7 @@ export async function loadPublicInstructorBySchoolSlug(
 ): Promise<PublicInstructorSlugResult | null> {
   const parsed = parseSchoolSlug(slug);
   if (!parsed) return null;
-  if (/^(no|dk|fi|is)/.test(parsed.id8)) {
+  if (/^(no|dk|fi|is|au|uk|eu)/.test(parsed.id8)) {
     const nordic = nordicInstructorByShortId(parsed.id8);
     if (!nordic) return null;
     const instructor: PublicInstructorSeo = {
@@ -141,7 +141,7 @@ export async function loadPublicInstructorBySchoolSlug(
       hourlyRateSek: 0,
       categories: [...nordic.categories],
       photoUrl: nordic.photoUrl,
-      englishSpeaking: false,
+      englishSpeaking: nordic.englishSpeaking,
       indexable: false,
       userId: null,
       providerRole: 'SCHOOL',

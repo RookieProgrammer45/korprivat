@@ -26,6 +26,21 @@ const LANGUAGE_LABELS: Record<string, string> = {
   fi: 'Finska',
   no: 'Norska',
   da: 'Danska',
+  is: 'Isländska',
+  it: 'Italienska',
+  nl: 'Nederländska',
+  pt: 'Portugisiska',
+  cs: 'Tjeckiska',
+  hu: 'Ungerska',
+  ro: 'Rumänska',
+  bg: 'Bulgariska',
+  hr: 'Kroatiska',
+  sl: 'Slovenska',
+  sk: 'Slovakiska',
+  el: 'Grekiska',
+  et: 'Estniska',
+  lv: 'Lettiska',
+  lt: 'Litauiska',
 };
 
 type DeckProfile = {

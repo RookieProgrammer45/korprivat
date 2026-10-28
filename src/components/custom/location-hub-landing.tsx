@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { LocationDirectory } from '@/components/custom/location-directory';
 import { loginHrefWithNext } from '@/lib/auth-next';
+import { nordicCountryHasSchools, nordicSchoolCountInCity } from '@/lib/discovery/nordic-catalogue';
 import { getSessionUser } from '@/lib/require-auth';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import {
@@ -61,11 +62,16 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           )
         : [];
   const regions = listRegions(location.country);
+  const catalogueCity = location.kind === 'city' ? (location.nameLocal ?? location.name) : null;
+  const catalogueHere = catalogueCity != null && nordicSchoolCountInCity(catalogueCity) > 0;
+  const countryCatalogue = location.country !== 'se' && nordicCountryHasSchools(location.country);
+  const showDirectory = (location.marketplaceLive && Boolean(location.filterCity)) || catalogueHere;
+  const directoryCity = location.filterCity ?? catalogueCity;
 
   const faq = [
     {
       q: t('faq1q', { name }),
-      a: location.marketplaceLive ? t('faq1aLive', { name }) : t('faq1aExpansion'),
+      a: showDirectory ? t('faq1aLive', { name }) : t('faq1aExpansion'),
     },
     { q: t('faq2q'), a: t('faq2a') },
     { q: t('faq3q'), a: t('faq3a') },
@@ -129,7 +135,11 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           <p className="max-w-2xl text-body-lg text-muted-foreground">
             {location.marketplaceLive
               ? t('subtitleLive', { name })
-              : t('subtitleExpansion', { name, country: country.nameLocal })}
+              : catalogueHere
+                ? t('subtitleCatalogue', { name })
+                : countryCatalogue
+                  ? t('subtitleCountryCatalogue', { name })
+                  : t('subtitleExpansion', { name, country: country.nameLocal })}
           </p>
           <p className="text-small text-muted-foreground">
             <Link className="underline underline-offset-4" href="/locations">
@@ -142,9 +152,9 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           </p>
         </header>
 
-        {location.marketplaceLive && location.filterCity ? (
+        {showDirectory && directoryCity ? (
           sessionUser ? (
-            <LocationDirectory cityName={location.filterCity} />
+            <LocationDirectory cityName={directoryCity} />
           ) : (
             <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
               <h2 className="font-display text-h3">{t('signInTitle')}</h2>
@@ -156,6 +166,19 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
               </p>
             </section>
           )
+        ) : countryCatalogue ? (
+          <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
+            <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {(location.kind === 'region' ? siblingCities : []).slice(0, 12).map((c) => (
+                <li key={c.slug}>
+                  <Link className="underline underline-offset-4" href={locationPath(c)}>
+                    {displayName(c)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
         ) : (
           <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
             <h2 className="font-display text-h3">{t('expansionTitle')}</h2>
@@ -178,12 +201,14 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
             <p className="text-muted-foreground">
               {location.marketplaceLive
                 ? t('seoP1Live', { name })
-                : t('seoP1Expansion', { name, country: country.nameLocal })}
+                : catalogueHere || countryCatalogue
+                  ? t('seoP1Catalogue', { name })
+                  : t('seoP1Expansion', { name, country: country.nameLocal })}
             </p>
             <p className="text-muted-foreground">{t('seoP2')}</p>
             <h3 className="font-display text-h4">{t('howTitle')}</h3>
             <p className="text-muted-foreground">
-              {location.marketplaceLive ? t('howBodyLive') : t('howBodyExpansion')}
+              {showDirectory || countryCatalogue ? t('howBodyLive') : t('howBodyExpansion')}
             </p>
           </div>
           <aside className="grid gap-4 rounded-xl border border-border bg-card p-5 shadow-sm">
