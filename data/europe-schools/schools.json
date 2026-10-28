@@ -26,7 +26,9 @@
       "EE": 9,
       "LT": 27,
       "LV": 6
-    }
+    },
+    "priceSource": "Each school's own website. OpenAI may only return a price printed on the cited page, and the price is kept only when that page states it for one lesson, next to the school's currency. A from-price, a package total, or a rounded decimal is left empty.",
+    "withLessonPrice": 0
   },
   "schools": [
     {
@@ -69167,7 +69169,7 @@
       "language": "en",
       "sourceUrl": "https://www.bikecraft.ie/",
       "checkedAt": "2026-10-28",
-      "websiteStatus": "LISTED"
+      "websiteStatus": "SITE_UNREACHABLE"
     },
     {
       "id": "euiee22833-doyle-driving-school",
