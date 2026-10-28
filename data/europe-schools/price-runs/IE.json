@@ -7,7 +7,7 @@
       "name": "Alexandra School of Motoring",
       "fetch": "ok",
       "pages": 6,
-      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "error": "OpenAI rejected the API key (401).",
       "lessonPrice": null
     },
     {
@@ -23,7 +23,7 @@
       "name": "Doyle Driving School",
       "fetch": "ok",
       "pages": 1,
-      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "error": "OpenAI rejected the API key (401).",
       "lessonPrice": null
     },
     {
@@ -31,7 +31,7 @@
       "name": "Drive Wave School of Motoring",
       "fetch": "ok",
       "pages": 4,
-      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "error": "OpenAI rejected the API key (401).",
       "lessonPrice": null
     },
     {
@@ -39,7 +39,7 @@
       "name": "Galway Driving School",
       "fetch": "ok",
       "pages": 3,
-      "error": "Error: 401 Incorrect API key provided: sk-redacted********************************************************************************************************************************************************IR0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "error": "OpenAI rejected the API key (401).",
       "lessonPrice": null
     }
   ]

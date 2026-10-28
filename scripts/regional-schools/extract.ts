@@ -313,9 +313,9 @@ function writePriceRun(country: string, notes: PriceRunNote[]) {
 }
 
 function publicError(error: unknown): string {
-  return String(error)
-    .replace(/sk-[A-Za-z0-9_-]+/g, 'sk-redacted')
-    .slice(0, 500);
+  const message = String(error);
+  if (/incorrect api key|\b401\b/i.test(message)) return 'OpenAI rejected the API key (401).';
+  return message.replace(/sk-[A-Za-z0-9_-]+/g, 'sk-redacted').slice(0, 500);
 }
 
 async function crawlSchool(school: School): Promise<FetchCache> {
