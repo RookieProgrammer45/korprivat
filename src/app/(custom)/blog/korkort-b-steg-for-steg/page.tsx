@@ -167,7 +167,7 @@ export default function KorkortBStegForStegPage() {
             </p>
             <p>
               Provavgifter och väntetider publiceras av Trafikverket. De hör inte hemma som fasta
-              siffror i en marknadsplatsannons, eftersom de kan ändras utan att skolan ändrar sitt
+              siffror i en katalogannons, eftersom de kan ändras utan att skolan ändrar sitt
               lektionspris.
             </p>
           </section>

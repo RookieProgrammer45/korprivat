@@ -18,7 +18,7 @@
 //      src/app/api/profile/picture/route.ts:103-127.
 //   6. upsert the InstructorLicense row keyed by `user.id` — same-row
 //      re-upload gates the row to one per user.
-//   7. return { status: 'PENDING', fileUrl, submittedAt }.
+//   7. return { status: 'PENDING', submittedAt }.
 //
 // GET layout:
 //   1. requireAuth — 401 when no session.
@@ -36,25 +36,15 @@ import { ObjectStorageError, storeUserUpload } from '@/lib/business/object-stora
 import { LicenseStatusResponse, LicenseUploadResponse } from '@/lib/contracts/instructor-license';
 import { prisma } from '@/lib/db';
 import { requireAuth } from '@/lib/require-auth';
+import { licenseFileAccepted, magicLooksLikeLicense } from '@/lib/verification/license-file';
 
 export const dynamic = 'force-dynamic';
 
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 const MAX_PDF_BYTES = 50 * 1024 * 1024;
 
-function fileIsAccepted(
-  mimeType: string,
-  sizeBytes: number,
-): { ok: true } | { ok: false; reason: string } {
-  if (mimeType.startsWith('image/')) {
-    if (sizeBytes > MAX_IMAGE_BYTES) return { ok: false, reason: 'licenseTooLarge' };
-    return { ok: true };
-  }
-  if (mimeType === 'application/pdf') {
-    if (sizeBytes > MAX_PDF_BYTES) return { ok: false, reason: 'licenseTooLarge' };
-    return { ok: true };
-  }
-  return { ok: false, reason: 'licenseWrongType' };
+function fileIsAccepted(mimeType: string, sizeBytes: number) {
+  return licenseFileAccepted(mimeType, sizeBytes, MAX_IMAGE_BYTES, MAX_PDF_BYTES);
 }
 
 export async function POST(req: Request) {
@@ -100,10 +90,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ errors: { license: 'attestationRequired' } }, { status: 400 });
   }
 
-  // 3. Validate MIME + size.
+  // 3. Validate MIME + size + magic bytes (do not trust File.type alone).
   const accepted = fileIsAccepted(fileEntry.type, fileEntry.size);
   if (!accepted.ok) {
     return NextResponse.json({ errors: { license: accepted.reason } }, { status: 400 });
+  }
+  const head = new Uint8Array(await fileEntry.slice(0, 16).arrayBuffer());
+  if (!magicLooksLikeLicense(head, fileEntry.type)) {
+    return NextResponse.json({ errors: { license: 'licenseWrongType' } }, { status: 400 });
   }
 
   // 4. Store via Vercel Blob.
@@ -164,7 +158,6 @@ export async function POST(req: Request) {
   return NextResponse.json(
     LicenseUploadResponse.parse({
       status: 'PENDING',
-      fileUrl,
       submittedAt: submittedAt.toISOString(),
     }),
     { status: 201 },

@@ -25,9 +25,11 @@ export const metadata: Metadata = {
   applicationName: siteName,
   openGraph: {
     type: 'website',
+    locale: 'sv_SE',
     siteName,
     title: siteName,
     description: siteDescription,
+    url: siteUrl,
   },
   twitter: {
     card: 'summary_large_image',

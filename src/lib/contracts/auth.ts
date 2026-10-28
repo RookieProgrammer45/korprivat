@@ -40,7 +40,7 @@ export const WelcomeRequest = z.object({
 export type WelcomeRequest = z.infer<typeof WelcomeRequest>;
 
 // Generic post-login redirect hint returned by a thin helper at
-// /api/auth/signup-redirect — the sign-up form POSTs the desired role there
+// /api/auth/signup-redirect — returns the dashboard path for the stored role
 // and gets back the role-correct dashboard path. Keeping it tiny: just the
 // `to` string the client should `router.push`.
 export const PostLoginRedirect = z.object({
@@ -57,7 +57,11 @@ export type PostLoginRedirect = z.infer<typeof PostLoginRedirect>;
 // regression in the client doesn't propagate.
 export const SocialRoleRequest = z.object({
   role: RoleEnum,
-  next: z.string().startsWith('/').optional(),
+  next: z
+    .string()
+    .startsWith('/')
+    .refine((value) => !value.startsWith('//') && !value.includes('\\'), 'same-origin path')
+    .optional(),
 });
 export type SocialRoleRequest = z.infer<typeof SocialRoleRequest>;
 

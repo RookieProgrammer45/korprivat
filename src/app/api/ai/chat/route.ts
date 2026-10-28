@@ -10,10 +10,21 @@ import 'server-only';
 import { NextResponse } from 'next/server';
 import { AiConfigurationError, streamChat } from '@/lib/ai/client';
 import { chatRequestSchema } from '@/lib/ai/schema';
+import { clientIp, rateLimitResponse, takeIpToken } from '@/lib/http/ip-rate-limit';
+import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
+  try {
+    await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
+
+  const limited = takeIpToken(`ai-chat:${clientIp(req.headers)}`, { max: 20 });
+  if (!limited.ok) return rateLimitResponse(limited.retryAfterSec);
+
   const json = await req.json().catch(() => null);
   const result = chatRequestSchema.safeParse(json);
 

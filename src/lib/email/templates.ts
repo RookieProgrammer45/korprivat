@@ -134,8 +134,8 @@ export function waitlistLaunchNotifyEmail(input: { name: string; ctaUrl: string 
   const { html, text } = renderEmail({
     heading: `DriveLinkUp is live — sign in, ${input.name}`,
     body: [
-      'The marketplace is open. Create your learner profile, compare driving-school listings, and request a time where the school has authorized that path. There is no separate DriveLinkUp learner fee.',
-      'If you signed up as a school, your listing can show the price and availability your school controls.',
+      'The catalog is open. Create your profile, compare driving-school listings and published prices, then contact the school. DriveLinkUp is free to use.',
+      'If you signed up as a school, your listing can show the price your school publishes.',
     ],
     cta: { label: 'Sign in to DriveLinkUp', url: input.ctaUrl },
     footer: 'DriveLinkUp · launching in Sweden',

@@ -1,5 +1,4 @@
 import { notFound, permanentRedirect } from 'next/navigation';
-import { requireCatalogSession } from '@/lib/catalog-guard';
 import { loadPublicInstructorSeo } from '@/lib/seo/public-instructor';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
@@ -20,7 +19,6 @@ type PageProps = {
 // Booking/review query params are carried over so old confirmation links keep working.
 export default async function InstructorPage({ params, searchParams }: PageProps) {
   const [{ id }, sp] = await Promise.all([params, searchParams]);
-  await requireCatalogSession(`/instructors/${id}`);
   const instructor = await loadPublicInstructorSeo(id);
   if (!instructor) notFound();
 

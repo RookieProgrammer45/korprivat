@@ -298,8 +298,8 @@
         "body": "Kategori, pris och tider publiceras av skolan, för de behörigheter skolan har."
       },
       "handledare": {
-        "title": "Marknadsplatsannons",
-        "body": "Håll kategorier, tjänster, priser och lediga tider korrekta för eleverna."
+        "title": "Vägledning för handledare",
+        "body": "Handledare är en separat väg för övningskörning. Det är inte en skolannons och inte bokning."
       }
     },
     "safety": {
@@ -493,8 +493,8 @@
         "faqTitle": "Vanliga frågor Västerås",
         "faq1q": "Vem syns i sök?",
         "faq1a": "Trafikskolor i katalogen. Ett märke visas bara när vi har en sparad kontroll.",
-        "faq2q": "Finns elevavgift på marknadsplatsen?",
-        "faq2a": "Nej. Skolans publicerade pris är det du betalar.",
+        "faq2q": "Är DriveLinkUp gratis?",
+        "faq2a": "Ja. DriveLinkUp är gratis att använda. Skolans publicerade pris är det du betalar.",
         "faq3q": "Var läser jag om privat övningskörning?",
         "faq3a": "På handledarsidan—privata handledare säljs inte som skolannonser."
       }
@@ -1366,7 +1366,7 @@
       "redirecting": "Omdirigerar till inloggning…",
       "brand": "Kontrollpanel",
       "adminAccess": "Adminåtkomst",
-      "marketplace": "Marknadsplats",
+      "marketplace": "Katalog",
       "title": {
         "learner": "Min översikt",
         "instructor": "Läraröversikt",
@@ -1400,11 +1400,11 @@
       "revenueTab": "Intäkter"
     },
     "providerActivation": {
-      "eyebrow": "Marknadsplatsens hälsa",
+      "eyebrow": "Katalogens hälsa",
       "pageTitle": "Aktivering av trafikskolor",
       "pageLead": "En aktuell vy över skolor som är redo att visas i det publika skolregistret.",
       "title": "Aktiverade trafikskolor",
-      "description": "Det aktuella antalet aktiverade skolannonser på marknadsplatsen.",
+      "description": "Det aktuella antalet aktiverade skolannonser i den publika katalogen.",
       "count": "{count, plural, one {# aktiverad trafikskola} other {# aktiverade trafikskolor}}",
       "trendNeutral": "Ingen historik ännu",
       "trendConfirmed": "Trend bekräftad",
@@ -1720,7 +1720,7 @@
       "lead": "Bläddra bland elever som söker handledd övningskörning och visa att du är tillgänglig. Du måste godkänna handledare-villkoren innan din profil blir aktiv.",
       "learnersCta": "Bläddra bland elever",
       "statusTitle": "Dina handledare-villkor är godkända",
-      "statusBody": "Du kan bläddra bland elever och visa din tillgänglighet. Vi finns här medan marknadsplatsen växer och listnings-sökningen rullas ut.",
+      "statusBody": "Du kan bläddra bland elever och visa att du är tillgänglig. DriveLinkUp listar skolor; övningskörningen ordnar du med eleven.",
       "availability": {
         "eyebrow": "Tillgänglighet",
         "title": "Hantera din handledartillgänglighet",
@@ -2539,7 +2539,7 @@
     },
     "emptyInstructors": "Inga instruktörer ännu",
     "inviteInstructor": "Bjud in instruktör",
-    "comingSoon": "Kommer snart",
+    "comingSoon": "Finns inte i katalogen ännu",
     "bookings": {
       "eyebrow": "Bokningar",
       "title": "Skolans bokningar",
@@ -3025,7 +3025,7 @@
     "eyebrow": "Svensk juridisk vägledning",
     "title": "Förstå handledarvägen",
     "description": "Lär dig hur privata handledare och övningskörning skiljer sig från trafikskolor i katalogen.",
-    "lead": "Handledare är privata handledare, inte skolannonser på marknadsplatsen. Läs gällande svenska krav före övning."
+    "lead": "Handledare är privata handledare, inte skolannonser. Läs gällande svenska krav före övning."
   },
   "providerOperations": {
     "instructorTitle": "Trafikskolans arbetsyta",
@@ -3209,7 +3209,7 @@
     "cta": {
       "eyebrow": "Redo att börja?",
       "title": "Din nästa körlektion finns närmare än du tror.",
-      "body": "Utforska hela skolmarknaden om du vill jämföra fler städer, språk och körkortskategorier.",
+      "body": "Öppna katalogen om du vill jämföra fler städer, språk och körkortskategorier.",
       "button": "Se alla trafikskolor",
       "ariaLabel": "Öppna hela katalogen med trafikskolor i katalogen"
     },
@@ -3337,7 +3337,7 @@
     "cta": {
       "eyebrow": "Redo att börja?",
       "title": "Nästa lektion kan börja med en stad nära dig.",
-      "body": "Öppna hela skolmarknaden för att jämföra städer, språk, körkortskategorier, priser och tillgänglighet i Sverige.",
+      "body": "Öppna katalogen för att jämföra städer, språk, körkortskategorier och publicerade priser i Sverige.",
       "button": "Se alla trafikskolor",
       "ariaLabel": "Öppna hela katalogen med trafikskolor i katalogen"
     },
@@ -3492,8 +3492,8 @@
     "signInBody": "Katalogen är öppen för inloggade användare. Efter inloggning kommer du tillbaka hit.",
     "signInCta": "Logga in",
     "faq1aExpansion": "Katalogen är live i Sverige först. Den här sidan förbereder orten för lansering; använd svenska stadshubbar för att bläddra nu.",
-    "faq2q": "Betalar elever en DriveLinkUp-avgift?",
-    "faq2a": "Nej. En kataloglista är gratis att bläddra. Du betalar skolan, inte DriveLinkUp.",
+    "faq2q": "Är DriveLinkUp gratis?",
+    "faq2a": "Ja. DriveLinkUp är gratis att använda. Du betalar skolan, inte DriveLinkUp.",
     "faq3q": "Är handledare samma sak som skolor?",
     "faq3a": "Nej. Handledare gäller privat övningskörning enligt svenska regler och säljs inte som skolannonser.",
     "linkHandledare": "Handledarguide",
@@ -3617,7 +3617,7 @@
       "description": "DriveLinkUp jämför trafikskolor. Publicerade priser syns på annonsen. Listningen är gratis."
     },
     "hero": {
-      "eyebrow": "Trafikskolor och elever. En marknadsplats.",
+      "eyebrow": "Trafikskolor och elever. En katalog.",
       "title": "Vi byggde jämförelsen vi själva saknade.",
       "intro": "Vad kostar lektionen, och vem står för den? På DriveLinkUp är svaret skolans publicerade pris. Instruktörer undervisar via en skola.",
       "chips": [
@@ -3637,11 +3637,11 @@
     "origin": {
       "title": "Det började med en fråga.",
       "body": "Vad kostar körkortet egentligen? Frågan borde vara enkel. I stället göms priserna i kassan och villkoren i finstilt, och valet hamnar på magkänsla. Vi tröttnade på det och byggde platsen vi själva hade letat efter.",
-      "body2": "DriveLinkUp startades i Stockholm 2026. En marknadsplats där det som spelar roll står öppet från första sidan: pris, kategori, stad, språk och villkor.",
+      "body2": "DriveLinkUp startades i Stockholm 2026. En katalog där det som spelar roll står öppet från första sidan: pris, kategori, stad och språk.",
       "pillars": [
         "Fakta före säljtryck. Det som står på annonsen är det skolan publicerat.",
         "Skolan äger sina uppgifter. Ett märke visas bara när kontrollen finns sparad.",
-        "Ingen avgift för elever. Du betalar skolans pris."
+        "Gratis att använda. Du betalar skolans pris."
       ],
       "facts": ["Grundat 2026", "Stockholm, Sverige", "Sverige först"],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."

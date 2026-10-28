@@ -25,6 +25,7 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { sanitizeNext } from '@/lib/auth-next';
 import { PostLoginRedirect, SocialRoleRequest } from '@/lib/contracts/auth';
 import { completeSignupHandshake } from '@/lib/email/onboarding';
 import { isIndependentInstructorSignupOpen } from '@/lib/signup-eligibility';
@@ -67,7 +68,7 @@ export async function POST(req: Request) {
   // user get back to wherever they came from — otherwise land on the
   // role-correct dashboard. Both are leading-slash same-origin paths so a
   // client bug can't leak to an external origin.
-  const target = next ?? result.dashboardPath;
+  const target = sanitizeNext(next) ?? result.dashboardPath;
 
   return NextResponse.json(PostLoginRedirect.parse({ to: target }));
 }

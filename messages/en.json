@@ -298,8 +298,8 @@
         "body": "Category, price and times are published by the school, for the permissions the school holds."
       },
       "handledare": {
-        "title": "Marketplace listing",
-        "body": "Keep your categories, service details, prices and available times accurate for learners."
+        "title": "Handledare guidance",
+        "body": "Handledare is a separate path for supervised practice. It is not a school listing and it is not booking."
       }
     },
     "safety": {
@@ -323,7 +323,7 @@
       },
       "header": {
         "eyebrow": "Driving schools in Stockholm",
-        "title": "Find an driving-school listing in Stockholm",
+        "title": "Find a driving school in Stockholm",
         "subtitle": "Compare schools by category, language and price. Contact the school."
       },
       "slug": "stockholm",
@@ -336,7 +336,7 @@
         "relatedTitle": "Related guides",
         "linkHandledare": "Handledare and private practice (Sweden)",
         "linkPricing": "Learner and school pricing",
-        "linkFaq": "Marketplace FAQ",
+        "linkFaq": "Questions",
         "linkBlog": "Guides for learners in Sweden",
         "faqTitle": "Stockholm FAQ",
         "faq1q": "Do learners pay a DriveLinkUp fee in Stockholm?",
@@ -356,7 +356,7 @@
       },
       "header": {
         "eyebrow": "Driving schools in Gothenburg",
-        "title": "Find an driving-school listing in Gothenburg",
+        "title": "Find a driving school in Gothenburg",
         "subtitle": "Compare schools by category, language and price. Contact the school."
       },
       "slug": "goteborg",
@@ -389,7 +389,7 @@
       },
       "header": {
         "eyebrow": "Driving schools in Malmö",
-        "title": "Find an driving-school listing in Malmö",
+        "title": "Find a driving school in Malmö",
         "subtitle": "Compare schools by category, language and price. Contact the school."
       },
       "slug": "malmo",
@@ -422,7 +422,7 @@
       },
       "header": {
         "eyebrow": "Driving schools in Uppsala",
-        "title": "Find an driving-school listing in Uppsala",
+        "title": "Find a driving school in Uppsala",
         "subtitle": "Compare schools by category, language and price. Contact the school."
       },
       "slug": "uppsala",
@@ -455,7 +455,7 @@
       },
       "header": {
         "eyebrow": "Driving schools in Västerås",
-        "title": "Find an driving-school listing in Västerås",
+        "title": "Find a driving school in Västerås",
         "subtitle": "Compare schools by category, language and price. Contact the school."
       },
       "services": {
@@ -492,9 +492,9 @@
         "linkBlog": "Blog",
         "faqTitle": "Västerås FAQ",
         "faq1q": "Who appears in search?",
-        "faq1a": "Only marketplace-activated schools/instructors with a verified licence.",
-        "faq2q": "Is there a learner marketplace fee?",
-        "faq2a": "No. The published school price is what you pay.",
+        "faq1a": "Driving schools in the catalog. A badge appears only when we have stored a check.",
+        "faq2q": "Is DriveLinkUp free?",
+        "faq2a": "Yes. DriveLinkUp is free to use. The published school price is what you pay.",
         "faq3q": "Where do I read about private practice?",
         "faq3a": "See the handledare page—private supervisors are not sold as school listings."
       }
@@ -1366,7 +1366,7 @@
       "redirecting": "Redirecting to sign in…",
       "brand": "Dashboard",
       "adminAccess": "Admin access",
-      "marketplace": "Marketplace",
+      "marketplace": "Directory",
       "title": {
         "learner": "My overview",
         "instructor": "Instructor overview",
@@ -1400,11 +1400,11 @@
       "revenueTab": "Revenue"
     },
     "providerActivation": {
-      "eyebrow": "Marketplace health",
+      "eyebrow": "Directory health",
       "pageTitle": "Provider activation",
       "pageLead": "A live view of schools that are ready to appear in the public school directory.",
       "title": "Activated schools",
-      "description": "The current number of activated school listings across the marketplace.",
+      "description": "The current number of activated school listings in the public directory.",
       "count": "{count, plural, one {# activated school} other {# activated schools}}",
       "trendNeutral": "No trend history yet",
       "trendConfirmed": "Trend confirmed",
@@ -1720,7 +1720,7 @@
       "lead": "Browse learners who are looking for supervised practice driving (övningskörning) and let them know you're available. You must complete the handledare terms before your listing goes active.",
       "learnersCta": "Browse learners",
       "statusTitle": "Your handledare terms are accepted",
-      "statusBody": "You can browse learners and signal availability. We're standing by as the marketplace grows and listing-search rolls out.",
+      "statusBody": "You can browse learners and show that you are available. DriveLinkUp lists schools; you arrange supervised practice with the learner.",
       "availability": {
         "eyebrow": "Availability",
         "title": "Manage your handledare availability",
@@ -2539,7 +2539,7 @@
     },
     "emptyInstructors": "No instructors yet",
     "inviteInstructor": "Invite instructor",
-    "comingSoon": "Coming soon",
+    "comingSoon": "Not available on the directory yet",
     "bookings": {
       "eyebrow": "Bookings",
       "title": "School bookings",
@@ -3025,7 +3025,7 @@
     "eyebrow": "Swedish legal guidance",
     "title": "Understand the handledare path",
     "description": "Learn how private handledare and övningskörning differ from driving-school listings.",
-    "lead": "Handledare are private supervisors, not marketplace school listings. Review the applicable Swedish requirements before practice."
+    "lead": "Handledare are private supervisors, not school listings. Review the applicable Swedish requirements before practice."
   },
   "providerOperations": {
     "instructorTitle": "Driving-school workspace",
@@ -3209,7 +3209,7 @@
     "cta": {
       "eyebrow": "Ready to start?",
       "title": "Your next driving lesson may be closer than you think.",
-      "body": "Explore the full school marketplace to compare more cities, languages, and licence categories.",
+      "body": "Open the catalog to compare more cities, languages, and licence categories.",
       "button": "See all driving schools",
       "ariaLabel": "Open the full directory of driving-school listings"
     },
@@ -3337,7 +3337,7 @@
     "cta": {
       "eyebrow": "Ready to start?",
       "title": "Your next lesson can begin with one nearby city.",
-      "body": "Open the full school marketplace to compare cities, languages, licence categories, prices, and availability across Sweden.",
+      "body": "Open the catalog to compare cities, languages, licence categories, and published prices across Sweden.",
       "button": "See all driving schools",
       "ariaLabel": "Open the full directory of driving-school listings"
     },
@@ -3459,7 +3459,7 @@
       "titleRegion": "Driving schools in {name}, {country}",
       "titleCountry": "Driving schools in {country}",
       "descriptionCity": "Compare driving-school listings for {name}, {country}. Published prices when the school has added them.",
-      "descriptionRegion": "Explore cities in {name}, {country} and compare driving-school listings when marketplace listings are live.",
+      "descriptionRegion": "Explore cities in {name}, {country} and compare driving-school listings when the catalog is live.",
       "descriptionCountry": "Find driving-school hubs across {country}. Sweden is live for the catalog; other Nordic markets are expansion pages."
     },
     "eyebrow": "{country}",
@@ -3492,8 +3492,8 @@
     "signInBody": "The catalog is open to signed-in users. After you sign in you will come back here.",
     "signInCta": "Sign in",
     "faq1aExpansion": "The catalog is live in Sweden first. This page prepares the location for launch; use Swedish city hubs to browse now.",
-    "faq2q": "Do learners pay a DriveLinkUp fee?",
-    "faq2a": "No. A catalog listing is free to browse. You pay the school, not DriveLinkUp.",
+    "faq2q": "Is DriveLinkUp free?",
+    "faq2a": "Yes. DriveLinkUp is free to use. You pay the school, not DriveLinkUp.",
     "faq3q": "Are handledare the same as schools?",
     "faq3a": "No. Handledare support private övningskörning under Swedish rules and are not sold as school listings.",
     "linkHandledare": "Handledare guide",
@@ -3617,7 +3617,7 @@
       "description": "DriveLinkUp compares driving schools. Published prices are visible on the listing. Listing is free."
     },
     "hero": {
-      "eyebrow": "Driving schools and learners. One marketplace.",
+      "eyebrow": "Driving schools and learners. One directory.",
       "title": "We built the comparison we wished existed.",
       "intro": "What does the lesson cost, and who stands behind it? On DriveLinkUp the answer is the school's published price. Instructors teach through a school.",
       "chips": [
@@ -3637,11 +3637,11 @@
     "origin": {
       "title": "It started with a question.",
       "body": "What does a driving licence actually cost? It should be a simple answer. Instead, prices hide at checkout, terms sit in the fine print, and the choice comes down to a hunch. We got tired of it and built the place we had been looking for.",
-      "body2": "DriveLinkUp started in Stockholm in 2026. A marketplace where the things that matter are out in the open from the first page: price, licence category, city, language and terms.",
+      "body2": "DriveLinkUp started in Stockholm in 2026. A directory where the things that matter are out in the open from the first page: price, licence category, city, and language.",
       "pillars": [
         "Facts before sales pressure. What is on the listing is what the school published.",
         "The school owns its details. A badge appears only when the check is stored.",
-        "No fee for learners. You pay the school's price."
+        "Free to use. You pay the school's price."
       ],
       "facts": ["Founded 2026", "Stockholm, Sweden", "Sweden first"],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."

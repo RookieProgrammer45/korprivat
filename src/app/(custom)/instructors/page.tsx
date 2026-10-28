@@ -12,6 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: t('title'),
     description: t('subtitle'),
     alternates: { canonical: '/instructors' },
+    robots: { index: false, follow: true },
   };
 }
 

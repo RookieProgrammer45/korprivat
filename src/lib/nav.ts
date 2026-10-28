@@ -54,6 +54,8 @@ export interface NavItem {
   requiresAuth?: boolean;
   /** When true, hide once a session exists (acquisition CTAs / marketing-only). */
   hideWhenAuthenticated?: boolean;
+  /** Login-walled catalogue. Keep out of sitemap and robots. */
+  catalogGated?: boolean;
   /** Sort key within a group (ascending); unordered items fall to the end. */
   order?: number;
 }
@@ -69,6 +71,7 @@ export const navItems: NavItem[] = [
     href: '/instructors',
     group: 'primary',
     order: 1,
+    catalogGated: true,
   },
   {
     label: 'Heavy vehicles',
@@ -76,6 +79,7 @@ export const navItems: NavItem[] = [
     href: '/tung-trafik',
     group: 'primary',
     order: 2,
+    catalogGated: true,
   },
   // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
   // primary bar — keeps marketing chrome short once a session exists.
@@ -150,19 +154,6 @@ export const navItems: NavItem[] = [
     href: '/locations/se/vasteras',
     group: 'footer',
     order: 9,
-  },
-  // Authed-only: "Saved details" / "payment methods" page. Lives in the
-  // footer because it requires a session — the global footer
-  // SiteNav renders it via useSession; non-authed visitors will see it
-  // ghost-rendered but the link is harmless on the public marketing
-  // pages. Better-auth auto-redirects unauthorised requests to /login.
-  {
-    label: 'Payment methods',
-    labelKey: 'nav.paymentMethods',
-    href: '/dashboard/student/payment-methods',
-    group: 'footer',
-    order: 10,
-    requiresAuth: true,
   },
   {
     label: 'Southern Sweden',

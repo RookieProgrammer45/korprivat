@@ -4,7 +4,6 @@ import { getTranslations } from 'next-intl/server';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
-import { requireCatalogSession } from '@/lib/catalog-guard';
 import { publishedPrices } from '@/lib/discovery/published-prices';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
@@ -63,7 +62,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function SchoolPage({ params, searchParams }: PageProps) {
   const [{ city, slug }, sp] = await Promise.all([params, searchParams]);
-  await requireCatalogSession(`/trafikskola/${city}/${slug}`);
   const resolved = await loadPublicInstructorBySchoolSlug(slug);
   if (!resolved) notFound();
 
@@ -78,22 +76,44 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   const jsonLd = resolved.instructor?.indexable
     ? {
         '@context': 'https://schema.org',
-        '@type': 'DrivingSchool',
-        name: resolved.instructor.name,
-        description: resolved.instructor.bio?.slice(0, 300) || undefined,
-        url: absoluteUrl(resolved.canonicalPath),
-        image: resolved.instructor.photoUrl || undefined,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: resolved.instructor.city,
-          addressCountry: 'SE',
-        },
-        priceRange:
-          publicLessonRate(resolved.instructor) > 0
-            ? `${publicLessonRate(resolved.instructor)} SEK`
-            : undefined,
-        areaServed: resolved.instructor.city,
-        knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'DriveLinkUp', item: absoluteUrl('/') },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: resolved.instructor.city,
+                item: absoluteUrl('/locations'),
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: resolved.instructor.name,
+                item: absoluteUrl(resolved.canonicalPath),
+              },
+            ],
+          },
+          {
+            '@type': 'DrivingSchool',
+            name: resolved.instructor.name,
+            description: resolved.instructor.bio?.slice(0, 300) || undefined,
+            url: absoluteUrl(resolved.canonicalPath),
+            image: resolved.instructor.photoUrl || undefined,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: resolved.instructor.city,
+              addressCountry: 'SE',
+            },
+            priceRange:
+              publicLessonRate(resolved.instructor) > 0
+                ? `${publicLessonRate(resolved.instructor)} SEK`
+                : undefined,
+            areaServed: resolved.instructor.city,
+            knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+          },
+        ],
       }
     : null;
 

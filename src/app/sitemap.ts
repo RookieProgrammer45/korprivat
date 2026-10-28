@@ -3,6 +3,7 @@
 // (src/lib/seo-routes.ts). To add URLs, edit those companions, not this file.
 import type { MetadataRoute } from 'next';
 import { navItems } from '@/lib/nav';
+import { isSitemapDisallowed } from '@/lib/robots-txt';
 import { seoRoutes } from '@/lib/seo-routes';
 import { siteUrl } from '@/lib/site';
 
@@ -14,6 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const item of navItems) {
     if (item.requiresAuth) continue; // auth/admin pages don't belong in the sitemap
+    if (item.catalogGated) continue; // login-walled catalogues waste crawl budget
+    if (isSitemapDisallowed(item.href)) continue;
     if (!item.href.startsWith('/')) continue; // external links aren't ours to list
     if (item.href.includes('#')) continue; // anchors aren't separate URLs
     if (seen.has(item.href)) continue;
@@ -24,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const route of await seoRoutes()) {
     if (!route.path.startsWith('/')) continue;
     if (route.path.includes('#')) continue;
+    if (isSitemapDisallowed(route.path)) continue;
     if (seen.has(route.path)) continue;
     seen.add(route.path);
     const { path, ...meta } = route;

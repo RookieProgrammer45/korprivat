@@ -6,7 +6,7 @@ import { siteName, siteUrl } from '@/lib/site';
 
 const TITLE = "How to compare driving schools for a Swedish driver's licence in Stockholm";
 const DESCRIPTION =
-  'A practical Stockholm guide to the Swedish licence path, driving-school listings, published prices, availability and how DriveLinkUp works as a marketplace.';
+  'A practical Stockholm guide to the Swedish licence path, driving-school listings, published prices, and how DriveLinkUp’s catalog works.';
 const PUBLISHED = '2026-08-02';
 const MODIFIED = '2026-09-05';
 
@@ -95,7 +95,7 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
               <Link href="/locations/se/stockholm">Compare Stockholm schools</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/faq">Read the marketplace FAQ</Link>
+              <Link href="/faq">Read the FAQ</Link>
             </Button>
           </div>
         </div>

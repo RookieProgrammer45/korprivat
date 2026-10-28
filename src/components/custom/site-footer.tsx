@@ -65,11 +65,6 @@ const COLUMNS: readonly FooterColumn[] = [
     items: [
       { labelKey: 'nav.privacy', href: '/privacy' },
       { labelKey: 'nav.terms', href: '/terms' },
-      {
-        labelKey: 'nav.paymentMethods',
-        href: '/dashboard/student/payment-methods',
-        requiresAuth: true,
-      },
     ],
   },
 ];

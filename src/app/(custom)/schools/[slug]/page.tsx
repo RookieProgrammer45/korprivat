@@ -11,8 +11,8 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
-import { requireCatalogSession } from '@/lib/catalog-guard';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
+import { publicAlternates } from '@/lib/seo/alternates';
 import { schoolPath } from '@/lib/seo/school-slugs';
 import { siteName, siteUrl } from '@/lib/site';
 
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    alternates: { canonical },
+    alternates: publicAlternates(canonical),
     openGraph: {
       type: 'website',
       siteName,
@@ -46,7 +46,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function SchoolProfilePage({ params }: PageProps) {
   const { slug } = await params;
-  await requireCatalogSession(`/schools/${slug}`);
   const org = await getOrganizationBySlug(slug);
   if (!org) notFound();
 

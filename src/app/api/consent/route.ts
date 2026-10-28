@@ -24,6 +24,7 @@ import { cookies, headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { ConsentEventInput, ConsentState } from '@/lib/contracts/consent';
 import { prisma } from '@/lib/db';
+import { rateLimitResponse, takeIpToken } from '@/lib/http/ip-rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -76,6 +77,12 @@ async function readCookie(): Promise<ParsedCookie | null> {
 }
 
 export async function POST(req: Request) {
+  const h0 = await headers();
+  const limited = takeIpToken(`consent:${firstForwardedFor(h0.get('x-forwarded-for')) ?? 'anonymous'}`, {
+    max: 30,
+  });
+  if (!limited.ok) return rateLimitResponse(limited.retryAfterSec);
+
   let bodyJson: unknown;
   try {
     bodyJson = await req.json();
@@ -129,6 +136,7 @@ export async function POST(req: Request) {
     maxAge: ONE_YEAR_SECONDS,
     sameSite: 'lax',
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
   });
 
   return new NextResponse(null, { status: 204 });

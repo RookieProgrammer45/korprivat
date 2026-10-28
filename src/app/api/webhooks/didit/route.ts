@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     jsonBody = JSON.parse(rawBody) as unknown;
   } catch {
     alertDiditWebhook('invalid_json', {
-      bodyPreview: rawBody.slice(0, 512),
+      bodyLength: rawBody.length,
     });
     return NextResponse.json({ error: 'invalid_payload' }, { status: 400 });
   }
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
   if (!verified.ok) {
     alertDiditWebhook('invalid_signature', {
-      bodyPreview: rawBody.slice(0, 512),
+      bodyLength: rawBody.length,
       hasV2: Boolean(signatureV2),
       hasRaw: Boolean(signatureRaw),
       hasSimple: Boolean(signatureSimple),

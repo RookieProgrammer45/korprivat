@@ -19,11 +19,17 @@ vi.mock('@/lib/db', () => ({
 
 import { POST } from '@/app/api/inbox/events/route';
 
-function post(body: unknown) {
+const INBOX_SECRET = 'inbox-test-secret';
+
+function post(body: unknown, headers: Record<string, string> = {}) {
   return POST(
     new Request('http://localhost/api/inbox/events', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${INBOX_SECRET}`,
+        ...headers,
+      },
       body: JSON.stringify(body),
     }),
   );
@@ -38,6 +44,7 @@ const event = {
 
 beforeEach(() => {
   delete process.env.RELIABLE_PROCESSING;
+  process.env.INBOX_EVENTS_SECRET = INBOX_SECRET;
   mockConnectionFind.mockReset();
   mockConnectionUpdate.mockClear();
   mockEventCreate.mockReset();
@@ -46,12 +53,20 @@ beforeEach(() => {
 
 afterEach(() => {
   delete process.env.RELIABLE_PROCESSING;
+  delete process.env.INBOX_EVENTS_SECRET;
 });
 
 describe('POST /api/inbox/events', () => {
   it('stays dark while reliable processing is off', async () => {
     const res = await post(event);
     expect(res.status).toBe(404);
+    expect(mockConnectionFind).not.toHaveBeenCalled();
+  });
+
+  it('rejects an unauthenticated inbox post when the flag is on', async () => {
+    process.env.RELIABLE_PROCESSING = '1';
+    const res = await post(event, { authorization: '' });
+    expect(res.status).toBe(401);
     expect(mockConnectionFind).not.toHaveBeenCalled();
   });
 
