@@ -10,8 +10,7 @@ const DESCRIPTION =
   'Kunskapsprov för körkort B: körkortstillstånd, riskutbildning, poäng och giltighet hos Trafikverket. Jämför trafikskolors publicerade priser utan elevavgift.';
 const PUBLISHED = '2026-10-26';
 
-const TRAFIKVERKET_B =
-  'https://www.trafikverket.se/korkort/ta-korkort/personbil-och-latt-lastbil/';
+const TRAFIKVERKET_B = 'https://www.trafikverket.se/korkort/ta-korkort/personbil-och-latt-lastbil/';
 const TRAFIKVERKET_SPRAK =
   'https://www.trafikverket.se/korkort/ta-korkort/personbil-och-latt-lastbil/teoriprovet-pa-annat-sprak/';
 const TRANSPORTSTYRELSEN_TILLSTAND =
@@ -79,9 +78,9 @@ export default function KunskapsprovKorkortBPage() {
               Kunskapsprov och teoriprov för körkort B
             </h2>
             <p>
-              Kunskapsprovet är teoriprovet för körkort B. Du gör det hos Trafikverket, på en
-              dator, efter att körkortstillstånd och riskutbildning är på plats. Ett godkänt prov
-              är ett av stegen mot körkortet. Det ersätter varken körlektioner eller körprovet.
+              Kunskapsprovet är teoriprovet för körkort B. Du gör det hos Trafikverket, på en dator,
+              efter att körkortstillstånd och riskutbildning är på plats. Ett godkänt prov är ett av
+              stegen mot körkortet. Det ersätter varken körlektioner eller körprovet.
             </p>
             <p>
               DriveLinkUp bokar inte provet och tar inte emot provavgiften. Regler, tider och
@@ -106,18 +105,17 @@ export default function KunskapsprovKorkortBPage() {
             </h2>
             <p>
               Trafikverket skriver att det inte går att boka prov utan körkortstillstånd. För
-              personbil, behörighet B, söker du tillstånd i grupp 1 hos Transportstyrelsen.
-              Ansökan innehåller en hälsodeklaration. Du behöver också ett grundläggande synintyg
-              som inte är äldre än två månader vid ansökan. Många optiker kan skicka intyget
-              digitalt.
+              personbil, behörighet B, söker du tillstånd i grupp 1 hos Transportstyrelsen. Ansökan
+              innehåller en hälsodeklaration. Du behöver också ett grundläggande synintyg som inte
+              är äldre än två månader vid ansökan. Många optiker kan skicka intyget digitalt.
             </p>
             <p>
               Transportstyrelsen tar inte betalt för själva ansökan. Synundersökningen hos optikern
               är ett separat ärende. Tillståndet gäller i fem år och kan inte förlängas.
               Handläggningen tar i normalfallet upp till fyra veckor när handlingarna är inne, och
               längre om ärendet behöver utredas. Hinner du inte bli klar med kunskapsprov och
-              körprov inom de fem åren, ansöker du om ett nytt tillstånd. Läs det aktuella läget
-              på Transportstyrelsens sida om körkortstillstånd innan du räknar med ett datum.
+              körprov inom de fem åren, ansöker du om ett nytt tillstånd. Läs det aktuella läget på
+              Transportstyrelsens sida om körkortstillstånd innan du räknar med ett datum.
             </p>
           </section>
           <section className="grid gap-3">
@@ -185,14 +183,18 @@ export default function KunskapsprovKorkortBPage() {
             <p>
               Transportstyrelsen har förlängt giltigheten för behörighet B. Ett kunskapsprov som
               godkänns från och med den 19 augusti 2026 gäller i ett år. Inom den tiden behöver du
-              ett godkänt körprov. Ett prov som godkändes före det datumet gällde i fyra månader.
-              Datumet på ditt eget resultat styr, så kontrollera det i Trafikverkets bokningstjänst.
+              ett godkänt körprov. Hur uppkörningen går till står i{' '}
+              <Link className="underline underline-offset-4" href="/blog/korprov-korkort-b">
+                guiden om körprovet
+              </Link>
+              . Ett prov som godkändes före det datumet gällde i fyra månader. Datumet på ditt eget
+              resultat styr, så kontrollera det i Trafikverkets bokningstjänst.
             </p>
             <p>
               Trafikverket rekommenderar att du bokar kunskapsprov och körprov vid samma tillfälle,
               med några veckor emellan. Då finns det tid att skriva om teorin om det behövs, innan
-              körprovet. Provavgifter och lediga tider ändras hos Trafikverket. De hör inte
-              hemma som fasta siffror på en skolannons.
+              körprovet. Provavgifter och lediga tider ändras hos Trafikverket. De hör inte hemma
+              som fasta siffror på en skolannons.
             </p>
           </section>
           <section className="grid gap-3">

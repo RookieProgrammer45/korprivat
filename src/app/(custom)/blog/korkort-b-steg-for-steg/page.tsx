@@ -156,10 +156,14 @@ export default function KorkortBStegForStegPage() {
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">Körprov, uppkörningen</h2>
             <p>
-              Körprovet görs hos Trafikverket när körkortstillstånd, riskutbildning och
-              kunskapsprov är på plats enligt de regler som gäller då. Provet bedömer hur du kör i
-              trafik, inte hur många lektioner du har betalat. Efter ett godkänt prov utfärdar
-              Transportstyrelsen körkortet.
+              Körprovet görs hos Trafikverket när körkortstillstånd, riskutbildning och kunskapsprov
+              är på plats enligt de regler som gäller då. Provet bedömer hur du kör i trafik, inte
+              hur många lektioner du har betalat. Efter ett godkänt prov utfärdar Transportstyrelsen
+              körkortet. Hur provdagen ser ut står i{' '}
+              <Link className="underline underline-offset-4" href="/blog/korprov-korkort-b">
+                guiden om körprovet
+              </Link>
+              .
             </p>
             <p>
               Provavgifter och väntetider publiceras av Trafikverket. De hör inte hemma som fasta
@@ -168,9 +172,7 @@ export default function KorkortBStegForStegPage() {
             </p>
           </section>
           <section className="grid gap-3">
-            <h2 className="font-display text-h2 leading-tight">
-              Jämför trafikskolor i katalogen
-            </h2>
+            <h2 className="font-display text-h2 leading-tight">Jämför trafikskolor i katalogen</h2>
             <p>
               När tillståndet är på gång kan du jämföra trafikskolor efter ort, körkortskategori,
               språk och publicerat pris. Det är gratis att titta. DriveLinkUp lägger inte på en

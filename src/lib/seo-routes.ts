@@ -9,6 +9,12 @@ import { schoolPath } from '@/lib/seo/school-slugs';
 export type SeoRoute = { path: string } & Omit<MetadataRoute.Sitemap[number], 'url'>;
 
 const EDITORIAL: SeoRoute[] = [
+  {
+    path: '/blog/korprov-korkort-b',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+    lastModified: '2026-10-28',
+  },
   { path: '/southern-sweden', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/western-northern-sweden', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/handledare', priority: 0.8, changeFrequency: 'monthly' },

@@ -229,6 +229,13 @@
       "subtitle": "Korta guider för dig som lär dig köra på svenska vägar. Vi tar upp Transportstyrelsens steg, skoljämförelse, lokala krav och tydliga priser i SEK."
     },
     "posts": {
+      "6": {
+        "eyebrow": "Körprov",
+        "title": "Körprov för körkort B: så går uppkörningen till hos Trafikverket",
+        "excerpt": "Säkerhetskontroll, manövrer och körning i trafik — och vad som ska vara klart med körkortstillstånd, riskutbildning och kunskapsprov.",
+        "meta": "{minutes} min läsning · 28 oktober 2026",
+        "readCta": "Läs guiden"
+      },
       "5": {
         "eyebrow": "Kunskapsprov",
         "title": "Kunskapsprov för körkort B: så fungerar teoriprovet hos Trafikverket",
@@ -3628,11 +3635,7 @@
         "Skolan äger sina uppgifter. Ett märke visas bara när kontrollen finns sparad.",
         "Ingen avgift för elever. Du betalar skolans pris."
       ],
-      "facts": [
-        "Grundat 2026",
-        "Stockholm, Sverige",
-        "Sverige först"
-      ],
+      "facts": ["Grundat 2026", "Stockholm, Sverige", "Sverige först"],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."
     },
     "promise": {

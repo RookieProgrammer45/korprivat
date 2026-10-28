@@ -34,8 +34,7 @@ export const llmsConfig: LlmsConfig = {
       'Browse and compare driving-school listings by licence category, city, language and published price.',
     '/locations':
       'Nordic location directory: Sweden live for discovery; Norway, Denmark, Finland, and Iceland expansion hubs.',
-    '/locations/se':
-      'Sweden country hub with län and city pages for driving-school discovery.',
+    '/locations/se': 'Sweden country hub with län and city pages for driving-school discovery.',
     '/locations/se/stockholm':
       'City hub for driving-school listings in Stockholm with pricing context and FAQ.',
     '/locations/se/goteborg': 'City hub for driving-school listings in Gothenburg (Göteborg).',
@@ -54,7 +53,10 @@ export const llmsConfig: LlmsConfig = {
       'A bilingual guide to driving-school listings across Västra Götaland, Värmland, Gävleborg, Västernorrland, Västerbotten, and Norrbotten.',
     '/handledare':
       'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
-    '/blog': 'Guides for learners: costs, handledare, and choosing a traffic school in Sweden.',
+    '/blog':
+      'Guides for learners: the category B driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+    '/blog/korprov-korkort-b':
+      'Swedish guide to the category B driving test at Trafikverket: learner permit, risk education, theory-test validity, safety check, and published school prices.',
     '/blog/korkort-b-steg-for-steg':
       'Swedish guide to category B: learner permit, risk education, theory test, driving test, and how to compare published school prices.',
     '/blog/kunskapsprov-korkort-b':

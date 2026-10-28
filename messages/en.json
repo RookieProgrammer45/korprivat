@@ -229,6 +229,13 @@
       "subtitle": "Short guides for people learning on Swedish roads. We cover Transportstyrelsen steps, school comparison, local requirements and clear SEK prices."
     },
     "posts": {
+      "6": {
+        "eyebrow": "Driving test",
+        "title": "Driving test for a Swedish category B licence: how Trafikverket runs the practical test",
+        "excerpt": "Safety check, manoeuvres and driving in traffic — and what must be in place with the learner permit, risk education and theory test.",
+        "meta": "{minutes} min read · 28 October 2026",
+        "readCta": "Read guide"
+      },
       "5": {
         "eyebrow": "Theory test",
         "title": "Theory test for a Swedish category B licence: how Trafikverket runs it",
@@ -3628,11 +3635,7 @@
         "The school owns its details. A badge appears only when the check is stored.",
         "No fee for learners. You pay the school's price."
       ],
-      "facts": [
-        "Founded 2026",
-        "Stockholm, Sweden",
-        "Sweden first"
-      ],
+      "facts": ["Founded 2026", "Stockholm, Sweden", "Sweden first"],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {
