@@ -1,22 +1,26 @@
 name: Regional school prices
 
-# Re-reads lesson prices on each school's own website outside Sweden and opens
-# a pull request. The OpenAI key is the repository secret, same as the Swedish
-# price refresh. Nothing goes live until the pull request is merged.
+# Re-reads one country's lesson prices from each school's own website and pushes
+# the file to main, which deploys. Start with the smallest market. The OpenAI
+# key is the repository secret. A tag regional-prices-IE runs Ireland.
 on:
   workflow_dispatch:
+    inputs:
+      country:
+        description: ISO country code
+        required: true
+        type: string
   push:
     tags:
       - regional-prices-*
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   extract:
     runs-on: ubuntu-latest
-    timeout-minutes: 360
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,20 +35,29 @@ jobs:
       - name: Install
         run: npm ci
       - name: Extract lesson prices
-        run: npx tsx scripts/regional-schools/extract.ts --only europe-schools --fetch --extract --write
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            COUNTRY="${{ github.event.inputs.country }}"
+          else
+            COUNTRY="${GITHUB_REF_NAME#regional-prices-}"
+          fi
+          COUNTRY=$(printf '%s' "$COUNTRY" | tr '[:lower:]' '[:upper:]')
+          case "$COUNTRY" in
+            IE|SK|SI|LV|HR|BG|EE|LU|GR|CZ|PT|RO|HU|LT|BE|CH|NL|AT|ES|PL|IT|FR|DE) ;;
+            *) echo "unsupported country: $COUNTRY" >&2; exit 1 ;;
+          esac
+          echo "COUNTRY=$COUNTRY" >> "$GITHUB_ENV"
+          npx tsx scripts/regional-schools/extract.ts --only europe-schools --country "$COUNTRY" --fetch --extract --write
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Save the extracted file
         uses: actions/upload-artifact@v4
         with:
-          name: europe-school-prices
+          name: europe-school-prices-${{ github.ref_name }}
           path: data/europe-schools/schools.json
           retention-days: 14
-      - name: Open pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Publish prices
         run: |
-          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/europe-schools/schools.json
@@ -52,12 +65,5 @@ jobs:
             echo "No price changes to publish"
             exit 0
           fi
-          git commit -m "data: extract European school lesson prices"
-          git push --force origin "HEAD:refs/heads/data/europe-school-prices"
-          if gh pr view data/europe-school-prices --json url --jq .url; then
-            echo "Updated the existing pull request"
-          else
-            gh pr create --base main --head data/europe-school-prices \
-              --title "data: extract European school lesson prices" \
-              --body "Lesson prices re-read from each school's own website. A null lesson price means the cited page did not state one lesson at that price. A from-price, a package total, and a rounded decimal are left empty."
-          fi
+          git commit -m "data: extract ${COUNTRY} driving-school lesson prices"
+          git push origin HEAD:main

@@ -3,7 +3,7 @@
 //   npx tsx scripts/regional-schools/extract.ts --fetch
 //   npx tsx scripts/regional-schools/extract.ts --extract   needs OPENAI_API_KEY
 //   npx tsx scripts/regional-schools/extract.ts --write
-//   npx tsx scripts/regional-schools/extract.ts --only europe-schools --fetch --extract --write
+//   npx tsx scripts/regional-schools/extract.ts --only europe-schools --country IE --fetch --extract --write
 //
 // Same rules as scripts/school-prices/refresh.ts: each school's own website,
 // robots.txt honoured, one request per host at a time. OpenAI may only return
@@ -178,10 +178,12 @@ async function main() {
     return [{ file, full, dataset: JSON.parse(readFileSync(full, 'utf8')) as Dataset }];
   });
   const ids = option('ids')?.split(',');
+  const country = option('country')?.toUpperCase();
   const limit = Number(option('limit') ?? Number.POSITIVE_INFINITY);
   const targets = datasets
     .flatMap((entry) => entry.dataset.schools.map((school) => ({ ...entry, school })))
     .filter((entry) => entry.school.website && (!ids || ids.includes(entry.school.id)))
+    .filter((entry) => !country || entry.school.country === country)
     .slice(0, limit);
   mkdirSync(CACHE_DIR, { recursive: true });
   const concurrency = Number(option('concurrency') ?? 8);
