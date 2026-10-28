@@ -60,9 +60,23 @@ describe('nordic catalogue', () => {
     expect(item?.priceRequest?.kind).toBe('website');
   });
 
-  it('does not list a school with no website or no car category', () => {
+  it('does not list a school with no website or no category', () => {
     expect(toNordicInstructor({ ...base, website: null })).toBeNull();
-    expect(toNordicInstructor({ ...base, categories: [], heavy: ['C'] })).toBeNull();
+    expect(toNordicInstructor({ ...base, categories: [], heavy: [] })).toBeNull();
+  });
+
+  it('lists a heavy-vehicle school with no car category and no lesson price', () => {
+    const item = toNordicInstructor({
+      ...base,
+      categories: [],
+      heavy: ['C', 'CE'],
+      lessonPrice: null,
+    });
+    expect(item?.categories).toEqual([]);
+    expect(item?.publishedPrices?.lesson ?? null).toBeNull();
+    expect(item?.publishedPrices?.heavy?.categories).toEqual(['C', 'CE']);
+    expect(item?.publishedPrices?.heavy?.prices).toEqual([]);
+    expect(InstructorItem.parse(item).categories).toEqual([]);
   });
 
   it('does not mix Nordic prices into a SEK rate filter or a motorcycle search', () => {
@@ -70,6 +84,22 @@ describe('nordic catalogue', () => {
     expect(
       listNordicInstructors({ categories: ['A'], city: 'Oslo' }).some(
         (row) => row.categories.length === 1 && row.categories[0] === 'B',
+      ),
+    ).toBe(false);
+  });
+
+  it('lists French and German heavy-vehicle schools without inventing a car category', () => {
+    const heavy = listNordicInstructors({ heavy: 'all' });
+    expect(heavy.some((school) => school.id.startsWith('eufr'))).toBe(true);
+    expect(heavy.some((school) => school.id.startsWith('eude'))).toBe(true);
+    expect(
+      heavy
+        .filter((school) => school.id.startsWith('eu'))
+        .every((school) => (school.publishedPrices?.heavy?.categories.length ?? 0) > 0),
+    ).toBe(true);
+    expect(
+      listNordicInstructors({}).some(
+        (school) => school.id.startsWith('eufr') && school.categories.length === 0,
       ),
     ).toBe(false);
   });

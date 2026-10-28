@@ -364,10 +364,14 @@ function heavyCategories(codes: readonly string[]): HeavyLicenceCode[] {
 export function toNordicInstructor(school: RawSchool): InstructorFilteredItem | null {
   const website = usableWebsite(school.website);
   const categories = lightCategories(school.categories);
+  const heavy = heavyCategories(school.heavy);
   const city = school.city?.trim();
   const language = school.language ?? LANGUAGE[school.country];
   const countryName = COUNTRY_NAME[school.country];
-  if (!website || !school.name?.trim() || !city || categories.length === 0) return null;
+  // A truck or bus school can be listed with no car category. The heavy codes
+  // stay on publishedPrices and off the car catalogue.
+  if (!website || !school.name?.trim() || !city) return null;
+  if (categories.length === 0 && heavy.length === 0) return null;
   if (!language || !countryName) return null;
   const amount = lessonAmount(school);
   // Australia is listed only when the school's own page states a lesson price.
@@ -377,7 +381,6 @@ export function toNordicInstructor(school: RawSchool): InstructorFilteredItem | 
     ? { kind: 'inbox' as const, href: `mailto:${email}` }
     : { kind: 'website' as const, href: website };
   const phone = usablePhone(school.phone, school.country);
-  const heavy = heavyCategories(school.heavy);
   const collectedAt = /^\d{4}-\d{2}-\d{2}$/.test(school.checkedAt)
     ? school.checkedAt
     : '2026-10-28';

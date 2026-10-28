@@ -262,12 +262,47 @@ def from_osm(code: str, currency: str) -> list[dict]:
                 "website": website,
                 "currency": currency,
                 "postcode": (tags.get("addr:postcode") or "").strip(),
+                "heavy": heavy_from_license_classes(tags.get("license_classes")),
             }
         )
     print(f"{code} osm {len(data.get('elements', []))} kept {len(rows)}", flush=True)
     if not os.environ.get("EUROPE_OFFLINE"):
         time.sleep(8)
     return rows
+
+
+HEAVY_FLAGS = (
+    ("C1_flag", "C1"),
+    ("C1E_flag", "C1E"),
+    ("C_flag", "C"),
+    ("CE_flag", "CE"),
+    ("D1_flag", "D1"),
+    ("D1E_flag", "D1E"),
+    ("D_flag", "D"),
+    ("DE_flag", "DE"),
+)
+
+
+def flagged(record: dict, key: str) -> bool:
+    return (record.get(key) or "").upper() == "TRUE"
+
+
+def heavy_codes(record: dict) -> list[str]:
+    return [code for key, code in HEAVY_FLAGS if flagged(record, key)]
+
+
+def heavy_from_license_classes(value: str | None) -> list[str]:
+    # OpenStreetMap documents license_classes as the driver's licence classes,
+    # for example A1;A;B;BE;C. Only a class written in that tag is stored.
+    if not value:
+        return []
+    found: list[str] = []
+    for match in re.finditer(r"\b(C1E|C1|CE|C|D1E|D1|DE|D)\b", value.upper()):
+        code = match.group(1)
+        if code not in found:
+            found.append(code)
+    order = [code for _key, code in HEAVY_FLAGS]
+    return [code for code in order if code in found]
 
 
 def french_official() -> list[dict]:
@@ -280,7 +315,9 @@ def french_official() -> list[dict]:
     text = dest.read_text(errors="replace")
     rows = []
     for record in csv.DictReader(io.StringIO(text), delimiter=";"):
-        if (record.get("B_flag") or "").upper() != "TRUE":
+        car = flagged(record, "B_flag")
+        heavy = heavy_codes(record)
+        if not car and not heavy:
             continue
         website = clean_website(record.get("aue_siteinternet"))
         name = (record.get("aue_raisonsociale") or "").strip()
@@ -295,6 +332,8 @@ def french_official() -> list[dict]:
                 "website": website,
                 "currency": "EUR",
                 "postcode": (record.get("aue_codepostal") or "").strip(),
+                "categories": ["B"] if car else [],
+                "heavy": heavy,
             }
         )
     print(f"FR official kept {len(rows)}", flush=True)
@@ -380,8 +419,8 @@ def main() -> None:
                     "name": row["name"],
                     "city": row["city"],
                     "website": row["website"],
-                    "categories": ["B"],
-                    "heavy": [],
+                    "categories": row.get("categories", ["B"]),
+                    "heavy": row.get("heavy", []),
                     "email": None,
                     "phone": None,
                     "lessonPrice": None,

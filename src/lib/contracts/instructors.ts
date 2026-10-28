@@ -101,7 +101,9 @@ export const InstructorItem = z.object({
   name: z.string(),
   city: z.string(),
   serviceArea: z.string().min(1),
-  categories: z.array(z.enum(LICENCE_CATEGORY_CODES)).min(1),
+  // Empty only for a heavy-vehicle school. Car categories stay on this list;
+  // C/D codes stay on publishedPrices.heavy.
+  categories: z.array(z.enum(LICENCE_CATEGORY_CODES)),
   hourlyRateSek: z.number().int().nonnegative(),
   bio: z.string(),
   photoUrl: z.string(),

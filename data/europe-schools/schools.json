@@ -4,8 +4,8 @@
     "note": "Schools whose own website is published on OpenStreetMap, plus French labelled schools whose own site is in the Sécurité routière file. Lesson prices are filled by the OpenAI extract. Nothing here is a verified permit. Directory and social-profile links are not stored as the school website.",
     "counts": {
       "ES": 119,
-      "FR": 877,
-      "DE": 1857,
+      "FR": 885,
+      "DE": 1858,
       "LU": 11,
       "NL": 105,
       "CH": 45,
@@ -19,7 +19,7 @@
       "SK": 6,
       "HU": 27,
       "HR": 8,
-      "RO": 26,
+      "RO": 27,
       "BG": 9,
       "SI": 6,
       "GR": 11,
@@ -2100,7 +2100,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -2220,7 +2224,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -2340,7 +2348,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -2740,7 +2757,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -3300,7 +3322,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -3620,7 +3646,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -3660,7 +3689,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -4840,7 +4872,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -5020,7 +5055,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -5080,7 +5118,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -5380,7 +5427,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -5440,7 +5489,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -5520,7 +5572,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -5920,7 +5975,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -6080,7 +6138,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -6120,7 +6181,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -6180,7 +6250,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -6640,7 +6719,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -6680,7 +6768,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -6840,7 +6937,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -7200,7 +7306,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -7460,7 +7568,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -7480,7 +7592,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -7580,7 +7701,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -8060,7 +8190,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -8080,7 +8219,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -8440,7 +8588,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -8960,7 +9110,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -9360,7 +9514,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -9380,7 +9538,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -9620,7 +9783,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -10200,7 +10368,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -10420,7 +10597,13 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -10660,7 +10843,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -10860,7 +11047,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -10880,7 +11071,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -10940,7 +11135,13 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -11260,7 +11461,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -11800,7 +12010,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -11980,7 +12199,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -12020,7 +12242,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -12320,7 +12545,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -12600,7 +12834,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -13020,7 +13257,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -13960,7 +14206,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -14080,7 +14328,13 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -15720,7 +15974,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -17480,7 +17737,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -19540,7 +19804,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -20420,7 +20693,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -20580,7 +20858,13 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -20780,7 +21064,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -20860,7 +21153,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -21760,7 +22056,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -21940,7 +22245,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -22380,7 +22694,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -22400,7 +22723,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -22640,7 +22968,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 69,
@@ -23280,7 +23610,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -23300,7 +23639,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "CE",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -23460,7 +23802,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -23920,7 +24271,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -24080,7 +24438,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -24300,7 +24660,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -25080,7 +25449,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -25460,7 +25834,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -25980,7 +26363,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -27460,7 +27852,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -27700,7 +28097,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -28020,7 +28426,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -28220,7 +28635,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -29160,7 +29580,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -29700,7 +30129,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -30000,7 +30438,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -30060,7 +30503,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -30940,7 +31388,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 70,
@@ -31080,7 +31533,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -31100,7 +31562,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -31120,7 +31591,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -31460,7 +31940,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -31480,7 +31964,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -31580,7 +32068,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -31780,7 +32273,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -32100,7 +32602,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 85,
@@ -32260,7 +32771,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -32300,7 +32814,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -32680,7 +33203,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -33080,7 +33612,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -33900,7 +34441,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "CE",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -33960,7 +34504,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -34260,7 +34809,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -34900,7 +35458,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -35260,7 +35827,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -35400,7 +35972,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -35580,7 +36161,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -35600,7 +36184,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -35660,7 +36249,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -35760,7 +36358,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -35980,7 +36587,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -37300,7 +37916,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -37360,7 +37979,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -37420,7 +38041,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -37680,7 +38306,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -38020,7 +38648,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 70,
@@ -38580,7 +39217,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -39700,7 +40340,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -39740,7 +40385,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -39960,7 +40614,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -40100,7 +40761,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -40480,7 +41144,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -40640,7 +41309,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -40860,7 +41534,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -43200,7 +43877,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "CE",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -43240,7 +43920,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 69,
@@ -43780,7 +44463,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -43980,7 +44672,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -44200,7 +44897,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -44600,7 +45299,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -44980,7 +45683,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1E",
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -45820,7 +46526,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -45920,7 +46635,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -45960,7 +46680,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -46560,7 +47289,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -46660,7 +47391,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -46880,7 +47618,15 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -47100,7 +47846,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -47180,7 +47930,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -48860,7 +49612,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "CE",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -49080,7 +49835,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -49700,7 +50460,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -50240,7 +51005,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -50520,7 +51290,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -51380,7 +52153,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -51760,7 +52538,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -52580,7 +53367,13 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D1",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 68,
@@ -53100,7 +53893,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -53800,7 +54596,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -55140,7 +55945,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -55720,7 +56530,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 70,
@@ -55860,7 +56673,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -55900,7 +56722,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -56100,7 +56925,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 75,
@@ -56200,7 +57034,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -57040,7 +57878,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -57800,7 +58643,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -58020,7 +58868,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -58100,7 +58957,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 62,
@@ -58360,7 +59222,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -58560,7 +59431,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -58620,7 +59494,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D1",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -58720,7 +59601,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -59560,7 +60444,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -60360,7 +61247,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -60760,7 +61656,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -60860,7 +61765,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -60900,7 +61814,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -61320,7 +62236,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -61480,7 +62399,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -61500,7 +62421,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -61580,7 +62506,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -61620,7 +62551,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -61640,7 +62580,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -61800,7 +62749,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62020,7 +62971,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62080,7 +63033,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62120,7 +63076,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 150,
@@ -62180,7 +63139,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62220,7 +63181,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62300,7 +63264,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62340,7 +63306,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62460,7 +63428,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62480,7 +63451,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62520,7 +63500,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62540,7 +63522,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 150,
@@ -62620,7 +63611,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62700,7 +63700,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62720,7 +63722,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -62960,7 +63966,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -63040,7 +64049,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 200,
@@ -63180,7 +64193,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -63380,7 +64395,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -63400,7 +64419,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 130,
@@ -63500,7 +64521,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -63640,7 +64664,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 170,
@@ -63720,7 +64748,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 130,
@@ -63760,7 +64792,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -64220,7 +65254,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D1",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -64340,7 +65381,9 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -64460,7 +65503,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -64920,7 +65966,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -65160,7 +66215,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -65200,7 +66260,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -65560,7 +66629,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D1",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -65620,7 +66696,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -65940,7 +67019,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -66180,7 +67262,14 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -66260,7 +67349,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -66640,7 +67732,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -67240,7 +68335,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -68060,7 +69164,15 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -70660,7 +71772,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -70780,7 +71895,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -70920,7 +72038,13 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D1",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -70960,7 +72084,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -71020,7 +72147,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -71220,7 +72351,12 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -71240,7 +72376,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -71320,7 +72459,16 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -71480,7 +72628,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -71520,7 +72671,10 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -71960,7 +73114,11 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": null,
@@ -72460,7 +73618,13 @@
       "categories": [
         "B"
       ],
-      "heavy": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D1",
+        "D"
+      ],
       "email": null,
       "phone": null,
       "lessonPrice": 22,
@@ -72790,6 +73954,234 @@
       "sourceUrl": "https://www.turbovezlys.lt/produktas/papildoma-vairavimo-pamoka/",
       "checkedAt": "2026-10-28",
       "websiteStatus": "OK"
+    },
+    {
+      "id": "eufr8babbc-gaillard-formation-nevers",
+      "country": "FR",
+      "name": "GAILLARD FORMATION NEVERS",
+      "city": "Fourchambault",
+      "website": "https://www.gaillardformation.fr",
+      "categories": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://www.gaillardformation.fr",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eufr3d993f-abskill-i",
+      "country": "FR",
+      "name": "ABSKILL I",
+      "city": "La Chapelle-Saint-Luc",
+      "website": "https://troyes@abskill.com",
+      "categories": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://troyes@abskill.com",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eufr1d63da-promotrans-fpc",
+      "country": "FR",
+      "name": "PROMOTRANS FPC",
+      "city": "Meaux",
+      "website": "https://www.promotrans.fr",
+      "categories": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://www.promotrans.fr",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eufr7d385c-aftral",
+      "country": "FR",
+      "name": "AFTRAL",
+      "city": "Perpignan",
+      "website": "https://www.aftral.com",
+      "categories": [],
+      "heavy": [
+        "C1",
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://www.aftral.com",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eufr658820-team-pro-formations",
+      "country": "FR",
+      "name": "TEAM PRO FORMATIONS",
+      "city": "Tremuson",
+      "website": "https://team-pro-formations-82.webselfsite.net",
+      "categories": [],
+      "heavy": [
+        "C",
+        "CE"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://team-pro-formations-82.webselfsite.net",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eufrd1a77e-promotrans-formation-professionnelle-continue",
+      "country": "FR",
+      "name": "PROMOTRANS FORMATION PROFESSIONNELLE CONTINUE",
+      "city": "Villeneuve-D'Ascq",
+      "website": "https://www.campus-promotrans.fr",
+      "categories": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D",
+        "DE"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://www.campus-promotrans.fr",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eufr538565-abskill-i",
+      "country": "FR",
+      "name": "ABSKILL I",
+      "city": "Seclin",
+      "website": "https://abskill.com",
+      "categories": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://abskill.com",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eufr4dfbad-cab-formations",
+      "country": "FR",
+      "name": "CAB FORMATIONS",
+      "city": "Seclin",
+      "website": "https://formalogistics.com",
+      "categories": [],
+      "heavy": [
+        "C",
+        "CE",
+        "D"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "fr",
+      "sourceUrl": "https://formalogistics.com",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "eude6446fd-fahrschule-hemauer",
+      "country": "DE",
+      "name": "Fahrschule Hemauer",
+      "city": "Regensburg",
+      "website": "http://www.fahrschule-hemauer.de/index.php/wann-wo/regensburg-brandlberger-str-84",
+      "categories": [
+        "B"
+      ],
+      "heavy": [
+        "C1",
+        "C1E",
+        "C",
+        "CE",
+        "D1",
+        "D1E",
+        "D",
+        "DE"
+      ],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "EUR",
+      "language": "de",
+      "sourceUrl": "http://www.fahrschule-hemauer.de/index.php/wann-wo/regensburg-brandlberger-str-84",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
+    },
+    {
+      "id": "euro915ef0-altais",
+      "country": "RO",
+      "name": "Altais",
+      "city": "Chișinău",
+      "website": "http://www.altaisauto.md/",
+      "categories": [
+        "B"
+      ],
+      "heavy": [],
+      "email": null,
+      "phone": null,
+      "lessonPrice": null,
+      "lessonMinutes": null,
+      "currency": "RON",
+      "language": "ro",
+      "sourceUrl": "http://www.altaisauto.md/",
+      "checkedAt": "2026-10-28",
+      "websiteStatus": "LISTED"
     }
   ]
 }
