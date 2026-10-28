@@ -35,7 +35,7 @@ jobs:
       - name: Open pull request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: data/regional-school-prices
+          branch: data/europe-school-prices
           delete-branch: true
           add-paths: |
             data/nordic-schools/schools.json
@@ -47,4 +47,4 @@ jobs:
           body: |
             Lesson prices re-read from each school's own website with the same OpenAI extract used for Swedish schools.
 
-            A null lesson price means the pages did not state a single lesson price. Before merging, compare how many schools still have a lessonPrice with the previous file. A large drop usually means sites blocked the crawler.
+            A null lesson price means the cited page did not state one lesson at that price. A from-price, a package total, and a rounded decimal are left empty. Before merging, compare how many schools still have a lessonPrice with the previous file. A large drop usually means sites blocked the crawler.

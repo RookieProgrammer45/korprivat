@@ -97,13 +97,15 @@ export function decideLesson(
   const cap = PRICE_CAP[school.country];
   const amount = extraction.lessonAmount;
   const currency = extraction.currency?.toUpperCase() ?? null;
+  const cited = pages.find((page) => page.url === extraction.sourceUrl);
   const onPage =
     amount != null &&
     cap != null &&
     amount >= cap[0] &&
     amount <= cap[1] &&
     currency === school.currency &&
-    pages.some((page) => amountNearCurrency(amount, page.text));
+    cited != null &&
+    firmLessonPrice(amount, school.currency, cited.text);
   const minutes =
     extraction.minutes != null && extraction.minutes >= 20 && extraction.minutes <= 120
       ? extraction.minutes
@@ -111,16 +113,60 @@ export function decideLesson(
   return { lessonPrice: onPage ? amount : null, lessonMinutes: onPage ? minutes : null };
 }
 
-function amountNearCurrency(amount: number, text: string): boolean {
+const FROM_PRICE =
+  /(?:\bfrom\b|\bstarting(?:\s+at)?\b|\bfra\b|\bfrån\b|\bab\b|\bdès\b|\bdesde\b|à partir|a partir|\bvanaf\b|\bod\b|a partire|\bde la\b|\bот\b|t[oó]l\b)/i;
+const PACKAGE_PRICE =
+  /\b(?:forfait|paket|paquete|pacchetto|pakiet|bal[ií][cč]ek|csomag|pachet|package|bundle)\b|\b(?:[2-9]|\d{2,})\s*(?:lessons?|leksjoner|lektioner|lektion|le[cç]ons?|stunden|fahrstunden|uur|horas|heures|ore|órák|lekcji|lekcje|clases|classes)\b/i;
+const PER_LESSON =
+  /per\s+(?:lesson|hour|leksjon|lektion)|\/\s*h(?:our|r)?\b|pro\s+(?:stunde|fahrstunde)|par\s+(?:le[cç]on|heure)|por\s+(?:hora|clase)|à l['’]heure|all['’]ora|per\s+uur|za\s+(?:godzin|lekcj|jazd)/i;
+
+function currencyPattern(currency: string): string {
+  switch (currency) {
+    case 'EUR':
+      return '€|\\beur\\b';
+    case 'GBP':
+      return '£|\\bgbp\\b|pounds?';
+    case 'AUD':
+      return '\\$|\\baud\\b';
+    case 'PLN':
+      return 'z[łl]|\\bpln\\b';
+    case 'CHF':
+      return '\\bchf\\b|francs?';
+    case 'CZK':
+      return 'k[čc]|\\bczk\\b';
+    case 'HUF':
+      return '\\bft\\b|\\bhuf\\b';
+    case 'RON':
+      return '\\blei\\b|\\bron\\b';
+    case 'BGN':
+      return 'лв|\\bbgn\\b';
+    case 'DKK':
+      return '\\bkr\\b|kroner|\\bdkk\\b';
+    case 'ISK':
+      return '\\bkr\\b|kronur|\\bisk\\b';
+    default:
+      return '\\bkr\\b|kroner|\\bnok\\b';
+  }
+}
+
+function firmLessonPrice(amount: number, currency: string, text: string): boolean {
   const normalized = text.replace(/\u00a0|\u202f/g, ' ');
   const grouped = String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, '[ .,]?');
-  const money =
-    '(?:£|€|\\$|\\bkr\\b|kroner|kronur|kronor|\\bnok\\b|\\bdkk\\b|\\bisk\\b|\\baud\\b|\\bgbp\\b|pounds?|z[łl]|k[čc]|\\bft\\b|\\blei\\b|лв|\\bchf\\b|francs?)';
+  const amountPattern = `${grouped}(?!\\d)(?:[.,]0+)?(?![.,]\\d)`;
+  const money = `(?:${currencyPattern(currency)})`;
   const pattern = new RegExp(
-    `${money}[^\\d]{0,24}${grouped}(?!\\d)|${grouped}(?!\\d)[^\\d]{0,24}${money}`,
-    'i',
+    `${money}[^\\d]{0,24}${amountPattern}|${amountPattern}[^\\d]{0,24}${money}`,
+    'gi',
   );
-  return pattern.test(normalized);
+  for (const match of normalized.matchAll(pattern)) {
+    const start = match.index ?? 0;
+    const before = normalized.slice(Math.max(0, start - 40), start);
+    const around = normalized.slice(Math.max(0, start - 80), start + match[0].length + 40);
+    if (FROM_PRICE.test(before)) continue;
+    if (PACKAGE_PRICE.test(around) && !PER_LESSON.test(around)) continue;
+    return true;
+  }
+  return false;
 }
 
 async function main() {
@@ -205,7 +251,7 @@ async function main() {
       }
       entry.dataset.meta.collectedAt = today;
       entry.dataset.meta.priceSource =
-        "Each school's own website; a single lesson price extracted with OpenAI and kept only when that amount is printed next to the currency.";
+        "Each school's own website. OpenAI may only return a price printed on the cited page, and the price is kept only when that page states it for one lesson, next to the school's currency. A from-price, a package total, or a rounded decimal is left empty.";
       entry.dataset.meta.withLessonPrice = priced;
       writeFileSync(entry.full, `${JSON.stringify(entry.dataset, null, 2)}\n`);
       console.log('wrote', entry.file, priced);
@@ -345,8 +391,8 @@ const EXTRACTION_SCHEMA = {
 
 const INSTRUCTIONS = `You read a driving school's own web pages and extract the published price of ONE standard car driving lesson.
 Rules:
-- Only use a price written on the pages. Never estimate, average, or divide a package into a lesson price. Use null when a single lesson price is not stated.
-- lessonAmount is an integer in the currency printed beside it. Ignore "from" / "fra" / "från" prices, block discounts, and package totals.
+- Only use a price written on the pages. Never estimate, average, round, or divide a package into a lesson price. Use null when a single lesson price is not stated.
+- lessonAmount is the integer printed beside the currency. Ignore "from", "fra", "från", "ab", "à partir", "desde", "vanaf", and "od" prices. Ignore a package or block total. 45,90 is not 45 or 46.
 - When the page states both a manual and an automatic lesson, use the manual or standard lesson the page leads with.
 - minutes is the length of that lesson. currency is NOK, DKK, ISK, EUR, AUD, GBP, PLN, CZK, HUF, RON, BGN, or CHF.
 - sourceUrl must be one of the given URLs, or null when no lesson price is stated.`;
