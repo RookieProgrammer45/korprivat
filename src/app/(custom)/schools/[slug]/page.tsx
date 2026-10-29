@@ -168,8 +168,8 @@ export default async function SchoolProfilePage({ params }: PageProps) {
                           name={instructor.name}
                           categories={instructor.categories}
                           heavy={instructor.publishedPrices?.heavy ?? null}
-                          iconClassName="size-8"
-                          className="flex size-[72px] shrink-0 items-center justify-center rounded-lg border border-border bg-muted font-display text-lg font-normal"
+                          iconLayout="thumb"
+                          className="box-border flex size-[72px] shrink-0 items-center justify-center rounded-lg border border-border bg-muted p-2 font-display text-lg font-normal"
                         />
                       )}
                       <div className="grid min-w-0 flex-1 gap-1">

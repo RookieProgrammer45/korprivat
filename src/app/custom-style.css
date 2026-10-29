@@ -2609,6 +2609,18 @@ html.dark .dlu-school-photo {
   background: #1a1a18;
 }
 
+/* Vehicle icons fill the same inset as a contained logo (photo marks use object-contain + p-8). */
+.dlu-school-mark-icon {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .consent-banner {
   max-height: 25vh;
   overflow: auto;

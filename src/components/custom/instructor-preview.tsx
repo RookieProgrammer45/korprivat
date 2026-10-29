@@ -210,13 +210,11 @@ export function SchoolMark({
         categories={categories}
         heavy={heavy}
         heavyScope={heavyScope}
-        iconClassName={
-          size === 'cover' ? 'size-6 sm:size-9 lg:size-11' : 'size-5 sm:size-6'
-        }
+        iconLayout={size === 'cover' ? 'cover' : 'avatar'}
         className={
           size === 'cover'
-            ? 'dlu-school-photo dlu-school-photo--compact flex items-center justify-center font-display text-lg font-normal text-foreground sm:text-4xl'
-            : 'flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-[#ece9e2] font-display text-sm font-normal text-foreground dark:bg-[#1a1a18]'
+            ? 'dlu-school-photo dlu-school-photo--compact box-border flex min-h-0 min-w-0 items-center justify-center p-6 font-display text-lg font-normal text-foreground sm:p-8 sm:text-4xl'
+            : 'box-border flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-[#ece9e2] p-1.5 font-display text-sm font-normal text-foreground dark:bg-[#1a1a18]'
         }
       />
     );

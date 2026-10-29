@@ -169,8 +169,8 @@ export function LiveAuthDeck() {
                   name={front.name}
                   categories={front.categories}
                   heavy={front.heavy}
-                  iconClassName="size-5"
-                  className="dlu-photo flex items-center justify-center font-display text-sm font-normal"
+                  iconLayout="deck"
+                  className="dlu-photo box-border flex items-center justify-center p-1.5 font-display text-sm font-normal"
                 />
               ) : (
                 <span className="dlu-photo flex items-center justify-center font-display text-sm font-normal">
