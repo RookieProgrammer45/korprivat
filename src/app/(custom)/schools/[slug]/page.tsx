@@ -12,7 +12,8 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
-import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
 import { publicAlternates } from '@/lib/seo/alternates';
 import { schoolPath } from '@/lib/seo/school-slugs';
@@ -163,12 +164,13 @@ export default async function SchoolProfilePage({ params }: PageProps) {
                           className="size-[72px] rounded-lg object-cover"
                         />
                       ) : (
-                        <span
-                          aria-hidden
+                        <SchoolMarkFallback
+                          name={instructor.name}
+                          categories={instructor.categories}
+                          heavy={instructor.publishedPrices?.heavy ?? null}
+                          iconClassName="size-8"
                           className="flex size-[72px] shrink-0 items-center justify-center rounded-lg border border-border bg-muted font-display text-lg font-normal"
-                        >
-                          {schoolInitials(instructor.name)}
-                        </span>
+                        />
                       )}
                       <div className="grid min-w-0 flex-1 gap-1">
                         <p className="truncate font-medium text-foreground">{instructor.name}</p>

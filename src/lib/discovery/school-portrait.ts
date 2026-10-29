@@ -21,3 +21,35 @@ export function schoolInitials(name: string): string {
     .join('')
     .toUpperCase();
 }
+
+export type SchoolMarkSymbol = 'light' | 'heavy' | 'initials';
+
+export type SchoolHeavyAdvertised = {
+  categories: readonly string[];
+  ykb?: boolean | null;
+};
+
+function schoolAdvertisesHeavy(heavy: SchoolHeavyAdvertised | null | undefined): boolean {
+  if (!heavy) return false;
+  return heavy.categories.length > 0 || heavy.ykb === true;
+}
+
+/** Car vs truck vs initials for schools without a portrait photo. */
+export function schoolMarkSymbol(
+  categories: readonly string[],
+  heavy: SchoolHeavyAdvertised | null | undefined,
+  options?: { heavyScope?: boolean },
+): SchoolMarkSymbol {
+  const hasLight = categories.length > 0;
+  const hasHeavy = schoolAdvertisesHeavy(heavy);
+
+  if (options?.heavyScope && hasHeavy) return 'heavy';
+  if (hasLight) return 'light';
+  if (hasHeavy) return 'heavy';
+  return 'initials';
+}
+
+/** @deprecated Use schoolMarkSymbol — kept for tests that assert light-only detection. */
+export function schoolShowsLightVehicleMark(categories: readonly string[]): boolean {
+  return categories.length > 0;
+}

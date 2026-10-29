@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api-client';
-import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
 
 /**
@@ -49,6 +50,8 @@ type DeckProfile = {
   name: string;
   photoUrl: string;
   type: 'Skola' | 'Instruktör';
+  categories: string[];
+  heavy: SchoolHeavyAdvertised | null;
   city: string;
   chip: string | null;
   languages: string;
@@ -86,6 +89,8 @@ function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
     name: row.name,
     photoUrl: row.photoUrl,
     type: row.providerType === 'INSTRUCTOR' ? 'Instruktör' : 'Skola',
+    categories: row.providerType === 'SCHOOL' ? row.categories : [],
+    heavy: row.providerType === 'SCHOOL' ? (row.publishedPrices?.heavy ?? null) : null,
     city: row.city,
     chip: formatSekChip(row.hourlyRateSek),
     languages: languages || 'Svenska',
@@ -159,9 +164,17 @@ export function LiveAuthDeck() {
                   width={44}
                   height={44}
                 />
+              ) : front.type === 'Skola' ? (
+                <SchoolMarkFallback
+                  name={front.name}
+                  categories={front.categories}
+                  heavy={front.heavy}
+                  iconClassName="size-5"
+                  className="dlu-photo flex items-center justify-center font-display text-sm font-normal"
+                />
               ) : (
                 <span className="dlu-photo flex items-center justify-center font-display text-sm font-normal">
-                  {schoolInitials(front.name)}
+                  {front.name.trim().slice(0, 2).toUpperCase()}
                 </span>
               )}
               <div className="min-w-0">

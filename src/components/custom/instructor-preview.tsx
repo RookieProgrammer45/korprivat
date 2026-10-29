@@ -7,7 +7,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
@@ -137,6 +138,8 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
         <SchoolMark
           name={row.name}
           photoUrl={row.photoUrl}
+          categories={row.categories}
+          heavy={row.publishedPrices?.heavy ?? null}
           alt={tr('portraitAlt', { name: row.name })}
           size="cover"
         />
@@ -183,11 +186,17 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
 export function SchoolMark({
   name,
   photoUrl,
+  categories,
+  heavy = null,
+  heavyScope = false,
   alt,
   size,
 }: {
   name: string;
   photoUrl: string;
+  categories: readonly string[];
+  heavy?: SchoolHeavyAdvertised | null;
+  heavyScope?: boolean;
   alt: string;
   size: 'cover' | 'avatar';
 }) {
@@ -196,16 +205,18 @@ export function SchoolMark({
   const photograph = portrait !== null && !failed;
   if (!photograph) {
     return (
-      <span
-        aria-hidden
+      <SchoolMarkFallback
+        name={name}
+        categories={categories}
+        heavy={heavy}
+        heavyScope={heavyScope}
+        iconClassName={size === 'cover' ? 'size-12' : 'size-6'}
         className={
           size === 'cover'
             ? 'dlu-school-photo flex items-center justify-center font-display text-4xl font-normal text-foreground'
             : 'flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-[#ece9e2] font-display text-sm font-normal text-foreground dark:bg-[#1a1a18]'
         }
-      >
-        {schoolInitials(name)}
-      </span>
+      />
     );
   }
   if (size === 'avatar') {

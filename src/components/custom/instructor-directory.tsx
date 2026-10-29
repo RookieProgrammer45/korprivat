@@ -845,6 +845,9 @@ function InstructorCard({
             <SchoolMark
               name={row.name}
               photoUrl={row.photoUrl}
+              categories={row.categories}
+              heavy={row.publishedPrices?.heavy ?? null}
+              heavyScope={heavyScope}
               alt={tr('portraitAlt', { name: row.name })}
               size="avatar"
             />

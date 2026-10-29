@@ -4,7 +4,8 @@
 'use client';
 
 import Image from 'next/image';
-import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
@@ -139,12 +140,13 @@ export function InstructorDetail({
               className="size-[180px] max-w-full rounded-xl border border-brand-500/25 bg-brand-100 object-cover shadow-sm dark:bg-brand-900"
             />
           ) : (
-            <div
-              aria-hidden
+            <SchoolMarkFallback
+              name={instructor.name}
+              categories={instructor.categories}
+              heavy={instructor.publishedPrices?.heavy ?? null}
+              iconClassName="size-16"
               className="flex size-[180px] max-w-full items-center justify-center rounded-xl border border-brand-500/25 bg-brand-100 font-display text-4xl font-semibold text-brand-700 shadow-sm dark:bg-brand-900 dark:text-brand-300"
-            >
-              {schoolInitials(instructor.name)}
-            </div>
+            />
           )}
         </div>
 
