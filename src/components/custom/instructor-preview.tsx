@@ -30,16 +30,23 @@ export function InstructorPreview({
   limit = MAX_PREVIEW_ROWS,
   pageIntro = false,
   showContact = true,
+  initialRows,
 }: {
   limit?: number;
   pageIntro?: boolean;
   showContact?: boolean;
+  /** Schools already rendered by the server. When set, the card does not fetch again. */
+  initialRows?: InstructorFilteredItem[];
 }) {
   const tr = useTranslations('instructorPreview');
-  const [status, setStatus] = useState<Status>('loading');
-  const [rows, setRows] = useState<InstructorFilteredItem[]>([]);
+  const seeded = initialRows !== undefined;
+  const [status, setStatus] = useState<Status>(
+    seeded ? (initialRows.length > 0 ? 'ready' : 'empty') : 'loading',
+  );
+  const [rows, setRows] = useState<InstructorFilteredItem[]>(initialRows ?? []);
 
   useEffect(() => {
+    if (seeded) return;
     let active = true;
     apiFetch(`/api/instructors?limit=${Math.max(1, limit)}`, { schema: InstructorList })
       .then((data) => {
@@ -54,7 +61,7 @@ export function InstructorPreview({
     return () => {
       active = false;
     };
-  }, [limit]);
+  }, [limit, seeded]);
 
   const content =
     status === 'loading' ? (

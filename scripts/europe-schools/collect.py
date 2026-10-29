@@ -11,10 +11,14 @@ import json
 import os
 import re
 import subprocess
+import sys
 import time
 import unicodedata
 from pathlib import Path
 from urllib.parse import urlparse
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from catalogue.non_driving_school import is_non_driving_school
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "data" / "europe-schools" / "schools.json"
@@ -405,6 +409,8 @@ def main() -> None:
         batch.extend(from_osm(code, currency))
         for row in batch:
             if "taxi" in row["name"].casefold():
+                continue
+            if is_non_driving_school(row["name"], row["website"]):
                 continue
             key = (code, host_of(row["website"]), row["city"].casefold())
             if key in seen:

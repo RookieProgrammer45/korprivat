@@ -39,6 +39,7 @@ export const NORDIC_COUNTRIES = [
   'ee',
   'lv',
   'lt',
+  'us',
 ] as const;
 export type NordicCountryCode = (typeof NORDIC_COUNTRIES)[number];
 
@@ -100,6 +101,7 @@ export const NORDIC_COUNTRY_META: Record<NordicCountryCode, NordicCountryMeta> =
   ee: { code: 'ee', name: 'Estonia', nameLocal: 'Eesti', adjective: 'Estonian' },
   lv: { code: 'lv', name: 'Latvia', nameLocal: 'Latvija', adjective: 'Latvian' },
   lt: { code: 'lt', name: 'Lithuania', nameLocal: 'Lietuva', adjective: 'Lithuanian' },
+  us: { code: 'us', name: 'United States', nameLocal: 'United States', adjective: 'American' },
 };
 
 function city(
@@ -367,6 +369,61 @@ const EU_PLACES: ReadonlyArray<readonly [NordicCountryCode, string, string, stri
   ['lt', 'lithuania', 'Lithuania', 'vilnius', 'Vilnius'],
 ];
 
+const US_STATES: ReadonlyArray<readonly [string, string]> = [
+  ['alabama', 'Alabama'],
+  ['alaska', 'Alaska'],
+  ['arizona', 'Arizona'],
+  ['arkansas', 'Arkansas'],
+  ['california', 'California'],
+  ['colorado', 'Colorado'],
+  ['connecticut', 'Connecticut'],
+  ['delaware', 'Delaware'],
+  ['district-of-columbia', 'District of Columbia'],
+  ['florida', 'Florida'],
+  ['georgia', 'Georgia'],
+  ['hawaii', 'Hawaii'],
+  ['idaho', 'Idaho'],
+  ['illinois', 'Illinois'],
+  ['indiana', 'Indiana'],
+  ['iowa', 'Iowa'],
+  ['kansas', 'Kansas'],
+  ['kentucky', 'Kentucky'],
+  ['louisiana', 'Louisiana'],
+  ['maine', 'Maine'],
+  ['maryland', 'Maryland'],
+  ['massachusetts', 'Massachusetts'],
+  ['michigan', 'Michigan'],
+  ['minnesota', 'Minnesota'],
+  ['mississippi', 'Mississippi'],
+  ['missouri', 'Missouri'],
+  ['montana', 'Montana'],
+  ['nebraska', 'Nebraska'],
+  ['nevada', 'Nevada'],
+  ['new-hampshire', 'New Hampshire'],
+  ['new-jersey', 'New Jersey'],
+  ['new-mexico', 'New Mexico'],
+  ['new-york', 'New York'],
+  ['north-carolina', 'North Carolina'],
+  ['north-dakota', 'North Dakota'],
+  ['ohio', 'Ohio'],
+  ['oklahoma', 'Oklahoma'],
+  ['oregon', 'Oregon'],
+  ['pennsylvania', 'Pennsylvania'],
+  ['rhode-island', 'Rhode Island'],
+  ['south-carolina', 'South Carolina'],
+  ['south-dakota', 'South Dakota'],
+  ['tennessee', 'Tennessee'],
+  ['texas', 'Texas'],
+  ['utah', 'Utah'],
+  ['vermont', 'Vermont'],
+  ['virginia', 'Virginia'],
+  ['washington', 'Washington'],
+  ['west-virginia', 'West Virginia'],
+  ['wisconsin', 'Wisconsin'],
+  ['wyoming', 'Wyoming'],
+];
+const US_REGIONS: NordicLocation[] = US_STATES.map(([slug, name]) => region('us', slug, name));
+
 const EU_REGIONS: NordicLocation[] = EU_PLACES.map(([country, slug, name]) =>
   region(country, slug, name),
 );
@@ -581,6 +638,7 @@ export const NORDIC_LOCATIONS: readonly NordicLocation[] = [
   ...GB_CITIES,
   ...EU_REGIONS,
   ...EU_CITIES,
+  ...US_REGIONS,
 ];
 
 const byKey = new Map<string, NordicLocation>();

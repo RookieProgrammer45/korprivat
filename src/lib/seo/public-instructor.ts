@@ -148,7 +148,7 @@ export async function loadPublicInstructorBySchoolSlug(
 ): Promise<PublicInstructorSlugResult | null> {
   const parsed = parseSchoolSlug(slug);
   if (!parsed) return null;
-  if (/^(no|dk|fi|is|au|uk|eu)/.test(parsed.id8)) {
+  if (/^(no|dk|fi|is|au|uk|eu|us)/.test(parsed.id8)) {
     const nordic = nordicInstructorByShortId(parsed.id8);
     if (!nordic) return null;
     const countryCode = catalogueCountryCode(nordic.id);

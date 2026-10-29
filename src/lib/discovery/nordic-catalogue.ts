@@ -14,6 +14,7 @@ import australia from '../../../data/australia-schools/schools.json';
 import europe from '../../../data/europe-schools/schools.json';
 import dataset from '../../../data/nordic-schools/schools.json';
 import unitedKingdom from '../../../data/uk-schools/schools.json';
+import unitedStates from '../../../data/us-schools/schools.json';
 
 const LIGHT = new Set<string>(LICENCE_CATEGORY_CODES);
 const PRICE_CAP: Record<string, readonly [number, number]> = {
@@ -48,6 +49,7 @@ const PRICE_CAP: Record<string, readonly [number, number]> = {
   HU: [4000, 25000],
   RO: [40, 250],
   BG: [20, 120],
+  US: [40, 200],
 };
 const COUNTRY_NAME: Record<string, string> = {
   NO: 'Norge',
@@ -81,6 +83,7 @@ const COUNTRY_NAME: Record<string, string> = {
   EE: 'Estonia',
   LV: 'Latvia',
   LT: 'Lithuania',
+  US: 'United States',
 };
 const LANGUAGE: Record<string, CatalogueLanguage> = {
   NO: 'no',
@@ -114,6 +117,7 @@ const LANGUAGE: Record<string, CatalogueLanguage> = {
   EE: 'et',
   LV: 'lv',
   LT: 'lt',
+  US: 'en',
 };
 const BAD_LOCAL = new Set([
   'bruker',
@@ -198,7 +202,8 @@ type NordicCountry =
   | 'MT'
   | 'EE'
   | 'LV'
-  | 'LT';
+  | 'LT'
+  | 'US';
 type NordicCurrency =
   | 'NOK'
   | 'DKK'
@@ -211,7 +216,8 @@ type NordicCurrency =
   | 'HUF'
   | 'RON'
   | 'BGN'
-  | 'CHF';
+  | 'CHF'
+  | 'USD';
 
 type RawSchool = {
   id: string;
@@ -227,6 +233,7 @@ type RawSchool = {
   lessonMinutes: number | null;
   currency: NordicCurrency;
   language?: CatalogueLanguage;
+  region?: string;
   sourceUrl: string | null;
   checkedAt: string;
   websiteStatus?: string;
@@ -449,12 +456,14 @@ function rawSchools(): RawSchool[] {
     ...(australia.schools as RawSchool[]),
     ...(unitedKingdom.schools as RawSchool[]),
     ...(europe.schools as RawSchool[]),
+    ...(unitedStates.schools as RawSchool[]),
   ];
 }
 
 const byId = new Map<string, InstructorFilteredItem>();
 const byShortId = new Map<string, InstructorFilteredItem>();
 const countryById = new Map<string, string>();
+const regionById = new Map<string, string>();
 for (const school of rawSchools()) {
   const instructor = toNordicInstructor(school);
   if (!instructor) continue;
@@ -463,6 +472,7 @@ for (const school of rawSchools()) {
   byId.set(instructor.id, instructor);
   byShortId.set(shortId, instructor);
   countryById.set(instructor.id, school.country.toLowerCase());
+  if (school.region) regionById.set(instructor.id, school.region);
 }
 
 const catalogue = [...byId.values()];
@@ -513,6 +523,11 @@ export function listCatalogueSchools(): readonly InstructorFilteredItem[] {
 /** ISO-like catalogue country (`de`, `gb`) for a listed school, or null. */
 export function catalogueCountryCode(id: string): string | null {
   return countryById.get(id) ?? null;
+}
+
+/** State or region slug stored with a catalogue school, when the file has one. */
+export function catalogueRegionSlug(id: string): string | null {
+  return regionById.get(id) ?? null;
 }
 
 export function nordicInstructorById(id: string): InstructorFilteredItem | null {
@@ -569,6 +584,7 @@ const COUNTRY_PREFIX = {
   ee: 'euee',
   lv: 'eulv',
   lt: 'eult',
+  us: 'us',
 } as const;
 
 export function nordicCountryHasSchools(country: keyof typeof COUNTRY_PREFIX): boolean {

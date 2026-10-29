@@ -198,6 +198,7 @@ const PHRASES: Partial<Record<NordicCountryCode, Phrase>> = {
   gb: en('en-GB'),
   ie: en('en-IE'),
   au: en('en-AU'),
+  us: en('en-US'),
   mt: en('en-MT'),
   de: de('de-DE'),
   at: de('de-AT'),

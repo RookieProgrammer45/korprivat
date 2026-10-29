@@ -1,14 +1,14 @@
 {
   "note": "Listings whose school publishes no usable price on its own website. Since 2026-10-26 they are listed publicly with a price-request button instead of prices; a listing shows prices once the price dataset has a website price for it.",
   "generatedAt": "2026-10-26",
-  "total": 155,
+  "total": 142,
   "byReason": {
-    "SITE_BLOCKED": 29,
-    "NOT_IN_DATASET": 54,
-    "PRICE_NOT_PUBLISHED": 55,
+    "SITE_BLOCKED": 27,
+    "NOT_IN_DATASET": 52,
+    "PRICE_NOT_PUBLISHED": 47,
     "NO_WEBSITE": 12,
-    "NOT_A_B_SCHOOL_SITE": 2,
-    "SITE_UNREACHABLE": 3
+    "SITE_UNREACHABLE": 3,
+    "NOT_A_B_SCHOOL_SITE": 1
   },
   "schools": [
     {
@@ -39,16 +39,6 @@
       "reasonText": "Not matched to a school in the price dataset",
       "website": null,
       "hasContactEmail": true,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "dd10d111-4df5-452a-af8b-df85b7fb2792",
-      "name": "Transdev Sverige AB",
-      "city": "Bromma",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://transdev.se",
-      "hasContactEmail": false,
       "storedRateSek": null
     },
     {
@@ -128,16 +118,6 @@
       "reason": "PRICE_NOT_PUBLISHED",
       "reasonText": "Website does not publish prices",
       "website": "https://gronlunds.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "8d529c50-bc80-45ee-ba17-4b5d5ab12af5",
-      "name": "JR Logistic AB",
-      "city": "Farsta",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://jrlogistic.se",
       "hasContactEmail": false,
       "storedRateSek": null
     },
@@ -242,16 +222,6 @@
       "storedRateSek": 250
     },
     {
-      "listingId": "a822334c-0719-492f-bc03-3d073031da74",
-      "name": "Vy Buss AB",
-      "city": "Göteborg",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://nettbuss.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "e0b19a51-1871-4ac9-a022-4fa7e261eb2e",
       "name": "Xtrafikskola AB",
       "city": "Göteborg",
@@ -300,16 +270,6 @@
       "website": "https://tiktok.com",
       "hasContactEmail": true,
       "storedRateSek": 350
-    },
-    {
-      "listingId": "d1c610f6-02a2-4256-9d61-2ae1c45c09ab",
-      "name": "Nickes Åkeritjänst AB",
-      "city": "Hisings-backa",
-      "reason": "SITE_BLOCKED",
-      "reasonText": "Website blocked automated reading",
-      "website": "https://nickesakeritjanst.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
     },
     {
       "listingId": "8fc659d2-6038-4086-b386-126e745c16e6",
@@ -382,16 +342,6 @@
       "storedRateSek": 1200
     },
     {
-      "listingId": "c7312093-1601-4bb0-a5b9-ce9db045cc74",
-      "name": "Presto AB",
-      "city": "Hässleholm",
-      "reason": "NOT_A_B_SCHOOL_SITE",
-      "reasonText": "Website is not a B driving-school site",
-      "website": "https://presto.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "0c996484-cd52-4fab-9c0a-092014a66c64",
       "name": "Din Trafikskola",
       "city": "Indal",
@@ -460,26 +410,6 @@
       "website": null,
       "hasContactEmail": false,
       "storedRateSek": 1500
-    },
-    {
-      "listingId": "ec899134-197d-425c-bb86-e3a3d4ed9cbc",
-      "name": "Widéns Åkeri",
-      "city": "Kalmar",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://widensakeri.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "fc58f521-df6c-4714-8c9d-c171168d4522",
-      "name": "DP World Logistics Sweden AB",
-      "city": "Karlshamn",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://foodtankers.com",
-      "hasContactEmail": false,
-      "storedRateSek": null
     },
     {
       "listingId": "e5c7737c-18f1-4a71-a986-be817a1343de",
@@ -982,16 +912,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "89f4d86d-6b97-45d1-b35e-bc6fc264c12f",
-      "name": "Nobina Sverige AB",
-      "city": "Solna",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://nobina.com",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "95de0195-8938-486e-83b3-13bd1bfbae0b",
       "name": "Odenplans Trafikskola AB",
       "city": "Solna",
@@ -1042,16 +962,6 @@
       "storedRateSek": 499
     },
     {
-      "listingId": "0fd9de34-3fa5-40af-b8f7-32b89d6c420b",
-      "name": "PostNord Sverige AB",
-      "city": "Stockholm",
-      "reason": "SITE_BLOCKED",
-      "reasonText": "Website blocked automated reading",
-      "website": "https://postnord.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "a32c0ddc-107a-4ed2-b003-6e3d48f18123",
       "name": "Strömstads Tanums Trafikskola HB",
       "city": "Strömstad",
@@ -1098,16 +1008,6 @@
       "reason": "NO_WEBSITE",
       "reasonText": "No website found",
       "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "4245b7ed-9412-42cd-9101-b2175ff1ac79",
-      "name": "Freedomoutdoor",
-      "city": "Sävar",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://freedomoutdoor.se",
       "hasContactEmail": false,
       "storedRateSek": null
     },
@@ -1208,16 +1108,6 @@
       "reason": "PRICE_NOT_PUBLISHED",
       "reasonText": "Website does not publish prices",
       "website": "https://gronlunds.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "adf7020d-588f-4d7a-95da-8681d66b4959",
-      "name": "Uddevalla Omnibuss AB",
-      "city": "Uddevalla",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
       "hasContactEmail": false,
       "storedRateSek": null
     },
@@ -1432,16 +1322,6 @@
       "storedRateSek": null
     },
     {
-      "listingId": "a381fd71-d912-44c4-a4ab-2932d8418178",
-      "name": "Go-Ahead AB",
-      "city": "Växjö",
-      "reason": "NOT_IN_DATASET",
-      "reasonText": "Not matched to a school in the price dataset",
-      "website": null,
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
       "listingId": "e4c7fda6-1657-492a-bfeb-e2ed12d02f74",
       "name": "KörkortCenter Vxo",
       "city": "Växjö",
@@ -1538,16 +1418,6 @@
       "reason": "PRICE_NOT_PUBLISHED",
       "reasonText": "Website does not publish prices",
       "website": "https://tmaorebro.se",
-      "hasContactEmail": false,
-      "storedRateSek": null
-    },
-    {
-      "listingId": "d81a8445-328d-407e-8794-714f283f0a47",
-      "name": "Ekologg o Görans Bygg AB",
-      "city": "Örsundsbro",
-      "reason": "PRICE_NOT_PUBLISHED",
-      "reasonText": "Website does not publish prices",
-      "website": "https://gbos.se",
       "hasContactEmail": false,
       "storedRateSek": null
     },

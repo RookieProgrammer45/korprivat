@@ -3,7 +3,11 @@
 // (for example a .md site stored under Romania) does not get a city page.
 
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
-import { catalogueCountryCode, listCatalogueSchools } from '@/lib/discovery/nordic-catalogue';
+import {
+  catalogueCountryCode,
+  catalogueRegionSlug,
+  listCatalogueSchools,
+} from '@/lib/discovery/nordic-catalogue';
 import {
   allLocationSitemapPaths,
   getLocation,
@@ -71,7 +75,12 @@ function buildCatalogueCities(): {
   const schoolsByKey = new Map<string, InstructorFilteredItem[]>();
   const pending = new Map<
     string,
-    { country: NordicCountryCode; city: string; schools: InstructorFilteredItem[] }
+    {
+      country: NordicCountryCode;
+      city: string;
+      region?: string;
+      schools: InstructorFilteredItem[];
+    }
   >();
 
   const add = (location: NordicLocation, school: InstructorFilteredItem) => {
@@ -93,10 +102,11 @@ function buildCatalogueCities(): {
       add(existing, school);
       continue;
     }
-    const groupKey = `${country}/${fold(city) || city}`;
+    const region = catalogueRegionSlug(school.id) ?? undefined;
+    const groupKey = `${country}/${region ?? ''}/${fold(city) || city}`;
     const group = pending.get(groupKey);
     if (group) group.schools.push(school);
-    else pending.set(groupKey, { country, city, schools: [school] });
+    else pending.set(groupKey, { country, city, region, schools: [school] });
   }
 
   const taken = new Map<NordicCountryCode, Set<string>>();
@@ -127,7 +137,7 @@ function buildCatalogueCities(): {
       kind: 'city',
       slug,
       name: group.city,
-      regionSlug: soleRegion(group.country),
+      regionSlug: group.region ?? soleRegion(group.country),
       marketplaceLive: false,
     };
     generated.push(location);
@@ -177,6 +187,25 @@ export function citiesInRegion(country: NordicCountryCode, regionSlug: string): 
   return locationsForCountry(country).filter(
     (location) => location.kind === 'city' && location.regionSlug === regionSlug,
   );
+}
+
+const REGION_PAGE_CITY_CAP = 80;
+
+/** Cities linked from a region page. A long country keeps the hand-written hubs. */
+export function browseCities(country: NordicCountryCode, regionSlug: string): NordicLocation[] {
+  const all = citiesInRegion(country, regionSlug);
+  if (all.length <= REGION_PAGE_CITY_CAP) return all;
+  const staticSlugs = new Set(
+    NORDIC_LOCATIONS.filter(
+      (location) =>
+        location.country === country &&
+        location.kind === 'city' &&
+        location.regionSlug === regionSlug,
+    ).map((location) => location.slug),
+  );
+  const featured = all.filter((city) => staticSlugs.has(city.slug));
+  if (featured.length > 0) return featured;
+  return all.slice(0, REGION_PAGE_CITY_CAP);
 }
 
 export function schoolsForLocation(location: NordicLocation): InstructorFilteredItem[] {

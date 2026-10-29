@@ -60,7 +60,10 @@ export default async function CountryLocationsPage({ params }: Props) {
   const t = await getTranslations('locationHub');
   const market = marketCopy(country);
   const regions = listRegions(country);
-  const cities = locationsForCountry(country).filter((l) => l.kind === 'city');
+  // Cities stay on the region page. Listing every city here made Germany
+  // one ~480 KB document. The sitemap still contains each city URL.
+  const cities =
+    regions.length === 0 ? locationsForCountry(country).filter((l) => l.kind === 'city') : [];
 
   return (
     <main className="container-page section">
@@ -99,18 +102,20 @@ export default async function CountryLocationsPage({ params }: Props) {
             ))}
           </ul>
         </div>
-        <div>
-          <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
-          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-            {cities.map((c) => (
-              <li key={c.slug}>
-                <Link className="underline underline-offset-4" href={locationPath(c)}>
-                  {displayName(c)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {cities.length > 0 ? (
+          <div>
+            <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {cities.map((c) => (
+                <li key={c.slug}>
+                  <Link className="underline underline-offset-4" href={locationPath(c)}>
+                    {displayName(c)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </section>
     </main>
   );

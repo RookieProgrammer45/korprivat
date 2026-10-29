@@ -1,15 +1,17 @@
 //
 // Frontstage: the price, then the schools. Policy stays on the terms page.
-
-'use client';
+// Server component so the three schools are in the first HTML response.
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { HomeHero } from '@/components/custom/home-hero';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
+import { PUBLIC_CATALOG_PREVIEW_LIMIT } from '@/lib/catalog-preview';
+import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
 
-export function PublicHome() {
-  const t = useTranslations('publicHome');
+export async function PublicHome() {
+  const t = await getTranslations('publicHome');
+  const schools = await listHomepageSchools(PUBLIC_CATALOG_PREVIEW_LIMIT).catch(() => undefined);
 
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
@@ -25,7 +27,7 @@ export function PublicHome() {
               {t('providers.cta')}
             </Link>
           </div>
-          <InstructorPreview limit={3} />
+          <InstructorPreview limit={PUBLIC_CATALOG_PREVIEW_LIMIT} initialRows={schools} />
         </div>
       </section>
 

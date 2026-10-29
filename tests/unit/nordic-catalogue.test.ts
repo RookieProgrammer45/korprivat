@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { InstructorItem } from '@/lib/contracts/instructors';
 import {
+  listCatalogueSchools,
   listNordicInstructors,
   nordicCountryHasSchools,
   nordicInstructorById,
@@ -187,6 +188,74 @@ describe('nordic catalogue', () => {
     expect(parsed.languages).toEqual(['es']);
     expect(parsed.englishSpeaking).toBe(false);
     expect(parsed.serviceArea).toBe('Madrid, Spain');
+  });
+
+  it('lists an American car school without a price, and a truck school as heavy only', () => {
+    const car = toNordicInstructor({
+      ...base,
+      id: 'usabc123-example-driving',
+      country: 'US',
+      region: 'texas',
+      name: 'Example Driving School',
+      city: 'Austin',
+      website: 'https://example-driving.example',
+      email: null,
+      phone: null,
+      lessonPrice: null,
+      lessonMinutes: null,
+      currency: 'USD',
+      language: 'en',
+      categories: ['B'],
+      heavy: [],
+    });
+    const parsed = InstructorItem.parse(car);
+    expect(parsed.verificationStatus).toBe('unverified');
+    expect(parsed.bookingMode).toBe('contact');
+    expect(parsed.canCollectPayment).toBe(false);
+    expect(parsed.categories).toEqual(['B']);
+    expect(parsed.publishedPrices).toBeNull();
+    expect(parsed.priceRequest?.kind).toBe('website');
+    expect(parsed.languages).toEqual(['en']);
+    expect(parsed.serviceArea).toBe('Austin, United States');
+
+    const truck = toNordicInstructor({
+      ...base,
+      id: 'usdef456-example-cdl',
+      country: 'US',
+      region: 'texas',
+      name: 'Example CDL Training',
+      city: 'Houston',
+      website: 'https://example-cdl.example',
+      email: null,
+      phone: null,
+      lessonPrice: null,
+      lessonMinutes: null,
+      currency: 'USD',
+      language: 'en',
+      categories: [],
+      heavy: ['C'],
+    });
+    const heavy = InstructorItem.parse(truck);
+    expect(heavy.categories).toEqual([]);
+    expect(heavy.publishedPrices?.heavy?.categories).toEqual(['C']);
+    expect(heavy.publishedPrices?.lesson).toBeNull();
+    expect(heavy.publishedPrices?.currency).toBe('USD');
+  });
+
+  it('lists collected American car schools and truck schools as unverified contacts', () => {
+    expect(nordicCountryHasSchools('us')).toBe(true);
+    const schools = listCatalogueSchools().filter((school) => school.id.startsWith('us'));
+    expect(schools.length).toBeGreaterThan(50);
+    expect(schools.some((school) => school.categories.includes('B'))).toBe(true);
+    expect(
+      schools.some((school) => (school.publishedPrices?.heavy?.categories.length ?? 0) > 0),
+    ).toBe(true);
+    for (const school of schools) {
+      expect(school.verificationStatus).toBe('unverified');
+      expect(school.bookingMode).toBe('contact');
+      expect(school.canCollectPayment).toBe(false);
+      expect(school.publishedPrices?.lesson ?? null).toBeNull();
+    }
   });
 
   it('puts collected schools in the catalogue for the cities that have them', () => {

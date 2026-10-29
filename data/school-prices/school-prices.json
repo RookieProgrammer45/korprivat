@@ -7,59 +7,21 @@
     "schoolRegisterSource": "https://trafikskola.se (built on Transportstyrelsen permit register + STR), all branches with B permission",
     "priceSource": "Each school's own website or its web shop; extracted automatically, spot-checked manually",
     "counts": {
-      "schools": 1101,
+      "schools": 1086,
       "withLessonPrice": 481,
       "withIntensivePrice": 153,
-      "linkedToListings": 488,
-      "listingIdsLinked": 581,
+      "linkedToListings": 476,
+      "listingIdsLinked": 569,
       "withRisk1Price": 428,
       "withRisk2Price": 371,
       "withPackagePrice": 414,
-      "withHeavyTraining": 115,
+      "withHeavyTraining": 111,
       "withHeavyPrice": 59,
-      "withPhone": 387,
-      "withInbox": 429
+      "withPhone": 383,
+      "withInbox": 422
     }
   },
   "schools": [
-    {
-      "id": "foodtankers-com",
-      "name": "Food Tankers",
-      "listingIds": [
-        "fc58f521-df6c-4714-8c9d-c171168d4522"
-      ],
-      "counties": [
-        "Blekinge län"
-      ],
-      "cities": [
-        "Karlshamn"
-      ],
-      "registerNames": [
-        "DP World Logistics Sweden AB"
-      ],
-      "website": "https://foodtankers.com",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://foodtankers.com/",
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": null,
-      "phone": null,
-      "inbox": null
-    },
     {
       "id": "mrkoll-se",
       "name": "Murad Al Zamel Abu Nabbout EF, Murad Trafikskola",
@@ -10194,51 +10156,6 @@
       "inbox": null
     },
     {
-      "id": "widensakeri-se",
-      "name": "Widéns Åkeri",
-      "listingIds": [
-        "ec899134-197d-425c-bb86-e3a3d4ed9cbc"
-      ],
-      "counties": [
-        "Kalmar län"
-      ],
-      "cities": [
-        "Kalmar"
-      ],
-      "registerNames": [
-        "Widéns Åkeri"
-      ],
-      "website": "https://widensakeri.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://widensakeri.se/",
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": null,
-      "phone": {
-        "display": "0480–44 42 99",
-        "e164": "+46480444299",
-        "sourceUrl": "https://widensakeri.se/"
-      },
-      "inbox": {
-        "address": "bokning@widensakeri.se",
-        "sourceUrl": "https://widensakeri.se/"
-      }
-    },
-    {
       "id": "kalmarsund-trafikskola-ab",
       "name": "Kalmarsund Trafikskola AB",
       "listingIds": [],
@@ -14955,78 +14872,6 @@
       "inbox": null
     },
     {
-      "id": "konkurslistan-se",
-      "name": "Konkurslistan.se",
-      "listingIds": [],
-      "counties": [
-        "Skåne län"
-      ],
-      "cities": [
-        "Hässleholm"
-      ],
-      "registerNames": [
-        "Stoffes Trafikskola AB"
-      ],
-      "website": "https://konkurslistan.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://konkurslistan.se/",
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "phone": null,
-      "inbox": {
-        "address": "info@konkurslistan.se",
-        "sourceUrl": "https://konkurslistan.se/"
-      }
-    },
-    {
-      "id": "presto-se",
-      "name": "Presto",
-      "listingIds": [
-        "c7312093-1601-4bb0-a5b9-ce9db045cc74"
-      ],
-      "counties": [
-        "Skåne län"
-      ],
-      "cities": [
-        "Hässleholm"
-      ],
-      "registerNames": [
-        "Presto AB"
-      ],
-      "website": "https://presto.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "UNKNOWN",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "NOT_A_B_SCHOOL_SITE",
-      "sourceUrl": "https://presto.se",
-      "checkedAt": "2026-10-26"
-    },
-    {
       "id": "ta-kortet-se",
       "name": "Ta Körkortet",
       "listingIds": [],
@@ -16930,38 +16775,6 @@
         "address": "info@skaneutbildarna.se",
         "sourceUrl": "https://skaneutbildarna.se/"
       }
-    },
-    {
-      "id": "creditsafe-com",
-      "name": "Svenssons Trafikskola Eftr. AB",
-      "listingIds": [],
-      "counties": [
-        "Skåne län"
-      ],
-      "cities": [
-        "Lund"
-      ],
-      "registerNames": [
-        "Svenssons Trafikskola Eftr. AB"
-      ],
-      "website": "https://creditsafe.com",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "UNKNOWN",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "NOT_A_B_SCHOOL_SITE",
-      "sourceUrl": "https://creditsafe.com",
-      "checkedAt": "2026-10-26"
     },
     {
       "id": "sydtrafikskola-com",
@@ -22073,56 +21886,6 @@
       "inbox": {
         "address": "info@hokis.se",
         "sourceUrl": "https://hokis.se/"
-      }
-    },
-    {
-      "id": "jrlogistic-se",
-      "name": "JR Logistic AB",
-      "listingIds": [
-        "8d529c50-bc80-45ee-ba17-4b5d5ab12af5"
-      ],
-      "counties": [
-        "Stockholms län"
-      ],
-      "cities": [
-        "Farsta"
-      ],
-      "registerNames": [
-        "JR Logistic AB"
-      ],
-      "website": "https://jrlogistic.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://jrlogistic.se/Vi-erbjuder",
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": {
-        "categories": [
-          "C",
-          "CE"
-        ],
-        "ykb": false,
-        "prices": [],
-        "sourceUrl": null,
-        "checkedAt": "2026-10-26"
-      },
-      "phone": null,
-      "inbox": {
-        "address": "info@jrlogistic.se",
-        "sourceUrl": "https://jrlogistic.se/"
       }
     },
     {
@@ -28431,54 +28194,6 @@
       }
     },
     {
-      "id": "nobina-com",
-      "name": "Nobina",
-      "listingIds": [
-        "89f4d86d-6b97-45d1-b35e-bc6fc264c12f"
-      ],
-      "counties": [
-        "Stockholms län"
-      ],
-      "cities": [
-        "Solna"
-      ],
-      "registerNames": [
-        "Nobina Sverige AB"
-      ],
-      "website": "https://nobina.com",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://nobina.com/",
-      "social": [
-        "https://www.instagram.com/nobinasverige/?hl=sv"
-      ],
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": null,
-      "phone": {
-        "display": "+46 8 410 650 00",
-        "e164": "+46841065000",
-        "sourceUrl": "https://nobina.com/"
-      },
-      "inbox": {
-        "address": "adm@nobina.se",
-        "sourceUrl": "https://nobina.com/"
-      }
-    },
-    {
       "id": "rembjers-trafikskolaoaeaeoa-tctabs-se",
       "name": "Odenplans Trafikskola AB, Rembjers Trafikskola",
       "listingIds": [],
@@ -29836,40 +29551,6 @@
       ],
       "phone": null,
       "inbox": null
-    },
-    {
-      "id": "postnord-se",
-      "name": "PostNord Sverige AB",
-      "listingIds": [
-        "0fd9de34-3fa5-40af-b8f7-32b89d6c420b"
-      ],
-      "counties": [
-        "Stockholms län"
-      ],
-      "cities": [
-        "Stockholm"
-      ],
-      "registerNames": [
-        "PostNord Sverige AB"
-      ],
-      "website": "https://postnord.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "UNKNOWN",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "SITE_BLOCKED",
-      "sourceUrl": "https://postnord.se",
-      "checkedAt": "2026-10-26"
     },
     {
       "id": "ringensbilskola-se",
@@ -36652,53 +36333,6 @@
       "sourceUrl": null
     },
     {
-      "id": "gbos-se",
-      "name": "Ekologg o Görans Bygg AB",
-      "listingIds": [
-        "d81a8445-328d-407e-8794-714f283f0a47"
-      ],
-      "counties": [
-        "Uppsala län"
-      ],
-      "cities": [
-        "Örsundsbro"
-      ],
-      "registerNames": [
-        "Ekologg o Görans Bygg AB"
-      ],
-      "website": "https://gbos.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://gbos.se/kurser/",
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": {
-        "categories": [],
-        "ykb": true,
-        "prices": [],
-        "sourceUrl": null,
-        "checkedAt": "2026-10-26"
-      },
-      "phone": null,
-      "inbox": {
-        "address": "info@gbos.se",
-        "sourceUrl": "https://gbos.se/"
-      }
-    },
-    {
       "id": "connys-nu",
       "name": "Conny's Trafikskola Östhammar",
       "listingIds": [
@@ -38995,51 +38629,6 @@
       "inbox": null
     },
     {
-      "id": "freedomoutdoor-se",
-      "name": "Freedom Outdoor",
-      "listingIds": [
-        "4245b7ed-9412-42cd-9101-b2175ff1ac79"
-      ],
-      "counties": [
-        "Västerbottens län"
-      ],
-      "cities": [
-        "Sävar"
-      ],
-      "registerNames": [
-        "Freedomoutdoor"
-      ],
-      "website": "https://freedomoutdoor.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://freedomoutdoor.se/",
-      "social": [
-        "https://www.facebook.com/profile.php?id=100088242441433",
-        "https://www.instagram.com/outdoor91891/"
-      ],
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": null,
-      "phone": null,
-      "inbox": {
-        "address": "info@freedomoutdoor.se",
-        "sourceUrl": "https://freedomoutdoor.se/"
-      }
-    },
-    {
       "id": "bjorkstadenstrafikskola-com",
       "name": "Björkstadens Trafikskola",
       "listingIds": [],
@@ -40643,40 +40232,6 @@
         "address": "desk@mtrafikskola.se",
         "sourceUrl": "https://mtrafikskola.se/"
       }
-    },
-    {
-      "id": "sundsvalljobb-se",
-      "name": "Sundsvalljobb",
-      "listingIds": [
-        "638ec065-6996-411f-9ca9-0c4c4ea1ba29"
-      ],
-      "counties": [
-        "Västernorrlands län"
-      ],
-      "cities": [
-        "Sundsvall"
-      ],
-      "registerNames": [
-        "Grönlunds Yrkesutbildningar AB, Sundsvall"
-      ],
-      "website": "https://sundsvalljobb.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "UNKNOWN",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "NOT_A_B_SCHOOL_SITE",
-      "sourceUrl": "https://sundsvalljobb.se",
-      "checkedAt": "2026-10-26"
     },
     {
       "id": "yrkesakademin-ab-ya-trafikskola-sundsvall",
@@ -47101,63 +46656,6 @@
       "sourceUrl": null
     },
     {
-      "id": "transdev-se",
-      "name": "Transdev",
-      "listingIds": [
-        "dd10d111-4df5-452a-af8b-df85b7fb2792"
-      ],
-      "counties": [
-        "Västra Götalands län"
-      ],
-      "cities": [
-        "Göteborg"
-      ],
-      "registerNames": [
-        "Transdev Sverige AB"
-      ],
-      "website": "https://transdev.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://transdev.se/",
-      "social": [
-        "https://www.instagram.com/transdevsverige/"
-      ],
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": {
-        "categories": [
-          "D",
-          "DE"
-        ],
-        "ykb": true,
-        "prices": [],
-        "sourceUrl": null,
-        "checkedAt": "2026-10-26"
-      },
-      "phone": {
-        "display": "08-629 50 00",
-        "e164": "+4686295000",
-        "sourceUrl": "https://transdev.se/"
-      },
-      "inbox": {
-        "address": "info@transdev.se",
-        "sourceUrl": "https://transdev.se/"
-      }
-    },
-    {
       "id": "utgardstrafikskola-se",
       "name": "Utgårds Trafikskola",
       "listingIds": [
@@ -47206,48 +46704,6 @@
       ],
       "heavy": null,
       "phone": null,
-      "inbox": null
-    },
-    {
-      "id": "nettbuss-se",
-      "name": "Vy bus4you",
-      "listingIds": [
-        "a822334c-0719-492f-bc03-3d073031da74"
-      ],
-      "counties": [
-        "Västra Götalands län"
-      ],
-      "cities": [
-        "Göteborg"
-      ],
-      "registerNames": [
-        "Vy Buss AB"
-      ],
-      "website": "https://nettbuss.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://nettbuss.se/",
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "heavy": null,
-      "phone": {
-        "display": "0701112233",
-        "e164": "+46701112233",
-        "sourceUrl": "https://nettbuss.se/"
-      },
       "inbox": null
     },
     {
@@ -48176,47 +47632,6 @@
       "inbox": {
         "address": "info@karrarodbotrafikskola.se",
         "sourceUrl": "https://karrarodbotrafikskola.se/"
-      }
-    },
-    {
-      "id": "nickesakeritjanst-se",
-      "name": "Nickes Åkeritjänst AB",
-      "listingIds": [
-        "d1c610f6-02a2-4256-9d61-2ae1c45c09ab"
-      ],
-      "counties": [
-        "Västra Götalands län"
-      ],
-      "cities": [
-        "Hisings-Backa"
-      ],
-      "registerNames": [
-        "Nickes Åkeritjänst AB"
-      ],
-      "website": "https://nickesakeritjanst.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "UNKNOWN",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "SITE_BLOCKED",
-      "sourceUrl": "https://nickesakeritjanst.se",
-      "checkedAt": "2026-10-26",
-      "heavy": {
-        "categories": [],
-        "ykb": true,
-        "prices": [],
-        "sourceUrl": null,
-        "checkedAt": "2026-10-26"
       }
     },
     {
@@ -52919,41 +52334,6 @@
       },
       "status": "NO_WEBSITE",
       "sourceUrl": null
-    },
-    {
-      "id": "uddevalla-omnibus-se",
-      "name": "Uddevalla Omnibus",
-      "listingIds": [],
-      "counties": [
-        "Västra Götalands län"
-      ],
-      "cities": [
-        "Uddevalla"
-      ],
-      "registerNames": [
-        "Omnibusskolan"
-      ],
-      "website": "https://uddevalla-omnibus.se",
-      "lesson": {
-        "priceSek": null,
-        "minutes": null,
-        "pricePerMinuteSek": null,
-        "note": null
-      },
-      "testLessonSek": null,
-      "risk1Sek": null,
-      "risk2Sek": null,
-      "intensive": {
-        "offered": "NOT_MENTIONED",
-        "cheapestPriceSek": null,
-        "courses": []
-      },
-      "status": "PRICE_NOT_PUBLISHED",
-      "sourceUrl": "https://uddevalla-omnibus.se/",
-      "checkedAt": "2026-10-26",
-      "packages": [],
-      "phone": null,
-      "inbox": null
     },
     {
       "id": "utbildarnavast-se",

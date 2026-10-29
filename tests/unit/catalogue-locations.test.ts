@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { listCatalogueSchools } from '@/lib/discovery/nordic-catalogue';
 import {
+  browseCities,
+  citiesInRegion,
   generatedCatalogueCities,
   indexableLocationPaths,
   locationForCatalogueSchool,
@@ -52,6 +54,15 @@ describe('catalogue location pages', () => {
     expect(locationsForCountry('ro').some((location) => location.name === 'Бор')).toBe(false);
   });
 
+  it('keeps a long region page to the hand-written cities', () => {
+    const all = citiesInRegion('de', 'germany');
+    const shown = browseCities('de', 'germany');
+    expect(all.length).toBeGreaterThan(shown.length);
+    expect(shown.length).toBeLessThan(150);
+    expect(shown.some((city) => city.slug === 'leonberg')).toBe(true);
+    expect(shown.some((city) => city.slug === 'berlin')).toBe(true);
+  });
+
   it('puts catalogue schools in the sitemap and on a local city page', () => {
     const galway = listCatalogueSchools().find((school) => school.id.startsWith('euie246274'));
     expect(galway?.city).toBe('Galway');
@@ -70,6 +81,7 @@ describe('market copy', () => {
     expect(german?.schemaLang).toBe('de-DE');
     expect(german?.schoolDescription('Richt', 'Leonberg')).toContain('nicht geprüft');
     expect(marketCopy('se')).toBeNull();
+    expect(marketCopy('us')?.cityHeading('Austin')).toBe('Driving schools in Austin');
     expect(marketCopy('fr')?.cityHeading('Lyon')).toContain('Auto-écoles');
   });
 });

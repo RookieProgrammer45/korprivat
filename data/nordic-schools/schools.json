@@ -15945,25 +15945,6 @@
       "websiteStatus": "OK"
     },
     {
-      "id": "no5d986b-vy-buss-as",
-      "country": "NO",
-      "name": "Vy Buss AS",
-      "city": "Trondheim",
-      "website": "http://nettbuss.tabs.no",
-      "categories": [],
-      "heavy": [
-        "D"
-      ],
-      "email": null,
-      "phone": null,
-      "lessonPrice": null,
-      "lessonMinutes": null,
-      "currency": "NOK",
-      "sourceUrl": "http://nettbuss.tabs.no",
-      "checkedAt": "2026-10-28",
-      "websiteStatus": "SITE_UNREACHABLE"
-    },
-    {
       "id": "no7a335c-warholm-trafikkskole-as",
       "country": "NO",
       "name": "Warholm Trafikkskole AS",

@@ -6,7 +6,7 @@ import { loginHrefWithNext } from '@/lib/auth-next';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { getSessionUser } from '@/lib/require-auth';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
-import { citiesInRegion, schoolsForLocation } from '@/lib/seo/catalogue-locations';
+import { browseCities, citiesInRegion, schoolsForLocation } from '@/lib/seo/catalogue-locations';
 import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,
@@ -250,7 +250,10 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
             <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
             <ul className="grid gap-2 sm:grid-cols-2">
-              {(location.kind === 'region' ? siblingCities : []).map((c) => (
+              {(location.kind === 'region'
+                ? browseCities(location.country, location.slug)
+                : []
+              ).map((c) => (
                 <li key={c.slug}>
                   <Link className="underline underline-offset-4" href={locationPath(c)}>
                     {displayName(c)}

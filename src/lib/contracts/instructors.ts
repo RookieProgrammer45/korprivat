@@ -201,6 +201,7 @@ export const InstructorItem = z.object({
           'RON',
           'BGN',
           'CHF',
+          'USD',
         ])
         .optional(),
       // Heavy-vehicle training the school's website advertises (C/D, YKB).
