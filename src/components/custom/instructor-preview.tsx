@@ -7,6 +7,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
@@ -191,7 +192,8 @@ export function SchoolMark({
   size: 'cover' | 'avatar';
 }) {
   const [failed, setFailed] = useState(false);
-  const photograph = isPhotograph(photoUrl) && !failed;
+  const portrait = schoolPortraitUrl(photoUrl);
+  const photograph = portrait !== null && !failed;
   if (!photograph) {
     return (
       <span
@@ -202,14 +204,14 @@ export function SchoolMark({
             : 'flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-[#ece9e2] font-display text-sm font-normal text-foreground dark:bg-[#1a1a18]'
         }
       >
-        {initials(name)}
+        {schoolInitials(name)}
       </span>
     );
   }
   if (size === 'avatar') {
     return (
       <Image
-        src={photoUrl}
+        src={portrait ?? ''}
         alt={alt}
         width={48}
         height={48}
@@ -222,7 +224,7 @@ export function SchoolMark({
   return (
     <span className="dlu-school-photo">
       <Image
-        src={photoUrl}
+        src={portrait ?? ''}
         alt={alt}
         fill
         unoptimized
@@ -238,20 +240,6 @@ export function SchoolMark({
 // codes without a name (AM, A1, A2) stay as the bare code.
 export function categoryChipLabel(label: string, code: string): string {
   return label === code ? code : `${label} · ${code}`;
-}
-
-function isPhotograph(url: string): boolean {
-  const path = url.split('?')[0]?.trim().toLowerCase() ?? '';
-  if (!path) return false;
-  return !path.endsWith('.svg');
-}
-
-function initials(name: string): string {
-  const parts = name.trim().split(/\s+/).filter(Boolean).slice(0, 2);
-  return parts
-    .map((part) => part[0] ?? '')
-    .join('')
-    .toUpperCase();
 }
 
 function PreviewSkeleton({ limit }: { limit: number }) {

@@ -12,6 +12,7 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
+import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
 import { publicAlternates } from '@/lib/seo/alternates';
 import { schoolPath } from '@/lib/seo/school-slugs';
@@ -152,14 +153,23 @@ export default async function SchoolProfilePage({ params }: PageProps) {
                 <li key={instructor.id}>
                   <Card className="border-border bg-card">
                     <CardContent className="flex gap-4 p-4">
-                      <Image
-                        src={instructor.photoUrl}
-                        alt=""
-                        width={72}
-                        height={72}
-                        unoptimized
-                        className="size-[72px] rounded-lg object-cover"
-                      />
+                      {schoolPortraitUrl(instructor.photoUrl) ? (
+                        <Image
+                          src={schoolPortraitUrl(instructor.photoUrl) ?? ''}
+                          alt=""
+                          width={72}
+                          height={72}
+                          unoptimized
+                          className="size-[72px] rounded-lg object-cover"
+                        />
+                      ) : (
+                        <span
+                          aria-hidden
+                          className="flex size-[72px] shrink-0 items-center justify-center rounded-lg border border-border bg-muted font-display text-lg font-normal"
+                        >
+                          {schoolInitials(instructor.name)}
+                        </span>
+                      )}
                       <div className="grid min-w-0 flex-1 gap-1">
                         <p className="truncate font-medium text-foreground">{instructor.name}</p>
                         <p className="text-small text-muted-foreground">{instructor.city}</p>

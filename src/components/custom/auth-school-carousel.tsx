@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api-client';
 import { PUBLIC_CATALOG_PREVIEW_LIMIT } from '@/lib/catalog-preview';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { InstructorList } from '@/lib/contracts/instructors';
 
 const FALLBACK_SRC = '/images/hero-lesson.jpg';
@@ -48,10 +49,13 @@ export function AuthSchoolCarousel() {
       .then((data) => {
         if (!alive) return;
         const schools = data.items
-          .filter((row) => row.photoUrl.trim().length > 0)
-          .map((row) => ({
+          .map((row) => ({ row, src: schoolPortraitUrl(row.photoUrl) }))
+          .filter((entry): entry is { row: (typeof data.items)[number]; src: string } =>
+            Boolean(entry.src),
+          )
+          .map(({ row, src }) => ({
             id: row.id,
-            src: row.photoUrl,
+            src,
             alt: t('schoolAlt', { name: row.name, city: row.city }),
             caption: `${row.name} · ${row.city}`,
           }));

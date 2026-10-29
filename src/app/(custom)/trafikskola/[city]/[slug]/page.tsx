@@ -6,6 +6,7 @@ import { InstructorOfferingsSection } from '@/components/custom/instructor-offer
 import { ReviewSection } from '@/components/custom/review-section';
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { publishedPrices } from '@/lib/discovery/published-prices';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { locationForCatalogueSchool } from '@/lib/seo/catalogue-locations';
 import { marketCopy } from '@/lib/seo/market-copy';
@@ -60,7 +61,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName,
       title,
       description,
-      images: instructor.photoUrl ? [{ url: instructor.photoUrl }] : undefined,
+      images: schoolPortraitUrl(instructor.photoUrl)
+        ? [{ url: schoolPortraitUrl(instructor.photoUrl)! }]
+        : undefined,
     },
   };
 }
@@ -115,7 +118,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
               resolved.instructor.bio?.slice(0, 300) ||
               undefined,
             url: absoluteUrl(resolved.canonicalPath),
-            image: resolved.instructor.photoUrl || undefined,
+            image: schoolPortraitUrl(resolved.instructor.photoUrl) || undefined,
             address: {
               '@type': 'PostalAddress',
               addressLocality: resolved.instructor.city,

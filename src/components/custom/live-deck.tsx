@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api-client';
+import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
 
 /**
@@ -102,16 +103,7 @@ export function LiveAuthDeck() {
     apiFetch('/api/instructors', { schema: InstructorList })
       .then((data) => {
         if (!alive) return;
-        // Profilkarusellen (2026-10-14): de tio demo-profilerna med genererade
-        // profilbilder (/assets/profiles/) roterar först — riktiga skolor fyller
-        // på om demo-profilerna saknas.
-        const withPhoto = data.items.filter((row) =>
-          (row.photoUrl ?? '').startsWith('/assets/profiles/'),
-        );
-        const withoutPhoto = data.items.filter(
-          (row) => !(row.photoUrl ?? '').startsWith('/assets/profiles/'),
-        );
-        const rows = [...withPhoto, ...withoutPhoto].slice(0, MAX_DECK_PROFILES).map(toDeckProfile);
+        const rows = data.items.slice(0, MAX_DECK_PROFILES).map(toDeckProfile);
         if (rows.length > 0) {
           setProfiles(rows);
           setActive(0);
@@ -158,8 +150,20 @@ export function LiveAuthDeck() {
         <article className="dlu-card" key={front.id}>
           <div className="dlu-top">
             <div className="dlu-id min-w-0">
-              {/* biome-ignore lint/performance/noImgElement: avatar-URL fran data, fast 44px - next/image lar ingen vinst */}
-              <img className="dlu-photo" src={front.photoUrl} alt="" width={44} height={44} />
+              {schoolPortraitUrl(front.photoUrl) ? (
+                // biome-ignore lint/performance/noImgElement: avatar-URL fran data, fast 44px - next/image lar ingen vinst
+                <img
+                  className="dlu-photo"
+                  src={schoolPortraitUrl(front.photoUrl) ?? ''}
+                  alt=""
+                  width={44}
+                  height={44}
+                />
+              ) : (
+                <span className="dlu-photo flex items-center justify-center font-display text-sm font-normal">
+                  {schoolInitials(front.name)}
+                </span>
+              )}
               <div className="min-w-0">
                 <p className="dlu-type">{front.type}</p>
                 <p className="dlu-name">{front.name}</p>

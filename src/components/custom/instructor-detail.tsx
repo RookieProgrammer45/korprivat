@@ -4,6 +4,7 @@
 'use client';
 
 import Image from 'next/image';
+import { schoolInitials, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
@@ -119,6 +120,8 @@ export function InstructorDetail({
     );
   }
 
+  const portrait = schoolPortraitUrl(instructor.photoUrl);
+
   return (
     <Card
       lang={contentLang ?? undefined}
@@ -126,9 +129,9 @@ export function InstructorDetail({
     >
       <CardContent className="grid min-w-0 gap-7 p-6 sm:p-8 md:grid-cols-[180px_minmax(0,1fr)] md:gap-9">
         <div className="instructor-detail-photo flex min-w-0 items-start justify-center">
-          {instructor.photoUrl ? (
+          {portrait ? (
             <Image
-              src={instructor.photoUrl}
+              src={portrait}
               alt={tr('portraitAlt', { name: instructor.name })}
               width={180}
               height={180}
@@ -140,7 +143,7 @@ export function InstructorDetail({
               aria-hidden
               className="flex size-[180px] max-w-full items-center justify-center rounded-xl border border-brand-500/25 bg-brand-100 font-display text-4xl font-semibold text-brand-700 shadow-sm dark:bg-brand-900 dark:text-brand-300"
             >
-              {instructor.name.slice(0, 1).toUpperCase()}
+              {schoolInitials(instructor.name)}
             </div>
           )}
         </div>
