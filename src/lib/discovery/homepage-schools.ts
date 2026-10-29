@@ -1,6 +1,5 @@
-// The three schools on the homepage. Same public card as
-// GET /api/instructors?limit=3, but the query stops after a small window
-// instead of loading every Swedish listing and then slicing.
+// Homepage school grid: same public card shape as the directory, ranked for the
+// visitor's catalogue country (Vercel geo headers) up to HOMEPAGE_SCHOOL_PREVIEW_LIMIT.
 import 'server-only';
 import { buildVerifiedProviderActivationWhere } from '@/lib/business/provider-activation';
 import {
@@ -8,7 +7,7 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
-import { PUBLIC_CATALOG_PREVIEW_LIMIT } from '@/lib/catalog-preview';
+import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import {
   type InstructorFilteredItem,
   InstructorList,
@@ -16,6 +15,10 @@ import {
 } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
 import { lightCatalogueWhere } from '@/lib/discovery/published-prices';
+import {
+  homepageSchoolRegionScore,
+  type VisitorCatalogueRegion,
+} from '@/lib/discovery/visitor-catalogue-region';
 import { loadFoldsByListing } from '@/lib/orgs/school-authorization';
 import {
   isSchoolAuthzEnforcementOn,
@@ -30,7 +33,8 @@ import {
   maskSurfacesForPayment,
 } from '@/lib/scheduling/listing-eligibility';
 
-const WINDOW = PUBLIC_CATALOG_PREVIEW_LIMIT * 8;
+/** Scan enough rows to fill 20 after country/region ranking. */
+const WINDOW = 800;
 
 const EMPTY_FOLD = {
   granted: [],
@@ -40,7 +44,8 @@ const EMPTY_FOLD = {
 };
 
 export async function listHomepageSchools(
-  limit = PUBLIC_CATALOG_PREVIEW_LIMIT,
+  limit = HOMEPAGE_SCHOOL_PREVIEW_LIMIT,
+  region: VisitorCatalogueRegion = { countryCode: 'se', regionSlug: null },
 ): Promise<InstructorFilteredItem[]> {
   const raw = await prisma.instructor.findMany({
     where: {
@@ -50,7 +55,19 @@ export async function listHomepageSchools(
     orderBy: [{ city: 'asc' }, { name: 'asc' }],
     take: WINDOW,
   });
-  const rows = raw.filter((row) => hasCanonicalCategory(row)).slice(0, limit);
+
+  const rows = raw
+    .filter((row) => hasCanonicalCategory(row))
+    .map((row) => ({ row, score: homepageSchoolRegionScore(row.id, region) }))
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return (
+        a.row.city.localeCompare(b.row.city, 'sv') || a.row.name.localeCompare(b.row.name, 'sv')
+      );
+    })
+    .slice(0, limit)
+    .map((entry) => entry.row);
+
   if (rows.length === 0) return [];
 
   const ids = rows.map((row) => row.id);

@@ -6,12 +6,18 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { HomeHero } from '@/components/custom/home-hero';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
-import { PUBLIC_CATALOG_PREVIEW_LIMIT } from '@/lib/catalog-preview';
+import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
+import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
+import { headers } from 'next/headers';
 
 export async function PublicHome() {
   const t = await getTranslations('publicHome');
-  const schools = await listHomepageSchools(PUBLIC_CATALOG_PREVIEW_LIMIT).catch(() => undefined);
+  const headerStore = await headers();
+  const region = visitorCatalogueRegionFromHeaders((name) => headerStore.get(name));
+  const schools = await listHomepageSchools(HOMEPAGE_SCHOOL_PREVIEW_LIMIT, region).catch(
+    () => undefined,
+  );
 
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
@@ -27,7 +33,11 @@ export async function PublicHome() {
               {t('providers.cta')}
             </Link>
           </div>
-          <InstructorPreview limit={PUBLIC_CATALOG_PREVIEW_LIMIT} initialRows={schools} />
+          <InstructorPreview
+            limit={HOMEPAGE_SCHOOL_PREVIEW_LIMIT}
+            initialRows={schools}
+            showContact={false}
+          />
         </div>
       </section>
 

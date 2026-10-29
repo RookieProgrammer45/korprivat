@@ -2595,6 +2595,16 @@ html.dark .dlu-ink-pill {
   background: #ece9e2;
 }
 
+.dlu-school-photo--compact {
+  aspect-ratio: 5 / 3;
+}
+
+@media (min-width: 640px) {
+  .dlu-school-photo--compact {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 html.dark .dlu-school-photo {
   background: #1a1a18;
 }

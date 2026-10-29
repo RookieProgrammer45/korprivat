@@ -24,7 +24,7 @@ import {
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
-const MAX_PREVIEW_ROWS = 3;
+const MAX_PREVIEW_ROWS = 20;
 
 type Status = 'loading' | 'ready' | 'empty' | 'error';
 
@@ -75,7 +75,7 @@ export function InstructorPreview({
     ) : status === 'empty' ? (
       <p className="text-small text-muted-foreground">{tr('empty')}</p>
     ) : (
-      <ul className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
         {rows.map((row) => (
           <li
             key={row.id}
@@ -134,7 +134,7 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
       className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       data-provider-type={row.providerType}
     >
-      <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-foreground/20 group-hover:shadow-md motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 dark:bg-card">
+      <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-foreground/20 group-hover:shadow-md motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 sm:rounded-[1.25rem] dark:bg-card">
         <SchoolMark
           name={row.name}
           photoUrl={row.photoUrl}
@@ -143,12 +143,12 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
           alt={tr('portraitAlt', { name: row.name })}
           size="cover"
         />
-        <div className="flex flex-1 flex-col gap-3 p-5">
+        <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-5">
           <div className="min-w-0">
-            <p className="text-small text-muted-foreground">
+            <p className="text-[11px] leading-snug text-muted-foreground sm:text-small">
               {row.phone ? `${row.city} · ${row.phone.display}` : row.city}
             </p>
-            <h3 className="break-words font-display text-h4 font-normal tracking-tight text-foreground">
+            <h3 className="line-clamp-2 break-words font-display text-sm font-normal leading-snug tracking-tight text-foreground sm:text-h4 sm:leading-normal">
               {row.name}
             </h3>
           </div>
@@ -210,10 +210,12 @@ export function SchoolMark({
         categories={categories}
         heavy={heavy}
         heavyScope={heavyScope}
-        iconClassName={size === 'cover' ? 'size-12' : 'size-6'}
+        iconClassName={
+          size === 'cover' ? 'size-6 sm:size-9 lg:size-11' : 'size-5 sm:size-6'
+        }
         className={
           size === 'cover'
-            ? 'dlu-school-photo flex items-center justify-center font-display text-4xl font-normal text-foreground'
+            ? 'dlu-school-photo dlu-school-photo--compact flex items-center justify-center font-display text-lg font-normal text-foreground sm:text-4xl'
             : 'flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-[#ece9e2] font-display text-sm font-normal text-foreground dark:bg-[#1a1a18]'
         }
       />
@@ -259,11 +261,11 @@ function PreviewSkeleton({ limit }: { limit: number }) {
     (_, index) => `preview-skeleton-${index + 1}`,
   );
   return (
-    <ul className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
       {ids.map((skeletonId) => (
         <li key={skeletonId} aria-hidden>
-          <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-white dark:bg-card">
-            <Skeleton className="aspect-[4/3] w-full rounded-none" />
+          <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white sm:rounded-[1.25rem] dark:bg-card">
+            <Skeleton className="aspect-[5/3] w-full rounded-none sm:aspect-[4/3]" />
             <div className="flex flex-col gap-3 p-5">
               <Skeleton className="h-3 w-1/4" />
               <Skeleton className="h-5 w-3/4" />
