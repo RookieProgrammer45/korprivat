@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   ADSENSE_CLIENT_DEFAULT,
+  adsenseAdsTxtLine,
   adsenseAllowedByConsent,
   adsenseClient,
   adsenseScriptSrc,
@@ -21,6 +22,12 @@ describe('AdSense publisher id', () => {
   it('builds the official loader URL', () => {
     expect(adsenseScriptSrc(ADSENSE_CLIENT_DEFAULT)).toBe(
       `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_DEFAULT}`,
+    );
+  });
+
+  it('builds the ads.txt authorization line', () => {
+    expect(adsenseAdsTxtLine(ADSENSE_CLIENT_DEFAULT)).toBe(
+      'google.com, pub-7844902305148063, DIRECT, f08c47fec0942fa0\n',
     );
   });
 

@@ -5,11 +5,23 @@
 // Same-origin only: a payload without script execution cannot read the meta
 // and script-src has no 'unsafe-inline', so this does not weaken the rampart.
 
+import Script from 'next/script';
+import { adsenseClient, adsenseScriptSrc } from '@/lib/adsense';
+
 export function HeadContent({ nonce }: { nonce?: string }) {
   return (
     <>
       <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" sizes="180x180" />
       {nonce ? <meta name="csp-nonce" content={nonce} /> : null}
+      <meta name="google-adsense-account" content={adsenseClient()} />
+      <Script
+        id="adsense-loader"
+        async
+        src={adsenseScriptSrc(adsenseClient())}
+        crossOrigin="anonymous"
+        strategy="beforeInteractive"
+        nonce={nonce}
+      />
     </>
   );
 }
