@@ -1,3 +1,6 @@
+// School trade marks and website logos are third-party IP. The directory uses
+// initials only — never hotlink or cache a school's logo from its website.
+
 const LOGO_IN_PATH =
   /\b(logo|logotyp|logga|favicon|sprite|brand-mark|site-icon)\b|\/og-\d|partner.*\/assets\//i;
 

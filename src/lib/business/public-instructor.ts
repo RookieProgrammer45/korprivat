@@ -186,7 +186,8 @@ export function toPublicInstructor(
     categories,
     hourlyRateSek: row.hourlyRateSek,
     bio: row.bio,
-    photoUrl: row.photoUrl,
+    // Schools: no logo or scraped site art in public JSON (third-party IP).
+    photoUrl: row.providerRole === 'SCHOOL' ? '' : row.photoUrl,
     englishSpeaking: row.englishSpeaking === true,
     languages: row.englishSpeaking === true ? (['sv', 'en'] as const) : (['sv'] as const),
     verificationStatus: aggregate.verificationStatus,
