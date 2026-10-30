@@ -7,13 +7,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
-import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { PublishedLessonPrice } from '@/components/custom/published-price';
 import { SchoolContactActions } from '@/components/custom/school-contact-button';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
@@ -22,6 +21,7 @@ import {
   providerSlotDateParts,
 } from '@/lib/business/marketplace-localization';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
+import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
 const MAX_PREVIEW_ROWS = 20;
@@ -130,7 +130,7 @@ function PreviewCard({ row }: { row: InstructorFilteredItem }) {
     showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, locale, tr) : null;
   return (
     <Link
-      href={`/instructors/${row.id}`}
+      href={schoolPath(row)}
       className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       data-provider-type={row.providerType}
     >

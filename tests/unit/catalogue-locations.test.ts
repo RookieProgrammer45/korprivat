@@ -5,6 +5,7 @@ import {
   citiesInRegion,
   generatedCatalogueCities,
   indexableLocationPaths,
+  isIndexableLocation,
   locationForCatalogueSchool,
   locationsForCountry,
   resolveLocation,
@@ -39,7 +40,9 @@ describe('catalogue location pages', () => {
         (location) => !staticPaths.has(`/locations/${location.country}/${location.slug}`),
       ),
     ).toBe(true);
-    const sample = generated.find((location) => location.country === 'de');
+    const sample = generated.find(
+      (location) => location.country === 'de' && isIndexableLocation(location),
+    );
     expect(sample).toBeTruthy();
     if (!sample) return;
     expect(resolveLocation(sample.country, sample.slug)?.name).toBe(sample.name);
@@ -67,9 +70,12 @@ describe('catalogue location pages', () => {
     const galway = listCatalogueSchools().find((school) => school.id.startsWith('euie246274'));
     expect(galway?.city).toBe('Galway');
     if (!galway) return;
-    expect(indexableLocationPaths()).toContain('/locations/ie/galway');
     const hub = locationForCatalogueSchool(galway.id);
     expect(hub?.country).toBe('ie');
+    if (!hub) return;
+    expect(indexableLocationPaths().includes('/locations/ie/galway')).toBe(
+      isIndexableLocation(hub),
+    );
     expect(schoolPath(galway)).toContain('/trafikskola/galway/');
   });
 });

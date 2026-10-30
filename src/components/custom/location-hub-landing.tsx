@@ -6,7 +6,12 @@ import { loginHrefWithNext } from '@/lib/auth-next';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { getSessionUser } from '@/lib/require-auth';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
-import { browseCities, citiesInRegion, schoolsForLocation } from '@/lib/seo/catalogue-locations';
+import {
+  browseCities,
+  citiesInRegion,
+  isIndexableLocation,
+  schoolsForLocation,
+} from '@/lib/seo/catalogue-locations';
 import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,
@@ -44,6 +49,7 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
     title,
     description,
     alternates: publicAlternates(path),
+    ...(isIndexableLocation(location) ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       type: 'website',
       siteName,
