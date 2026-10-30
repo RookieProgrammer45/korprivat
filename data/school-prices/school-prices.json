@@ -1,6 +1,6 @@
 {
   "meta": {
-    "collectedAt": "2026-10-26",
+    "collectedAt": "2026-10-30",
     "currency": "SEK",
     "vatIncluded": true,
     "licenceCategory": "B",
@@ -8,13 +8,13 @@
     "priceSource": "Each school's own website or its web shop; extracted automatically, spot-checked manually",
     "counts": {
       "schools": 1086,
-      "withLessonPrice": 481,
-      "withIntensivePrice": 153,
+      "withLessonPrice": 374,
+      "withIntensivePrice": 150,
       "linkedToListings": 476,
       "listingIdsLinked": 569,
-      "withRisk1Price": 428,
-      "withRisk2Price": 371,
-      "withPackagePrice": 414,
+      "withRisk1Price": 373,
+      "withRisk2Price": 338,
+      "withPackagePrice": 370,
       "withHeavyTraining": 111,
       "withHeavyPrice": 59,
       "withPhone": 383,
@@ -72,30 +72,23 @@
       ],
       "website": "https://trafikskolandepa.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
-        "offered": "NOT_MENTIONED",
+        "offered": "UNKNOWN",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "SITE_UNREACHABLE",
       "sourceUrl": "https://trafikskolandepa.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -212,30 +205,23 @@
       ],
       "website": "https://kronanpavag.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://kronanpavag.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -473,33 +459,26 @@
       ],
       "website": "https://trafikolof.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell bil"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://trafikolof.se/",
       "social": [
         "https://www.facebook.com/hagbergs/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": {
@@ -650,20 +629,20 @@
       ],
       "website": "https://blekingetrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "manuell bil"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://blekingetrafikskola.se/",
       "social": [
         "https://www.facebook.com/blekingetrafikskola",
@@ -1057,9 +1036,9 @@
       ],
       "website": "https://caredrivetrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
@@ -1070,7 +1049,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://caredrivetrafikskola.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -2400,33 +2379,26 @@
       ],
       "website": "https://krylbotrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://krylbotrafikskola.se/",
       "social": [
         "https://www.facebook.com/krylbotrafikskola"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "076 261 26 19",
@@ -2492,34 +2464,27 @@
       ],
       "website": "https://rosakortettrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 60,
-        "pricePerMinuteSek": 10.8,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://rosakortettrafikskola.se/",
       "social": [
         "https://www.facebook.com/rosakortet/",
         "https://www.instagram.com/rosakortet/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": {
         "categories": [
           "C1",
@@ -2855,9 +2820,9 @@
       "website": "https://dalatrafikskola.se",
       "lesson": {
         "priceSek": null,
-        "minutes": 40,
+        "minutes": null,
         "pricePerMinuteSek": null,
-        "note": "manuell/automat samma pris"
+        "note": null
       },
       "testLessonSek": 1330,
       "risk1Sek": 1050,
@@ -3459,10 +3424,10 @@
       ],
       "website": "http://www.nilssonsbilskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 900,
@@ -3475,14 +3440,7 @@
       "status": "OK",
       "sourceUrl": "http://www.nilssonsbilskola.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -3545,10 +3503,10 @@
       ],
       "website": "https://abetrafikskola.se",
       "lesson": {
-        "priceSek": 700,
-        "minutes": 40,
-        "pricePerMinuteSek": 17.5,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 800,
@@ -4549,30 +4507,23 @@
       ],
       "website": "https://ledigajobbhudiksvall.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://ledigajobbhudiksvall.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -4816,10 +4767,10 @@
       ],
       "website": "https://nyatrafikskolan.nu",
       "lesson": {
-        "priceSek": 1450,
-        "minutes": 40,
-        "pricePerMinuteSek": 36.3,
-        "note": "ord pris"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -4991,10 +4942,10 @@
       ],
       "website": "https://murtans.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -5004,7 +4955,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://murtans.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -5485,14 +5436,14 @@
       ],
       "website": "https://fartvinden.se",
       "lesson": {
-        "priceSek": 795,
-        "minutes": 40,
-        "pricePerMinuteSek": 19.9,
-        "note": "standard vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 1900,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
         "cheapestPriceSek": 25495,
@@ -5512,12 +5463,6 @@
       ],
       "checkedAt": "2026-10-26",
       "packages": [
-        {
-          "name": "Standardpaket",
-          "lessons": null,
-          "contents": "paket med flera lektioner och riskutbildningar",
-          "priceSek": 21495
-        },
         {
           "name": "Stort paket",
           "lessons": null,
@@ -5551,13 +5496,13 @@
       ],
       "website": "http://www.rattman.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, standardlektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 850,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
@@ -5570,21 +5515,14 @@
           }
         ]
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.rattman.se/sv/priser/priser-korkort-bil.aspx",
       "social": [
         "https://www.facebook.com/halmstadtrafik/",
         "https://www.instagram.com/halmstadtrafikskola/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": {
         "address": "info@halmstadtrafikskola.se",
@@ -6190,10 +6128,10 @@
       ],
       "website": "https://onvia.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "manuell och automat, vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -6203,17 +6141,10 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://onvia.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 4550
-        }
-      ],
+      "packages": [],
       "heavy": {
         "categories": [
           "C",
@@ -6249,10 +6180,10 @@
       ],
       "website": "https://pilenstrafikskola.se",
       "lesson": {
-        "priceSek": 760,
-        "minutes": 40,
-        "pricePerMinuteSek": 19,
-        "note": "grupplektion 2-3 elever, varje elev kör 2x40 min per lektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 1095,
@@ -6446,10 +6377,10 @@
       ],
       "website": "https://korskolanvarberg.se",
       "lesson": {
-        "priceSek": 795,
-        "minutes": 60,
-        "pricePerMinuteSek": 13.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -6459,7 +6390,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://korskolanvarberg.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -6801,9 +6732,9 @@
       ],
       "website": "https://ljusdalstrafikskola.se",
       "lesson": {
-        "priceSek": 760,
-        "minutes": 45,
-        "pricePerMinuteSek": 16.9,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
@@ -6831,7 +6762,7 @@
         "https://www.facebook.com/Ljusdals-Trafikskola-AB-541774165838092",
         "https://www.instagram.com/ljusdalstrafikskola/"
       ],
-      "checkedAt": "2026-10-26",
+      "checkedAt": "2026-10-30",
       "packages": [
         {
           "name": "Bilpaket Grund",
@@ -7453,30 +7384,23 @@
       ],
       "website": "https://reveljens.se",
       "lesson": {
-        "priceSek": 795,
-        "minutes": 40,
-        "pricePerMinuteSek": 19.9,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://reveljens.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Startpaket",
-          "lessons": null,
-          "contents": "Körlektioner, teori och riskutbildningar",
-          "priceSek": 15900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "063-10 53 10",
@@ -7874,10 +7798,10 @@
       ],
       "website": "https://rattmuffen.com",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 1000,
@@ -8068,7 +7992,7 @@
         "https://www.instagram.com/ba_trafikskola/",
         "https://www.facebook.com/BAtrafikskola/"
       ],
-      "checkedAt": "2026-10-26",
+      "checkedAt": "2026-10-30",
       "packages": [],
       "heavy": {
         "categories": [
@@ -8393,10 +8317,10 @@
       ],
       "website": "https://johanstrafikskola.com",
       "lesson": {
-        "priceSek": 795,
-        "minutes": 40,
-        "pricePerMinuteSek": 19.9,
-        "note": "Ordinarie vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 995,
@@ -9027,30 +8951,23 @@
       ],
       "website": "https://lasses.nu",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://lasses.nu/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "0380-139 90",
@@ -10510,30 +10427,23 @@
       ],
       "website": "http://www.trafikskolorna.se",
       "lesson": {
-        "priceSek": 600,
-        "minutes": 40,
-        "pricePerMinuteSek": 15,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.trafikskolorna.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 5700
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -10553,10 +10463,10 @@
       ],
       "website": "https://asedatrafikskola.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 35,
-        "pricePerMinuteSek": 24.3,
-        "note": "ordinarie pris, vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": 900,
       "risk1Sek": null,
@@ -10734,10 +10644,10 @@
       ],
       "website": "https://alvesta-trafikskola.se",
       "lesson": {
-        "priceSek": 795,
-        "minutes": 60,
-        "pricePerMinuteSek": 13.3,
-        "note": "manuell eller automat"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 899,
@@ -11139,14 +11049,14 @@
       ],
       "website": "https://dahlstrafikskola.com",
       "lesson": {
-        "priceSek": 799,
-        "minutes": 40,
-        "pricePerMinuteSek": 20,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 1200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
         "cheapestPriceSek": null,
@@ -11409,10 +11319,10 @@
       ],
       "website": "https://ljungkviststrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 795,
@@ -11607,20 +11517,20 @@
       ],
       "website": "https://utuab.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://utuab.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -11873,14 +11783,14 @@
       ],
       "website": "https://trafikutbildarna-arvidsjaur.com",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 60,
-        "pricePerMinuteSek": 14.2,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 1200,
-      "risk2Sek": 2200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
         "cheapestPriceSek": 15000,
@@ -11962,20 +11872,20 @@
       ],
       "website": "https://expansa.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 40,
-        "pricePerMinuteSek": 21.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://www.expansa.se/prislista/",
       "social": [
         "https://www.facebook.com/Expansa-1667519126795551",
@@ -12055,36 +11965,23 @@
       ],
       "website": "https://ranheimers.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 40,
-        "pricePerMinuteSek": 21.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 850,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://www.ranheimers.se/e-handel/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 8250
-        },
-        {
-          "name": "Paket 15 lektioner",
-          "lessons": 15,
-          "contents": "15 körlektioner",
-          "priceSek": 12000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": {
@@ -14801,22 +14698,22 @@
       ],
       "website": "https://goingetrafikskola.com",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "manuell bil"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 650,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://goingetrafikskola.com/nyheter/1202/prislista",
-      "checkedAt": "2026-10-26",
+      "checkedAt": "2026-10-30",
       "packages": [],
       "heavy": null,
       "phone": {
@@ -14923,10 +14820,10 @@
       ],
       "website": "https://trafikteamet.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 60,
-        "pricePerMinuteSek": 10.8,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 880,
@@ -14968,10 +14865,10 @@
       ],
       "website": "https://wolfmc-konsult.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "automat"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -14981,7 +14878,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://wolfmc-konsult.se/",
       "social": [
         "https://www.facebook.com/profile.php?id=61560921934010",
@@ -15692,20 +15589,20 @@
       ],
       "website": "https://takortet.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "manuell och automat, vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 1400,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://takortet.se/",
       "social": [
         "https://www.facebook.com/rhodinstrafikskola/",
@@ -15781,14 +15678,14 @@
       ],
       "website": "https://sodratrafikskolan.com",
       "lesson": {
-        "priceSek": 580,
-        "minutes": 40,
-        "pricePerMinuteSek": 14.5,
-        "note": "ord pris 650 kr"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
-      "testLessonSek": 1300,
+      "testLessonSek": null,
       "risk1Sek": 900,
-      "risk2Sek": 2600,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
@@ -15796,56 +15693,13 @@
       },
       "status": "OK",
       "sourceUrl": "https://sodratrafikskolan.com/utbildning-bil",
-      "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Teoripaketet",
-          "lessons": null,
-          "contents": "digitalt studiematerial",
-          "priceSek": 2300
-        },
-        {
-          "name": "Södras startpaket",
-          "lessons": 5,
-          "contents": "Teoripaket + 5 körlektioner",
-          "priceSek": 5150
-        },
-        {
-          "name": "Stora 1:an",
-          "lessons": 10,
-          "contents": "teoripaketet, Riskettan och Risktvåan",
-          "priceSek": 11400
-        },
-        {
-          "name": "Stora 2:an",
-          "lessons": 15,
-          "contents": "teoripaketet, Riskettan och Risktvåan",
-          "priceSek": 14050
-        },
-        {
-          "name": "Stora 3:an",
-          "lessons": 20,
-          "contents": "teoripaketet, Riskettan och Risktvåan",
-          "priceSek": 16600
-        },
-        {
-          "name": "Körlektionspaket 5-paket",
-          "lessons": 5,
-          "contents": "körlektioner",
-          "priceSek": 2850
-        },
-        {
-          "name": "Körlektionspaket 10-paket",
-          "lessons": 10,
-          "contents": "körlektioner",
-          "priceSek": 5600
-        }
-      ],
+      "checkedAt": "2026-10-30",
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "070-976 08 00",
         "e164": "+46709760800",
-        "sourceUrl": "https://elev.sodratrafikskolan.com/shop/kurser"
+        "sourceUrl": "https://sodratrafikskolan.com/"
       },
       "inbox": {
         "address": "info@sodratrafikskolan.com",
@@ -15869,10 +15723,10 @@
       ],
       "website": "https://walterstrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "manuell eller automat, vardagspris"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 1000,
@@ -16081,30 +15935,23 @@
       ],
       "website": "http://www.thellmans.com",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.thellmans.com/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket",
-          "lessons": 10,
-          "contents": "10 körlektioner, riskettan, halkbana, teoriprov",
-          "priceSek": 11900
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -16303,34 +16150,27 @@
       ],
       "website": "https://lommastrands.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://lommastrands.se/",
       "social": [
         "https://www.facebook.com/people/Lommastrands-Trafikskola/100063477013197/?_rdr",
         "https://www.instagram.com/lommastrandstrafikskola/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "046-188188",
@@ -17420,14 +17260,14 @@
       ],
       "website": "https://carolitrafikskola.se",
       "lesson": {
-        "priceSek": 930,
-        "minutes": 70,
-        "pricePerMinuteSek": 13.3,
-        "note": "manuell eller automat, vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 1200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
         "cheapestPriceSek": 14400,
@@ -17857,30 +17697,23 @@
       ],
       "website": "http://www.erikslust.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.erikslust.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket",
-          "lessons": 10,
-          "contents": "10 körlektioner, riskettan, halkbana, teoripaket",
-          "priceSek": 10900
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -18455,20 +18288,20 @@
       ],
       "website": "https://korkortmalmo.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 1200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://korkortmalmo.se",
       "social": [
         "https://www.facebook.com/korkortmalmo",
@@ -18476,14 +18309,7 @@
         "https://www.tiktok.com/@slottsstadenstrafikskola"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -18816,10 +18642,10 @@
       ],
       "website": "https://persborgs.se",
       "lesson": {
-        "priceSek": 425,
-        "minutes": 35,
-        "pricePerMinuteSek": 12.1,
-        "note": "automat eller manuel"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -18884,30 +18710,23 @@
       ],
       "website": "https://rasktrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://rasktrafikskola.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket",
-          "lessons": 10,
-          "contents": "10 körlektioner, riskettan, halkbana, teoriprov, körprov",
-          "priceSek": 11900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -19833,9 +19652,9 @@
       "website": "https://trafikskolan.com",
       "lesson": {
         "priceSek": null,
-        "minutes": 80,
+        "minutes": null,
         "pricePerMinuteSek": null,
-        "note": "pris ej angivet, standardlängd 80 min"
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -19983,34 +19802,27 @@
       ],
       "website": "http://www.sjolinlantz.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.sjolinlantz.se/",
       "social": [
         "https://www.facebook.com/Ystadtrafikutbildning",
         "https://www.instagram.com/ystadtrafikutbildning/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": {
         "display": "0411-168 18",
         "e164": "+4641116818",
@@ -20236,30 +20048,23 @@
       ],
       "website": "https://berndtssons.nu",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://berndtssons.nu/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket",
-          "lessons": null,
-          "contents": "teori, riskettan, halkbana, körlektioner",
-          "priceSek": 13900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -21928,7 +21733,7 @@
           {
             "name": "Intensivkurs 15 dagar",
             "contents": "20 körlektioner á 60 minuter, teoribok, körhäftet, 1000 dataprov och billån vid prov",
-            "priceSek": 24415
+            "priceSek": null
           }
         ]
       },
@@ -21940,12 +21745,6 @@
       ],
       "checkedAt": "2026-10-26",
       "packages": [
-        {
-          "name": "Paket 1",
-          "lessons": 5,
-          "contents": "5 körlektioner, teoribok, körhäftet, 1000 dataprov och billån vid prov",
-          "priceSek": 7390
-        },
         {
           "name": "Paket 2",
           "lessons": 10,
@@ -22206,30 +22005,23 @@
       ],
       "website": "http://www.soderortsbilskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 850,
-      "risk2Sek": 2200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.soderortsbilskola.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -22289,10 +22081,10 @@
       ],
       "website": "https://gtuab.se",
       "lesson": {
-        "priceSek": 789,
-        "minutes": 40,
-        "pricePerMinuteSek": 19.7,
-        "note": "Ordinarie vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 750,
@@ -22388,10 +22180,10 @@
       ],
       "website": "https://takorkorthaninge.se",
       "lesson": {
-        "priceSek": 1790,
-        "minutes": 70,
-        "pricePerMinuteSek": 25.6,
-        "note": "Ordinarie pris per lektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 700,
@@ -22408,26 +22200,7 @@
         "https://tiktok.com/@trafiklararen"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Lilla paketet",
-          "lessons": 5,
-          "contents": "5 körlektioner á 70 min, Teorimaterial och böcker, Körkortsfrågor Online, Riskettan, Halkbanan, Intresseanmälan",
-          "priceSek": 8490
-        },
-        {
-          "name": "Mellan paketet",
-          "lessons": 15,
-          "contents": "15 körlektioner á 70 min, Teorimaterial och böcker, Körkortsfrågor Online, Riskettan, Halkbanan, Intresseanmälan",
-          "priceSek": 17900
-        },
-        {
-          "name": "Stora paketet",
-          "lessons": 25,
-          "contents": "25 körlektioner á 70 min, Teorimaterial och böcker, Körkortsfrågor Online, Riskettan, Halkbanan, Intresseanmälan",
-          "priceSek": 26990
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": {
         "address": "info@takorkorthaninge.se",
@@ -22451,34 +22224,27 @@
       ],
       "website": "https://search.vainu.com",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 850,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://search.vainu.com/",
       "social": [
         "https://www.instagram.com/vainu.app/",
         "https://www.facebook.com/vainuapp/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -22503,10 +22269,10 @@
       ],
       "website": "https://yvonnestrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -22516,7 +22282,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://yvonnestrafikskola.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -22636,10 +22402,10 @@
       ],
       "website": "https://huddingetrafikskola.se",
       "lesson": {
-        "priceSek": 690,
-        "minutes": 40,
-        "pricePerMinuteSek": 17.3,
-        "note": "Ordinarie vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -23101,7 +22867,7 @@
           {
             "name": "Intensivpaket 40",
             "contents": "För nybörjare, passar bäst för automatväxlad bil men går att boka för manuell också",
-            "priceSek": 29330
+            "priceSek": null
           },
           {
             "name": "Super Intensivare 50",
@@ -23469,14 +23235,14 @@
       ],
       "website": "https://trafikskolahasselby.se",
       "lesson": {
-        "priceSek": 940,
-        "minutes": 40,
-        "pricePerMinuteSek": 23.5,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 1500,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
         "cheapestPriceSek": 9999,
@@ -23908,9 +23674,9 @@
       "website": "https://s-k-a.se",
       "lesson": {
         "priceSek": null,
-        "minutes": 55,
+        "minutes": null,
         "pricePerMinuteSek": null,
-        "note": "Ordinarie lektionstid 55 min"
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -24909,9 +24675,9 @@
       ],
       "website": "https://brea-trafikskola.se",
       "lesson": {
-        "priceSek": 700,
-        "minutes": 50,
-        "pricePerMinuteSek": 14,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
@@ -25082,30 +24848,23 @@
       ],
       "website": "https://magantrafikskola.com",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://magantrafikskola.com/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaketet",
-          "lessons": 15,
-          "contents": "15 körlektioner, riskettan, halkbana, teoriprov, körprov",
-          "priceSek": 13900
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -25124,10 +24883,10 @@
       ],
       "website": "https://trafikskola-kista.se/",
       "lesson": {
-        "priceSek": 470,
-        "minutes": 40,
-        "pricePerMinuteSek": 11.8,
-        "note": "ordinarie vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -25481,30 +25240,23 @@
       ],
       "website": "https://lidingotrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://lidingotrafikskola.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaketet",
-          "lessons": 10,
-          "contents": "10 körlektioner, Riskettan, Risktvåan, teoripaket",
-          "priceSek": 11900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -25659,30 +25411,23 @@
       ],
       "website": "http://www.ellstroms.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 850,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.ellstroms.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaketet",
-          "lessons": 10,
-          "contents": "10 körlektioner, riskettan, halkbana, teoripaket",
-          "priceSek": 10900
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -25980,30 +25725,23 @@
       ],
       "website": "https://saltsjotrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://saltsjotrafikskola.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket",
-          "lessons": 10,
-          "contents": "10 körlektioner, riskettan, halkbana, teoriprov, körprov",
-          "priceSek": 11900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -27758,10 +27496,10 @@
       ],
       "website": "https://silverdaltrafikskola.se",
       "lesson": {
-        "priceSek": 695,
-        "minutes": 40,
-        "pricePerMinuteSek": 17.4,
-        "note": "Ordinarie vardagslektion, automatbil"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": 599,
       "risk1Sek": 895,
@@ -28718,10 +28456,10 @@
       ],
       "website": "https://hammarbysjostadstrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 499,
@@ -28754,20 +28492,7 @@
         "https://www.instagram.com/hammarbytrafikskola"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Startpaket",
-          "lessons": null,
-          "contents": "paket med flera tjänster för B-körkort",
-          "priceSek": 3999
-        },
-        {
-          "name": "Körlektionspaket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner för B-körkort",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "08-999 272",
@@ -28917,9 +28642,9 @@
       ],
       "website": "https://jarla_trafikskola_odenplanoaeaeoa.tctabs.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
@@ -30224,10 +29949,10 @@
       ],
       "website": "https://trafikskolasundbyberg.nu/",
       "lesson": {
-        "priceSek": 940,
-        "minutes": 40,
-        "pricePerMinuteSek": 23.5,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -30482,10 +30207,10 @@
       ],
       "website": "https://kringlanstrafikskola.se",
       "lesson": {
-        "priceSek": 600,
-        "minutes": 50,
-        "pricePerMinuteSek": 12,
-        "note": "kampanjpaket 5,10,20 lektioner, 50 min"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": 395,
       "risk1Sek": 350,
@@ -30764,10 +30489,10 @@
       ],
       "website": "https://stadenskorskola.se",
       "lesson": {
-        "priceSek": 1230,
-        "minutes": 50,
-        "pricePerMinuteSek": 24.6,
-        "note": "vanlig vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -31540,9 +31265,9 @@
       ],
       "website": "https://tyresotrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
@@ -31553,7 +31278,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://tyresotrafikskola.se/",
       "social": [
         "https://www.facebook.com/profile.php?id=61575363472026",
@@ -34184,10 +33909,10 @@
       ],
       "website": "https://albertsons.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -34197,7 +33922,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://albertsons.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -34380,10 +34105,10 @@
       ],
       "website": "https://korkortscenter.nu",
       "lesson": {
-        "priceSek": 625,
-        "minutes": 40,
-        "pricePerMinuteSek": 15.6,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 600,
@@ -34838,30 +34563,23 @@
       ],
       "website": "https://halluddstrafikskola.nu",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://halluddstrafikskola.nu/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket 1",
-          "lessons": 10,
-          "contents": "10 körlektioner, riskettan, teoriprov, halkbana",
-          "priceSek": 11900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -35124,10 +34842,10 @@
       ],
       "website": "https://026-76079.se",
       "lesson": {
-        "priceSek": 800,
-        "minutes": 60,
-        "pricePerMinuteSek": 13.3,
-        "note": "30 min lektion 400 SEK, 60 min antas dubbla pris"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": 700,
       "risk1Sek": 840,
@@ -35183,30 +34901,23 @@
       ],
       "website": "https://alvkarleby-skutskars-trafikskola.localo.site",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 60,
-        "pricePerMinuteSek": 10.8,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://alvkarleby-skutskars-trafikskola.localo.site/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": {
         "display": "+46 26 760 79",
         "e164": "+462676079",
@@ -35248,12 +34959,6 @@
       "sourceUrl": "https://jpbilomc.se/prislista.html",
       "checkedAt": "2026-10-26",
       "packages": [
-        {
-          "name": "Startpaket 1",
-          "lessons": 10,
-          "contents": "10/11 Körlektioner, Data teori & Risk 1",
-          "priceSek": 7500
-        },
         {
           "name": "Startpaket 2",
           "lessons": 20,
@@ -35366,36 +35071,23 @@
       ],
       "website": "https://gelinderstrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell bil"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://gelinderstrafikskola.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        },
-        {
-          "name": "Körprovspaket",
-          "lessons": null,
-          "contents": "Riskutbildningar och körprovspaket",
-          "priceSek": 3500
-        }
-      ],
+      "packages": [],
       "phone": {
         "display": "018-10 45 45",
         "e164": "+4618104545",
@@ -35489,30 +35181,23 @@
       ],
       "website": "https://citytrafikskolauppsala.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://citytrafikskolauppsala.se/priser",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -35818,12 +35503,6 @@
           "lessons": 20,
           "contents": "20 körlektioner",
           "priceSek": 11585
-        },
-        {
-          "name": "Fortsättningspaket 5 körlektioner",
-          "lessons": 5,
-          "contents": "5 körlektioner (40 min)",
-          "priceSek": 3150
         },
         {
           "name": "Fortsättningspaket 10 körlektioner",
@@ -36349,30 +36028,23 @@
       ],
       "website": "https://connys.nu",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell eller automat"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://connys.nu/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": {
         "categories": [],
         "ykb": true,
@@ -36907,42 +36579,29 @@
       ],
       "website": "https://carlstadkorcenter.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
-        "cheapestPriceSek": 21900,
+        "cheapestPriceSek": null,
         "courses": [
           {
             "name": "Intensivutbildning B",
             "contents": "Körlektioner, riskettan, halkbana, teoripaket under kort tid",
-            "priceSek": 21900
+            "priceSek": null
           }
         ]
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://carlstadkorcenter.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket 1",
-          "lessons": 15,
-          "contents": "15 körlektioner, riskettan, halkbana, teoripaket",
-          "priceSek": 16900
-        },
-        {
-          "name": "Körkortspaket 2",
-          "lessons": 20,
-          "contents": "20 körlektioner, riskettan, halkbana, teoripaket",
-          "priceSek": 21900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -37357,47 +37016,34 @@
       ],
       "website": "https://kristinehamnsbilskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
-        "cheapestPriceSek": 26000,
+        "cheapestPriceSek": null,
         "courses": [
           {
             "name": "Intensivkurs kort",
             "contents": "20 körlektioner (35 min), Riskettan, Halkbana, lån av bil vid uppkörning",
-            "priceSek": 26000
+            "priceSek": null
           },
           {
             "name": "Intensivkurs lång",
             "contents": "30 körlektioner (35 min), Riskettan, Halkbana, lån av bil vid uppkörning",
-            "priceSek": 35000
+            "priceSek": null
           }
         ]
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://kristinehamnsbilskola.se/nyheter/1299/prislista",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Intensivkurs kort",
-          "lessons": 20,
-          "contents": "20 körlektioner (35 min), Riskettan, Halkbana, lån av bil vid uppkörning",
-          "priceSek": 26000
-        },
-        {
-          "name": "Intensivkurs lång",
-          "lessons": 30,
-          "contents": "30 körlektioner (35 min), Riskettan, Halkbana, lån av bil vid uppkörning",
-          "priceSek": 35000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "0550-124 36",
@@ -37548,30 +37194,23 @@
       ],
       "website": "https://amazonetrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://amazonetrafikskola.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körkortspaket",
-          "lessons": 10,
-          "contents": "10 körlektioner, riskettan, halkbana, teoriprov, körprov",
-          "priceSek": 10900
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -38074,10 +37713,10 @@
       ],
       "website": "https://norrskenetstrafikskola.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 40,
-        "pricePerMinuteSek": 21.3,
-        "note": "vardag, manuell och automat"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -38087,7 +37726,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://www.norrskenetstrafikskola.se/utbildningar/b-personbil-manuell-och-automat-copy/",
       "social": [
         "https://www.facebook.com/norrskenetstrafikskola/"
@@ -38688,10 +38327,10 @@
       ],
       "website": "http://www.centralatrafikskolan.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 40,
-        "pricePerMinuteSek": 21.3,
-        "note": "manuell, vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -38813,10 +38452,10 @@
       ],
       "website": "https://korkortsaklart.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 60,
-        "pricePerMinuteSek": 10.8,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -38826,7 +38465,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://korkortsaklart.se/",
       "social": [
         "https://www.facebook.com/korkortsaklart/"
@@ -39006,10 +38645,10 @@
       ],
       "website": "https://tops.nu",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 50,
-        "pricePerMinuteSek": 13,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -39019,7 +38658,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://elev.tops.nu/shop/personbil-2/korlektion-b",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -39168,13 +38807,13 @@
       ],
       "website": "https://umeavannas-trafikskola.se",
       "lesson": {
-        "priceSek": 795,
-        "minutes": 40,
-        "pricePerMinuteSek": 19.9,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
@@ -40406,14 +40045,14 @@
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 1200,
-      "risk2Sek": 2200,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://halkbanasoderhamn.se/boka-riskutbildning",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -40790,13 +40429,13 @@
       ],
       "website": "https://barmans.nu",
       "lesson": {
-        "priceSek": 1100,
-        "minutes": 40,
-        "pricePerMinuteSek": 27.5,
-        "note": "standard vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
@@ -41703,10 +41342,10 @@
       ],
       "website": "https://trafikskolaninorberg.se",
       "lesson": {
-        "priceSek": 1590,
-        "minutes": 50,
-        "pricePerMinuteSek": 31.8,
-        "note": "standard vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 900,
@@ -41953,10 +41592,10 @@
       ],
       "website": "https://trafikskolasala.se/",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -41966,7 +41605,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://trafikskolasala.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -42057,7 +41696,7 @@
         "pricePerMinuteSek": 16.3,
         "note": null
       },
-      "testLessonSek": 1300,
+      "testLessonSek": null,
       "risk1Sek": 850,
       "risk2Sek": 2500,
       "intensive": {
@@ -43100,20 +42739,20 @@
       ],
       "website": "https://hedinstrafikskola.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 40,
-        "pricePerMinuteSek": 21.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://hedinstrafikskola.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -43288,10 +42927,10 @@
       ],
       "website": "https://cityangered.se",
       "lesson": {
-        "priceSek": 599,
-        "minutes": 40,
-        "pricePerMinuteSek": 15,
-        "note": "2x40 min lektion för 1199 kr, alltså 599,5 kr per 40 min lektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": 499,
       "risk1Sek": 499,
@@ -43769,10 +43408,10 @@
       ],
       "website": "https://boraskorskola.se",
       "lesson": {
-        "priceSek": 999,
-        "minutes": 50,
-        "pricePerMinuteSek": 20,
-        "note": "vardag, automat"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -44396,10 +44035,10 @@
       ],
       "website": "https://thorellstrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 995,
@@ -44847,30 +44486,23 @@
       ],
       "website": "https://cityutbildarna.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 1200,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://cityutbildarna.se/priser",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -45216,10 +44848,10 @@
       ],
       "website": "https://eketra.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "helg körningar utan extra kostnad"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 400,
@@ -46478,28 +46110,21 @@
         "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 795,
-      "risk2Sek": 1595,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://www.storaholm.se/bil/",
       "social": [
         "https://www.facebook.com/storaholmtrafikovningsplats",
         "https://www.instagram.com/storaholmtrafikovningsplats/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Risk 1 & 2 heldag",
-          "lessons": null,
-          "contents": "Teori och halkkörning under en dag",
-          "priceSek": 2290
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "031-55 90 40",
@@ -46818,10 +46443,10 @@
       ],
       "website": "http://www.wright.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 45,
-        "pricePerMinuteSek": 18.9,
-        "note": "vardag, automatgir"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -46831,7 +46456,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "http://www.wright.se/pakke/superpakken-kl-b-automat",
       "social": [
         "https://www.facebook.com/WrightTrafikkskole",
@@ -46902,34 +46527,27 @@
       ],
       "website": "https://ztrafik.se",
       "lesson": {
-        "priceSek": 695,
-        "minutes": 40,
-        "pricePerMinuteSek": 17.4,
-        "note": "manuell, vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 650,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://ztrafik.se/",
       "social": [
         "https://www.facebook.com/zmotorochtrafik",
         "https://www.instagram.com/zmotor_trafik/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 4 lektioner",
-          "lessons": 4,
-          "contents": "4 körlektioner",
-          "priceSek": 2085
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": {
@@ -47504,33 +47122,33 @@
       "checkedAt": "2026-10-26",
       "packages": [
         {
-          "name": "5 körlektioner",
+          "name": "5 k rlektioner",
           "lessons": 5,
-          "contents": "körlektioner",
+          "contents": "k rlektioner",
           "priceSek": 5499
         },
         {
-          "name": "10 körlektioner",
+          "name": "10 k rlektioner",
           "lessons": 10,
-          "contents": "körlektioner",
+          "contents": "k rlektioner",
           "priceSek": 10990
         },
         {
-          "name": "10 körlektioner - inklusive Risk1 och Risk2",
+          "name": "10 k rlektioner - inklusive Risk1 och Risk2",
           "lessons": 10,
-          "contents": "körlektioner, Risk1 och Risk2",
+          "contents": "k rlektioner, Risk1 och Risk2",
           "priceSek": 16199
         },
         {
-          "name": "15 körlektioner",
+          "name": "15 k rlektioner",
           "lessons": 15,
-          "contents": "körlektioner",
+          "contents": "k rlektioner",
           "priceSek": 15300
         },
         {
-          "name": "20 körlektioner",
+          "name": "20 k rlektioner",
           "lessons": 20,
-          "contents": "körlektioner",
+          "contents": "k rlektioner",
           "priceSek": 20000
         }
       ],
@@ -47588,10 +47206,10 @@
       ],
       "website": "https://karrarodbotrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -47601,7 +47219,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://karrarodbotrafikskola.se/",
       "social": [
         "https://www.instagram.com/karrarodbotrafikskola_/"
@@ -48215,22 +47833,22 @@
       ],
       "website": "https://kongahallatrafikskola.com",
       "lesson": {
-        "priceSek": 1590,
-        "minutes": 70,
-        "pricePerMinuteSek": 22.7,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": 999,
       "risk1Sek": null,
       "risk2Sek": 3150,
       "intensive": {
         "offered": "PRICE_LISTED",
-        "cheapestPriceSek": 19980,
+        "cheapestPriceSek": null,
         "courses": [
           {
             "name": "Intensivkurs",
             "contents": "20 st körlektioner á 70 minuter samt fullständig Online-teori inkl. tester, samtliga lektioner inom 2 veckor",
-            "priceSek": 19980
+            "priceSek": null
           }
         ]
       },
@@ -48238,18 +47856,6 @@
       "sourceUrl": "https://www.kongahallatrafikskola.com/korkort/priser-och-paket",
       "checkedAt": "2026-10-26",
       "packages": [
-        {
-          "name": "Köra bil 3",
-          "lessons": 3,
-          "contents": "3 st körlektioner med automat (á 70 min), varav 2 st bokningar på helger ingår",
-          "priceSek": 3890
-        },
-        {
-          "name": "Köra bil 5",
-          "lessons": 5,
-          "contents": "5 st körlektioner med automat (á 70 min), varav 2 st bokningar på helger ingår",
-          "priceSek": 5790
-        },
         {
           "name": "Köra bil 10",
           "lessons": 10,
@@ -48382,20 +47988,20 @@
       ],
       "website": "https://mindedu.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "manuell bil"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://mindedu.se/webshop/",
       "social": [
         "https://www.instagram.com/ardinstrafikskola/",
@@ -48405,14 +48011,7 @@
         "https://www.tiktok.com/@ardinstrafikskola"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": {
@@ -49280,21 +48879,21 @@
       "checkedAt": "2026-10-26",
       "packages": [
         {
-          "name": "5 körlektioner",
+          "name": "5 k rlektioner",
           "lessons": 5,
-          "contents": "körlektioner 55 Min",
+          "contents": "k rlektioner 55 Min",
           "priceSek": 4275
         },
         {
-          "name": "10 körlektioner",
+          "name": "10 k rlektioner",
           "lessons": 10,
-          "contents": "körlektioner 55 Min",
+          "contents": "k rlektioner 55 Min",
           "priceSek": 8500
         },
         {
-          "name": "20 Körlektioner",
+          "name": "20 K rlektioner",
           "lessons": 20,
-          "contents": "körlektioner 55 Min",
+          "contents": "k rlektioner 55 Min",
           "priceSek": 16700
         },
         {
@@ -49404,14 +49003,14 @@
       ],
       "website": "https://dintrafikskolapartille.se",
       "lesson": {
-        "priceSek": 590,
-        "minutes": 40,
-        "pricePerMinuteSek": 14.8,
-        "note": "Ordinarie vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": 1240,
-      "risk1Sek": 795,
-      "risk2Sek": 1595,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "PRICE_LISTED",
         "cheapestPriceSek": 10890,
@@ -50664,9 +50263,9 @@
       ],
       "website": "https://bastkustenstrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
         "note": null
       },
       "testLessonSek": null,
@@ -51062,10 +50661,10 @@
       ],
       "website": "https://centrala.nu",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 55,
-        "pricePerMinuteSek": 11.8,
-        "note": "standard vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -51075,7 +50674,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://centrala.nu/",
       "social": [
         "https://www.instagram.com/centralatrafikskolan_tidaholm?igsh=MTRuMmx2YjZjejZoaw=="
@@ -52452,9 +52051,9 @@
       "website": "https://vastkustentrafikskola.se",
       "lesson": {
         "priceSek": null,
-        "minutes": 40,
+        "minutes": null,
         "pricePerMinuteSek": null,
-        "note": "Ordinarie pris per lektion, vardag"
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 800,
@@ -52908,30 +52507,23 @@
       ],
       "website": "https://kornu.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 795,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://kornu.se/",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Körpaket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "phone": null,
       "inbox": null
     },
@@ -53170,20 +52762,20 @@
       ],
       "website": "https://tkivast.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, manuell"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
+      "risk1Sek": null,
       "risk2Sek": null,
       "intensive": {
         "offered": "NOT_MENTIONED",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://tkivast.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -53625,10 +53217,10 @@
       ],
       "website": "https://josefssonstrafikskola.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag, ej helg eller kampanj"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 800,
@@ -53966,10 +53558,10 @@
       ],
       "website": "https://adtrafikskola.se",
       "lesson": {
-        "priceSek": 750,
-        "minutes": 50,
-        "pricePerMinuteSek": 15,
-        "note": "manuell eller automat, vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": 600,
@@ -55842,10 +55434,10 @@
       ],
       "website": "https://ingelas.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -55855,7 +55447,7 @@
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://ingelas.se/",
       "checkedAt": "2026-10-26",
       "packages": [],
@@ -56411,30 +56003,23 @@
       ],
       "website": "https://wasens.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "vardag"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://wasens.se/priser",
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 6000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": null,
       "inbox": null
@@ -56869,10 +56454,10 @@
       ],
       "website": "https://arres.se",
       "lesson": {
-        "priceSek": 650,
-        "minutes": 40,
-        "pricePerMinuteSek": 16.3,
-        "note": "ordinarie vardagslektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -58317,33 +57902,26 @@
       ],
       "website": "https://ornerdalstrafikskola.se",
       "lesson": {
-        "priceSek": 850,
-        "minutes": 40,
-        "pricePerMinuteSek": 21.3,
-        "note": "manuell och automat"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": null
       },
       "testLessonSek": null,
-      "risk1Sek": 900,
-      "risk2Sek": 2300,
+      "risk1Sek": null,
+      "risk2Sek": null,
       "intensive": {
         "offered": "ON_REQUEST",
         "cheapestPriceSek": null,
         "courses": []
       },
-      "status": "OK",
+      "status": "PRICE_NOT_PUBLISHED",
       "sourceUrl": "https://ornerdalstrafikskola.se/shop",
       "social": [
         "https://www.facebook.com/ornerdals/"
       ],
       "checkedAt": "2026-10-26",
-      "packages": [
-        {
-          "name": "Paket 10 lektioner",
-          "lessons": 10,
-          "contents": "10 körlektioner",
-          "priceSek": 8000
-        }
-      ],
+      "packages": [],
       "heavy": null,
       "phone": {
         "display": "011-13 01 02",

@@ -1,7 +1,7 @@
 // Programmatic SEO routes merged into /sitemap.xml. Prefer the Nordic
 // locations registry over one-off city files — add a row in nordic-locations.ts.
 import type { MetadataRoute } from 'next';
-import { listCatalogueSchools } from '@/lib/discovery/nordic-catalogue';
+import { catalogueWebsiteDown, listCatalogueSchools } from '@/lib/discovery/nordic-catalogue';
 import { indexableLocationPaths } from '@/lib/seo/catalogue-locations';
 import { listIndexableInstructors } from '@/lib/seo/public-instructor';
 import { schoolPath } from '@/lib/seo/school-slugs';
@@ -64,6 +64,9 @@ const EDITORIAL: SeoRoute[] = [
   { path: '/instructors/vasteras', priority: 0.3, changeFrequency: 'yearly' },
 ];
 
+/** One sitemap file holds at most 50,000 URLs; the catalogue routes share it. */
+const MAX_SITEMAP_SCHOOLS = 20_000;
+
 export async function seoRoutes(): Promise<SeoRoute[]> {
   const locationRoutes: SeoRoute[] = indexableLocationPaths().map((path) => ({
     path,
@@ -71,15 +74,17 @@ export async function seoRoutes(): Promise<SeoRoute[]> {
     changeFrequency: 'weekly' as const,
   }));
 
-  const catalogueRoutes: SeoRoute[] = listCatalogueSchools().map((school) => ({
-    path: schoolPath(school),
-    priority: 0.65,
-    changeFrequency: 'weekly' as const,
-  }));
+  const catalogueRoutes: SeoRoute[] = listCatalogueSchools()
+    .filter((school) => !catalogueWebsiteDown(school.id))
+    .map((school) => ({
+      path: schoolPath(school),
+      priority: 0.65,
+      changeFrequency: 'weekly' as const,
+    }));
 
   let instructorRoutes: SeoRoute[] = [];
   try {
-    const rows = await listIndexableInstructors(500);
+    const rows = await listIndexableInstructors(MAX_SITEMAP_SCHOOLS);
     instructorRoutes = rows.map((row) => ({
       path: schoolPath(row),
       priority: 0.65,

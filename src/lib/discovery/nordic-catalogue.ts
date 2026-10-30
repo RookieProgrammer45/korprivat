@@ -464,6 +464,7 @@ const byId = new Map<string, InstructorFilteredItem>();
 const byShortId = new Map<string, InstructorFilteredItem>();
 const countryById = new Map<string, string>();
 const regionById = new Map<string, string>();
+const websiteDown = new Set<string>();
 for (const school of rawSchools()) {
   const instructor = toNordicInstructor(school);
   if (!instructor) continue;
@@ -473,6 +474,7 @@ for (const school of rawSchools()) {
   byShortId.set(shortId, instructor);
   countryById.set(instructor.id, school.country.toLowerCase());
   if (school.region) regionById.set(instructor.id, school.region);
+  if (school.websiteStatus === 'SITE_UNREACHABLE') websiteDown.add(instructor.id);
 }
 
 const catalogue = [...byId.values()];
@@ -528,6 +530,15 @@ export function catalogueCountryCode(id: string): string | null {
 /** State or region slug stored with a catalogue school, when the file has one. */
 export function catalogueRegionSlug(id: string): string | null {
   return regionById.get(id) ?? null;
+}
+
+/**
+ * The school's own website did not answer at the last catalogue check. The
+ * listing stays in the directory but is kept out of search until a re-check
+ * finds the site again.
+ */
+export function catalogueWebsiteDown(id: string): boolean {
+  return websiteDown.has(id);
 }
 
 export function nordicInstructorById(id: string): InstructorFilteredItem | null {

@@ -2,7 +2,11 @@ import 'server-only';
 import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
-import { catalogueCountryCode, nordicInstructorByShortId } from '@/lib/discovery/nordic-catalogue';
+import {
+  catalogueCountryCode,
+  catalogueWebsiteDown,
+  nordicInstructorByShortId,
+} from '@/lib/discovery/nordic-catalogue';
 import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
 import { marketCopy } from '@/lib/seo/market-copy';
 import { isNordicCountry } from '@/lib/seo/nordic-locations';
@@ -164,7 +168,7 @@ export async function loadPublicInstructorBySchoolSlug(
       categories: [...nordic.categories],
       photoUrl: nordic.photoUrl,
       englishSpeaking: nordic.englishSpeaking,
-      indexable: true,
+      indexable: !catalogueWebsiteDown(nordic.id),
       userId: null,
       providerRole: 'SCHOOL',
       bookingMode: 'contact',

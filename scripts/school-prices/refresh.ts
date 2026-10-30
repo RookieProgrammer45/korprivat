@@ -195,9 +195,10 @@ async function main() {
     writeFileSync(CSV_PATH, toCsv(dataset.schools));
     console.log('wrote', JSON_PATH, dataset.meta.counts);
   } else if (flag('write')) {
-    const today = new Date().toISOString().slice(0, 10);
-    for (const school of dataset.schools) merge(school, today);
-    dataset.meta.collectedAt = today;
+    for (const school of dataset.schools) merge(school);
+    dataset.meta.collectedAt = dataset.schools
+      .map((school) => school.checkedAt ?? '')
+      .reduce((latest, day) => (day > latest ? day : latest), dataset.meta.collectedAt);
     dataset.meta.priceSource =
       "Each school's own website or its web shop; extracted automatically, spot-checked manually";
     dataset.meta.counts = {
@@ -601,7 +602,7 @@ function sanitize(extraction: Extraction): Extraction {
 
 // --- write -------------------------------------------------------------------
 
-function merge(school: School, today: string) {
+function merge(school: School) {
   const fetched = readJson<FetchCache>(cachePath(school.id, 'fetch'));
   const extraction = readJson<Extraction>(cachePath(school.id, 'extract'));
   if (fetched?.social.length) school.social = fetched.social;
@@ -615,8 +616,14 @@ function merge(school: School, today: string) {
     if (school.status === 'OK') school.status = 'SITE_UNREACHABLE';
     return;
   }
+  if (fetched.pages.every((page) => PARKED_PAGE.test(page.text))) {
+    school.status = 'SITE_UNREACHABLE';
+    clearPrices(school);
+    return;
+  }
   if (!extraction) return;
-  const { lesson } = extraction;
+  const checked = onlyBPricesOnPage(extraction, fetched);
+  const { lesson } = checked;
   school.lesson = {
     priceSek: lesson.priceSek,
     minutes: lesson.minutes,
@@ -626,27 +633,72 @@ function merge(school: School, today: string) {
         : null,
     note: lesson.note,
   };
-  school.testLessonSek = extraction.testLessonSek;
-  school.risk1Sek = extraction.risk1Sek;
-  school.risk2Sek = extraction.risk2Sek;
-  school.packages = extraction.packages;
-  const priced = extraction.intensive.courses.flatMap((course) =>
+  school.testLessonSek = checked.testLessonSek;
+  school.risk1Sek = checked.risk1Sek;
+  school.risk2Sek = checked.risk2Sek;
+  school.packages = checked.packages;
+  const priced = checked.intensive.courses.flatMap((course) =>
     course.priceSek == null ? [] : [course.priceSek],
   );
   school.intensive = {
-    offered: extraction.intensive.offered,
+    offered: checked.intensive.offered,
     cheapestPriceSek: priced.length > 0 ? Math.min(...priced) : null,
-    courses: extraction.intensive.courses,
+    courses: checked.intensive.courses,
   };
   const anyPrice =
     lesson.priceSek != null ||
-    extraction.risk1Sek != null ||
-    extraction.risk2Sek != null ||
-    extraction.packages.length > 0 ||
+    checked.risk1Sek != null ||
+    checked.risk2Sek != null ||
+    checked.packages.length > 0 ||
     priced.length > 0;
   school.status = anyPrice ? 'OK' : 'PRICE_NOT_PUBLISHED';
-  school.sourceUrl = extraction.sourceUrl ?? school.sourceUrl;
-  school.checkedAt = today;
+  school.sourceUrl = checked.sourceUrl ?? school.sourceUrl;
+}
+
+// A domain-host placeholder or parking page is not the school's website.
+const PARKED_PAGE =
+  /has not been mapped yet|domain (is )?(for sale|parked)|this domain (may be|is) for sale|domänen (är )?till salu|webbhotell.{0,40}(parkerad|ej aktiv)/i;
+
+function amountOnPages(amount: number, pages: FetchCache['pages']): boolean {
+  const grouped = String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, '[ .,]?');
+  const pattern = new RegExp(`(^|[^\\d])${grouped}([^\\d]|$)`);
+  return pages.some((page) => pattern.test(page.text.replace(/\u00a0|\u202f/g, ' ')));
+}
+
+// The model sometimes fills a typical Swedish price list into a page that has
+// none. Every amount must be written on one of the crawled pages.
+function onlyBPricesOnPage(extraction: Extraction, fetched: FetchCache): Extraction {
+  const seen = (amount: number | null) =>
+    amount != null && amountOnPages(amount, fetched.pages) ? amount : null;
+  const lessonPrice = seen(extraction.lesson.priceSek);
+  return {
+    ...extraction,
+    lesson: {
+      priceSek: lessonPrice,
+      minutes: lessonPrice == null ? null : extraction.lesson.minutes,
+      note: lessonPrice == null ? null : extraction.lesson.note,
+    },
+    testLessonSek: seen(extraction.testLessonSek),
+    risk1Sek: seen(extraction.risk1Sek),
+    risk2Sek: seen(extraction.risk2Sek),
+    packages: extraction.packages.filter((pack) => seen(pack.priceSek) != null),
+    intensive: {
+      offered: extraction.intensive.offered,
+      courses: extraction.intensive.courses.map((course) => ({
+        ...course,
+        priceSek: seen(course.priceSek),
+      })),
+    },
+  };
+}
+
+function clearPrices(school: School) {
+  school.lesson = { priceSek: null, minutes: null, pricePerMinuteSek: null, note: null };
+  school.testLessonSek = null;
+  school.risk1Sek = null;
+  school.risk2Sek = null;
+  school.packages = [];
+  school.intensive = { offered: 'UNKNOWN', cheapestPriceSek: null, courses: [] };
 }
 
 const HEAVY_NAME_CODE = /(^|[^A-Za-z0-9])(C1E?|CE|C|D1E?|DE|D)([^A-Za-z0-9]|$)/;
