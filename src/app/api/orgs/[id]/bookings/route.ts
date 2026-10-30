@@ -12,14 +12,14 @@ import {
 import { BookingPaymentStatusEnum } from '@/lib/contracts/bookings';
 import { SchoolBookingList } from '@/lib/contracts/provider-operations';
 import { prisma } from '@/lib/db';
+import { loadListingBindings } from '@/lib/orgs/school-authorization';
+import { bookingVisibleToOrganization } from '@/lib/orgs/school-authorization-policy';
 import {
   assertActiveMember,
   getOrganizationById,
   OrgForbiddenError,
   OrgNotFoundError,
 } from '@/lib/orgs/service';
-import { loadListingBindings } from '@/lib/orgs/school-authorization';
-import { bookingVisibleToOrganization } from '@/lib/orgs/school-authorization-policy';
 import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';

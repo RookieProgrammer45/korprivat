@@ -27,9 +27,10 @@ describe('homepageSchoolRegionScore', () => {
   it('ranks in-country listings above others', () => {
     const local = listCatalogueSchools().find((s) => catalogueCountryCode(s.id) === 'no');
     expect(local).toBeTruthy();
+    if (!local) return;
     const match = { countryCode: 'no', regionSlug: null };
     const other = { countryCode: 'us', regionSlug: null };
-    expect(homepageSchoolRegionScore(local!.id, match)).toBe(10);
-    expect(homepageSchoolRegionScore(local!.id, other)).toBe(0);
+    expect(homepageSchoolRegionScore(local.id, match)).toBe(10);
+    expect(homepageSchoolRegionScore(local.id, other)).toBe(0);
   });
 });

@@ -110,28 +110,28 @@ export function BookingPriceSummary({
             {locale === 'en' ? 'Price on request' : 'Pris på förfrågan'}
           </p>
         ) : (
-<dl className="grid gap-2 text-small">
-          <div className="flex items-center justify-between gap-3">
-            <dt className="text-muted-foreground">{tr('priceLine')}</dt>
-            <dd className="font-medium text-foreground">
-              {formatSek(quote.priceAmountSek, locale)}
-            </dd>
-          </div>
-          {quote.serviceFeeSek > 0 ? (
+          <dl className="grid gap-2 text-small">
             <div className="flex items-center justify-between gap-3">
-              <dt className="text-muted-foreground">{tr('feeLine')}</dt>
+              <dt className="text-muted-foreground">{tr('priceLine')}</dt>
               <dd className="font-medium text-foreground">
-                {formatSek(quote.serviceFeeSek, locale)}
+                {formatSek(quote.priceAmountSek, locale)}
               </dd>
             </div>
-          ) : null}
-          <div className="flex items-center justify-between gap-3 border-t border-border pt-2">
-            <dt className="font-medium text-foreground">{tr('totalLine')}</dt>
-            <dd className="font-display text-h4 font-semibold tracking-tight text-foreground">
-              {formatSek(quote.grossChargedSek, locale)}
-            </dd>
-          </div>
-        </dl>
+            {quote.serviceFeeSek > 0 ? (
+              <div className="flex items-center justify-between gap-3">
+                <dt className="text-muted-foreground">{tr('feeLine')}</dt>
+                <dd className="font-medium text-foreground">
+                  {formatSek(quote.serviceFeeSek, locale)}
+                </dd>
+              </div>
+            ) : null}
+            <div className="flex items-center justify-between gap-3 border-t border-border pt-2">
+              <dt className="font-medium text-foreground">{tr('totalLine')}</dt>
+              <dd className="font-display text-h4 font-semibold tracking-tight text-foreground">
+                {formatSek(quote.grossChargedSek, locale)}
+              </dd>
+            </div>
+          </dl>
         )}
         <p className="text-caption text-muted-foreground">{tr('note')}</p>
       </CardContent>

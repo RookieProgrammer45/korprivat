@@ -1,4 +1,3 @@
-
 'use client';
 
 import { ArrowUpRight, ChevronRight, Compass, MountainSnow, RotateCcw } from 'lucide-react';

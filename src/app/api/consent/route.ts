@@ -78,9 +78,12 @@ async function readCookie(): Promise<ParsedCookie | null> {
 
 export async function POST(req: Request) {
   const h0 = await headers();
-  const limited = takeIpToken(`consent:${firstForwardedFor(h0.get('x-forwarded-for')) ?? 'anonymous'}`, {
-    max: 30,
-  });
+  const limited = takeIpToken(
+    `consent:${firstForwardedFor(h0.get('x-forwarded-for')) ?? 'anonymous'}`,
+    {
+      max: 30,
+    },
+  );
   if (!limited.ok) return rateLimitResponse(limited.retryAfterSec);
 
   let bodyJson: unknown;

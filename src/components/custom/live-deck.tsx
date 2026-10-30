@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { apiFetch } from '@/lib/api-client';
-import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
+import { apiFetch } from '@/lib/api-client';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
+import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 
 /**
  * The live profile deck used on the auth shell (signup/login).

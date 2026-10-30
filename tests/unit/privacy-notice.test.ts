@@ -25,7 +25,9 @@ describe('published privacy notice', () => {
       expect(blob).not.toMatch(/legal review|juridik|juristgransk/i);
       expect(blob).toMatch(/frank@drivelinkup\.com/);
       expect(blob).not.toMatch(/Stripe|hosted payment|betalningsleverantör/i);
-      expect(blob).toMatch(/do not currently collect card numbers|samlar just nu inte in kortnummer/);
+      expect(blob).toMatch(
+        /do not currently collect card numbers|samlar just nu inte in kortnummer/,
+      );
     }
   });
 

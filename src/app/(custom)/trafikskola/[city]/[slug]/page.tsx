@@ -45,6 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const path = canonicalPath;
   const title = `${instructor.name} — ${instructor.city} | DriveLinkUp`;
   const rate = publicLessonRate(instructor);
+  const portrait = schoolPortraitUrl(instructor.photoUrl);
   const description =
     instructor.localDescription ||
     instructor.bio?.trim().slice(0, 155) ||
@@ -61,9 +62,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName,
       title,
       description,
-      images: schoolPortraitUrl(instructor.photoUrl)
-        ? [{ url: schoolPortraitUrl(instructor.photoUrl)! }]
-        : undefined,
+      images: portrait ? [{ url: portrait }] : undefined,
     },
   };
 }

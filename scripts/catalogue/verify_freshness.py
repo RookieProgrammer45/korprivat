@@ -24,7 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 FILES = ["nordic", "europe", "us", "uk", "australia"]
-USER_AGENT = "DriveLinkUpCatalogueCheck/1.0 (+https://www.drivelinkup.com/kontakt)"
+USER_AGENT = "DriveLinkUpCatalogueCheck/1.0 (+https://www.drivelinkup.com/contact)"
 CTX = ssl.create_default_context()
 LAX = ssl._create_unverified_context()  # some small-school sites ship broken chains
 TAG = re.compile(r"<script.*?</script>|<style.*?</style>|<[^>]+>", re.S | re.I)

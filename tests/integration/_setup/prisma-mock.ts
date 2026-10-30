@@ -460,6 +460,7 @@ export function instructorRow(
     userId: string | null;
     cancellationPolicyTier: string | null;
     bookingMode: 'instant' | 'request' | null;
+    providerRole: 'INSTRUCTOR' | 'SCHOOL' | 'HANDLEDARE' | null;
   }> = {},
 ) {
   return {

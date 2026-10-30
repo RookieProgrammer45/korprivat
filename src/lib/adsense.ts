@@ -30,6 +30,8 @@ export function adsenseAdsTxtLine(client = adsenseClient()): string {
 }
 
 /** AdSense is a marketing cookie. Load it only after that toggle is on. */
-export function adsenseAllowedByConsent(scope: { marketing?: boolean } | null | undefined): boolean {
+export function adsenseAllowedByConsent(
+  scope: { marketing?: boolean } | null | undefined,
+): boolean {
   return scope?.marketing === true;
 }

@@ -4,20 +4,20 @@
 'use client';
 
 import Image from 'next/image';
-import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
-import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
 import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { PublishedPriceList } from '@/components/custom/published-price';
 import { SchoolContactActions } from '@/components/custom/school-contact-button';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { InstructorItem } from '@/lib/contracts/instructors';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
 type Status = 'loading' | 'not-found' | 'error' | 'profile';

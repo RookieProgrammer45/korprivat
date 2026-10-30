@@ -20,7 +20,7 @@ const FILES = [
   'data/europe-schools/schools.json',
 ];
 const CACHE_DIR = path.join(process.cwd(), 'data/regional-schools/.cache');
-const USER_AGENT = 'DriveLinkUpPriceBot/1.0 (+https://www.drivelinkup.com/kontakt)';
+const USER_AGENT = 'DriveLinkUpPriceBot/1.0 (+https://www.drivelinkup.com/contact)';
 const PRICE_LINK =
   /pris|price|pricing|cost|fee|hinta|ver[ðd]|leksjon|lektion|lesson|k[øo]retime|timpris|timepris|tariff|preis|precio|prix|prezzo|cena|cennik|prijs|pre[cç]o|kosten/i;
 const MAX_PAGES = 6;
@@ -236,7 +236,8 @@ async function main() {
         const fetched = readJson<FetchCache>(cachePath(school, 'fetch'));
         const inCountry = !country || school.country === country;
         if (!fetched) {
-          if (inCountry) notes.push(note(school, 'missing', 0, extractErrors.get(school.id) ?? null));
+          if (inCountry)
+            notes.push(note(school, 'missing', 0, extractErrors.get(school.id) ?? null));
           continue;
         }
         school.checkedAt = today;
@@ -248,7 +249,9 @@ async function main() {
         const extraction = readJson<Extraction>(cachePath(school, 'extract'));
         if (!extraction) {
           if (inCountry) {
-            notes.push(note(school, 'ok', fetched.pages.length, extractErrors.get(school.id) ?? null));
+            notes.push(
+              note(school, 'ok', fetched.pages.length, extractErrors.get(school.id) ?? null),
+            );
           }
           continue;
         }

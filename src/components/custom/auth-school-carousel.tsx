@@ -7,8 +7,8 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api-client';
 import { PUBLIC_CATALOG_PREVIEW_LIMIT } from '@/lib/catalog-preview';
-import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { InstructorList } from '@/lib/contracts/instructors';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 
 const FALLBACK_SRC = '/images/hero-lesson.jpg';
 const ROTATION_MS = 5500;

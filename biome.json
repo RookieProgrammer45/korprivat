@@ -3,7 +3,19 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!.next", "!.polsia", "!node_modules", "!dist"]
+    "includes": [
+      "**",
+      "!.next",
+      "!.polsia",
+      "!node_modules",
+      "!dist",
+      "!mobile/node_modules",
+      "!mobile/ios",
+      "!mobile/android",
+      "!data/**/*.json",
+      "!docs/authorization-coverage-report.json",
+      "!docs/v1.2-production-readiness-walkthrough.json"
+    ]
   },
   "linter": {
     "enabled": true,
@@ -36,7 +48,9 @@
         "src/app/**/route.ts",
         "src/app/layout.tsx",
         "src/lib/**",
-        "src/modules/**/server/**"
+        "src/modules/**/server/**",
+        "scripts/**",
+        "tests/**"
       ],
       "linter": { "rules": { "style": { "noRestrictedImports": "off" } } }
     }

@@ -43,9 +43,9 @@ describe('signup eligibility', () => {
   });
 
   it('still rejects an underage date of birth if one is sent', () => {
-    expect(
-      SignupStart.safeParse({ path: 'LEARNER', dateOfBirth: '2015-01-01' }).success,
-    ).toBe(false);
+    expect(SignupStart.safeParse({ path: 'LEARNER', dateOfBirth: '2015-01-01' }).success).toBe(
+      false,
+    );
   });
 
   it('maps signup paths to roles and provider roles', () => {

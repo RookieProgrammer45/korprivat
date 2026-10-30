@@ -22,7 +22,7 @@ const DATA_DIR = path.join(process.cwd(), 'data/school-prices');
 const CACHE_DIR = path.join(DATA_DIR, '.cache');
 const JSON_PATH = path.join(DATA_DIR, 'school-prices.json');
 const CSV_PATH = path.join(DATA_DIR, 'school-prices.csv');
-const USER_AGENT = 'DriveLinkUpPriceBot/1.0 (+https://www.drivelinkup.com/kontakt)';
+const USER_AGENT = 'DriveLinkUpPriceBot/1.0 (+https://www.drivelinkup.com/contact)';
 const PRICE_LINK = /pris|priser|prislista|paket|risk|halk|kurs|intensiv|shop|butik|erbjud|price/i;
 const HEAVY_LINK =
   /lastbil|buss|tung|yrkesf[öo]rar|ykb|heavy|truck|\bbus\b|[cd]1?e?-?(k[öo]rkort|beh[öo]righet|utbildning)|\/(c|ce|c1|c1e|d|de|d1|d1e)(\/|-|$)/i;

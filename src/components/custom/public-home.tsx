@@ -2,6 +2,8 @@
 // Frontstage: the price, then the schools. Policy stays on the terms page.
 // Server component so the three schools are in the first HTML response.
 
+// biome-ignore lint/style/noRestrictedImports: server component - reads the Vercel geo headers to order schools by region
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { HomeHero } from '@/components/custom/home-hero';
@@ -9,7 +11,6 @@ import { InstructorPreview } from '@/components/custom/instructor-preview';
 import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
 import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
-import { headers } from 'next/headers';
 
 export async function PublicHome() {
   const t = await getTranslations('publicHome');

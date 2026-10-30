@@ -19,8 +19,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { apiFetch } from '@/lib/api-client';
 import {
   type GoogleReviewItem,
-  type GoogleReviewSummary,
   GoogleReviewList,
+  type GoogleReviewSummary,
 } from '@/lib/contracts/google-reviews';
 
 type State =
@@ -111,7 +111,9 @@ function GoogleReviewCard({ review }: { review: GoogleReviewItem }) {
   const locale = useLocale();
   const [expanded, setExpanded] = useState(false);
   const isLong = review.comment.length > 320;
-  const whenLabel = review.publishTime ? formatDay(review.publishTime, locale) : review.relativeTime;
+  const whenLabel = review.publishTime
+    ? formatDay(review.publishTime, locale)
+    : review.relativeTime;
 
   return (
     <div className="min-w-0 rounded-lg border border-border bg-muted p-4">
@@ -127,9 +129,7 @@ function GoogleReviewCard({ review }: { review: GoogleReviewItem }) {
           {`★ ${formatNumber(review.rating, locale)}`}
         </Badge>
       </div>
-      {whenLabel ? (
-        <p className="mt-0.5 text-caption text-muted-foreground">{whenLabel}</p>
-      ) : null}
+      {whenLabel ? <p className="mt-0.5 text-caption text-muted-foreground">{whenLabel}</p> : null}
       <p
         className={`mt-2 whitespace-pre-line text-body text-foreground ${
           isLong && !expanded ? 'line-clamp-5' : ''
@@ -156,7 +156,14 @@ function GoogleReviewCard({ review }: { review: GoogleReviewItem }) {
 // next/image config) at 16px so the attribution reads as Google's mark.
 function GoogleG() {
   return (
-    <svg aria-hidden="true" role="presentation" focusable="false" width="16" height="16" viewBox="0 0 24 24">
+    <svg
+      aria-hidden="true"
+      role="presentation"
+      focusable="false"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+    >
       <path
         fill="#4285F4"
         d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47a5.57 5.57 0 0 1-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"

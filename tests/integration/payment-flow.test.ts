@@ -96,7 +96,9 @@ describe('POST /api/checkout', () => {
     prismaMock.booking.findUnique.mockResolvedValue(
       bookingRow({ id: 'booking_pay', paymentStatus: null }),
     );
-    prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
+    prismaMock.instructor.findUnique.mockResolvedValue(
+      instructorRow({ hourlyRateSek: 550, providerRole: 'SCHOOL' }),
+    );
     prismaMock.booking.update.mockResolvedValue({ id: 'booking_pay' });
 
     const res = await checkoutPOST(checkoutReq('booking_pay'));
@@ -171,6 +173,31 @@ describe('POST /api/checkout', () => {
     prismaMock.instructor.findUnique.mockResolvedValue(instructorRow());
     const res = await checkoutPOST(checkoutReq('booking_x'));
     expect(res.status).toBe(403);
+  });
+
+  it('403 for an independent instructor (school-only payments)', async () => {
+    prismaMock.booking.findUnique.mockResolvedValue(
+      bookingRow({ id: 'booking_pay', paymentStatus: null }),
+    );
+    prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
+    const res = await checkoutPOST(checkoutReq('booking_pay'));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: { code: 'independent_payment_refused' } });
+    expect(createCheckoutSession).not.toHaveBeenCalled();
+  });
+
+  it('403 while booking creation is off', async () => {
+    vi.stubEnv('BOOKING_CREATION_ENABLED', '');
+    prismaMock.booking.findUnique.mockResolvedValue(
+      bookingRow({ id: 'booking_pay', paymentStatus: null }),
+    );
+    prismaMock.instructor.findUnique.mockResolvedValue(
+      instructorRow({ hourlyRateSek: 550, providerRole: 'SCHOOL' }),
+    );
+    const res = await checkoutPOST(checkoutReq('booking_pay'));
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: 'booking_not_available' });
+    expect(createCheckoutSession).not.toHaveBeenCalled();
   });
 });
 

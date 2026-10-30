@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { ClaimSchoolButton } from '@/components/custom/school-contact-button';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -12,7 +13,6 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
-import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
 import { publicAlternates } from '@/lib/seo/alternates';
