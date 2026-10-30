@@ -23,7 +23,7 @@ These block a review even after the binary uploads.
 | Website | https://www.drivelinkup.com |
 | Privacy | https://www.drivelinkup.com/privacy |
 | Support | https://www.drivelinkup.com/contact |
-| Support email | support@drivelinkup.com |
+| Support email | frank@drivelinkup.com |
 | Age | 16 and older. Not a children's app. |
 
 Apple's questionnaire has no "16+" bucket. Answer it from the real content. Expect 12+ or 17+. On Google Play, set the target age to 16 and do not opt into the Families program.

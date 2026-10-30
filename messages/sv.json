@@ -2101,7 +2101,7 @@
       "cancel": "Avbryt",
       "deleting": "Raderar…",
       "done": "Ditt konto har raderats.",
-      "error": "Kunde inte radera kontot. Försök igen, eller mejla support@drivelinkup.com."
+      "error": "Kunde inte radera kontot. Försök igen, eller mejla frank@drivelinkup.com."
     }
   },
   "chatbot": {
@@ -2131,7 +2131,7 @@
     "sections": {
       "0": {
         "title": "1. Personuppgiftsansvarig och kontakt",
-        "body": "DriveLinkUp är personuppgiftsansvarig för de personuppgifter som beskrivs här. Vi har inte publicerat något registrerat bolagsnamn eller organisationsnummer på den här sidan. Skriv till support@drivelinkup.com med ”Integritet” i ämnesraden. Om vi registrerar ett svenskt bolag lägger vi till firma och organisationsnummer här.",
+        "body": "DriveLinkUp är personuppgiftsansvarig för de personuppgifter som beskrivs här. Vi har inte publicerat något registrerat bolagsnamn eller organisationsnummer på den här sidan. Skriv till frank@drivelinkup.com med ”Integritet” i ämnesraden. Om vi registrerar ett svenskt bolag lägger vi till firma och organisationsnummer här.",
         "items": []
       },
       "1": {
@@ -2144,7 +2144,7 @@
           "Uppgifter vid skolregistrering som skolnamn, organisationsnummer och stad.",
           "En fil med lärarbehörighet om du laddar upp en. Vi sparar den för att granska annonsen. Det är inte en automatisk kontroll hos Transportstyrelsen.",
           "Handledares försäkringsbekräftelse (din bekräftelse och tidpunkten), inte försäkringsbrevet om du inte skickar det till support.",
-          "Supportmeddelanden som du skickar i kontaktformuläret. De mejlas till support@drivelinkup.com. Vi har ingen separat publik kontaktdatabas.",
+          "Supportmeddelanden som du skickar i kontaktformuläret. De mejlas till frank@drivelinkup.com. Vi har ingen separat publik kontaktdatabas.",
           "Frågor som du skriver till assistenten på sajten. Texten skickas till OpenAI för att ta fram ett svar.",
           "Ungefärliga koordinater när du klickar på ”Använd min plats”, som skickas med katalogförfrågan så att vi kan sortera skolor. Vi sparar inte den platsen på ditt konto.",
           "Cookieval, policyversion och en hash av IP-adress plus webbläsarinformation. Vi sparar inte den råa IP-adressen på samtyckesposten.",
@@ -2196,7 +2196,7 @@
       },
       "5": {
         "title": "6. Internationella överföringar",
-        "body": "Vissa leverantörer behandlar uppgifter utanför EU/EES, bland annat i USA (Vercel, Google, OpenAI och Resend). När det krävs använder vi ett adekvansbeslut eller EU-kommissionens standardavtalsklausuler. Skriv till support@drivelinkup.com om du vill ha mer om en överföring.",
+        "body": "Vissa leverantörer behandlar uppgifter utanför EU/EES, bland annat i USA (Vercel, Google, OpenAI och Resend). När det krävs använder vi ett adekvansbeslut eller EU-kommissionens standardavtalsklausuler. Skriv till frank@drivelinkup.com om du vill ha mer om en överföring.",
         "items": []
       },
       "6": {
@@ -2216,14 +2216,14 @@
         "body": "Enligt GDPR kan du begära tillgång, rättelse, radering, begränsning, invändning och dataportabilitet när de rättsliga villkoren är uppfyllda. När vi stödjer oss på samtycke kan du återkalla det när som helst. Ett återkallande påverkar inte behandling som redan skett.",
         "items": [
           "Radera kontot under Profil. Det är den självbetjänta raderingsvägen.",
-          "Skriv till support@drivelinkup.com för tillgång, rättelse eller en annan rättighetsbegäran.",
+          "Skriv till frank@drivelinkup.com för tillgång, rättelse eller en annan rättighetsbegäran.",
           "Invänd mot behandling som grundas på berättigat intresse, inklusive assistenten, så slutar vi om vi inte har ett tvingande skäl att fortsätta.",
           "Lämna klagomål till Integritetsskyddsmyndigheten (IMY), https://www.imy.se."
         ]
       },
       "8": {
         "title": "9. Ålder",
-        "body": "DriveLinkUp är till för personer som är 16 år eller äldre. Det är inte en tjänst för barn. Vi skapar inte medvetet konton för någon under 16 år. Om du tror att ett barn har ett konto, skriv till support@drivelinkup.com så stänger vi det.",
+        "body": "DriveLinkUp är till för personer som är 16 år eller äldre. Det är inte en tjänst för barn. Vi skapar inte medvetet konton för någon under 16 år. Om du tror att ett barn har ett konto, skriv till frank@drivelinkup.com så stänger vi det.",
         "items": []
       },
       "9": {
@@ -2238,7 +2238,7 @@
       },
       "11": {
         "title": "12. Ändringar",
-        "body": "Vi uppdaterar den här informationen när tjänsten eller behandlingen ändras. Datum och version ovan gäller. En väsentlig ändring höjer versionen och cookie-bannern frågar igen. Frågor: support@drivelinkup.com.",
+        "body": "Vi uppdaterar den här informationen när tjänsten eller behandlingen ändras. Datum och version ovan gäller. En väsentlig ändring höjer versionen och cookie-bannern frågar igen. Frågor: frank@drivelinkup.com.",
         "items": []
       },
       "12": {
@@ -3621,7 +3621,7 @@
         "body": "Villkor för lektionen sätts av skolan. Bekräfta dem med skolan innan du ordnar en lektion.",
         "items": [
           "Kontakta skolan direkt för att ändra en tid.",
-          "Löser det sig inte skriver du till support@drivelinkup.com."
+          "Löser det sig inte skriver du till frank@drivelinkup.com."
         ]
       },
       "4": {
@@ -3649,7 +3649,7 @@
       },
       "8": {
         "title": "Ändringar och kontakt",
-        "body": "Vi kan uppdatera villkoren när tjänsten ändras. Versionen visas överst på sidan. Frågor: support@drivelinkup.com.",
+        "body": "Vi kan uppdatera villkoren när tjänsten ändras. Versionen visas överst på sidan. Frågor: frank@drivelinkup.com.",
         "items": []
       },
       "9": {
@@ -3657,7 +3657,7 @@
         "body": "Om du publicerar en skolannons ger du DriveLinkUp en icke-exklusiv licens att lagra, kopiera och visa innehållet på webbplatsen och i appen så att andra kan jämföra skolor. Du måste äga innehållet eller ha rätt att ge oss den licensen. Du ansvarar för att det du publicerar stämmer.",
         "items": [
           "Vi kan korta visningen, dölja eller ta bort innehåll som är vilseledande, olagligt eller som vi måste ta bort.",
-          "Skriv till support@drivelinkup.com för att anmäla en annons eller annat innehåll som du menar är olagligt eller fel."
+          "Skriv till frank@drivelinkup.com för att anmäla en annons eller annat innehåll som du menar är olagligt eller fel."
         ]
       },
       "10": {
@@ -3685,7 +3685,7 @@
       },
       "14": {
         "title": "Övriga villkor",
-        "body": "Dessa villkor och integritetspolicyn är avtalet för att använda sajten. Om en domstol anser att en del inte kan tillämpas gäller resten. Om vi inte driver en del innebär det inte att vi avstår från den. Du får inte överlåta avtalet utan vårt samtycke. Vi får överlåta det om vi överlåter tjänsten. Meddelanden skickas till support@drivelinkup.com och till e-postadressen på ditt konto.",
+        "body": "Dessa villkor och integritetspolicyn är avtalet för att använda sajten. Om en domstol anser att en del inte kan tillämpas gäller resten. Om vi inte driver en del innebär det inte att vi avstår från den. Du får inte överlåta avtalet utan vårt samtycke. Vi får överlåta det om vi överlåter tjänsten. Meddelanden skickas till frank@drivelinkup.com och till e-postadressen på ditt konto.",
         "items": []
       }
     },

@@ -79,7 +79,7 @@ export async function POST(req: Request) {
 
   const inquiry = parsed.data;
   const topicLabel = CONTACT_TOPIC_LABELS[inquiry.topic as ContactTopic];
-  const recipient = process.env.CONTACT_EMAIL ?? 'support@drivelinkup.com';
+  const recipient = process.env.CONTACT_EMAIL ?? 'frank@drivelinkup.com';
 
   const createdAt = new Date();
   const id = `con_${crypto.randomUUID()}`;

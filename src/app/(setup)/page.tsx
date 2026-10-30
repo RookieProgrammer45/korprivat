@@ -27,7 +27,7 @@ export default function DriveLinkUpLanding() {
         '@type': 'Organization',
         name: siteName,
         url: absoluteUrl('/'),
-        email: 'support@drivelinkup.com',
+        email: 'frank@drivelinkup.com',
         areaServed: 'SE',
         description: siteDescription,
       },

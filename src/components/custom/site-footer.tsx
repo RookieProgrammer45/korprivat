@@ -81,7 +81,7 @@ const CITY_LINKS: readonly FooterLink[] = [
 // marketing@drivelinkup.com. Privacy and terms use this same address.
 // Social links are only profiles that resolve to DriveLinkUp. Do not add a
 // network until its public URL is known.
-const CONTACT_EMAIL = 'support@drivelinkup.com';
+const CONTACT_EMAIL = 'frank@drivelinkup.com';
 
 const SOCIAL_LINKS = [
   { href: 'https://x.com/Drivelinkup', labelKey: 'footer.socialX' as const },

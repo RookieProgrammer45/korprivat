@@ -2101,7 +2101,7 @@
       "cancel": "Cancel",
       "deleting": "Deleting…",
       "done": "Your account has been deleted.",
-      "error": "Could not delete the account. Try again, or email support@drivelinkup.com."
+      "error": "Could not delete the account. Try again, or email frank@drivelinkup.com."
     }
   },
   "chatbot": {
@@ -2131,7 +2131,7 @@
     "sections": {
       "0": {
         "title": "1. Controller and contact",
-        "body": "DriveLinkUp is the controller for the personal data described here. We have not published a registered company name or organisation number on this page. Write to support@drivelinkup.com with “Privacy” in the subject. If we register a Swedish company we will add the legal name and organisation number here.",
+        "body": "DriveLinkUp is the controller for the personal data described here. We have not published a registered company name or organisation number on this page. Write to frank@drivelinkup.com with “Privacy” in the subject. If we register a Swedish company we will add the legal name and organisation number here.",
         "items": []
       },
       "1": {
@@ -2144,7 +2144,7 @@
           "School onboarding details such as school name, organisation number, and city.",
           "A teaching-licence file if you upload one. We store it to review the listing. That is not an automatic check with Transportstyrelsen.",
           "Handledare insurance attestation (your confirmation and the time you gave it), not the insurance document unless you send that to support.",
-          "Support messages you send on the contact form. Those are emailed to support@drivelinkup.com. We do not keep a separate public contact database.",
+          "Support messages you send on the contact form. Those are emailed to frank@drivelinkup.com. We do not keep a separate public contact database.",
           "Questions you type into the on-site assistant. The text is sent to OpenAI to generate a reply.",
           "Approximate coordinates when you click “Use my location”, sent with the directory request so we can sort schools. We do not save that location on your account.",
           "Cookie choice, policy version, and a hash of IP address plus browser information. We do not store the raw IP on the consent record.",
@@ -2196,7 +2196,7 @@
       },
       "5": {
         "title": "6. International transfers",
-        "body": "Some vendors process data outside the EU/EEA, including in the United States (Vercel, Google, OpenAI, and Resend). Where required we rely on an adequacy decision or the European Commission’s Standard Contractual Clauses. Ask support@drivelinkup.com if you want more detail on a transfer.",
+        "body": "Some vendors process data outside the EU/EEA, including in the United States (Vercel, Google, OpenAI, and Resend). Where required we rely on an adequacy decision or the European Commission’s Standard Contractual Clauses. Ask frank@drivelinkup.com if you want more detail on a transfer.",
         "items": []
       },
       "6": {
@@ -2216,14 +2216,14 @@
         "body": "Under the GDPR you may request access, rectification, erasure, restriction, objection, and data portability where the legal conditions are met. Where we rely on consent you may withdraw it at any time. Withdrawal does not affect processing that already happened.",
         "items": [
           "Delete your account from Profile. That is the self-service erasure path.",
-          "Write to support@drivelinkup.com for access, correction, or another rights request.",
+          "Write to frank@drivelinkup.com for access, correction, or another rights request.",
           "Object to processing based on legitimate interest, including the assistant, and we will stop unless we have a compelling ground to continue.",
           "Lodge a complaint with Integritetsskyddsmyndigheten (IMY), https://www.imy.se."
         ]
       },
       "8": {
         "title": "9. Age",
-        "body": "DriveLinkUp is for people aged 16 and over. It is not a service for children. We do not knowingly create accounts for anyone under 16. If you believe a child has an account, write to support@drivelinkup.com and we will close it.",
+        "body": "DriveLinkUp is for people aged 16 and over. It is not a service for children. We do not knowingly create accounts for anyone under 16. If you believe a child has an account, write to frank@drivelinkup.com and we will close it.",
         "items": []
       },
       "9": {
@@ -2238,7 +2238,7 @@
       },
       "11": {
         "title": "12. Changes",
-        "body": "We update this notice when the service or the processing changes. The date and version above are the current ones. A material change bumps the version and the cookie banner asks again. Questions: support@drivelinkup.com.",
+        "body": "We update this notice when the service or the processing changes. The date and version above are the current ones. A material change bumps the version and the cookie banner asks again. Questions: frank@drivelinkup.com.",
         "items": []
       },
       "12": {
@@ -3621,7 +3621,7 @@
         "body": "Lesson terms are set by the school. Confirm them with the school before you arrange a lesson.",
         "items": [
           "Contact the school directly to change a time.",
-          "If that does not resolve it, write to support@drivelinkup.com."
+          "If that does not resolve it, write to frank@drivelinkup.com."
         ]
       },
       "4": {
@@ -3649,7 +3649,7 @@
       },
       "8": {
         "title": "Changes and contact",
-        "body": "We may update these terms when the service changes. The version is shown at the top of the page. Questions: support@drivelinkup.com.",
+        "body": "We may update these terms when the service changes. The version is shown at the top of the page. Questions: frank@drivelinkup.com.",
         "items": []
       },
       "9": {
@@ -3657,7 +3657,7 @@
         "body": "If you publish a school listing you grant DriveLinkUp a non-exclusive licence to host, copy, and display that content on the website and in the app so people can compare schools. You must own the content or have the right to give us that licence. You are responsible for the accuracy of what you publish.",
         "items": [
           "We may edit the display length, hide, or remove content that is misleading, unlawful, or that we must take down.",
-          "Write to support@drivelinkup.com to report a listing or other content that you believe is illegal or wrong."
+          "Write to frank@drivelinkup.com to report a listing or other content that you believe is illegal or wrong."
         ]
       },
       "10": {
@@ -3685,7 +3685,7 @@
       },
       "14": {
         "title": "Other legal terms",
-        "body": "These terms and the privacy policy are the agreement for using the site. If a court finds one part unenforceable, the rest still applies. If we do not enforce a part, we do not waive it. You may not assign this agreement without our consent. We may assign it if we transfer the service. Notices go to support@drivelinkup.com and to the email on your account.",
+        "body": "These terms and the privacy policy are the agreement for using the site. If a court finds one part unenforceable, the rest still applies. If we do not enforce a part, we do not waive it. You may not assign this agreement without our consent. We may assign it if we transfer the service. Notices go to frank@drivelinkup.com and to the email on your account.",
         "items": []
       }
     },

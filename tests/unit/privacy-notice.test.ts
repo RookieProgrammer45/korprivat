@@ -23,7 +23,7 @@ describe('published privacy notice', () => {
       expect(page.hero.reviewNotice).toBeUndefined();
       const blob = JSON.stringify(page);
       expect(blob).not.toMatch(/legal review|juridik|juristgransk/i);
-      expect(blob).toMatch(/support@drivelinkup\.com/);
+      expect(blob).toMatch(/frank@drivelinkup\.com/);
       expect(blob).not.toMatch(/Stripe|hosted payment|betalningsleverantör/i);
       expect(blob).toMatch(/do not currently collect card numbers|samlar just nu inte in kortnummer/);
     }
@@ -59,8 +59,8 @@ describe('published privacy notice', () => {
   it('points terms support at the same inbox as the privacy notice', () => {
     for (const locale of ['en', 'sv'] as const) {
       const blob = JSON.stringify(loadMessages(locale).termsPage);
-      expect(blob).toMatch(/support@drivelinkup\.com/);
-      expect(blob).not.toMatch(/frank@drivelinkup\.com/);
+      expect(blob).toMatch(/frank@drivelinkup\.com/);
+      expect(blob).not.toMatch(/support@drivelinkup\.com/);
     }
   });
 });
