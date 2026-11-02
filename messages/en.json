@@ -3550,7 +3550,9 @@
       "descriptionCityCounted": "Compare {count} driving schools and lessons in {name}, {country}. Published prices when the school lists them on its website.",
       "descriptionCityPriced": "Compare {count} driving schools in {name}. Lessons from {price} SEK when the school publishes the price on its website.",
       "descriptionRegion": "Explore cities in {name}, {country} and compare driving-school listings when the catalog is live.",
-      "descriptionCountry": "Find driving schools across {country}. A listed price is the price on the school's website."
+      "descriptionCountry": "Find driving schools across {country}. A listed price is the price on the school's website.",
+      "indexTitle": "Driving schools",
+      "indexSubtitle": "Open a country. A price in the catalog is the price on the school's website."
     },
     "eyebrow": "{country}",
     "headerTitleCity": "Driving schools in {name}",

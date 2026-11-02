@@ -27,6 +27,22 @@ describe('public marketplace localization', () => {
     expect(swedish).toEqual(english);
   });
 
+  it('keeps /locations metadata keys that generateMetadata reads', () => {
+    for (const locale of ['en', 'sv'] as const) {
+      const messages = loadMessages(locale);
+      expect(isRecord(messages)).toBe(true);
+      const hub = isRecord(messages) ? messages.locationHub : null;
+      expect(isRecord(hub)).toBe(true);
+      const meta = isRecord(hub) ? hub.meta : null;
+      expect(isRecord(meta)).toBe(true);
+      if (!isRecord(meta)) continue;
+      expect(typeof meta.indexTitle).toBe('string');
+      expect(String(meta.indexTitle).length).toBeGreaterThan(0);
+      expect(typeof meta.indexSubtitle).toBe('string');
+      expect(String(meta.indexSubtitle).length).toBeGreaterThan(0);
+    }
+  });
+
   it('does not reintroduce retired public marketplace claims', () => {
     const publicCopy = JSON.stringify({
       en: loadMessages('en'),
