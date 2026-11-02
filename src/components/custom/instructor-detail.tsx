@@ -102,7 +102,7 @@ export function InstructorDetail({
           </p>
           <p className="max-w-sm text-small text-muted-foreground">{tr('notFoundBody')}</p>
           <Button asChild variant="outline" size="sm" className="mt-1">
-            <Link href="/instructors">{tr('backDirectory')}</Link>
+            <Link href={cityHref ?? '/locations'}>{tr('backDirectory')}</Link>
           </Button>
         </CardContent>
       </Card>

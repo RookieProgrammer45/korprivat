@@ -9,6 +9,7 @@ import { publishedPrices } from '@/lib/discovery/published-prices';
 import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { locationForCatalogueSchool } from '@/lib/seo/catalogue-locations';
+import { jsonLdScript } from '@/lib/seo/json-ld';
 import { marketCopy } from '@/lib/seo/market-copy';
 import { isNordicCountry, locationPath } from '@/lib/seo/nordic-locations';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
@@ -43,7 +44,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const { instructor, canonicalPath } = resolved;
   const path = canonicalPath;
-  const title = `${instructor.name} — ${instructor.city} | DriveLinkUp`;
+  const title = instructor.catalogue
+    ? `${instructor.name} — ${instructor.city}`
+    : t('titleNamed', { name: instructor.name, city: instructor.city });
   const rate = publicLessonRate(instructor);
   const portrait = schoolPortraitUrl(instructor.photoUrl);
   const description =
@@ -118,6 +121,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
               undefined,
             url: absoluteUrl(resolved.canonicalPath),
             image: schoolPortraitUrl(resolved.instructor.photoUrl) || undefined,
+            telephone: resolved.listing?.phone?.display,
             address: {
               '@type': 'PostalAddress',
               addressLocality: resolved.instructor.city,
@@ -133,6 +137,17 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
             knowsLanguage:
               resolved.listing?.languages ??
               (resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv']),
+            ...(resolved.listing?.googleRating != null &&
+            (resolved.listing.googleReviewCount ?? 0) > 0
+              ? {
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: resolved.listing.googleRating,
+                    reviewCount: resolved.listing.googleReviewCount,
+                    bestRating: 5,
+                  },
+                }
+              : {}),
           },
         ],
       }
@@ -159,7 +174,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
           )}
         </div>
       </div>
-      {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
+      {jsonLd ? jsonLdScript(jsonLd) : null}
     </main>
   );
 }

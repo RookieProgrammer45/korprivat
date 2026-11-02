@@ -675,6 +675,7 @@
   "instructorDetail": {
     "meta": {
       "title": "Trafikskolans annons",
+      "titleNamed": "{name} — trafikskola i {city}",
       "description": "Se skolans kategorier, publicerade pris och ort. Kontakta skolan för att ordna en lektion.",
       "descriptionNamed": "{name} i {city} — från {rate} SEK/lektion."
     },
@@ -1977,7 +1978,8 @@
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "typeSchool": "Skola",
-    "typeInstructor": "Instruktör"
+    "typeInstructor": "Instruktör",
+    "ratingChipAria": "{average} av 5 från {count} omdömen"
   },
   "reviewForm": {
     "title": "Lämna en recension",
@@ -3540,10 +3542,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Trafikskolor i {name}, {country}",
+      "titleCity": "Trafikskolor i {name} — jämför körlektioner",
+      "titleCityCounted": "Trafikskolor i {name} — jämför {count} körskolor",
       "titleRegion": "Trafikskolor i {name}, {country}",
       "titleCountry": "Trafikskolor i {country}",
-      "descriptionCity": "Jämför trafikskolor i katalogen i {name}, {country}. Publicerade priser när skolan har fyllt i dem.",
+      "descriptionCity": "Jämför trafikskolor och körlektioner i {name}, {country}. Publicerade priser när skolan har dem på sin webbplats.",
+      "descriptionCityCounted": "Jämför {count} trafikskolor och körlektioner i {name}, {country}. Publicerade priser när skolan har dem på sin webbplats.",
+      "descriptionCityPriced": "Jämför {count} trafikskolor i {name}. Körlektioner från {price} kr när skolan publicerat priset på sin webbplats.",
       "descriptionRegion": "Utforska orter i {name}, {country} och jämför trafikskolor i katalogen när annonser är live.",
       "descriptionCountry": "Hitta trafikskolor i {country}. Ett listat pris är priset på skolans webbplats."
     },
@@ -3577,7 +3582,14 @@
     "countriesTitle": "Länder",
     "faqTitle": "Vanliga frågor",
     "faq1q": "Kan jag hitta en skola i {name} i dag?",
-    "faq1aLive": "Ja. Logga in för att se skolannonserna i {name}. Kontakta skolan för att ordna en lektion.",
+    "faq1aLive": "Ja. Skolannonserna i {name} syns här. Öppna en skola för omdömen och kontakta skolan för att ordna en lektion.",
+    "emptyLiveTitle": "Inga skolannonser i {name} just nu",
+    "emptyLiveBody": "Nya skolor publiceras här när de syns i katalogen. Utforska andra orter, eller kontakta oss om du driver en skola i {name}.",
+    "listHeadingLive": "Trafikskolor och körlektioner i {name}",
+    "statsCount": "{count} trafikskolor i {name}",
+    "statsPriceFrom": "Lektionspris från {price} kr",
+    "statsDuration": "{minutes} minuters lektion",
+    "statsUpdated": "Priser hämtade {date}",
     "signInTitle": "Logga in för att se skolorna",
     "signInBody": "Katalogen är öppen för inloggade användare. Efter inloggning kommer du tillbaka hit.",
     "signInCta": "Logga in",

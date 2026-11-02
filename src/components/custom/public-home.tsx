@@ -30,7 +30,7 @@ export async function PublicHome() {
             <h2 className="font-display text-h2 font-normal leading-tight tracking-tight text-foreground">
               {t('providers.title')}
             </h2>
-            <Link href="/instructors" className="dlu-text-link shrink-0">
+            <Link href="/locations" className="dlu-text-link shrink-0">
               {t('providers.cta')}
             </Link>
           </div>
@@ -44,7 +44,7 @@ export async function PublicHome() {
 
       <section className="border-t border-border">
         <div className="container-page flex min-w-0 flex-col items-start gap-4 py-12 lg:py-16 sm:flex-row sm:items-center">
-          <Link href="/instructors" className="dlu-ink-pill">
+          <Link href="/locations" className="dlu-ink-pill">
             {t('entry.learnerCta')}
           </Link>
           <Link href="/for-skolor" className="dlu-text-link">

@@ -3,8 +3,12 @@ import { describe, expect, it, vi } from 'vitest';
 vi.mock('server-only', () => ({}));
 vi.mock('@/lib/db', () => ({
   prisma: {
-    instructorLicense: { findMany: async () => [] },
-    instructor: { findMany: async () => [] },
+    instructorLicense: { findMany: async () => [], findUnique: async () => null },
+    instructor: {
+      findMany: async () => [],
+      findFirst: async () => null,
+      findUnique: async () => null,
+    },
   },
 }));
 

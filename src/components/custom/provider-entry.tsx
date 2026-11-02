@@ -34,7 +34,7 @@ export function ProviderEntry() {
               <Link href="/signup?role=school">{t('primaryCta')}</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="/instructors">{t('learnerCta')}</Link>
+              <Link href="/locations">{t('learnerCta')}</Link>
             </Button>
           </div>
         </header>

@@ -79,7 +79,7 @@ export function PrivacyPolicyContent() {
 
         <div className="flex flex-wrap gap-2">
           <Button asChild variant="outline" size="sm">
-            <Link href="/instructors">{t('cta.findProviders')}</Link>
+            <Link href="/locations">{t('cta.findProviders')}</Link>
           </Button>
           <Button asChild variant="ghost" size="sm">
             <Link href="/contact">{t('cta.contact')}</Link>

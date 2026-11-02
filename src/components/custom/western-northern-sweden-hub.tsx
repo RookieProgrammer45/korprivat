@@ -92,7 +92,7 @@ export function WesternNorthernSwedenHub() {
             <p className="max-w-2xl text-body-lg text-muted-foreground">{data.hero.body}</p>
             <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
               <Button asChild size="lg">
-                <Link href="/instructors">
+                <Link href="/locations">
                   {data.hero.primaryCta} <ArrowUpRight aria-hidden />
                 </Link>
               </Button>
@@ -271,7 +271,7 @@ export function WesternNorthernSwedenHub() {
             <p className="text-body-lg opacity-80">{data.cta.body}</p>
           </div>
           <Button asChild variant="secondary" size="lg">
-            <Link href="/instructors" aria-label={data.cta.ariaLabel}>
+            <Link href="/locations" aria-label={data.cta.ariaLabel}>
               {data.cta.button} <ArrowUpRight aria-hidden />
             </Link>
           </Button>

@@ -48,7 +48,7 @@ export default function KostnadKorkortPage() {
             Göteborg
           </Link>{' '}
           eller{' '}
-          <Link className="underline underline-offset-4" href="/instructors">
+          <Link className="underline underline-offset-4" href="/locations">
             hela katalogen
           </Link>
           . Läs mer om{' '}

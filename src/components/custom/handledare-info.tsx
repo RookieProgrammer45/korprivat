@@ -30,7 +30,7 @@ export function HandledareInfo() {
       </div>
       <div className="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row">
         <Button asChild>
-          <Link href="/instructors">{t('cta.schools')}</Link>
+          <Link href="/locations">{t('cta.schools')}</Link>
         </Button>
         <Button asChild variant="outline">
           <Link href="/faq">{t('cta.faq')}</Link>

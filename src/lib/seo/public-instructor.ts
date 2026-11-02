@@ -1,4 +1,5 @@
 import 'server-only';
+import { cache } from 'react';
 import { isMarketplaceSchoolRole, isProviderActivated } from '@/lib/business/provider-activation';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
@@ -7,6 +8,7 @@ import {
   catalogueWebsiteDown,
   nordicInstructorByShortId,
 } from '@/lib/discovery/nordic-catalogue';
+import { loadPublicListingById } from '@/lib/discovery/public-listing';
 import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
 import { marketCopy } from '@/lib/seo/market-copy';
 import { isNordicCountry } from '@/lib/seo/nordic-locations';
@@ -138,7 +140,7 @@ export async function listIndexableInstructors(limit = 200) {
 export type PublicInstructorSlugResult = {
   instructor: PublicInstructorSeo;
   canonicalPath: string;
-  /** Present for a website catalogue school so the page can render without a session. */
+  /** Present so the page can render without a signed-in detail request. */
   listing: InstructorFilteredItem | null;
 };
 
@@ -147,38 +149,39 @@ export type PublicInstructorSlugResult = {
  * `canonicalPath` lets the page 308 any non-canonical spelling (wrong city,
  * renamed school, missing id suffix) onto the right URL.
  */
-export async function loadPublicInstructorBySchoolSlug(
+async function loadPublicInstructorBySchoolSlugUncached(
   slug: string,
 ): Promise<PublicInstructorSlugResult | null> {
   const parsed = parseSchoolSlug(slug);
   if (!parsed) return null;
   if (/^(no|dk|fi|is|au|uk|eu|us)/.test(parsed.id8)) {
     const nordic = nordicInstructorByShortId(parsed.id8);
-    if (!nordic) return null;
-    const countryCode = catalogueCountryCode(nordic.id);
-    const country = countryCode && isNordicCountry(countryCode) ? countryCode : null;
-    const market = country ? marketCopy(country) : null;
-    const heavyCategories = nordic.publishedPrices?.heavy?.categories ?? [];
-    const instructor: PublicInstructorSeo = {
-      id: nordic.id,
-      name: nordic.name,
-      city: nordic.city,
-      bio: nordic.bio,
-      hourlyRateSek: 0,
-      categories: [...nordic.categories],
-      photoUrl: nordic.photoUrl,
-      englishSpeaking: nordic.englishSpeaking,
-      indexable: !catalogueWebsiteDown(nordic.id),
-      userId: null,
-      providerRole: 'SCHOOL',
-      bookingMode: 'contact',
-      catalogue: true,
-      addressCountry: country ? country.toUpperCase() : 'SE',
-      contentLanguage: market?.schemaLang ?? 'sv-SE',
-      heavyCategories: [...heavyCategories],
-      localDescription: market?.schoolDescription(nordic.name, nordic.city) ?? null,
-    };
-    return { instructor, canonicalPath: schoolPath(instructor), listing: nordic };
+    if (nordic) {
+      const countryCode = catalogueCountryCode(nordic.id);
+      const country = countryCode && isNordicCountry(countryCode) ? countryCode : null;
+      const market = country ? marketCopy(country) : null;
+      const heavyCategories = nordic.publishedPrices?.heavy?.categories ?? [];
+      const instructor: PublicInstructorSeo = {
+        id: nordic.id,
+        name: nordic.name,
+        city: nordic.city,
+        bio: nordic.bio,
+        hourlyRateSek: 0,
+        categories: [...nordic.categories],
+        photoUrl: nordic.photoUrl,
+        englishSpeaking: nordic.englishSpeaking,
+        indexable: !catalogueWebsiteDown(nordic.id),
+        userId: null,
+        providerRole: 'SCHOOL',
+        bookingMode: 'contact',
+        catalogue: true,
+        addressCountry: country ? country.toUpperCase() : 'SE',
+        contentLanguage: market?.schemaLang ?? 'sv-SE',
+        heavyCategories: [...heavyCategories],
+        localDescription: market?.schoolDescription(nordic.name, nordic.city) ?? null,
+      };
+      return { instructor, canonicalPath: schoolPath(instructor), listing: nordic };
+    }
   }
   const row = await prisma.instructor.findFirst({
     where: { id: { startsWith: parsed.id8 } },
@@ -188,5 +191,8 @@ export async function loadPublicInstructorBySchoolSlug(
   if (!row) return null;
   const instructor = await loadPublicInstructorSeo(row.id);
   if (!instructor) return null;
-  return { instructor, canonicalPath: schoolPath(instructor), listing: null };
+  const listing = await loadPublicListingById(row.id);
+  return { instructor, canonicalPath: schoolPath(instructor), listing };
 }
+
+export const loadPublicInstructorBySchoolSlug = cache(loadPublicInstructorBySchoolSlugUncached);

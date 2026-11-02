@@ -32,7 +32,7 @@ export function AboutContent() {
             ))}
           </div>
           <div className="flex flex-wrap gap-2 pt-1">
-            <Link href="/instructors" className="dlu-footer-cta">
+            <Link href="/locations" className="dlu-footer-cta">
               {t('hero.primaryCta')}
               <ArrowRight className="size-4" aria-hidden />
             </Link>
@@ -91,7 +91,7 @@ export function AboutContent() {
           </h2>
           <p className="text-body text-foreground/90">{t('final.body')}</p>
           <div className="flex flex-wrap gap-2 pt-1">
-            <Link href="/instructors" className="dlu-footer-cta">
+            <Link href="/locations" className="dlu-footer-cta">
               {t('final.primaryCta')}
               <ArrowRight className="size-4" aria-hidden />
             </Link>

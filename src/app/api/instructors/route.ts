@@ -37,6 +37,7 @@ import {
 } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
 import { listNordicInstructors, nordicCatalogueCities } from '@/lib/discovery/nordic-catalogue';
+import { omitListingReviewBodies } from '@/lib/discovery/public-listing';
 import { heavyListingWhere, lightCatalogueWhere } from '@/lib/discovery/published-prices';
 import { sendEmail } from '@/lib/email/send';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
@@ -186,6 +187,7 @@ export async function GET(req: NextRequest) {
   // are validated and averaged by the shared public aggregate loader.
   const aggregates = await loadPublicInstructorAggregates(
     candidateRows.map(({ row }) => ({ id: row.id, userId: row.userId })),
+    { includeGoogleReviewBodies: false },
   );
   const ratedRows =
     minRating == null
@@ -295,7 +297,7 @@ export async function GET(req: NextRequest) {
   // stays the Swedish slice. A price in another currency is not ranked inside a
   // SEK price sort; those schools stay in the list after the Swedish prices.
   const nordicItems = limit == null ? listNordicInstructors(q) : [];
-  const items =
+  const mergedItems =
     nordicItems.length === 0
       ? swedishItems
       : priceSort || q.sort === 'distance'
@@ -303,6 +305,7 @@ export async function GET(req: NextRequest) {
         : [...swedishItems, ...nordicItems].sort(
             (a, b) => a.city.localeCompare(b.city, 'sv') || a.name.localeCompare(b.name, 'sv'),
           );
+  const items = mergedItems.map(omitListingReviewBodies);
 
   const cityDelegate = (
     prisma as unknown as {

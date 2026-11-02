@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
-import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
 import { PublishedPriceList } from '@/components/custom/published-price';
 import { SchoolContactActions } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
@@ -121,9 +120,6 @@ export function ProviderComparison({
                     }
                   />
                 </dl>
-                {(provider.googleReviews?.length ?? 0) > 0 ? (
-                  <GoogleReviewQuotes items={provider.googleReviews ?? []} limit={2} compact />
-                ) : null}
                 <SchoolContactActions
                   name={provider.name}
                   contact={provider.contact}
@@ -133,9 +129,7 @@ export function ProviderComparison({
                   className="w-full"
                 />
                 <Button asChild variant="secondary" size="sm" className="w-full">
-                  <Link href={`/instructors/${encodeURIComponent(provider.id)}`}>
-                    {t('viewProfile')}
-                  </Link>
+                  <Link href={schoolPath(provider)}>{t('viewProfile')}</Link>
                 </Button>
               </article>
             );

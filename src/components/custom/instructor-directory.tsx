@@ -1,18 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
-import { categoryChipLabel, SchoolMark } from '@/components/custom/instructor-preview';
+import { categoryChipLabel } from '@/components/custom/instructor-preview';
 import { MAX_COMPARISON_ITEMS, ProviderComparison } from '@/components/custom/provider-comparison';
-import {
-  PublishedHeavyOffer,
-  PublishedLessonPrice,
-  PublishedPackageFrom,
-} from '@/components/custom/published-price';
 import { SchoolContactActions } from '@/components/custom/school-contact-button';
+import {
+  SCHOOL_LISTING_GRID_CLASS,
+  SchoolListingCard,
+} from '@/components/custom/school-listing-card';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -752,20 +749,18 @@ function CardGrid({
 }) {
   const tr = useTranslations('instructorDirectory');
   return (
-    <ul className="grid min-w-0 gap-4 sm:grid-cols-2">
+    <ul className={SCHOOL_LISTING_GRID_CLASS}>
       {items.map((row) => (
         // `data-next-slot-at` carries a null-safe sort key the eventual matcher
         // can scrape without re-parsing the row. Items with no upcoming slot
         // emit an empty string so a missing key means "free to interpret".
-        <li key={row.id} data-next-slot-at={row.nextSlotAt ?? ''}>
+        <li
+          key={row.id}
+          data-next-slot-at={row.nextSlotAt ?? ''}
+          className="grid h-full min-w-0 grid-rows-[1fr_auto] gap-2"
+        >
+          <SchoolListingCard row={row} heavyScope={heavyScope} />
           <div className="grid min-w-0 gap-2">
-            <Link
-              href={schoolPath(row)}
-              className="marketplace-provider-card group block min-w-0 rounded-xl outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-brand-500/60"
-              data-provider-type={row.providerType}
-            >
-              <InstructorCard row={row} heavyScope={heavyScope} />
-            </Link>
             <SchoolContactActions
               name={row.name}
               contact={row.contact}
@@ -780,7 +775,7 @@ function CardGrid({
               size="sm"
               aria-pressed={comparisonIds.includes(row.id)}
               onClick={() => onToggleComparison(row.id)}
-              className="w-full"
+              className="w-full min-h-11"
             >
               {comparisonIds.includes(row.id)
                 ? tr('comparison.removeFromComparison')
@@ -793,216 +788,24 @@ function CardGrid({
   );
 }
 
-function InstructorCard({
-  row,
-  heavyScope = false,
-}: {
-  row: InstructorFilteredItem;
-  heavyScope?: boolean;
-}) {
-  const tr = useTranslations('instructorDirectory');
-  const locale = useLocale();
-  const trTier = useTranslations('cancellationPolicy.tierBadge');
-  const showTimes = row.surfaces?.availabilityDisplay === true;
-  const nextSlotPill =
-    showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, tr, locale) : null;
-  const distancePill =
-    row.distanceKm != null
-      ? tr('distancePill', { km: formatNumber(row.distanceKm, locale) })
-      : null;
-  // Tier pill surfaces the cancellation tier the instructor publishes on
-  // their profile. Falls back to "flexible" on a missing tier field
-  // (a pre-tier row) so the page never shows an empty pill.
-  // Directory-only ('contact') listings show no cancellation-policy pill:
-  // no booking flows through DriveLinkUp, and an unconfirmed tier would
-  // misrepresent the school's own terms.
-  const directoryOnly = row.surfaces ? row.surfaces.directoryOnly : true;
-  const tierBadge =
-    directoryOnly || row.showCancellationPolicy === false
-      ? null
-      : tierBadgeLabel(row.cancellationPolicyTier, trTier);
-  const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
-  const hasGoogleQuotes = (row.googleReviews?.length ?? 0) > 0;
-  const showServiceArea = Boolean(row.serviceArea) && row.serviceArea !== row.city;
-  const categoryCodes = heavyScope ? heavyCategoryLabels(row) : row.categories;
-  const reviewLabel =
-    row.reviewSummary.averageRating === null
-      ? row.googleRating != null && !hasGoogleQuotes
-        ? tr('reviewsGoogleSummary', {
-            count: row.googleReviewCount ?? 0,
-            average: formatNumber(row.googleRating, locale),
-          })
-        : null
-      : tr('reviewsSummary', {
-          count: row.reviewSummary.count,
-          average: formatNumber(row.reviewSummary.averageRating, locale),
-        });
-  return (
-    <Card className="surface-card lift h-full border-border bg-card transition-colors duration-200 group-hover:border-brand-500/40 group-hover:shadow-md">
-      <CardContent className="flex h-full min-w-0 flex-col gap-5 p-6">
-        <div className="marketplace-directory-card-header flex min-w-0 flex-wrap items-start justify-between gap-4">
-          <div className="flex min-w-0 flex-1 max-sm:flex-auto items-center gap-3">
-            <SchoolMark
-              name={row.name}
-              photoUrl={row.photoUrl}
-              categories={row.categories}
-              heavy={row.publishedPrices?.heavy ?? null}
-              heavyScope={heavyScope}
-              alt={tr('portraitAlt', { name: row.name })}
-              size="avatar"
-            />
-            <div className="min-w-0">
-              <p className="dlu-type">
-                {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
-              </p>
-              <div className="break-words font-display text-base font-normal text-foreground">
-                {row.name}
-              </div>
-              <div className="flex flex-wrap items-center gap-1.5 text-small text-muted-foreground">
-                <span>{row.city}</span>
-                {tierBadge ? (
-                  <span className="inline-flex items-center rounded-md border border-border bg-background px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
-                    {tierBadge.label}
-                  </span>
-                ) : null}
-                {distancePill && (
-                  <span className="rounded-md border border-brand-500/40 bg-brand-100 px-2 text-[11px] font-medium text-brand-700 dark:bg-brand-900 dark:text-brand-300">
-                    {distancePill}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        {heavyScope ? null : row.publishedPrices?.lesson ? (
-          <PublishedLessonPrice prices={row.publishedPrices} />
-        ) : null}
-        {heavyScope ? null : row.publishedPrices ? (
-          <PublishedPackageFrom prices={row.publishedPrices} />
-        ) : null}
-        {row.publishedPrices ? <PublishedHeavyOffer prices={row.publishedPrices} /> : null}
-
-        <div className="grid min-w-0 gap-3 rounded-lg border border-border bg-muted p-4 sm:grid-cols-2">
-          {nextSlotPill ? (
-            <div className="grid min-w-0 gap-1">
-              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {tr('nextAvailableLabel')}
-              </span>
-              <span className="min-w-0 break-words text-small text-foreground">
-                {nextSlotPill.whenLabel}
-              </span>
-            </div>
-          ) : null}
-          {row.phone ? (
-            <div className="grid min-w-0 gap-1">
-              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {tr('phoneLabel')}
-              </span>
-              <span className="min-w-0 break-words text-small font-medium text-foreground">
-                {row.phone.display}
-              </span>
-            </div>
-          ) : null}
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('languageLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {languageLabel}
-            </span>
-          </div>
-          {showServiceArea ? (
-            <div className="grid min-w-0 gap-1">
-              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {tr('serviceAreaLabel')}
-              </span>
-              <span className="min-w-0 break-words text-small font-medium text-foreground">
-                {row.serviceArea}
-              </span>
-            </div>
-          ) : null}
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('verificationLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {tr(`verification.${row.verificationStatus}`)}
-            </span>
-          </div>
-          {reviewLabel ? (
-            <div className="grid min-w-0 gap-1 sm:col-span-2">
-              <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {tr('reviewsLabel')}
-              </span>
-              <span className="text-small font-medium text-foreground">{reviewLabel}</span>
-            </div>
-          ) : null}
-        </div>
-
-        {hasGoogleQuotes ? (
-          <GoogleReviewQuotes
-            items={row.googleReviews ?? []}
-            average={row.googleRating}
-            count={row.googleReviewCount}
-            limit={2}
-            compact
-          />
-        ) : null}
-
-        {categoryCodes.length > 0 ? (
-          <div className="flex flex-wrap items-center gap-1.5">
-            {categoryCodes.map((code) => (
-              <span key={code} className="dlu-chip">
-                {heavyScope ? code : categoryChipLabel(tr(`category.${code}`), code)}
-              </span>
-            ))}
-          </div>
-        ) : null}
-
-        <div className="mt-auto flex items-center justify-between border-t border-border pt-4 text-small">
-          <span className="min-w-0 font-medium text-foreground">{tr('profileCta')}</span>
-          <span
-            aria-hidden
-            className="text-brand-700 transition-transform group-hover:translate-x-0.5 dark:text-brand-300"
-          >
-            →
-          </span>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-// `trTier` is namespaced under `cancellationPolicy.tierBadge`; the
-// `keyof` shape matches the contract enum so we can sanity-check the
-// tier argument before calling the translator with a non-existent key.
-function tierBadgeLabel(
-  tier: string | null,
-  trTier: ReturnType<typeof useTranslations<'cancellationPolicy.tierBadge'>>,
-): { label: string } | null {
-  if (!tier) return null;
-  if (tier !== 'flexible' && tier !== 'moderate' && tier !== 'strict') return null;
-  return { label: trTier(tier) };
-}
-
 function CardGridSkeleton() {
   return (
-    <ul className="grid gap-4 sm:grid-cols-2">
-      {['directory-skeleton-a', 'directory-skeleton-b'].map((skeletonId) => (
-        <li key={skeletonId}>
-          <Card className="surface-card marketplace-directory-card border-border">
-            <CardContent className="flex flex-col gap-5 p-6">
-              <div className="flex items-center gap-3">
-                <Skeleton className="size-12 rounded-full" />
-                <div className="flex flex-1 flex-col gap-2">
-                  <Skeleton className="h-4 w-2/3" />
-                  <Skeleton className="h-3 w-1/3" />
-                </div>
-              </div>
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-5/6" />
-            </CardContent>
-          </Card>
+    <ul className={SCHOOL_LISTING_GRID_CLASS}>
+      {[
+        'directory-skeleton-a',
+        'directory-skeleton-b',
+        'directory-skeleton-c',
+        'directory-skeleton-d',
+      ].map((skeletonId) => (
+        <li key={skeletonId} aria-hidden>
+          <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white sm:rounded-[1.25rem] dark:bg-card">
+            <Skeleton className="aspect-[5/3] w-full rounded-none sm:aspect-[4/3]" />
+            <div className="flex flex-col gap-3 p-4">
+              <Skeleton className="h-3 w-1/4" />
+              <Skeleton className="h-5 w-3/4" />
+              <Skeleton className="h-7 w-1/3" />
+            </div>
+          </div>
         </li>
       ))}
     </ul>
@@ -1128,12 +931,6 @@ function filtersFromSearchParams(searchParams: URLSearchParams): Filters | null 
   };
 }
 
-function heavyCategoryLabels(row: InstructorFilteredItem): string[] {
-  const heavy = row.publishedPrices?.heavy;
-  if (!heavy) return [];
-  return [...heavy.categories, ...(heavy.ykb ? ['YKB'] : [])];
-}
-
 function hasActiveFilter(f: Filters): boolean {
   return (
     f.categories.length > 0 ||
@@ -1160,68 +957,4 @@ function isInvalidRateRange(filters: Filters): boolean {
     typeof filters.maxRate === 'number' &&
     filters.minRate > filters.maxRate
   );
-}
-
-// Native-Intl pill formatter. Within a week → "Weekday 18:30"; further out
-// the pill stays compact via "{monthShort} {day} {time}". The caller passes
-// the matching i18n translator so the label text remains in the
-// operator-approved copy (Swedish "fre 18:30", English "Fri 6:30 PM", …).
-function formatNextSlotPill(
-  iso: string,
-  t: ReturnType<typeof useTranslations<'instructorDirectory'>>,
-  locale: string,
-): { whenLabel: string; iso: string } {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return { whenLabel: t('slotLabel'), iso };
-  const intlLocale = locale === 'sv' ? 'sv-SE' : 'en-GB';
-  const dateOptions = { timeZone: 'Europe/Stockholm' } as const;
-  const day = new Intl.DateTimeFormat(intlLocale, { ...dateOptions, day: 'numeric' }).format(date);
-  const monthShort = new Intl.DateTimeFormat(intlLocale, {
-    ...dateOptions,
-    month: 'short',
-  }).format(date);
-  const time = new Intl.DateTimeFormat(intlLocale, {
-    ...dateOptions,
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(date);
-  const weekday = new Intl.DateTimeFormat(intlLocale, { ...dateOptions, weekday: 'short' }).format(
-    date,
-  );
-  const today = new Date();
-  const todayKey = formatDayKey(today.toISOString());
-  const todayParts = todayKey.split('-').map(Number);
-  const todayAtNoon = Date.UTC(
-    todayParts[0] ?? 0,
-    (todayParts[1] ?? 1) - 1,
-    todayParts[2] ?? 1,
-    12,
-  );
-  const dateKey = formatDayKey(iso);
-  const dateParts = dateKey.split('-').map(Number);
-  const dateAtNoon = Date.UTC(dateParts[0] ?? 0, (dateParts[1] ?? 1) - 1, dateParts[2] ?? 1, 12);
-  const diffDays = Math.round((dateAtNoon - todayAtNoon) / (24 * 60 * 60 * 1000));
-  const when =
-    diffDays >= 0 && diffDays < 7
-      ? t('slotTimeAndWeekday', { weekday, time })
-      : `${t('slotMonthDay', { monthShort, day })} · ${t('slotTime', { time })}`;
-  return { whenLabel: when, iso };
-}
-
-function formatDayKey(iso: string): string {
-  const date = new Date(iso);
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Stockholm',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).formatToParts(date);
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  return `${values.year ?? '0000'}-${values.month ?? '00'}-${values.day ?? '00'}`;
-}
-
-function formatNumber(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
-    maximumFractionDigits: 1,
-  }).format(value);
 }

@@ -27,7 +27,7 @@ export default function HandledareBlogPost() {
         </p>
         <p>
           Letar du efter en körskola eller instruktör? Börja i{' '}
-          <Link className="underline" href="/instructors">
+          <Link className="underline" href="/locations">
             katalogen
           </Link>{' '}
           eller läs mer på{' '}

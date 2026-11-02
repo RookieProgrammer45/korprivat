@@ -5,24 +5,21 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
-import { PublishedLessonPrice } from '@/components/custom/published-price';
 import { SchoolContactActions } from '@/components/custom/school-contact-button';
-import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
+import {
+  SCHOOL_LISTING_GRID_CLASS,
+  SchoolListingCard,
+} from '@/components/custom/school-listing-card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import {
-  normalizeMarketplaceLocale,
-  providerSlotDateParts,
-} from '@/lib/business/marketplace-localization';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
-import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { schoolPath } from '@/lib/seo/school-slugs';
+
+export { categoryChipLabel, SchoolMark } from '@/components/custom/school-listing-card';
 
 const MAX_PREVIEW_ROWS = 20;
 
@@ -75,7 +72,7 @@ export function InstructorPreview({
     ) : status === 'empty' ? (
       <p className="text-small text-muted-foreground">{tr('empty')}</p>
     ) : (
-      <ul className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+      <ul className={SCHOOL_LISTING_GRID_CLASS}>
         {rows.map((row) => (
           <li
             key={row.id}
@@ -83,7 +80,7 @@ export function InstructorPreview({
               showContact ? 'grid h-full min-w-0 grid-rows-[1fr_auto] gap-2' : 'h-full min-w-0'
             }
           >
-            <PreviewCard row={row} />
+            <SchoolListingCard row={row} />
             {showContact ? (
               <div className="grid gap-2">
                 <SchoolContactActions
@@ -122,173 +119,25 @@ export function InstructorPreview({
   );
 }
 
-function PreviewCard({ row }: { row: InstructorFilteredItem }) {
-  const tr = useTranslations('instructorPreview');
-  const locale = normalizeMarketplaceLocale(useLocale());
-  const showTimes = row.surfaces?.availabilityDisplay === true;
-  const nextSlotPill =
-    showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, locale, tr) : null;
-  return (
-    <Link
-      href={schoolPath(row)}
-      className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      data-provider-type={row.providerType}
-    >
-      <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-foreground/20 group-hover:shadow-md motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 sm:rounded-[1.25rem] dark:bg-card">
-        <SchoolMark
-          name={row.name}
-          photoUrl={row.photoUrl}
-          categories={row.categories}
-          heavy={row.publishedPrices?.heavy ?? null}
-          alt={tr('portraitAlt', { name: row.name })}
-          size="cover"
-        />
-        <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-5">
-          <div className="min-w-0">
-            <p className="text-[11px] leading-snug text-muted-foreground sm:text-small">
-              {row.phone ? `${row.city} · ${row.phone.display}` : row.city}
-            </p>
-            <h3 className="line-clamp-2 break-words font-display text-sm font-normal leading-snug tracking-tight text-foreground sm:text-h4 sm:leading-normal">
-              {row.name}
-            </h3>
-          </div>
-          {row.publishedPrices?.lesson ? (
-            <PublishedLessonPrice prices={row.publishedPrices} />
-          ) : null}
-          <div className="mt-auto flex flex-wrap gap-2">
-            {row.categories.map((category) => (
-              <span key={category} className="dlu-chip">
-                {categoryChipLabel(tr(`category.${category}`), category)}
-              </span>
-            ))}
-            {row.englishSpeaking ? (
-              <span className="dlu-chip">{tr('englishAvailable')}</span>
-            ) : null}
-          </div>
-          {nextSlotPill ? (
-            <p className="text-small text-muted-foreground">{nextSlotPill.label}</p>
-          ) : null}
-          {(row.googleReviews?.length ?? 0) > 0 ? (
-            <GoogleReviewQuotes
-              items={row.googleReviews ?? []}
-              average={row.googleRating}
-              count={row.googleReviewCount}
-              limit={1}
-              compact
-            />
-          ) : null}
-        </div>
-      </article>
-    </Link>
-  );
-}
-
-export function SchoolMark({
-  name,
-  photoUrl,
-  categories,
-  heavy = null,
-  heavyScope = false,
-  alt,
-  size,
-}: {
-  name: string;
-  photoUrl: string;
-  categories: readonly string[];
-  heavy?: SchoolHeavyAdvertised | null;
-  heavyScope?: boolean;
-  alt: string;
-  size: 'cover' | 'avatar';
-}) {
-  const [failed, setFailed] = useState(false);
-  const portrait = schoolPortraitUrl(photoUrl);
-  const photograph = portrait !== null && !failed;
-  if (!photograph) {
-    return (
-      <SchoolMarkFallback
-        name={name}
-        categories={categories}
-        heavy={heavy}
-        heavyScope={heavyScope}
-        iconLayout={size === 'cover' ? 'cover' : 'avatar'}
-        className={
-          size === 'cover'
-            ? 'dlu-school-photo dlu-school-photo--compact box-border flex min-h-0 min-w-0 items-center justify-center p-6 font-display text-lg font-normal text-foreground sm:p-8 sm:text-4xl'
-            : 'box-border flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-[#ece9e2] p-1.5 font-display text-sm font-normal text-foreground dark:bg-[#1a1a18]'
-        }
-      />
-    );
-  }
-  if (size === 'avatar') {
-    return (
-      <Image
-        src={portrait ?? ''}
-        alt={alt}
-        width={48}
-        height={48}
-        unoptimized
-        onError={() => setFailed(true)}
-        className="size-12 shrink-0 rounded-full border border-border bg-white object-contain p-1.5"
-      />
-    );
-  }
-  return (
-    <span className="dlu-school-photo">
-      <Image
-        src={portrait ?? ''}
-        alt={alt}
-        fill
-        unoptimized
-        sizes="(min-width: 1024px) 24rem, 100vw"
-        onError={() => setFailed(true)}
-        className="object-contain p-8"
-      />
-    </span>
-  );
-}
-
-// Named categories read "Bil · B" so the chip matches the search field;
-// codes without a name (AM, A1, A2) stay as the bare code.
-export function categoryChipLabel(label: string, code: string): string {
-  return label === code ? code : `${label} · ${code}`;
-}
-
 function PreviewSkeleton({ limit }: { limit: number }) {
   const ids = Array.from(
     { length: Math.min(Math.max(1, limit), MAX_PREVIEW_ROWS) },
     (_, index) => `preview-skeleton-${index + 1}`,
   );
   return (
-    <ul className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+    <ul className={SCHOOL_LISTING_GRID_CLASS}>
       {ids.map((skeletonId) => (
         <li key={skeletonId} aria-hidden>
           <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white sm:rounded-[1.25rem] dark:bg-card">
             <Skeleton className="aspect-[5/3] w-full rounded-none sm:aspect-[4/3]" />
-            <div className="flex flex-col gap-3 p-5">
+            <div className="flex flex-col gap-3 p-4">
               <Skeleton className="h-3 w-1/4" />
               <Skeleton className="h-5 w-3/4" />
               <Skeleton className="h-7 w-1/3" />
-              <div className="flex gap-2">
-                <Skeleton className="h-7 w-20 rounded-full" />
-                <Skeleton className="h-7 w-16 rounded-full" />
-              </div>
             </div>
           </div>
         </li>
       ))}
     </ul>
   );
-}
-
-function formatNextSlotPill(
-  iso: string,
-  locale: 'en' | 'sv',
-  t: ReturnType<typeof useTranslations<'instructorPreview'>>,
-): { label: string; iso: string } {
-  const parts = providerSlotDateParts(iso, locale);
-  if (!parts) return { label: t('slotLabel'), iso };
-  const when = parts.isWithinNextWeek
-    ? t('slotTimeAndWeekday', { weekday: parts.weekday, time: parts.time })
-    : `${t('slotMonthDay', { monthShort: parts.monthShort, day: parts.day })} · ${t('slotTime', { time: parts.time })}`;
-  return { label: t('slotLabelRelative', { when }), iso };
 }

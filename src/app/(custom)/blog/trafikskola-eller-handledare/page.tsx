@@ -58,7 +58,7 @@ export default function TrafikskolaEllerHandledarePage() {
             Handledare och övningskörning
           </Link>
           . När du är redo för skollektioner, börja i{' '}
-          <Link className="underline underline-offset-4" href="/instructors">
+          <Link className="underline underline-offset-4" href="/locations">
             katalogen
           </Link>
           .

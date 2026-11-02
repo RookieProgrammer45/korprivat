@@ -675,6 +675,7 @@
   "instructorDetail": {
     "meta": {
       "title": "Driving-school listing",
+      "titleNamed": "{name} — driving school in {city}",
       "description": "Review a school's categories, published price and city. Contact the school to arrange a lesson.",
       "descriptionNamed": "{name} in {city} — from {rate} SEK/lesson."
     },
@@ -1977,7 +1978,8 @@
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "typeSchool": "School",
-    "typeInstructor": "Instructor"
+    "typeInstructor": "Instructor",
+    "ratingChipAria": "{average} out of 5 from {count} reviews"
   },
   "reviewForm": {
     "title": "Leave a review",
@@ -3540,10 +3542,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Driving schools in {name}, {country}",
+      "titleCity": "Driving schools in {name} — compare lessons",
+      "titleCityCounted": "Driving schools in {name} — compare {count} schools",
       "titleRegion": "Driving schools in {name}, {country}",
       "titleCountry": "Driving schools in {country}",
-      "descriptionCity": "Compare driving-school listings for {name}, {country}. Published prices when the school has added them.",
+      "descriptionCity": "Compare driving schools and lessons in {name}, {country}. Published prices when the school lists them on its website.",
+      "descriptionCityCounted": "Compare {count} driving schools and lessons in {name}, {country}. Published prices when the school lists them on its website.",
+      "descriptionCityPriced": "Compare {count} driving schools in {name}. Lessons from {price} SEK when the school publishes the price on its website.",
       "descriptionRegion": "Explore cities in {name}, {country} and compare driving-school listings when the catalog is live.",
       "descriptionCountry": "Find driving schools across {country}. A listed price is the price on the school's website."
     },
@@ -3577,7 +3582,14 @@
     "countriesTitle": "Countries",
     "faqTitle": "FAQ",
     "faq1q": "Can I find a school in {name} today?",
-    "faq1aLive": "Yes. Sign in to see the school listings in {name}. Contact the school to arrange a lesson.",
+    "faq1aLive": "Yes. School listings in {name} are shown here. Open a school for reviews, then contact the school to arrange a lesson.",
+    "emptyLiveTitle": "No school listings in {name} yet",
+    "emptyLiveBody": "New schools appear here when they are in the catalog. Browse other cities, or contact us if you run a school in {name}.",
+    "listHeadingLive": "Driving schools and lessons in {name}",
+    "statsCount": "{count} driving schools in {name}",
+    "statsPriceFrom": "Lessons from {price} SEK",
+    "statsDuration": "{minutes}-minute lesson",
+    "statsUpdated": "Prices collected {date}",
     "signInTitle": "Sign in to see the schools",
     "signInBody": "The catalog is open to signed-in users. After you sign in you will come back here.",
     "signInCta": "Sign in",

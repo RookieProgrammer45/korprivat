@@ -36,7 +36,7 @@ export function PublicFaq() {
       </div>
       <div className="mx-auto mt-10 flex max-w-3xl flex-col gap-3 sm:flex-row">
         <Button asChild size="lg">
-          <Link href="/instructors">{t('cta.findProviders')}</Link>
+          <Link href="/locations">{t('cta.findProviders')}</Link>
         </Button>
         <Button asChild variant="outline" size="lg">
           <Link href="/contact">{t('cta.contact')}</Link>

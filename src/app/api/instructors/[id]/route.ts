@@ -1,24 +1,8 @@
 import 'server-only';
 import { NextResponse } from 'next/server';
-import {
-  hasCanonicalCategory,
-  loadPublicInstructorAggregates,
-  toPublicInstructor,
-} from '@/lib/business/public-instructor';
-import { InstructorItem, LISTING_CONTACT_SELECT } from '@/lib/contracts/instructors';
-import { prisma } from '@/lib/db';
-import { nordicInstructorById } from '@/lib/discovery/nordic-catalogue';
-import { getActiveAffiliationForUser } from '@/lib/orgs/public';
-import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
+import { InstructorItem } from '@/lib/contracts/instructors';
+import { loadPublicListingById } from '@/lib/discovery/public-listing';
 import { requireAuth } from '@/lib/require-auth';
-import {
-  isCancellationPolicyEnforced,
-  listingHasActiveCancellationPolicy,
-} from '@/lib/scheduling/cancellation-policy-store';
-import {
-  loadInstructorPaymentEligibility,
-  maskSurfacesForPayment,
-} from '@/lib/scheduling/listing-eligibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,60 +15,11 @@ export async function GET(req: Request, ctx: Ctx) {
     return res as Response;
   }
   const { id } = await ctx.params;
-  const nordic = nordicInstructorById(id);
-  if (nordic) {
-    return NextResponse.json(InstructorItem.parse(nordic));
-  }
-  const instructor = await prisma.instructor.findUnique({
-    where: { id },
-    select: LISTING_CONTACT_SELECT,
-  });
-  if (!instructor) {
+  const listing = await loadPublicListingById(id);
+  if (!listing) {
     // Same envelope the form's `applyServerErrors` consumes, so the client
     // island can detect "not found" without a bespoke shape.
     return NextResponse.json({ errors: { id: 'Not found' } }, { status: 404 });
   }
-  if (!hasCanonicalCategory(instructor)) {
-    return NextResponse.json({ errors: { id: 'Not found' } }, { status: 404 });
-  }
-  const [aggregates, affiliation] = await Promise.all([
-    loadPublicInstructorAggregates([{ id: instructor.id, userId: instructor.userId }]),
-    getActiveAffiliationForUser(instructor.userId),
-  ]);
-  const slot = prisma.availabilitySlot
-    ? await prisma.availabilitySlot.findFirst({
-        where: {
-          instructorId: instructor.id,
-          bookedAt: null,
-          startsAt: { gt: new Date() },
-        },
-        orderBy: { startsAt: 'asc' },
-        select: { startsAt: true },
-      })
-    : null;
-  const aggregate = aggregates.get(instructor.id) ?? {
-    verificationStatus: 'unverified' as const,
-    reviewSummary: { count: 0, averageRating: null },
-  };
-  const payment = await loadInstructorPaymentEligibility({
-    listingId: instructor.id,
-    userId: instructor.userId,
-    providerRole: instructor.providerRole,
-  });
-  const surfaces = maskSurfacesForPayment(
-    await loadListingSurfaces(instructor.id, instructor.bookingMode),
-    payment.allowed,
-  );
-  const nextSlotAt = surfaces.availabilityDisplay ? (slot?.startsAt.toISOString() ?? null) : null;
-  const hidePolicy =
-    isCancellationPolicyEnforced() && !(await listingHasActiveCancellationPolicy(instructor.id));
-  return NextResponse.json(
-    InstructorItem.parse({
-      ...toPublicInstructor(instructor, aggregate, nextSlotAt),
-      affiliation: affiliation ? { name: affiliation.name, slug: affiliation.slug } : null,
-      canCollectPayment: payment.allowed,
-      surfaces,
-      ...(hidePolicy ? { cancellationPolicyTier: null, showCancellationPolicy: false } : {}),
-    }),
-  );
+  return NextResponse.json(InstructorItem.parse(listing));
 }

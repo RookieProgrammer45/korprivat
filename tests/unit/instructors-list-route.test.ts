@@ -275,7 +275,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(row).not.toHaveProperty('userId');
   });
 
-  it('lists stored Google reviews on each school item', async () => {
+  it('omits Google review bodies from list items', async () => {
     const instructorId = 'school_globen';
     mockInstructorFindMany.mockResolvedValueOnce([
       instructorRow({
@@ -294,14 +294,6 @@ describe('GET /api/instructors — next-open-slot projection', () => {
         comment: 'Bra skola',
         relativeTime: 'för 2 månader sedan',
       },
-      {
-        id: 'rev-skip',
-        instructorId,
-        authorName: 'Bad',
-        rating: 99,
-        comment: 'invalid',
-        relativeTime: null,
-      },
     ]);
 
     const res = await GET(req());
@@ -309,15 +301,8 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const body = (await res.json()) as {
       items: Array<{ id: string; googleReviews?: Array<Record<string, unknown>> }>;
     };
-    expect(body.items.find((item) => item.id === instructorId)?.googleReviews).toEqual([
-      {
-        id: 'rev-1',
-        authorName: 'Lilly Ask',
-        rating: 5,
-        comment: 'Bra skola',
-        relativeTime: 'för 2 månader sedan',
-      },
-    ]);
+    expect(body.items.find((item) => item.id === instructorId)?.googleReviews).toBeUndefined();
+    expect(mockGoogleReviewFindMany).not.toHaveBeenCalled();
   });
 
   it('resolves school contact to mailto and never serializes email', async () => {

@@ -28,6 +28,9 @@ const EDITORIAL: SeoRoute[] = [
   { path: '/pricing', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/faq', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/for-skolor', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/for-instructors', priority: 0.6, changeFrequency: 'monthly' },
+  { path: '/om-oss', priority: 0.6, changeFrequency: 'monthly' },
+  { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.6, changeFrequency: 'weekly' },
   {
     path: '/blog/kunskapsprov-korkort-b',
@@ -61,13 +64,6 @@ const EDITORIAL: SeoRoute[] = [
     priority: 0.75,
     changeFrequency: 'monthly',
   },
-  // Legacy city URLs 308 to /locations/se/* — keep briefly for crawlers that
-  // still hold the old sitemap entries.
-  { path: '/instructors/stockholm', priority: 0.3, changeFrequency: 'yearly' },
-  { path: '/instructors/goteborg', priority: 0.3, changeFrequency: 'yearly' },
-  { path: '/instructors/malmo', priority: 0.3, changeFrequency: 'yearly' },
-  { path: '/instructors/uppsala', priority: 0.3, changeFrequency: 'yearly' },
-  { path: '/instructors/vasteras', priority: 0.3, changeFrequency: 'yearly' },
 ];
 
 /** One sitemap file holds at most 50,000 URLs; the catalogue routes share it. */

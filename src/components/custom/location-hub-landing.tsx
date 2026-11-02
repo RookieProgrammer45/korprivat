@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { LocationDirectory } from '@/components/custom/location-directory';
-import { loginHrefWithNext } from '@/lib/auth-next';
+import { SchoolListingCard } from '@/components/custom/school-listing-card';
+import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
-import { getSessionUser } from '@/lib/require-auth';
+import { cityListingStats, publicSchoolsForLocation } from '@/lib/discovery/public-listing';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import {
   browseCities,
@@ -12,6 +12,7 @@ import {
   isIndexableLocation,
   schoolsForLocation,
 } from '@/lib/seo/catalogue-locations';
+import { jsonLdScript } from '@/lib/seo/json-ld';
 import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,
@@ -30,19 +31,36 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
   const name = displayName(location);
   const country = NORDIC_COUNTRY_META[location.country];
   const market = marketCopy(location.country);
+  const schools = await publicSchoolsForLocation(location);
+  const stats = cityListingStats(schools);
   const title = market
     ? location.kind === 'city'
       ? market.cityTitle(name, country.nameLocal)
       : market.countryTitle(country.nameLocal)
     : location.kind === 'city'
-      ? t('titleCity', { name, country: country.nameLocal })
+      ? stats.count > 0
+        ? t('titleCityCounted', { name, country: country.nameLocal, count: stats.count })
+        : t('titleCity', { name, country: country.nameLocal })
       : t('titleRegion', { name, country: country.nameLocal });
   const description = market
     ? location.kind === 'city'
       ? market.cityDescription(name, country.nameLocal)
       : market.countryDescription(country.nameLocal)
     : location.kind === 'city'
-      ? t('descriptionCity', { name, country: country.nameLocal })
+      ? stats.minLessonSek
+        ? t('descriptionCityPriced', {
+            name,
+            country: country.nameLocal,
+            count: stats.count,
+            price: stats.minLessonSek,
+          })
+        : stats.count > 0
+          ? t('descriptionCityCounted', {
+              name,
+              country: country.nameLocal,
+              count: stats.count,
+            })
+          : t('descriptionCity', { name, country: country.nameLocal })
       : t('descriptionRegion', { name, country: country.nameLocal });
   const brandedTitle = `${title} · ${siteName}`;
   return {
@@ -64,7 +82,6 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
 export async function LocationHubLanding({ location }: { location: NordicLocation }) {
   const t = await getTranslations('locationHub');
   const path = locationPath(location);
-  const sessionUser = await getSessionUser();
   const name = displayName(location);
   const country = NORDIC_COUNTRY_META[location.country];
   const market = marketCopy(location.country);
@@ -78,11 +95,11 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           )
         : [];
   const regions = listRegions(location.country);
-  const schools = location.kind === 'city' ? schoolsForLocation(location) : [];
-  const catalogueHere = schools.length > 0;
+  const schools = await publicSchoolsForLocation(location);
+  const stats = cityListingStats(schools);
+  const catalogueHere = location.kind === 'city' && schoolsForLocation(location).length > 0;
   const countryCatalogue = location.country !== 'se' && nordicCountryHasSchools(location.country);
   const showLiveDirectory = location.marketplaceLive && Boolean(location.filterCity);
-  const directoryCity = location.filterCity ?? null;
   const heading = market
     ? location.kind === 'city'
       ? market.cityHeading(name)
@@ -205,54 +222,38 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
 
         {schools.length > 0 ? (
           <section lang={market?.htmlLang} className="mx-auto mt-8 w-full max-w-6xl">
-            <h2 className="font-display text-h3">{market?.listHeading ?? t('citiesTitle')}</h2>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {schools.map((school) => {
-                const codes = [
-                  ...school.categories,
-                  ...(school.publishedPrices?.heavy?.categories ?? []),
-                ];
-                const lesson = school.publishedPrices?.lesson;
-                const currency = school.publishedPrices?.currency ?? 'SEK';
-                const price = lesson ? `${lesson.priceSek} ${currency}` : null;
-                return (
-                  <li
-                    key={school.id}
-                    className="rounded-[1.25rem] border border-border bg-card p-4"
-                  >
-                    <Link
-                      className="font-display text-body text-foreground underline-offset-4 hover:underline"
-                      href={schoolPath(school)}
-                    >
-                      {school.name}
-                    </Link>
-                    {codes.length > 0 || price ? (
-                      <p className="mt-1 text-small text-muted-foreground">
-                        {[codes.join(' · '), price].filter(Boolean).join(' · ')}
-                      </p>
-                    ) : null}
-                  </li>
-                );
-              })}
+            <h2 className="font-display text-h3">
+              {market?.listHeading ?? t('listHeadingLive', { name })}
+            </h2>
+            {stats.count > 0 ? (
+              <p className="mt-2 text-small text-muted-foreground">
+                {[
+                  t('statsCount', { count: stats.count, name }),
+                  stats.minLessonSek ? t('statsPriceFrom', { price: stats.minLessonSek }) : null,
+                  stats.typicalMinutes
+                    ? t('statsDuration', { minutes: stats.typicalMinutes })
+                    : null,
+                  stats.latestCollectedAt
+                    ? t('statsUpdated', {
+                        date: formatCollectedDate(stats.latestCollectedAt),
+                      })
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </p>
+            ) : null}
+            <ul className={`mt-4 ${SCHOOL_LISTING_GRID_CLASS}`}>
+              {schools.map((school) => (
+                <li key={school.id} className="h-full min-w-0">
+                  <SchoolListingCard row={school} />
+                </li>
+              ))}
             </ul>
           </section>
         ) : null}
 
-        {showLiveDirectory && directoryCity ? (
-          sessionUser ? (
-            <LocationDirectory cityName={directoryCity} />
-          ) : (
-            <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
-              <h2 className="font-display text-h3">{t('signInTitle')}</h2>
-              <p className="text-body text-muted-foreground">{t('signInBody')}</p>
-              <p>
-                <Link className="dlu-ink-pill inline-flex" href={loginHrefWithNext(path)}>
-                  {t('signInCta')}
-                </Link>
-              </p>
-            </section>
-          )
-        ) : schools.length > 0 ? null : countryCatalogue ? (
+        {schools.length > 0 ? null : countryCatalogue ? (
           <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
             <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
             <ul className="grid gap-2 sm:grid-cols-2">
@@ -268,12 +269,22 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
               ))}
             </ul>
           </section>
+        ) : showLiveDirectory ? (
+          <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
+            <h2 className="font-display text-h3">{t('emptyLiveTitle', { name })}</h2>
+            <p className="text-body text-muted-foreground">{t('emptyLiveBody', { name })}</p>
+            <p>
+              <Link className="underline underline-offset-4" href="/locations">
+                {t('expansionCtaSweden')}
+              </Link>
+            </p>
+          </section>
         ) : (
           <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
             <h2 className="font-display text-h3">{t('expansionTitle')}</h2>
             <p className="text-body text-muted-foreground">{t('expansionBody')}</p>
             <p>
-              <Link className="underline underline-offset-4" href="/instructors">
+              <Link className="underline underline-offset-4" href="/locations">
                 {t('expansionCtaSweden')}
               </Link>
             </p>
@@ -351,7 +362,16 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           </aside>
         </div>
       </section>
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      {jsonLdScript(jsonLd)}
     </>
   );
+}
+
+function formatCollectedDate(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  return new Intl.DateTimeFormat('sv-SE', {
+    dateStyle: 'medium',
+    timeZone: 'Europe/Stockholm',
+  }).format(date);
 }

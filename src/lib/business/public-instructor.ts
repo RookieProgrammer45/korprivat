@@ -66,10 +66,12 @@ type GoogleReviewRow = {
 
 export async function loadPublicInstructorAggregates(
   rows: Array<Pick<PublicInstructorSource, 'id' | 'userId'>>,
+  options?: { includeGoogleReviewBodies?: boolean },
 ): Promise<Map<string, PublicInstructorAggregate>> {
   const result = new Map<string, PublicInstructorAggregate>();
   const instructorIds = rows.map((row) => row.id);
   const userIds = rows.flatMap((row) => (row.userId ? [row.userId] : []));
+  const includeGoogleReviewBodies = options?.includeGoogleReviewBodies !== false;
 
   const [licenses, reviews, googleReviews] = await Promise.all([
     userIds.length > 0 && prisma.instructorLicense
@@ -84,7 +86,7 @@ export async function loadPublicInstructorAggregates(
           select: { instructorId: true, rating: true },
         })
       : Promise.resolve([] as ReviewRow[]),
-    instructorIds.length > 0 && prisma.googleReview
+    includeGoogleReviewBodies && instructorIds.length > 0 && prisma.googleReview
       ? prisma.googleReview.findMany({
           where: { instructorId: { in: instructorIds } },
           select: {
@@ -155,7 +157,7 @@ export async function loadPublicInstructorAggregates(
         ? (statusByUser.get(row.userId) ?? 'unverified')
         : 'unverified',
       reviewSummary: { count: ratings.length, averageRating: average },
-      googleReviews: googleByInstructor.get(row.id) ?? [],
+      ...(includeGoogleReviewBodies ? { googleReviews: googleByInstructor.get(row.id) ?? [] } : {}),
     });
   }
 
@@ -196,7 +198,7 @@ export function toPublicInstructor(
     googleRating: row.googleRating ?? null,
     googleReviewCount: row.googleReviewCount ?? null,
     googleMapsUri: row.googleMapsUri ?? null,
-    googleReviews: aggregate.googleReviews ?? [],
+    ...(aggregate.googleReviews ? { googleReviews: aggregate.googleReviews } : {}),
     publishedPrices: prices,
     nextSlotAt,
     cancellationPolicyTier:
