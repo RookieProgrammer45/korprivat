@@ -1139,14 +1139,14 @@ export function offeringRequestLearnerEmail(input: {
         `Din förfrågan om "${input.offeringName}" är skickad till ${input.schoolName} (${input.schoolCity}).`,
         'Skolan svarar dig direkt på den här mejladressen — oftast inom en arbetsdag.',
         '',
-        'Här kan du jämföra fler skolor när du väntar: https://www.drivelinkup.com/instructors',
+        'Här kan du jämföra fler skolor när du väntar: https://www.drivelinkup.com/locations/se',
       ]
     : [
         `Hi ${input.studentName},`,
         `Your request for "${input.offeringName}" has been sent to ${input.schoolName} (${input.schoolCity}).`,
         'The school will reply directly to this address — usually within one business day.',
         '',
-        'While you wait you can compare more schools here: https://www.drivelinkup.com/instructors',
+        'While you wait you can compare more schools here: https://www.drivelinkup.com/locations/se',
       ];
   const { html, text } = renderEmail({
     heading: isSwedish

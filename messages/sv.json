@@ -155,7 +155,7 @@
         "browseStockholmTitle": "Se trafikskolor i Stockholm",
         "browseStockholmSubtitle": "{count} listade skolor",
         "browseAllTitle": "Se alla trafikskolor",
-        "browseAllSubtitle": "Filtrera på stad, kategori, språk och pris."
+        "browseAllSubtitle": "Bläddra städer och öppna en skolannons."
       }
     }
   },
@@ -293,13 +293,13 @@
   },
   "forInstructorsPage": {
     "meta": {
-      "title": "För instruktörer på en trafikskola",
-      "description": "Instruktörer går med via sin skola. Skolans tillstånd styr kategori, pris och villkor."
+      "title": "För trafikskolor",
+      "description": "Lista skolan. Skolans tillstånd styr kategori, pris och villkor."
     },
     "hero": {
       "eyebrow": "För trafikskolor",
-      "title": "Skolan publicerar. Instruktören undervisar.",
-      "body": "Lägg upp kategori, pris och tider för det ni har tillstånd till. Eleverna jämför. Instruktörer bjuds in av skolan.",
+      "title": "Skolan publicerar. Eleverna jämför.",
+      "body": "Lägg upp kategori, pris och tider för det ni har tillstånd till. Eleverna jämför och kontaktar skolan.",
       "primaryCta": "Registrera skolan",
       "learnerCta": "Se elevvyn"
     },
@@ -513,7 +513,7 @@
   },
   "instructorDirectory": {
     "categoryLabel": "Körkortskategori",
-    "typeInstructor": "Instruktör",
+    "typeInstructor": "Trafikskola",
     "typeSchool": "Trafikskola",
     "cityLabel": "Stad",
     "cityPlaceholder": "Alla städer",
@@ -1307,7 +1307,7 @@
       "pathSubtitle": "Berätta först vem du är. Vi frågar bara efter det som behövs för den vägen.",
       "backToPaths": "Tillbaka",
       "accountTitleLearner": "Skapa ditt elevkonto",
-      "accountLeadLearner": "Hitta lektioner hos trafikskolor. Instruktörer undervisar via en skola.",
+      "accountLeadLearner": "Hitta lektioner hos trafikskolor. Jämför publicerade priser och kontakta skolan.",
       "accountTitleSchool": "Lista er trafikskola",
       "accountLeadSchool": "Lägg till skolans uppgifter så att elever kan hitta er.",
       "accountTitleInstructor": "Skapa ditt instruktörskonto",
@@ -1386,7 +1386,7 @@
     "instructorBreakdown": {
       "rateLine": "Publicerat lektionspris",
       "commissionLine": "DriveLinkUp lägger inte på någon avgift på en kataloglista",
-      "payoutLine": "En kataloglista är gratis. Instruktörer tar betalt endast via en trafikskola de tillhör.",
+      "payoutLine": "En kataloglista är gratis. Betalning för lektionen ordnas med skolan.",
       "exampleTitle": "Exempel"
     }
   },
@@ -1760,7 +1760,7 @@
       "eyebrow": "Handledare",
       "title": "Handledare-dashboard",
       "lead": "Bläddra bland elever som söker handledd övningskörning och visa att du är tillgänglig. Du måste godkänna handledare-villkoren innan din profil blir aktiv.",
-      "learnersCta": "Bläddra bland elever",
+      "learnersCta": "Jämför trafikskolor",
       "statusTitle": "Dina handledare-villkor är godkända",
       "statusBody": "Du kan bläddra bland elever och visa att du är tillgänglig. DriveLinkUp listar skolor; övningskörningen ordnar du med eleven.",
       "availability": {
@@ -1947,15 +1947,15 @@
   },
   "instructorPreview": {
     "meta": {
-      "title": "Instruktörsförhandsvisning",
-      "description": "Se instruktörskorten från elevens sida och fortsätt till den aktuella katalogen."
+      "title": "Förhandsvisning av trafikskolor",
+      "description": "Se skolannonserna från elevens sida och fortsätt till katalogen."
     },
     "pageEyebrow": "Elevvy",
     "pageTitle": "Förhandsvisa skolmarknaden",
     "pageBody": "Aktuella skolannonser. Öppna en profil eller kontakta skolan.",
     "directoryCta": "Öppna hela katalogen",
     "errorTitle": "Förhandsvisningen kunde inte laddas.",
-    "empty": "Inga instruktörer är listade ännu.",
+    "empty": "Inga trafikskolor är listade ännu.",
     "portraitAlt": "Profilbild på {name}",
     "rateSuffix": "SEK / lektion",
     "rateSuffixShort": "kr",
@@ -1978,7 +1978,7 @@
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "typeSchool": "Skola",
-    "typeInstructor": "Instruktör",
+    "typeInstructor": "Trafikskola",
     "ratingChipAria": "{average} av 5 från {count} omdömen"
   },
   "reviewForm": {
@@ -2364,11 +2364,11 @@
       "schoolCta": "Jag driver en skola",
       "panelEyebrow": "Så funkar det",
       "panelTitle": "Skolan står för lektionen",
-      "panelBody": "Bläddra på stad och kategori. Instruktörer undervisar för en skola.",
+      "panelBody": "Bläddra på stad och kategori. Öppna skolan och kontakta dem.",
       "panelPoints": {
         "directory": "Skolans uppgifter och publicerade pris.",
         "prices": "Publicerat pris när skolan har fyllt i det.",
-        "schools": "Instruktörer går med via skolan de undervisar för."
+        "schools": "Skolan publicerar det den har tillstånd att erbjuda."
       },
       "contactCta": "Starta en konversation",
       "assurance": {
@@ -3459,11 +3459,11 @@
       "title": "För trafikskolor i katalogen",
       "body": "Publicera priset för de kategorier ni har tillstånd för. En kataloglista är gratis.",
       "price": "Gratis att lista",
-      "detail": "En kataloglista är gratis. DriveLinkUp tar inte betalt för att skolan syns här. Instruktörer tar betalt endast via en trafikskola de tillhör."
+      "detail": "En kataloglista är gratis. DriveLinkUp tar inte betalt för att skolan syns här. Betalning för lektionen ordnas med skolan."
     },
     "notes": {
       "title": "Så fungerar listan (Sverige)",
-      "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för kataloglistor och lägger inte på en elevavgift. En instruktör kan inte ta betalt på DriveLinkUp om hen inte tillhör en trafikskola. Lektioner och villkor ordnas med skolan."
+      "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för kataloglistor och lägger inte på en elevavgift. Lektioner och villkor ordnas med skolan."
     },
     "cta": {
       "learner": "Jämför trafikskolor",
@@ -3570,7 +3570,7 @@
     "seoP1Live": "Annonser i {name} visar skolor som syns i katalogen. Jämför innan du kontaktar skolan.",
     "seoP1Catalogue": "Skolor i {name} är hämtade från skolans egen webbplats. De är inte markerade som verifierade. Jämför dem i katalogen och kontakta skolan.",
     "seoP1Expansion": "Vi publicerar en strukturerad hubb för {name}, {country} så sök och AI kan dirigera elever rätt medan utbud onboards.",
-    "seoP2": "En kataloglista är gratis. DriveLinkUp lägger inte på en elevavgift. Instruktörer tar betalt endast via en trafikskola de tillhör. Handledare är en separat juridisk väg.",
+    "seoP2": "En kataloglista är gratis. DriveLinkUp lägger inte på en elevavgift. Lektioner och betalning ordnas med skolan. Handledare är en separat juridisk väg.",
     "howTitle": "Så fungerar DriveLinkUp",
     "howBodyLive": "Öppna en annons, läs det publicerade priset och kontakta skolan. Lektioner ordnas med skolan.",
     "howBodyExpansion": "När annonser går live på den här marknaden gäller samma katalog — publicerade priser, kontakta skolan, ingen betalning till DriveLinkUp för en lista.",
@@ -3616,7 +3616,7 @@
     "sections": {
       "0": {
         "title": "Om tjänsten",
-        "body": "DriveLinkUp är en katalog över trafikskolor i Sverige. Instruktörer undervisar via en skola. Vi visar publicerade priser när skolan har fyllt i dem. DriveLinkUp bokar inte lektionen och tar inte betalt för lektionen.",
+        "body": "DriveLinkUp är en katalog över trafikskolor i Sverige. Vi visar publicerade priser när skolan har fyllt i dem. DriveLinkUp bokar inte lektionen och tar inte betalt för lektionen.",
         "items": [
           "Skolan publicerar sina uppgifter. Ett märke visas bara när den matchande kontrollen finns sparad.",
           "Tid och betalning ordnar du med skolan, bland annat via Kontakta skolan."
@@ -3645,7 +3645,7 @@
       },
       "4": {
         "title": "Listor och konto",
-        "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för att skolan syns här. Instruktörer tar betalt endast via en skola de tillhör. Elever betalar aldrig någon avgift till DriveLinkUp. Du måste vara 16 år eller äldre för att skapa ett konto, och du ansvarar för uppgifterna du anger och för att inte dela inloggningen.",
+        "body": "En kataloglista är gratis. DriveLinkUp tar inte betalt för att skolan syns här. Elever betalar aldrig någon avgift till DriveLinkUp. Du måste vara 16 år eller äldre för att skapa ett konto, och du ansvarar för uppgifterna du anger och för att inte dela inloggningen.",
         "items": [
           "Det är inte tillåtet att missbruka sajten, till exempel genom vilseledande uppgifter eller genom att störa tjänsten.",
           "Vi kan stänga ett konto som bryter mot villkoren eller som vi måste stänga för att skydda användare eller följa lag."
@@ -3721,7 +3721,7 @@
     "hero": {
       "eyebrow": "Trafikskolor och elever. En katalog.",
       "title": "Vi byggde jämförelsen vi själva saknade.",
-      "intro": "Vad kostar lektionen, och vem står för den? På DriveLinkUp är svaret skolans publicerade pris. Instruktörer undervisar via en skola.",
+      "intro": "Vad kostar lektionen, och vem står för den? På DriveLinkUp är svaret skolans publicerade pris.",
       "chips": [
         "Publicerat pris i kronor",
         "Skolans tillstånd styr behörigheten",
@@ -3756,7 +3756,7 @@
     "final": {
       "eyebrow": "Redo för nästa steg?",
       "title": "Elev eller skola. Börja där du är.",
-      "body": "Elever jämför priser. Skolor lägger upp det de har tillstånd att erbjuda. Instruktörer bjuds in av sin skola.",
+      "body": "Elever jämför priser. Skolor lägger upp det de har tillstånd att erbjuda.",
       "primaryCta": "Hitta lektioner",
       "secondaryCta": "Registrera skolan"
     }

@@ -104,7 +104,7 @@ export function StudentBookingHistory() {
           <p className="text-small text-muted-foreground">{t('emptyBody')}</p>
           <div className="mt-2">
             <Button asChild size="sm" variant="secondary">
-              <Link href="/instructors">{t('emptyCta')}</Link>
+              <Link href="/locations/se">{t('emptyCta')}</Link>
             </Button>
           </div>
         </CardContent>

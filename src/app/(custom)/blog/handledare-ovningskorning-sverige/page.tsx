@@ -26,7 +26,7 @@ export default function HandledareBlogPost() {
           handledaren, som godkänner via en unik länk. Först därefter blir kontot ACTIVE.
         </p>
         <p>
-          Letar du efter en körskola eller instruktör? Börja i{' '}
+          Letar du efter en trafikskola? Börja i{' '}
           <Link className="underline" href="/locations">
             katalogen
           </Link>{' '}

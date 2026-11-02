@@ -37,7 +37,7 @@ export default function KostnadKorkortPage() {
       </p>
       <div className="grid gap-4 text-body text-foreground">
         <p>Du ser skolans pris i SEK per timme. Kontakta skolan för att ordna lektionen.</p>
-        <p>Listningen är gratis. Instruktörer tar betalt via sin skola.</p>
+        <p>Listningen är gratis. Betalning för lektionen ordnas med skolan.</p>
         <p>
           Börja i{' '}
           <Link className="underline underline-offset-4" href="/locations/se/stockholm">

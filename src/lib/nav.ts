@@ -68,10 +68,9 @@ export const navItems: NavItem[] = [
   {
     label: 'Light vehicles',
     labelKey: 'nav.findProvider',
-    href: '/instructors',
+    href: '/locations/se',
     group: 'primary',
     order: 1,
-    catalogGated: true,
   },
   {
     label: 'Heavy vehicles',

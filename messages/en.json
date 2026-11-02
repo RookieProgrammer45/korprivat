@@ -155,7 +155,7 @@
         "browseStockholmTitle": "Browse Stockholm driving schools",
         "browseStockholmSubtitle": "{count} listed schools",
         "browseAllTitle": "View all driving schools",
-        "browseAllSubtitle": "Filter by city, category, language and price."
+        "browseAllSubtitle": "Browse cities and open a school listing."
       }
     }
   },
@@ -293,13 +293,13 @@
   },
   "forInstructorsPage": {
     "meta": {
-      "title": "For instructors at a driving school",
-      "description": "Instructors join through their school. The school's permission sets category, price and terms."
+      "title": "For driving schools",
+      "description": "List the school. The school's permission sets category, price and terms."
     },
     "hero": {
       "eyebrow": "For driving schools",
-      "title": "The school publishes. The instructor teaches.",
-      "body": "List the category, price and times you are permitted to offer. Learners compare. Instructors are invited by the school.",
+      "title": "The school publishes. Learners compare.",
+      "body": "List the category, price and times you are permitted to offer. Learners compare and contact the school.",
       "primaryCta": "Register the school",
       "learnerCta": "See the learner view"
     },
@@ -513,7 +513,7 @@
   },
   "instructorDirectory": {
     "categoryLabel": "Licence category",
-    "typeInstructor": "Instructor",
+    "typeInstructor": "Driving school",
     "typeSchool": "Driving school",
     "cityLabel": "City",
     "cityPlaceholder": "All cities",
@@ -1065,7 +1065,7 @@
       "pathSubtitle": "First, tell us who you are. We'll only ask for what that path needs.",
       "backToPaths": "Back",
       "accountTitleLearner": "Create your student account",
-      "accountLeadLearner": "Find lessons at driving schools. Instructors teach through a school.",
+      "accountLeadLearner": "Find lessons at driving schools. Compare published prices and contact the school.",
       "accountTitleSchool": "List your driving school",
       "accountLeadSchool": "Add your school details so learners can find you.",
       "accountTitleInstructor": "Create your instructor account",
@@ -1386,7 +1386,7 @@
     "instructorBreakdown": {
       "rateLine": "Published lesson price",
       "commissionLine": "DriveLinkUp does not add a fee on a catalog listing",
-      "payoutLine": "A catalog listing is free. Instructors collect payment only through a driving school they belong to.",
+      "payoutLine": "A catalog listing is free. Payment for the lesson is arranged with the school.",
       "exampleTitle": "Example"
     }
   },
@@ -1760,7 +1760,7 @@
       "eyebrow": "Handledare",
       "title": "Handledare dashboard",
       "lead": "Browse learners who are looking for supervised practice driving (övningskörning) and let them know you're available. You must complete the handledare terms before your listing goes active.",
-      "learnersCta": "Browse learners",
+      "learnersCta": "Compare driving schools",
       "statusTitle": "Your handledare terms are accepted",
       "statusBody": "You can browse learners and show that you are available. DriveLinkUp lists schools; you arrange supervised practice with the learner.",
       "availability": {
@@ -1947,15 +1947,15 @@
   },
   "instructorPreview": {
     "meta": {
-      "title": "Instructor preview",
-      "description": "Preview the learner-side instructor cards and continue to the live directory."
+      "title": "Driving-school preview",
+      "description": "Preview the learner-side school cards and continue to the catalog."
     },
     "pageEyebrow": "Learner view",
-    "pageTitle": "Preview the instructor directory",
+    "pageTitle": "Preview the school catalog",
     "pageBody": "Live school listings. Open a profile or contact the school.",
     "directoryCta": "Open the full directory",
-    "errorTitle": "The instructor preview could not load.",
-    "empty": "No instructors are listed yet.",
+    "errorTitle": "The school preview could not load.",
+    "empty": "No driving schools are listed yet.",
     "portraitAlt": "Profile photo of {name}",
     "rateSuffix": "SEK / lesson",
     "rateSuffixShort": "kr",
@@ -1978,7 +1978,7 @@
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "typeSchool": "School",
-    "typeInstructor": "Instructor",
+    "typeInstructor": "Driving school",
     "ratingChipAria": "{average} out of 5 from {count} reviews"
   },
   "reviewForm": {
@@ -2364,11 +2364,11 @@
       "schoolCta": "I run a school",
       "panelEyebrow": "How it works",
       "panelTitle": "The school stands behind the lesson",
-      "panelBody": "Browse by city and category. Instructors teach for a school.",
+      "panelBody": "Browse by city and category. Open the school and contact them.",
       "panelPoints": {
         "directory": "The school's details and published price.",
         "prices": "A published price when the school has added one.",
-        "schools": "Instructors join through the school they teach for."
+        "schools": "The school publishes what it is permitted to offer."
       },
       "contactCta": "Start a conversation",
       "assurance": {
@@ -3459,11 +3459,11 @@
       "title": "For driving schools",
       "body": "Publish the price for the categories you are permitted to teach. A catalog listing is free.",
       "price": "Free to list",
-      "detail": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. Instructors collect payment only through a driving school they belong to."
+      "detail": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. Payment for the lesson is arranged with the school."
     },
     "notes": {
       "title": "How listing works (Sweden)",
-      "body": "A catalog listing is free. DriveLinkUp does not take payment for directory listings and does not add a learner fee. An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Lessons and terms are arranged with the school."
+      "body": "A catalog listing is free. DriveLinkUp does not take payment for directory listings and does not add a learner fee. Lessons and terms are arranged with the school."
     },
     "cta": {
       "learner": "Compare schools",
@@ -3570,7 +3570,7 @@
     "seoP1Live": "Listings in {name} show schools that appear in the catalog. Compare before you contact the school.",
     "seoP1Catalogue": "Schools in {name} are listed from their own websites. They are not marked verified. Compare them in the catalog, then contact the school.",
     "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
-    "seoP2": "A catalog listing is free. DriveLinkUp does not add a learner fee. Instructors collect payment only through a driving school they belong to. Handledare / private practice is a separate legal path.",
+    "seoP2": "A catalog listing is free. DriveLinkUp does not add a learner fee. Lessons and payment are arranged with the school. Handledare / private practice is a separate legal path.",
     "howTitle": "How DriveLinkUp works",
     "howBodyLive": "Open a listing, read the published price, then contact the school. Lessons are arranged with the school.",
     "howBodyExpansion": "When listings go live in this market, the same catalog applies — published prices, contact the school, no DriveLinkUp payment on a listing.",
@@ -3616,7 +3616,7 @@
     "sections": {
       "0": {
         "title": "The service",
-        "body": "DriveLinkUp is a directory of driving schools in Sweden. Instructors teach through a school. We show published prices when the school has filled them in. DriveLinkUp does not book the lesson and does not take payment for the lesson.",
+        "body": "DriveLinkUp is a directory of driving schools in Sweden. We show published prices when the school has filled them in. DriveLinkUp does not book the lesson and does not take payment for the lesson.",
         "items": [
           "The school publishes its own details. A badge appears only when the matching check is stored.",
           "You arrange time and payment with the school, including through Contact the school."
@@ -3645,7 +3645,7 @@
       },
       "4": {
         "title": "Listings and accounts",
-        "body": "A directory listing is free. DriveLinkUp does not charge the school to appear here. Instructors charge only through a school they belong to. Learners never pay a fee to DriveLinkUp. You must be 16 or older to create an account, and you are responsible for the details you enter and for keeping your sign-in to yourself.",
+        "body": "A directory listing is free. DriveLinkUp does not charge the school to appear here. Learners never pay a fee to DriveLinkUp. You must be 16 or older to create an account, and you are responsible for the details you enter and for keeping your sign-in to yourself.",
         "items": [
           "Do not misuse the site, for example by posting misleading details or disrupting the service.",
           "We may close an account that breaks these terms or that we must close to protect users or comply with law."
@@ -3721,7 +3721,7 @@
     "hero": {
       "eyebrow": "Driving schools and learners. One directory.",
       "title": "We built the comparison we wished existed.",
-      "intro": "What does the lesson cost, and who stands behind it? On DriveLinkUp the answer is the school's published price. Instructors teach through a school.",
+      "intro": "What does the lesson cost, and who stands behind it? On DriveLinkUp the answer is the school's published price.",
       "chips": [
         "Published price in kronor",
         "The school's permit sets the licence",
@@ -3756,7 +3756,7 @@
     "final": {
       "eyebrow": "Ready for the next step?",
       "title": "Start from your side of the road.",
-      "body": "Learners compare prices. Schools publish what they are permitted to offer. Instructors are invited by their school.",
+      "body": "Learners compare prices. Schools publish what they are permitted to offer.",
       "primaryCta": "Find lessons",
       "secondaryCta": "Register the school"
     }

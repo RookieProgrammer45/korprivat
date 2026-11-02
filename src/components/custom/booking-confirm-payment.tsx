@@ -164,7 +164,7 @@ export function BookingPaymentLink({
           <p className="font-display text-h3 tracking-tight text-foreground">{t('accessTitle')}</p>
           <p className="text-small text-muted-foreground">{t('accessBody')}</p>
           <Button asChild variant="outline" size="sm" className="w-fit">
-            <Link href="/instructors">{t('browseCta')}</Link>
+            <Link href="/locations/se">{t('browseCta')}</Link>
           </Button>
         </CardContent>
       </Card>

@@ -42,7 +42,10 @@ describe('public SEO surfaces', () => {
     expect(robotsConfig.disallow).not.toContain('/trafikskola');
     expect(robotsConfig.disallow).not.toContain('/locations');
     const gated = navItems.filter((item) => item.catalogGated).map((item) => item.href);
-    expect(gated).toEqual(expect.arrayContaining(['/instructors', '/tung-trafik']));
+    expect(gated).toEqual(['/tung-trafik']);
+    expect(navItems.find((item) => item.labelKey === 'nav.findProvider')?.href).toBe(
+      '/locations/se',
+    );
     expect(isSitemapDisallowed('/instructors')).toBe(true);
     expect(isSitemapDisallowed('/signup')).toBe(true);
     expect(isSitemapDisallowed('/trafikskola/stockholm/example')).toBe(false);

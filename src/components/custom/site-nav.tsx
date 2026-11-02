@@ -37,7 +37,7 @@ export function useIsAuthenticated(): boolean {
 }
 
 function NavLabel({ href, children }: { href: string; children: React.ReactNode }) {
-  const Icon = href === '/tung-trafik' ? Truck : href === '/instructors' ? Car : null;
+  const Icon = href === '/tung-trafik' ? Truck : href === '/locations/se' ? Car : null;
   if (!Icon) return children;
   return (
     <span className="inline-flex items-center gap-1.5">

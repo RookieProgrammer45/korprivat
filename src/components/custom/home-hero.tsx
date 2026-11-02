@@ -9,49 +9,13 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { type FormEvent, useId, useState } from 'react';
 import { AnimatedTitle } from '@/components/custom/animated-title';
+import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
 
-// Values are the city names stored on listings. Labels come from i18n.
-const SEARCH_CITIES = [
-  { id: 'stockholm', value: 'Stockholm' },
-  { id: 'goteborg', value: 'Göteborg' },
-  { id: 'malmo', value: 'Malmö' },
-  { id: 'uppsala', value: 'Uppsala' },
-  { id: 'vasteras', value: 'Västerås' },
-  { id: 'linkoping', value: 'Linköping' },
-  { id: 'orebro', value: 'Örebro' },
-  { id: 'helsingborg', value: 'Helsingborg' },
-  { id: 'oslo', value: 'Oslo' },
-  { id: 'bergen', value: 'Bergen' },
-  { id: 'trondheim', value: 'Trondheim' },
-  { id: 'stavanger', value: 'Stavanger' },
-  { id: 'tromso', value: 'Tromsø' },
-  { id: 'odense', value: 'Odense' },
-  { id: 'reykjavik', value: 'Reykjavík' },
-  { id: 'sydney', value: 'Sydney' },
-  { id: 'melbourne', value: 'Melbourne' },
-  { id: 'brisbane', value: 'Brisbane' },
-  { id: 'perth', value: 'Perth' },
-  { id: 'adelaide', value: 'Adelaide' },
-  { id: 'hobart', value: 'Hobart' },
-  { id: 'goldCoast', value: 'Gold Coast' },
-  { id: 'london', value: 'London' },
-  { id: 'manchester', value: 'Manchester' },
-  { id: 'birmingham', value: 'Birmingham' },
-  { id: 'leeds', value: 'Leeds' },
-  { id: 'glasgow', value: 'Glasgow' },
-  { id: 'cardiff', value: 'Cardiff' },
-  { id: 'madrid', value: 'Madrid' },
-  { id: 'paris', value: 'Paris' },
-  { id: 'berlin', value: 'Berlin' },
-  { id: 'roma', value: 'Roma' },
-  { id: 'warszawa', value: 'Warszawa' },
-] as const;
-
 const POPULAR_LINKS = [
   { key: 'heavy', href: '/tung-trafik' },
-  { key: 'categoryA', href: '/instructors?categories=A' },
+  { key: 'categoryA', href: '/locations/se' },
   { key: 'stockholm', href: '/locations/se/stockholm' },
   { key: 'goteborg', href: '/locations/se/goteborg' },
   { key: 'malmo', href: '/locations/se/malmo' },
@@ -72,12 +36,7 @@ export function HomeHero() {
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Only send non-empty params: the shared parser rejects `city=`.
-    const params = new URLSearchParams();
-    if (category) params.set('categories', category);
-    if (city) params.set('city', city);
-    const qs = params.toString();
-    router.push(qs ? `/instructors?${qs}` : '/instructors');
+    router.push(schoolSearchPath(city));
   }
 
   return (

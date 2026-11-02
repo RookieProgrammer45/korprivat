@@ -27,7 +27,7 @@ import type { LlmsConfig } from '@/lib/llms';
 
 export const llmsConfig: LlmsConfig = {
   intro:
-    'DriveLinkUp is a Sweden-first catalog of driving schools. It is not a driving school, licensing authority, or government service. Anyone can compare listings and published prices for free, then contact the school. DriveLinkUp does not take lesson payments. Instructors appear only as part of a school. Handledare / övningskörning is a separate legal path, not a school listing.',
+    'DriveLinkUp is a Sweden-first catalog of driving schools. It is not a driving school, licensing authority, or government service. Anyone can compare listings and published prices for free, then contact the school. DriveLinkUp does not take lesson payments. Handledare / övningskörning is a separate legal path, not a school listing.',
   pageDescriptions: {
     '/': 'Catalog for comparing driving-school listings and published prices in Sweden.',
     '/locations':
@@ -38,7 +38,7 @@ export const llmsConfig: LlmsConfig = {
     '/locations/se/goteborg': 'City hub for driving-school listings in Gothenburg (Göteborg).',
     '/locations/se/malmo': 'City hub for driving-school listings in Malmö and Skåne.',
     '/pricing':
-      'A catalog listing is free. DriveLinkUp does not add a fee. Instructors collect payment only through a driving school they belong to.',
+      'A catalog listing is free. DriveLinkUp does not add a fee. Payment for the lesson is arranged with the school.',
     '/faq':
       'Answers about directory listings, published prices, and the separate Swedish handledare path.',
     '/for-instructors':
@@ -62,8 +62,7 @@ export const llmsConfig: LlmsConfig = {
     '/blog/kunskapsprov-korkort-b':
       'Swedish guide to the category B theory test at Trafikverket: learner permit, risk education, scoring, validity, and published school prices.',
     '/om-oss':
-      'About DriveLinkUp: a catalog of driving schools. Published prices are visible on the listing. Instructors teach through a school. Founded in Stockholm in 2026.',
-    '/terms':
-      'Terms of service: directory listings, instructor payment only through a school, and account rules.',
+      'About DriveLinkUp: a catalog of driving schools. Published prices are visible on the listing. Founded in Stockholm in 2026.',
+    '/terms': 'Terms of service: directory listings, school-arranged payment, and account rules.',
   },
 };

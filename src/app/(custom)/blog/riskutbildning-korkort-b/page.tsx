@@ -313,7 +313,7 @@ export default function RiskutbildningKorkortBPage() {
                 Lund
               </Link>
               , eller öppna{' '}
-              <Link className="underline underline-offset-4" href="/instructors">
+              <Link className="underline underline-offset-4" href="/locations/se">
                 hela katalogen
               </Link>
               . Hur priset visas förklaras på{' '}
@@ -347,7 +347,7 @@ export default function RiskutbildningKorkortBPage() {
           </section>
           <div className="flex flex-col gap-3 border-t border-border pt-6 sm:flex-row">
             <Button asChild>
-              <Link href="/instructors">Jämför trafikskolor</Link>
+              <Link href="/locations/se">Jämför trafikskolor</Link>
             </Button>
             <Button asChild variant="outline">
               <Link href="/blog">Fler guider</Link>

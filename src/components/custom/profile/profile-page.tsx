@@ -131,7 +131,7 @@ export function ProfilePage({ compact = false }: { compact?: boolean } = {}) {
         <Card className="surface-panel border-border bg-card">
           <CardContent className="flex flex-col items-start gap-3 p-8">
             <p className="text-body text-muted-foreground">{t('upcoming.emptyBodyStudent')}</p>
-            <Link href="/instructors" className="dlu-ink-pill">
+            <Link href="/locations/se" className="dlu-ink-pill">
               {t('upcoming.emptyCtaStudent')}
             </Link>
           </CardContent>
@@ -167,7 +167,7 @@ export function ProfilePage({ compact = false }: { compact?: boolean } = {}) {
                           ? '/dashboard/instructor/availability'
                           : role === 'SCHOOL'
                             ? '/dashboard/school'
-                            : '/instructors'
+                            : '/locations/se'
                       }
                     >
                       {t(

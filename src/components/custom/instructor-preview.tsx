@@ -112,7 +112,7 @@ export function InstructorPreview({
       {content}
       <div>
         <Button asChild size="lg">
-          <Link href="/instructors">{tr('directoryCta')}</Link>
+          <Link href="/locations/se">{tr('directoryCta')}</Link>
         </Button>
       </div>
     </section>

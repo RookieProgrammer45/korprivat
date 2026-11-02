@@ -242,7 +242,7 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
           </p>
           <p className="text-small text-muted-foreground">{t('receipt.body')}</p>
           <Link
-            href="/instructors"
+            href="/locations/se"
             className="text-small font-medium text-brand-700 underline-offset-4 hover:underline dark:text-brand-300"
           >
             {t('receipt.browseCta')}

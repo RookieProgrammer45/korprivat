@@ -42,7 +42,7 @@ export function PublicDirectoryPage({
           <p className="max-w-2xl text-body-lg text-muted-foreground">{subtitle}</p>
           {city ? (
             <Button asChild variant="ghost" size="sm" className="w-fit px-0 text-foreground">
-              <Link href="/instructors">{t('directoryCta')}</Link>
+              <Link href="/locations/se">{t('directoryCta')}</Link>
             </Button>
           ) : null}
         </div>
