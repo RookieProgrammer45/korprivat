@@ -133,7 +133,11 @@ export default function KunskapsprovKorkortBPage() {
               motorcykel gäller inte för personbil. Utbildningen gäller till den dag körkortet
               utfärdas, eller i högst fem år. Du gör den hos en utbildare som har tillstånd för just
               den delen. Trafikskolan anmäler sina elever. Övar du utan skola kontaktar du själv en
-              godkänd utbildare. Listan finns hos{' '}
+              godkänd utbildare. En egen genomgång finns i{' '}
+              <Link className="underline underline-offset-4" href="/blog/riskutbildning-korkort-b">
+                guiden om riskutbildning
+              </Link>
+              . Listan finns hos{' '}
               <a className="underline underline-offset-4" href={TRANSPORTSTYRELSEN_RISK}>
                 Transportstyrelsen
               </a>

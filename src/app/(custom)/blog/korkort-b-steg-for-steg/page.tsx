@@ -83,14 +83,18 @@ export default function KorkortBStegForStegPage() {
             <h2 className="font-display text-h2 leading-tight">Riskutbildning innan körprovet</h2>
             <p>
               För körkort B ingår riskutbildning i två delar. Del 1 tar upp alkohol, droger och
-              trötthet. Del 2 är den praktiska delen, ofta kallad halkbana. Båda ska vara klara
-              innan du gör körprovet. Vilken ordning som passar dig beror på hur långt du har kommit
-              med övningskörningen, och på vad den godkända utbildaren kräver.
+              trötthet. Del 2 är den praktiska delen, ofta kallad halkbana. Båda ska vara klara och
+              giltiga innan kunskapsprov och körprov. Vilken ordning som passar dig beror på hur
+              långt du har kommit med övningskörningen, och på vad den godkända utbildaren kräver.
             </p>
             <p>
               Anmäl dig till riskutbildningen hos en aktör som har tillstånd för just den delen.
               DriveLinkUp är en katalog över trafikskolor, inte den myndighet som godkänner
-              riskutbildare.
+              riskutbildare. Delarna, giltigheten och bokningen står i{' '}
+              <Link className="underline underline-offset-4" href="/blog/riskutbildning-korkort-b">
+                guiden om riskutbildning
+              </Link>
+              .
             </p>
           </section>
           <section className="grid gap-3">
