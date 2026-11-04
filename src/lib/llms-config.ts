@@ -52,7 +52,9 @@ export const llmsConfig: LlmsConfig = {
     '/handledare':
       'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
     '/blog':
-      'Guides for learners: category B risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+      'Guides for learners: the category B learner permit, risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+    '/blog/korkortstillstand-korkort-b':
+      'Swedish guide to the category B learner permit: group 1 application, vision certificate, five-year validity, foreign-licence readers, and published school prices.',
     '/blog/riskutbildning-korkort-b':
       'Swedish guide to mandatory category B risk education: riskettan, skidpad (halkbana), validity before the theory and driving tests, foreign-licence readers, and published school prices.',
     '/blog/korprov-korkort-b':
