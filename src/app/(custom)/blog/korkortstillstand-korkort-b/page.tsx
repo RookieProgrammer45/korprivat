@@ -156,8 +156,8 @@ export default function KorkortstillstandKorkortBPage() {
             </p>
             <p>
               Har du en digital brevlåda skickas tillståndet dit. Du kan också se ansökan och om
-              tillståndet gäller på Mina sidor. En trafikskola i katalogen ser inte det beslutet
-              och kan inte utfärda det. En annons är inte ett körkortstillstånd.
+              tillståndet gäller på Mina sidor. En trafikskola i katalogen ser inte det beslutet och
+              kan inte utfärda det. En annons är inte ett körkortstillstånd.
             </p>
           </section>
           <section className="grid gap-3">
@@ -191,10 +191,10 @@ export default function KorkortstillstandKorkortBPage() {
             </p>
             <p>
               För att få körkort B krävs också att du är permanent bosatt i Sverige, eller har
-              studerat här i minst sex månader, att riskutbildningen för personbil är giltig och
-              att både kunskapsprov och körprov är godkända. Har du redan ett körkort från ett
-              annat EES-land är vägen ett utbyte, inte ett nytt svenskt förarprov. Läs villkoren på
-              sidan om{' '}
+              studerat här i minst sex månader, att riskutbildningen för personbil är giltig och att
+              både kunskapsprov och körprov är godkända. Har du redan ett körkort från ett annat
+              EES-land är vägen ett utbyte, inte ett nytt svenskt förarprov. Läs villkoren på sidan
+              om{' '}
               <a className="underline underline-offset-4" href={TRANSPORTSTYRELSEN_B}>
                 personbil och lätt lastbil
               </a>{' '}
@@ -220,9 +220,9 @@ export default function KorkortstillstandKorkortBPage() {
               Transportstyrelsen har godkänt för dig. Handledaren ska ha fyllt 24 år, ha giltigt
               körkort för fordonet och ha haft körkort i minst fem av de senaste tio åren.
               Handledaren har med sig handledarbeviset, den grönvita skylten ÖVNINGSKÖR ska synas
-              bakifrån, och handledaren räknas som förare. Från den 1 augusti 2026 krävs inte
-              längre en introduktionsutbildning för elev eller handledare vid privat övningskörning
-              för behörighet B. Tillståndet och det godkända handledarskapet finns kvar. Läs
+              bakifrån, och handledaren räknas som förare. Från den 1 augusti 2026 krävs inte längre
+              en introduktionsutbildning för elev eller handledare vid privat övningskörning för
+              behörighet B. Tillståndet och det godkända handledarskapet finns kvar. Läs
               Transportstyrelsens sidor om{' '}
               <a className="underline underline-offset-4" href={TRANSPORTSTYRELSEN_OVNING}>
                 övningskörning
@@ -279,13 +279,12 @@ export default function KorkortstillstandKorkortBPage() {
             <p>
               Körkort från länder utanför EES byts i regel inte ut. Undantagen som
               Transportstyrelsen anger är Förenade kungariket, Färöarna, Schweiz och Japan. Ett
-              körkort utanför EES
-              slutar i regel gälla i Sverige ett år från den dag du blev folkbokförd här. Kort från
-              Förenade kungariket och Färöarna kan fortfarande användas efter det året. Det träffar
-              bland annat körkort från USA, Australien och Brasilien: de byts inte ut, och när de
-              inte längre gäller i Sverige är vägen till körkort B densamma som för den som tar
-              kortet första gången, med körkortstillstånd, riskutbildning, kunskapsprov och körprov.
-              Villkor och avgift för ett utbyte står på sidorna om{' '}
+              körkort utanför EES slutar i regel gälla i Sverige ett år från den dag du blev
+              folkbokförd här. Kort från Förenade kungariket och Färöarna kan fortfarande användas
+              efter det året. Det träffar bland annat körkort från USA, Australien och Brasilien: de
+              byts inte ut, och när de inte längre gäller i Sverige är vägen till körkort B densamma
+              som för den som tar kortet första gången, med körkortstillstånd, riskutbildning,
+              kunskapsprov och körprov. Villkor och avgift för ett utbyte står på sidorna om{' '}
               <a className="underline underline-offset-4" href={TRANSPORTSTYRELSEN_UTLAND}>
                 utländska körkort
               </a>
