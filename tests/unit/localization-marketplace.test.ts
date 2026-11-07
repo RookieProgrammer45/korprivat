@@ -92,6 +92,81 @@ describe('public marketplace localization', () => {
     }
   });
 
+  it('keeps ICU placeholders aligned with English', () => {
+    const placeholder = /\{[a-zA-Z_][a-zA-Z0-9_]*\}/g;
+    const english = loadMessages('en');
+    const mismatches: Array<{ path: string; expected: string[]; actual: string[] }> = [];
+
+    function collect(enValue: unknown, locValue: unknown, path: string): void {
+      if (isRecord(enValue) && isRecord(locValue)) {
+        for (const key of Object.keys(enValue)) {
+          collect(enValue[key], locValue[key], path ? `${path}.${key}` : key);
+        }
+        return;
+      }
+      if (typeof enValue === 'string' && typeof locValue === 'string') {
+        const expected = [...new Set(enValue.match(placeholder) ?? [])].sort();
+        const actual = [...new Set(locValue.match(placeholder) ?? [])].sort();
+        if (expected.join() !== actual.join()) {
+          mismatches.push({ path, expected, actual });
+        }
+      }
+    }
+
+    for (const locale of locales) {
+      if (locale === 'en') continue;
+      collect(english, loadMessages(locale), locale);
+    }
+
+    expect(mismatches).toEqual([]);
+  });
+
+  it('does not ship English clones on indexed German and French marketing pages', () => {
+    const en = loadMessages('en') as {
+      aboutPage: { hero: { intro: string } };
+      termsPage: { hero: { intro: string } };
+      pricingPage: { hero: { body: string } };
+    };
+    const de = loadMessages('de') as typeof en;
+    const fr = loadMessages('fr') as typeof en;
+    expect(de.aboutPage.hero.intro).not.toBe(en.aboutPage.hero.intro);
+    expect(de.termsPage.hero.intro).not.toBe(en.termsPage.hero.intro);
+    expect(de.pricingPage.hero.body).not.toBe(en.pricingPage.hero.body);
+    expect(fr.aboutPage.hero.intro).not.toBe(en.aboutPage.hero.intro);
+  });
+
+  it('keeps native marketing intros and hub titles on every major locale', () => {
+    const en = loadMessages('en') as {
+      aboutPage: { hero: { intro: string } };
+      termsPage: { hero: { intro: string } };
+      pricingPage: { hero: { body: string } };
+      locationHub: { meta: { indexTitle: string } };
+      faqPage: { items: { scope: { q: string } } };
+    };
+    for (const locale of locales) {
+      if (locale === 'en') continue;
+      const loc = loadMessages(locale) as typeof en;
+      expect({ locale, intro: loc.aboutPage.hero.intro }).not.toEqual({
+        locale,
+        intro: en.aboutPage.hero.intro,
+      });
+      expect({ locale, terms: loc.termsPage.hero.intro }).not.toEqual({
+        locale,
+        terms: en.termsPage.hero.intro,
+      });
+      expect({ locale, pricing: loc.pricingPage.hero.body }).not.toEqual({
+        locale,
+        pricing: en.pricingPage.hero.body,
+      });
+      expect({ locale, faq: loc.faqPage.items.scope.q }).not.toEqual({
+        locale,
+        faq: en.faqPage.items.scope.q,
+      });
+      expect(loc.locationHub.meta.indexTitle).not.toBe('Driving schools');
+      expect(loc.locationHub.meta.indexTitle.length).toBeGreaterThan(0);
+    }
+  });
+
   it('does not reintroduce retired public marketplace claims', () => {
     const publicCopy = JSON.stringify(
       Object.fromEntries(locales.map((locale) => [locale, loadMessages(locale)])),

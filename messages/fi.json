@@ -2,35 +2,35 @@
   "common": {
     "nav": {
       "findProvider": "Kevyt liikenne",
-      "heavyVehicles": "Heavy vehicles",
-      "howItWorks": "How it works",
-      "licenceCategories": "Licence categories",
-      "drivingInstructor": "I teach at a driving school",
-      "drivingSchool": "I run a driving school",
+      "heavyVehicles": "Raskaat ajoneuvot",
+      "howItWorks": "Näin se toimii",
+      "licenceCategories": "Ajokorttiluokat",
+      "drivingInstructor": "Opetan autokoulussa",
+      "drivingSchool": "Pidän autokoulua",
       "forSchoolsMenu": "Kouluille",
       "handledare": "Handledare-opas",
-      "getStarted": "Get started",
+      "getStarted": "Aloita",
       "faq": "Kysymyksiä",
       "contactUs": "Ota yhteyttä",
       "contact": "Yhteys",
-      "openMenu": "Open menu",
-      "more": "More",
-      "theme": "Theme",
-      "language": "Language",
-      "languageAria": "Change language",
-      "themeAria": "Toggle theme",
-      "primary": "Primary navigation",
-      "mobile": "Mobile navigation",
-      "footer": "Footer navigation",
-      "signIn": "Sign in",
-      "signOut": "Sign out",
-      "signingOut": "Signing out…",
-      "signOutError": "Could not sign out. Please try again.",
-      "languageError": "Could not change language. Please try again.",
-      "dashboard": "Dashboard",
-      "resources": "Resources",
+      "openMenu": "Avaa valikko",
+      "more": "Lisää",
+      "theme": "Teema",
+      "language": "Kieli",
+      "languageAria": "Vaihda kieltä",
+      "themeAria": "Vaihda teemaa",
+      "primary": "Päänavigointi",
+      "mobile": "Mobiilinavigointi",
+      "footer": "Alatunnisteen navigointi",
+      "signIn": "Kirjaudu sisään",
+      "signOut": "Kirjaudu ulos",
+      "signingOut": "Kirjaudutaan ulos…",
+      "signOutError": "Uloskirjautuminen ei onnistunut. Yritä uudelleen.",
+      "languageError": "Kielen vaihto ei onnistunut. Yritä uudelleen.",
+      "dashboard": "Hallintapaneeli",
+      "resources": "Aineistot",
       "blog": "Blogi",
-      "profile": "Profile",
+      "profile": "Profiili",
       "locations": "Paikat",
       "cityStockholm": "Stockholm",
       "cityGoteborg": "Gothenburg",
@@ -39,9 +39,9 @@
       "cityVasteras": "Västerås",
       "privacy": "Tietosuoja",
       "pricing": "Hinnat",
-      "paymentMethods": "Payment methods",
-      "southernSweden": "Southern Sweden",
-      "westernNorthernSweden": "Western & Northern Sweden",
+      "paymentMethods": "Maksutavat",
+      "southernSweden": "Etelä-Ruotsi",
+      "westernNorthernSweden": "Länsi- ja Pohjois-Ruotsi",
       "about": "Tietoa meistä",
       "terms": "Ehdot"
     },
@@ -68,23 +68,23 @@
       "sun": "S"
     },
     "footer": {
-      "headline": "Get started today.",
-      "sub": "Free to use.",
-      "cta": "Get started",
-      "columnProduct": "Product",
-      "columnCompany": "Company",
-      "columnResources": "Resources",
-      "columnLegal": "Legal",
-      "popularCities": "Popular cities",
-      "emailAria": "Email DriveLinkUp",
-      "socialNav": "DriveLinkUp on social media",
+      "headline": "Aloita tänään.",
+      "sub": "Ilmainen käyttää.",
+      "cta": "Aloita",
+      "columnProduct": "Tuote",
+      "columnCompany": "Yritys",
+      "columnResources": "Aineistot",
+      "columnLegal": "Juridiset",
+      "popularCities": "Suositut kaupungit",
+      "emailAria": "Lähetä sähköpostia DriveLinkUpille",
+      "socialNav": "DriveLinkUp sosiaalisessa mediassa",
       "socialX": "X",
       "socialInstagram": "Instagram",
       "socialFacebook": "Facebook",
       "socialLinkedin": "LinkedIn",
       "socialTiktok": "TikTok",
       "socialReddit": "Reddit",
-      "copyright": "Copyright © {year} DriveLinkUp. All rights reserved."
+      "copyright": "Copyright © {year} DriveLinkUp. Kaikki oikeudet pidätetään."
     }
   },
   "availability": {
@@ -101,70 +101,70 @@
   "landing": {
     "contactPage": {
       "eyebrow": "Tuki",
-      "headingLead": "How can we help",
-      "headingAccent": "today?",
+      "headingLead": "Miten voimme auttaa",
+      "headingAccent": "tänään?",
       "lead": "Kysy luettelosta, kouluilmoituksesta, turvallisuudesta tai tietosuojasta.",
       "step": {
-        "backToTopics": "Choose another topic",
-        "heading": "Tell us what happened",
-        "lead": "Share enough detail for the team to understand your question. We will reply using the email address you provide."
+        "backToTopics": "Valitse toinen aihe",
+        "heading": "Kerro, mitä tapahtui",
+        "lead": "Kerro tarpeeksi, jotta tiimi ymmärtää kysymyksesi. Vastaamme antamaasi sähköpostiosoitteeseen."
       },
       "fields": {
-        "nameLabel": "Your name",
+        "nameLabel": "Nimesi",
         "namePlaceholder": "Alex Morgan",
-        "emailLabel": "Email",
+        "emailLabel": "Sähköposti",
         "emailPlaceholder": "alex@example.com",
-        "messageLabel": "Message",
-        "messagePlaceholder": "What would you like help with?",
-        "topicLabel": "Support topic",
-        "topicHint": "Pick the topic that best matches your question."
+        "messageLabel": "Viesti",
+        "messagePlaceholder": "Mihin tarvitset apua?",
+        "topicLabel": "Tukiaihe",
+        "topicHint": "Valitse aihe, joka sopii parhaiten kysymykseesi."
       },
       "topics": [
         {
-          "title": "Question about a school",
-          "description": "A school listing, category, price or how to reach the school."
+          "title": "Kysymys autokoulusta",
+          "description": "Autokoulun ilmoitus, luokka, hinta tai miten tavoitat koulun."
         },
         {
-          "title": "Question about a school listing",
-          "description": "A school profile, category, availability or lesson question."
+          "title": "Kysymys autokoulun ilmoituksesta",
+          "description": "Kysymys profiilista, luokasta, saatavuudesta tai ajotunnista."
         },
         {
-          "title": "Payment at the school",
-          "description": "A question about payment or terms set by the school. DriveLinkUp does not take lesson payments."
+          "title": "Maksu autokoululle",
+          "description": "Kysymys maksusta tai koulun ehdoista. DriveLinkUp ei ota vastaan ajotuntien maksuja."
         },
         {
-          "title": "Technical issue",
-          "description": "Something is not loading or working as expected."
+          "title": "Tekninen ongelma",
+          "description": "Jokin ei lataudu tai toimi odotetusti."
         },
         {
-          "title": "Press or partnership",
-          "description": "Media, research or a partnership enquiry."
+          "title": "Lehdistö tai kumppanuus",
+          "description": "Media, tutkimus tai kumppanuuskysely."
         },
         {
-          "title": "Other question",
-          "description": "Anything else about DriveLinkUp."
+          "title": "Muu kysymys",
+          "description": "Kaikki muu DriveLinkUpista."
         },
         {
-          "title": "Claim or update a listing",
-          "description": "You run this school and need DriveLinkUp to change the name, price or other listing details."
+          "title": "Lunasta tai päivitä ilmoitus",
+          "description": "Pidät tätä autokoulua ja tarvitset DriveLinkUpia muuttamaan nimen, hinnan tai muut ilmoitustiedot."
         }
       ],
-      "submit": "Send to support",
-      "submitting": "Sending…",
+      "submit": "Lähetä tukeen",
+      "submitting": "Lähetetään…",
       "success": {
-        "title": "Message sent",
-        "body": "Thanks — the support team has your message and will get back to you."
+        "title": "Viesti lähetetty",
+        "body": "Kiitos — tukitiimi on vastaanottanut viestisi ja palaa asiaan."
       },
       "error": {
-        "generic": "We could not send your message. Please try again."
+        "generic": "Viestiä ei voitu lähettää. Yritä uudelleen."
       },
-      "footerNote": "For urgent safety concerns, stop the lesson and contact local emergency services first.",
+      "footerNote": "Kiireellisissä turvallisuusasioissa keskeytä ajotunti ja ota ensin yhteyttä paikalliseen hätänumeroon.",
       "cta": {
-        "eyebrow": "Prefer to browse?",
-        "browseStockholmTitle": "Browse Stockholm driving schools",
-        "browseStockholmSubtitle": "{count} listed schools",
-        "browseAllTitle": "View all driving schools",
-        "browseAllSubtitle": "Browse cities and open a school listing."
+        "eyebrow": "Haluatko mieluummin selata?",
+        "browseStockholmTitle": "Selaa Stockholmin autokouluja",
+        "browseStockholmSubtitle": "{count} listattua autokoulua",
+        "browseAllTitle": "Näytä kaikki autokoulut",
+        "browseAllSubtitle": "Selaa kaupunkeja ja avaa autokoulun ilmoitus."
       }
     }
   },
@@ -192,7 +192,7 @@
   },
   "faqPage": {
     "header": {
-      "eyebrow": "FAQ",
+      "eyebrow": "Kysymyksiä",
       "title": "Kysymyksiä",
       "subtitle": "Autokoulut Ruotsissa."
     },
@@ -227,8 +227,8 @@
       }
     },
     "cta": {
-      "findProviders": "Find a driving school",
-      "contact": "Contact support"
+      "findProviders": "Etsi autokoulu",
+      "contact": "Ota yhteyttä tukeen"
     }
   },
   "blogPage": {
@@ -239,64 +239,71 @@
     "header": {
       "eyebrow": "Blogi",
       "title": "Ajaminen Ruotsissa, selkeällä kielellä.",
-      "subtitle": "Short guides for people learning on Swedish roads. We cover Transportstyrelsen steps, school comparison, local requirements and clear SEK prices."
+      "subtitle": "Lyhyitä oppaita ruotsalaisilla teillä opiskeleville. Käsittelemme Transportstyrelsenin vaiheet, koulujen vertailun, paikalliset vaatimukset ja selkeät SEK-hinnat."
     },
     "posts": {
+      "8": {
+        "eyebrow": "Opetuslupa",
+        "title": "Ruotsalainen B-luokan opetuslupa: hakemus, näkötodistus ja voimassaolo",
+        "excerpt": "Terveysselvitys, näkötodistus ja viiden vuoden voimassaolo ennen harjoittelua, ajotunteja, teoriakoetta ja ajokoetta — ja miten vertaat kouluja Stockholmissa, Göteborgissa, Malmössä ja Lundissa.",
+        "meta": "{minutes} min lukuaika · 4. marraskuuta 2026",
+        "readCta": "Lue opas"
+      },
       "7": {
-        "eyebrow": "Risk education",
-        "title": "Risk education for a Swedish category B licence: riskettan, skidpad and validity",
-        "excerpt": "Riskettan and the skidpad before the theory test and driving test — and how to compare a school's published price in Stockholm, Gothenburg, Malmö and Lund.",
-        "meta": "{minutes} min read · 2 November 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Riskikoulutus",
+        "title": "Riskikoulutus ruotsalaiseen B-luokan ajokorttiin: riskettan, liukastelurata ja voimassaolo",
+        "excerpt": "Riskettan ja liukastelurata ennen teoriakoetta ja ajokoetta — ja miten vertailet autokoulun julkaisemaa hintaa Stockholmissa, Göteborgissa, Malmössä ja Lundissa.",
+        "meta": "{minutes} min lukuaika · 2. marraskuuta 2026",
+        "readCta": "Lue opas"
       },
       "6": {
-        "eyebrow": "Driving test",
-        "title": "Driving test for a Swedish category B licence: how Trafikverket runs the practical test",
-        "excerpt": "Safety check, manoeuvres and driving in traffic — and what must be in place with the learner permit, risk education and theory test.",
-        "meta": "{minutes} min read · 28 October 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Ajokoe",
+        "title": "Ajokoe ruotsalaiseen B-luokan ajokorttiin: miten Trafikverket järjestää käytännön kokeen",
+        "excerpt": "Turvatarkastus, manööverit ja ajaminen liikenteessä — ja mitä opetusluvan, riskikoulutuksen ja teoriakokeen kanssa on oltava kunnossa.",
+        "meta": "{minutes} min lukuaika · 28. lokakuuta 2026",
+        "readCta": "Lue opas"
       },
       "5": {
-        "eyebrow": "Theory test",
-        "title": "Theory test for a Swedish category B licence: how Trafikverket runs it",
-        "excerpt": "Learner permit, risk education, and what Trafikverket requires on the knowledge test — plus how to compare a school's published price.",
-        "meta": "{minutes} min read · 26 October 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Teoriakoe",
+        "title": "Teoriakoe ruotsalaiseen B-luokan ajokorttiin: miten Trafikverket järjestää sen",
+        "excerpt": "Opetuslupa, riskikoulutus ja mitä Trafikverket vaatii tietokokeessa — sekä miten vertailet autokoulun julkaisemaa hintaa.",
+        "meta": "{minutes} min lukuaika · 26. lokakuuta 2026",
+        "readCta": "Lue opas"
       },
       "4": {
-        "eyebrow": "Category B",
-        "title": "Swedish category B licence: from learner permit to the driving test",
-        "excerpt": "Learner permit, risk education, theory test and driving test — and how to compare a school's published lesson price.",
-        "meta": "{minutes} min read · 26 October 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Luokka B",
+        "title": "Ruotsalainen B-luokan ajokortti: opetusluvasta ajokokeeseen",
+        "excerpt": "Opetuslupa, riskikoulutus, teoriakoe ja ajokoe — ja miten vertailet autokoulun julkaisemaa tuntihintaa.",
+        "meta": "{minutes} min lukuaika · 26. lokakuuta 2026",
+        "readCta": "Lue opas"
       },
       "0": {
-        "eyebrow": "Article · Stockholm expats",
-        "title": "How to get a Swedish driver's license as an expat in Stockholm",
-        "excerpt": "Transportstyrelsen steps, realistic price planning, and how to compare driving-school listings in Stockholm.",
-        "readCta": "Read article",
-        "meta": "{minutes} min read · Updated August 2026"
+        "eyebrow": "Artikkeli · Stockholmin ulkomaalaiset",
+        "title": "Näin saat ruotsalaisen ajokortin ulkomailta muuttaneena Stockholmissa",
+        "excerpt": "Transportstyrelsenin vaiheet, realistinen hintasuunnittelu ja miten vertailet autokouluilmoituksia Stockholmissa.",
+        "readCta": "Lue artikkeli",
+        "meta": "{minutes} min lukuaika · Päivitetty elokuussa 2026"
       },
       "1": {
         "eyebrow": "Handledare",
-        "title": "Handledare and supervised practice in Sweden",
-        "excerpt": "How 16–17-year-olds complete handledare enrollment for private practice driving.",
-        "meta": "{minutes} min read",
-        "readCta": "Read guide"
+        "title": "Handledare ja valvottu harjoittelu Ruotsissa",
+        "excerpt": "Miten 16–17-vuotiaat hoitavat handledare-ilmoittautumisen yksityiseen harjoitteluajoon.",
+        "meta": "{minutes} min lukuaika",
+        "readCta": "Lue opas"
       },
       "2": {
-        "eyebrow": "Costs",
-        "title": "What does a Swedish driving licence cost?",
-        "excerpt": "How lesson prices work, and why DriveLinkUp shows school prices without a learner fee.",
-        "meta": "{minutes} min read",
-        "readCta": "Read guide"
+        "eyebrow": "Kustannukset",
+        "title": "Paljonko ruotsalainen ajokortti maksaa?",
+        "excerpt": "Miten tuntihinnat toimivat ja miksi DriveLinkUp näyttää koulun hinnat ilman oppilasmaksua.",
+        "meta": "{minutes} min lukuaika",
+        "readCta": "Lue opas"
       },
       "3": {
-        "eyebrow": "Paths",
-        "title": "Traffic school or handledare?",
-        "excerpt": "When a listed driving school fits, and when private övningskörning with a handledare applies.",
-        "meta": "{minutes} min read",
-        "readCta": "Read guide"
+        "eyebrow": "Polut",
+        "title": "Autokoulu vai handledare?",
+        "excerpt": "Milloin listattu autokoulu sopii, ja milloin yksityinen övningskörning handledaren kanssa tulee kyseeseen.",
+        "meta": "{minutes} min lukuaika",
+        "readCta": "Lue opas"
       }
     }
   },
@@ -306,380 +313,380 @@
       "description": "Listaa koulu. Koulun lupa määrää luokan, hinnan ja ehdot."
     },
     "hero": {
-      "eyebrow": "For driving schools",
-      "title": "The school publishes. Learners compare.",
-      "body": "List the category, price and times you are permitted to offer. Learners compare and contact the school.",
-      "primaryCta": "Register the school",
-      "learnerCta": "See the learner view"
+      "eyebrow": "Autokouluille",
+      "title": "Koulu julkaisee. Oppilaat vertailevat.",
+      "body": "Listaa luokka, hinta ja ajat, joihin teillä on lupa. Oppilaat vertailevat ja ottavat yhteyttä kouluun.",
+      "primaryCta": "Rekisteröi autokoulu",
+      "learnerCta": "Näytä oppilaan näkymä"
     },
     "roles": {
       "trafiklarare": {
-        "title": "The school's listing",
-        "body": "Category, price and times are published by the school, for the permissions the school holds."
+        "title": "Autokoulun ilmoitus",
+        "body": "Luokan, hinnan ja ajat julkaisee koulu sen lupien mukaan."
       },
       "handledare": {
-        "title": "Handledare guidance",
-        "body": "Handledare is a separate path for supervised practice. It is not a school listing and it is not booking."
+        "title": "Handledare-ohjeet",
+        "body": "Handledare on erillinen polku valvottuun harjoitteluun. Se ei ole kouluilmoitus eikä varaus."
       }
     },
     "safety": {
-      "title": "Safety starts with accurate information.",
-      "body": "Keep your authorization, location, languages and prices current."
+      "title": "Turvallisuus alkaa oikeista tiedoista.",
+      "body": "Pidä lupa, sijainti, kielet ja hinnat ajan tasalla."
     }
   },
   "instructorsPage": {
     "header": {
-      "eyebrow": "Car, motorcycle and trailer",
-      "title": "Light vehicles",
-      "subtitle": "Driving schools whose websites say they train for AM, A, B or BE. The price is shown when the school publishes it."
+      "eyebrow": "Auto, moottoripyörä ja perävaunu",
+      "title": "Kevyet ajoneuvot",
+      "subtitle": "Autokoulut, joiden sivuston mukaan ne kouluttavat AM-, A-, B- tai BE-luokkiin. Hinta näkyy, kun koulu julkaisee sen."
     },
-    "directoryCta": "View all driving schools",
+    "directoryCta": "Näytä kaikki autokoulut",
     "stockholmCity": {
       "meta": {
-        "title": "Driving schools in Stockholm",
-        "description": "Compare driving schools in Stockholm by category, language and price.",
-        "ogTitle": "Find a driving school in Stockholm",
-        "ogDescription": "Compare driving schools in Stockholm by category, language and price."
+        "title": "Autokoulut Stockholmissa",
+        "description": "Vertaa Stockholmin autokouluja luokan, kielen ja hinnan mukaan.",
+        "ogTitle": "Etsi autokoulu Stockholmista",
+        "ogDescription": "Vertaa Stockholmin autokouluja luokan, kielen ja hinnan mukaan."
       },
       "header": {
-        "eyebrow": "Driving schools in Stockholm",
-        "title": "Find a driving school in Stockholm",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autokoulut Stockholmissa",
+        "title": "Etsi autokoulu Stockholmista",
+        "subtitle": "Vertaa kouluja luokan, kielen ja hinnan mukaan. Ota yhteyttä kouluun."
       },
       "slug": "stockholm",
       "seo": {
-        "lead": "Driving schools in Stockholm",
-        "p1": "Compare the published price and city. Contact the school.",
-        "p2": "Compare the published price and city. Contact the school.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare and private practice (Sweden)",
-        "linkPricing": "Learner and school pricing",
-        "linkFaq": "Questions",
-        "linkBlog": "Guides for learners in Sweden",
-        "faqTitle": "Stockholm FAQ",
-        "faq1q": "Do learners pay a DriveLinkUp fee in Stockholm?",
-        "faq1a": "No. You pay the school’s published lesson price — no added fees.",
-        "faq2q": "Are private handledare listed as schools?",
-        "faq2a": "No. Handledare are a separate legal path for övningskörning. Use the handledare guide. A school listing is a directory profile, not a teaching permit.",
-        "faq3q": "How do I reach a school?",
-        "faq3a": "Contact the school."
+        "lead": "Autokoulut Stockholmissa",
+        "p1": "Vertaa julkaistua hintaa ja kaupunkia. Ota yhteyttä kouluun.",
+        "p2": "Vertaa julkaistua hintaa ja kaupunkia. Ota yhteyttä kouluun.",
+        "howTitle": "Näin aloitat",
+        "howBody": "Avaa ilmoitus. Ota yhteyttä kouluun.",
+        "relatedTitle": "Liittyvät oppaat",
+        "linkHandledare": "Handledare ja yksityinen harjoittelu (Ruotsi)",
+        "linkPricing": "Hinnoittelu oppilaalle ja koululle",
+        "linkFaq": "Kysymykset",
+        "linkBlog": "Oppaat oppilaille Ruotsissa",
+        "faqTitle": "Stockholm — kysymyksiä",
+        "faq1q": "Maksavatko oppilaat DriveLinkUp-maksua Stockholmissa?",
+        "faq1a": "Ei. Maksat koulun julkaiseman tuntihinnan — ei lisämaksuja.",
+        "faq2q": "Listataanko yksityiset handledaret autokouluina?",
+        "faq2a": "Ei. Handledare on erillinen juridinen polku övningskörningiin. Käytä handledare-opasta. Kouluilmoitus on hakemistoprofiili, ei opetuslupa.",
+        "faq3q": "Miten tavoitan autokoulun?",
+        "faq3a": "Ota yhteyttä kouluun."
       }
     },
     "goteborgCity": {
       "meta": {
-        "title": "Driving schools in Gothenburg",
-        "description": "Compare driving schools in Gothenburg by category, language and price.",
-        "ogTitle": "Find a driving school in Gothenburg",
-        "ogDescription": "Compare driving schools in Gothenburg by category, language and price."
+        "title": "Autokoulut Göteborgissa",
+        "description": "Vertaa Göteborgin autokouluja luokan, kielen ja hinnan mukaan.",
+        "ogTitle": "Etsi autokoulu Göteborgista",
+        "ogDescription": "Vertaa Göteborgin autokouluja luokan, kielen ja hinnan mukaan."
       },
       "header": {
-        "eyebrow": "Driving schools in Gothenburg",
-        "title": "Find a driving school in Gothenburg",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autokoulut Göteborgissa",
+        "title": "Etsi autokoulu Göteborgista",
+        "subtitle": "Vertaa kouluja luokan, kielen ja hinnan mukaan. Ota yhteyttä kouluun."
       },
       "slug": "goteborg",
       "seo": {
-        "lead": "Driving schools in Gothenburg",
-        "p1": "Compare Göteborg traffic schools by licence category, language and published SEK price.",
-        "p2": "Compare the published price and city. Contact the school.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare and övningskörning",
-        "linkPricing": "Pricing",
-        "linkFaq": "FAQ",
-        "linkBlog": "Learner guides",
-        "faqTitle": "Gothenburg FAQ",
-        "faq1q": "Is English-speaking instruction available?",
-        "faq1a": "Contact the school.",
-        "faq2q": "Does a school pay to be listed?",
-        "faq2a": "No. A catalog listing is free. DriveLinkUp does not take payment for directory listings. Lessons are arranged with the school.",
-        "faq3q": "When do I pay?",
-        "faq3a": "With the school. DriveLinkUp does not take payment for a catalog listing."
+        "lead": "Autokoulut Göteborgissa",
+        "p1": "Vertaa Göteborgin autokouluja ajokorttiluokan, kielen ja julkaistun SEK-hinnan mukaan.",
+        "p2": "Vertaa julkaistua hintaa ja kaupunkia. Ota yhteyttä kouluun.",
+        "howTitle": "Näin aloitat",
+        "howBody": "Avaa ilmoitus. Ota yhteyttä kouluun.",
+        "relatedTitle": "Liittyvät oppaat",
+        "linkHandledare": "Handledare ja övningskörning",
+        "linkPricing": "Hinnat",
+        "linkFaq": "Kysymyksiä",
+        "linkBlog": "Oppilasoppaat",
+        "faqTitle": "Göteborg — kysymyksiä",
+        "faq1q": "Onko opetusta englanniksi?",
+        "faq1a": "Ota yhteyttä kouluun.",
+        "faq2q": "Maksako koulu listauksesta?",
+        "faq2a": "Ei. Luetteloilmoitus on ilmainen. DriveLinkUp ei ota maksua hakemistoilmoituksista. Ajotunnit sovitaan koulun kanssa.",
+        "faq3q": "Milloin maksan?",
+        "faq3a": "Koululle. DriveLinkUp ei ota maksua luetteloilmoituksesta."
       }
     },
     "malmoCity": {
       "meta": {
-        "title": "Driving schools in Malmö",
-        "description": "Compare driving schools in Malmö by category, language and price.",
-        "ogTitle": "Find a driving school in Malmö",
-        "ogDescription": "Compare driving schools in Malmö by category, language and price."
+        "title": "Autokoulut Malmössä",
+        "description": "Vertaa Malmön autokouluja luokan, kielen ja hinnan mukaan.",
+        "ogTitle": "Etsi autokoulu Malmöstä",
+        "ogDescription": "Vertaa Malmön autokouluja luokan, kielen ja hinnan mukaan."
       },
       "header": {
-        "eyebrow": "Driving schools in Malmö",
-        "title": "Find a driving school in Malmö",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autokoulut Malmössä",
+        "title": "Etsi autokoulu Malmöstä",
+        "subtitle": "Vertaa kouluja luokan, kielen ja hinnan mukaan. Ota yhteyttä kouluun."
       },
       "slug": "malmo",
       "seo": {
-        "lead": "Driving schools in Malmö",
-        "p1": "Compare the published price and city. Contact the school.",
-        "p2": "Cross-border and bilingual households often need clear English copy; listings that speak English are marked in the directory.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare requirements",
-        "linkPricing": "Pricing",
-        "linkFaq": "FAQ",
-        "linkBlog": "Blog",
-        "faqTitle": "Malmö FAQ",
-        "faq1q": "Are prices shown before signup?",
-        "faq1a": "Yes. Hourly rates are published on each listing so you can compare before you create an account.",
-        "faq2q": "Can I practice privately as well?",
-        "faq2a": "Contact the school.",
-        "faq3q": "Which cities are nearby on DriveLinkUp?",
-        "faq3a": "Start from Malmö, then browse the southern Sweden hub for other Skåne and neighbouring cities."
+        "lead": "Autokoulut Malmössä",
+        "p1": "Vertaa julkaistua hintaa ja kaupunkia. Ota yhteyttä kouluun.",
+        "p2": "Rajat ylittävät ja kaksikieliset perheet tarvitsevat usein selkeää englanninkielistä tekstiä; englantia tarjoavat ilmoitukset on merkitty hakemistossa.",
+        "howTitle": "Näin aloitat",
+        "howBody": "Avaa ilmoitus. Ota yhteyttä kouluun.",
+        "relatedTitle": "Liittyvät oppaat",
+        "linkHandledare": "Handledare-vaatimukset",
+        "linkPricing": "Hinnat",
+        "linkFaq": "Kysymyksiä",
+        "linkBlog": "Blogi",
+        "faqTitle": "Malmö — kysymyksiä",
+        "faq1q": "Näkyvätkö hinnat ennen rekisteröitymistä?",
+        "faq1a": "Kyllä. Tuntihinnat on julkaistu jokaisessa ilmoituksessa, joten voit vertailla ennen tilin luomista.",
+        "faq2q": "Voinko harjoitella myös yksityisesti?",
+        "faq2a": "Ota yhteyttä kouluun.",
+        "faq3q": "Mitkä lähikaupungit ovat DriveLinkUpissa?",
+        "faq3a": "Aloita Malmöstä ja selaa sen jälkeen Etelä-Ruotsin keskittymää muihin Skånen ja naapurikaupunkeihin."
       }
     },
     "uppsalaCity": {
       "meta": {
-        "title": "Driving schools in Uppsala",
-        "description": "Compare driving schools in Uppsala by category, language and price.",
-        "ogTitle": "Find a driving school in Uppsala",
-        "ogDescription": "Compare driving schools in Uppsala by category, language and price."
+        "title": "Autokoulut Uppsalassa",
+        "description": "Vertaa Uppsalan autokouluja luokan, kielen ja hinnan mukaan.",
+        "ogTitle": "Etsi autokoulu Uppsalasta",
+        "ogDescription": "Vertaa Uppsalan autokouluja luokan, kielen ja hinnan mukaan."
       },
       "header": {
-        "eyebrow": "Driving schools in Uppsala",
-        "title": "Find a driving school in Uppsala",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autokoulut Uppsalassa",
+        "title": "Etsi autokoulu Uppsalasta",
+        "subtitle": "Vertaa kouluja luokan, kielen ja hinnan mukaan. Ota yhteyttä kouluun."
       },
       "slug": "uppsala",
       "seo": {
-        "lead": "Driving schools in Uppsala",
-        "p1": "Uppsala students and working adults can compare B-licence school listings, published SEK prices, and times the school has chosen to show.",
-        "p2": "Compare the published price and city. Contact the school.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare guide",
-        "linkPricing": "Pricing",
-        "linkFaq": "FAQ",
-        "linkBlog": "Guides",
-        "faqTitle": "Uppsala FAQ",
-        "faq1q": "Do I need a school for the whole licence?",
-        "faq1a": "Schools provide structured lessons. Private övningskörning with a handledare is optional and separate.",
-        "faq2q": "How do I reach a school?",
-        "faq2a": "Contact the school.",
-        "faq3q": "What about times and terms?",
-        "faq3a": "Ask the school. Terms are set by the school, not by DriveLinkUp."
+        "lead": "Autokoulut Uppsalassa",
+        "p1": "Uppsalan opiskelijat ja työssäkäyvät voivat vertailla B-luokan kouluilmoituksia, julkaistuja SEK-hintoja ja aikoja, jotka koulu on valinnut näytettäväksi.",
+        "p2": "Vertaa julkaistua hintaa ja kaupunkia. Ota yhteyttä kouluun.",
+        "howTitle": "Näin aloitat",
+        "howBody": "Avaa ilmoitus. Ota yhteyttä kouluun.",
+        "relatedTitle": "Liittyvät oppaat",
+        "linkHandledare": "Handledare-opas",
+        "linkPricing": "Hinnat",
+        "linkFaq": "Kysymyksiä",
+        "linkBlog": "Oppaat",
+        "faqTitle": "Uppsala — kysymyksiä",
+        "faq1q": "Tarvitsenko koulua koko ajokorttiin?",
+        "faq1a": "Koulut tarjoavat jäsenneltyjä ajotunteja. Yksityinen övningskörning handledaren kanssa on vapaaehtoinen ja erillinen.",
+        "faq2q": "Miten tavoitan autokoulun?",
+        "faq2a": "Ota yhteyttä kouluun.",
+        "faq3q": "Entä ajat ja ehdot?",
+        "faq3a": "Kysy koululta. Ehdot määrää koulu, ei DriveLinkUp."
       }
     },
     "vasterasCity": {
       "meta": {
-        "title": "Driving schools in Västerås",
-        "description": "Compare driving schools in Västerås by category, language and price.",
-        "ogTitle": "Find a driving school in Västerås",
-        "ogDescription": "Compare driving schools in Västerås by category, language and price."
+        "title": "Autokoulut Västeråsissa",
+        "description": "Vertaa Västeråsin autokouluja luokan, kielen ja hinnan mukaan.",
+        "ogTitle": "Etsi autokoulu Västeråsista",
+        "ogDescription": "Vertaa Västeråsin autokouluja luokan, kielen ja hinnan mukaan."
       },
       "header": {
-        "eyebrow": "Driving schools in Västerås",
-        "title": "Find a driving school in Västerås",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autokoulut Västeråsissa",
+        "title": "Etsi autokoulu Västeråsista",
+        "subtitle": "Vertaa kouluja luokan, kielen ja hinnan mukaan. Ota yhteyttä kouluun."
       },
       "services": {
-        "eyebrow": "Choose the right support",
-        "title": "Lessons in Västerås, your way",
-        "subtitle": "Compare schools by category, language and price. Contact the school.",
+        "eyebrow": "Valitse sopiva tuki",
+        "title": "Ajotunnit Västeråsissa, sinun tavallasi",
+        "subtitle": "Vertaa kouluja luokan, kielen ja hinnan mukaan. Ota yhteyttä kouluun.",
         "handledare": {
-          "title": "Private handledare guidance",
-          "body": "Handledare are a separate Swedish private-practice path, not authorized school listings. Review the legal requirements before practice driving."
+          "title": "Yksityisen handledaren ohjeet",
+          "body": "Handledare on erillinen ruotsalainen yksityisen harjoittelun polku, ei valtuutettuja kouluilmoituksia. Tarkista oikeudelliset vaatimukset ennen harjoitteluajoa."
         },
         "trafiklarare": {
-          "title": "Driving schools",
-          "body": "Compare schools by category and price. Contact the school."
+          "title": "Autokoulut",
+          "body": "Vertaa kouluja luokan ja hinnan mukaan. Ota yhteyttä kouluun."
         }
       },
       "cta": {
-        "eyebrow": "Ready to get started?",
-        "title": "Find your match in Västerås",
-        "body": "Filter by category, language and price. Contact the school.",
-        "find": "Find a driving school",
-        "become": "List your driving school"
+        "eyebrow": "Valmis aloittamaan?",
+        "title": "Löydä sopiva koulu Västeråsista",
+        "body": "Suodata luokan, kielen ja hinnan mukaan. Ota yhteyttä kouluun.",
+        "find": "Etsi autokoulu",
+        "become": "Listaa autokoulusi"
       },
       "slug": "vasteras",
       "seo": {
-        "lead": "Driving schools in Västerås",
-        "p1": "Compare the published price and city. Contact the school.",
-        "p2": "Combine school lessons with private practice only when handledare rules are met—the two paths stay distinct.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare information",
-        "linkPricing": "Pricing overview",
-        "linkFaq": "FAQ",
-        "linkBlog": "Blog",
-        "faqTitle": "Västerås FAQ",
-        "faq1q": "Who appears in search?",
-        "faq1a": "Driving schools in the catalog. A badge appears only when we have stored a check.",
-        "faq2q": "Is DriveLinkUp free?",
-        "faq2a": "Yes. DriveLinkUp is free to use. The published school price is what you pay.",
-        "faq3q": "Where do I read about private practice?",
-        "faq3a": "See the handledare page—private supervisors are not sold as school listings."
+        "lead": "Autokoulut Västeråsissa",
+        "p1": "Vertaa julkaistua hintaa ja kaupunkia. Ota yhteyttä kouluun.",
+        "p2": "Yhdistä koulun ajotunnit yksityiseen harjoitteluun vain, kun handledare-säännöt täyttyvät — polut pysyvät erillisinä.",
+        "howTitle": "Näin aloitat",
+        "howBody": "Avaa ilmoitus. Ota yhteyttä kouluun.",
+        "relatedTitle": "Liittyvät oppaat",
+        "linkHandledare": "Handledare-tiedot",
+        "linkPricing": "Hintakatsaus",
+        "linkFaq": "Kysymyksiä",
+        "linkBlog": "Blogi",
+        "faqTitle": "Västerås — kysymyksiä",
+        "faq1q": "Kuka näkyy haussa?",
+        "faq1a": "Autokoulut luettelossa. Merkki näkyy vain, kun olemme tallentaneet tarkistuksen.",
+        "faq2q": "Onko DriveLinkUp ilmainen?",
+        "faq2a": "Kyllä. DriveLinkUp on ilmainen käyttää. Maksat koulun julkaiseman hinnan.",
+        "faq3q": "Mistä luen yksityisestä harjoittelusta?",
+        "faq3a": "Katso handledare-sivu — yksityisiä ohjaajia ei myydä kouluilmoituksina."
       }
     }
   },
   "instructorDirectory": {
-    "categoryLabel": "Licence category",
-    "typeInstructor": "Driving school",
-    "typeSchool": "Driving school",
-    "cityLabel": "City",
-    "cityPlaceholder": "All cities",
-    "cityAllOption": "All cities",
-    "minRateLabel": "Minimum lesson price",
-    "maxRateLabel": "Maximum lesson price",
-    "englishOnly": "English available",
-    "minRatePlaceholder": "e.g. 400",
-    "maxRatePlaceholder": "e.g. 600",
-    "ratingLabel": "Minimum rating",
-    "ratingPlaceholder": "Any rating",
-    "ratingAllOption": "Any rating",
-    "rating3Plus": "3+ stars",
-    "rating4Plus": "4+ stars",
-    "rating4_5Plus": "4.5+ stars",
-    "availabilityLabel": "Availability",
-    "availabilityPlaceholder": "Any day",
-    "availabilityAllOption": "Any day",
-    "weekday": "Weekdays",
-    "weekend": "Weekends",
-    "affiliationLabel": "Link to a school",
-    "affiliationAll": "All",
-    "affiliationSchool": "Belongs to a school",
-    "affiliationIndependent": "No school linked",
-    "rateSuffix": "SEK / lesson",
+    "categoryLabel": "Ajokorttiluokka",
+    "typeInstructor": "Autokoulu",
+    "typeSchool": "Autokoulu",
+    "cityLabel": "Kaupunki",
+    "cityPlaceholder": "Kaikki kaupungit",
+    "cityAllOption": "Kaikki kaupungit",
+    "minRateLabel": "Alin oppitunnin hinta",
+    "maxRateLabel": "Ylin oppitunnin hinta",
+    "englishOnly": "Englanti saatavilla",
+    "minRatePlaceholder": "esim. 400",
+    "maxRatePlaceholder": "esim. 600",
+    "ratingLabel": "Vähimmäisarvosana",
+    "ratingPlaceholder": "Kaikki arvosanat",
+    "ratingAllOption": "Kaikki arvosanat",
+    "rating3Plus": "3+ tähteä",
+    "rating4Plus": "4+ tähteä",
+    "rating4_5Plus": "4,5+ tähteä",
+    "availabilityLabel": "Saatavuus",
+    "availabilityPlaceholder": "Mikä tahansa päivä",
+    "availabilityAllOption": "Mikä tahansa päivä",
+    "weekday": "Arkisin",
+    "weekend": "Viikonloput",
+    "affiliationLabel": "Liitä kouluun",
+    "affiliationAll": "Kaikki",
+    "affiliationSchool": "Kuuluu kouluun",
+    "affiliationIndependent": "Ei kytkettyä koulua",
+    "rateSuffix": "SEK / ajotunti",
     "rateSuffixShort": "kr",
-    "rateRangeError": "The minimum price must be less than or equal to the maximum price.",
-    "clearFilters": "Clear filters",
-    "resultCount": "{count, plural, one {# school found} other {# schools found}}",
-    "loadingResults": "Updating school results…",
-    "emptyTitle": "No schools match these filters",
-    "emptyBody": "Try removing a filter or browse all schools.",
-    "errorTitle": "The directory could not load",
-    "errorBody": "Please try again in a moment.",
-    "retry": "Try again",
-    "nextAvailableLabel": "Next available",
-    "noUpcomingSlot": "No upcoming slot listed",
-    "languageLabel": "Language",
-    "phoneLabel": "Phone",
-    "englishAvailable": "English available",
-    "swedishAvailable": "Swedish",
-    "slotLabel": "Next available",
+    "rateRangeError": "Alin hinta ei saa olla korkeampi kuin ylin hinta.",
+    "clearFilters": "Tyhjennä suodattimet",
+    "resultCount": "{count, plural, one {# koulu löytyi} other {# koulua löytyi}}",
+    "loadingResults": "Päivitetään koulutuloksia…",
+    "emptyTitle": "Mikään koulu ei vastaa suodattimia",
+    "emptyBody": "Poista suodatin tai selaa kaikkia kouluja.",
+    "errorTitle": "Hakemistoa ei voitu ladata",
+    "errorBody": "Yritä hetken kuluttua uudelleen.",
+    "retry": "Yritä uudelleen",
+    "nextAvailableLabel": "Seuraava vapaa",
+    "noUpcomingSlot": "Ei tulevaa aikaa listattuna",
+    "languageLabel": "Kieli",
+    "phoneLabel": "Puhelin",
+    "englishAvailable": "Englanti saatavilla",
+    "swedishAvailable": "Ruotsi",
+    "slotLabel": "Seuraava vapaa",
     "slotMonthDay": "{monthShort} {day}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
-    "geoTitle": "Search near you",
-    "useMyLocation": "Use my location",
+    "geoTitle": "Hae läheltä",
+    "useMyLocation": "Käytä sijaintiani",
     "locationStatus": {
-      "prompt": "Use your location to sort schools by distance and filter nearby.",
-      "requesting": "Finding your location…",
-      "granted": "Showing schools near your location.",
-      "denied": "Location access was denied. You can still filter by city.",
-      "failed": "We could not find your location. Try again, or filter by city.",
-      "unsupported": "Location is not available in this browser. You can still filter by city."
+      "prompt": "Käytä sijaintiasi järjestääksesi koulut etäisyyden mukaan ja suodattaaksesi läheltä.",
+      "requesting": "Paikannetaan sijaintiasi…",
+      "granted": "Näytetään koulut lähellä sijaintiasi.",
+      "denied": "Sijainnin käyttö evättiin. Voit silti suodattaa kaupungin mukaan.",
+      "failed": "Sijaintiasi ei löytynyt. Yritä uudelleen tai suodata kaupungin mukaan.",
+      "unsupported": "Sijainti ei ole käytettävissä tässä selaimessa. Voit silti suodattaa kaupungin mukaan."
     },
-    "nearKmLabel": "Within (km)",
+    "nearKmLabel": "Säde (km)",
     "nearKmPlaceholder": "25",
-    "sortLabel": "Sort order",
-    "sortNewest": "Standard order",
-    "sortNearest": "Nearest first",
-    "sortLessonPrice": "Lesson price, cheapest first",
-    "sortPackagePrice": "Package price, cheapest first",
-    "heavyAllVehicles": "All heavy vehicles",
-    "heavyLabel": "Heavy vehicles",
-    "heavyAll": "All schools",
-    "heavyTruck": "Truck (C1, C, CE)",
-    "heavyBus": "Bus (D1, D, DE)",
-    "heavyYkb": "YKB (professional driver)",
-    "distancePill": "{km} km away",
-    "clearGeolocation": "Clear location",
-    "profileCta": "View profile",
-    "portraitAlt": "Profile photo of {name}",
-    "serviceAreaLabel": "Service area",
-    "verificationLabel": "Verification",
+    "sortLabel": "Lajittelu",
+    "sortNewest": "Oletusjärjestys",
+    "sortNearest": "Lähin ensin",
+    "sortLessonPrice": "Oppitunnin hinta, halvin ensin",
+    "sortPackagePrice": "Pakettihinta, halvin ensin",
+    "heavyAllVehicles": "Kaikki raskaat ajoneuvot",
+    "heavyLabel": "Raskaat ajoneuvot",
+    "heavyAll": "Kaikki koulut",
+    "heavyTruck": "Kuorma-auto (C1, C, CE)",
+    "heavyBus": "Linja-auto (D1, D, DE)",
+    "heavyYkb": "YKB (ammattikuljettaja)",
+    "distancePill": "{km} km päässä",
+    "clearGeolocation": "Tyhjennä sijainti",
+    "profileCta": "Näytä profiili",
+    "portraitAlt": "Profiilikuva: {name}",
+    "serviceAreaLabel": "Palvelualue",
+    "verificationLabel": "Vahvistus",
     "verification": {
-      "verified": "Verified",
-      "pending": "Verification pending",
-      "rejected": "Not verified",
-      "unverified": "Not verified"
+      "verified": "Varmennettu",
+      "pending": "Vahvistus kesken",
+      "rejected": "Ei vahvistettu",
+      "unverified": "Ei vahvistettu"
     },
-    "reviewsLabel": "Reviews",
-    "reviewsNone": "No reviews yet",
-    "reviewsSummary": "{average} · {count, plural, one {# review} other {# reviews}}",
+    "reviewsLabel": "Arvostelut",
+    "reviewsNone": "Ei vielä arvosteluja",
+    "reviewsSummary": "{average} · {count, plural, one {# arvostelu} other {# arvostelua}}",
     "language": {
-      "sv": "Swedish",
+      "sv": "Ruotsi",
       "en": "English",
-      "no": "Norwegian",
-      "da": "Danish",
-      "fi": "Finnish",
-      "is": "Icelandic"
+      "no": "Norja",
+      "da": "Tanska",
+      "fi": "Suomi",
+      "is": "Islanti"
     },
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer"
+      "A": "Moottoripyörä",
+      "B": "Auto",
+      "BE": "Perävaunu"
     },
     "comparison": {
-      "eyebrow": "Shortlist",
-      "title": "Compare driving schools",
-      "count": "{count} of {max} selected",
-      "addToComparison": "Add to comparison",
-      "removeFromComparison": "Remove from comparison",
-      "limitReached": "You can compare up to three driving schools at a time.",
-      "clear": "Clear comparison",
-      "remove": "Remove",
-      "removeAria": "Remove {name} from comparison",
-      "category": "Categories",
-      "language": "Languages",
+      "eyebrow": "Vertailulista",
+      "title": "Vertaa autokouluja",
+      "count": "{count}/{max} valittu",
+      "addToComparison": "Lisää vertailuun",
+      "removeFromComparison": "Poista vertailusta",
+      "limitReached": "Voit vertailla enintään kolmea autokoulua kerrallaan.",
+      "clear": "Tyhjennä vertailu",
+      "remove": "Poista",
+      "removeAria": "Poista {name} vertailusta",
+      "category": "Luokat",
+      "language": "Kielet",
       "languages": {
-        "sv": "Swedish",
+        "sv": "Ruotsi",
         "en": "English"
       },
-      "serviceArea": "Service area",
-      "phone": "Phone",
-      "rate": "Lesson price",
-      "fee": "Listing",
-      "feeValue": "Free to compare. You pay the school.",
+      "serviceArea": "Palvelualue",
+      "phone": "Puhelin",
+      "rate": "Oppitunnin hinta",
+      "fee": "Ilmoitus",
+      "feeValue": "Vertailu on maksuton. Maksat koululle.",
       "rateValue": "{amount} / h",
-      "availability": "Availability",
-      "noAvailability": "No upcoming time listed",
-      "bookingMode": "Booking mode",
+      "availability": "Saatavuus",
+      "noAvailability": "Ei tulevia aikoja listattuna",
+      "bookingMode": "Varaus­tapa",
       "bookingModes": {
-        "instant": "Instant book",
-        "request": "Request to book"
+        "instant": "Suora varaus",
+        "request": "Pyydä varausta"
       },
-      "cancellation": "Cancellation",
+      "cancellation": "Peruutus",
       "policies": {
-        "flexible": "Flexible",
-        "moderate": "Moderate",
-        "strict": "Strict"
+        "flexible": "Joustava",
+        "moderate": "Kohtalainen",
+        "strict": "Tiukka"
       },
-      "policyUnknown": "See profile",
-      "reviews": "Reviews",
-      "noReviews": "No reviews yet",
+      "policyUnknown": "Näytä profiili",
+      "reviews": "Arvostelut",
+      "noReviews": "Ei vielä arvosteluja",
       "reviewsValue": "{average}/5 ({count})",
-      "viewProfile": "View profile"
+      "viewProfile": "Näytä profiili"
     },
-    "reviewsGoogleSummary": "{average} ★ on Google · {count, plural, one {# review} other {# reviews}}"
+    "reviewsGoogleSummary": "{average} ★ Googlella · {count, plural, one {# arvostelu} other {# arvostelua}}"
   },
   "schoolContact": {
-    "label": "Contact the school",
-    "inboxAria": "Email {name}",
-    "websiteAria": "Open {name}'s website",
-    "phoneLabel": "Call {number}",
-    "phoneAria": "Call {name} on {number}",
-    "priceRequest": "Ask for prices",
-    "priceRequestAria": "Ask {name} for prices",
-    "priceRequestSubject": "Price enquiry",
-    "priceRequestBody": "Hi {name},\n\nI found you on DriveLinkUp and would like to know what your driving lessons and packages cost.\n\nThank you!",
-    "noPrice": "No prices on the school's website yet",
-    "claim": "Claim this school",
-    "claimAria": "Claim {name} and ask DriveLinkUp to update this listing",
-    "claimPrefill": "I represent {name}. Please update this listing.\n{listing}",
-    "claimPrefillName": "I represent {name}. Please update this listing."
+    "label": "Ota yhteyttä kouluun",
+    "inboxAria": "Lähetä sähköpostia: {name}",
+    "websiteAria": "Avaa koulun {name} verkkosivusto",
+    "phoneLabel": "Soita {number}",
+    "phoneAria": "Soita {name}: {number}",
+    "priceRequest": "Kysy hintoja",
+    "priceRequestAria": "Kysy hintoja koululta {name}",
+    "priceRequestSubject": "Hintakysely",
+    "priceRequestBody": "Hei {name},\n\nLöysin teidät DriveLinkUpista ja haluaisin tietää, mitä ajotuntinne ja pakettinne maksavat.\n\nKiitos!",
+    "noPrice": "Koulun sivustolla ei ole vielä hintoja",
+    "claim": "Lunasta tämä koulu",
+    "claimAria": "Lunasta {name} ja pyydä DriveLinkUpia päivittämään tämä ilmoitus",
+    "claimPrefill": "Edustan koulua {name}. Päivittäkää tämä ilmoitus.\n{listing}",
+    "claimPrefillName": "Edustan koulua {name}. Päivittäkää tämä ilmoitus."
   },
   "instructorDetail": {
     "meta": {
@@ -690,25 +697,25 @@
     },
     "profileEyebrow": "Driving-school listing",
     "locatedIn": "Based in {city}",
-    "hourlyRate": "Lesson price",
-    "rateSuffix": "SEK / lesson",
-    "portraitAlt": "Profile photo of {name}",
+    "hourlyRate": "Oppitunnin hinta",
+    "rateSuffix": "SEK / ajotunti",
+    "portraitAlt": "Profiilikuva: {name}",
     "facts": {
-      "city": "City",
-      "phone": "Phone",
-      "serviceArea": "Service area",
-      "language": "Language",
-      "verification": "Verification",
-      "reviews": "Reviews",
-      "availability": "Next available"
+      "city": "Kaupunki",
+      "phone": "Puhelin",
+      "serviceArea": "Palvelualue",
+      "language": "Kieli",
+      "verification": "Vahvistus",
+      "reviews": "Arvostelut",
+      "availability": "Seuraava vapaa"
     },
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer",
+      "A": "Moottoripyörä",
+      "B": "Auto",
+      "BE": "Perävaunu",
       "C1": "C1",
       "C1E": "C1E",
       "C": "C",
@@ -719,12 +726,12 @@
       "DE": "DE"
     },
     "language": {
-      "sv": "Swedish",
+      "sv": "Ruotsi",
       "en": "English",
-      "no": "Norwegian",
-      "da": "Danish",
-      "fi": "Finnish",
-      "is": "Icelandic",
+      "no": "Norja",
+      "da": "Tanska",
+      "fi": "Suomi",
+      "is": "Islanti",
       "es": "Spanish",
       "fr": "French",
       "de": "German",
@@ -745,18 +752,18 @@
       "lt": "Lithuanian"
     },
     "verification": {
-      "verified": "Verified",
-      "pending": "Verification pending",
-      "rejected": "Not verified",
-      "unverified": "Not verified"
+      "verified": "Varmennettu",
+      "pending": "Vahvistus kesken",
+      "rejected": "Ei vahvistettu",
+      "unverified": "Ei vahvistettu"
     },
     "reviews": {
-      "none": "No reviews yet",
-      "summary": "{average} · {count, plural, one {# review} other {# reviews}}",
+      "none": "Ei vielä arvosteluja",
+      "summary": "{average} · {count, plural, one {# arvostelu} other {# arvostelua}}",
       "googleSummary": "{average} · {count, plural, one {# review} other {# reviews}} on Google"
     },
     "availability": {
-      "none": "No upcoming slot listed"
+      "none": "Ei tulevaa aikaa listattuna"
     },
     "loadError": "We could not load this profile.",
     "notFoundTitle": "School listing not found",
@@ -770,11 +777,11 @@
         "body": "Choose an open slot and continue to hosted checkout to secure the lesson."
       },
       "request": {
-        "title": "Request to book",
+        "title": "Pyydä varausta",
         "body": "Choose an open slot and send a request. The school confirms before payment is collected."
       },
       "contact": {
-        "title": "Directory listing",
+        "title": "Hakemistoilmoitus",
         "body": "This school is listed with its information and prices. Use Contact the school to reach them directly."
       },
       "paymentThroughSchool": {
@@ -792,7 +799,7 @@
     },
     "slots": {
       "loadError": "Could not load available times.",
-      "retry": "Try again",
+      "retry": "Yritä uudelleen",
       "empty": "No open times are listed right now."
     }
   },
@@ -805,9 +812,9 @@
     "submitRequest": "Send booking request",
     "submitDirectoryOnly": "This listing does not take bookings here",
     "submitIndependentPayment": "Payment is collected by a driving school",
-    "submitting": "Sending…",
+    "submitting": "Lähetetään…",
     "submittingInstant": "Booking…",
-    "submittingRequest": "Sending…",
+    "submittingRequest": "Lähetetään…",
     "policyEyebrow": "Cancellation policy",
     "policyLink": "Read the full policy in the FAQ",
     "policyScheduleFlexible": "Flexible: full refund at least 24 hours before; the full lesson fee is retained within 24 hours.",
@@ -819,10 +826,10 @@
     "learnerNotEligible": "You must be at least 16 years old to book lessons.",
     "learnerNeedsVerification": "Confirm your age with ID verification before booking.",
     "labels": {
-      "yourName": "Your name",
-      "email": "Email",
-      "phone": "Phone",
-      "category": "Licence category",
+      "yourName": "Nimesi",
+      "email": "Sähköposti",
+      "phone": "Puhelin",
+      "category": "Ajokorttiluokka",
       "categoryPlaceholder": "Choose a category"
     },
     "placeholders": {
@@ -842,8 +849,8 @@
     },
     "successEyebrow": "Booking saved",
     "successBody": "Your booking with {instructor} is saved. Review the school price, payment status and next step below.",
-    "rateLabel": "Lesson price",
-    "rateSuffix": "SEK / lesson",
+    "rateLabel": "Oppitunnin hinta",
+    "rateSuffix": "SEK / ajotunti",
     "paymentLabel": "Payment",
     "rateFallback": "the school",
     "paidBadge": "Paid",
@@ -873,25 +880,25 @@
     "bookingModeLabel": {
       "instant": "Instant",
       "request": "Request",
-      "contact": "Directory listing",
+      "contact": "Hakemistoilmoitus",
       "paymentThroughSchool": "Pays through a school"
     },
     "bookingMode": {
-      "title": "Booking mode",
+      "title": "Varaus­tapa",
       "description": "Choose whether learners can book instantly or send a request for approval.",
       "instantLabel": "Instant",
       "instantSummary": "Learners choose an open time and continue to payment.",
       "instantName": "Instant booking",
       "requestLabel": "Request",
       "requestSummary": "Learners choose an open time and wait for your approval before payment.",
-      "requestName": "Request to book",
+      "requestName": "Pyydä varausta",
       "contactLockedTitle": "Booking disabled",
       "contactLockedBody": "Your school is currently listed as a directory listing — information and prices, without booking or requests via DriveLinkUp. Only DriveLinkUp can change this, following a new decision from your school. Contact us if you want to change it."
     },
     "validation": {
       "nameRequired": "Enter your name.",
       "nameTooLong": "That name is too long.",
-      "emailInvalid": "Enter a valid email address.",
+      "emailInvalid": "Anna kelvollinen sähköpostiosoite.",
       "phoneRequired": "Enter your phone number.",
       "phoneTooLong": "That phone number is too long.",
       "categoryRequired": "Choose one of the school's published categories.",
@@ -907,13 +914,13 @@
     "subtitle": "Publish the school details and price learners need to compare. Keep the listing accurate.",
     "submit": "Publish my listing",
     "submitting": "Creating listing…",
-    "error": "Something went wrong. Please try again.",
+    "error": "Jokin meni pieleen. Yritä uudelleen.",
     "fields": {
-      "nameLabel": "Name",
+      "nameLabel": "Nimi",
       "namePlaceholder": "Erik Lindqvist",
-      "cityLabel": "City",
+      "cityLabel": "Kaupunki",
       "cityPlaceholder": "Stockholm",
-      "categoriesLabel": "Licence categories",
+      "categoriesLabel": "Ajokorttiluokat",
       "categoriesDescription": "Mark every licence class your school is authorized to offer.",
       "rateLabel": "Lesson price (SEK)",
       "ratePlaceholder": "550",
@@ -924,7 +931,7 @@
       "photoWrongType": "That file isn't an image. Use JPEG, PNG, or WebP.",
       "photoTooLarge": "That image is over 20 MB. Try a smaller export.",
       "photoDescription": "Upload a representative school image. JPEG, PNG, or WebP up to 20 MB.",
-      "emailLabel": "Email",
+      "emailLabel": "Sähköposti",
       "emailPlaceholder": "you@example.com",
       "emailDescription": "We send your school-listing confirmation here.",
       "bioLabel": "Short bio",
@@ -946,7 +953,7 @@
       "title": "Create a school account",
       "description": "Create an driving-school listing with published price and availability for learners to compare."
     },
-    "eyebrow": "For driving schools",
+    "eyebrow": "Autokouluille",
     "title": "Create a school account",
     "lead": "Complete the form to create your listing. Publish the price your school controls so learners can compare.",
     "back": "Back to overview",
@@ -961,34 +968,34 @@
     }
   },
   "waitlist": {
-    "saved": "You're on the list — we'll email you when DriveLinkUp launches.",
-    "error": "Something went wrong — try again.",
+    "saved": "Olet listalla — lähetämme sähköpostia, kun DriveLinkUp avautuu.",
+    "error": "Jokin meni pieleen — yritä uudelleen.",
     "fields": {
-      "nameLabel": "Name",
-      "namePlaceholder": "Your full name",
-      "emailLabel": "Email",
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Koko nimesi",
+      "emailLabel": "Sähköposti",
       "emailPlaceholder": "you@example.com",
-      "roleLabel": "I am a"
+      "roleLabel": "Olen"
     },
     "roleOptions": {
       "student": {
-        "label": "Driving student",
-        "hint": "I want to find a driving school."
+        "label": "Oppilas",
+        "hint": "Haluan löytää autokoulun."
       },
       "instructor": {
-        "label": "Driving school",
-        "hint": "I want to publish the school's lessons."
+        "label": "Autokoulu",
+        "hint": "Haluan julkaista koulun tunnit."
       }
     },
     "validation": {
-      "nameRequired": "Tell us your name.",
-      "nameTooLong": "Keep your name under 120 characters.",
-      "emailInvalid": "Enter a valid email address.",
-      "roleRequired": "Choose whether you are a learner or represent a driving school.",
-      "generic": "We could not save your details. Please try again."
+      "nameRequired": "Kerro nimesi.",
+      "nameTooLong": "Pidä nimi alle 120 merkissä.",
+      "emailInvalid": "Anna kelvollinen sähköpostiosoite.",
+      "roleRequired": "Valitse, oletko oppilas vai edustatko autokoulua.",
+      "generic": "Tietojasi ei voitu tallentaa. Yritä uudelleen."
     },
-    "submit": "Save my spot",
-    "submitting": "Saving…"
+    "submit": "Varaa paikka",
+    "submitting": "Tallennetaan…"
   },
   "auth": {
     "social": {
@@ -1002,7 +1009,7 @@
       "label": "Driving lessons",
       "role": "carousel",
       "goTo": "Show photo {n}",
-      "lessonAlt": "A driver holding the steering wheel on a dusk road",
+      "lessonAlt": "Kuljettaja pitää ohjauspyörästä hämärällä tiellä",
       "schoolAlt": "{name} in {city}"
     },
     "signIn": {
@@ -1014,7 +1021,7 @@
       "switchToSignupLead": "Don't have an account?",
       "switchToSignup": "Sign up",
       "fields": {
-        "emailLabel": "Email",
+        "emailLabel": "Sähköposti",
         "emailPlaceholder": "you@example.com",
         "passwordLabel": "Password",
         "passwordPlaceholder": "Your password"
@@ -1025,7 +1032,7 @@
       },
       "visual": {
         "label": "Schools in the directory",
-        "fallbackAlt": "A driver holding the steering wheel on a dusk road",
+        "fallbackAlt": "Kuljettaja pitää ohjauspyörästä hämärällä tiellä",
         "schoolAlt": "{name} in {city}"
       }
     },
@@ -1033,12 +1040,12 @@
       "title": "Forgot password",
       "subtitle": "Enter your email and we'll send a reset link if an account exists.",
       "submit": "Send reset link",
-      "submitting": "Sending…",
+      "submitting": "Lähetetään…",
       "sentBody": "If that email is registered, check your inbox for a reset link. It expires in 1 hour.",
       "backLead": "Remembered it?",
       "backToLogin": "Log in",
       "fields": {
-        "emailLabel": "Email",
+        "emailLabel": "Sähköposti",
         "emailPlaceholder": "you@example.com"
       },
       "errors": {
@@ -1075,7 +1082,7 @@
       "backToPaths": "Back",
       "accountTitleLearner": "Create your student account",
       "accountLeadLearner": "Find lessons at driving schools. Compare published prices and contact the school.",
-      "accountTitleSchool": "List your driving school",
+      "accountTitleSchool": "Listaa autokoulusi",
       "accountLeadSchool": "Add your school details so learners can find you.",
       "accountTitleInstructor": "Create your instructor account",
       "accountLeadInstructor": "Teach as an approved driving instructor (trafiklärare) affiliated with a driving school.",
@@ -1087,20 +1094,20 @@
         "title": "You're already signed in",
         "lead": "You're signed in as {email}. Continue to your dashboard, or sign out to create a different account.",
         "continue": "Continue to dashboard",
-        "signOut": "Sign out",
-        "signOutError": "Could not sign out. Please try again."
+        "signOut": "Kirjaudu ulos",
+        "signOutError": "Uloskirjautuminen ei onnistunut. Yritä uudelleen."
       },
       "fields": {
         "nameLabel": "Full name",
         "namePlaceholder": "Anna Svensson…",
-        "emailLabel": "Email",
+        "emailLabel": "Sähköposti",
         "emailPlaceholder": "you@example.com",
         "passwordLabel": "Password",
         "passwordPlaceholder": "At least 8 characters…",
-        "roleLabel": "I am a",
+        "roleLabel": "Olen",
         "roleLearner": "I'm a student",
         "roleSchool": "I'm a driving school",
-        "roleInstructor": "I teach at a driving school",
+        "roleInstructor": "Opetan autokoulussa",
         "roleLearnerDesc": "Compare driving schools. You must be at least 16.",
         "roleSchoolDesc": "List your driving school with prices and details. Learners compare and contact you.",
         "roleInstructorDesc": "You join through the school you teach for. The school's permission sets what you can offer.",
@@ -1111,11 +1118,11 @@
         "dateOfBirthHelp": "Students must be at least {age} years old.",
         "phoneLabel": "Phone (optional)",
         "phonePlaceholder": "+46 70 123 45 67…",
-        "cityLabel": "City",
+        "cityLabel": "Kaupunki",
         "cityPlaceholder": "Stockholm…",
-        "schoolNameLabel": "School name",
+        "schoolNameLabel": "Koulun nimi",
         "schoolNamePlaceholder": "Stockholm Trafikskola…",
-        "organizationNumberLabel": "Organisation number",
+        "organizationNumberLabel": "Organisaationumero",
         "organizationNumberPlaceholder": "556000-0000…",
         "licenseHeldYearsLabel": "Years with a full driving licence",
         "licenseHeldYearsPlaceholder": "5…",
@@ -1140,7 +1147,7 @@
         },
         "checkboxLabel": "I confirm I carry valid motor insurance covering supervised practice driving (övningskörning) with a learner driver, that liability for supervised sessions rests with me and the learner (not DriveLinkUp), and that I have read and agree to the handledare terms below.",
         "submit": "Confirm and continue",
-        "submitting": "Saving…",
+        "submitting": "Tallennetaan…",
         "back": "Back",
         "errors": {
           "attestationRequired": "Tick the box to confirm you've read the terms and carry valid insurance.",
@@ -1339,27 +1346,27 @@
           "title": "Let's get to know you",
           "pictureLabel": "Profile picture",
           "replaceImage": "Replace image",
-          "removeImage": "Remove",
+          "removeImage": "Poista",
           "imageHint": "*.png, *.jpeg files up to {max}MB",
           "firstNameLabel": "First name",
           "lastNameLabel": "Last name",
           "firstNamePlaceholder": "First name…",
           "lastNamePlaceholder": "Last name…",
           "firstNameError": "Enter your first name.",
-          "emailLabel": "Email",
+          "emailLabel": "Sähköposti",
           "emailHelp": "Used for sign-in.",
           "subscribeLabel": "Subscribe to product update emails",
           "subscribeDesc": "Get the latest updates about features and product improvements.",
           "nameUpdateFailed": "We couldn't save your name. Try again.",
           "photoRequiredHint": "Upload a profile picture to continue.",
           "continue": "Continue",
-          "submitting": "Saving…",
+          "submitting": "Tallennetaan…",
           "back": "Back",
           "preview": {
             "caption": "This is how your profile appears to others",
             "roleLearner": "Learner",
             "roleInstructor": "Instructor",
-            "roleSchool": "Driving school"
+            "roleSchool": "Autokoulu"
           }
         },
         "photo": {
@@ -1372,7 +1379,7 @@
           "heading": "Verify your identity",
           "body": "Upload a valid ID (passport, national ID, or driving licence) so we can confirm your age. Takes under 2 minutes.",
           "cta": "Upload ID document",
-          "pending": "Verification in progress",
+          "pending": "Varmennus käynnissä",
           "success": "Identity confirmed",
           "failed": "We could not verify your ID document. Please try again."
         }
@@ -1385,12 +1392,12 @@
     "commissionLabel": "School listing",
     "learnerBreakdown": {
       "eyebrow": "Your price",
-      "priceLine": "Lesson price",
+      "priceLine": "Oppitunnin hinta",
       "feeLine": "DriveLinkUp fee",
       "totalLine": "School price / learner total",
       "note": "The school's published price is the learner total before checkout — nothing is added on top.",
       "error": "We could not load the current total.",
-      "retry": "Try again"
+      "retry": "Yritä uudelleen"
     },
     "instructorBreakdown": {
       "rateLine": "Published lesson price",
@@ -1400,24 +1407,24 @@
     }
   },
   "instructorPayoutCard": {
-    "title": "Listing",
-    "eyebrow": "Directory",
+    "title": "Ilmoitus",
+    "eyebrow": "Hakemisto",
     "body": "A catalog listing is free. DriveLinkUp does not charge a school to be listed.",
     "payoutLine": "The school controls its published price. Listing is not a payment.",
     "exampleTitle": "Example at 600 SEK/hr",
     "exampleLine": "A published price of {price} SEK is what the learner sees. DriveLinkUp does not add a fee.",
     "exampleLearnerLine": "The published {price} SEK school price is the figure on the listing.",
     "errorTitle": "Could not load the listing details.",
-    "retry": "Try again"
+    "retry": "Yritä uudelleen"
   },
   "dashboard": {
     "signedInAs": "Signed in as {name}",
     "shell": {
       "loading": "Loading dashboard…",
       "redirecting": "Redirecting to sign in…",
-      "brand": "Dashboard",
+      "brand": "Hallintapaneeli",
       "adminAccess": "Admin access",
-      "marketplace": "Directory",
+      "marketplace": "Hakemisto",
       "title": {
         "learner": "My overview",
         "instructor": "Instructor overview",
@@ -1427,7 +1434,7 @@
       "badge": {
         "learner": "Learner",
         "instructor": "Instructor",
-        "school": "School",
+        "school": "Koulu",
         "admin": "Admin"
       }
     },
@@ -1437,14 +1444,14 @@
       "instructorTab": "Instructor",
       "handledareTab": "Handledare",
       "adminBadge": "Admin",
-      "signOut": "Sign out",
-      "signingOut": "Signing out…",
-      "signOutError": "Could not sign out. Please try again.",
+      "signOut": "Kirjaudu ulos",
+      "signingOut": "Kirjaudutaan ulos…",
+      "signOutError": "Uloskirjautuminen ei onnistunut. Yritä uudelleen.",
       "messagesTab": "Messages",
       "overviewTab": "Overview",
-      "availabilityTab": "Availability",
+      "availabilityTab": "Saatavuus",
       "schoolOverviewTab": "Overview",
-      "schoolInstructorsTab": "Instructors",
+      "schoolInstructorsTab": "Opettajat",
       "schoolBookingsTab": "Bookings",
       "schoolRevenueTab": "Revenue",
       "schoolSettingsTab": "Settings",
@@ -1464,13 +1471,13 @@
       "tooltip": "Activated means a school listing publishes at least one canonical licence category: AM, A1, A2, A, B or BE. This matches the public school directory. There is no historical activation source yet, so the tile does not show a percentage change.",
       "loading": "Loading activation count…",
       "error": "We couldn't load the activation count.",
-      "retry": "Try again"
+      "retry": "Yritä uudelleen"
     },
     "completedLessons": {
       "title": "Completed lessons",
       "description": "A quick view of lessons you have completed and settled.",
       "roles": {
-        "INSTRUCTOR": "Driving school",
+        "INSTRUCTOR": "Autokoulu",
         "HANDLEDARE": "Supervisor"
       },
       "count": "{count, plural, one {# completed lesson} other {# completed lessons}}",
@@ -1482,7 +1489,7 @@
       "emptyBody": "Completed, settled lessons will appear here after both the lesson and payment are finalized.",
       "loading": "Loading completed lessons…",
       "error": "We couldn't load your completed lessons.",
-      "retry": "Try again"
+      "retry": "Yritä uudelleen"
     },
     "signupConfirmation": {
       "title": "Your account is set up",
@@ -1501,7 +1508,7 @@
       "emptyBody": "Compare driving schools in the catalog and use Contact the school.",
       "emptyCta": "Browse driving schools",
       "loadError": "We couldn't load your bookings just now.",
-      "retry": "Try again",
+      "retry": "Yritä uudelleen",
       "paymentStatus": {
         "unpaid": "Awaiting payment",
         "pending": "Payment pending",
@@ -1534,13 +1541,13 @@
         "eyebrow": "Recommended driving schools",
         "title": "Schools that fit your booking",
         "lead": "AI-ranked matches for your selected category, city, and availability — drawn from the pilot cohort and ordered by fit, city match, and available slots.",
-        "viewProfile": "View profile",
+        "viewProfile": "Näytä profiili",
         "nextSlot": "Next open slot · {when}",
         "portraitAlt": "Image for {name}, driving school",
-        "englishAvailable": "English available",
-        "rateSuffix": "SEK / lesson",
+        "englishAvailable": "Englanti saatavilla",
+        "rateSuffix": "SEK / ajotunti",
         "errorTitle": "We couldn't load your recommendations just now.",
-        "retry": "Try again"
+        "retry": "Yritä uudelleen"
       },
       "viewAllBookings": "See all bookings",
       "nextAction": {
@@ -1561,14 +1568,14 @@
         "sectionUpcoming": "Upcoming",
         "sectionPast": "Past",
         "count": "{count, plural, one {# booking} other {# bookings}}",
-        "instructorLabel": "Driving school",
+        "instructorLabel": "Autokoulu",
         "categoryLabel": "Category",
         "dateLabel": "When",
         "priceLabel": "Price",
         "statusLabel": "Status",
         "priceApproxNote": "Price per current hourly rate.",
         "loadError": "We couldn't load your booking history just now.",
-        "retry": "Try again",
+        "retry": "Yritä uudelleen",
         "emptyTitle": "No bookings yet.",
         "emptyBody": "Compare driving schools in the catalog and use Contact the school.",
         "emptyCta": "Browse driving schools",
@@ -1633,7 +1640,7 @@
       "emptyTitle": "No new requests right now.",
       "emptyBody": "We'll show new learner requests here. Make sure your listing shows the categories your school offers and the cities you cover.",
       "loadError": "We couldn't load your requests just now.",
-      "retry": "Try again",
+      "retry": "Yritä uudelleen",
       "pendingLicense": {
         "pendingEyebrow": "Pending review",
         "pendingTitle": "Your school credentials are being verified",
@@ -1671,14 +1678,14 @@
         }
       },
       "availability": {
-        "eyebrow": "Availability",
+        "eyebrow": "Saatavuus",
         "title": "Manage your availability",
         "lead": "Release the time slots learners can book. Bulk-create weekly times, add a one-off slot, or edit the ones you've already released.",
         "formWeeklyTitle": "Weekly slots",
         "formWeeklyHint": "Pick the weekdays, start date, time, and how many weeks ahead to publish.",
         "formSingleTitle": "One-off slot",
         "formSingleHint": "For an irregular day — a stray afternoon, a weekend, or a reschedule.",
-        "weekdayLabel": "Weekdays",
+        "weekdayLabel": "Arkisin",
         "startDateLabel": "Start date",
         "timeOfDayLabel": "Time of day",
         "weeksAheadLabel": "Weeks ahead",
@@ -1694,7 +1701,7 @@
         "submitError": "Could not save — please try again.",
         "invalidDate": "Pick a valid start and end date/time.",
         "loadError": "Could not load your slots.",
-        "retry": "Try again",
+        "retry": "Yritä uudelleen",
         "emptyTitle": "No upcoming slots.",
         "emptyBody": "Release a few hours in the weekly form above — learners will see them and book.",
         "upcomingTitle": "Upcoming slots",
@@ -1713,14 +1720,14 @@
         "endsAtLabel": "End (local)"
       },
       "reviews": {
-        "eyebrow": "Reviews",
+        "eyebrow": "Arvostelut",
         "title": "Learner reviews",
         "lead": "What learners have written about your lessons.",
         "count": "{count, plural, one {# review} other {# reviews}}",
         "empty": "No reviews yet.",
         "emptyBody": "Reviews appear here after learners complete and rate a lesson with you.",
         "loadError": "We couldn't load your reviews just now.",
-        "retry": "Try again",
+        "retry": "Yritä uudelleen",
         "rating": "{rating}/5"
       },
       "history": {
@@ -1731,7 +1738,7 @@
         "empty": "No completed transactions yet.",
         "emptyBody": "Your settled lessons will appear here after both the lesson and payout are complete.",
         "loadError": "We couldn't load your booking history just now.",
-        "retry": "Try again",
+        "retry": "Yritä uudelleen",
         "receiptLink": "View receipt",
         "receiptOpen": "Open school receipt",
         "receiptDownload": "Download receipt PDF",
@@ -1769,14 +1776,14 @@
       "eyebrow": "Handledare",
       "title": "Handledare dashboard",
       "lead": "Browse learners who are looking for supervised practice driving (övningskörning) and let them know you're available. You must complete the handledare terms before your listing goes active.",
-      "learnersCta": "Compare driving schools",
+      "learnersCta": "Vertaa autokouluja",
       "statusTitle": "Your handledare terms are accepted",
       "statusBody": "You can browse learners and show that you are available. DriveLinkUp lists schools; you arrange supervised practice with the learner.",
       "availability": {
-        "eyebrow": "Availability",
+        "eyebrow": "Saatavuus",
         "title": "Manage your handledare availability",
         "lead": "Publish the times learners can request supervised practice driving.",
-        "nav": "Availability"
+        "nav": "Saatavuus"
       },
       "clickwrap": {
         "pendingEyebrow": "Almost there",
@@ -1794,7 +1801,7 @@
         },
         "checkboxLabel": "I confirm I carry valid motor insurance covering supervised practice driving (övningskörning) with a learner driver, that liability for supervised sessions rests with me and the learner (not DriveLinkUp), and that I have read and agree to the handledare terms below.",
         "submit": "Confirm and continue",
-        "submitting": "Saving…",
+        "submitting": "Tallennetaan…",
         "back": "Back",
         "renewalSuccess": "Thanks — your acceptance is recorded.",
         "errors": {
@@ -1887,7 +1894,7 @@
     "openFormEyebrow": "Open a dispute",
     "openFormTitle": "Flag a problem with this booking",
     "openFormLead": "Describe what happened — the other party gets an email and can resolve the dispute via the same link you used. The payout is paused until the dispute is resolved.",
-    "nameLabel": "Your name",
+    "nameLabel": "Nimesi",
     "youAreLabel": "You are",
     "youAreLearner": "Learner",
     "youAreInstructor": "Instructor",
@@ -1901,7 +1908,7 @@
     "noteLabel": "Note (optional)",
     "resolveRefund": "Refund the learner",
     "resolveRelease": "Release to the instructor",
-    "resolving": "Sending…",
+    "resolving": "Lähetetään…",
     "inertTitle": "Cannot open dispute",
     "openedBadge": "Dispute opened",
     "openedTitle": "Your dispute is recorded.",
@@ -1932,7 +1939,7 @@
     "eyebrow": "Mark lesson delivered",
     "title": "Mark the lesson as completed",
     "body": "When the lesson is done, mark it delivered here. The learner has 48 hours to confirm before payout auto-releases.",
-    "nameLabel": "Your name",
+    "nameLabel": "Nimesi",
     "youAreLabel": "You are",
     "youAreLearner": "Learner",
     "youAreInstructor": "Instructor",
@@ -1956,46 +1963,46 @@
   },
   "instructorPreview": {
     "meta": {
-      "title": "Driving-school preview",
-      "description": "Preview the learner-side school cards and continue to the catalog."
+      "title": "Autokoulun esikatselu",
+      "description": "Esikatsele oppilaan koulukortteja ja jatka luetteloon."
     },
-    "pageEyebrow": "Learner view",
-    "pageTitle": "Preview the school catalog",
-    "pageBody": "Live school listings. Open a profile or contact the school.",
-    "directoryCta": "Open the full directory",
-    "errorTitle": "The school preview could not load.",
-    "empty": "No driving schools are listed yet.",
-    "portraitAlt": "Profile photo of {name}",
-    "rateSuffix": "SEK / lesson",
+    "pageEyebrow": "Oppilaan näkymä",
+    "pageTitle": "Esikatsele koululuetteloa",
+    "pageBody": "Julkaistut kouluilmoitukset. Avaa profiili tai ota yhteyttä kouluun.",
+    "directoryCta": "Avaa koko hakemisto",
+    "errorTitle": "Koulun esikatselua ei voitu ladata.",
+    "empty": "Autokouluja ei ole vielä listattu.",
+    "portraitAlt": "Profiilikuva: {name}",
+    "rateSuffix": "SEK / ajotunti",
     "rateSuffixShort": "kr",
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer"
+      "A": "Moottoripyörä",
+      "B": "Auto",
+      "BE": "Perävaunu"
     },
-    "nextAvailableLabel": "Next available",
-    "noUpcomingSlot": "No upcoming slot listed",
-    "englishAvailable": "English available",
-    "swedishAvailable": "Swedish",
-    "profileCta": "View profile",
-    "slotLabel": "Next available",
+    "nextAvailableLabel": "Seuraava vapaa",
+    "noUpcomingSlot": "Ei tulevaa aikaa listattuna",
+    "englishAvailable": "Englanti saatavilla",
+    "swedishAvailable": "Ruotsi",
+    "profileCta": "Näytä profiili",
+    "slotLabel": "Seuraava vapaa",
     "slotLabelRelative": "{when}",
     "slotMonthDay": "{monthShort} {day}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
-    "typeSchool": "School",
-    "typeInstructor": "Driving school",
-    "ratingChipAria": "{average} out of 5 from {count} reviews"
+    "typeSchool": "Koulu",
+    "typeInstructor": "Autokoulu",
+    "ratingChipAria": "{average} / 5, {count} arviota"
   },
   "reviewForm": {
     "title": "Leave a review",
     "description": "Share your experience with this instructor — your name, a star rating, and a short comment.",
     "submit": "Post review",
     "submitting": "Posting…",
-    "submitError": "Something went wrong. Please try again.",
+    "submitError": "Jokin meni pieleen. Yritä uudelleen.",
     "submitSuccess": "Thanks — your review was posted.",
     "context": {
       "notEligibleTitle": "Reviews are available after a completed lesson",
@@ -2013,7 +2020,7 @@
       "bookingUnavailable": "This lesson is not available for a review."
     },
     "labels": {
-      "nameLabel": "Your name",
+      "nameLabel": "Nimesi",
       "ratingLabel": "Rating",
       "ratingAriaLabel": "Star rating from 1 to 5",
       "commentLabel": "Your comment"
@@ -2024,24 +2031,24 @@
     },
     "ratingOption": "★ {rating}",
     "list": {
-      "heading": "Reviews",
+      "heading": "Arvostelut",
       "emptyTitle": "No reviews yet.",
       "emptyBody": "Be the first to leave one — share what stood out about your lesson.",
       "loadError": "Could not load the reviews.",
-      "retry": "Try again",
+      "retry": "Yritä uudelleen",
       "ratingValue": "{rating}/5",
       "errorTitle": "We could not save your review."
     }
   },
   "profile": {
-    "title": "Profile",
+    "title": "Profiili",
     "signedInAs": "Signed in as {name}",
     "role": {
       "label": "Role",
       "learner": "Learner",
       "instructor": "Instructor",
       "handledare": "Supervisor",
-      "school": "Driving school"
+      "school": "Autokoulu"
     },
     "nameEdit": {
       "editButton": "Edit name",
@@ -2053,7 +2060,7 @@
       "lastNamePlaceholder": "Last name",
       "firstNameError": "Enter your first name.",
       "save": "Save",
-      "saving": "Saving…",
+      "saving": "Tallennetaan…",
       "cancel": "Cancel",
       "successToast": "Your name was updated.",
       "errorToast": "We could not save your name. Try again."
@@ -2068,7 +2075,7 @@
       "chooseButton": "Choose a photo",
       "dragHint": "Drag & drop or choose",
       "submit": "Save",
-      "submitting": "Saving…",
+      "submitting": "Tallennetaan…",
       "confirm": "Confirm my photo",
       "confirming": "Confirming…",
       "confirmationLabel": "I confirm this is the photo I want to use on my profile.",
@@ -2123,17 +2130,17 @@
     }
   },
   "chatbot": {
-    "fabLabel": "Ask DriveLinkUp",
-    "title": "Ask DriveLinkUp",
-    "lead": "Get a quick answer about categories, prices and how to reach a school. Personal payment, refund and safety cases go to support.",
-    "placeholder": "Ask about a category, price or school…",
-    "sendAria": "Send",
-    "inputAria": "Write your question",
-    "emptyState": "Hi! Ask me about categories, prices or how to reach a school.",
-    "errorGeneric": "The assistant is unavailable right now. Try again shortly.",
-    "rateLimited": "Please wait a moment before sending another message.",
-    "handoffLabel": "Need personal help? Contact support →",
-    "closeAria": "Close"
+    "fabLabel": "Kysy DriveLinkUpilta",
+    "title": "Kysy DriveLinkUpilta",
+    "lead": "Saat nopean vastauksen luokista, hinnoista ja koulun tavoittamisesta. Henkilökohtaiset maksu-, hyvitys- ja turvallisuusasiat menevät tukeen.",
+    "placeholder": "Kysy luokasta, hinnasta tai koulusta…",
+    "sendAria": "Lähetä",
+    "inputAria": "Kirjoita kysymyksesi",
+    "emptyState": "Hei! Kysy luokista, hinnoista tai koulun tavoittamisesta.",
+    "errorGeneric": "Avustaja ei ole juuri nyt käytettävissä. Yritä hetken kuluttua.",
+    "rateLimited": "Odota hetki ennen seuraavaa viestiä.",
+    "handoffLabel": "Tarvitsetko henkilökohtaista apua? Ota yhteyttä tukeen →",
+    "closeAria": "Sulje"
   },
   "privacyPage": {
     "meta": {
@@ -2141,176 +2148,176 @@
       "description": "Miten DriveLinkUp käsittelee henkilötietoja tileille, luettelolle, evästeille ja tukeen."
     },
     "hero": {
-      "eyebrow": "Privacy",
-      "title": "Privacy Policy",
-      "lastUpdated": "Last updated: 27 October 2026 · policy version {version}",
-      "intro": "This notice explains how DriveLinkUp processes personal data when you browse the directory, create an account, contact a school, or write to us. It describes current processing only. DriveLinkUp does not book lessons or take lesson payments."
+      "eyebrow": "Tietosuoja",
+      "title": "Tietosuojakäytäntö",
+      "lastUpdated": "Päivitetty 27. lokakuuta 2026 · käytännön versio {version}",
+      "intro": "Tässä ilmoituksessa kerrotaan, miten DriveLinkUp käsittelee henkilötietoja, kun selaat hakemistoa, luot tilin, otat yhteyttä kouluun tai kirjoitat meille. Se kuvaa vain nykyistä käsittelyä. DriveLinkUp ei varaa ajotunteja eikä ota vastaan tuntimaksuja."
     },
     "sections": {
       "0": {
-        "title": "1. Controller and contact",
-        "body": "DriveLinkUp is the controller for the personal data described here. We have not published a registered company name or organisation number on this page. Write to frank@drivelinkup.com with “Privacy” in the subject. If we register a Swedish company we will add the legal name and organisation number here.",
+        "title": "1. Rekisterinpitäjä ja yhteystiedot",
+        "body": "DriveLinkUp on tässä kuvattujen henkilötietojen rekisterinpitäjä. Tälle sivulle ei ole julkaistu rekisteröityä yritysnimeä eikä organisaationumeroa. Kirjoita osoitteeseen frank@drivelinkup.com ja merkitse aiheeksi ”Privacy”. Jos rekisteröimme ruotsalaisen yrityksen, lisäämme tänne virallisen nimen ja organisaationumeron.",
         "items": []
       },
       "1": {
-        "title": "2. Personal data we collect",
-        "body": "What we collect depends on how you use the site. We do not currently collect card numbers, and learner signup does not scan identity documents.",
+        "title": "2. Keräämämme henkilötiedot",
+        "body": "Kerättävät tiedot riippuvat siitä, miten käytät sivustoa. Emme tällä hetkellä kerää korttinumeroita, eikä oppilaan rekisteröityminen skannaa henkilöllisyysasiakirjoja.",
         "items": [
-          "Account details: name, email address, hashed password, and role (learner, school, or handledare).",
-          "The date of birth you enter at learner signup. We use it only to check that you are 16 or older. It is not treated as a verified date of birth for booking.",
-          "Optional profile photo that you choose to upload.",
-          "School onboarding details such as school name, organisation number, and city.",
-          "A teaching-licence file if you upload one. We store it to review the listing. That is not an automatic check with Transportstyrelsen.",
-          "Handledare insurance attestation (your confirmation and the time you gave it), not the insurance document unless you send that to support.",
-          "Support messages you send on the contact form. Those are emailed to frank@drivelinkup.com. We do not keep a separate public contact database.",
-          "Questions you type into the on-site assistant. The text is sent to OpenAI to generate a reply.",
-          "Approximate coordinates when you click “Use my location”, sent with the directory request so we can sort schools. We do not save that location on your account.",
-          "Cookie choice, policy version, and a hash of IP address plus browser information. We do not store the raw IP on the consent record.",
-          "Technical logs such as IP address, browser information, and security events needed to run and protect the site.",
-          "Name, email, and profile photo that Google shares if you sign in with Google.",
-          "Published prices, categories, and listing text taken from a school's own website so the directory can show what the school already publishes.",
-          "Google reviews we store and show on a listing, marked as coming from Google. We do not verify those reviews.",
-          "Details about another person if you include them in a support message or an assistant question."
+          "Tilin tiedot: nimi, sähköpostiosoite, tiivistetty salasana ja rooli (oppilas, koulu tai handledare).",
+          "Syntymäaika, jonka annat oppilaan rekisteröitymisessä. Käytämme sitä vain tarkistaaksemme, että olet vähintään 16-vuotias. Sitä ei käsitellä varmennettuna syntymäaikana varausta varten.",
+          "Valinnainen profiilikuva, jonka päätät ladata.",
+          "Koulun käyttöönoton tiedot, kuten koulun nimi, organisaationumero ja kaupunki.",
+          "Opetuslupatiedosto, jos lataat sellaisen. Säilytämme sen ilmoituksen tarkistamista varten. Se ei ole automaattinen tarkistus Transportstyrelseniltä.",
+          "Handledare-vakuutusvahvistus (vahvistuksesi ja sen ajankohta), ei vakuutusasiakirjaa, ellet lähetä sitä tukeen.",
+          "Yhteydenottolomakkeella lähettämäsi tukiviestit. Ne lähetetään sähköpostitse osoitteeseen frank@drivelinkup.com. Emme pidä erillistä julkista yhteystietokantaa.",
+          "Kysymykset, jotka kirjoitat sivuston avustajaan. Teksti lähetetään OpenAI:lle vastauksen tuottamista varten.",
+          "Likimääräiset koordinaatit, kun napsautat ”Käytä sijaintiani”. Ne lähetetään hakemistopyynnön mukana, jotta voimme järjestää koulut. Emme tallenna sijaintia tiliisi.",
+          "Evästevalinta, käytännön versio ja tiiviste IP-osoitteesta sekä selaintiedoista. Emme tallenna raakaa IP-osoitetta suostumusmerkintään.",
+          "Tekniset lokit, kuten IP-osoite, selaintiedot ja tietoturvatapahtumat, joita sivuston ylläpito ja suojaus edellyttävät.",
+          "Nimi, sähköposti ja profiilikuva, jotka Google jakaa, jos kirjaudut Googlella.",
+          "Julkaistut hinnat, luokat ja ilmoitusteksti koulun omalta verkkosivustolta, jotta hakemisto voi näyttää sen, minkä koulu jo julkaisee.",
+          "Google-arviot, jotka tallennamme ja näytämme ilmoituksessa merkittynä Googlelta peräisin oleviksi. Emme varmenna näitä arvioita.",
+          "Toista henkilöä koskevat tiedot, jos sisällytat niitä tukiviestiin tai avustajan kysymykseen."
         ]
       },
       "2": {
-        "title": "3. Purposes and legal bases",
-        "body": "We process personal data only for the purposes below. Each purpose has a GDPR Article 6 basis.",
+        "title": "3. Tarkoitukset ja oikeusperusteet",
+        "body": "Käsittelemme henkilötietoja vain alla oleviin tarkoituksiin. Jokaisella tarkoituksella on GDPR:n 6 artiklan mukainen peruste.",
         "items": [
-          "Provide the directory, your account, and a school listing — Article 6(1)(b) contract.",
-          "Check that a learner account is 16 or older from the date you enter — Article 6(1)(b) contract and Article 6(1)(f) legitimate interest in keeping the service off-limits to children.",
-          "Send product email such as address verification, password reset, and school invites — Article 6(1)(b) contract.",
-          "Answer support and contact-form messages — Article 6(1)(b) contract or Article 6(1)(f) legitimate interest in helping you.",
-          "Reply to assistant questions you choose to type — Article 6(1)(f) legitimate interest in answering routine questions.",
-          "Review an optional teaching-licence file — Article 6(1)(b) contract and Article 6(1)(f) legitimate interest in reviewing a listing.",
-          "Record cookie choices and keep the site secure — Article 6(1)(c) legal obligation and Article 6(1)(f) legitimate interest in security and proof of consent.",
-          "Load Google AdSense after you accept marketing cookies — Article 6(1)(a) consent.",
-          "We do not currently take lesson payments. If checkout is turned on later, this notice will be updated before that processing starts."
+          "Hakemiston, tilisi ja kouluilmoituksen tarjoaminen — 6 artiklan 1 kohdan b alakohta (sopimus).",
+          "Oppilastilin iän tarkistus antamasi päivämäärän perusteella (vähintään 16 vuotta) — 6 artiklan 1 kohdan b alakohta (sopimus) ja 6 artiklan 1 kohdan f alakohta (oikeutettu etu pitää palvelu poissa lapsilta).",
+          "Tuotesähköpostit, kuten osoitteen vahvistus, salasanan palautus ja koulukutsut — 6 artiklan 1 kohdan b alakohta (sopimus).",
+          "Tuki- ja yhteydenottolomakeviesteihin vastaaminen — 6 artiklan 1 kohdan b alakohta (sopimus) tai 6 artiklan 1 kohdan f alakohta (oikeutettu etu auttaa sinua).",
+          "Avustajaan kirjoittamiisi kysymyksiin vastaaminen — 6 artiklan 1 kohdan f alakohta (oikeutettu etu vastata rutiinikysymyksiin).",
+          "Valinnaisen opetuslupatiedoston tarkistaminen — 6 artiklan 1 kohdan b alakohta (sopimus) ja 6 artiklan 1 kohdan f alakohta (oikeutettu etu tarkistaa ilmoitus).",
+          "Evästevalintojen tallentaminen ja sivuston pitäminen turvallisena — 6 artiklan 1 kohdan c alakohta (lakisääteinen velvoite) ja 6 artiklan 1 kohdan f alakohta (oikeutettu etu tietoturvaan ja suostumuksen näyttöön).",
+          "Google AdSensen lataaminen, kun hyväksyt markkinointievästeet — 6 artiklan 1 kohdan a alakohta (suostumus).",
+          "Emme tällä hetkellä ota vastaan ajotuntien maksuja. Jos kassa otetaan myöhemmin käyttöön, tämä ilmoitus päivitetään ennen kyseisen käsittelyn alkamista."
         ]
       },
       "3": {
-        "title": "4. Cookies and similar technologies",
-        "body": "Essential cookies run the site. Optional cookies wait for your choice in the banner. Changing the banner or clearing cookies lets you choose again. A new policy version also asks again.",
+        "title": "4. Evästeet ja vastaavat tekniikat",
+        "body": "Välttämättömät evästeet pitävät sivuston käynnissä. Valinnaiset evästeet odottavat valintaasi bannerissa. Bannerin muuttaminen tai evästeiden tyhjentäminen antaa valita uudelleen. Uusi käytäntöversio kysyy myös uudelleen.",
         "items": [
-          "Essential: session, security, language, and the cookie that remembers this choice. These stay on.",
-          "Analytics: we do not currently load a separate analytics tool. The toggle is reserved. Leaving it off keeps it off.",
-          "Marketing: Google AdSense loads only after you accept marketing cookies. Google may set its own cookies and collect device and usage data to show ads. See Google’s advertising policy at https://policies.google.com/technologies/ads.",
-          "If you withdraw marketing consent we stop loading new AdSense scripts. Cookies Google already set may remain until you clear them in the browser."
+          "Välttämättömät: istunto, tietoturva, kieli ja eväste, joka muistaa tämän valinnan. Nämä pysyvät päällä.",
+          "Analytiikka: emme tällä hetkellä lataa erillistä analytiikkatyökalua. Kytkin on varattu. Pois päältä jättäminen pitää sen poissa.",
+          "Markkinointi: Google AdSense latautuu vasta, kun hyväksyt markkinointievästeet. Google voi asettaa omia evästeitään ja kerätä laite- ja käyttödataa mainosten näyttämiseksi. Katso Googlen mainontakäytäntö: https://policies.google.com/technologies/ads.",
+          "Jos peruutat markkinointisuostumuksen, emme enää lataa uusia AdSense-skriptejä. Googlen jo asettamat evästeet voivat jäädä, kunnes tyhjennät ne selaimessa."
         ]
       },
       "4": {
-        "title": "5. Recipients",
-        "body": "We do not sell personal data. We share it only with the vendors that run the site, the school you contact yourself, or when the law requires it.",
+        "title": "5. Vastaanottajat",
+        "body": "Emme myy henkilötietoja. Jaamme niitä vain sivustoa ylläpitäville toimittajille, koululle, johon itse otat yhteyttä, tai kun laki sitä edellyttää.",
         "items": [
-          "Vercel hosts the website and may store profile photos.",
-          "Neon hosts the PostgreSQL database.",
-          "Cloudflare R2 may store uploaded photos or teaching-licence files.",
-          "Resend sends product email.",
-          "Google provides optional sign-in and, after marketing consent, AdSense.",
-          "OpenAI processes assistant messages you type.",
-          "A school you email or visit becomes a separate controller for the details you send them.",
-          "Authorities or advisors may receive data when Swedish or EU law requires it, or to establish, exercise, or defend a legal claim."
+          "Vercel isännöi verkkosivustoa ja voi tallentaa profiilikuvia.",
+          "Neon isännöi PostgreSQL-tietokantaa.",
+          "Cloudflare R2 voi tallentaa ladattuja kuvia tai opetuslupatiedostoja.",
+          "Resend lähettää tuotesähköpostit.",
+          "Google tarjoaa valinnaisen kirjautumisen ja markkinointisuostumuksen jälkeen AdSensen.",
+          "OpenAI käsittelee avustajaan kirjoittamasi viestit.",
+          "Koulu, jolle lähetät sähköpostia tai jonka sivustolla käyt, on erillinen rekisterinpitäjä niille tiedoille, jotka lähetät sille.",
+          "Viranomaiset tai neuvonantajat voivat saada tietoja, kun Ruotsin tai EU:n laki sitä edellyttää, tai oikeudellisen vaatimuksen laatimiseksi, käyttämiseksi tai puolustamiseksi."
         ]
       },
       "5": {
-        "title": "6. International transfers",
-        "body": "Some vendors process data outside the EU/EEA, including in the United States (Vercel, Google, OpenAI, and Resend). Where required we rely on an adequacy decision or the European Commission’s Standard Contractual Clauses. Ask frank@drivelinkup.com if you want more detail on a transfer.",
+        "title": "6. Kansainväliset siirrot",
+        "body": "Osa toimittajista käsittelee tietoja EU/ETA-alueen ulkopuolella, myös Yhdysvalloissa (Vercel, Google, OpenAI ja Resend). Tarvittaessa tukeudumme tietosuojan riittävyyttä koskevaan päätökseen tai Euroopan komission vakiosopimuslausekkeisiin. Kysy osoitteesta frank@drivelinkup.com, jos haluat lisätietoja siirrosta.",
         "items": []
       },
       "6": {
-        "title": "7. How long we keep data",
-        "body": "We keep data only as long as the purpose needs, then delete or anonymise it, unless Swedish law requires a longer period.",
+        "title": "7. Kuinka kauan säilytämme tietoja",
+        "body": "Säilytämme tietoja vain niin kauan kuin tarkoitus edellyttää ja poistamme tai anonymisoimme ne sen jälkeen, ellei Ruotsin laki vaadi pidempää aikaa.",
         "items": [
-          "Account and profile data stay while the account is open. You can delete the account from Profile.",
-          "After deletion we may keep hashed consent events and append-only verification logs as an audit trail. A handledare enrollment is revoked, not erased.",
-          "Teaching-licence files stay until the review ends or the account is deleted.",
-          "Support email stays as long as the request needs.",
-          "Technical logs stay for a limited security period.",
-          "Assistant messages are processed to answer you. We do not keep a public chat history on your profile."
+          "Tili- ja profiilitiedot säilyvät tilin ollessa auki. Voit poistaa tilin Profiilista.",
+          "Poiston jälkeen voimme säilyttää tiivistettyjä suostumustapahtumia ja vain lisättäviä varmennuslokeja tarkastusjälkenä. Handledare-ilmoittautuminen peruutetaan, ei poisteta.",
+          "Opetuslupatiedostot säilyvät, kunnes tarkistus päättyy tai tili poistetaan.",
+          "Tukisähköposti säilyy niin kauan kuin pyyntö sitä tarvitsee.",
+          "Tekniset lokit säilyvät rajatun tietoturvajakson ajan.",
+          "Avustajan viestit käsitellään, jotta voimme vastata sinulle. Emme pidä julkista keskusteluhistoriaa profiilissasi."
         ]
       },
       "7": {
-        "title": "8. Your rights",
-        "body": "Under the GDPR you may request access, rectification, erasure, restriction, objection, and data portability where the legal conditions are met. Where we rely on consent you may withdraw it at any time. Withdrawal does not affect processing that already happened.",
+        "title": "8. Oikeutesi",
+        "body": "GDPR:n nojalla voit pyytää pääsyä, oikaisua, poistoa, rajoitusta, vastustamista ja tietojen siirrettävyyttä, kun lain edellytykset täyttyvät. Kun tukeudumme suostumukseen, voit peruuttaa sen milloin tahansa. Peruutus ei vaikuta jo tapahtuneeseen käsittelyyn.",
         "items": [
-          "Delete your account from Profile. That is the self-service erasure path.",
-          "Write to frank@drivelinkup.com for access, correction, or another rights request.",
-          "Object to processing based on legitimate interest, including the assistant, and we will stop unless we have a compelling ground to continue.",
-          "Lodge a complaint with Integritetsskyddsmyndigheten (IMY), https://www.imy.se."
+          "Poista tilisi Profiilista. Se on itsepalvelupoiston reitti.",
+          "Kirjoita osoitteeseen frank@drivelinkup.com pääsyä, oikaisua tai muuta oikeuksia koskevaa pyyntöä varten.",
+          "Vastusta oikeutettuun etuun perustuvaa käsittelyä, mukaan lukien avustaja, ja lopetamme sen, ellei meillä ole pakottavaa perustetta jatkaa.",
+          "Tee valitus Integritetsskyddsmyndighetenille (IMY), https://www.imy.se."
         ]
       },
       "8": {
-        "title": "9. Age",
-        "body": "DriveLinkUp is for people aged 16 and over. It is not a service for children. We do not knowingly create accounts for anyone under 16. If you believe a child has an account, write to frank@drivelinkup.com and we will close it.",
+        "title": "9. Ikä",
+        "body": "DriveLinkUp on tarkoitettu 16 vuotta täyttäneille. Se ei ole lasten palvelu. Emme tietoisesti luo tilejä alle 16-vuotiaille. Jos uskot lapsella olevan tili, kirjoita osoitteeseen frank@drivelinkup.com, niin suljemme sen.",
         "items": []
       },
       "9": {
-        "title": "10. Automated decisions",
-        "body": "We do not make solely automated decisions that produce legal effects or similarly significant effects. The 16+ check is a simple age rule from the date you enter.",
+        "title": "10. Automaattiset päätökset",
+        "body": "Emme tee yksinomaan automatisoituja päätöksiä, joilla on oikeusvaikutuksia tai vastaavan merkittäviä vaikutuksia. 16+ -tarkistus on yksinkertainen ikäsääntö antamasi päivämäärän perusteella.",
         "items": []
       },
       "10": {
-        "title": "11. Schools you contact",
-        "body": "Contact the school is between you and the school. If you send them your name, email, or phone number, that school decides how to handle those details. DriveLinkUp is not their processor for that conversation.",
+        "title": "11. Koulut, joihin otat yhteyttä",
+        "body": "Yhteydenotto kouluun on sinun ja koulun välinen. Jos lähetät nimesi, sähköpostisi tai puhelinnumerosi, koulu päättää, miten se käsittelee nämä tiedot. DriveLinkUp ei ole kyseisen keskustelun käsittelijä.",
         "items": []
       },
       "11": {
-        "title": "12. Changes",
-        "body": "We update this notice when the service or the processing changes. The date and version above are the current ones. A material change bumps the version and the cookie banner asks again. Questions: frank@drivelinkup.com.",
+        "title": "12. Muutokset",
+        "body": "Päivitämme tämän ilmoituksen, kun palvelu tai käsittely muuttuu. Yllä oleva päivämäärä ja versio ovat voimassa olevat. Olennainen muutos nostaa versionumeroa, ja evästebanneri kysyy uudelleen. Kysymykset: frank@drivelinkup.com.",
         "items": []
       },
       "12": {
-        "title": "13. How we collect data",
-        "body": "Like other directories, we collect data in three ways. We only use each source for the purposes in this notice.",
+        "title": "13. Miten keräämme tietoja",
+        "body": "Kuten muut hakemistot, keräämme tietoja kolmella tavalla. Käytämme kutakin lähdettä vain tässä ilmoituksessa kuvattuihin tarkoituksiin.",
         "items": [
-          "You give it to us: account details, the date of birth you enter, photos, school onboarding, a teaching-licence file, handledare attestation, support messages, and assistant questions.",
-          "It is collected automatically when you use the site: technical logs, cookie choice, and approximate coordinates if you click Use my location.",
-          "We receive it from others: Google if you sign in with Google; a school's public website for prices and listing facts; Google for reviews we display; and a school you write to, if they reply to us about that message."
+          "Annat ne meille: tilin tiedot, antamasi syntymäaika, kuvat, koulun käyttöönotto, opetuslupatiedosto, handledare-vahvistus, tukiviestit ja avustajan kysymykset.",
+          "Niitä kerätään automaattisesti, kun käytät sivustoa: tekniset lokit, evästevalinta ja likimääräiset koordinaatit, jos napsautat Käytä sijaintiani.",
+          "Saamme niitä muilta: Googlelta, jos kirjaudut Googlella; koulun julkiselta verkkosivustolta hintoja ja ilmoitustietoja varten; Googlelta näyttämiämme arvioita varten; ja koululta, jolle kirjoitat, jos se vastaa meille kyseisestä viestistä."
         ]
       },
       "13": {
-        "title": "14. What is public on a listing",
-        "body": "A school listing is public. Anyone can see the school's name, city, published prices, categories, bio, photo, and Google reviews we display. Your learner account, date of birth, password, teaching-licence file, and support messages are not shown on the public listing.",
+        "title": "14. Mikä ilmoituksessa on julkista",
+        "body": "Kouluilmoitus on julkinen. Kuka tahansa näkee koulun nimen, kaupungin, julkaistut hinnat, luokat, esittelytekstin, kuvan ja näyttämämme Google-arviot. Oppilastiliäsi, syntymäaikaasi, salasanaasi, opetuslupatiedostoa ja tukiviestejä ei näytetä julkisessa ilmoituksessa.",
         "items": [
-          "If you run a school listing, do not put another person's private details in the public bio.",
-          "We may hide or remove a listing that is inaccurate, unlawful, or that we must take down to protect users or comply with law."
+          "Jos pidät kouluilmoitusta, älä kirjoita toisen henkilön yksityisiä tietoja julkiseen esittelytekstiin.",
+          "Voimme piilottaa tai poistaa ilmoituksen, joka on virheellinen, lainvastainen tai joka on poistettava käyttäjien suojaamiseksi tai lain noudattamiseksi."
         ]
       },
       "14": {
-        "title": "15. Security",
-        "body": "No site can promise perfect security. We use administrative and technical measures that fit a service of this size: hashed passwords, access limited to people who operate the site, HTTPS, and storage of uploads with our hosting vendors. If we become aware of a personal-data breach that must be notified under the GDPR, we will notify IMY and affected people when the law requires it.",
+        "title": "15. Tietoturva",
+        "body": "Mikään sivusto ei voi luvata täydellistä tietoturvaa. Käytämme hallinnollisia ja teknisiä toimenpiteitä, jotka sopivat tämän kokoiseen palveluun: tiivistetyt salasanat, pääsy vain sivustoa ylläpitäville, HTTPS ja latausten tallennus isännöintitoimittajillemme. Jos saamme tietää henkilötietojen tietoturvaloukkauksesta, josta on ilmoitettava GDPR:n nojalla, ilmoitamme IMY:lle ja asianosaisille, kun laki sitä edellyttää.",
         "items": []
       },
       "15": {
-        "title": "16. Other sites and apps",
-        "body": "Listings may link to a school's website, maps, or social profiles. Those sites have their own controllers and policies. DriveLinkUp is not responsible for how they handle personal data. The same applies if you leave a review on Google or open an ad that Google shows after marketing consent.",
+        "title": "16. Muut sivustot ja sovellukset",
+        "body": "Ilmoitukset voivat linkittää koulun verkkosivustoon, karttoihin tai someprofiileihin. Näillä sivustoilla on omat rekisterinpitäjänsä ja käytäntönsä. DriveLinkUp ei vastaa siitä, miten ne käsittelevät henkilötietoja. Sama koskee, jos jätät arvion Googleen tai avaat mainoksen, jonka Google näyttää markkinointisuostumuksen jälkeen.",
         "items": []
       }
     },
     "cta": {
-      "findProviders": "Find a driving school",
-      "contact": "Contact support"
+      "findProviders": "Etsi autokoulu",
+      "contact": "Ota yhteyttä tukeen"
     }
   },
   "consentBanner": {
-    "intro": "We use cookies that the directory needs to run. With your consent we may also load ads. You can change your choice at any time.",
-    "essentialLabel": "Essential",
-    "essentialBody": "Sign-in, security, language, and remembering this choice. Required — cannot be turned off.",
-    "analyticsLabel": "Analytics",
-    "analyticsBody": "No separate analytics tool runs today. This toggle is reserved. Leave it off unless you want that processing if we add it later.",
-    "marketingLabel": "Marketing",
-    "marketingBody": "Google AdSense, which can show ads and set Google cookies. Loads only if you accept.",
-    "acceptAll": "Accept all",
-    "rejectNonEssential": "Reject non-essential",
-    "customize": "Customize",
-    "save": "Save my choice",
-    "saved": "Your cookie choice is saved.",
-    "error": "Could not save your cookie choice — try again.",
-    "privacy": "Privacy policy"
+    "intro": "Käytämme evästeitä, joita hakemisto tarvitsee toimiakseen. Suostumuksellasi voimme myös ladata mainoksia. Voit muuttaa valintaasi milloin tahansa.",
+    "essentialLabel": "Välttämättömät",
+    "essentialBody": "Kirjautuminen, tietoturva, kieli ja tämän valinnan muistaminen. Pakollinen — ei voi kytkeä pois.",
+    "analyticsLabel": "Analytiikka",
+    "analyticsBody": "Erillistä analytiikkatyökalua ei ole tänään käytössä. Tämä kytkin on varattu. Jätä se pois päältä, ellet halua kyseistä käsittelyä, jos lisäämme sen myöhemmin.",
+    "marketingLabel": "Markkinointi",
+    "marketingBody": "Google AdSense, joka voi näyttää mainoksia ja asettaa Googlen evästeitä. Latautuu vain, jos hyväksyt.",
+    "acceptAll": "Hyväksy kaikki",
+    "rejectNonEssential": "Hylkää ei-välttämättömät",
+    "customize": "Mukauta",
+    "save": "Tallenna valintani",
+    "saved": "Evästevalintasi on tallennettu.",
+    "error": "Evästevalintaa ei voitu tallentaa — yritä uudelleen.",
+    "privacy": "Tietosuojakäytäntö"
   },
   "consentForm": {
     "signupCheckbox": "I have read and agree to the Privacy Policy.",
-    "signupCheckboxLinkText": "Privacy policy",
+    "signupCheckboxLinkText": "Tietosuojakäytäntö",
     "signupCheckboxError": "Tick the box to confirm you've read the Privacy Policy.",
     "licenseCheckbox": "I agree that DriveLinkUp may store the teaching-licence file I upload, and related personal data, so it can review the listing. This is not an automatic check with Transportstyrelsen.",
     "licenseCheckboxError": "Tick the box to confirm you consent to processing your licence data."
@@ -2320,25 +2327,25 @@
   },
   "cancellationPolicy": {
     "tierBadge": {
-      "flexible": "Flexible",
-      "moderate": "Moderate",
-      "strict": "Strict"
+      "flexible": "Joustava",
+      "moderate": "Kohtalainen",
+      "strict": "Tiukka"
     },
     "flexible": {
-      "name": "Flexible",
+      "name": "Joustava",
       "summary": "Full refund at least 24 hours before the lesson. Within 24 hours, the full lesson fee is retained.",
       "fullRefundBefore": "Full refund when you cancel at least 24 hours before the lesson.",
       "noRefundAfter": "Within 24 hours, the full lesson fee is retained."
     },
     "moderate": {
-      "name": "Moderate",
+      "name": "Kohtalainen",
       "summary": "Full refund at least 120 hours before the lesson. From 120 to 24 hours, a 50% fee applies. Within 24 hours, the full lesson fee is retained.",
       "fullRefundBefore": "Full refund when you cancel at least 120 hours before the lesson.",
       "partialBetween": "From 120 to 24 hours before the lesson, a 50% fee is retained.",
       "noRefundAfter": "Within 24 hours, the full lesson fee is retained."
     },
     "strict": {
-      "name": "Strict",
+      "name": "Tiukka",
       "summary": "Full refund at least 168 hours before the lesson. From 168 to 24 hours, a 50% fee applies. Within 24 hours, the full lesson fee is retained.",
       "fullRefundBefore": "Full refund when you cancel at least 168 hours before the lesson.",
       "partialBetween": "From 168 to 24 hours before the lesson, a 50% fee is retained.",
@@ -2349,14 +2356,14 @@
     "editor": {
       "title": "Cancellation policy",
       "description": "Pick the tier that fits your schedule. The fee schedule is shown to learners before they confirm a booking, and is snapshotted onto every booking so a later change can't retroactively shift a completed booking's refund.",
-      "flexibleLabel": "Flexible",
+      "flexibleLabel": "Joustava",
       "flexibleSummary": "Full refund up to 24 hours before the lesson. 100% fee within 24 hours.",
-      "moderateLabel": "Moderate",
+      "moderateLabel": "Kohtalainen",
       "moderateSummary": "Full refund up to 5 days before the lesson. 50% fee between 5 days and 24 hours. 100% fee within 24 hours.",
-      "strictLabel": "Strict",
+      "strictLabel": "Tiukka",
       "strictSummary": "Full refund up to 7 days before the lesson. 50% fee between 7 days and 24 hours. 100% fee within 24 hours.",
       "save": "Save policy",
-      "saving": "Saving…",
+      "saving": "Tallennetaan…",
       "saved": "Cancellation policy saved",
       "error": "Could not save the cancellation policy",
       "noInstructorRow": "You don't have a listed school profile yet — finish onboarding at /instructors/new first, then come back here to set your cancellation policy."
@@ -2367,42 +2374,42 @@
       "eyebrow": "",
       "title": "Löydä autokoulu läheltäsi.",
       "body": "Autokoulut, jotka sivustonsa mukaan kouluttavat luokkiin AM, A, B tai BE. Hinta näkyy, kun koulu julkaisee sen.",
-      "primaryCta": "Find a school",
-      "instructorCta": "I work at a driving school",
-      "marketplaceTag": "Light vehicles · Driving schools",
-      "schoolCta": "I run a school",
-      "panelEyebrow": "How it works",
-      "panelTitle": "The school stands behind the lesson",
-      "panelBody": "Browse by city and category. Open the school and contact them.",
+      "primaryCta": "Etsi koulu",
+      "instructorCta": "Työskentelen autokoulussa",
+      "marketplaceTag": "Kevyet ajoneuvot · Autokoulut",
+      "schoolCta": "Pidän autokoulua",
+      "panelEyebrow": "Näin se toimii",
+      "panelTitle": "Koulu vastaa ajotunnista",
+      "panelBody": "Selaa kaupungin ja luokan mukaan. Avaa koulu ja ota yhteyttä.",
       "panelPoints": {
-        "directory": "The school's details and published price.",
-        "prices": "A published price when the school has added one.",
-        "schools": "The school publishes what it is permitted to offer."
+        "directory": "Koulun tiedot ja julkaistu hinta.",
+        "prices": "Julkaistu hinta, kun koulu on lisännyt sen.",
+        "schools": "Koulu julkaisee sen, mitä sillä on lupa tarjota."
       },
-      "contactCta": "Start a conversation",
+      "contactCta": "Aloita keskustelu",
       "assurance": {
-        "price": "Published price in kronor",
-        "safety": "Ask the school about their permit",
-        "choice": "Free to browse"
+        "price": "Julkaistu hinta kruunuina",
+        "safety": "Kysy koululta luvasta",
+        "choice": "Ilmainen selata"
       },
-      "previewEyebrow": "The decision, in one place",
-      "previewTitle": "School → city → price",
-      "imageAlt": "A driver holding the steering wheel on a dusk road",
+      "previewEyebrow": "Päätös, yhdessä paikassa",
+      "previewTitle": "Koulu → kaupunki → hinta",
+      "imageAlt": "Kuljettaja pitää ohjauspyörästä hämärällä tiellä",
       "previewLines": {
-        "profile": "Compare categories, language and location.",
-        "price": "Review the school's published price — no added fees.",
-        "time": "Open the school and read what is on the listing."
+        "profile": "Vertaa luokkia, kieltä ja sijaintia.",
+        "price": "Katso koulun julkaistu hinta — ei lisämaksuja.",
+        "time": "Avaa koulu ja lue, mitä ilmoituksessa lukee."
       },
       "search": {
-        "label": "Search driving schools",
-        "categoryLabel": "Licence",
-        "cityLabel": "City",
-        "cityAny": "All cities",
-        "submit": "Search",
+        "label": "Hae autokouluja",
+        "categoryLabel": "Ajokortti",
+        "cityLabel": "Kaupunki",
+        "cityAny": "Kaikki kaupungit",
+        "submit": "Hae",
         "categories": {
-          "B": "Car · B",
-          "A": "Motorcycle · A",
-          "BE": "Car + trailer · BE"
+          "B": "Auto · B",
+          "A": "Moottoripyörä · A",
+          "BE": "Auto + perävaunu · BE"
         },
         "cities": {
           "stockholm": "Stockholm",
@@ -2441,9 +2448,9 @@
         }
       },
       "popular": {
-        "label": "Popular:",
+        "label": "Suositut:",
         "links": {
-          "categoryB": "Car · B",
+          "categoryB": "Auto · B",
           "stockholm": "Stockholm",
           "goteborg": "Gothenburg",
           "malmo": "Malmö",
@@ -2451,24 +2458,24 @@
           "sydney": "Sydney",
           "london": "London",
           "paris": "Paris",
-          "categoryA": "Motorcycle · A",
-          "heavy": "Heavy vehicles"
+          "categoryA": "Moottoripyörä · A",
+          "heavy": "Raskaat ajoneuvot"
         }
       },
-      "lead": "Free. You pay the school's price.",
-      "note": "DriveLinkUp is a catalog. We do not take payment for a catalog listing.",
-      "schoolLink": "I run a school",
+      "lead": "Ilmainen. Maksat koulun hinnan.",
+      "note": "DriveLinkUp on luettelo. Emme ota maksua luetteloilmoituksesta.",
+      "schoolLink": "Pidän autokoulua",
       "chips": {
-        "price": "Published price in kronor",
-        "cancellation": "Contact the school for terms"
+        "price": "Julkaistu hinta kruunuina",
+        "cancellation": "Kysy ehdot koululta"
       }
     },
     "quickLinks": {
-      "label": "Start with",
+      "label": "Aloita",
       "categories": {
-        "B": "Car · B",
-        "A": "Motorcycle · A",
-        "BE": "Car with trailer · BE"
+        "B": "Auto · B",
+        "A": "Moottoripyörä · A",
+        "BE": "Auto perävaunulla · BE"
       },
       "cities": {
         "stockholm": "Stockholm",
@@ -2478,60 +2485,60 @@
       }
     },
     "how": {
-      "eyebrow": "How it works",
-      "title": "How it works.",
+      "eyebrow": "Näin se toimii",
+      "title": "Näin se toimii.",
       "body": "",
       "steps": {
         "choose": {
-          "title": "Choose a place",
-          "body": "Car, truck, bus or trailer."
+          "title": "Valitse paikka",
+          "body": "Auto, kuorma-auto, linja-auto tai perävaunu."
         },
         "compare": {
-          "title": "Read the price",
-          "body": "The price is shown when the school publishes it."
+          "title": "Lue hinta",
+          "body": "Hinta näkyy, kun koulu julkaisee sen."
         },
         "book": {
-          "title": "Contact the school",
-          "body": "You contact the school. DriveLinkUp does not book the lesson."
+          "title": "Ota yhteyttä kouluun",
+          "body": "Otat yhteyttä kouluun. DriveLinkUp ei varaa ajotuntia."
         }
       }
     },
     "providers": {
       "eyebrow": "",
-      "title": "Schools",
-      "cta": "All schools"
+      "title": "Koulut",
+      "cta": "Kaikki koulut"
     },
     "assurance": {
-      "eyebrow": "How the directory works",
-      "title": "Nothing hidden in the fine print.",
+      "eyebrow": "Miten hakemisto toimii",
+      "title": "Ei mitään piilossa pienessä präntissä.",
       "cards": {
         "price": {
-          "title": "The published price",
-          "body": "When a school has published a price, you see it in kronor. DriveLinkUp does not add a fee."
+          "title": "Julkaistu hinta",
+          "body": "Kun koulu on julkaissut hinnan, näet sen kruunuina. DriveLinkUp ei lisää maksua."
         },
         "safety": {
-          "title": "A listing is a catalog card",
-          "body": "A catalog card is not a teaching permit and not an agreement. Confirm permission, lesson setup and terms with the school."
+          "title": "Ilmoitus on luettelokortti",
+          "body": "Luettelokortti ei ole opetuslupa eikä sopimus. Vahvista lupa, ajotunnin järjestelyt ja ehdot koulun kanssa."
         },
         "cancellation": {
-          "title": "Contact the school",
-          "body": "Lessons are arranged with the school. Contact the school opens their inbox or website. DriveLinkUp does not take payment for a catalog listing."
+          "title": "Ota yhteyttä kouluun",
+          "body": "Ajotunnit sovitaan koulun kanssa. Ota yhteyttä kouluun avaa koulun sähköpostin tai verkkosivuston. DriveLinkUp ei ota maksua luetteloilmoituksesta."
         }
       }
     },
     "entry": {
       "eyebrow": "",
-      "title": "Find a school.",
-      "body": "It's free.",
-      "learnerCta": "Find a school",
-      "providerCta": "I run a school"
+      "title": "Etsi koulu.",
+      "body": "Se on ilmaista.",
+      "learnerCta": "Etsi koulu",
+      "providerCta": "Pidän autokoulua"
     },
     "footer": {
-      "prompt": "Need more context?",
-      "label": "Helpful links",
-      "faq": "FAQ",
-      "privacy": "Privacy",
-      "contact": "Contact support"
+      "prompt": "Tarvitsetko lisätietoa?",
+      "label": "Hyödyllisiä linkkejä",
+      "faq": "Kysymyksiä",
+      "privacy": "Tietosuoja",
+      "contact": "Ota yhteyttä tukeen"
     }
   },
   "forSkolor": {
@@ -2539,53 +2546,53 @@
       "title": "Autokouluille",
       "description": "Rekisteröi autokoulu DriveLinkUpiin. Oppilaat vertaavat hintaa ja ottavat yhteyttä."
     },
-    "badge": "FOR DRIVING SCHOOLS",
-    "title": "Your school. Your price. Your call.",
-    "body": "Publish the licences you are permitted to teach. Learners compare your price and contact you.",
-    "benefit1": "Learners searching for lessons in your city can find you.",
-    "benefit2": "The learner pays your published price. We add no learner fee.",
-    "benefit3": "Invite the instructors who teach at your school.",
-    "ctaSignedOut": "Create school account",
-    "ctaSignIn": "Sign in",
-    "timeNote": "The account is quick to create. Verification happens after.",
-    "signedInContext": "Signed in as {email}. Fill in the details below to register your school.",
-    "pendingTitle": "You've been invited to a driving school",
-    "pendingBody": "You've been invited as {role} to {school}. Open the invite link in your email to join — if you can't find it, check your spam folder.",
-    "pendingRoleOwner": "owner",
-    "pendingRoleStaff": "team member",
+    "badge": "AUTOKOULUILLE",
+    "title": "Sinun koulusi. Sinun hintasi. Sinun päätöksesi.",
+    "body": "Julkaise ajokorttiluokat, joita sinulla on lupa opettaa. Oppilaat vertailevat hintaasi ja ottavat yhteyttä.",
+    "benefit1": "Oppilaat, jotka etsivät ajotunteja kaupungissasi, voivat löytää sinut.",
+    "benefit2": "Oppilas maksaa julkaisemasi hinnan. Emme lisää oppilasmaksua.",
+    "benefit3": "Kutsu opettajat, jotka opettavat koulussasi.",
+    "ctaSignedOut": "Luo koulun tili",
+    "ctaSignIn": "Kirjaudu sisään",
+    "timeNote": "Tili syntyy nopeasti. Varmennus tapahtuu sen jälkeen.",
+    "signedInContext": "Kirjautuneena: {email}. Täytä tiedot alle rekisteröidäksesi koulusi.",
+    "pendingTitle": "Sinut on kutsuttu autokouluun",
+    "pendingBody": "Sinut on kutsuttu rooliin {role} kouluun {school}. Avaa kutsulinkki sähköpostistasi liittyäksesi — jos et löydä sitä, tarkista roskapostikansio.",
+    "pendingRoleOwner": "omistaja",
+    "pendingRoleStaff": "tiimin jäsen",
     "form": {
-      "name": "School name",
-      "organizationNumber": "Organisation number",
-      "organizationNumberHint": "Format: 556xxx-xxxx",
-      "city": "City",
-      "address": "Address",
-      "postcode": "Postcode",
-      "submit": "Register school",
-      "submitting": "Registering…",
-      "errorDuplicate": "A school with this organisation number is already registered.",
-      "genericError": "Something went wrong. Please try again."
+      "name": "Koulun nimi",
+      "organizationNumber": "Organisaationumero",
+      "organizationNumberHint": "Muoto: 556xxx-xxxx",
+      "city": "Kaupunki",
+      "address": "Osoite",
+      "postcode": "Postinumero",
+      "submit": "Rekisteröi koulu",
+      "submitting": "Rekisteröidään…",
+      "errorDuplicate": "Koulu tällä organisaationumerolla on jo rekisteröity.",
+      "genericError": "Jokin meni pieleen. Yritä uudelleen."
     }
   },
   "schoolProfile": {
-    "title": "Driving school",
-    "verifiedBadge": "Verified",
-    "pendingBadge": "Verification in progress",
-    "listedBadge": "Directory listing",
-    "instructorsHeading": "Instructors",
-    "noInstructors": "No instructors yet",
-    "contactHeading": "Contact"
+    "title": "Autokoulu",
+    "verifiedBadge": "Varmennettu",
+    "pendingBadge": "Varmennus käynnissä",
+    "listedBadge": "Hakemistoilmoitus",
+    "instructorsHeading": "Opettajat",
+    "noInstructors": "Ei vielä opettajia",
+    "contactHeading": "Yhteystiedot"
   },
   "instructorAffiliation": {
     "belongsTo": "Belongs to {name}"
   },
   "dashboardSchool": {
     "title": "School dashboard",
-    "eyebrow": "Driving school",
+    "eyebrow": "Autokoulu",
     "welcome": "Welcome, {name}",
     "orgNumber": "Org. no. {number}",
     "verificationDraft": "Draft",
     "verificationPending": "In review",
-    "verificationApproved": "Verified",
+    "verificationApproved": "Varmennettu",
     "connectionTitle": "Partner connection",
     "connectionBody": "Availability sync does not enable instant booking. Booking stays on the school's own schedule until transactional booking is certified.",
     "connectionNone": "No production partner connection is attached to this school.",
@@ -2633,7 +2640,7 @@
       "history": "Already granted (not pre-selected): {scopes}",
       "nothingPreselected": "No scope is pre-selected."
     },
-    "emptyInstructors": "No instructors yet",
+    "emptyInstructors": "Ei vielä opettajia",
     "inviteInstructor": "Invite instructor",
     "comingSoon": "Not available on the directory yet",
     "bookings": {
@@ -2644,7 +2651,7 @@
       "empty": "No school bookings yet.",
       "emptyBody": "When affiliated instructors take bookings, they appear here.",
       "loadError": "We couldn't load school bookings just now.",
-      "retry": "Try again",
+      "retry": "Yritä uudelleen",
       "open": "Open",
       "withInstructor": "with {name}",
       "status": {
@@ -2701,7 +2708,7 @@
     "stateC": {
       "title": "Payouts active",
       "body": "Payments are sent to your bank account after each completed lesson.",
-      "badge": "Verified",
+      "badge": "Varmennettu",
       "dashboardCta": "Open Stripe Dashboard"
     },
     "stateD": {
@@ -2725,7 +2732,7 @@
     "stateC": {
       "title": "Payouts active",
       "body": "Payouts are sent to your bank account after each completed lesson.",
-      "badge": "Verified",
+      "badge": "Varmennettu",
       "dashboardCta": "Open Stripe Dashboard"
     },
     "stateD": {
@@ -2750,12 +2757,12 @@
   },
   "schoolSettings": {
     "title": "School settings",
-    "name": "School name",
-    "orgNumber": "Organisation number",
+    "name": "Koulun nimi",
+    "orgNumber": "Organisaationumero",
     "orgNumberLocked": "Organisation number can only be changed via support.",
-    "address": "Address",
-    "postcode": "Postcode",
-    "city": "City",
+    "address": "Osoite",
+    "postcode": "Postinumero",
+    "city": "Kaupunki",
     "contactEmail": "Contact email",
     "contactPhone": "Contact phone",
     "save": "Save",
@@ -2763,9 +2770,9 @@
     "errorGeneric": "Could not save. Try again."
   },
   "schoolInstructors": {
-    "title": "Instructors",
+    "title": "Opettajat",
     "inviteCta": "Invite instructor",
-    "emptyTitle": "No instructors yet",
+    "emptyTitle": "Ei vielä opettajia",
     "emptyBody": "Invite instructors so they join the school and appear in the catalogue.",
     "pendingTitle": "Pending invitations",
     "roleOwner": "Owner",
@@ -2773,14 +2780,14 @@
     "joinedAt": "Joined {date}",
     "resend": "Resend",
     "cancel": "Cancel",
-    "revoke": "Remove",
+    "revoke": "Poista",
     "revokeConfirm": "Remove this instructor from the school?",
     "removeSuccess": "Instructor removed",
     "inviteSuccess": "Invitation sent",
     "inviteCancelled": "Invitation cancelled",
     "inviteError": "Could not send the invitation. Try again.",
     "inviteDuplicate": "This person is already invited or a member",
-    "emailLabel": "Email"
+    "emailLabel": "Sähköposti"
   },
   "inviteAccept": {
     "title": "School invitation",
@@ -2805,17 +2812,17 @@
     "eyebrow": "For people who teach at a school",
     "title": "Instructors come in through the school.",
     "body": "The school sends the invite. The school's permission sets category, price and terms. An instructor does not take payment on DriveLinkUp apart from the school.",
-    "primaryCta": "Register the school",
+    "primaryCta": "Rekisteröi autokoulu",
     "learnerCta": "Browse light vehicles",
-    "rolesEyebrow": "How it works",
+    "rolesEyebrow": "Näin se toimii",
     "roles": {
       "trafiklarare": {
-        "title": "The school's listing",
+        "title": "Autokoulun ilmoitus",
         "body": "What gets published is set by the school: licence, price, times and cancellation. Only what the school is permitted to teach.",
         "expectation": "An instructor cannot take payment here without belonging to the school."
       },
       "commission": {
-        "title": "Listing is free",
+        "title": "Listaus on ilmainen",
         "body": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. The school pays its instructors itself.",
         "expectation": "No learner fee. No promise of how many people book."
       }
@@ -2849,25 +2856,25 @@
       "cancelled_full_refund": "Cancelled",
       "cancelled_partial": "Cancelled"
     },
-    "providerLabel": "Driving school",
-    "cityLabel": "City",
-    "categoryLabel": "Licence category",
+    "providerLabel": "Autokoulu",
+    "cityLabel": "Kaupunki",
+    "categoryLabel": "Ajokorttiluokka",
     "durationLabel": "Lesson length",
     "duration": "{minutes} minutes",
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer"
+      "A": "Moottoripyörä",
+      "B": "Auto",
+      "BE": "Perävaunu"
     },
     "cancellationTitle": "Cancellation terms",
     "cancellationBody": "{tier}: full refund at least {hours} hours before the lesson.",
     "tier": {
-      "flexible": "Flexible",
-      "moderate": "Moderate",
-      "strict": "Strict"
+      "flexible": "Joustava",
+      "moderate": "Kohtalainen",
+      "strict": "Tiukka"
     },
     "heldConfirmation": "Your payment is held in escrow until the lesson is completed.",
     "paidConfirmation": "Payment has been received and your booking is confirmed.",
@@ -2880,7 +2887,7 @@
     "cancelledBody": "This booking is no longer active.",
     "accessTitle": "Booking access expired",
     "accessBody": "Open the latest booking link from your email, or sign in to view a booking that belongs to you.",
-    "payClosedTitle": "Contact the school",
+    "payClosedTitle": "Ota yhteyttä kouluun",
     "payClosedBody": "DriveLinkUp does not book the lesson. Contact the school opens their inbox or website.",
     "payCta": "Continue to hosted checkout",
     "openingCheckout": "Opening checkout…",
@@ -2907,7 +2914,7 @@
     "loading": "Loading messages…",
     "emptyTitle": "No conversations yet",
     "emptyBody": "Open a message thread from one of your bookings to keep the conversation on DriveLinkUp.",
-    "retry": "Try again",
+    "retry": "Yritä uudelleen",
     "errorTitle": "Messages could not be loaded",
     "selectPrompt": "Choose a conversation to read",
     "bookingContextTitle": "Booking context",
@@ -2919,10 +2926,10 @@
     "read": "Read",
     "noMessages": "No messages yet. Say hello to your school.",
     "sentByYou": "You",
-    "messageLabel": "Message",
+    "messageLabel": "Viesti",
     "placeholder": "Write a plain-text message…",
     "send": "Send message",
-    "sending": "Sending…",
+    "sending": "Lähetetään…",
     "sendError": "Your message could not be sent. Try again.",
     "blockedTitle": "Let’s keep this on DriveLinkUp",
     "blockedBody": "This message looks like it includes contact details or an off-platform payment request. We did not save it.",
@@ -2947,7 +2954,7 @@
     "detailsLabel": "Details (optional)",
     "detailsPlaceholder": "Add a short note",
     "submitReport": "Send report",
-    "reporting": "Sending…",
+    "reporting": "Lähetetään…",
     "cancel": "Cancel",
     "reportSuccess": "Thanks — your report was sent.",
     "reportError": "The report could not be sent. Try again.",
@@ -2973,7 +2980,7 @@
     "eyebrow": "Confirm booking",
     "title": "Accept booking",
     "bookingId": "Booking ID: {id}",
-    "nameLabel": "Your name",
+    "nameLabel": "Nimesi",
     "submit": "Accept the booking",
     "submitting": "Accepting…",
     "continueToPayment": "Open the booking",
@@ -2992,14 +2999,14 @@
     "declinedBody": "No payment was collected. The learner has been notified and can choose another school.",
     "eyebrow": "Decline booking",
     "title": "Decline booking",
-    "nameLabel": "Your name",
+    "nameLabel": "Nimesi",
     "reasonLabel": "Optional reason (sent to the learner)",
     "reasonPlaceholder": "For example: the time is no longer available.",
     "submit": "Decline booking",
     "submitting": "Declining…"
   },
   "bookingCancel": {
-    "eyebrow": "Cancellation",
+    "eyebrow": "Peruutus",
     "title": "Review cancellation",
     "schedule": "Lesson time: {date}",
     "policyEyebrow": "Saved cancellation policy",
@@ -3016,7 +3023,7 @@
       "none": "No cancellation charge is shown for this timing."
     },
     "form": {
-      "nameLabel": "Your name",
+      "nameLabel": "Nimesi",
       "roleLabel": "Who is cancelling?",
       "roles": {
         "learner": "Learner",
@@ -3077,7 +3084,7 @@
     "download": "Download PDF",
     "print": "Print receipt",
     "backToBooking": "Back to booking",
-    "retry": "Try again",
+    "retry": "Yritä uudelleen",
     "errorEyebrow": "Receipt unavailable",
     "errorTitle": "We couldn't load this receipt",
     "errorBody": "The receipt may not be issued yet, or this link may have expired.",
@@ -3118,10 +3125,10 @@
     }
   },
   "handledareDirectory": {
-    "eyebrow": "Swedish legal guidance",
-    "title": "Understand the handledare path",
-    "description": "Learn how private handledare and övningskörning differ from driving-school listings.",
-    "lead": "Handledare are private supervisors, not school listings. Review the applicable Swedish requirements before practice."
+    "eyebrow": "Ruotsin oikeudellinen ohje",
+    "title": "Ymmärrä handledare-polku",
+    "description": "Lue, miten yksityinen handledare ja övningskörning eroavat autokoulujen ilmoituksista.",
+    "lead": "Handledare ovat yksityisiä ohjaajia, eivät koulujen ilmoituksia. Tarkista Ruotsin vaatimukset ennen harjoittelua."
   },
   "providerOperations": {
     "instructorTitle": "Driving-school workspace",
@@ -3164,7 +3171,7 @@
     "open": "Open details",
     "errorTitle": "School data could not be loaded",
     "errorBody": "Try again. If the problem continues, finish school setup or contact support.",
-    "retry": "Try again",
+    "retry": "Yritä uudelleen",
     "actionError": "The action could not be completed. Refresh and try again.",
     "setup": {
       "title": "Finish host setup",
@@ -3187,45 +3194,45 @@
     "meta": {
       "title": "Autokoulut Etelä-Ruotsissa",
       "description": "Vertaa autokouluja Skånessa, Hallandissa, Blekingessä ja Smålandissa.",
-      "ogTitle": "Find your route through Southern Sweden",
-      "ogDescription": "Compare school listings near you."
+      "ogTitle": "Löydä reittisi Etelä-Ruotsissa",
+      "ogDescription": "Vertaa lähellä olevia kouluilmoituksia."
     },
     "hero": {
-      "eyebrow": "DriveLinkUp · Southern Sweden",
-      "title": "Find the right route through Southern Sweden.",
-      "body": "Compare driving schools in the region by price and city.",
-      "primaryCta": "Find a driving school",
-      "secondaryCta": "Explore the regions"
+      "eyebrow": "DriveLinkUp · Etelä-Ruotsi",
+      "title": "Löydä sopiva reitti Etelä-Ruotsissa.",
+      "body": "Vertaa alueen autokouluja hinnan ja kaupungin mukaan.",
+      "primaryCta": "Etsi autokoulu",
+      "secondaryCta": "Tutustu alueisiin"
     },
     "learnerGuide": {
-      "eyebrow": "For learners",
-      "title": "Make your next lesson easier to choose.",
-      "body": "Start where you are. Compare schools. Contact the school.",
+      "eyebrow": "Oppilaille",
+      "title": "Tee seuraavan ajotunnin valinnasta helpompaa.",
+      "body": "Aloita sieltä missä olet. Vertaa kouluja. Ota yhteyttä kouluun.",
       "steps": {
         "choose": {
-          "title": "Choose your city",
-          "body": "Open a city near you to see available driving-school listings."
+          "title": "Valitse kaupunki",
+          "body": "Avaa läheinen kaupunki nähdäksesi saatavilla olevat autokouluilmoitukset."
         },
         "compare": {
-          "title": "Compare with confidence",
-          "body": "Review price, language, availability, and each profile's approach before you decide."
+          "title": "Vertaa rauhassa",
+          "body": "Tarkista hinta, kieli, saatavuus ja kunkin profiilin ote ennen päätöstä."
         },
         "practice": {
-          "title": "Contact the school",
-          "body": "Write to the school and arrange the lesson with them."
+          "title": "Ota yhteyttä kouluun",
+          "body": "Kirjoita koululle ja sovi ajotunnista sen kanssa."
         }
       }
     },
     "regionNav": {
-      "eyebrow": "Regional guide",
-      "title": "Four regions. A clearer starting point.",
-      "body": "Jump straight to your part of Southern Sweden and find a local path to your next driving lesson.",
-      "jumpLabel": "Jump to region"
+      "eyebrow": "Alueopas",
+      "title": "Neljä aluetta. Selkeämpi lähtökohta.",
+      "body": "Siirry suoraan omaan osaasi Etelä-Ruotsia ja löydä paikallinen polku seuraavaan ajotuntiin.",
+      "jumpLabel": "Siirry alueeseen"
     },
     "regions": {
       "skane": {
         "name": "Skåne",
-        "description": "City streets, coastal roads, and flexible lesson options. Start with Malmö or compare schools in another Skåne city.",
+        "description": "Katukatuja, rannikkoteitä ja joustavia ajotuntivaihtoehtoja. Aloita Malmöstä tai vertaa kouluja toisessa Skånen kaupungissa.",
         "cities": {
           "malmo": {
             "label": "Malmö"
@@ -3246,7 +3253,7 @@
       },
       "halland": {
         "name": "Halland",
-        "description": "Plan lessons across coast, country roads, and growing towns. See which listed driving schools are close to your routine.",
+        "description": "Suunnittele ajotunteja rannikolla, maanteillä ja kasvavissa kaupungeissa. Katso, mitkä listatut autokoulut ovat lähellä arkeasi.",
         "cities": {
           "halmstad": {
             "label": "Halmstad"
@@ -3264,7 +3271,7 @@
       },
       "blekinge": {
         "name": "Blekinge",
-        "description": "Build a local practice-driving plan across Blekinge's towns and coastline.",
+        "description": "Kokoa paikallinen harjoittelusuunnitelma Blekingesin kyliin ja rannikolle.",
         "cities": {
           "karlskrona": {
             "label": "Karlskrona"
@@ -3282,7 +3289,7 @@
       },
       "smaland": {
         "name": "Småland",
-        "description": "From Jönköping to Kalmar and Växjö: choose a city, compare local options, and build confidence behind the wheel one step at a time.",
+        "description": "Jönköpingistä Kalmariin ja Växjöön: valitse kaupunki, vertaa paikallisia vaihtoehtoja ja kartuta varmuutta rattiin askel kerrallaan.",
         "cities": {
           "jonkoping": {
             "label": "Jönköping"
@@ -3303,66 +3310,66 @@
       }
     },
     "cta": {
-      "eyebrow": "Ready to start?",
-      "title": "Your next driving lesson may be closer than you think.",
-      "body": "Open the catalog to compare more cities, languages, and licence categories.",
-      "button": "See all driving schools",
-      "ariaLabel": "Open the full directory of driving-school listings"
+      "eyebrow": "Valmis aloittamaan?",
+      "title": "Seuraava ajotuntisi voi olla lähempänä kuin luulet.",
+      "body": "Avaa luettelo ja vertaa lisää kaupunkeja, kieliä ja ajokorttiluokkia.",
+      "button": "Näytä kaikki autokoulut",
+      "ariaLabel": "Avaa koko autokouluhakemisto"
     },
     "ui": {
-      "loading": "Loading the regional guide…",
-      "error": "The regional guide could not load right now.",
-      "retry": "Try again",
-      "cityListingLabel": "Choose a city",
-      "cityLinkPrefix": "Find driving schools in",
-      "regionNavLabel": "Navigate between regions",
-      "backToRegions": "Back to regions",
-      "directoryLinkPrefix": "Open the school directory for"
+      "loading": "Ladataan alueopasta…",
+      "error": "Alueopasta ei voitu ladata juuri nyt.",
+      "retry": "Yritä uudelleen",
+      "cityListingLabel": "Valitse kaupunki",
+      "cityLinkPrefix": "Etsi autokouluja kohteesta",
+      "regionNavLabel": "Siirry alueiden välillä",
+      "backToRegions": "Takaisin alueisiin",
+      "directoryLinkPrefix": "Avaa kouluhakemisto kohteelle"
     }
   },
   "westernNorthernSwedenPage": {
     "meta": {
       "title": "Autokoulut Länsi- ja Pohjois-Ruotsissa",
       "description": "Vertaa autokouluja Göteborgista Kiirunaan.",
-      "ogTitle": "Find your driving route across Western and Northern Sweden",
-      "ogDescription": "Compare local school listings, then choose lessons that fit your city, schedule, and next step."
+      "ogTitle": "Löydä ajoreittisi Länsi- ja Pohjois-Ruotsissa",
+      "ogDescription": "Vertaa paikallisia kouluilmoituksia ja valitse sitten tunnit, jotka sopivat kaupunkiisi, aikatauluusi ja seuraavaan askeleeseen."
     },
     "hero": {
-      "eyebrow": "DriveLinkUp · Western & Northern Sweden",
-      "title": "Find your route from the west to the north.",
-      "body": "From Gothenburg streets to northern winter roads, compare driving-school listings that serve the roads around your everyday life.",
-      "primaryCta": "Find a driving school",
-      "secondaryCta": "Explore the regions"
+      "eyebrow": "DriveLinkUp · Länsi- ja Pohjois-Ruotsi",
+      "title": "Löydä reittisi lännestä pohjoiseen.",
+      "body": "Göteborgin kaduista pohjoisen talviteihin: vertaa autokouluilmoituksia, jotka palvelevat arjen teitäsi.",
+      "primaryCta": "Etsi autokoulu",
+      "secondaryCta": "Tutustu alueisiin"
     },
     "learnerGuide": {
-      "eyebrow": "For learners",
-      "title": "A local starting point makes practice easier.",
-      "body": "Choose a nearby city, compare the details that matter, and build a practice-driving plan around your route and season.",
+      "eyebrow": "Oppilaille",
+      "title": "Paikallinen lähtökohta tekee harjoittelusta helpompaa.",
+      "body": "Valitse läheinen kaupunki, vertaa olennaisia tietoja ja kokoa harjoittelusuunnitelma reittisi ja vuodenajan mukaan.",
       "steps": {
         "choose": {
-          "title": "Start with your city",
-          "body": "Open a city near you to see available driving-school listings in the directory."
+          "title": "Aloita omasta kaupungistasi",
+          "body": "Avaa läheinen kaupunki nähdäksesi hakemiston autokouluilmoitukset."
         },
         "compare": {
-          "title": "Compare the full picture",
-          "body": "Review price, language, availability, and profile details before choosing who fits your learning style."
+          "title": "Vertaa kokonaisuutta",
+          "body": "Tarkista hinta, kieli, saatavuus ja profiilitiedot ennen kuin valitset tyyliisi sopivan koulun."
         },
         "practice": {
-          "title": "Contact the school",
-          "body": "Write to the school and arrange the lesson with them."
+          "title": "Ota yhteyttä kouluun",
+          "body": "Kirjoita koululle ja sovi ajotunnista sen kanssa."
         }
       }
     },
     "regionNav": {
-      "eyebrow": "Regional guide",
-      "title": "Four regional starting points.",
-      "body": "Move from broad region to nearby city, then into the public school directory for the local options available to you.",
-      "jumpLabel": "Jump to region"
+      "eyebrow": "Alueopas",
+      "title": "Neljä alueellista lähtökohtaa.",
+      "body": "Siirry laajasta alueesta läheiseen kaupunkiin ja sieltä julkiseen kouluhakemistoon paikallisiin vaihtoehtoihin.",
+      "jumpLabel": "Siirry alueeseen"
     },
     "regions": {
       "vastra-gotaland": {
         "name": "Västra Götaland",
-        "description": "Balance city traffic, ring roads, and open country routes. Start in Göteborg or compare schools across Borås, Trollhättan, and Skövde for a practical local route.",
+        "description": "Tasaa kaupunkiliikenne, kehätiet ja maantiet. Aloita Göteborgista tai vertaa kouluja Boråsissa, Trollhättanissa ja Skövdessä käytännölliseen paikallisreittiin.",
         "cities": {
           "goteborg": {
             "label": "Göteborg"
@@ -3380,7 +3387,7 @@
       },
       "varmland": {
         "name": "Värmland",
-        "description": "Build steady skills across Karlstad streets, smaller towns, and longer country-road drives. Pick the place that makes regular practice realistic for you.",
+        "description": "Kartuta varmuutta Karlstadin kaduilla, pienemmissä kaupungeissa ja pidemmillä maanteillä. Valitse paikka, jossa säännöllinen harjoittelu onnistuu.",
         "cities": {
           "karlstad": {
             "label": "Karlstad"
@@ -3394,8 +3401,8 @@
         }
       },
       "gavleborg-vasternorrland": {
-        "name": "Gävleborg & Västernorrland",
-        "description": "Prepare for a mix of city traffic, coast, and longer distances. Find local options in Gävle, Sundsvall, Hudiksvall, or Örnsköldsvik and plan practice around your real journeys.",
+        "name": "Gävleborg ja Västernorrland",
+        "description": "Valmistaudu kaupunkiliikenteen, rannikon ja pidempien matkojen sekoitukseen. Löydä paikallisia vaihtoehtoja Gävlessä, Sundsvallissa, Hudiksvallissa tai Örnsköldsvikissä ja suunnittele harjoittelu oikeiden matkojesi mukaan.",
         "cities": {
           "gavle": {
             "label": "Gävle"
@@ -3412,8 +3419,8 @@
         }
       },
       "vasterbotten-norrbotten": {
-        "name": "Västerbotten & Norrbotten",
-        "description": "Give yourself room to learn in changing light, weather, and road conditions. Compare schools in Umeå, Skellefteå, Luleå, and Kiruna for a practical local plan.",
+        "name": "Västerbotten ja Norrbotten",
+        "description": "Jätä tilaa oppia vaihtuvassa valossa, säässä ja keliolosuhteissa. Vertaa kouluja Umeåssa, Skellefteåssa, Luleåssa ja Kirunassa käytännölliseen paikallissuunnitelmaan.",
         "cities": {
           "umea": {
             "label": "Umeå"
@@ -3431,21 +3438,21 @@
       }
     },
     "cta": {
-      "eyebrow": "Ready to start?",
-      "title": "Your next lesson can begin with one nearby city.",
-      "body": "Open the catalog to compare cities, languages, licence categories, and published prices across Sweden.",
-      "button": "See all driving schools",
-      "ariaLabel": "Open the full directory of driving-school listings"
+      "eyebrow": "Valmis aloittamaan?",
+      "title": "Seuraava ajotuntisi voi alkaa yhdestä läheisestä kaupungista.",
+      "body": "Avaa luettelo ja vertaa kaupunkeja, kieliä, ajokorttiluokkia ja julkaistuja hintoja ympäri Ruotsia.",
+      "button": "Näytä kaikki autokoulut",
+      "ariaLabel": "Avaa koko autokouluhakemisto"
     },
     "ui": {
-      "loading": "Loading the regional guide…",
-      "error": "The regional guide could not load right now.",
-      "retry": "Try again",
-      "cityListingLabel": "Choose a city",
-      "cityLinkPrefix": "Find driving schools in",
-      "regionNavLabel": "Navigate between regions",
-      "backToRegions": "Back to regions",
-      "directoryLinkPrefix": "Open the school directory for"
+      "loading": "Ladataan alueopasta…",
+      "error": "Alueopasta ei voitu ladata juuri nyt.",
+      "retry": "Yritä uudelleen",
+      "cityListingLabel": "Valitse kaupunki",
+      "cityLinkPrefix": "Etsi autokouluja kohteesta",
+      "regionNavLabel": "Siirry alueiden välillä",
+      "backToRegions": "Takaisin alueisiin",
+      "directoryLinkPrefix": "Avaa kouluhakemisto kohteelle"
     }
   },
   "pricingPage": {
@@ -3454,29 +3461,29 @@
       "description": "Vertaa autokouluja ilmaiseksi. Luettelomerkintä on ilmainen. DriveLinkUp ei peri maksua luettelosta."
     },
     "hero": {
-      "eyebrow": "Directory",
-      "title": "The school price is the figure on the listing.",
-      "body": "Discover and compare driving-school listings."
+      "eyebrow": "Hakemisto",
+      "title": "Koulun hinta on ilmoituksessa näkyvä summa.",
+      "body": "Tutustu autokouluilmoituksiin ja vertaile niitä."
     },
     "learner": {
-      "title": "For learners",
-      "body": "Browse listed driving schools and compare their published prices. Lessons are arranged with the school.",
-      "price": "Free to browse",
-      "detail": "You see the school's published price. DriveLinkUp does not add a fee."
+      "title": "Oppilaille",
+      "body": "Selaa listattuja autokouluja ja vertaa niiden julkaistuja hintoja. Ajotunnit sovitaan koulun kanssa.",
+      "price": "Ilmainen selata",
+      "detail": "Näet koulun julkaiseman hinnan. DriveLinkUp ei lisää maksua."
     },
     "school": {
-      "title": "For driving schools",
-      "body": "Publish the price for the categories you are permitted to teach. A catalog listing is free.",
-      "price": "Free to list",
-      "detail": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. Payment for the lesson is arranged with the school."
+      "title": "Autokouluille",
+      "body": "Julkaise hinta luokille, joihin teillä on opetuslupa. Luetteloilmoitus on ilmainen.",
+      "price": "Listaus on ilmainen",
+      "detail": "Luetteloilmoitus on ilmainen. DriveLinkUp ei veloita koulua listauksesta. Ajotunnin maksu sovitaan koulun kanssa."
     },
     "notes": {
-      "title": "How listing works (Sweden)",
-      "body": "A catalog listing is free. DriveLinkUp does not take payment for directory listings and does not add a learner fee. Lessons and terms are arranged with the school."
+      "title": "Miten listaus toimii (Ruotsi)",
+      "body": "Luetteloilmoitus on ilmainen. DriveLinkUp ei ota maksua hakemistoilmoituksista eikä lisää oppilasmaksua. Ajotunnit ja ehdot sovitaan koulun kanssa."
     },
     "cta": {
-      "learner": "Compare schools",
-      "school": "List your school"
+      "learner": "Vertaa kouluja",
+      "school": "Listaa koulusi"
     }
   },
   "handledareInfo": {
@@ -3484,20 +3491,20 @@
       "title": "Handledare ja yksityinen harjoitteluajo",
       "description": "Ymmärrä Ruotsin handledare-polku ja miten se eroaa autokouluilmoituksista."
     },
-    "eyebrow": "Swedish legal guidance",
-    "title": "Handledare are a separate private path.",
-    "lead": "In Sweden, a handledare supports private övningskörning under the applicable rules. This is different from a driving-school listing.",
+    "eyebrow": "Ruotsin oikeudellinen ohje",
+    "title": "Handledare on erillinen yksityinen polku.",
+    "lead": "Ruotsissa handledare tukee yksityistä övningskörningia voimassa olevien sääntöjen mukaan. Tämä eroaa autokouluilmoituksesta.",
     "private": {
-      "title": "Private övningskörning",
-      "body": "Learners and handledare must meet the current Swedish requirements, permissions and vehicle rules. Check Transportstyrelsen guidance before practice. DriveLinkUp does not present handledare as authorized schools."
+      "title": "Yksityinen övningskörning",
+      "body": "Oppilaiden ja handledareiden on täytettävä voimassa olevat ruotsalaiset vaatimukset, luvat ja ajoneuvosäännöt. Tarkista Transportstyrelsenin ohjeet ennen harjoittelua. DriveLinkUp ei esitä handledareita valtuutettuina kouluina."
     },
     "schools": {
-      "title": "Driving schools",
-      "body": "Compare school listings and published prices. Contact the school."
+      "title": "Autokoulut",
+      "body": "Vertaa kouluilmoituksia ja julkaistuja hintoja. Ota yhteyttä kouluun."
     },
     "cta": {
-      "schools": "Compare driving schools",
-      "faq": "Read the FAQ"
+      "schools": "Vertaa autokouluja",
+      "faq": "Lue kysymykset"
     }
   },
   "onboarding": {
@@ -3506,7 +3513,7 @@
       "body": "We need to confirm your age and identity."
     },
     "verify": {
-      "title": "Verification in progress",
+      "title": "Varmennus käynnissä",
       "body": "This usually takes under 2 minutes. Don't close this tab.",
       "heading": "Verify your identity",
       "subtext": "Upload a valid ID (passport, national ID, or driving licence) so we can confirm your age. Takes under 2 minutes.",
@@ -3514,7 +3521,7 @@
         "heading": "Before we verify your identity",
         "lead": "Confirm your date of birth and accept the privacy policy so we can continue.",
         "continue": "Continue",
-        "submitting": "Saving…"
+        "submitting": "Tallennetaan…"
       },
       "startCta": "Upload ID document",
       "starting": "Opening…",
@@ -3523,8 +3530,8 @@
       "startFailed": "Could not start verification. Please try again.",
       "invalidState": "Verification cannot be started in your current state.",
       "missingConfig": "Identity verification isn't configured right now. Please try again later or contact support.",
-      "inProgressTitle": "Verification in progress",
-      "waitingTitle": "Verification in progress",
+      "inProgressTitle": "Varmennus käynnissä",
+      "waitingTitle": "Varmennus käynnissä",
       "waitingBody": "This usually takes under 2 minutes. Don't close this tab.",
       "timeoutBody": "We're still waiting for a response from Didit. Try again in a moment.",
       "checkAgain": "Check again",
@@ -3545,7 +3552,7 @@
     "invalidBody": "Request a new confirmation link to continue.",
     "resendNew": "Send a new link",
     "resent": "Link sent again",
-    "resending": "Sending…",
+    "resending": "Lähetetään…",
     "resendFailed": "Could not send a new link. Try again.",
     "resendNeedsEmail": "Sign in again to request a new link."
   },
@@ -3567,51 +3574,51 @@
     "headerTitleCity": "Autokoulut — {name}",
     "headerTitleRegion": "Autokoulut — {name}",
     "headerTitleCountry": "Autokoulut — {name}",
-    "subtitleLive": "Compare school listings in {name} by category, language and published SEK price. Contact the school to arrange a lesson.",
-    "subtitleCatalogue": "Driving schools in {name} are in the same catalog. A price is shown in the currency on the school's website. Contact the school to arrange a lesson.",
-    "subtitleExpansion": "{name} in {country} is an expansion hub. The catalog is live in Sweden today; use these pages to explore Nordic coverage as we grow.",
-    "subtitleCountryLive": "Browse regions and cities across {name}. Open a city hub to compare listings.",
-    "subtitleCountryCatalogue": "Open a city to compare driving schools in {name}. They are in the same catalog as the Swedish schools.",
-    "subtitleCountryExpansion": "{name} hubs are ready for SEO and expansion. The catalog is live in Sweden first (ADR-001).",
+    "subtitleLive": "Vertaa kouluilmoituksia paikassa {name} luokan, kielen ja julkaistun SEK-hinnan mukaan. Ota yhteyttä kouluun sopiaksesi ajotunnista.",
+    "subtitleCatalogue": "Autokoulut paikassa {name} ovat samassa luettelossa. Hinta näytetään koulun sivuston valuutassa. Ota yhteyttä kouluun sopiaksesi ajotunnista.",
+    "subtitleExpansion": "{name} maassa {country} on laajentumissivu. Luettelo on tänään live Ruotsissa; näillä sivuilla näet pohjoismaisen kattavuuden kasvaessamme.",
+    "subtitleCountryLive": "Selaa alueita ja kaupunkeja kohteessa {name}. Avaa kaupunkisivu vertaillaksesi ilmoituksia.",
+    "subtitleCountryCatalogue": "Avaa kaupunki vertaillaksesi autokouluja kohteessa {name}. Ne ovat samassa luettelossa kuin ruotsalaiset koulut.",
+    "subtitleCountryExpansion": "{name}-sivut ovat valmiit hakuun ja laajentumiseen. Luettelo on ensin live Ruotsissa (ADR-001).",
     "breadcrumbLocations": "Paikat",
-    "expansionTitle": "The catalog is Sweden-first",
-    "expansionBody": "DriveLinkUp lists driving schools in Sweden first. This Nordic location page is indexable so learners can find us as we expand — explore Swedish cities today.",
-    "expansionCtaSweden": "Browse Swedish driving schools",
-    "seoLead": "Compare driving schools in {name}, {country}",
-    "seoP1Live": "Listings in {name} show schools that appear in the catalog. Compare before you contact the school.",
-    "seoP1Catalogue": "Schools in {name} are listed from their own websites. They are not marked verified. Compare them in the catalog, then contact the school.",
-    "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
-    "seoP2": "A catalog listing is free. DriveLinkUp does not add a learner fee. Lessons and payment are arranged with the school. Handledare / private practice is a separate legal path.",
-    "howTitle": "How DriveLinkUp works",
-    "howBodyLive": "Open a listing, read the published price, then contact the school. Lessons are arranged with the school.",
-    "howBodyExpansion": "When listings go live in this market, the same catalog applies — published prices, contact the school, no DriveLinkUp payment on a listing.",
-    "nearbyTitle": "Nearby hubs",
-    "regionsTitle": "Regions",
-    "citiesTitle": "Cities",
+    "expansionTitle": "Luettelo on Ruotsi ensin",
+    "expansionBody": "DriveLinkUp listaa autokoulut ensin Ruotsissa. Tämä pohjoismainen sijaintisivu on indeksoitavissa, jotta oppilaat löytävät meidät laajentuessamme — selaa ruotsalaisia kaupunkeja tänään.",
+    "expansionCtaSweden": "Selaa ruotsalaisia autokouluja",
+    "seoLead": "Vertaa autokouluja: {name}, {country}",
+    "seoP1Live": "Ilmoitukset kohteessa {name} näyttävät luettelossa olevat koulut. Vertaa ennen kuin otat yhteyttä kouluun.",
+    "seoP1Catalogue": "Koulut kohteessa {name} on listattu omilta sivustoiltaan. Niitä ei ole merkitty vahvistetuiksi. Vertaa niitä luettelossa ja ota sitten yhteyttä kouluun.",
+    "seoP1Expansion": "Julkaisemme jäsennellyn sivun kohteelle {name}, {country}, jotta haku ja tekoälyavustajat ohjaavat oppilaat oikein tarjonnan kasvaessa.",
+    "seoP2": "Luetteloilmoitus on ilmainen. DriveLinkUp ei lisää oppilasmaksua. Ajotunnit ja maksu sovitaan koulun kanssa. Handledare / yksityinen harjoittelu on erillinen juridinen polku.",
+    "howTitle": "Miten DriveLinkUp toimii",
+    "howBodyLive": "Avaa ilmoitus, lue julkaistu hinta ja ota yhteyttä kouluun. Ajotunnit sovitaan koulun kanssa.",
+    "howBodyExpansion": "Kun ilmoitukset tulevat tähän markkinaan, sama luettelo pätee: julkaistut hinnat, yhteys kouluun, ei DriveLinkUp-maksua ilmoituksesta.",
+    "nearbyTitle": "Läheiset sivut",
+    "regionsTitle": "Alueet",
+    "citiesTitle": "Kaupungit",
     "indexTitle": "Autokoulut",
     "indexSubtitle": "Avaa maa. Luettelon hinta on koulun sivulla julkaistu hinta.",
     "countriesTitle": "Maat",
     "faqTitle": "Kysymyksiä",
     "faq1q": "Löydänkö koulun kohteesta {name} tänään?",
     "faq1aLive": "Kyllä. Kohteen {name} koulujen ilmoitukset näkyvät tässä. Avaa koulu ja käytä Ota yhteyttä kouluun.",
-    "emptyLiveTitle": "No school listings in {name} yet",
-    "emptyLiveBody": "New schools appear here when they are in the catalog. Browse other cities, or contact us if you run a school in {name}.",
+    "emptyLiveTitle": "Ei vielä kouluilmoituksia kohteessa {name}",
+    "emptyLiveBody": "Uudet koulut näkyvät täällä, kun ne ovat luettelossa. Selaa muita kaupunkeja tai ota yhteyttä, jos pidät koulua kohteessa {name}.",
     "listHeadingLive": "Autokoulut ja ajotunnit — {name}",
-    "statsCount": "{count} driving schools in {name}",
-    "statsPriceFrom": "Lessons from {price} SEK",
-    "statsDuration": "{minutes}-minute lesson",
-    "statsUpdated": "Prices collected {date}",
-    "signInTitle": "Sign in to see the schools",
-    "signInBody": "The catalog is open to signed-in users. After you sign in you will come back here.",
-    "signInCta": "Sign in",
+    "statsCount": "{count} autokoulua kohteessa {name}",
+    "statsPriceFrom": "Ajotunteja alkaen {price} SEK",
+    "statsDuration": "{minutes} minuutin ajotunti",
+    "statsUpdated": "Hinnat kerätty {date}",
+    "signInTitle": "Kirjaudu nähdäksesi koulut",
+    "signInBody": "Luettelo on avoinna kirjautuneille. Kirjautumisen jälkeen palaat tänne.",
+    "signInCta": "Kirjaudu sisään",
     "faq1aExpansion": "Luettelo on ensin live Ruotsissa. Selaa nyt ruotsalaisia kaupunkeja.",
     "faq2q": "Onko DriveLinkUp ilmainen?",
     "faq2a": "Kyllä. DriveLinkUp on ilmainen. Maksat koululle, et DriveLinkUpille.",
     "faq3q": "Ovatko handledaret sama asia kuin koulut?",
     "faq3a": "Eivät. Handledaret tukevat yksityistä harjoitteluajoa Ruotsin sääntöjen mukaan, eikä heitä myydä kouluilmoituksina.",
-    "linkHandledare": "Handledare guide",
-    "linkPricing": "Pricing",
-    "linkBlog": "Guides"
+    "linkHandledare": "Handledare-opas",
+    "linkPricing": "Hinnat",
+    "linkBlog": "Oppaat"
   },
   "termsPage": {
     "meta": {
@@ -3619,109 +3626,109 @@
       "description": "DriveLinkUpin käyttöehdot: koululuettelo, tilit ja henkilötiedot."
     },
     "hero": {
-      "eyebrow": "Terms of service",
-      "title": "Terms of service",
-      "lastUpdated": "Last updated {version}",
-      "intro": "These terms apply when you use DriveLinkUp — as a learner browsing driving-school listings or as a school that lists itself. By using the site you accept the terms."
+      "eyebrow": "Käyttöehdot",
+      "title": "Käyttöehdot",
+      "lastUpdated": "Päivitetty {version}",
+      "intro": "Nämä ehdot koskevat DriveLinkUpin käyttöä — oppilaana, joka selaa autokouluja, tai kouluna, joka listautuu. Käyttämällä sivustoa hyväksyt ehdot."
     },
     "sections": {
       "0": {
-        "title": "The service",
-        "body": "DriveLinkUp is a directory of driving schools in Sweden. We show published prices when the school has filled them in. DriveLinkUp does not book the lesson and does not take payment for the lesson.",
+        "title": "Palvelu",
+        "body": "DriveLinkUp on autokoulujen hakemisto Ruotsissa. Näytämme julkaistut hinnat, kun koulu on täyttänyt ne. DriveLinkUp ei varaa ajotuntia eikä ota maksua siitä.",
         "items": [
-          "The school publishes its own details. A badge appears only when the matching check is stored.",
-          "You arrange time and payment with the school, including through Contact the school."
+          "Koulu julkaisee omat tietonsa. Merkki näkyy vain, kun vastaava tarkistus on tallennettu.",
+          "Sovit ajan ja maksun koulun kanssa, myös Ota yhteyttä kouluun -toiminnolla."
         ]
       },
       "1": {
-        "title": "Roles and responsibility",
-        "body": "When you take a lesson the agreement is between you and the driving school. DriveLinkUp lists schools. We do not give the lesson and we are not a party to that agreement.",
+        "title": "Roolit ja vastuu",
+        "body": "Kun otat ajotunnin, sopimus on sinun ja autokoulun välinen. DriveLinkUp listaa koulut. Emme pidä ajotuntia emmekä ole osapuoli siinä sopimuksessa.",
         "items": [
-          "The school is responsible for the lesson, how it is given, and the details it publishes.",
-          "DriveLinkUp is responsible for the directory and the account tools on this site."
+          "Koulu vastaa ajotunnista, sen toteutuksesta ja julkaisemistaan tiedoista.",
+          "DriveLinkUp vastaa hakemistosta ja tämän sivuston tilityökaluista."
         ]
       },
       "2": {
-        "title": "Price and payment",
-        "body": "The figure on the listing is the school’s published price. DriveLinkUp does not charge for a directory listing. Payment is arranged with the school.",
+        "title": "Hinta ja maksu",
+        "body": "Ilmoituksen luku on koulun julkaisema hinta. DriveLinkUp ei veloita hakemistoilmoituksesta. Maksu sovitaan koulun kanssa.",
         "items": []
       },
       "3": {
-        "title": "Times and school terms",
-        "body": "Lesson terms are set by the school. Confirm them with the school before you arrange a lesson.",
+        "title": "Ajat ja koulun ehdot",
+        "body": "Ajotunnin ehdot määrää koulu. Vahvista ne koululta ennen kuin sovit tunnista.",
         "items": [
-          "Contact the school directly to change a time.",
-          "If that does not resolve it, write to frank@drivelinkup.com."
+          "Ota suoraan yhteyttä kouluun ajan muuttamiseksi.",
+          "Jos se ei ratkaise asiaa, kirjoita osoitteeseen frank@drivelinkup.com."
         ]
       },
       "4": {
-        "title": "Listings and accounts",
-        "body": "A directory listing is free. DriveLinkUp does not charge the school to appear here. Learners never pay a fee to DriveLinkUp. You must be 16 or older to create an account, and you are responsible for the details you enter and for keeping your sign-in to yourself.",
+        "title": "Ilmoitukset ja tilit",
+        "body": "Hakemistoilmoitus on ilmainen. DriveLinkUp ei veloita koulua näkymisestä täällä. Oppilaat eivät maksa DriveLinkUpille. Tilin luomiseen on oltava vähintään 16 vuotta, ja vastaat syöttämistäsi tiedoista sekä kirjautumistietojesi pitämisestä omana tietonasi.",
         "items": [
-          "Do not misuse the site, for example by posting misleading details or disrupting the service.",
-          "We may close an account that breaks these terms or that we must close to protect users or comply with law."
+          "Älä väärinkäytä sivustoa, esimerkiksi julkaisemalla harhaanjohtavia tietoja tai häiritsemällä palvelua.",
+          "Voimme sulkea tilin, joka rikkoo näitä ehtoja tai joka on suljettava käyttäjien suojaamiseksi tai lain noudattamiseksi."
         ]
       },
       "5": {
-        "title": "Personal data",
-        "body": "We process personal data under the GDPR. How we collect, use, and protect data is described in the privacy policy.",
+        "title": "Henkilötiedot",
+        "body": "Käsittelemme henkilötietoja GDPR:n mukaan. Miten keräämme, käytämme ja suojaamme tietoja, kerrotaan tietosuojakäytännössä.",
         "items": []
       },
       "6": {
-        "title": "Liability",
-        "body": "The directory shows information the school has published or that we have stored from a listed source. We do not warrant that every listing is complete or current. We are not liable for the lesson, the vehicle, or an agreement you make with a school, except where Swedish law does not allow that limit.",
+        "title": "Vastuu",
+        "body": "Hakemisto näyttää tiedot, jotka koulu on julkaissut tai jotka olemme tallentaneet listatusta lähteestä. Emme takaa, että jokainen ilmoitus on täydellinen tai ajan tasalla. Emme vastaa ajotunnista, ajoneuvosta tai sopimuksesta, jonka teet koulun kanssa, paitsi jos Ruotsin laki ei salli tätä rajoitusta.",
         "items": []
       },
       "7": {
-        "title": "Governing law",
-        "body": "These terms are governed by Swedish law. A dispute may be brought before the Swedish courts. Consumers in the EU also keep any mandatory rights that apply in their country of residence.",
+        "title": "Sovellettava laki",
+        "body": "Näihin ehtoihin sovelletaan Ruotsin lakia. Riita voidaan viedä Ruotsin tuomioistuimiin. EU:n kuluttajat säilyttävät myös asuinmaansa pakottavat oikeudet.",
         "items": []
       },
       "8": {
-        "title": "Changes and contact",
-        "body": "We may update these terms when the service changes. The version is shown at the top of the page. Questions: frank@drivelinkup.com.",
+        "title": "Muutokset ja yhteydenotto",
+        "body": "Voimme päivittää näitä ehtoja, kun palvelu muuttuu. Versio näkyy sivun yläosassa. Kysymykset: frank@drivelinkup.com.",
         "items": []
       },
       "9": {
-        "title": "Your content and listings",
-        "body": "If you publish a school listing you grant DriveLinkUp a non-exclusive licence to host, copy, and display that content on the website and in the app so people can compare schools. You must own the content or have the right to give us that licence. You are responsible for the accuracy of what you publish.",
+        "title": "Sisältösi ja ilmoituksesi",
+        "body": "Jos julkaiset kouluilmoituksen, annat DriveLinkUpille ei-yksinomaisen luvan isännöidä, kopioida ja näyttää sisältöä sivustolla ja sovelluksessa, jotta kouluja voi vertailla. Sinun on omistettava sisältö tai oltava oikeus antaa tämä lupa. Vastaat julkaisemasi tiedon paikkansapitävyydestä.",
         "items": [
-          "We may edit the display length, hide, or remove content that is misleading, unlawful, or that we must take down.",
-          "Write to frank@drivelinkup.com to report a listing or other content that you believe is illegal or wrong."
+          "Voimme muokata näyttöpituutta, piilottaa tai poistaa sisältöä, joka on harhaanjohtavaa, laitonta tai joka on poistettava.",
+          "Kirjoita osoitteeseen frank@drivelinkup.com ilmoittaaksesi ilmoituksen tai muun sisällön, jonka uskot olevan laitonta tai virheellistä."
         ]
       },
       "10": {
-        "title": "Reviews",
-        "body": "Some listings show Google reviews that we store and label as coming from Google. DriveLinkUp does not write those reviews and does not verify them. A review can be incomplete or out of date. It is not a DriveLinkUp verification badge.",
+        "title": "Arvostelut",
+        "body": "Joissakin ilmoituksissa näkyy Google-arvosteluja, jotka tallennamme ja merkitsemme Googlelta tuleviksi. DriveLinkUp ei kirjoita eikä vahvista niitä. Arvostelu voi olla puutteellinen tai vanhentunut. Se ei ole DriveLinkUpin vahvistusmerkki.",
         "items": []
       },
       "11": {
-        "title": "Intellectual property and acceptable use",
-        "body": "The DriveLinkUp name, site design, and software are ours or our licensors'. You may use the directory to compare schools and contact them. You may not copy the catalogue in bulk, scrape it, frame it, or use it to build a competing directory without our written permission.",
+        "title": "Immateriaalioikeudet ja hyväksyttävä käyttö",
+        "body": "DriveLinkUp-nimi, sivuston ulkoasu ja ohjelmisto ovat meidän tai lisenssinantajiemme. Voit käyttää hakemistoa koulujen vertailuun ja yhteydenottoon. Et saa kopioida luetteloa joukoittain, kaapia sitä, kehystää sitä tai käyttää sitä kilpailevan hakemiston rakentamiseen ilman kirjallista lupaamme.",
         "items": [
-          "Do not impersonate a school, post another school's content as your own, or interfere with the service.",
-          "Do not collect personal data from the site except as needed to contact a school about a lesson."
+          "Älä esitä olevasi koulu, julkaise toisen koulun sisältöä omanasi tai häiritse palvelua.",
+          "Älä kerää henkilötietoja sivustolta muuten kuin ottaaksesi yhteyttä kouluun ajotunnista."
         ]
       },
       "12": {
-        "title": "How listings appear",
-        "body": "DriveLinkUp is not a party to any lesson you arrange with a school and does not act as the school's agent. Search and catalogue order can change. Near-me sorts by distance when you share your location. Light and heavy catalogues filter by the licence categories the listing covers. Third-party ads from Google may appear after marketing consent. Those ads are not a paid rank for a school listing unless we later mark a listing as advertised.",
+        "title": "Miten ilmoitukset näkyvät",
+        "body": "DriveLinkUp ei ole osapuoli ajotunnissa, jonka sovit koulun kanssa, eikä toimi koulun asiamiehenä. Haun ja luettelon järjestys voi muuttua. Lähelläni järjestää etäisyyden mukaan, kun jaat sijaintisi. Kevyt- ja raskaskalustoluettelot suodattavat ilmoituksen ajokorttiluokkien mukaan. Googlen kolmannen osapuolen mainoksia voi näkyä markkinointisuostumuksen jälkeen. Ne eivät ole maksettua sijoitusta kouluilmoitukselle, ellemme myöhemmin merkitse ilmoitusta mainostetuksi.",
         "items": []
       },
       "13": {
-        "title": "Ending the account",
-        "body": "You may delete your account from Profile at any time. We may suspend or close an account, or hide a listing, if you break these terms, if we must protect users, or if the law requires it. We will write to the email on the account when we can.",
+        "title": "Tilin päättäminen",
+        "body": "Voit poistaa tilisi Profiilista milloin tahansa. Voimme jäädyttää tai sulkea tilin tai piilottaa ilmoituksen, jos rikot näitä ehtoja, jos meidän on suojattava käyttäjiä tai jos laki sitä vaatii. Kirjoitamme tilin sähköpostiin, kun voimme.",
         "items": []
       },
       "14": {
-        "title": "Other legal terms",
-        "body": "These terms and the privacy policy are the agreement for using the site. If a court finds one part unenforceable, the rest still applies. If we do not enforce a part, we do not waive it. You may not assign this agreement without our consent. We may assign it if we transfer the service. Notices go to frank@drivelinkup.com and to the email on your account.",
+        "title": "Muut oikeudelliset ehdot",
+        "body": "Nämä ehdot ja tietosuojakäytäntö ovat sopimus sivuston käytöstä. Jos tuomioistuin toteaa osan täytäntöönpanokelvottomaksi, muu osa pysyy voimassa. Jos emme pane osaa täytäntöön, emme luovu siitä. Et saa siirtää tätä sopimusta ilman suostumustamme. Voimme siirtää sen, jos siirrämme palvelun. Ilmoitukset lähetetään osoitteeseen frank@drivelinkup.com ja tilisi sähköpostiin.",
         "items": []
       }
     },
     "cta": {
-      "contact": "Contact support",
-      "faq": "Read the FAQ"
+      "contact": "Ota yhteyttä tukeen",
+      "faq": "Lue kysymykset"
     }
   },
   "aboutPage": {
@@ -3730,61 +3737,61 @@
       "description": "DriveLinkUp vertaa autokouluja. Julkaistut hinnat näkyvät ilmoituksessa. Listaus on ilmainen."
     },
     "hero": {
-      "eyebrow": "Driving schools and learners. One directory.",
-      "title": "We built the comparison we wished existed.",
-      "intro": "What does the lesson cost, and who stands behind it? On DriveLinkUp the answer is the school's published price.",
+      "eyebrow": "Autokoulut ja oppilaat. Yksi hakemisto.",
+      "title": "Rakensimme vertailun, jota olisimme itse kaivanneet.",
+      "intro": "Mitä ajotunti maksaa, ja kuka sen antaa? DriveLinkUpissa vastaus on koulun julkaisema hinta.",
       "chips": [
-        "Published price in kronor",
-        "The school's permit sets the licence",
-        "Listing is free"
+        "Julkaistu hinta kruunuina",
+        "Koulun lupa määrää ajokorttiluokan",
+        "Listaus on ilmainen"
       ],
-      "primaryCta": "Find lessons",
-      "secondaryCta": "Common questions"
+      "primaryCta": "Etsi ajotunteja",
+      "secondaryCta": "Yleiset kysymykset"
     },
     "linkStory": {
-      "title": "Two links. One connection.",
-      "body": "The logo is two chain links: one for the school, one for the learner. We are the link that keeps them connected. Hence the name, DriveLinkUp.",
-      "learner": "The learner",
-      "school": "The school"
+      "title": "Kaksi lenkkiä. Yksi yhteys.",
+      "body": "Logo on kaksi ketjunlenkkiä: yksi koululle, yksi oppilaalle. Me olemme lenkki, joka pitää heidät yhteydessä. Siksi nimi DriveLinkUp.",
+      "learner": "Oppilas",
+      "school": "Koulu"
     },
     "origin": {
-      "title": "It started with a question.",
-      "body": "What does a driving licence actually cost? It should be a simple answer. Instead, prices hide at checkout, terms sit in the fine print, and the choice comes down to a hunch. We got tired of it and built the place we had been looking for.",
-      "body2": "DriveLinkUp started in Stockholm in 2026. A directory where the things that matter are out in the open from the first page: price, licence category, city, and language.",
+      "title": "Se alkoi kysymyksestä.",
+      "body": "Mitä ajokortti oikeasti maksaa? Vastauksen pitäisi olla yksinkertainen. Sen sijaan hinnat piiloutuvat kassalla, ehdot ovat pienellä präntillä, ja valinta jää mutu-tuntumaan. Kyllästyimme siihen ja rakensimme paikan, jota olimme etsineet.",
+      "body2": "DriveLinkUp alkoi Stockholmissa vuonna 2026. Hakemisto, jossa olennainen on esillä heti etusivulta: hinta, ajokorttiluokka, kaupunki ja kieli.",
       "pillars": [
-        "Facts before sales pressure. What is on the listing is what the school published.",
-        "The school owns its details. A badge appears only when the check is stored.",
-        "Free to use. You pay the school's price."
+        "Faktat ennen myyntipainetta. Ilmoituksessa on se, minkä koulu on julkaissut.",
+        "Koulu omistaa tietonsa. Merkki näkyy vain, kun tarkistus on tallennettu.",
+        "Ilmainen käyttää. Maksat koulun hinnan."
       ],
       "facts": [
-        "Founded 2026",
-        "Stockholm, Sweden",
-        "Sweden first"
+        "Perustettu 2026",
+        "Stockholm, Ruotsi",
+        "Ruotsi ensin"
       ],
-      "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
+      "closing": "Olemme nuori yritys. Ensimmäisiä kouluja listataan nyt, ja jos kirjoitat meille, ihminen vastaa."
     },
     "promise": {
-      "eyebrow": "Our promise",
-      "title": "The published price is on the listing.",
-      "body": "On every listing where the school has published a price."
+      "eyebrow": "Lupauksemme",
+      "title": "Julkaistu hinta on ilmoituksessa.",
+      "body": "Jokaisessa ilmoituksessa, jossa koulu on julkaissut hinnan."
     },
     "final": {
-      "eyebrow": "Ready for the next step?",
-      "title": "Start from your side of the road.",
-      "body": "Learners compare prices. Schools publish what they are permitted to offer.",
-      "primaryCta": "Find lessons",
-      "secondaryCta": "Register the school"
+      "eyebrow": "Valmis seuraavaan askeleeseen?",
+      "title": "Aloita omalta puoleltasi tietä.",
+      "body": "Oppilaat vertaavat hintoja. Koulut julkaisevat sen, mihin niillä on lupa.",
+      "primaryCta": "Etsi ajotunteja",
+      "secondaryCta": "Rekisteröi autokoulu"
     }
   },
   "googleReviews": {
-    "heading": "Reviews from Google",
-    "summaryText": "{average} · {count, plural, one {# review} other {# reviews}}",
-    "viewAll": "See all on Google Maps",
-    "showMore": "Show more",
-    "showLess": "Show less",
-    "source": "Source: Google",
-    "syncedAt": "Fetched {date}",
-    "reviewRating": "Rated {rating} out of 5"
+    "heading": "Arvostelut Googlesta",
+    "summaryText": "{average} · {count, plural, one {# arvostelu} other {# arvostelua}}",
+    "viewAll": "Näytä kaikki Google Mapsissa",
+    "showMore": "Näytä lisää",
+    "showLess": "Näytä vähemmän",
+    "source": "Lähde: Google",
+    "syncedAt": "Haettu {date}",
+    "reviewRating": "Arvosana {rating} / 5"
   },
   "offerings": {
     "section": {
@@ -3794,30 +3801,30 @@
       "kind": {
         "PAKET": "Course",
         "LEKTION": "Lesson",
-        "INTENSIVKURS": "Intensive course"
+        "INTENSIVKURS": "Tehokurssi"
       },
       "sessionsCount": "{count, plural, =1 {1 session} other {# sessions}}",
       "weeksCount": "{count, plural, =1 {1 week} other {# weeks}}",
       "priceFrom": "From {price} SEK",
-      "requestCta": "Contact the school"
+      "requestCta": "Ota yhteyttä kouluun"
     },
     "requestForm": {
       "title": "Send a request to {name}",
-      "nameLabel": "Name",
-      "namePlaceholder": "Your name",
-      "emailLabel": "Email",
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Nimesi",
+      "emailLabel": "Sähköposti",
       "emailPlaceholder": "you@example.com",
-      "phoneLabel": "Phone",
+      "phoneLabel": "Puhelin",
       "phonePlaceholder": "07X-XXX XX XX",
       "startLabel": "Preferred start time",
       "startPlaceholder": "Pick a date and time",
-      "messageLabel": "Message",
+      "messageLabel": "Viesti",
       "messagePlaceholder": "Tell us briefly what you need help with…",
       "submit": "Send request",
-      "submitting": "Sending…",
+      "submitting": "Lähetetään…",
       "cancel": "Cancel",
       "success": "Request sent! We'll get back to you as soon as we can.",
-      "error": "Something went wrong. Please try again."
+      "error": "Jokin meni pieleen. Yritä uudelleen."
     },
     "editor": {
       "title": "Prices & courses",
@@ -3832,15 +3839,15 @@
       "sessionsShort": "sessions",
       "weeksShort": "wks",
       "save": "Save",
-      "saving": "Saving…",
+      "saving": "Tallennetaan…",
       "saved": "Saved!",
       "cancel": "Cancel",
-      "error": "Something went wrong. Please try again.",
+      "error": "Jokin meni pieleen. Yritä uudelleen.",
       "requiredMissing": "Please fill in all required fields.",
       "kind": {
         "PAKET": "Course",
         "LEKTION": "Lesson",
-        "INTENSIVKURS": "Intensive course"
+        "INTENSIVKURS": "Tehokurssi"
       }
     }
   },
@@ -3851,60 +3858,60 @@
     "handledareTab": "Handledare (supervisor)",
     "messagesTab": "Messages",
     "adminBadge": "Admin",
-    "signOut": "Sign out",
-    "signingOut": "Signing out…",
-    "signOutError": "Could not sign out. Please try again."
+    "signOut": "Kirjaudu ulos",
+    "signingOut": "Kirjaudutaan ulos…",
+    "signOutError": "Uloskirjautuminen ei onnistunut. Yritä uudelleen."
   },
   "categoryLanding": {
-    "title": "{category} training",
-    "body": "Offerings appear here only when the school holds current teaching permission for this category. This page has no booking surface.",
-    "empty": "No offerings in this category."
+    "title": "{category}-koulutus",
+    "body": "Tarjonta näkyy tässä vain, kun koululla on voimassa oleva opetuslupa tähän luokkaan. Tällä sivulla ei ole varausnäkymää.",
+    "empty": "Ei tarjontaa tässä luokassa."
   },
   "riskCourses": {
-    "title": "{course} in {municipality}",
+    "title": "{course}, {municipality}",
     "course": {
       "RISK_1": "Risk 1",
       "RISK_2": "Risk 2"
     },
-    "lead": "Upcoming dated group sessions published or approved by the school. DriveLinkUp is the recipient of a request.",
-    "honestSeats": "Remaining seats and prices are displays, not a hold or a confirmation.",
-    "empty": "No published sessions in this municipality.",
+    "lead": "Tulevat päivätyt ryhmätunnit, jotka koulu on julkaissut tai hyväksynyt. DriveLinkUp vastaanottaa pyynnön.",
+    "honestSeats": "Jäljellä olevat paikat ja hinnat ovat näyttöjä, eivät varausta tai vahvistusta.",
+    "empty": "Ei julkaistuja sessioita tässä kunnassa.",
     "when": "{when}",
     "price": "{price} SEK",
-    "seats": "{count, plural, one {# seat shown} other {# seats shown}}",
-    "requestCta": "Request this session",
-    "recipient": "The request is saved by DriveLinkUp and awaits school review. It does not reserve a seat.",
-    "name": "Name",
-    "email": "Email",
-    "requestSaved": "Request saved by DriveLinkUp; awaiting school review.",
-    "requestError": "The request could not be saved."
+    "seats": "{count, plural, one {# paikka näytetty} other {# paikkaa näytetty}}",
+    "requestCta": "Pyydä tätä sessiota",
+    "recipient": "DriveLinkUp tallentaa pyynnön, ja koulu käsittelee sen. Se ei varaa paikkaa.",
+    "name": "Nimi",
+    "email": "Sähköposti",
+    "requestSaved": "DriveLinkUp tallensi pyynnön; odottaa koulun käsittelyä.",
+    "requestError": "Pyyntöä ei voitu tallentaa."
   },
   "publishedPrice": {
     "amount": "SEK {amount}",
     "amountCurrency": "{currency} {amount}",
     "minutes": "{minutes} min",
-    "source": "From the school’s website, {date}.",
-    "sourceLink": "See the price list",
-    "packageFrom": "Packages from SEK {amount}",
-    "packageFromCurrency": "Packages from {currency} {amount}",
-    "lesson": "Driving lesson",
+    "source": "Koulun sivustolta, {date}.",
+    "sourceLink": "Katso hinnasto",
+    "packageFrom": "Paketteja alkaen SEK {amount}",
+    "packageFromCurrency": "Paketteja alkaen {currency} {amount}",
+    "lesson": "Ajotunti",
     "risk1": "Risk 1",
-    "risk2": "Risk 2 (skid pan)",
-    "package": "Package",
-    "intensive": "Intensive course",
-    "lessons": "{count, plural, one {# lesson} other {# lessons}}",
-    "heading": "Prices",
+    "risk2": "Risk 2 (liukastelurata)",
+    "package": "Paketti",
+    "intensive": "Tehokurssi",
+    "lessons": "{count, plural, one {# ajotunti} other {# ajotuntia}}",
+    "heading": "Hinnat",
     "hours": "{hours} h",
-    "heavyHeading": "Heavy vehicles",
-    "heavyOffered": "Trains, according to its website: {list}",
-    "heavyTruck": "Truck",
-    "heavyBus": "Bus",
-    "heavyFrom": "from SEK {amount}",
-    "heavyFromCurrency": "from {currency} {amount}"
+    "heavyHeading": "Raskaat ajoneuvot",
+    "heavyOffered": "Kouluttaa sivustonsa mukaan: {list}",
+    "heavyTruck": "Kuorma-auto",
+    "heavyBus": "Linja-auto",
+    "heavyFrom": "alkaen SEK {amount}",
+    "heavyFromCurrency": "alkaen {currency} {amount}"
   },
   "heavyVehiclesPage": {
-    "eyebrow": "Truck, bus and YKB",
-    "title": "Heavy vehicles",
-    "subtitle": "Driving schools whose websites say they train for a C or D licence, or for YKB. The price is shown when the school publishes it."
+    "eyebrow": "Kuorma-auto, linja-auto ja YKB",
+    "title": "Raskaat ajoneuvot",
+    "subtitle": "Autokoulut, joiden sivuston mukaan ne kouluttavat C- tai D-korttiin tai YKB:hen. Hinta näkyy, kun koulu julkaisee sen."
   }
 }

@@ -2,35 +2,35 @@
   "common": {
     "nav": {
       "findProvider": "Veicoli leggeri",
-      "heavyVehicles": "Heavy vehicles",
-      "howItWorks": "How it works",
-      "licenceCategories": "Licence categories",
-      "drivingInstructor": "I teach at a driving school",
-      "drivingSchool": "I run a driving school",
+      "heavyVehicles": "Veicoli pesanti",
+      "howItWorks": "Come funziona",
+      "licenceCategories": "Categorie di patente",
+      "drivingInstructor": "Insegno in un'autoscuola",
+      "drivingSchool": "Gestisco un'autoscuola",
       "forSchoolsMenu": "Per le scuole",
       "handledare": "Guida handledare",
-      "getStarted": "Get started",
+      "getStarted": "Inizia",
       "faq": "Domande",
       "contactUs": "Contattaci",
       "contact": "Contatto",
-      "openMenu": "Open menu",
-      "more": "More",
-      "theme": "Theme",
-      "language": "Language",
-      "languageAria": "Change language",
-      "themeAria": "Toggle theme",
-      "primary": "Primary navigation",
-      "mobile": "Mobile navigation",
-      "footer": "Footer navigation",
-      "signIn": "Sign in",
-      "signOut": "Sign out",
-      "signingOut": "Signing out…",
-      "signOutError": "Could not sign out. Please try again.",
-      "languageError": "Could not change language. Please try again.",
+      "openMenu": "Apri il menu",
+      "more": "Altro",
+      "theme": "Tema",
+      "language": "Lingua",
+      "languageAria": "Cambia lingua",
+      "themeAria": "Cambia tema",
+      "primary": "Navigazione principale",
+      "mobile": "Navigazione mobile",
+      "footer": "Navigazione piè di pagina",
+      "signIn": "Accedi",
+      "signOut": "Esci",
+      "signingOut": "Disconnessione…",
+      "signOutError": "Impossibile disconnettersi. Riprova.",
+      "languageError": "Impossibile cambiare lingua. Riprova.",
       "dashboard": "Dashboard",
-      "resources": "Resources",
+      "resources": "Risorse",
       "blog": "Blog",
-      "profile": "Profile",
+      "profile": "Profilo",
       "locations": "Luoghi",
       "cityStockholm": "Stockholm",
       "cityGoteborg": "Gothenburg",
@@ -39,9 +39,9 @@
       "cityVasteras": "Västerås",
       "privacy": "Privacy",
       "pricing": "Prezzi",
-      "paymentMethods": "Payment methods",
-      "southernSweden": "Southern Sweden",
-      "westernNorthernSweden": "Western & Northern Sweden",
+      "paymentMethods": "Metodi di pagamento",
+      "southernSweden": "Svezia meridionale",
+      "westernNorthernSweden": "Svezia occidentale e settentrionale",
       "about": "Chi siamo",
       "terms": "Termini"
     },
@@ -68,23 +68,23 @@
       "sun": "S"
     },
     "footer": {
-      "headline": "Get started today.",
-      "sub": "Free to use.",
-      "cta": "Get started",
-      "columnProduct": "Product",
-      "columnCompany": "Company",
-      "columnResources": "Resources",
-      "columnLegal": "Legal",
-      "popularCities": "Popular cities",
-      "emailAria": "Email DriveLinkUp",
-      "socialNav": "DriveLinkUp on social media",
+      "headline": "Inizia oggi.",
+      "sub": "Gratuito.",
+      "cta": "Inizia",
+      "columnProduct": "Prodotto",
+      "columnCompany": "Azienda",
+      "columnResources": "Risorse",
+      "columnLegal": "Note legali",
+      "popularCities": "Città popolari",
+      "emailAria": "Scrivi a DriveLinkUp",
+      "socialNav": "DriveLinkUp sui social",
       "socialX": "X",
       "socialInstagram": "Instagram",
       "socialFacebook": "Facebook",
       "socialLinkedin": "LinkedIn",
       "socialTiktok": "TikTok",
       "socialReddit": "Reddit",
-      "copyright": "Copyright © {year} DriveLinkUp. All rights reserved."
+      "copyright": "Copyright © {year} DriveLinkUp. Tutti i diritti riservati."
     }
   },
   "availability": {
@@ -101,70 +101,70 @@
   "landing": {
     "contactPage": {
       "eyebrow": "Supporto",
-      "headingLead": "How can we help",
-      "headingAccent": "today?",
+      "headingLead": "Come possiamo aiutarti",
+      "headingAccent": "oggi?",
       "lead": "Chiedi del catalogo, di un annuncio, della sicurezza o della privacy.",
       "step": {
-        "backToTopics": "Choose another topic",
-        "heading": "Tell us what happened",
-        "lead": "Share enough detail for the team to understand your question. We will reply using the email address you provide."
+        "backToTopics": "Scegli un altro argomento",
+        "heading": "Raccontaci cosa è successo",
+        "lead": "Fornisci abbastanza dettagli perché il team possa capire la tua domanda. Risponderemo all'indirizzo email che indichi."
       },
       "fields": {
-        "nameLabel": "Your name",
+        "nameLabel": "Il tuo nome",
         "namePlaceholder": "Alex Morgan",
         "emailLabel": "Email",
         "emailPlaceholder": "alex@example.com",
-        "messageLabel": "Message",
-        "messagePlaceholder": "What would you like help with?",
-        "topicLabel": "Support topic",
-        "topicHint": "Pick the topic that best matches your question."
+        "messageLabel": "Messaggio",
+        "messagePlaceholder": "Su cosa vorresti aiuto?",
+        "topicLabel": "Argomento di supporto",
+        "topicHint": "Scegli l'argomento che corrisponde meglio alla tua domanda."
       },
       "topics": [
         {
-          "title": "Question about a school",
-          "description": "A school listing, category, price or how to reach the school."
+          "title": "Domanda su un'autoscuola",
+          "description": "Una scheda, una categoria, un prezzo o come contattare la scuola."
         },
         {
-          "title": "Question about a school listing",
-          "description": "A school profile, category, availability or lesson question."
+          "title": "Domanda su una scheda di autoscuola",
+          "description": "Un profilo scuola, una categoria, la disponibilità o una domanda sulla lezione."
         },
         {
-          "title": "Payment at the school",
-          "description": "A question about payment or terms set by the school. DriveLinkUp does not take lesson payments."
+          "title": "Pagamento presso la scuola",
+          "description": "Una domanda su pagamento o condizioni fissate dalla scuola. DriveLinkUp non incassa i pagamenti delle lezioni."
         },
         {
-          "title": "Technical issue",
-          "description": "Something is not loading or working as expected."
+          "title": "Problema tecnico",
+          "description": "Qualcosa non si carica o non funziona come previsto."
         },
         {
-          "title": "Press or partnership",
-          "description": "Media, research or a partnership enquiry."
+          "title": "Stampa o partnership",
+          "description": "Media, ricerca o richiesta di partnership."
         },
         {
-          "title": "Other question",
-          "description": "Anything else about DriveLinkUp."
+          "title": "Altra domanda",
+          "description": "Qualsiasi altra cosa su DriveLinkUp."
         },
         {
-          "title": "Claim or update a listing",
-          "description": "You run this school and need DriveLinkUp to change the name, price or other listing details."
+          "title": "Rivendica o aggiorna una scheda",
+          "description": "Gestisci questa scuola e vuoi che DriveLinkUp modifichi il nome, il prezzo o altri dettagli della scheda."
         }
       ],
-      "submit": "Send to support",
-      "submitting": "Sending…",
+      "submit": "Invia al supporto",
+      "submitting": "Invio in corso…",
       "success": {
-        "title": "Message sent",
-        "body": "Thanks — the support team has your message and will get back to you."
+        "title": "Messaggio inviato",
+        "body": "Grazie — il team di supporto ha ricevuto il tuo messaggio e ti risponderà."
       },
       "error": {
-        "generic": "We could not send your message. Please try again."
+        "generic": "Non è stato possibile inviare il messaggio. Riprova."
       },
-      "footerNote": "For urgent safety concerns, stop the lesson and contact local emergency services first.",
+      "footerNote": "Per problemi di sicurezza urgenti, interrompi la lezione e contatta prima i servizi di emergenza locali.",
       "cta": {
-        "eyebrow": "Prefer to browse?",
-        "browseStockholmTitle": "Browse Stockholm driving schools",
-        "browseStockholmSubtitle": "{count} listed schools",
-        "browseAllTitle": "View all driving schools",
-        "browseAllSubtitle": "Browse cities and open a school listing."
+        "eyebrow": "Preferisci sfogliare?",
+        "browseStockholmTitle": "Sfoglia le autoscuole di Stockholm",
+        "browseStockholmSubtitle": "{count} scuole in elenco",
+        "browseAllTitle": "Vedi tutte le autoscuole",
+        "browseAllSubtitle": "Sfoglia le città e apri una scheda scuola."
       }
     }
   },
@@ -227,8 +227,8 @@
       }
     },
     "cta": {
-      "findProviders": "Find a driving school",
-      "contact": "Contact support"
+      "findProviders": "Trova un'autoscuola",
+      "contact": "Contatta il supporto"
     }
   },
   "blogPage": {
@@ -239,64 +239,71 @@
     "header": {
       "eyebrow": "Blog",
       "title": "Guidare in Svezia, in linguaggio chiaro.",
-      "subtitle": "Short guides for people learning on Swedish roads. We cover Transportstyrelsen steps, school comparison, local requirements and clear SEK prices."
+      "subtitle": "Guide brevi per chi impara sulle strade svedesi. Trattiamo i passi di Transportstyrelsen, il confronto tra scuole, i requisiti locali e prezzi chiari in SEK."
     },
     "posts": {
+      "8": {
+        "eyebrow": "Permesso allievo",
+        "title": "Permesso allievo svedese per categoria B: domanda, certificato visivo e validità",
+        "excerpt": "Dichiarazione di salute, certificato visivo e validità di cinque anni prima di pratica, lezioni, esame di teoria ed esame di guida — e come confrontare le scuole a Stockholm, Göteborg, Malmö e Lund.",
+        "meta": "{minutes} min di lettura · 4 novembre 2026",
+        "readCta": "Leggi la guida"
+      },
       "7": {
-        "eyebrow": "Risk education",
-        "title": "Risk education for a Swedish category B licence: riskettan, skidpad and validity",
-        "excerpt": "Riskettan and the skidpad before the theory test and driving test — and how to compare a school's published price in Stockholm, Gothenburg, Malmö and Lund.",
-        "meta": "{minutes} min read · 2 November 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Formazione sui rischi",
+        "title": "Formazione sui rischi per la patente svedese categoria B: riskettan, skidpad e validità",
+        "excerpt": "Riskettan e lo skidpad prima dell'esame di teoria e dell'esame di guida — e come confrontare il prezzo pubblicato da una scuola a Stockholm, Göteborg, Malmö e Lund.",
+        "meta": "{minutes} min di lettura · 2 novembre 2026",
+        "readCta": "Leggi la guida"
       },
       "6": {
-        "eyebrow": "Driving test",
-        "title": "Driving test for a Swedish category B licence: how Trafikverket runs the practical test",
-        "excerpt": "Safety check, manoeuvres and driving in traffic — and what must be in place with the learner permit, risk education and theory test.",
-        "meta": "{minutes} min read · 28 October 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Esame di guida",
+        "title": "Esame di guida per la patente svedese categoria B: come Trafikverket organizza la prova pratica",
+        "excerpt": "Controllo di sicurezza, manovre e guida nel traffico — e cosa deve essere in regola con il permesso allievo, la formazione sui rischi e l'esame di teoria.",
+        "meta": "{minutes} min di lettura · 28 ottobre 2026",
+        "readCta": "Leggi la guida"
       },
       "5": {
-        "eyebrow": "Theory test",
-        "title": "Theory test for a Swedish category B licence: how Trafikverket runs it",
-        "excerpt": "Learner permit, risk education, and what Trafikverket requires on the knowledge test — plus how to compare a school's published price.",
-        "meta": "{minutes} min read · 26 October 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Esame di teoria",
+        "title": "Esame di teoria per la patente svedese categoria B: come lo organizza Trafikverket",
+        "excerpt": "Permesso allievo, formazione sui rischi e cosa richiede Trafikverket all'esame di conoscenze — più come confrontare il prezzo pubblicato da una scuola.",
+        "meta": "{minutes} min di lettura · 26 ottobre 2026",
+        "readCta": "Leggi la guida"
       },
       "4": {
-        "eyebrow": "Category B",
-        "title": "Swedish category B licence: from learner permit to the driving test",
-        "excerpt": "Learner permit, risk education, theory test and driving test — and how to compare a school's published lesson price.",
-        "meta": "{minutes} min read · 26 October 2026",
-        "readCta": "Read guide"
+        "eyebrow": "Categoria B",
+        "title": "Patente svedese categoria B: dal permesso allievo all'esame di guida",
+        "excerpt": "Permesso allievo, formazione sui rischi, esame di teoria ed esame di guida — e come confrontare il prezzo della lezione pubblicato da una scuola.",
+        "meta": "{minutes} min di lettura · 26 ottobre 2026",
+        "readCta": "Leggi la guida"
       },
       "0": {
-        "eyebrow": "Article · Stockholm expats",
-        "title": "How to get a Swedish driver's license as an expat in Stockholm",
-        "excerpt": "Transportstyrelsen steps, realistic price planning, and how to compare driving-school listings in Stockholm.",
-        "readCta": "Read article",
-        "meta": "{minutes} min read · Updated August 2026"
+        "eyebrow": "Articolo · Expat a Stockholm",
+        "title": "Come ottenere la patente svedese da expat a Stockholm",
+        "excerpt": "Passi di Transportstyrelsen, pianificazione realistica dei costi e come confrontare le schede delle autoscuole a Stockholm.",
+        "readCta": "Leggi l'articolo",
+        "meta": "{minutes} min di lettura · Aggiornato agosto 2026"
       },
       "1": {
         "eyebrow": "Handledare",
-        "title": "Handledare and supervised practice in Sweden",
-        "excerpt": "How 16–17-year-olds complete handledare enrollment for private practice driving.",
-        "meta": "{minutes} min read",
-        "readCta": "Read guide"
+        "title": "Handledare e pratica supervisionata in Svezia",
+        "excerpt": "Come i 16–17enni completano l'iscrizione handledare per la pratica di guida privata.",
+        "meta": "{minutes} min di lettura",
+        "readCta": "Leggi la guida"
       },
       "2": {
-        "eyebrow": "Costs",
-        "title": "What does a Swedish driving licence cost?",
-        "excerpt": "How lesson prices work, and why DriveLinkUp shows school prices without a learner fee.",
-        "meta": "{minutes} min read",
-        "readCta": "Read guide"
+        "eyebrow": "Costi",
+        "title": "Quanto costa una patente svedese?",
+        "excerpt": "Come funzionano i prezzi delle lezioni e perché DriveLinkUp mostra i prezzi delle scuole senza un costo per l'allievo.",
+        "meta": "{minutes} min di lettura",
+        "readCta": "Leggi la guida"
       },
       "3": {
-        "eyebrow": "Paths",
-        "title": "Traffic school or handledare?",
-        "excerpt": "When a listed driving school fits, and when private övningskörning with a handledare applies.",
-        "meta": "{minutes} min read",
-        "readCta": "Read guide"
+        "eyebrow": "Percorsi",
+        "title": "Autoscuola o handledare?",
+        "excerpt": "Quando conviene un'autoscuola in elenco e quando si applica l'övningskörning privata con un handledare.",
+        "meta": "{minutes} min di lettura",
+        "readCta": "Leggi la guida"
       }
     }
   },
@@ -306,380 +313,380 @@
       "description": "Elenca la scuola. Il permesso della scuola fissa categoria, prezzo e condizioni."
     },
     "hero": {
-      "eyebrow": "For driving schools",
-      "title": "The school publishes. Learners compare.",
-      "body": "List the category, price and times you are permitted to offer. Learners compare and contact the school.",
-      "primaryCta": "Register the school",
-      "learnerCta": "See the learner view"
+      "eyebrow": "Per le autoscuole",
+      "title": "La scuola pubblica. Gli allievi confrontano.",
+      "body": "Indica la categoria, il prezzo e gli orari che sei autorizzato a offrire. Gli allievi confrontano e contattano la scuola.",
+      "primaryCta": "Registra la scuola",
+      "learnerCta": "Vedi la vista allievo"
     },
     "roles": {
       "trafiklarare": {
-        "title": "The school's listing",
-        "body": "Category, price and times are published by the school, for the permissions the school holds."
+        "title": "La scheda della scuola",
+        "body": "Categoria, prezzo e orari sono pubblicati dalla scuola, per le autorizzazioni di cui dispone."
       },
       "handledare": {
-        "title": "Handledare guidance",
-        "body": "Handledare is a separate path for supervised practice. It is not a school listing and it is not booking."
+        "title": "Guida handledare",
+        "body": "Handledare è un percorso distinto per la pratica supervisionata. Non è una scheda scuola e non è una prenotazione."
       }
     },
     "safety": {
-      "title": "Safety starts with accurate information.",
-      "body": "Keep your authorization, location, languages and prices current."
+      "title": "La sicurezza inizia da informazioni accurate.",
+      "body": "Tieni aggiornati autorizzazione, sede, lingue e prezzi."
     }
   },
   "instructorsPage": {
     "header": {
-      "eyebrow": "Car, motorcycle and trailer",
-      "title": "Light vehicles",
-      "subtitle": "Driving schools whose websites say they train for AM, A, B or BE. The price is shown when the school publishes it."
+      "eyebrow": "Auto, moto e rimorchio",
+      "title": "Veicoli leggeri",
+      "subtitle": "Autoscuole i cui siti indicano formazione per AM, A, B o BE. Il prezzo è visibile quando la scuola lo pubblica."
     },
-    "directoryCta": "View all driving schools",
+    "directoryCta": "Vedi tutte le autoscuole",
     "stockholmCity": {
       "meta": {
-        "title": "Driving schools in Stockholm",
-        "description": "Compare driving schools in Stockholm by category, language and price.",
-        "ogTitle": "Find a driving school in Stockholm",
-        "ogDescription": "Compare driving schools in Stockholm by category, language and price."
+        "title": "Autoscuole a Stockholm",
+        "description": "Confronta le autoscuole a Stockholm per categoria, lingua e prezzo.",
+        "ogTitle": "Trova un'autoscuola a Stockholm",
+        "ogDescription": "Confronta le autoscuole a Stockholm per categoria, lingua e prezzo."
       },
       "header": {
-        "eyebrow": "Driving schools in Stockholm",
-        "title": "Find a driving school in Stockholm",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autoscuole a Stockholm",
+        "title": "Trova un'autoscuola a Stockholm",
+        "subtitle": "Confronta le scuole per categoria, lingua e prezzo. Contatta la scuola."
       },
       "slug": "stockholm",
       "seo": {
-        "lead": "Driving schools in Stockholm",
-        "p1": "Compare the published price and city. Contact the school.",
-        "p2": "Compare the published price and city. Contact the school.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare and private practice (Sweden)",
-        "linkPricing": "Learner and school pricing",
-        "linkFaq": "Questions",
-        "linkBlog": "Guides for learners in Sweden",
-        "faqTitle": "Stockholm FAQ",
-        "faq1q": "Do learners pay a DriveLinkUp fee in Stockholm?",
-        "faq1a": "No. You pay the school’s published lesson price — no added fees.",
-        "faq2q": "Are private handledare listed as schools?",
-        "faq2a": "No. Handledare are a separate legal path for övningskörning. Use the handledare guide. A school listing is a directory profile, not a teaching permit.",
-        "faq3q": "How do I reach a school?",
-        "faq3a": "Contact the school."
+        "lead": "Autoscuole a Stockholm",
+        "p1": "Confronta il prezzo pubblicato e la città. Contatta la scuola.",
+        "p2": "Confronta il prezzo pubblicato e la città. Contatta la scuola.",
+        "howTitle": "Come iniziare",
+        "howBody": "Apri una scheda. Contatta la scuola.",
+        "relatedTitle": "Guide correlate",
+        "linkHandledare": "Handledare e pratica privata (Svezia)",
+        "linkPricing": "Prezzi allievo e scuola",
+        "linkFaq": "Domande",
+        "linkBlog": "Guide per allievi in Svezia",
+        "faqTitle": "FAQ Stockholm",
+        "faq1q": "Gli allievi pagano un costo DriveLinkUp a Stockholm?",
+        "faq1a": "No. Paghi il prezzo della lezione pubblicato dalla scuola — senza costi aggiuntivi.",
+        "faq2q": "I handledare privati figurano come scuole?",
+        "faq2a": "No. I handledare sono un percorso legale distinto per l'övningskörning. Usa la guida handledare. Una scheda scuola è un profilo di elenco, non un permesso di insegnamento.",
+        "faq3q": "Come contatto una scuola?",
+        "faq3a": "Contatta la scuola."
       }
     },
     "goteborgCity": {
       "meta": {
-        "title": "Driving schools in Gothenburg",
-        "description": "Compare driving schools in Gothenburg by category, language and price.",
-        "ogTitle": "Find a driving school in Gothenburg",
-        "ogDescription": "Compare driving schools in Gothenburg by category, language and price."
+        "title": "Autoscuole a Göteborg",
+        "description": "Confronta le autoscuole a Göteborg per categoria, lingua e prezzo.",
+        "ogTitle": "Trova un'autoscuola a Göteborg",
+        "ogDescription": "Confronta le autoscuole a Göteborg per categoria, lingua e prezzo."
       },
       "header": {
-        "eyebrow": "Driving schools in Gothenburg",
-        "title": "Find a driving school in Gothenburg",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autoscuole a Göteborg",
+        "title": "Trova un'autoscuola a Göteborg",
+        "subtitle": "Confronta le scuole per categoria, lingua e prezzo. Contatta la scuola."
       },
       "slug": "goteborg",
       "seo": {
-        "lead": "Driving schools in Gothenburg",
-        "p1": "Compare Göteborg traffic schools by licence category, language and published SEK price.",
-        "p2": "Compare the published price and city. Contact the school.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare and övningskörning",
-        "linkPricing": "Pricing",
+        "lead": "Autoscuole a Göteborg",
+        "p1": "Confronta le autoscuole di Göteborg per categoria di patente, lingua e prezzo pubblicato in SEK.",
+        "p2": "Confronta il prezzo pubblicato e la città. Contatta la scuola.",
+        "howTitle": "Come iniziare",
+        "howBody": "Apri una scheda. Contatta la scuola.",
+        "relatedTitle": "Guide correlate",
+        "linkHandledare": "Handledare e övningskörning",
+        "linkPricing": "Prezzi",
         "linkFaq": "FAQ",
-        "linkBlog": "Learner guides",
-        "faqTitle": "Gothenburg FAQ",
-        "faq1q": "Is English-speaking instruction available?",
-        "faq1a": "Contact the school.",
-        "faq2q": "Does a school pay to be listed?",
-        "faq2a": "No. A catalog listing is free. DriveLinkUp does not take payment for directory listings. Lessons are arranged with the school.",
-        "faq3q": "When do I pay?",
-        "faq3a": "With the school. DriveLinkUp does not take payment for a catalog listing."
+        "linkBlog": "Guide per allievi",
+        "faqTitle": "FAQ Göteborg",
+        "faq1q": "Sono disponibili lezioni in inglese?",
+        "faq1a": "Contatta la scuola.",
+        "faq2q": "Una scuola paga per essere in elenco?",
+        "faq2a": "No. Una scheda nel catalogo è gratuita. DriveLinkUp non incassa pagamenti per le schede dell'elenco. Le lezioni si organizzano con la scuola.",
+        "faq3q": "Quando pago?",
+        "faq3a": "Presso la scuola. DriveLinkUp non incassa pagamenti per una scheda del catalogo."
       }
     },
     "malmoCity": {
       "meta": {
-        "title": "Driving schools in Malmö",
-        "description": "Compare driving schools in Malmö by category, language and price.",
-        "ogTitle": "Find a driving school in Malmö",
-        "ogDescription": "Compare driving schools in Malmö by category, language and price."
+        "title": "Autoscuole a Malmö",
+        "description": "Confronta le autoscuole a Malmö per categoria, lingua e prezzo.",
+        "ogTitle": "Trova un'autoscuola a Malmö",
+        "ogDescription": "Confronta le autoscuole a Malmö per categoria, lingua e prezzo."
       },
       "header": {
-        "eyebrow": "Driving schools in Malmö",
-        "title": "Find a driving school in Malmö",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autoscuole a Malmö",
+        "title": "Trova un'autoscuola a Malmö",
+        "subtitle": "Confronta le scuole per categoria, lingua e prezzo. Contatta la scuola."
       },
       "slug": "malmo",
       "seo": {
-        "lead": "Driving schools in Malmö",
-        "p1": "Compare the published price and city. Contact the school.",
-        "p2": "Cross-border and bilingual households often need clear English copy; listings that speak English are marked in the directory.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare requirements",
-        "linkPricing": "Pricing",
+        "lead": "Autoscuole a Malmö",
+        "p1": "Confronta il prezzo pubblicato e la città. Contatta la scuola.",
+        "p2": "Le famiglie transfrontaliere e bilingui spesso hanno bisogno di testi chiari in inglese; le schede che parlano inglese sono segnalate nell'elenco.",
+        "howTitle": "Come iniziare",
+        "howBody": "Apri una scheda. Contatta la scuola.",
+        "relatedTitle": "Guide correlate",
+        "linkHandledare": "Requisiti handledare",
+        "linkPricing": "Prezzi",
         "linkFaq": "FAQ",
         "linkBlog": "Blog",
-        "faqTitle": "Malmö FAQ",
-        "faq1q": "Are prices shown before signup?",
-        "faq1a": "Yes. Hourly rates are published on each listing so you can compare before you create an account.",
-        "faq2q": "Can I practice privately as well?",
-        "faq2a": "Contact the school.",
-        "faq3q": "Which cities are nearby on DriveLinkUp?",
-        "faq3a": "Start from Malmö, then browse the southern Sweden hub for other Skåne and neighbouring cities."
+        "faqTitle": "FAQ Malmö",
+        "faq1q": "I prezzi sono visibili prima della registrazione?",
+        "faq1a": "Sì. Le tariffe orarie sono pubblicate su ogni scheda così puoi confrontare prima di creare un account.",
+        "faq2q": "Posso praticare anche in privato?",
+        "faq2a": "Contatta la scuola.",
+        "faq3q": "Quali città vicine ci sono su DriveLinkUp?",
+        "faq3a": "Parti da Malmö, poi sfoglia l'hub della Svezia meridionale per altre città dello Skåne e dei dintorni."
       }
     },
     "uppsalaCity": {
       "meta": {
-        "title": "Driving schools in Uppsala",
-        "description": "Compare driving schools in Uppsala by category, language and price.",
-        "ogTitle": "Find a driving school in Uppsala",
-        "ogDescription": "Compare driving schools in Uppsala by category, language and price."
+        "title": "Autoscuole a Uppsala",
+        "description": "Confronta le autoscuole a Uppsala per categoria, lingua e prezzo.",
+        "ogTitle": "Trova un'autoscuola a Uppsala",
+        "ogDescription": "Confronta le autoscuole a Uppsala per categoria, lingua e prezzo."
       },
       "header": {
-        "eyebrow": "Driving schools in Uppsala",
-        "title": "Find a driving school in Uppsala",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autoscuole a Uppsala",
+        "title": "Trova un'autoscuola a Uppsala",
+        "subtitle": "Confronta le scuole per categoria, lingua e prezzo. Contatta la scuola."
       },
       "slug": "uppsala",
       "seo": {
-        "lead": "Driving schools in Uppsala",
-        "p1": "Uppsala students and working adults can compare B-licence school listings, published SEK prices, and times the school has chosen to show.",
-        "p2": "Compare the published price and city. Contact the school.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare guide",
-        "linkPricing": "Pricing",
+        "lead": "Autoscuole a Uppsala",
+        "p1": "Studenti e lavoratori di Uppsala possono confrontare le schede delle scuole per patente B, i prezzi pubblicati in SEK e gli orari che la scuola ha scelto di mostrare.",
+        "p2": "Confronta il prezzo pubblicato e la città. Contatta la scuola.",
+        "howTitle": "Come iniziare",
+        "howBody": "Apri una scheda. Contatta la scuola.",
+        "relatedTitle": "Guide correlate",
+        "linkHandledare": "Guida handledare",
+        "linkPricing": "Prezzi",
         "linkFaq": "FAQ",
-        "linkBlog": "Guides",
-        "faqTitle": "Uppsala FAQ",
-        "faq1q": "Do I need a school for the whole licence?",
-        "faq1a": "Schools provide structured lessons. Private övningskörning with a handledare is optional and separate.",
-        "faq2q": "How do I reach a school?",
-        "faq2a": "Contact the school.",
-        "faq3q": "What about times and terms?",
-        "faq3a": "Ask the school. Terms are set by the school, not by DriveLinkUp."
+        "linkBlog": "Guide",
+        "faqTitle": "FAQ Uppsala",
+        "faq1q": "Ho bisogno di una scuola per tutta la patente?",
+        "faq1a": "Le scuole offrono lezioni strutturate. L'övningskörning privata con un handledare è facoltativa e distinta.",
+        "faq2q": "Come contatto una scuola?",
+        "faq2a": "Contatta la scuola.",
+        "faq3q": "E orari e condizioni?",
+        "faq3a": "Chiedi alla scuola. Le condizioni le fissa la scuola, non DriveLinkUp."
       }
     },
     "vasterasCity": {
       "meta": {
-        "title": "Driving schools in Västerås",
-        "description": "Compare driving schools in Västerås by category, language and price.",
-        "ogTitle": "Find a driving school in Västerås",
-        "ogDescription": "Compare driving schools in Västerås by category, language and price."
+        "title": "Autoscuole a Västerås",
+        "description": "Confronta le autoscuole a Västerås per categoria, lingua e prezzo.",
+        "ogTitle": "Trova un'autoscuola a Västerås",
+        "ogDescription": "Confronta le autoscuole a Västerås per categoria, lingua e prezzo."
       },
       "header": {
-        "eyebrow": "Driving schools in Västerås",
-        "title": "Find a driving school in Västerås",
-        "subtitle": "Compare schools by category, language and price. Contact the school."
+        "eyebrow": "Autoscuole a Västerås",
+        "title": "Trova un'autoscuola a Västerås",
+        "subtitle": "Confronta le scuole per categoria, lingua e prezzo. Contatta la scuola."
       },
       "services": {
-        "eyebrow": "Choose the right support",
-        "title": "Lessons in Västerås, your way",
-        "subtitle": "Compare schools by category, language and price. Contact the school.",
+        "eyebrow": "Scegli il supporto giusto",
+        "title": "Lezioni a Västerås, a modo tuo",
+        "subtitle": "Confronta le scuole per categoria, lingua e prezzo. Contatta la scuola.",
         "handledare": {
-          "title": "Private handledare guidance",
-          "body": "Handledare are a separate Swedish private-practice path, not authorized school listings. Review the legal requirements before practice driving."
+          "title": "Guida handledare privato",
+          "body": "I handledare sono un percorso svedese distinto di pratica privata, non schede di scuole autorizzate. Consulta i requisiti legali prima di guidare in pratica."
         },
         "trafiklarare": {
-          "title": "Driving schools",
-          "body": "Compare schools by category and price. Contact the school."
+          "title": "Autoscuole",
+          "body": "Confronta le scuole per categoria e prezzo. Contatta la scuola."
         }
       },
       "cta": {
-        "eyebrow": "Ready to get started?",
-        "title": "Find your match in Västerås",
-        "body": "Filter by category, language and price. Contact the school.",
-        "find": "Find a driving school",
-        "become": "List your driving school"
+        "eyebrow": "Pronto a iniziare?",
+        "title": "Trova la tua scelta a Västerås",
+        "body": "Filtra per categoria, lingua e prezzo. Contatta la scuola.",
+        "find": "Trova un'autoscuola",
+        "become": "Inserisci la tua autoscuola"
       },
       "slug": "vasteras",
       "seo": {
-        "lead": "Driving schools in Västerås",
-        "p1": "Compare the published price and city. Contact the school.",
-        "p2": "Combine school lessons with private practice only when handledare rules are met—the two paths stay distinct.",
-        "howTitle": "How to start",
-        "howBody": "Open a listing. Contact the school.",
-        "relatedTitle": "Related guides",
-        "linkHandledare": "Handledare information",
-        "linkPricing": "Pricing overview",
+        "lead": "Autoscuole a Västerås",
+        "p1": "Confronta il prezzo pubblicato e la città. Contatta la scuola.",
+        "p2": "Combina le lezioni in scuola con la pratica privata solo quando le regole handledare sono rispettate: i due percorsi restano distinti.",
+        "howTitle": "Come iniziare",
+        "howBody": "Apri una scheda. Contatta la scuola.",
+        "relatedTitle": "Guide correlate",
+        "linkHandledare": "Informazioni handledare",
+        "linkPricing": "Panoramica prezzi",
         "linkFaq": "FAQ",
         "linkBlog": "Blog",
-        "faqTitle": "Västerås FAQ",
-        "faq1q": "Who appears in search?",
-        "faq1a": "Driving schools in the catalog. A badge appears only when we have stored a check.",
-        "faq2q": "Is DriveLinkUp free?",
-        "faq2a": "Yes. DriveLinkUp is free to use. The published school price is what you pay.",
-        "faq3q": "Where do I read about private practice?",
-        "faq3a": "See the handledare page—private supervisors are not sold as school listings."
+        "faqTitle": "FAQ Västerås",
+        "faq1q": "Chi compare nella ricerca?",
+        "faq1a": "Le autoscuole nel catalogo. Un badge compare solo quando abbiamo registrato un controllo.",
+        "faq2q": "DriveLinkUp è gratuito?",
+        "faq2a": "Sì. DriveLinkUp è gratuito. Il prezzo pubblicato dalla scuola è quello che paghi.",
+        "faq3q": "Dove leggo sulla pratica privata?",
+        "faq3a": "Vedi la pagina handledare: i supervisori privati non sono venduti come schede scuola."
       }
     }
   },
   "instructorDirectory": {
-    "categoryLabel": "Licence category",
-    "typeInstructor": "Driving school",
-    "typeSchool": "Driving school",
-    "cityLabel": "City",
-    "cityPlaceholder": "All cities",
-    "cityAllOption": "All cities",
-    "minRateLabel": "Minimum lesson price",
-    "maxRateLabel": "Maximum lesson price",
-    "englishOnly": "English available",
-    "minRatePlaceholder": "e.g. 400",
-    "maxRatePlaceholder": "e.g. 600",
-    "ratingLabel": "Minimum rating",
-    "ratingPlaceholder": "Any rating",
-    "ratingAllOption": "Any rating",
-    "rating3Plus": "3+ stars",
-    "rating4Plus": "4+ stars",
-    "rating4_5Plus": "4.5+ stars",
-    "availabilityLabel": "Availability",
-    "availabilityPlaceholder": "Any day",
-    "availabilityAllOption": "Any day",
-    "weekday": "Weekdays",
-    "weekend": "Weekends",
-    "affiliationLabel": "Link to a school",
-    "affiliationAll": "All",
-    "affiliationSchool": "Belongs to a school",
-    "affiliationIndependent": "No school linked",
-    "rateSuffix": "SEK / lesson",
+    "categoryLabel": "Categoria di patente",
+    "typeInstructor": "Autoscuola",
+    "typeSchool": "Autoscuola",
+    "cityLabel": "Città",
+    "cityPlaceholder": "Tutte le città",
+    "cityAllOption": "Tutte le città",
+    "minRateLabel": "Prezzo minimo della lezione",
+    "maxRateLabel": "Prezzo massimo della lezione",
+    "englishOnly": "Inglese disponibile",
+    "minRatePlaceholder": "es. 400",
+    "maxRatePlaceholder": "es. 600",
+    "ratingLabel": "Valutazione minima",
+    "ratingPlaceholder": "Qualsiasi valutazione",
+    "ratingAllOption": "Qualsiasi valutazione",
+    "rating3Plus": "3+ stelle",
+    "rating4Plus": "4+ stelle",
+    "rating4_5Plus": "4,5+ stelle",
+    "availabilityLabel": "Disponibilità",
+    "availabilityPlaceholder": "Qualsiasi giorno",
+    "availabilityAllOption": "Qualsiasi giorno",
+    "weekday": "Giorni feriali",
+    "weekend": "Fine settimana",
+    "affiliationLabel": "Collega a una scuola",
+    "affiliationAll": "Tutte",
+    "affiliationSchool": "Appartiene a una scuola",
+    "affiliationIndependent": "Nessuna scuola collegata",
+    "rateSuffix": "SEK / lezione",
     "rateSuffixShort": "kr",
-    "rateRangeError": "The minimum price must be less than or equal to the maximum price.",
-    "clearFilters": "Clear filters",
-    "resultCount": "{count, plural, one {# school found} other {# schools found}}",
-    "loadingResults": "Updating school results…",
-    "emptyTitle": "No schools match these filters",
-    "emptyBody": "Try removing a filter or browse all schools.",
-    "errorTitle": "The directory could not load",
-    "errorBody": "Please try again in a moment.",
-    "retry": "Try again",
-    "nextAvailableLabel": "Next available",
-    "noUpcomingSlot": "No upcoming slot listed",
-    "languageLabel": "Language",
-    "phoneLabel": "Phone",
-    "englishAvailable": "English available",
-    "swedishAvailable": "Swedish",
-    "slotLabel": "Next available",
+    "rateRangeError": "Il prezzo minimo deve essere inferiore o uguale al prezzo massimo.",
+    "clearFilters": "Cancella filtri",
+    "resultCount": "{count, plural, one {# scuola trovata} other {# scuole trovate}}",
+    "loadingResults": "Aggiornamento dei risultati…",
+    "emptyTitle": "Nessuna scuola corrisponde a questi filtri",
+    "emptyBody": "Rimuovi un filtro o sfoglia tutte le scuole.",
+    "errorTitle": "Impossibile caricare l’elenco",
+    "errorBody": "Riprova tra un momento.",
+    "retry": "Riprova",
+    "nextAvailableLabel": "Prossima disponibilità",
+    "noUpcomingSlot": "Nessuno slot in arrivo indicato",
+    "languageLabel": "Lingua",
+    "phoneLabel": "Telefono",
+    "englishAvailable": "Inglese disponibile",
+    "swedishAvailable": "Svedese",
+    "slotLabel": "Prossima disponibilità",
     "slotMonthDay": "{monthShort} {day}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
-    "geoTitle": "Search near you",
-    "useMyLocation": "Use my location",
+    "geoTitle": "Cerca vicino a te",
+    "useMyLocation": "Usa la mia posizione",
     "locationStatus": {
-      "prompt": "Use your location to sort schools by distance and filter nearby.",
-      "requesting": "Finding your location…",
-      "granted": "Showing schools near your location.",
-      "denied": "Location access was denied. You can still filter by city.",
-      "failed": "We could not find your location. Try again, or filter by city.",
-      "unsupported": "Location is not available in this browser. You can still filter by city."
+      "prompt": "Usa la tua posizione per ordinare le scuole per distanza e filtrare quelle vicine.",
+      "requesting": "Ricerca della tua posizione…",
+      "granted": "Scuole vicine alla tua posizione.",
+      "denied": "Accesso alla posizione negato. Puoi comunque filtrare per città.",
+      "failed": "Non abbiamo trovato la tua posizione. Riprova o filtra per città.",
+      "unsupported": "La posizione non è disponibile in questo browser. Puoi comunque filtrare per città."
     },
-    "nearKmLabel": "Within (km)",
+    "nearKmLabel": "Entro (km)",
     "nearKmPlaceholder": "25",
-    "sortLabel": "Sort order",
-    "sortNewest": "Standard order",
-    "sortNearest": "Nearest first",
-    "sortLessonPrice": "Lesson price, cheapest first",
-    "sortPackagePrice": "Package price, cheapest first",
-    "heavyAllVehicles": "All heavy vehicles",
-    "heavyLabel": "Heavy vehicles",
-    "heavyAll": "All schools",
-    "heavyTruck": "Truck (C1, C, CE)",
-    "heavyBus": "Bus (D1, D, DE)",
-    "heavyYkb": "YKB (professional driver)",
-    "distancePill": "{km} km away",
-    "clearGeolocation": "Clear location",
-    "profileCta": "View profile",
-    "portraitAlt": "Profile photo of {name}",
-    "serviceAreaLabel": "Service area",
-    "verificationLabel": "Verification",
+    "sortLabel": "Ordinamento",
+    "sortNewest": "Ordine standard",
+    "sortNearest": "Più vicine prima",
+    "sortLessonPrice": "Prezzo lezione, più economico prima",
+    "sortPackagePrice": "Prezzo pacchetto, più economico prima",
+    "heavyAllVehicles": "Tutti i veicoli pesanti",
+    "heavyLabel": "Veicoli pesanti",
+    "heavyAll": "Tutte le scuole",
+    "heavyTruck": "Camion (C1, C, CE)",
+    "heavyBus": "Autobus (D1, D, DE)",
+    "heavyYkb": "YKB (autista professionale)",
+    "distancePill": "a {km} km",
+    "clearGeolocation": "Cancella posizione",
+    "profileCta": "Vedi profilo",
+    "portraitAlt": "Foto profilo di {name}",
+    "serviceAreaLabel": "Area di servizio",
+    "verificationLabel": "Verifica",
     "verification": {
-      "verified": "Verified",
-      "pending": "Verification pending",
-      "rejected": "Not verified",
-      "unverified": "Not verified"
+      "verified": "Verificato",
+      "pending": "Verifica in attesa",
+      "rejected": "Non verificata",
+      "unverified": "Non verificata"
     },
-    "reviewsLabel": "Reviews",
-    "reviewsNone": "No reviews yet",
-    "reviewsSummary": "{average} · {count, plural, one {# review} other {# reviews}}",
+    "reviewsLabel": "Recensioni",
+    "reviewsNone": "Ancora nessuna recensione",
+    "reviewsSummary": "{average} · {count, plural, one {# recensione} other {# recensioni}}",
     "language": {
-      "sv": "Swedish",
+      "sv": "Svedese",
       "en": "English",
-      "no": "Norwegian",
-      "da": "Danish",
-      "fi": "Finnish",
-      "is": "Icelandic"
+      "no": "Norvegese",
+      "da": "Danese",
+      "fi": "Finlandese",
+      "is": "Islandese"
     },
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer"
+      "A": "Moto",
+      "B": "Auto",
+      "BE": "Rimorchio"
     },
     "comparison": {
-      "eyebrow": "Shortlist",
-      "title": "Compare driving schools",
-      "count": "{count} of {max} selected",
-      "addToComparison": "Add to comparison",
-      "removeFromComparison": "Remove from comparison",
-      "limitReached": "You can compare up to three driving schools at a time.",
-      "clear": "Clear comparison",
-      "remove": "Remove",
-      "removeAria": "Remove {name} from comparison",
-      "category": "Categories",
-      "language": "Languages",
+      "eyebrow": "Selezione",
+      "title": "Confronta le autoscuole",
+      "count": "{count} di {max} selezionate",
+      "addToComparison": "Aggiungi al confronto",
+      "removeFromComparison": "Rimuovi dal confronto",
+      "limitReached": "Puoi confrontare fino a tre autoscuole alla volta.",
+      "clear": "Cancella confronto",
+      "remove": "Rimuovi",
+      "removeAria": "Rimuovi {name} dal confronto",
+      "category": "Categorie",
+      "language": "Lingue",
       "languages": {
-        "sv": "Swedish",
+        "sv": "Svedese",
         "en": "English"
       },
-      "serviceArea": "Service area",
-      "phone": "Phone",
-      "rate": "Lesson price",
-      "fee": "Listing",
-      "feeValue": "Free to compare. You pay the school.",
+      "serviceArea": "Area di servizio",
+      "phone": "Telefono",
+      "rate": "Prezzo della lezione",
+      "fee": "Scheda",
+      "feeValue": "Confrontare è gratuito. Paghi la scuola.",
       "rateValue": "{amount} / h",
-      "availability": "Availability",
-      "noAvailability": "No upcoming time listed",
-      "bookingMode": "Booking mode",
+      "availability": "Disponibilità",
+      "noAvailability": "Nessun orario prossimo indicato",
+      "bookingMode": "Modalità di prenotazione",
       "bookingModes": {
-        "instant": "Instant book",
-        "request": "Request to book"
+        "instant": "Prenotazione immediata",
+        "request": "Richiedi prenotazione"
       },
-      "cancellation": "Cancellation",
+      "cancellation": "Cancellazione",
       "policies": {
-        "flexible": "Flexible",
-        "moderate": "Moderate",
-        "strict": "Strict"
+        "flexible": "Flessibile",
+        "moderate": "Moderata",
+        "strict": "Rigorosa"
       },
-      "policyUnknown": "See profile",
-      "reviews": "Reviews",
-      "noReviews": "No reviews yet",
+      "policyUnknown": "Vedi profilo",
+      "reviews": "Recensioni",
+      "noReviews": "Ancora nessuna recensione",
       "reviewsValue": "{average}/5 ({count})",
-      "viewProfile": "View profile"
+      "viewProfile": "Vedi profilo"
     },
-    "reviewsGoogleSummary": "{average} ★ on Google · {count, plural, one {# review} other {# reviews}}"
+    "reviewsGoogleSummary": "{average} ★ su Google · {count, plural, one {# recensione} other {# recensioni}}"
   },
   "schoolContact": {
-    "label": "Contact the school",
-    "inboxAria": "Email {name}",
-    "websiteAria": "Open {name}'s website",
-    "phoneLabel": "Call {number}",
-    "phoneAria": "Call {name} on {number}",
-    "priceRequest": "Ask for prices",
-    "priceRequestAria": "Ask {name} for prices",
-    "priceRequestSubject": "Price enquiry",
-    "priceRequestBody": "Hi {name},\n\nI found you on DriveLinkUp and would like to know what your driving lessons and packages cost.\n\nThank you!",
-    "noPrice": "No prices on the school's website yet",
-    "claim": "Claim this school",
-    "claimAria": "Claim {name} and ask DriveLinkUp to update this listing",
-    "claimPrefill": "I represent {name}. Please update this listing.\n{listing}",
-    "claimPrefillName": "I represent {name}. Please update this listing."
+    "label": "Contatta la scuola",
+    "inboxAria": "Scrivi a {name}",
+    "websiteAria": "Apri il sito di {name}",
+    "phoneLabel": "Chiama {number}",
+    "phoneAria": "Chiama {name} al {number}",
+    "priceRequest": "Chiedi i prezzi",
+    "priceRequestAria": "Chiedi i prezzi a {name}",
+    "priceRequestSubject": "Richiesta prezzi",
+    "priceRequestBody": "Ciao {name},\n\nTi ho trovato su DriveLinkUp e vorrei sapere quanto costano le tue lezioni di guida e i pacchetti.\n\nGrazie!",
+    "noPrice": "Ancora nessun prezzo sul sito della scuola",
+    "claim": "Rivendica questa scuola",
+    "claimAria": "Rivendica {name} e chiedi a DriveLinkUp di aggiornare questa scheda",
+    "claimPrefill": "Rappresento {name}. Aggiornate questa scheda.\n{listing}",
+    "claimPrefillName": "Rappresento {name}. Aggiornate questa scheda."
   },
   "instructorDetail": {
     "meta": {
@@ -690,25 +697,25 @@
     },
     "profileEyebrow": "Driving-school listing",
     "locatedIn": "Based in {city}",
-    "hourlyRate": "Lesson price",
-    "rateSuffix": "SEK / lesson",
-    "portraitAlt": "Profile photo of {name}",
+    "hourlyRate": "Prezzo della lezione",
+    "rateSuffix": "SEK / lezione",
+    "portraitAlt": "Foto profilo di {name}",
     "facts": {
-      "city": "City",
-      "phone": "Phone",
-      "serviceArea": "Service area",
-      "language": "Language",
-      "verification": "Verification",
-      "reviews": "Reviews",
-      "availability": "Next available"
+      "city": "Città",
+      "phone": "Telefono",
+      "serviceArea": "Area di servizio",
+      "language": "Lingua",
+      "verification": "Verifica",
+      "reviews": "Recensioni",
+      "availability": "Prossima disponibilità"
     },
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer",
+      "A": "Moto",
+      "B": "Auto",
+      "BE": "Rimorchio",
       "C1": "C1",
       "C1E": "C1E",
       "C": "C",
@@ -719,12 +726,12 @@
       "DE": "DE"
     },
     "language": {
-      "sv": "Swedish",
+      "sv": "Svedese",
       "en": "English",
-      "no": "Norwegian",
-      "da": "Danish",
-      "fi": "Finnish",
-      "is": "Icelandic",
+      "no": "Norvegese",
+      "da": "Danese",
+      "fi": "Finlandese",
+      "is": "Islandese",
       "es": "Spanish",
       "fr": "French",
       "de": "German",
@@ -745,18 +752,18 @@
       "lt": "Lithuanian"
     },
     "verification": {
-      "verified": "Verified",
-      "pending": "Verification pending",
-      "rejected": "Not verified",
-      "unverified": "Not verified"
+      "verified": "Verificato",
+      "pending": "Verifica in attesa",
+      "rejected": "Non verificata",
+      "unverified": "Non verificata"
     },
     "reviews": {
-      "none": "No reviews yet",
-      "summary": "{average} · {count, plural, one {# review} other {# reviews}}",
+      "none": "Ancora nessuna recensione",
+      "summary": "{average} · {count, plural, one {# recensione} other {# recensioni}}",
       "googleSummary": "{average} · {count, plural, one {# review} other {# reviews}} on Google"
     },
     "availability": {
-      "none": "No upcoming slot listed"
+      "none": "Nessuno slot in arrivo indicato"
     },
     "loadError": "We could not load this profile.",
     "notFoundTitle": "School listing not found",
@@ -770,11 +777,11 @@
         "body": "Choose an open slot and continue to hosted checkout to secure the lesson."
       },
       "request": {
-        "title": "Request to book",
+        "title": "Richiedi prenotazione",
         "body": "Choose an open slot and send a request. The school confirms before payment is collected."
       },
       "contact": {
-        "title": "Directory listing",
+        "title": "Scheda elenco",
         "body": "This school is listed with its information and prices. Use Contact the school to reach them directly."
       },
       "paymentThroughSchool": {
@@ -792,7 +799,7 @@
     },
     "slots": {
       "loadError": "Could not load available times.",
-      "retry": "Try again",
+      "retry": "Riprova",
       "empty": "No open times are listed right now."
     }
   },
@@ -805,9 +812,9 @@
     "submitRequest": "Send booking request",
     "submitDirectoryOnly": "This listing does not take bookings here",
     "submitIndependentPayment": "Payment is collected by a driving school",
-    "submitting": "Sending…",
+    "submitting": "Invio in corso…",
     "submittingInstant": "Booking…",
-    "submittingRequest": "Sending…",
+    "submittingRequest": "Invio in corso…",
     "policyEyebrow": "Cancellation policy",
     "policyLink": "Read the full policy in the FAQ",
     "policyScheduleFlexible": "Flexible: full refund at least 24 hours before; the full lesson fee is retained within 24 hours.",
@@ -819,10 +826,10 @@
     "learnerNotEligible": "You must be at least 16 years old to book lessons.",
     "learnerNeedsVerification": "Confirm your age with ID verification before booking.",
     "labels": {
-      "yourName": "Your name",
+      "yourName": "Il tuo nome",
       "email": "Email",
-      "phone": "Phone",
-      "category": "Licence category",
+      "phone": "Telefono",
+      "category": "Categoria di patente",
       "categoryPlaceholder": "Choose a category"
     },
     "placeholders": {
@@ -842,8 +849,8 @@
     },
     "successEyebrow": "Booking saved",
     "successBody": "Your booking with {instructor} is saved. Review the school price, payment status and next step below.",
-    "rateLabel": "Lesson price",
-    "rateSuffix": "SEK / lesson",
+    "rateLabel": "Prezzo della lezione",
+    "rateSuffix": "SEK / lezione",
     "paymentLabel": "Payment",
     "rateFallback": "the school",
     "paidBadge": "Paid",
@@ -873,25 +880,25 @@
     "bookingModeLabel": {
       "instant": "Instant",
       "request": "Request",
-      "contact": "Directory listing",
+      "contact": "Scheda elenco",
       "paymentThroughSchool": "Pays through a school"
     },
     "bookingMode": {
-      "title": "Booking mode",
+      "title": "Modalità di prenotazione",
       "description": "Choose whether learners can book instantly or send a request for approval.",
       "instantLabel": "Instant",
       "instantSummary": "Learners choose an open time and continue to payment.",
       "instantName": "Instant booking",
       "requestLabel": "Request",
       "requestSummary": "Learners choose an open time and wait for your approval before payment.",
-      "requestName": "Request to book",
+      "requestName": "Richiedi prenotazione",
       "contactLockedTitle": "Booking disabled",
       "contactLockedBody": "Your school is currently listed as a directory listing — information and prices, without booking or requests via DriveLinkUp. Only DriveLinkUp can change this, following a new decision from your school. Contact us if you want to change it."
     },
     "validation": {
       "nameRequired": "Enter your name.",
       "nameTooLong": "That name is too long.",
-      "emailInvalid": "Enter a valid email address.",
+      "emailInvalid": "Inserisci un indirizzo e-mail valido.",
       "phoneRequired": "Enter your phone number.",
       "phoneTooLong": "That phone number is too long.",
       "categoryRequired": "Choose one of the school's published categories.",
@@ -907,13 +914,13 @@
     "subtitle": "Publish the school details and price learners need to compare. Keep the listing accurate.",
     "submit": "Publish my listing",
     "submitting": "Creating listing…",
-    "error": "Something went wrong. Please try again.",
+    "error": "Qualcosa è andato storto. Riprova.",
     "fields": {
-      "nameLabel": "Name",
+      "nameLabel": "Nome",
       "namePlaceholder": "Erik Lindqvist",
-      "cityLabel": "City",
+      "cityLabel": "Città",
       "cityPlaceholder": "Stockholm",
-      "categoriesLabel": "Licence categories",
+      "categoriesLabel": "Categorie di patente",
       "categoriesDescription": "Mark every licence class your school is authorized to offer.",
       "rateLabel": "Lesson price (SEK)",
       "ratePlaceholder": "550",
@@ -946,7 +953,7 @@
       "title": "Create a school account",
       "description": "Create an driving-school listing with published price and availability for learners to compare."
     },
-    "eyebrow": "For driving schools",
+    "eyebrow": "Per le autoscuole",
     "title": "Create a school account",
     "lead": "Complete the form to create your listing. Publish the price your school controls so learners can compare.",
     "back": "Back to overview",
@@ -961,34 +968,34 @@
     }
   },
   "waitlist": {
-    "saved": "You're on the list — we'll email you when DriveLinkUp launches.",
-    "error": "Something went wrong — try again.",
+    "saved": "Sei in lista: ti scriveremo quando DriveLinkUp sarà disponibile.",
+    "error": "Qualcosa è andato storto: riprova.",
     "fields": {
-      "nameLabel": "Name",
-      "namePlaceholder": "Your full name",
+      "nameLabel": "Nome",
+      "namePlaceholder": "Il tuo nome completo",
       "emailLabel": "Email",
       "emailPlaceholder": "you@example.com",
-      "roleLabel": "I am a"
+      "roleLabel": "Sono"
     },
     "roleOptions": {
       "student": {
-        "label": "Driving student",
-        "hint": "I want to find a driving school."
+        "label": "Allievo",
+        "hint": "Voglio trovare un’autoscuola."
       },
       "instructor": {
-        "label": "Driving school",
-        "hint": "I want to publish the school's lessons."
+        "label": "Autoscuola",
+        "hint": "Voglio pubblicare le lezioni della scuola."
       }
     },
     "validation": {
-      "nameRequired": "Tell us your name.",
-      "nameTooLong": "Keep your name under 120 characters.",
-      "emailInvalid": "Enter a valid email address.",
-      "roleRequired": "Choose whether you are a learner or represent a driving school.",
-      "generic": "We could not save your details. Please try again."
+      "nameRequired": "Indica il tuo nome.",
+      "nameTooLong": "Il nome deve avere meno di 120 caratteri.",
+      "emailInvalid": "Inserisci un indirizzo e-mail valido.",
+      "roleRequired": "Scegli se sei un allievo o rappresenti un’autoscuola.",
+      "generic": "Non abbiamo potuto salvare i tuoi dati. Riprova."
     },
-    "submit": "Save my spot",
-    "submitting": "Saving…"
+    "submit": "Salva il mio posto",
+    "submitting": "Salvataggio…"
   },
   "auth": {
     "social": {
@@ -1002,7 +1009,7 @@
       "label": "Driving lessons",
       "role": "carousel",
       "goTo": "Show photo {n}",
-      "lessonAlt": "A driver holding the steering wheel on a dusk road",
+      "lessonAlt": "Un conducente al volante su una strada al crepuscolo",
       "schoolAlt": "{name} in {city}"
     },
     "signIn": {
@@ -1025,7 +1032,7 @@
       },
       "visual": {
         "label": "Schools in the directory",
-        "fallbackAlt": "A driver holding the steering wheel on a dusk road",
+        "fallbackAlt": "Un conducente al volante su una strada al crepuscolo",
         "schoolAlt": "{name} in {city}"
       }
     },
@@ -1033,7 +1040,7 @@
       "title": "Forgot password",
       "subtitle": "Enter your email and we'll send a reset link if an account exists.",
       "submit": "Send reset link",
-      "submitting": "Sending…",
+      "submitting": "Invio in corso…",
       "sentBody": "If that email is registered, check your inbox for a reset link. It expires in 1 hour.",
       "backLead": "Remembered it?",
       "backToLogin": "Log in",
@@ -1075,7 +1082,7 @@
       "backToPaths": "Back",
       "accountTitleLearner": "Create your student account",
       "accountLeadLearner": "Find lessons at driving schools. Compare published prices and contact the school.",
-      "accountTitleSchool": "List your driving school",
+      "accountTitleSchool": "Inserisci la tua autoscuola",
       "accountLeadSchool": "Add your school details so learners can find you.",
       "accountTitleInstructor": "Create your instructor account",
       "accountLeadInstructor": "Teach as an approved driving instructor (trafiklärare) affiliated with a driving school.",
@@ -1087,8 +1094,8 @@
         "title": "You're already signed in",
         "lead": "You're signed in as {email}. Continue to your dashboard, or sign out to create a different account.",
         "continue": "Continue to dashboard",
-        "signOut": "Sign out",
-        "signOutError": "Could not sign out. Please try again."
+        "signOut": "Esci",
+        "signOutError": "Impossibile disconnettersi. Riprova."
       },
       "fields": {
         "nameLabel": "Full name",
@@ -1097,10 +1104,10 @@
         "emailPlaceholder": "you@example.com",
         "passwordLabel": "Password",
         "passwordPlaceholder": "At least 8 characters…",
-        "roleLabel": "I am a",
+        "roleLabel": "Sono",
         "roleLearner": "I'm a student",
         "roleSchool": "I'm a driving school",
-        "roleInstructor": "I teach at a driving school",
+        "roleInstructor": "Insegno in un'autoscuola",
         "roleLearnerDesc": "Compare driving schools. You must be at least 16.",
         "roleSchoolDesc": "List your driving school with prices and details. Learners compare and contact you.",
         "roleInstructorDesc": "You join through the school you teach for. The school's permission sets what you can offer.",
@@ -1111,11 +1118,11 @@
         "dateOfBirthHelp": "Students must be at least {age} years old.",
         "phoneLabel": "Phone (optional)",
         "phonePlaceholder": "+46 70 123 45 67…",
-        "cityLabel": "City",
+        "cityLabel": "Città",
         "cityPlaceholder": "Stockholm…",
-        "schoolNameLabel": "School name",
+        "schoolNameLabel": "Nome della scuola",
         "schoolNamePlaceholder": "Stockholm Trafikskola…",
-        "organizationNumberLabel": "Organisation number",
+        "organizationNumberLabel": "Numero di organizzazione",
         "organizationNumberPlaceholder": "556000-0000…",
         "licenseHeldYearsLabel": "Years with a full driving licence",
         "licenseHeldYearsPlaceholder": "5…",
@@ -1140,7 +1147,7 @@
         },
         "checkboxLabel": "I confirm I carry valid motor insurance covering supervised practice driving (övningskörning) with a learner driver, that liability for supervised sessions rests with me and the learner (not DriveLinkUp), and that I have read and agree to the handledare terms below.",
         "submit": "Confirm and continue",
-        "submitting": "Saving…",
+        "submitting": "Salvataggio…",
         "back": "Back",
         "errors": {
           "attestationRequired": "Tick the box to confirm you've read the terms and carry valid insurance.",
@@ -1339,7 +1346,7 @@
           "title": "Let's get to know you",
           "pictureLabel": "Profile picture",
           "replaceImage": "Replace image",
-          "removeImage": "Remove",
+          "removeImage": "Rimuovi",
           "imageHint": "*.png, *.jpeg files up to {max}MB",
           "firstNameLabel": "First name",
           "lastNameLabel": "Last name",
@@ -1353,13 +1360,13 @@
           "nameUpdateFailed": "We couldn't save your name. Try again.",
           "photoRequiredHint": "Upload a profile picture to continue.",
           "continue": "Continue",
-          "submitting": "Saving…",
+          "submitting": "Salvataggio…",
           "back": "Back",
           "preview": {
             "caption": "This is how your profile appears to others",
             "roleLearner": "Learner",
             "roleInstructor": "Instructor",
-            "roleSchool": "Driving school"
+            "roleSchool": "Autoscuola"
           }
         },
         "photo": {
@@ -1372,7 +1379,7 @@
           "heading": "Verify your identity",
           "body": "Upload a valid ID (passport, national ID, or driving licence) so we can confirm your age. Takes under 2 minutes.",
           "cta": "Upload ID document",
-          "pending": "Verification in progress",
+          "pending": "Verifica in corso",
           "success": "Identity confirmed",
           "failed": "We could not verify your ID document. Please try again."
         }
@@ -1385,12 +1392,12 @@
     "commissionLabel": "School listing",
     "learnerBreakdown": {
       "eyebrow": "Your price",
-      "priceLine": "Lesson price",
+      "priceLine": "Prezzo della lezione",
       "feeLine": "DriveLinkUp fee",
       "totalLine": "School price / learner total",
       "note": "The school's published price is the learner total before checkout — nothing is added on top.",
       "error": "We could not load the current total.",
-      "retry": "Try again"
+      "retry": "Riprova"
     },
     "instructorBreakdown": {
       "rateLine": "Published lesson price",
@@ -1400,15 +1407,15 @@
     }
   },
   "instructorPayoutCard": {
-    "title": "Listing",
-    "eyebrow": "Directory",
+    "title": "Scheda",
+    "eyebrow": "Elenco",
     "body": "A catalog listing is free. DriveLinkUp does not charge a school to be listed.",
     "payoutLine": "The school controls its published price. Listing is not a payment.",
     "exampleTitle": "Example at 600 SEK/hr",
     "exampleLine": "A published price of {price} SEK is what the learner sees. DriveLinkUp does not add a fee.",
     "exampleLearnerLine": "The published {price} SEK school price is the figure on the listing.",
     "errorTitle": "Could not load the listing details.",
-    "retry": "Try again"
+    "retry": "Riprova"
   },
   "dashboard": {
     "signedInAs": "Signed in as {name}",
@@ -1417,7 +1424,7 @@
       "redirecting": "Redirecting to sign in…",
       "brand": "Dashboard",
       "adminAccess": "Admin access",
-      "marketplace": "Directory",
+      "marketplace": "Elenco",
       "title": {
         "learner": "My overview",
         "instructor": "Instructor overview",
@@ -1427,7 +1434,7 @@
       "badge": {
         "learner": "Learner",
         "instructor": "Instructor",
-        "school": "School",
+        "school": "Scuola",
         "admin": "Admin"
       }
     },
@@ -1437,14 +1444,14 @@
       "instructorTab": "Instructor",
       "handledareTab": "Handledare",
       "adminBadge": "Admin",
-      "signOut": "Sign out",
-      "signingOut": "Signing out…",
-      "signOutError": "Could not sign out. Please try again.",
+      "signOut": "Esci",
+      "signingOut": "Disconnessione…",
+      "signOutError": "Impossibile disconnettersi. Riprova.",
       "messagesTab": "Messages",
       "overviewTab": "Overview",
-      "availabilityTab": "Availability",
+      "availabilityTab": "Disponibilità",
       "schoolOverviewTab": "Overview",
-      "schoolInstructorsTab": "Instructors",
+      "schoolInstructorsTab": "Istruttori",
       "schoolBookingsTab": "Bookings",
       "schoolRevenueTab": "Revenue",
       "schoolSettingsTab": "Settings",
@@ -1464,13 +1471,13 @@
       "tooltip": "Activated means a school listing publishes at least one canonical licence category: AM, A1, A2, A, B or BE. This matches the public school directory. There is no historical activation source yet, so the tile does not show a percentage change.",
       "loading": "Loading activation count…",
       "error": "We couldn't load the activation count.",
-      "retry": "Try again"
+      "retry": "Riprova"
     },
     "completedLessons": {
       "title": "Completed lessons",
       "description": "A quick view of lessons you have completed and settled.",
       "roles": {
-        "INSTRUCTOR": "Driving school",
+        "INSTRUCTOR": "Autoscuola",
         "HANDLEDARE": "Supervisor"
       },
       "count": "{count, plural, one {# completed lesson} other {# completed lessons}}",
@@ -1482,7 +1489,7 @@
       "emptyBody": "Completed, settled lessons will appear here after both the lesson and payment are finalized.",
       "loading": "Loading completed lessons…",
       "error": "We couldn't load your completed lessons.",
-      "retry": "Try again"
+      "retry": "Riprova"
     },
     "signupConfirmation": {
       "title": "Your account is set up",
@@ -1501,7 +1508,7 @@
       "emptyBody": "Compare driving schools in the catalog and use Contact the school.",
       "emptyCta": "Browse driving schools",
       "loadError": "We couldn't load your bookings just now.",
-      "retry": "Try again",
+      "retry": "Riprova",
       "paymentStatus": {
         "unpaid": "Awaiting payment",
         "pending": "Payment pending",
@@ -1534,13 +1541,13 @@
         "eyebrow": "Recommended driving schools",
         "title": "Schools that fit your booking",
         "lead": "AI-ranked matches for your selected category, city, and availability — drawn from the pilot cohort and ordered by fit, city match, and available slots.",
-        "viewProfile": "View profile",
+        "viewProfile": "Vedi profilo",
         "nextSlot": "Next open slot · {when}",
         "portraitAlt": "Image for {name}, driving school",
-        "englishAvailable": "English available",
-        "rateSuffix": "SEK / lesson",
+        "englishAvailable": "Inglese disponibile",
+        "rateSuffix": "SEK / lezione",
         "errorTitle": "We couldn't load your recommendations just now.",
-        "retry": "Try again"
+        "retry": "Riprova"
       },
       "viewAllBookings": "See all bookings",
       "nextAction": {
@@ -1561,14 +1568,14 @@
         "sectionUpcoming": "Upcoming",
         "sectionPast": "Past",
         "count": "{count, plural, one {# booking} other {# bookings}}",
-        "instructorLabel": "Driving school",
+        "instructorLabel": "Autoscuola",
         "categoryLabel": "Category",
         "dateLabel": "When",
         "priceLabel": "Price",
         "statusLabel": "Status",
         "priceApproxNote": "Price per current hourly rate.",
         "loadError": "We couldn't load your booking history just now.",
-        "retry": "Try again",
+        "retry": "Riprova",
         "emptyTitle": "No bookings yet.",
         "emptyBody": "Compare driving schools in the catalog and use Contact the school.",
         "emptyCta": "Browse driving schools",
@@ -1633,7 +1640,7 @@
       "emptyTitle": "No new requests right now.",
       "emptyBody": "We'll show new learner requests here. Make sure your listing shows the categories your school offers and the cities you cover.",
       "loadError": "We couldn't load your requests just now.",
-      "retry": "Try again",
+      "retry": "Riprova",
       "pendingLicense": {
         "pendingEyebrow": "Pending review",
         "pendingTitle": "Your school credentials are being verified",
@@ -1671,14 +1678,14 @@
         }
       },
       "availability": {
-        "eyebrow": "Availability",
+        "eyebrow": "Disponibilità",
         "title": "Manage your availability",
         "lead": "Release the time slots learners can book. Bulk-create weekly times, add a one-off slot, or edit the ones you've already released.",
         "formWeeklyTitle": "Weekly slots",
         "formWeeklyHint": "Pick the weekdays, start date, time, and how many weeks ahead to publish.",
         "formSingleTitle": "One-off slot",
         "formSingleHint": "For an irregular day — a stray afternoon, a weekend, or a reschedule.",
-        "weekdayLabel": "Weekdays",
+        "weekdayLabel": "Giorni feriali",
         "startDateLabel": "Start date",
         "timeOfDayLabel": "Time of day",
         "weeksAheadLabel": "Weeks ahead",
@@ -1694,7 +1701,7 @@
         "submitError": "Could not save — please try again.",
         "invalidDate": "Pick a valid start and end date/time.",
         "loadError": "Could not load your slots.",
-        "retry": "Try again",
+        "retry": "Riprova",
         "emptyTitle": "No upcoming slots.",
         "emptyBody": "Release a few hours in the weekly form above — learners will see them and book.",
         "upcomingTitle": "Upcoming slots",
@@ -1713,14 +1720,14 @@
         "endsAtLabel": "End (local)"
       },
       "reviews": {
-        "eyebrow": "Reviews",
+        "eyebrow": "Recensioni",
         "title": "Learner reviews",
         "lead": "What learners have written about your lessons.",
         "count": "{count, plural, one {# review} other {# reviews}}",
         "empty": "No reviews yet.",
         "emptyBody": "Reviews appear here after learners complete and rate a lesson with you.",
         "loadError": "We couldn't load your reviews just now.",
-        "retry": "Try again",
+        "retry": "Riprova",
         "rating": "{rating}/5"
       },
       "history": {
@@ -1731,7 +1738,7 @@
         "empty": "No completed transactions yet.",
         "emptyBody": "Your settled lessons will appear here after both the lesson and payout are complete.",
         "loadError": "We couldn't load your booking history just now.",
-        "retry": "Try again",
+        "retry": "Riprova",
         "receiptLink": "View receipt",
         "receiptOpen": "Open school receipt",
         "receiptDownload": "Download receipt PDF",
@@ -1769,14 +1776,14 @@
       "eyebrow": "Handledare",
       "title": "Handledare dashboard",
       "lead": "Browse learners who are looking for supervised practice driving (övningskörning) and let them know you're available. You must complete the handledare terms before your listing goes active.",
-      "learnersCta": "Compare driving schools",
+      "learnersCta": "Confronta le autoscuole",
       "statusTitle": "Your handledare terms are accepted",
       "statusBody": "You can browse learners and show that you are available. DriveLinkUp lists schools; you arrange supervised practice with the learner.",
       "availability": {
-        "eyebrow": "Availability",
+        "eyebrow": "Disponibilità",
         "title": "Manage your handledare availability",
         "lead": "Publish the times learners can request supervised practice driving.",
-        "nav": "Availability"
+        "nav": "Disponibilità"
       },
       "clickwrap": {
         "pendingEyebrow": "Almost there",
@@ -1794,7 +1801,7 @@
         },
         "checkboxLabel": "I confirm I carry valid motor insurance covering supervised practice driving (övningskörning) with a learner driver, that liability for supervised sessions rests with me and the learner (not DriveLinkUp), and that I have read and agree to the handledare terms below.",
         "submit": "Confirm and continue",
-        "submitting": "Saving…",
+        "submitting": "Salvataggio…",
         "back": "Back",
         "renewalSuccess": "Thanks — your acceptance is recorded.",
         "errors": {
@@ -1887,7 +1894,7 @@
     "openFormEyebrow": "Open a dispute",
     "openFormTitle": "Flag a problem with this booking",
     "openFormLead": "Describe what happened — the other party gets an email and can resolve the dispute via the same link you used. The payout is paused until the dispute is resolved.",
-    "nameLabel": "Your name",
+    "nameLabel": "Il tuo nome",
     "youAreLabel": "You are",
     "youAreLearner": "Learner",
     "youAreInstructor": "Instructor",
@@ -1901,7 +1908,7 @@
     "noteLabel": "Note (optional)",
     "resolveRefund": "Refund the learner",
     "resolveRelease": "Release to the instructor",
-    "resolving": "Sending…",
+    "resolving": "Invio in corso…",
     "inertTitle": "Cannot open dispute",
     "openedBadge": "Dispute opened",
     "openedTitle": "Your dispute is recorded.",
@@ -1932,7 +1939,7 @@
     "eyebrow": "Mark lesson delivered",
     "title": "Mark the lesson as completed",
     "body": "When the lesson is done, mark it delivered here. The learner has 48 hours to confirm before payout auto-releases.",
-    "nameLabel": "Your name",
+    "nameLabel": "Il tuo nome",
     "youAreLabel": "You are",
     "youAreLearner": "Learner",
     "youAreInstructor": "Instructor",
@@ -1956,46 +1963,46 @@
   },
   "instructorPreview": {
     "meta": {
-      "title": "Driving-school preview",
-      "description": "Preview the learner-side school cards and continue to the catalog."
+      "title": "Anteprima autoscuola",
+      "description": "Anteprima delle schede scuola lato allievo e continua al catalogo."
     },
-    "pageEyebrow": "Learner view",
-    "pageTitle": "Preview the school catalog",
-    "pageBody": "Live school listings. Open a profile or contact the school.",
-    "directoryCta": "Open the full directory",
-    "errorTitle": "The school preview could not load.",
-    "empty": "No driving schools are listed yet.",
-    "portraitAlt": "Profile photo of {name}",
-    "rateSuffix": "SEK / lesson",
+    "pageEyebrow": "Vista allievo",
+    "pageTitle": "Anteprima del catalogo scuole",
+    "pageBody": "Schede scuole online. Apri un profilo o contatta la scuola.",
+    "directoryCta": "Apri l'elenco completo",
+    "errorTitle": "L'anteprima della scuola non è stata caricata.",
+    "empty": "Non ci sono ancora autoscuole in elenco.",
+    "portraitAlt": "Foto profilo di {name}",
+    "rateSuffix": "SEK / lezione",
     "rateSuffixShort": "kr",
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer"
+      "A": "Moto",
+      "B": "Auto",
+      "BE": "Rimorchio"
     },
-    "nextAvailableLabel": "Next available",
-    "noUpcomingSlot": "No upcoming slot listed",
-    "englishAvailable": "English available",
-    "swedishAvailable": "Swedish",
-    "profileCta": "View profile",
-    "slotLabel": "Next available",
+    "nextAvailableLabel": "Prossima disponibilità",
+    "noUpcomingSlot": "Nessuno slot in arrivo indicato",
+    "englishAvailable": "Inglese disponibile",
+    "swedishAvailable": "Svedese",
+    "profileCta": "Vedi profilo",
+    "slotLabel": "Prossima disponibilità",
     "slotLabelRelative": "{when}",
     "slotMonthDay": "{monthShort} {day}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
-    "typeSchool": "School",
-    "typeInstructor": "Driving school",
-    "ratingChipAria": "{average} out of 5 from {count} reviews"
+    "typeSchool": "Scuola",
+    "typeInstructor": "Autoscuola",
+    "ratingChipAria": "{average} su 5 da {count} recensioni"
   },
   "reviewForm": {
     "title": "Leave a review",
     "description": "Share your experience with this instructor — your name, a star rating, and a short comment.",
     "submit": "Post review",
     "submitting": "Posting…",
-    "submitError": "Something went wrong. Please try again.",
+    "submitError": "Qualcosa è andato storto. Riprova.",
     "submitSuccess": "Thanks — your review was posted.",
     "context": {
       "notEligibleTitle": "Reviews are available after a completed lesson",
@@ -2013,7 +2020,7 @@
       "bookingUnavailable": "This lesson is not available for a review."
     },
     "labels": {
-      "nameLabel": "Your name",
+      "nameLabel": "Il tuo nome",
       "ratingLabel": "Rating",
       "ratingAriaLabel": "Star rating from 1 to 5",
       "commentLabel": "Your comment"
@@ -2024,24 +2031,24 @@
     },
     "ratingOption": "★ {rating}",
     "list": {
-      "heading": "Reviews",
+      "heading": "Recensioni",
       "emptyTitle": "No reviews yet.",
       "emptyBody": "Be the first to leave one — share what stood out about your lesson.",
       "loadError": "Could not load the reviews.",
-      "retry": "Try again",
+      "retry": "Riprova",
       "ratingValue": "{rating}/5",
       "errorTitle": "We could not save your review."
     }
   },
   "profile": {
-    "title": "Profile",
+    "title": "Profilo",
     "signedInAs": "Signed in as {name}",
     "role": {
       "label": "Role",
       "learner": "Learner",
       "instructor": "Instructor",
       "handledare": "Supervisor",
-      "school": "Driving school"
+      "school": "Autoscuola"
     },
     "nameEdit": {
       "editButton": "Edit name",
@@ -2053,7 +2060,7 @@
       "lastNamePlaceholder": "Last name",
       "firstNameError": "Enter your first name.",
       "save": "Save",
-      "saving": "Saving…",
+      "saving": "Salvataggio…",
       "cancel": "Cancel",
       "successToast": "Your name was updated.",
       "errorToast": "We could not save your name. Try again."
@@ -2068,7 +2075,7 @@
       "chooseButton": "Choose a photo",
       "dragHint": "Drag & drop or choose",
       "submit": "Save",
-      "submitting": "Saving…",
+      "submitting": "Salvataggio…",
       "confirm": "Confirm my photo",
       "confirming": "Confirming…",
       "confirmationLabel": "I confirm this is the photo I want to use on my profile.",
@@ -2123,17 +2130,17 @@
     }
   },
   "chatbot": {
-    "fabLabel": "Ask DriveLinkUp",
-    "title": "Ask DriveLinkUp",
-    "lead": "Get a quick answer about categories, prices and how to reach a school. Personal payment, refund and safety cases go to support.",
-    "placeholder": "Ask about a category, price or school…",
-    "sendAria": "Send",
-    "inputAria": "Write your question",
-    "emptyState": "Hi! Ask me about categories, prices or how to reach a school.",
-    "errorGeneric": "The assistant is unavailable right now. Try again shortly.",
-    "rateLimited": "Please wait a moment before sending another message.",
-    "handoffLabel": "Need personal help? Contact support →",
-    "closeAria": "Close"
+    "fabLabel": "Chiedi a DriveLinkUp",
+    "title": "Chiedi a DriveLinkUp",
+    "lead": "Risposta rapida su categorie, prezzi e come contattare una scuola. Pagamenti, rimborsi e sicurezza vanno al supporto.",
+    "placeholder": "Chiedi una categoria, un prezzo o una scuola…",
+    "sendAria": "Invia",
+    "inputAria": "Scrivi la tua domanda",
+    "emptyState": "Ciao! Chiedimi categorie, prezzi o come contattare una scuola.",
+    "errorGeneric": "L’assistente non è disponibile al momento. Riprova tra poco.",
+    "rateLimited": "Attendi un momento prima di inviare un altro messaggio.",
+    "handoffLabel": "Serve aiuto personale? Contatta il supporto →",
+    "closeAria": "Chiudi"
   },
   "privacyPage": {
     "meta": {
@@ -2142,175 +2149,175 @@
     },
     "hero": {
       "eyebrow": "Privacy",
-      "title": "Privacy Policy",
-      "lastUpdated": "Last updated: 27 October 2026 · policy version {version}",
-      "intro": "This notice explains how DriveLinkUp processes personal data when you browse the directory, create an account, contact a school, or write to us. It describes current processing only. DriveLinkUp does not book lessons or take lesson payments."
+      "title": "Informativa sulla privacy",
+      "lastUpdated": "Ultimo aggiornamento: 27 ottobre 2026 · versione informativa {version}",
+      "intro": "Questa informativa spiega come DriveLinkUp tratta i dati personali quando sfogli l'elenco, crei un account, contatti una scuola o ci scrivi. Descrive solo il trattamento attuale. DriveLinkUp non prenota lezioni e non incassa i pagamenti delle lezioni."
     },
     "sections": {
       "0": {
-        "title": "1. Controller and contact",
-        "body": "DriveLinkUp is the controller for the personal data described here. We have not published a registered company name or organisation number on this page. Write to frank@drivelinkup.com with “Privacy” in the subject. If we register a Swedish company we will add the legal name and organisation number here.",
+        "title": "1. Titolare e contatto",
+        "body": "DriveLinkUp è il titolare del trattamento dei dati personali descritti qui. Non abbiamo pubblicato su questa pagina una ragione sociale o un numero di organizzazione registrato. Scrivi a frank@drivelinkup.com con “Privacy” nell'oggetto. Se registreremo una società svedese, aggiungeremo qui la denominazione legale e il numero di organizzazione.",
         "items": []
       },
       "1": {
-        "title": "2. Personal data we collect",
-        "body": "What we collect depends on how you use the site. We do not currently collect card numbers, and learner signup does not scan identity documents.",
+        "title": "2. Dati personali che raccogliamo",
+        "body": "Cosa raccogliamo dipende da come usi il sito. Al momento non raccogliamo numeri di carta e la registrazione allievo non scansiona documenti di identità.",
         "items": [
-          "Account details: name, email address, hashed password, and role (learner, school, or handledare).",
-          "The date of birth you enter at learner signup. We use it only to check that you are 16 or older. It is not treated as a verified date of birth for booking.",
-          "Optional profile photo that you choose to upload.",
-          "School onboarding details such as school name, organisation number, and city.",
-          "A teaching-licence file if you upload one. We store it to review the listing. That is not an automatic check with Transportstyrelsen.",
-          "Handledare insurance attestation (your confirmation and the time you gave it), not the insurance document unless you send that to support.",
-          "Support messages you send on the contact form. Those are emailed to frank@drivelinkup.com. We do not keep a separate public contact database.",
-          "Questions you type into the on-site assistant. The text is sent to OpenAI to generate a reply.",
-          "Approximate coordinates when you click “Use my location”, sent with the directory request so we can sort schools. We do not save that location on your account.",
-          "Cookie choice, policy version, and a hash of IP address plus browser information. We do not store the raw IP on the consent record.",
-          "Technical logs such as IP address, browser information, and security events needed to run and protect the site.",
-          "Name, email, and profile photo that Google shares if you sign in with Google.",
-          "Published prices, categories, and listing text taken from a school's own website so the directory can show what the school already publishes.",
-          "Google reviews we store and show on a listing, marked as coming from Google. We do not verify those reviews.",
-          "Details about another person if you include them in a support message or an assistant question."
+          "Dati dell'account: nome, indirizzo email, password con hash e ruolo (allievo, scuola o handledare).",
+          "La data di nascita che inserisci alla registrazione allievo. La usiamo solo per verificare che hai 16 anni o più. Non è trattata come data di nascita verificata per la prenotazione.",
+          "Foto profilo facoltativa che scegli di caricare.",
+          "Dati di onboarding della scuola come nome della scuola, numero di organizzazione e città.",
+          "Un file di licenza di insegnamento se ne carichi uno. Lo conserviamo per esaminare la scheda. Non è un controllo automatico con Transportstyrelsen.",
+          "Attestazione assicurativa handledare (la tua conferma e l'ora in cui l'hai data), non il documento assicurativo a meno che tu non lo invii al supporto.",
+          "Messaggi di supporto inviati dal modulo di contatto. Vengono inviati via email a frank@drivelinkup.com. Non teniamo un database di contatti pubblico separato.",
+          "Domande che digiti nell'assistente del sito. Il testo è inviato a OpenAI per generare una risposta.",
+          "Coordinate approssimative quando fai clic su “Use my location”, inviate con la richiesta dell'elenco per ordinare le scuole. Non salviamo quella posizione sul tuo account.",
+          "Scelta cookie, versione dell'informativa e un hash dell'indirizzo IP più le informazioni del browser. Non memorizziamo l'IP grezzo sul registro del consenso.",
+          "Log tecnici come indirizzo IP, informazioni del browser ed eventi di sicurezza necessari per far funzionare e proteggere il sito.",
+          "Nome, email e foto profilo che Google condivide se accedi con Google.",
+          "Prezzi pubblicati, categorie e testo della scheda presi dal sito della scuola, così l'elenco può mostrare ciò che la scuola pubblica già.",
+          "Recensioni Google che memorizziamo e mostriamo su una scheda, indicate come provenienti da Google. Non verifichiamo quelle recensioni.",
+          "Dati su un'altra persona se li includi in un messaggio di supporto o in una domanda all'assistente."
         ]
       },
       "2": {
-        "title": "3. Purposes and legal bases",
-        "body": "We process personal data only for the purposes below. Each purpose has a GDPR Article 6 basis.",
+        "title": "3. Finalità e basi giuridiche",
+        "body": "Trattiamo i dati personali solo per le finalità sotto. Ogni finalità ha una base nell'articolo 6 del GDPR.",
         "items": [
-          "Provide the directory, your account, and a school listing — Article 6(1)(b) contract.",
-          "Check that a learner account is 16 or older from the date you enter — Article 6(1)(b) contract and Article 6(1)(f) legitimate interest in keeping the service off-limits to children.",
-          "Send product email such as address verification, password reset, and school invites — Article 6(1)(b) contract.",
-          "Answer support and contact-form messages — Article 6(1)(b) contract or Article 6(1)(f) legitimate interest in helping you.",
-          "Reply to assistant questions you choose to type — Article 6(1)(f) legitimate interest in answering routine questions.",
-          "Review an optional teaching-licence file — Article 6(1)(b) contract and Article 6(1)(f) legitimate interest in reviewing a listing.",
-          "Record cookie choices and keep the site secure — Article 6(1)(c) legal obligation and Article 6(1)(f) legitimate interest in security and proof of consent.",
-          "Load Google AdSense after you accept marketing cookies — Article 6(1)(a) consent.",
-          "We do not currently take lesson payments. If checkout is turned on later, this notice will be updated before that processing starts."
+          "Fornire l'elenco, il tuo account e una scheda scuola — articolo 6(1)(b) contratto.",
+          "Verificare che un account allievo abbia 16 anni o più in base alla data che inserisci — articolo 6(1)(b) contratto e articolo 6(1)(f) interesse legittimo a tenere il servizio fuori dalla portata dei minori.",
+          "Inviare email di prodotto come verifica dell'indirizzo, reimpostazione della password e inviti scuola — articolo 6(1)(b) contratto.",
+          "Rispondere ai messaggi di supporto e del modulo di contatto — articolo 6(1)(b) contratto o articolo 6(1)(f) interesse legittimo ad aiutarti.",
+          "Rispondere alle domande all'assistente che scegli di digitare — articolo 6(1)(f) interesse legittimo a rispondere a domande di routine.",
+          "Esaminare un file facoltativo di licenza di insegnamento — articolo 6(1)(b) contratto e articolo 6(1)(f) interesse legittimo a esaminare una scheda.",
+          "Registrare le scelte sui cookie e mantenere il sito sicuro — articolo 6(1)(c) obbligo legale e articolo 6(1)(f) interesse legittimo alla sicurezza e alla prova del consenso.",
+          "Caricare Google AdSense dopo che accetti i cookie di marketing — articolo 6(1)(a) consenso.",
+          "Al momento non incassiamo i pagamenti delle lezioni. Se il checkout verrà attivato in seguito, questa informativa sarà aggiornata prima che quel trattamento inizi."
         ]
       },
       "3": {
-        "title": "4. Cookies and similar technologies",
-        "body": "Essential cookies run the site. Optional cookies wait for your choice in the banner. Changing the banner or clearing cookies lets you choose again. A new policy version also asks again.",
+        "title": "4. Cookie e tecnologie simili",
+        "body": "I cookie essenziali fanno funzionare il sito. I cookie facoltativi attendono la tua scelta nel banner. Modificare il banner o cancellare i cookie ti consente di scegliere di nuovo. Una nuova versione dell'informativa chiede di nuovo.",
         "items": [
-          "Essential: session, security, language, and the cookie that remembers this choice. These stay on.",
-          "Analytics: we do not currently load a separate analytics tool. The toggle is reserved. Leaving it off keeps it off.",
-          "Marketing: Google AdSense loads only after you accept marketing cookies. Google may set its own cookies and collect device and usage data to show ads. See Google’s advertising policy at https://policies.google.com/technologies/ads.",
-          "If you withdraw marketing consent we stop loading new AdSense scripts. Cookies Google already set may remain until you clear them in the browser."
+          "Essenziali: sessione, sicurezza, lingua e il cookie che ricorda questa scelta. Restano attivi.",
+          "Analitica: al momento non carichiamo uno strumento di analitica separato. L'interruttore è riservato. Lasciarlo spento lo tiene spento.",
+          "Marketing: Google AdSense si carica solo dopo che accetti i cookie di marketing. Google può impostare i propri cookie e raccogliere dati su dispositivo e utilizzo per mostrare annunci. Vedi la politica pubblicitaria di Google su https://policies.google.com/technologies/ads.",
+          "Se revochi il consenso al marketing smettiamo di caricare nuovi script AdSense. I cookie già impostati da Google possono restare finché non li cancelli nel browser."
         ]
       },
       "4": {
-        "title": "5. Recipients",
-        "body": "We do not sell personal data. We share it only with the vendors that run the site, the school you contact yourself, or when the law requires it.",
+        "title": "5. Destinatari",
+        "body": "Non vendiamo dati personali. Li condividiamo solo con i fornitori che gestiscono il sito, la scuola che contatti tu stesso o quando la legge lo richiede.",
         "items": [
-          "Vercel hosts the website and may store profile photos.",
-          "Neon hosts the PostgreSQL database.",
-          "Cloudflare R2 may store uploaded photos or teaching-licence files.",
-          "Resend sends product email.",
-          "Google provides optional sign-in and, after marketing consent, AdSense.",
-          "OpenAI processes assistant messages you type.",
-          "A school you email or visit becomes a separate controller for the details you send them.",
-          "Authorities or advisors may receive data when Swedish or EU law requires it, or to establish, exercise, or defend a legal claim."
+          "Vercel ospita il sito e può memorizzare le foto profilo.",
+          "Neon ospita il database PostgreSQL.",
+          "Cloudflare R2 può memorizzare foto caricate o file di licenza di insegnamento.",
+          "Resend invia le email di prodotto.",
+          "Google fornisce l'accesso facoltativo e, dopo il consenso al marketing, AdSense.",
+          "OpenAI tratta i messaggi all'assistente che digiti.",
+          "Una scuola a cui scrivi o che visiti diventa titolare distinto per i dati che le invii.",
+          "Autorità o consulenti possono ricevere dati quando la legge svedese o dell'UE lo richiede, o per accertare, esercitare o difendere un diritto."
         ]
       },
       "5": {
-        "title": "6. International transfers",
-        "body": "Some vendors process data outside the EU/EEA, including in the United States (Vercel, Google, OpenAI, and Resend). Where required we rely on an adequacy decision or the European Commission’s Standard Contractual Clauses. Ask frank@drivelinkup.com if you want more detail on a transfer.",
+        "title": "6. Trasferimenti internazionali",
+        "body": "Alcuni fornitori trattano dati fuori dall'UE/SEE, anche negli Stati Uniti (Vercel, Google, OpenAI e Resend). Ove richiesto ci basiamo su una decisione di adeguatezza o sulle clausole contrattuali tipo della Commissione europea. Chiedi a frank@drivelinkup.com se vuoi più dettagli su un trasferimento.",
         "items": []
       },
       "6": {
-        "title": "7. How long we keep data",
-        "body": "We keep data only as long as the purpose needs, then delete or anonymise it, unless Swedish law requires a longer period.",
+        "title": "7. Per quanto tempo conserviamo i dati",
+        "body": "Conserviamo i dati solo per il tempo necessario allo scopo, poi li cancelliamo o li anonimizziamo, salvo che la legge svedese richieda un periodo più lungo.",
         "items": [
-          "Account and profile data stay while the account is open. You can delete the account from Profile.",
-          "After deletion we may keep hashed consent events and append-only verification logs as an audit trail. A handledare enrollment is revoked, not erased.",
-          "Teaching-licence files stay until the review ends or the account is deleted.",
-          "Support email stays as long as the request needs.",
-          "Technical logs stay for a limited security period.",
-          "Assistant messages are processed to answer you. We do not keep a public chat history on your profile."
+          "I dati di account e profilo restano finché l'account è aperto. Puoi cancellare l'account da Profilo.",
+          "Dopo la cancellazione possiamo conservare eventi di consenso con hash e log di verifica solo in appendice come traccia di audit. Un'iscrizione handledare è revocata, non cancellata.",
+          "I file di licenza di insegnamento restano fino alla fine dell'esame o alla cancellazione dell'account.",
+          "Le email di supporto restano per il tempo necessario alla richiesta.",
+          "I log tecnici restano per un periodo di sicurezza limitato.",
+          "I messaggi all'assistente sono trattati per risponderti. Non teniamo una cronologia chat pubblica sul tuo profilo."
         ]
       },
       "7": {
-        "title": "8. Your rights",
-        "body": "Under the GDPR you may request access, rectification, erasure, restriction, objection, and data portability where the legal conditions are met. Where we rely on consent you may withdraw it at any time. Withdrawal does not affect processing that already happened.",
+        "title": "8. I tuoi diritti",
+        "body": "Ai sensi del GDPR puoi chiedere accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei dati ove ne ricorrano i presupposti. Ove ci basiamo sul consenso, puoi revocarlo in qualsiasi momento. La revoca non pregiudica il trattamento già avvenuto.",
         "items": [
-          "Delete your account from Profile. That is the self-service erasure path.",
-          "Write to frank@drivelinkup.com for access, correction, or another rights request.",
-          "Object to processing based on legitimate interest, including the assistant, and we will stop unless we have a compelling ground to continue.",
-          "Lodge a complaint with Integritetsskyddsmyndigheten (IMY), https://www.imy.se."
+          "Cancella l'account da Profilo. È il percorso di cancellazione self-service.",
+          "Scrivi a frank@drivelinkup.com per accesso, correzione o un'altra richiesta sui diritti.",
+          "Opponiti al trattamento basato sull'interesse legittimo, incluso l'assistente, e interromperemo salvo un motivo prevalente per continuare.",
+          "Presenta un reclamo a Integritetsskyddsmyndigheten (IMY), https://www.imy.se."
         ]
       },
       "8": {
-        "title": "9. Age",
-        "body": "DriveLinkUp is for people aged 16 and over. It is not a service for children. We do not knowingly create accounts for anyone under 16. If you believe a child has an account, write to frank@drivelinkup.com and we will close it.",
+        "title": "9. Età",
+        "body": "DriveLinkUp è per persone di 16 anni e oltre. Non è un servizio per bambini. Non creiamo consapevolmente account per chi ha meno di 16 anni. Se ritieni che un minore abbia un account, scrivi a frank@drivelinkup.com e lo chiuderemo.",
         "items": []
       },
       "9": {
-        "title": "10. Automated decisions",
-        "body": "We do not make solely automated decisions that produce legal effects or similarly significant effects. The 16+ check is a simple age rule from the date you enter.",
+        "title": "10. Decisioni automatizzate",
+        "body": "Non prendiamo decisioni basate unicamente sul trattamento automatizzato che producano effetti giuridici o analogamente significativi. Il controllo 16+ è una semplice regola di età dalla data che inserisci.",
         "items": []
       },
       "10": {
-        "title": "11. Schools you contact",
-        "body": "Contact the school is between you and the school. If you send them your name, email, or phone number, that school decides how to handle those details. DriveLinkUp is not their processor for that conversation.",
+        "title": "11. Scuole che contatti",
+        "body": "Contatta la scuola è tra te e la scuola. Se invii nome, email o numero di telefono, quella scuola decide come trattare quei dati. DriveLinkUp non è il loro responsabile del trattamento per quella conversazione.",
         "items": []
       },
       "11": {
-        "title": "12. Changes",
-        "body": "We update this notice when the service or the processing changes. The date and version above are the current ones. A material change bumps the version and the cookie banner asks again. Questions: frank@drivelinkup.com.",
+        "title": "12. Modifiche",
+        "body": "Aggiorniamo questa informativa quando il servizio o il trattamento cambiano. La data e la versione sopra sono quelle attuali. Una modifica sostanziale alza la versione e il banner cookie chiede di nuovo. Domande: frank@drivelinkup.com.",
         "items": []
       },
       "12": {
-        "title": "13. How we collect data",
-        "body": "Like other directories, we collect data in three ways. We only use each source for the purposes in this notice.",
+        "title": "13. Come raccogliamo i dati",
+        "body": "Come altri elenchi, raccogliamo dati in tre modi. Usiamo ogni fonte solo per le finalità di questa informativa.",
         "items": [
-          "You give it to us: account details, the date of birth you enter, photos, school onboarding, a teaching-licence file, handledare attestation, support messages, and assistant questions.",
-          "It is collected automatically when you use the site: technical logs, cookie choice, and approximate coordinates if you click Use my location.",
-          "We receive it from others: Google if you sign in with Google; a school's public website for prices and listing facts; Google for reviews we display; and a school you write to, if they reply to us about that message."
+          "Ce li dai tu: dati dell'account, la data di nascita che inserisci, foto, onboarding scuola, un file di licenza di insegnamento, attestazione handledare, messaggi di supporto e domande all'assistente.",
+          "Vengono raccolti automaticamente quando usi il sito: log tecnici, scelta cookie e coordinate approssimative se fai clic su Use my location.",
+          "Li riceviamo da altri: Google se accedi con Google; il sito pubblico di una scuola per prezzi e fatti della scheda; Google per le recensioni che mostriamo; e una scuola a cui scrivi, se ci risponde su quel messaggio."
         ]
       },
       "13": {
-        "title": "14. What is public on a listing",
-        "body": "A school listing is public. Anyone can see the school's name, city, published prices, categories, bio, photo, and Google reviews we display. Your learner account, date of birth, password, teaching-licence file, and support messages are not shown on the public listing.",
+        "title": "14. Cosa è pubblico su una scheda",
+        "body": "Una scheda scuola è pubblica. Chiunque può vedere nome della scuola, città, prezzi pubblicati, categorie, bio, foto e recensioni Google che mostriamo. Il tuo account allievo, la data di nascita, la password, il file di licenza di insegnamento e i messaggi di supporto non sono mostrati sulla scheda pubblica.",
         "items": [
-          "If you run a school listing, do not put another person's private details in the public bio.",
-          "We may hide or remove a listing that is inaccurate, unlawful, or that we must take down to protect users or comply with law."
+          "Se gestisci una scheda scuola, non inserire dati privati di un'altra persona nella bio pubblica.",
+          "Possiamo nascondere o rimuovere una scheda inesatta, illecita o che dobbiamo togliere per proteggere gli utenti o rispettare la legge."
         ]
       },
       "14": {
-        "title": "15. Security",
-        "body": "No site can promise perfect security. We use administrative and technical measures that fit a service of this size: hashed passwords, access limited to people who operate the site, HTTPS, and storage of uploads with our hosting vendors. If we become aware of a personal-data breach that must be notified under the GDPR, we will notify IMY and affected people when the law requires it.",
+        "title": "15. Sicurezza",
+        "body": "Nessun sito può promettere una sicurezza perfetta. Usiamo misure amministrative e tecniche adatte a un servizio di questa dimensione: password con hash, accesso limitato a chi opera il sito, HTTPS e archiviazione dei file caricati presso i nostri fornitori di hosting. Se veniamo a conoscenza di una violazione di dati personali da notificare ai sensi del GDPR, notificheremo IMY e le persone interessate quando la legge lo richiede.",
         "items": []
       },
       "15": {
-        "title": "16. Other sites and apps",
-        "body": "Listings may link to a school's website, maps, or social profiles. Those sites have their own controllers and policies. DriveLinkUp is not responsible for how they handle personal data. The same applies if you leave a review on Google or open an ad that Google shows after marketing consent.",
+        "title": "16. Altri siti e app",
+        "body": "Le schede possono collegare al sito della scuola, a mappe o a profili social. Quei siti hanno titolari e informative propri. DriveLinkUp non è responsabile di come trattano i dati personali. Lo stesso vale se lasci una recensione su Google o apri un annuncio che Google mostra dopo il consenso al marketing.",
         "items": []
       }
     },
     "cta": {
-      "findProviders": "Find a driving school",
-      "contact": "Contact support"
+      "findProviders": "Trova un'autoscuola",
+      "contact": "Contatta il supporto"
     }
   },
   "consentBanner": {
-    "intro": "We use cookies that the directory needs to run. With your consent we may also load ads. You can change your choice at any time.",
-    "essentialLabel": "Essential",
-    "essentialBody": "Sign-in, security, language, and remembering this choice. Required — cannot be turned off.",
-    "analyticsLabel": "Analytics",
-    "analyticsBody": "No separate analytics tool runs today. This toggle is reserved. Leave it off unless you want that processing if we add it later.",
+    "intro": "Usiamo cookie di cui l'elenco ha bisogno per funzionare. Con il tuo consenso possiamo anche caricare annunci. Puoi cambiare la scelta in qualsiasi momento.",
+    "essentialLabel": "Essenziali",
+    "essentialBody": "Accesso, sicurezza, lingua e ricordo di questa scelta. Obbligatori — non si possono disattivare.",
+    "analyticsLabel": "Analitica",
+    "analyticsBody": "Oggi non è attivo uno strumento di analitica separato. Questo interruttore è riservato. Lascialo spento a meno che tu non voglia quel trattamento se lo aggiungeremo in seguito.",
     "marketingLabel": "Marketing",
-    "marketingBody": "Google AdSense, which can show ads and set Google cookies. Loads only if you accept.",
-    "acceptAll": "Accept all",
-    "rejectNonEssential": "Reject non-essential",
-    "customize": "Customize",
-    "save": "Save my choice",
-    "saved": "Your cookie choice is saved.",
-    "error": "Could not save your cookie choice — try again.",
-    "privacy": "Privacy policy"
+    "marketingBody": "Google AdSense, che può mostrare annunci e impostare cookie Google. Si carica solo se accetti.",
+    "acceptAll": "Accetta tutti",
+    "rejectNonEssential": "Rifiuta i non essenziali",
+    "customize": "Personalizza",
+    "save": "Salva la mia scelta",
+    "saved": "La tua scelta sui cookie è salvata.",
+    "error": "Impossibile salvare la scelta sui cookie — riprova.",
+    "privacy": "Informativa sulla privacy"
   },
   "consentForm": {
     "signupCheckbox": "I have read and agree to the Privacy Policy.",
-    "signupCheckboxLinkText": "Privacy policy",
+    "signupCheckboxLinkText": "Informativa sulla privacy",
     "signupCheckboxError": "Tick the box to confirm you've read the Privacy Policy.",
     "licenseCheckbox": "I agree that DriveLinkUp may store the teaching-licence file I upload, and related personal data, so it can review the listing. This is not an automatic check with Transportstyrelsen.",
     "licenseCheckboxError": "Tick the box to confirm you consent to processing your licence data."
@@ -2320,25 +2327,25 @@
   },
   "cancellationPolicy": {
     "tierBadge": {
-      "flexible": "Flexible",
-      "moderate": "Moderate",
-      "strict": "Strict"
+      "flexible": "Flessibile",
+      "moderate": "Moderata",
+      "strict": "Rigorosa"
     },
     "flexible": {
-      "name": "Flexible",
+      "name": "Flessibile",
       "summary": "Full refund at least 24 hours before the lesson. Within 24 hours, the full lesson fee is retained.",
       "fullRefundBefore": "Full refund when you cancel at least 24 hours before the lesson.",
       "noRefundAfter": "Within 24 hours, the full lesson fee is retained."
     },
     "moderate": {
-      "name": "Moderate",
+      "name": "Moderata",
       "summary": "Full refund at least 120 hours before the lesson. From 120 to 24 hours, a 50% fee applies. Within 24 hours, the full lesson fee is retained.",
       "fullRefundBefore": "Full refund when you cancel at least 120 hours before the lesson.",
       "partialBetween": "From 120 to 24 hours before the lesson, a 50% fee is retained.",
       "noRefundAfter": "Within 24 hours, the full lesson fee is retained."
     },
     "strict": {
-      "name": "Strict",
+      "name": "Rigorosa",
       "summary": "Full refund at least 168 hours before the lesson. From 168 to 24 hours, a 50% fee applies. Within 24 hours, the full lesson fee is retained.",
       "fullRefundBefore": "Full refund when you cancel at least 168 hours before the lesson.",
       "partialBetween": "From 168 to 24 hours before the lesson, a 50% fee is retained.",
@@ -2349,14 +2356,14 @@
     "editor": {
       "title": "Cancellation policy",
       "description": "Pick the tier that fits your schedule. The fee schedule is shown to learners before they confirm a booking, and is snapshotted onto every booking so a later change can't retroactively shift a completed booking's refund.",
-      "flexibleLabel": "Flexible",
+      "flexibleLabel": "Flessibile",
       "flexibleSummary": "Full refund up to 24 hours before the lesson. 100% fee within 24 hours.",
-      "moderateLabel": "Moderate",
+      "moderateLabel": "Moderata",
       "moderateSummary": "Full refund up to 5 days before the lesson. 50% fee between 5 days and 24 hours. 100% fee within 24 hours.",
-      "strictLabel": "Strict",
+      "strictLabel": "Rigorosa",
       "strictSummary": "Full refund up to 7 days before the lesson. 50% fee between 7 days and 24 hours. 100% fee within 24 hours.",
       "save": "Save policy",
-      "saving": "Saving…",
+      "saving": "Salvataggio…",
       "saved": "Cancellation policy saved",
       "error": "Could not save the cancellation policy",
       "noInstructorRow": "You don't have a listed school profile yet — finish onboarding at /instructors/new first, then come back here to set your cancellation policy."
@@ -2367,42 +2374,42 @@
       "eyebrow": "",
       "title": "Trova un'autoscuola vicino a te.",
       "body": "Autoscuole che, secondo il loro sito, formano per AM, A, B o BE. Il prezzo appare quando la scuola lo pubblica.",
-      "primaryCta": "Find a school",
-      "instructorCta": "I work at a driving school",
-      "marketplaceTag": "Light vehicles · Driving schools",
-      "schoolCta": "I run a school",
-      "panelEyebrow": "How it works",
-      "panelTitle": "The school stands behind the lesson",
-      "panelBody": "Browse by city and category. Open the school and contact them.",
+      "primaryCta": "Trova una scuola",
+      "instructorCta": "Lavoro in un'autoscuola",
+      "marketplaceTag": "Veicoli leggeri · Autoscuole",
+      "schoolCta": "Gestisco una scuola",
+      "panelEyebrow": "Come funziona",
+      "panelTitle": "La scuola è responsabile della lezione",
+      "panelBody": "Sfoglia per città e categoria. Apri la scuola e contattala.",
       "panelPoints": {
-        "directory": "The school's details and published price.",
-        "prices": "A published price when the school has added one.",
-        "schools": "The school publishes what it is permitted to offer."
+        "directory": "I dati della scuola e il prezzo pubblicato.",
+        "prices": "Un prezzo pubblicato quando la scuola ne ha aggiunto uno.",
+        "schools": "La scuola pubblica ciò che è autorizzata a offrire."
       },
-      "contactCta": "Start a conversation",
+      "contactCta": "Inizia una conversazione",
       "assurance": {
-        "price": "Published price in kronor",
-        "safety": "Ask the school about their permit",
-        "choice": "Free to browse"
+        "price": "Prezzo pubblicato in corone",
+        "safety": "Chiedi alla scuola del suo permesso",
+        "choice": "Sfoglia gratis"
       },
-      "previewEyebrow": "The decision, in one place",
-      "previewTitle": "School → city → price",
-      "imageAlt": "A driver holding the steering wheel on a dusk road",
+      "previewEyebrow": "La decisione, in un solo posto",
+      "previewTitle": "Scuola → città → prezzo",
+      "imageAlt": "Un conducente al volante su una strada al crepuscolo",
       "previewLines": {
-        "profile": "Compare categories, language and location.",
-        "price": "Review the school's published price — no added fees.",
-        "time": "Open the school and read what is on the listing."
+        "profile": "Confronta categorie, lingua e località.",
+        "price": "Consulta il prezzo pubblicato dalla scuola — senza costi aggiuntivi.",
+        "time": "Apri la scuola e leggi cosa c'è sulla scheda."
       },
       "search": {
-        "label": "Search driving schools",
-        "categoryLabel": "Licence",
-        "cityLabel": "City",
-        "cityAny": "All cities",
-        "submit": "Search",
+        "label": "Cerca autoscuole",
+        "categoryLabel": "Patente",
+        "cityLabel": "Città",
+        "cityAny": "Tutte le città",
+        "submit": "Cerca",
         "categories": {
-          "B": "Car · B",
-          "A": "Motorcycle · A",
-          "BE": "Car + trailer · BE"
+          "B": "Auto · B",
+          "A": "Moto · A",
+          "BE": "Auto + rimorchio · BE"
         },
         "cities": {
           "stockholm": "Stockholm",
@@ -2441,9 +2448,9 @@
         }
       },
       "popular": {
-        "label": "Popular:",
+        "label": "Popolari:",
         "links": {
-          "categoryB": "Car · B",
+          "categoryB": "Auto · B",
           "stockholm": "Stockholm",
           "goteborg": "Gothenburg",
           "malmo": "Malmö",
@@ -2451,24 +2458,24 @@
           "sydney": "Sydney",
           "london": "London",
           "paris": "Paris",
-          "categoryA": "Motorcycle · A",
-          "heavy": "Heavy vehicles"
+          "categoryA": "Moto · A",
+          "heavy": "Veicoli pesanti"
         }
       },
-      "lead": "Free. You pay the school's price.",
-      "note": "DriveLinkUp is a catalog. We do not take payment for a catalog listing.",
-      "schoolLink": "I run a school",
+      "lead": "Gratuito. Paghi il prezzo della scuola.",
+      "note": "DriveLinkUp è un catalogo. Non incassiamo pagamenti per una scheda del catalogo.",
+      "schoolLink": "Gestisco una scuola",
       "chips": {
-        "price": "Published price in kronor",
-        "cancellation": "Contact the school for terms"
+        "price": "Prezzo pubblicato in corone",
+        "cancellation": "Contatta la scuola per le condizioni"
       }
     },
     "quickLinks": {
-      "label": "Start with",
+      "label": "Inizia da",
       "categories": {
-        "B": "Car · B",
-        "A": "Motorcycle · A",
-        "BE": "Car with trailer · BE"
+        "B": "Auto · B",
+        "A": "Moto · A",
+        "BE": "Auto con rimorchio · BE"
       },
       "cities": {
         "stockholm": "Stockholm",
@@ -2478,60 +2485,60 @@
       }
     },
     "how": {
-      "eyebrow": "How it works",
-      "title": "How it works.",
+      "eyebrow": "Come funziona",
+      "title": "Come funziona.",
       "body": "",
       "steps": {
         "choose": {
-          "title": "Choose a place",
-          "body": "Car, truck, bus or trailer."
+          "title": "Scegli un luogo",
+          "body": "Auto, camion, autobus o rimorchio."
         },
         "compare": {
-          "title": "Read the price",
-          "body": "The price is shown when the school publishes it."
+          "title": "Leggi il prezzo",
+          "body": "Il prezzo è visibile quando la scuola lo pubblica."
         },
         "book": {
-          "title": "Contact the school",
-          "body": "You contact the school. DriveLinkUp does not book the lesson."
+          "title": "Contatta la scuola",
+          "body": "Contatti la scuola. DriveLinkUp non prenota la lezione."
         }
       }
     },
     "providers": {
       "eyebrow": "",
-      "title": "Schools",
-      "cta": "All schools"
+      "title": "Scuole",
+      "cta": "Tutte le scuole"
     },
     "assurance": {
-      "eyebrow": "How the directory works",
-      "title": "Nothing hidden in the fine print.",
+      "eyebrow": "Come funziona l'elenco",
+      "title": "Niente nascosto nelle note in piccolo.",
       "cards": {
         "price": {
-          "title": "The published price",
-          "body": "When a school has published a price, you see it in kronor. DriveLinkUp does not add a fee."
+          "title": "Il prezzo pubblicato",
+          "body": "Quando una scuola ha pubblicato un prezzo, lo vedi in corone. DriveLinkUp non aggiunge un costo."
         },
         "safety": {
-          "title": "A listing is a catalog card",
-          "body": "A catalog card is not a teaching permit and not an agreement. Confirm permission, lesson setup and terms with the school."
+          "title": "Una scheda è una carta del catalogo",
+          "body": "Una scheda di catalogo non è un permesso di insegnamento e non è un accordo. Conferma permesso, organizzazione della lezione e condizioni con la scuola."
         },
         "cancellation": {
-          "title": "Contact the school",
-          "body": "Lessons are arranged with the school. Contact the school opens their inbox or website. DriveLinkUp does not take payment for a catalog listing."
+          "title": "Contatta la scuola",
+          "body": "Le lezioni si organizzano con la scuola. Contatta la scuola apre la loro casella o il loro sito. DriveLinkUp non incassa pagamenti per una scheda del catalogo."
         }
       }
     },
     "entry": {
       "eyebrow": "",
-      "title": "Find a school.",
-      "body": "It's free.",
-      "learnerCta": "Find a school",
-      "providerCta": "I run a school"
+      "title": "Trova una scuola.",
+      "body": "È gratuito.",
+      "learnerCta": "Trova una scuola",
+      "providerCta": "Gestisco una scuola"
     },
     "footer": {
-      "prompt": "Need more context?",
-      "label": "Helpful links",
+      "prompt": "Serve più contesto?",
+      "label": "Link utili",
       "faq": "FAQ",
       "privacy": "Privacy",
-      "contact": "Contact support"
+      "contact": "Contatta il supporto"
     }
   },
   "forSkolor": {
@@ -2539,53 +2546,53 @@
       "title": "Per le autoscuole",
       "description": "Registra l’autoscuola su DriveLinkUp. Gli allievi confrontano il prezzo e ti contattano."
     },
-    "badge": "FOR DRIVING SCHOOLS",
-    "title": "Your school. Your price. Your call.",
-    "body": "Publish the licences you are permitted to teach. Learners compare your price and contact you.",
-    "benefit1": "Learners searching for lessons in your city can find you.",
-    "benefit2": "The learner pays your published price. We add no learner fee.",
-    "benefit3": "Invite the instructors who teach at your school.",
-    "ctaSignedOut": "Create school account",
-    "ctaSignIn": "Sign in",
-    "timeNote": "The account is quick to create. Verification happens after.",
-    "signedInContext": "Signed in as {email}. Fill in the details below to register your school.",
-    "pendingTitle": "You've been invited to a driving school",
-    "pendingBody": "You've been invited as {role} to {school}. Open the invite link in your email to join — if you can't find it, check your spam folder.",
-    "pendingRoleOwner": "owner",
-    "pendingRoleStaff": "team member",
+    "badge": "PER LE AUTOSCUOLE",
+    "title": "La tua scuola. Il tuo prezzo. La tua decisione.",
+    "body": "Pubblica le patenti che sei autorizzato a insegnare. Gli allievi confrontano il tuo prezzo e ti contattano.",
+    "benefit1": "Gli allievi che cercano lezioni nella tua città possono trovarti.",
+    "benefit2": "L'allievo paga il tuo prezzo pubblicato. Non aggiungiamo un costo per l'allievo.",
+    "benefit3": "Invita gli istruttori che insegnano nella tua scuola.",
+    "ctaSignedOut": "Crea account scuola",
+    "ctaSignIn": "Accedi",
+    "timeNote": "L'account si crea in poco tempo. La verifica avviene dopo.",
+    "signedInContext": "Accesso come {email}. Compila i dati sotto per registrare la tua scuola.",
+    "pendingTitle": "Sei stato invitato in un'autoscuola",
+    "pendingBody": "Sei stato invitato come {role} a {school}. Apri il link di invito nella tua email per unirti — se non lo trovi, controlla la cartella spam.",
+    "pendingRoleOwner": "titolare",
+    "pendingRoleStaff": "membro del team",
     "form": {
-      "name": "School name",
-      "organizationNumber": "Organisation number",
-      "organizationNumberHint": "Format: 556xxx-xxxx",
-      "city": "City",
-      "address": "Address",
-      "postcode": "Postcode",
-      "submit": "Register school",
-      "submitting": "Registering…",
-      "errorDuplicate": "A school with this organisation number is already registered.",
-      "genericError": "Something went wrong. Please try again."
+      "name": "Nome della scuola",
+      "organizationNumber": "Numero di organizzazione",
+      "organizationNumberHint": "Formato: 556xxx-xxxx",
+      "city": "Città",
+      "address": "Indirizzo",
+      "postcode": "CAP",
+      "submit": "Registra scuola",
+      "submitting": "Registrazione…",
+      "errorDuplicate": "Una scuola con questo numero di organizzazione è già registrata.",
+      "genericError": "Qualcosa è andato storto. Riprova."
     }
   },
   "schoolProfile": {
-    "title": "Driving school",
-    "verifiedBadge": "Verified",
-    "pendingBadge": "Verification in progress",
-    "listedBadge": "Directory listing",
-    "instructorsHeading": "Instructors",
-    "noInstructors": "No instructors yet",
-    "contactHeading": "Contact"
+    "title": "Autoscuola",
+    "verifiedBadge": "Verificato",
+    "pendingBadge": "Verifica in corso",
+    "listedBadge": "Scheda elenco",
+    "instructorsHeading": "Istruttori",
+    "noInstructors": "Ancora nessun istruttore",
+    "contactHeading": "Contatto"
   },
   "instructorAffiliation": {
     "belongsTo": "Belongs to {name}"
   },
   "dashboardSchool": {
     "title": "School dashboard",
-    "eyebrow": "Driving school",
+    "eyebrow": "Autoscuola",
     "welcome": "Welcome, {name}",
     "orgNumber": "Org. no. {number}",
     "verificationDraft": "Draft",
     "verificationPending": "In review",
-    "verificationApproved": "Verified",
+    "verificationApproved": "Verificato",
     "connectionTitle": "Partner connection",
     "connectionBody": "Availability sync does not enable instant booking. Booking stays on the school's own schedule until transactional booking is certified.",
     "connectionNone": "No production partner connection is attached to this school.",
@@ -2633,7 +2640,7 @@
       "history": "Already granted (not pre-selected): {scopes}",
       "nothingPreselected": "No scope is pre-selected."
     },
-    "emptyInstructors": "No instructors yet",
+    "emptyInstructors": "Ancora nessun istruttore",
     "inviteInstructor": "Invite instructor",
     "comingSoon": "Not available on the directory yet",
     "bookings": {
@@ -2644,7 +2651,7 @@
       "empty": "No school bookings yet.",
       "emptyBody": "When affiliated instructors take bookings, they appear here.",
       "loadError": "We couldn't load school bookings just now.",
-      "retry": "Try again",
+      "retry": "Riprova",
       "open": "Open",
       "withInstructor": "with {name}",
       "status": {
@@ -2701,7 +2708,7 @@
     "stateC": {
       "title": "Payouts active",
       "body": "Payments are sent to your bank account after each completed lesson.",
-      "badge": "Verified",
+      "badge": "Verificato",
       "dashboardCta": "Open Stripe Dashboard"
     },
     "stateD": {
@@ -2725,7 +2732,7 @@
     "stateC": {
       "title": "Payouts active",
       "body": "Payouts are sent to your bank account after each completed lesson.",
-      "badge": "Verified",
+      "badge": "Verificato",
       "dashboardCta": "Open Stripe Dashboard"
     },
     "stateD": {
@@ -2750,12 +2757,12 @@
   },
   "schoolSettings": {
     "title": "School settings",
-    "name": "School name",
-    "orgNumber": "Organisation number",
+    "name": "Nome della scuola",
+    "orgNumber": "Numero di organizzazione",
     "orgNumberLocked": "Organisation number can only be changed via support.",
-    "address": "Address",
-    "postcode": "Postcode",
-    "city": "City",
+    "address": "Indirizzo",
+    "postcode": "CAP",
+    "city": "Città",
     "contactEmail": "Contact email",
     "contactPhone": "Contact phone",
     "save": "Save",
@@ -2763,9 +2770,9 @@
     "errorGeneric": "Could not save. Try again."
   },
   "schoolInstructors": {
-    "title": "Instructors",
+    "title": "Istruttori",
     "inviteCta": "Invite instructor",
-    "emptyTitle": "No instructors yet",
+    "emptyTitle": "Ancora nessun istruttore",
     "emptyBody": "Invite instructors so they join the school and appear in the catalogue.",
     "pendingTitle": "Pending invitations",
     "roleOwner": "Owner",
@@ -2773,7 +2780,7 @@
     "joinedAt": "Joined {date}",
     "resend": "Resend",
     "cancel": "Cancel",
-    "revoke": "Remove",
+    "revoke": "Rimuovi",
     "revokeConfirm": "Remove this instructor from the school?",
     "removeSuccess": "Instructor removed",
     "inviteSuccess": "Invitation sent",
@@ -2805,17 +2812,17 @@
     "eyebrow": "For people who teach at a school",
     "title": "Instructors come in through the school.",
     "body": "The school sends the invite. The school's permission sets category, price and terms. An instructor does not take payment on DriveLinkUp apart from the school.",
-    "primaryCta": "Register the school",
+    "primaryCta": "Registra la scuola",
     "learnerCta": "Browse light vehicles",
-    "rolesEyebrow": "How it works",
+    "rolesEyebrow": "Come funziona",
     "roles": {
       "trafiklarare": {
-        "title": "The school's listing",
+        "title": "La scheda della scuola",
         "body": "What gets published is set by the school: licence, price, times and cancellation. Only what the school is permitted to teach.",
         "expectation": "An instructor cannot take payment here without belonging to the school."
       },
       "commission": {
-        "title": "Listing is free",
+        "title": "L'inserimento è gratuito",
         "body": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. The school pays its instructors itself.",
         "expectation": "No learner fee. No promise of how many people book."
       }
@@ -2849,25 +2856,25 @@
       "cancelled_full_refund": "Cancelled",
       "cancelled_partial": "Cancelled"
     },
-    "providerLabel": "Driving school",
-    "cityLabel": "City",
-    "categoryLabel": "Licence category",
+    "providerLabel": "Autoscuola",
+    "cityLabel": "Città",
+    "categoryLabel": "Categoria di patente",
     "durationLabel": "Lesson length",
     "duration": "{minutes} minutes",
     "category": {
       "AM": "AM",
       "A1": "A1",
       "A2": "A2",
-      "A": "Motorcycle",
-      "B": "Car",
-      "BE": "Trailer"
+      "A": "Moto",
+      "B": "Auto",
+      "BE": "Rimorchio"
     },
     "cancellationTitle": "Cancellation terms",
     "cancellationBody": "{tier}: full refund at least {hours} hours before the lesson.",
     "tier": {
-      "flexible": "Flexible",
-      "moderate": "Moderate",
-      "strict": "Strict"
+      "flexible": "Flessibile",
+      "moderate": "Moderata",
+      "strict": "Rigorosa"
     },
     "heldConfirmation": "Your payment is held in escrow until the lesson is completed.",
     "paidConfirmation": "Payment has been received and your booking is confirmed.",
@@ -2880,7 +2887,7 @@
     "cancelledBody": "This booking is no longer active.",
     "accessTitle": "Booking access expired",
     "accessBody": "Open the latest booking link from your email, or sign in to view a booking that belongs to you.",
-    "payClosedTitle": "Contact the school",
+    "payClosedTitle": "Contatta la scuola",
     "payClosedBody": "DriveLinkUp does not book the lesson. Contact the school opens their inbox or website.",
     "payCta": "Continue to hosted checkout",
     "openingCheckout": "Opening checkout…",
@@ -2907,7 +2914,7 @@
     "loading": "Loading messages…",
     "emptyTitle": "No conversations yet",
     "emptyBody": "Open a message thread from one of your bookings to keep the conversation on DriveLinkUp.",
-    "retry": "Try again",
+    "retry": "Riprova",
     "errorTitle": "Messages could not be loaded",
     "selectPrompt": "Choose a conversation to read",
     "bookingContextTitle": "Booking context",
@@ -2919,10 +2926,10 @@
     "read": "Read",
     "noMessages": "No messages yet. Say hello to your school.",
     "sentByYou": "You",
-    "messageLabel": "Message",
+    "messageLabel": "Messaggio",
     "placeholder": "Write a plain-text message…",
     "send": "Send message",
-    "sending": "Sending…",
+    "sending": "Invio in corso…",
     "sendError": "Your message could not be sent. Try again.",
     "blockedTitle": "Let’s keep this on DriveLinkUp",
     "blockedBody": "This message looks like it includes contact details or an off-platform payment request. We did not save it.",
@@ -2947,7 +2954,7 @@
     "detailsLabel": "Details (optional)",
     "detailsPlaceholder": "Add a short note",
     "submitReport": "Send report",
-    "reporting": "Sending…",
+    "reporting": "Invio in corso…",
     "cancel": "Cancel",
     "reportSuccess": "Thanks — your report was sent.",
     "reportError": "The report could not be sent. Try again.",
@@ -2973,7 +2980,7 @@
     "eyebrow": "Confirm booking",
     "title": "Accept booking",
     "bookingId": "Booking ID: {id}",
-    "nameLabel": "Your name",
+    "nameLabel": "Il tuo nome",
     "submit": "Accept the booking",
     "submitting": "Accepting…",
     "continueToPayment": "Open the booking",
@@ -2992,14 +2999,14 @@
     "declinedBody": "No payment was collected. The learner has been notified and can choose another school.",
     "eyebrow": "Decline booking",
     "title": "Decline booking",
-    "nameLabel": "Your name",
+    "nameLabel": "Il tuo nome",
     "reasonLabel": "Optional reason (sent to the learner)",
     "reasonPlaceholder": "For example: the time is no longer available.",
     "submit": "Decline booking",
     "submitting": "Declining…"
   },
   "bookingCancel": {
-    "eyebrow": "Cancellation",
+    "eyebrow": "Cancellazione",
     "title": "Review cancellation",
     "schedule": "Lesson time: {date}",
     "policyEyebrow": "Saved cancellation policy",
@@ -3016,7 +3023,7 @@
       "none": "No cancellation charge is shown for this timing."
     },
     "form": {
-      "nameLabel": "Your name",
+      "nameLabel": "Il tuo nome",
       "roleLabel": "Who is cancelling?",
       "roles": {
         "learner": "Learner",
@@ -3077,7 +3084,7 @@
     "download": "Download PDF",
     "print": "Print receipt",
     "backToBooking": "Back to booking",
-    "retry": "Try again",
+    "retry": "Riprova",
     "errorEyebrow": "Receipt unavailable",
     "errorTitle": "We couldn't load this receipt",
     "errorBody": "The receipt may not be issued yet, or this link may have expired.",
@@ -3118,10 +3125,10 @@
     }
   },
   "handledareDirectory": {
-    "eyebrow": "Swedish legal guidance",
-    "title": "Understand the handledare path",
-    "description": "Learn how private handledare and övningskörning differ from driving-school listings.",
-    "lead": "Handledare are private supervisors, not school listings. Review the applicable Swedish requirements before practice."
+    "eyebrow": "Indicazioni legali svedesi",
+    "title": "Capire il percorso handledare",
+    "description": "Come handledare privato e övningskörning differiscono dalle schede delle autoscuole.",
+    "lead": "Gli handledare sono supervisori privati, non schede di scuole. Controlla i requisiti svedesi prima di esercitarti."
   },
   "providerOperations": {
     "instructorTitle": "Driving-school workspace",
@@ -3164,7 +3171,7 @@
     "open": "Open details",
     "errorTitle": "School data could not be loaded",
     "errorBody": "Try again. If the problem continues, finish school setup or contact support.",
-    "retry": "Try again",
+    "retry": "Riprova",
     "actionError": "The action could not be completed. Refresh and try again.",
     "setup": {
       "title": "Finish host setup",
@@ -3187,45 +3194,45 @@
     "meta": {
       "title": "Autoscuole nel sud della Svezia",
       "description": "Confronta autoscuole in Scania, Halland, Blekinge e Småland.",
-      "ogTitle": "Find your route through Southern Sweden",
-      "ogDescription": "Compare school listings near you."
+      "ogTitle": "Trova il tuo percorso nella Svezia meridionale",
+      "ogDescription": "Confronta le schede scuola vicino a te."
     },
     "hero": {
-      "eyebrow": "DriveLinkUp · Southern Sweden",
-      "title": "Find the right route through Southern Sweden.",
-      "body": "Compare driving schools in the region by price and city.",
-      "primaryCta": "Find a driving school",
-      "secondaryCta": "Explore the regions"
+      "eyebrow": "DriveLinkUp · Svezia meridionale",
+      "title": "Trova il percorso giusto nella Svezia meridionale.",
+      "body": "Confronta le autoscuole della regione per prezzo e città.",
+      "primaryCta": "Trova un'autoscuola",
+      "secondaryCta": "Esplora le regioni"
     },
     "learnerGuide": {
-      "eyebrow": "For learners",
-      "title": "Make your next lesson easier to choose.",
-      "body": "Start where you are. Compare schools. Contact the school.",
+      "eyebrow": "Per gli allievi",
+      "title": "Rendi più facile scegliere la prossima lezione.",
+      "body": "Parti da dove sei. Confronta le scuole. Contatta la scuola.",
       "steps": {
         "choose": {
-          "title": "Choose your city",
-          "body": "Open a city near you to see available driving-school listings."
+          "title": "Scegli la tua città",
+          "body": "Apri una città vicina per vedere le schede autoscuola disponibili."
         },
         "compare": {
-          "title": "Compare with confidence",
-          "body": "Review price, language, availability, and each profile's approach before you decide."
+          "title": "Confronta con fiducia",
+          "body": "Consulta prezzo, lingua, disponibilità e l'approccio di ogni profilo prima di decidere."
         },
         "practice": {
-          "title": "Contact the school",
-          "body": "Write to the school and arrange the lesson with them."
+          "title": "Contatta la scuola",
+          "body": "Scrivi alla scuola e organizza la lezione con loro."
         }
       }
     },
     "regionNav": {
-      "eyebrow": "Regional guide",
-      "title": "Four regions. A clearer starting point.",
-      "body": "Jump straight to your part of Southern Sweden and find a local path to your next driving lesson.",
-      "jumpLabel": "Jump to region"
+      "eyebrow": "Guida regionale",
+      "title": "Quattro regioni. Un punto di partenza più chiaro.",
+      "body": "Vai subito alla tua zona della Svezia meridionale e trova un percorso locale per la prossima lezione di guida.",
+      "jumpLabel": "Vai alla regione"
     },
     "regions": {
       "skane": {
         "name": "Skåne",
-        "description": "City streets, coastal roads, and flexible lesson options. Start with Malmö or compare schools in another Skåne city.",
+        "description": "Strade di città, vie costiere e opzioni di lezione flessibili. Parti da Malmö o confronta le scuole in un'altra città dello Skåne.",
         "cities": {
           "malmo": {
             "label": "Malmö"
@@ -3246,7 +3253,7 @@
       },
       "halland": {
         "name": "Halland",
-        "description": "Plan lessons across coast, country roads, and growing towns. See which listed driving schools are close to your routine.",
+        "description": "Pianifica lezioni tra costa, strade di campagna e città in crescita. Vedi quali autoscuole in elenco sono vicine alla tua routine.",
         "cities": {
           "halmstad": {
             "label": "Halmstad"
@@ -3264,7 +3271,7 @@
       },
       "blekinge": {
         "name": "Blekinge",
-        "description": "Build a local practice-driving plan across Blekinge's towns and coastline.",
+        "description": "Costruisci un piano locale di pratica di guida tra le città e la costa del Blekinge.",
         "cities": {
           "karlskrona": {
             "label": "Karlskrona"
@@ -3282,7 +3289,7 @@
       },
       "smaland": {
         "name": "Småland",
-        "description": "From Jönköping to Kalmar and Växjö: choose a city, compare local options, and build confidence behind the wheel one step at a time.",
+        "description": "Da Jönköping a Kalmar e Växjö: scegli una città, confronta le opzioni locali e guadagna fiducia al volante un passo alla volta.",
         "cities": {
           "jonkoping": {
             "label": "Jönköping"
@@ -3303,66 +3310,66 @@
       }
     },
     "cta": {
-      "eyebrow": "Ready to start?",
-      "title": "Your next driving lesson may be closer than you think.",
-      "body": "Open the catalog to compare more cities, languages, and licence categories.",
-      "button": "See all driving schools",
-      "ariaLabel": "Open the full directory of driving-school listings"
+      "eyebrow": "Pronto a iniziare?",
+      "title": "La tua prossima lezione di guida potrebbe essere più vicina di quanto pensi.",
+      "body": "Apri il catalogo per confrontare più città, lingue e categorie di patente.",
+      "button": "Vedi tutte le autoscuole",
+      "ariaLabel": "Apri l'elenco completo delle schede autoscuola"
     },
     "ui": {
-      "loading": "Loading the regional guide…",
-      "error": "The regional guide could not load right now.",
-      "retry": "Try again",
-      "cityListingLabel": "Choose a city",
-      "cityLinkPrefix": "Find driving schools in",
-      "regionNavLabel": "Navigate between regions",
-      "backToRegions": "Back to regions",
-      "directoryLinkPrefix": "Open the school directory for"
+      "loading": "Caricamento della guida regionale…",
+      "error": "La guida regionale non è stata caricata in questo momento.",
+      "retry": "Riprova",
+      "cityListingLabel": "Scegli una città",
+      "cityLinkPrefix": "Trova autoscuole a",
+      "regionNavLabel": "Naviga tra le regioni",
+      "backToRegions": "Torna alle regioni",
+      "directoryLinkPrefix": "Apri l'elenco scuole per"
     }
   },
   "westernNorthernSwedenPage": {
     "meta": {
       "title": "Autoscuole nell’ovest e nel nord della Svezia",
       "description": "Confronta autoscuole da Göteborg a Kiruna.",
-      "ogTitle": "Find your driving route across Western and Northern Sweden",
-      "ogDescription": "Compare local school listings, then choose lessons that fit your city, schedule, and next step."
+      "ogTitle": "Trova il tuo percorso di guida nella Svezia occidentale e settentrionale",
+      "ogDescription": "Confronta le schede scuola locali, poi scegli lezioni adatte alla tua città, al tuo orario e al passo successivo."
     },
     "hero": {
-      "eyebrow": "DriveLinkUp · Western & Northern Sweden",
-      "title": "Find your route from the west to the north.",
-      "body": "From Gothenburg streets to northern winter roads, compare driving-school listings that serve the roads around your everyday life.",
-      "primaryCta": "Find a driving school",
-      "secondaryCta": "Explore the regions"
+      "eyebrow": "DriveLinkUp · Svezia occidentale e settentrionale",
+      "title": "Trova il tuo percorso da ovest a nord.",
+      "body": "Dalle strade di Göteborg alle vie invernali del nord, confronta le schede autoscuola che coprono le strade della tua vita quotidiana.",
+      "primaryCta": "Trova un'autoscuola",
+      "secondaryCta": "Esplora le regioni"
     },
     "learnerGuide": {
-      "eyebrow": "For learners",
-      "title": "A local starting point makes practice easier.",
-      "body": "Choose a nearby city, compare the details that matter, and build a practice-driving plan around your route and season.",
+      "eyebrow": "Per gli allievi",
+      "title": "Un punto di partenza locale rende più facile la pratica.",
+      "body": "Scegli una città vicina, confronta i dettagli che contano e costruisci un piano di pratica di guida intorno al tuo percorso e alla stagione.",
       "steps": {
         "choose": {
-          "title": "Start with your city",
-          "body": "Open a city near you to see available driving-school listings in the directory."
+          "title": "Inizia dalla tua città",
+          "body": "Apri una città vicina per vedere le schede autoscuola disponibili nell'elenco."
         },
         "compare": {
-          "title": "Compare the full picture",
-          "body": "Review price, language, availability, and profile details before choosing who fits your learning style."
+          "title": "Confronta il quadro completo",
+          "body": "Consulta prezzo, lingua, disponibilità e dettagli del profilo prima di scegliere chi si adatta al tuo modo di imparare."
         },
         "practice": {
-          "title": "Contact the school",
-          "body": "Write to the school and arrange the lesson with them."
+          "title": "Contatta la scuola",
+          "body": "Scrivi alla scuola e organizza la lezione con loro."
         }
       }
     },
     "regionNav": {
-      "eyebrow": "Regional guide",
-      "title": "Four regional starting points.",
-      "body": "Move from broad region to nearby city, then into the public school directory for the local options available to you.",
-      "jumpLabel": "Jump to region"
+      "eyebrow": "Guida regionale",
+      "title": "Quattro punti di partenza regionali.",
+      "body": "Passa dalla regione ampia a una città vicina, poi all'elenco pubblico delle scuole per le opzioni locali a tua disposizione.",
+      "jumpLabel": "Vai alla regione"
     },
     "regions": {
       "vastra-gotaland": {
         "name": "Västra Götaland",
-        "description": "Balance city traffic, ring roads, and open country routes. Start in Göteborg or compare schools across Borås, Trollhättan, and Skövde for a practical local route.",
+        "description": "Bilancia traffico cittadino, tangenziali e strade di campagna. Parti da Göteborg o confronta le scuole a Borås, Trollhättan e Skövde per un percorso locale pratico.",
         "cities": {
           "goteborg": {
             "label": "Göteborg"
@@ -3380,7 +3387,7 @@
       },
       "varmland": {
         "name": "Värmland",
-        "description": "Build steady skills across Karlstad streets, smaller towns, and longer country-road drives. Pick the place that makes regular practice realistic for you.",
+        "description": "Costruisci competenze solide tra le strade di Karlstad, i paesi più piccoli e i tragitti più lunghi in campagna. Scegli il posto che rende realistica una pratica regolare per te.",
         "cities": {
           "karlstad": {
             "label": "Karlstad"
@@ -3394,8 +3401,8 @@
         }
       },
       "gavleborg-vasternorrland": {
-        "name": "Gävleborg & Västernorrland",
-        "description": "Prepare for a mix of city traffic, coast, and longer distances. Find local options in Gävle, Sundsvall, Hudiksvall, or Örnsköldsvik and plan practice around your real journeys.",
+        "name": "Gävleborg e Västernorrland",
+        "description": "Preparati a un mix di traffico cittadino, costa e distanze più lunghe. Trova opzioni locali a Gävle, Sundsvall, Hudiksvall o Örnsköldsvik e pianifica la pratica intorno ai tuoi tragitti reali.",
         "cities": {
           "gavle": {
             "label": "Gävle"
@@ -3412,8 +3419,8 @@
         }
       },
       "vasterbotten-norrbotten": {
-        "name": "Västerbotten & Norrbotten",
-        "description": "Give yourself room to learn in changing light, weather, and road conditions. Compare schools in Umeå, Skellefteå, Luleå, and Kiruna for a practical local plan.",
+        "name": "Västerbotten e Norrbotten",
+        "description": "Datti spazio per imparare con luce, meteo e condizioni stradali che cambiano. Confronta le scuole a Umeå, Skellefteå, Luleå e Kiruna per un piano locale pratico.",
         "cities": {
           "umea": {
             "label": "Umeå"
@@ -3431,21 +3438,21 @@
       }
     },
     "cta": {
-      "eyebrow": "Ready to start?",
-      "title": "Your next lesson can begin with one nearby city.",
-      "body": "Open the catalog to compare cities, languages, licence categories, and published prices across Sweden.",
-      "button": "See all driving schools",
-      "ariaLabel": "Open the full directory of driving-school listings"
+      "eyebrow": "Pronto a iniziare?",
+      "title": "La tua prossima lezione può iniziare da una città vicina.",
+      "body": "Apri il catalogo per confrontare città, lingue, categorie di patente e prezzi pubblicati in tutta la Svezia.",
+      "button": "Vedi tutte le autoscuole",
+      "ariaLabel": "Apri l'elenco completo delle schede autoscuola"
     },
     "ui": {
-      "loading": "Loading the regional guide…",
-      "error": "The regional guide could not load right now.",
-      "retry": "Try again",
-      "cityListingLabel": "Choose a city",
-      "cityLinkPrefix": "Find driving schools in",
-      "regionNavLabel": "Navigate between regions",
-      "backToRegions": "Back to regions",
-      "directoryLinkPrefix": "Open the school directory for"
+      "loading": "Caricamento della guida regionale…",
+      "error": "La guida regionale non è stata caricata in questo momento.",
+      "retry": "Riprova",
+      "cityListingLabel": "Scegli una città",
+      "cityLinkPrefix": "Trova autoscuole a",
+      "regionNavLabel": "Naviga tra le regioni",
+      "backToRegions": "Torna alle regioni",
+      "directoryLinkPrefix": "Apri l'elenco scuole per"
     }
   },
   "pricingPage": {
@@ -3454,29 +3461,29 @@
       "description": "Confronta autoscuole gratis. Un annuncio in catalogo è gratuito. DriveLinkUp non fa pagare gli annunci."
     },
     "hero": {
-      "eyebrow": "Directory",
-      "title": "The school price is the figure on the listing.",
-      "body": "Discover and compare driving-school listings."
+      "eyebrow": "Elenco",
+      "title": "Il prezzo della scuola è l'importo sulla scheda.",
+      "body": "Scopri e confronta gli annunci delle autoscuole."
     },
     "learner": {
-      "title": "For learners",
-      "body": "Browse listed driving schools and compare their published prices. Lessons are arranged with the school.",
-      "price": "Free to browse",
-      "detail": "You see the school's published price. DriveLinkUp does not add a fee."
+      "title": "Per gli allievi",
+      "body": "Sfoglia le autoscuole in elenco e confronta i prezzi pubblicati. Le lezioni si organizzano con la scuola.",
+      "price": "Sfoglia gratis",
+      "detail": "Vedi il prezzo pubblicato dalla scuola. DriveLinkUp non aggiunge un costo."
     },
     "school": {
-      "title": "For driving schools",
-      "body": "Publish the price for the categories you are permitted to teach. A catalog listing is free.",
-      "price": "Free to list",
-      "detail": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. Payment for the lesson is arranged with the school."
+      "title": "Per le autoscuole",
+      "body": "Pubblica il prezzo per le categorie che sei autorizzato a insegnare. Una scheda nel catalogo è gratuita.",
+      "price": "Inserimento gratuito",
+      "detail": "Una scheda nel catalogo è gratuita. DriveLinkUp non fa pagare una scuola per essere in elenco. Il pagamento della lezione si organizza con la scuola."
     },
     "notes": {
-      "title": "How listing works (Sweden)",
-      "body": "A catalog listing is free. DriveLinkUp does not take payment for directory listings and does not add a learner fee. Lessons and terms are arranged with the school."
+      "title": "Come funziona l'inserimento (Svezia)",
+      "body": "Una scheda nel catalogo è gratuita. DriveLinkUp non incassa pagamenti per le schede dell'elenco e non aggiunge un costo per l'allievo. Lezioni e condizioni si organizzano con la scuola."
     },
     "cta": {
-      "learner": "Compare schools",
-      "school": "List your school"
+      "learner": "Confronta le scuole",
+      "school": "Inserisci la tua scuola"
     }
   },
   "handledareInfo": {
@@ -3484,20 +3491,20 @@
       "title": "Handledare e guida supervisionata",
       "description": "Il percorso handledare in Svezia e come differisce dagli annunci di autoscuola."
     },
-    "eyebrow": "Swedish legal guidance",
-    "title": "Handledare are a separate private path.",
-    "lead": "In Sweden, a handledare supports private övningskörning under the applicable rules. This is different from a driving-school listing.",
+    "eyebrow": "Indicazioni legali svedesi",
+    "title": "I handledare sono un percorso privato distinto.",
+    "lead": "In Svezia, un handledare accompagna l'övningskörning privata secondo le regole applicabili. È diverso da una scheda autoscuola.",
     "private": {
-      "title": "Private övningskörning",
-      "body": "Learners and handledare must meet the current Swedish requirements, permissions and vehicle rules. Check Transportstyrelsen guidance before practice. DriveLinkUp does not present handledare as authorized schools."
+      "title": "Övningskörning privata",
+      "body": "Allievi e handledare devono rispettare i requisiti, i permessi e le regole sul veicolo svedesi in vigore. Consulta le indicazioni di Transportstyrelsen prima di praticare. DriveLinkUp non presenta i handledare come scuole autorizzate."
     },
     "schools": {
-      "title": "Driving schools",
-      "body": "Compare school listings and published prices. Contact the school."
+      "title": "Autoscuole",
+      "body": "Confronta le schede scuola e i prezzi pubblicati. Contatta la scuola."
     },
     "cta": {
-      "schools": "Compare driving schools",
-      "faq": "Read the FAQ"
+      "schools": "Confronta le autoscuole",
+      "faq": "Leggi le FAQ"
     }
   },
   "onboarding": {
@@ -3506,7 +3513,7 @@
       "body": "We need to confirm your age and identity."
     },
     "verify": {
-      "title": "Verification in progress",
+      "title": "Verifica in corso",
       "body": "This usually takes under 2 minutes. Don't close this tab.",
       "heading": "Verify your identity",
       "subtext": "Upload a valid ID (passport, national ID, or driving licence) so we can confirm your age. Takes under 2 minutes.",
@@ -3514,7 +3521,7 @@
         "heading": "Before we verify your identity",
         "lead": "Confirm your date of birth and accept the privacy policy so we can continue.",
         "continue": "Continue",
-        "submitting": "Saving…"
+        "submitting": "Salvataggio…"
       },
       "startCta": "Upload ID document",
       "starting": "Opening…",
@@ -3523,8 +3530,8 @@
       "startFailed": "Could not start verification. Please try again.",
       "invalidState": "Verification cannot be started in your current state.",
       "missingConfig": "Identity verification isn't configured right now. Please try again later or contact support.",
-      "inProgressTitle": "Verification in progress",
-      "waitingTitle": "Verification in progress",
+      "inProgressTitle": "Verifica in corso",
+      "waitingTitle": "Verifica in corso",
       "waitingBody": "This usually takes under 2 minutes. Don't close this tab.",
       "timeoutBody": "We're still waiting for a response from Didit. Try again in a moment.",
       "checkAgain": "Check again",
@@ -3545,7 +3552,7 @@
     "invalidBody": "Request a new confirmation link to continue.",
     "resendNew": "Send a new link",
     "resent": "Link sent again",
-    "resending": "Sending…",
+    "resending": "Invio in corso…",
     "resendFailed": "Could not send a new link. Try again.",
     "resendNeedsEmail": "Sign in again to request a new link."
   },
@@ -3567,51 +3574,51 @@
     "headerTitleCity": "Autoscuole a {name}",
     "headerTitleRegion": "Autoscuole a {name}",
     "headerTitleCountry": "Autoscuole in {name}",
-    "subtitleLive": "Compare school listings in {name} by category, language and published SEK price. Contact the school to arrange a lesson.",
-    "subtitleCatalogue": "Driving schools in {name} are in the same catalog. A price is shown in the currency on the school's website. Contact the school to arrange a lesson.",
-    "subtitleExpansion": "{name} in {country} is an expansion hub. The catalog is live in Sweden today; use these pages to explore Nordic coverage as we grow.",
-    "subtitleCountryLive": "Browse regions and cities across {name}. Open a city hub to compare listings.",
-    "subtitleCountryCatalogue": "Open a city to compare driving schools in {name}. They are in the same catalog as the Swedish schools.",
-    "subtitleCountryExpansion": "{name} hubs are ready for SEO and expansion. The catalog is live in Sweden first (ADR-001).",
+    "subtitleLive": "Confronta le schede scuola a {name} per categoria, lingua e prezzo pubblicato in SEK. Contatta la scuola per organizzare una lezione.",
+    "subtitleCatalogue": "Le autoscuole a {name} sono nello stesso catalogo. Un prezzo è mostrato nella valuta del sito della scuola. Contatta la scuola per organizzare una lezione.",
+    "subtitleExpansion": "{name} in {country} è un hub di espansione. Il catalogo è attivo in Svezia oggi; usa queste pagine per esplorare la copertura nordica man mano che cresciamo.",
+    "subtitleCountryLive": "Sfoglia regioni e città in {name}. Apri un hub città per confrontare le schede.",
+    "subtitleCountryCatalogue": "Apri una città per confrontare le autoscuole a {name}. Sono nello stesso catalogo delle scuole svedesi.",
+    "subtitleCountryExpansion": "Gli hub {name} sono pronti per SEO ed espansione. Il catalogo è attivo prima in Svezia (ADR-001).",
     "breadcrumbLocations": "Luoghi",
-    "expansionTitle": "The catalog is Sweden-first",
-    "expansionBody": "DriveLinkUp lists driving schools in Sweden first. This Nordic location page is indexable so learners can find us as we expand — explore Swedish cities today.",
-    "expansionCtaSweden": "Browse Swedish driving schools",
-    "seoLead": "Compare driving schools in {name}, {country}",
-    "seoP1Live": "Listings in {name} show schools that appear in the catalog. Compare before you contact the school.",
-    "seoP1Catalogue": "Schools in {name} are listed from their own websites. They are not marked verified. Compare them in the catalog, then contact the school.",
-    "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
-    "seoP2": "A catalog listing is free. DriveLinkUp does not add a learner fee. Lessons and payment are arranged with the school. Handledare / private practice is a separate legal path.",
-    "howTitle": "How DriveLinkUp works",
-    "howBodyLive": "Open a listing, read the published price, then contact the school. Lessons are arranged with the school.",
-    "howBodyExpansion": "When listings go live in this market, the same catalog applies — published prices, contact the school, no DriveLinkUp payment on a listing.",
-    "nearbyTitle": "Nearby hubs",
-    "regionsTitle": "Regions",
-    "citiesTitle": "Cities",
+    "expansionTitle": "Il catalogo privilegia la Svezia",
+    "expansionBody": "DriveLinkUp elenca prima le autoscuole in Svezia. Questa pagina nordica è indicizzabile così gli allievi possono trovarci mentre ci espandiamo — esplora le città svedesi oggi.",
+    "expansionCtaSweden": "Sfoglia le autoscuole svedesi",
+    "seoLead": "Confronta le autoscuole a {name}, {country}",
+    "seoP1Live": "Le schede a {name} mostrano le scuole presenti nel catalogo. Confronta prima di contattare la scuola.",
+    "seoP1Catalogue": "Le scuole a {name} sono elencate dai loro siti. Non sono contrassegnate come verificate. Confrontale nel catalogo, poi contatta la scuola.",
+    "seoP1Expansion": "Pubblichiamo un hub strutturato per {name}, {country} così ricerca e assistenti IA possono orientare correttamente gli allievi mentre l'offerta viene inserita.",
+    "seoP2": "Una scheda nel catalogo è gratuita. DriveLinkUp non aggiunge un costo per l'allievo. Lezioni e pagamento si organizzano con la scuola. Handledare / pratica privata è un percorso legale distinto.",
+    "howTitle": "Come funziona DriveLinkUp",
+    "howBodyLive": "Apri una scheda, leggi il prezzo pubblicato, poi contatta la scuola. Le lezioni si organizzano con la scuola.",
+    "howBodyExpansion": "Quando le schede saranno online in questo mercato, vale lo stesso catalogo — prezzi pubblicati, contatta la scuola, nessun pagamento DriveLinkUp su una scheda.",
+    "nearbyTitle": "Hub vicini",
+    "regionsTitle": "Regioni",
+    "citiesTitle": "Città",
     "indexTitle": "Autoscuole",
     "indexSubtitle": "Apri un Paese. Un prezzo nel catalogo è il prezzo sul sito della scuola.",
     "countriesTitle": "Paesi",
     "faqTitle": "Domande",
     "faq1q": "Posso trovare una scuola a {name} oggi?",
     "faq1aLive": "Sì. Gli annunci a {name} sono qui. Apri una scuola e usa Contatta la scuola.",
-    "emptyLiveTitle": "No school listings in {name} yet",
-    "emptyLiveBody": "New schools appear here when they are in the catalog. Browse other cities, or contact us if you run a school in {name}.",
+    "emptyLiveTitle": "Ancora nessuna scheda scuola a {name}",
+    "emptyLiveBody": "Le nuove scuole compaiono qui quando sono nel catalogo. Sfoglia altre città, o contattaci se gestisci una scuola a {name}.",
     "listHeadingLive": "Autoscuole e lezioni a {name}",
-    "statsCount": "{count} driving schools in {name}",
-    "statsPriceFrom": "Lessons from {price} SEK",
-    "statsDuration": "{minutes}-minute lesson",
-    "statsUpdated": "Prices collected {date}",
-    "signInTitle": "Sign in to see the schools",
-    "signInBody": "The catalog is open to signed-in users. After you sign in you will come back here.",
-    "signInCta": "Sign in",
+    "statsCount": "{count} autoscuole a {name}",
+    "statsPriceFrom": "Lezioni da {price} SEK",
+    "statsDuration": "Lezione di {minutes} minuti",
+    "statsUpdated": "Prezzi raccolti {date}",
+    "signInTitle": "Accedi per vedere le scuole",
+    "signInBody": "Il catalogo è aperto agli utenti connessi. Dopo l'accesso tornerai qui.",
+    "signInCta": "Accedi",
     "faq1aExpansion": "Il catalogo è prima live in Svezia. Sfoglia ora le città svedesi.",
     "faq2q": "DriveLinkUp è gratis?",
     "faq2a": "Sì. DriveLinkUp è gratis. Paghi la scuola, non DriveLinkUp.",
     "faq3q": "Gli handledare sono scuole?",
     "faq3a": "No. Gli handledare supportano la guida supervisionata secondo le regole svedesi e non sono annunci di scuola.",
-    "linkHandledare": "Handledare guide",
-    "linkPricing": "Pricing",
-    "linkBlog": "Guides"
+    "linkHandledare": "Guida handledare",
+    "linkPricing": "Prezzi",
+    "linkBlog": "Guide"
   },
   "termsPage": {
     "meta": {
@@ -3619,109 +3626,109 @@
       "description": "Termini di utilizzo di DriveLinkUp: catalogo scuole, account e dati personali."
     },
     "hero": {
-      "eyebrow": "Terms of service",
-      "title": "Terms of service",
-      "lastUpdated": "Last updated {version}",
-      "intro": "These terms apply when you use DriveLinkUp — as a learner browsing driving-school listings or as a school that lists itself. By using the site you accept the terms."
+      "eyebrow": "Termini di servizio",
+      "title": "Termini di servizio",
+      "lastUpdated": "Ultimo aggiornamento {version}",
+      "intro": "Queste condizioni si applicano quando usi DriveLinkUp — come allievo che consulta le autoscuole o come scuola che si iscrive. Usando il sito accetti le condizioni."
     },
     "sections": {
       "0": {
-        "title": "The service",
-        "body": "DriveLinkUp is a directory of driving schools in Sweden. We show published prices when the school has filled them in. DriveLinkUp does not book the lesson and does not take payment for the lesson.",
+        "title": "Il servizio",
+        "body": "DriveLinkUp è un elenco di autoscuole in Svezia. Mostriamo i prezzi pubblicati quando la scuola li ha inseriti. DriveLinkUp non prenota la lezione e non incassa il pagamento della lezione.",
         "items": [
-          "The school publishes its own details. A badge appears only when the matching check is stored.",
-          "You arrange time and payment with the school, including through Contact the school."
+          "La scuola pubblica i propri dati. Un badge compare solo quando è registrato il controllo corrispondente.",
+          "Organizzi orario e pagamento con la scuola, anche tramite Contatta la scuola."
         ]
       },
       "1": {
-        "title": "Roles and responsibility",
-        "body": "When you take a lesson the agreement is between you and the driving school. DriveLinkUp lists schools. We do not give the lesson and we are not a party to that agreement.",
+        "title": "Ruoli e responsabilità",
+        "body": "Quando fai una lezione l'accordo è tra te e l'autoscuola. DriveLinkUp elenca le scuole. Non teniamo la lezione e non siamo parte di quell'accordo.",
         "items": [
-          "The school is responsible for the lesson, how it is given, and the details it publishes.",
-          "DriveLinkUp is responsible for the directory and the account tools on this site."
+          "La scuola è responsabile della lezione, di come viene tenuta e dei dati che pubblica.",
+          "DriveLinkUp è responsabile dell'elenco e degli strumenti di account su questo sito."
         ]
       },
       "2": {
-        "title": "Price and payment",
-        "body": "The figure on the listing is the school’s published price. DriveLinkUp does not charge for a directory listing. Payment is arranged with the school.",
+        "title": "Prezzo e pagamento",
+        "body": "L'importo sulla scheda è il prezzo pubblicato dalla scuola. DriveLinkUp non fa pagare una scheda dell'elenco. Il pagamento si organizza con la scuola.",
         "items": []
       },
       "3": {
-        "title": "Times and school terms",
-        "body": "Lesson terms are set by the school. Confirm them with the school before you arrange a lesson.",
+        "title": "Orari e condizioni della scuola",
+        "body": "Le condizioni delle lezioni le fissa la scuola. Confermale con la scuola prima di organizzare una lezione.",
         "items": [
-          "Contact the school directly to change a time.",
-          "If that does not resolve it, write to frank@drivelinkup.com."
+          "Contatta direttamente la scuola per cambiare un orario.",
+          "Se non risolve, scrivi a frank@drivelinkup.com."
         ]
       },
       "4": {
-        "title": "Listings and accounts",
-        "body": "A directory listing is free. DriveLinkUp does not charge the school to appear here. Learners never pay a fee to DriveLinkUp. You must be 16 or older to create an account, and you are responsible for the details you enter and for keeping your sign-in to yourself.",
+        "title": "Schede e account",
+        "body": "Una scheda dell'elenco è gratuita. DriveLinkUp non fa pagare la scuola per comparire qui. Gli allievi non pagano mai un costo a DriveLinkUp. Devi avere 16 anni o più per creare un account e sei responsabile dei dati che inserisci e di tenere l'accesso per te.",
         "items": [
-          "Do not misuse the site, for example by posting misleading details or disrupting the service.",
-          "We may close an account that breaks these terms or that we must close to protect users or comply with law."
+          "Non usare il sito in modo improprio, ad esempio pubblicando dati fuorvianti o disturbando il servizio.",
+          "Possiamo chiudere un account che viola questi termini o che dobbiamo chiudere per proteggere gli utenti o rispettare la legge."
         ]
       },
       "5": {
-        "title": "Personal data",
-        "body": "We process personal data under the GDPR. How we collect, use, and protect data is described in the privacy policy.",
+        "title": "Dati personali",
+        "body": "Trattiamo i dati personali ai sensi del GDPR. Come raccogliamo, usiamo e proteggiamo i dati è descritto nell'informativa sulla privacy.",
         "items": []
       },
       "6": {
-        "title": "Liability",
-        "body": "The directory shows information the school has published or that we have stored from a listed source. We do not warrant that every listing is complete or current. We are not liable for the lesson, the vehicle, or an agreement you make with a school, except where Swedish law does not allow that limit.",
+        "title": "Responsabilità",
+        "body": "L'elenco mostra informazioni pubblicate dalla scuola o che abbiamo memorizzato da una fonte elencata. Non garantiamo che ogni scheda sia completa o aggiornata. Non siamo responsabili della lezione, del veicolo o di un accordo che fai con una scuola, salvo dove la legge svedese non consente quel limite.",
         "items": []
       },
       "7": {
-        "title": "Governing law",
-        "body": "These terms are governed by Swedish law. A dispute may be brought before the Swedish courts. Consumers in the EU also keep any mandatory rights that apply in their country of residence.",
+        "title": "Legge applicabile",
+        "body": "Questi termini sono regolati dalla legge svedese. Una controversia può essere portata dinanzi ai tribunali svedesi. I consumatori nell'UE conservano anche i diritti inderogabili applicabili nel paese di residenza.",
         "items": []
       },
       "8": {
-        "title": "Changes and contact",
-        "body": "We may update these terms when the service changes. The version is shown at the top of the page. Questions: frank@drivelinkup.com.",
+        "title": "Modifiche e contatto",
+        "body": "Possiamo aggiornare questi termini quando il servizio cambia. La versione è indicata in cima alla pagina. Domande: frank@drivelinkup.com.",
         "items": []
       },
       "9": {
-        "title": "Your content and listings",
-        "body": "If you publish a school listing you grant DriveLinkUp a non-exclusive licence to host, copy, and display that content on the website and in the app so people can compare schools. You must own the content or have the right to give us that licence. You are responsible for the accuracy of what you publish.",
+        "title": "I tuoi contenuti e le tue schede",
+        "body": "Se pubblichi una scheda scuola concedi a DriveLinkUp una licenza non esclusiva per ospitare, copiare e mostrare quel contenuto sul sito e nell'app così le persone possono confrontare le scuole. Devi essere titolare del contenuto o avere il diritto di darci quella licenza. Sei responsabile dell'accuratezza di ciò che pubblichi.",
         "items": [
-          "We may edit the display length, hide, or remove content that is misleading, unlawful, or that we must take down.",
-          "Write to frank@drivelinkup.com to report a listing or other content that you believe is illegal or wrong."
+          "Possiamo modificare la lunghezza di visualizzazione, nascondere o rimuovere contenuti fuorvianti, illeciti o che dobbiamo togliere.",
+          "Scrivi a frank@drivelinkup.com per segnalare una scheda o altro contenuto che ritieni illegale o errato."
         ]
       },
       "10": {
-        "title": "Reviews",
-        "body": "Some listings show Google reviews that we store and label as coming from Google. DriveLinkUp does not write those reviews and does not verify them. A review can be incomplete or out of date. It is not a DriveLinkUp verification badge.",
+        "title": "Recensioni",
+        "body": "Alcune schede mostrano recensioni Google che memorizziamo e indichiamo come provenienti da Google. DriveLinkUp non scrive quelle recensioni e non le verifica. Una recensione può essere incompleta o non aggiornata. Non è un badge di verifica DriveLinkUp.",
         "items": []
       },
       "11": {
-        "title": "Intellectual property and acceptable use",
-        "body": "The DriveLinkUp name, site design, and software are ours or our licensors'. You may use the directory to compare schools and contact them. You may not copy the catalogue in bulk, scrape it, frame it, or use it to build a competing directory without our written permission.",
+        "title": "Proprietà intellettuale e uso consentito",
+        "body": "Il nome DriveLinkUp, il design del sito e il software sono nostri o dei nostri licenzianti. Puoi usare l'elenco per confrontare le scuole e contattarle. Non puoi copiare il catalogo in massa, estrarlo con scraping, inquadrarlo in un frame o usarlo per costruire un elenco concorrente senza il nostro permesso scritto.",
         "items": [
-          "Do not impersonate a school, post another school's content as your own, or interfere with the service.",
-          "Do not collect personal data from the site except as needed to contact a school about a lesson."
+          "Non spacciarti per una scuola, non pubblicare i contenuti di un'altra scuola come tuoi e non interferire con il servizio.",
+          "Non raccogliere dati personali dal sito salvo quanto necessario per contattare una scuola su una lezione."
         ]
       },
       "12": {
-        "title": "How listings appear",
-        "body": "DriveLinkUp is not a party to any lesson you arrange with a school and does not act as the school's agent. Search and catalogue order can change. Near-me sorts by distance when you share your location. Light and heavy catalogues filter by the licence categories the listing covers. Third-party ads from Google may appear after marketing consent. Those ads are not a paid rank for a school listing unless we later mark a listing as advertised.",
+        "title": "Come compaiono le schede",
+        "body": "DriveLinkUp non è parte di alcuna lezione che organizzi con una scuola e non agisce come agente della scuola. L'ordine di ricerca e del catalogo può cambiare. Vicino a me ordina per distanza quando condividi la posizione. I cataloghi veicoli leggeri e pesanti filtrano per le categorie di patente coperte dalla scheda. Annunci di terzi da Google possono comparire dopo il consenso al marketing. Quegli annunci non sono un posizionamento a pagamento per una scheda scuola, salvo che in seguito contrassegniamo una scheda come pubblicizzata.",
         "items": []
       },
       "13": {
-        "title": "Ending the account",
-        "body": "You may delete your account from Profile at any time. We may suspend or close an account, or hide a listing, if you break these terms, if we must protect users, or if the law requires it. We will write to the email on the account when we can.",
+        "title": "Chiusura dell'account",
+        "body": "Puoi cancellare l'account da Profilo in qualsiasi momento. Possiamo sospendere o chiudere un account, o nascondere una scheda, se violi questi termini, se dobbiamo proteggere gli utenti o se la legge lo richiede. Scriveremo all'email dell'account quando possiamo.",
         "items": []
       },
       "14": {
-        "title": "Other legal terms",
-        "body": "These terms and the privacy policy are the agreement for using the site. If a court finds one part unenforceable, the rest still applies. If we do not enforce a part, we do not waive it. You may not assign this agreement without our consent. We may assign it if we transfer the service. Notices go to frank@drivelinkup.com and to the email on your account.",
+        "title": "Altre disposizioni legali",
+        "body": "Questi termini e l'informativa sulla privacy sono l'accordo per l'uso del sito. Se un tribunale ritiene una parte inapplicabile, il resto resta valido. Se non facciamo valere una parte, non vi rinunciamo. Non puoi cedere questo accordo senza il nostro consenso. Possiamo cederlo se trasferiamo il servizio. Le comunicazioni vanno a frank@drivelinkup.com e all'email del tuo account.",
         "items": []
       }
     },
     "cta": {
-      "contact": "Contact support",
-      "faq": "Read the FAQ"
+      "contact": "Contatta il supporto",
+      "faq": "Leggi le FAQ"
     }
   },
   "aboutPage": {
@@ -3730,61 +3737,61 @@
       "description": "DriveLinkUp confronta autoscuole. I prezzi pubblicati sono sull’annuncio. L’inserimento è gratuito."
     },
     "hero": {
-      "eyebrow": "Driving schools and learners. One directory.",
-      "title": "We built the comparison we wished existed.",
-      "intro": "What does the lesson cost, and who stands behind it? On DriveLinkUp the answer is the school's published price.",
+      "eyebrow": "Autoscuole e allievi. Un solo elenco.",
+      "title": "Abbiamo costruito il confronto che avremmo voluto trovare.",
+      "intro": "Quanto costa la lezione e chi la tiene? Su DriveLinkUp la risposta è il prezzo pubblicato della scuola.",
       "chips": [
-        "Published price in kronor",
-        "The school's permit sets the licence",
-        "Listing is free"
+        "Prezzo pubblicato in corone",
+        "Il permesso della scuola determina la patente",
+        "L'inserimento è gratuito"
       ],
-      "primaryCta": "Find lessons",
-      "secondaryCta": "Common questions"
+      "primaryCta": "Trova lezioni",
+      "secondaryCta": "Domande frequenti"
     },
     "linkStory": {
-      "title": "Two links. One connection.",
-      "body": "The logo is two chain links: one for the school, one for the learner. We are the link that keeps them connected. Hence the name, DriveLinkUp.",
-      "learner": "The learner",
-      "school": "The school"
+      "title": "Due maglie. Un collegamento.",
+      "body": "Il logo è due maglie di catena: una per la scuola, una per l'allievo. Siamo il collegamento che li tiene uniti. Da qui il nome, DriveLinkUp.",
+      "learner": "L'allievo",
+      "school": "La scuola"
     },
     "origin": {
-      "title": "It started with a question.",
-      "body": "What does a driving licence actually cost? It should be a simple answer. Instead, prices hide at checkout, terms sit in the fine print, and the choice comes down to a hunch. We got tired of it and built the place we had been looking for.",
-      "body2": "DriveLinkUp started in Stockholm in 2026. A directory where the things that matter are out in the open from the first page: price, licence category, city, and language.",
+      "title": "È iniziato con una domanda.",
+      "body": "Quanto costa davvero una patente? Dovrebbe essere una risposta semplice. Invece i prezzi si nascondono al pagamento, le condizioni stanno nelle note in piccolo e la scelta si riduce a un'intuizione. Ci siamo stancati e abbiamo costruito il posto che cercavamo.",
+      "body2": "DriveLinkUp è nato a Stockholm nel 2026. Un elenco in cui ciò che conta è visibile dalla prima pagina: prezzo, categoria di patente, città e lingua.",
       "pillars": [
-        "Facts before sales pressure. What is on the listing is what the school published.",
-        "The school owns its details. A badge appears only when the check is stored.",
-        "Free to use. You pay the school's price."
+        "I fatti prima della pressione commerciale. Ciò che è sulla scheda è ciò che la scuola ha pubblicato.",
+        "La scuola è titolare dei propri dati. Un badge compare solo quando il controllo è registrato.",
+        "Gratuito. Paghi il prezzo della scuola."
       ],
       "facts": [
-        "Founded 2026",
-        "Stockholm, Sweden",
-        "Sweden first"
+        "Fondata nel 2026",
+        "Stockholm, Svezia",
+        "Prima la Svezia"
       ],
-      "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
+      "closing": "Siamo una società giovane. Le prime scuole sono in elenco ora e, se ci scrivi, risponde una persona."
     },
     "promise": {
-      "eyebrow": "Our promise",
-      "title": "The published price is on the listing.",
-      "body": "On every listing where the school has published a price."
+      "eyebrow": "La nostra promessa",
+      "title": "Il prezzo pubblicato è sulla scheda.",
+      "body": "Su ogni scheda in cui la scuola ha pubblicato un prezzo."
     },
     "final": {
-      "eyebrow": "Ready for the next step?",
-      "title": "Start from your side of the road.",
-      "body": "Learners compare prices. Schools publish what they are permitted to offer.",
-      "primaryCta": "Find lessons",
-      "secondaryCta": "Register the school"
+      "eyebrow": "Pronto per il passo successivo?",
+      "title": "Parti dal tuo lato della strada.",
+      "body": "Gli allievi confrontano i prezzi. Le scuole pubblicano ciò che sono autorizzate a offrire.",
+      "primaryCta": "Trova lezioni",
+      "secondaryCta": "Registra la scuola"
     }
   },
   "googleReviews": {
-    "heading": "Reviews from Google",
-    "summaryText": "{average} · {count, plural, one {# review} other {# reviews}}",
-    "viewAll": "See all on Google Maps",
-    "showMore": "Show more",
-    "showLess": "Show less",
-    "source": "Source: Google",
-    "syncedAt": "Fetched {date}",
-    "reviewRating": "Rated {rating} out of 5"
+    "heading": "Recensioni da Google",
+    "summaryText": "{average} · {count, plural, one {# recensione} other {# recensioni}}",
+    "viewAll": "Vedi tutto su Google Maps",
+    "showMore": "Mostra di più",
+    "showLess": "Mostra di meno",
+    "source": "Fonte: Google",
+    "syncedAt": "Raccolte il {date}",
+    "reviewRating": "Valutato {rating} su 5"
   },
   "offerings": {
     "section": {
@@ -3794,30 +3801,30 @@
       "kind": {
         "PAKET": "Course",
         "LEKTION": "Lesson",
-        "INTENSIVKURS": "Intensive course"
+        "INTENSIVKURS": "Corso intensivo"
       },
       "sessionsCount": "{count, plural, =1 {1 session} other {# sessions}}",
       "weeksCount": "{count, plural, =1 {1 week} other {# weeks}}",
       "priceFrom": "From {price} SEK",
-      "requestCta": "Contact the school"
+      "requestCta": "Contatta la scuola"
     },
     "requestForm": {
       "title": "Send a request to {name}",
-      "nameLabel": "Name",
-      "namePlaceholder": "Your name",
+      "nameLabel": "Nome",
+      "namePlaceholder": "Il tuo nome",
       "emailLabel": "Email",
       "emailPlaceholder": "you@example.com",
-      "phoneLabel": "Phone",
+      "phoneLabel": "Telefono",
       "phonePlaceholder": "07X-XXX XX XX",
       "startLabel": "Preferred start time",
       "startPlaceholder": "Pick a date and time",
-      "messageLabel": "Message",
+      "messageLabel": "Messaggio",
       "messagePlaceholder": "Tell us briefly what you need help with…",
       "submit": "Send request",
-      "submitting": "Sending…",
+      "submitting": "Invio in corso…",
       "cancel": "Cancel",
       "success": "Request sent! We'll get back to you as soon as we can.",
-      "error": "Something went wrong. Please try again."
+      "error": "Qualcosa è andato storto. Riprova."
     },
     "editor": {
       "title": "Prices & courses",
@@ -3832,15 +3839,15 @@
       "sessionsShort": "sessions",
       "weeksShort": "wks",
       "save": "Save",
-      "saving": "Saving…",
+      "saving": "Salvataggio…",
       "saved": "Saved!",
       "cancel": "Cancel",
-      "error": "Something went wrong. Please try again.",
+      "error": "Qualcosa è andato storto. Riprova.",
       "requiredMissing": "Please fill in all required fields.",
       "kind": {
         "PAKET": "Course",
         "LEKTION": "Lesson",
-        "INTENSIVKURS": "Intensive course"
+        "INTENSIVKURS": "Corso intensivo"
       }
     }
   },
@@ -3851,60 +3858,60 @@
     "handledareTab": "Handledare (supervisor)",
     "messagesTab": "Messages",
     "adminBadge": "Admin",
-    "signOut": "Sign out",
-    "signingOut": "Signing out…",
-    "signOutError": "Could not sign out. Please try again."
+    "signOut": "Esci",
+    "signingOut": "Disconnessione…",
+    "signOutError": "Impossibile disconnettersi. Riprova."
   },
   "categoryLanding": {
-    "title": "{category} training",
-    "body": "Offerings appear here only when the school holds current teaching permission for this category. This page has no booking surface.",
-    "empty": "No offerings in this category."
+    "title": "Formazione {category}",
+    "body": "Le offerte compaiono qui solo quando la scuola ha un permesso di insegnamento in corso per questa categoria. Questa pagina non ha una funzione di prenotazione.",
+    "empty": "Nessuna offerta in questa categoria."
   },
   "riskCourses": {
-    "title": "{course} in {municipality}",
+    "title": "{course} a {municipality}",
     "course": {
       "RISK_1": "Risk 1",
       "RISK_2": "Risk 2"
     },
-    "lead": "Upcoming dated group sessions published or approved by the school. DriveLinkUp is the recipient of a request.",
-    "honestSeats": "Remaining seats and prices are displays, not a hold or a confirmation.",
-    "empty": "No published sessions in this municipality.",
+    "lead": "Sessioni di gruppo con data, pubblicate o approvate dalla scuola. DriveLinkUp riceve la richiesta.",
+    "honestSeats": "Posti e prezzi mostrati non sono una prenotazione né una conferma.",
+    "empty": "Nessuna sessione pubblicata in questo comune.",
     "when": "{when}",
     "price": "{price} SEK",
-    "seats": "{count, plural, one {# seat shown} other {# seats shown}}",
-    "requestCta": "Request this session",
-    "recipient": "The request is saved by DriveLinkUp and awaits school review. It does not reserve a seat.",
-    "name": "Name",
+    "seats": "{count, plural, one {# posto mostrato} other {# posti mostrati}}",
+    "requestCta": "Richiedi questa sessione",
+    "recipient": "DriveLinkUp salva la richiesta; la scuola la valuta. Non riserva un posto.",
+    "name": "Nome",
     "email": "Email",
-    "requestSaved": "Request saved by DriveLinkUp; awaiting school review.",
-    "requestError": "The request could not be saved."
+    "requestSaved": "Richiesta salvata da DriveLinkUp; in attesa della scuola.",
+    "requestError": "Impossibile salvare la richiesta."
   },
   "publishedPrice": {
     "amount": "SEK {amount}",
     "amountCurrency": "{currency} {amount}",
     "minutes": "{minutes} min",
-    "source": "From the school’s website, {date}.",
-    "sourceLink": "See the price list",
-    "packageFrom": "Packages from SEK {amount}",
-    "packageFromCurrency": "Packages from {currency} {amount}",
-    "lesson": "Driving lesson",
+    "source": "Dal sito della scuola, {date}.",
+    "sourceLink": "Vedi il listino",
+    "packageFrom": "Pacchetti da SEK {amount}",
+    "packageFromCurrency": "Pacchetti da {currency} {amount}",
+    "lesson": "Lezione di guida",
     "risk1": "Risk 1",
     "risk2": "Risk 2 (skid pan)",
-    "package": "Package",
-    "intensive": "Intensive course",
-    "lessons": "{count, plural, one {# lesson} other {# lessons}}",
-    "heading": "Prices",
+    "package": "Pacchetto",
+    "intensive": "Corso intensivo",
+    "lessons": "{count, plural, one {# lezione} other {# lezioni}}",
+    "heading": "Prezzi",
     "hours": "{hours} h",
-    "heavyHeading": "Heavy vehicles",
-    "heavyOffered": "Trains, according to its website: {list}",
-    "heavyTruck": "Truck",
-    "heavyBus": "Bus",
-    "heavyFrom": "from SEK {amount}",
-    "heavyFromCurrency": "from {currency} {amount}"
+    "heavyHeading": "Veicoli pesanti",
+    "heavyOffered": "Forma, secondo il suo sito: {list}",
+    "heavyTruck": "Camion",
+    "heavyBus": "Autobus",
+    "heavyFrom": "da SEK {amount}",
+    "heavyFromCurrency": "da {currency} {amount}"
   },
   "heavyVehiclesPage": {
-    "eyebrow": "Truck, bus and YKB",
-    "title": "Heavy vehicles",
-    "subtitle": "Driving schools whose websites say they train for a C or D licence, or for YKB. The price is shown when the school publishes it."
+    "eyebrow": "Camion, autobus e YKB",
+    "title": "Veicoli pesanti",
+    "subtitle": "Autoscuole il cui sito indica formazione per la patente C o D, o YKB. Il prezzo compare quando la scuola lo pubblica."
   }
 }
