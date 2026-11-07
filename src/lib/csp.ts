@@ -63,6 +63,11 @@ function sourceList(base: string, extra: string[] = []): string {
   return [...seen].join(' ');
 }
 
+/** Per-request CSP nonce. Web Crypto only — Node `Buffer` is missing on Edge. */
+export function createCspNonce(randomUUID: () => string = () => crypto.randomUUID()): string {
+  return btoa(randomUUID());
+}
+
 export function buildCsp(
   nonce: string,
   isDev: boolean,

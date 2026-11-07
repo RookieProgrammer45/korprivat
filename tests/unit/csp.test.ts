@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildCsp } from '@/lib/csp';
+import { buildCsp, createCspNonce } from '@/lib/csp';
 
 // Locks the platform CSP posture so a future edit can't silently re-tighten
 // style-src (breaks Radix/shadcn in prod) or loosen script-src (XSS regression).
@@ -110,5 +110,18 @@ describe('buildCsp — extra sources seam', () => {
     // extra origins land only on their resource directives, never on script/style
     expect(directive(csp, 'script-src')).not.toContain('example.com');
     expect(directive(csp, 'style-src')).not.toContain('example.com');
+  });
+});
+
+describe('createCspNonce', () => {
+  it('returns a web-safe base64 token without Node Buffer', () => {
+    const nonce = createCspNonce(() => 'nonce-seed-0001');
+    expect(nonce).toBe(btoa('nonce-seed-0001'));
+    expect(nonce.length).toBeGreaterThan(8);
+    expect(nonce).not.toMatch(/[^A-Za-z0-9+/=]/);
+  });
+
+  it('changes between calls when using the runtime generator', () => {
+    expect(createCspNonce()).not.toBe(createCspNonce());
   });
 });

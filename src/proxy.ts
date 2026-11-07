@@ -1,4 +1,9 @@
 //
+// Must live under src/ (same convention as instrumentation.ts). Next 16
+// webpack production builds only scan the parent of src/app, so a root-level
+// proxy.ts is compiled in `next dev` and skipped on Vercel — locale prefixes
+// then 404 and CSP never ships.
+//
 // Do NOT create `middleware.ts`. This file owns:
 //   - CSP with per-request nonce
 //   - frame-ancestors 'none'
@@ -9,12 +14,12 @@
 // Posture locked by tests/unit/csp.test.ts.
 
 import { type NextRequest, NextResponse } from 'next/server';
-import { buildCsp } from '@/lib/csp';
+import { buildCsp, createCspNonce } from '@/lib/csp';
 import { cspExtraSources } from '@/lib/csp-extra-sources';
 import { LOCALE_HEADER, localeProxyDecision } from '@/lib/seo/locale-path';
 
 export function proxy(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
+  const nonce = createCspNonce();
   const isDev = process.env.NODE_ENV === 'development';
 
   // Edge contributions (rate-limit, etc.) may be added here intentionally.
