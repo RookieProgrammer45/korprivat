@@ -48,11 +48,20 @@ describe('GET /api/western-northern-sweden', () => {
   });
 
   it('falls back to the configured default locale for an invalid value', async () => {
-    const response = await GET(request('de'));
+    const response = await GET(request('xx'));
     const body = WesternNorthernSwedenHub.parse(await response.json());
 
     expect(body.locale).toBe('sv');
     expect(body.hero.title).toContain('väst till norr');
+  });
+
+  it('returns native copy for a prefixed major-search locale', async () => {
+    const response = await GET(request('de'));
+    const body = WesternNorthernSwedenHub.parse(await response.json());
+
+    expect(body.locale).toBe('de');
+    expect(body.hero.title).not.toContain('west to the north');
+    expect(body.hero.title.length).toBeGreaterThan(0);
   });
 
   it('stays a public editorial route without DB or auth dependencies', () => {

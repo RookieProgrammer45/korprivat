@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import { type Locale, locales } from '@/i18n/config';
 
-export const WesternNorthernSwedenLocale = z.enum(['sv', 'en']);
+export const WesternNorthernSwedenLocale = z.enum(locales as [Locale, ...Locale[]]);
 export const WesternNorthernSwedenRegionSlug = z.enum([
   'vastra-gotaland',
   'varmland',
