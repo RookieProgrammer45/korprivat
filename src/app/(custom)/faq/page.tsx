@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { PublicFaq } from '@/components/custom/public-faq';
-import { publicAlternates } from '@/lib/seo/alternates';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 const FAQ_KEYS = [
   'scope',
@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t('title'),
     description: t('subtitle'),
-    alternates: publicAlternates('/faq'),
+    alternates: await publicAlternatesFor('/faq'),
   };
 }
 

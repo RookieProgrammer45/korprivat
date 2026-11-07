@@ -14,6 +14,7 @@ import { ContactDirectoryCtas } from '@/components/custom/contact-directory-ctas
 import { ContactFlow } from '@/components/custom/contact-flow';
 import { parseClaimListingPath, parseClaimSchoolName } from '@/lib/contact/claim-listing';
 import { resolveContactTopic } from '@/lib/contact/schema';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 import { siteUrl } from '@/lib/site';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       absolute: `${t('eyebrow')} · DriveLinkUp`,
     },
     description: t('lead'),
-    alternates: { canonical: '/contact' },
+    alternates: await publicAlternatesFor('/contact'),
   };
 }
 

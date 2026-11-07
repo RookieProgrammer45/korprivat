@@ -4,11 +4,12 @@
 
 import { ChevronDown, Search, Truck } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { type FormEvent, useId, useState } from 'react';
 import { AnimatedTitle } from '@/components/custom/animated-title';
+import { localePath } from '@/lib/seo/locale-path';
 import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
@@ -28,6 +29,7 @@ const POPULAR_LINKS = [
 export function HomeHero() {
   const t = useTranslations('publicHome.hero');
   const tHeavy = useTranslations('heavyVehiclesPage');
+  const locale = useLocale();
   const router = useRouter();
   const categoryId = useId();
   const cityId = useId();
@@ -36,7 +38,7 @@ export function HomeHero() {
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    router.push(schoolSearchPath(city));
+    router.push(localePath(locale, schoolSearchPath(city)));
   }
 
   return (

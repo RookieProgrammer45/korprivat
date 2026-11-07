@@ -4,6 +4,8 @@
  * chrome and must suppress the marketing shell.
  */
 
+import { parseLocalePrefix } from '@/lib/seo/locale-path';
+
 export type ShellMode = 'marketing' | 'focused';
 
 const FOCUSED_EXACT = new Set(['/instructors/new', '/profile']);
@@ -22,8 +24,9 @@ const FOCUSED_PREFIXES = [
 
 export function shellModeForPath(pathname: string | null | undefined): ShellMode {
   if (!pathname) return 'marketing';
-  if (FOCUSED_EXACT.has(pathname)) return 'focused';
-  if (FOCUSED_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(prefix))) {
+  const path = parseLocalePrefix(pathname).pathname;
+  if (FOCUSED_EXACT.has(path)) return 'focused';
+  if (FOCUSED_PREFIXES.some((prefix) => path === prefix || path.startsWith(prefix))) {
     return 'focused';
   }
   return 'marketing';

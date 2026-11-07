@@ -11,6 +11,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { buildCsp } from '@/lib/csp';
 import { cspExtraSources } from '@/lib/csp-extra-sources';
+import { LOCALE_HEADER, localeProxyDecision } from '@/lib/seo/locale-path';
 
 export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
@@ -25,6 +26,23 @@ export function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('Content-Security-Policy', csp);
+
+  const decision = localeProxyDecision(request.nextUrl.pathname);
+  if (decision.action === 'redirect') {
+    const url = request.nextUrl.clone();
+    url.pathname = decision.pathname;
+    const response = NextResponse.redirect(url, 308);
+    response.headers.set('Content-Security-Policy', csp);
+    return response;
+  }
+  if (decision.action === 'rewrite') {
+    requestHeaders.set(LOCALE_HEADER, decision.locale);
+    const url = request.nextUrl.clone();
+    url.pathname = decision.pathname;
+    const response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+    response.headers.set('Content-Security-Policy', csp);
+    return response;
+  }
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set('Content-Security-Policy', csp);

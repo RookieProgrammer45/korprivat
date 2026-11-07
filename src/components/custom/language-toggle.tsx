@@ -6,7 +6,7 @@
 'use client';
 
 import { Languages } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
@@ -19,11 +19,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { locales } from '@/i18n/config';
 import { apiFetch } from '@/lib/api-client';
+import { switchLocalePath } from '@/lib/seo/locale-path';
 
-const LOCALE_SHORT: Record<(typeof locales)[number], string> = {
-  sv: 'SV',
-  en: 'EN',
-};
+const LOCALE_SHORT: Record<(typeof locales)[number], string> = Object.fromEntries(
+  locales.map((locale) => [locale, locale.toUpperCase()]),
+) as Record<(typeof locales)[number], string>;
 
 export function LanguageToggle({
   className,
@@ -34,6 +34,7 @@ export function LanguageToggle({
 }) {
   const current = useLocale();
   const router = useRouter();
+  const pathname = usePathname();
   const t = useTranslations('common');
   const [pending, startTransition] = useTransition();
 
@@ -45,7 +46,7 @@ export function LanguageToggle({
           method: 'POST',
           body: JSON.stringify({ locale }),
         });
-        router.refresh();
+        router.push(switchLocalePath(pathname, locale));
       } catch {
         toast.error(t('nav.languageError'));
       }

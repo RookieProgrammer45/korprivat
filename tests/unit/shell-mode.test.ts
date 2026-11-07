@@ -22,4 +22,10 @@ describe('shellModeForPath', () => {
     expect(isFocusedShellPath('/reset-password')).toBe(true);
     expect(isFocusedShellPath('/oauth-complete')).toBe(true);
   });
+
+  it('strips locale prefixes before choosing chrome', () => {
+    expect(isFocusedShellPath('/de/login')).toBe(true);
+    expect(isFocusedShellPath('/en/dashboard/student')).toBe(true);
+    expect(shellModeForPath('/nb/for-skolor')).toBe('marketing');
+  });
 });

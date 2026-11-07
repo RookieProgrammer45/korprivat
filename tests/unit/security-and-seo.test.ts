@@ -47,6 +47,8 @@ describe('public SEO surfaces', () => {
       '/locations/se',
     );
     expect(isSitemapDisallowed('/instructors')).toBe(true);
+    expect(isSitemapDisallowed('/de/instructors')).toBe(true);
+    expect(isSitemapDisallowed('/en/dashboard/student')).toBe(true);
     expect(isSitemapDisallowed('/signup')).toBe(true);
     expect(isSitemapDisallowed('/trafikskola/stockholm/example')).toBe(false);
     expect(isSitemapDisallowed('/locations/se/stockholm')).toBe(false);
@@ -59,6 +61,7 @@ describe('public SEO surfaces', () => {
     if (previous === undefined) delete process.env.SEO_INDEXABLE;
     else process.env.SEO_INDEXABLE = previous;
     expect(body).toContain('Disallow: /instructors');
+    expect(body).toContain('Disallow: /de/instructors');
     expect(body).toContain('Disallow: /tung-trafik');
     expect(body).toContain('Disallow: /admin');
     expect(body).toContain('Sitemap:');

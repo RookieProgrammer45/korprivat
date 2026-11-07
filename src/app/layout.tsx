@@ -9,8 +9,10 @@ import { SiteNav } from '@/components/custom/site-nav';
 import { AppProviders } from '@/components/providers';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import { defaultLocale, isLocale } from '@/i18n/config';
 import { bodyFont, displayFont } from '@/lib/fonts';
-import { locale } from '@/lib/locale';
+import { resolveLocale } from '@/lib/i18n';
+import { localeHtmlLang } from '@/lib/seo/locale-path';
 import { siteDescription, siteName, siteUrl } from '@/lib/site';
 import { viewportConfig } from '@/lib/viewport-config';
 import './globals.css';
@@ -42,11 +44,13 @@ export const viewport: Viewport = { ...viewportConfig };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const nonce = (await headers()).get('x-nonce') ?? undefined;
+  const resolved = await resolveLocale();
+  const htmlLang = isLocale(resolved) ? localeHtmlLang[resolved] : localeHtmlLang[defaultLocale];
 
   return (
     <html
-      lang={locale.lang}
-      dir={locale.dir}
+      lang={htmlLang}
+      dir="ltr"
       suppressHydrationWarning
       className={`${displayFont.variable} ${bodyFont.variable}`}
     >

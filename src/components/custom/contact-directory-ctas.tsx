@@ -16,8 +16,8 @@
 
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { LocaleLink as Link } from '@/components/locale-link';
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';

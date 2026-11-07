@@ -1,13 +1,13 @@
 'use client';
 
 import { Car, ChevronDown, Menu, Truck } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { toast } from 'sonner';
 import { AuthNav } from '@/components/custom/auth-nav';
 import { LanguageToggle } from '@/components/custom/language-toggle';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -22,6 +22,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { signOut as signOutAction, useSession } from '@/lib/auth-client';
 
 import { type NavGroup, type NavItem, navItems } from '@/lib/nav';
+import { parseLocalePrefix } from '@/lib/seo/locale-path';
 import { isFocusedShellPath } from '@/lib/shell-mode';
 import { siteName } from '@/lib/site';
 import { cn } from '@/lib/utils';
@@ -150,8 +151,11 @@ export function SiteNav() {
 
   // Exact match for the root; segment-boundary match for everything else so
   // '/blog' highlights on '/blog/post' but '/' never matches every route.
+  const currentPath = parseLocalePrefix(pathname).pathname;
   const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+    href === '/'
+      ? currentPath === '/'
+      : currentPath === href || currentPath.startsWith(`${href}/`);
   const isSlotActive = (slot: NavSlot) =>
     slot.type === 'link' ? isActive(slot.item.href) : slot.items.some((i) => isActive(i.href));
 

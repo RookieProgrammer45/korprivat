@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
 
 const path = '/blog/kunskapsprov-korkort-b';
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     'Trafikverket',
     'Transportstyrelsen',
   ],
-  alternates: publicAlternates(path),
+  alternates: swedishCanonicalAlternates(path),
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,

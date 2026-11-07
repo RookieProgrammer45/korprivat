@@ -8,14 +8,16 @@ import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { defaultLocale } from '@/i18n/config';
 import {
   hasCanonicalCategory,
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
 import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { resolveLocale } from '@/lib/i18n';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
-import { publicAlternates } from '@/lib/seo/alternates';
+import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { schoolPath } from '@/lib/seo/school-slugs';
 import { siteName, siteUrl } from '@/lib/site';
 
@@ -33,12 +35,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = `${org.name} — trafikskola i ${city}`;
   const description = `${org.name} på DriveLinkUp — trafikskola i katalogen i ${city}.`;
   const canonical = `/schools/${org.slug}`;
+  const locale = await resolveLocale();
   return {
     title,
     description,
-    alternates: publicAlternates(canonical),
+    alternates: swedishCanonicalAlternates(canonical),
+    robots: locale !== defaultLocale ? { index: false, follow: true } : undefined,
     openGraph: {
       type: 'website',
+      locale: 'sv_SE',
       siteName,
       title,
       description,

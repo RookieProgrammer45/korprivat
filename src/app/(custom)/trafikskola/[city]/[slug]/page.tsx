@@ -4,10 +4,12 @@ import { getTranslations } from 'next-intl/server';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
+import { defaultLocale } from '@/i18n/config';
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { publishedPrices } from '@/lib/discovery/published-prices';
 import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { resolveLocale } from '@/lib/i18n';
+import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { locationForCatalogueSchool } from '@/lib/seo/catalogue-locations';
 import { jsonLdScript } from '@/lib/seo/json-ld';
 import { marketCopy } from '@/lib/seo/market-copy';
@@ -55,16 +57,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     (rate > 0
       ? t('descriptionNamed', { name: instructor.name, city: instructor.city, rate })
       : t('description'));
+  const locale = await resolveLocale();
   return {
     title,
     description,
-    alternates: publicAlternates(path),
-    robots: instructor.indexable ? { index: true, follow: true } : { index: false, follow: true },
+    alternates: swedishCanonicalAlternates(path),
+    robots:
+      locale !== defaultLocale
+        ? { index: false, follow: true }
+        : instructor.indexable
+          ? { index: true, follow: true }
+          : { index: false, follow: true },
     openGraph: {
       type: 'profile',
+      locale: 'sv_SE',
       siteName,
       title,
       description,
+      url: absoluteUrl(path),
       images: portrait ? [{ url: portrait }] : undefined,
     },
   };

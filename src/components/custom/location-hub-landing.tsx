@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { SchoolListingCard } from '@/components/custom/school-listing-card';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
+import { isLocale } from '@/i18n/config';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { cityListingStats, publicSchoolsForLocation } from '@/lib/discovery/public-listing';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { absoluteUrl, publicAlternatesFor } from '@/lib/seo/alternates';
 import {
   browseCities,
   citiesInRegion,
@@ -13,6 +14,7 @@ import {
   schoolsForLocation,
 } from '@/lib/seo/catalogue-locations';
 import { jsonLdScript } from '@/lib/seo/json-ld';
+import { localeHreflang, localePath } from '@/lib/seo/locale-path';
 import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,
@@ -63,17 +65,19 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
           : t('descriptionCity', { name, country: country.nameLocal })
       : t('descriptionRegion', { name, country: country.nameLocal });
   const brandedTitle = `${title} · ${siteName}`;
+  const locale = await getLocale();
   return {
     title,
     description,
-    alternates: publicAlternates(path),
+    alternates: await publicAlternatesFor(path),
     ...(isIndexableLocation(location) ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       type: 'website',
+      locale: (isLocale(locale) ? localeHreflang[locale] : localeHreflang.sv).replace('-', '_'),
       siteName,
       title: brandedTitle,
       description,
-      url: absoluteUrl(path),
+      url: absoluteUrl(localePath(locale, path)),
     },
     twitter: { card: 'summary_large_image', title: brandedTitle, description },
   };
@@ -81,11 +85,13 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
 
 export async function LocationHubLanding({ location }: { location: NordicLocation }) {
   const t = await getTranslations('locationHub');
+  const locale = await getLocale();
+  const href = (next: string) => localePath(locale, next);
   const path = locationPath(location);
   const name = displayName(location);
   const country = NORDIC_COUNTRY_META[location.country];
   const market = marketCopy(location.country);
-  const url = absoluteUrl(path);
+  const url = absoluteUrl(href(path));
   const siblingCities =
     location.kind === 'region'
       ? citiesInRegion(location.country, location.slug)
@@ -141,24 +147,24 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name }),
         description: pageDescription,
         url,
-        inLanguage: market?.schemaLang ?? 'sv-SE',
-        isPartOf: { '@type': 'WebSite', name: siteName, url: `${siteUrl}/` },
+        inLanguage: market?.schemaLang ?? (isLocale(locale) ? localeHreflang[locale] : 'sv-SE'),
+        isPartOf: { '@type': 'WebSite', name: siteName, url: siteUrl },
       },
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: siteName, item: `${siteUrl}/` },
+          { '@type': 'ListItem', position: 1, name: siteName, item: absoluteUrl(href('/')) },
           {
             '@type': 'ListItem',
             position: 2,
             name: t('breadcrumbLocations'),
-            item: `${siteUrl}/locations`,
+            item: absoluteUrl(href('/locations')),
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: country.nameLocal,
-            item: absoluteUrl(countryPath(location.country)),
+            item: absoluteUrl(href(countryPath(location.country))),
           },
           { '@type': 'ListItem', position: 4, name, item: url },
         ],
@@ -210,11 +216,14 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
                     : t('subtitleExpansion', { name, country: country.nameLocal })}
           </p>
           <p className="text-small text-muted-foreground">
-            <Link className="underline underline-offset-4" href="/locations">
+            <Link className="underline underline-offset-4" href={href('/locations')}>
               {t('breadcrumbLocations')}
             </Link>
             {' / '}
-            <Link className="underline underline-offset-4" href={countryPath(location.country)}>
+            <Link
+              className="underline underline-offset-4"
+              href={href(countryPath(location.country))}
+            >
               {country.nameLocal}
             </Link>
           </p>
@@ -262,7 +271,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
                 : []
               ).map((c) => (
                 <li key={c.slug}>
-                  <Link className="underline underline-offset-4" href={locationPath(c)}>
+                  <Link className="underline underline-offset-4" href={href(locationPath(c))}>
                     {displayName(c)}
                   </Link>
                 </li>
@@ -274,7 +283,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
             <h2 className="font-display text-h3">{t('emptyLiveTitle', { name })}</h2>
             <p className="text-body text-muted-foreground">{t('emptyLiveBody', { name })}</p>
             <p>
-              <Link className="underline underline-offset-4" href="/locations">
+              <Link className="underline underline-offset-4" href={href('/locations')}>
                 {t('expansionCtaSweden')}
               </Link>
             </p>
@@ -284,7 +293,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
             <h2 className="font-display text-h3">{t('expansionTitle')}</h2>
             <p className="text-body text-muted-foreground">{t('expansionBody')}</p>
             <p>
-              <Link className="underline underline-offset-4" href="/locations">
+              <Link className="underline underline-offset-4" href={href('/locations')}>
                 {t('expansionCtaSweden')}
               </Link>
             </p>
@@ -318,7 +327,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
             <ul className="grid gap-2 text-body">
               {siblingCities.slice(0, 12).map((c) => (
                 <li key={c.slug}>
-                  <Link className="underline underline-offset-4" href={locationPath(c)}>
+                  <Link className="underline underline-offset-4" href={href(locationPath(c))}>
                     {displayName(c)}
                   </Link>
                 </li>
@@ -326,7 +335,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
               {siblingCities.length === 0
                 ? regions.slice(0, 8).map((r) => (
                     <li key={r.slug}>
-                      <Link className="underline underline-offset-4" href={locationPath(r)}>
+                      <Link className="underline underline-offset-4" href={href(locationPath(r))}>
                         {displayName(r)}
                       </Link>
                     </li>

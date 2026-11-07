@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
 
 const path = '/blog/kostnad-korkort-sverige';
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Vad kostar körkortet i Sverige?',
   description:
     'Översikt av lektionspriser, skolavgifter och hur DriveLinkUp visar publicerade priser utan separat elevavgift.',
-  alternates: publicAlternates(path),
+  alternates: swedishCanonicalAlternates(path),
 };
 
 export default function KostnadKorkortPage() {

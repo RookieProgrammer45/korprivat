@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { absoluteUrl, publicAlternatesFor } from '@/lib/seo/alternates';
+import { localePath } from '@/lib/seo/locale-path';
 import { locationsForCountry } from '@/lib/seo/catalogue-locations';
 import { marketCopy } from '@/lib/seo/market-copy';
 import {
@@ -42,13 +43,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: publicAlternates(path),
+    alternates: await publicAlternatesFor(path),
     openGraph: {
       type: 'website',
       siteName,
       title: brandedTitle,
       description,
-      url: absoluteUrl(path),
+      url: absoluteUrl(localePath(await getLocale(), path)),
     },
   };
 }
@@ -58,6 +59,8 @@ export default async function CountryLocationsPage({ params }: Props) {
   if (!isNordicCountry(country)) notFound();
   const meta = NORDIC_COUNTRY_META[country];
   const t = await getTranslations('locationHub');
+  const locale = await getLocale();
+  const href = (path: string) => localePath(locale, path);
   const market = marketCopy(country);
   const regions = listRegions(country);
   // Cities stay on the region page. Listing every city here made Germany
@@ -69,7 +72,7 @@ export default async function CountryLocationsPage({ params }: Props) {
     <main className="container-page section">
       <header className="mx-auto flex max-w-3xl flex-col gap-3">
         <p className="text-eyebrow">
-          <Link className="underline underline-offset-4" href="/locations">
+          <Link className="underline underline-offset-4" href={href('/locations')}>
             {t('breadcrumbLocations')}
           </Link>
         </p>
@@ -95,7 +98,7 @@ export default async function CountryLocationsPage({ params }: Props) {
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
             {regions.map((r) => (
               <li key={r.slug}>
-                <Link className="underline underline-offset-4" href={locationPath(r)}>
+                <Link className="underline underline-offset-4" href={href(locationPath(r))}>
                   {displayName(r)}
                 </Link>
               </li>
@@ -108,7 +111,7 @@ export default async function CountryLocationsPage({ params }: Props) {
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {cities.map((c) => (
                 <li key={c.slug}>
-                  <Link className="underline underline-offset-4" href={locationPath(c)}>
+                  <Link className="underline underline-offset-4" href={href(locationPath(c))}>
                     {displayName(c)}
                   </Link>
                 </li>

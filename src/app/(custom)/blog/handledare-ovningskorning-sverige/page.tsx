@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { publicAlternates } from '@/lib/seo/alternates';
+import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 
 export const metadata: Metadata = {
   title: 'Handledare och övningskörning i Sverige',
   description:
     'Så fungerar handledarskap för övningskörning, och hur 16–17-åringar kompletterar handledarskap i Sverige.',
-  alternates: publicAlternates('/blog/handledare-ovningskorning-sverige'),
+  alternates: swedishCanonicalAlternates('/blog/handledare-ovningskorning-sverige'),
 };
 
 export default function HandledareBlogPost() {

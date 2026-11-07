@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
 
 const path = '/blog/trafikskola-eller-handledare';
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Trafikskola eller handledare?',
   description:
     'Skillnaden mellan trafikskola och privat handledare för övningskörning i Sverige — och hur DriveLinkUp håller vägarna isär.',
-  alternates: publicAlternates(path),
+  alternates: swedishCanonicalAlternates(path),
 };
 
 export default function TrafikskolaEllerHandledarePage() {

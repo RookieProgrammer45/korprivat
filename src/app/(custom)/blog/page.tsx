@@ -10,6 +10,7 @@
 
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 const POSTS = [
   {
@@ -61,11 +62,10 @@ const POSTS = [
 
 export async function generateMetadata() {
   const t = await getTranslations('blogPage.meta');
-  const { publicAlternates } = await import('@/lib/seo/alternates');
   return {
     title: t('title'),
     description: t('description'),
-    alternates: publicAlternates('/blog'),
+    alternates: await publicAlternatesFor('/blog'),
   };
 }
 

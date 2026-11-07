@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { publicAlternates } from '@/lib/seo/alternates';
+import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName, siteUrl } from '@/lib/site';
 
 const TITLE = "How to compare driving schools for a Swedish driver's licence in Stockholm";
@@ -13,7 +13,7 @@ const MODIFIED = '2026-09-05';
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: publicAlternates('/blog/swedish-drivers-license-expat-stockholm'),
+  alternates: swedishCanonicalAlternates('/blog/swedish-drivers-license-expat-stockholm'),
 };
 
 export default function SwedishDriversLicenseExpatStockholmPost() {

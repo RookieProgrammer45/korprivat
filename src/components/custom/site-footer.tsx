@@ -8,10 +8,10 @@
 // active locale, mirroring SiteNav.
 
 import { ArrowRight, Mail } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useIsAuthenticated } from '@/components/custom/site-nav';
+import { LocaleLink as Link } from '@/components/locale-link';
 import type { NavItem } from '@/lib/nav';
 import { isFocusedShellPath } from '@/lib/shell-mode';
 import { siteName } from '@/lib/site';

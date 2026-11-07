@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { useState } from 'react';
 import { PublishedHeavyOffer, PublishedLessonPrice } from '@/components/custom/published-price';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
