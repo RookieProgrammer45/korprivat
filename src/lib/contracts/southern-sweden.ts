@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { type Locale, locales } from '@/i18n/config';
 
-export const SouthernSwedenLocale = z.enum(locales as [Locale, ...Locale[]]);
+export const SouthernSwedenLocale = z.enum(locales as unknown as [Locale, ...Locale[]]);
 export const SouthernSwedenRegionSlug = z.enum(['skane', 'halland', 'blekinge', 'smaland']);
 
 const CityCopy = z.object({ label: z.string().min(1) });
