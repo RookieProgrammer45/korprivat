@@ -276,8 +276,10 @@ describe('nordic catalogue', () => {
     expect(sydney.length).toBeGreaterThan(0);
     expect(sydney.every((row) => row.publishedPrices?.currency === 'AUD')).toBe(true);
     const london = listNordicInstructors({ city: 'London', english: true });
-    expect(london.length).toBeGreaterThan(0);
-    expect(london.every((row) => row.publishedPrices?.currency === 'GBP')).toBe(true);
+    const ukLondon = london.filter((row) => row.id.startsWith('uk'));
+    expect(ukLondon.length).toBeGreaterThan(0);
+    expect(ukLondon.every((row) => row.publishedPrices?.currency === 'GBP')).toBe(true);
+    expect(london.some((row) => row.id.startsWith('ca'))).toBe(true);
     expect(listNordicInstructors({ city: 'Oslo', english: true })).toEqual([]);
     const madrid = listNordicInstructors({ city: 'Madrid' });
     expect(madrid.length).toBeGreaterThan(0);
@@ -288,6 +290,14 @@ describe('nordic catalogue', () => {
     expect(nordicCountryHasSchools('fr')).toBe(true);
     expect(nordicCountryHasSchools('de')).toBe(true);
     expect(nordicCountryHasSchools('hr')).toBe(true);
+    expect(nordicCountryHasSchools('ca')).toBe(true);
+    expect(nordicCountryHasSchools('br')).toBe(true);
+    expect(
+      listCatalogueSchools().filter((school) => school.id.startsWith('ca')).length,
+    ).toBeGreaterThanOrEqual(250);
+    expect(
+      listCatalogueSchools().filter((school) => school.id.startsWith('br')).length,
+    ).toBeGreaterThanOrEqual(50);
     expect(nordicCountryHasSchools('cy')).toBe(false);
     expect(nordicCountryHasSchools('mt')).toBe(false);
     expect(nordicSchoolCountInCity('Paris')).toBeGreaterThan(0);

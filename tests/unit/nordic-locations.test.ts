@@ -46,6 +46,8 @@ describe('nordic-locations registry', () => {
       'lv',
       'lt',
       'us',
+      'ca',
+      'br',
     ]);
     const keys = NORDIC_LOCATIONS.map((l) => `${l.country}/${l.slug}`);
     expect(new Set(keys).size).toBe(keys.length);
@@ -75,6 +77,9 @@ describe('nordic-locations registry', () => {
     expect(listLocationsForCountry('no').some((l) => l.slug === 'oslo')).toBe(true);
     expect(getLocation('us', 'texas')?.name).toBe('Texas');
     expect(getLocation('us', 'texas')?.marketplaceLive).toBe(false);
+    expect(getLocation('ca', 'ontario')?.name).toBe('Ontario');
+    expect(getLocation('br', 'sao-paulo')?.name).toBe('São Paulo');
+    expect(getLocation('ca', 'ontario')?.marketplaceLive).toBe(false);
   });
 
   it('builds sitemap paths for index, countries, and every hub', () => {

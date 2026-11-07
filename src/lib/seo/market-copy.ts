@@ -199,6 +199,7 @@ const PHRASES: Partial<Record<NordicCountryCode, Phrase>> = {
   ie: en('en-IE'),
   au: en('en-AU'),
   us: en('en-US'),
+  ca: en('en-CA'),
   mt: en('en-MT'),
   de: de('de-DE'),
   at: de('de-AT'),
@@ -299,6 +300,25 @@ const PHRASES: Partial<Record<NordicCountryCode, Phrase>> = {
       '{name} em {city}. Os dados vêm do site da escola. A DriveLinkUp não verificou a escola e não marca a aula.',
     faqQ: 'Os preços estão verificados?',
     faqA: 'Não. Um preço é o valor no site da escola. A DriveLinkUp não verificou a escola e não marca a aula.',
+  },
+  br: {
+    htmlLang: 'pt-BR',
+    schemaLang: 'pt-BR',
+    cityTitle: 'Autoescolas em {name}, {country}',
+    cityDescription:
+      'Autoescolas em {name}, {country}. Um preço só aparece quando a autoescola o publica no próprio site. A DriveLinkUp não verificou a autoescola e não reserva a aula.',
+    cityHeading: 'Autoescolas em {name}',
+    cityLead:
+      'As autoescolas em {name} aparecem com a cidade e a categoria da CNH. Um preço é o valor no site da autoescola. A DriveLinkUp não verificou a autoescola e não reserva a aula.',
+    countryTitle: 'Autoescolas no {country}',
+    countryDescription:
+      'Autoescolas no {country}. Um preço só aparece quando a autoescola o publica no próprio site. A DriveLinkUp não verificou a autoescola e não reserva a aula.',
+    countryHeading: 'Autoescolas no {country}',
+    listHeading: 'Autoescolas',
+    schoolDescription:
+      '{name} em {city}. Os dados vêm do site da autoescola. A DriveLinkUp não verificou a autoescola e não reserva a aula.',
+    faqQ: 'Os preços estão verificados?',
+    faqA: 'Não. Um preço é o valor no site da autoescola. A DriveLinkUp não verificou a autoescola e não reserva a aula.',
   },
   pl: {
     htmlLang: 'pl-PL',

@@ -88,6 +88,8 @@ describe('market copy', () => {
     expect(german?.schoolDescription('Richt', 'Leonberg')).toContain('nicht geprüft');
     expect(marketCopy('se')).toBeNull();
     expect(marketCopy('us')?.cityHeading('Austin')).toBe('Driving schools in Austin');
+    expect(marketCopy('ca')?.cityHeading('Toronto')).toBe('Driving schools in Toronto');
+    expect(marketCopy('br')?.cityHeading('São Paulo')).toBe('Autoescolas em São Paulo');
     expect(marketCopy('fr')?.cityHeading('Lyon')).toContain('Auto-écoles');
   });
 });

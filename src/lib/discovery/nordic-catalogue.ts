@@ -11,6 +11,8 @@ import type { InstructorFilteredItem, InstructorQuery } from '@/lib/contracts/in
 import { cityFilterCandidates } from '@/lib/seo/nordic-locations';
 import { schoolShortId } from '@/lib/seo/school-slugs';
 import australia from '../../../data/australia-schools/schools.json';
+import brazil from '../../../data/brazil-schools/schools.json';
+import canada from '../../../data/canada-schools/schools.json';
 import europe from '../../../data/europe-schools/schools.json';
 import dataset from '../../../data/nordic-schools/schools.json';
 import unitedKingdom from '../../../data/uk-schools/schools.json';
@@ -50,6 +52,8 @@ const PRICE_CAP: Record<string, readonly [number, number]> = {
   RO: [40, 250],
   BG: [20, 120],
   US: [40, 200],
+  CA: [40, 200],
+  BR: [40, 400],
 };
 const COUNTRY_NAME: Record<string, string> = {
   NO: 'Norge',
@@ -84,6 +88,8 @@ const COUNTRY_NAME: Record<string, string> = {
   LV: 'Latvia',
   LT: 'Lithuania',
   US: 'United States',
+  CA: 'Canada',
+  BR: 'Brasil',
 };
 const LANGUAGE: Record<string, CatalogueLanguage> = {
   NO: 'no',
@@ -118,6 +124,8 @@ const LANGUAGE: Record<string, CatalogueLanguage> = {
   LV: 'lv',
   LT: 'lt',
   US: 'en',
+  CA: 'en',
+  BR: 'pt',
 };
 const BAD_LOCAL = new Set([
   'bruker',
@@ -203,7 +211,9 @@ type NordicCountry =
   | 'EE'
   | 'LV'
   | 'LT'
-  | 'US';
+  | 'US'
+  | 'CA'
+  | 'BR';
 type NordicCurrency =
   | 'NOK'
   | 'DKK'
@@ -217,7 +227,9 @@ type NordicCurrency =
   | 'RON'
   | 'BGN'
   | 'CHF'
-  | 'USD';
+  | 'USD'
+  | 'CAD'
+  | 'BRL';
 
 type RawSchool = {
   id: string;
@@ -457,6 +469,8 @@ function rawSchools(): RawSchool[] {
     ...(unitedKingdom.schools as RawSchool[]),
     ...(europe.schools as RawSchool[]),
     ...(unitedStates.schools as RawSchool[]),
+    ...(canada.schools as RawSchool[]),
+    ...(brazil.schools as RawSchool[]),
   ];
 }
 
@@ -596,6 +610,8 @@ const COUNTRY_PREFIX = {
   lv: 'eulv',
   lt: 'eult',
   us: 'us',
+  ca: 'ca',
+  br: 'br',
 } as const;
 
 export function nordicCountryHasSchools(country: keyof typeof COUNTRY_PREFIX): boolean {

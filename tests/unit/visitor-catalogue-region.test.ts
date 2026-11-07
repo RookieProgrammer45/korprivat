@@ -15,6 +15,24 @@ describe('visitorCatalogueRegionFromHeaders', () => {
     expect(region).toEqual({ countryCode: 'us', regionSlug: 'california' });
   });
 
+  it('maps a Canadian visitor to Canada, not California', () => {
+    const region = visitorCatalogueRegionFromHeaders((name) => {
+      if (name === 'x-vercel-ip-country') return 'CA';
+      if (name === 'x-vercel-ip-country-region') return 'ON';
+      return null;
+    });
+    expect(region).toEqual({ countryCode: 'ca', regionSlug: 'ontario' });
+  });
+
+  it('maps a Brazilian visitor to the catalogue state slug', () => {
+    const region = visitorCatalogueRegionFromHeaders((name) => {
+      if (name === 'x-vercel-ip-country') return 'BR';
+      if (name === 'x-vercel-ip-country-region') return 'SP';
+      return null;
+    });
+    expect(region).toEqual({ countryCode: 'br', regionSlug: 'sao-paulo' });
+  });
+
   it('defaults to Sweden when geo headers are missing', () => {
     expect(visitorCatalogueRegionFromHeaders(() => null)).toEqual({
       countryCode: 'se',

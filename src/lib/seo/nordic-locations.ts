@@ -40,6 +40,8 @@ export const NORDIC_COUNTRIES = [
   'lv',
   'lt',
   'us',
+  'ca',
+  'br',
 ] as const;
 export type NordicCountryCode = (typeof NORDIC_COUNTRIES)[number];
 
@@ -102,6 +104,8 @@ export const NORDIC_COUNTRY_META: Record<NordicCountryCode, NordicCountryMeta> =
   lv: { code: 'lv', name: 'Latvia', nameLocal: 'Latvija', adjective: 'Latvian' },
   lt: { code: 'lt', name: 'Lithuania', nameLocal: 'Lietuva', adjective: 'Lithuanian' },
   us: { code: 'us', name: 'United States', nameLocal: 'United States', adjective: 'American' },
+  ca: { code: 'ca', name: 'Canada', nameLocal: 'Canada', adjective: 'Canadian' },
+  br: { code: 'br', name: 'Brazil', nameLocal: 'Brasil', adjective: 'Brazilian' },
 };
 
 function city(
@@ -424,6 +428,54 @@ const US_STATES: ReadonlyArray<readonly [string, string]> = [
 ];
 const US_REGIONS: NordicLocation[] = US_STATES.map(([slug, name]) => region('us', slug, name));
 
+const CA_PROVINCES: ReadonlyArray<readonly [string, string]> = [
+  ['alberta', 'Alberta'],
+  ['british-columbia', 'British Columbia'],
+  ['manitoba', 'Manitoba'],
+  ['new-brunswick', 'New Brunswick'],
+  ['newfoundland-and-labrador', 'Newfoundland and Labrador'],
+  ['nova-scotia', 'Nova Scotia'],
+  ['ontario', 'Ontario'],
+  ['prince-edward-island', 'Prince Edward Island'],
+  ['quebec', 'Quebec'],
+  ['saskatchewan', 'Saskatchewan'],
+  ['northwest-territories', 'Northwest Territories'],
+  ['nunavut', 'Nunavut'],
+  ['yukon', 'Yukon'],
+];
+const CA_REGIONS: NordicLocation[] = CA_PROVINCES.map(([slug, name]) => region('ca', slug, name));
+
+const BR_STATES: ReadonlyArray<readonly [string, string]> = [
+  ['acre', 'Acre'],
+  ['alagoas', 'Alagoas'],
+  ['amapa', 'Amapá'],
+  ['amazonas', 'Amazonas'],
+  ['bahia', 'Bahia'],
+  ['ceara', 'Ceará'],
+  ['distrito-federal', 'Distrito Federal'],
+  ['espirito-santo', 'Espírito Santo'],
+  ['goias', 'Goiás'],
+  ['maranhao', 'Maranhão'],
+  ['mato-grosso', 'Mato Grosso'],
+  ['mato-grosso-do-sul', 'Mato Grosso do Sul'],
+  ['minas-gerais', 'Minas Gerais'],
+  ['para', 'Pará'],
+  ['paraiba', 'Paraíba'],
+  ['parana', 'Paraná'],
+  ['pernambuco', 'Pernambuco'],
+  ['piaui', 'Piauí'],
+  ['rio-de-janeiro', 'Rio de Janeiro'],
+  ['rio-grande-do-norte', 'Rio Grande do Norte'],
+  ['rio-grande-do-sul', 'Rio Grande do Sul'],
+  ['rondonia', 'Rondônia'],
+  ['roraima', 'Roraima'],
+  ['santa-catarina', 'Santa Catarina'],
+  ['sao-paulo', 'São Paulo'],
+  ['sergipe', 'Sergipe'],
+  ['tocantins', 'Tocantins'],
+];
+const BR_REGIONS: NordicLocation[] = BR_STATES.map(([slug, name]) => region('br', slug, name));
+
 const EU_REGIONS: NordicLocation[] = EU_PLACES.map(([country, slug, name]) =>
   region(country, slug, name),
 );
@@ -639,6 +691,8 @@ export const NORDIC_LOCATIONS: readonly NordicLocation[] = [
   ...EU_REGIONS,
   ...EU_CITIES,
   ...US_REGIONS,
+  ...CA_REGIONS,
+  ...BR_REGIONS,
 ];
 
 const byKey = new Map<string, NordicLocation>();

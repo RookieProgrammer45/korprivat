@@ -8,6 +8,8 @@ const VISITOR_COUNTRY_TO_CATALOGUE: Record<string, string> = {
   IS: 'is',
   FI: 'fi',
   US: 'us',
+  CA: 'ca',
+  BR: 'br',
   GB: 'gb',
   AU: 'au',
   DE: 'de',
@@ -64,6 +66,54 @@ const US_REGION_TO_SLUG: Record<string, string> = {
   WI: 'wisconsin',
 };
 
+/** Canadian province codes from `x-vercel-ip-country-region` → catalogue region slug. */
+const CA_REGION_TO_SLUG: Record<string, string> = {
+  AB: 'alberta',
+  BC: 'british-columbia',
+  MB: 'manitoba',
+  NB: 'new-brunswick',
+  NL: 'newfoundland-and-labrador',
+  NS: 'nova-scotia',
+  ON: 'ontario',
+  PE: 'prince-edward-island',
+  QC: 'quebec',
+  SK: 'saskatchewan',
+  NT: 'northwest-territories',
+  NU: 'nunavut',
+  YT: 'yukon',
+};
+
+/** Brazilian state codes from `x-vercel-ip-country-region` → catalogue region slug. */
+const BR_REGION_TO_SLUG: Record<string, string> = {
+  AC: 'acre',
+  AL: 'alagoas',
+  AP: 'amapa',
+  AM: 'amazonas',
+  BA: 'bahia',
+  CE: 'ceara',
+  DF: 'distrito-federal',
+  ES: 'espirito-santo',
+  GO: 'goias',
+  MA: 'maranhao',
+  MT: 'mato-grosso',
+  MS: 'mato-grosso-do-sul',
+  MG: 'minas-gerais',
+  PA: 'para',
+  PB: 'paraiba',
+  PR: 'parana',
+  PE: 'pernambuco',
+  PI: 'piaui',
+  RJ: 'rio-de-janeiro',
+  RN: 'rio-grande-do-norte',
+  RS: 'rio-grande-do-sul',
+  RO: 'rondonia',
+  RR: 'roraima',
+  SC: 'santa-catarina',
+  SP: 'sao-paulo',
+  SE: 'sergipe',
+  TO: 'tocantins',
+};
+
 export type VisitorCatalogueRegion = {
   countryCode: string;
   regionSlug: string | null;
@@ -79,6 +129,10 @@ export function visitorCatalogueRegionFromHeaders(
   let regionSlug: string | null = null;
   if (countryCode === 'us' && regionRaw) {
     regionSlug = US_REGION_TO_SLUG[regionRaw] ?? null;
+  } else if (countryCode === 'ca' && regionRaw) {
+    regionSlug = CA_REGION_TO_SLUG[regionRaw] ?? null;
+  } else if (countryCode === 'br' && regionRaw) {
+    regionSlug = BR_REGION_TO_SLUG[regionRaw] ?? null;
   }
 
   return { countryCode, regionSlug };
