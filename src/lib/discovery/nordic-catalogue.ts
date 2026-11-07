@@ -618,3 +618,10 @@ export function nordicCountryHasSchools(country: keyof typeof COUNTRY_PREFIX): b
   const prefix = COUNTRY_PREFIX[country];
   return catalogue.some((school) => school.id.startsWith(prefix));
 }
+
+/** True when an 8-char school-slug id belongs to the static catalogue, not Prisma. */
+export function isCatalogueShortId(id8: string): boolean {
+  return (Object.values(COUNTRY_PREFIX) as readonly string[]).some((prefix) =>
+    id8.startsWith(prefix),
+  );
+}

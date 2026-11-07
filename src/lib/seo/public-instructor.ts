@@ -6,6 +6,7 @@ import { prisma } from '@/lib/db';
 import {
   catalogueCountryCode,
   catalogueWebsiteDown,
+  isCatalogueShortId,
   nordicInstructorByShortId,
 } from '@/lib/discovery/nordic-catalogue';
 import { loadPublicListingById } from '@/lib/discovery/public-listing';
@@ -154,7 +155,7 @@ async function loadPublicInstructorBySchoolSlugUncached(
 ): Promise<PublicInstructorSlugResult | null> {
   const parsed = parseSchoolSlug(slug);
   if (!parsed) return null;
-  if (/^(no|dk|fi|is|au|uk|eu|us)/.test(parsed.id8)) {
+  if (isCatalogueShortId(parsed.id8)) {
     const nordic = nordicInstructorByShortId(parsed.id8);
     if (nordic) {
       const countryCode = catalogueCountryCode(nordic.id);

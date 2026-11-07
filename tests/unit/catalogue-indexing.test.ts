@@ -39,6 +39,16 @@ describe('catalogue indexing', () => {
     expect((await loadPublicInstructorBySchoolSlug(slugOf(UP)))?.instructor.indexable).toBe(true);
   });
 
+  it('resolves Canadian and Brazilian school profile slugs from the catalogue', async () => {
+    const ca = listCatalogueSchools().find((school) => school.id.startsWith('ca'));
+    const br = listCatalogueSchools().find((school) => school.id.startsWith('br'));
+    expect(ca).toBeTruthy();
+    expect(br).toBeTruthy();
+    if (!ca || !br) return;
+    expect((await loadPublicInstructorBySchoolSlug(slugOf(ca.id)))?.instructor.id).toBe(ca.id);
+    expect((await loadPublicInstructorBySchoolSlug(slugOf(br.id)))?.instructor.id).toBe(br.id);
+  });
+
   it('puts every catalogue school with a live website in the sitemap', async () => {
     const paths = new Set((await seoRoutes()).map((route) => route.path));
     for (const school of listCatalogueSchools()) {
