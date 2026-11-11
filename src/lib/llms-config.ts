@@ -52,7 +52,9 @@ export const llmsConfig: LlmsConfig = {
     '/handledare':
       'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
     '/blog':
-      'Guides for learners: category B driving lessons, the learner permit, risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+      'Guides for learners: category B in Gothenburg, driving lessons, the learner permit, risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+    '/blog/korkort-b-goteborg':
+      'Swedish guide to category B in Gothenburg: learner permit, traffic-school lessons, risk education, Trafikverket theory and driving tests at Hisingen, Högsbo and Partille, foreign-licence readers, and published school prices.',
     '/blog/korlektion-korkort-b':
       'Swedish guide to a category B driving lesson: learner permit, a traffic-school permit versus a catalog listing, published prices in Stockholm, Gothenburg, Malmö and Lund, and readers who already drive in another country.',
     '/blog/korkortstillstand-korkort-b':

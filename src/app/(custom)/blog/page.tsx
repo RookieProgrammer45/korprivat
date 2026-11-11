@@ -14,6 +14,11 @@ import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 const POSTS = [
   {
+    slug: 'korkort-b-goteborg',
+    index: '10',
+    minutes: 8,
+  },
+  {
     slug: 'korlektion-korkort-b',
     index: '9',
     minutes: 8,
