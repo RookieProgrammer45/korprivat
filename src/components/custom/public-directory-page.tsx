@@ -30,7 +30,7 @@ export function PublicDirectoryPage({
 
   return (
     <main className="directory-shell container-page min-h-[calc(100dvh-3.5rem)] min-w-0">
-      <header className="flex w-full items-start gap-4">
+      <header className="mx-auto flex w-full max-w-6xl items-start gap-4">
         <span className="flex size-14 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground">
           <Car className="size-7" strokeWidth={1.75} aria-hidden />
         </span>

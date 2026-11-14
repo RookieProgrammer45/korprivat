@@ -166,7 +166,7 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
 
   return (
     <main className="container-page section min-w-0">
-      <div className="grid w-full gap-6">
+      <div className="mx-auto grid w-full max-w-6xl gap-6">
         <div className="grid min-w-0 gap-6">
           <InstructorDetail
             instructorId={instructorId}

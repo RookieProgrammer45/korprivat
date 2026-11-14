@@ -6,9 +6,9 @@ import { ChevronDown, Search, Truck } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { type FormEvent, useId, useState } from 'react';
 import { AnimatedTitle } from '@/components/custom/animated-title';
-import { LocaleLink as Link } from '@/components/locale-link';
 import { localePath } from '@/lib/seo/locale-path';
 import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 
@@ -42,95 +42,93 @@ export function HomeHero() {
   }
 
   return (
-    <section className="marketplace-hero dlu-hero">
-      <div className="container-page pt-[var(--spacing-gutter)]">
-        <div className="grid items-center gap-10 overflow-hidden rounded-[1.5rem] border border-border bg-card px-4 py-12 sm:px-6 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pt-20 lg:pb-14">
-          <div className="dlu-hero-copy flex min-w-0 flex-col">
-            <AnimatedTitle
-              text={t('title')}
-              className="marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
-            />
-            <p className="marketplace-reveal dlu-hero-in-2 mt-4 max-w-xl text-body text-muted-foreground">
-              {t('body')}
-            </p>
+    <section className="marketplace-hero dlu-hero border-b border-border">
+      <div className="container-page grid items-center gap-10 pt-12 pb-10 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20 lg:pb-14">
+        <div className="dlu-hero-copy flex min-w-0 flex-col">
+          <AnimatedTitle
+            text={t('title')}
+            className="marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
+          />
+          <p className="marketplace-reveal dlu-hero-in-2 mt-4 max-w-xl text-body text-muted-foreground">
+            {t('body')}
+          </p>
 
-            <form
-              onSubmit={onSubmit}
-              aria-label={t('search.label')}
-              className="marketplace-reveal dlu-hero-in-2 dlu-hero-search mt-8 grid w-full gap-1 rounded-[1.25rem] border border-border bg-background p-2 sm:grid-cols-[1fr_1.25fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
+          <form
+            onSubmit={onSubmit}
+            aria-label={t('search.label')}
+            className="marketplace-reveal dlu-hero-in-2 dlu-hero-search mt-8 grid w-full max-w-2xl gap-1 rounded-[1.25rem] border border-border bg-card p-2 sm:grid-cols-[1fr_1.25fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
+          >
+            <SearchField
+              id={categoryId}
+              label={t('search.categoryLabel')}
+              value={category}
+              onChange={setCategory}
             >
-              <SearchField
-                id={categoryId}
-                label={t('search.categoryLabel')}
-                value={category}
-                onChange={setCategory}
-              >
-                {SEARCH_CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
-                    {t(`search.categories.${c}`)}
-                  </option>
-                ))}
-              </SearchField>
+              {SEARCH_CATEGORIES.map((c) => (
+                <option key={c} value={c}>
+                  {t(`search.categories.${c}`)}
+                </option>
+              ))}
+            </SearchField>
 
-              <div className="mx-4 h-px bg-border sm:hidden" aria-hidden />
+            <div className="mx-4 h-px bg-border sm:hidden" aria-hidden />
 
-              <SearchField
-                id={cityId}
-                label={t('search.cityLabel')}
-                value={city}
-                onChange={setCity}
-                divider
-              >
-                <option value="">{t('search.cityAny')}</option>
-                {SEARCH_CITIES.map((c) => (
-                  <option key={c.id} value={c.value}>
-                    {t(`search.cities.${c.id}`)}
-                  </option>
-                ))}
-              </SearchField>
+            <SearchField
+              id={cityId}
+              label={t('search.cityLabel')}
+              value={city}
+              onChange={setCity}
+              divider
+            >
+              <option value="">{t('search.cityAny')}</option>
+              {SEARCH_CITIES.map((c) => (
+                <option key={c.id} value={c.value}>
+                  {t(`search.cities.${c.id}`)}
+                </option>
+              ))}
+            </SearchField>
 
-              <button
-                type="submit"
-                className="dlu-ink-pill mt-1 cursor-pointer justify-center border-0 sm:mt-0"
-              >
-                <Search className="size-4" strokeWidth={2} aria-hidden />
-                {t('search.submit')}
-              </button>
-            </form>
+            <button
+              type="submit"
+              className="dlu-ink-pill mt-1 cursor-pointer justify-center border-0 sm:mt-0"
+            >
+              <Search className="size-4" strokeWidth={2} aria-hidden />
+              {t('search.submit')}
+            </button>
+          </form>
 
-            <div className="marketplace-reveal dlu-hero-in-3 mt-5 grid min-w-0 gap-3">
-              <div className="flex min-w-0 flex-wrap items-center gap-2 text-sm">
-                <span className="mr-1 text-muted-foreground">{t('popular.label')}</span>
-                {POPULAR_LINKS.map((link) => (
-                  <Link
-                    key={link.key}
-                    href={link.href}
-                    aria-describedby={link.key === 'heavy' ? 'hero-heavy-note' : undefined}
-                    className="dlu-hero-popular-link inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-background px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-                  >
-                    {link.key === 'heavy' ? (
-                      <Truck className="size-4" strokeWidth={1.75} aria-hidden />
-                    ) : null}
-                    {t(`popular.links.${link.key}`)}
-                  </Link>
-                ))}
-              </div>
-              <p id="hero-heavy-note" className="max-w-xl text-small text-muted-foreground">
-                {tHeavy('subtitle')}
-              </p>
+          <div className="marketplace-reveal dlu-hero-in-3 mt-5 grid min-w-0 gap-3">
+            <div className="flex min-w-0 flex-wrap items-center gap-2 text-sm">
+              <span className="mr-1 text-muted-foreground">{t('popular.label')}</span>
+              {POPULAR_LINKS.map((link) => (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  aria-describedby={link.key === 'heavy' ? 'hero-heavy-note' : undefined}
+                  className="dlu-hero-popular-link inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-card px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                >
+                  {link.key === 'heavy' ? (
+                    <Truck className="size-4" strokeWidth={1.75} aria-hidden />
+                  ) : null}
+                  {t(`popular.links.${link.key}`)}
+                </Link>
+              ))}
             </div>
+            <p id="hero-heavy-note" className="max-w-xl text-small text-muted-foreground">
+              {tHeavy('subtitle')}
+            </p>
           </div>
-          <aside className="marketplace-reveal dlu-hero-in-visual dlu-hero-visual relative hidden min-h-[28rem] overflow-hidden rounded-[1.25rem] border border-border lg:block lg:min-h-[32rem]">
-            <Image
-              src="/images/hero-lesson.jpg"
-              alt={t('imageAlt')}
-              fill
-              priority
-              sizes="(min-width: 1024px) 42vw, 0px"
-              className="object-cover"
-            />
-          </aside>
         </div>
+        <aside className="marketplace-reveal dlu-hero-in-visual dlu-hero-visual relative hidden min-h-[28rem] overflow-hidden rounded-[1.25rem] border border-border lg:block lg:min-h-[32rem]">
+          <Image
+            src="/images/hero-lesson.jpg"
+            alt={t('imageAlt')}
+            fill
+            priority
+            sizes="(min-width: 1024px) 28rem, 0px"
+            className="object-cover"
+          />
+        </aside>
       </div>
     </section>
   );

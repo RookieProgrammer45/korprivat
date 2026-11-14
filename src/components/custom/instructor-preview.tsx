@@ -21,7 +21,7 @@ import { schoolPath } from '@/lib/seo/school-slugs';
 
 export { categoryChipLabel, SchoolMark } from '@/components/custom/school-listing-card';
 
-const MAX_PREVIEW_ROWS = 60;
+const MAX_PREVIEW_ROWS = 20;
 
 type Status = 'loading' | 'ready' | 'empty' | 'error';
 
