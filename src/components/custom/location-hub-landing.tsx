@@ -24,16 +24,23 @@ import {
   NORDIC_COUNTRY_META,
   type NordicLocation,
 } from '@/lib/seo/nordic-locations';
+import { heroCategoryMatches, parseHeroSearchCategory } from '@/lib/seo/school-search-path';
 import { schoolPath } from '@/lib/seo/school-slugs';
 import { siteName, siteUrl } from '@/lib/site';
 
-export async function locationHubMetadata(location: NordicLocation): Promise<Metadata> {
+export async function locationHubMetadata(
+  location: NordicLocation,
+  category?: string | null,
+): Promise<Metadata> {
   const t = await getTranslations('locationHub.meta');
   const path = locationPath(location);
   const name = displayName(location);
   const country = NORDIC_COUNTRY_META[location.country];
   const market = marketCopy(location.country);
-  const schools = await publicSchoolsForLocation(location);
+  const licence = parseHeroSearchCategory(category);
+  const schools = (await publicSchoolsForLocation(location)).filter((school) =>
+    heroCategoryMatches(school.categories, licence),
+  );
   const stats = cityListingStats(schools);
   const title = market
     ? location.kind === 'city'
@@ -83,7 +90,13 @@ export async function locationHubMetadata(location: NordicLocation): Promise<Met
   };
 }
 
-export async function LocationHubLanding({ location }: { location: NordicLocation }) {
+export async function LocationHubLanding({
+  location,
+  category,
+}: {
+  location: NordicLocation;
+  category?: string | null;
+}) {
   const t = await getTranslations('locationHub');
   const locale = await getLocale();
   const href = (next: string) => localePath(locale, next);
@@ -101,7 +114,10 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           )
         : [];
   const regions = listRegions(location.country);
-  const schools = await publicSchoolsForLocation(location);
+  const licence = parseHeroSearchCategory(category);
+  const schools = (await publicSchoolsForLocation(location)).filter((school) =>
+    heroCategoryMatches(school.categories, licence),
+  );
   const stats = cityListingStats(schools);
   const catalogueHere = location.kind === 'city' && schoolsForLocation(location).length > 0;
   const countryCatalogue = location.country !== 'se' && nordicCountryHasSchools(location.country);
@@ -262,7 +278,11 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
           </section>
         ) : null}
 
-        {schools.length > 0 ? null : countryCatalogue ? (
+        {schools.length > 0 ? null : licence ? (
+          <p className="mx-auto mt-8 w-full max-w-6xl text-body text-muted-foreground">
+            {t('filteredEmpty', { name })}
+          </p>
+        ) : countryCatalogue ? (
           <section className="mx-auto mt-8 grid w-full max-w-6xl gap-3 rounded-xl border border-border bg-card p-6">
             <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
             <ul className="grid gap-2 sm:grid-cols-2">

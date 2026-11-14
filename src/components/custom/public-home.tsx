@@ -11,14 +11,17 @@ import { InstructorPreview } from '@/components/custom/instructor-preview';
 import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
 import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
+import { parseHeroSearchCategory } from '@/lib/seo/school-search-path';
 
-export async function PublicHome() {
+export async function PublicHome({ category }: { category?: string | null } = {}) {
   const t = await getTranslations('publicHome');
   const headerStore = await headers();
   const region = visitorCatalogueRegionFromHeaders((name) => headerStore.get(name));
-  const schools = await listHomepageSchools(HOMEPAGE_SCHOOL_PREVIEW_LIMIT, region).catch(
+  const schools = await listHomepageSchools(HOMEPAGE_SCHOOL_PREVIEW_LIMIT, region, category).catch(
     () => undefined,
   );
+  const licence = parseHeroSearchCategory(category);
+  const filtered = Boolean(licence && licence !== 'B');
 
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
@@ -38,6 +41,7 @@ export async function PublicHome() {
             limit={HOMEPAGE_SCHOOL_PREVIEW_LIMIT}
             initialRows={schools}
             showContact={false}
+            emptyLabel={filtered ? t('providers.filteredEmpty') : undefined}
           />
         </div>
       </section>

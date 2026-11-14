@@ -56,15 +56,31 @@ export function parseLocalePrefix(pathname: string): {
   return { locale: defaultLocale, pathname: normalized, hadPrefix: false };
 }
 
-export function localePath(locale: string, path: string): string {
-  const { pathname } = parseLocalePrefix(path);
-  if (!isLocale(locale) || locale === defaultLocale) return pathname;
-  return pathname === '/' ? `/${locale}` : `/${locale}${pathname}`;
+function splitPathSuffix(path: string): { pathname: string; suffix: string } {
+  const cut = path.search(/[?#]/);
+  if (cut === -1) return { pathname: path, suffix: '' };
+  return { pathname: path.slice(0, cut) || '/', suffix: path.slice(cut) };
 }
 
-export function switchLocalePath(currentPathname: string, nextLocale: string): string {
-  const { pathname } = parseLocalePrefix(currentPathname);
-  return localePath(nextLocale, pathname);
+export function localePath(locale: string, path: string): string {
+  const { pathname, suffix } = splitPathSuffix(path);
+  const { pathname: bare } = parseLocalePrefix(pathname || '/');
+  const prefixed =
+    !isLocale(locale) || locale === defaultLocale
+      ? bare
+      : bare === '/'
+        ? `/${locale}`
+        : `/${locale}${bare}`;
+  return `${prefixed}${suffix}`;
+}
+
+export function switchLocalePath(currentPathname: string, nextLocale: string, search = ''): string {
+  const { pathname, suffix } = splitPathSuffix(currentPathname);
+  const { pathname: bare } = parseLocalePrefix(pathname || '/');
+  const extra =
+    suffix ||
+    (search ? (search.startsWith('?') || search.startsWith('#') ? search : `?${search}`) : '');
+  return localePath(nextLocale, `${bare}${extra}`);
 }
 
 export type LocaleProxyDecision =

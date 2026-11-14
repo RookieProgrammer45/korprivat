@@ -70,6 +70,18 @@ describe('localePath and switchLocalePath', () => {
     expect(switchLocalePath('/de/faq', 'sv')).toBe('/faq');
     expect(switchLocalePath('/faq', 'en')).toBe('/en/faq');
   });
+
+  it('keeps a licence query on the localized path', () => {
+    expect(localePath('sv', '/?category=A')).toBe('/?category=A');
+    expect(localePath('en', '/?category=A')).toBe('/en?category=A');
+    expect(localePath('en', '/locations/se/goteborg?category=BE')).toBe(
+      '/en/locations/se/goteborg?category=BE',
+    );
+    expect(switchLocalePath('/locations/se/goteborg', 'en', '?category=A')).toBe(
+      '/en/locations/se/goteborg?category=A',
+    );
+    expect(switchLocalePath('/', 'sv', '?category=BE')).toBe('/?category=BE');
+  });
 });
 
 describe('localeProxyDecision', () => {

@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Auto-écoles",
-      "cta": "Toutes les auto-écoles"
+      "cta": "Toutes les auto-écoles",
+      "filteredEmpty": "Aucune annonce pour cette catégorie de permis pour le moment."
     },
     "assurance": {
       "eyebrow": "Fonctionnement de l’annuaire",
@@ -3632,7 +3633,8 @@
     "faq3a": "Non. Les handledare accompagnent la conduite supervisée selon les règles suédoises et ne sont pas des annonces d’école.",
     "linkHandledare": "Guide Handledare",
     "linkPricing": "Tarifs",
-    "linkBlog": "Guides"
+    "linkBlog": "Guides",
+    "filteredEmpty": "Aucune annonce pour cette catégorie de permis à {name} pour le moment."
   },
   "termsPage": {
     "meta": {

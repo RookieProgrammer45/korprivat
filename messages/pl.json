@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Szkoły",
-      "cta": "Wszystkie szkoły"
+      "cta": "Wszystkie szkoły",
+      "filteredEmpty": "Brak ogłoszeń dla tej kategorii prawa jazdy."
     },
     "assurance": {
       "eyebrow": "Jak działa katalog",
@@ -3632,7 +3633,8 @@
     "faq3a": "Nie. Handledare wspierają prywatną jazdę nadzorowaną według szwedzkich zasad i nie są ogłoszeniami szkół.",
     "linkHandledare": "Poradnik handledare",
     "linkPricing": "Cennik",
-    "linkBlog": "Poradniki"
+    "linkBlog": "Poradniki",
+    "filteredEmpty": "Brak ogłoszeń dla tej kategorii prawa jazdy w {name}."
   },
   "termsPage": {
     "meta": {

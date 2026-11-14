@@ -5,6 +5,7 @@ import {
   adsenseAllowedByConsent,
   adsenseClient,
   adsenseScriptSrc,
+  adsenseShouldLoad,
   isAdsenseClient,
 } from '@/lib/adsense';
 
@@ -35,5 +36,19 @@ describe('AdSense publisher id', () => {
     expect(adsenseAllowedByConsent(null)).toBe(false);
     expect(adsenseAllowedByConsent({ marketing: false })).toBe(false);
     expect(adsenseAllowedByConsent({ marketing: true })).toBe(true);
+  });
+
+  it('refuses a stale policy or a missing marketing yes', () => {
+    const current = 'v2026.10.27';
+    expect(adsenseShouldLoad(null, current)).toBe(false);
+    expect(
+      adsenseShouldLoad({ policyVersion: 'v2025.1', scope: { marketing: true } }, current),
+    ).toBe(false);
+    expect(
+      adsenseShouldLoad({ policyVersion: current, scope: { marketing: false } }, current),
+    ).toBe(false);
+    expect(adsenseShouldLoad({ policyVersion: current, scope: { marketing: true } }, current)).toBe(
+      true,
+    );
   });
 });

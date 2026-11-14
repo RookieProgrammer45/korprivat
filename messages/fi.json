@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Koulut",
-      "cta": "Kaikki koulut"
+      "cta": "Kaikki koulut",
+      "filteredEmpty": "Ei tämän ajokorttiluokan ilmoituksia juuri nyt."
     },
     "assurance": {
       "eyebrow": "Miten hakemisto toimii",
@@ -3632,7 +3633,8 @@
     "faq3a": "Eivät. Handledaret tukevat yksityistä harjoitteluajoa Ruotsin sääntöjen mukaan, eikä heitä myydä kouluilmoituksina.",
     "linkHandledare": "Handledare-opas",
     "linkPricing": "Hinnat",
-    "linkBlog": "Oppaat"
+    "linkBlog": "Oppaat",
+    "filteredEmpty": "Ei tämän ajokorttiluokan ilmoituksia paikassa {name} juuri nyt."
   },
   "termsPage": {
     "meta": {

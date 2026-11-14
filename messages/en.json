@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Schools",
-      "cta": "All schools"
+      "cta": "All schools",
+      "filteredEmpty": "No listings for this licence yet."
     },
     "assurance": {
       "eyebrow": "How the directory works",
@@ -3632,7 +3633,8 @@
     "faq3a": "No. Handledare support private övningskörning under Swedish rules and are not sold as school listings.",
     "linkHandledare": "Handledare guide",
     "linkPricing": "Pricing",
-    "linkBlog": "Guides"
+    "linkBlog": "Guides",
+    "filteredEmpty": "No listings for this licence in {name} yet."
   },
   "termsPage": {
     "meta": {

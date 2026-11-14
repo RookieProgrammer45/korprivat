@@ -1,3 +1,29 @@
+import { withUsualMotorcycleCategories } from '@/lib/business/licence-categories';
+
+/** Hero licence choices. B is the default light catalogue and does not narrow the list. */
+export const HERO_SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
+
+export type HeroSearchCategory = (typeof HERO_SEARCH_CATEGORIES)[number];
+
+export function parseHeroSearchCategory(
+  value: string | null | undefined,
+): HeroSearchCategory | null {
+  if (!value) return null;
+  return (HERO_SEARCH_CATEGORIES as readonly string[]).includes(value)
+    ? (value as HeroSearchCategory)
+    : null;
+}
+
+/** A and BE narrow a listing. B and unknown values keep the full light list. */
+export function heroCategoryMatches(
+  categories: readonly string[],
+  category: string | null | undefined,
+): boolean {
+  const parsed = parseHeroSearchCategory(category);
+  if (!parsed || parsed === 'B') return true;
+  return withUsualMotorcycleCategories(categories).includes(parsed);
+}
+
 /** Hero search cities → public location hubs. Never `/instructors` (login-walled). */
 
 export const SEARCH_CITIES = [
@@ -36,10 +62,15 @@ export const SEARCH_CITIES = [
   { id: 'warszawa', value: 'Warszawa', href: '/locations/pl/warszawa' },
 ] as const;
 
-/** Public school search: a chosen city opens that hub; otherwise Sweden. */
-export function schoolSearchPath(cityValue: string): string {
+/** Public school search: a chosen city opens that hub; otherwise Sweden. A and BE stay on the result. */
+export function schoolSearchPath(cityValue: string, categoryValue?: string): string {
   const wanted = cityValue.trim();
-  if (!wanted) return '/locations/se';
-  const match = SEARCH_CITIES.find((city) => city.value === wanted);
-  return match?.href ?? '/locations/se';
+  const category = parseHeroSearchCategory(categoryValue);
+  const base = !wanted
+    ? category && category !== 'B'
+      ? '/'
+      : '/locations/se'
+    : (SEARCH_CITIES.find((city) => city.value === wanted)?.href ?? '/locations/se');
+  if (!category || category === 'B') return base;
+  return `${base}?category=${category}`;
 }

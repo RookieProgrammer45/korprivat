@@ -6,9 +6,9 @@ import { ChevronDown, Search, Truck } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { LocaleLink as Link } from '@/components/locale-link';
 import { type FormEvent, useId, useState } from 'react';
 import { AnimatedTitle } from '@/components/custom/animated-title';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { localePath } from '@/lib/seo/locale-path';
 import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 
@@ -16,7 +16,7 @@ const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
 
 const POPULAR_LINKS = [
   { key: 'heavy', href: '/tung-trafik' },
-  { key: 'categoryA', href: '/locations/se' },
+  { key: 'categoryA', href: '/?category=A' },
   { key: 'stockholm', href: '/locations/se/stockholm' },
   { key: 'goteborg', href: '/locations/se/goteborg' },
   { key: 'malmo', href: '/locations/se/malmo' },
@@ -38,12 +38,12 @@ export function HomeHero() {
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    router.push(localePath(locale, schoolSearchPath(city)));
+    router.push(localePath(locale, schoolSearchPath(city, category)));
   }
 
   return (
     <section className="marketplace-hero dlu-hero border-b border-border">
-      <div className="container-page grid items-center gap-10 pt-12 pb-10 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20 lg:pb-14">
+      <div className="container-page grid items-start gap-8 pt-4 pb-8 sm:pt-5 lg:grid-cols-[1.05fr_0.95fr] lg:pt-6 lg:pb-10">
         <div className="dlu-hero-copy flex min-w-0 flex-col">
           <AnimatedTitle
             text={t('title')}

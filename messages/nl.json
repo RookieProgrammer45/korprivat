@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Rijscholen",
-      "cta": "Alle rijscholen"
+      "cta": "Alle rijscholen",
+      "filteredEmpty": "Geen advertenties voor dit rijbewijs op dit moment."
     },
     "assurance": {
       "eyebrow": "Hoe de catalogus werkt",
@@ -3632,7 +3633,8 @@
     "faq3a": "Nee. Handledare ondersteunen privé oefenrijden volgens Zweedse regels en zijn geen schoolvermeldingen.",
     "linkHandledare": "Handledare-gids",
     "linkPricing": "Prijzen",
-    "linkBlog": "Gidsen"
+    "linkBlog": "Gidsen",
+    "filteredEmpty": "Geen advertenties voor dit rijbewijs in {name} op dit moment."
   },
   "termsPage": {
     "meta": {

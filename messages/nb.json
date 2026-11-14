@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Skoler",
-      "cta": "Alle skoler"
+      "cta": "Alle skoler",
+      "filteredEmpty": "Ingen annonse for denne førerkortklassen akkurat nå."
     },
     "assurance": {
       "eyebrow": "Hvordan katalogen fungerer",
@@ -3632,7 +3633,8 @@
     "faq3a": "Nei. Handledare støtter privat øvingskjøring etter svenske regler og selges ikke som skoleoppføringer.",
     "linkHandledare": "Håndleder guide",
     "linkPricing": "Prissetting",
-    "linkBlog": "Guider"
+    "linkBlog": "Guider",
+    "filteredEmpty": "Ingen annonse for denne førerkortklassen i {name} akkurat nå."
   },
   "termsPage": {
     "meta": {

@@ -30,12 +30,15 @@ export function InstructorPreview({
   pageIntro = false,
   showContact = true,
   initialRows,
+  emptyLabel,
 }: {
   limit?: number;
   pageIntro?: boolean;
   showContact?: boolean;
   /** Schools already rendered by the server. When set, the card does not fetch again. */
   initialRows?: InstructorFilteredItem[];
+  /** Replaces the default empty sentence when a licence filter matched nothing. */
+  emptyLabel?: string;
 }) {
   const tr = useTranslations('instructorPreview');
   const seeded = initialRows !== undefined;
@@ -70,7 +73,7 @@ export function InstructorPreview({
         {tr('errorTitle')}
       </p>
     ) : status === 'empty' ? (
-      <p className="text-small text-muted-foreground">{tr('empty')}</p>
+      <p className="text-small text-muted-foreground">{emptyLabel ?? tr('empty')}</p>
     ) : (
       <ul className={SCHOOL_LISTING_GRID_CLASS}>
         {rows.map((row) => (

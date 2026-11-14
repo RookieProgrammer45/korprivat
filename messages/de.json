@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Schulen",
-      "cta": "Alle Schulen"
+      "cta": "Alle Schulen",
+      "filteredEmpty": "Keine Inserate für diese Führerscheinklasse."
     },
     "assurance": {
       "eyebrow": "So funktioniert das Verzeichnis",
@@ -3632,7 +3633,8 @@
     "faq3a": "Nein. Handledare unterstützen privates Übungsfahren nach schwedischen Regeln und sind keine Schulangebote.",
     "linkHandledare": "Handledare-Leitfaden",
     "linkPricing": "Preise",
-    "linkBlog": "Leitfäden"
+    "linkBlog": "Leitfäden",
+    "filteredEmpty": "Keine Inserate für diese Führerscheinklasse in {name}."
   },
   "termsPage": {
     "meta": {

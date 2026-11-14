@@ -34,7 +34,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function DriveLinkUpLanding() {
+export default async function DriveLinkUpLanding({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category } = await searchParams;
   const locale = await resolveLocale();
   const t = await getTranslations('publicHome.hero');
   const description = locale === 'sv' ? siteDescription : t('body');
@@ -65,7 +70,7 @@ export default async function DriveLinkUpLanding() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      <PublicHome />
+      <PublicHome category={category} />
     </>
   );
 }

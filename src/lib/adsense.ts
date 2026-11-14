@@ -35,3 +35,12 @@ export function adsenseAllowedByConsent(
 ): boolean {
   return scope?.marketing === true;
 }
+
+/** Load the script only for the current policy version and an explicit marketing yes. */
+export function adsenseShouldLoad(
+  stored: { policyVersion?: string; scope?: { marketing?: boolean } } | null | undefined,
+  policyVersion: string,
+): boolean {
+  if (!stored || stored.policyVersion !== policyVersion) return false;
+  return adsenseAllowedByConsent(stored.scope);
+}

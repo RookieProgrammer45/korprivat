@@ -24,7 +24,7 @@ export function LocaleSwitcher() {
           method: 'POST',
           body: JSON.stringify({ locale }),
         });
-        router.push(switchLocalePath(pathname, locale));
+        router.push(switchLocalePath(pathname, locale, window.location.search));
       } catch {
         toast.error(t('nav.languageError'));
       }

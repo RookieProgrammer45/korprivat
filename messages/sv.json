@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Skolor",
-      "cta": "Alla skolor"
+      "cta": "Alla skolor",
+      "filteredEmpty": "Inga annonser för den här behörigheten just nu."
     },
     "assurance": {
       "eyebrow": "Så fungerar katalogen",
@@ -3632,7 +3633,8 @@
     "faq3a": "Nej. Handledare gäller privat övningskörning enligt svenska regler och säljs inte som skolannonser.",
     "linkHandledare": "Handledarguide",
     "linkPricing": "Priser",
-    "linkBlog": "Guider"
+    "linkBlog": "Guider",
+    "filteredEmpty": "Inga annonser för den här behörigheten i {name} just nu."
   },
   "termsPage": {
     "meta": {

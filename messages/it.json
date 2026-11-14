@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Scuole",
-      "cta": "Tutte le scuole"
+      "cta": "Tutte le scuole",
+      "filteredEmpty": "Nessun annuncio per questa categoria di patente al momento."
     },
     "assurance": {
       "eyebrow": "Come funziona l'elenco",
@@ -3632,7 +3633,8 @@
     "faq3a": "No. Gli handledare supportano la guida supervisionata secondo le regole svedesi e non sono annunci di scuola.",
     "linkHandledare": "Guida handledare",
     "linkPricing": "Prezzi",
-    "linkBlog": "Guide"
+    "linkBlog": "Guide",
+    "filteredEmpty": "Nessun annuncio per questa categoria di patente a {name} al momento."
   },
   "termsPage": {
     "meta": {

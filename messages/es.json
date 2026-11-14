@@ -2520,7 +2520,8 @@
     "providers": {
       "eyebrow": "",
       "title": "Autoescuelas",
-      "cta": "Todas las autoescuelas"
+      "cta": "Todas las autoescuelas",
+      "filteredEmpty": "No hay anuncios de esta categoría de permiso ahora mismo."
     },
     "assurance": {
       "eyebrow": "Cómo funciona el directorio",
@@ -3632,7 +3633,8 @@
     "faq3a": "No. Los handledare apoyan la práctica supervisada según las normas suecas y no se venden como autoescuelas.",
     "linkHandledare": "Guía handledare",
     "linkPricing": "Precios",
-    "linkBlog": "Guías"
+    "linkBlog": "Guías",
+    "filteredEmpty": "No hay anuncios de esta categoría de permiso en {name} ahora mismo."
   },
   "termsPage": {
     "meta": {
