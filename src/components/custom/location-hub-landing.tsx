@@ -198,7 +198,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
   return (
     <>
       <main className="directory-shell container-page min-h-[calc(100dvh-3.5rem)] min-w-0">
-        <header lang={market?.htmlLang} className="mx-auto flex w-full max-w-6xl flex-col gap-3">
+        <header lang={market?.htmlLang} className="flex w-full flex-col gap-3">
           <p className="text-eyebrow">{t('eyebrow', { country: country.nameLocal })}</p>
           <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
             {heading ??
@@ -230,7 +230,7 @@ export async function LocationHubLanding({ location }: { location: NordicLocatio
         </header>
 
         {schools.length > 0 ? (
-          <section lang={market?.htmlLang} className="mx-auto mt-8 w-full max-w-6xl">
+          <section lang={market?.htmlLang} className="mt-8 w-full">
             <h2 className="font-display text-h3">
               {market?.listHeading ?? t('listHeadingLive', { name })}
             </h2>

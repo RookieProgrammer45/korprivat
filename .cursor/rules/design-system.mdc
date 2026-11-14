@@ -60,7 +60,8 @@ Rules
 
 ## 3. Layout and spacing
 
-- Container: `container-page` (max-w-screen-xl, px-4 sm:px-6).
+- Container: `container-page` (full viewport width, ~12–20px gutters).
+  School listings use `SCHOOL_LISTING_GRID_CLASS` (2 → 6 columns). The homepage shows 10 rows on desktop.
 - 8-pt spacing. Section padding: `py-16 sm:py-24`. Hero: `pt-10 pb-16
   sm:pt-16 lg:pt-20 lg:pb-24`.
 - No dead bands: a section never has more than one empty viewport-third.

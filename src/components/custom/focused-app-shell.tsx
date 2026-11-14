@@ -19,7 +19,7 @@ export function FocusedAppShell({
 }) {
   return (
     <div className="focused-shell flex min-h-dvh min-w-0 flex-col bg-[var(--background)]">
-      <header className="focused-shell-topbar mx-auto flex w-full max-w-screen-xl items-center justify-between gap-3 px-gutter pt-6 sm:pt-8">
+      <header className="focused-shell-topbar container-page flex items-center justify-between gap-3 pt-6 sm:pt-8">
         <Link
           href="/"
           aria-label="DriveLinkUp"

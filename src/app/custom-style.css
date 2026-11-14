@@ -137,12 +137,11 @@ html.dark ::file-selector-button {
 
 .marketplace-hero {
   position: relative;
-  background-color: #fff;
-  border-bottom: 1px solid var(--border);
+  background-color: transparent;
 }
 
 html.dark .marketplace-hero {
-  background-color: var(--background);
+  background-color: transparent;
 }
 
 .marketplace-hero h1,
@@ -953,8 +952,8 @@ form > button[type="submit"] {
   .container-page,
   .section,
   .section-lg {
-    padding-left: max(1rem, env(safe-area-inset-left, 0px));
-    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
   }
 
   html,
@@ -2106,13 +2105,15 @@ html.dark .dlu-photo {
 
 .dlu-footer-inner {
   margin-inline: auto;
-  max-width: 80rem;
-  padding: 3.5rem 1rem 1.75rem;
+  max-width: var(--container-page);
+  padding-block: 3.5rem 1.75rem;
+  padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+  padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
 }
 
 @media (min-width: 640px) {
   .dlu-footer-inner {
-    padding: 4.25rem 2rem 1.75rem;
+    padding-block: 4.25rem 1.75rem;
   }
 }
 

@@ -153,9 +153,7 @@ export function SiteNav() {
   // '/blog' highlights on '/blog/post' but '/' never matches every route.
   const currentPath = parseLocalePrefix(pathname).pathname;
   const isActive = (href: string) =>
-    href === '/'
-      ? currentPath === '/'
-      : currentPath === href || currentPath.startsWith(`${href}/`);
+    href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
   const isSlotActive = (slot: NavSlot) =>
     slot.type === 'link' ? isActive(slot.item.href) : slot.items.some((i) => isActive(i.href));
 
@@ -163,7 +161,7 @@ export function SiteNav() {
     <header className="site-header site-header-shell sticky top-0 z-40 w-full border-b border-border/60 bg-background">
       <nav
         aria-label={tNav('nav.primary')}
-        className="mx-auto flex h-14 min-w-0 max-w-screen-xl items-center gap-2 px-4 sm:px-6"
+        className="container-page flex h-14 min-w-0 items-center gap-2"
       >
         <Link
           href="/"

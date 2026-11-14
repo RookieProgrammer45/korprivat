@@ -13,7 +13,7 @@ import {
   type VisitorCatalogueRegion,
 } from '@/lib/discovery/visitor-catalogue-region';
 
-/** Scan enough rows to fill 20 after country/region ranking. */
+/** Scan enough rows to fill the homepage grid after country/region ranking. */
 const WINDOW = 800;
 
 export async function listHomepageSchools(

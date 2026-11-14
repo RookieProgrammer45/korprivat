@@ -309,7 +309,7 @@ export function InstructorDirectory({
   }, [location.status, location.coords, replaceUrl]);
 
   return (
-    <section className="mx-auto mt-10 flex min-w-0 w-full max-w-6xl flex-col gap-7">
+    <section className="mt-10 flex min-w-0 w-full flex-col gap-7">
       <Suspense>
         <FilterBar
           filters={filters}

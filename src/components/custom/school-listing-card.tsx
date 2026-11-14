@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { LocaleLink as Link } from '@/components/locale-link';
 import { useState } from 'react';
 import { PublishedHeavyOffer, PublishedLessonPrice } from '@/components/custom/published-price';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
 import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
+import { LocaleLink as Link } from '@/components/locale-link';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
 import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { schoolPath } from '@/lib/seo/school-slugs';
@@ -139,9 +139,9 @@ export function SchoolMark({
         alt={alt}
         fill
         unoptimized
-        sizes="(min-width: 1536px) 18vw, (min-width: 1280px) 22vw, (min-width: 1024px) 30vw, 50vw"
+        sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 20vw, (min-width: 768px) 25vw, 50vw"
         onError={() => setFailed(true)}
-        className="object-contain p-8"
+        className="object-contain p-6 sm:p-8"
       />
     </span>
   );

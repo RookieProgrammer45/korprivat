@@ -86,7 +86,7 @@ export function DashboardShell({
     <main data-shell-role={shellRole} className="dashboard-shell min-h-dvh text-foreground">
       <div className="flex min-h-dvh flex-col">
         <header className="border-b border-border/70">
-          <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-gutter">
+          <div className="container-page flex h-16 items-center justify-between gap-4">
             <Link
               href="/"
               aria-label={siteName}
@@ -121,7 +121,7 @@ export function DashboardShell({
           </div>
         </header>
 
-        <div className="mx-auto grid w-full max-w-7xl flex-1 gap-6 px-gutter py-6 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <div className="container-page grid flex-1 gap-6 py-6 lg:grid-cols-[220px_minmax(0,1fr)]">
           <aside className="lg:border-r lg:border-border/70 lg:pr-6">
             <DashboardNav
               role={role}
