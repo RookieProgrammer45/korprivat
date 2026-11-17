@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Löydä autokoulu läheltäsi.",
+      "metaTitle": "Vertaa autokouluja Ruotsissa",
+      "metaDescription": "Vertaa autokouluja Ruotsissa. Katso julkaistut tuntihinnat ja ota yhteyttä kouluun. Ilmainen kaikille.",
       "body": "Autokoulut, jotka sivustonsa mukaan kouluttavat luokkiin AM, A, B tai BE. Hinta näkyy, kun koulu julkaisee sen.",
       "primaryCta": "Etsi koulu",
       "instructorCta": "Työskentelen autokoulussa",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "Päätös, yhdessä paikassa",
       "previewTitle": "Koulu → kaupunki → hinta",
-      "imageAlt": "Kuljettaja pitää ohjauspyörästä hämärällä tiellä",
+      "imageAlt": "Ajotunti: kuljettaja pitää ohjauspyörästä hämärällä",
       "previewLines": {
         "profile": "Vertaa luokkia, kieltä ja sijaintia.",
         "price": "Katso koulun julkaistu hinta — ei lisämaksuja.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Autokoulut — {name}, vertaa ajotunteja",
-      "titleCityCounted": "Autokoulut — {name}, vertaa {count} koulua",
+      "titleCity": "Vertaa autokouluja — {name}",
+      "titleCityCounted": "Vertaa {count} autokoulua — {name}",
       "titleRegion": "Autokoulut — {name}, {country}",
       "titleCountry": "Autokoulut — {country}",
-      "descriptionCity": "Vertaa autokouluja ja ajotunteja kohteessa {name}, {country}. Hinta näkyy vain, jos koulu on julkaissut sen sivullaan.",
-      "descriptionCityCounted": "Vertaa {count} autokoulua ja ajotuntia kohteessa {name}, {country}. Hinta näkyy vain, jos koulu on julkaissut sen sivullaan.",
-      "descriptionCityPriced": "Vertaa {count} autokoulua kohteessa {name}. Ajotunnit alkaen {price} SEK, kun koulu julkaisee hinnan sivullaan.",
+      "descriptionCity": "Vertaa autokouluja paikassa {name}. Ota yhteyttä kouluun. Hinta näkyy, kun koulu on julkaissut sen.",
+      "descriptionCityCounted": "Vertaa {count} autokoulua paikassa {name}. Ota yhteyttä kouluun. Hinta näkyy, kun koulu on julkaissut sen.",
+      "descriptionCityPriced": "Vertaa {count} autokoulua paikassa {name}. Edullisin julkaistu ajotunti: {price} kr. Ota yhteyttä kouluun.",
       "descriptionRegion": "Selaa kaupunkeja alueella {name}, {country}, ja vertaa autokouluja, kun luettelo on käytössä.",
       "descriptionCountry": "Löydä autokouluja maasta {country}. Listattu hinta on koulun sivun hinta.",
       "indexTitle": "Autokoulut",

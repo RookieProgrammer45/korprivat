@@ -5,7 +5,7 @@ import { resetIpRateLimitForTests, takeIpToken } from '@/lib/http/ip-rate-limit'
 import { navItems } from '@/lib/nav';
 import { robotsConfig } from '@/lib/robots-config';
 import { isSitemapDisallowed, renderRobotsTxt } from '@/lib/robots-txt';
-import { siteDescription } from '@/lib/site';
+import { siteDescription, siteTitleSv } from '@/lib/site';
 import { licenseFileAccepted, magicLooksLikeLicense } from '@/lib/verification/license-file';
 
 describe('ip rate limit', () => {
@@ -71,6 +71,9 @@ describe('public SEO surfaces', () => {
     expect(siteDescription.toLowerCase()).toContain('katalog');
     expect(siteDescription.toLowerCase()).not.toContain('marknadsplats');
     expect(siteDescription.toLowerCase()).not.toContain('kostnadsfritt för elever');
+    expect(siteDescription.length).toBeLessThanOrEqual(155);
+    expect(siteTitleSv.length).toBeLessThanOrEqual(60);
+    expect(siteTitleSv.toLowerCase()).toContain('trafikskolor');
   });
 });
 

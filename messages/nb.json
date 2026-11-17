@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Finn en trafikkskole nær deg.",
+      "metaTitle": "Sammenlign trafikkskoler i Sverige",
+      "metaDescription": "Sammenlign trafikkskoler i Sverige. Se publiserte timepriser og kontakt skolen. Gratis for alle.",
       "body": "Trafikkskoler som ifølge nettstedet sitt utdanner for AM, A, B eller BE. Prisen vises når skolen publiserer den.",
       "primaryCta": "Finn en skole",
       "instructorCta": "Jeg jobber på en kjøreskole",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "Avgjørelsen, på ett sted",
       "previewTitle": "Skole → by → pris",
-      "imageAlt": "En sjåfør som holder rattet på en skumringsvei",
+      "imageAlt": "Kjøretime: en sjåfør holder rattet i skumringen",
       "previewLines": {
         "profile": "Sammenlign kategorier, språk og plassering.",
         "price": "Se gjennom skolens publiserte pris – ingen ekstra avgifter.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Trafikkskoler i {name} — sammenlign kjøretimer",
-      "titleCityCounted": "Trafikkskoler i {name} — sammenlign {count} kjøreskoler",
+      "titleCity": "Sammenlign trafikkskoler i {name}",
+      "titleCityCounted": "Sammenlign {count} trafikkskoler i {name}",
       "titleRegion": "Trafikkskoler i {name}, {country}",
       "titleCountry": "Trafikkskoler i {country}",
-      "descriptionCity": "Sammenlign trafikkskoler og kjøretimer i {name}, {country}. En pris vises bare når skolen har publisert den på sitt nettsted.",
-      "descriptionCityCounted": "Sammenlign {count} trafikkskoler og kjøretimer i {name}, {country}. En pris vises bare når skolen har publisert den på sitt nettsted.",
-      "descriptionCityPriced": "Sammenlign {count} trafikkskoler i {name}. Kjøretimer fra {price} SEK når skolen publiserer prisen på sitt nettsted.",
+      "descriptionCity": "Sammenlign trafikkskoler i {name}. Kontakt skolen direkte. Prisen vises når skolen har publisert den.",
+      "descriptionCityCounted": "Sammenlign {count} trafikkskoler i {name}. Kontakt skolen direkte. Prisen vises når skolen har publisert den.",
+      "descriptionCityPriced": "Sammenlign {count} trafikkskoler i {name}. Laveste publiserte kjøretime: {price} kr. Kontakt skolen.",
       "descriptionRegion": "Utforsk steder i {name}, {country} og sammenlign trafikkskoler når katalogen er live.",
       "descriptionCountry": "Finn trafikkskoler i {country}. En oppgitt pris er prisen på skolens nettsted.",
       "indexTitle": "Trafikkskoler",

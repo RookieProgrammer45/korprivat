@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Vind een rijschool bij jou in de buurt.",
+      "metaTitle": "Vergelijk rijscholen in Zweden",
+      "metaDescription": "Vergelijk rijscholen in Zweden. Bekijk gepubliceerde lesprijzen en neem contact op met de school. Gratis voor iedereen.",
       "body": "Rijscholen die volgens hun website opleiden voor AM, A, B of BE. De prijs verschijnt wanneer de school die publiceert.",
       "primaryCta": "Vind een rijschool",
       "instructorCta": "Ik werk bij een rijschool",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "De keuze, op één plek",
       "previewTitle": "Rijschool → stad → prijs",
-      "imageAlt": "Een bestuurder die het stuur vasthoudt op een weg in de schemering",
+      "imageAlt": "Rijles: een bestuurder aan het stuur in de schemering",
       "previewLines": {
         "profile": "Vergelijk categorieën, taal en locatie.",
         "price": "Bekijk de gepubliceerde prijs van de rijschool — zonder extra kosten.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Rijscholen in {name} — lessen vergelijken",
-      "titleCityCounted": "Rijscholen in {name} — {count} scholen vergelijken",
+      "titleCity": "Vergelijk rijscholen in {name}",
+      "titleCityCounted": "Vergelijk {count} rijscholen in {name}",
       "titleRegion": "Rijscholen in {name}, {country}",
       "titleCountry": "Rijscholen in {country}",
-      "descriptionCity": "Vergelijk rijscholen en lessen in {name}, {country}. Een prijs staat er alleen als de school die op de eigen website publiceert.",
-      "descriptionCityCounted": "Vergelijk {count} rijscholen en lessen in {name}, {country}. Een prijs staat er alleen als de school die op de eigen website publiceert.",
-      "descriptionCityPriced": "Vergelijk {count} rijscholen in {name}. Lessen vanaf {price} SEK wanneer de school de prijs op de website publiceert.",
+      "descriptionCity": "Vergelijk rijscholen in {name}. Neem direct contact op met de school. De prijs staat er als de school die heeft gepubliceerd.",
+      "descriptionCityCounted": "Vergelijk {count} rijscholen in {name}. Neem direct contact op met de school. De prijs staat er als de school die heeft gepubliceerd.",
+      "descriptionCityPriced": "Vergelijk {count} rijscholen in {name}. Laagste gepubliceerde les: {price} kr. Neem contact op.",
       "descriptionRegion": "Verken plaatsen in {name}, {country} en vergelijk rijscholen wanneer de catalogus live is.",
       "descriptionCountry": "Vind rijscholen in {country}. Een vermelde prijs is de prijs op de website van de school.",
       "indexTitle": "Rijscholen",

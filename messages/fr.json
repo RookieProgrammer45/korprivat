@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Trouvez une auto-école près de chez vous.",
+      "metaTitle": "Comparer les auto-écoles en Suède",
+      "metaDescription": "Comparez les auto-écoles en Suède. Voyez les prix de leçon publiés et contactez l’école. Gratuit pour tous.",
       "body": "Auto-écoles qui, selon leur site, forment aux permis AM, A, B ou BE. Le prix s’affiche lorsque l’école le publie.",
       "primaryCta": "Trouver une auto-école",
       "instructorCta": "Je travaille dans une auto-école",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "La décision, au même endroit",
       "previewTitle": "Auto-école → ville → prix",
-      "imageAlt": "Un conducteur au volant sur une route au crépuscule",
+      "imageAlt": "Leçon de conduite : un conducteur au volant au crépuscule",
       "previewLines": {
         "profile": "Comparez catégories, langue et lieu.",
         "price": "Consultez le prix publié par l’auto-école — aucun frais ajouté.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Auto-écoles à {name} — comparer les leçons",
-      "titleCityCounted": "Auto-écoles à {name} — comparer {count} écoles",
+      "titleCity": "Comparer les auto-écoles à {name}",
+      "titleCityCounted": "Comparer {count} auto-écoles à {name}",
       "titleRegion": "Auto-écoles à {name}, {country}",
       "titleCountry": "Auto-écoles en {country}",
-      "descriptionCity": "Comparez auto-écoles et leçons à {name}, {country}. Un prix n’apparaît que s’il est publié sur le site de l’école.",
-      "descriptionCityCounted": "Comparez {count} auto-écoles et leçons à {name}, {country}. Un prix n’apparaît que s’il est publié sur le site de l’école.",
-      "descriptionCityPriced": "Comparez {count} auto-écoles à {name}. Leçons à partir de {price} SEK lorsque l’école publie le prix sur son site.",
+      "descriptionCity": "Comparez les auto-écoles à {name}. Contactez l’école. Le prix s’affiche quand l’école l’a publié.",
+      "descriptionCityCounted": "Comparez {count} auto-écoles à {name}. Contactez l’école. Le prix s’affiche quand l’école l’a publié.",
+      "descriptionCityPriced": "Comparez {count} auto-écoles à {name}. Leçon publiée la moins chère : {price} kr. Contactez l’école.",
       "descriptionRegion": "Explorez les villes de {name}, {country} et comparez les auto-écoles lorsque le catalogue est en ligne.",
       "descriptionCountry": "Trouvez des auto-écoles en {country}. Un prix listé est le prix du site de l’école.",
       "indexTitle": "Auto-écoles",

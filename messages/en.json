@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Find a driving school near you.",
+      "metaTitle": "Compare driving schools in Sweden",
+      "metaDescription": "Compare driving schools in Sweden. See published lesson prices and contact the school. Free for everyone.",
       "body": "Driving schools whose websites say they train for AM, A, B or BE. The price is shown when the school publishes it.",
       "primaryCta": "Find a school",
       "instructorCta": "I work at a driving school",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "The decision, in one place",
       "previewTitle": "School → city → price",
-      "imageAlt": "A driver holding the steering wheel on a dusk road",
+      "imageAlt": "Driving lesson: a driver holding the wheel at dusk",
       "previewLines": {
         "profile": "Compare categories, language and location.",
         "price": "Review the school's published price — no added fees.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Driving schools in {name} — compare lessons",
-      "titleCityCounted": "Driving schools in {name} — compare {count} schools",
+      "titleCity": "Compare driving schools in {name}",
+      "titleCityCounted": "Compare {count} driving schools in {name}",
       "titleRegion": "Driving schools in {name}, {country}",
       "titleCountry": "Driving schools in {country}",
-      "descriptionCity": "Compare driving schools and lessons in {name}, {country}. Published prices when the school lists them on its website.",
-      "descriptionCityCounted": "Compare {count} driving schools and lessons in {name}, {country}. Published prices when the school lists them on its website.",
-      "descriptionCityPriced": "Compare {count} driving schools in {name}. Lessons from {price} SEK when the school publishes the price on its website.",
+      "descriptionCity": "Compare driving schools in {name}. Contact the school directly. A price appears when the school has published it.",
+      "descriptionCityCounted": "Compare {count} driving schools in {name}. Contact the school directly. A price appears when the school has published it.",
+      "descriptionCityPriced": "Compare {count} driving schools in {name}. Lowest published lesson: {price} SEK. Contact the school.",
       "descriptionRegion": "Explore cities in {name}, {country} and compare driving-school listings when the catalog is live.",
       "descriptionCountry": "Find driving schools across {country}. A listed price is the price on the school's website.",
       "indexTitle": "Driving schools",

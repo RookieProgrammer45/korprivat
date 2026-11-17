@@ -714,7 +714,7 @@
       "title": "Trafikskolans annons",
       "titleNamed": "{name} — trafikskola i {city}",
       "description": "Se skolans kategorier, publicerade pris och ort. Kontakta skolan för att ordna en lektion.",
-      "descriptionNamed": "{name} i {city} — från {rate} SEK/lektion."
+      "descriptionNamed": "{name} i {city}. Körlektion från {rate} kr. Kontakta skolan."
     },
     "profileEyebrow": "Trafikskolans annons",
     "locatedIn": "Finns i {city}",
@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Hitta en trafikskola nära dig.",
+      "metaTitle": "Trafikskolor i Sverige – jämför priser",
+      "metaDescription": "Jämför trafikskolor i Sverige. Se publicerade lektionspriser och kontakta skolan. Gratis katalog för alla.",
       "body": "Trafikskolor som enligt sin webbplats utbildar för AM, A, B eller BE. Priset visas när skolan publicerar det.",
       "primaryCta": "Hitta en skola",
       "instructorCta": "Jag undervisar på en trafikskola",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "Beslutet, samlat på ett ställe",
       "previewTitle": "Skola → ort → pris",
-      "imageAlt": "En förare håller ratten i skymning",
+      "imageAlt": "Körlektion: en förare håller ratten i skymning",
       "previewLines": {
         "profile": "Jämför kategori, språk och plats.",
         "price": "Se skolans publicerade pris — inga tilläggsavgifter.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Trafikskolor i {name} — jämför körlektioner",
-      "titleCityCounted": "Trafikskolor i {name} — jämför {count} körskolor",
+      "titleCity": "Jämför trafikskolor i {name}",
+      "titleCityCounted": "Jämför {count} trafikskolor i {name}",
       "titleRegion": "Trafikskolor i {name}, {country}",
       "titleCountry": "Trafikskolor i {country}",
-      "descriptionCity": "Jämför trafikskolor och körlektioner i {name}, {country}. Publicerade priser när skolan har dem på sin webbplats.",
-      "descriptionCityCounted": "Jämför {count} trafikskolor och körlektioner i {name}, {country}. Publicerade priser när skolan har dem på sin webbplats.",
-      "descriptionCityPriced": "Jämför {count} trafikskolor i {name}. Körlektioner från {price} kr när skolan publicerat priset på sin webbplats.",
+      "descriptionCity": "Jämför trafikskolor i {name}. Kontakta skolan direkt. Priset visas när skolan publicerat det.",
+      "descriptionCityCounted": "Jämför {count} trafikskolor i {name}. Kontakta skolan direkt. Priset visas när skolan publicerat det.",
+      "descriptionCityPriced": "Jämför {count} trafikskolor i {name}. Lägsta publicerade körlektion: {price} kr. Kontakta skolan.",
       "descriptionRegion": "Utforska orter i {name}, {country} och jämför trafikskolor i katalogen när annonser är live.",
       "descriptionCountry": "Hitta trafikskolor i {country}. Ett listat pris är priset på skolans webbplats.",
       "indexTitle": "Trafikskolor",

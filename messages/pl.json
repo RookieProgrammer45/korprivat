@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Znajdź szkołę jazdy w pobliżu.",
+      "metaTitle": "Porównaj szkoły jazdy w Szwecji",
+      "metaDescription": "Porównaj szkoły jazdy w Szwecji. Zobacz opublikowane ceny lekcji i skontaktuj się ze szkołą. Za darmo dla wszystkich.",
       "body": "Szkoły jazdy, które według swojej strony szkolą na AM, A, B lub BE. Cena pojawia się, gdy szkoła ją publikuje.",
       "primaryCta": "Znajdź szkołę",
       "instructorCta": "Pracuję w szkole jazdy",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "Decyzja w jednym miejscu",
       "previewTitle": "Szkoła → miasto → cena",
-      "imageAlt": "Kierowca trzymający kierownicę na drodze o zmierzchu",
+      "imageAlt": "Lekcja jazdy: kierowca trzyma kierownicę o zmierzchu",
       "previewLines": {
         "profile": "Porównaj kategorie, język i lokalizację.",
         "price": "Sprawdź opublikowaną cenę szkoły — bez dodatkowych opłat.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Szkoły jazdy w {name} — porównaj lekcje",
-      "titleCityCounted": "Szkoły jazdy w {name} — porównaj {count} szkół",
+      "titleCity": "Porównaj szkoły jazdy w {name}",
+      "titleCityCounted": "Porównaj {count} szkół jazdy w {name}",
       "titleRegion": "Szkoły jazdy w {name}, {country}",
       "titleCountry": "Szkoły jazdy w {country}",
-      "descriptionCity": "Porównaj szkoły jazdy i lekcje w {name}, {country}. Cena pojawia się tylko wtedy, gdy szkoła publikuje ją na swojej stronie.",
-      "descriptionCityCounted": "Porównaj {count} szkół jazdy i lekcji w {name}, {country}. Cena pojawia się tylko wtedy, gdy szkoła publikuje ją na swojej stronie.",
-      "descriptionCityPriced": "Porównaj {count} szkół jazdy w {name}. Lekcje od {price} SEK, gdy szkoła publikuje cenę na stronie.",
+      "descriptionCity": "Porównaj szkoły jazdy w {name}. Skontaktuj się ze szkołą. Cena pojawia się, gdy szkoła ją opublikowała.",
+      "descriptionCityCounted": "Porównaj {count} szkół jazdy w {name}. Skontaktuj się ze szkołą. Cena pojawia się, gdy szkoła ją opublikowała.",
+      "descriptionCityPriced": "Porównaj {count} szkół jazdy w {name}. Najtańsza opublikowana lekcja: {price} kr. Skontaktuj się ze szkołą.",
       "descriptionRegion": "Przeglądaj miasta w {name}, {country} i porównuj szkoły jazdy, gdy katalog jest aktywny.",
       "descriptionCountry": "Znajdź szkoły jazdy w {country}. Podana cena to cena ze strony szkoły.",
       "indexTitle": "Szkoły jazdy",

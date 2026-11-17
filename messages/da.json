@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Find en køreskole tæt på dig.",
+      "metaTitle": "Sammenlign køreskoler i Sverige",
+      "metaDescription": "Sammenlign køreskoler i Sverige. Se offentliggjorte timepriser og kontakt skolen. Gratis for alle.",
       "body": "Køreskoler, der ifølge deres website underviser til AM, A, B eller BE. Prisen vises, når skolen offentliggør den.",
       "primaryCta": "Finn en skole",
       "instructorCta": "Jeg jobber på en køreskole",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "Afgørelsen, på ett sted",
       "previewTitle": "Skole → by → pris",
-      "imageAlt": "En sjåfør som holder rattet på en skumringsvei",
+      "imageAlt": "Køretime: en fører holder rattet i skumringen",
       "previewLines": {
         "profile": "Sammenlign kategorier, sprog og plassering.",
         "price": "Se gjennom skolens publiserte pris – ingen ekstra avgifter.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Køreskoler i {name} — sammenlign køretimer",
-      "titleCityCounted": "Køreskoler i {name} — sammenlign {count} køreskoler",
+      "titleCity": "Sammenlign køreskoler i {name}",
+      "titleCityCounted": "Sammenlign {count} køreskoler i {name}",
       "titleRegion": "Køreskoler i {name}, {country}",
       "titleCountry": "Køreskoler i {country}",
-      "descriptionCity": "Sammenlign køreskoler og køretimer i {name}, {country}. En pris vises kun, når skolen har offentliggjort den på sit website.",
-      "descriptionCityCounted": "Sammenlign {count} køreskoler og køretimer i {name}, {country}. En pris vises kun, når skolen har offentliggjort den på sit website.",
-      "descriptionCityPriced": "Sammenlign {count} køreskoler i {name}. Køretimer fra {price} kr, når skolen offentliggør prisen på sit website.",
+      "descriptionCity": "Sammenlign køreskoler i {name}. Kontakt skolen direkte. Prisen vises, når skolen har offentliggjort den.",
+      "descriptionCityCounted": "Sammenlign {count} køreskoler i {name}. Kontakt skolen direkte. Prisen vises, når skolen har offentliggjort den.",
+      "descriptionCityPriced": "Sammenlign {count} køreskoler i {name}. Laveste offentliggjorte køretime: {price} kr. Kontakt skolen.",
       "descriptionRegion": "Udforsk byer i {name}, {country}, og sammenlign køreskoler, når kataloget er live.",
       "descriptionCountry": "Find køreskoler i {country}. En angivet pris er prisen på skolens website.",
       "indexTitle": "Køreskoler",

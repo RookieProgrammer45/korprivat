@@ -11,7 +11,10 @@ import { InstructorPreview } from '@/components/custom/instructor-preview';
 import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
 import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
+import { absoluteUrl } from '@/lib/seo/alternates';
+import { jsonLdScript } from '@/lib/seo/json-ld';
 import { parseHeroSearchCategory } from '@/lib/seo/school-search-path';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 export async function PublicHome({ category }: { category?: string | null } = {}) {
   const t = await getTranslations('publicHome');
@@ -22,9 +25,25 @@ export async function PublicHome({ category }: { category?: string | null } = {}
   );
   const licence = parseHeroSearchCategory(category);
   const filtered = Boolean(licence && licence !== 'B');
+  const itemList =
+    schools && schools.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: t('providers.title'),
+          numberOfItems: schools.length,
+          itemListElement: schools.map((school, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: school.name,
+            url: absoluteUrl(schoolPath(school)),
+          })),
+        }
+      : null;
 
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
+      {itemList ? jsonLdScript(itemList) : null}
       <HomeHero />
 
       <section className="border-t border-border">

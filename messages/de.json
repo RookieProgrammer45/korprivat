@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Finde eine Fahrschule in deiner Nähe.",
+      "metaTitle": "Fahrschulen in Schweden vergleichen",
+      "metaDescription": "Fahrschulen in Schweden vergleichen. Veröffentlichte Stundenpreise sehen und die Schule kontaktieren. Für alle kostenlos.",
       "body": "Fahrschulen, die laut ihrer Website für AM, A, B oder BE ausbilden. Der Preis erscheint, wenn die Schule ihn veröffentlicht.",
       "primaryCta": "Schule finden",
       "instructorCta": "Ich arbeite an einer Fahrschule",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "Die Entscheidung an einem Ort",
       "previewTitle": "Schule → Stadt → Preis",
-      "imageAlt": "Ein Fahrer am Steuer auf einer Abendstraße",
+      "imageAlt": "Fahrstunde: ein Fahrer am Steuer in der Dämmerung",
       "previewLines": {
         "profile": "Kategorien, Sprache und Standort vergleichen.",
         "price": "Veröffentlichten Schulpreis prüfen — ohne Zusatzgebühren.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Fahrschulen in {name} — Fahrstunden vergleichen",
-      "titleCityCounted": "Fahrschulen in {name} — {count} Fahrschulen vergleichen",
+      "titleCity": "Fahrschulen in {name} vergleichen",
+      "titleCityCounted": "{count} Fahrschulen in {name} vergleichen",
       "titleRegion": "Fahrschulen in {name}, {country}",
       "titleCountry": "Fahrschulen in {country}",
-      "descriptionCity": "Fahrschulen und Fahrstunden in {name}, {country} vergleichen. Ein Preis steht nur, wenn die Schule ihn auf ihrer Website veröffentlicht.",
-      "descriptionCityCounted": "{count} Fahrschulen und Fahrstunden in {name}, {country} vergleichen. Ein Preis steht nur, wenn die Schule ihn auf ihrer Website veröffentlicht.",
-      "descriptionCityPriced": "{count} Fahrschulen in {name} vergleichen. Fahrstunden ab {price} SEK, wenn die Schule den Preis auf ihrer Website veröffentlicht.",
+      "descriptionCity": "Fahrschulen in {name} vergleichen. Die Schule direkt kontaktieren. Der Preis steht da, wenn die Schule ihn veröffentlicht hat.",
+      "descriptionCityCounted": "{count} Fahrschulen in {name} vergleichen. Die Schule direkt kontaktieren. Der Preis steht da, wenn die Schule ihn veröffentlicht hat.",
+      "descriptionCityPriced": "{count} Fahrschulen in {name} vergleichen. Günstigste veröffentlichte Fahrstunde: {price} kr. Schule kontaktieren.",
       "descriptionRegion": "Orte in {name}, {country} erkunden und Fahrschulen vergleichen, wenn der Katalog live ist.",
       "descriptionCountry": "Fahrschulen in {country} finden. Ein gelisteter Preis ist der Preis auf der Website der Schule.",
       "indexTitle": "Fahrschulen",

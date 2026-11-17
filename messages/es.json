@@ -2394,6 +2394,8 @@
     "hero": {
       "eyebrow": "",
       "title": "Encuentra una autoescuela cerca de ti.",
+      "metaTitle": "Compara autoescuelas en Suecia",
+      "metaDescription": "Compara autoescuelas en Suecia. Mira los precios de clase publicados y contacta con la escuela. Gratis para todos.",
       "body": "Autoescuelas que, según su web, forman para AM, A, B o BE. El precio se muestra cuando la autoescuela lo publica.",
       "primaryCta": "Buscar una autoescuela",
       "instructorCta": "Trabajo en una autoescuela",
@@ -2415,7 +2417,7 @@
       },
       "previewEyebrow": "La decisión, en un solo sitio",
       "previewTitle": "Autoescuela → ciudad → precio",
-      "imageAlt": "Un conductor al volante en una carretera al anochecer",
+      "imageAlt": "Clase de conducir: un conductor al volante al anochecer",
       "previewLines": {
         "profile": "Compara categorías, idioma y ubicación.",
         "price": "Consulta el precio publicado por la autoescuela, sin cargos añadidos.",
@@ -3580,13 +3582,13 @@
   },
   "locationHub": {
     "meta": {
-      "titleCity": "Autoescuelas en {name} — compara clases",
-      "titleCityCounted": "Autoescuelas en {name} — compara {count} autoescuelas",
+      "titleCity": "Compara autoescuelas en {name}",
+      "titleCityCounted": "Compara {count} autoescuelas en {name}",
       "titleRegion": "Autoescuelas en {name}, {country}",
       "titleCountry": "Autoescuelas en {country}",
-      "descriptionCity": "Compara autoescuelas y clases en {name}, {country}. Un precio solo aparece si la autoescuela lo publica en su web.",
-      "descriptionCityCounted": "Compara {count} autoescuelas y clases en {name}, {country}. Un precio solo aparece si la autoescuela lo publica en su web.",
-      "descriptionCityPriced": "Compara {count} autoescuelas en {name}. Clases desde {price} SEK cuando la autoescuela publica el precio en su web.",
+      "descriptionCity": "Compara autoescuelas en {name}. Contacta con la autoescuela. El precio aparece cuando la escuela lo ha publicado.",
+      "descriptionCityCounted": "Compara {count} autoescuelas en {name}. Contacta con la autoescuela. El precio aparece cuando la escuela lo ha publicado.",
+      "descriptionCityPriced": "Compara {count} autoescuelas en {name}. Clase publicada más baja: {price} kr. Contacta con la escuela.",
       "descriptionRegion": "Explora ciudades en {name}, {country} y compara autoescuelas cuando el catálogo esté activo.",
       "descriptionCountry": "Encuentra autoescuelas en {country}. Un precio listado es el precio de la web de la autoescuela.",
       "indexTitle": "Autoescuelas",

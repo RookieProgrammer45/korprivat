@@ -33,6 +33,15 @@ function publicLessonRate(instructor: { id: string }): number {
   return publishedPrices(instructor.id)?.lesson?.priceSek ?? 0;
 }
 
+/** Google cuts meta descriptions around 155 characters. */
+function metaSnippet(value: string): string {
+  const clean = value.replace(/\s+/g, ' ').trim();
+  if (clean.length <= 155) return clean;
+  const cut = clean.slice(0, 154);
+  const space = cut.lastIndexOf(' ');
+  return `${(space > 80 ? cut.slice(0, space) : cut).trim()}…`;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const resolved = await loadPublicInstructorBySchoolSlug(slug);
@@ -46,17 +55,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const { instructor, canonicalPath } = resolved;
   const path = canonicalPath;
-  const title = instructor.catalogue
-    ? `${instructor.name} — ${instructor.city}`
-    : t('titleNamed', { name: instructor.name, city: instructor.city });
   const rate = publicLessonRate(instructor);
   const portrait = schoolPortraitUrl(instructor.photoUrl);
-  const description =
+  // A published price is the reason to click. The city stays in the description and the URL.
+  const title =
+    instructor.catalogue && rate > 0
+      ? `${instructor.name} – från ${rate} kr`
+      : instructor.catalogue
+        ? `${instructor.name} — ${instructor.city}`
+        : t('titleNamed', { name: instructor.name, city: instructor.city });
+  const description = metaSnippet(
     instructor.localDescription ||
-    instructor.bio?.trim().slice(0, 155) ||
-    (rate > 0
-      ? t('descriptionNamed', { name: instructor.name, city: instructor.city, rate })
-      : t('description'));
+      instructor.bio?.trim() ||
+      (rate > 0
+        ? t('descriptionNamed', { name: instructor.name, city: instructor.city, rate })
+        : t('description')),
+  );
   const locale = await resolveLocale();
   return {
     title,
