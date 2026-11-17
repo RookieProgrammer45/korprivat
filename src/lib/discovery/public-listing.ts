@@ -274,7 +274,11 @@ export const publicSchoolsForLocation = cache(
   async (location: NordicLocation): Promise<InstructorFilteredItem[]> => {
     if (location.kind !== 'city') return [];
     if (location.country === 'se') {
-      return listPublicSchoolsForCity(location.filterCity ?? location.name);
+      // Multi-city hubs pass their display name; cityFilterCandidates resolves
+      // it to every registered DB spelling (e.g. Haninge -> Handen, Västerhaninge).
+      const cityFilter =
+        typeof location.filterCity === 'string' ? location.filterCity : location.name;
+      return listPublicSchoolsForCity(cityFilter);
     }
     return schoolsForLocation(location);
   },

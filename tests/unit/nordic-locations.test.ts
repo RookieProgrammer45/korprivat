@@ -93,3 +93,11 @@ describe('nordic-locations registry', () => {
     expect(paths.length).toBe(1 + NORDIC_COUNTRIES.length + NORDIC_LOCATIONS.length);
   });
 });
+
+describe('cityFilterCandidates', () => {
+  it('resolves multi-city hubs to every registered DB spelling', () => {
+    expect(cityFilterCandidates('Haninge')).toEqual(
+      expect.arrayContaining(['Haninge', 'Handen', 'Västerhaninge']),
+    );
+  });
+});
