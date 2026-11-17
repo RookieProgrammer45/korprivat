@@ -9,10 +9,18 @@ import {
 import { locationPath, NORDIC_LOCATIONS } from '@/lib/seo/nordic-locations';
 
 describe('location indexing', () => {
-  it('keeps hand-written hubs indexable', () => {
-    for (const location of NORDIC_LOCATIONS) {
+  it('keeps hand-written Swedish hubs indexable', () => {
+    for (const location of NORDIC_LOCATIONS.filter((l) => l.country === 'se')) {
       expect(isIndexableLocation(location)).toBe(true);
     }
+  });
+
+  it('drops thin hand-written hubs outside Sweden', () => {
+    const thin = NORDIC_LOCATIONS.filter(
+      (l) => l.country !== 'se' && l.kind === 'city' && schoolsForLocation(l).length < 3,
+    );
+    expect(thin.length).toBeGreaterThan(0);
+    for (const location of thin) expect(isIndexableLocation(location)).toBe(false);
   });
 
   it('only indexes generated city pages with enough schools', () => {

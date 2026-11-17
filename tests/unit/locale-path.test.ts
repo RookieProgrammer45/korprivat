@@ -146,9 +146,14 @@ describe('sitemapPathsFor', () => {
   it('adds locale prefixes for hubs and editorial pages, not school profiles', () => {
     const hub = sitemapPathsFor('/locations/se/stockholm');
     expect(hub).toContain('/locations/se/stockholm');
-    expect(hub).toContain('/de/locations/se/stockholm');
     expect(hub).toContain('/en/locations/se/stockholm');
-    expect(hub).toHaveLength(locales.length);
+    expect(hub).not.toContain('/de/locations/se/stockholm');
+    expect(hub).toHaveLength(2);
+    expect(sitemapPathsFor('/locations/de/berlin')).toEqual([
+      '/locations/de/berlin',
+      '/en/locations/de/berlin',
+      '/de/locations/de/berlin',
+    ]);
 
     const school = sitemapPathsFor('/trafikskola/stockholm/fogels-trafikskola-abcd1234');
     expect(school).toEqual(['/trafikskola/stockholm/fogels-trafikskola-abcd1234']);
