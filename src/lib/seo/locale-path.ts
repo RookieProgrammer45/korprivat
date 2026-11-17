@@ -109,8 +109,32 @@ export function isSwedishOnlySeoPath(path: string): boolean {
 }
 
 /** Swedish URL plus prefixed locales, except school profiles and Swedish-only guides. */
+const COUNTRY_LOCALE: Record<string, string> = {
+  se: 'sv',
+  no: 'nb',
+  dk: 'da',
+  fi: 'fi',
+  de: 'de',
+  at: 'de',
+  ch: 'de',
+  fr: 'fr',
+  be: 'fr',
+  lu: 'fr',
+  nl: 'nl',
+  es: 'es',
+  it: 'it',
+  pl: 'pl',
+};
+
 export function sitemapPathsFor(path: string): string[] {
   const { pathname } = parseLocalePrefix(path);
   if (isSchoolProfilePath(pathname) || isSwedishOnlySeoPath(pathname)) return [pathname];
+  const hub = /^\/locations\/([a-z]{2})(?:\/|$)/.exec(pathname);
+  if (hub) {
+    // Location hubs: Swedish, English and the market's own language only.
+    // Emitting all 11 locales per city produced ~8,700 near-duplicate URLs.
+    const wanted = new Set<string>([defaultLocale, 'en', COUNTRY_LOCALE[hub[1] ?? ''] ?? 'en']);
+    return locales.filter((l) => wanted.has(l)).map((locale) => localePath(locale, pathname));
+  }
   return locales.map((locale) => localePath(locale, pathname));
 }

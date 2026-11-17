@@ -215,15 +215,29 @@ export function schoolsForLocation(location: NordicLocation): InstructorFiltered
 /** A generated city page with fewer schools than this is near-duplicate template text. */
 export const MIN_SCHOOLS_FOR_INDEXED_CITY = 3;
 
-/** Hand-written hubs always index; generated city pages need enough schools to stand alone. */
+/** Swedish hubs always index; elsewhere a city needs enough catalogue schools (a region, one such city). */
 export function isIndexableLocation(location: NordicLocation): boolean {
-  if (!generatedByKey.has(`${location.country}/${location.slug}`)) return true;
+  if (!generatedByKey.has(`${location.country}/${location.slug}`)) {
+    // Swedish hubs are backed by the live DB directory; elsewhere the static
+    // catalogue is authoritative, so thin curated cities stay out of the index.
+    if (location.country === 'se') return true;
+    if (location.kind !== 'city') {
+      return citiesInRegion(location.country, location.slug).some(
+        (city) => schoolsForLocation(city).length >= MIN_SCHOOLS_FOR_INDEXED_CITY,
+      );
+    }
+  }
   return schoolsForLocation(location).length >= MIN_SCHOOLS_FOR_INDEXED_CITY;
 }
 
 export function indexableLocationPaths(): string[] {
   return [
-    ...allLocationSitemapPaths(),
+    ...allLocationSitemapPaths().filter((path) => {
+      const [, , country, slug] = path.split('/');
+      if (!country || !slug) return true;
+      const location = resolveLocation(country, slug);
+      return !location || isIndexableLocation(location);
+    }),
     ...built.generated.filter(isIndexableLocation).map((location) => locationPath(location)),
   ];
 }
