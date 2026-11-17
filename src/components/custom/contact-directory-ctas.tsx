@@ -17,8 +17,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { LocaleLink as Link } from '@/components/locale-link';
 import * as React from 'react';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { apiFetch } from '@/lib/api-client';

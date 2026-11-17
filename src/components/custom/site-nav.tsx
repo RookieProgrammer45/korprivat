@@ -153,9 +153,7 @@ export function SiteNav() {
   // '/blog' highlights on '/blog/post' but '/' never matches every route.
   const currentPath = parseLocalePrefix(pathname).pathname;
   const isActive = (href: string) =>
-    href === '/'
-      ? currentPath === '/'
-      : currentPath === href || currentPath.startsWith(`${href}/`);
+    href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
   const isSlotActive = (slot: NavSlot) =>
     slot.type === 'link' ? isActive(slot.item.href) : slot.items.some((i) => isActive(i.href));
 

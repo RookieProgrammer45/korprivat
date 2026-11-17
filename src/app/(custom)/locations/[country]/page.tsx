@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { absoluteUrl, publicAlternatesFor } from '@/lib/seo/alternates';
-import { localePath } from '@/lib/seo/locale-path';
 import { locationsForCountry } from '@/lib/seo/catalogue-locations';
+import { localePath } from '@/lib/seo/locale-path';
 import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,

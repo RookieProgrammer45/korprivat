@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { LocaleLink as Link } from '@/components/locale-link';
 import { useState } from 'react';
 import { PublishedHeavyOffer, PublishedLessonPrice } from '@/components/custom/published-price';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
 import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
+import { LocaleLink as Link } from '@/components/locale-link';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
 import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { schoolPath } from '@/lib/seo/school-slugs';
