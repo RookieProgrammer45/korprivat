@@ -42,6 +42,7 @@ export type PublishedHeavy = {
 
 type DatasetSchool = {
   listingIds: string[];
+  cities?: string[];
   status: string;
   sourceUrl: string | null;
   checkedAt?: string;
@@ -215,8 +216,43 @@ export function lightCatalogueWhere(): { id: { notIn: string[] } } {
 
 // Public pages show the website lesson price over the listing's stored rate;
 // the stored rate stays untouched for a future checkout.
+/** Lowest and highest lesson price read from a school's own website. */
+export function publishedLessonPriceBounds(): { min: number; max: number } | null {
+  let min = Number.POSITIVE_INFINITY;
+  let max = 0;
+  for (const prices of byListing.values()) {
+    const price = prices.lesson?.priceSek;
+    if (!price) continue;
+    if (price < min) min = price;
+    if (price > max) max = price;
+  }
+  if (!Number.isFinite(min) || max <= 0) return null;
+  return { min, max };
+}
+
 export function publishedPrices(listingId: string): PublishedPrices | null {
   return byListing.get(listingId) ?? null;
+}
+
+/** How many linked schools publish an ordinary B lesson in each register city. */
+const lessonCountByCity = new Map<string, number>();
+for (const school of dataset.schools as DatasetSchool[]) {
+  if (school.status !== 'OK' || !school.lesson.priceSek || school.listingIds.length === 0) continue;
+  for (const city of school.cities ?? []) {
+    const key = city.trim().toLocaleLowerCase('sv');
+    if (!key) continue;
+    lessonCountByCity.set(key, (lessonCountByCity.get(key) ?? 0) + 1);
+  }
+}
+
+export function publishedLessonCountInCity(city: string): number {
+  return lessonCountByCity.get(city.trim().toLocaleLowerCase('sv')) ?? 0;
+}
+
+export function publishedLessonCountForCities(cities: readonly string[]): number {
+  let total = 0;
+  for (const city of cities) total += publishedLessonCountInCity(city);
+  return total;
 }
 
 // A heavy-vehicle school can be listed with categories and no amount. The

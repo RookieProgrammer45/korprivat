@@ -1,28 +1,16 @@
 //
 // Server-only module: the assistant receives a small, auditable set of
 // marketplace facts and hands personal or safety-sensitive cases to the
-// existing contact flow. Dynamic rates come from the same seed rows used by
-// the provider directory so the public answer does not invent a range.
+// existing contact flow. Lesson bounds are prices read on each school's own website.
 
 import 'server-only';
-import { seedRows } from '@/lib/business/instructor-seeds';
 import { CONTACT_TOPICS, type ContactTopic } from '@/lib/contact/schema';
 import type { Locale } from '@/lib/contracts/chatbot';
+import { publishedLessonPriceBounds } from '@/lib/discovery/published-prices';
 
 interface RateRange {
   min: number;
   max: number;
-}
-
-function deriveRateRange(rows = seedRows): RateRange {
-  if (rows.length === 0) return { min: 0, max: 0 };
-  let min = Number.POSITIVE_INFINITY;
-  let max = 0;
-  for (const row of rows) {
-    if (row.hourlyRateSek < min) min = row.hourlyRateSek;
-    if (row.hourlyRateSek > max) max = row.hourlyRateSek;
-  }
-  return { min, max };
 }
 
 const CATEGORY_FACTS: Record<Locale, string> = {
@@ -38,26 +26,24 @@ const CATEGORY_FACTS: Record<Locale, string> = {
   ].join('\n'),
 };
 
-const PRICING_FACTS = ({ min, max }: RateRange, locale: Locale): string => {
+const PRICING_FACTS = (range: RateRange | null, locale: Locale): string => {
+  if (!range) {
+    return locale === 'sv'
+      ? 'Ett lektionspris visas bara när skolan har publicerat det på sin webbplats. DriveLinkUp lägger inte på någon avgift.'
+      : 'A lesson price is shown only when the school has published it on its website. DriveLinkUp adds no fee.';
+  }
+  const { min, max } = range;
   if (locale === 'sv') {
     return [
-      'Trafikskolornas publicerade timpriser i den aktuella katalogen ligger mellan ' +
-        min +
-        ' och ' +
-        max +
-        ' SEK.',
-      'Varje skola sätter sitt eget lektionspris, som visas på annonsen.',
-      'Eleven betalar skolans publicerade lektionspris. DriveLinkUp lägger inte på någon separat avgift.',
+      `Publicerade körlektioner på skolornas egna webbplatser ligger mellan ${min} och ${max} kr.`,
+      'Varje skola sätter sitt pris. Annonsen visar det priset med källa och datum.',
+      'DriveLinkUp lägger inte på någon avgift.',
     ].join(' ');
   }
   return [
-    'Published school lesson prices in the current directory range from ' +
-      min +
-      ' to ' +
-      max +
-      ' SEK per hour.',
-    'Each school sets its own lesson price, which is shown on the listing.',
-    'The learner pays the published school price. DriveLinkUp adds no separate learner fee.',
+    `Driving lessons published on the schools' own websites range from ${min} to ${max} SEK.`,
+    'Each school sets its price. The listing shows that price with its source and date.',
+    'DriveLinkUp adds no fee.',
   ].join(' ');
 };
 
@@ -151,8 +137,10 @@ function languageDirective(locale: Locale): string {
     : 'Reply in English unless the user wrote in Swedish, in which case reply in Swedish. Match the user.';
 }
 
-export function buildSystemPrompt(locale: Locale, rows = seedRows): string {
-  const range = deriveRateRange(rows);
+export function buildSystemPrompt(
+  locale: Locale,
+  range: RateRange | null = publishedLessonPriceBounds(),
+): string {
   return [
     RECEIVE_GUIDANCE[locale],
     '',

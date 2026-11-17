@@ -66,11 +66,16 @@ export const SEARCH_CITIES = [
 export function schoolSearchPath(cityValue: string, categoryValue?: string): string {
   const wanted = cityValue.trim();
   const category = parseHeroSearchCategory(categoryValue);
+  const match = wanted ? SEARCH_CITIES.find((city) => city.value === wanted) : undefined;
   const base = !wanted
     ? category && category !== 'B'
       ? '/'
       : '/locations/se'
-    : (SEARCH_CITIES.find((city) => city.value === wanted)?.href ?? '/locations/se');
+    : (match?.href ?? '/locations/se');
+  // Swedish city + car → PriceRunner-style lesson comparison when that page exists.
+  if ((!category || category === 'B') && match?.href.startsWith('/locations/se/')) {
+    return `${match.href}/korlektion`;
+  }
   if (!category || category === 'B') return base;
   return `${base}?category=${category}`;
 }

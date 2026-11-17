@@ -3592,7 +3592,8 @@
       "descriptionRegion": "Explore cities in {name}, {country} and compare driving-school listings when the catalog is live.",
       "descriptionCountry": "Find driving schools across {country}. A listed price is the price on the school's website.",
       "indexTitle": "Driving schools",
-      "indexSubtitle": "Open a country. A price in the catalog is the price on the school's website."
+      "indexSubtitle": "Open a country. A price in the catalog is the price on the school's website.",
+      "titleCityPriced": "Lesson in {name} from {price} SEK"
     },
     "eyebrow": "{country}",
     "headerTitleCity": "Driving schools in {name}",
@@ -3643,7 +3644,15 @@
     "linkHandledare": "Handledare guide",
     "linkPricing": "Pricing",
     "linkBlog": "Guides",
-    "filteredEmpty": "No listings for this licence in {name} yet."
+    "filteredEmpty": "No listings for this licence in {name} yet.",
+    "headerTitleCityPriced": "Lessons in {name} from {price} SEK",
+    "compareTitle": "Published driving lessons",
+    "compareCaption": "Cheapest first. The price is what the school published on its website.",
+    "compareFullLink": "Open the full driving-lesson comparison for {name}",
+    "compareSchool": "School",
+    "compareLesson": "Lesson",
+    "compareLength": "Length",
+    "compareMinutes": "{minutes} min"
   },
   "termsPage": {
     "meta": {
@@ -3788,7 +3797,11 @@
         "The school owns its details. A badge appears only when the check is stored.",
         "Free to use. You pay the school's price."
       ],
-      "facts": ["Founded 2026", "Stockholm, Sweden", "Sweden first"],
+      "facts": [
+        "Founded 2026",
+        "Stockholm, Sweden",
+        "Sweden first"
+      ],
       "closing": "We're a young company. The first schools are being listed now, and if you write to us, a person answers."
     },
     "promise": {
@@ -3934,5 +3947,33 @@
     "eyebrow": "Truck, bus and YKB",
     "title": "Heavy vehicles",
     "subtitle": "Driving schools whose websites say they train for a C or D licence, or for YKB. The price is shown when the school publishes it."
+  },
+  "lessonComparison": {
+    "meta": {
+      "title": "Compare driving lessons in {name} – from {price} SEK",
+      "description": "Compare {count} published driving lessons in {name}. Cheapest first from {price} SEK. The price is from the school's own website."
+    },
+    "heading": "Compare driving lessons in {name} from {price} SEK",
+    "lead": "{count} schools in {name} have published a lesson price. Cheapest right now: {price} SEK. Contact the school to book.",
+    "breadcrumbLocations": "Locations",
+    "breadcrumbLesson": "Lesson",
+    "tableTitle": "Driving lessons in {name}",
+    "tableCaption": "Cheapest first. Price and length come from the school's own website.",
+    "colRank": "#",
+    "colSchool": "School",
+    "colLesson": "Lesson",
+    "colLength": "Length",
+    "colPerMinute": "SEK/min",
+    "minutes": "{minutes} min",
+    "sourceNote": "The price is what the school published on its website. DriveLinkUp has not verified it and does not use it as a booking amount.",
+    "cardsHeading": "Schools with a published price in {name}",
+    "faqTitle": "FAQ",
+    "faq1q": "Are the prices in {name} up to date?",
+    "faq1a": "They were read from each school's own website. The school may have changed the price since — open the school's price list from the listing.",
+    "faq2q": "Does DriveLinkUp charge for the comparison?",
+    "faq2a": "No. The directory is free. You pay the school, not DriveLinkUp.",
+    "backToHub": "All driving schools in {name}",
+    "offerLesson": "Driving lesson",
+    "offerMinutes": "Driving lesson {minutes} min"
   }
 }

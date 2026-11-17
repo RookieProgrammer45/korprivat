@@ -3592,7 +3592,8 @@
       "descriptionRegion": "Selaa kaupunkeja alueella {name}, {country}, ja vertaa autokouluja, kun luettelo on käytössä.",
       "descriptionCountry": "Löydä autokouluja maasta {country}. Listattu hinta on koulun sivun hinta.",
       "indexTitle": "Autokoulut",
-      "indexSubtitle": "Avaa maa. Luettelon hinta on koulun sivulla julkaistu hinta."
+      "indexSubtitle": "Avaa maa. Luettelon hinta on koulun sivulla julkaistu hinta.",
+      "titleCityPriced": "Ajotunti — {name}, alkaen {price} kr"
     },
     "eyebrow": "{country}",
     "headerTitleCity": "Autokoulut — {name}",
@@ -3643,7 +3644,15 @@
     "linkHandledare": "Handledare-opas",
     "linkPricing": "Hinnat",
     "linkBlog": "Oppaat",
-    "filteredEmpty": "Ei tämän ajokorttiluokan ilmoituksia paikassa {name} juuri nyt."
+    "filteredEmpty": "Ei tämän ajokorttiluokan ilmoituksia paikassa {name} juuri nyt.",
+    "headerTitleCityPriced": "Ajotunnit — {name}, alkaen {price} kr",
+    "compareTitle": "Published driving lessons",
+    "compareCaption": "Cheapest first. The price is what the school published on its website.",
+    "compareFullLink": "Open the full driving-lesson comparison for {name}",
+    "compareSchool": "School",
+    "compareLesson": "Lesson",
+    "compareLength": "Length",
+    "compareMinutes": "{minutes} min"
   },
   "termsPage": {
     "meta": {
@@ -3788,7 +3797,11 @@
         "Koulu omistaa tietonsa. Merkki näkyy vain, kun tarkistus on tallennettu.",
         "Ilmainen käyttää. Maksat koulun hinnan."
       ],
-      "facts": ["Perustettu 2026", "Stockholm, Ruotsi", "Ruotsi ensin"],
+      "facts": [
+        "Perustettu 2026",
+        "Stockholm, Ruotsi",
+        "Ruotsi ensin"
+      ],
       "closing": "Olemme nuori yritys. Ensimmäisiä kouluja listataan nyt, ja jos kirjoitat meille, ihminen vastaa."
     },
     "promise": {
@@ -3934,5 +3947,33 @@
     "eyebrow": "Kuorma-auto, linja-auto ja YKB",
     "title": "Raskaat ajoneuvot",
     "subtitle": "Autokoulut, joiden sivuston mukaan ne kouluttavat C- tai D-korttiin tai YKB:hen. Hinta näkyy, kun koulu julkaisee sen."
+  },
+  "lessonComparison": {
+    "meta": {
+      "title": "Compare driving lessons in {name} – from {price} SEK",
+      "description": "Compare {count} published driving lessons in {name}. Cheapest first from {price} SEK. The price is from the school's own website."
+    },
+    "heading": "Compare driving lessons in {name} from {price} SEK",
+    "lead": "{count} schools in {name} have published a lesson price. Cheapest right now: {price} SEK. Contact the school to book.",
+    "breadcrumbLocations": "Locations",
+    "breadcrumbLesson": "Lesson",
+    "tableTitle": "Driving lessons in {name}",
+    "tableCaption": "Cheapest first. Price and length come from the school's own website.",
+    "colRank": "#",
+    "colSchool": "School",
+    "colLesson": "Lesson",
+    "colLength": "Length",
+    "colPerMinute": "SEK/min",
+    "minutes": "{minutes} min",
+    "sourceNote": "The price is what the school published on its website. DriveLinkUp has not verified it and does not use it as a booking amount.",
+    "cardsHeading": "Schools with a published price in {name}",
+    "faqTitle": "FAQ",
+    "faq1q": "Are the prices in {name} up to date?",
+    "faq1a": "They were read from each school's own website. The school may have changed the price since — open the school's price list from the listing.",
+    "faq2q": "Does DriveLinkUp charge for the comparison?",
+    "faq2a": "No. The directory is free. You pay the school, not DriveLinkUp.",
+    "backToHub": "All driving schools in {name}",
+    "offerLesson": "Driving lesson",
+    "offerMinutes": "Driving lesson {minutes} min"
   }
 }

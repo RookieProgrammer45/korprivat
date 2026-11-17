@@ -337,10 +337,10 @@
       ],
       "website": "https://trossotrafikskola.se",
       "lesson": {
-        "priceSek": 1045,
-        "minutes": 60,
-        "pricePerMinuteSek": 17.4,
-        "note": "prova-på-lektion"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": "Tidigare pris var prova-på-lektion, inte ordinarie körlektion (rättad 2026-11-17)"
       },
       "testLessonSek": null,
       "risk1Sek": 1000,
@@ -356,7 +356,7 @@
         "https://www.instagram.com/trossotrafikskola/",
         "http://www.facebook.com/trossotrafikskola"
       ],
-      "checkedAt": "2026-10-26",
+      "checkedAt": "2026-11-17",
       "packages": [
         {
           "name": "Startpaket personbil",
@@ -16709,10 +16709,10 @@
       ],
       "website": "https://trafikpedagogerna.com",
       "lesson": {
-        "priceSek": 1049,
-        "minutes": 60,
-        "pricePerMinuteSek": 17.5,
-        "note": "testlektion pris, vanlig lektionstid ej angiven"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": "Tidigare pris var testlektion (rättad 2026-11-17)"
       },
       "testLessonSek": 1049,
       "risk1Sek": null,
@@ -16733,7 +16733,7 @@
       "social": [
         "https://www.instagram.com/trafikpedagogerna.lund/"
       ],
-      "checkedAt": "2026-10-26",
+      "checkedAt": "2026-11-17",
       "packages": [],
       "heavy": null,
       "phone": {
@@ -17551,10 +17551,10 @@
       ],
       "website": "https://e4trafikskola.se",
       "lesson": {
-        "priceSek": 499,
-        "minutes": 40,
-        "pricePerMinuteSek": 12.5,
-        "note": null
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": "499 kr på webbplatsen är testlektion; ordinarie enkellektion saknas (rättad 2026-11-17)"
       },
       "testLessonSek": 499,
       "risk1Sek": 600,
@@ -17582,7 +17582,7 @@
       },
       "status": "OK",
       "sourceUrl": "https://e4trafikskola.se/",
-      "checkedAt": "2026-10-26",
+      "checkedAt": "2026-11-17",
       "packages": [
         {
           "name": "Paket med 10 körlektioner",
@@ -20003,10 +20003,10 @@
       ],
       "website": "https://affes-trafikskola.org",
       "lesson": {
-        "priceSek": 590,
-        "minutes": 80,
-        "pricePerMinuteSek": 7.4,
-        "note": "första lektion, gratis hämtning, personlig planering"
+        "priceSek": null,
+        "minutes": null,
+        "pricePerMinuteSek": null,
+        "note": "Tidigare pris var första lektion / kampanj, inte ordinarie (rättad 2026-11-17)"
       },
       "testLessonSek": null,
       "risk1Sek": null,
@@ -20018,7 +20018,7 @@
       },
       "status": "OK",
       "sourceUrl": "https://affes-trafikskola.org/",
-      "checkedAt": "2026-10-26",
+      "checkedAt": "2026-11-17",
       "packages": [],
       "heavy": null,
       "phone": {

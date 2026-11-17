@@ -146,7 +146,7 @@ export default function KorkortBStegForStegPage() {
             <p>
               Antalet körlektioner varierar. Ingen seriös källa kan lova att ett visst timantal
               räcker. En trafikskola som publicerar pris per lektion gör det lättare att jämföra
-              timpris, inte att förutse din totalkostnad. Se{' '}
+              lektionspris, inte att förutse din totalkostnad. Se{' '}
               <Link className="underline underline-offset-4" href="/blog/kostnad-korkort-sverige">
                 vad körkortet kan kosta
               </Link>{' '}

@@ -92,7 +92,7 @@ function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
     categories: row.providerType === 'SCHOOL' ? row.categories : [],
     heavy: row.providerType === 'SCHOOL' ? (row.publishedPrices?.heavy ?? null) : null,
     city: row.city,
-    chip: formatSekChip(row.hourlyRateSek),
+    chip: formatSekChip(row.publishedPrices?.lesson?.priceSek ?? null),
     languages: languages || 'Svenska',
     nextSlot: row.nextSlotAt ? formatSlot(row.nextSlotAt) : null,
   };

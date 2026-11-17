@@ -3592,7 +3592,8 @@
       "descriptionRegion": "Utforska orter i {name}, {country} och jämför trafikskolor i katalogen när annonser är live.",
       "descriptionCountry": "Hitta trafikskolor i {country}. Ett listat pris är priset på skolans webbplats.",
       "indexTitle": "Trafikskolor",
-      "indexSubtitle": "Öppna ett land. Ett pris i katalogen är priset på skolans webbplats."
+      "indexSubtitle": "Öppna ett land. Ett pris i katalogen är priset på skolans webbplats.",
+      "titleCityPriced": "Körlektion i {name} från {price} kr"
     },
     "eyebrow": "{country}",
     "headerTitleCity": "Trafikskolor i {name}",
@@ -3643,7 +3644,15 @@
     "linkHandledare": "Handledarguide",
     "linkPricing": "Priser",
     "linkBlog": "Guider",
-    "filteredEmpty": "Inga annonser för den här behörigheten i {name} just nu."
+    "filteredEmpty": "Inga annonser för den här behörigheten i {name} just nu.",
+    "headerTitleCityPriced": "Körlektioner i {name} från {price} kr",
+    "compareTitle": "Publicerade körlektioner",
+    "compareCaption": "Billigast först. Priset är det skolan publicerat på sin webbplats.",
+    "compareFullLink": "Öppna hela jämförelsen av körlektioner i {name}",
+    "compareSchool": "Skola",
+    "compareLesson": "Körlektion",
+    "compareLength": "Längd",
+    "compareMinutes": "{minutes} min"
   },
   "termsPage": {
     "meta": {
@@ -3788,7 +3797,11 @@
         "Skolan äger sina uppgifter. Ett märke visas bara när kontrollen finns sparad.",
         "Gratis att använda. Du betalar skolans pris."
       ],
-      "facts": ["Grundat 2026", "Stockholm, Sverige", "Sverige först"],
+      "facts": [
+        "Grundat 2026",
+        "Stockholm, Sverige",
+        "Sverige först"
+      ],
       "closing": "Vi är ett ungt bolag. De första skolorna listas just nu, och skriver du till oss svarar en människa, inte en robot."
     },
     "promise": {
@@ -3934,5 +3947,33 @@
     "eyebrow": "Lastbil, buss och YKB",
     "title": "Tung trafik",
     "subtitle": "Trafikskolor som enligt sin webbplats utbildar för C- och D-behörighet eller YKB. Priset visas när skolan publicerar det."
+  },
+  "lessonComparison": {
+    "meta": {
+      "title": "Jämför körlektioner i {name} – från {price} kr",
+      "description": "Jämför {count} publicerade körlektioner i {name}. Billigast först från {price} kr. Priset är skolans egen webbplats."
+    },
+    "heading": "Jämför körlektioner i {name} från {price} kr",
+    "lead": "{count} skolor i {name} har publicerat en körlektion. Billigast just nu: {price} kr. Kontakta skolan för att boka.",
+    "breadcrumbLocations": "Orter",
+    "breadcrumbLesson": "Körlektion",
+    "tableTitle": "Körlektioner i {name}",
+    "tableCaption": "Billigast först. Priset och längden kommer från skolans egen webbplats.",
+    "colRank": "#",
+    "colSchool": "Skola",
+    "colLesson": "Körlektion",
+    "colLength": "Längd",
+    "colPerMinute": "Kr/min",
+    "minutes": "{minutes} min",
+    "sourceNote": "Priset är det skolan publicerat på sin webbplats. Det är inte verifierat av DriveLinkUp och används inte som bokningsbelopp.",
+    "cardsHeading": "Skolor med publicerat pris i {name}",
+    "faqTitle": "Vanliga frågor",
+    "faq1q": "Är priserna i {name} aktuella?",
+    "faq1a": "De är hämtade från varje skolas egen webbplats. Skolan kan ha ändrat priset sedan vi läste av sidan — öppna skolans prislista via annonsen.",
+    "faq2q": "Tar DriveLinkUp betalt för jämförelsen?",
+    "faq2a": "Nej. Katalogen är gratis. Du betalar skolan, inte DriveLinkUp.",
+    "backToHub": "Alla trafikskolor i {name}",
+    "offerLesson": "Körlektion",
+    "offerMinutes": "Körlektion {minutes} min"
   }
 }

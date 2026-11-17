@@ -8,8 +8,8 @@ describe('schoolSearchPath', () => {
   });
 
   it('opens the public city hub for a known search city', () => {
-    expect(schoolSearchPath('Stockholm')).toBe('/locations/se/stockholm');
-    expect(schoolSearchPath('Göteborg')).toBe('/locations/se/goteborg');
+    expect(schoolSearchPath('Stockholm')).toBe('/locations/se/stockholm/korlektion');
+    expect(schoolSearchPath('Göteborg')).toBe('/locations/se/goteborg/korlektion');
     expect(schoolSearchPath('Gold Coast')).toBe('/locations/au/gold-coast');
   });
 
@@ -21,8 +21,8 @@ describe('schoolSearchPath', () => {
   it('keeps motorcycle and trailer choices on the result', () => {
     expect(schoolSearchPath('Göteborg', 'A')).toBe('/locations/se/goteborg?category=A');
     expect(schoolSearchPath('', 'BE')).toBe('/?category=BE');
-    expect(schoolSearchPath('Stockholm', 'B')).toBe('/locations/se/stockholm');
-    expect(schoolSearchPath('Stockholm', 'C')).toBe('/locations/se/stockholm');
+    expect(schoolSearchPath('Stockholm', 'B')).toBe('/locations/se/stockholm/korlektion');
+    expect(schoolSearchPath('Stockholm', 'C')).toBe('/locations/se/stockholm/korlektion');
   });
 
   it('matches only the chosen licence when the search is not car', () => {

@@ -589,7 +589,6 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
 
 type PricedItem = {
   name: string;
-  hourlyRateSek: number;
   publishedPrices: {
     lesson: { priceSek: number } | null;
     packages: Array<{ priceSek: number }>;
@@ -601,8 +600,7 @@ function sortByPrice<T extends PricedItem>(items: T[], by: 'lesson' | 'package')
   const key = (item: T): number => {
     if (by === 'lesson') {
       const website = item.publishedPrices?.lesson?.priceSek;
-      if (website) return website;
-      return item.hourlyRateSek > 0 ? item.hourlyRateSek : Number.POSITIVE_INFINITY;
+      return website && website > 0 ? website : Number.POSITIVE_INFINITY;
     }
     const packages = item.publishedPrices?.packages ?? [];
     return packages.length > 0

@@ -6,6 +6,7 @@ import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-gr
 import { isLocale } from '@/i18n/config';
 import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
 import { cityListingStats, publicSchoolsForLocation } from '@/lib/discovery/public-listing';
+import { compareByPublishedLessonPrice } from '@/lib/discovery/published-lesson-order';
 import { absoluteUrl, publicAlternatesFor } from '@/lib/seo/alternates';
 import {
   browseCities,
@@ -14,6 +15,7 @@ import {
   schoolsForLocation,
 } from '@/lib/seo/catalogue-locations';
 import { jsonLdScript } from '@/lib/seo/json-ld';
+import { isLessonComparisonEligible, lessonComparisonPath } from '@/lib/seo/lesson-comparison-path';
 import { localeHreflang, localePath } from '@/lib/seo/locale-path';
 import { marketCopy } from '@/lib/seo/market-copy';
 import {
@@ -38,18 +40,20 @@ export async function locationHubMetadata(
   const country = NORDIC_COUNTRY_META[location.country];
   const market = marketCopy(location.country);
   const licence = parseHeroSearchCategory(category);
-  const schools = (await publicSchoolsForLocation(location)).filter((school) =>
-    heroCategoryMatches(school.categories, licence),
-  );
+  const schools = (await publicSchoolsForLocation(location))
+    .filter((school) => heroCategoryMatches(school.categories, licence))
+    .sort(compareByPublishedLessonPrice);
   const stats = cityListingStats(schools);
   const title = market
     ? location.kind === 'city'
       ? market.cityTitle(name, country.nameLocal)
       : market.countryTitle(country.nameLocal)
     : location.kind === 'city'
-      ? stats.count > 0
-        ? t('titleCityCounted', { name, country: country.nameLocal, count: stats.count })
-        : t('titleCity', { name, country: country.nameLocal })
+      ? stats.minLessonSek
+        ? t('titleCityPriced', { name, price: stats.minLessonSek })
+        : stats.count > 0
+          ? t('titleCityCounted', { name, country: country.nameLocal, count: stats.count })
+          : t('titleCity', { name, country: country.nameLocal })
       : t('titleRegion', { name, country: country.nameLocal });
   const description = market
     ? location.kind === 'city'
@@ -115,10 +119,18 @@ export async function LocationHubLanding({
         : [];
   const regions = listRegions(location.country);
   const licence = parseHeroSearchCategory(category);
-  const schools = (await publicSchoolsForLocation(location)).filter((school) =>
-    heroCategoryMatches(school.categories, licence),
-  );
+  const schools = (await publicSchoolsForLocation(location))
+    .filter((school) => heroCategoryMatches(school.categories, licence))
+    .sort(compareByPublishedLessonPrice);
   const stats = cityListingStats(schools);
+  const pricedLessons = schools.filter((school) => school.publishedPrices?.lesson);
+  const lessonCompareHref =
+    location.country === 'se' &&
+    location.kind === 'city' &&
+    !licence &&
+    isLessonComparisonEligible(pricedLessons.length)
+      ? lessonComparisonPath(location)
+      : null;
   const catalogueHere = location.kind === 'city' && schoolsForLocation(location).length > 0;
   const countryCatalogue = location.country !== 'se' && nordicCountryHasSchools(location.country);
   const showLiveDirectory = location.marketplaceLive && Boolean(location.filterCity);
@@ -150,21 +162,52 @@ export async function LocationHubLanding({
       ? market.cityDescription(name, country.nameLocal)
       : market.countryDescription(country.nameLocal)
     : location.kind === 'city'
-      ? tMeta('descriptionCity', { name, country: country.nameLocal })
+      ? stats.minLessonSek
+        ? tMeta('descriptionCityPriced', {
+            name,
+            country: country.nameLocal,
+            count: stats.count,
+            price: stats.minLessonSek,
+          })
+        : stats.count > 0
+          ? tMeta('descriptionCityCounted', {
+              name,
+              country: country.nameLocal,
+              count: stats.count,
+            })
+          : tMeta('descriptionCity', { name, country: country.nameLocal })
       : tMeta('descriptionRegion', { name, country: country.nameLocal });
+  const visibleHeading =
+    heading ??
+    (stats.minLessonSek
+      ? t('headerTitleCityPriced', { name, price: stats.minLessonSek })
+      : t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name }));
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'CollectionPage',
-        name:
-          heading ??
-          t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name }),
+        name: visibleHeading,
         description: pageDescription,
         url,
         inLanguage: market?.schemaLang ?? (isLocale(locale) ? localeHreflang[locale] : 'sv-SE'),
         isPartOf: { '@type': 'WebSite', name: siteName, url: siteUrl },
+        ...(location.country === 'se' && stats.minLessonSek
+          ? {
+              offers: {
+                '@type': 'AggregateOffer',
+                lowPrice: stats.minLessonSek,
+                highPrice: Math.max(
+                  ...schools.flatMap((school) =>
+                    school.publishedPrices?.lesson ? [school.publishedPrices.lesson.priceSek] : [],
+                  ),
+                ),
+                priceCurrency: 'SEK',
+                offerCount: schools.filter((school) => school.publishedPrices?.lesson).length,
+              },
+            }
+          : {}),
       },
       {
         '@type': 'BreadcrumbList',
@@ -197,7 +240,7 @@ export async function LocationHubLanding({
         ? [
             {
               '@type': 'ItemList',
-              name: heading ?? name,
+              name: visibleHeading,
               numberOfItems: schools.length,
               itemListElement: schools.map((school, index) => ({
                 '@type': 'ListItem',
@@ -217,8 +260,7 @@ export async function LocationHubLanding({
         <header lang={market?.htmlLang} className="mx-auto flex w-full max-w-6xl flex-col gap-3">
           <p className="text-eyebrow">{t('eyebrow', { country: country.nameLocal })}</p>
           <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
-            {heading ??
-              t(location.kind === 'city' ? 'headerTitleCity' : 'headerTitleRegion', { name })}
+            {visibleHeading}
           </h1>
           <p className="max-w-2xl text-body-lg text-muted-foreground">
             {lead
@@ -267,6 +309,70 @@ export async function LocationHubLanding({
                   .filter(Boolean)
                   .join(' · ')}
               </p>
+            ) : null}
+            {pricedLessons.length > 0 ? (
+              <div className="mt-4 overflow-x-auto">
+                <table className="w-full min-w-[32rem] border-collapse text-left text-small">
+                  <caption className="mb-3 text-left text-body text-muted-foreground">
+                    <span className="mb-1 block font-display text-h3 text-foreground">
+                      {t('compareTitle')}
+                    </span>
+                    {t('compareCaption')}
+                    {lessonCompareHref ? (
+                      <span className="mt-2 block">
+                        <Link
+                          className="underline underline-offset-4"
+                          href={href(lessonCompareHref)}
+                        >
+                          {t('compareFullLink', { name })}
+                        </Link>
+                      </span>
+                    ) : null}
+                  </caption>
+                  <thead>
+                    <tr className="border-b border-border text-muted-foreground">
+                      <th scope="col" className="py-2 pr-4 font-medium">
+                        {t('compareSchool')}
+                      </th>
+                      <th scope="col" className="py-2 pr-4 font-medium">
+                        {t('compareLesson')}
+                      </th>
+                      <th scope="col" className="py-2 font-medium">
+                        {t('compareLength')}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pricedLessons.map((school) => {
+                      const lesson = school.publishedPrices?.lesson;
+                      if (!lesson) return null;
+                      const amount = new Intl.NumberFormat(locale, {
+                        style: 'currency',
+                        currency: school.publishedPrices?.currency ?? 'SEK',
+                        maximumFractionDigits: 0,
+                      }).format(lesson.priceSek);
+                      return (
+                        <tr key={school.id} className="border-b border-border/70">
+                          <th scope="row" className="py-3 pr-4 font-normal">
+                            <Link
+                              className="underline underline-offset-4"
+                              href={href(schoolPath(school))}
+                            >
+                              {school.name}
+                            </Link>
+                          </th>
+                          <td className="py-3 pr-4 font-medium text-foreground">{amount}</td>
+                          <td className="py-3 text-muted-foreground">
+                            {lesson.minutes
+                              ? t('compareMinutes', { minutes: lesson.minutes })
+                              : '—'}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             ) : null}
             <ul className={`mt-4 ${SCHOOL_LISTING_GRID_CLASS}`}>
               {schools.map((school) => (

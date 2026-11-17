@@ -180,13 +180,16 @@ export function toPublicInstructor(
     bio: row.bio,
     inbox: publishedInbox(row.id),
   };
+  // Public catalogue never shows the booking-form rate when a website lesson
+  // price exists. Checkout still reads the stored rate from the booking path.
+  const publicRateSek = prices?.lesson?.priceSek ?? row.hourlyRateSek;
   return {
     id: row.id,
     name: row.name,
     city: row.city,
     serviceArea: (typeof row.serviceArea === 'string' ? row.serviceArea.trim() : '') || row.city,
     categories,
-    hourlyRateSek: row.hourlyRateSek,
+    hourlyRateSek: publicRateSek,
     bio: row.bio,
     // Schools: no logo or scraped site art in public JSON (third-party IP).
     photoUrl: row.providerRole === 'SCHOOL' ? '' : row.photoUrl,

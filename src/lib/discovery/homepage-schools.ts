@@ -7,6 +7,7 @@ import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import { type InstructorFilteredItem, LISTING_CONTACT_SELECT } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
 import { assemblePublicDirectoryItems } from '@/lib/discovery/public-listing';
+import { compareByPublishedLessonPrice } from '@/lib/discovery/published-lesson-order';
 import { lightCatalogueWhere } from '@/lib/discovery/published-prices';
 import {
   homepageSchoolRegionScore,
@@ -43,8 +44,10 @@ export async function listHomepageSchools(
         a.row.city.localeCompare(b.row.city, 'sv') || a.row.name.localeCompare(b.row.name, 'sv')
       );
     })
-    .slice(0, limit)
+    .slice(0, Math.max(limit * 3, limit))
     .map((entry) => entry.row);
 
-  return assemblePublicDirectoryItems(rows, { includeReviewBodies: false });
+  const items = await assemblePublicDirectoryItems(rows, { includeReviewBodies: false });
+  // Within the geo window, PriceRunner order: cheapest published website lesson first.
+  return [...items].sort(compareByPublishedLessonPrice).slice(0, limit);
 }

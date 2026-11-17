@@ -2,7 +2,10 @@
 // locations registry over one-off city files — add a row in nordic-locations.ts.
 import type { MetadataRoute } from 'next';
 import { catalogueWebsiteDown, listCatalogueSchools } from '@/lib/discovery/nordic-catalogue';
+import { publishedLessonCountForCities } from '@/lib/discovery/published-prices';
 import { indexableLocationPaths } from '@/lib/seo/catalogue-locations';
+import { isLessonComparisonEligible, lessonComparisonPath } from '@/lib/seo/lesson-comparison-path';
+import { NORDIC_LOCATIONS } from '@/lib/seo/nordic-locations';
 import { listIndexableInstructors } from '@/lib/seo/public-instructor';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
@@ -93,10 +96,28 @@ const EDITORIAL: SeoRoute[] = [
 /** One sitemap file holds at most 50,000 URLs; the catalogue routes share it. */
 const MAX_SITEMAP_SCHOOLS = 20_000;
 
+function filterCitiesFor(location: (typeof NORDIC_LOCATIONS)[number]): string[] {
+  if (typeof location.filterCity === 'string') return [location.filterCity];
+  if (location.filterCity) return [...location.filterCity];
+  return [location.name];
+}
+
 export async function seoRoutes(): Promise<SeoRoute[]> {
   const locationRoutes: SeoRoute[] = indexableLocationPaths().map((path) => ({
     path,
     priority: path === '/locations' ? 0.85 : path.split('/').length <= 3 ? 0.8 : 0.7,
+    changeFrequency: 'weekly' as const,
+  }));
+
+  // PriceRunner pages: only cities with enough ordinary website lesson prices.
+  const lessonComparisonRoutes: SeoRoute[] = NORDIC_LOCATIONS.filter((location) => {
+    if (location.country !== 'se' || location.kind !== 'city' || !location.marketplaceLive) {
+      return false;
+    }
+    return isLessonComparisonEligible(publishedLessonCountForCities(filterCitiesFor(location)));
+  }).map((location) => ({
+    path: lessonComparisonPath(location),
+    priority: 0.85,
     changeFrequency: 'weekly' as const,
   }));
 
@@ -120,5 +141,11 @@ export async function seoRoutes(): Promise<SeoRoute[]> {
     instructorRoutes = [];
   }
 
-  return [...EDITORIAL, ...locationRoutes, ...catalogueRoutes, ...instructorRoutes];
+  return [
+    ...EDITORIAL,
+    ...locationRoutes,
+    ...lessonComparisonRoutes,
+    ...catalogueRoutes,
+    ...instructorRoutes,
+  ];
 }

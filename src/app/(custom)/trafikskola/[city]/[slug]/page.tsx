@@ -10,8 +10,9 @@ import { publishedPrices } from '@/lib/discovery/published-prices';
 import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { resolveLocale } from '@/lib/i18n';
 import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
-import { locationForCatalogueSchool } from '@/lib/seo/catalogue-locations';
+import { hubForListedCity, locationForCatalogueSchool } from '@/lib/seo/catalogue-locations';
 import { jsonLdScript } from '@/lib/seo/json-ld';
+import { localePath } from '@/lib/seo/locale-path';
 import { marketCopy } from '@/lib/seo/market-copy';
 import { isNordicCountry, locationPath } from '@/lib/seo/nordic-locations';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const portrait = schoolPortraitUrl(instructor.photoUrl);
   // A published price is the reason to click. The city stays in the description and the URL.
   const title =
-    instructor.catalogue && rate > 0
+    rate > 0
       ? `${instructor.name} – från ${rate} kr`
       : instructor.catalogue
         ? `${instructor.name} — ${instructor.city}`
@@ -107,12 +108,14 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
+  const detail = await getTranslations('instructorDetail');
+  const locale = await resolveLocale();
   const lesson = resolved.listing?.publishedPrices?.lesson ?? null;
   const lessonCurrency = resolved.listing?.publishedPrices?.currency ?? 'SEK';
   const swedishRate = publicLessonRate(resolved.instructor);
   const cityHub = resolved.instructor.catalogue
     ? locationForCatalogueSchool(resolved.instructor.id)
-    : null;
+    : hubForListedCity('se', resolved.instructor.city);
   const market = cityHub && isNordicCountry(cityHub.country) ? marketCopy(cityHub.country) : null;
   const jsonLd = resolved.instructor?.indexable
     ? {
@@ -186,8 +189,14 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
             instructorId={instructorId}
             initial={initialListing}
             intro={resolved.instructor.localDescription}
-            cityHref={cityHub ? locationPath(cityHub) : null}
-            cityLinkLabel={market ? market.cityHeading(resolved.instructor.city) : null}
+            cityHref={cityHub ? localePath(locale, locationPath(cityHub)) : null}
+            cityLinkLabel={
+              market
+                ? market.cityHeading(resolved.instructor.city)
+                : cityHub
+                  ? detail('locatedIn', { city: resolved.instructor.city })
+                  : null
+            }
             contentLang={resolved.instructor.catalogue ? resolved.instructor.contentLanguage : null}
           />
           {resolved.instructor.catalogue ? null : (

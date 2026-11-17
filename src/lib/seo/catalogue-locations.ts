@@ -58,6 +58,13 @@ function soleRegion(country: NordicCountryCode): string | undefined {
   return regions.length === 1 ? regions[0]?.slug : undefined;
 }
 
+export function hubForListedCity(
+  country: NordicCountryCode,
+  city: string,
+): NordicLocation | null {
+  return existingCity(country, city) ?? null;
+}
+
 function existingCity(country: NordicCountryCode, city: string): NordicLocation | undefined {
   return NORDIC_LOCATIONS.find(
     (location) =>

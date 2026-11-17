@@ -3592,7 +3592,8 @@
       "descriptionRegion": "Verken plaatsen in {name}, {country} en vergelijk rijscholen wanneer de catalogus live is.",
       "descriptionCountry": "Vind rijscholen in {country}. Een vermelde prijs is de prijs op de website van de school.",
       "indexTitle": "Rijscholen",
-      "indexSubtitle": "Open een land. Een prijs in de catalogus is de prijs op de website van de school."
+      "indexSubtitle": "Open een land. Een prijs in de catalogus is de prijs op de website van de school.",
+      "titleCityPriced": "Rijles in {name} vanaf {price} kr"
     },
     "eyebrow": "{country}",
     "headerTitleCity": "Rijscholen in {name}",
@@ -3643,7 +3644,15 @@
     "linkHandledare": "Handledare-gids",
     "linkPricing": "Prijzen",
     "linkBlog": "Gidsen",
-    "filteredEmpty": "Geen advertenties voor dit rijbewijs in {name} op dit moment."
+    "filteredEmpty": "Geen advertenties voor dit rijbewijs in {name} op dit moment.",
+    "headerTitleCityPriced": "Rijlessen in {name} vanaf {price} kr",
+    "compareTitle": "Published driving lessons",
+    "compareCaption": "Cheapest first. The price is what the school published on its website.",
+    "compareFullLink": "Open the full driving-lesson comparison for {name}",
+    "compareSchool": "School",
+    "compareLesson": "Lesson",
+    "compareLength": "Length",
+    "compareMinutes": "{minutes} min"
   },
   "termsPage": {
     "meta": {
@@ -3788,7 +3797,11 @@
         "De rijschool is eigenaar van de eigen gegevens. Een badge verschijnt alleen wanneer de controle is opgeslagen.",
         "Gratis te gebruiken. Je betaalt de prijs van de rijschool."
       ],
-      "facts": ["Opgericht in 2026", "Stockholm, Zweden", "Zweden eerst"],
+      "facts": [
+        "Opgericht in 2026",
+        "Stockholm, Zweden",
+        "Zweden eerst"
+      ],
       "closing": "We zijn een jong bedrijf. De eerste rijscholen worden nu vermeld, en als je ons schrijft, antwoordt een mens."
     },
     "promise": {
@@ -3934,5 +3947,33 @@
     "eyebrow": "Vrachtwagen, bus en YKB",
     "title": "Zware voertuigen",
     "subtitle": "Rijscholen waarvan de website C- of D-rijbewijs of YKB noemt. De prijs verschijnt als de school die publiceert."
+  },
+  "lessonComparison": {
+    "meta": {
+      "title": "Compare driving lessons in {name} – from {price} SEK",
+      "description": "Compare {count} published driving lessons in {name}. Cheapest first from {price} SEK. The price is from the school's own website."
+    },
+    "heading": "Compare driving lessons in {name} from {price} SEK",
+    "lead": "{count} schools in {name} have published a lesson price. Cheapest right now: {price} SEK. Contact the school to book.",
+    "breadcrumbLocations": "Locations",
+    "breadcrumbLesson": "Lesson",
+    "tableTitle": "Driving lessons in {name}",
+    "tableCaption": "Cheapest first. Price and length come from the school's own website.",
+    "colRank": "#",
+    "colSchool": "School",
+    "colLesson": "Lesson",
+    "colLength": "Length",
+    "colPerMinute": "SEK/min",
+    "minutes": "{minutes} min",
+    "sourceNote": "The price is what the school published on its website. DriveLinkUp has not verified it and does not use it as a booking amount.",
+    "cardsHeading": "Schools with a published price in {name}",
+    "faqTitle": "FAQ",
+    "faq1q": "Are the prices in {name} up to date?",
+    "faq1a": "They were read from each school's own website. The school may have changed the price since — open the school's price list from the listing.",
+    "faq2q": "Does DriveLinkUp charge for the comparison?",
+    "faq2a": "No. The directory is free. You pay the school, not DriveLinkUp.",
+    "backToHub": "All driving schools in {name}",
+    "offerLesson": "Driving lesson",
+    "offerMinutes": "Driving lesson {minutes} min"
   }
 }
