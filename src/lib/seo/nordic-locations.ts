@@ -57,8 +57,9 @@ export type NordicLocation = {
   nameLocal?: string;
   /** Parent region slug within the same country (cities only). */
   regionSlug?: string;
-  /** Value passed to instructor directory `city` filter when marketplaceLive. */
-  filterCity?: string;
+  /** DB `city` values matched by the hub when marketplaceLive. One or more, e.g.
+   *  Haninge covers the schools registered in Handen and Västerhaninge. */
+  filterCity?: string | readonly string[];
   /** SE launch market can show live listings; other Nordics are expansion hubs. */
   marketplaceLive: boolean;
 };
@@ -113,7 +114,7 @@ function city(
   slug: string,
   name: string,
   regionSlug: string,
-  opts?: { filterCity?: string; nameLocal?: string; live?: boolean },
+  opts?: { filterCity?: string | readonly string[]; nameLocal?: string; live?: boolean },
 ): NordicLocation {
   const live = opts?.live ?? country === 'se';
   return {
@@ -175,6 +176,9 @@ const SE_CITIES: NordicLocation[] = [
   city('se', 'solna', 'Solna', 'stockholm-lan'),
   city('se', 'nacka', 'Nacka', 'stockholm-lan'),
   city('se', 'huddinge', 'Huddinge', 'stockholm-lan'),
+  city('se', 'haninge', 'Haninge', 'stockholm-lan', {
+    filterCity: ['Handen', 'Västerhaninge'],
+  }),
   city('se', 'uppsala', 'Uppsala', 'uppsala-lan'),
   city('se', 'enkoping', 'Enköping', 'uppsala-lan', { filterCity: 'Enköping' }),
   city('se', 'eskilstuna', 'Eskilstuna', 'sodermanland'),
@@ -763,12 +767,18 @@ export function cityFilterCandidates(input: string): string[] {
   const names = new Set<string>([raw]);
   for (const loc of NORDIC_LOCATIONS) {
     if (!loc.marketplaceLive) continue;
-    const hay = [loc.slug, loc.name, loc.nameLocal, loc.filterCity].filter(
+    const filterCities =
+      typeof loc.filterCity === 'string'
+        ? [loc.filterCity]
+        : loc.filterCity
+          ? [...loc.filterCity]
+          : [];
+    const hay = [loc.slug, loc.name, loc.nameLocal, ...filterCities].filter(
       (value): value is string => Boolean(value),
     );
     if (!hay.some((value) => foldCity(value) === folded)) continue;
     names.add(loc.name);
-    if (loc.filterCity) names.add(loc.filterCity);
+    for (const value of filterCities) names.add(value);
   }
   return [...names];
 }
