@@ -1,78 +1,21 @@
-// message namespace; renders one editorial card per published post. Static
-// SSR shape (no `'use client'`, no server-only imports, no fetch) — the
-// post page itself is hand-written JSX so a markdown renderer is unjustified
-// while there is only one article in the corpus.
-//
-// Editing a post? Update src/app/(custom)/blog/<slug>/page.tsx and add an
-// entry under `blogPage.posts.<index>` — both message files must mirror.
-// Adding a second post? Push another literal into POSTS and add the matching
-// `blogPage.posts.<index>` block; render stays a flat card stack.
-
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import content from '../../../../messages/europe-driving-guides.en.json';
 import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 const POSTS = [
-  {
-    slug: 'korkort-b-malmo',
-    index: '11',
-    minutes: 8,
-  },
-  {
-    slug: 'korkort-b-goteborg',
-    index: '10',
-    minutes: 8,
-  },
-  {
-    slug: 'korlektion-korkort-b',
-    index: '9',
-    minutes: 8,
-  },
-  {
-    slug: 'korkortstillstand-korkort-b',
-    index: '8',
-    minutes: 8,
-  },
-  {
-    slug: 'riskutbildning-korkort-b',
-    index: '7',
-    minutes: 8,
-  },
-  {
-    slug: 'korprov-korkort-b',
-    index: '6',
-    minutes: 8,
-  },
-  {
-    slug: 'kunskapsprov-korkort-b',
-    index: '5',
-    minutes: 8,
-  },
-  {
-    slug: 'korkort-b-steg-for-steg',
-    index: '4',
-    minutes: 7,
-  },
-  {
-    slug: 'swedish-drivers-license-expat-stockholm',
-    index: '0',
-    minutes: 7,
-  },
-  {
-    slug: 'handledare-ovningskorning-sverige',
-    index: '1',
-    minutes: 6,
-  },
-  {
-    slug: 'kostnad-korkort-sverige',
-    index: '2',
-    minutes: 5,
-  },
-  {
-    slug: 'trafikskola-eller-handledare',
-    index: '3',
-    minutes: 5,
-  },
+  { slug: 'korkort-b-malmo', index: '11', minutes: 8 },
+  { slug: 'korkort-b-goteborg', index: '10', minutes: 8 },
+  { slug: 'korlektion-korkort-b', index: '9', minutes: 8 },
+  { slug: 'korkortstillstand-korkort-b', index: '8', minutes: 8 },
+  { slug: 'riskutbildning-korkort-b', index: '7', minutes: 8 },
+  { slug: 'korprov-korkort-b', index: '6', minutes: 8 },
+  { slug: 'kunskapsprov-korkort-b', index: '5', minutes: 8 },
+  { slug: 'korkort-b-steg-for-steg', index: '4', minutes: 7 },
+  { slug: 'swedish-drivers-license-expat-stockholm', index: '0', minutes: 7 },
+  { slug: 'handledare-ovningskorning-sverige', index: '1', minutes: 6 },
+  { slug: 'kostnad-korkort-sverige', index: '2', minutes: 5 },
+  { slug: 'trafikskola-eller-handledare', index: '3', minutes: 5 },
 ] as const;
 
 export async function generateMetadata() {
@@ -86,8 +29,6 @@ export async function generateMetadata() {
 
 export default async function BlogIndexPage() {
   const tHeader = await getTranslations('blogPage.header');
-  // Resolve every post's copy up front so the JSX below stays sync and the
-  // blogPage.posts.<index> namespace is unambiguously bound at request time.
   const renderedPosts = await Promise.all(
     POSTS.map(async (post) => {
       const tPost = await getTranslations(`blogPage.posts.${post.index}`);
@@ -109,9 +50,29 @@ export default async function BlogIndexPage() {
         <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
           {tHeader('title')}
         </h1>
-        <p className="max-w-2xl text-body-lg text-muted-foreground">{tHeader('subtitle')}</p>
+        <p className="max-w-2xl text-body-lg text-muted-foreground">
+          {tHeader('subtitle')}
+        </p>
       </header>
-
+      <section
+        lang="en"
+        aria-label={content.ui.related}
+        className="mx-auto mt-10 grid max-w-3xl gap-6"
+      >
+        {content.guides.map((guide) => (
+          <article
+            key={guide.slug}
+            className="surface-card rounded-xl border border-border bg-card p-6 shadow-sm"
+          >
+            <h2 className="font-display text-h3 leading-tight tracking-tight text-foreground">
+              <Link href={`/en/blog/${guide.slug}`} className="underline underline-offset-4">
+                {guide.title}
+              </Link>
+            </h2>
+            <p className="mt-3 text-body text-muted-foreground">{guide.description}</p>
+          </article>
+        ))}
+      </section>
       <div className="mx-auto mt-10 grid max-w-3xl gap-6">
         {renderedPosts.map((post) => (
           <article
