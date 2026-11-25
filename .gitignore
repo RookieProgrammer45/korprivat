@@ -35,6 +35,8 @@ lerna-debug.log*
 
 # Testing
 /coverage/
+__pycache__/
+*.pyc
 
 # TypeScript
 *.tsbuildinfo
