@@ -7,6 +7,7 @@
       "licenceCategories": "Lisenskategorier",
       "drivingInstructor": "Jeg underviser på en kjøreskole",
       "drivingSchool": "Jeg driver en kjøreskole",
+      "dealershipOwner": "Jeg driver en bilforhandler",
       "forSchoolsMenu": "For skoler",
       "handledare": "Handledare-veiledning",
       "getStarted": "Kom i gang",
@@ -148,6 +149,10 @@
         {
           "title": "Gjør krav på eller oppdater en oppføring",
           "description": "Du driver denne skolen og trenger DriveLinkUp for å endre navn, pris eller andre oppføringsdetaljer."
+        },
+        {
+          "title": "Før opp eller oppdater en bilforhandler",
+          "description": "Du driver en bilforhandler og vil at DriveLinkUp skal legge til eller rette annonsen."
         }
       ],
       "submit": "Send til support",
@@ -2577,7 +2582,8 @@
       "title": "Finn en skole.",
       "body": "Det er gratis.",
       "learnerCta": "Finn en skole",
-      "providerCta": "Jeg driver en skole"
+      "providerCta": "Jeg driver en skole",
+      "dealerCta": "Jeg driver en bilforhandler"
     },
     "footer": {
       "prompt": "Trenger du mer kontekst?",
@@ -4001,11 +4007,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Compare vehicle prices at dealers",
-      "description": "Compare published vehicle prices at dealerships. The price is the one on the dealer's own website."
+      "description": "Compare car models with year, mileage, fuel and gearbox. The price is the one the dealer published."
     },
     "eyebrow": "Bilforhandlere",
     "title": "Compare vehicle prices",
-    "lead": "Prices are what the dealer published on their own website. Cheapest first. DriveLinkUp does not sell the vehicle.",
+    "lead": "Each card is a car the dealer has published, with the model, year, mileage, fuel and gearbox. The price is the dealer's. DriveLinkUp does not sell the car.",
     "cityLabel": "City",
     "cityAll": "All cities",
     "kindLabel": "Vehicle",
@@ -4018,9 +4024,20 @@
     },
     "filter": "Show",
     "sourceNote": "Details come from the dealer's website and the public member list that links to it. DriveLinkUp has not verified them.",
-    "empty": "No dealers in this selection yet.",
+    "empty": "No cars with published specifications in this selection yet.",
     "offer": "{name} from {price}",
     "noPrice": "Price on the dealer's website",
-    "openSite": "Website"
+    "openSite": "Website",
+    "mileageMil": "{value} mil",
+    "mileageKm": "{value} km",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "businessesTitle": "Dealers",
+    "businessesLead": "The business is on a public member list that links to its website. A car card appears when the dealer publishes the model and specifications.",
+    "listCta": "Jeg driver en bilforhandler",
+    "listPrefill": "Jeg driver en bilforhandler og vil bli oppført på DriveLinkUp.\n\nBedrift:\nSted:\nNettsted:",
+    "claim": "Dette er min bilforhandler",
+    "claimAria": "Be DriveLinkUp føre opp eller oppdatere {name}",
+    "claimPrefill": "Jeg representerer {name} og vil at annonsen skal føres opp eller oppdateres på DriveLinkUp."
   }
 }

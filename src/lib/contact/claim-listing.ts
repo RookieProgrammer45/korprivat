@@ -41,3 +41,12 @@ export function claimListingHref(input: { name: string; listing: string }): stri
   if (listing) params.set('listing', listing);
   return `/contact?${params.toString()}`;
 }
+
+// Same contact form as a school claim. It asks DriveLinkUp to list or
+// correct a dealership. It does not create an account or a verified listing.
+export function dealerListingHref(input?: { name?: string }): string {
+  const params = new URLSearchParams({ topic: 'list_dealer' });
+  const name = parseClaimSchoolName(input?.name);
+  if (name) params.set('dealer', name);
+  return `/contact?${params.toString()}`;
+}

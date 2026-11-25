@@ -24,6 +24,7 @@ export const CONTACT_TOPICS = [
   'press',
   'other',
   'claim_listing',
+  'list_dealer',
 ] as const;
 
 export type ContactTopic = (typeof CONTACT_TOPICS)[number];
@@ -44,6 +45,9 @@ const TOPIC_URL_ALIASES: Record<string, ContactTopic> = {
   claim: 'claim_listing',
   listing: 'claim_listing',
   'claim-listing': 'claim_listing',
+  dealer: 'list_dealer',
+  dealership: 'list_dealer',
+  'list-dealer': 'list_dealer',
 };
 
 export function resolveContactTopic(raw: string | null | undefined): ContactTopic | null {
@@ -71,6 +75,10 @@ export const CONTACT_TOPIC_LABELS: Record<ContactTopic, { en: string; sv: string
   claim_listing: {
     en: 'Claim or update a school listing',
     sv: 'Anspråk på eller uppdatera en skolannons',
+  },
+  list_dealer: {
+    en: 'List or update a dealership',
+    sv: 'Lista eller uppdatera en bilhandel',
   },
 };
 

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   claimListingHref,
+  dealerListingHref,
   parseClaimListingPath,
   parseClaimSchoolName,
 } from '@/lib/contact/claim-listing';
@@ -27,6 +28,16 @@ describe('claim listing contact deep-link', () => {
     expect(parseClaimListingPath('/schools/moderna-trafikskola')).toBe(
       '/schools/moderna-trafikskola',
     );
+  });
+
+  it('routes a dealership owner to the same contact form', () => {
+    expect(dealerListingHref()).toBe('/contact?topic=list_dealer');
+    expect(dealerListingHref({ name: 'Bilcity i Bollnäs AB' })).toBe(
+      '/contact?topic=list_dealer&dealer=Bilcity+i+Bolln%C3%A4s+AB',
+    );
+    expect(resolveContactTopic('dealer')).toBe('list_dealer');
+    expect(resolveContactTopic('list_dealer')).toBe('list_dealer');
+    expect(dealerListingHref({ name: '' })).toBe('/contact?topic=list_dealer');
   });
 
   it('drops off-site listings, control characters, and empty names', () => {

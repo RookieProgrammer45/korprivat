@@ -135,7 +135,10 @@ export function SiteNav() {
   // the hero CTA cluster (public-home), not in the top bar. barNav = the rest,
   // used both by the desktop bar and the mobile sheet.
   const barNav = secondary.filter(
-    (item) => item.labelKey !== 'nav.drivingInstructor' && item.labelKey !== 'nav.drivingSchool',
+    (item) =>
+      item.labelKey !== 'nav.drivingInstructor' &&
+      item.labelKey !== 'nav.drivingSchool' &&
+      item.labelKey !== 'nav.dealershipOwner',
   );
   // ElevenLabs-style CTA order: outline "Logga in" first, black "Kom igång" last.
   const ctaNav = [...barNav].sort(

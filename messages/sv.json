@@ -7,6 +7,7 @@
       "licenceCategories": "Körkortskategorier",
       "drivingInstructor": "Jag undervisar på en trafikskola",
       "drivingSchool": "Jag driver trafikskola",
+      "dealershipOwner": "Jag driver en bilhandel",
       "forSchoolsMenu": "För skolor",
       "handledare": "Handledarguide",
       "getStarted": "Kom igång",
@@ -148,6 +149,10 @@
         {
           "title": "Anspråk på eller uppdatera en annons",
           "description": "Du driver den här skolan och vill att DriveLinkUp ska ändra namn, pris eller andra uppgifter."
+        },
+        {
+          "title": "Lista eller uppdatera en bilhandel",
+          "description": "Du driver en bilhandel och vill att DriveLinkUp ska lägga till eller rätta annonsen."
         }
       ],
       "submit": "Skicka till support",
@@ -2577,7 +2582,8 @@
       "title": "Hitta en skola.",
       "body": "Det är gratis.",
       "learnerCta": "Hitta en skola",
-      "providerCta": "Jag driver en skola"
+      "providerCta": "Jag driver en skola",
+      "dealerCta": "Jag driver en bilhandel"
     },
     "footer": {
       "prompt": "Behöver du veta mer?",
@@ -4001,11 +4007,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Jämför bilpriser hos handlare",
-      "description": "Jämför publicerade fordonspriser hos bilhandlare. Priset är det handlaren visar på sin webbplats."
+      "description": "Jämför bilmodeller med årsmodell, miltal, drivmedel och växellåda. Priset är det handlaren publicerat."
     },
     "eyebrow": "Bilhandlare",
     "title": "Jämför fordonspriser",
-    "lead": "Priserna är de handlaren publicerat på sin egen webbplats. Billigast först. DriveLinkUp säljer inte fordonet.",
+    "lead": "Varje kort är en bil som handlaren publicerat, med modell, årsmodell, miltal, drivmedel och växellåda. Priset är handlarens. DriveLinkUp säljer inte bilen.",
     "cityLabel": "Ort",
     "cityAll": "Alla orter",
     "kindLabel": "Fordon",
@@ -4018,9 +4024,20 @@
     },
     "filter": "Visa",
     "sourceNote": "Uppgiften kommer från handlarens webbplats och den offentliga medlemslista som länkar dit. Den är inte verifierad av DriveLinkUp.",
-    "empty": "Inga handlare i det här urvalet ännu.",
+    "empty": "Inga bilar med publicerade specifikationer i det här urvalet ännu.",
     "offer": "{name} från {price}",
     "noPrice": "Pris på handlarens webbplats",
-    "openSite": "Webbplats"
+    "openSite": "Webbplats",
+    "mileageMil": "{value} mil",
+    "mileageKm": "{value} km",
+    "countryLabel": "Land",
+    "countryAll": "Alla länder",
+    "businessesTitle": "Handlare",
+    "businessesLead": "Företaget står på en offentlig medlemslista som länkar till dess webbplats. Ett bilkort visas när handlaren publicerar modell och specifikationer.",
+    "listCta": "Jag driver en bilhandel",
+    "listPrefill": "Jag driver en bilhandel och vill bli listad på DriveLinkUp.\n\nFöretag:\nOrt:\nWebbplats:",
+    "claim": "Det här är min bilhandel",
+    "claimAria": "Be DriveLinkUp lista eller uppdatera {name}",
+    "claimPrefill": "Jag företräder {name} och vill att annonsen ska listas eller uppdateras på DriveLinkUp."
   }
 }

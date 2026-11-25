@@ -33,6 +33,7 @@ interface ContactPageProps {
     topic?: string | string[];
     school?: string | string[];
     listing?: string | string[];
+    dealer?: string | string[];
   }>;
 }
 
@@ -46,13 +47,19 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
   const initialTopic = resolveContactTopic(rawTopic);
   const schoolName = parseClaimSchoolName(firstParam(params.school));
   const listingPath = parseClaimListingPath(firstParam(params.listing));
+  const dealerName = parseClaimSchoolName(firstParam(params.dealer));
   const tClaim = await getTranslations('schoolContact');
+  const tDealer = await getTranslations('dealershipsPage');
   const initialMessage =
     schoolName && listingPath
       ? tClaim('claimPrefill', { name: schoolName, listing: `${siteUrl}${listingPath}` })
       : schoolName
         ? tClaim('claimPrefillName', { name: schoolName })
-        : null;
+        : dealerName
+          ? tDealer('claimPrefill', { name: dealerName })
+          : initialTopic === 'list_dealer'
+            ? tDealer('listPrefill')
+            : null;
 
   return (
     <main className="container-page section w-full min-w-0">

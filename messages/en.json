@@ -7,6 +7,7 @@
       "licenceCategories": "Licence categories",
       "drivingInstructor": "I teach at a driving school",
       "drivingSchool": "I run a driving school",
+      "dealershipOwner": "I run a dealership",
       "forSchoolsMenu": "For schools",
       "handledare": "Handledare guidance",
       "getStarted": "Get started",
@@ -148,6 +149,10 @@
         {
           "title": "Claim or update a listing",
           "description": "You run this school and need DriveLinkUp to change the name, price or other listing details."
+        },
+        {
+          "title": "List or update a dealership",
+          "description": "You run a dealership and want DriveLinkUp to add or correct the listing."
         }
       ],
       "submit": "Send to support",
@@ -2577,7 +2582,8 @@
       "title": "Find a school.",
       "body": "It's free.",
       "learnerCta": "Find a school",
-      "providerCta": "I run a school"
+      "providerCta": "I run a school",
+      "dealerCta": "I run a dealership"
     },
     "footer": {
       "prompt": "Need more context?",
@@ -4001,11 +4007,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Compare vehicle prices at dealers",
-      "description": "Compare published vehicle prices at dealerships. The price is the one on the dealer's own website."
+      "description": "Compare car models with year, mileage, fuel and gearbox. The price is the one the dealer published."
     },
     "eyebrow": "Dealers",
     "title": "Compare vehicle prices",
-    "lead": "Prices are what the dealer published on their own website. Cheapest first. DriveLinkUp does not sell the vehicle.",
+    "lead": "Each card is a car the dealer has published, with the model, year, mileage, fuel and gearbox. The price is the dealer's. DriveLinkUp does not sell the car.",
     "cityLabel": "City",
     "cityAll": "All cities",
     "kindLabel": "Vehicle",
@@ -4018,9 +4024,20 @@
     },
     "filter": "Show",
     "sourceNote": "Details come from the dealer's website and the public member list that links to it. DriveLinkUp has not verified them.",
-    "empty": "No dealers in this selection yet.",
+    "empty": "No cars with published specifications in this selection yet.",
     "offer": "{name} from {price}",
     "noPrice": "Price on the dealer's website",
-    "openSite": "Website"
+    "openSite": "Website",
+    "mileageMil": "{value} mil",
+    "mileageKm": "{value} km",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "businessesTitle": "Dealers",
+    "businessesLead": "The business is on a public member list that links to its website. A car card appears when the dealer publishes the model and specifications.",
+    "listCta": "I run a dealership",
+    "listPrefill": "I run a dealership and want it listed on DriveLinkUp.\n\nBusiness:\nCity:\nWebsite:",
+    "claim": "This is my dealership",
+    "claimAria": "Ask DriveLinkUp to list or update {name}",
+    "claimPrefill": "I represent {name} and want the listing added or updated on DriveLinkUp."
   }
 }

@@ -8,6 +8,12 @@ export type DealershipVehicle = {
   price: number;
   currency: string;
   sourceUrl: string;
+  year: number | null;
+  mileage: number | null;
+  mileageUnit: 'mil' | 'km' | null;
+  fuel: string | null;
+  gearbox: string | null;
+  imageUrl: string | null;
 };
 
 export type Dealership = {
@@ -33,6 +39,24 @@ const CURRENCY_ORDER: Record<string, number> = { SEK: 0, NOK: 1, DKK: 2, EUR: 3 
 
 function httpUrl(value: unknown): string | null {
   return typeof value === 'string' && /^https?:\/\/\S+$/i.test(value.trim()) ? value.trim() : null;
+}
+
+function shortText(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed ? trimmed.slice(0, 40) : null;
+}
+
+function modelYear(value: unknown): number | null {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 1980 && value <= 2035
+    ? value
+    : null;
+}
+
+function mileageValue(value: unknown): number | null {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value < 2_000_000
+    ? value
+    : null;
 }
 
 function asDealership(row: unknown): Dealership | null {
@@ -64,6 +88,8 @@ function asDealership(row: unknown): Dealership | null {
         if (!KINDS.has(kind as DealershipVehicleKind)) return [];
         if (typeof price !== 'number' || !Number.isFinite(price) || price <= 0) return [];
         if (!currency || !sourceUrl || !vehicleName) return [];
+        const mileageUnit: 'mil' | 'km' | null =
+          item.mileageUnit === 'mil' || item.mileageUnit === 'km' ? item.mileageUnit : null;
         return [
           {
             name: vehicleName,
@@ -71,6 +97,12 @@ function asDealership(row: unknown): Dealership | null {
             price,
             currency,
             sourceUrl,
+            year: modelYear(item.year),
+            mileage: mileageValue(item.mileage),
+            mileageUnit,
+            fuel: shortText(item.fuel),
+            gearbox: shortText(item.gearbox),
+            imageUrl: httpUrl(item.imageUrl),
           },
         ];
       })
@@ -109,6 +141,10 @@ export function listDealerships(): Dealership[] {
   return dealers;
 }
 
+export function dealerCountries(): Dealership['country'][] {
+  return [...new Set(dealers.map((dealer) => dealer.country))].sort();
+}
+
 export function dealerCities(): string[] {
   return [...new Set(dealers.map((dealer) => dealer.city).filter(Boolean))].sort((a, b) =>
     a.localeCompare(b, 'sv'),
@@ -120,6 +156,44 @@ export function cheapestVehicle(dealer: Dealership): DealershipVehicle | null {
     if (!best || vehicle.price < best.price) return vehicle;
     return best;
   }, null);
+}
+
+export type PublishedCar = {
+  id: string;
+  dealerName: string;
+  dealerCity: string;
+  dealerCountry: Dealership['country'];
+  vehicle: DealershipVehicle;
+};
+
+export function isSpecifiedVehicle(vehicle: DealershipVehicle): boolean {
+  return (
+    vehicle.year != null || vehicle.mileage != null || Boolean(vehicle.fuel || vehicle.gearbox)
+  );
+}
+
+export function publishedCars(rows: Dealership[] = dealers): PublishedCar[] {
+  const cars: PublishedCar[] = [];
+  for (const dealer of rows) {
+    for (const vehicle of dealer.vehicles) {
+      if (!isSpecifiedVehicle(vehicle)) continue;
+      cars.push({
+        id: `${dealer.id}:${vehicle.sourceUrl}`,
+        dealerName: dealer.name,
+        dealerCity: dealer.city,
+        dealerCountry: dealer.country,
+        vehicle,
+      });
+    }
+  }
+  cars.sort((left, right) => {
+    const currency =
+      (CURRENCY_ORDER[left.vehicle.currency] ?? 9) - (CURRENCY_ORDER[right.vehicle.currency] ?? 9);
+    if (currency !== 0) return currency;
+    if (left.vehicle.price !== right.vehicle.price) return left.vehicle.price - right.vehicle.price;
+    return left.vehicle.name.localeCompare(right.vehicle.name, 'sv');
+  });
+  return cars;
 }
 
 export function compareDealerships(a: Dealership, b: Dealership): number {

@@ -7,6 +7,7 @@
       "licenceCategories": "Kategorie prawa jazdy",
       "drivingInstructor": "Uczę w szkole jazdy",
       "drivingSchool": "Prowadzę szkołę jazdy",
+      "dealershipOwner": "Prowadzę salon samochodowy",
       "forSchoolsMenu": "Dla szkół",
       "handledare": "Przewodnik handledare",
       "getStarted": "Rozpocznij",
@@ -148,6 +149,10 @@
         {
           "title": "Przejmij lub zaktualizuj wpis",
           "description": "Prowadzisz tę szkołę i potrzebujesz, aby DriveLinkUp zmienił nazwę, cenę lub inne dane wpisu."
+        },
+        {
+          "title": "Dodaj lub zaktualizuj salon",
+          "description": "Prowadzisz salon samochodowy i chcesz, aby DriveLinkUp dodał lub poprawił ogłoszenie."
         }
       ],
       "submit": "Wyślij do wsparcia",
@@ -2577,7 +2582,8 @@
       "title": "Znajdź szkołę.",
       "body": "To nic nie kosztuje.",
       "learnerCta": "Znajdź szkołę",
-      "providerCta": "Prowadzę szkołę"
+      "providerCta": "Prowadzę szkołę",
+      "dealerCta": "Prowadzę salon samochodowy"
     },
     "footer": {
       "prompt": "Potrzebujesz szerszego kontekstu?",
@@ -4001,11 +4007,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Compare vehicle prices at dealers",
-      "description": "Compare published vehicle prices at dealerships. The price is the one on the dealer's own website."
+      "description": "Compare car models with year, mileage, fuel and gearbox. The price is the one the dealer published."
     },
     "eyebrow": "Dealerzy",
     "title": "Compare vehicle prices",
-    "lead": "Prices are what the dealer published on their own website. Cheapest first. DriveLinkUp does not sell the vehicle.",
+    "lead": "Each card is a car the dealer has published, with the model, year, mileage, fuel and gearbox. The price is the dealer's. DriveLinkUp does not sell the car.",
     "cityLabel": "City",
     "cityAll": "All cities",
     "kindLabel": "Vehicle",
@@ -4018,9 +4024,20 @@
     },
     "filter": "Show",
     "sourceNote": "Details come from the dealer's website and the public member list that links to it. DriveLinkUp has not verified them.",
-    "empty": "No dealers in this selection yet.",
+    "empty": "No cars with published specifications in this selection yet.",
     "offer": "{name} from {price}",
     "noPrice": "Price on the dealer's website",
-    "openSite": "Website"
+    "openSite": "Website",
+    "mileageMil": "{value} mil",
+    "mileageKm": "{value} km",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "businessesTitle": "Dealers",
+    "businessesLead": "The business is on a public member list that links to its website. A car card appears when the dealer publishes the model and specifications.",
+    "listCta": "Prowadzę salon samochodowy",
+    "listPrefill": "Prowadzę salon samochodowy i chcę być na DriveLinkUp.\n\nFirma:\nMiasto:\nStrona:",
+    "claim": "To mój salon samochodowy",
+    "claimAria": "Poproś DriveLinkUp o dodanie lub aktualizację {name}",
+    "claimPrefill": "Reprezentuję {name} i chcę, aby ogłoszenie zostało dodane lub zaktualizowane na DriveLinkUp."
   }
 }

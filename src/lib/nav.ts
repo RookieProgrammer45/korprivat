@@ -16,6 +16,7 @@ export interface NavItem {
     | 'nav.licenceCategories'
     | 'nav.drivingInstructor'
     | 'nav.drivingSchool'
+    | 'nav.dealershipOwner'
     | 'nav.forSchoolsMenu'
     | 'nav.getStarted'
     | 'nav.faq'
@@ -94,6 +95,14 @@ export const navItems: NavItem[] = [
     label: 'I run a driving school',
     labelKey: 'nav.drivingSchool',
     href: '/for-skolor',
+    group: 'secondary',
+    order: 1,
+    hideWhenAuthenticated: true,
+  },
+  {
+    label: 'I run a dealership',
+    labelKey: 'nav.dealershipOwner',
+    href: '/contact?topic=list_dealer',
     group: 'secondary',
     order: 1,
     hideWhenAuthenticated: true,

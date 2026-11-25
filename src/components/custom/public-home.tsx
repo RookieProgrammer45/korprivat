@@ -9,7 +9,12 @@ import { getTranslations } from 'next-intl/server';
 import { HomeHero } from '@/components/custom/home-hero';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
 import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
-import { cheapestVehicle, dealerCities, listDealerships } from '@/lib/discovery/dealerships';
+import {
+  cheapestVehicle,
+  dealerCities,
+  listDealerships,
+  publishedCars,
+} from '@/lib/discovery/dealerships';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
 import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
 import { absoluteUrl } from '@/lib/seo/alternates';
@@ -78,6 +83,9 @@ export async function PublicHome({ category }: { category?: string | null } = {}
           <Link href="/for-skolor" className="dlu-text-link">
             {t('entry.providerCta')}
           </Link>
+          <Link href="/contact?topic=list_dealer" className="dlu-text-link">
+            {t('entry.dealerCta')}
+          </Link>
         </div>
       </section>
     </main>
@@ -94,6 +102,8 @@ function lowestLessonSek(
 }
 
 function lowestVehicle(): { amount: number; currency: string } | null {
+  const specified = publishedCars().find((car) => car.vehicle.currency === 'SEK');
+  if (specified) return { amount: specified.vehicle.price, currency: specified.vehicle.currency };
   const offers = listDealerships()
     .map(cheapestVehicle)
     .filter((vehicle): vehicle is NonNullable<typeof vehicle> => vehicle?.currency === 'SEK');
