@@ -9,6 +9,7 @@ import { getTranslations } from 'next-intl/server';
 import { HomeHero } from '@/components/custom/home-hero';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
 import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
+import { cheapestVehicle, dealerCities, listDealerships } from '@/lib/discovery/dealerships';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
 import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
 import { absoluteUrl } from '@/lib/seo/alternates';
@@ -44,7 +45,11 @@ export async function PublicHome({ category }: { category?: string | null } = {}
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
       {itemList ? jsonLdScript(itemList) : null}
-      <HomeHero />
+      <HomeHero
+        dealerCities={dealerCities()}
+        lessonFrom={lowestLessonSek(schools)}
+        vehicleFrom={lowestVehicle()}
+      />
 
       <section className="border-t border-border">
         <div className="container-page grid min-w-0 gap-6 py-10 lg:py-14">
@@ -77,4 +82,21 @@ export async function PublicHome({ category }: { category?: string | null } = {}
       </section>
     </main>
   );
+}
+
+function lowestLessonSek(
+  schools: Awaited<ReturnType<typeof listHomepageSchools>> | undefined,
+): number | null {
+  const prices = (schools ?? [])
+    .map((school) => school.publishedPrices?.lesson?.priceSek)
+    .filter((price): price is number => typeof price === 'number' && price > 0);
+  return prices.length > 0 ? Math.min(...prices) : null;
+}
+
+function lowestVehicle(): { amount: number; currency: string } | null {
+  const offers = listDealerships()
+    .map(cheapestVehicle)
+    .filter((vehicle): vehicle is NonNullable<typeof vehicle> => vehicle?.currency === 'SEK');
+  const cheapest = offers.sort((a, b) => a.price - b.price)[0];
+  return cheapest ? { amount: cheapest.price, currency: cheapest.currency } : null;
 }

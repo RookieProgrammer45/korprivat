@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { PublishedHeavyOffer, PublishedLessonPrice } from '@/components/custom/published-price';
@@ -121,12 +120,13 @@ export function SchoolMark({
   }
   if (size === 'avatar') {
     return (
-      <Image
+      // biome-ignore lint/performance/noImgElement: scraped logos are on each business's own host
+      <img
         src={portrait ?? ''}
         alt={alt}
         width={48}
         height={48}
-        unoptimized
+        referrerPolicy="no-referrer"
         onError={() => setFailed(true)}
         className="size-12 shrink-0 rounded-full border border-border bg-white object-contain p-1.5"
       />
@@ -134,14 +134,13 @@ export function SchoolMark({
   }
   return (
     <span className="dlu-school-photo">
-      <Image
+      {/* biome-ignore lint/performance/noImgElement: scraped logos are on each business's own host */}
+      <img
         src={portrait ?? ''}
         alt={alt}
-        fill
-        unoptimized
-        sizes="(min-width: 1536px) 18vw, (min-width: 1280px) 22vw, (min-width: 1024px) 30vw, 50vw"
+        referrerPolicy="no-referrer"
         onError={() => setFailed(true)}
-        className="object-contain p-8"
+        className="absolute inset-0 h-full w-full object-contain p-8"
       />
     </span>
   );

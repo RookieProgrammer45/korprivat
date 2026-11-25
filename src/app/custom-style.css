@@ -2391,6 +2391,21 @@ html.dark .dlu-footer-cta {
   animation-delay: 200ms;
 }
 
+.dlu-hero-fact {
+  animation: dlu-title-in 720ms var(--ease-out-expo) 280ms both;
+}
+
+.dlu-hero-fact-late {
+  animation-delay: 460ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dlu-hero-fact,
+  .dlu-hero-fact-late {
+    animation: none;
+  }
+}
+
 .dlu-hero-in-visual {
   animation-delay: 160ms;
 }

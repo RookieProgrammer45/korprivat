@@ -1,4 +1,5 @@
-// Search-first entry. Desktop-only photograph sits to the right of the copy.
+// Search-first entry. The title alternates between driving schools and dealers.
+// The photograph stays on desktop, with the two comparison paths on top of it.
 
 'use client';
 
@@ -7,47 +8,69 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { type FormEvent, useId, useState } from 'react';
-import { AnimatedTitle } from '@/components/custom/animated-title';
+import { RotatingTitle } from '@/components/custom/animated-title';
 import { LocaleLink as Link } from '@/components/locale-link';
+import { dealerSearchPath } from '@/lib/seo/dealer-search-path';
 import { localePath } from '@/lib/seo/locale-path';
 import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
+const VEHICLE_KINDS = ['car', 'van', 'heavy', 'other'] as const;
 
 const POPULAR_LINKS = [
+  { key: 'dealers', href: '/bilhandlare' },
   { key: 'heavy', href: '/tung-trafik' },
   { key: 'categoryA', href: '/?category=A' },
   { key: 'stockholm', href: '/locations/se/stockholm' },
   { key: 'goteborg', href: '/locations/se/goteborg' },
   { key: 'malmo', href: '/locations/se/malmo' },
   { key: 'oslo', href: '/locations/no/oslo' },
-  { key: 'sydney', href: '/locations/au/sydney' },
-  { key: 'london', href: '/locations/gb/london' },
-  { key: 'paris', href: '/locations/fr/paris' },
 ] as const;
 
-export function HomeHero() {
+export function HomeHero({
+  dealerCities,
+  lessonFrom,
+  vehicleFrom,
+}: {
+  dealerCities: readonly string[];
+  lessonFrom: number | null;
+  vehicleFrom: { amount: number; currency: string } | null;
+}) {
   const t = useTranslations('publicHome.hero');
   const tHeavy = useTranslations('heavyVehiclesPage');
   const locale = useLocale();
   const router = useRouter();
   const categoryId = useId();
   const cityId = useId();
+  const [mode, setMode] = useState<'school' | 'dealer'>('school');
   const [category, setCategory] = useState<string>('B');
   const [city, setCity] = useState<string>('');
+  const dealerMode = mode === 'dealer';
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    router.push(localePath(locale, schoolSearchPath(city, category)));
+    const path = dealerMode
+      ? dealerSearchPath(city, category || null)
+      : schoolSearchPath(city, category);
+    router.push(localePath(locale, path));
   }
+
+  function selectMode(next: 'school' | 'dealer') {
+    setMode(next);
+    setCategory(next === 'school' ? 'B' : '');
+    setCity('');
+  }
+
+  const money = (amount: number, currency: string) =>
+    `${new Intl.NumberFormat(locale).format(amount)} ${currency}`;
 
   return (
     <section className="marketplace-hero dlu-hero border-b border-border">
       <div className="container-page grid items-start gap-8 pt-4 pb-8 sm:pt-5 lg:grid-cols-[1.05fr_0.95fr] lg:pt-6 lg:pb-10">
         <div className="dlu-hero-copy flex min-w-0 flex-col">
-          <AnimatedTitle
-            text={t('title')}
-            className="marketplace-hero-title max-w-[15ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
+          <RotatingTitle
+            lines={[t('titleSchool'), t('titleDealer')]}
+            className="marketplace-hero-title max-w-[16ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
           />
           <p className="marketplace-reveal dlu-hero-in-2 mt-4 max-w-xl text-body text-muted-foreground">
             {t('body')}
@@ -56,22 +79,38 @@ export function HomeHero() {
           <form
             onSubmit={onSubmit}
             aria-label={t('search.label')}
-            className="marketplace-reveal dlu-hero-in-2 dlu-hero-search mt-8 grid w-full max-w-2xl gap-1 rounded-[1.25rem] border border-border bg-card p-2 sm:grid-cols-[1fr_1.25fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
+            className="marketplace-reveal dlu-hero-in-2 dlu-hero-search mt-8 grid w-full max-w-2xl gap-1 rounded-[1.25rem] border border-border bg-card p-2 sm:grid-cols-[auto_1fr_1.15fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
           >
+            <fieldset className="flex min-w-0 gap-1 border-0 px-1 py-1 sm:px-1">
+              <legend className="sr-only">{t('search.modeLabel')}</legend>
+              <ModeButton active={!dealerMode} onClick={() => selectMode('school')}>
+                {t('search.modeSchool')}
+              </ModeButton>
+              <ModeButton active={dealerMode} onClick={() => selectMode('dealer')}>
+                {t('search.modeDealer')}
+              </ModeButton>
+            </fieldset>
+
             <SearchField
               id={categoryId}
-              label={t('search.categoryLabel')}
+              label={dealerMode ? t('search.kindLabel') : t('search.categoryLabel')}
               value={category}
               onChange={setCategory}
+              divider
             >
-              {SEARCH_CATEGORIES.map((c) => (
-                <option key={c} value={c}>
-                  {t(`search.categories.${c}`)}
-                </option>
-              ))}
+              {dealerMode ? <option value="">{t('search.kindAny')}</option> : null}
+              {dealerMode
+                ? VEHICLE_KINDS.map((kind) => (
+                    <option key={kind} value={kind}>
+                      {t(`search.kinds.${kind}`)}
+                    </option>
+                  ))
+                : SEARCH_CATEGORIES.map((item) => (
+                    <option key={item} value={item}>
+                      {t(`search.categories.${item}`)}
+                    </option>
+                  ))}
             </SearchField>
-
-            <div className="mx-4 h-px bg-border sm:hidden" aria-hidden />
 
             <SearchField
               id={cityId}
@@ -81,11 +120,17 @@ export function HomeHero() {
               divider
             >
               <option value="">{t('search.cityAny')}</option>
-              {SEARCH_CITIES.map((c) => (
-                <option key={c.id} value={c.value}>
-                  {t(`search.cities.${c.id}`)}
-                </option>
-              ))}
+              {dealerMode
+                ? dealerCities.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))
+                : SEARCH_CITIES.map((item) => (
+                    <option key={item.id} value={item.value}>
+                      {t(`search.cities.${item.id}`)}
+                    </option>
+                  ))}
             </SearchField>
 
             <button
@@ -128,9 +173,56 @@ export function HomeHero() {
             sizes="(min-width: 1024px) 28rem, 0px"
             className="object-cover"
           />
+          <div className="absolute inset-x-5 bottom-5 grid gap-3">
+            <Link
+              href="/locations/se"
+              className="dlu-hero-fact rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-foreground backdrop-blur-sm"
+            >
+              <span className="block text-xs text-muted-foreground">{t('facts.lesson')}</span>
+              <span className="mt-1 block font-display text-xl tracking-tight">
+                {lessonFrom
+                  ? t('facts.from', { price: money(lessonFrom, 'SEK') })
+                  : t('facts.lessonFallback')}
+              </span>
+            </Link>
+            <Link
+              href="/bilhandlare"
+              className="dlu-hero-fact dlu-hero-fact-late rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-foreground backdrop-blur-sm"
+            >
+              <span className="block text-xs text-muted-foreground">{t('facts.vehicle')}</span>
+              <span className="mt-1 block font-display text-xl tracking-tight">
+                {vehicleFrom
+                  ? t('facts.from', { price: money(vehicleFrom.amount, vehicleFrom.currency) })
+                  : t('facts.vehicleFallback')}
+              </span>
+            </Link>
+          </div>
         </aside>
       </div>
     </section>
+  );
+}
+
+function ModeButton({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={active}
+      onClick={onClick}
+      className={`rounded-full px-3 py-2 text-sm ${
+        active ? 'bg-foreground text-background' : 'text-muted-foreground hover:bg-muted'
+      }`}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -163,7 +255,7 @@ function SearchField({
       <select
         id={id}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         className="dlu-hero-select w-full cursor-pointer appearance-none truncate border-0 bg-transparent py-0.5 pr-6 text-base text-muted-foreground outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
       >
         {children}

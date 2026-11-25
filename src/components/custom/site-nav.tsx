@@ -315,10 +315,8 @@ export function SiteNav() {
             <AuthNav />
           </div>
 
-          {/* Language lives in the mobile drawer; the app is light-only, so no theme toggle. */}
-          <div className="hidden md:contents">
-            <LanguageToggle />
-          </div>
+          {/* Same control on mobile and desktop so a language switch is one tap. */}
+          <LanguageToggle />
 
           {/* Mobile (below md): burger + drawer — only when there's something to collapse */}
           {collapsedCount > 0 && (
@@ -415,16 +413,6 @@ export function SiteNav() {
                     </div>
                   )}
                 </nav>
-                {/* Footer of the mobile drawer — language toggle lives here so
-                    every page can flip SV/EN from mobile, paralleling the
-                    theme toggle (which is also designer-included in the
-                    right-hand cluster on desktop). */}
-                <div className="mt-auto flex items-center justify-between gap-2 border-t border-border pt-4">
-                  <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                    {tNav('nav.language')}
-                  </span>
-                  <LanguageToggle />
-                </div>
               </SheetContent>
             </Sheet>
           )}

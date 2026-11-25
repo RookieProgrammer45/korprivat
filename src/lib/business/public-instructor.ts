@@ -2,6 +2,7 @@ import 'server-only';
 import { withUsualMotorcycleCategories } from '@/lib/business/licence-categories';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { publishedLogo } from '@/lib/discovery/business-logos';
 import {
   hasWebsitePrice,
   publishedInbox,
@@ -13,6 +14,7 @@ import {
   resolvePriceRequest,
   resolveSchoolContact,
 } from '@/lib/discovery/school-contact';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
 
 export type PublicGoogleReview = {
@@ -191,8 +193,11 @@ export function toPublicInstructor(
     categories,
     hourlyRateSek: publicRateSek,
     bio: row.bio,
-    // Schools: no logo or scraped site art in public JSON (third-party IP).
-    photoUrl: row.providerRole === 'SCHOOL' ? '' : row.photoUrl,
+    // Schools: the mark from the school's own site, used only to identify them.
+    photoUrl:
+      row.providerRole === 'SCHOOL'
+        ? (publishedLogo(row.id) ?? schoolPortraitUrl(row.photoUrl) ?? '')
+        : row.photoUrl,
     englishSpeaking: row.englishSpeaking === true,
     languages: row.englishSpeaking === true ? (['sv', 'en'] as const) : (['sv'] as const),
     verificationStatus: aggregate.verificationStatus,

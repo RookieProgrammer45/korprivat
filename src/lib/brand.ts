@@ -2,10 +2,10 @@
 
 export const siteName = 'DriveLinkUp';
 /** Swedish homepage `<title>`. Keyword first, under 60 characters, no brand suffix. */
-export const siteTitleSv = 'Trafikskolor i Sverige – jämför priser';
+export const siteTitleSv = 'Jämför bilpriser och trafikskolor';
 /** Default meta description. Must stay a free catalogue (see security-and-seo). */
 export const siteDescription =
-  'Jämför trafikskolor i Sverige. Se publicerade lektionspriser och kontakta skolan. Gratis katalog för alla.';
+  'Jämför bilpriser och trafikskolor. Priset är det företaget publicerat. Gratis katalog för alla.';
 
 // PWA + social-share colors. HEX only (the oklch() tokens in globals.css aren't
 // readable here) — set to match your brand seed.

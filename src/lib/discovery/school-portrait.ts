@@ -1,16 +1,12 @@
-// School trade marks and website logos are third-party IP. The directory uses
-// initials only — never hotlink or cache a school's logo from its website.
+// Published logos identify the business. They are the mark from the business's
+// own site, shown only as identification — never as a DriveLinkUp endorsement.
 
-const LOGO_IN_PATH =
-  /\b(logo|logotyp|logga|favicon|sprite|brand-mark|site-icon)\b|\/og-\d|partner.*\/assets\//i;
+const HTTP_URL = /^https?:\/\/[^\s]+$/i;
 
-/** Whether a stored URL is shown as a school portrait (not a logo or placeholder). */
+/** A stored http(s) image, including a scraped logo or SVG mark. */
 export function schoolPortraitUrl(url: string | null | undefined): string | null {
   const raw = (url ?? '').trim();
-  if (!raw) return null;
-  const path = raw.split('?')[0]?.toLowerCase() ?? '';
-  if (path.endsWith('.svg')) return null;
-  if (LOGO_IN_PATH.test(path)) return null;
+  if (!HTTP_URL.test(raw)) return null;
   return raw;
 }
 

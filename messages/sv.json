@@ -43,7 +43,8 @@
       "southernSweden": "Södra Sverige",
       "westernNorthernSweden": "Västra och norra Sverige",
       "about": "Om oss",
-      "terms": "Villkor"
+      "terms": "Villkor",
+      "dealers": "Bilhandlare"
     },
     "language": {
       "sv": "Svenska",
@@ -2393,13 +2394,13 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "Hitta en trafikskola nära dig.",
-      "metaTitle": "Trafikskolor i Sverige – jämför priser",
-      "metaDescription": "Jämför trafikskolor i Sverige. Se publicerade lektionspriser och kontakta skolan. Gratis katalog för alla.",
-      "body": "Trafikskolor som enligt sin webbplats utbildar för AM, A, B eller BE. Priset visas när skolan publicerar det.",
+      "title": "Jämför bilpriser och trafikskolor.",
+      "metaTitle": "Jämför bilpriser och trafikskolor",
+      "metaDescription": "Jämför bilpriser och trafikskolor. Priset är det företaget publicerat. Gratis katalog för alla.",
+      "body": "DriveLinkUp är stället där du jämför bilpriser, trafikskolor och sådant som hör till bilen. I dag är det publicerade priser från skolor och handlare.",
       "primaryCta": "Hitta en skola",
       "instructorCta": "Jag undervisar på en trafikskola",
-      "marketplaceTag": "Lätt trafik · Trafikskolor",
+      "marketplaceTag": "Bilpriser · Trafikskolor",
       "schoolCta": "Jag driver en skola",
       "panelEyebrow": "Så funkar det",
       "panelTitle": "Skolan står för lektionen",
@@ -2468,6 +2469,17 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa"
+        },
+        "modeLabel": "Vad vill du jämföra",
+        "modeSchool": "Körskola",
+        "modeDealer": "Bilhandlare",
+        "kindLabel": "Fordon",
+        "kindAny": "Alla fordon",
+        "kinds": {
+          "car": "Personbil",
+          "van": "Transportbil",
+          "heavy": "Tungt fordon",
+          "other": "Övrigt"
         }
       },
       "popular": {
@@ -2482,7 +2494,8 @@
           "london": "London",
           "paris": "Paris",
           "categoryA": "Motorcykel · A",
-          "heavy": "Tung trafik"
+          "heavy": "Tung trafik",
+          "dealers": "Bilpriser"
         }
       },
       "lead": "Gratis. Du betalar skolans pris.",
@@ -2491,6 +2504,15 @@
       "chips": {
         "price": "Publicerat pris i kronor",
         "cancellation": "Kontakta skolan för villkor"
+      },
+      "titleSchool": "Jämför trafikskolor.",
+      "titleDealer": "Jämför bilpriser.",
+      "facts": {
+        "lesson": "Körlektion",
+        "vehicle": "Fordon",
+        "from": "från {price}",
+        "lessonFallback": "Publicerade lektionspriser",
+        "vehicleFallback": "Publicerade fordonspriser"
       }
     },
     "quickLinks": {
@@ -3975,5 +3997,30 @@
     "backToHub": "Alla trafikskolor i {name}",
     "offerLesson": "Körlektion",
     "offerMinutes": "Körlektion {minutes} min"
+  },
+  "dealershipsPage": {
+    "meta": {
+      "title": "Jämför bilpriser hos handlare",
+      "description": "Jämför publicerade fordonspriser hos bilhandlare. Priset är det handlaren visar på sin webbplats."
+    },
+    "eyebrow": "Bilhandlare",
+    "title": "Jämför fordonspriser",
+    "lead": "Priserna är de handlaren publicerat på sin egen webbplats. Billigast först. DriveLinkUp säljer inte fordonet.",
+    "cityLabel": "Ort",
+    "cityAll": "Alla orter",
+    "kindLabel": "Fordon",
+    "kindAll": "Alla fordon",
+    "kind": {
+      "car": "Personbil",
+      "van": "Transportbil",
+      "heavy": "Tungt fordon",
+      "other": "Övrigt"
+    },
+    "filter": "Visa",
+    "sourceNote": "Uppgiften kommer från handlarens webbplats och den offentliga medlemslista som länkar dit. Den är inte verifierad av DriveLinkUp.",
+    "empty": "Inga handlare i det här urvalet ännu.",
+    "offer": "{name} från {price}",
+    "noPrice": "Pris på handlarens webbplats",
+    "openSite": "Webbplats"
   }
 }

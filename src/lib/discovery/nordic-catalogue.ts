@@ -12,6 +12,7 @@ import { cityFilterCandidates } from '@/lib/seo/nordic-locations';
 import { schoolShortId } from '@/lib/seo/school-slugs';
 import australia from '../../../data/australia-schools/schools.json';
 import brazil from '../../../data/brazil-schools/schools.json';
+import logos from '../../../data/business-logos/logos.json';
 import canada from '../../../data/canada-schools/schools.json';
 import europe from '../../../data/europe-schools/schools.json';
 import dataset from '../../../data/nordic-schools/schools.json';
@@ -364,6 +365,11 @@ function phoneFact(e164: string): { display: string; href: string } {
   return { display: `${prefix} ${groups}`, href: `tel:${e164}` };
 }
 
+function logoFor(id: string): string {
+  const url = (logos.byKey as Record<string, string>)[id];
+  return typeof url === 'string' && /^https?:\/\//i.test(url) ? url : '';
+}
+
 function lessonAmount(school: RawSchool): number | null {
   const amount = school.lessonPrice;
   if (typeof amount !== 'number' || !Number.isInteger(amount)) return null;
@@ -441,7 +447,7 @@ export function toNordicInstructor(school: RawSchool): InstructorFilteredItem | 
     categories,
     hourlyRateSek: 0,
     bio: 'Kontaktuppgifter och pris kommer från skolans webbplats. DriveLinkUp har inte verifierat tillståndet och bokar inte lektionen.',
-    photoUrl: '',
+    photoUrl: logoFor(school.id),
     englishSpeaking: language === 'en',
     languages: [language],
     verificationStatus: 'unverified',

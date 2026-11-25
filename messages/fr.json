@@ -43,7 +43,8 @@
       "southernSweden": "Suède du Sud",
       "westernNorthernSweden": "Suède occidentale et septentrionale",
       "about": "À propos",
-      "terms": "Conditions"
+      "terms": "Conditions",
+      "dealers": "Concessionnaires"
     },
     "language": {
       "sv": "Svenska",
@@ -2393,13 +2394,13 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "Trouvez une auto-école près de chez vous.",
-      "metaTitle": "Comparer les auto-écoles en Suède",
-      "metaDescription": "Comparez les auto-écoles en Suède. Voyez les prix de leçon publiés et contactez l’école. Gratuit pour tous.",
-      "body": "Auto-écoles qui, selon leur site, forment aux permis AM, A, B ou BE. Le prix s’affiche lorsque l’école le publie.",
+      "title": "Compare car prices and driving schools.",
+      "metaTitle": "Compare car prices and driving schools",
+      "metaDescription": "Compare car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
+      "body": "DriveLinkUp is where you compare car prices, driving schools, and the rest of cars. Today that is published prices from schools and dealers.",
       "primaryCta": "Trouver une auto-école",
       "instructorCta": "Je travaille dans une auto-école",
-      "marketplaceTag": "Véhicules légers · Auto-écoles",
+      "marketplaceTag": "Car prices · Driving schools",
       "schoolCta": "Je dirige une auto-école",
       "panelEyebrow": "Comment ça marche",
       "panelTitle": "L’auto-école est responsable de la leçon",
@@ -2468,6 +2469,17 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa"
+        },
+        "modeLabel": "What to compare",
+        "modeSchool": "Driving school",
+        "modeDealer": "Dealer",
+        "kindLabel": "Vehicle",
+        "kindAny": "All vehicles",
+        "kinds": {
+          "car": "Car",
+          "van": "Van",
+          "heavy": "Heavy vehicle",
+          "other": "Other"
         }
       },
       "popular": {
@@ -2482,7 +2494,8 @@
           "london": "London",
           "paris": "Paris",
           "categoryA": "Moto · A",
-          "heavy": "Véhicules lourds"
+          "heavy": "Véhicules lourds",
+          "dealers": "Prix véhicules"
         }
       },
       "lead": "Gratuit. Vous payez le prix de l’auto-école.",
@@ -2491,6 +2504,15 @@
       "chips": {
         "price": "Prix publié en couronnes",
         "cancellation": "Contactez l’auto-école pour les conditions"
+      },
+      "titleSchool": "Compare driving schools.",
+      "titleDealer": "Compare car prices.",
+      "facts": {
+        "lesson": "Driving lesson",
+        "vehicle": "Vehicle",
+        "from": "from {price}",
+        "lessonFallback": "Published lesson prices",
+        "vehicleFallback": "Published vehicle prices"
       }
     },
     "quickLinks": {
@@ -3975,5 +3997,30 @@
     "backToHub": "All driving schools in {name}",
     "offerLesson": "Driving lesson",
     "offerMinutes": "Driving lesson {minutes} min"
+  },
+  "dealershipsPage": {
+    "meta": {
+      "title": "Compare vehicle prices at dealers",
+      "description": "Compare published vehicle prices at dealerships. The price is the one on the dealer's own website."
+    },
+    "eyebrow": "Concessionnaires",
+    "title": "Compare vehicle prices",
+    "lead": "Prices are what the dealer published on their own website. Cheapest first. DriveLinkUp does not sell the vehicle.",
+    "cityLabel": "City",
+    "cityAll": "All cities",
+    "kindLabel": "Vehicle",
+    "kindAll": "All vehicles",
+    "kind": {
+      "car": "Car",
+      "van": "Van",
+      "heavy": "Heavy vehicle",
+      "other": "Other"
+    },
+    "filter": "Show",
+    "sourceNote": "Details come from the dealer's website and the public member list that links to it. DriveLinkUp has not verified them.",
+    "empty": "No dealers in this selection yet.",
+    "offer": "{name} from {price}",
+    "noPrice": "Price on the dealer's website",
+    "openSite": "Website"
   }
 }

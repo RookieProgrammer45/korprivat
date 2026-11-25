@@ -1,15 +1,14 @@
-// icon-button / dropdown pattern so the two sit visually balanced next to each
-// other in the right-hand cluster of the header. Switching writes the
-// `NEXT_LOCALE` cookie via the installed POST /api/locale lane and then refreshes
-// the current page so its translated strings re-render.
+// One language control for every viewport. Options are real links so Next
+// prefetches the translated page the same way on mobile and desktop, and the
+// switch does not wait on a network round-trip.
 
 'use client';
 
 import { Languages } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { useTransition } from 'react';
-import { toast } from 'sonner';
+import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -18,39 +17,77 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { locales } from '@/i18n/config';
-import { apiFetch } from '@/lib/api-client';
+import { writeLocaleCookie } from '@/lib/locale-cookie';
 import { switchLocalePath } from '@/lib/seo/locale-path';
 
 const LOCALE_SHORT: Record<(typeof locales)[number], string> = Object.fromEntries(
   locales.map((locale) => [locale, locale.toUpperCase()]),
 ) as Record<(typeof locales)[number], string>;
 
-export function LanguageToggle({
+export function LanguageToggle(props: {
+  className?: string;
+  align?: 'start' | 'end';
+  showCode?: boolean;
+}) {
+  return (
+    <Suspense fallback={<LanguageToggleButton {...props} />}>
+      <LanguageToggleMenu {...props} />
+    </Suspense>
+  );
+}
+
+function LanguageToggleButton({
   className,
-  align = 'end',
+  showCode = false,
 }: {
   className?: string;
   align?: 'start' | 'end';
+  showCode?: boolean;
+}) {
+  const t = useTranslations('common');
+  const current = useLocale();
+  return (
+    <Button
+      variant="ghost"
+      size={showCode ? 'sm' : 'icon'}
+      className={toggleClass(showCode, className)}
+      aria-label={t('nav.languageAria')}
+      type="button"
+    >
+      <Languages className="size-4 shrink-0" />
+      {showCode ? (
+        <span className="text-caption font-medium uppercase tracking-[0.08em]">
+          {LOCALE_SHORT[current as (typeof locales)[number]] ?? current}
+        </span>
+      ) : null}
+    </Button>
+  );
+}
+
+function toggleClass(showCode: boolean, className?: string) {
+  return showCode
+    ? `shrink-0 gap-1.5 rounded-full border border-border bg-card px-2.5 text-muted-foreground hover:border-brand-400 hover:bg-brand-100 hover:text-brand-700 dark:hover:bg-brand-900 dark:hover:text-brand-300 ${className ?? ''}`
+    : `rounded-full border border-border bg-card text-muted-foreground hover:border-brand-400 hover:bg-brand-100 hover:text-brand-700 dark:hover:bg-brand-900 dark:hover:text-brand-300 ${className ?? ''}`;
+}
+
+function LanguageToggleMenu({
+  className,
+  align = 'end',
+  showCode = false,
+}: {
+  className?: string;
+  align?: 'start' | 'end';
+  /** Auth/dashboard: show the active code (SV) beside the icon so the control stays one control wide. */
+  showCode?: boolean;
 }) {
   const current = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const t = useTranslations('common');
-  const [pending, startTransition] = useTransition();
+  const search = searchParams.toString();
 
-  function select(locale: (typeof locales)[number]) {
-    if (locale === current || pending) return;
-    startTransition(async () => {
-      try {
-        await apiFetch('/api/locale', {
-          method: 'POST',
-          body: JSON.stringify({ locale }),
-        });
-        router.push(switchLocalePath(pathname, locale, window.location.search));
-      } catch {
-        toast.error(t('nav.languageError'));
-      }
-    });
+  function hrefFor(locale: (typeof locales)[number]) {
+    return switchLocalePath(pathname, locale, search ? `?${search}` : '');
   }
 
   return (
@@ -58,29 +95,49 @@ export function LanguageToggle({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
-          className={`rounded-full border border-border bg-card text-muted-foreground hover:border-brand-400 hover:bg-brand-100 hover:text-brand-700 dark:hover:bg-brand-900 dark:hover:text-brand-300 ${className ?? ''}`}
+          size={showCode ? 'sm' : 'icon'}
+          className={toggleClass(showCode, className)}
           aria-label={t('nav.languageAria')}
-          aria-busy={pending}
         >
-          <Languages />
+          <Languages className="size-4 shrink-0" />
+          {showCode ? (
+            <span className="text-caption font-medium uppercase tracking-[0.08em]">
+              {LOCALE_SHORT[current as (typeof locales)[number]] ?? current}
+            </span>
+          ) : null}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align={align}>
+      <DropdownMenuContent align={align} className="min-w-[12rem]">
         {locales.map((locale) => {
           const active = locale === current;
-          return (
-            <DropdownMenuItem
-              key={locale}
-              disabled={pending || active}
-              onSelect={(event) => {
-                event.preventDefault();
-                select(locale);
-              }}
-              className="flex w-full items-center justify-between gap-3"
-            >
+          const label = (
+            <>
               <span className="font-medium">{LOCALE_SHORT[locale]}</span>
               <span className="text-caption text-muted-foreground">{t(`language.${locale}`)}</span>
+            </>
+          );
+          if (active) {
+            return (
+              <DropdownMenuItem
+                key={locale}
+                disabled
+                className="flex w-full items-center justify-between gap-3"
+              >
+                {label}
+              </DropdownMenuItem>
+            );
+          }
+          return (
+            <DropdownMenuItem key={locale} asChild>
+              <Link
+                href={hrefFor(locale)}
+                hrefLang={locale}
+                prefetch
+                className="flex w-full items-center justify-between gap-3"
+                onClick={() => writeLocaleCookie(locale)}
+              >
+                {label}
+              </Link>
             </DropdownMenuItem>
           );
         })}

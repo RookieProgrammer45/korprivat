@@ -53,6 +53,7 @@ const EDITORIAL: SeoRoute[] = [
   { path: '/western-northern-sweden', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/handledare', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/pricing', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/bilhandlare', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/faq', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/for-skolor', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/for-instructors', priority: 0.6, changeFrequency: 'monthly' },

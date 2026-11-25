@@ -7,11 +7,18 @@ import {
 } from '@/lib/discovery/school-portrait';
 
 describe('schoolPortraitUrl', () => {
-  it('rejects empty, svg, and logo paths', () => {
+  it('rejects empty and non-http values', () => {
     expect(schoolPortraitUrl('')).toBeNull();
-    expect(schoolPortraitUrl('https://x.se/logo.png')).toBeNull();
-    expect(schoolPortraitUrl('https://x.se/icon.svg')).toBeNull();
-    expect(schoolPortraitUrl('https://nobina.com/wp-content/logo-white.png')).toBeNull();
+    expect(schoolPortraitUrl('/brand/logo-black.svg')).toBeNull();
+    expect(schoolPortraitUrl('javascript:alert(1)')).toBeNull();
+  });
+
+  it('allows a scraped logo, including svg', () => {
+    expect(schoolPortraitUrl('https://x.se/logo.png')).toBe('https://x.se/logo.png');
+    expect(schoolPortraitUrl('https://x.se/icon.svg')).toBe('https://x.se/icon.svg');
+    expect(schoolPortraitUrl('https://nobina.com/wp-content/logo-white.png')).toBe(
+      'https://nobina.com/wp-content/logo-white.png',
+    );
   });
 
   it('allows a plain photograph path', () => {
