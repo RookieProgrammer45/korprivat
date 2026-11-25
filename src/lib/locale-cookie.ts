@@ -1,8 +1,10 @@
 // Client-side NEXT_LOCALE writer. The cookie is not HttpOnly (see
 // POST /api/locale), so we can set it before navigation and avoid waiting on
-// the API round-trip. The API call still runs in the background for parity.
+// the API round-trip. Keep this module free of next/headers: the language
+// switcher is a client component.
 import { isLocale } from '@/i18n/config';
-import { LOCALE_COOKIE } from '@/lib/i18n';
+
+export const LOCALE_COOKIE = 'NEXT_LOCALE';
 
 const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
