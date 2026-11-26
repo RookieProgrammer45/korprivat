@@ -46,7 +46,8 @@
       "about": "Sobre nosotros",
       "terms": "Términos",
       "dealers": "Concesionarios",
-      "parts": "Recambios"
+      "parts": "Recambios",
+      "inspection": "ITV"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Compara precios de coches y autoescuelas.",
-      "metaTitle": "Compara precios de coches y autoescuelas",
-      "metaDescription": "Compara precios de coches y autoescuelas. El precio es el que publicó la empresa. Catálogo gratis para todos.",
-      "body": "DriveLinkUp es el lugar donde comparas autoescuelas, precios de coches, cascos y recambios. La cifra es el precio que publicó la autoescuela, el concesionario o la tienda.",
+      "metaTitle": "Compara recambios, precios y autoescuelas",
+      "metaDescription": "Compara recambios, precios de coches y autoescuelas. El precio es el publicado. Catálogo gratis para todos.",
+      "body": "Compara autoescuelas, vehículos pesados, precios de coches y recambios que una tienda publicó para un conductor o un taller. La cifra es el precio publicado.",
       "primaryCta": "Buscar una autoescuela",
       "instructorCta": "Trabajo en una autoescuela",
       "marketplaceTag": "Precios de coches · Autoescuelas",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "Nueva York",
         "modeParts": "Recambios",
         "productLabel": "Producto",
-        "productPlaceholder": "Casco"
+        "productPlaceholder": "Pastillas de freno",
+        "labelParts": "Buscar recambios",
+        "labelDealer": "Buscar precios"
       },
       "popular": {
         "label": "Populares:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Moto · A",
           "heavy": "Vehículos pesados",
           "dealers": "Precios",
-          "parts": "Recambios"
+          "parts": "Recambios",
+          "ownerParts": "Recambios para conductores",
+          "workshopParts": "Recambios para talleres",
+          "inspection": "ITV"
         }
       },
       "lead": "Gratis. Pagas el precio de la autoescuela.",
@@ -2530,7 +2536,7 @@
         "parts": "Recambios",
         "partsFallback": "Precios publicados por las tiendas"
       },
-      "titleParts": "Compara recambios y cascos."
+      "titleParts": "Compara recambios."
     },
     "quickLinks": {
       "label": "Empezar por",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Autoescuelas",
       "cta": "Todas las autoescuelas",
-      "filteredEmpty": "No hay anuncios de esta categoría de permiso ahora mismo."
+      "filteredEmpty": "No hay anuncios de esta categoría de permiso ahora mismo.",
+      "carsTitle": "Coches",
+      "carsCta": "Todos los precios",
+      "carsEmpty": "Ningún coche publicado con una especificación.",
+      "partsTitle": "Recambios",
+      "partsCta": "Todos los recambios",
+      "partsEmpty": "Ningún recambio publicado con una especificación."
     },
     "assurance": {
       "eyebrow": "Cómo funciona el directorio",
@@ -2595,7 +2607,8 @@
       "body": "Es gratis.",
       "learnerCta": "Buscar una autoescuela",
       "providerCta": "Dirijo una autoescuela",
-      "dealerCta": "Tengo un concesionario"
+      "dealerCta": "Tengo un concesionario",
+      "partsCta": "Comparar recambios"
     },
     "footer": {
       "prompt": "¿Necesitas más contexto?",
@@ -4118,6 +4131,55 @@
       "FI": "Finlandia",
       "AU": "Australia",
       "US": "Estados Unidos"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Comparar precios de ITV",
+      "description": "Precios publicados por la estación o la autoridad. Un país aparece cuando el precio está publicado. DriveLinkUp no reserva la inspección."
+    },
+    "title": "Comparar precios de ITV",
+    "lead": "El precio es el que publicó la estación o la autoridad. DriveLinkUp no reserva la inspección y no llama verificada a una estación.",
+    "countryLabel": "País",
+    "countryAll": "Todos los países",
+    "vehicleLabel": "Vehículo",
+    "inspectionLabel": "Inspección",
+    "vehicles": {
+      "car": "Turismo",
+      "motorcycle": "Moto",
+      "heavy": "Vehículo pesado",
+      "van": "Furgoneta"
+    },
+    "inspections": {
+      "periodic": "Periódica",
+      "retest": "Segunda inspección",
+      "periodicEmissions": "Con prueba de emisiones"
+    },
+    "priceFrom": "desde",
+    "priceMaximum": "Máximo",
+    "empty": "Todavía no hay un precio publicado para esa elección.",
+    "source": "Página de precios",
+    "currencyGroup": "Precios en {currency}",
+    "countries": {
+      "SE": "Suecia",
+      "NO": "Noruega",
+      "DK": "Dinamarca",
+      "DE": "Alemania",
+      "ES": "España",
+      "GB": "Reino Unido"
+    },
+    "notes": {
+      "inclVat": "IVA incluido.",
+      "inclVatAuthorityFee": "IVA incluido y la tasa oficial que publica la página.",
+      "inclVatTrafficTax": "Incluye la tasa de tráfico que publica la página.",
+      "noVatMaximum": "Máximo legal. El IVA no está incluido. Un taller puede cobrar menos.",
+      "lowestPrice": "Precio publicado más bajo. Varía según la estación y la hora.",
+      "prepayOnline": "Precio al reservar y pagar en línea.",
+      "whenBooked": "Precio al reservar. La estación también publica una tarifa de lista más alta.",
+      "hallList": "Tarifa de lista de la estación.",
+      "partnerMayDiffer": "Las estaciones asociadas pueden cobrar otra tarifa.",
+      "retestIfRepaired": "Se cobra cuando el taller repara los fallos.",
+      "namedWorkshops": "Publicado para talleres concretos."
     }
   }
 }

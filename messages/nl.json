@@ -46,7 +46,8 @@
       "about": "Over ons",
       "terms": "Voorwaarden",
       "dealers": "Autodealers",
-      "parts": "Onderdelen"
+      "parts": "Onderdelen",
+      "inspection": "APK"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Vergelijk autoprijzen en rijscholen.",
-      "metaTitle": "Vergelijk autoprijzen en rijscholen",
-      "metaDescription": "Vergelijk autoprijzen en rijscholen. De prijs is de prijs die het bedrijf heeft gepubliceerd. Gratis catalogus voor iedereen.",
-      "body": "DriveLinkUp is de plek waar je rijscholen, autoprijzen, helmen en auto-onderdelen vergelijkt. Het bedrag is de prijs die de school, de dealer of de winkel heeft gepubliceerd.",
+      "metaTitle": "Onderdelen, prijzen en rijscholen vergelijken",
+      "metaDescription": "Vergelijk onderdelen, autoprijzen en rijscholen. De prijs is de gepubliceerde. Gratis catalogus voor iedereen.",
+      "body": "Vergelijk rijscholen, zwaar verkeer, autoprijzen en onderdelen die een winkel publiceerde voor een autobezitter of een werkplaats. Het bedrag is de gepubliceerde prijs.",
       "primaryCta": "Vind een rijschool",
       "instructorCta": "Ik werk bij een rijschool",
       "marketplaceTag": "Autoprijzen · Rijscholen",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Onderdelen",
         "productLabel": "Product",
-        "productPlaceholder": "Helm"
+        "productPlaceholder": "Remblokken",
+        "labelParts": "Onderdelen zoeken",
+        "labelDealer": "Autoprijzen zoeken"
       },
       "popular": {
         "label": "Populair:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Motor · A",
           "heavy": "Zware voertuigen",
           "dealers": "Voertuigprijzen",
-          "parts": "Onderdelen"
+          "parts": "Onderdelen",
+          "ownerParts": "Onderdelen voor autobezitters",
+          "workshopParts": "Onderdelen voor werkplaatsen",
+          "inspection": "APK"
         }
       },
       "lead": "Gratis. Je betaalt de prijs van de rijschool.",
@@ -2530,7 +2536,7 @@
         "parts": "Onderdelen",
         "partsFallback": "Gepubliceerde winkelprijzen"
       },
-      "titleParts": "Vergelijk onderdelen en helmen."
+      "titleParts": "Auto-onderdelen vergelijken."
     },
     "quickLinks": {
       "label": "Begin met",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Rijscholen",
       "cta": "Alle rijscholen",
-      "filteredEmpty": "Geen advertenties voor dit rijbewijs op dit moment."
+      "filteredEmpty": "Geen advertenties voor dit rijbewijs op dit moment.",
+      "carsTitle": "Auto's",
+      "carsCta": "Alle autoprijzen",
+      "carsEmpty": "Geen gepubliceerde auto met een specificatie.",
+      "partsTitle": "Onderdelen",
+      "partsCta": "Alle onderdelen",
+      "partsEmpty": "Geen gepubliceerd onderdeel met een specificatie."
     },
     "assurance": {
       "eyebrow": "Hoe de catalogus werkt",
@@ -2595,7 +2607,8 @@
       "body": "Het is gratis.",
       "learnerCta": "Vind een rijschool",
       "providerCta": "Ik run een rijschool",
-      "dealerCta": "Ik heb een autodealer"
+      "dealerCta": "Ik heb een autodealer",
+      "partsCta": "Onderdelen vergelijken"
     },
     "footer": {
       "prompt": "Meer context nodig?",
@@ -4118,6 +4131,55 @@
       "FI": "Finland",
       "AU": "Australië",
       "US": "Verenigde Staten"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "APK-prijzen vergelijken",
+      "description": "Gepubliceerde prijzen van het station of de overheid. Een land staat erbij wanneer de prijs is gepubliceerd. DriveLinkUp boekt de keuring niet."
+    },
+    "title": "APK-prijzen vergelijken",
+    "lead": "De prijs is wat het station of de overheid heeft gepubliceerd. DriveLinkUp boekt de keuring niet en noemt een station niet geverifieerd.",
+    "countryLabel": "Land",
+    "countryAll": "Alle landen",
+    "vehicleLabel": "Voertuig",
+    "inspectionLabel": "Keuring",
+    "vehicles": {
+      "car": "Auto",
+      "motorcycle": "Motor",
+      "heavy": "Zwaar voertuig",
+      "van": "Bestelwagen"
+    },
+    "inspections": {
+      "periodic": "Periodiek",
+      "retest": "Herkuring",
+      "periodicEmissions": "Met emissietest"
+    },
+    "priceFrom": "vanaf",
+    "priceMaximum": "Hoogstens",
+    "empty": "Nog geen gepubliceerde prijs voor die keuze.",
+    "source": "Prijsblad",
+    "currencyGroup": "Prijzen in {currency}",
+    "countries": {
+      "SE": "Zweden",
+      "NO": "Noorwegen",
+      "DK": "Denemarken",
+      "DE": "Duitsland",
+      "ES": "Spanje",
+      "GB": "Verenigd Koninkrijk"
+    },
+    "notes": {
+      "inclVat": "Inclusief btw.",
+      "inclVatAuthorityFee": "Inclusief btw en de overheidstoeslag die de pagina publiceert.",
+      "inclVatTrafficTax": "Inclusief de verkeersheffing die de pagina publiceert.",
+      "noVatMaximum": "Wettelijk maximum. Btw is niet inbegrepen. Een garage mag minder rekenen.",
+      "lowestPrice": "Laagste gepubliceerde prijs. Die verschilt per station en tijdstip.",
+      "prepayOnline": "Prijs bij online boeken en betalen.",
+      "whenBooked": "Prijs als je boekt. Het station publiceert ook een hogere lijstprijs.",
+      "hallList": "Lijstprijs van het station.",
+      "partnerMayDiffer": "Partnerstations kunnen een ander tarief rekenen.",
+      "retestIfRepaired": "Verschuldigd wanneer de werkplaats de gebreken herstelt.",
+      "namedWorkshops": "Gepubliceerd voor genoemde werkplaatsen."
     }
   }
 }

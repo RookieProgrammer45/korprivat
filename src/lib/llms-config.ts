@@ -27,9 +27,17 @@ import type { LlmsConfig } from '@/lib/llms';
 
 export const llmsConfig: LlmsConfig = {
   intro:
-    'DriveLinkUp is a Sweden-first catalog of driving schools. It is not a driving school, licensing authority, or government service. Anyone can compare listings and published prices for free, then contact the school. DriveLinkUp does not take lesson payments. Handledare / övningskörning is a separate legal path, not a school listing.',
+    'DriveLinkUp is a Sweden-first catalogue of driving schools, heavy-vehicle schools, published car prices, spare parts a shop published for a car owner or a workshop, and vehicle-inspection prices a station or an authority published. It is not a driving school, a parts shop, an inspection station, a licensing authority, or a government service. Anyone can compare the published price and specifications for free. DriveLinkUp does not sell the part, does not book the inspection, and does not take lesson payments. A listing is not a verified permit. A country appears in the inspection catalogue only when a price was published. Handledare / övningskörning is a separate legal path, not a school listing.',
   pageDescriptions: {
-    '/': 'Catalog for comparing driving-school listings and published prices in Sweden.',
+    '/': 'Compare driving schools, heavy-vehicle schools, published car prices, and spare parts a shop published for a car owner or a workshop.',
+    '/reservdelar':
+      'Published spare-part and accessory prices from the shop’s own page. Filter by car owner or workshop, and by the seller’s country. Currencies stay in separate groups.',
+    '/besiktning':
+      'Published vehicle-inspection prices. A country appears when the station or the authority published the amount. A maximum is the legal cap, not the price every garage charges. DriveLinkUp does not book the inspection.',
+    '/tung-trafik':
+      'Heavy-vehicle driving schools whose source listed a truck or bus licence class. A school name alone does not make it a truck school.',
+    '/bilhandlare':
+      'Published car prices and specifications from the dealer’s own page. DriveLinkUp does not sell the car.',
     '/locations':
       'Nordic location directory: Sweden live for discovery; Norway, Denmark, Finland, and Iceland expansion hubs.',
     '/locations/se': 'Sweden country hub with län and city pages for driving-school discovery.',

@@ -1,0 +1,1043 @@
+{
+  "rows": [
+    {
+      "id": "se-opus-car",
+      "country": "SE",
+      "provider": "Opus Bilprovning",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "from",
+      "amount": 699,
+      "currency": "SEK",
+      "notes": [
+        "inclVat",
+        "lowestPrice"
+      ],
+      "sourceUrl": "https://opus.se/priser/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-opus-car-retest",
+      "country": "SE",
+      "provider": "Opus Bilprovning",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "from",
+      "amount": 399,
+      "currency": "SEK",
+      "notes": [
+        "inclVat",
+        "lowestPrice"
+      ],
+      "sourceUrl": "https://opus.se/priser/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-opus-motorcycle",
+      "country": "SE",
+      "provider": "Opus Bilprovning",
+      "place": "",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "from",
+      "amount": 699,
+      "currency": "SEK",
+      "notes": [
+        "inclVat",
+        "lowestPrice"
+      ],
+      "sourceUrl": "https://opus.se/priser/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-besikta-car-retest",
+      "country": "SE",
+      "provider": "Besikta",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 359,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://besikta.se/tjanster/priser/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-besikta-heavy",
+      "country": "SE",
+      "provider": "Besikta",
+      "place": "",
+      "vehicle": "heavy",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 1099,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://besikta.se/tjanster/priser/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-besikta-heavy-retest",
+      "country": "SE",
+      "provider": "Besikta",
+      "place": "",
+      "vehicle": "heavy",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 649,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://besikta.se/tjanster/priser/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-besikta-motorcycle",
+      "country": "SE",
+      "provider": "Besikta",
+      "place": "",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "from",
+      "amount": 729,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://besikta.se/tjanster/priser/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-carspect-car-retest",
+      "country": "SE",
+      "provider": "Carspect",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 379,
+      "currency": "SEK",
+      "notes": [
+        "inclVat",
+        "prepayOnline"
+      ],
+      "sourceUrl": "https://www.carspect.se/priser",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-bilprovningen-car-retest",
+      "country": "SE",
+      "provider": "Bilprovningen",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 389,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://www.bilprovningen.se/priser",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-bilprovningen-heavy",
+      "country": "SE",
+      "provider": "Bilprovningen",
+      "place": "",
+      "vehicle": "heavy",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 1289,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://www.bilprovningen.se/priser",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-bilprovningen-heavy-retest",
+      "country": "SE",
+      "provider": "Bilprovningen",
+      "place": "",
+      "vehicle": "heavy",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 869,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://www.bilprovningen.se/priser",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-bilprovningen-motorcycle",
+      "country": "SE",
+      "provider": "Bilprovningen",
+      "place": "",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "from",
+      "amount": 709,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://www.bilprovningen.se/priser",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "se-bilprovningen-motorcycle-retest",
+      "country": "SE",
+      "provider": "Bilprovningen",
+      "place": "",
+      "vehicle": "motorcycle",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 349,
+      "currency": "SEK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://www.bilprovningen.se/priser",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "no-snap-car",
+      "country": "NO",
+      "provider": "Snap Drive",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 1390,
+      "currency": "NOK",
+      "notes": [
+        "inclVat"
+      ],
+      "sourceUrl": "https://www.snapdrive.no/verkstedtjenester/eu-kontroll/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "no-snap-van",
+      "country": "NO",
+      "provider": "Snap Drive",
+      "place": "",
+      "vehicle": "van",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 1645,
+      "currency": "NOK",
+      "notes": [
+        "inclVat",
+        "namedWorkshops"
+      ],
+      "sourceUrl": "https://www.snapdrive.no/verkstedtjenester/eu-kontroll/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "no-snap-retest",
+      "country": "NO",
+      "provider": "Snap Drive",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 174,
+      "currency": "NOK",
+      "notes": [
+        "inclVat",
+        "retestIfRepaired"
+      ],
+      "sourceUrl": "https://www.snapdrive.no/verkstedtjenester/eu-kontroll/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-herlev-car",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Herlev",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 640,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee",
+        "hallList"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/herlev/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-herlev-car-retest",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Herlev",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 440,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/herlev/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-herlev-motorcycle",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Herlev",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 570,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/herlev/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-odder-car",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Odder",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 660,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/odder/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-odder-car-retest",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Odder",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 440,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/odder/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-odder-motorcycle",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Odder",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 570,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/odder/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-hilleroed-car",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Hillerød",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 470,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/hilleroed/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-hilleroed-car-retest",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Hillerød",
+      "vehicle": "car",
+      "inspection": "retest",
+      "priceKind": "fixed",
+      "amount": 360,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/hilleroed/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-hilleroed-motorcycle",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Hillerød",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 570,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/hilleroed/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "dk-herlev-car-booked",
+      "country": "DK",
+      "provider": "Applus+ Bilsyn",
+      "place": "Herlev",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 490,
+      "currency": "DKK",
+      "notes": [
+        "inclVatAuthorityFee",
+        "whenBooked"
+      ],
+      "sourceUrl": "https://applusbilsyn.dk/synshal/herlev/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "de-bw-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Baden-Württemberg",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 63.3,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-bw-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Baden-Württemberg",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 163.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-by-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Bayern",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 63.3,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-by-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Bayern",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 163.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-be-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Berlin",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 101.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-be-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Berlin",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 160.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-bb-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Brandenburg",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 101.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-bb-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Brandenburg",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 160.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-hb-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Bremen",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 108.5,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-hb-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Bremen",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 166.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-hh-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Hamburg",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 63.3,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-hh-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Hamburg",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 162.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-he-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Hessen",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 108.5,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-he-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Hessen",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 166.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-mv-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Mecklenburg-Vorpommern",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 101.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-mv-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Mecklenburg-Vorpommern",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 160.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-ni-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Niedersachsen",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 105.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-ni-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Niedersachsen",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 163.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-nw-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Nordrhein-Westfalen",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 108.5,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-nw-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Nordrhein-Westfalen",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 166.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-rp-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Rheinland-Pfalz",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 108.5,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-rp-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Rheinland-Pfalz",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 166.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-sl-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Saarland",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 108.5,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-sl-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Saarland",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 166.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-sn-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Sachsen",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 105.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-sn-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Sachsen",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 163.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-st-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Sachsen-Anhalt",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 101.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-st-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Sachsen-Anhalt",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 160.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-sh-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Schleswig-Holstein",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 101.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-sh-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Schleswig-Holstein",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 160.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-th-car",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Thüringen",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 101.9,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "de-th-car-emissions",
+      "country": "DE",
+      "provider": "TÜV SÜD",
+      "place": "Thüringen",
+      "vehicle": "car",
+      "inspection": "periodicEmissions",
+      "priceKind": "fixed",
+      "amount": 160.0,
+      "currency": "EUR",
+      "notes": [
+        "inclVat",
+        "partnerMayDiffer"
+      ],
+      "sourceUrl": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "id": "es-eivissa-car",
+      "country": "ES",
+      "provider": "Consell d'Eivissa",
+      "place": "Eivissa",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 32.18,
+      "currency": "EUR",
+      "notes": [
+        "inclVatTrafficTax"
+      ],
+      "sourceUrl": "https://itv.conselldeivissa.es/tarifas/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "es-eivissa-motorcycle",
+      "country": "ES",
+      "provider": "Consell d'Eivissa",
+      "place": "Eivissa",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 16.18,
+      "currency": "EUR",
+      "notes": [
+        "inclVatTrafficTax"
+      ],
+      "sourceUrl": "https://itv.conselldeivissa.es/tarifas/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "es-eivissa-heavy",
+      "country": "ES",
+      "provider": "Consell d'Eivissa",
+      "place": "Eivissa",
+      "vehicle": "heavy",
+      "inspection": "periodic",
+      "priceKind": "fixed",
+      "amount": 64.18,
+      "currency": "EUR",
+      "notes": [
+        "inclVatTrafficTax"
+      ],
+      "sourceUrl": "https://itv.conselldeivissa.es/tarifas/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "gb-mot-car",
+      "country": "GB",
+      "provider": "GOV.UK",
+      "place": "",
+      "vehicle": "car",
+      "inspection": "periodic",
+      "priceKind": "maximum",
+      "amount": 54.85,
+      "currency": "GBP",
+      "notes": [
+        "noVatMaximum"
+      ],
+      "sourceUrl": "https://www.gov.uk/getting-an-mot/mot-test-fees",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "gb-mot-motorcycle",
+      "country": "GB",
+      "provider": "GOV.UK",
+      "place": "",
+      "vehicle": "motorcycle",
+      "inspection": "periodic",
+      "priceKind": "maximum",
+      "amount": 29.65,
+      "currency": "GBP",
+      "notes": [
+        "noVatMaximum"
+      ],
+      "sourceUrl": "https://www.gov.uk/getting-an-mot/mot-test-fees",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "id": "gb-mot-van",
+      "country": "GB",
+      "provider": "GOV.UK",
+      "place": "",
+      "vehicle": "van",
+      "inspection": "periodic",
+      "priceKind": "maximum",
+      "amount": 58.6,
+      "currency": "GBP",
+      "notes": [
+        "noVatMaximum"
+      ],
+      "sourceUrl": "https://www.gov.uk/getting-an-mot/mot-test-fees",
+      "checkedAt": "2026-11-26"
+    }
+  ],
+  "meta": {
+    "checkedAt": "2026-11-26",
+    "note": "A row stays only when the station or the authority page published the amount. The monthly refresh reads those pages again and changes an amount only when the page shows a new one. A page that cannot be read leaves the previous amount in place.",
+    "unreadable": [
+      "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    ]
+  }
+}

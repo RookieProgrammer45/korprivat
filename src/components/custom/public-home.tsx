@@ -6,19 +6,23 @@
 import { headers } from 'next/headers';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { HomeHero } from '@/components/custom/home-hero';
-import { InstructorPreview } from '@/components/custom/instructor-preview';
+import { HomeCatalogue, type HomeOfferCard } from '@/components/custom/home-catalogue';
 import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import {
   cheapestVehicle,
   dealerCities,
   listDealerships,
+  type PublishedCar,
   publishedCars,
 } from '@/lib/discovery/dealerships';
+import { pickHomepageCars, pickHomepageParts } from '@/lib/discovery/homepage-offers';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
+import { type ListedPart, listParts } from '@/lib/discovery/parts';
 import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
 import { absoluteUrl } from '@/lib/seo/alternates';
+import { dealerSearchPath } from '@/lib/seo/dealer-search-path';
 import { jsonLdScript } from '@/lib/seo/json-ld';
+import { partsSearchPath } from '@/lib/seo/parts-search-path';
 import { parseHeroSearchCategory } from '@/lib/seo/school-search-path';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
@@ -50,30 +54,15 @@ export async function PublicHome({ category }: { category?: string | null } = {}
   return (
     <main className="marketplace-home relative isolate w-full min-w-0">
       {itemList ? jsonLdScript(itemList) : null}
-      <HomeHero
+      <HomeCatalogue
+        schools={schools}
+        cars={previewCars(region.countryCode)}
+        parts={previewParts(region.countryCode)}
         dealerCities={dealerCities()}
         lessonFrom={lowestLessonSek(schools)}
         vehicleFrom={lowestVehicle()}
+        schoolsEmptyLabel={filtered ? t('providers.filteredEmpty') : undefined}
       />
-
-      <section className="border-t border-border">
-        <div className="container-page grid min-w-0 gap-6 py-10 lg:py-14">
-          <div className="flex min-w-0 items-end justify-between gap-4">
-            <h2 className="font-display text-h2 font-normal leading-tight tracking-tight text-foreground">
-              {t('providers.title')}
-            </h2>
-            <Link href="/locations" className="dlu-text-link shrink-0">
-              {t('providers.cta')}
-            </Link>
-          </div>
-          <InstructorPreview
-            limit={HOMEPAGE_SCHOOL_PREVIEW_LIMIT}
-            initialRows={schools}
-            showContact={false}
-            emptyLabel={filtered ? t('providers.filteredEmpty') : undefined}
-          />
-        </div>
-      </section>
 
       <section className="border-t border-border">
         <div className="container-page flex min-w-0 flex-col items-start gap-4 py-12 lg:py-16 sm:flex-row sm:items-center">
@@ -86,10 +75,58 @@ export async function PublicHome({ category }: { category?: string | null } = {}
           <Link href="/contact?topic=list_dealer" className="dlu-text-link">
             {t('entry.dealerCta')}
           </Link>
+          <Link href="/reservdelar" className="dlu-text-link">
+            {t('entry.partsCta')}
+          </Link>
         </div>
       </section>
     </main>
   );
+}
+
+function previewCars(countryCode: string): HomeOfferCard[] {
+  return pickHomepageCars(publishedCars(), countryCode, HOMEPAGE_SCHOOL_PREVIEW_LIMIT).map(carCard);
+}
+
+function previewParts(countryCode: string): HomeOfferCard[] {
+  const rows = listParts().map((part) => ({
+    ...part,
+    text: `${part.name} ${part.category ?? ''} ${part.specs.join(' ')}`,
+  }));
+  return pickHomepageParts(rows, countryCode, HOMEPAGE_SCHOOL_PREVIEW_LIMIT).map(partCard);
+}
+
+function carCard(car: PublishedCar): HomeOfferCard {
+  const spec = [car.vehicle.year, car.vehicle.fuel, car.vehicle.gearbox].find(
+    (value) => value != null && String(value).length > 0,
+  );
+  return {
+    id: car.id,
+    href: dealerSearchPath(car.dealerCity, car.vehicle.kind, car.vehicle.model ?? car.vehicle.name),
+    place: car.dealerCity,
+    name: car.vehicle.name,
+    price: car.vehicle.price,
+    currency: car.vehicle.currency,
+    imageUrl: httpsImage(car.vehicle.imageUrl),
+    spec: spec == null ? null : String(spec),
+  };
+}
+
+function partCard(part: ListedPart): HomeOfferCard {
+  return {
+    id: part.id,
+    href: partsSearchPath(part.name),
+    place: part.sellerName,
+    name: part.name,
+    price: part.price,
+    currency: part.currency,
+    imageUrl: httpsImage(part.imageUrl),
+    spec: part.specs[0] ?? null,
+  };
+}
+
+function httpsImage(url: string | null): string | null {
+  return url && /^https:\/\//i.test(url) ? url : null;
 }
 
 function lowestLessonSek(

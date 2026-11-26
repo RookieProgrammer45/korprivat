@@ -46,7 +46,8 @@
       "about": "Om oss",
       "terms": "Villkor",
       "dealers": "Bilhandlare",
-      "parts": "Reservdelar"
+      "parts": "Reservdelar",
+      "inspection": "Besiktning"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Jämför bilpriser och trafikskolor.",
-      "metaTitle": "Jämför bilpriser och trafikskolor",
-      "metaDescription": "Jämför bilpriser och trafikskolor. Priset är det företaget publicerat. Gratis katalog för alla.",
-      "body": "DriveLinkUp är platsen där du jämför trafikskolor, bilpriser, hjälmar och reservdelar. Siffran är det pris skolan, handlaren eller butiken har publicerat.",
+      "metaTitle": "Jämför reservdelar, bilpriser och trafikskolor",
+      "metaDescription": "Jämför reservdelar, bilpriser och trafikskolor. Priset är det som publicerats. Gratis katalog för alla.",
+      "body": "Jämför trafikskolor, tung trafik, bilpriser och reservdelar som en butik publicerat för en bilägare eller en verkstad. Siffran är det publicerade priset.",
       "primaryCta": "Hitta en skola",
       "instructorCta": "Jag undervisar på en trafikskola",
       "marketplaceTag": "Bilpriser · Trafikskolor",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Reservdelar",
         "productLabel": "Produkt",
-        "productPlaceholder": "Hjälm"
+        "productPlaceholder": "Bromsbelägg",
+        "labelParts": "Sök reservdelar",
+        "labelDealer": "Sök bilpriser"
       },
       "popular": {
         "label": "Populärt:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Motorcykel · A",
           "heavy": "Tung trafik",
           "dealers": "Bilpriser",
-          "parts": "Reservdelar"
+          "parts": "Reservdelar",
+          "ownerParts": "Reservdelar för bilägare",
+          "workshopParts": "Reservdelar för verkstad",
+          "inspection": "Besiktning"
         }
       },
       "lead": "Gratis. Du betalar skolans pris.",
@@ -2530,7 +2536,7 @@
         "parts": "Reservdelar",
         "partsFallback": "Publicerade butikspriser"
       },
-      "titleParts": "Jämför reservdelar och hjälmar."
+      "titleParts": "Jämför reservdelar."
     },
     "quickLinks": {
       "label": "Börja med",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Skolor",
       "cta": "Alla skolor",
-      "filteredEmpty": "Inga annonser för den här behörigheten just nu."
+      "filteredEmpty": "Inga annonser för den här behörigheten just nu.",
+      "carsTitle": "Bilar",
+      "carsCta": "Alla bilpriser",
+      "carsEmpty": "Ingen publicerad bil med en specifikation just nu.",
+      "partsTitle": "Reservdelar",
+      "partsCta": "Alla reservdelar",
+      "partsEmpty": "Ingen publicerad reservdel med en specifikation just nu."
     },
     "assurance": {
       "eyebrow": "Så fungerar katalogen",
@@ -2595,7 +2607,8 @@
       "body": "Det är gratis.",
       "learnerCta": "Hitta en skola",
       "providerCta": "Jag driver en skola",
-      "dealerCta": "Jag driver en bilhandel"
+      "dealerCta": "Jag driver en bilhandel",
+      "partsCta": "Jämför reservdelar"
     },
     "footer": {
       "prompt": "Behöver du veta mer?",
@@ -4118,6 +4131,55 @@
       "FI": "Finland",
       "AU": "Australien",
       "US": "USA"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Jämför besiktningspriser",
+      "description": "Publicerade besiktningspriser från stationen eller myndigheten. Ett land visas när priset är publicerat. DriveLinkUp bokar inte besiktningen."
+    },
+    "title": "Jämför besiktningspriser",
+    "lead": "Priset är det stationen eller myndigheten har publicerat. DriveLinkUp bokar inte besiktningen och kallar inte en station verifierad.",
+    "countryLabel": "Land",
+    "countryAll": "Alla länder",
+    "vehicleLabel": "Fordon",
+    "inspectionLabel": "Besiktning",
+    "vehicles": {
+      "car": "Personbil",
+      "motorcycle": "Motorcykel",
+      "heavy": "Tungt fordon",
+      "van": "Skåpbil"
+    },
+    "inspections": {
+      "periodic": "Kontrollbesiktning",
+      "retest": "Efterkontroll",
+      "periodicEmissions": "Med avgastest"
+    },
+    "priceFrom": "från",
+    "priceMaximum": "Högst",
+    "empty": "Inget publicerat pris för det valet ännu.",
+    "source": "Prissida",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "DK": "Danmark",
+      "DE": "Tyskland",
+      "ES": "Spanien",
+      "GB": "Storbritannien"
+    },
+    "notes": {
+      "inclVat": "Inklusive moms.",
+      "inclVatAuthorityFee": "Inklusive moms och den myndighetsavgift sidan publicerar.",
+      "inclVatTrafficTax": "Inklusive den trafikavgift sidan publicerar.",
+      "noVatMaximum": "Lagstadgat högsta pris. Moms ingår inte. En verkstad kan ta mindre.",
+      "lowestPrice": "Lägsta publicerade pris. Det varierar mellan station och tid.",
+      "prepayOnline": "Pris vid förbokning och betalning online.",
+      "whenBooked": "Pris när du bokar. Hallen publicerar också ett högre listpris.",
+      "hallList": "Hallens listpris.",
+      "partnerMayDiffer": "Partnerstationer kan ta en annan avgift.",
+      "retestIfRepaired": "Tas ut när verkstaden åtgärdar felen.",
+      "namedWorkshops": "Publicerat för namngivna verkstäder."
     }
   }
 }

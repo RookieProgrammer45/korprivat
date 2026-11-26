@@ -46,7 +46,8 @@
       "about": "À propos",
       "terms": "Conditions",
       "dealers": "Concessionnaires",
-      "parts": "Pièces"
+      "parts": "Pièces",
+      "inspection": "Contrôle technique"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Comparez les prix des voitures et les auto-écoles.",
-      "metaTitle": "Comparez les prix des voitures et les auto-écoles",
-      "metaDescription": "Comparez les prix des voitures et les auto-écoles. Le prix est celui que l'entreprise a publié. Catalogue gratuit pour tous.",
-      "body": "DriveLinkUp est l'endroit où vous comparez les auto-écoles, les prix des voitures, les casques et les pièces. Le chiffre est le prix publié par l'école, le concessionnaire ou la boutique.",
+      "metaTitle": "Comparer pièces, prix et auto-écoles",
+      "metaDescription": "Comparez les pièces, les prix des voitures et les auto-écoles. Le prix est celui publié. Catalogue gratuit pour tous.",
+      "body": "Comparez les auto-écoles, la conduite poids lourd, les prix des voitures et les pièces qu’un magasin a publiées pour un conducteur ou un atelier. Le chiffre est le prix publié.",
       "primaryCta": "Trouver une auto-école",
       "instructorCta": "Je travaille dans une auto-école",
       "marketplaceTag": "Prix des voitures · Auto-écoles",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Pièces",
         "productLabel": "Produit",
-        "productPlaceholder": "Casque"
+        "productPlaceholder": "Plaquettes de frein",
+        "labelParts": "Chercher des pièces",
+        "labelDealer": "Chercher des prix"
       },
       "popular": {
         "label": "Populaire :",
@@ -2509,7 +2512,10 @@
           "categoryA": "Moto · A",
           "heavy": "Véhicules lourds",
           "dealers": "Prix véhicules",
-          "parts": "Pièces et accessoires"
+          "parts": "Pièces et accessoires",
+          "ownerParts": "Pièces pour conducteurs",
+          "workshopParts": "Pièces pour ateliers",
+          "inspection": "Contrôle technique"
         }
       },
       "lead": "Gratuit. Vous payez le prix de l’auto-école.",
@@ -2530,7 +2536,7 @@
         "parts": "Pièces",
         "partsFallback": "Prix publiés par les boutiques"
       },
-      "titleParts": "Comparez pièces et casques."
+      "titleParts": "Comparer les pièces auto."
     },
     "quickLinks": {
       "label": "Commencer par",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Auto-écoles",
       "cta": "Toutes les auto-écoles",
-      "filteredEmpty": "Aucune annonce pour cette catégorie de permis pour le moment."
+      "filteredEmpty": "Aucune annonce pour cette catégorie de permis pour le moment.",
+      "carsTitle": "Voitures",
+      "carsCta": "Tous les prix",
+      "carsEmpty": "Aucune voiture publiée avec une caractéristique.",
+      "partsTitle": "Pièces",
+      "partsCta": "Toutes les pièces",
+      "partsEmpty": "Aucune pièce publiée avec une caractéristique."
     },
     "assurance": {
       "eyebrow": "Fonctionnement de l’annuaire",
@@ -2595,7 +2607,8 @@
       "body": "C’est gratuit.",
       "learnerCta": "Trouver une auto-école",
       "providerCta": "Je dirige une auto-école",
-      "dealerCta": "Je gère une concession"
+      "dealerCta": "Je gère une concession",
+      "partsCta": "Comparer les pièces"
     },
     "footer": {
       "prompt": "Besoin de plus de contexte ?",
@@ -4118,6 +4131,55 @@
       "FI": "Finlande",
       "AU": "Australie",
       "US": "États-Unis"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Comparer les prix du contrôle technique",
+      "description": "Prix publiés par le centre ou l'autorité. Un pays apparaît quand le prix est publié. DriveLinkUp ne réserve pas le contrôle."
+    },
+    "title": "Comparer les prix du contrôle technique",
+    "lead": "Le prix est celui que le centre ou l'autorité a publié. DriveLinkUp ne réserve pas le contrôle et ne dit pas qu'un centre est vérifié.",
+    "countryLabel": "Pays",
+    "countryAll": "Tous les pays",
+    "vehicleLabel": "Véhicule",
+    "inspectionLabel": "Contrôle",
+    "vehicles": {
+      "car": "Voiture",
+      "motorcycle": "Moto",
+      "heavy": "Véhicule lourd",
+      "van": "Fourgon"
+    },
+    "inspections": {
+      "periodic": "Périodique",
+      "retest": "Contre-visite",
+      "periodicEmissions": "Avec contrôle des émissions"
+    },
+    "priceFrom": "à partir de",
+    "priceMaximum": "Maximum",
+    "empty": "Aucun prix publié pour ce choix pour le moment.",
+    "source": "Page de prix",
+    "currencyGroup": "Prix en {currency}",
+    "countries": {
+      "SE": "Suède",
+      "NO": "Norvège",
+      "DK": "Danemark",
+      "DE": "Allemagne",
+      "ES": "Espagne",
+      "GB": "Royaume-Uni"
+    },
+    "notes": {
+      "inclVat": "TVA comprise.",
+      "inclVatAuthorityFee": "TVA comprise, ainsi que la redevance publique publiée sur la page.",
+      "inclVatTrafficTax": "Taxe de circulation publiée sur la page comprise.",
+      "noVatMaximum": "Maximum légal. La TVA n'est pas comprise. Un garage peut demander moins.",
+      "lowestPrice": "Prix publié le plus bas. Il varie selon le centre et l'horaire.",
+      "prepayOnline": "Prix en cas de réservation et de paiement en ligne.",
+      "whenBooked": "Prix sur réservation. Le centre publie aussi un tarif affiché plus élevé.",
+      "hallList": "Tarif affiché du centre.",
+      "partnerMayDiffer": "Les centres partenaires peuvent demander un autre tarif.",
+      "retestIfRepaired": "Facturé quand l'atelier répare les défauts.",
+      "namedWorkshops": "Publié pour des ateliers nommés."
     }
   }
 }

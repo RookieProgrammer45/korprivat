@@ -18,21 +18,26 @@ import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
 
 const POPULAR_LINKS = [
-  { key: 'dealers', href: '/bilhandlare' },
-  { key: 'parts', href: '/reservdelar' },
+  { key: 'inspection', href: '/besiktning' },
+  { key: 'ownerParts', href: '/reservdelar?buyer=owner' },
+  { key: 'workshopParts', href: '/reservdelar?buyer=workshop' },
   { key: 'heavy', href: '/tung-trafik' },
-  { key: 'categoryA', href: '/?category=A' },
+  { key: 'dealers', href: '/bilhandlare' },
   { key: 'stockholm', href: '/locations/se/stockholm' },
   { key: 'goteborg', href: '/locations/se/goteborg' },
-  { key: 'malmo', href: '/locations/se/malmo' },
-  { key: 'oslo', href: '/locations/no/oslo' },
 ] as const;
 
+export type HomeCatalogueMode = 'school' | 'dealer' | 'parts';
+
 export function HomeHero({
+  mode,
+  onModeChange,
   dealerCities,
   lessonFrom,
   vehicleFrom,
 }: {
+  mode: HomeCatalogueMode;
+  onModeChange: (mode: HomeCatalogueMode) => void;
   dealerCities: readonly string[];
   lessonFrom: number | null;
   vehicleFrom: { amount: number; currency: string } | null;
@@ -43,7 +48,6 @@ export function HomeHero({
   const router = useRouter();
   const categoryId = useId();
   const cityId = useId();
-  const [mode, setMode] = useState<'school' | 'dealer' | 'parts'>('school');
   const [category, setCategory] = useState<string>('B');
   const [city, setCity] = useState<string>('');
   const [model, setModel] = useState('');
@@ -61,8 +65,8 @@ export function HomeHero({
     router.push(localePath(locale, path));
   }
 
-  function selectMode(next: 'school' | 'dealer' | 'parts') {
-    setMode(next);
+  function selectMode(next: HomeCatalogueMode) {
+    onModeChange(next);
     setCategory(next === 'school' ? 'B' : '');
     setCity('');
     setModel('');
@@ -86,7 +90,13 @@ export function HomeHero({
 
           <form
             onSubmit={onSubmit}
-            aria-label={t('search.label')}
+            aria-label={
+              partsMode
+                ? t('search.labelParts')
+                : dealerMode
+                  ? t('search.labelDealer')
+                  : t('search.label')
+            }
             className="marketplace-reveal dlu-hero-in-2 dlu-hero-search mt-8 grid w-full max-w-2xl gap-1 rounded-[1.25rem] border border-border bg-card p-2 sm:grid-cols-[auto_1fr_1.15fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
           >
             <fieldset className="flex min-w-0 flex-wrap gap-1 border-0 px-1 py-1 sm:px-1">
@@ -180,7 +190,7 @@ export function HomeHero({
 
             <button
               type="submit"
-              className="dlu-ink-pill mt-1 cursor-pointer justify-center border-0 sm:mt-0"
+              className="dlu-ink-pill mt-1 w-full cursor-pointer justify-center border-0 sm:mt-0 sm:w-auto"
             >
               <Search className="size-4" strokeWidth={2} aria-hidden />
               {t('search.submit')}
@@ -201,7 +211,9 @@ export function HomeHero({
                 <Link
                   key={link.key}
                   href={link.href}
-                  aria-describedby={link.key === 'heavy' ? 'hero-heavy-note' : undefined}
+                  aria-describedby={
+                    link.key === 'heavy' && mode === 'school' ? 'hero-heavy-note' : undefined
+                  }
                   className="dlu-hero-popular-link inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-card px-4 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 >
                   {link.key === 'heavy' ? (
@@ -211,9 +223,36 @@ export function HomeHero({
                 </Link>
               ))}
             </div>
-            <p id="hero-heavy-note" className="max-w-xl text-small text-muted-foreground">
-              {tHeavy('subtitle')}
-            </p>
+            {mode === 'school' ? (
+              <p id="hero-heavy-note" className="max-w-xl text-small text-muted-foreground">
+                {tHeavy('subtitle')}
+              </p>
+            ) : null}
+            <div className="grid gap-3 lg:hidden">
+              <FactLink
+                href="/reservdelar?buyer=owner"
+                label={t('facts.parts')}
+                value={t('facts.partsFallback')}
+              />
+              <FactLink
+                href="/locations/se"
+                label={t('facts.lesson')}
+                value={
+                  lessonFrom
+                    ? t('facts.from', { price: money(lessonFrom, 'SEK') })
+                    : t('facts.lessonFallback')
+                }
+              />
+              <FactLink
+                href="/bilhandlare"
+                label={t('facts.vehicle')}
+                value={
+                  vehicleFrom
+                    ? t('facts.from', { price: money(vehicleFrom.amount, vehicleFrom.currency) })
+                    : t('facts.vehicleFallback')
+                }
+              />
+            </div>
           </div>
         </div>
         <aside className="marketplace-reveal dlu-hero-in-visual dlu-hero-visual relative hidden min-h-[28rem] overflow-hidden rounded-[1.25rem] border border-border lg:block lg:min-h-[32rem]">
@@ -226,41 +265,65 @@ export function HomeHero({
             className="object-cover"
           />
           <div className="absolute inset-x-5 bottom-5 grid gap-3">
-            <Link
+            <FactLink
+              href="/reservdelar?buyer=owner"
+              overlay
+              label={t('facts.parts')}
+              value={t('facts.partsFallback')}
+            />
+            <FactLink
               href="/locations/se"
-              className="dlu-hero-fact rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-foreground backdrop-blur-sm"
-            >
-              <span className="block text-xs text-muted-foreground">{t('facts.lesson')}</span>
-              <span className="mt-1 block font-display text-xl tracking-tight">
-                {lessonFrom
+              overlay
+              label={t('facts.lesson')}
+              value={
+                lessonFrom
                   ? t('facts.from', { price: money(lessonFrom, 'SEK') })
-                  : t('facts.lessonFallback')}
-              </span>
-            </Link>
-            <Link
-              href="/reservdelar"
-              className="dlu-hero-fact rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-foreground backdrop-blur-sm"
-            >
-              <span className="block text-xs text-muted-foreground">{t('facts.parts')}</span>
-              <span className="mt-1 block font-display text-xl tracking-tight">
-                {t('facts.partsFallback')}
-              </span>
-            </Link>
-            <Link
+                  : t('facts.lessonFallback')
+              }
+            />
+            <FactLink
               href="/bilhandlare"
-              className="dlu-hero-fact dlu-hero-fact-late rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-foreground backdrop-blur-sm"
-            >
-              <span className="block text-xs text-muted-foreground">{t('facts.vehicle')}</span>
-              <span className="mt-1 block font-display text-xl tracking-tight">
-                {vehicleFrom
+              overlay
+              late
+              label={t('facts.vehicle')}
+              value={
+                vehicleFrom
                   ? t('facts.from', { price: money(vehicleFrom.amount, vehicleFrom.currency) })
-                  : t('facts.vehicleFallback')}
-              </span>
-            </Link>
+                  : t('facts.vehicleFallback')
+              }
+            />
           </div>
         </aside>
       </div>
     </section>
+  );
+}
+
+function FactLink({
+  href,
+  label,
+  value,
+  overlay = false,
+  late = false,
+}: {
+  href: string;
+  label: string;
+  value: string;
+  overlay?: boolean;
+  late?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={
+        overlay
+          ? `dlu-hero-fact rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-foreground backdrop-blur-sm ${late ? 'dlu-hero-fact-late' : ''}`
+          : 'rounded-[1.25rem] border border-border bg-card px-4 py-3 text-foreground'
+      }
+    >
+      <span className="block text-xs text-muted-foreground">{label}</span>
+      <span className="mt-1 block font-display text-xl tracking-tight">{value}</span>
+    </Link>
   );
 }
 
@@ -278,7 +341,7 @@ function ModeButton({
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`rounded-full px-3 py-2 text-sm ${
+      className={`min-h-11 rounded-full px-4 text-sm ${
         active ? 'bg-foreground text-background' : 'text-muted-foreground hover:bg-muted'
       }`}
     >

@@ -55,6 +55,7 @@ const EDITORIAL: SeoRoute[] = [
   { path: '/pricing', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/bilhandlare', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/reservdelar', priority: 0.8, changeFrequency: 'weekly' },
+  { path: '/besiktning', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/faq', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/for-skolor', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/for-instructors', priority: 0.6, changeFrequency: 'monthly' },

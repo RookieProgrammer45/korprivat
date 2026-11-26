@@ -1,0 +1,37 @@
+name: Inspection prices refresh
+
+# Re-reads each station or authority price page once a month and opens a pull
+# request. A page that cannot be read keeps its previous amount. Nothing goes
+# live until the pull request is merged.
+on:
+  schedule:
+    - cron: '0 4 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-read published inspection prices
+        run: python3 scripts/inspections/refresh.py --self-test && python3 scripts/inspections/refresh.py --write
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data/inspection-prices-refresh
+          delete-branch: true
+          add-paths: data/inspections/published.json
+          commit-message: 'data: monthly inspection price refresh'
+          title: 'data: monthly inspection price refresh'
+          body: |
+            Prices re-read from each station or authority page.
+
+            An amount changes only when that page shows a new number. A page that could not be read keeps the previous amount; those addresses are listed in `meta.unreadable`. A large drop is a failed read, not a station removing its price.

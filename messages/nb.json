@@ -46,7 +46,8 @@
       "about": "Om oss",
       "terms": "Vilkår",
       "dealers": "Bilforhandlere",
-      "parts": "Reservedeler"
+      "parts": "Reservedeler",
+      "inspection": "EU-kontroll"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Sammenlign bilpriser og kjøreskoler.",
-      "metaTitle": "Sammenlign bilpriser og kjøreskoler",
-      "metaDescription": "Sammenlign bilpriser og kjøreskoler. Prisen er den virksomheten har publisert. Gratis katalog for alle.",
-      "body": "DriveLinkUp er stedet der du sammenligner kjøreskoler, bilpriser, hjelmer og bildeler. Tallet er prisen skolen, forhandleren eller butikken har publisert.",
+      "metaTitle": "Sammenlign reservedeler, bilpriser og trafikkskoler",
+      "metaDescription": "Sammenlign reservedeler, bilpriser og trafikkskoler. Prisen er den bedriften har publisert. Gratis katalog for alle.",
+      "body": "Sammenlign trafikkskoler, tungtrafikk, bilpriser og reservedeler som en butikk har publisert for en bileier eller et verksted. Tallet er den publiserte prisen.",
       "primaryCta": "Finn en skole",
       "instructorCta": "Jeg jobber på en kjøreskole",
       "marketplaceTag": "Bilpriser · Kjøreskoler",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Deler",
         "productLabel": "Produkt",
-        "productPlaceholder": "Hjelm"
+        "productPlaceholder": "Bremseklosser",
+        "labelParts": "Søk reservedeler",
+        "labelDealer": "Søk bilpriser"
       },
       "popular": {
         "label": "Populær:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Motorsykkel · A",
           "heavy": "Tunge kjøretøy",
           "dealers": "Bilpriser",
-          "parts": "Reservedeler"
+          "parts": "Reservedeler",
+          "ownerParts": "Reservedeler for bileiere",
+          "workshopParts": "Reservedeler for verksted",
+          "inspection": "EU-kontroll"
         }
       },
       "lead": "Gratis. Du betaler skolens pris.",
@@ -2530,7 +2536,7 @@
         "parts": "Deler",
         "partsFallback": "Publiserte butikkpriser"
       },
-      "titleParts": "Sammenlign deler og hjelmer."
+      "titleParts": "Sammenlign reservedeler."
     },
     "quickLinks": {
       "label": "Start med",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Skoler",
       "cta": "Alle skoler",
-      "filteredEmpty": "Ingen annonse for denne førerkortklassen akkurat nå."
+      "filteredEmpty": "Ingen annonse for denne førerkortklassen akkurat nå.",
+      "carsTitle": "Biler",
+      "carsCta": "Alle bilpriser",
+      "carsEmpty": "Ingen publisert bil med en spesifikasjon akkurat nå.",
+      "partsTitle": "Reservedeler",
+      "partsCta": "Alle reservedeler",
+      "partsEmpty": "Ingen publisert reservedel med en spesifikasjon akkurat nå."
     },
     "assurance": {
       "eyebrow": "Hvordan katalogen fungerer",
@@ -2595,7 +2607,8 @@
       "body": "Det er gratis.",
       "learnerCta": "Finn en skole",
       "providerCta": "Jeg driver en skole",
-      "dealerCta": "Jeg driver en bilforhandler"
+      "dealerCta": "Jeg driver en bilforhandler",
+      "partsCta": "Sammenlign reservedeler"
     },
     "footer": {
       "prompt": "Trenger du mer kontekst?",
@@ -4118,6 +4131,55 @@
       "FI": "Finland",
       "AU": "Australia",
       "US": "USA"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Sammenlign priser for EU-kontroll",
+      "description": "Publiserte priser fra stasjonen eller myndigheten. Et land vises når prisen er publisert. DriveLinkUp bestiller ikke kontrollen."
+    },
+    "title": "Sammenlign priser for EU-kontroll",
+    "lead": "Prisen er det stasjonen eller myndigheten har publisert. DriveLinkUp bestiller ikke kontrollen og kaller ikke en stasjon verifisert.",
+    "countryLabel": "Land",
+    "countryAll": "Alle land",
+    "vehicleLabel": "Kjøretøy",
+    "inspectionLabel": "Kontroll",
+    "vehicles": {
+      "car": "Personbil",
+      "motorcycle": "Motorsykkel",
+      "heavy": "Tungt kjøretøy",
+      "van": "Varebil"
+    },
+    "inspections": {
+      "periodic": "Periodisk",
+      "retest": "Etterkontroll",
+      "periodicEmissions": "Med utslippstest"
+    },
+    "priceFrom": "fra",
+    "priceMaximum": "Høyeste",
+    "empty": "Ingen publisert pris for det valget ennå.",
+    "source": "Prisside",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "DK": "Danmark",
+      "DE": "Tyskland",
+      "ES": "Spania",
+      "GB": "Storbritannia"
+    },
+    "notes": {
+      "inclVat": "Inkludert mva.",
+      "inclVatAuthorityFee": "Inkludert mva og myndighetsgebyret siden publiserer.",
+      "inclVatTrafficTax": "Inkludert trafikkavgiften siden publiserer.",
+      "noVatMaximum": "Lovbestemt høyeste pris. Mva er ikke inkludert. Et verksted kan ta mindre.",
+      "lowestPrice": "Laveste publiserte pris. Den varierer mellom stasjon og tid.",
+      "prepayOnline": "Pris ved bestilling og betaling på nett.",
+      "whenBooked": "Pris når du bestiller. Hallen publiserer også en høyere listepris.",
+      "hallList": "Hallens listepris.",
+      "partnerMayDiffer": "Partnerstasjoner kan ta et annet gebyr.",
+      "retestIfRepaired": "Tas når verkstedet utbedrer feilene.",
+      "namedWorkshops": "Publisert for navngitte verksteder."
     }
   }
 }

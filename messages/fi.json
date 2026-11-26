@@ -46,7 +46,8 @@
       "about": "Tietoa meistä",
       "terms": "Ehdot",
       "dealers": "Autoliikkeet",
-      "parts": "Varaosat"
+      "parts": "Varaosat",
+      "inspection": "Katsastus"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Vertaa auton hintoja ja autokouluja.",
-      "metaTitle": "Vertaa auton hintoja ja autokouluja",
-      "metaDescription": "Vertaa auton hintoja ja autokouluja. Hinta on se, jonka yritys on julkaissut. Ilmainen luettelo kaikille.",
-      "body": "DriveLinkUp on paikka, jossa vertaat autokouluja, auton hintoja, kypäriä ja varaosia. Luku on hinta, jonka koulu, autoliike tai kauppa on julkaissut.",
+      "metaTitle": "Vertaile varaosia, auton hintoja ja autokouluja",
+      "metaDescription": "Vertaile varaosia, auton hintoja ja autokouluja. Hinta on se, jonka yritys on julkaissut. Ilmainen luettelo kaikille.",
+      "body": "Vertaile autokouluja, raskasta liikennettä, auton hintoja ja varaosia, jotka kauppa on julkaissut auton omistajalle tai korjaamolle. Luku on julkaistu hinta.",
       "primaryCta": "Etsi koulu",
       "instructorCta": "Työskentelen autokoulussa",
       "marketplaceTag": "Auton hinnat · Autokoulut",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Varaosat",
         "productLabel": "Tuote",
-        "productPlaceholder": "Kypärä"
+        "productPlaceholder": "Jarrupalat",
+        "labelParts": "Hae varaosia",
+        "labelDealer": "Hae auton hintoja"
       },
       "popular": {
         "label": "Suositut:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Moottoripyörä · A",
           "heavy": "Raskaat ajoneuvot",
           "dealers": "Autohinnat",
-          "parts": "Varaosat"
+          "parts": "Varaosat",
+          "ownerParts": "Varaosat auton omistajalle",
+          "workshopParts": "Varaosat korjaamolle",
+          "inspection": "Katsastus"
         }
       },
       "lead": "Ilmainen. Maksat koulun hinnan.",
@@ -2530,7 +2536,7 @@
         "parts": "Varaosat",
         "partsFallback": "Julkaistut kauppahinnat"
       },
-      "titleParts": "Vertaile varaosia ja kypäriä."
+      "titleParts": "Vertaile varaosia."
     },
     "quickLinks": {
       "label": "Aloita",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Koulut",
       "cta": "Kaikki koulut",
-      "filteredEmpty": "Ei tämän ajokorttiluokan ilmoituksia juuri nyt."
+      "filteredEmpty": "Ei tämän ajokorttiluokan ilmoituksia juuri nyt.",
+      "carsTitle": "Autot",
+      "carsCta": "Kaikki autohinnat",
+      "carsEmpty": "Ei julkaistua autoa, jossa on tekninen tieto.",
+      "partsTitle": "Varaosat",
+      "partsCta": "Kaikki varaosat",
+      "partsEmpty": "Ei julkaistua varaosaa, jossa on tekninen tieto."
     },
     "assurance": {
       "eyebrow": "Miten hakemisto toimii",
@@ -2595,7 +2607,8 @@
       "body": "Se on ilmaista.",
       "learnerCta": "Etsi koulu",
       "providerCta": "Pidän autokoulua",
-      "dealerCta": "Pidän autoliikettä"
+      "dealerCta": "Pidän autoliikettä",
+      "partsCta": "Vertaile varaosia"
     },
     "footer": {
       "prompt": "Tarvitsetko lisätietoa?",
@@ -4118,6 +4131,55 @@
       "FI": "Suomi",
       "AU": "Australia",
       "US": "Yhdysvallat"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Vertaa katsastushintoja",
+      "description": "Julkaistut hinnat asemalta tai viranomaiselta. Maa näkyy, kun hinta on julkaistu. DriveLinkUp ei varaa katsastusta."
+    },
+    "title": "Vertaa katsastushintoja",
+    "lead": "Hinta on se, jonka asema tai viranomainen on julkaissut. DriveLinkUp ei varaa katsastusta eikä kutsu asemaa varmennetuksi.",
+    "countryLabel": "Maa",
+    "countryAll": "Kaikki maat",
+    "vehicleLabel": "Ajoneuvo",
+    "inspectionLabel": "Katsastus",
+    "vehicles": {
+      "car": "Henkilöauto",
+      "motorcycle": "Moottoripyörä",
+      "heavy": "Raskas ajoneuvo",
+      "van": "Pakettiauto"
+    },
+    "inspections": {
+      "periodic": "Määräaikainen",
+      "retest": "Jälkitarkastus",
+      "periodicEmissions": "Päästötestin kanssa"
+    },
+    "priceFrom": "alkaen",
+    "priceMaximum": "Enintään",
+    "empty": "Tälle valinnalle ei ole vielä julkaistua hintaa.",
+    "source": "Hintasivu",
+    "currencyGroup": "Hinnat valuutassa {currency}",
+    "countries": {
+      "SE": "Ruotsi",
+      "NO": "Norja",
+      "DK": "Tanska",
+      "DE": "Saksa",
+      "ES": "Espanja",
+      "GB": "Iso-Britannia"
+    },
+    "notes": {
+      "inclVat": "Sisältää arvonlisäveron.",
+      "inclVatAuthorityFee": "Sisältää arvonlisäveron ja sivulla julkaistun viranomaismaksun.",
+      "inclVatTrafficTax": "Sisältää sivulla julkaistun liikennemaksun.",
+      "noVatMaximum": "Lakisääteinen enimmäishinta. Arvonlisävero ei sisälly. Korjaamo voi veloittaa vähemmän.",
+      "lowestPrice": "Alin julkaistu hinta. Se vaihtelee aseman ja ajan mukaan.",
+      "prepayOnline": "Hinta, kun varaat ja maksat verkossa.",
+      "whenBooked": "Hinta, kun varaat ajan. Asema julkaisee myös korkeamman listahinnan.",
+      "hallList": "Aseman listahinta.",
+      "partnerMayDiffer": "Kumppaniasemat voivat veloittaa eri maksun.",
+      "retestIfRepaired": "Veloitetaan, kun korjaamo korjaa viat.",
+      "namedWorkshops": "Julkaistu nimetyille korjaamoille."
     }
   }
 }

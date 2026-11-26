@@ -46,7 +46,8 @@
       "about": "Om os",
       "terms": "Vilkår",
       "dealers": "Bilforhandlere",
-      "parts": "Reservedele"
+      "parts": "Reservedele",
+      "inspection": "Bilsyn"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Sammenlign bilpriser og køreskoler.",
-      "metaTitle": "Sammenlign bilpriser og køreskoler",
-      "metaDescription": "Sammenlign bilpriser og køreskoler. Prisen er den, virksomheden har offentliggjort. Gratis katalog for alle.",
-      "body": "DriveLinkUp er stedet, hvor du sammenligner køreskoler, bilpriser, hjelme og reservedele. Tallet er den pris, skolen, forhandleren eller butikken har offentliggjort.",
+      "metaTitle": "Sammenlign reservedele, bilpriser og køreskoler",
+      "metaDescription": "Sammenlign reservedele, bilpriser og køreskoler. Prisen er den, virksomheden har offentliggjort. Gratis katalog for alle.",
+      "body": "Sammenlign køreskoler, tung trafik, bilpriser og reservedele, som en butik har offentliggjort for en bilejer eller et værksted. Tallet er den offentliggjorte pris.",
       "primaryCta": "Find en skole",
       "instructorCta": "Jeg underviser på en køreskole",
       "marketplaceTag": "Bilpriser · Køreskoler",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Reservedele",
         "productLabel": "Produkt",
-        "productPlaceholder": "Hjelm"
+        "productPlaceholder": "Bremseklodser",
+        "labelParts": "Søg reservedele",
+        "labelDealer": "Søg bilpriser"
       },
       "popular": {
         "label": "Populært:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Motorcykel · A",
           "heavy": "Tunge køretøjer",
           "dealers": "Bilpriser",
-          "parts": "Reservedele"
+          "parts": "Reservedele",
+          "ownerParts": "Reservedele til bilejere",
+          "workshopParts": "Reservedele til værksted",
+          "inspection": "Bilsyn"
         }
       },
       "lead": "Gratis. Du betaler skolens pris.",
@@ -2530,7 +2536,7 @@
         "parts": "Reservedele",
         "partsFallback": "Offentliggjorte butikspriser"
       },
-      "titleParts": "Sammenlign reservedele og hjelme."
+      "titleParts": "Sammenlign reservedele."
     },
     "quickLinks": {
       "label": "Start med",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Skoler",
       "cta": "Alle skoler",
-      "filteredEmpty": "Ingen annonce for dette kørekort lige nu."
+      "filteredEmpty": "Ingen annonce for dette kørekort lige nu.",
+      "carsTitle": "Biler",
+      "carsCta": "Alle bilpriser",
+      "carsEmpty": "Ingen offentliggjort bil med en specifikation lige nu.",
+      "partsTitle": "Reservedele",
+      "partsCta": "Alle reservedele",
+      "partsEmpty": "Ingen offentliggjort reservedel med en specifikation lige nu."
     },
     "assurance": {
       "eyebrow": "Sådan fungerer kataloget",
@@ -2595,7 +2607,8 @@
       "body": "Det er gratis.",
       "learnerCta": "Find en skole",
       "providerCta": "Jeg driver en skole",
-      "dealerCta": "Jeg driver en bilforhandler"
+      "dealerCta": "Jeg driver en bilforhandler",
+      "partsCta": "Sammenlign reservedele"
     },
     "footer": {
       "prompt": "Vil du vide mere?",
@@ -4118,6 +4131,55 @@
       "FI": "Finland",
       "AU": "Australien",
       "US": "USA"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Sammenlign synspriser",
+      "description": "Offentliggjorte priser fra hallen eller myndigheden. Et land vises, når prisen er offentliggjort. DriveLinkUp booker ikke synet."
+    },
+    "title": "Sammenlign synspriser",
+    "lead": "Prisen er den, hallen eller myndigheden har offentliggjort. DriveLinkUp booker ikke synet og kalder ikke en station verificeret.",
+    "countryLabel": "Land",
+    "countryAll": "Alle lande",
+    "vehicleLabel": "Køretøj",
+    "inspectionLabel": "Syn",
+    "vehicles": {
+      "car": "Personbil",
+      "motorcycle": "Motorcykel",
+      "heavy": "Tungt køretøj",
+      "van": "Varebil"
+    },
+    "inspections": {
+      "periodic": "Periodisk syn",
+      "retest": "Omsyn",
+      "periodicEmissions": "Med udstødningstest"
+    },
+    "priceFrom": "fra",
+    "priceMaximum": "Højeste",
+    "empty": "Ingen offentliggjort pris for det valg endnu.",
+    "source": "Prisside",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "DK": "Danmark",
+      "DE": "Tyskland",
+      "ES": "Spanien",
+      "GB": "Storbritannien"
+    },
+    "notes": {
+      "inclVat": "Inklusive moms.",
+      "inclVatAuthorityFee": "Inklusive moms og det myndighedsgebyr, siden offentliggør.",
+      "inclVatTrafficTax": "Inklusive den trafikafgift, siden offentliggør.",
+      "noVatMaximum": "Lovbestemt højeste pris. Moms er ikke inkluderet. Et værksted kan tage mindre.",
+      "lowestPrice": "Laveste offentliggjorte pris. Den varierer mellem station og tid.",
+      "prepayOnline": "Pris ved booking og betaling online.",
+      "whenBooked": "Pris, når du booker. Hallen offentliggør også en højere listepris.",
+      "hallList": "Hallens listepris.",
+      "partnerMayDiffer": "Partnerstationer kan tage et andet gebyr.",
+      "retestIfRepaired": "Opkræves, når værkstedet udbedrer fejlene.",
+      "namedWorkshops": "Offentliggjort for navngivne værksteder."
     }
   }
 }

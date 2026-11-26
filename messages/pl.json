@@ -46,7 +46,8 @@
       "about": "O nas",
       "terms": "Regulamin",
       "dealers": "Dealerzy",
-      "parts": "Części"
+      "parts": "Części",
+      "inspection": "Badanie techniczne"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Porównaj ceny samochodów i szkoły jazdy.",
-      "metaTitle": "Porównaj ceny samochodów i szkoły jazdy",
-      "metaDescription": "Porównaj ceny samochodów i szkoły jazdy. Cena jest tą, którą firma opublikowała. Bezpłatny katalog dla wszystkich.",
-      "body": "DriveLinkUp to miejsce, w którym porównujesz szkoły jazdy, ceny samochodów, kaski i części. Liczba to cena opublikowana przez szkołę, dealera albo sklep.",
+      "metaTitle": "Porównaj części, ceny i szkoły jazdy",
+      "metaDescription": "Porównaj części, ceny aut i szkoły jazdy. Cena jest tą opublikowaną. Bezpłatny katalog dla wszystkich.",
+      "body": "Porównaj szkoły jazdy, ciężki transport, ceny aut i części, które sklep opublikował dla właściciela albo warsztatu. Liczba to opublikowana cena.",
       "primaryCta": "Znajdź szkołę",
       "instructorCta": "Pracuję w szkole jazdy",
       "marketplaceTag": "Ceny aut · Szkoły jazdy",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "Nowy Jork",
         "modeParts": "Części",
         "productLabel": "Produkt",
-        "productPlaceholder": "Kask"
+        "productPlaceholder": "Klocki hamulcowe",
+        "labelParts": "Szukaj części",
+        "labelDealer": "Szukaj cen aut"
       },
       "popular": {
         "label": "Popularne:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Motocykl · A",
           "heavy": "Pojazdy ciężkie",
           "dealers": "Ceny aut",
-          "parts": "Części"
+          "parts": "Części",
+          "ownerParts": "Części dla właścicieli",
+          "workshopParts": "Części dla warsztatów",
+          "inspection": "Badanie techniczne"
         }
       },
       "lead": "Bezpłatnie. Płacisz cenę szkoły.",
@@ -2530,7 +2536,7 @@
         "parts": "Części",
         "partsFallback": "Opublikowane ceny sklepów"
       },
-      "titleParts": "Porównaj części i kaski."
+      "titleParts": "Porównaj części samochodowe."
     },
     "quickLinks": {
       "label": "Zacznij od",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Szkoły",
       "cta": "Wszystkie szkoły",
-      "filteredEmpty": "Brak ogłoszeń dla tej kategorii prawa jazdy."
+      "filteredEmpty": "Brak ogłoszeń dla tej kategorii prawa jazdy.",
+      "carsTitle": "Samochody",
+      "carsCta": "Wszystkie ceny",
+      "carsEmpty": "Żaden opublikowany samochód ze specyfikacją.",
+      "partsTitle": "Części",
+      "partsCta": "Wszystkie części",
+      "partsEmpty": "Żadna opublikowana część ze specyfikacją."
     },
     "assurance": {
       "eyebrow": "Jak działa katalog",
@@ -2595,7 +2607,8 @@
       "body": "To nic nie kosztuje.",
       "learnerCta": "Znajdź szkołę",
       "providerCta": "Prowadzę szkołę",
-      "dealerCta": "Prowadzę salon samochodowy"
+      "dealerCta": "Prowadzę salon samochodowy",
+      "partsCta": "Porównaj części"
     },
     "footer": {
       "prompt": "Potrzebujesz szerszego kontekstu?",
@@ -4118,6 +4131,55 @@
       "FI": "Finlandia",
       "AU": "Australia",
       "US": "Stany Zjednoczone"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Porównaj ceny badania technicznego",
+      "description": "Ceny opublikowane przez stację albo urząd. Kraj pojawia się, gdy cena jest opublikowana. DriveLinkUp nie rezerwuje badania."
+    },
+    "title": "Porównaj ceny badania technicznego",
+    "lead": "Cena jest tą, którą opublikowała stacja albo urząd. DriveLinkUp nie rezerwuje badania i nie nazywa stacji zweryfikowaną.",
+    "countryLabel": "Kraj",
+    "countryAll": "Wszystkie kraje",
+    "vehicleLabel": "Pojazd",
+    "inspectionLabel": "Badanie",
+    "vehicles": {
+      "car": "Samochód",
+      "motorcycle": "Motocykl",
+      "heavy": "Pojazd ciężki",
+      "van": "Dostawczy"
+    },
+    "inspections": {
+      "periodic": "Okresowe",
+      "retest": "Badanie ponowne",
+      "periodicEmissions": "Z badaniem spalin"
+    },
+    "priceFrom": "od",
+    "priceMaximum": "Maksymalnie",
+    "empty": "Nie ma jeszcze opublikowanej ceny dla tego wyboru.",
+    "source": "Strona z ceną",
+    "currencyGroup": "Ceny w {currency}",
+    "countries": {
+      "SE": "Szwecja",
+      "NO": "Norwegia",
+      "DK": "Dania",
+      "DE": "Niemcy",
+      "ES": "Hiszpania",
+      "GB": "Wielka Brytania"
+    },
+    "notes": {
+      "inclVat": "Z VAT.",
+      "inclVatAuthorityFee": "Z VAT i z opłatą urzędową podaną na stronie.",
+      "inclVatTrafficTax": "Z opłatą drogową podaną na stronie.",
+      "noVatMaximum": "Ustawowe maksimum. VAT nie jest wliczony. Warsztat może policzyć mniej.",
+      "lowestPrice": "Najniższa opublikowana cena. Zależy od stacji i terminu.",
+      "prepayOnline": "Cena przy rezerwacji i płatności online.",
+      "whenBooked": "Cena przy rezerwacji. Stacja publikuje też wyższą cenę z cennika.",
+      "hallList": "Cena z cennika stacji.",
+      "partnerMayDiffer": "Stacje partnerskie mogą pobrać inną opłatę.",
+      "retestIfRepaired": "Naliczane, gdy warsztat usuwa usterki.",
+      "namedWorkshops": "Opublikowane dla nazwanych warsztatów."
     }
   }
 }

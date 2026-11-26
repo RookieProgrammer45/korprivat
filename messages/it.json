@@ -46,7 +46,8 @@
       "about": "Chi siamo",
       "terms": "Termini",
       "dealers": "Concessionarie",
-      "parts": "Ricambi"
+      "parts": "Ricambi",
+      "inspection": "Revisione"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Confronta i prezzi delle auto e le autoscuole.",
-      "metaTitle": "Confronta i prezzi delle auto e le autoscuole",
-      "metaDescription": "Confronta i prezzi delle auto e le autoscuole. Il prezzo è quello pubblicato dall'azienda. Catalogo gratuito per tutti.",
-      "body": "DriveLinkUp è il posto in cui confronti le autoscuole, i prezzi delle auto, i caschi e i ricambi. La cifra è il prezzo pubblicato dalla scuola, dal concessionario o dal negozio.",
+      "metaTitle": "Confronta ricambi, prezzi e autoscuole",
+      "metaDescription": "Confronta ricambi, prezzi delle auto e autoscuole. Il prezzo è quello pubblicato. Catalogo gratuito per tutti.",
+      "body": "Confronta autoscuole, veicoli pesanti, prezzi delle auto e ricambi che un negozio ha pubblicato per un automobilista o un’officina. La cifra è il prezzo pubblicato.",
       "primaryCta": "Trova una scuola",
       "instructorCta": "Lavoro in un'autoscuola",
       "marketplaceTag": "Prezzi auto · Autoscuole",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Ricambi",
         "productLabel": "Prodotto",
-        "productPlaceholder": "Casco"
+        "productPlaceholder": "Pastiglie freno",
+        "labelParts": "Cerca ricambi",
+        "labelDealer": "Cerca prezzi"
       },
       "popular": {
         "label": "Popolari:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Moto · A",
           "heavy": "Veicoli pesanti",
           "dealers": "Prezzi auto",
-          "parts": "Ricambi"
+          "parts": "Ricambi",
+          "ownerParts": "Ricambi per automobilisti",
+          "workshopParts": "Ricambi per officine",
+          "inspection": "Revisione"
         }
       },
       "lead": "Gratuito. Paghi il prezzo della scuola.",
@@ -2530,7 +2536,7 @@
         "parts": "Ricambi",
         "partsFallback": "Prezzi pubblicati dai negozi"
       },
-      "titleParts": "Confronta ricambi e caschi."
+      "titleParts": "Confronta i ricambi."
     },
     "quickLinks": {
       "label": "Inizia da",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Scuole",
       "cta": "Tutte le scuole",
-      "filteredEmpty": "Nessun annuncio per questa categoria di patente al momento."
+      "filteredEmpty": "Nessun annuncio per questa categoria di patente al momento.",
+      "carsTitle": "Auto",
+      "carsCta": "Tutti i prezzi",
+      "carsEmpty": "Nessuna auto pubblicata con una specifica.",
+      "partsTitle": "Ricambi",
+      "partsCta": "Tutti i ricambi",
+      "partsEmpty": "Nessun ricambio pubblicato con una specifica."
     },
     "assurance": {
       "eyebrow": "Come funziona l'elenco",
@@ -2595,7 +2607,8 @@
       "body": "È gratuito.",
       "learnerCta": "Trova una scuola",
       "providerCta": "Gestisco una scuola",
-      "dealerCta": "Gestisco una concessionaria"
+      "dealerCta": "Gestisco una concessionaria",
+      "partsCta": "Confronta i ricambi"
     },
     "footer": {
       "prompt": "Serve più contesto?",
@@ -4118,6 +4131,55 @@
       "FI": "Finlandia",
       "AU": "Australia",
       "US": "Stati Uniti"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Confronta i prezzi della revisione",
+      "description": "Prezzi pubblicati dal centro o dall'autorità. Un paese compare quando il prezzo è pubblicato. DriveLinkUp non prenota la revisione."
+    },
+    "title": "Confronta i prezzi della revisione",
+    "lead": "Il prezzo è quello pubblicato dal centro o dall'autorità. DriveLinkUp non prenota la revisione e non dice che un centro è verificato.",
+    "countryLabel": "Paese",
+    "countryAll": "Tutti i paesi",
+    "vehicleLabel": "Veicolo",
+    "inspectionLabel": "Revisione",
+    "vehicles": {
+      "car": "Auto",
+      "motorcycle": "Moto",
+      "heavy": "Veicolo pesante",
+      "van": "Furgone"
+    },
+    "inspections": {
+      "periodic": "Periodica",
+      "retest": "Revisione successiva",
+      "periodicEmissions": "Con prova emissioni"
+    },
+    "priceFrom": "da",
+    "priceMaximum": "Massimo",
+    "empty": "Nessun prezzo pubblicato per questa scelta.",
+    "source": "Pagina dei prezzi",
+    "currencyGroup": "Prezzi in {currency}",
+    "countries": {
+      "SE": "Svezia",
+      "NO": "Norvegia",
+      "DK": "Danimarca",
+      "DE": "Germania",
+      "ES": "Spagna",
+      "GB": "Regno Unito"
+    },
+    "notes": {
+      "inclVat": "IVA inclusa.",
+      "inclVatAuthorityFee": "IVA inclusa e il diritto pubblicato sulla pagina.",
+      "inclVatTrafficTax": "Include la tassa di circolazione pubblicata sulla pagina.",
+      "noVatMaximum": "Massimo di legge. L'IVA non è inclusa. Un'officina può chiedere meno.",
+      "lowestPrice": "Prezzo pubblicato più basso. Varia per centro e orario.",
+      "prepayOnline": "Prezzo con prenotazione e pagamento online.",
+      "whenBooked": "Prezzo se prenoti. Il centro pubblica anche un listino più alto.",
+      "hallList": "Prezzo di listino del centro.",
+      "partnerMayDiffer": "I centri partner possono applicare una tariffa diversa.",
+      "retestIfRepaired": "Dovuto quando l'officina ripara i difetti.",
+      "namedWorkshops": "Pubblicato per officine indicate."
     }
   }
 }

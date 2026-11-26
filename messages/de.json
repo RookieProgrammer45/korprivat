@@ -46,7 +46,8 @@
       "about": "Über uns",
       "terms": "Bedingungen",
       "dealers": "Autohändler",
-      "parts": "Ersatzteile"
+      "parts": "Ersatzteile",
+      "inspection": "Hauptuntersuchung"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Autopreise und Fahrschulen vergleichen.",
-      "metaTitle": "Autopreise und Fahrschulen vergleichen",
-      "metaDescription": "Autopreise und Fahrschulen vergleichen. Der Preis ist der, den das Unternehmen veröffentlicht hat. Kostenloser Katalog für alle.",
-      "body": "DriveLinkUp ist der Ort, an dem du Fahrschulen, Autopreise, Helme und Autoteile vergleichst. Die Zahl ist der Preis, den die Schule, der Händler oder der Shop veröffentlicht hat.",
+      "metaTitle": "Autoteile, Preise und Fahrschulen vergleichen",
+      "metaDescription": "Vergleichen Sie Autoteile, Autopreise und Fahrschulen. Der Preis ist der veröffentlichte. Kostenloser Katalog für alle.",
+      "body": "Vergleichen Sie Fahrschulen, Schwerverkehr, Autopreise und Teile, die ein Geschäft für einen Autobesitzer oder eine Werkstatt veröffentlicht hat. Die Zahl ist der veröffentlichte Preis.",
       "primaryCta": "Schule finden",
       "instructorCta": "Ich arbeite an einer Fahrschule",
       "marketplaceTag": "Autopreise · Fahrschulen",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Teile",
         "productLabel": "Produkt",
-        "productPlaceholder": "Helm"
+        "productPlaceholder": "Bremsbeläge",
+        "labelParts": "Teile suchen",
+        "labelDealer": "Autopreise suchen"
       },
       "popular": {
         "label": "Beliebt:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Motorrad · A",
           "heavy": "Schwere Fahrzeuge",
           "dealers": "Fahrzeugpreise",
-          "parts": "Ersatzteile"
+          "parts": "Ersatzteile",
+          "ownerParts": "Teile für Autobesitzer",
+          "workshopParts": "Teile für Werkstätten",
+          "inspection": "Hauptuntersuchung"
         }
       },
       "lead": "Kostenlos. Sie zahlen den Preis der Schule.",
@@ -2530,7 +2536,7 @@
         "parts": "Teile",
         "partsFallback": "Veröffentlichte Shop-Preise"
       },
-      "titleParts": "Teile und Helme vergleichen."
+      "titleParts": "Autoteile vergleichen."
     },
     "quickLinks": {
       "label": "Starten mit",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Schulen",
       "cta": "Alle Schulen",
-      "filteredEmpty": "Keine Inserate für diese Führerscheinklasse."
+      "filteredEmpty": "Keine Inserate für diese Führerscheinklasse.",
+      "carsTitle": "Autos",
+      "carsCta": "Alle Autopreise",
+      "carsEmpty": "Kein veröffentlichtes Auto mit einer Angabe.",
+      "partsTitle": "Ersatzteile",
+      "partsCta": "Alle Ersatzteile",
+      "partsEmpty": "Kein veröffentlichtes Ersatzteil mit einer Angabe."
     },
     "assurance": {
       "eyebrow": "So funktioniert das Verzeichnis",
@@ -2595,7 +2607,8 @@
       "body": "Es ist kostenlos.",
       "learnerCta": "Schule finden",
       "providerCta": "Ich betreibe eine Schule",
-      "dealerCta": "Ich betreibe ein Autohaus"
+      "dealerCta": "Ich betreibe ein Autohaus",
+      "partsCta": "Teile vergleichen"
     },
     "footer": {
       "prompt": "Mehr Kontext nötig?",
@@ -4118,6 +4131,55 @@
       "FI": "Finnland",
       "AU": "Australien",
       "US": "Vereinigte Staaten"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Hauptuntersuchung vergleichen",
+      "description": "Veröffentlichte Preise der Prüfstelle oder der Behörde. Ein Land erscheint, wenn der Preis veröffentlicht ist. DriveLinkUp bucht die Prüfung nicht."
+    },
+    "title": "Hauptuntersuchung vergleichen",
+    "lead": "Der Preis ist der, den die Prüfstelle oder die Behörde veröffentlicht hat. DriveLinkUp bucht die Prüfung nicht und nennt eine Stelle nicht verifiziert.",
+    "countryLabel": "Land",
+    "countryAll": "Alle Länder",
+    "vehicleLabel": "Fahrzeug",
+    "inspectionLabel": "Prüfung",
+    "vehicles": {
+      "car": "Pkw",
+      "motorcycle": "Motorrad",
+      "heavy": "Schweres Fahrzeug",
+      "van": "Transporter"
+    },
+    "inspections": {
+      "periodic": "Hauptuntersuchung",
+      "retest": "Nachprüfung",
+      "periodicEmissions": "Mit Abgasuntersuchung"
+    },
+    "priceFrom": "ab",
+    "priceMaximum": "Höchstens",
+    "empty": "Für diese Auswahl ist noch kein veröffentlichter Preis da.",
+    "source": "Preisseite",
+    "currencyGroup": "Preise in {currency}",
+    "countries": {
+      "SE": "Schweden",
+      "NO": "Norwegen",
+      "DK": "Dänemark",
+      "DE": "Deutschland",
+      "ES": "Spanien",
+      "GB": "Vereinigtes Königreich"
+    },
+    "notes": {
+      "inclVat": "Inklusive MwSt.",
+      "inclVatAuthorityFee": "Inklusive MwSt. und der auf der Seite veröffentlichten Behördengebühr.",
+      "inclVatTrafficTax": "Inklusive der auf der Seite veröffentlichten Verkehrsgebühr.",
+      "noVatMaximum": "Gesetzliche Höchstgebühr. MwSt. ist nicht enthalten. Eine Werkstatt kann weniger verlangen.",
+      "lowestPrice": "Niedrigster veröffentlichter Preis. Er hängt von Stelle und Zeit ab.",
+      "prepayOnline": "Preis bei Online-Buchung und Online-Zahlung.",
+      "whenBooked": "Preis bei Buchung. Die Stelle veröffentlicht auch einen höheren Listenpreis.",
+      "hallList": "Listenpreis der Stelle.",
+      "partnerMayDiffer": "Partnerstellen können eine andere Gebühr verlangen.",
+      "retestIfRepaired": "Fällig, wenn die Werkstatt die Mängel behebt.",
+      "namedWorkshops": "Veröffentlicht für genannte Werkstätten."
     }
   }
 }

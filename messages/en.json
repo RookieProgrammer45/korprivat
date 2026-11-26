@@ -46,7 +46,8 @@
       "about": "About",
       "terms": "Terms",
       "dealers": "Dealers",
-      "parts": "Parts"
+      "parts": "Parts",
+      "inspection": "Inspection"
     },
     "language": {
       "sv": "Svenska",
@@ -2401,9 +2402,9 @@
     "hero": {
       "eyebrow": "",
       "title": "Compare car prices and driving schools.",
-      "metaTitle": "Compare car prices and driving schools",
-      "metaDescription": "Compare car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
-      "body": "DriveLinkUp is where you compare driving schools, car prices, helmets, and car parts. The figure is the price the school, dealer, or shop published.",
+      "metaTitle": "Compare car parts, prices and driving schools",
+      "metaDescription": "Compare car parts, car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
+      "body": "Compare driving schools, heavy-vehicle schools, car prices, and the parts a shop published for a car owner or a workshop. The figure is that published price.",
       "primaryCta": "Find a school",
       "instructorCta": "I work at a driving school",
       "marketplaceTag": "Car prices · Driving schools",
@@ -2493,7 +2494,9 @@
         "placePlaceholder": "New York",
         "modeParts": "Parts",
         "productLabel": "Product",
-        "productPlaceholder": "Helmet"
+        "productPlaceholder": "Brake pads",
+        "labelParts": "Search parts",
+        "labelDealer": "Search car prices"
       },
       "popular": {
         "label": "Popular:",
@@ -2509,7 +2512,10 @@
           "categoryA": "Motorcycle · A",
           "heavy": "Heavy vehicles",
           "dealers": "Vehicle prices",
-          "parts": "Parts and accessories"
+          "parts": "Parts and accessories",
+          "ownerParts": "Parts for car owners",
+          "workshopParts": "Parts for workshops",
+          "inspection": "Inspection"
         }
       },
       "lead": "Free. You pay the school's price.",
@@ -2530,7 +2536,7 @@
         "parts": "Parts",
         "partsFallback": "Published shop prices"
       },
-      "titleParts": "Compare parts and helmets."
+      "titleParts": "Compare car parts."
     },
     "quickLinks": {
       "label": "Start with",
@@ -2569,7 +2575,13 @@
       "eyebrow": "",
       "title": "Schools",
       "cta": "All schools",
-      "filteredEmpty": "No listings for this licence yet."
+      "filteredEmpty": "No listings for this licence yet.",
+      "carsTitle": "Cars",
+      "carsCta": "All car prices",
+      "carsEmpty": "No published car with a specification yet.",
+      "partsTitle": "Parts",
+      "partsCta": "All parts",
+      "partsEmpty": "No published part with a specification yet."
     },
     "assurance": {
       "eyebrow": "How the directory works",
@@ -2595,7 +2607,8 @@
       "body": "It's free.",
       "learnerCta": "Find a school",
       "providerCta": "I run a school",
-      "dealerCta": "I run a dealership"
+      "dealerCta": "I run a dealership",
+      "partsCta": "Compare parts"
     },
     "footer": {
       "prompt": "Need more context?",
@@ -4118,6 +4131,55 @@
       "FI": "Finland",
       "AU": "Australia",
       "US": "United States"
+    }
+  },
+  "inspectionPage": {
+    "meta": {
+      "title": "Compare vehicle inspection prices",
+      "description": "Published inspection prices from the station or the authority. A country is listed when that price is published. DriveLinkUp does not book the inspection."
+    },
+    "title": "Compare inspection prices",
+    "lead": "The price is what the station or the authority published. DriveLinkUp does not book the inspection and does not call a station verified.",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "vehicleLabel": "Vehicle",
+    "inspectionLabel": "Inspection",
+    "vehicles": {
+      "car": "Car",
+      "motorcycle": "Motorcycle",
+      "heavy": "Heavy vehicle",
+      "van": "Van"
+    },
+    "inspections": {
+      "periodic": "Periodic",
+      "retest": "Retest",
+      "periodicEmissions": "With emissions test"
+    },
+    "priceFrom": "from",
+    "priceMaximum": "Maximum",
+    "empty": "No published price for that choice yet.",
+    "source": "Price page",
+    "currencyGroup": "Prices in {currency}",
+    "countries": {
+      "SE": "Sweden",
+      "NO": "Norway",
+      "DK": "Denmark",
+      "DE": "Germany",
+      "ES": "Spain",
+      "GB": "United Kingdom"
+    },
+    "notes": {
+      "inclVat": "Including VAT.",
+      "inclVatAuthorityFee": "Including VAT and the authority fee published on the page.",
+      "inclVatTrafficTax": "Including the traffic tax published on the page.",
+      "noVatMaximum": "Statutory maximum. VAT is not included. A garage can charge less.",
+      "lowestPrice": "Lowest published price. It varies by station and time.",
+      "prepayOnline": "Price when booked and paid online.",
+      "whenBooked": "Price when you book. The hall also publishes a higher list price.",
+      "hallList": "The hall's list price.",
+      "partnerMayDiffer": "Partner stations can charge a different fee.",
+      "retestIfRepaired": "Charged when the workshop repairs the faults.",
+      "namedWorkshops": "Published for named workshops."
     }
   }
 }

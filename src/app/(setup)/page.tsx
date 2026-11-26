@@ -6,6 +6,7 @@ import { siteDescription, siteName, siteTitleSv } from '@/lib/brand';
 import { resolveLocale } from '@/lib/i18n';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { localeHreflang, localePath } from '@/lib/seo/locale-path';
+import { NORDIC_COUNTRIES } from '@/lib/seo/nordic-locations';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await resolveLocale();
@@ -41,9 +42,17 @@ export default async function DriveLinkUpLanding({
   const { category } = await searchParams;
   const locale = await resolveLocale();
   const t = await getTranslations('publicHome.hero');
-  const description = locale === 'sv' ? siteDescription : t('body');
+  const description = locale === 'sv' ? siteDescription : t('metaDescription');
   const url = absoluteUrl(localePath(locale, '/'));
   const inLanguage = isLocale(locale) ? localeHreflang[locale] : localeHreflang[defaultLocale];
+  const catalogues = [
+    { name: t('popular.links.inspection'), path: '/besiktning' },
+    { name: t('popular.links.ownerParts'), path: '/reservdelar?buyer=owner' },
+    { name: t('popular.links.workshopParts'), path: '/reservdelar?buyer=workshop' },
+    { name: t('popular.links.heavy'), path: '/tung-trafik' },
+    { name: t('popular.links.dealers'), path: '/bilhandlare' },
+    { name: t('titleSchool'), path: '/locations' },
+  ];
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -52,7 +61,7 @@ export default async function DriveLinkUpLanding({
         name: siteName,
         url: absoluteUrl('/'),
         email: 'frank@drivelinkup.com',
-        areaServed: 'SE',
+        areaServed: NORDIC_COUNTRIES.map((code) => code.toUpperCase()),
         description,
       },
       {
@@ -62,6 +71,21 @@ export default async function DriveLinkUpLanding({
         description,
         inLanguage,
         publisher: { '@type': 'Organization', name: siteName },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: absoluteUrl('/reservdelar?q={search_term_string}'),
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'ItemList',
+        name: t('search.modeLabel'),
+        itemListElement: catalogues.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          url: absoluteUrl(item.path),
+        })),
       },
     ],
   };
