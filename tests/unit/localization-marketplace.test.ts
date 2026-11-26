@@ -173,12 +173,18 @@ describe('public marketplace localization', () => {
       const hero = (
         loadMessages(locale) as {
           publicHome: {
-            hero: { titleDealer: string; titleSchool: string; search: { modeSchool: string } };
+            hero: {
+              titleDealer: string;
+              titleSchool: string;
+              titleParts: string;
+              search: { modeSchool: string };
+            };
           };
         }
       ).publicHome.hero;
       expect(hero.titleDealer).not.toBe('Compare car prices.');
       expect(hero.titleSchool).not.toBe('Compare driving schools.');
+      expect(hero.titleParts).not.toBe('Compare parts and helmets.');
       expect(hero.search.modeSchool).not.toBe('Driving school');
     }
     const danish = loadMessages('da') as {

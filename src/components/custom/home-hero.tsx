@@ -1,5 +1,5 @@
-// Search-first entry. The title alternates between driving schools and dealers.
-// The photograph stays on desktop, with the two comparison paths on top of it.
+// Search-first entry. The title alternates between schools, car prices, and parts.
+// The photograph stays on desktop, with those three comparison paths on top of it.
 
 'use client';
 
@@ -12,12 +12,14 @@ import { RotatingTitle } from '@/components/custom/animated-title';
 import { LocaleLink as Link } from '@/components/locale-link';
 import { dealerSearchPath } from '@/lib/seo/dealer-search-path';
 import { localePath } from '@/lib/seo/locale-path';
+import { PART_PLACES, partsSearchPath } from '@/lib/seo/parts-search-path';
 import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
 
 const POPULAR_LINKS = [
   { key: 'dealers', href: '/bilhandlare' },
+  { key: 'parts', href: '/reservdelar' },
   { key: 'heavy', href: '/tung-trafik' },
   { key: 'categoryA', href: '/?category=A' },
   { key: 'stockholm', href: '/locations/se/stockholm' },
@@ -41,25 +43,30 @@ export function HomeHero({
   const router = useRouter();
   const categoryId = useId();
   const cityId = useId();
-  const [mode, setMode] = useState<'school' | 'dealer'>('school');
+  const [mode, setMode] = useState<'school' | 'dealer' | 'parts'>('school');
   const [category, setCategory] = useState<string>('B');
   const [city, setCity] = useState<string>('');
   const [model, setModel] = useState('');
+  const [query, setQuery] = useState('');
   const dealerMode = mode === 'dealer';
+  const partsMode = mode === 'parts';
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const path = dealerMode
-      ? dealerSearchPath(city, null, model)
-      : schoolSearchPath(city, category);
+    const path = partsMode
+      ? partsSearchPath(query, null, city)
+      : dealerMode
+        ? dealerSearchPath(city, null, model)
+        : schoolSearchPath(city, category);
     router.push(localePath(locale, path));
   }
 
-  function selectMode(next: 'school' | 'dealer') {
+  function selectMode(next: 'school' | 'dealer' | 'parts') {
     setMode(next);
     setCategory(next === 'school' ? 'B' : '');
     setCity('');
     setModel('');
+    setQuery('');
   }
 
   const money = (amount: number, currency: string) =>
@@ -70,7 +77,7 @@ export function HomeHero({
       <div className="container-page grid items-start gap-8 pt-4 pb-8 sm:pt-5 lg:grid-cols-[1.05fr_0.95fr] lg:pt-6 lg:pb-10">
         <div className="dlu-hero-copy flex min-w-0 flex-col">
           <RotatingTitle
-            lines={[t('titleSchool'), t('titleDealer')]}
+            lines={[t('titleSchool'), t('titleDealer'), t('titleParts')]}
             className="marketplace-hero-title max-w-[16ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
           />
           <p className="marketplace-reveal dlu-hero-in-2 mt-4 max-w-xl text-body text-muted-foreground">
@@ -82,17 +89,29 @@ export function HomeHero({
             aria-label={t('search.label')}
             className="marketplace-reveal dlu-hero-in-2 dlu-hero-search mt-8 grid w-full max-w-2xl gap-1 rounded-[1.25rem] border border-border bg-card p-2 sm:grid-cols-[auto_1fr_1.15fr_auto] sm:items-center sm:rounded-full sm:p-1.5 sm:pl-2"
           >
-            <fieldset className="flex min-w-0 gap-1 border-0 px-1 py-1 sm:px-1">
+            <fieldset className="flex min-w-0 flex-wrap gap-1 border-0 px-1 py-1 sm:px-1">
               <legend className="sr-only">{t('search.modeLabel')}</legend>
-              <ModeButton active={!dealerMode} onClick={() => selectMode('school')}>
+              <ModeButton active={mode === 'school'} onClick={() => selectMode('school')}>
                 {t('search.modeSchool')}
               </ModeButton>
               <ModeButton active={dealerMode} onClick={() => selectMode('dealer')}>
                 {t('search.modeDealer')}
               </ModeButton>
+              <ModeButton active={partsMode} onClick={() => selectMode('parts')}>
+                {t('search.modeParts')}
+              </ModeButton>
             </fieldset>
 
-            {dealerMode ? (
+            {partsMode ? (
+              <SearchText
+                id={categoryId}
+                label={t('search.productLabel')}
+                value={query}
+                onChange={setQuery}
+                placeholder={t('search.productPlaceholder')}
+                divider
+              />
+            ) : dealerMode ? (
               <SearchText
                 id={categoryId}
                 label={t('search.modelLabel')}
@@ -117,7 +136,22 @@ export function HomeHero({
               </SearchField>
             )}
 
-            {dealerMode ? (
+            {partsMode ? (
+              <SearchField
+                id={cityId}
+                label={t('search.cityLabel')}
+                value={city}
+                onChange={setCity}
+                divider
+              >
+                <option value="">{t('search.cityAny')}</option>
+                {PART_PLACES.map((item) => (
+                  <option key={item.id} value={item.value}>
+                    {t(`search.cities.${item.id}`)}
+                  </option>
+                ))}
+              </SearchField>
+            ) : dealerMode ? (
               <SearchText
                 id={cityId}
                 label={t('search.cityLabel')}
@@ -201,6 +235,15 @@ export function HomeHero({
                 {lessonFrom
                   ? t('facts.from', { price: money(lessonFrom, 'SEK') })
                   : t('facts.lessonFallback')}
+              </span>
+            </Link>
+            <Link
+              href="/reservdelar"
+              className="dlu-hero-fact rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-foreground backdrop-blur-sm"
+            >
+              <span className="block text-xs text-muted-foreground">{t('facts.parts')}</span>
+              <span className="mt-1 block font-display text-xl tracking-tight">
+                {t('facts.partsFallback')}
               </span>
             </Link>
             <Link

@@ -45,7 +45,8 @@
       "westernNorthernSweden": "Länsi- ja Pohjois-Ruotsi",
       "about": "Tietoa meistä",
       "terms": "Ehdot",
-      "dealers": "Autoliikkeet"
+      "dealers": "Autoliikkeet",
+      "parts": "Varaosat"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Vertaa auton hintoja ja autokouluja.",
       "metaTitle": "Vertaa auton hintoja ja autokouluja",
       "metaDescription": "Vertaa auton hintoja ja autokouluja. Hinta on se, jonka yritys on julkaissut. Ilmainen luettelo kaikille.",
-      "body": "DriveLinkUp on paikka, jossa vertaat auton hintoja, autokouluja ja muuta autoon liittyvää. Tänään näet koulujen ja autoliikkeiden julkaisemat hinnat.",
+      "body": "DriveLinkUp on paikka, jossa vertaat autokouluja, auton hintoja, kypäriä ja varaosia. Luku on hinta, jonka koulu, autoliike tai kauppa on julkaissut.",
       "primaryCta": "Etsi koulu",
       "instructorCta": "Työskentelen autokoulussa",
       "marketplaceTag": "Auton hinnat · Autokoulut",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "Mitä haluat vertailla",
         "modeSchool": "Autokoulu",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Malli",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "New York"
+        "placePlaceholder": "New York",
+        "modeParts": "Varaosat",
+        "productLabel": "Tuote",
+        "productPlaceholder": "Kypärä"
       },
       "popular": {
         "label": "Suositut:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Moottoripyörä · A",
           "heavy": "Raskaat ajoneuvot",
-          "dealers": "Autohinnat"
+          "dealers": "Autohinnat",
+          "parts": "Varaosat"
         }
       },
       "lead": "Ilmainen. Maksat koulun hinnan.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Ajoneuvo",
         "from": "alkaen {price}",
         "lessonFallback": "Julkaistut ajotuntihinnat",
-        "vehicleFallback": "Julkaistut ajoneuvohinnat"
-      }
+        "vehicleFallback": "Julkaistut ajoneuvohinnat",
+        "parts": "Varaosat",
+        "partsFallback": "Julkaistut kauppahinnat"
+      },
+      "titleParts": "Vertaile varaosia ja kypäriä."
     },
     "quickLinks": {
       "label": "Aloita",
@@ -4053,5 +4062,62 @@
       "used": "Käytetty"
     },
     "msrp": "Ohjevähittäishinta"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Vertaile varaosia, moottoripyöriä ja tarvikkeita",
+      "description": "Vertaile kypäriä, varaosia ja autotarvikkeita. Hinta ja tiedot ovat myyjän omalta sivulta."
+    },
+    "eyebrow": "Varaosat",
+    "title": "Vertaile varaosia ja tarvikkeita",
+    "lead": "Auton omistaja ja korjaamo vertaavat hintaa ja tietoja, jotka kauppa on julkaissut. DriveLinkUp ei myy tuotetta.",
+    "queryLabel": "Tuote",
+    "queryPlaceholder": "Jarrupalat",
+    "kindLabel": "Tyyppi",
+    "kindAll": "Kaikki",
+    "kind": {
+      "part": "Varaosa",
+      "motorcycle": "Moottoripyörä",
+      "accessory": "Tarvike"
+    },
+    "filter": "Näytä",
+    "sourceNote": "Hinta ja tiedot ovat ne, jotka myyjä on julkaissut. DriveLinkUp ei ole tarkistanut tuotetta.",
+    "empty": "Yksikään myyjä ei ole vielä julkaissut tätä tuotetta hinnalla ja tiedoilla.",
+    "openSite": "Myyjällä {seller}",
+    "placeLabel": "Paikka",
+    "placePlaceholder": "New York",
+    "compareTitle": "Tiedot",
+    "compareLead": "Jokainen rivi on se, mitä kauppa on julkaissut. DriveLinkUp ei valitse parasta kypärää.",
+    "nearest": "Lähin myymälä",
+    "noNearby": "Yksikään kauppa ei ole julkaissut myymälää sen paikan lähellä hinnalla ja tiedoilla.",
+    "cityAny": "Kaikki paikat",
+    "useMyLocation": "Käytä sijaintiani",
+    "clearLocation": "Poista sijainti",
+    "locationPrompt": "Valitse kaupunki tai käytä sijaintiasi nähdäksesi lähimmän julkaistun myymälän.",
+    "locationRequesting": "Haetaan sijaintiasi…",
+    "locationGranted": "Näytetään lähin myymälä, joka on julkaissut hinnan ja tiedot.",
+    "locationDenied": "Sijainnin käyttö estettiin. Voit silti valita kaupungin.",
+    "locationFailed": "Sijaintia ei löytynyt. Yritä uudelleen tai valitse kaupunki.",
+    "locationUnsupported": "Sijainti ei ole käytettävissä tässä selaimessa. Voit silti valita kaupungin.",
+    "locationNone": "Yksikään kauppa ei ole julkaissut myymälää 120 km säteellä. Alla olevat hinnat ovat kaupan omalta sivulta.",
+    "currencyGroup": "Hinnat valuutassa {currency}",
+    "comparePick": "Valitse enintään {count} tuotetta vertaillaksesi jokaista tietoa.",
+    "compareLimit": "Voit vertailla {count} tuotetta kerrallaan.",
+    "kmAway": "{km} km paikasta {place}",
+    "kmFromYou": "{km} km sinusta",
+    "buyerLabel": "Kuka ostaa",
+    "buyerAll": "Kaikki",
+    "buyer": {
+      "owner": "Auton omistaja",
+      "workshop": "Korjaamo"
+    },
+    "countryLabel": "Maa",
+    "countryAny": "Kaikki maat",
+    "countries": {
+      "SE": "Ruotsi",
+      "FI": "Suomi",
+      "AU": "Australia",
+      "US": "Yhdysvallat"
+    }
   }
 }

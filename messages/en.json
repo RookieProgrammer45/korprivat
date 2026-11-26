@@ -45,7 +45,8 @@
       "westernNorthernSweden": "Western & Northern Sweden",
       "about": "About",
       "terms": "Terms",
-      "dealers": "Dealers"
+      "dealers": "Dealers",
+      "parts": "Parts"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Compare car prices and driving schools.",
       "metaTitle": "Compare car prices and driving schools",
       "metaDescription": "Compare car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
-      "body": "DriveLinkUp is where you compare car prices, driving schools, and the rest of cars. Today that is published prices from schools and dealers.",
+      "body": "DriveLinkUp is where you compare driving schools, car prices, helmets, and car parts. The figure is the price the school, dealer, or shop published.",
       "primaryCta": "Find a school",
       "instructorCta": "I work at a driving school",
       "marketplaceTag": "Car prices · Driving schools",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "What to compare",
         "modeSchool": "Driving school",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Model",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "New York"
+        "placePlaceholder": "New York",
+        "modeParts": "Parts",
+        "productLabel": "Product",
+        "productPlaceholder": "Helmet"
       },
       "popular": {
         "label": "Popular:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Motorcycle · A",
           "heavy": "Heavy vehicles",
-          "dealers": "Vehicle prices"
+          "dealers": "Vehicle prices",
+          "parts": "Parts and accessories"
         }
       },
       "lead": "Free. You pay the school's price.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Vehicle",
         "from": "from {price}",
         "lessonFallback": "Published lesson prices",
-        "vehicleFallback": "Published vehicle prices"
-      }
+        "vehicleFallback": "Published vehicle prices",
+        "parts": "Parts",
+        "partsFallback": "Published shop prices"
+      },
+      "titleParts": "Compare parts and helmets."
     },
     "quickLinks": {
       "label": "Start with",
@@ -4053,5 +4062,62 @@
       "used": "Used"
     },
     "msrp": "MSRP"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Compare car parts, motorbikes and accessories",
+      "description": "Compare helmets, spare parts and car accessories. The price and specifications come from the seller's own page."
+    },
+    "eyebrow": "Parts",
+    "title": "Compare parts and accessories",
+    "lead": "A car owner and a workshop compare the price and specifications a shop published. DriveLinkUp does not sell the product.",
+    "queryLabel": "Product",
+    "queryPlaceholder": "Brake pads",
+    "kindLabel": "Type",
+    "kindAll": "All",
+    "kind": {
+      "part": "Spare part",
+      "motorcycle": "Motorbike",
+      "accessory": "Accessory"
+    },
+    "filter": "Show",
+    "sourceNote": "The price and specifications are what the seller published. DriveLinkUp has not checked the product.",
+    "empty": "No seller has published that product with a price and specifications yet.",
+    "openSite": "At {seller}",
+    "placeLabel": "Place",
+    "placePlaceholder": "New York",
+    "compareTitle": "Specifications",
+    "compareLead": "Every line is what the shop published. DriveLinkUp does not choose a best helmet.",
+    "nearest": "Nearest store",
+    "noNearby": "No shop has published a store near that place with a price and specifications.",
+    "cityAny": "Any place",
+    "useMyLocation": "Use my location",
+    "clearLocation": "Clear location",
+    "locationPrompt": "Choose a city, or use your location to see the nearest published store.",
+    "locationRequesting": "Finding your location…",
+    "locationGranted": "Showing the nearest store that published a price and specifications.",
+    "locationDenied": "Location access was denied. You can still choose a city.",
+    "locationFailed": "We could not find your location. Try again, or choose a city.",
+    "locationUnsupported": "Location is not available in this browser. You can still choose a city.",
+    "locationNone": "No shop has published a store within 120 km. The prices below are from each shop's own page.",
+    "currencyGroup": "Prices in {currency}",
+    "comparePick": "Choose up to {count} products to compare every specification.",
+    "compareLimit": "You can compare {count} products at a time.",
+    "kmAway": "{km} km from {place}",
+    "kmFromYou": "{km} km from you",
+    "buyerLabel": "Who is buying",
+    "buyerAll": "Everyone",
+    "buyer": {
+      "owner": "Car owner",
+      "workshop": "Workshop"
+    },
+    "countryLabel": "Country",
+    "countryAny": "Any country",
+    "countries": {
+      "SE": "Sweden",
+      "FI": "Finland",
+      "AU": "Australia",
+      "US": "United States"
+    }
   }
 }

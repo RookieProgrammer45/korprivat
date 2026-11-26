@@ -45,7 +45,8 @@
       "westernNorthernSweden": "Västra och norra Sverige",
       "about": "Om oss",
       "terms": "Villkor",
-      "dealers": "Bilhandlare"
+      "dealers": "Bilhandlare",
+      "parts": "Reservdelar"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Jämför bilpriser och trafikskolor.",
       "metaTitle": "Jämför bilpriser och trafikskolor",
       "metaDescription": "Jämför bilpriser och trafikskolor. Priset är det företaget publicerat. Gratis katalog för alla.",
-      "body": "DriveLinkUp är stället där du jämför bilpriser, trafikskolor och sådant som hör till bilen. I dag är det publicerade priser från skolor och handlare.",
+      "body": "DriveLinkUp är platsen där du jämför trafikskolor, bilpriser, hjälmar och reservdelar. Siffran är det pris skolan, handlaren eller butiken har publicerat.",
       "primaryCta": "Hitta en skola",
       "instructorCta": "Jag undervisar på en trafikskola",
       "marketplaceTag": "Bilpriser · Trafikskolor",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "Vad vill du jämföra",
         "modeSchool": "Körskola",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Modell",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "New York"
+        "placePlaceholder": "New York",
+        "modeParts": "Reservdelar",
+        "productLabel": "Produkt",
+        "productPlaceholder": "Hjälm"
       },
       "popular": {
         "label": "Populärt:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Motorcykel · A",
           "heavy": "Tung trafik",
-          "dealers": "Bilpriser"
+          "dealers": "Bilpriser",
+          "parts": "Reservdelar"
         }
       },
       "lead": "Gratis. Du betalar skolans pris.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Fordon",
         "from": "från {price}",
         "lessonFallback": "Publicerade lektionspriser",
-        "vehicleFallback": "Publicerade fordonspriser"
-      }
+        "vehicleFallback": "Publicerade fordonspriser",
+        "parts": "Reservdelar",
+        "partsFallback": "Publicerade butikspriser"
+      },
+      "titleParts": "Jämför reservdelar och hjälmar."
     },
     "quickLinks": {
       "label": "Börja med",
@@ -4053,5 +4062,62 @@
       "used": "Begagnad"
     },
     "msrp": "Rek. pris"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Jämför reservdelar, MC och tillbehör",
+      "description": "Jämför hjälmar, reservdelar och biltillbehör. Pris och specifikation kommer från butikens egen sida."
+    },
+    "eyebrow": "Reservdelar",
+    "title": "Jämför reservdelar och tillbehör",
+    "lead": "En bilägare och en verkstad jämför priset och specifikationen som butiken har publicerat. DriveLinkUp säljer inte produkten.",
+    "queryLabel": "Produkt",
+    "queryPlaceholder": "Bromsbelägg",
+    "kindLabel": "Typ",
+    "kindAll": "Alla",
+    "kind": {
+      "part": "Reservdel",
+      "motorcycle": "Motorcykel",
+      "accessory": "Tillbehör"
+    },
+    "filter": "Visa",
+    "sourceNote": "Pris och specifikation är det butiken publicerat. DriveLinkUp har inte granskat produkten.",
+    "empty": "Ingen butik har publicerat den produkten med pris och specifikation ännu.",
+    "openSite": "Hos {seller}",
+    "placeLabel": "Plats",
+    "placePlaceholder": "New York",
+    "compareTitle": "Specifikationer",
+    "compareLead": "Varje rad är vad butiken publicerat. DriveLinkUp väljer inte en bästa hjälm.",
+    "nearest": "Närmaste butik",
+    "noNearby": "Ingen butik har publicerat en butik nära den platsen med pris och specifikation.",
+    "cityAny": "Alla platser",
+    "useMyLocation": "Använd min plats",
+    "clearLocation": "Rensa plats",
+    "locationPrompt": "Välj en stad, eller använd din plats för att se närmaste publicerade butik.",
+    "locationRequesting": "Hämtar din plats…",
+    "locationGranted": "Visar närmaste butik som har publicerat pris och specifikation.",
+    "locationDenied": "Platstillstånd nekades. Du kan fortfarande välja stad.",
+    "locationFailed": "Vi kunde inte hitta din plats. Försök igen, eller välj en stad.",
+    "locationUnsupported": "Plats är inte tillgängligt i den här webbläsaren. Du kan fortfarande välja stad.",
+    "locationNone": "Ingen butik har publicerat en butik inom 120 km. Priserna nedan kommer från butikens egen sida.",
+    "currencyGroup": "Priser i {currency}",
+    "comparePick": "Välj upp till {count} produkter för att jämföra varje specifikation.",
+    "compareLimit": "Du kan jämföra {count} produkter åt gången.",
+    "kmAway": "{km} km från {place}",
+    "kmFromYou": "{km} km från dig",
+    "buyerLabel": "Vem handlar",
+    "buyerAll": "Alla",
+    "buyer": {
+      "owner": "Bilägare",
+      "workshop": "Verkstad"
+    },
+    "countryLabel": "Land",
+    "countryAny": "Alla länder",
+    "countries": {
+      "SE": "Sverige",
+      "FI": "Finland",
+      "AU": "Australien",
+      "US": "USA"
+    }
   }
 }

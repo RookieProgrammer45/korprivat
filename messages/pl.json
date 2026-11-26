@@ -45,7 +45,8 @@
       "westernNorthernSweden": "Zachodnia i północna Szwecja",
       "about": "O nas",
       "terms": "Regulamin",
-      "dealers": "Dealerzy"
+      "dealers": "Dealerzy",
+      "parts": "Części"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Porównaj ceny samochodów i szkoły jazdy.",
       "metaTitle": "Porównaj ceny samochodów i szkoły jazdy",
       "metaDescription": "Porównaj ceny samochodów i szkoły jazdy. Cena jest tą, którą firma opublikowała. Bezpłatny katalog dla wszystkich.",
-      "body": "DriveLinkUp to miejsce, w którym porównujesz ceny samochodów, szkoły jazdy i to, co wiąże się z samochodem. Dziś są to ceny opublikowane przez szkoły i dealerów.",
+      "body": "DriveLinkUp to miejsce, w którym porównujesz szkoły jazdy, ceny samochodów, kaski i części. Liczba to cena opublikowana przez szkołę, dealera albo sklep.",
       "primaryCta": "Znajdź szkołę",
       "instructorCta": "Pracuję w szkole jazdy",
       "marketplaceTag": "Ceny aut · Szkoły jazdy",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "Co chcesz porównać",
         "modeSchool": "Szkoła jazdy",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Model",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "Nowy Jork"
+        "placePlaceholder": "Nowy Jork",
+        "modeParts": "Części",
+        "productLabel": "Produkt",
+        "productPlaceholder": "Kask"
       },
       "popular": {
         "label": "Popularne:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Motocykl · A",
           "heavy": "Pojazdy ciężkie",
-          "dealers": "Ceny aut"
+          "dealers": "Ceny aut",
+          "parts": "Części"
         }
       },
       "lead": "Bezpłatnie. Płacisz cenę szkoły.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Pojazd",
         "from": "od {price}",
         "lessonFallback": "Opublikowane ceny lekcji",
-        "vehicleFallback": "Opublikowane ceny pojazdów"
-      }
+        "vehicleFallback": "Opublikowane ceny pojazdów",
+        "parts": "Części",
+        "partsFallback": "Opublikowane ceny sklepów"
+      },
+      "titleParts": "Porównaj części i kaski."
     },
     "quickLinks": {
       "label": "Zacznij od",
@@ -4053,5 +4062,62 @@
       "used": "Używany"
     },
     "msrp": "Cena katalogowa"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Porównaj części, motocykle i akcesoria",
+      "description": "Porównuj kaski, części i akcesoria samochodowe. Cena i dane pochodzą ze strony sprzedawcy."
+    },
+    "eyebrow": "Części",
+    "title": "Porównaj części i akcesoria",
+    "lead": "Właściciel samochodu i warsztat porównują cenę i specyfikację opublikowane przez sklep. DriveLinkUp nie sprzedaje produktu.",
+    "queryLabel": "Produkt",
+    "queryPlaceholder": "Klocki hamulcowe",
+    "kindLabel": "Rodzaj",
+    "kindAll": "Wszystkie",
+    "kind": {
+      "part": "Część",
+      "motorcycle": "Motocykl",
+      "accessory": "Akcesorium"
+    },
+    "filter": "Pokaż",
+    "sourceNote": "Cena i dane są tym, co opublikował sprzedawca. DriveLinkUp nie sprawdził produktu.",
+    "empty": "Żaden sprzedawca nie opublikował jeszcze tego produktu z ceną i danymi.",
+    "openSite": "U {seller}",
+    "placeLabel": "Miejsce",
+    "placePlaceholder": "New York",
+    "compareTitle": "Specyfikacja",
+    "compareLead": "Każdy wiersz pochodzi ze strony sklepu. DriveLinkUp nie wybiera najlepszego kasku.",
+    "nearest": "Najbliższy sklep",
+    "noNearby": "Żaden sklep nie opublikował sklepu w pobliżu tego miejsca z ceną i specyfikacją.",
+    "cityAny": "Wszystkie miejsca",
+    "useMyLocation": "Użyj mojej lokalizacji",
+    "clearLocation": "Wyczyść lokalizację",
+    "locationPrompt": "Wybierz miasto albo użyj swojej lokalizacji, aby zobaczyć najbliższy opublikowany sklep.",
+    "locationRequesting": "Szukanie lokalizacji…",
+    "locationGranted": "Pokazuje najbliższy sklep, który opublikował cenę i specyfikację.",
+    "locationDenied": "Odmówiono dostępu do lokalizacji. Nadal możesz wybrać miasto.",
+    "locationFailed": "Nie udało się znaleźć lokalizacji. Spróbuj ponownie albo wybierz miasto.",
+    "locationUnsupported": "Lokalizacja nie jest dostępna w tej przeglądarce. Nadal możesz wybrać miasto.",
+    "locationNone": "Żaden sklep nie opublikował sklepu w promieniu 120 km. Ceny poniżej pochodzą ze strony sklepu.",
+    "currencyGroup": "Ceny w {currency}",
+    "comparePick": "Wybierz do {count} produktów, aby porównać każdą specyfikację.",
+    "compareLimit": "Możesz porównać {count} produkty naraz.",
+    "kmAway": "{km} km od {place}",
+    "kmFromYou": "{km} km od ciebie",
+    "buyerLabel": "Kto kupuje",
+    "buyerAll": "Wszyscy",
+    "buyer": {
+      "owner": "Właściciel samochodu",
+      "workshop": "Warsztat"
+    },
+    "countryLabel": "Kraj",
+    "countryAny": "Wszystkie kraje",
+    "countries": {
+      "SE": "Szwecja",
+      "FI": "Finlandia",
+      "AU": "Australia",
+      "US": "Stany Zjednoczone"
+    }
   }
 }

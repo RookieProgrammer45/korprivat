@@ -45,7 +45,8 @@
       "westernNorthernSweden": "Vest- og Nordsverige",
       "about": "Om os",
       "terms": "Vilkår",
-      "dealers": "Bilforhandlere"
+      "dealers": "Bilforhandlere",
+      "parts": "Reservedele"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Sammenlign bilpriser og køreskoler.",
       "metaTitle": "Sammenlign bilpriser og køreskoler",
       "metaDescription": "Sammenlign bilpriser og køreskoler. Prisen er den, virksomheden har offentliggjort. Gratis katalog for alle.",
-      "body": "DriveLinkUp er stedet, hvor du sammenligner bilpriser, køreskoler og det, der hører til bilen. I dag er det offentliggjorte priser fra skoler og forhandlere.",
+      "body": "DriveLinkUp er stedet, hvor du sammenligner køreskoler, bilpriser, hjelme og reservedele. Tallet er den pris, skolen, forhandleren eller butikken har offentliggjort.",
       "primaryCta": "Find en skole",
       "instructorCta": "Jeg underviser på en køreskole",
       "marketplaceTag": "Bilpriser · Køreskoler",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "Hvad vil du sammenligne",
         "modeSchool": "Køreskole",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Model",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "New York"
+        "placePlaceholder": "New York",
+        "modeParts": "Reservedele",
+        "productLabel": "Produkt",
+        "productPlaceholder": "Hjelm"
       },
       "popular": {
         "label": "Populært:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Motorcykel · A",
           "heavy": "Tunge køretøjer",
-          "dealers": "Bilpriser"
+          "dealers": "Bilpriser",
+          "parts": "Reservedele"
         }
       },
       "lead": "Gratis. Du betaler skolens pris.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Køretøj",
         "from": "fra {price}",
         "lessonFallback": "Offentliggjorte timepriser",
-        "vehicleFallback": "Offentliggjorte køretøjspriser"
-      }
+        "vehicleFallback": "Offentliggjorte køretøjspriser",
+        "parts": "Reservedele",
+        "partsFallback": "Offentliggjorte butikspriser"
+      },
+      "titleParts": "Sammenlign reservedele og hjelme."
     },
     "quickLinks": {
       "label": "Start med",
@@ -4053,5 +4062,62 @@
       "used": "Brugt"
     },
     "msrp": "Vejl. pris"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Sammenlign reservedele, MC og tilbehør",
+      "description": "Sammenlign hjelme, reservedele og biltilbehør. Pris og specifikationer kommer fra butikkens egen side."
+    },
+    "eyebrow": "Reservedele",
+    "title": "Sammenlign reservedele og tilbehør",
+    "lead": "En bilejer og et værksted sammenligner prisen og specifikationen, butikken har offentliggjort. DriveLinkUp sælger ikke produktet.",
+    "queryLabel": "Produkt",
+    "queryPlaceholder": "Bremseklodser",
+    "kindLabel": "Type",
+    "kindAll": "Alle",
+    "kind": {
+      "part": "Reservedel",
+      "motorcycle": "Motorcykel",
+      "accessory": "Tilbehør"
+    },
+    "filter": "Vis",
+    "sourceNote": "Pris og specifikationer er det, butikken har offentliggjort. DriveLinkUp har ikke kontrolleret produktet.",
+    "empty": "Ingen butik har offentliggjort det produkt med pris og specifikationer endnu.",
+    "openSite": "Hos {seller}",
+    "placeLabel": "Sted",
+    "placePlaceholder": "New York",
+    "compareTitle": "Specifikationer",
+    "compareLead": "Hver linje er det, butikken har offentliggjort. DriveLinkUp vælger ikke en bedste hjelm.",
+    "nearest": "Nærmeste butik",
+    "noNearby": "Ingen butik har offentliggjort en butik tæt på det sted med pris og specifikation.",
+    "cityAny": "Alle steder",
+    "useMyLocation": "Brug min placering",
+    "clearLocation": "Ryd placering",
+    "locationPrompt": "Vælg en by, eller brug din placering for at se den nærmeste offentliggjorte butik.",
+    "locationRequesting": "Finder din placering…",
+    "locationGranted": "Viser den nærmeste butik, der har offentliggjort pris og specifikation.",
+    "locationDenied": "Adgang til placering blev afvist. Du kan stadig vælge en by.",
+    "locationFailed": "Vi kunne ikke finde din placering. Prøv igen, eller vælg en by.",
+    "locationUnsupported": "Placering er ikke tilgængelig i denne browser. Du kan stadig vælge en by.",
+    "locationNone": "Ingen butik har offentliggjort en butik inden for 120 km. Priserne nedenfor kommer fra butikkens egen side.",
+    "currencyGroup": "Priser i {currency}",
+    "comparePick": "Vælg op til {count} produkter for at sammenligne hver specifikation.",
+    "compareLimit": "Du kan sammenligne {count} produkter ad gangen.",
+    "kmAway": "{km} km fra {place}",
+    "kmFromYou": "{km} km fra dig",
+    "buyerLabel": "Hvem handler",
+    "buyerAll": "Alle",
+    "buyer": {
+      "owner": "Bilejer",
+      "workshop": "Værksted"
+    },
+    "countryLabel": "Land",
+    "countryAny": "Alle lande",
+    "countries": {
+      "SE": "Sverige",
+      "FI": "Finland",
+      "AU": "Australien",
+      "US": "USA"
+    }
   }
 }

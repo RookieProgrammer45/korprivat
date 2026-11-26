@@ -45,7 +45,8 @@
       "westernNorthernSweden": "Oeste y norte de Suecia",
       "about": "Sobre nosotros",
       "terms": "Términos",
-      "dealers": "Concesionarios"
+      "dealers": "Concesionarios",
+      "parts": "Recambios"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Compara precios de coches y autoescuelas.",
       "metaTitle": "Compara precios de coches y autoescuelas",
       "metaDescription": "Compara precios de coches y autoescuelas. El precio es el que publicó la empresa. Catálogo gratis para todos.",
-      "body": "DriveLinkUp es el sitio donde comparas precios de coches, autoescuelas y lo que rodea al coche. Hoy son precios publicados por escuelas y concesionarios.",
+      "body": "DriveLinkUp es el lugar donde comparas autoescuelas, precios de coches, cascos y recambios. La cifra es el precio que publicó la autoescuela, el concesionario o la tienda.",
       "primaryCta": "Buscar una autoescuela",
       "instructorCta": "Trabajo en una autoescuela",
       "marketplaceTag": "Precios de coches · Autoescuelas",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "Qué quieres comparar",
         "modeSchool": "Autoescuela",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Modelo",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "Nueva York"
+        "placePlaceholder": "Nueva York",
+        "modeParts": "Recambios",
+        "productLabel": "Producto",
+        "productPlaceholder": "Casco"
       },
       "popular": {
         "label": "Populares:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Moto · A",
           "heavy": "Vehículos pesados",
-          "dealers": "Precios"
+          "dealers": "Precios",
+          "parts": "Recambios"
         }
       },
       "lead": "Gratis. Pagas el precio de la autoescuela.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Vehículo",
         "from": "desde {price}",
         "lessonFallback": "Precios de clase publicados",
-        "vehicleFallback": "Precios de vehículos publicados"
-      }
+        "vehicleFallback": "Precios de vehículos publicados",
+        "parts": "Recambios",
+        "partsFallback": "Precios publicados por las tiendas"
+      },
+      "titleParts": "Compara recambios y cascos."
     },
     "quickLinks": {
       "label": "Empezar por",
@@ -4053,5 +4062,62 @@
       "used": "Ocasión"
     },
     "msrp": "PVP"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Compara recambios, motos y accesorios",
+      "description": "Compara cascos, recambios y accesorios de coche. El precio y las especificaciones están en la página del vendedor."
+    },
+    "eyebrow": "Recambios",
+    "title": "Compara recambios y accesorios",
+    "lead": "Un conductor y un taller comparan el precio y las especificaciones que publicó la tienda. DriveLinkUp no vende el producto.",
+    "queryLabel": "Producto",
+    "queryPlaceholder": "Pastillas de freno",
+    "kindLabel": "Tipo",
+    "kindAll": "Todos",
+    "kind": {
+      "part": "Recambio",
+      "motorcycle": "Moto",
+      "accessory": "Accesorio"
+    },
+    "filter": "Mostrar",
+    "sourceNote": "El precio y las especificaciones son los que publicó el vendedor. DriveLinkUp no ha comprobado el producto.",
+    "empty": "Ningún vendedor ha publicado todavía ese producto con precio y especificaciones.",
+    "openSite": "En {seller}",
+    "placeLabel": "Lugar",
+    "placePlaceholder": "New York",
+    "compareTitle": "Especificaciones",
+    "compareLead": "Cada línea es lo que publicó la tienda. DriveLinkUp no elige un mejor casco.",
+    "nearest": "Tienda más cercana",
+    "noNearby": "Ninguna tienda ha publicado un local cerca de ese lugar con precio y especificaciones.",
+    "cityAny": "Cualquier lugar",
+    "useMyLocation": "Usar mi ubicación",
+    "clearLocation": "Borrar ubicación",
+    "locationPrompt": "Elige una ciudad o usa tu ubicación para ver la tienda publicada más cercana.",
+    "locationRequesting": "Buscando tu ubicación…",
+    "locationGranted": "Muestra la tienda más cercana que publicó un precio y especificaciones.",
+    "locationDenied": "Se denegó el acceso a la ubicación. Aún puedes elegir una ciudad.",
+    "locationFailed": "No se encontró tu ubicación. Inténtalo de nuevo o elige una ciudad.",
+    "locationUnsupported": "La ubicación no está disponible en este navegador. Aún puedes elegir una ciudad.",
+    "locationNone": "Ninguna tienda ha publicado un local en un radio de 120 km. Los precios de abajo vienen de la página de la tienda.",
+    "currencyGroup": "Precios en {currency}",
+    "comparePick": "Elige hasta {count} productos para comparar cada especificación.",
+    "compareLimit": "Puedes comparar {count} productos a la vez.",
+    "kmAway": "{km} km de {place}",
+    "kmFromYou": "{km} km de ti",
+    "buyerLabel": "Quién compra",
+    "buyerAll": "Todos",
+    "buyer": {
+      "owner": "Conductor",
+      "workshop": "Taller"
+    },
+    "countryLabel": "País",
+    "countryAny": "Cualquier país",
+    "countries": {
+      "SE": "Suecia",
+      "FI": "Finlandia",
+      "AU": "Australia",
+      "US": "Estados Unidos"
+    }
   }
 }

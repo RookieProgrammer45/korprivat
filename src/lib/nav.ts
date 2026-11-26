@@ -12,6 +12,7 @@ export interface NavItem {
     | 'nav.findProvider'
     | 'nav.heavyVehicles'
     | 'nav.dealers'
+    | 'nav.parts'
     | 'nav.howItWorks'
     | 'nav.licenceCategories'
     | 'nav.drivingInstructor'
@@ -88,6 +89,13 @@ export const navItems: NavItem[] = [
     href: '/bilhandlare',
     group: 'primary',
     order: 3,
+  },
+  {
+    label: 'Parts',
+    labelKey: 'nav.parts',
+    href: '/reservdelar',
+    group: 'primary',
+    order: 4,
   },
   // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
   // primary bar — keeps marketing chrome short once a session exists.

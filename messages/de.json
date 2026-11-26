@@ -45,7 +45,8 @@
       "westernNorthernSweden": "West- und Nordschweden",
       "about": "Über uns",
       "terms": "Bedingungen",
-      "dealers": "Autohändler"
+      "dealers": "Autohändler",
+      "parts": "Ersatzteile"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Autopreise und Fahrschulen vergleichen.",
       "metaTitle": "Autopreise und Fahrschulen vergleichen",
       "metaDescription": "Autopreise und Fahrschulen vergleichen. Der Preis ist der, den das Unternehmen veröffentlicht hat. Kostenloser Katalog für alle.",
-      "body": "DriveLinkUp ist der Ort, an dem du Autopreise, Fahrschulen und das, was zum Auto gehört, vergleichst. Heute sind das veröffentlichte Preise von Schulen und Händlern.",
+      "body": "DriveLinkUp ist der Ort, an dem du Fahrschulen, Autopreise, Helme und Autoteile vergleichst. Die Zahl ist der Preis, den die Schule, der Händler oder der Shop veröffentlicht hat.",
       "primaryCta": "Schule finden",
       "instructorCta": "Ich arbeite an einer Fahrschule",
       "marketplaceTag": "Autopreise · Fahrschulen",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "Was möchtest du vergleichen",
         "modeSchool": "Fahrschule",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Modell",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "New York"
+        "placePlaceholder": "New York",
+        "modeParts": "Teile",
+        "productLabel": "Produkt",
+        "productPlaceholder": "Helm"
       },
       "popular": {
         "label": "Beliebt:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Motorrad · A",
           "heavy": "Schwere Fahrzeuge",
-          "dealers": "Fahrzeugpreise"
+          "dealers": "Fahrzeugpreise",
+          "parts": "Ersatzteile"
         }
       },
       "lead": "Kostenlos. Sie zahlen den Preis der Schule.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Fahrzeug",
         "from": "ab {price}",
         "lessonFallback": "Veröffentlichte Fahrstundenpreise",
-        "vehicleFallback": "Veröffentlichte Fahrzeugpreise"
-      }
+        "vehicleFallback": "Veröffentlichte Fahrzeugpreise",
+        "parts": "Teile",
+        "partsFallback": "Veröffentlichte Shop-Preise"
+      },
+      "titleParts": "Teile und Helme vergleichen."
     },
     "quickLinks": {
       "label": "Starten mit",
@@ -4053,5 +4062,62 @@
       "used": "Gebraucht"
     },
     "msrp": "UVP"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Ersatzteile, Motorräder und Zubehör vergleichen",
+      "description": "Vergleiche Helme, Ersatzteile und Autozubehör. Preis und Angaben stehen auf der Seite des Händlers."
+    },
+    "eyebrow": "Ersatzteile",
+    "title": "Ersatzteile und Zubehör vergleichen",
+    "lead": "Ein Autobesitzer und eine Werkstatt vergleichen den Preis und die Angaben, die der Shop veröffentlicht hat. DriveLinkUp verkauft das Produkt nicht.",
+    "queryLabel": "Produkt",
+    "queryPlaceholder": "Bremsbeläge",
+    "kindLabel": "Art",
+    "kindAll": "Alle",
+    "kind": {
+      "part": "Ersatzteil",
+      "motorcycle": "Motorrad",
+      "accessory": "Zubehör"
+    },
+    "filter": "Zeigen",
+    "sourceNote": "Preis und Angaben sind das, was der Händler veröffentlicht hat. DriveLinkUp hat das Produkt nicht geprüft.",
+    "empty": "Noch hat kein Händler dieses Produkt mit Preis und Angaben veröffentlicht.",
+    "openSite": "Bei {seller}",
+    "placeLabel": "Ort",
+    "placePlaceholder": "New York",
+    "compareTitle": "Angaben",
+    "compareLead": "Jede Zeile stammt von der Seite des Geschäfts. DriveLinkUp wählt keinen besten Helm.",
+    "nearest": "Nächstes Geschäft",
+    "noNearby": "Kein Geschäft hat in der Nähe dieses Ortes ein Produkt mit Preis und Angaben veröffentlicht.",
+    "cityAny": "Alle Orte",
+    "useMyLocation": "Meinen Standort verwenden",
+    "clearLocation": "Standort löschen",
+    "locationPrompt": "Wähle einen Ort oder verwende deinen Standort, um das nächste veröffentlichte Geschäft zu sehen.",
+    "locationRequesting": "Standort wird gesucht…",
+    "locationGranted": "Zeigt das nächste Geschäft, das Preis und Angaben veröffentlicht hat.",
+    "locationDenied": "Standortzugriff wurde abgelehnt. Du kannst weiterhin einen Ort wählen.",
+    "locationFailed": "Der Standort wurde nicht gefunden. Versuche es erneut oder wähle einen Ort.",
+    "locationUnsupported": "Standort ist in diesem Browser nicht verfügbar. Du kannst weiterhin einen Ort wählen.",
+    "locationNone": "Kein Geschäft hat ein Ladenlokal innerhalb von 120 km veröffentlicht. Die Preise unten stehen auf der Seite des Geschäfts.",
+    "currencyGroup": "Preise in {currency}",
+    "comparePick": "Wähle bis zu {count} Produkte, um jede Angabe zu vergleichen.",
+    "compareLimit": "Du kannst {count} Produkte gleichzeitig vergleichen.",
+    "kmAway": "{km} km von {place}",
+    "kmFromYou": "{km} km von dir",
+    "buyerLabel": "Wer kauft",
+    "buyerAll": "Alle",
+    "buyer": {
+      "owner": "Autobesitzer",
+      "workshop": "Werkstatt"
+    },
+    "countryLabel": "Land",
+    "countryAny": "Alle Länder",
+    "countries": {
+      "SE": "Schweden",
+      "FI": "Finnland",
+      "AU": "Australien",
+      "US": "Vereinigte Staaten"
+    }
   }
 }

@@ -45,7 +45,8 @@
       "westernNorthernSweden": "West- en Noord-Zweden",
       "about": "Over ons",
       "terms": "Voorwaarden",
-      "dealers": "Autodealers"
+      "dealers": "Autodealers",
+      "parts": "Onderdelen"
     },
     "language": {
       "sv": "Svenska",
@@ -2402,7 +2403,7 @@
       "title": "Vergelijk autoprijzen en rijscholen.",
       "metaTitle": "Vergelijk autoprijzen en rijscholen",
       "metaDescription": "Vergelijk autoprijzen en rijscholen. De prijs is de prijs die het bedrijf heeft gepubliceerd. Gratis catalogus voor iedereen.",
-      "body": "DriveLinkUp is de plek waar je autoprijzen, rijscholen en alles rond de auto vergelijkt. Vandaag zijn dat gepubliceerde prijzen van scholen en dealers.",
+      "body": "DriveLinkUp is de plek waar je rijscholen, autoprijzen, helmen en auto-onderdelen vergelijkt. Het bedrag is de prijs die de school, de dealer of de winkel heeft gepubliceerd.",
       "primaryCta": "Vind een rijschool",
       "instructorCta": "Ik werk bij een rijschool",
       "marketplaceTag": "Autoprijzen · Rijscholen",
@@ -2473,7 +2474,8 @@
           "paris": "Paris",
           "berlin": "Berlin",
           "roma": "Roma",
-          "warszawa": "Warszawa"
+          "warszawa": "Warszawa",
+          "newYork": "New York"
         },
         "modeLabel": "Wat wil je vergelijken",
         "modeSchool": "Rijschool",
@@ -2488,7 +2490,10 @@
         },
         "modelLabel": "Model",
         "modelPlaceholder": "Volvo",
-        "placePlaceholder": "New York"
+        "placePlaceholder": "New York",
+        "modeParts": "Onderdelen",
+        "productLabel": "Product",
+        "productPlaceholder": "Helm"
       },
       "popular": {
         "label": "Populair:",
@@ -2503,7 +2508,8 @@
           "paris": "Paris",
           "categoryA": "Motor · A",
           "heavy": "Zware voertuigen",
-          "dealers": "Voertuigprijzen"
+          "dealers": "Voertuigprijzen",
+          "parts": "Onderdelen"
         }
       },
       "lead": "Gratis. Je betaalt de prijs van de rijschool.",
@@ -2520,8 +2526,11 @@
         "vehicle": "Voertuig",
         "from": "vanaf {price}",
         "lessonFallback": "Gepubliceerde lesprijzen",
-        "vehicleFallback": "Gepubliceerde voertuigprijzen"
-      }
+        "vehicleFallback": "Gepubliceerde voertuigprijzen",
+        "parts": "Onderdelen",
+        "partsFallback": "Gepubliceerde winkelprijzen"
+      },
+      "titleParts": "Vergelijk onderdelen en helmen."
     },
     "quickLinks": {
       "label": "Begin met",
@@ -4053,5 +4062,62 @@
       "used": "Gebruikt"
     },
     "msrp": "Adviesprijs"
+  },
+  "partsPage": {
+    "meta": {
+      "title": "Vergelijk onderdelen, motoren en accessoires",
+      "description": "Vergelijk helmen, onderdelen en auto-accessoires. Prijs en specificaties staan op de pagina van de verkoper."
+    },
+    "eyebrow": "Onderdelen",
+    "title": "Vergelijk onderdelen en accessoires",
+    "lead": "Een autobezitter en een werkplaats vergelijken de prijs en de specificaties die de winkel heeft gepubliceerd. DriveLinkUp verkoopt het product niet.",
+    "queryLabel": "Product",
+    "queryPlaceholder": "Remblokken",
+    "kindLabel": "Soort",
+    "kindAll": "Alles",
+    "kind": {
+      "part": "Onderdeel",
+      "motorcycle": "Motor",
+      "accessory": "Accessoire"
+    },
+    "filter": "Toon",
+    "sourceNote": "Prijs en specificaties zijn wat de verkoper heeft gepubliceerd. DriveLinkUp heeft het product niet gecontroleerd.",
+    "empty": "Nog geen verkoper heeft dit product met prijs en specificaties gepubliceerd.",
+    "openSite": "Bij {seller}",
+    "placeLabel": "Plaats",
+    "placePlaceholder": "New York",
+    "compareTitle": "Specificaties",
+    "compareLead": "Elke regel is wat de winkel heeft gepubliceerd. DriveLinkUp kiest geen beste helm.",
+    "nearest": "Dichtstbijzijnde winkel",
+    "noNearby": "Geen winkel heeft bij die plaats een product met prijs en specificaties gepubliceerd.",
+    "cityAny": "Alle plaatsen",
+    "useMyLocation": "Gebruik mijn locatie",
+    "clearLocation": "Locatie wissen",
+    "locationPrompt": "Kies een plaats, of gebruik je locatie om de dichtstbijzijnde gepubliceerde winkel te zien.",
+    "locationRequesting": "Locatie wordt gezocht…",
+    "locationGranted": "Toont de dichtstbijzijnde winkel die een prijs en specificaties heeft gepubliceerd.",
+    "locationDenied": "Locatietoegang is geweigerd. Je kunt nog steeds een plaats kiezen.",
+    "locationFailed": "Je locatie is niet gevonden. Probeer opnieuw, of kies een plaats.",
+    "locationUnsupported": "Locatie is niet beschikbaar in deze browser. Je kunt nog steeds een plaats kiezen.",
+    "locationNone": "Geen winkel heeft een winkel binnen 120 km gepubliceerd. De prijzen hieronder komen van de eigen pagina van de winkel.",
+    "currencyGroup": "Prijzen in {currency}",
+    "comparePick": "Kies tot {count} producten om elke specificatie te vergelijken.",
+    "compareLimit": "Je kunt {count} producten tegelijk vergelijken.",
+    "kmAway": "{km} km van {place}",
+    "kmFromYou": "{km} km van jou",
+    "buyerLabel": "Wie koopt",
+    "buyerAll": "Iedereen",
+    "buyer": {
+      "owner": "Autobezitter",
+      "workshop": "Werkplaats"
+    },
+    "countryLabel": "Land",
+    "countryAny": "Alle landen",
+    "countries": {
+      "SE": "Zweden",
+      "FI": "Finland",
+      "AU": "Australië",
+      "US": "Verenigde Staten"
+    }
   }
 }
