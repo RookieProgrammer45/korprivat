@@ -10,6 +10,7 @@ import {
   type ConversationMessage,
   ReadResponse,
 } from '@/lib/contracts/messaging';
+import { intlLocale } from '@/lib/intl-locale';
 import { BookingContextCard } from './booking-context-card';
 import { MessageComposer } from './message-composer';
 import { MessageReportDialog } from './message-report-dialog';
@@ -111,7 +112,7 @@ function MessageBubble({
 function formatTime(iso: string, locale: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',

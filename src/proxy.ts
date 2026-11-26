@@ -1,0 +1,62 @@
+//
+// Must live under src/ (same convention as instrumentation.ts). Next 16
+// webpack production builds only scan the parent of src/app, so a root-level
+// proxy.ts is compiled in `next dev` and skipped on Vercel — locale prefixes
+// then 404 and CSP never ships.
+//
+// Do NOT create `middleware.ts`. This file owns:
+//   - CSP with per-request nonce
+//   - frame-ancestors 'none'
+//   - Optional edge checks (compose carefully; prefer page/API guards for auth)
+//
+// CSP is built in `src/lib/csp.ts`: script-src stays strict (nonce +
+// 'strict-dynamic'). style-src allows 'unsafe-inline' for Radix/shadcn.
+// Posture locked by tests/unit/csp.test.ts.
+
+import { type NextRequest, NextResponse } from 'next/server';
+import { buildCsp, createCspNonce } from '@/lib/csp';
+import { cspExtraSources } from '@/lib/csp-extra-sources';
+import { LOCALE_HEADER, localeProxyDecision } from '@/lib/seo/locale-path';
+
+export function proxy(request: NextRequest) {
+  const nonce = createCspNonce();
+  const isDev = process.env.NODE_ENV === 'development';
+
+  // Edge contributions (rate-limit, etc.) may be added here intentionally.
+  // Auth / verification redirects stay in src/lib/dashboard-guard.ts and
+  // signup-resume — not in this file unless there is a clear edge need.
+
+  const csp = buildCsp(nonce, isDev, process.env.NEXT_PUBLIC_API_URL ?? '', cspExtraSources);
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-nonce', nonce);
+  requestHeaders.set('Content-Security-Policy', csp);
+
+  const decision = localeProxyDecision(request.nextUrl.pathname);
+  if (decision.action === 'redirect') {
+    const url = request.nextUrl.clone();
+    url.pathname = decision.pathname;
+    const response = NextResponse.redirect(url, 308);
+    response.headers.set('Content-Security-Policy', csp);
+    return response;
+  }
+  if (decision.action === 'rewrite') {
+    requestHeaders.set(LOCALE_HEADER, decision.locale);
+    const url = request.nextUrl.clone();
+    url.pathname = decision.pathname;
+    const response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+    response.headers.set('Content-Security-Policy', csp);
+    return response;
+  }
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  response.headers.set('Content-Security-Policy', csp);
+  return response;
+}
+
+export const config = {
+  // Prefetch must run this proxy. The App Router caches a prefetched locale
+  // URL, and skipping the rewrite stored a 404. Choosing a language then
+  // fell through to a full document load instead of swapping the page.
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+};

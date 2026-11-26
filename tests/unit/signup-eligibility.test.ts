@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { SignupStart } from '@/lib/contracts/signup';
 import {
   ageYearsFromDateOfBirth,
+  isIndependentInstructorSignupOpen,
   isInstructorLicenseTenureEligible,
   isLearnerAgeEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
@@ -23,6 +25,27 @@ describe('signup eligibility', () => {
     expect(isInstructorLicenseTenureEligible(4)).toBe(false);
     expect(isInstructorLicenseTenureEligible(5)).toBe(true);
     expect(isInstructorLicenseTenureEligible(12)).toBe(true);
+  });
+
+  it('keeps independent instructor signup closed in the Nordics', () => {
+    expect(isIndependentInstructorSignupOpen()).toBe(false);
+    expect(
+      SignupStart.safeParse({
+        path: 'INSTRUCTOR',
+        city: 'Stockholm',
+        licenseHeldYears: 8,
+      }).success,
+    ).toBe(false);
+  });
+
+  it('lets a learner start directory signup without a date of birth', () => {
+    expect(SignupStart.safeParse({ path: 'LEARNER' }).success).toBe(true);
+  });
+
+  it('still rejects an underage date of birth if one is sent', () => {
+    expect(SignupStart.safeParse({ path: 'LEARNER', dateOfBirth: '2015-01-01' }).success).toBe(
+      false,
+    );
   });
 
   it('maps signup paths to roles and provider roles', () => {

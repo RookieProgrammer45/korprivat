@@ -8,9 +8,25 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
-export const TERMS_VERSION = '2026-10-15';
+export const TERMS_VERSION = '2026-10-27';
 
-const SECTION_IDS = ['0', '1', '2', '3', '4', '5', '6', '7'] as const;
+const SECTION_IDS = [
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+] as const;
 
 export function TermsContent() {
   const t = useTranslations('termsPage');

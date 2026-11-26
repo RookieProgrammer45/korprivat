@@ -7,13 +7,18 @@ authoritative. Read it before every task.
 
 **Decisions:** [ADR-001 Sweden-first](docs/decisions/ADR-001-sweden-first.md) ·
 [ADR-002 better-auth](docs/decisions/ADR-002-better-auth.md) ·
-[ADR-003 canonical webhook host](docs/decisions/ADR-003-canonical-webhook-host.md)
+[ADR-003 canonical webhook host](docs/decisions/ADR-003-canonical-webhook-host.md) ·
+[ADR-006 directory-first](docs/decisions/ADR-006-directory-first.md) ·
+[ADR-007 store shell](docs/decisions/ADR-007-store-shell.md)
 
 ## Invariants (never violate)
 
 1. **Verified DOB is the only age gate for booking.** Authoritative DOB is
    written only by the Didit webhook (or documented verification writer). Never
-   treat a signup-form DOB as verified for booking eligibility.
+   treat a signup-form DOB as verified for booking eligibility. Do not collect
+   claimed age or run Didit until booking is on for schools globally
+   (`BOOKING_CREATION_ENABLED`). The live directory does not age-gate browsing
+   or contacting a school.
 2. **Bookings cannot overlap.** Enforced by a Postgres exclusion constraint on
    the existing `Booking` table (`startsAt`/`endsAt`). Never check overlap in
    application code alone.
@@ -33,6 +38,11 @@ authoritative. Read it before every task.
 7. **Handledare enrollment for supervised practice is a legal artefact.** Model
    `HandledareEnrollment` (not parental guardian consent). Never hard-delete;
    mark revoked/expired only.
+8. **Keep the booking API.** Customers use the school contact button until
+   the directory has shown demand and schools use booking systems the API
+   can connect to. Both are still false. Leave `BOOKING_CREATION_ENABLED`
+   unset. Do not delete booking, checkout, or connector code because the
+   directory does not call it ([ADR-006](docs/decisions/ADR-006-directory-first.md)).
 
 ## Bounded contexts
 
@@ -137,6 +147,21 @@ override.
 3. State which invariants above apply.
 4. If the task isn't covered by a spec or ADR, stop and ask — don't invent.
 5. After writing, run `npm run typecheck && npm test` and fix failures.
+
+## UI and design
+
+- Every UI change follows `.cursor/rules/design-system.mdc` (auto-attached for
+  `src/app/**`, `src/components/**` and the CSS files). Product honesty rules in
+  `.cursor/rules/drivelinkup.mdc` win on conflict.
+- Reference implementation: `src/components/custom/home-hero.tsx`.
+- Workflow: `/design-plan` (Plan mode, writes `tasks/design-plan.md`) →
+  `/design-apply <task>` (Agent mode, one section per run). Commands live in
+  `.cursor/commands/`.
+- Visual references come from the Mobbin MCP (`.cursor/mcp.json`).
+- Method: Stanford d.school design thinking applied to service design (§12) and
+  the Laws of UX (§13). Every plan and report names the laws it used.
+- Copy: DriveLinkUp is free for all users. Never phrase it as free only for
+  learners.
 
 ## Never
 

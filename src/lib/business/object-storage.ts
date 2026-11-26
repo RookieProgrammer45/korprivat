@@ -2,6 +2,7 @@
 // Requires BLOB_READ_WRITE_TOKEN (Vercel Blob store).
 
 import 'server-only';
+import { randomUUID } from 'node:crypto';
 import { put } from '@vercel/blob';
 
 export type StoredObject = {
@@ -31,6 +32,8 @@ function safeFilename(raw: string): string {
 
 /**
  * Store a user upload. `folder` scopes the pathname (e.g. `photos`, `licenses`).
+ * Paths include a random UUID so the public URL is not guessable. Licence
+ * upload responses must not echo `url` back to the browser.
  */
 export async function storeUserUpload(
   file: File,
@@ -38,7 +41,7 @@ export async function storeUserUpload(
 ): Promise<StoredObject> {
   const filename = safeFilename(options.filename || file.name || 'upload');
   const contentType = options.contentType || file.type || 'application/octet-stream';
-  const pathname = `${options.folder}/${Date.now()}-${filename}`;
+  const pathname = `${options.folder}/${randomUUID()}-${Date.now()}-${filename}`;
 
   if (!process.env.BLOB_READ_WRITE_TOKEN) {
     throw new ObjectStorageError('upload_failed', 'No object storage configured');

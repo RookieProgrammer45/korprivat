@@ -52,3 +52,19 @@ export function resolveInstructorCoords(
   const key = row.city.trim().toLowerCase();
   return INSTRUCTOR_CITY_COORDS[key] ?? null;
 }
+
+function displayCityFromKey(key: string): string {
+  return key.charAt(0).toUpperCase() + key.slice(1);
+}
+
+/** Closest known Swedish city centre, or null when the user is too far away. */
+export function nearestKnownCity(lat: number, lng: number, maxKm = 50): string | null {
+  let best: { name: string; km: number } | null = null;
+  for (const [key, coords] of Object.entries(INSTRUCTOR_CITY_COORDS)) {
+    const km = haversineKm(lat, lng, coords.latitude, coords.longitude);
+    if (!best || km < best.km) {
+      best = { name: displayCityFromKey(key), km };
+    }
+  }
+  return best && best.km <= maxKm ? best.name : null;
+}

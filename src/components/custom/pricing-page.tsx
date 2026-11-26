@@ -44,7 +44,7 @@ export function PricingPage() {
         <p className="text-muted-foreground">{t('notes.body')}</p>
         <div className="flex flex-col gap-3 pt-2 sm:flex-row">
           <Button asChild>
-            <Link href="/instructors">{t('cta.learner')}</Link>
+            <Link href="/locations">{t('cta.learner')}</Link>
           </Button>
           <Button asChild variant="outline">
             <Link href="/for-instructors">{t('cta.school')}</Link>

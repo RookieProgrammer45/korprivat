@@ -4,7 +4,7 @@
 /** Bump this constant when the privacy policy text changes; the consent
  *  table groups rows by policyVersion so a future GDPR-driven version bump
  *  is tracked separately per acceptance. Format: semver-ish. */
-export const PRIVACY_POLICY_VERSION = 'v2026.08.0';
+export const PRIVACY_POLICY_VERSION = 'v2026.10.27';
 
 /** The fixed "essential" cookie scope — non-negotiable, the service cannot
  *  run without these. Re-exported so client code can render a locked toggle. */

@@ -1,10 +1,11 @@
 // messages/<locale>.json with the SAME keys as every other locale file (a missing
 // key throws MISSING_MESSAGE). `defaultLocale` is what `/` and unknown locales use.
-export const locales = ['sv', 'en'] as const;
+// Swedish URLs stay unprefixed; other locales use /{locale}/... (see locale-path).
+export const locales = ['sv', 'en', 'nb', 'da', 'fi', 'de', 'fr', 'nl', 'es', 'it', 'pl'] as const;
 
 export type Locale = (typeof locales)[number];
 
-// Swedish is the install-time default (Drivelinkup is launching in Sweden;
+// Swedish is the install-time default (DriveLinkUp is launching in Sweden;
 // bare-cookie / cookieless visitors — crawlers included — see SV.)
 export const defaultLocale: Locale = 'sv';
 

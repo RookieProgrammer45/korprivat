@@ -28,6 +28,7 @@ import {
   BookingCancelResponse,
   BookingRead,
 } from '@/lib/contracts/bookings';
+import { intlLocale } from '@/lib/intl-locale';
 import { sekToUsdChargeAmount } from '@/lib/payments/format-amount';
 
 type Status =
@@ -242,7 +243,7 @@ export function BookingCancelForm({ bookingId, token }: { bookingId: string; tok
           </p>
           <p className="text-small text-muted-foreground">{t('receipt.body')}</p>
           <Link
-            href="/instructors"
+            href="/locations/se"
             className="text-small font-medium text-brand-700 underline-offset-4 hover:underline dark:text-brand-300"
           >
             {t('receipt.browseCta')}
@@ -360,7 +361,7 @@ function cancellationTier(tier: string | null): CancellationTier {
 function formatDate(iso: string, locale: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',

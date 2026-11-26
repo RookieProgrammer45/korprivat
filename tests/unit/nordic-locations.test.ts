@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   allLocationSitemapPaths,
+  cityFilterCandidates,
   getLocation,
   listCitiesInRegion,
   listLocationsForCountry,
@@ -10,8 +11,44 @@ import {
 } from '@/lib/seo/nordic-locations';
 
 describe('nordic-locations registry', () => {
-  it('covers all five Nordic countries with unique country/slug keys', () => {
-    expect(NORDIC_COUNTRIES).toEqual(['se', 'no', 'dk', 'fi', 'is']);
+  it('covers the catalogue countries with unique country/slug keys', () => {
+    expect(NORDIC_COUNTRIES).toEqual([
+      'se',
+      'no',
+      'dk',
+      'fi',
+      'is',
+      'au',
+      'gb',
+      'es',
+      'fr',
+      'de',
+      'it',
+      'pl',
+      'at',
+      'be',
+      'nl',
+      'pt',
+      'ie',
+      'lu',
+      'ch',
+      'cz',
+      'sk',
+      'hu',
+      'ro',
+      'bg',
+      'hr',
+      'si',
+      'gr',
+      'cy',
+      'mt',
+      'ee',
+      'lv',
+      'lt',
+      'us',
+      'ca',
+      'br',
+    ]);
     const keys = NORDIC_LOCATIONS.map((l) => `${l.country}/${l.slug}`);
     expect(new Set(keys).size).toBe(keys.length);
   });
@@ -27,11 +64,22 @@ describe('nordic-locations registry', () => {
     }
   });
 
+  it('maps city slugs and ascii aliases onto stored city names', () => {
+    expect(cityFilterCandidates('stockholm')).toEqual(expect.arrayContaining(['Stockholm']));
+    expect(cityFilterCandidates('Goteborg')).toEqual(expect.arrayContaining(['Göteborg']));
+    expect(cityFilterCandidates('malmo')).toEqual(expect.arrayContaining(['Malmö']));
+  });
+
   it('resolves featured SE hubs and region children', () => {
     expect(getLocation('se', 'stockholm')?.kind).toBe('city');
     expect(locationPath({ country: 'se', slug: 'malmo' })).toBe('/locations/se/malmo');
     expect(listCitiesInRegion('se', 'skane').map((c) => c.slug)).toContain('lund');
     expect(listLocationsForCountry('no').some((l) => l.slug === 'oslo')).toBe(true);
+    expect(getLocation('us', 'texas')?.name).toBe('Texas');
+    expect(getLocation('us', 'texas')?.marketplaceLive).toBe(false);
+    expect(getLocation('ca', 'ontario')?.name).toBe('Ontario');
+    expect(getLocation('br', 'sao-paulo')?.name).toBe('São Paulo');
+    expect(getLocation('ca', 'ontario')?.marketplaceLive).toBe(false);
   });
 
   it('builds sitemap paths for index, countries, and every hub', () => {
@@ -43,5 +91,13 @@ describe('nordic-locations registry', () => {
     expect(paths).toContain('/locations/se/stockholm');
     expect(paths).toContain('/locations/dk/copenhagen');
     expect(paths.length).toBe(1 + NORDIC_COUNTRIES.length + NORDIC_LOCATIONS.length);
+  });
+});
+
+describe('cityFilterCandidates', () => {
+  it('resolves multi-city hubs to every registered DB spelling', () => {
+    expect(cityFilterCandidates('Haninge')).toEqual(
+      expect.arrayContaining(['Haninge', 'Handen', 'Västerhaninge']),
+    );
   });
 });

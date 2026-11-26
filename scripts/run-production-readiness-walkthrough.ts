@@ -5,17 +5,24 @@
  *
  * Usage (host-guarded): DATABASE_URL=<preview> npx tsx scripts/run-production-readiness-walkthrough.ts
  */
-import { PrismaClient } from '@prisma/client';
+
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { PrismaClient } from '@prisma/client';
+import {
+  offeringPolicySelection,
+  offeringPublicationDecision,
+} from '../src/lib/acquisition/category-offering-policy';
 import { claimScopeDecision, importSourceDecision } from '../src/lib/acquisition/claim-policy';
-import { offeringPolicySelection, offeringPublicationDecision } from '../src/lib/acquisition/category-offering-policy';
 import {
   conciergeApprovalDecision,
   conciergePublishDecision,
   conciergeStoreDecision,
 } from '../src/lib/acquisition/concierge-policy';
-import { leadConversionDecision, leadDashboardDecision } from '../src/lib/acquisition/lead-dashboard-policy';
+import {
+  leadConversionDecision,
+  leadDashboardDecision,
+} from '../src/lib/acquisition/lead-dashboard-policy';
 import {
   independentPublicationDecision,
   invitationCategoryDecision,
@@ -26,17 +33,17 @@ import { isConnectivityEnabled } from '../src/lib/connectivity/policy';
 import { canSignForEnvironment } from '../src/lib/connectivity/signing';
 import { evaluateAlert, readConfiguredThresholds } from '../src/lib/ops/alerting-policy';
 import {
-  decideInboxEvent,
-  isReliableProcessingOn,
-  nativeOutboxData,
-} from '../src/lib/reliability/inbox-policy';
-import {
+  type AuthorizationEvent,
   foldAuthorizationEvents,
   isSchoolAuthzEnforcementOn,
   listingSurfaces,
   planAuthorizationAppend,
-  type AuthorizationEvent,
 } from '../src/lib/orgs/school-authorization-policy';
+import {
+  decideInboxEvent,
+  isReliableProcessingOn,
+  nativeOutboxData,
+} from '../src/lib/reliability/inbox-policy';
 
 const STAGING_HOST = 'ep-dawn-smoke-b7btfhhc';
 const PRODUCTION_HOST_MARKERS = ['ep-blue-hat-b7yj9hwe', 'br-rough-frost'];
@@ -215,9 +222,13 @@ async function main() {
     );
     const register = importSourceDecision('bolagsverket');
     if (register.allowed) {
-      claim.blocked.push('Real register import unexpectedly allowed — expected register_rights_unverified');
+      claim.blocked.push(
+        'Real register import unexpectedly allowed — expected register_rights_unverified',
+      );
     } else {
-      claim.works.push(`Non-synthetic import refused (${register.code}); SYNTHETIC_FIXTURE allowed`);
+      claim.works.push(
+        `Non-synthetic import refused (${register.code}); SYNTHETIC_FIXTURE allowed`,
+      );
     }
     const prospect = await prisma.listingProspect.create({
       data: {
@@ -250,7 +261,10 @@ async function main() {
       mandateStatus: 'PENDING_REVIEW',
       representativeStatus: 'PENDING_REVIEW',
     });
-    if (pendingDecision.code !== 'verification_incomplete' || pendingDecision.authorizationEventsCreated !== 0) {
+    if (
+      pendingDecision.code !== 'verification_incomplete' ||
+      pendingDecision.authorizationEventsCreated !== 0
+    ) {
       claim.broken.push(`Pending claim should not grant scopes; got ${pendingDecision.code}`);
     } else {
       claim.works.push('Claim submit stays verification_incomplete and writes 0 grant events');
@@ -315,7 +329,9 @@ async function main() {
         `Grant persisted with enforcement OFF (sequence ${eventsAfterGrant[0]?.sequence}); idempotent replay returned replay=true and did not insert a second row`,
       );
     } else {
-      claim.broken.push(`Grant/replay failed: ${JSON.stringify({ grant1, grantReplay, n: eventsAfterGrant.length })}`);
+      claim.broken.push(
+        `Grant/replay failed: ${JSON.stringify({ grant1, grantReplay, n: eventsAfterGrant.length })}`,
+      );
     }
     claim.verdict = claim.broken.length ? 'PARTIAL' : claim.blocked.length ? 'PARTIAL' : 'VERIFIED';
     results.push(claim);
@@ -346,7 +362,9 @@ async function main() {
       representativeVerified: false,
     });
     if (inviteOk.allowed && !inviteOver.allowed && inviteOver.code === 'category_not_permitted') {
-      mediated.works.push('School invite within B allowed; A exceeds school categories and is refused');
+      mediated.works.push(
+        'School invite within B allowed; A exceeds school categories and is refused',
+      );
     } else {
       mediated.broken.push('Invitation category gate did not match expected B-only school');
     }
@@ -355,7 +373,10 @@ async function main() {
     } else {
       mediated.broken.push('Independent publication was allowed');
     }
-    if (!instructorGrant.allowed && instructorGrant.code === 'instructor_role_cannot_grant_scopes') {
+    if (
+      !instructorGrant.allowed &&
+      instructorGrant.code === 'instructor_role_cannot_grant_scopes'
+    ) {
       mediated.works.push('Instructor role cannot grant scopes');
     } else {
       mediated.broken.push('Instructor was allowed to grant scopes');
@@ -380,7 +401,9 @@ async function main() {
         status: 'VERIFIED',
       },
     });
-    mediated.works.push('Synthetic school invitation persisted; instructor affiliation VERIFIED without scope grants');
+    mediated.works.push(
+      'Synthetic school invitation persisted; instructor affiliation VERIFIED without scope grants',
+    );
     mediated.verdict = mediated.broken.length ? 'PARTIAL' : 'VERIFIED';
     results.push(mediated);
     flagOff('SCHOOL_MEDIATED_INSTRUCTORS');
@@ -457,12 +480,19 @@ async function main() {
       },
       listingId: schoolListingId,
     });
-    if (!refuseA.allowed && refuseA.code === 'category_not_permitted' && allowB.allowed && snapshot.ok) {
+    if (
+      !refuseA.allowed &&
+      refuseA.code === 'category_not_permitted' &&
+      allowB.allowed &&
+      snapshot.ok
+    ) {
       category.works.push(
         'B-only permission refuses A (and would refuse C/D the same way); B offering selects the approved policy snapshot',
       );
     } else {
-      category.broken.push(`Category gate unexpected: ${JSON.stringify({ refuseA, allowB, snapshot })}`);
+      category.broken.push(
+        `Category gate unexpected: ${JSON.stringify({ refuseA, allowB, snapshot })}`,
+      );
     }
     category.blocked.push(
       'No live resource-bundle renderer was exercised beyond policy snapshot fields (policyId/version). Offering UI category landing is flag-gated (`/kategori/[category]`).',
@@ -597,8 +627,15 @@ async function main() {
     } catch {
       duplicateInsertBlocked = true;
     }
-    if (first === 'apply' && dup === 'rejected_duplicate' && stale === 'rejected_stale' && duplicateInsertBlocked) {
-      reliable.works.push('SC-11: inbox apply / duplicate / stale decisions; unique (connection, providerEventId) blocks replay insert');
+    if (
+      first === 'apply' &&
+      dup === 'rejected_duplicate' &&
+      stale === 'rejected_stale' &&
+      duplicateInsertBlocked
+    ) {
+      reliable.works.push(
+        'SC-11: inbox apply / duplicate / stale decisions; unique (connection, providerEventId) blocks replay insert',
+      );
     } else {
       reliable.broken.push(
         `Inbox ordering unexpected: ${JSON.stringify({ first, dup, stale, duplicateInsertBlocked })}`,
@@ -622,8 +659,13 @@ async function main() {
     connectivity.works.push(
       'Routes present: GET /v1/connections, PUT /v1/connections/[id]/availability, /content, /events. requirePartner 401s when signature headers are missing',
     );
-    if (!canSignForEnvironment('sandbox', 'production') && canSignForEnvironment('sandbox', 'sandbox')) {
-      connectivity.works.push('Sandbox credentials cannot sign for a production connection (environment must match)');
+    if (
+      !canSignForEnvironment('sandbox', 'production') &&
+      canSignForEnvironment('sandbox', 'sandbox')
+    ) {
+      connectivity.works.push(
+        'Sandbox credentials cannot sign for a production connection (environment must match)',
+      );
     } else {
       connectivity.broken.push('Sandbox/production isolation rule failed');
     }
@@ -653,7 +695,9 @@ async function main() {
       evidence: { source: 'sandbox', milestone5: false },
     });
     if (mock.code === 'mock_evidence_refused' && noMs5.code === 'milestone_5_required') {
-      cert.works.push('Surfaces exist; mock/sandbox evidence cannot enable connector instant booking');
+      cert.works.push(
+        'Surfaces exist; mock/sandbox evidence cannot enable connector instant booking',
+      );
     } else {
       cert.broken.push(`Certification decisions unexpected: ${JSON.stringify({ mock, noMs5 })}`);
     }
@@ -666,7 +710,9 @@ async function main() {
     flagOn('CONCIERGE_ONBOARDING');
     const concierge: FlagResult = {
       flag: 'CONCIERGE_ONBOARDING',
-      exercised: ['draft store, admin cannot manufacture approval, publish requires school approval (SC-25)'],
+      exercised: [
+        'draft store, admin cannot manufacture approval, publish requires school approval (SC-25)',
+      ],
       works: [],
       broken: [],
       blocked: [],
@@ -745,7 +791,9 @@ async function main() {
     } else {
       ops.broken.push('Ops alerting fired or invented a baseline without env thresholds');
     }
-    ops.works.push(`Staging synthetic listings visible to count queries (${schoolCount} walkthrough-prefixed)`);
+    ops.works.push(
+      `Staging synthetic listings visible to count queries (${schoolCount} walkthrough-prefixed)`,
+    );
     ops.verdict = ops.broken.length ? 'PARTIAL' : 'VERIFIED';
     results.push(ops);
     flagOff('OPS_ALERTING');
@@ -825,7 +873,8 @@ async function main() {
       enforcementOn: true,
     });
     proofs.contactRestriction = {
-      ok: !contactGrant.ok && contactGrant.code === 'contact_locked' && contactSurfaces.directoryOnly,
+      ok:
+        !contactGrant.ok && contactGrant.code === 'contact_locked' && contactSurfaces.directoryOnly,
       detail: `grant=${JSON.stringify(contactGrant)} directoryOnly=${contactSurfaces.directoryOnly}`,
     };
   } finally {
@@ -953,7 +1002,9 @@ async function cleanup(
   },
 ) {
   const listingIds = [ids.schoolListingId, ids.contactListingId, ids.otherListingId];
-  await prisma.commandOutbox.deleteMany({ where: { bookingId: { startsWith: `booking-${ids.suffix}` } } });
+  await prisma.commandOutbox.deleteMany({
+    where: { bookingId: { startsWith: `booking-${ids.suffix}` } },
+  });
   const connections = await prisma.schoolConnection.findMany({
     where: { listingId: { in: listingIds } },
     select: { id: true },
@@ -966,15 +1017,23 @@ async function cleanup(
   await prisma.conciergeDraft.deleteMany({ where: { listingId: { in: listingIds } } });
   await prisma.cancellationPolicy.deleteMany({ where: { listingId: { in: listingIds } } });
   await prisma.teachingPermission.deleteMany({ where: { listingId: { in: listingIds } } });
-  await prisma.schoolInstructorAffiliation.deleteMany({ where: { schoolListingId: { in: listingIds } } });
-  await prisma.schoolInstructorInvitation.deleteMany({ where: { schoolListingId: { in: listingIds } } });
+  await prisma.schoolInstructorAffiliation.deleteMany({
+    where: { schoolListingId: { in: listingIds } },
+  });
+  await prisma.schoolInstructorInvitation.deleteMany({
+    where: { schoolListingId: { in: listingIds } },
+  });
   await prisma.schoolAuthorizationEvent.deleteMany({ where: { listingId: { in: listingIds } } });
   await prisma.listingAuthzHead.deleteMany({ where: { listingId: { in: listingIds } } });
-  await prisma.listingRepresentativeAuthority.deleteMany({ where: { listingId: { in: listingIds } } });
+  await prisma.listingRepresentativeAuthority.deleteMany({
+    where: { listingId: { in: listingIds } },
+  });
   await prisma.prospectClaim.deleteMany({
     where: { claimantUserId: { in: [ids.schoolUserId, ids.otherUserId, ids.instructorUserId] } },
   });
-  await prisma.listingProspect.deleteMany({ where: { legalName: { startsWith: 'Walkthrough Prospect' } } });
+  await prisma.listingProspect.deleteMany({
+    where: { legalName: { startsWith: 'Walkthrough Prospect' } },
+  });
   await prisma.membership.deleteMany({
     where: { userId: { in: [ids.schoolUserId, ids.otherUserId, ids.instructorUserId] } },
   });

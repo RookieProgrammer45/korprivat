@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { LiveAuthDeck } from '@/components/custom/live-deck';
 import { LocaleSwitcher } from '@/components/locale-switcher';
 
 /**
@@ -8,14 +7,26 @@ import { LocaleSwitcher } from '@/components/locale-switcher';
  * - Brand is the primary landmark (Airbnb/Uber-style)
  * - One narrow column, no decorative card chrome
  * - Locale stays available without competing with the form
- * - 2026-10-14 restyle: on large screens the live profile carousel sits to the
- *   RIGHT of the form column (interactive, data-driven).
  */
 
-export function AuthShell({ children, footer }: { children: ReactNode; footer?: ReactNode }) {
+export function AuthShell({
+  children,
+  footer,
+  visual,
+}: {
+  children: ReactNode;
+  footer?: ReactNode;
+  visual?: ReactNode;
+}) {
   return (
-    <main className="auth-shell flex min-h-dvh min-w-0 flex-col bg-[var(--background)]">
-      <div className="auth-shell-grid mx-auto flex w-full min-w-0 max-w-6xl flex-1 flex-col lg:flex-row lg:items-stretch lg:gap-12 lg:px-6">
+    <main className="auth-shell flex min-h-dvh min-w-0 flex-col">
+      <div
+        className={
+          visual
+            ? 'auth-shell-grid mx-auto flex w-full min-w-0 flex-1 flex-col lg:grid lg:grid-cols-[minmax(0,32rem)_minmax(0,1fr)] lg:items-stretch'
+            : 'auth-shell-grid mx-auto flex w-full min-w-0 max-w-lg flex-1 flex-col'
+        }
+      >
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="auth-shell-topbar mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-gutter pt-6 sm:pt-8">
             <Link
@@ -75,14 +86,7 @@ export function AuthShell({ children, footer }: { children: ReactNode; footer?: 
             ) : null}
           </div>
         </div>
-
-        <aside
-          className="auth-shell-art relative hidden overflow-hidden lg:flex lg:h-[45rem] lg:w-[460px] lg:shrink-0 lg:flex-col"
-          aria-hidden
-        >
-          <span className="dlu-glow" />
-          <LiveAuthDeck />
-        </aside>
+        {visual}
       </div>
     </main>
   );

@@ -8,13 +8,10 @@ import { z } from 'zod';
 export const LicenseStatusEnum = z.enum(['NONE', 'PENDING', 'VERIFIED', 'REJECTED', 'EXPIRED']);
 export type LicenseStatusWire = z.infer<typeof LicenseStatusEnum>;
 
-// Response from POST /api/instructor-license. The server returns the just-
-// committed status (always `PENDING` on a fresh upload, the prior status on
-// a re-upload) plus the public file URL and the submitted timestamp so the
-// client can render a confirmation alongside the wizard's final step.
+// Response from POST /api/instructor-license. The file stays on the server
+// for admin review — do not send the storage URL back to the browser.
 export const LicenseUploadResponse = z.object({
   status: LicenseStatusEnum,
-  fileUrl: z.string().url(),
   submittedAt: z.string(),
 });
 export type LicenseUploadResponse = z.infer<typeof LicenseUploadResponse>;

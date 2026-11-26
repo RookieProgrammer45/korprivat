@@ -119,7 +119,7 @@
   --radius: 1.25rem; /* 20px cards, 999px pills — ElevenLabs-style restyle */
 
   --font-display: var(--font-display-face, "Syne"), "Avenir Next", sans-serif;
-  --font-body: var(--font-body-face, "Hanken Grotesk"), "Avenir Next", sans-serif;
+  --font-body: var(--font-display-face, "Syne"), "Avenir Next", sans-serif;
 }
 
 /* FRAMEWORK-DERIVED — NOT agent-editable (outside the slot). The full ramp,

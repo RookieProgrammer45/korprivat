@@ -6,7 +6,11 @@
 // island, the new directory island, and both route handlers can all depend on
 // it without leaking server-only modules into client bundles.
 import { z } from 'zod';
-import { LICENCE_CATEGORY_CODES } from '@/lib/business/licence-categories';
+import {
+  HEAVY_FILTERS,
+  HEAVY_LICENCE_CODES,
+  LICENCE_CATEGORY_CODES,
+} from '@/lib/business/licence-categories';
 import { ProviderRoleEnum } from '@/lib/contracts/availability';
 
 // Public directory role: the raw marketplace kind as stored on the row.
@@ -74,6 +78,18 @@ export const PUBLIC_INSTRUCTOR_SELECT = {
   googleMapsUri: true,
 } as const;
 
+// List/detail reads may load `email` to resolve `contact`. The raw address
+// is stripped before InstructorItem parse — never serialized.
+export const LISTING_CONTACT_SELECT = {
+  ...PUBLIC_INSTRUCTOR_SELECT,
+  email: true,
+} as const;
+
+const SchoolContactSchema = z.object({
+  kind: z.enum(['inbox', 'website']),
+  href: z.string().min(1),
+});
+
 // Read shape: persisted instructor record returned by the detail endpoint.
 // `categories` is a free-form `String[]` at the storage layer (categories are
 // a small, versioned enum at the business layer — see licence-categories.ts),
@@ -85,12 +101,43 @@ export const InstructorItem = z.object({
   name: z.string(),
   city: z.string(),
   serviceArea: z.string().min(1),
-  categories: z.array(z.enum(LICENCE_CATEGORY_CODES)).min(1),
+  // Empty only for a heavy-vehicle school. Car categories stay on this list;
+  // C/D codes stay on publishedPrices.heavy.
+  categories: z.array(z.enum(LICENCE_CATEGORY_CODES)),
   hourlyRateSek: z.number().int().nonnegative(),
   bio: z.string(),
   photoUrl: z.string(),
   englishSpeaking: z.boolean(),
-  languages: z.array(z.enum(['sv', 'en'])).min(1),
+  languages: z
+    .array(
+      z.enum([
+        'sv',
+        'en',
+        'no',
+        'da',
+        'fi',
+        'is',
+        'es',
+        'fr',
+        'de',
+        'it',
+        'pl',
+        'nl',
+        'pt',
+        'cs',
+        'hu',
+        'ro',
+        'bg',
+        'hr',
+        'sl',
+        'sk',
+        'el',
+        'et',
+        'lv',
+        'lt',
+      ]),
+    )
+    .min(1),
   verificationStatus: z.enum(['verified', 'pending', 'rejected', 'unverified']),
   reviewSummary: z.object({
     count: z.number().int().nonnegative(),
@@ -102,6 +149,86 @@ export const InstructorItem = z.object({
   googleRating: z.number().min(0).max(5).nullable().optional(),
   googleReviewCount: z.number().int().nonnegative().nullable().optional(),
   googleMapsUri: z.string().nullable().optional(),
+  // Stored Google Places review texts (weekly snapshot). Optional so older
+  // list payloads still parse; the UI hides the list when this is empty.
+  googleReviews: z
+    .array(
+      z.object({
+        id: z.string(),
+        authorName: z.string(),
+        rating: z.number().int().min(1).max(5),
+        comment: z.string(),
+        relativeTime: z.string().nullable(),
+      }),
+    )
+    .max(5)
+    .optional(),
+  // Prices read off the school's website (data/school-prices). Display only,
+  // labelled with their source and date; never a booking amount.
+  publishedPrices: z
+    .object({
+      lesson: z
+        .object({
+          priceSek: z.number().int().positive(),
+          minutes: z.number().int().positive().nullable(),
+        })
+        .nullable(),
+      risk1Sek: z.number().int().positive().nullable(),
+      risk2Sek: z.number().int().positive().nullable(),
+      packages: z.array(
+        z.object({
+          name: z.string(),
+          kind: z.enum(['package', 'intensive']),
+          lessons: z.number().int().positive().nullable(),
+          priceSek: z.number().int().positive(),
+        }),
+      ),
+      sourceUrl: z.string().nullable(),
+      collectedAt: z.string(),
+      // Present when the amount is not Swedish kronor. Omitted means SEK.
+      currency: z
+        .enum([
+          'SEK',
+          'NOK',
+          'DKK',
+          'EUR',
+          'ISK',
+          'AUD',
+          'GBP',
+          'PLN',
+          'CZK',
+          'HUF',
+          'RON',
+          'BGN',
+          'CHF',
+          'USD',
+          'CAD',
+          'BRL',
+        ])
+        .optional(),
+      // Heavy-vehicle training the school's website advertises (C/D, YKB).
+      heavy: z
+        .object({
+          categories: z.array(z.enum(HEAVY_LICENCE_CODES)),
+          ykb: z.boolean(),
+          prices: z.array(
+            z.object({
+              category: z.enum([...HEAVY_LICENCE_CODES, 'YKB']),
+              kind: z.enum(['lesson', 'course']),
+              name: z.string(),
+              minutes: z.number().int().positive().nullable(),
+              hours: z.number().int().positive().nullable(),
+              priceSek: z.number().int().positive(),
+            }),
+          ),
+          sourceUrl: z.string().nullable(),
+          collectedAt: z.string(),
+        })
+        .nullable()
+        .optional(),
+    })
+    .nullable()
+    .optional(),
   nextSlotAt: z.string().datetime().nullable(),
   // Cancellation-policy tier published on the instructor's profile.
   // Nullable on the storage column; nullable on the contract too so a
@@ -127,6 +254,7 @@ export const InstructorItem = z.object({
       directoryOnly: z.boolean(),
     })
     .optional(),
+  canCollectPayment: z.boolean().optional(),
   // Mirrors the raw marketplace kind (SCHOOL | INSTRUCTOR | HANDLEDARE) so a
   // school-owned listing no longer reports itself as INSTRUCTOR (QA
   // 2026-10-13). Kept alongside the redundant `providerType` alias so
@@ -145,6 +273,21 @@ export const InstructorItem = z.object({
     })
     .nullable()
     .optional(),
+  // Phone number printed on the school's website. Listed with the other
+  // facts; the contact button never dials it.
+  phone: z
+    .object({
+      display: z.string().min(1),
+      href: z.string().min(1),
+    })
+    .nullable()
+    .optional(),
+  // Resolved outbound contact for schools: inbox (mailto) for every school
+  // that has an email, then the school's own website. Raw email is never
+  // included — only this href.
+  contact: SchoolContactSchema.nullable().optional(),
+  // Only for schools with no price on their website: where to ask for one.
+  priceRequest: SchoolContactSchema.nullable().optional(),
 });
 
 // Read shape for list rows: same as detail plus the directory-required
@@ -200,7 +343,9 @@ export const InstructorQuery = z
     lat: z.coerce.number().min(-90).max(90).optional(),
     lng: z.coerce.number().min(-180).max(180).optional(),
     nearKm: z.coerce.number().int().positive().max(20_000).optional(),
-    sort: z.enum(['distance', 'default']).optional(),
+    sort: z.enum(['distance', 'default', 'lessonPrice', 'packagePrice']).optional(),
+    /** Heavy-vehicle training advertised on the school's website. */
+    heavy: z.enum(HEAVY_FILTERS).optional(),
     providerRole: ProviderRoleEnum.optional(),
     /** Marketplace affiliation filter — school Membership vs independent. */
     affiliation: z.enum(['school', 'independent', 'all']).optional(),
@@ -330,6 +475,7 @@ type RawInstructorQuery = {
   lng: string | null | undefined;
   nearKm: string | null | undefined;
   sort: string | null | undefined;
+  heavy: string | null | undefined;
   providerRole: string | null | undefined;
   affiliation: string | null | undefined;
 };
@@ -357,6 +503,7 @@ export function parseInstructorQuery(
     lng: searchParams.get('lng'),
     nearKm: searchParams.get('nearKm'),
     sort: searchParams.get('sort'),
+    heavy: searchParams.get('heavy'),
     providerRole: searchParams.get('providerRole'),
     affiliation: searchParams.get('affiliation'),
   };
@@ -376,6 +523,7 @@ export function parseInstructorQuery(
     lng: parseCoord(raw.lng, -180, 180),
     nearKm: parseInteger(raw.nearKm),
     sort: parseSort(raw.sort),
+    heavy: HEAVY_FILTERS.find((value) => value === raw.heavy),
     providerRole: parseProviderRole(raw.providerRole),
     affiliation: parseAffiliation(raw.affiliation),
   });
@@ -403,8 +551,12 @@ function parseInteger(raw: string | null | undefined): number | undefined {
   return n;
 }
 
-function parseSort(raw: string | null | undefined): 'distance' | 'default' | undefined {
-  if (raw === 'distance' || raw === 'default') return raw;
+function parseSort(
+  raw: string | null | undefined,
+): 'distance' | 'default' | 'lessonPrice' | 'packagePrice' | undefined {
+  if (raw === 'distance' || raw === 'default' || raw === 'lessonPrice' || raw === 'packagePrice') {
+    return raw;
+  }
   return undefined;
 }
 

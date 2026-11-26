@@ -19,7 +19,6 @@ import {
   type InstructorPayoutsState,
 } from '@/components/custom/instructor/instructor-payouts-card';
 import { InstructorLicenseStatusBanner } from '@/components/custom/instructor-license-status-banner';
-import { InstructorPayoutCard } from '@/components/custom/instructor-payout-card';
 import { InstructorPolicyEditor } from '@/components/custom/instructor-policy-editor';
 import { Button } from '@/components/ui/button';
 import {
@@ -128,7 +127,6 @@ export default async function InstructorDashboardPage() {
           <InstructorPayoutsCard state={payoutsState} />
         </div>
       ) : null}
-      <InstructorPayoutCard />
       {hasListing ? <InstructorPolicyEditor /> : null}
       {hasListing ? <InstructorOfferingsEditor /> : null}
       <ProviderOperations />

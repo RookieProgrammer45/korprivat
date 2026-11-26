@@ -3,6 +3,7 @@ import { getBookingAccessToken, matchesLearnerAccessToken } from '@/lib/business
 import { assertTokenMatches } from '@/lib/business/escrow';
 import { isReceiptPaymentStatus, type ReceiptRole } from '@/lib/business/receipts';
 import { prisma } from '@/lib/db';
+import { intlLocale } from '@/lib/intl-locale';
 import type { DocumentSpec } from '@/lib/pdf/schema';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 
@@ -128,8 +129,6 @@ const PDF_COPY = {
     lesson: 'Lesson price (SEK)',
     serviceFee: 'DriveLinkUp fee (SEK)',
     grossPaid: 'Learner-paid gross total (SEK)',
-    commission: 'School commission (SEK)',
-    reconciliation: 'Net payout = school price − attributable school commission after completion.',
     note: (usd: string) => `Verified checkout charge: ${usd}. Amounts are shown in SEK.`,
   },
   sv: {
@@ -139,9 +138,6 @@ const PDF_COPY = {
     lesson: 'Lektionspris (SEK)',
     serviceFee: 'DriveLinkUp-avgift (SEK)',
     grossPaid: 'Elevens brutto betalda belopp (SEK)',
-    commission: 'Skolprovision (SEK)',
-    reconciliation:
-      'Nettoutbetalning = skolans pris − hänförlig skolprovision efter genomförd tjänst.',
     note: (usd: string) => `Verifierad kassabetalning: ${usd}. Beloppen visas i SEK.`,
   },
 } as const;
@@ -149,12 +145,12 @@ const PDF_COPY = {
 export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec {
   const locale = receipt.locale === 'en' ? 'en' : 'sv';
   const copy = PDF_COPY[locale];
-  const formattedDate = new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  const formattedDate = new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'full',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
   }).format(receipt.scheduledAt);
-  const formattedUsd = new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  const formattedUsd = new Intl.NumberFormat(intlLocale(locale), {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,
@@ -192,11 +188,6 @@ export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec 
                 },
               ]
             : []),
-          {
-            description: copy.commission,
-            quantity: 1,
-            unitAmountCents: -receipt.commissionSek * 100,
-          },
         ];
 
   return {
@@ -209,10 +200,7 @@ export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec 
     lineItems,
     totalCents:
       (receipt.recipientRole === 'learner' ? receipt.grossChargedSek : receipt.netPayoutSek) * 100,
-    notes:
-      receipt.recipientRole === 'instructor'
-        ? `${copy.note(formattedUsd)} ${copy.reconciliation}`
-        : copy.note(formattedUsd),
+    notes: copy.note(formattedUsd),
     footer: 'DriveLinkUp',
   };
 }

@@ -17,7 +17,12 @@ import {
 
 export class AuthorizationCommandError extends Error {
   constructor(
-    readonly code: 'stale' | 'not_representative' | 'evidence_required' | 'contact_locked',
+    readonly code:
+      | 'stale'
+      | 'not_representative'
+      | 'evidence_required'
+      | 'contact_locked'
+      | 'no_scopes_selected',
   ) {
     super(code);
     this.name = 'AuthorizationCommandError';

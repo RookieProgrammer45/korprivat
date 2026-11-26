@@ -67,7 +67,11 @@ export async function storeConciergeDraft(input: {
   provenance: ConciergeProvenance;
   payload: Record<string, unknown>;
 }) {
-  const decision = conciergeStoreDecision(input);
+  const decision = conciergeStoreDecision({
+    source: input.source,
+    provenance: input.provenance,
+    payload: input.payload,
+  });
   if (!decision.allowed) return { status: 403, body: { error: { code: decision.code } } };
   const table = db().conciergeDraft;
   if (!table) return { status: 503, body: { error: { code: 'not_available' } } };

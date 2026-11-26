@@ -24,6 +24,7 @@ import {
   type Receipt as ReceiptData,
   ReceiptResendResponse,
 } from '@/lib/contracts/receipts';
+import { intlLocale } from '@/lib/intl-locale';
 
 export function BookingReceipt({ bookingId, token }: { bookingId: string; token?: string }) {
   const t = useTranslations('bookingReceipt');
@@ -192,18 +193,11 @@ export function BookingReceipt({ bookingId, token }: { bookingId: string; token?
                   />
                 ) : null}
                 <MoneyRow
-                  label={t('items.commission')}
-                  value={`−${formatSek(receipt.commissionSek, locale)}`}
-                />
-                <MoneyRow
                   emphasized
                   label={t('netPayout')}
                   value={formatSek(receipt.netPayoutSek, locale)}
                 />
                 <MoneyRow label={t('payoutStatus')} value={payoutLabel(receipt.payoutStatus, t)} />
-                <p className="border-t pt-3 text-small text-muted-foreground">
-                  {t('reconciliation')}
-                </p>
               </>
             )}
           </div>
@@ -367,7 +361,7 @@ function payoutLabel(
 }
 
 function formatDate(iso: string, locale: string): string {
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'full',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
@@ -375,7 +369,7 @@ function formatDate(iso: string, locale: string): string {
 }
 
 function formatSek(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     style: 'currency',
     currency: 'SEK',
     maximumFractionDigits: 0,
@@ -383,7 +377,7 @@ function formatSek(amount: number, locale: string): string {
 }
 
 function formatUsd(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,

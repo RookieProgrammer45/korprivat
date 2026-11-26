@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
+import { requireCatalogSession } from '@/lib/catalog-guard';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function InstructorPreviewPage() {
+export default async function InstructorPreviewPage() {
+  await requireCatalogSession('/instructors/preview');
   return (
     <main className="container-page section">
       <InstructorPreview pageIntro />

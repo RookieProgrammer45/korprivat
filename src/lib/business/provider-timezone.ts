@@ -1,6 +1,8 @@
 // This module is deliberately server/client safe: it contains no database or
 // request imports, so the availability island and API handlers share it.
 
+import { intlLocale } from '@/lib/intl-locale';
+
 export const SWEDISH_TIMEZONE = 'Europe/Stockholm';
 export const PROVIDER_FALLBACK_TIMEZONE = 'UTC';
 
@@ -115,7 +117,7 @@ export function formatProviderDate(
 ): string {
   const date = iso instanceof Date ? iso : new Date(iso);
   if (Number.isNaN(date.getTime())) return typeof iso === 'string' ? iso : '';
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone,

@@ -118,6 +118,7 @@ function learnerGet(url: string): Request {
 }
 
 beforeEach(() => {
+  vi.stubEnv('BOOKING_CREATION_ENABLED', 'true');
   resetPrisma();
   resetEmailMock();
   authMock.reset();
@@ -144,6 +145,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.unstubAllEnvs();
   createCheckoutSession.mockReset();
   retrieveCheckoutSession.mockReset();
 });
@@ -161,7 +163,9 @@ describe('booking: full chain unpaid → mint → held_escrow → complete → r
         studentEmail: 'learner@example.test',
       }),
     );
-    prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
+    prismaMock.instructor.findUnique.mockResolvedValue(
+      instructorRow({ hourlyRateSek: 550, providerRole: 'SCHOOL' }),
+    );
     prismaMock.booking.update.mockResolvedValue({ id: 'booking_chain' });
     // 550 SEK school price → totalSek 550 → ceil(550 × 0.094) = 52
     createCheckoutSession.mockResolvedValueOnce({
@@ -318,7 +322,9 @@ describe('booking/checkout: re-mints on `pending` (intentional per comment)', ()
     prismaMock.booking.findUnique.mockResolvedValue(
       bookingRow({ id: 'booking_pending', paymentStatus: 'pending' }),
     );
-    prismaMock.instructor.findUnique.mockResolvedValue(instructorRow({ hourlyRateSek: 550 }));
+    prismaMock.instructor.findUnique.mockResolvedValue(
+      instructorRow({ hourlyRateSek: 550, providerRole: 'SCHOOL' }),
+    );
     prismaMock.booking.update.mockResolvedValue({ id: 'booking_pending' });
     createCheckoutSession.mockResolvedValueOnce({
       id: 'cs_remint',
@@ -599,7 +605,7 @@ describe('checkout: success/cancel URLs use public app URL', () => {
       bookingRow({ id: 'booking_origin', paymentStatus: null }),
     );
     prismaMock.instructor.findUnique.mockResolvedValue(
-      instructorRow({ id: 'instructor_erik', hourlyRateSek: 550 }),
+      instructorRow({ id: 'instructor_erik', hourlyRateSek: 550, providerRole: 'SCHOOL' }),
     );
     prismaMock.booking.update.mockResolvedValue({ id: 'booking_origin' });
     createCheckoutSession.mockResolvedValueOnce({

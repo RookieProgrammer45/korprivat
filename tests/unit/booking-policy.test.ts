@@ -18,6 +18,7 @@ describe('booking policy service', () => {
       categoryAllowed: true,
       studentContactVerified: true,
       licenceStatus: 'VERIFIED',
+      instructorAffiliated: true,
       nativeSlotId: null,
       commitmentRoute: 'external_manual',
     });
@@ -30,6 +31,8 @@ describe('booking policy service', () => {
         action: 'instant_create',
         categoryAllowed: true,
         studentContactVerified: true,
+        licenceStatus: 'VERIFIED',
+        instructorAffiliated: true,
         nativeSlotId: null,
       }),
     ).toEqual({ ok: false, component: 'E4' });
@@ -38,18 +41,61 @@ describe('booking policy service', () => {
         action: 'request_submission',
         categoryAllowed: true,
         studentContactVerified: true,
+        licenceStatus: 'VERIFIED',
+        instructorAffiliated: true,
         nativeSlotId: null,
       }).ok,
     ).toBe(true);
+  });
+
+  it('fails closed when required E0–E3 facts are missing', () => {
+    expect(
+      evaluateBookingPolicy({
+        action: 'request_submission',
+        offeringInScope: true,
+        offeringActive: null,
+        categoryAllowed: true,
+        studentContactVerified: true,
+        licenceStatus: 'VERIFIED',
+        instructorAffiliated: true,
+      }),
+    ).toEqual({ ok: false, component: 'E0' });
+    expect(
+      evaluateBookingPolicy({
+        action: 'request_submission',
+        categoryAllowed: true,
+        studentContactVerified: true,
+        instructorAffiliated: true,
+      }),
+    ).toEqual({ ok: false, component: 'E1' });
+    expect(
+      evaluateBookingPolicy({
+        action: 'request_submission',
+        categoryAllowed: true,
+        studentContactVerified: true,
+        licenceStatus: 'VERIFIED',
+      }),
+    ).toEqual({ ok: false, component: 'E2' });
+    expect(
+      evaluateBookingPolicy({
+        action: 'request_submission',
+        categoryAllowed: true,
+        licenceStatus: 'VERIFIED',
+        instructorAffiliated: true,
+      }),
+    ).toEqual({ ok: false, component: 'E3' });
   });
 
   it('blocks an inactive offering at E0 and an unverified licence at E1', () => {
     expect(
       evaluateBookingPolicy({
         action: 'request_submission',
+        offeringInScope: true,
         offeringActive: false,
         categoryAllowed: true,
         studentContactVerified: true,
+        licenceStatus: 'VERIFIED',
+        instructorAffiliated: true,
       }),
     ).toEqual({ ok: false, component: 'E0' });
     expect(
@@ -58,6 +104,7 @@ describe('booking policy service', () => {
         categoryAllowed: true,
         licenceStatus: 'EXPIRED',
         studentContactVerified: true,
+        instructorAffiliated: true,
         nativeSlotId: 'slot-1',
       }),
     ).toEqual({ ok: false, component: 'E1' });

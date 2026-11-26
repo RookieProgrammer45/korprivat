@@ -208,47 +208,36 @@ describe('welcome idempotency under concurrency', () => {
 });
 
 describe('signup-redirect: no duplicate profile on parallel post', () => {
-  it('two concurrent role writes — no duplicate UserProfile insert', async () => {
+  it('concurrent posts only read the stored role', async () => {
     authMock.setUser(SESSION_USER);
-    // Track create() to assert it is NEVER called by this route — the
-    // profile row is created by the user.create.after hook, not by
-    // signup-redirect itself.
     prismaMock.userProfile.create.mockClear();
-    prismaMock.userProfile.update.mockResolvedValue({
+    prismaMock.userProfile.findUnique.mockResolvedValue({
       id: 'row',
       userId: SESSION_USER.id,
-      role: 'INSTRUCTOR',
+      role: 'STUDENT',
     });
 
     const url = 'http://localhost/api/auth/signup-redirect';
-    const body1 = JSON.stringify({ role: 'STUDENT' });
-    const body2 = JSON.stringify({ role: 'INSTRUCTOR' });
     const [r1, r2] = await Promise.all([
       signupRedirectPOST(
         new Request(url, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: body1,
+          body: JSON.stringify({ role: 'STUDENT' }),
         }),
       ),
       signupRedirectPOST(
         new Request(url, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: body2,
+          body: JSON.stringify({ role: 'INSTRUCTOR' }),
         }),
       ),
     ]);
 
     expect(r1.status).toBe(200);
     expect(r2.status).toBe(200);
-    // Profile creation is exclusively the hook's job — the route only UPDATES.
     expect(prismaMock.userProfile.create).not.toHaveBeenCalled();
-    expect(prismaMock.userProfile.update).toHaveBeenCalledTimes(2);
-
-    const calls = prismaMock.userProfile.update.mock.calls
-      .map((c) => (c[0] as { data: { role: string } }).data.role)
-      .sort();
-    expect(calls).toEqual(['INSTRUCTOR', 'STUDENT']);
+    expect(prismaMock.userProfile.update).not.toHaveBeenCalled();
   });
 });

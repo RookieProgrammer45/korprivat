@@ -10,8 +10,49 @@
 
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 const POSTS = [
+  {
+    slug: 'korkort-b-malmo',
+    index: '11',
+    minutes: 8,
+  },
+  {
+    slug: 'korkort-b-goteborg',
+    index: '10',
+    minutes: 8,
+  },
+  {
+    slug: 'korlektion-korkort-b',
+    index: '9',
+    minutes: 8,
+  },
+  {
+    slug: 'korkortstillstand-korkort-b',
+    index: '8',
+    minutes: 8,
+  },
+  {
+    slug: 'riskutbildning-korkort-b',
+    index: '7',
+    minutes: 8,
+  },
+  {
+    slug: 'korprov-korkort-b',
+    index: '6',
+    minutes: 8,
+  },
+  {
+    slug: 'kunskapsprov-korkort-b',
+    index: '5',
+    minutes: 8,
+  },
+  {
+    slug: 'korkort-b-steg-for-steg',
+    index: '4',
+    minutes: 7,
+  },
   {
     slug: 'swedish-drivers-license-expat-stockholm',
     index: '0',
@@ -36,11 +77,10 @@ const POSTS = [
 
 export async function generateMetadata() {
   const t = await getTranslations('blogPage.meta');
-  const { publicAlternates } = await import('@/lib/seo/alternates');
   return {
     title: t('title'),
     description: t('description'),
-    alternates: publicAlternates('/blog'),
+    alternates: await publicAlternatesFor('/blog'),
   };
 }
 

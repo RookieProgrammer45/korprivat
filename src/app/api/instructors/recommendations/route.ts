@@ -142,17 +142,18 @@ async function loadCandidates(category: string): Promise<Candidate[]> {
   const enforcementOn = isSchoolAuthzEnforcementOn();
   const visibleIds = new Set(
     matching
-      .filter((row) =>
-        listingSurfaces({
-          bookingMode: row.bookingMode,
-          folded: folds.get(row.id) ?? {
-            granted: [],
-            withdrawn: [],
-            decisionVersion: 0,
-            headSequence: 0,
-          },
-          enforcementOn,
-        }).availabilityDisplay,
+      .filter(
+        (row) =>
+          listingSurfaces({
+            bookingMode: row.bookingMode,
+            folded: folds.get(row.id) ?? {
+              granted: [],
+              withdrawn: [],
+              decisionVersion: 0,
+              headSequence: 0,
+            },
+            enforcementOn,
+          }).availabilityDisplay,
       )
       .map((row) => row.id),
   );

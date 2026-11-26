@@ -3,15 +3,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { ClaimSchoolButton } from '@/components/custom/school-contact-button';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { defaultLocale } from '@/i18n/config';
 import {
   hasCanonicalCategory,
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { resolveLocale } from '@/lib/i18n';
 import { getOrganizationBySlug, listSchoolListedInstructors } from '@/lib/orgs/public';
+import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { schoolPath } from '@/lib/seo/school-slugs';
 import { siteName, siteUrl } from '@/lib/site';
 
@@ -27,14 +33,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const city = org.city?.trim() || 'Sverige';
   const title = `${org.name} — trafikskola i ${city}`;
-  const description = `${org.name} på DriveLinkUp — auktoriserad trafikskola i ${city}.`;
+  const description = `${org.name} på DriveLinkUp — trafikskola i katalogen i ${city}.`;
   const canonical = `/schools/${org.slug}`;
+  const locale = await resolveLocale();
   return {
     title,
     description,
-    alternates: { canonical },
+    alternates: swedishCanonicalAlternates(canonical),
+    robots: locale !== defaultLocale ? { index: false, follow: true } : undefined,
     openGraph: {
       type: 'website',
+      locale: 'sv_SE',
       siteName,
       title,
       description,
@@ -62,7 +71,6 @@ export default async function SchoolProfilePage({ params }: PageProps) {
     return toPublicInstructor(row, aggregate, null);
   });
 
-  const verified = org.verificationState === 'APPROVED';
   const city = org.city?.trim() || null;
   const pageUrl = `${siteUrl}/schools/${org.slug}`;
 
@@ -118,18 +126,12 @@ export default async function SchoolProfilePage({ params }: PageProps) {
             <h1 className="font-display text-h1 leading-tight tracking-tight text-foreground">
               {org.name}
             </h1>
-            <Badge
-              variant="outline"
-              className={
-                verified
-                  ? 'border-brand-500/40 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300'
-                  : 'border-border bg-muted text-muted-foreground'
-              }
-            >
-              {verified ? t('verifiedBadge') : t('pendingBadge')}
+            <Badge variant="outline" className="border-border bg-muted text-muted-foreground">
+              {t('listedBadge')}
             </Badge>
           </div>
           {city ? <p className="text-body text-muted-foreground">{city}</p> : null}
+          <ClaimSchoolButton name={org.name} listing={`/schools/${org.slug}`} className="w-fit" />
         </header>
 
         {(org.contactEmail || org.contactPhone || addressParts.length > 0) && (
@@ -157,14 +159,24 @@ export default async function SchoolProfilePage({ params }: PageProps) {
                 <li key={instructor.id}>
                   <Card className="border-border bg-card">
                     <CardContent className="flex gap-4 p-4">
-                      <Image
-                        src={instructor.photoUrl}
-                        alt=""
-                        width={72}
-                        height={72}
-                        unoptimized
-                        className="size-[72px] rounded-lg object-cover"
-                      />
+                      {schoolPortraitUrl(instructor.photoUrl) ? (
+                        <Image
+                          src={schoolPortraitUrl(instructor.photoUrl) ?? ''}
+                          alt=""
+                          width={72}
+                          height={72}
+                          unoptimized
+                          className="size-[72px] rounded-lg object-cover"
+                        />
+                      ) : (
+                        <SchoolMarkFallback
+                          name={instructor.name}
+                          categories={instructor.categories}
+                          heavy={instructor.publishedPrices?.heavy ?? null}
+                          iconLayout="thumb"
+                          className="box-border flex size-[72px] shrink-0 items-center justify-center rounded-lg border border-border bg-muted p-2 font-display text-lg font-normal"
+                        />
+                      )}
                       <div className="grid min-w-0 flex-1 gap-1">
                         <p className="truncate font-medium text-foreground">{instructor.name}</p>
                         <p className="text-small text-muted-foreground">{instructor.city}</p>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { CitySeoSection, cityFaqJsonLd } from '@/components/custom/city-seo-section';
 import { PublicDirectoryPage } from '@/components/custom/public-directory-page';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { absoluteUrl, publicAlternatesFor } from '@/lib/seo/alternates';
 import { type CityHubKey, cityHubPath } from '@/lib/seo/city-hubs';
 import { siteName, siteUrl } from '@/lib/site';
 
@@ -14,7 +14,7 @@ type Props = {
 export async function cityInstructorsMetadata(city: CityHubKey): Promise<Metadata> {
   const path = cityHubPath(city);
   const t = await getTranslations(`instructorsPage.${city}City.meta`);
-  const alternates = publicAlternates(path);
+  const alternates = await publicAlternatesFor(path);
   return {
     title: t('title'),
     description: t('description'),

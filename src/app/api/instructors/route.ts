@@ -5,8 +5,9 @@
 // payload from `/instructors/new`, inserts a new instructor row, fires the
 // profile-live confirmation mail, and returns the new id. The shape is
 // validated by `InstructorCreate`. The new `email` field lands in the
-// optional `Instructor.email String?` column and is intentionally kept OUT
-// of `PUBLIC_INSTRUCTOR_SELECT` so it never leaks through any public read.
+// optional `Instructor.email String?` column. Public reads load it only
+// via `LISTING_CONTACT_SELECT` to resolve an outbound contact href; the
+// raw address is never serialized.
 import 'server-only';
 import { Prisma } from '@prisma/client';
 import { type NextRequest, NextResponse } from 'next/server';
@@ -16,6 +17,7 @@ import {
 } from '@/lib/acquisition/mediated-instructor-store';
 import { registerKnownContact } from '@/lib/business/escrow';
 import { haversineKm, resolveInstructorCoords } from '@/lib/business/geo';
+import { categoryFilterMatches } from '@/lib/business/licence-categories';
 import { confirmedPhotoUrl } from '@/lib/business/photo-verification';
 import { buildVerifiedProviderActivationWhere } from '@/lib/business/provider-activation';
 import { providerTimezoneForCity } from '@/lib/business/provider-timezone';
@@ -24,15 +26,19 @@ import {
   loadPublicInstructorAggregates,
   toPublicInstructor,
 } from '@/lib/business/public-instructor';
+import { PUBLIC_CATALOG_PREVIEW_LIMIT } from '@/lib/catalog-preview';
 import {
   InstructorCreate,
   InstructorCreated,
   InstructorList,
   type InstructorQuery,
-  PUBLIC_INSTRUCTOR_SELECT,
+  LISTING_CONTACT_SELECT,
   parseInstructorQuery,
 } from '@/lib/contracts/instructors';
 import { prisma } from '@/lib/db';
+import { listNordicInstructors, nordicCatalogueCities } from '@/lib/discovery/nordic-catalogue';
+import { omitListingReviewBodies } from '@/lib/discovery/public-listing';
+import { heavyListingWhere, lightCatalogueWhere } from '@/lib/discovery/published-prices';
 import { sendEmail } from '@/lib/email/send';
 import { instructorProfileLiveEmail } from '@/lib/email/templates';
 import { env } from '@/lib/env';
@@ -42,12 +48,16 @@ import {
   isSchoolAuthzEnforcementOn,
   listingSurfaces,
 } from '@/lib/orgs/school-authorization-policy';
-import { requireAuth, type SessionUser } from '@/lib/require-auth';
+import { getSessionUser, requireAuth, type SessionUser } from '@/lib/require-auth';
 import {
   activePolicyListingIds,
   isCancellationPolicyEnforced,
 } from '@/lib/scheduling/cancellation-policy-store';
-
+import {
+  loadInstructorPaymentEligibilityByListings,
+  maskSurfacesForPayment,
+} from '@/lib/scheduling/listing-eligibility';
+import { cityFilterCandidates } from '@/lib/seo/nordic-locations';
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
@@ -63,6 +73,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ errors }, { status: 400 });
   }
   const q = parsed.value;
+  const sessionUser = await getSessionUser();
+  const limit = parseLimit(req.nextUrl.searchParams.get('limit'));
 
   // `countOnly=1` short-circuits into a single Prisma `count()` and skips the
   // full row hydrate / slot projection. Used by the contact page's instructor-
@@ -82,7 +94,17 @@ export async function GET(req: NextRequest) {
     q.nearKm !== undefined ||
     q.sort !== undefined ||
     q.providerRole !== undefined ||
-    q.affiliation !== undefined;
+    q.affiliation !== undefined ||
+    q.heavy !== undefined;
+  const publicPreview =
+    !sessionUser &&
+    limit != null &&
+    limit <= PUBLIC_CATALOG_PREVIEW_LIMIT &&
+    !hasDirectoryFilters &&
+    !countOnly;
+  if (!sessionUser && !publicPreview && !(countOnly && !hasDirectoryFilters)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   if (countOnly && !hasDirectoryFilters) {
     const count = await prisma.instructor.count({
       where: await buildVerifiedProviderActivationWhere(),
@@ -104,7 +126,7 @@ export async function GET(req: NextRequest) {
   // indexed read.
   const rawRows = await prisma.instructor.findMany({
     where: await buildWhere(q),
-    select: PUBLIC_INSTRUCTOR_SELECT,
+    select: LISTING_CONTACT_SELECT,
     orderBy:
       q.sort === 'distance' && hasGeo
         ? undefined
@@ -152,17 +174,25 @@ export async function GET(req: NextRequest) {
     prunedRows.push(...resolved, ...fallback);
   }
 
+  // `limit` (1–50) serves small previews such as the home page. Without rating
+  // or availability filters the order is already final, so we cut before the
+  // aggregate, slot and payment loads; otherwise we cut after filtering.
+  const minRating = q.minRating;
+  const priceSort = q.sort === 'lessonPrice' || q.sort === 'packagePrice';
+  const cutEarly = limit != null && minRating == null && q.availability === undefined && !priceSort;
+  const candidateRows = cutEarly ? prunedRows.slice(0, limit) : prunedRows;
+
   // Load review aggregates once for the candidate rows. A minimum-rating
   // filter is deliberately applied after the base Prisma read because ratings
   // are validated and averaged by the shared public aggregate loader.
   const aggregates = await loadPublicInstructorAggregates(
-    canonicalRows.map((row) => ({ id: row.id, userId: row.userId })),
+    candidateRows.map(({ row }) => ({ id: row.id, userId: row.userId })),
+    { includeGoogleReviewBodies: false },
   );
-  const minRating = q.minRating;
   const ratedRows =
     minRating == null
-      ? prunedRows
-      : prunedRows.filter(({ row }) => {
+      ? candidateRows
+      : candidateRows.filter(({ row }) => {
           const average = aggregates.get(row.id)?.reviewSummary.averageRating;
           return average != null && average >= minRating;
         });
@@ -215,6 +245,7 @@ export async function GET(req: NextRequest) {
       const availableIds = new Set(matchingSlots.map((slot) => slot.instructorId));
       filteredRows = ratedRows.filter(({ row }) => availableIds.has(row.id));
     }
+    if (limit != null && !priceSort) filteredRows = filteredRows.slice(0, limit);
 
     for (const row of matchingSlots) {
       if (!nextSlotByInstructor.has(row.instructorId)) {
@@ -226,8 +257,16 @@ export async function GET(req: NextRequest) {
   const approvedListings = isCancellationPolicyEnforced()
     ? await activePolicyListingIds(filteredRows.map(({ row }) => row.id))
     : null;
-  const items = filteredRows.map(({ row, distanceKm }) => {
-    const surfaces = surfacesFor(row);
+  const paymentByListing = await loadInstructorPaymentEligibilityByListings(
+    filteredRows.map(({ row }) => ({
+      id: row.id,
+      userId: row.userId,
+      providerRole: row.providerRole,
+    })),
+  );
+  const unsortedItems = filteredRows.map(({ row, distanceKm }) => {
+    const canCollectPayment = paymentByListing.get(row.id) === true;
+    const surfaces = maskSurfacesForPayment(surfacesFor(row), canCollectPayment);
     const nextSlotAt = surfaces.availabilityDisplay
       ? (nextSlotByInstructor.get(row.id) ?? null)
       : null;
@@ -241,14 +280,54 @@ export async function GET(req: NextRequest) {
         nextSlotAt,
         distanceKm,
       ),
+      canCollectPayment,
       surfaces,
       ...(approvedListings && !approvedListings.has(row.id)
         ? { cancellationPolicyTier: null, showCancellationPolicy: false as const }
         : {}),
     };
   });
+  const swedishItems = priceSort
+    ? sortByPrice(unsortedItems, q.sort === 'packagePrice' ? 'package' : 'lesson').slice(
+        0,
+        limit ?? undefined,
+      )
+    : unsortedItems;
+  // The full catalogue includes website schools outside Sweden. A short preview
+  // stays the Swedish slice. A price in another currency is not ranked inside a
+  // SEK price sort; those schools stay in the list after the Swedish prices.
+  const nordicItems = limit == null ? listNordicInstructors(q) : [];
+  const mergedItems =
+    nordicItems.length === 0
+      ? swedishItems
+      : priceSort || q.sort === 'distance'
+        ? [...swedishItems, ...nordicItems]
+        : [...swedishItems, ...nordicItems].sort(
+            (a, b) => a.city.localeCompare(b.city, 'sv') || a.name.localeCompare(b.name, 'sv'),
+          );
+  const items = mergedItems.map(omitListingReviewBodies);
 
-  const cities = Array.from(new Set(canonicalRows.map((r) => r.city))).sort();
+  const cityDelegate = (
+    prisma as unknown as {
+      instructor?: {
+        groupBy?: (args: unknown) => Promise<Array<{ city: string }>>;
+      };
+    }
+  ).instructor;
+  const marketplaceCities = cityDelegate?.groupBy
+    ? await cityDelegate.groupBy({
+        by: ['city'],
+        where: await buildVerifiedProviderActivationWhere(),
+      })
+    : canonicalRows.map((row) => ({ city: row.city }));
+  const cities = Array.from(
+    new Set(
+      [
+        ...marketplaceCities.map((row) => row.city),
+        ...(limit == null ? nordicCatalogueCities() : []),
+      ].filter(Boolean),
+    ),
+  ).sort((a, b) => a.localeCompare(b, 'sv'));
 
   // We DO return the `englishSpeaking` flag on each row — the directory island
   // surfaces it in the filter toggle (and could surface it as a badge later).
@@ -275,7 +354,7 @@ export async function POST(req: Request) {
   // accounts use the guidance surfaces, not public school inventory.
   if (profile?.role !== 'INSTRUCTOR') {
     return NextResponse.json(
-      { errors: { role: 'An authorized driving-school account is required.' } },
+      { errors: { role: 'A driving-school account is required.' } },
       { status: 403 },
     );
   }
@@ -456,9 +535,11 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
   if (q.categories && q.categories.length > 0) {
     // Postgres `String[]` exposes per-value `has` (single); the canonical
     // "any-of" idiom is `OR` of `has`. No-op when the array is empty.
-    filters.OR = q.categories.map((code) => ({ categories: { has: code } }));
+    // Motorcycle searches also match stored B-only listings.
+    filters.OR = categoryFilterMatches(q.categories).map((code) => ({
+      categories: { has: code },
+    }));
   }
-  if (q.city) filters.city = q.city;
   if (typeof q.minRate === 'number' || typeof q.maxRate === 'number') {
     filters.hourlyRateSek = {
       ...(typeof q.minRate === 'number' ? { gte: q.minRate } : {}),
@@ -477,6 +558,14 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
     await buildVerifiedProviderActivationWhere(),
     filters,
   ];
+  if (q.heavy) clauses.push(heavyListingWhere(q.heavy));
+  else clauses.push(lightCatalogueWhere());
+  if (q.city) {
+    const names = cityFilterCandidates(q.city);
+    clauses.push({
+      OR: names.map((city) => ({ city: { equals: city, mode: 'insensitive' } })),
+    });
+  }
 
   // Affiliation via Membership (ACTIVE), not Instructor.providerRole —
   // providerRole describes the listing kind, not the owner's membership.
@@ -496,6 +585,41 @@ async function buildWhere(q: InstructorQuery): Promise<Prisma.InstructorWhereInp
   }
 
   return { AND: clauses };
+}
+
+type PricedItem = {
+  name: string;
+  publishedPrices: {
+    lesson: { priceSek: number } | null;
+    packages: Array<{ priceSek: number }>;
+  } | null;
+};
+
+// Cheapest first; listings without the price sort last, then by name.
+function sortByPrice<T extends PricedItem>(items: T[], by: 'lesson' | 'package'): T[] {
+  const key = (item: T): number => {
+    if (by === 'lesson') {
+      const website = item.publishedPrices?.lesson?.priceSek;
+      return website && website > 0 ? website : Number.POSITIVE_INFINITY;
+    }
+    const packages = item.publishedPrices?.packages ?? [];
+    return packages.length > 0
+      ? Math.min(...packages.map((pack) => pack.priceSek))
+      : Number.POSITIVE_INFINITY;
+  };
+  return [...items].sort((a, b) => {
+    const difference = key(a) - key(b);
+    if (Number.isFinite(difference) && difference !== 0) return difference;
+    if (key(a) !== key(b)) return Number.isFinite(key(a)) ? -1 : 1;
+    return a.name.localeCompare(b.name, 'sv');
+  });
+}
+
+function parseLimit(raw: string | null): number | null {
+  if (raw == null) return null;
+  const value = Number.parseInt(raw, 10);
+  if (!Number.isFinite(value) || value < 1) return null;
+  return Math.min(value, 50);
 }
 
 function matchesAvailability(

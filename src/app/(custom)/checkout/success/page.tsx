@@ -50,11 +50,9 @@ async function resolveSuccessDashboardHref(): Promise<string> {
 
 export default async function CheckoutSuccessPage() {
   const dashboardHref = await resolveSuccessDashboardHref();
-  const bookingsHref =
-    dashboardHref === '/dashboard/student' ? '/dashboard/student/bookings' : undefined;
   return (
     <main className="container-page section min-h-[calc(100dvh-3.5rem)]">
-      <CheckoutSuccessIsland dashboardHref={dashboardHref} bookingsHref={bookingsHref} />
+      <CheckoutSuccessIsland dashboardHref={dashboardHref} />
     </main>
   );
 }

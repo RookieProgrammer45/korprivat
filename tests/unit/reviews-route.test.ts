@@ -175,6 +175,11 @@ describe('GET /api/reviews', () => {
     mockReviewCreate.mockReset();
     mockTransaction.mockReset();
     mockRequireAuth.mockReset();
+    mockRequireAuth.mockResolvedValue({
+      id: 'user_signed_in',
+      email: 'user@example.test',
+      name: 'User',
+    });
     mockTransaction.mockImplementation(async (callback: (tx: unknown) => unknown) =>
       callback({ review: { findFirst: mockReviewFindFirst, create: mockReviewCreate } }),
     );
@@ -186,7 +191,7 @@ describe('GET /api/reviews', () => {
 
   it('returns 200 with the empty schema when the table has no rows', async () => {
     mockReviewFindMany.mockResolvedValueOnce([]);
-    const res = await GET();
+    const res = await GET(new Request('http://localhost/api/reviews'));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body).toEqual({ items: [] });
@@ -195,7 +200,7 @@ describe('GET /api/reviews', () => {
 
   it('maps a DateTime row to an ISO string and returns 200', async () => {
     mockReviewFindMany.mockResolvedValueOnce([reviewRow()]);
-    const res = await GET();
+    const res = await GET(new Request('http://localhost/api/reviews'));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.items).toHaveLength(1);
@@ -211,7 +216,7 @@ describe('GET /api/reviews', () => {
 
   it('orders the prisma call by createdAt desc', async () => {
     mockReviewFindMany.mockResolvedValueOnce([]);
-    await GET();
+    await GET(new Request('http://localhost/api/reviews'));
     expect(mockReviewFindMany).toHaveBeenCalledWith(
       expect.objectContaining({ orderBy: { createdAt: 'desc' } }),
     );

@@ -1,0 +1,329 @@
+{
+  "note": "DriveLinkUp listings (docs/cutover-school-roster.json) that could not be linked to exactly one price record. Link manually if needed.",
+  "listings": [
+    {
+      "listingId": "4b481ac0-3779-4b75-9bab-756b009aee0e",
+      "name": "ATV Trafikskola",
+      "city": "Ulricehamn",
+      "reason": "no match"
+    },
+    {
+      "listingId": "f2c62f4d-4fef-4746-bfb0-5b4c8e6cab99",
+      "name": "Allians Trafikskola · Kungsholmen",
+      "city": "Stockholm",
+      "reason": "no match"
+    },
+    {
+      "listingId": "f13419a0-2abd-418a-8a4e-1ef890d2c1b7",
+      "name": "Allians Trafikskola · Vallentuna",
+      "city": "Vallentuna",
+      "reason": "no match"
+    },
+    {
+      "listingId": "2a71602c-4dab-4ce3-abfd-ccfbb9a45632",
+      "name": "Allians Trafikskola · Vasastan",
+      "city": "Stockholm",
+      "reason": "no match"
+    },
+    {
+      "listingId": "22249c06-e860-4cc5-bed2-5c19446a1edb",
+      "name": "Anderssons Trafikskola AB",
+      "city": "Uppsala",
+      "reason": "ambiguous"
+    },
+    {
+      "listingId": "1d0850de-a7f1-418f-9a1b-d0af1621f480",
+      "name": "Bilskolan Mitt i Stan",
+      "city": "Motala",
+      "reason": "no match"
+    },
+    {
+      "listingId": "c41f8939-b3f3-49f0-8a2b-1e024d718cb6",
+      "name": "Centrala Trafikinstitutet Huskvarna",
+      "city": "Huskvarna",
+      "reason": "no match"
+    },
+    {
+      "listingId": "0c996484-cd52-4fab-9c0a-092014a66c64",
+      "name": "Din Trafikskola",
+      "city": "Indal",
+      "reason": "ambiguous"
+    },
+    {
+      "listingId": "a381fd71-d912-44c4-a4ab-2932d8418178",
+      "name": "Go-Ahead AB",
+      "city": "Växjö",
+      "reason": "no match"
+    },
+    {
+      "listingId": "f1b11ad1-1102-48f9-b419-2c8da90865b0",
+      "name": "Grimhäll & Partner AB",
+      "city": "Malmköping",
+      "reason": "no match"
+    },
+    {
+      "listingId": "e63a9bd2-b636-4e6c-9585-28b3ac988276",
+      "name": "Grönlunds Yrkesutbildningar AB Danderyd",
+      "city": "Danderyd",
+      "reason": "no match"
+    },
+    {
+      "listingId": "25def8a4-7d3f-4fa3-a2d4-2c9c113221c3",
+      "name": "Grönlunds Yrkesutbildningar AB Göteborg",
+      "city": "Säve",
+      "reason": "no match"
+    },
+    {
+      "listingId": "f2f17e4d-c712-4d64-87b7-03c82c245538",
+      "name": "Grönlunds Yrkesutbildningar AB Sigtuna",
+      "city": "Märsta",
+      "reason": "no match"
+    },
+    {
+      "listingId": "3443a1d0-b0f5-485f-bc0e-a820dd9e63e2",
+      "name": "Grönlunds Yrkesutbildningar AB YKB",
+      "city": "Södertälje",
+      "reason": "no match"
+    },
+    {
+      "listingId": "fabeea02-af9a-478d-b164-289195c57c4a",
+      "name": "Hagmans Trafikskola AB",
+      "city": "Tranås",
+      "reason": "no match"
+    },
+    {
+      "listingId": "f16c5d13-c6ca-443c-abff-7f80a677de66",
+      "name": "Hultsfred Trafikskola",
+      "city": "Hultsfred",
+      "reason": "no match"
+    },
+    {
+      "listingId": "1ed33cde-9678-41f9-ab30-276d5e38ef20",
+      "name": "Hässleholms Trafikskola AB",
+      "city": "Hässleholm",
+      "reason": "no match"
+    },
+    {
+      "listingId": "78331c00-0c6b-49e9-952e-3cfe506b097d",
+      "name": "J&A Risk  & Förarutbildning",
+      "city": "Klippan",
+      "reason": "no match"
+    },
+    {
+      "listingId": "ea8b506d-60a9-422f-a666-bb6c8f4f6751",
+      "name": "Kristianstad Trygga Trafikskola AB",
+      "city": "Kristianstad",
+      "reason": "no match"
+    },
+    {
+      "listingId": "e4c7fda6-1657-492a-bfeb-e2ed12d02f74",
+      "name": "KörkortCenter Vxo",
+      "city": "Växjö",
+      "reason": "no match"
+    },
+    {
+      "listingId": "b881ac5d-f7a6-4506-8169-9bfebc2e55c1",
+      "name": "Melissas Trafikutbildning Konsult AB",
+      "city": "Göteborg",
+      "reason": "no match"
+    },
+    {
+      "listingId": "1618602a-5cf1-4e7a-9e13-fd1ffb88f32e",
+      "name": "My Driving Academy Österåker",
+      "city": "Åkersberga",
+      "reason": "no match"
+    },
+    {
+      "listingId": "ad256055-01a7-4dcd-87ad-4f928c35f276",
+      "name": "Mårtensson Trafikskola Kristianstad",
+      "city": "Kristianstad",
+      "reason": "no match"
+    },
+    {
+      "listingId": "bf23ffda-39a8-41a3-9de0-b0c260931010",
+      "name": "Mårtenssons Trafikskola HBG",
+      "city": "Helsingborg",
+      "reason": "no match"
+    },
+    {
+      "listingId": "c82e0c01-a704-4de4-a36d-55bc5f248de8",
+      "name": "Mårtenssons Trafikskola Va Hamnen",
+      "city": "Malmö",
+      "reason": "no match"
+    },
+    {
+      "listingId": "e5a8efba-f631-49ad-8a5a-106c1c191f1c",
+      "name": "Mårtenssons Trafikskola Värnhem",
+      "city": "Malmö",
+      "reason": "no match"
+    },
+    {
+      "listingId": "5bdec273-c049-4855-b008-8b34d537afb5",
+      "name": "Niklas Trafikskola AB",
+      "city": "Älmhult",
+      "reason": "no match"
+    },
+    {
+      "listingId": "95de0195-8938-486e-83b3-13bd1bfbae0b",
+      "name": "Odenplans Trafikskola AB",
+      "city": "Solna",
+      "reason": "ambiguous"
+    },
+    {
+      "listingId": "e5c7737c-18f1-4a71-a986-be817a1343de",
+      "name": "On Via Bodekull Trafikskola",
+      "city": "Karlshamn",
+      "reason": "no match"
+    },
+    {
+      "listingId": "359cdc10-c5c3-4757-8409-96eb050374fe",
+      "name": "On Via Finnvedens Trafikskola",
+      "city": "Värnamo",
+      "reason": "no match"
+    },
+    {
+      "listingId": "4a2d10e4-0e70-476f-b0bc-3b4d821d5162",
+      "name": "On Via Ingvars Vetlanda",
+      "city": "Vetlanda",
+      "reason": "no match"
+    },
+    {
+      "listingId": "0e80da52-48d0-417c-b5f0-7e1be0eb5952",
+      "name": "On Via JR:s Trafikskola",
+      "city": "Falkenberg",
+      "reason": "no match"
+    },
+    {
+      "listingId": "be377a97-2d62-4db6-8775-6ca53d9cff9d",
+      "name": "On Via Köping Trafikskola",
+      "city": "Köping",
+      "reason": "no match"
+    },
+    {
+      "listingId": "2c806a10-ab5f-4f42-86e4-f9d30923e99b",
+      "name": "On Via Majornas Trafikskola",
+      "city": "Göteborg",
+      "reason": "no match"
+    },
+    {
+      "listingId": "de1bc2bc-b231-432b-b588-19ab9726b5e1",
+      "name": "On Via Nyströms Trafikskola",
+      "city": "Boden",
+      "reason": "no match"
+    },
+    {
+      "listingId": "bae7bc5e-f764-4e0d-a452-0d7ac7961ccd",
+      "name": "On Via Sundsvall",
+      "city": "Sundsvall",
+      "reason": "no match"
+    },
+    {
+      "listingId": "21e667ca-554a-46e5-8984-de52d7e832bb",
+      "name": "On Via Ta Körkort Jönköping",
+      "city": "Jönköping",
+      "reason": "no match"
+    },
+    {
+      "listingId": "fbb5502c-73b1-4b68-962e-4371d073fe3b",
+      "name": "On Via Torslanda Trafikskola",
+      "city": "Torslanda",
+      "reason": "no match"
+    },
+    {
+      "listingId": "178fc9f8-2106-412f-83ad-6ca8a2781072",
+      "name": "On Via Varbergs Trafikskola",
+      "city": "Varberg",
+      "reason": "no match"
+    },
+    {
+      "listingId": "b73a145d-2734-4d18-9fa3-a6b23a5c9146",
+      "name": "On Via Åbergs Trafikskola",
+      "city": "Vaggeryd",
+      "reason": "no match"
+    },
+    {
+      "listingId": "ecff16fc-886a-4c23-9c19-61d94054b972",
+      "name": "On Via Östra Göteborg",
+      "city": "Göteborg",
+      "reason": "no match"
+    },
+    {
+      "listingId": "8c58bfdb-ac35-42c9-9c56-ab88ba57802b",
+      "name": "On via TS Albertsons Trafikskola",
+      "city": "Nyköping",
+      "reason": "no match"
+    },
+    {
+      "listingId": "0b5205a3-db9e-4fee-b9a4-d781faee3842",
+      "name": "Pedalens Trafikskola i Nyköping",
+      "city": "Nyköping",
+      "reason": "no match"
+    },
+    {
+      "listingId": "53b90568-7d7d-4d29-8606-addbfef55464",
+      "name": "Rauk n Rull AB",
+      "city": "Visby",
+      "reason": "no match"
+    },
+    {
+      "listingId": "088b38f7-4b8e-4a24-b7dd-125b01c3eec9",
+      "name": "Roldan TrafikCenter",
+      "city": "Västerås",
+      "reason": "no match"
+    },
+    {
+      "listingId": "a5f688f8-0f01-49b6-ba6c-ee500d69d8e4",
+      "name": "Sanells Trafikskola AB",
+      "city": "Kristianstad",
+      "reason": "no match"
+    },
+    {
+      "listingId": "5354fd3b-7038-41ec-9d5d-93abe1819a3b",
+      "name": "Stadens Trafikskola",
+      "city": "Järfälla",
+      "reason": "no match"
+    },
+    {
+      "listingId": "cffb8174-c35d-49ff-828a-1f9fc9545ff8",
+      "name": "Söderkulla Tung Trafik",
+      "city": "Borås",
+      "reason": "no match"
+    },
+    {
+      "listingId": "8fc659d2-6038-4086-b386-126e745c16e6",
+      "name": "Tommy Nordberghs Maskin & Transport AB",
+      "city": "Hjärnarp",
+      "reason": "no match"
+    },
+    {
+      "listingId": "adf7020d-588f-4d7a-95da-8681d66b4959",
+      "name": "Uddevalla Omnibuss AB",
+      "city": "Uddevalla",
+      "reason": "no match"
+    },
+    {
+      "listingId": "3018e286-5df7-4dc1-b92e-0f79102bdad9",
+      "name": "Utbildarna AB Trafiklärarutbildningen",
+      "city": "Helsingborg",
+      "reason": "no match"
+    },
+    {
+      "listingId": "b97a4aea-366e-46b4-b0f7-cfa25a645fbd",
+      "name": "VFG Trafikskola",
+      "city": "Växjö",
+      "reason": "no match"
+    },
+    {
+      "listingId": "5bc36f18-8eed-45b0-9bd0-7cf5fd137b50",
+      "name": "Yrkesförarcentrum i Mälardalen",
+      "city": "Västerås",
+      "reason": "no match"
+    },
+    {
+      "listingId": "84ab5af2-1666-4ec0-bcf6-a8c4aa28067d",
+      "name": "Z-Trafikskola AB",
+      "city": "Östersund",
+      "reason": "no match"
+    }
+  ]
+}

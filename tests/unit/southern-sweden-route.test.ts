@@ -44,11 +44,20 @@ describe('GET /api/southern-sweden', () => {
   });
 
   it('falls back to the configured default locale for an invalid value', async () => {
-    const response = await GET(request('de'));
+    const response = await GET(request('xx'));
     const body = SouthernSwedenHub.parse(await response.json());
 
     expect(body.locale).toBe('sv');
     expect(body.hero.title).toContain('södra Sverige');
+  });
+
+  it('returns native copy for a prefixed major-search locale', async () => {
+    const response = await GET(request('de'));
+    const body = SouthernSwedenHub.parse(await response.json());
+
+    expect(body.locale).toBe('de');
+    expect(body.hero.title).not.toContain('Southern Sweden');
+    expect(body.hero.title.length).toBeGreaterThan(0);
   });
 
   it('stays a public editorial route without DB or auth dependencies', () => {

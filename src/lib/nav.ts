@@ -10,10 +10,13 @@ export interface NavItem {
   /** Translation key under `common.nav.*`. */
   labelKey:
     | 'nav.findProvider'
+    | 'nav.heavyVehicles'
+    | 'nav.dealers'
     | 'nav.howItWorks'
     | 'nav.licenceCategories'
     | 'nav.drivingInstructor'
     | 'nav.drivingSchool'
+    | 'nav.dealershipOwner'
     | 'nav.forSchoolsMenu'
     | 'nav.getStarted'
     | 'nav.faq'
@@ -53,6 +56,8 @@ export interface NavItem {
   requiresAuth?: boolean;
   /** When true, hide once a session exists (acquisition CTAs / marketing-only). */
   hideWhenAuthenticated?: boolean;
+  /** Login-walled catalogue. Keep out of sitemap and robots. */
+  catalogGated?: boolean;
   /** Sort key within a group (ascending); unordered items fall to the end. */
   order?: number;
 }
@@ -63,34 +68,41 @@ export interface NavItem {
 //   { labelKey: 'nav.contactUs', href: 'mailto:…',          group: 'secondary' },
 export const navItems: NavItem[] = [
   {
-    label: 'Find driving schools',
+    label: 'Light vehicles',
     labelKey: 'nav.findProvider',
-    href: '/instructors',
+    href: '/locations/se',
     group: 'primary',
     order: 1,
   },
   {
-    label: 'How it works',
-    labelKey: 'nav.howItWorks',
-    href: '/#how',
+    label: 'Heavy vehicles',
+    labelKey: 'nav.heavyVehicles',
+    href: '/tung-trafik',
     group: 'primary',
     order: 2,
-    hideWhenAuthenticated: true,
+    catalogGated: true,
+  },
+  {
+    label: 'Dealers',
+    labelKey: 'nav.dealers',
+    href: '/bilhandlare',
+    group: 'primary',
+    order: 3,
   },
   // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
   // primary bar — keeps marketing chrome short once a session exists.
   {
-    label: "I'm a driving instructor",
-    labelKey: 'nav.drivingInstructor',
-    href: '/signup?role=instructor',
-    group: 'secondary',
-    order: 0,
-    hideWhenAuthenticated: true,
-  },
-  {
     label: 'I run a driving school',
     labelKey: 'nav.drivingSchool',
     href: '/for-skolor',
+    group: 'secondary',
+    order: 1,
+    hideWhenAuthenticated: true,
+  },
+  {
+    label: 'I run a dealership',
+    labelKey: 'nav.dealershipOwner',
+    href: '/contact?topic=list_dealer',
     group: 'secondary',
     order: 1,
     hideWhenAuthenticated: true,
@@ -158,19 +170,6 @@ export const navItems: NavItem[] = [
     href: '/locations/se/vasteras',
     group: 'footer',
     order: 9,
-  },
-  // Authed-only: "Saved details" / "payment methods" page. Lives in the
-  // footer because it requires a session — the global footer
-  // SiteNav renders it via useSession; non-authed visitors will see it
-  // ghost-rendered but the link is harmless on the public marketing
-  // pages. Better-auth auto-redirects unauthorised requests to /login.
-  {
-    label: 'Payment methods',
-    labelKey: 'nav.paymentMethods',
-    href: '/dashboard/student/payment-methods',
-    group: 'footer',
-    order: 10,
-    requiresAuth: true,
   },
   {
     label: 'Southern Sweden',

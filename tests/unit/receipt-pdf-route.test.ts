@@ -216,7 +216,6 @@ describe('booking receipt PDF route', () => {
       lineItems: [
         { description: 'Elevens brutto betalda belopp (SEK)', unitAmountCents: 57800 },
         { description: 'DriveLinkUp-avgift (SEK)', unitAmountCents: -2800 },
-        { description: 'Skolprovision (SEK)', unitAmountCents: -5500 },
       ],
       totalCents: 49500,
     });

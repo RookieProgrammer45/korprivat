@@ -19,6 +19,7 @@ import { AuthShell } from '@/components/custom/auth-shell';
 import { apiFetch } from '@/lib/api-client';
 import { clearPersistedAuthNext, sanitizeNext } from '@/lib/auth-next';
 import { PostLoginRedirect, RoleEnum } from '@/lib/contracts/auth';
+import { isIndependentInstructorSignupOpen } from '@/lib/signup-eligibility';
 
 export default function OAuthCompletePage() {
   const router = useRouter();
@@ -31,7 +32,9 @@ export default function OAuthCompletePage() {
 
     const params = new URLSearchParams(window.location.search);
     const parsedRole = RoleEnum.safeParse(params.get('role') ?? 'STUDENT');
-    const role = parsedRole.success ? parsedRole.data : 'STUDENT';
+    const incoming = parsedRole.success ? parsedRole.data : 'STUDENT';
+    const role =
+      incoming === 'INSTRUCTOR' && !isIndependentInstructorSignupOpen() ? 'STUDENT' : incoming;
     const next = sanitizeNext(params.get('next'));
 
     void (async () => {
@@ -47,10 +50,12 @@ export default function OAuthCompletePage() {
         if (next) {
           clearPersistedAuthNext();
           router.replace(next);
+        } else if (incoming === 'INSTRUCTOR') {
+          router.replace('/signup?role=school');
         } else if (role === 'STUDENT') {
           router.replace('/dashboard/student');
         } else {
-          router.replace('/signup?role=instructor');
+          router.replace('/signup?role=school');
         }
         router.refresh();
       } catch {

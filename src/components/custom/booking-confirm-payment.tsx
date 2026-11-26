@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
 import { BookingPriceSummary } from '@/components/custom/booking-price-summary';
 import { BookingMessagingEntry } from '@/components/custom/messaging/booking-messaging-entry';
+import { SchoolContactButton } from '@/components/custom/school-contact-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -15,6 +16,7 @@ import {
   BookingPaymentPollResponse,
   BookingRead,
 } from '@/lib/contracts/bookings';
+import { intlLocale } from '@/lib/intl-locale';
 
 const POLL_INTERVAL_MS = 1500;
 const POLL_MAX_ATTEMPTS = 10;
@@ -29,7 +31,15 @@ type Status =
       error: string | null;
     };
 
-export function BookingPaymentLink({ bookingId, token }: { bookingId: string; token?: string }) {
+export function BookingPaymentLink({
+  bookingId,
+  token,
+  paymentsEnabled = false,
+}: {
+  bookingId: string;
+  token?: string;
+  paymentsEnabled?: boolean;
+}) {
   const t = useTranslations('bookingConfirmPayment');
   const locale = useLocale();
   const [status, setStatus] = useState<Status>({ kind: 'loading' });
@@ -155,7 +165,7 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
           <p className="font-display text-h3 tracking-tight text-foreground">{t('accessTitle')}</p>
           <p className="text-small text-muted-foreground">{t('accessBody')}</p>
           <Button asChild variant="outline" size="sm" className="w-fit">
-            <Link href="/instructors">{t('browseCta')}</Link>
+            <Link href="/locations/se">{t('browseCta')}</Link>
           </Button>
         </CardContent>
       </Card>
@@ -258,13 +268,13 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
             </div>
             <p className="text-small text-muted-foreground">{t('refundedBody')}</p>
           </div>
-        ) : isAwaiting ? (
+        ) : isAwaiting && paymentsEnabled ? (
           <StateNotice title={t('awaitingTitle')} body={t('awaitingBody')} />
         ) : isDeclined ? (
           <StateNotice title={t('declinedTitle')} body={t('declinedBody')} />
         ) : isCancelled ? (
           <StateNotice title={t('cancelledTitle')} body={t('cancelledBody')} />
-        ) : canPay ? (
+        ) : canPay && paymentsEnabled ? (
           <Button
             type="button"
             disabled={status.paymentLoading}
@@ -272,6 +282,8 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
           >
             {status.paymentLoading ? t('openingCheckout') : t('payCta')}
           </Button>
+        ) : canPay || isAwaiting ? (
+          <SchoolReferral name={booking.providerName} contact={booking.schoolContact} />
         ) : null}
 
         {paymentPollError ? (
@@ -297,12 +309,14 @@ export function BookingPaymentLink({ bookingId, token }: { bookingId: string; to
           </div>
         ) : null}
         {status.error ? <p className="text-small text-destructive">{status.error}</p> : null}
-        <Link
-          href="/contact?topic=payment"
-          className="text-small text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          {t('paymentHelp')}
-        </Link>
+        {paymentsEnabled ? (
+          <Link
+            href="/contact?topic=payment"
+            className="text-small text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+          >
+            {t('paymentHelp')}
+          </Link>
+        ) : null}
       </CardContent>
     </Card>
   );
@@ -317,6 +331,22 @@ function DetailFact({ label, children }: { label: string; children: ReactNode })
         {label}
       </dt>
       <dd className="text-small font-medium text-foreground">{children}</dd>
+    </div>
+  );
+}
+
+function SchoolReferral({
+  name,
+  contact,
+}: {
+  name: string;
+  contact: { kind: 'inbox' | 'website'; href: string } | null | undefined;
+}) {
+  const t = useTranslations('bookingConfirmPayment');
+  return (
+    <div className="grid gap-3">
+      <StateNotice title={t('payClosedTitle')} body={t('payClosedBody')} />
+      <SchoolContactButton name={name} contact={contact} size="default" className="w-fit" />
     </div>
   );
 }
@@ -344,7 +374,7 @@ function readBooking(id: string, token: string | undefined): Promise<BookingRead
 function formatDate(iso: string, locale: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',

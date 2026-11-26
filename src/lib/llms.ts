@@ -69,6 +69,7 @@ export async function renderLlmsTxt(config: LlmsConfig): Promise<string> {
 
   for (const item of navItems) {
     if (item.requiresAuth) continue; // auth/admin pages aren't public
+    if (item.catalogGated) continue;
     if (!item.href.startsWith('/')) continue; // external links aren't ours to list
     if (item.href.includes('#')) continue; // anchors aren't separate URLs
     if (seen.has(item.href)) continue;

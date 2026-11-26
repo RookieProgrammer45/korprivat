@@ -10,7 +10,7 @@
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -40,8 +40,12 @@ export function AuthNav() {
   const t = useTranslations('common');
   const { data: session, isPending } = useSession();
   const [signingOut, setSigningOut] = useState(false);
+  // Session state only exists in the browser; rendering before mount makes
+  // the server HTML disagree with the first client render.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  if (isPending) return null;
+  if (!mounted || isPending) return null;
 
   if (!session?.user) {
     return (

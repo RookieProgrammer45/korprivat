@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   independentPublicationDecision,
+  instructorPaymentDecision,
   inventoryDiaryDecision,
   invitationCategoryDecision,
   offeringCategoryDecision,
@@ -8,6 +9,25 @@ import {
 } from '@/lib/acquisition/mediated-instructor-policy';
 
 describe('school-mediated instructor policy', () => {
+  it('lets only a school or a school-affiliated instructor collect payment', () => {
+    expect(
+      instructorPaymentDecision({ providerRole: 'SCHOOL', affiliationVerified: false }),
+    ).toEqual({ allowed: true, code: 'school_listing' });
+    expect(
+      instructorPaymentDecision({ providerRole: 'INSTRUCTOR', affiliationVerified: true }),
+    ).toEqual({ allowed: true, code: 'school_affiliated' });
+    expect(
+      instructorPaymentDecision({ providerRole: 'INSTRUCTOR', affiliationVerified: false }),
+    ).toEqual({ allowed: false, code: 'independent_payment_refused' });
+    expect(instructorPaymentDecision({ providerRole: null, affiliationVerified: false })).toEqual({
+      allowed: false,
+      code: 'independent_payment_refused',
+    });
+    expect(
+      instructorPaymentDecision({ providerRole: 'HANDLEDARE', affiliationVerified: true }),
+    ).toEqual({ allowed: false, code: 'handledare_not_payable' });
+  });
+
   it('SC-23 refuses independent publication and sale, and keeps a native diary closed without delegation', () => {
     expect(
       independentPublicationDecision({

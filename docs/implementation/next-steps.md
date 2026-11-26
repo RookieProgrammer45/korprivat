@@ -1,6 +1,6 @@
 # Next steps — build complete; rehearsal then founder decisions
 
-**Status (2026-10-24):** specs/09 v1.3 is fully implemented — Phases 0–6, ACQ-1…5, and the Phase 5 alerting/cutover-runbook slice are on `main`. The cutover rehearsal (#41) and the staging flag-on walkthrough (#42) are on `main`. **Cursor does not flip production flags, contact vendors, or decide open questions without a named founder authorization — one flag at a time, by name.**
+**Status (2026-10-24):** specs/09 v1.3 is fully implemented — Phases 0–6, ACQ-1…5, and the Phase 5 alerting/cutover-runbook slice are on `main`. The cutover rehearsal (#41) and the staging flag-on walkthrough (#42) are on `main`. **Cursor does not flip production flags, contact vendors, or decide open questions without a named founder authorization — one flag at a time, by name.** `RISK_COURSES` is a new default-OFF flag (specs/09 §6.6). Do not enable it in production without a named authorization.
 
 ## 1. Cutover rehearsal (done — #41) and staging walkthrough (done — #42)
 

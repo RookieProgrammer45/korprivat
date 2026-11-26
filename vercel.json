@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npx prisma migrate deploy && next build --webpack",
+  "buildCommand": "bash scripts/vercel-build.sh",
   "crons": [
     {
       "path": "/api/cron/auto-release",

@@ -1,13 +1,13 @@
 'use client';
 
-import { ChevronDown, Menu } from 'lucide-react';
-import Link from 'next/link';
+import { Car, ChevronDown, Menu, Truck } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { toast } from 'sonner';
 import { AuthNav } from '@/components/custom/auth-nav';
 import { LanguageToggle } from '@/components/custom/language-toggle';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -22,6 +22,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { signOut as signOutAction, useSession } from '@/lib/auth-client';
 
 import { type NavGroup, type NavItem, navItems } from '@/lib/nav';
+import { parseLocalePrefix } from '@/lib/seo/locale-path';
 import { isFocusedShellPath } from '@/lib/shell-mode';
 import { siteName } from '@/lib/site';
 import { cn } from '@/lib/utils';
@@ -34,6 +35,17 @@ import { cn } from '@/lib/utils';
 export function useIsAuthenticated(): boolean {
   const { data } = useSession();
   return Boolean(data?.user);
+}
+
+function NavLabel({ href, children }: { href: string; children: React.ReactNode }) {
+  const Icon = href === '/tung-trafik' ? Truck : href === '/locations/se' ? Car : null;
+  if (!Icon) return children;
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <Icon className="size-4" aria-hidden />
+      {children}
+    </span>
+  );
 }
 
 function visibleItems(group: NavGroup, isAuthenticated: boolean): NavItem[] {
@@ -123,7 +135,10 @@ export function SiteNav() {
   // the hero CTA cluster (public-home), not in the top bar. barNav = the rest,
   // used both by the desktop bar and the mobile sheet.
   const barNav = secondary.filter(
-    (item) => item.labelKey !== 'nav.drivingInstructor' && item.labelKey !== 'nav.drivingSchool',
+    (item) =>
+      item.labelKey !== 'nav.drivingInstructor' &&
+      item.labelKey !== 'nav.drivingSchool' &&
+      item.labelKey !== 'nav.dealershipOwner',
   );
   // ElevenLabs-style CTA order: outline "Logga in" first, black "Kom igång" last.
   const ctaNav = [...barNav].sort(
@@ -139,8 +154,9 @@ export function SiteNav() {
 
   // Exact match for the root; segment-boundary match for everything else so
   // '/blog' highlights on '/blog/post' but '/' never matches every route.
+  const currentPath = parseLocalePrefix(pathname).pathname;
   const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+    href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
   const isSlotActive = (slot: NavSlot) =>
     slot.type === 'link' ? isActive(slot.item.href) : slot.items.some((i) => isActive(i.href));
 
@@ -165,7 +181,7 @@ export function SiteNav() {
           />
           <span
             id="site-logo-title"
-            className="site-header-wordmark truncate font-display text-xs font-bold tracking-[-0.02em] text-foreground transition-colors group-hover:text-brand-700 dark:group-hover:text-brand-300"
+            className="site-header-wordmark truncate font-display text-base font-normal tracking-[-0.02em] text-foreground"
           >
             {siteName}
           </span>
@@ -189,7 +205,7 @@ export function SiteNav() {
                   href={slot.item.href}
                   aria-current={isActive(slot.item.href) ? 'page' : undefined}
                 >
-                  {tNav(slot.item.labelKey)}
+                  <NavLabel href={slot.item.href}>{tNav(slot.item.labelKey)}</NavLabel>
                 </Link>
               </Button>
             ) : (
@@ -255,7 +271,7 @@ export function SiteNav() {
                             href={slot.item.href}
                             aria-current={isActive(slot.item.href) ? 'page' : undefined}
                           >
-                            {tNav(slot.item.labelKey)}
+                            <NavLabel href={slot.item.href}>{tNav(slot.item.labelKey)}</NavLabel>
                           </Link>
                         </DropdownMenuItem>
                       ) : (
@@ -302,10 +318,8 @@ export function SiteNav() {
             <AuthNav />
           </div>
 
-          {/* Language lives in the mobile drawer; the app is light-only, so no theme toggle. */}
-          <div className="hidden md:contents">
-            <LanguageToggle />
-          </div>
+          {/* Same control on mobile and desktop so a language switch is one tap. */}
+          <LanguageToggle />
 
           {/* Mobile (below md): burger + drawer — only when there's something to collapse */}
           {collapsedCount > 0 && (
@@ -349,7 +363,7 @@ export function SiteNav() {
                           aria-current={isActive(slot.item.href) ? 'page' : undefined}
                           onClick={() => setOpen(false)}
                         >
-                          {tNav(slot.item.labelKey)}
+                          <NavLabel href={slot.item.href}>{tNav(slot.item.labelKey)}</NavLabel>
                         </Link>
                       </Button>
                     ) : (
@@ -402,16 +416,6 @@ export function SiteNav() {
                     </div>
                   )}
                 </nav>
-                {/* Footer of the mobile drawer — language toggle lives here so
-                    every page can flip SV/EN from mobile, paralleling the
-                    theme toggle (which is also designer-included in the
-                    right-hand cluster on desktop). */}
-                <div className="mt-auto flex items-center justify-between gap-2 border-t border-border pt-4">
-                  <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                    {tNav('nav.language')}
-                  </span>
-                  <LanguageToggle />
-                </div>
               </SheetContent>
             </Sheet>
           )}

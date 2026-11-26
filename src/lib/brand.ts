@@ -1,8 +1,11 @@
 // siteName/siteDescription; `manifest.ts` + `opengraph-image.tsx` read `brandVisual`.
 
 export const siteName = 'DriveLinkUp';
+/** Swedish homepage `<title>`. Keyword first, under 60 characters, no brand suffix. */
+export const siteTitleSv = 'Jämför bilpriser och trafikskolor';
+/** Default meta description. Must stay a free catalogue (see security-and-seo). */
 export const siteDescription =
-  'Jämför auktoriserade trafikskolor och behöriga instruktörer. Priser och villkor syns före bokningen — kostnadsfritt för elever.';
+  'Jämför bilpriser och trafikskolor. Priset är det företaget publicerat. Gratis katalog för alla.';
 
 // PWA + social-share colors. HEX only (the oklch() tokens in globals.css aren't
 // readable here) — set to match your brand seed.
@@ -16,6 +19,6 @@ export const brandVisual = {
     background: '#F1FAF9',
     foreground: '#0D1312',
     /** Second line under the site name; '' hides it. */
-    tagline: 'Trafikskolor och instruktörer — på ett ställe.',
+    tagline: 'Katalog för trafikskolor i Sverige — inte en myndighet.',
   },
 } as const;

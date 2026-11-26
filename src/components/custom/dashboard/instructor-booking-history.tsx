@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { type ProviderBookingItem, ProviderBookingList } from '@/lib/contracts/provider-operations';
+import { intlLocale } from '@/lib/intl-locale';
 
 export function InstructorBookingHistory() {
   const t = useTranslations('dashboard.instructor.history');
@@ -107,10 +108,6 @@ function TransactionCard({
             value={formatNullableSek(item.serviceFeeSek, locale, true)}
           />
           <MoneyRow
-            label={t('commission')}
-            value={formatNullableSek(item.commissionSek, locale, true)}
-          />
-          <MoneyRow
             emphasized
             label={t('netPayout')}
             value={formatNullableSek(item.netPayoutSek, locale)}
@@ -171,7 +168,7 @@ function formatNullableSek(amount: number | null, locale: string, negative = fal
 }
 
 function formatDate(iso: string, locale: string) {
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
@@ -179,7 +176,7 @@ function formatDate(iso: string, locale: string) {
 }
 
 function formatSek(amount: number, locale: string) {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     style: 'currency',
     currency: 'SEK',
     maximumFractionDigits: 0,

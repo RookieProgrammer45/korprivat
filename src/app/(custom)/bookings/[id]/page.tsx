@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BookingConfirmPayment } from '@/components/custom/booking-confirm-payment';
+import { newBookingCreationEnabled } from '@/lib/scheduling/booking-creation';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,7 +27,11 @@ export default async function BookingDetailPage({ params, searchParams }: PagePr
   return (
     <main className="container-page section">
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-3">
-        <BookingConfirmPayment bookingId={id} token={token} />
+        <BookingConfirmPayment
+          bookingId={id}
+          token={token}
+          paymentsEnabled={newBookingCreationEnabled()}
+        />
       </div>
     </main>
   );

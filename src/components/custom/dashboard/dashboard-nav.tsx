@@ -1,6 +1,5 @@
 'use client';
 
-import { LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -46,10 +45,9 @@ export function DashboardNav({
   return (
     <nav
       aria-label={t('ariaLabel')}
-      className="flex flex-wrap items-center gap-2 rounded-[calc(var(--radius)+0.25rem)] border border-border bg-card px-3 py-3 shadow-md lg:grid lg:overflow-visible"
+      className="flex flex-wrap items-center gap-1 lg:grid lg:items-start"
     >
       {navItems.map((item) => {
-        const Icon = LayoutDashboard;
         const hrefPath = item.href.split('#')[0] ?? item.href;
         const isHashPlaceholder = item.href.includes('#');
         const active = isHashPlaceholder
@@ -64,13 +62,12 @@ export function DashboardNav({
             href={item.href}
             aria-current={active ? 'page' : undefined}
             className={cn(
-              'flex h-10 shrink-0 items-center gap-2 rounded-full px-3 text-sm font-medium transition-colors',
+              'flex h-10 shrink-0 items-center rounded-full px-3 text-sm font-medium transition-colors',
               active
-                ? 'bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300'
-                : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground',
+                ? 'bg-muted text-foreground'
+                : 'text-muted-foreground hover:bg-muted/70 hover:text-foreground',
             )}
           >
-            <Icon aria-hidden="true" className="size-4" />
             <span>{t(item.labelKey)}</span>
           </Link>
         );

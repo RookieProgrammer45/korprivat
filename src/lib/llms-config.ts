@@ -27,37 +27,50 @@ import type { LlmsConfig } from '@/lib/llms';
 
 export const llmsConfig: LlmsConfig = {
   intro:
-    'DriveLinkUp is a Sweden-first marketplace for authorized driving schools. Learners discover, compare, and book for free (0% learner fee). School-affiliated bookings pay 8% commission after completed service; independent instructors pay 10%. Handledare / övningskörning is a separate legal path, not a school listing.',
+    'DriveLinkUp is a Sweden-first catalog of driving schools. It is not a driving school, licensing authority, or government service. Anyone can compare listings and published prices for free, then contact the school. DriveLinkUp does not take lesson payments. Handledare / övningskörning is a separate legal path, not a school listing.',
   pageDescriptions: {
-    '/': 'Marketplace for comparing authorized driving schools, their published prices, availability, and driving lessons in Sweden.',
-    '/instructors':
-      'Browse and compare authorized driving-school listings by licence category, city, language, price, availability, and booking policy.',
+    '/': 'Catalog for comparing driving-school listings and published prices in Sweden.',
     '/locations':
-      'Nordic location directory: Sweden live for booking; Norway, Denmark, Finland, and Iceland expansion hubs.',
-    '/locations/se':
-      'Sweden country hub with län and city pages for authorized driving-school discovery.',
+      'Nordic location directory: Sweden live for discovery; Norway, Denmark, Finland, and Iceland expansion hubs.',
+    '/locations/se': 'Sweden country hub with län and city pages for driving-school discovery.',
     '/locations/se/stockholm':
-      'City hub for authorized driving schools in Stockholm with booking, pricing context, and FAQ.',
-    '/locations/se/goteborg': 'City hub for authorized driving schools in Gothenburg (Göteborg).',
-    '/locations/se/malmo': 'City hub for authorized driving schools in Malmö and Skåne.',
+      'City hub for driving-school listings in Stockholm with pricing context and FAQ.',
+    '/locations/se/goteborg': 'City hub for driving-school listings in Gothenburg (Göteborg).',
+    '/locations/se/malmo': 'City hub for driving-school listings in Malmö and Skåne.',
     '/pricing':
-      'Learner booking is free of marketplace fees. Schools pay 8% after completion; independent instructors 10%.',
+      'A catalog listing is free. DriveLinkUp does not add a fee. Payment for the lesson is arranged with the school.',
     '/faq':
-      'Answers about authorized schools, free learner booking, school-controlled availability, cancellations, and the separate Swedish handledare path.',
+      'Answers about directory listings, published prices, and the separate Swedish handledare path.',
     '/for-instructors':
-      'Information for authorized driving schools about qualified, measurable bookings, school-controlled prices, and post-completion commission.',
+      'Information for driving schools about listings and school-controlled prices. Listing is not an endorsement.',
     '/for-skolor':
-      'School onboarding: publish prices and availability, receive measurable bookings, 8% after completion.',
+      'School onboarding: publish the school and its prices so learners can compare and contact you.',
     '/southern-sweden':
-      'A bilingual guide to authorized driving-school listings and lessons across Skåne, Halland, Blekinge, and Småland, with links to exact-city listings.',
+      'A bilingual guide to driving-school listings across Skåne, Halland, Blekinge, and Småland, with links to city listings.',
     '/western-northern-sweden':
-      'A bilingual guide to authorized driving-school listings and lessons across Västra Götaland, Värmland, Gävleborg, Västernorrland, Västerbotten, and Norrbotten, with links to exact-city listings.',
+      'A bilingual guide to driving-school listings across Västra Götaland, Värmland, Gävleborg, Västernorrland, Västerbotten, and Norrbotten.',
     '/handledare':
-      'A Swedish legal explainer for private handledare and övningskörning. Handledare are distinct from authorized driving schools and are not marketplace school listings.',
-    '/blog': 'Guides for learners: costs, handledare, and choosing a traffic school in Sweden.',
+      'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
+    '/blog':
+      'Guides for learners: category B in Malmö and Gothenburg, driving lessons, the learner permit, risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+    '/blog/korkort-b-malmo':
+      'Swedish guide to category B in Malmö: learner permit, traffic-school lessons, risk education, Trafikverket theory and driving tests at Cederströmsgatan 1, foreign-licence readers, and published school prices.',
+    '/blog/korkort-b-goteborg':
+      'Swedish guide to category B in Gothenburg: learner permit, traffic-school lessons, risk education, Trafikverket theory and driving tests at Hisingen, Högsbo and Partille, foreign-licence readers, and published school prices.',
+    '/blog/korlektion-korkort-b':
+      'Swedish guide to a category B driving lesson: learner permit, a traffic-school permit versus a catalog listing, published prices in Stockholm, Gothenburg, Malmö and Lund, and readers who already drive in another country.',
+    '/blog/korkortstillstand-korkort-b':
+      'Swedish guide to the category B learner permit: group 1 application, vision certificate, five-year validity, foreign-licence readers, and published school prices.',
+    '/blog/riskutbildning-korkort-b':
+      'Swedish guide to mandatory category B risk education: riskettan, skidpad (halkbana), validity before the theory and driving tests, foreign-licence readers, and published school prices.',
+    '/blog/korprov-korkort-b':
+      'Swedish guide to the category B driving test at Trafikverket: learner permit, risk education, theory-test validity, safety check, and published school prices.',
+    '/blog/korkort-b-steg-for-steg':
+      'Swedish guide to category B: learner permit, risk education, theory test, driving test, and how to compare published school prices.',
+    '/blog/kunskapsprov-korkort-b':
+      'Swedish guide to the category B theory test at Trafikverket: learner permit, risk education, scoring, validity, and published school prices.',
     '/om-oss':
-      'About DriveLinkUp: why published prices appear before checkout, how the marketplace connects schools, certified instructors and learners. DriveLinkUp is a startup founded in Stockholm in 2026.',
-    '/terms':
-      'Terms of service: booking and payment via Stripe with funds released after completed lessons, cancellation rules set by each school, 8% school / 10% independent-instructor commission, and account rules.',
+      'About DriveLinkUp: a catalog of driving schools. Published prices are visible on the listing. Founded in Stockholm in 2026.',
+    '/terms': 'Terms of service: directory listings, school-arranged payment, and account rules.',
   },
 };

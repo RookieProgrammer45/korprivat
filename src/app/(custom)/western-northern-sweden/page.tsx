@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { WesternNorthernSwedenHub } from '@/components/custom/western-northern-sweden-hub';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 import { siteName, siteUrl } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
@@ -12,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t('title'),
     description: t('description'),
-    alternates: { canonical: '/western-northern-sweden' },
+    alternates: await publicAlternatesFor('/western-northern-sweden'),
     openGraph: {
       type: 'website',
       siteName,

@@ -31,7 +31,7 @@ export function HandledareApproveClient({ token }: { token: string }) {
   if (status === 'ok') {
     return (
       <p className="rounded-md border border-border bg-muted/40 p-4 text-sm">
-        Tack — handledarskapet är godkänt. Eleven kan nu boka lektioner.
+        Tack — handledarskapet är godkänt.
       </p>
     );
   }

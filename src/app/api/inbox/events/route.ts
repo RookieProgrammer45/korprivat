@@ -20,6 +20,11 @@ export async function POST(req: Request) {
   if (!isReliableProcessingOn()) {
     return NextResponse.json({ error: { code: 'not_found' } }, { status: 404 });
   }
+  const secret = process.env.INBOX_EVENTS_SECRET?.trim();
+  const auth = req.headers.get('authorization');
+  if (!secret || auth !== `Bearer ${secret}`) {
+    return NextResponse.json({ error: { code: 'unauthorized' } }, { status: 401 });
+  }
   let json: unknown;
   try {
     json = await req.json();

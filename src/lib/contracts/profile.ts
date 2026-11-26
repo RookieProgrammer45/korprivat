@@ -33,6 +33,26 @@ export const Profile = z.object({
 });
 export type Profile = z.infer<typeof Profile>;
 
+export const DISPLAY_NAME_MAX = 120;
+
+export function normalizeDisplayName(input: string): string {
+  return input.trim().replace(/\s+/g, ' ');
+}
+
+// Write shape for PATCH /api/profile — the signed-in user changes the
+// account display name stored on better-auth's User.name. Email stays
+// read-only here; identity verification still does not accept a claimed
+// name as evidence.
+export const ProfileNameUpdate = z.object({
+  name: z.string().transform(normalizeDisplayName).pipe(z.string().min(1).max(DISPLAY_NAME_MAX)),
+});
+export type ProfileNameUpdate = z.infer<typeof ProfileNameUpdate>;
+
+export const ProfileNameUpdated = z.object({
+  name: z.string().min(1).max(DISPLAY_NAME_MAX),
+});
+export type ProfileNameUpdated = z.infer<typeof ProfileNameUpdated>;
+
 // Response for POST /api/profile/delete — the self-service GDPR erasure.
 // `deleted: true` is only returned after the full transactional erase has
 // committed; the caller's session is dead by then (Session cascades with

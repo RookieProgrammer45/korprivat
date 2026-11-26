@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { TermsContent } from '@/components/custom/terms-content';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('termsPage.meta');
   return {
     title: { absolute: `${t('title')} · DriveLinkUp` },
     description: t('description'),
-    alternates: { canonical: '/terms' },
+    alternates: await publicAlternatesFor('/terms'),
   };
 }
 

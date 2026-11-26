@@ -1,0 +1,69 @@
+name: Regional school prices
+
+# Re-reads one country's lesson prices from each school's own website and pushes
+# the file to main, which deploys. Start with the smallest market. The OpenAI
+# key is the repository secret. A tag regional-prices-IE runs Ireland.
+on:
+  workflow_dispatch:
+    inputs:
+      country:
+        description: ISO country code
+        required: true
+        type: string
+  push:
+    tags:
+      - regional-prices-*
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Stay on the main branch
+        run: git switch -C main origin/main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Extract lesson prices
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            COUNTRY="${{ github.event.inputs.country }}"
+          else
+            COUNTRY="${GITHUB_REF_NAME#regional-prices-}"
+          fi
+          COUNTRY=$(printf '%s' "$COUNTRY" | tr '[:lower:]' '[:upper:]')
+          case "$COUNTRY" in
+            IE|SK|SI|LV|HR|BG|EE|LU|GR|CZ|PT|RO|HU|LT|BE|CH|NL|AT|ES|PL|IT|FR|DE) ;;
+            *) echo "unsupported country: $COUNTRY" >&2; exit 1 ;;
+          esac
+          echo "COUNTRY=$COUNTRY" >> "$GITHUB_ENV"
+          npx tsx scripts/regional-schools/extract.ts --only europe-schools --country "$COUNTRY" --fetch --extract --write
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Save the extracted file
+        uses: actions/upload-artifact@v4
+        with:
+          name: europe-school-prices-${{ github.ref_name }}
+          path: data/europe-schools/schools.json
+          retention-days: 14
+      - name: Publish prices
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/europe-schools/schools.json data/europe-schools/price-runs
+          if git diff --cached --quiet; then
+            echo "No price changes to publish"
+            exit 0
+          fi
+          git commit -m "data: extract ${COUNTRY} driving-school lesson prices"
+          git push origin HEAD:main

@@ -79,12 +79,10 @@ function runVitest(flagEnv: Record<string, string>, testNamePattern?: string) {
 }
 
 function extractFailures(output: string): string[] {
-  return output
-    .split('\n')
-    .flatMap((line) => {
-      const match = line.match(/^ FAIL  (.+)$/);
-      return match?.[1] ? [match[1]] : [];
-    });
+  return output.split('\n').flatMap((line) => {
+    const match = line.match(/^ FAIL {2}(.+)$/);
+    return match?.[1] ? [match[1]] : [];
+  });
 }
 
 function summarize(output: string, exitCode: number): RunSummary {

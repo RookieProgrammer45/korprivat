@@ -6,7 +6,43 @@
  * only for SE locations that can filter the live directory.
  */
 
-export const NORDIC_COUNTRIES = ['se', 'no', 'dk', 'fi', 'is'] as const;
+export const NORDIC_COUNTRIES = [
+  'se',
+  'no',
+  'dk',
+  'fi',
+  'is',
+  'au',
+  'gb',
+  'es',
+  'fr',
+  'de',
+  'it',
+  'pl',
+  'at',
+  'be',
+  'nl',
+  'pt',
+  'ie',
+  'lu',
+  'ch',
+  'cz',
+  'sk',
+  'hu',
+  'ro',
+  'bg',
+  'hr',
+  'si',
+  'gr',
+  'cy',
+  'mt',
+  'ee',
+  'lv',
+  'lt',
+  'us',
+  'ca',
+  'br',
+] as const;
 export type NordicCountryCode = (typeof NORDIC_COUNTRIES)[number];
 
 export type NordicLocationKind = 'city' | 'region';
@@ -21,8 +57,9 @@ export type NordicLocation = {
   nameLocal?: string;
   /** Parent region slug within the same country (cities only). */
   regionSlug?: string;
-  /** Value passed to instructor directory `city` filter when marketplaceLive. */
-  filterCity?: string;
+  /** DB `city` values matched by the hub when marketplaceLive. One or more, e.g.
+   *  Haninge covers the schools registered in Handen and Västerhaninge. */
+  filterCity?: string | readonly string[];
   /** SE launch market can show live listings; other Nordics are expansion hubs. */
   marketplaceLive: boolean;
 };
@@ -40,6 +77,36 @@ export const NORDIC_COUNTRY_META: Record<NordicCountryCode, NordicCountryMeta> =
   dk: { code: 'dk', name: 'Denmark', nameLocal: 'Danmark', adjective: 'Danish' },
   fi: { code: 'fi', name: 'Finland', nameLocal: 'Suomi', adjective: 'Finnish' },
   is: { code: 'is', name: 'Iceland', nameLocal: 'Ísland', adjective: 'Icelandic' },
+  au: { code: 'au', name: 'Australia', nameLocal: 'Australia', adjective: 'Australian' },
+  gb: { code: 'gb', name: 'United Kingdom', nameLocal: 'United Kingdom', adjective: 'British' },
+  es: { code: 'es', name: 'Spain', nameLocal: 'España', adjective: 'Spanish' },
+  fr: { code: 'fr', name: 'France', nameLocal: 'France', adjective: 'French' },
+  de: { code: 'de', name: 'Germany', nameLocal: 'Deutschland', adjective: 'German' },
+  it: { code: 'it', name: 'Italy', nameLocal: 'Italia', adjective: 'Italian' },
+  pl: { code: 'pl', name: 'Poland', nameLocal: 'Polska', adjective: 'Polish' },
+  at: { code: 'at', name: 'Austria', nameLocal: 'Österreich', adjective: 'Austrian' },
+  be: { code: 'be', name: 'Belgium', nameLocal: 'België', adjective: 'Belgian' },
+  nl: { code: 'nl', name: 'Netherlands', nameLocal: 'Nederland', adjective: 'Dutch' },
+  pt: { code: 'pt', name: 'Portugal', nameLocal: 'Portugal', adjective: 'Portuguese' },
+  ie: { code: 'ie', name: 'Ireland', nameLocal: 'Ireland', adjective: 'Irish' },
+  lu: { code: 'lu', name: 'Luxembourg', nameLocal: 'Luxembourg', adjective: 'Luxembourgish' },
+  ch: { code: 'ch', name: 'Switzerland', nameLocal: 'Schweiz', adjective: 'Swiss' },
+  cz: { code: 'cz', name: 'Czechia', nameLocal: 'Česko', adjective: 'Czech' },
+  sk: { code: 'sk', name: 'Slovakia', nameLocal: 'Slovensko', adjective: 'Slovak' },
+  hu: { code: 'hu', name: 'Hungary', nameLocal: 'Magyarország', adjective: 'Hungarian' },
+  ro: { code: 'ro', name: 'Romania', nameLocal: 'România', adjective: 'Romanian' },
+  bg: { code: 'bg', name: 'Bulgaria', nameLocal: 'България', adjective: 'Bulgarian' },
+  hr: { code: 'hr', name: 'Croatia', nameLocal: 'Hrvatska', adjective: 'Croatian' },
+  si: { code: 'si', name: 'Slovenia', nameLocal: 'Slovenija', adjective: 'Slovenian' },
+  gr: { code: 'gr', name: 'Greece', nameLocal: 'Ελλάδα', adjective: 'Greek' },
+  cy: { code: 'cy', name: 'Cyprus', nameLocal: 'Κύπρος', adjective: 'Cypriot' },
+  mt: { code: 'mt', name: 'Malta', nameLocal: 'Malta', adjective: 'Maltese' },
+  ee: { code: 'ee', name: 'Estonia', nameLocal: 'Eesti', adjective: 'Estonian' },
+  lv: { code: 'lv', name: 'Latvia', nameLocal: 'Latvija', adjective: 'Latvian' },
+  lt: { code: 'lt', name: 'Lithuania', nameLocal: 'Lietuva', adjective: 'Lithuanian' },
+  us: { code: 'us', name: 'United States', nameLocal: 'United States', adjective: 'American' },
+  ca: { code: 'ca', name: 'Canada', nameLocal: 'Canada', adjective: 'Canadian' },
+  br: { code: 'br', name: 'Brazil', nameLocal: 'Brasil', adjective: 'Brazilian' },
 };
 
 function city(
@@ -47,7 +114,7 @@ function city(
   slug: string,
   name: string,
   regionSlug: string,
-  opts?: { filterCity?: string; nameLocal?: string; live?: boolean },
+  opts?: { filterCity?: string | readonly string[]; nameLocal?: string; live?: boolean },
 ): NordicLocation {
   const live = opts?.live ?? country === 'se';
   return {
@@ -109,6 +176,9 @@ const SE_CITIES: NordicLocation[] = [
   city('se', 'solna', 'Solna', 'stockholm-lan'),
   city('se', 'nacka', 'Nacka', 'stockholm-lan'),
   city('se', 'huddinge', 'Huddinge', 'stockholm-lan'),
+  city('se', 'haninge', 'Haninge', 'stockholm-lan', {
+    filterCity: ['Handen', 'Västerhaninge'],
+  }),
   city('se', 'uppsala', 'Uppsala', 'uppsala-lan'),
   city('se', 'enkoping', 'Enköping', 'uppsala-lan', { filterCity: 'Enköping' }),
   city('se', 'eskilstuna', 'Eskilstuna', 'sodermanland'),
@@ -244,6 +314,369 @@ const IS_CITIES: NordicLocation[] = [
   city('is', 'selfoss', 'Selfoss', 'sudurland'),
 ];
 
+const AU_REGIONS: NordicLocation[] = [
+  region('au', 'new-south-wales', 'New South Wales'),
+  region('au', 'victoria', 'Victoria'),
+  region('au', 'queensland', 'Queensland'),
+  region('au', 'western-australia', 'Western Australia'),
+  region('au', 'south-australia', 'South Australia'),
+  region('au', 'tasmania', 'Tasmania'),
+];
+
+const AU_CITIES: NordicLocation[] = [
+  city('au', 'sydney', 'Sydney', 'new-south-wales'),
+  city('au', 'melbourne', 'Melbourne', 'victoria'),
+  city('au', 'brisbane', 'Brisbane', 'queensland'),
+  city('au', 'gold-coast', 'Gold Coast', 'queensland'),
+  city('au', 'toowoomba', 'Toowoomba', 'queensland'),
+  city('au', 'perth', 'Perth', 'western-australia'),
+  city('au', 'adelaide', 'Adelaide', 'south-australia'),
+  city('au', 'hobart', 'Hobart', 'tasmania'),
+];
+
+const GB_REGIONS: NordicLocation[] = [
+  region('gb', 'england', 'England'),
+  region('gb', 'scotland', 'Scotland'),
+  region('gb', 'wales', 'Wales'),
+];
+
+const GB_CITIES: NordicLocation[] = [
+  city('gb', 'london', 'London', 'england'),
+  city('gb', 'manchester', 'Manchester', 'england'),
+  city('gb', 'birmingham', 'Birmingham', 'england'),
+  city('gb', 'leeds', 'Leeds', 'england'),
+  city('gb', 'glasgow', 'Glasgow', 'scotland'),
+  city('gb', 'cardiff', 'Cardiff', 'wales'),
+];
+
+const EU_PLACES: ReadonlyArray<readonly [NordicCountryCode, string, string, string, string]> = [
+  ['es', 'spain', 'Spain', 'madrid', 'Madrid'],
+  ['fr', 'france', 'France', 'paris', 'Paris'],
+  ['de', 'germany', 'Germany', 'berlin', 'Berlin'],
+  ['it', 'italy', 'Italy', 'roma', 'Roma'],
+  ['pl', 'poland', 'Poland', 'warszawa', 'Warszawa'],
+  ['at', 'austria', 'Austria', 'wien', 'Wien'],
+  ['be', 'belgium', 'Belgium', 'bruxelles', 'Bruxelles'],
+  ['nl', 'netherlands', 'Netherlands', 'amsterdam', 'Amsterdam'],
+  ['pt', 'portugal', 'Portugal', 'lisboa', 'Lisboa'],
+  ['ie', 'ireland', 'Ireland', 'dublin', 'Dublin'],
+  ['lu', 'luxembourg', 'Luxembourg', 'luxembourg-city', 'Luxembourg'],
+  ['ch', 'switzerland', 'Switzerland', 'zuerich', 'Zürich'],
+  ['cz', 'czechia', 'Czechia', 'praha', 'Praha'],
+  ['sk', 'slovakia', 'Slovakia', 'bratislava', 'Bratislava'],
+  ['hu', 'hungary', 'Hungary', 'budapest', 'Budapest'],
+  ['ro', 'romania', 'Romania', 'bucuresti', 'București'],
+  ['bg', 'bulgaria', 'Bulgaria', 'sofia', 'София'],
+  ['hr', 'croatia', 'Croatia', 'zagreb', 'Zagreb'],
+  ['si', 'slovenia', 'Slovenia', 'ljubljana', 'Ljubljana'],
+  ['gr', 'greece', 'Greece', 'athina', 'Αθήνα'],
+  ['cy', 'cyprus', 'Cyprus', 'nicosia', 'Λευκωσία'],
+  ['mt', 'malta', 'Malta', 'valletta', 'Valletta'],
+  ['ee', 'estonia', 'Estonia', 'tallinn', 'Tallinn'],
+  ['lv', 'latvia', 'Latvia', 'riga', 'Rīga'],
+  ['lt', 'lithuania', 'Lithuania', 'vilnius', 'Vilnius'],
+];
+
+const US_STATES: ReadonlyArray<readonly [string, string]> = [
+  ['alabama', 'Alabama'],
+  ['alaska', 'Alaska'],
+  ['arizona', 'Arizona'],
+  ['arkansas', 'Arkansas'],
+  ['california', 'California'],
+  ['colorado', 'Colorado'],
+  ['connecticut', 'Connecticut'],
+  ['delaware', 'Delaware'],
+  ['district-of-columbia', 'District of Columbia'],
+  ['florida', 'Florida'],
+  ['georgia', 'Georgia'],
+  ['hawaii', 'Hawaii'],
+  ['idaho', 'Idaho'],
+  ['illinois', 'Illinois'],
+  ['indiana', 'Indiana'],
+  ['iowa', 'Iowa'],
+  ['kansas', 'Kansas'],
+  ['kentucky', 'Kentucky'],
+  ['louisiana', 'Louisiana'],
+  ['maine', 'Maine'],
+  ['maryland', 'Maryland'],
+  ['massachusetts', 'Massachusetts'],
+  ['michigan', 'Michigan'],
+  ['minnesota', 'Minnesota'],
+  ['mississippi', 'Mississippi'],
+  ['missouri', 'Missouri'],
+  ['montana', 'Montana'],
+  ['nebraska', 'Nebraska'],
+  ['nevada', 'Nevada'],
+  ['new-hampshire', 'New Hampshire'],
+  ['new-jersey', 'New Jersey'],
+  ['new-mexico', 'New Mexico'],
+  ['new-york', 'New York'],
+  ['north-carolina', 'North Carolina'],
+  ['north-dakota', 'North Dakota'],
+  ['ohio', 'Ohio'],
+  ['oklahoma', 'Oklahoma'],
+  ['oregon', 'Oregon'],
+  ['pennsylvania', 'Pennsylvania'],
+  ['rhode-island', 'Rhode Island'],
+  ['south-carolina', 'South Carolina'],
+  ['south-dakota', 'South Dakota'],
+  ['tennessee', 'Tennessee'],
+  ['texas', 'Texas'],
+  ['utah', 'Utah'],
+  ['vermont', 'Vermont'],
+  ['virginia', 'Virginia'],
+  ['washington', 'Washington'],
+  ['west-virginia', 'West Virginia'],
+  ['wisconsin', 'Wisconsin'],
+  ['wyoming', 'Wyoming'],
+];
+const US_REGIONS: NordicLocation[] = US_STATES.map(([slug, name]) => region('us', slug, name));
+
+const CA_PROVINCES: ReadonlyArray<readonly [string, string]> = [
+  ['alberta', 'Alberta'],
+  ['british-columbia', 'British Columbia'],
+  ['manitoba', 'Manitoba'],
+  ['new-brunswick', 'New Brunswick'],
+  ['newfoundland-and-labrador', 'Newfoundland and Labrador'],
+  ['nova-scotia', 'Nova Scotia'],
+  ['ontario', 'Ontario'],
+  ['prince-edward-island', 'Prince Edward Island'],
+  ['quebec', 'Quebec'],
+  ['saskatchewan', 'Saskatchewan'],
+  ['northwest-territories', 'Northwest Territories'],
+  ['nunavut', 'Nunavut'],
+  ['yukon', 'Yukon'],
+];
+const CA_REGIONS: NordicLocation[] = CA_PROVINCES.map(([slug, name]) => region('ca', slug, name));
+
+const BR_STATES: ReadonlyArray<readonly [string, string]> = [
+  ['acre', 'Acre'],
+  ['alagoas', 'Alagoas'],
+  ['amapa', 'Amapá'],
+  ['amazonas', 'Amazonas'],
+  ['bahia', 'Bahia'],
+  ['ceara', 'Ceará'],
+  ['distrito-federal', 'Distrito Federal'],
+  ['espirito-santo', 'Espírito Santo'],
+  ['goias', 'Goiás'],
+  ['maranhao', 'Maranhão'],
+  ['mato-grosso', 'Mato Grosso'],
+  ['mato-grosso-do-sul', 'Mato Grosso do Sul'],
+  ['minas-gerais', 'Minas Gerais'],
+  ['para', 'Pará'],
+  ['paraiba', 'Paraíba'],
+  ['parana', 'Paraná'],
+  ['pernambuco', 'Pernambuco'],
+  ['piaui', 'Piauí'],
+  ['rio-de-janeiro', 'Rio de Janeiro'],
+  ['rio-grande-do-norte', 'Rio Grande do Norte'],
+  ['rio-grande-do-sul', 'Rio Grande do Sul'],
+  ['rondonia', 'Rondônia'],
+  ['roraima', 'Roraima'],
+  ['santa-catarina', 'Santa Catarina'],
+  ['sao-paulo', 'São Paulo'],
+  ['sergipe', 'Sergipe'],
+  ['tocantins', 'Tocantins'],
+];
+const BR_REGIONS: NordicLocation[] = BR_STATES.map(([slug, name]) => region('br', slug, name));
+
+const EU_REGIONS: NordicLocation[] = EU_PLACES.map(([country, slug, name]) =>
+  region(country, slug, name),
+);
+const EU_CITIES: NordicLocation[] = [
+  ...EU_PLACES.map(([country, regionSlug, , citySlug, capital]) =>
+    city(country, citySlug, capital, regionSlug),
+  ),
+  city('be', 'liege', 'Liège', 'belgium'),
+  city('be', 'namur', 'Namur', 'belgium'),
+  city('es', 'langreo-llangreu', 'Langreo / Llangréu', 'spain'),
+  city('es', 'oviedo', 'Oviedo', 'spain'),
+  city('es', 'carbajosa-de-la-sagrada', 'Carbajosa de la Sagrada', 'spain'),
+  city('fr', 'hericourt', 'Hericourt', 'france'),
+  city('fr', 'bourges', 'Bourges', 'france'),
+  city('fr', 'nemours', 'Nemours', 'france'),
+  city('fr', 'coulommiers', 'Coulommiers', 'france'),
+  city('fr', 'mirande', 'Mirande', 'france'),
+  city('fr', 'dinan', 'Dinan', 'france'),
+  city('fr', 'montgermont', 'Montgermont', 'france'),
+  city('fr', 'argentre-du-plessis', 'Argentre-Du-Plessis', 'france'),
+  city('fr', 'vimoutiers', 'Vimoutiers', 'france'),
+  city('fr', 'mondeville', 'Mondeville', 'france'),
+  city('fr', 'figeac', 'Figeac', 'france'),
+  city('fr', 'giberville', 'Giberville', 'france'),
+  city('fr', 'saint-esteve', 'Saint-Esteve', 'france'),
+  city('fr', 'baie-mahault', 'Baie-Mahault', 'france'),
+  city('fr', 'saint-brieuc', 'Saint-Brieuc', 'france'),
+  city('fr', 'montaigu', 'Montaigu', 'france'),
+  city('fr', 'carcassonne', 'Carcassonne', 'france'),
+  city('fr', 'redon', 'Redon', 'france'),
+  city('fr', 'auch', 'Auch', 'france'),
+  city('fr', 'bouillargues', 'Bouillargues', 'france'),
+  city('fr', 'les-abymes', 'Les Abymes', 'france'),
+  city('fr', 'villeneuve-d-ascq', "Villeneuve-D'Ascq", 'france'),
+  city('fr', 'roubaix', 'Roubaix', 'france'),
+  city('fr', 'lagny-sur-marne', 'Lagny-Sur-Marne', 'france'),
+  city('fr', 'bon-encontre', 'Bon-Encontre', 'france'),
+  city('fr', 'torvilliers', 'Torvilliers', 'france'),
+  city('fr', 'corps-nuds', 'Corps-Nuds', 'france'),
+  city('fr', 'cantin', 'Cantin', 'france'),
+  city('fr', 'saint-amand-montrond', 'Saint-Amand-Montrond', 'france'),
+  city('fr', 'lesigny', 'Lesigny', 'france'),
+  city('fr', 'nangis', 'Nangis', 'france'),
+  city('fr', 'gretz-armainvilliers', 'Gretz-Armainvilliers', 'france'),
+  city('fr', 'orange', 'Orange', 'france'),
+  city('fr', 'arles', 'Arles', 'france'),
+  city('fr', 'caulnes', 'Caulnes', 'france'),
+  city('fr', 'mamoudzou', 'Mamoudzou', 'france'),
+  city('fr', 'rohrbach-les-bitche', 'Rohrbach-Les-Bitche', 'france'),
+  city('fr', 'lormont', 'Lormont', 'france'),
+  city('fr', 'brest', 'Brest', 'france'),
+  city('fr', 'la-rochelle', 'La Rochelle', 'france'),
+  city('fr', 'notre-dame-d-oe', "Notre-Dame-d'Oé", 'france'),
+  city('de', 'leonberg', 'Leonberg', 'germany'),
+  city('de', 'neuss', 'Neuss', 'germany'),
+  city('de', 'neu-ulm', 'Neu-Ulm', 'germany'),
+  city('de', 'stetten-am-kalten-markt', 'Stetten am kalten Markt', 'germany'),
+  city('de', 'lohmar', 'Lohmar', 'germany'),
+  city('de', 'nauheim', 'Nauheim', 'germany'),
+  city('de', 'ludwigshafen-am-rhein', 'Ludwigshafen am Rhein', 'germany'),
+  city('de', 'lohr-am-main', 'Lohr am Main', 'germany'),
+  city('de', 'limburg-an-der-lahn', 'Limburg an der Lahn', 'germany'),
+  city('de', 'koln', 'Köln', 'germany'),
+  city('de', 'spraitbach', 'Spraitbach', 'germany'),
+  city('de', 'nurtingen', 'Nürtingen', 'germany'),
+  city('de', 'bretten', 'Bretten', 'germany'),
+  city('de', 'stuttgart', 'Stuttgart', 'germany'),
+  city('de', 'dillenburg', 'Dillenburg', 'germany'),
+  city('de', 'karlsruhe', 'Karlsruhe', 'germany'),
+  city('de', 'bad-durkheim', 'Bad Dürkheim', 'germany'),
+  city('de', 'schmallenberg', 'Schmallenberg', 'germany'),
+  city('de', 'mechernich', 'Mechernich', 'germany'),
+  city('de', 'bad-wimpfen', 'Bad Wimpfen', 'germany'),
+  city('de', 'kreuztal', 'Kreuztal', 'germany'),
+  city('de', 'iphofen', 'Iphofen', 'germany'),
+  city('de', 'monheim-am-rhein', 'Monheim am Rhein', 'germany'),
+  city('de', 'bruhl', 'Brühl', 'germany'),
+  city('de', 'mutterstadt', 'Mutterstadt', 'germany'),
+  city('de', 'ludwigsburg', 'Ludwigsburg', 'germany'),
+  city('de', 'russelsheim-am-main', 'Rüsselsheim am Main', 'germany'),
+  city('de', 'fulda', 'Fulda', 'germany'),
+  city('de', 'langenfeld-rheinland', 'Langenfeld (Rheinland)', 'germany'),
+  city('de', 'ehingen-donau', 'Ehingen (Donau)', 'germany'),
+  city('de', 'herborn', 'Herborn', 'germany'),
+  city('de', 'freudenberg', 'Freudenberg', 'germany'),
+  city('de', 'ottersweier', 'Ottersweier', 'germany'),
+  city('de', 'ravensburg', 'Ravensburg', 'germany'),
+  city('de', 'siegen', 'Siegen', 'germany'),
+  city('de', 'schwabisch-gmund', 'Schwäbisch Gmünd', 'germany'),
+  city('de', 'pforzheim', 'Pforzheim', 'germany'),
+  city('de', 'zerf', 'Zerf', 'germany'),
+  city('de', 'bad-aibling', 'Bad Aibling', 'germany'),
+  city('de', 'dresden', 'Dresden', 'germany'),
+  city('de', 'landshut', 'Landshut', 'germany'),
+  city('de', 'ansbach', 'Ansbach', 'germany'),
+  city('de', 'erding', 'Erding', 'germany'),
+  city('cz', 'praha-10', 'Praha 10', 'czechia'),
+  city('de', 'augsburg', 'Augsburg', 'germany'),
+  city('de', 'rodewisch', 'Rodewisch', 'germany'),
+  city('de', 'passau', 'Passau', 'germany'),
+  city('de', 'straubing', 'Straubing', 'germany'),
+  city('de', 'burghausen', 'Burghausen', 'germany'),
+  city('de', 'siegsdorf', 'Siegsdorf', 'germany'),
+  city('de', 'freital', 'Freital', 'germany'),
+  city('de', 'bayreuth', 'Bayreuth', 'germany'),
+  city('de', 'moosburg-a-d-isar', 'Moosburg a.d. Isar', 'germany'),
+  city('de', 'rosenheim', 'Rosenheim', 'germany'),
+  city('de', 'dachau', 'Dachau', 'germany'),
+  city('de', 'langenneufnach', 'Langenneufnach', 'germany'),
+  city('de', 'parsberg', 'Parsberg', 'germany'),
+  city('de', 'pfaffenhofen-a-d-ilm', 'Pfaffenhofen a.d. Ilm', 'germany'),
+  city('de', 'hersbruck', 'Hersbruck', 'germany'),
+  city('de', 'dusseldorf', 'Düsseldorf', 'germany'),
+  city('de', 'paderborn', 'Paderborn', 'germany'),
+  city('de', 'wuppertal', 'Wuppertal', 'germany'),
+  city('de', 'essen', 'Essen', 'germany'),
+  city('de', 'bielefeld', 'Bielefeld', 'germany'),
+  city('nl', 'nijmegen', 'Nijmegen', 'netherlands'),
+  city('de', 'halle-westf', 'Halle (Westf.)', 'germany'),
+  city('de', 'rhede', 'Rhede', 'germany'),
+  city('de', 'kassel', 'Kassel', 'germany'),
+  city('de', 'leer-ostfriesland', 'Leer (Ostfriesland)', 'germany'),
+  city('de', 'kronshagen', 'Kronshagen', 'germany'),
+  city('de', 'meschede', 'Meschede', 'germany'),
+  city('de', 'bochum', 'Bochum', 'germany'),
+  city('de', 'hamburg', 'Hamburg', 'germany'),
+  city('de', 'essen-oldenburg', 'Essen (Oldenburg)', 'germany'),
+  city('de', 'beckum', 'Beckum', 'germany'),
+  city('de', 'hude-oldenburg', 'Hude (Oldenburg)', 'germany'),
+  city('de', 'nordkirchen', 'Nordkirchen', 'germany'),
+  city('de', 'bocholt', 'Bocholt', 'germany'),
+  city('de', 'duisburg', 'Duisburg', 'germany'),
+  city('de', 'warstein', 'Warstein', 'germany'),
+  city('de', 'rieste', 'Rieste', 'germany'),
+  city('de', 'rostock', 'Rostock', 'germany'),
+  city('de', 'leipzig', 'Leipzig', 'germany'),
+  city('de', 'ketzin-havel', 'Ketzin/Havel', 'germany'),
+  city('de', 'bitterfeld-wolfen', 'Bitterfeld-Wolfen', 'germany'),
+  city('de', 'markkleeberg', 'Markkleeberg', 'germany'),
+  city('de', 'haldensleben', 'Haldensleben', 'germany'),
+  city('de', 'wolfenbuttel', 'Wolfenbüttel', 'germany'),
+  city('de', 'braunschweig', 'Braunschweig', 'germany'),
+  city('de', 'lubbenau-spreewald', 'Lübbenau/Spreewald', 'germany'),
+  city('de', 'liebenwalde', 'Liebenwalde', 'germany'),
+  city('it', 'lavis', 'Lavis', 'italy'),
+  city('it', 'trento', 'Trento', 'italy'),
+  city('it', 'milano', 'Milano', 'italy'),
+  city('it', 'lana', 'Lana', 'italy'),
+  city('it', 'tione-di-trento-tn', 'Tione di Trento TN', 'italy'),
+  city('it', 'mori-tn', 'Mori TN', 'italy'),
+  city('it', 'lomazzo', 'Lomazzo', 'italy'),
+  city('it', 'aci-sant-antonio', "Aci Sant'Antonio", 'italy'),
+  city('it', 'montelupo-fiorentino', 'Montelupo Fiorentino', 'italy'),
+  city('it', 'dueville', 'Dueville', 'italy'),
+  city('it', 'genova', 'Genova', 'italy'),
+  city('pl', 'ruda-slaska', 'Ruda Śląska', 'poland'),
+  city('pl', 'radom', 'Radom', 'poland'),
+  city('pl', 'lapy', 'Łapy', 'poland'),
+  city('pl', 'janow-lubelski', 'Janów Lubelski', 'poland'),
+  city('pl', 'katowice', 'Katowice', 'poland'),
+  city('pl', 'bialystok', 'Białystok', 'poland'),
+  city('pl', 'ostrowiec-swietokrzyski', 'Ostrowiec Świętokrzyski', 'poland'),
+  city('pl', 'tychy', 'Tychy', 'poland'),
+  city('pl', 'staszow', 'Staszów', 'poland'),
+  city('pl', 'tarnowskie-gory', 'Tarnowskie Góry', 'poland'),
+  city('pl', 'wagrowiec', 'Wągrowiec', 'poland'),
+  city('pl', 'lodz', 'Łódź', 'poland'),
+  city('pl', 'koszalin', 'Koszalin', 'poland'),
+  city('pl', 'chelm', 'Chełm', 'poland'),
+  city('pl', 'brodnica', 'Brodnica', 'poland'),
+  city('at', 'gloggnitz', 'Gloggnitz', 'austria'),
+  city('at', 'saalfelden-am-steinernen-meer', 'Saalfelden am Steinernen Meer', 'austria'),
+  city('at', 'st-johann-in-tirol', 'St. Johann in Tirol', 'austria'),
+  city('at', 'hollabrunn', 'Hollabrunn', 'austria'),
+  city('at', 'leibnitz', 'Leibnitz', 'austria'),
+  city('at', 'braunau-am-inn', 'Braunau am Inn', 'austria'),
+  city('at', 'bad-voslau', 'Bad Vöslau', 'austria'),
+  city('be', 'asse', 'Asse', 'belgium'),
+  city('nl', 'utrecht', 'Utrecht', 'netherlands'),
+  city('nl', 'goes', 'Goes', 'netherlands'),
+  city('hu', 'szekszard', 'Szekszárd', 'hungary'),
+  city('ro', 'sibiu', 'Sibiu', 'romania'),
+  city('ro', 'targu-mures', 'Târgu Mureș', 'romania'),
+  city('ro', 'iasi', 'Iași', 'romania'),
+  city('ee', 'viljandi', 'Viljandi', 'estonia'),
+  city('fr', 'fourchambault', 'Fourchambault', 'france'),
+  city('fr', 'la-chapelle-saint-luc', 'La Chapelle-Saint-Luc', 'france'),
+  city('fr', 'meaux', 'Meaux', 'france'),
+  city('fr', 'perpignan', 'Perpignan', 'france'),
+  city('fr', 'tremuson', 'Tremuson', 'france'),
+  city('fr', 'seclin', 'Seclin', 'france'),
+  city('de', 'regensburg', 'Regensburg', 'germany'),
+  city('fr', 'rohrbach-les-bitche-2', 'Rohrbach-lès-Bitche', 'france'),
+  city('bg', 'varna', 'Варна', 'bulgaria'),
+  city('bg', 'vratsa', 'Враца', 'bulgaria'),
+];
+
 export const NORDIC_LOCATIONS: readonly NordicLocation[] = [
   ...SE_REGIONS,
   ...SE_CITIES,
@@ -255,6 +688,15 @@ export const NORDIC_LOCATIONS: readonly NordicLocation[] = [
   ...FI_CITIES,
   ...IS_REGIONS,
   ...IS_CITIES,
+  ...AU_REGIONS,
+  ...AU_CITIES,
+  ...GB_REGIONS,
+  ...GB_CITIES,
+  ...EU_REGIONS,
+  ...EU_CITIES,
+  ...US_REGIONS,
+  ...CA_REGIONS,
+  ...BR_REGIONS,
 ];
 
 const byKey = new Map<string, NordicLocation>();
@@ -311,6 +753,34 @@ export function listRegions(country: NordicCountryCode): NordicLocation[] {
 
 export function displayName(loc: NordicLocation): string {
   return loc.nameLocal ?? loc.name;
+}
+
+function foldCity(value: string): string {
+  return value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim();
+}
+
+/** Values that should match a directory `city` filter, including slug aliases. */
+export function cityFilterCandidates(input: string): string[] {
+  const raw = input.trim();
+  if (!raw) return [];
+  const folded = foldCity(raw);
+  const names = new Set<string>([raw]);
+  for (const loc of NORDIC_LOCATIONS) {
+    if (!loc.marketplaceLive) continue;
+    const filterCities =
+      typeof loc.filterCity === 'string'
+        ? [loc.filterCity]
+        : loc.filterCity
+          ? [...loc.filterCity]
+          : [];
+    const hay = [loc.slug, loc.name, loc.nameLocal, ...filterCities].filter(
+      (value): value is string => Boolean(value),
+    );
+    if (!hay.some((value) => foldCity(value) === folded)) continue;
+    names.add(loc.name);
+    for (const value of filterCities) names.add(value);
+  }
+  return [...names];
 }
 
 export function allLocationSitemapPaths(): string[] {

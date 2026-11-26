@@ -20,4 +20,4 @@ export const siteUrl = (env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').repl
 // in src/lib/brand.ts. Re-exported here so the SEO plumbing (layout/manifest) and
 // every existing `@/lib/site` import keep a single entry point. `siteUrl` above
 // stays framework-owned (it's the deploy origin, not a brand string).
-export { siteDescription, siteName } from '@/lib/brand';
+export { siteDescription, siteName, siteTitleSv } from '@/lib/brand';

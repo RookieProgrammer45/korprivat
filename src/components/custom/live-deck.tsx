@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { apiFetch } from '@/lib/api-client';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
+import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
 
 /**
  * The live profile deck used on the auth shell (signup/login).
@@ -26,6 +28,21 @@ const LANGUAGE_LABELS: Record<string, string> = {
   fi: 'Finska',
   no: 'Norska',
   da: 'Danska',
+  is: 'Isländska',
+  it: 'Italienska',
+  nl: 'Nederländska',
+  pt: 'Portugisiska',
+  cs: 'Tjeckiska',
+  hu: 'Ungerska',
+  ro: 'Rumänska',
+  bg: 'Bulgariska',
+  hr: 'Kroatiska',
+  sl: 'Slovenska',
+  sk: 'Slovakiska',
+  el: 'Grekiska',
+  et: 'Estniska',
+  lv: 'Lettiska',
+  lt: 'Litauiska',
 };
 
 type DeckProfile = {
@@ -33,6 +50,8 @@ type DeckProfile = {
   name: string;
   photoUrl: string;
   type: 'Skola' | 'Instruktör';
+  categories: string[];
+  heavy: SchoolHeavyAdvertised | null;
   city: string;
   chip: string | null;
   languages: string;
@@ -43,7 +62,8 @@ const MAX_DECK_PROFILES = 10;
 const ROTATION_MS = 4800;
 
 function formatSekChip(rate: number | null): string | null {
-  return typeof rate === 'number' ? `fr. ${rate} kr` : null;
+  if (typeof rate !== 'number' || rate <= 0) return null;
+  return `fr. ${rate} kr`;
 }
 
 function formatSlot(iso: string): string | null {
@@ -69,8 +89,10 @@ function toDeckProfile(row: InstructorFilteredItem): DeckProfile {
     name: row.name,
     photoUrl: row.photoUrl,
     type: row.providerType === 'INSTRUCTOR' ? 'Instruktör' : 'Skola',
+    categories: row.providerType === 'SCHOOL' ? row.categories : [],
+    heavy: row.providerType === 'SCHOOL' ? (row.publishedPrices?.heavy ?? null) : null,
     city: row.city,
-    chip: formatSekChip(row.hourlyRateSek),
+    chip: formatSekChip(row.publishedPrices?.lesson?.priceSek ?? null),
     languages: languages || 'Svenska',
     nextSlot: row.nextSlotAt ? formatSlot(row.nextSlotAt) : null,
   };
@@ -86,16 +108,7 @@ export function LiveAuthDeck() {
     apiFetch('/api/instructors', { schema: InstructorList })
       .then((data) => {
         if (!alive) return;
-        // Profilkarusellen (2026-10-14): de tio demo-profilerna med genererade
-        // profilbilder (/assets/profiles/) roterar först — riktiga skolor fyller
-        // på om demo-profilerna saknas.
-        const withPhoto = data.items.filter((row) =>
-          (row.photoUrl ?? '').startsWith('/assets/profiles/'),
-        );
-        const withoutPhoto = data.items.filter(
-          (row) => !(row.photoUrl ?? '').startsWith('/assets/profiles/'),
-        );
-        const rows = [...withPhoto, ...withoutPhoto].slice(0, MAX_DECK_PROFILES).map(toDeckProfile);
+        const rows = data.items.slice(0, MAX_DECK_PROFILES).map(toDeckProfile);
         if (rows.length > 0) {
           setProfiles(rows);
           setActive(0);
@@ -142,8 +155,28 @@ export function LiveAuthDeck() {
         <article className="dlu-card" key={front.id}>
           <div className="dlu-top">
             <div className="dlu-id min-w-0">
-              {/* biome-ignore lint/performance/noImgElement: avatar-URL fran data, fast 44px - next/image lar ingen vinst */}
-              <img className="dlu-photo" src={front.photoUrl} alt="" width={44} height={44} />
+              {schoolPortraitUrl(front.photoUrl) ? (
+                // biome-ignore lint/performance/noImgElement: avatar-URL fran data, fast 44px - next/image lar ingen vinst
+                <img
+                  className="dlu-photo"
+                  src={schoolPortraitUrl(front.photoUrl) ?? ''}
+                  alt=""
+                  width={44}
+                  height={44}
+                />
+              ) : front.type === 'Skola' ? (
+                <SchoolMarkFallback
+                  name={front.name}
+                  categories={front.categories}
+                  heavy={front.heavy}
+                  iconLayout="deck"
+                  className="dlu-photo box-border flex items-center justify-center p-1.5 font-display text-sm font-normal"
+                />
+              ) : (
+                <span className="dlu-photo flex items-center justify-center font-display text-sm font-normal">
+                  {front.name.trim().slice(0, 2).toUpperCase()}
+                </span>
+              )}
               <div className="min-w-0">
                 <p className="dlu-type">{front.type}</p>
                 <p className="dlu-name">{front.name}</p>

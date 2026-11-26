@@ -17,7 +17,6 @@
 //
 // Requires DATABASE_URL in the environment (same as `npm run db:seed`).
 
-// biome-ignore lint/style/noRestrictedImports: operator seed script runs standalone with DATABASE_URL (same as db:seed) - direct import is intentional
 import { PrismaClient } from '@prisma/client';
 import { buildDemoAvailabilitySlots } from '../src/lib/business/marketplace-seed';
 

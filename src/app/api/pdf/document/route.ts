@@ -11,12 +11,23 @@
 
 import 'server-only';
 import { NextResponse } from 'next/server';
+import { clientIp, rateLimitResponse, takeIpToken } from '@/lib/http/ip-rate-limit';
 import { renderDocumentPdf } from '@/lib/pdf/client';
 import { documentSpecSchema } from '@/lib/pdf/schema';
+import { requireAuth } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
+  try {
+    await requireAuth(req);
+  } catch (res) {
+    return res as Response;
+  }
+
+  const limited = takeIpToken(`pdf:${clientIp(req.headers)}`, { max: 10 });
+  if (!limited.ok) return rateLimitResponse(limited.retryAfterSec);
+
   let body: unknown;
   try {
     body = await req.json();

@@ -12,6 +12,8 @@ import {
   BookingRead,
 } from '@/lib/contracts/bookings';
 import { prisma } from '@/lib/db';
+import { publishedInbox } from '@/lib/discovery/published-prices';
+import { resolveSchoolContact } from '@/lib/discovery/school-contact';
 import { getSessionUser } from '@/lib/require-auth';
 
 export const dynamic = 'force-dynamic';
@@ -39,7 +41,15 @@ export async function GET(req: Request, ctx: Ctx) {
 
   const instructor = await prisma.instructor.findUnique({
     where: { id: booking.instructorId },
-    select: { name: true, city: true, hourlyRateSek: true, userId: true, providerRole: true },
+    select: {
+      name: true,
+      city: true,
+      hourlyRateSek: true,
+      userId: true,
+      providerRole: true,
+      email: true,
+      bio: true,
+    },
   });
   if (!instructor) {
     return NextResponse.json({ errors: { id: 'Booking not found' } }, { status: 404 });
@@ -131,6 +141,12 @@ export async function GET(req: Request, ctx: Ctx) {
     receiptEmailStatus: normalizeReceiptEmailDeliveryStatus(receipt?.emailDeliveryStatus),
     providerRole,
     capabilities,
+    schoolContact: resolveSchoolContact({
+      providerRole: instructor.providerRole,
+      email: instructor.email,
+      bio: instructor.bio,
+      inbox: publishedInbox(booking.instructorId),
+    }),
   };
 
   return NextResponse.json(BookingRead.parse(body), { status: 200 });

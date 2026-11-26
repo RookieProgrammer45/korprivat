@@ -1,11 +1,37 @@
 import 'server-only';
+import { withUsualMotorcycleCategories } from '@/lib/business/licence-categories';
 import { isProviderActivated } from '@/lib/business/provider-activation';
 import { prisma } from '@/lib/db';
+import { publishedLogo } from '@/lib/discovery/business-logos';
+import {
+  hasWebsitePrice,
+  publishedInbox,
+  publishedPhone,
+  publishedPrices,
+} from '@/lib/discovery/published-prices';
+import {
+  phoneFact,
+  resolvePriceRequest,
+  resolveSchoolContact,
+} from '@/lib/discovery/school-contact';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { publishedBookingMode } from '@/lib/scheduling/booking-creation';
+
+export type PublicGoogleReview = {
+  id: string;
+  authorName: string;
+  rating: number;
+  comment: string;
+  relativeTime: string | null;
+};
 
 export type PublicInstructorAggregate = {
   verificationStatus: 'verified' | 'pending' | 'rejected' | 'unverified';
   reviewSummary: { count: number; averageRating: number | null };
+  googleReviews?: PublicGoogleReview[];
 };
+
+const MAX_PUBLIC_GOOGLE_REVIEWS = 5;
 
 type PublicInstructorSource = {
   id: string;
@@ -26,19 +52,30 @@ type PublicInstructorSource = {
   googleRating?: number | null;
   googleReviewCount?: number | null;
   googleMapsUri?: string | null;
+  email?: string | null;
 };
 
 type ReviewRow = { instructorId: string; rating: number };
 type LicenseRow = { userId: string; status: string };
+type GoogleReviewRow = {
+  id: string;
+  instructorId: string;
+  authorName: string;
+  rating: number;
+  comment: string;
+  relativeTime: string | null;
+};
 
 export async function loadPublicInstructorAggregates(
   rows: Array<Pick<PublicInstructorSource, 'id' | 'userId'>>,
+  options?: { includeGoogleReviewBodies?: boolean },
 ): Promise<Map<string, PublicInstructorAggregate>> {
   const result = new Map<string, PublicInstructorAggregate>();
   const instructorIds = rows.map((row) => row.id);
   const userIds = rows.flatMap((row) => (row.userId ? [row.userId] : []));
+  const includeGoogleReviewBodies = options?.includeGoogleReviewBodies !== false;
 
-  const [licenses, reviews] = await Promise.all([
+  const [licenses, reviews, googleReviews] = await Promise.all([
     userIds.length > 0 && prisma.instructorLicense
       ? prisma.instructorLicense.findMany({
           where: { userId: { in: userIds } },
@@ -51,6 +88,21 @@ export async function loadPublicInstructorAggregates(
           select: { instructorId: true, rating: true },
         })
       : Promise.resolve([] as ReviewRow[]),
+    includeGoogleReviewBodies && instructorIds.length > 0 && prisma.googleReview
+      ? prisma.googleReview.findMany({
+          where: { instructorId: { in: instructorIds } },
+          select: {
+            id: true,
+            instructorId: true,
+            authorName: true,
+            rating: true,
+            comment: true,
+            relativeTime: true,
+            publishTime: true,
+          },
+          orderBy: { publishTime: 'desc' },
+        })
+      : Promise.resolve([] as GoogleReviewRow[]),
   ]);
 
   const statusByUser = new Map<string, PublicInstructorAggregate['verificationStatus']>();
@@ -79,6 +131,23 @@ export async function loadPublicInstructorAggregates(
     reviewsByInstructor.set(review.instructorId, existing);
   }
 
+  const googleByInstructor = new Map<string, PublicGoogleReview[]>();
+  for (const review of googleReviews) {
+    if (!Number.isInteger(review.rating) || review.rating < 1 || review.rating > 5) {
+      continue;
+    }
+    const existing = googleByInstructor.get(review.instructorId) ?? [];
+    if (existing.length >= MAX_PUBLIC_GOOGLE_REVIEWS) continue;
+    existing.push({
+      id: review.id,
+      authorName: review.authorName,
+      rating: review.rating,
+      comment: review.comment,
+      relativeTime: review.relativeTime,
+    });
+    googleByInstructor.set(review.instructorId, existing);
+  }
+
   for (const row of rows) {
     const ratings = reviewsByInstructor.get(row.id) ?? [];
     const average =
@@ -90,6 +159,7 @@ export async function loadPublicInstructorAggregates(
         ? (statusByUser.get(row.userId) ?? 'unverified')
         : 'unverified',
       reviewSummary: { count: ratings.length, averageRating: average },
+      ...(includeGoogleReviewBodies ? { googleReviews: googleByInstructor.get(row.id) ?? [] } : {}),
     });
   }
 
@@ -102,16 +172,32 @@ export function toPublicInstructor(
   nextSlotAt: string | null,
   distanceKm?: number,
 ) {
-  const categories = row.categories.filter((category) => isProviderActivated([category]));
+  const categories = withUsualMotorcycleCategories(row.categories).filter((category) =>
+    isProviderActivated([category]),
+  );
+  const prices = publishedPrices(row.id);
+  const contactInput = {
+    providerRole: row.providerRole,
+    email: row.email,
+    bio: row.bio,
+    inbox: publishedInbox(row.id),
+  };
+  // Public catalogue never shows the booking-form rate when a website lesson
+  // price exists. Checkout still reads the stored rate from the booking path.
+  const publicRateSek = prices?.lesson?.priceSek ?? row.hourlyRateSek;
   return {
     id: row.id,
     name: row.name,
     city: row.city,
     serviceArea: (typeof row.serviceArea === 'string' ? row.serviceArea.trim() : '') || row.city,
     categories,
-    hourlyRateSek: row.hourlyRateSek,
+    hourlyRateSek: publicRateSek,
     bio: row.bio,
-    photoUrl: row.photoUrl,
+    // Schools: the mark from the school's own site, used only to identify them.
+    photoUrl:
+      row.providerRole === 'SCHOOL'
+        ? (publishedLogo(row.id) ?? schoolPortraitUrl(row.photoUrl) ?? '')
+        : row.photoUrl,
     englishSpeaking: row.englishSpeaking === true,
     languages: row.englishSpeaking === true ? (['sv', 'en'] as const) : (['sv'] as const),
     verificationStatus: aggregate.verificationStatus,
@@ -120,6 +206,8 @@ export function toPublicInstructor(
     googleRating: row.googleRating ?? null,
     googleReviewCount: row.googleReviewCount ?? null,
     googleMapsUri: row.googleMapsUri ?? null,
+    ...(aggregate.googleReviews ? { googleReviews: aggregate.googleReviews } : {}),
+    publishedPrices: prices,
     nextSlotAt,
     cancellationPolicyTier:
       row.cancellationPolicyTier === 'moderate' || row.cancellationPolicyTier === 'strict'
@@ -127,12 +215,7 @@ export function toPublicInstructor(
         : row.cancellationPolicyTier === 'flexible'
           ? 'flexible'
           : null,
-    bookingMode:
-      row.bookingMode === 'request'
-        ? 'request'
-        : row.bookingMode === 'contact'
-          ? 'contact'
-          : 'instant',
+    bookingMode: publishedBookingMode(row.bookingMode),
     // Raw marketplace kind as stored (SCHOOL | INSTRUCTOR | HANDLEDARE) — a
     // school-owned listing reports SCHOOL (QA 2026-10-13: the previous
     // collapse made /api/instructors describe every school as INSTRUCTOR).
@@ -147,6 +230,9 @@ export function toPublicInstructor(
       row.providerRole === 'SCHOOL' || row.providerRole === 'HANDLEDARE'
         ? row.providerRole
         : 'INSTRUCTOR',
+    phone: row.providerRole === 'SCHOOL' ? phoneFact(publishedPhone(row.id)) : null,
+    contact: resolveSchoolContact(contactInput),
+    priceRequest: hasWebsitePrice(prices) ? null : resolvePriceRequest(contactInput),
     ...(distanceKm == null ? {} : { distanceKm }),
   };
 }

@@ -2,6 +2,7 @@ import { randomBytes } from 'node:crypto';
 import type { Membership, MembershipInvite, Organization, Prisma } from '@prisma/client';
 import { Prisma as PrismaNamespace } from '@prisma/client';
 import { prisma } from '@/lib/db';
+import { publishSchoolStaffListing } from '@/lib/discovery/school-staff-listing';
 
 export class OrgAlreadyExistsError extends Error {
   readonly code = 'ORG_EXISTS' as const;
@@ -347,6 +348,10 @@ export async function acceptInviteByToken(
   const invite = await prisma.membershipInvite.findUnique({ where: { token } });
   if (!invite) throw new OrgNotFoundError();
   if (invite.acceptedAt) {
+    await publishSchoolStaffListing({
+      organizationId: invite.organizationId,
+      userId,
+    });
     return { organizationId: invite.organizationId };
   }
   if (invite.expiresAt.getTime() < Date.now()) {
@@ -391,6 +396,10 @@ export async function acceptInviteByToken(
     });
   });
 
+  await publishSchoolStaffListing({
+    organizationId: invite.organizationId,
+    userId,
+  });
   return { organizationId: invite.organizationId };
 }
 

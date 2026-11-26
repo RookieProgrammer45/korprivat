@@ -60,3 +60,46 @@ model OfferingRequest {
   @@index([instructorId])
   @@index([offeringId])
 }
+
+// Risk 1 / Risk 2 dated group sessions. Gated by RISK_COURSES (default off).
+// Unpublished or unapproved rows never appear on discovery pages.
+model RiskCourseSession {
+  id               String              @id @default(cuid())
+  listingId        String
+  courseType       String
+  licenceCategory  String
+  municipality     String
+  location         String
+  startsAt         DateTime
+  endsAt           DateTime
+  seatCapacity     Int
+  priceSek         Int
+  publishedAt      DateTime?
+  approvedAt       DateTime?
+  approvedByUserId String?
+  source           String              @default("SCHOOL_PUBLISHED")
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  listing          Instructor          @relation(fields: [listingId], references: [id])
+  requests         RiskCourseRequest[]
+
+  @@index([listingId])
+  @@index([courseType, municipality, startsAt])
+}
+
+model RiskCourseRequest {
+  id              String            @id @default(cuid())
+  sessionId       String
+  listingId       String
+  studentUserId   String?
+  studentName     String
+  studentEmail    String
+  status          String            @default("pending")
+  commitmentRoute String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  session         RiskCourseSession @relation(fields: [sessionId], references: [id])
+
+  @@index([sessionId])
+  @@index([listingId])
+}

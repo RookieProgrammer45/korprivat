@@ -74,10 +74,10 @@ export function InstructorOnboardingSurface() {
         {t('roleMismatch.body', { role: t('roleMismatch.student') })}{' '}
         {t('roleMismatch.contactLead')}{' '}
         <a
-          href="mailto:support@drivelinkup.com"
+          href="mailto:frank@drivelinkup.com"
           className="underline underline-offset-2 hover:text-brand-800 dark:hover:text-brand-100"
         >
-          support@drivelinkup.com
+          frank@drivelinkup.com
         </a>{' '}
         {t('roleMismatch.contactTail')}
       </div>

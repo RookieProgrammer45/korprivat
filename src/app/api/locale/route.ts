@@ -20,6 +20,7 @@ export async function POST(req: Request) {
     path: '/',
     maxAge: ONE_YEAR_SECONDS,
     sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
   });
 
   return NextResponse.json({ locale }, { status: 200 });

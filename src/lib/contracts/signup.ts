@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { PhotoVerificationState } from '@/lib/contracts/photo-verification';
 import {
+  isIndependentInstructorSignupOpen,
   isInstructorLicenseTenureEligible,
   isLearnerAgeEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
@@ -58,15 +59,9 @@ export const SignupStart = z
     ageCheckStatus: z.string().max(40).optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.path === 'LEARNER') {
-      if (!data.dateOfBirth) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['dateOfBirth'],
-          message: `Learners must be at least ${MIN_LEARNER_AGE_YEARS} years old.`,
-        });
-        return;
-      }
+    // LEARNER date of birth is optional until booking ships globally.
+    // If a client still sends one, reject underage values so we never store them.
+    if (data.path === 'LEARNER' && data.dateOfBirth) {
       const dob = new Date(data.dateOfBirth);
       if (Number.isNaN(dob.getTime()) || !isLearnerAgeEligible(dob)) {
         ctx.addIssue({
@@ -100,6 +95,15 @@ export const SignupStart = z
       }
     }
     if (data.path === 'INSTRUCTOR') {
+      if (!isIndependentInstructorSignupOpen()) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['path'],
+          message:
+            'Independent instructors cannot sign up in the Nordics. Join through a driving school.',
+        });
+        return;
+      }
       if (data.licenseHeldYears === undefined) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,

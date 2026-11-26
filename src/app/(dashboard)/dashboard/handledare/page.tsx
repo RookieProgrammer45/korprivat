@@ -93,7 +93,7 @@ export default async function HandledareDashboardPage() {
         <p className="max-w-2xl text-body text-muted-foreground">{t('lead')}</p>
         <div className="mt-2 flex flex-wrap gap-3">
           <Button asChild variant="secondary">
-            <Link href="/instructors">{t('learnersCta')}</Link>
+            <Link href="/locations/se">{t('learnersCta')}</Link>
           </Button>
         </div>
       </header>

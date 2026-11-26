@@ -7,13 +7,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { listMembershipsForUser, listPendingInvitesForUser } from '@/lib/orgs/service';
 import { getSessionUser } from '@/lib/require-auth';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('forSkolor');
   return {
     title: t('meta.title'),
     description: t('meta.description'),
-    alternates: { canonical: '/for-skolor' },
+    alternates: await publicAlternatesFor('/for-skolor'),
   };
 }
 

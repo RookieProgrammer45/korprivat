@@ -158,8 +158,8 @@ describe('buildAuthorizationCoverage', () => {
     expect(coverage.buckets.instantBookable).toBe(0);
     expect(coverage.buckets.availabilityDisplayAuthorized).toBe(1);
     expect(coverage.buckets.directoryOnlyIfEnforcementOn).toBe(2);
-    expect(coverage.buckets.directoryOnlyToday).toBe(1);
-    expect(coverage.flipDelta.schoolsGoingDirectoryOnly).toEqual(['legacy']);
+    expect(coverage.buckets.directoryOnlyToday).toBe(2);
+    expect(coverage.flipDelta.schoolsGoingDirectoryOnly).toEqual([]);
     expect(coverage.byCity.Malmö?.actionEligible).toBe(1);
     expect(coverage.byCity.Malmö?.directoryOnlyIfEnforcementOn).toBe(1);
     expect(coverage.inventedFacts).toEqual([]);

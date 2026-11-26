@@ -47,10 +47,27 @@ import {
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { RebookSuggestResponse } from '@/lib/contracts/saved-payment-methods';
 import { applyServerErrors } from '@/lib/forms';
+import { intlLocale } from '@/lib/intl-locale';
 import { cn } from '@/lib/utils';
 import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/state';
 
 type FormValues = BookingCreate;
+
+function listingCreateMode(instructor: InstructorItem | null): 'instant' | 'request' | null {
+  if (instructor?.canCollectPayment === false) return null;
+  if (instructor?.surfaces?.transactionalBooking) return 'instant';
+  if (instructor?.surfaces?.requestToBook) return 'request';
+  return null;
+}
+
+function listingModeCopy(
+  instructor: InstructorItem,
+): 'instant' | 'request' | 'contact' | 'paymentThroughSchool' {
+  if (instructor.providerRole === 'INSTRUCTOR' && instructor.canCollectPayment === false) {
+    return 'paymentThroughSchool';
+  }
+  return listingCreateMode(instructor) ?? 'contact';
+}
 
 const POLL_INTERVAL_MS = 1500;
 const POLL_MAX_ATTEMPTS = 10;
@@ -387,8 +404,15 @@ export function BookingForm({
         // Always POST with the matching `mode` so the route does not 400
         // when the instructor's published mode is `request`. Mirrors the
         // server-side branch on `data.mode === 'request'`.
-        const submittedMode: 'instant' | 'request' =
-          instructor?.bookingMode === 'request' ? 'request' : 'instant';
+        const submittedMode = listingCreateMode(instructor);
+        if (!submittedMode) {
+          toast.error(
+            instructor?.canCollectPayment === false
+              ? t('validation.independentPaymentRefused')
+              : t('validation.notAuthorizedBySchool'),
+          );
+          return;
+        }
         const created = await apiFetch('/api/bookings', {
           method: 'POST',
           body: JSON.stringify({
@@ -694,18 +718,16 @@ export function BookingForm({
             {instructor ? (
               <div className="min-w-0 rounded-lg border border-brand-500/25 bg-brand-100 p-4 dark:bg-brand-900">
                 <p className="text-small font-medium text-foreground">
-                  {instructor.bookingMode === 'request'
-                    ? tDetail('bookingMode.request.title')
-                    : tDetail('bookingMode.instant.title')}
+                  {tDetail(`bookingMode.${listingModeCopy(instructor)}.title`)}
                 </p>
                 <p className="mt-1 text-small text-muted-foreground">
-                  {instructor.bookingMode === 'request'
-                    ? tDetail('bookingMode.request.body')
-                    : tDetail('bookingMode.instant.body')}
+                  {tDetail(`bookingMode.${listingModeCopy(instructor)}.body`)}
                 </p>
               </div>
             ) : null}
-            {instructor ? <BookingPriceSummary instructorId={instructor.id} /> : null}
+            {instructor && instructor.canCollectPayment !== false ? (
+              <BookingPriceSummary instructorId={instructor.id} />
+            ) : null}
             <FormField
               control={form.control}
               name="studentName"
@@ -848,12 +870,16 @@ export function BookingForm({
               className="shadow-sm"
             >
               {form.formState.isSubmitting
-                ? instructor?.bookingMode === 'request'
+                ? listingCreateMode(instructor) === 'request'
                   ? t('submittingRequest')
                   : t('submittingInstant')
-                : instructor?.bookingMode === 'request'
+                : listingCreateMode(instructor) === 'request'
                   ? t('submitRequest')
-                  : t('submitInstant')}
+                  : listingCreateMode(instructor) === 'instant'
+                    ? t('submitInstant')
+                    : instructor?.canCollectPayment === false
+                      ? t('submitIndependentPayment')
+                      : t('submitDirectoryOnly')}
             </Button>
             {eligibilityError ? (
               <p className="text-small text-destructive" role="alert">
@@ -1009,14 +1035,14 @@ function groupLabel(
     if (diffDays === 0) return t('groupToday');
     if (diffDays === 1) return t('groupTomorrow');
     if (diffDays > 1 && diffDays < 7) {
-      return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+      return new Intl.DateTimeFormat(intlLocale(locale), {
         weekday: 'long',
         day: 'numeric',
         month: 'short',
         timeZone: 'Europe/Stockholm',
       }).format(date);
     }
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       dateStyle: 'medium',
       timeZone: 'Europe/Stockholm',
     }).format(date);
@@ -1029,7 +1055,7 @@ function formatSlotTime(iso: string, locale: string): string {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       hour: '2-digit',
       minute: '2-digit',
       timeZone: 'Europe/Stockholm',
@@ -1045,7 +1071,7 @@ function accessHeaders(token: string | undefined): HeadersInit {
 
 function formatSek(amount: number, locale: string, suffix: string): string {
   if (!amount) return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} ${suffix}`;
+  return `${new Intl.NumberFormat(intlLocale(locale)).format(amount)} ${suffix}`;
 }
 
 function makeErrorMap<T extends ReturnType<typeof useTranslations<'bookingForm'>>>(t: T) {

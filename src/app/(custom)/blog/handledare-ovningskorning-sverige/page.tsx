@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { publicAlternates } from '@/lib/seo/alternates';
+import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 
 export const metadata: Metadata = {
   title: 'Handledare och övningskörning i Sverige',
   description:
-    'Så fungerar handledarskap för övningskörning, och hur DriveLinkUp kopplar 16–17-åringar till handledare innan bokning.',
-  alternates: publicAlternates('/blog/handledare-ovningskorning-sverige'),
+    'Så fungerar handledarskap för övningskörning, och hur 16–17-åringar kompletterar handledarskap i Sverige.',
+  alternates: swedishCanonicalAlternates('/blog/handledare-ovningskorning-sverige'),
 };
 
 export default function HandledareBlogPost() {
@@ -17,18 +17,17 @@ export default function HandledareBlogPost() {
         Handledare och övningskörning i Sverige
       </h1>
       <p className="text-lg text-muted-foreground">
-        För elever mellan 16 och 17 år krävs handledarskap innan bokning på DriveLinkUp. Det är ett
+        För elever mellan 16 och 17 år krävs handledarskap för privat övningskörning. Det är ett
         Trafikverket-orienterat handledarskap — inte ett generellt föräldramedgivande.
       </p>
       <div className="grid gap-4 text-body text-foreground">
         <p>
           Eleven verifierar ålder med ID via Didit. Om åldern är 16–17 skickas en inbjudan till
-          handledaren, som godkänner via en unik länk. Först därefter blir kontot ACTIVE och kan
-          boka lektioner.
+          handledaren, som godkänner via en unik länk. Först därefter blir kontot ACTIVE.
         </p>
         <p>
-          Letar du efter en körskola eller instruktör? Börja i{' '}
-          <Link className="underline" href="/instructors">
+          Letar du efter en trafikskola? Börja i{' '}
+          <Link className="underline" href="/locations">
             katalogen
           </Link>{' '}
           eller läs mer på{' '}

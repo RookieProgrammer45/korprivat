@@ -7,6 +7,7 @@
 // and the composition; DB-detail lives in the /api route handler.
 
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { ProfilePage } from '@/components/custom/profile/profile-page';
 import { requireDashboardSession } from '@/lib/dashboard-guard';
@@ -21,7 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProfileRoutePage() {
-  await requireDashboardSession('/profile');
+  const session = await requireDashboardSession('/profile');
+  if (session.role === 'STUDENT') {
+    redirect('/dashboard/student');
+  }
   const t = await getTranslations('profile');
   return (
     <main className="profile-shell container-page section">

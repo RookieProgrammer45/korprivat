@@ -160,9 +160,21 @@ describe('POST /api/auth/signup-redirect', () => {
     expect(res.status).toBe(401);
   });
 
-  it('defaults to STUDENT when role is missing or unparseable', async () => {
+  it('returns the stored profile role and ignores the body', async () => {
     authMock.setUser(SESSION_USER);
-    prismaMock.userProfile.update.mockResolvedValueOnce(PROFILE_ROW_STUDENT);
+    prismaMock.userProfile.findUnique.mockResolvedValueOnce(PROFILE_ROW_INSTRUCTOR);
+
+    const res = await signupRedirectPOST(
+      jsonRequest('/api/auth/signup-redirect', { role: 'SCHOOL' }),
+    );
+    const body = (await res.json()) as { to: string };
+    expect(body.to).toBe('/dashboard/instructor');
+    expect(prismaMock.userProfile.update).not.toHaveBeenCalled();
+  });
+
+  it('defaults to the student dashboard when no profile row exists', async () => {
+    authMock.setUser(SESSION_USER);
+    prismaMock.userProfile.findUnique.mockResolvedValueOnce(null);
 
     const res = await signupRedirectPOST(
       new Request('http://localhost/api/auth/signup-redirect', {
@@ -173,48 +185,7 @@ describe('POST /api/auth/signup-redirect', () => {
     );
     const body = (await res.json()) as { to: string };
     expect(body.to).toBe('/dashboard/student');
-    expect(prismaMock.userProfile.update).toHaveBeenCalledWith(
-      expect.objectContaining({
-        where: { userId: 'user_alice' },
-        data: { role: 'STUDENT' },
-      }),
-    );
-  });
-
-  it('writes INSTRUCTOR role and returns /dashboard/instructor', async () => {
-    authMock.setUser(SESSION_USER);
-    prismaMock.userProfile.update.mockResolvedValueOnce(PROFILE_ROW_INSTRUCTOR);
-
-    const res = await signupRedirectPOST(
-      jsonRequest('/api/auth/signup-redirect', { role: 'INSTRUCTOR' }),
-    );
-    const body = (await res.json()) as { to: string };
-    expect(body.to).toBe('/dashboard/instructor');
-    expect(prismaMock.userProfile.update).toHaveBeenCalledWith(
-      expect.objectContaining({ data: { role: 'INSTRUCTOR' } }),
-    );
-  });
-
-  it('second post overwrites the role (idempotent — second wins)', async () => {
-    authMock.setUser(SESSION_USER);
-    prismaMock.userProfile.update
-      .mockResolvedValueOnce(PROFILE_ROW_STUDENT)
-      .mockResolvedValueOnce(PROFILE_ROW_INSTRUCTOR);
-
-    const r1 = await signupRedirectPOST(
-      jsonRequest('/api/auth/signup-redirect', { role: 'STUDENT' }),
-    );
-    expect(((await r1.json()) as { to: string }).to).toBe('/dashboard/student');
-
-    const r2 = await signupRedirectPOST(
-      jsonRequest('/api/auth/signup-redirect', { role: 'INSTRUCTOR' }),
-    );
-    expect(((await r2.json()) as { to: string }).to).toBe('/dashboard/instructor');
-
-    expect(prismaMock.userProfile.update).toHaveBeenCalledTimes(2);
-    expect(mockCallArg(prismaMock.userProfile.update, 1)).toMatchObject({
-      data: { role: 'INSTRUCTOR' },
-    });
+    expect(prismaMock.userProfile.update).not.toHaveBeenCalled();
   });
 });
 

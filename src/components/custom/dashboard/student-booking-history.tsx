@@ -26,6 +26,7 @@ import {
   BookingHistoryList,
   type BookingPaymentStatus,
 } from '@/lib/contracts/bookings';
+import { intlLocale } from '@/lib/intl-locale';
 
 type State =
   | { kind: 'loading' }
@@ -104,7 +105,7 @@ export function StudentBookingHistory() {
           <p className="text-small text-muted-foreground">{t('emptyBody')}</p>
           <div className="mt-2">
             <Button asChild size="sm" variant="secondary">
-              <Link href="/instructors">{t('emptyCta')}</Link>
+              <Link href="/locations/se">{t('emptyCta')}</Link>
             </Button>
           </div>
         </CardContent>
@@ -445,7 +446,7 @@ function PaymentBadge({ status }: { status: BookingPaymentStatus }) {
 function formatDate(iso: string, locale: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
@@ -454,7 +455,7 @@ function formatDate(iso: string, locale: string): string {
 
 function formatSek(amountSek: number, locale: string): string {
   try {
-    return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.NumberFormat(intlLocale(locale), {
       style: 'currency',
       currency: 'SEK',
       useGrouping: true,

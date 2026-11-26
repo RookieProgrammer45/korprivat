@@ -11,6 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { type ReviewItem, ReviewList } from '@/lib/contracts/reviews';
+import { intlLocale } from '@/lib/intl-locale';
 
 export function InstructorReviewInbox() {
   const t = useTranslations('dashboard.instructor.reviews');
@@ -95,7 +96,7 @@ function formatDate(iso: string, locale: string): string {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       dateStyle: 'medium',
       timeZone: 'Europe/Stockholm',
     }).format(d);

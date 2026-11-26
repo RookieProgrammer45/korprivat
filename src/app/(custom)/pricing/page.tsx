@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { PricingPage } from '@/components/custom/pricing-page';
+import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('pricingPage.meta');
   return {
     title: t('title'),
     description: t('description'),
-    alternates: { canonical: '/pricing' },
+    alternates: await publicAlternatesFor('/pricing'),
   };
 }
 

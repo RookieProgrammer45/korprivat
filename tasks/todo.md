@@ -9,6 +9,32 @@ Script: `npm run outreach:draft`. Playbook: docs/authorization-outreach-sequence
 - [x] Concierge POST accepts `OUTREACH_SEQUENCE` without granting scopes
 - [ ] Do not send outreach or flip production flags without a named founder authorization
 
+## Instructor payment via school (branch `feat/instructor-payment-via-school`)
+
+Always-on: an instructor cannot collect payment unless they belong to a driving school. Do not merge, deploy, or flip flags without a named founder authorization.
+
+- [x] `instructorPaymentDecision` — SCHOOL or verified affiliation only
+- [x] Booking create / accept / checkout refuse `independent_payment_refused`
+- [x] Directory and profile mask request + transactional surfaces
+- [x] Public copy: payment collected by the school; instructor listing stays visible
+- [ ] Browser iterate directory / profile / booking form
+- [ ] Do not merge or deploy this slice without a named founder authorization
+
+## Compliance remediation (branch `feat/compliance-remediation`)
+
+Do not merge, deploy, production-migrate, or flip flags without a named founder authorization.
+
+- [x] E0–E3 fail closed when required facts are missing
+- [x] `bookingMode` and `cancellationPolicyTier` never grant surfaces or accept rights
+- [x] Canonical `evaluateBookingPolicy` on booking create and accept; no client `hasE4`
+- [x] Manual accept without a recorded commitment route stays pending (SC-16)
+- [x] Empty / pending / revoked / conflicting org bindings snapshot `null` (SC-19)
+- [x] Directory UI no longer invents instant booking from missing surfaces
+- [x] Public copy: marketplace role, listing ≠ authorization, badge honesty, sv/en key parity
+- [x] Isolated local browser pass: homepage footer, FAQ header, directory API surfaces
+- [ ] Profile page client islands stayed on skeleton in the browser session (API 200, ~19s)
+- [x] Founder go-ahead 2026-10-26: merge + production deploy, no flag flips
+
 ## Authorization collection tooling (§10)
 
 Script: `npm run cohorts:assign`. Report: docs/authorization-coverage-report.md. Worklists: docs/authorization-cohort-worklists.json. Merged: https://github.com/RookieProgrammer45/korprivat/pull/43.
@@ -18,6 +44,15 @@ Script: `npm run cohorts:assign`. Report: docs/authorization-coverage-report.md.
 - [x] Hypothetical flip delta: 634 schools go directory-only; usable supply is 0
 - [ ] Do not pick a pilot city/category or send outreach without a named founder authorization
 - [ ] Do not flip production flags without a named founder authorization
+
+## Risk-course discovery — Risk 1 / Risk 2 (specs/09 §9A [PROPOSED], specs/06 §2B)
+
+- [ ] Data model: Risk 1 / Risk 2 session offerings — course part, licence category (A/B), provider, venue/municipality, start/end with timezone, teaching language, capacity, publication status, school-approved price per participant. Additive schema only; behind `RISK_COURSES` (default OFF).
+- [ ] Provider eligibility gate: stored evidence of the Transportstyrelsen risk-training permit for the session's licence category; no permit evidence → the session stays unpublished (SC-26 test).
+- [ ] Discovery pages: `/riskettan/[city]` + `/risktvåan/[city]` per the existing `/trafikskola/[city]` convention; app's existing i18n mechanism (no invented English slugs); server-rendered; municipality/date filters.
+- [ ] Group capacity: one seat per booking; pending requests consume no seats; confirmed + holds ≤ capacity, atomic and idempotent; release/expiry/cancellation reconcile exactly once; shared sessions never exclusively unavailable; `external_manual` shows unknown availability without valid provenance/freshness (SC-28 test).
+- [ ] Booking gates independent: display needs availability authorization; requests need `request_to_book` + E0–E3; instant needs transactional + all eligibility incl. E4; withdrawal scope-specific (SC-27 test).
+- [ ] Route-level acceptance tests mapping to UX-9/UX-10 + specs/traceability.md update.
 
 ## Production-readiness walkthrough (merged #42)
 

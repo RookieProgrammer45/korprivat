@@ -11,10 +11,10 @@
 
 import { z } from 'zod';
 
-/** Bump this constant when the placeholder terms text changes — the
+/** Bump this constant when the handledare terms text changes — the
  *  dashboard guard forces re-consent on any row whose stored
  *  `termsVersion` is less than this value. Format: semver-ish. */
-export const HANDLEDARE_TERMS_VERSION = 'v1.0.0';
+export const HANDLEDARE_TERMS_VERSION = 'v1.1.0';
 
 /** User-side companion type used wherever user code branches on a
  *  marketplace role (the wizard, the dashboard guard, the profile page,

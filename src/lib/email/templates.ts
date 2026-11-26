@@ -5,6 +5,8 @@
 // renderEmail() auto-escapes its heading/body/cta/footer, so pass RAW values (don't escapeHtml() them
 // first — that double-escapes). escapeHtml() is only for when you hand-build an html string yourself.
 
+import { intlLocale } from '@/lib/intl-locale';
+
 /** Subject + rendered bodies — spread into sendEmail({ to, ... }). */
 export interface EmailContent {
   subject: string;
@@ -102,7 +104,7 @@ export function waitlistConfirmationEmail(input: {
     const { html, text } = renderEmail({
       heading: `You're on the DriveLinkUp early-access list — thanks, ${name}`,
       body: [
-        `We've got you down as an authorized driving school interested in listing on DriveLinkUp.`,
+        `We've got you down as a driving school interested in listing on DriveLinkUp.`,
         `We'll review your school information and walk through the listing before it goes live.`,
         `In the meantime, we'd love to hear what scheduling categories you teach and a few openings you typically have, so we can prioritise the right city and category in the pilot.`,
       ],
@@ -118,7 +120,7 @@ export function waitlistConfirmationEmail(input: {
     heading: `You're on the DriveLinkUp early-access list — thanks, ${name}`,
     body: [
       `We've saved your spot on the DriveLinkUp launch list.`,
-      `When we go live, you'll be able to compare authorized schools by licence category, language, neighbourhood, published price and availability.`,
+      `When we go live, you'll be able to compare driving-school listings by licence category, language, neighbourhood, published price and availability.`,
       `No spam — you'll get one launch email, then only updates that matter for you.`,
     ],
     footer: 'DriveLinkUp · launching in Sweden',
@@ -134,8 +136,8 @@ export function waitlistLaunchNotifyEmail(input: { name: string; ctaUrl: string 
   const { html, text } = renderEmail({
     heading: `DriveLinkUp is live — sign in, ${input.name}`,
     body: [
-      'The marketplace is open. Create your learner profile, compare authorized schools, and book your first slot with no separate DriveLinkUp fee.',
-      'If you signed up as a school, your listing can show the price and availability your school controls.',
+      'The catalog is open. Create your profile, compare driving-school listings and published prices, then contact the school. DriveLinkUp is free to use.',
+      'If you signed up as a school, your listing can show the price your school publishes.',
     ],
     cta: { label: 'Sign in to DriveLinkUp', url: input.ctaUrl },
     footer: 'DriveLinkUp · launching in Sweden',
@@ -246,7 +248,7 @@ export function signedUpWelcomeEmail(input: {
     };
   }
   const baseBody = [
-    `Your learner account is live. Tell us your licence goal, preferred language, neighbourhood, schedule, and budget so you can compare authorized schools nearby.`,
+    `Your learner account is live. Tell us your licence goal, preferred language, neighbourhood, schedule, and budget so you can compare driving-school listings nearby.`,
     `You can browse the pilot cohort right now, or wait for the launch email with the full marketplace.`,
     avatar ? `Your profile is set up and you're ready to start.` : null,
   ].filter((line): line is string => line !== null);
@@ -397,9 +399,7 @@ export function bookingReceiptEmail(input: {
           `Lektion: ${input.category} · ${lessonDate}`,
           `Brutto betalt av eleven: ${input.grossChargedSek} SEK`,
           ...(input.serviceFeeSek > 0 ? [`DriveLinkUp-avgift: ${input.serviceFeeSek} SEK`] : []),
-          `Skolans provision efter genomförande: ${input.commissionSek} SEK`,
           `Nettoutbetalning: ${input.netPayoutSek} SEK`,
-          'Nettoutbetalning = skolans pris − hänförlig skolprovision efter genomförd tjänst.',
           ...actionLines,
         ]
     : learner
@@ -418,9 +418,7 @@ export function bookingReceiptEmail(input: {
           `Lesson: ${input.category} · ${lessonDate}`,
           `Gross paid by learner: ${input.grossChargedSek} SEK`,
           ...(input.serviceFeeSek > 0 ? [`DriveLinkUp fee: ${input.serviceFeeSek} SEK`] : []),
-          `School commission after completion: ${input.commissionSek} SEK`,
           `Net payout: ${input.netPayoutSek} SEK`,
-          'Net payout = school price − attributable school commission after completion.',
           ...actionLines,
         ];
   const { html, text } = renderEmail({
@@ -439,7 +437,7 @@ function formatBookingTimestamp(lessonDate: string, locale: 'sv' | 'en'): string
   const date = new Date(lessonDate);
   if (Number.isNaN(date.getTime())) return lessonDate;
 
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'full',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
@@ -858,14 +856,14 @@ export function cancellationFeeReceiptEmail(input: {
         `Din avbokning av lektionen med ${instructorName} har registrerats. En avgift på ${feeUsd} USD (av lektionens ${lessonChargeUsd} USD) behålls av plattformen.`,
         policyLine,
         'Din instruktör behåller sin fulla lektionsavgift enligt marknadsplatsens modell — du behöver inte kontakta instruktören om betalningen.',
-        'Frågor kan skickas till support@drivelinkup.com.',
+        'Frågor kan skickas till frank@drivelinkup.com.',
       ]
     : [
         `Hi ${recipientName},`,
         `Your cancellation of the lesson with ${instructorName} was recorded. A fee of ${feeUsd} USD (from the ${lessonChargeUsd} USD lesson charge) is retained by the platform.`,
         policyLine,
         'Your instructor keeps the full lesson rate under the marketplace model — you do not need to contact them about payment.',
-        'Questions can be sent to support@drivelinkup.com.',
+        'Questions can be sent to frank@drivelinkup.com.',
       ];
   const { html, text } = renderEmail({
     heading,
@@ -967,12 +965,12 @@ export function instructorProfileLiveEmail(input: {
     : `Your driving-school listing is live — welcome aboard, ${name}`;
   const baseBody = isSwedish
     ? [
-        'Tack för att du listar din trafikskola på DriveLinkUp. Skolprofilen är live och synlig för elever som jämför auktoriserade trafikskolor i din stad.',
+        'Tack för att du listar din trafikskola på DriveLinkUp. Skolprofilen är live och synlig för elever som jämför trafikskolor i din stad. En katalogannons är inte en bokningsbehörighet.',
         'Nästa steg: DriveLinkUp-teamet återkommer separat om verifieringen av ditt lärartillstånd från Transportstyrelsen.',
         'Du kan när som helst uppdatera skolans priser, tillgänglighet och presentation från skolöversikten.',
       ]
     : [
-        'Thanks for listing your driving school on DriveLinkUp. Your school listing is live and visible to learners comparing authorized schools in your city.',
+        'Thanks for listing your driving school on DriveLinkUp. Your school listing is live and visible to learners comparing schools in your city. A directory listing is not a booking authorization.',
         'Next: the DriveLinkUp team will follow up separately about verification of your Transportstyrelsen teaching licence.',
         'You can update your school prices, availability, and profile anytime from your school dashboard.',
       ];
@@ -1143,14 +1141,14 @@ export function offeringRequestLearnerEmail(input: {
         `Din förfrågan om "${input.offeringName}" är skickad till ${input.schoolName} (${input.schoolCity}).`,
         'Skolan svarar dig direkt på den här mejladressen — oftast inom en arbetsdag.',
         '',
-        'Här kan du jämföra fler skolor när du väntar: https://www.drivelinkup.com/instructors',
+        'Här kan du jämföra fler skolor när du väntar: https://www.drivelinkup.com/locations/se',
       ]
     : [
         `Hi ${input.studentName},`,
         `Your request for "${input.offeringName}" has been sent to ${input.schoolName} (${input.schoolCity}).`,
         'The school will reply directly to this address — usually within one business day.',
         '',
-        'While you wait you can compare more schools here: https://www.drivelinkup.com/instructors',
+        'While you wait you can compare more schools here: https://www.drivelinkup.com/locations/se',
       ];
   const { html, text } = renderEmail({
     heading: isSwedish

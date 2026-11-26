@@ -1,13 +1,20 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { BookingForm } from '@/components/custom/booking-form';
-import { GoogleReviewsSection } from '@/components/custom/google-reviews-section';
 import { InstructorDetail } from '@/components/custom/instructor-detail';
 import { InstructorOfferingsSection } from '@/components/custom/instructor-offerings-section';
 import { ReviewSection } from '@/components/custom/review-section';
-import { loadListingSurfaces } from '@/lib/orgs/school-authorization';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { defaultLocale } from '@/i18n/config';
+import { InstructorItem } from '@/lib/contracts/instructors';
+import { publishedPrices } from '@/lib/discovery/published-prices';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { resolveLocale } from '@/lib/i18n';
+import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
+import { hubForListedCity, locationForCatalogueSchool } from '@/lib/seo/catalogue-locations';
+import { jsonLdScript } from '@/lib/seo/json-ld';
+import { localePath } from '@/lib/seo/locale-path';
+import { marketCopy } from '@/lib/seo/market-copy';
+import { isNordicCountry, locationPath } from '@/lib/seo/nordic-locations';
 import { loadPublicInstructorBySchoolSlug } from '@/lib/seo/public-instructor';
 import { siteName } from '@/lib/site';
 
@@ -23,6 +30,19 @@ type PageProps = {
   }>;
 };
 
+function publicLessonRate(instructor: { id: string }): number {
+  return publishedPrices(instructor.id)?.lesson?.priceSek ?? 0;
+}
+
+/** Google cuts meta descriptions around 155 characters. */
+function metaSnippet(value: string): string {
+  const clean = value.replace(/\s+/g, ' ').trim();
+  if (clean.length <= 155) return clean;
+  const cut = clean.slice(0, 154);
+  const space = cut.lastIndexOf(' ');
+  return `${(space > 80 ? cut.slice(0, space) : cut).trim()}…`;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const resolved = await loadPublicInstructorBySchoolSlug(slug);
@@ -36,25 +56,41 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   const { instructor, canonicalPath } = resolved;
   const path = canonicalPath;
-  const title = `${instructor.name} — ${instructor.city} | DriveLinkUp`;
-  const description =
-    instructor.bio?.trim().slice(0, 155) ||
-    t('descriptionNamed', {
-      name: instructor.name,
-      city: instructor.city,
-      rate: instructor.hourlyRateSek,
-    });
+  const rate = publicLessonRate(instructor);
+  const portrait = schoolPortraitUrl(instructor.photoUrl);
+  // A published price is the reason to click. The city stays in the description and the URL.
+  const title =
+    rate > 0
+      ? `${instructor.name} – från ${rate} kr`
+      : instructor.catalogue
+        ? `${instructor.name} — ${instructor.city}`
+        : t('titleNamed', { name: instructor.name, city: instructor.city });
+  const description = metaSnippet(
+    instructor.localDescription ||
+      instructor.bio?.trim() ||
+      (rate > 0
+        ? t('descriptionNamed', { name: instructor.name, city: instructor.city, rate })
+        : t('description')),
+  );
+  const locale = await resolveLocale();
   return {
     title,
     description,
-    alternates: publicAlternates(path),
-    robots: instructor.indexable ? { index: true, follow: true } : { index: false, follow: true },
+    alternates: swedishCanonicalAlternates(path),
+    robots:
+      locale !== defaultLocale
+        ? { index: false, follow: true }
+        : instructor.indexable
+          ? { index: true, follow: true }
+          : { index: false, follow: true },
     openGraph: {
       type: 'profile',
+      locale: 'sv_SE',
       siteName,
       title,
       description,
-      images: instructor.photoUrl ? [{ url: instructor.photoUrl }] : undefined,
+      url: absoluteUrl(path),
+      images: portrait ? [{ url: portrait }] : undefined,
     },
   };
 }
@@ -67,78 +103,111 @@ export default async function SchoolPage({ params, searchParams }: PageProps) {
   const requested = `/trafikskola/${city}/${slug}`;
   if (resolved.canonicalPath !== requested) permanentRedirect(resolved.canonicalPath);
 
-  const rawBooking = Array.isArray(sp.booking) ? sp.booking[0] : sp.booking;
-  const rawToken = Array.isArray(sp.token) ? sp.token[0] : sp.token;
-  const rawRebook = Array.isArray(sp.rebook) ? sp.rebook[0] : sp.rebook;
   const rawReview = Array.isArray(sp.review) ? sp.review[0] : sp.review;
   const instructorId = resolved.instructor.id;
-  const bookingId = typeof rawBooking === 'string' && rawBooking.length > 0 ? rawBooking : null;
-  const bookingToken = typeof rawToken === 'string' && rawToken.length > 0 ? rawToken : undefined;
-  const rebookId = typeof rawRebook === 'string' && rawRebook.length > 0 ? rawRebook : null;
   const reviewBookingId =
     typeof rawReview === 'string' && /^[A-Za-z0-9_-]{1,120}$/.test(rawReview) ? rawReview : null;
 
+  const detail = await getTranslations('instructorDetail');
+  const locale = await resolveLocale();
+  const lesson = resolved.listing?.publishedPrices?.lesson ?? null;
+  const lessonCurrency = resolved.listing?.publishedPrices?.currency ?? 'SEK';
+  const swedishRate = publicLessonRate(resolved.instructor);
+  const cityHub = resolved.instructor.catalogue
+    ? locationForCatalogueSchool(resolved.instructor.id)
+    : hubForListedCity('se', resolved.instructor.city);
+  const market = cityHub && isNordicCountry(cityHub.country) ? marketCopy(cityHub.country) : null;
   const jsonLd = resolved.instructor?.indexable
     ? {
         '@context': 'https://schema.org',
-        '@type': 'DrivingSchool',
-        name: resolved.instructor.name,
-        description: resolved.instructor.bio?.slice(0, 300) || undefined,
-        url: absoluteUrl(resolved.canonicalPath),
-        image: resolved.instructor.photoUrl || undefined,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: resolved.instructor.city,
-          addressCountry: 'SE',
-        },
-        priceRange:
-          resolved.instructor.hourlyRateSek > 0
-            ? `${resolved.instructor.hourlyRateSek} SEK`
-            : undefined,
-        areaServed: resolved.instructor.city,
-        knowsLanguage: resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv'],
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'DriveLinkUp', item: absoluteUrl('/') },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: resolved.instructor.city,
+                item: cityHub ? absoluteUrl(locationPath(cityHub)) : absoluteUrl('/locations'),
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: resolved.instructor.name,
+                item: absoluteUrl(resolved.canonicalPath),
+              },
+            ],
+          },
+          {
+            '@type': 'DrivingSchool',
+            name: resolved.instructor.name,
+            description:
+              resolved.instructor.localDescription ||
+              resolved.instructor.bio?.slice(0, 300) ||
+              undefined,
+            url: absoluteUrl(resolved.canonicalPath),
+            image: schoolPortraitUrl(resolved.instructor.photoUrl) || undefined,
+            telephone: resolved.listing?.phone?.display,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: resolved.instructor.city,
+              addressCountry: resolved.instructor.addressCountry,
+            },
+            priceRange: lesson
+              ? `${lesson.priceSek} ${lessonCurrency}`
+              : swedishRate > 0
+                ? `${swedishRate} SEK`
+                : undefined,
+            areaServed: resolved.instructor.city,
+            inLanguage: resolved.instructor.contentLanguage,
+            knowsLanguage:
+              resolved.listing?.languages ??
+              (resolved.instructor.englishSpeaking ? ['sv', 'en'] : ['sv']),
+            ...(resolved.listing?.googleRating != null &&
+            (resolved.listing.googleReviewCount ?? 0) > 0
+              ? {
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: resolved.listing.googleRating,
+                    reviewCount: resolved.listing.googleReviewCount,
+                    bestRating: 5,
+                  },
+                }
+              : {}),
+          },
+        ],
       }
     : null;
-
-  // Surfaces come from authorization, not legacy bookingMode, so a withdrawal
-  // hides the booking sidebar and offering request even if bookingMode is still
-  // instant or request. Info, prices, and reviews stay.
-  const surfaces = await loadListingSurfaces(
-    resolved.instructor.id,
-    resolved.instructor.bookingMode,
-  );
-  const showBooking = surfaces.transactionalBooking || surfaces.requestToBook;
+  const initialListing = resolved.listing ? InstructorItem.parse(resolved.listing) : null;
 
   return (
     <main className="container-page section min-w-0">
-      <div
-        className={
-          showBooking
-            ? 'mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start'
-            : 'mx-auto grid w-full max-w-6xl gap-6'
-        }
-      >
+      <div className="mx-auto grid w-full max-w-6xl gap-6">
         <div className="grid min-w-0 gap-6">
-          <InstructorDetail instructorId={instructorId} />
-          <InstructorOfferingsSection
+          <InstructorDetail
             instructorId={instructorId}
-            requestEnabled={surfaces.inquiryCollection}
+            initial={initialListing}
+            intro={resolved.instructor.localDescription}
+            cityHref={cityHub ? localePath(locale, locationPath(cityHub)) : null}
+            cityLinkLabel={
+              market
+                ? market.cityHeading(resolved.instructor.city)
+                : cityHub
+                  ? detail('locatedIn', { city: resolved.instructor.city })
+                  : null
+            }
+            contentLang={resolved.instructor.catalogue ? resolved.instructor.contentLanguage : null}
           />
-          <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
-          <GoogleReviewsSection instructorId={instructorId} />
+          {resolved.instructor.catalogue ? null : (
+            <InstructorOfferingsSection instructorId={instructorId} requestEnabled={false} />
+          )}
+          {resolved.instructor.catalogue ? null : (
+            <ReviewSection instructorId={instructorId} reviewBookingId={reviewBookingId} />
+          )}
         </div>
-        {showBooking ? (
-          <div className="instructor-page-booking min-w-0 lg:sticky lg:top-24">
-            <BookingForm
-              instructorId={instructorId}
-              bookingId={bookingId}
-              bookingToken={bookingToken}
-              rebookBookingId={rebookId}
-            />
-          </div>
-        ) : null}
       </div>
-      {jsonLd ? <script type="application/ld+json">{JSON.stringify(jsonLd)}</script> : null}
+      {jsonLd ? jsonLdScript(jsonLd) : null}
     </main>
   );
 }

@@ -19,6 +19,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { sendEmail } from '@/lib/email/send';
 import { waitlistConfirmationEmail } from '@/lib/email/templates';
+import { clientIp, rateLimitResponse, takeIpToken } from '@/lib/http/ip-rate-limit';
 import { WaitlistCreate, type WaitlistCreatedValue } from '@/lib/waitlist/schema';
 
 export const dynamic = 'force-dynamic';
@@ -32,6 +33,9 @@ function badRequest(fieldErrors: Record<string, string>): NextResponse<ErrorBody
 }
 
 export async function POST(req: Request): Promise<NextResponse<WaitlistCreatedValue | ErrorBody>> {
+  const limited = takeIpToken(`waitlist:${clientIp(req.headers)}`);
+  if (!limited.ok) return rateLimitResponse(limited.retryAfterSec) as NextResponse<ErrorBody>;
+
   let body: unknown;
   try {
     body = await req.json();

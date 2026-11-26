@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
 
 const path = '/blog/kostnad-korkort-sverige';
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Vad kostar körkortet i Sverige?',
   description:
     'Översikt av lektionspriser, skolavgifter och hur DriveLinkUp visar publicerade priser utan separat elevavgift.',
-  alternates: publicAlternates(path),
+  alternates: swedishCanonicalAlternates(path),
 };
 
 export default function KostnadKorkortPage() {
@@ -19,7 +19,7 @@ export default function KostnadKorkortPage() {
     '@type': 'Article',
     headline: 'Vad kostar körkortet i Sverige?',
     description:
-      'Hur lektionspriser och skolavgifter hänger ihop, och hur du jämför auktoriserade trafikskolor.',
+      'Hur lektionspriser och skolavgifter hänger ihop, och hur du jämför trafikskolor i katalogen.',
     author: { '@type': 'Organization', name: siteName },
     mainEntityOfPage: url,
     inLanguage: 'sv-SE',
@@ -33,17 +33,11 @@ export default function KostnadKorkortPage() {
       </h1>
       <p className="text-lg text-muted-foreground">
         Totalkostnaden varierar med antal lektioner, teori och prov. Det du kan jämföra tidigt är
-        skolans publicerade lektionspris — och om någon lägger på dolda marknadsplatsavgifter.
+        skolans publicerade lektionspris.
       </p>
       <div className="grid gap-4 text-body text-foreground">
-        <p>
-          På DriveLinkUp betalar elever ingen separat plattformsavgift. Du ser skolans pris i SEK
-          per timme, bokar en ledig tid och betalar det publicerade beloppet till escrow.
-        </p>
-        <p>
-          Skolans provision till DriveLinkUp (8% för skolbokningar, 10% för oberoende instruktörer)
-          tas efter genomförd tjänst och påverkar inte elevens checkout-total.
-        </p>
+        <p>Du ser skolans pris i SEK per timme. Kontakta skolan för att ordna lektionen.</p>
+        <p>Listningen är gratis. Betalning för lektionen ordnas med skolan.</p>
         <p>
           Börja i{' '}
           <Link className="underline underline-offset-4" href="/locations/se/stockholm">
@@ -54,7 +48,7 @@ export default function KostnadKorkortPage() {
             Göteborg
           </Link>{' '}
           eller{' '}
-          <Link className="underline underline-offset-4" href="/instructors">
+          <Link className="underline underline-offset-4" href="/locations">
             hela katalogen
           </Link>
           . Läs mer om{' '}

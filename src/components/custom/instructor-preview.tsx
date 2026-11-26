@@ -5,39 +5,52 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
+import {
+  SCHOOL_LISTING_GRID_CLASS,
+  SchoolListingCard,
+} from '@/components/custom/school-listing-card';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import {
-  normalizeMarketplaceLocale,
-  providerSlotDateParts,
-} from '@/lib/business/marketplace-localization';
 import { type InstructorFilteredItem, InstructorList } from '@/lib/contracts/instructors';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
-const MAX_PREVIEW_ROWS = 3;
+export { categoryChipLabel, SchoolMark } from '@/components/custom/school-listing-card';
+
+const MAX_PREVIEW_ROWS = 20;
 
 type Status = 'loading' | 'ready' | 'empty' | 'error';
 
 export function InstructorPreview({
   limit = MAX_PREVIEW_ROWS,
   pageIntro = false,
+  showContact = true,
+  initialRows,
+  emptyLabel,
 }: {
   limit?: number;
   pageIntro?: boolean;
+  showContact?: boolean;
+  /** Schools already rendered by the server. When set, the card does not fetch again. */
+  initialRows?: InstructorFilteredItem[];
+  /** Replaces the default empty sentence when a licence filter matched nothing. */
+  emptyLabel?: string;
 }) {
   const tr = useTranslations('instructorPreview');
-  const [status, setStatus] = useState<Status>('loading');
-  const [rows, setRows] = useState<InstructorFilteredItem[]>([]);
+  const seeded = initialRows !== undefined;
+  const [status, setStatus] = useState<Status>(
+    seeded ? (initialRows.length > 0 ? 'ready' : 'empty') : 'loading',
+  );
+  const [rows, setRows] = useState<InstructorFilteredItem[]>(initialRows ?? []);
 
   useEffect(() => {
+    if (seeded) return;
     let active = true;
-    apiFetch('/api/instructors', { schema: InstructorList })
+    apiFetch(`/api/instructors?limit=${Math.max(1, limit)}`, { schema: InstructorList })
       .then((data) => {
         if (!active) return;
         setRows(data.items.slice(0, Math.max(1, limit)));
@@ -50,7 +63,7 @@ export function InstructorPreview({
     return () => {
       active = false;
     };
-  }, [limit]);
+  }, [limit, seeded]);
 
   const content =
     status === 'loading' ? (
@@ -60,12 +73,29 @@ export function InstructorPreview({
         {tr('errorTitle')}
       </p>
     ) : status === 'empty' ? (
-      <p className="text-small text-muted-foreground">{tr('empty')}</p>
+      <p className="text-small text-muted-foreground">{emptyLabel ?? tr('empty')}</p>
     ) : (
-      <ul className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className={SCHOOL_LISTING_GRID_CLASS}>
         {rows.map((row) => (
-          <li key={row.id}>
-            <PreviewCard row={row} />
+          <li
+            key={row.id}
+            className={
+              showContact ? 'grid h-full min-w-0 grid-rows-[1fr_auto] gap-2' : 'h-full min-w-0'
+            }
+          >
+            <SchoolListingCard row={row} />
+            {showContact ? (
+              <div className="grid gap-2">
+                <SchoolContactActions
+                  name={row.name}
+                  contact={row.contact}
+                  priceRequest={row.priceRequest}
+                  listing={schoolPath(row)}
+                  size="sm"
+                  className="w-full"
+                />
+              </div>
+            ) : null}
           </li>
         ))}
       </ul>
@@ -85,89 +115,10 @@ export function InstructorPreview({
       {content}
       <div>
         <Button asChild size="lg">
-          <Link href="/instructors">{tr('directoryCta')}</Link>
+          <Link href="/locations/se">{tr('directoryCta')}</Link>
         </Button>
       </div>
     </section>
-  );
-}
-
-function PreviewCard({ row }: { row: InstructorFilteredItem }) {
-  const tr = useTranslations('instructorPreview');
-  const trTier = useTranslations('cancellationPolicy.tierBadge');
-  const trBooking = useTranslations('bookingForm');
-  const locale = normalizeMarketplaceLocale(useLocale());
-  const nextSlotPill = row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, locale, tr) : null;
-  const mode = row.bookingMode === 'request' ? 'request' : 'instant';
-  const tier = row.cancellationPolicyTier ?? 'flexible';
-  return (
-    <Link
-      href={`/instructors/${row.id}`}
-      className="marketplace-provider-card group block h-full min-w-0 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
-      data-provider-type={row.providerType}
-    >
-      <Card className="surface-card marketplace-preview-card lift h-full border-border bg-card transition-colors duration-200 group-hover:border-brand-500/40 group-hover:shadow-md">
-        <CardContent className="flex h-full min-w-0 flex-col gap-4 p-5">
-          <div className="marketplace-preview-card-header flex min-w-0 flex-wrap items-start justify-between gap-3">
-            <div className="flex min-w-0 flex-1 max-sm:flex-auto items-center gap-3">
-              <Image
-                src={row.photoUrl}
-                alt={tr('portraitAlt', { name: row.name })}
-                width={48}
-                height={48}
-                unoptimized
-                className="marketplace-provider-avatar size-12 shrink-0 rounded-full border border-brand-500/35 bg-brand-100 object-cover dark:bg-brand-900"
-              />
-              <div className="min-w-0">
-                <p className="dlu-type">
-                  {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
-                </p>
-                <p className="break-words font-display text-base font-semibold text-foreground">
-                  {row.name}
-                </p>
-                <p className="break-words text-small text-muted-foreground">{row.city}</p>
-              </div>
-            </div>
-            <Badge
-              variant="secondary"
-              className="marketplace-rate-badge max-w-full shrink-0 whitespace-normal bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-            >
-              {formatSek(row.hourlyRateSek, locale, tr('rateSuffix'))}
-            </Badge>
-          </div>
-
-          <div className="flex flex-wrap gap-1.5">
-            {row.categories.map((category) => (
-              <Badge key={category} variant="outline" className="border-border text-foreground">
-                {category}
-              </Badge>
-            ))}
-          </div>
-
-          <div className="grid min-w-0 gap-1 text-small text-muted-foreground">
-            <span>
-              {tr('nextAvailableLabel')}:{' '}
-              <span className="font-medium text-foreground">
-                {nextSlotPill?.label ?? tr('noUpcomingSlot')}
-              </span>
-            </span>
-            <span>{row.englishSpeaking ? tr('englishAvailable') : tr('swedishAvailable')}</span>
-          </div>
-
-          <div className="mt-auto flex min-w-0 flex-wrap items-center gap-2 border-t border-border pt-4">
-            <Badge variant="outline" className="border-border">
-              {trBooking(`bookingModeLabel.${mode}`)}
-            </Badge>
-            <Badge variant="outline" className="border-border">
-              {trTier(tier)}
-            </Badge>
-            <span className="ml-auto min-w-0 text-right text-small font-medium text-foreground">
-              {tr('profileCta')} <span aria-hidden>→</span>
-            </span>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
   );
 }
 
@@ -177,44 +128,19 @@ function PreviewSkeleton({ limit }: { limit: number }) {
     (_, index) => `preview-skeleton-${index + 1}`,
   );
   return (
-    <ul className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className={SCHOOL_LISTING_GRID_CLASS}>
       {ids.map((skeletonId) => (
-        <li key={skeletonId}>
-          <Card className="surface-card border-border">
-            <CardContent className="flex min-w-0 flex-col gap-5 p-6">
-              <div className="flex items-center gap-3">
-                <Skeleton className="size-12 rounded-full" />
-                <div className="flex flex-1 flex-col gap-2">
-                  <Skeleton className="h-4 w-2/3" />
-                  <Skeleton className="h-3 w-1/3" />
-                </div>
-              </div>
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-5/6" />
-            </CardContent>
-          </Card>
+        <li key={skeletonId} aria-hidden>
+          <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white sm:rounded-[1.25rem] dark:bg-card">
+            <Skeleton className="aspect-[5/3] w-full rounded-none sm:aspect-[4/3]" />
+            <div className="flex flex-col gap-3 p-4">
+              <Skeleton className="h-3 w-1/4" />
+              <Skeleton className="h-5 w-3/4" />
+              <Skeleton className="h-7 w-1/3" />
+            </div>
+          </div>
         </li>
       ))}
     </ul>
   );
-}
-
-function formatNextSlotPill(
-  iso: string,
-  locale: 'en' | 'sv',
-  t: ReturnType<typeof useTranslations<'instructorPreview'>>,
-): { label: string; iso: string } {
-  const parts = providerSlotDateParts(iso, locale);
-  if (!parts) return { label: t('slotLabel'), iso };
-  const when = parts.isWithinNextWeek
-    ? t('slotTimeAndWeekday', { weekday: parts.weekday, time: parts.time })
-    : `${t('slotMonthDay', { monthShort: parts.monthShort, day: parts.day })} · ${t('slotTime', { time: parts.time })}`;
-  return { label: t('slotLabelRelative', { when }), iso };
-}
-
-function formatSek(amount: number, locale: 'en' | 'sv', suffix: string): string {
-  if (!amount) {
-    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  }
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} ${suffix}`;
 }

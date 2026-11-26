@@ -1,0 +1,18 @@
+---
+description: Outreach mail is sent only from marketing@drivelinkup.com via the connected Gmail account.
+alwaysApply: true
+---
+
+# Email outreach sender
+
+Outreach (schools, instructors, handledare, vendors, partners) is sent only from `marketing@drivelinkup.com` through the Outlook account connected to Cursor.
+
+Before any send or draft:
+
+1. Confirm the authenticated Outlook sender is `marketing@drivelinkup.com` (`get_me` mail / userPrincipalName).
+2. If the session is any other address, including `samuelstronga@gmail.com`, stop. Do not send or draft outreach. Ask for the Outlook plugin to be reconnected as `marketing@drivelinkup.com`.
+3. Do not send outreach through the Gmail plugin. Do not try to set a different sender in the message body or headers.
+
+Product mail stays on Resend (`src/lib/email/send.ts`, `RESEND_FROM`, default `DriveLinkUp <noreply@drivelinkup.com>`): verification, password reset, booking, receipt, payout, and org invite. Do not route that mail through Gmail.
+
+This rule sets the From address. It does not authorize a send. Outreach still needs a separate explicit go-ahead for the specific recipients.

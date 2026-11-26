@@ -16,9 +16,9 @@
 
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
+import { LocaleLink as Link } from '@/components/locale-link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { apiFetch } from '@/lib/api-client';
@@ -84,7 +84,7 @@ export function ContactDirectoryCtas() {
             size="lg"
             className="h-auto w-full min-w-0 max-w-full justify-start whitespace-normal border-brand-500/40 py-3 text-brand-700 hover:bg-brand-100 hover:text-brand-700 dark:bg-brand-900 dark:text-brand-300 dark:hover:bg-brand-800 sm:flex-1"
           >
-            <Link href="/instructors" className="flex w-full min-w-0">
+            <Link href="/locations" className="flex w-full min-w-0">
               <span className="flex min-w-0 flex-1 flex-col items-start gap-0.5 text-left whitespace-normal break-words">
                 <span className="min-w-0 max-w-full break-words whitespace-normal font-display text-base font-semibold">
                   {t('browseAllTitle')}

@@ -1,9 +1,5 @@
 //
-// The profile is intentionally a small decision surface: live identity,
-// categories, rate, learner fee quote, booking mode, cancellation schedule,
-// and platform safety expectations. Availability and booking remain in the
-// adjacent BookingForm island so every mutation still uses the REST data
-// plane.
+// School listing: identity, categories, published price, contact, and reviews.
 
 'use client';
 
@@ -11,26 +7,49 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { type ReactNode, useEffect, useState } from 'react';
-import { BookingPriceSummary } from '@/components/custom/booking-price-summary';
+import { GoogleReviewQuotes } from '@/components/custom/google-review-quotes';
+import { PublishedPriceList } from '@/components/custom/published-price';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
+import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
-import { getPolicyForTier } from '@/lib/business/cancellation-policy';
 import { InstructorItem } from '@/lib/contracts/instructors';
+import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { intlLocale } from '@/lib/intl-locale';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 type Status = 'loading' | 'not-found' | 'error' | 'profile';
 
-export function InstructorDetail({ instructorId }: { instructorId: string }) {
-  const [status, setStatus] = useState<Status>('loading');
-  const [instructor, setInstructor] = useState<InstructorItem | null>(null);
+export function InstructorDetail({
+  instructorId,
+  initial = null,
+  intro = null,
+  cityHref = null,
+  cityLinkLabel = null,
+  contentLang = null,
+}: {
+  instructorId: string;
+  /** Server-rendered catalogue row. Skips the signed-in detail request. */
+  initial?: InstructorItem | null;
+  intro?: string | null;
+  cityHref?: string | null;
+  cityLinkLabel?: string | null;
+  contentLang?: string | null;
+}) {
+  const [status, setStatus] = useState<Status>(initial ? 'profile' : 'loading');
+  const [instructor, setInstructor] = useState<InstructorItem | null>(initial);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const tr = useTranslations('instructorDetail');
+  const trPrice = useTranslations('publishedPrice');
+  const trContact = useTranslations('schoolContact');
   const tAffiliation = useTranslations('instructorAffiliation');
   const locale = useLocale();
 
   useEffect(() => {
+    if (initial) return;
     let active = true;
     setStatus('loading');
     setErrorMsg(null);
@@ -60,7 +79,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
     return () => {
       active = false;
     };
-  }, [instructorId, tr]);
+  }, [instructorId, initial, tr]);
 
   if (status === 'loading') {
     return (
@@ -84,7 +103,7 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
           </p>
           <p className="max-w-sm text-small text-muted-foreground">{tr('notFoundBody')}</p>
           <Button asChild variant="outline" size="sm" className="mt-1">
-            <Link href="/instructors">{tr('backDirectory')}</Link>
+            <Link href={cityHref ?? '/locations'}>{tr('backDirectory')}</Link>
           </Button>
         </CardContent>
       </Card>
@@ -103,13 +122,18 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
     );
   }
 
+  const portrait = schoolPortraitUrl(instructor.photoUrl);
+
   return (
-    <Card className="surface-card instructor-detail-card min-w-0 overflow-hidden border-brand-500/25 bg-card shadow-md">
+    <Card
+      lang={contentLang ?? undefined}
+      className="surface-card instructor-detail-card min-w-0 overflow-hidden border-brand-500/25 bg-card shadow-md"
+    >
       <CardContent className="grid min-w-0 gap-7 p-6 sm:p-8 md:grid-cols-[180px_minmax(0,1fr)] md:gap-9">
         <div className="instructor-detail-photo flex min-w-0 items-start justify-center">
-          {instructor.photoUrl ? (
+          {portrait ? (
             <Image
-              src={instructor.photoUrl}
+              src={portrait}
               alt={tr('portraitAlt', { name: instructor.name })}
               width={180}
               height={180}
@@ -117,12 +141,13 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
               className="size-[180px] max-w-full rounded-xl border border-brand-500/25 bg-brand-100 object-cover shadow-sm dark:bg-brand-900"
             />
           ) : (
-            <div
-              aria-hidden
-              className="flex size-[180px] max-w-full items-center justify-center rounded-xl border border-brand-500/25 bg-brand-100 font-display text-4xl font-semibold text-brand-700 shadow-sm dark:bg-brand-900 dark:text-brand-300"
-            >
-              {instructor.name.slice(0, 1).toUpperCase()}
-            </div>
+            <SchoolMarkFallback
+              name={instructor.name}
+              categories={instructor.categories}
+              heavy={instructor.publishedPrices?.heavy ?? null}
+              iconLayout="hero"
+              className="box-border flex size-[180px] max-w-full items-center justify-center rounded-xl border border-brand-500/25 bg-brand-100 p-8 font-display text-4xl font-semibold text-brand-700 shadow-sm dark:bg-brand-900 dark:text-brand-300"
+            />
           )}
         </div>
 
@@ -132,9 +157,17 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
             <h1 className="mt-1 break-words font-display text-h1 leading-tight tracking-tight text-foreground">
               {instructor.name}
             </h1>
-            <p className="mt-1 text-body text-muted-foreground">
-              {tr('locatedIn', { city: instructor.city })}
-            </p>
+            {cityHref && cityLinkLabel ? (
+              <p className="mt-1 text-body">
+                <Link href={cityHref} className="text-foreground underline underline-offset-4">
+                  {cityLinkLabel}
+                </Link>
+              </p>
+            ) : (
+              <p className="mt-1 text-body text-muted-foreground">
+                {tr('locatedIn', { city: instructor.city })}
+              </p>
+            )}
             {instructor.affiliation ? (
               <p className="mt-2 text-body text-muted-foreground">
                 <Link
@@ -157,10 +190,26 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
                 {tr(`category.${category}`)}
               </Badge>
             ))}
+            {(instructor.publishedPrices?.heavy?.categories ?? []).map((category) => (
+              <Badge
+                key={category}
+                variant="secondary"
+                className="bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
+              >
+                {tr(`category.${category}`)}
+              </Badge>
+            ))}
           </div>
 
           <dl className="grid min-w-0 gap-3 rounded-xl border border-border bg-muted p-4 sm:grid-cols-2">
             <Fact label={tr('facts.city')}>{instructor.city}</Fact>
+            {instructor.phone ? (
+              <Fact label={tr('facts.phone')}>
+                <a href={instructor.phone.href} className="underline-offset-4 hover:underline">
+                  {instructor.phone.display}
+                </a>
+              </Fact>
+            ) : null}
             <Fact label={tr('facts.serviceArea')}>{instructor.serviceArea}</Fact>
             <Fact label={tr('facts.language')}>
               {instructor.languages.map((language) => tr(`language.${language}`)).join(' · ')}
@@ -191,30 +240,46 @@ export function InstructorDetail({ instructorId }: { instructorId: string }) {
                   ? formatSlotDate(instructor.nextSlotAt, locale)
                   : tr('availability.none')}
             </Fact>
-            <div className="min-w-0 sm:col-span-2">
-              <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {tr('hourlyRate')}
-              </dt>
-              <dd className="mt-1 break-words font-display text-h2 font-semibold tracking-tight text-foreground">
-                {formatSek(instructor.hourlyRateSek, locale, tr('rateSuffix'))}
-              </dd>
-            </div>
+            {instructor.publishedPrices ? (
+              <div className="min-w-0 sm:col-span-2">
+                <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  {trPrice('heading')}
+                </dt>
+                <dd className="mt-2">
+                  <PublishedPriceList prices={instructor.publishedPrices} showSourceLink />
+                </dd>
+              </div>
+            ) : (
+              <div className="min-w-0 sm:col-span-2">
+                <dt className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  {trPrice('heading')}
+                </dt>
+                <dd className="mt-1 text-small text-muted-foreground">{trContact('noPrice')}</dd>
+              </div>
+            )}
           </dl>
 
-          <BookingPriceSummary instructorId={instructor.id} />
+          <p className="min-w-0 break-words text-body text-muted-foreground">
+            {intro?.trim() ? intro : instructor.bio}
+          </p>
 
-          <p className="min-w-0 break-words text-body text-muted-foreground">{instructor.bio}</p>
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <SchoolContactActions
+              name={instructor.name}
+              contact={instructor.contact}
+              priceRequest={instructor.priceRequest}
+              listing={schoolPath(instructor)}
+              className="w-full sm:w-auto"
+            />
+          </div>
 
-          <BookingModeSection bookingMode={instructor.bookingMode} surfaces={instructor.surfaces} />
-          {/* Directory-only listings show no cancellation policy: no booking
-              flows through DriveLinkUp for this school, and an unconfirmed
-              tier would misrepresent the school's own terms. */}
-          {instructor.showCancellationPolicy === false ||
-          instructor.surfaces?.directoryOnly ||
-          (!instructor.surfaces && instructor.bookingMode === 'contact') ? null : (
-            <CancellationPolicySection tier={instructor.cancellationPolicyTier} />
-          )}
-          <SafetyExpectations />
+          <GoogleReviewQuotes
+            items={instructor.googleReviews ?? []}
+            average={instructor.googleRating}
+            count={instructor.googleReviewCount}
+            mapsUri={instructor.googleMapsUri}
+          />
+          {instructor.surfaces?.directoryOnly ? null : <SafetyExpectations />}
         </div>
       </CardContent>
     </Card>
@@ -233,87 +298,17 @@ function Fact({ label, children }: { label: string; children: ReactNode }) {
 }
 
 function formatNumber(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     maximumFractionDigits: 1,
   }).format(value);
 }
 
-function formatSek(value: number, locale: string, suffix: string): string {
-  if (!value) {
-    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  }
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(value)} ${suffix}`;
-}
-
 function formatSlotDate(iso: string, locale: string): string {
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
   }).format(new Date(iso));
-}
-
-function BookingModeSection({
-  bookingMode,
-  surfaces,
-}: {
-  bookingMode: InstructorItem['bookingMode'];
-  surfaces: InstructorItem['surfaces'];
-}) {
-  const tr = useTranslations('instructorDetail');
-  const mode = surfaces?.directoryOnly
-    ? 'contact'
-    : surfaces?.requestToBook && !surfaces.transactionalBooking
-      ? 'request'
-      : surfaces?.transactionalBooking
-        ? 'instant'
-        : bookingMode === 'request'
-          ? 'request'
-          : bookingMode === 'contact'
-            ? 'contact'
-            : 'instant';
-  return (
-    <section className="grid min-w-0 gap-2 rounded-xl border border-border bg-muted p-4">
-      <p className="text-eyebrow text-muted-foreground">{tr('bookingModeEyebrow')}</p>
-      <p className="font-display text-h4 font-semibold tracking-tight text-foreground">
-        {tr(`bookingMode.${mode}.title`)}
-      </p>
-      <p className="text-small text-muted-foreground">{tr(`bookingMode.${mode}.body`)}</p>
-    </section>
-  );
-}
-
-function CancellationPolicySection({ tier }: { tier: InstructorItem['cancellationPolicyTier'] }) {
-  const tr = useTranslations('cancellationPolicy');
-  const tierKey = tier ?? 'flexible';
-  const policy = getPolicyForTier(tierKey);
-  return (
-    <section className="grid min-w-0 gap-3 rounded-xl border border-border bg-muted p-4">
-      <div>
-        <p className="text-eyebrow text-muted-foreground">{tr('sectionEyebrow')}</p>
-        <p className="mt-1 font-display text-h4 font-semibold tracking-tight text-foreground">
-          {tr(`${tierKey}.name`)}
-        </p>
-        <p className="mt-1 text-small text-muted-foreground">{tr(`${tierKey}.summary`)}</p>
-      </div>
-      <ul className="grid gap-2 text-small text-foreground">
-        <li className="flex items-start gap-2">
-          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden />
-          <span>{tr(`${tierKey}.fullRefundBefore`)}</span>
-        </li>
-        {policy.partialFeePercent > 0 ? (
-          <li className="flex items-start gap-2">
-            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden />
-            <span>{tr(`${tierKey}.partialBetween`)}</span>
-          </li>
-        ) : null}
-        <li className="flex items-start gap-2">
-          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-destructive" aria-hidden />
-          <span>{tr(`${tierKey}.noRefundAfter`)}</span>
-        </li>
-      </ul>
-    </section>
-  );
 }
 
 function SafetyExpectations() {

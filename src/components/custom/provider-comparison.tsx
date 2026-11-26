@@ -2,9 +2,13 @@
 
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { PublishedPriceList } from '@/components/custom/published-price';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
+import { intlLocale } from '@/lib/intl-locale';
+import { schoolPath } from '@/lib/seo/school-slugs';
 
 const MAX_COMPARISON_ITEMS = 3;
 
@@ -14,12 +18,15 @@ export function ProviderComparison({
   providers,
   onRemove,
   onClear,
+  heavyScope = false,
 }: {
   providers: InstructorFilteredItem[];
   onRemove: (id: string) => void;
   onClear: () => void;
+  heavyScope?: boolean;
 }) {
   const t = useTranslations('instructorDirectory.comparison');
+  const tPrice = useTranslations('publishedPrice');
   const locale = useLocale();
 
   if (providers.length === 0) return null;
@@ -40,82 +47,94 @@ export function ProviderComparison({
       </CardHeader>
       <CardContent className="min-w-0 overflow-x-auto p-4 pt-0 sm:p-6 sm:pt-0">
         <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {providers.map((provider) => (
-            <article
-              key={provider.id}
-              className="grid gap-3 rounded-lg border border-border bg-card p-4"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <h3 className="truncate font-display text-h4 text-foreground">{provider.name}</h3>
-                  <p className="text-small text-muted-foreground">{provider.city}</p>
+          {providers.map((provider) => {
+            const categories = heavyScope
+              ? [
+                  ...(provider.publishedPrices?.heavy?.categories ?? []),
+                  ...(provider.publishedPrices?.heavy?.ykb ? ['YKB'] : []),
+                ]
+              : provider.categories;
+            return (
+              <article
+                key={provider.id}
+                className="grid gap-3 rounded-lg border border-border bg-card p-4"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="truncate font-display text-h4 text-foreground">
+                      {provider.name}
+                    </h3>
+                    <p className="text-small text-muted-foreground">{provider.city}</p>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="shrink-0"
+                    onClick={() => onRemove(provider.id)}
+                    aria-label={t('removeAria', { name: provider.name })}
+                  >
+                    {t('remove')}
+                  </Button>
                 </div>
-                <Button
-                  type="button"
-                  variant="ghost"
+                <dl className="grid gap-2 text-small">
+                  {categories.length > 0 ? (
+                    <Fact label={t('category')} value={categories.join(', ')} />
+                  ) : null}
+                  <Fact
+                    label={t('language')}
+                    value={provider.languages
+                      .map((language) => t(`languages.${language}`))
+                      .join(' · ')}
+                  />
+                  <Fact label={t('serviceArea')} value={provider.serviceArea} />
+                  {provider.phone ? (
+                    <Fact label={t('phone')} value={provider.phone.display} />
+                  ) : null}
+                  {provider.publishedPrices ? (
+                    <PublishedPricesFact
+                      label={tPrice('heading')}
+                      prices={provider.publishedPrices}
+                      heavyOnly={heavyScope}
+                    />
+                  ) : null}
+                  {provider.surfaces?.availabilityDisplay && provider.nextSlotAt ? (
+                    <Fact
+                      label={t('availability')}
+                      value={formatDate(provider.nextSlotAt, locale)}
+                    />
+                  ) : null}
+                  <Fact
+                    label={t('reviews')}
+                    value={
+                      provider.reviewSummary.averageRating === null
+                        ? provider.googleRating != null
+                          ? t('reviewsValue', {
+                              average: formatNumber(provider.googleRating, locale),
+                              count: provider.googleReviewCount ?? 0,
+                            })
+                          : t('noReviews')
+                        : t('reviewsValue', {
+                            average: formatNumber(provider.reviewSummary.averageRating, locale),
+                            count: provider.reviewSummary.count,
+                          })
+                    }
+                  />
+                </dl>
+                <SchoolContactActions
+                  name={provider.name}
+                  contact={provider.contact}
+                  priceRequest={provider.priceRequest}
+                  listing={schoolPath(provider)}
                   size="sm"
-                  className="shrink-0"
-                  onClick={() => onRemove(provider.id)}
-                  aria-label={t('removeAria', { name: provider.name })}
-                >
-                  {t('remove')}
+                  className="w-full"
+                />
+                <Button asChild variant="secondary" size="sm" className="w-full">
+                  <Link href={schoolPath(provider)}>{t('viewProfile')}</Link>
                 </Button>
-              </div>
-              <dl className="grid gap-2 text-small">
-                <Fact label={t('category')} value={provider.categories.join(', ')} />
-                <Fact
-                  label={t('language')}
-                  value={provider.languages
-                    .map((language) => t(`languages.${language}`))
-                    .join(' · ')}
-                />
-                <Fact label={t('serviceArea')} value={provider.serviceArea} />
-                <Fact
-                  label={t('rate')}
-                  value={t('rateValue', { amount: formatSek(provider.hourlyRateSek, locale) })}
-                />
-                <Fact label={t('fee')} value={t('feeValue')} />
-                <Fact
-                  label={t('availability')}
-                  value={
-                    provider.nextSlotAt
-                      ? formatDate(provider.nextSlotAt, locale)
-                      : t('noAvailability')
-                  }
-                />
-                <Fact
-                  label={t('bookingMode')}
-                  value={t(
-                    `bookingModes.${provider.bookingMode === 'request' ? 'request' : 'instant'}`,
-                  )}
-                />
-                <Fact
-                  label={t('cancellation')}
-                  value={
-                    provider.cancellationPolicyTier
-                      ? t(`policies.${provider.cancellationPolicyTier}`)
-                      : t('policyUnknown')
-                  }
-                />
-                <Fact
-                  label={t('reviews')}
-                  value={
-                    provider.reviewSummary.averageRating === null
-                      ? t('noReviews')
-                      : t('reviewsValue', {
-                          average: formatNumber(provider.reviewSummary.averageRating, locale),
-                          count: provider.reviewSummary.count,
-                        })
-                  }
-                />
-              </dl>
-              <Button asChild variant="secondary" size="sm" className="w-full">
-                <Link href={`/instructors/${encodeURIComponent(provider.id)}`}>
-                  {t('viewProfile')}
-                </Link>
-              </Button>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </CardContent>
     </Card>
@@ -131,16 +150,27 @@ function Fact({ label, value }: { label: string; value: string }) {
   );
 }
 
-function formatSek(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
-    style: 'currency',
-    currency: 'SEK',
-    maximumFractionDigits: 0,
-  }).format(amount);
+function PublishedPricesFact({
+  label,
+  prices,
+  heavyOnly = false,
+}: {
+  label: string;
+  prices: NonNullable<InstructorFilteredItem['publishedPrices']>;
+  heavyOnly?: boolean;
+}) {
+  return (
+    <div className="grid gap-1 border-b border-border/70 pb-2 last:border-b-0 last:pb-0">
+      <dt className="text-caption uppercase tracking-[0.1em] text-muted-foreground">{label}</dt>
+      <dd className="min-w-0">
+        <PublishedPriceList prices={prices} heavyOnly={heavyOnly} />
+      </dd>
+    </div>
+  );
 }
 
 function formatNumber(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     maximumFractionDigits: 1,
   }).format(amount);
 }
@@ -148,7 +178,7 @@ function formatNumber(amount: number, locale: string): string {
 function formatDate(iso: string, locale: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeZone: 'Europe/Stockholm',
   }).format(date);

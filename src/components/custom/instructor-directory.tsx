@@ -1,12 +1,15 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { categoryChipLabel } from '@/components/custom/instructor-preview';
 import { MAX_COMPARISON_ITEMS, ProviderComparison } from '@/components/custom/provider-comparison';
-import { Badge } from '@/components/ui/badge';
+import { SchoolContactActions } from '@/components/custom/school-contact-button';
+import {
+  SCHOOL_LISTING_GRID_CLASS,
+  SchoolListingCard,
+} from '@/components/custom/school-listing-card';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -22,7 +25,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { type LocationStatus, useUserLocation } from '@/hooks/use-user-location';
 import { apiFetch } from '@/lib/api-client';
+import { nearestKnownCity } from '@/lib/business/geo';
 import {
+  HEAVY_FILTERS,
+  type HeavyFilter,
   LICENCE_CATEGORY_CODES,
   type LicenceCategoryCode,
 } from '@/lib/business/licence-categories';
@@ -34,7 +40,7 @@ import {
 } from '@/lib/contracts/instructors';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
-type SortMode = 'default' | 'distance';
+type SortMode = 'default' | 'distance' | 'lessonPrice' | 'packagePrice';
 
 // Local mirror of the typed filter spec, derived from URL state. The island
 // also keeps a parallel `initialCities` array so the city dropdown is populated
@@ -56,6 +62,7 @@ type Filters = {
   sort: SortMode;
   providerRole: 'INSTRUCTOR' | 'HANDLEDARE' | '';
   affiliation: 'school' | 'independent' | 'all' | '';
+  heavy: HeavyFilter | '';
 };
 
 const EMPTY_FILTERS: Filters = {
@@ -72,6 +79,7 @@ const EMPTY_FILTERS: Filters = {
   sort: 'default',
   providerRole: '',
   affiliation: '',
+  heavy: '',
 };
 
 // Radix `<Select.Item value="">` throws on hydration — use a non-empty
@@ -86,8 +94,12 @@ type Status = 'loading' | 'ready' | 'empty' | 'error' | 'invalid';
 
 export function InstructorDirectory({
   initialFilters,
+  heavyScope = false,
 }: {
   initialFilters?: Partial<Filters>;
+  // The heavy-vehicle page stays on truck, bus and YKB schools. Clearing
+  // filters returns to that list instead of the whole catalogue.
+  heavyScope?: boolean;
 } = {}) {
   const router = useRouter();
   const pathname = usePathname();
@@ -131,6 +143,8 @@ export function InstructorDirectory({
   // happens only when `onLocationRequest` is wired to its `request()` from
   // the user clicking "Use my location".
   const location = useUserLocation();
+  const requestLocation = location.request;
+  const resetLocation = location.reset;
 
   // Stable, sorted query string snapshot used to key the fetch effect and to
   // build the URL when filters change.
@@ -146,18 +160,21 @@ export function InstructorDirectory({
   // valid source of truth is the URL itself.
   useEffect(() => {
     const sp = new URLSearchParams(searchParams.toString());
-    setFilters(filtersFromSearchParams(sp) ?? EMPTY_FILTERS);
+    const parsed = filtersFromSearchParams(sp);
+    if (parsed) {
+      setFilters(parsed);
+      return;
+    }
+    const seed = initialFiltersRef.current;
+    if (seed && Object.keys(seed).length > 0) {
+      setFilters({ ...EMPTY_FILTERS, ...seed });
+      return;
+    }
+    setFilters(EMPTY_FILTERS);
   }, [searchParams]);
 
-  // Keep the geolocation badge in sync with the URL: when the learner clears
-  // their coordinates via "Rensa filter" / manual URL edit, reset the hook back
-  // to `idle` so the next click re-prompts cleanly instead of showing a stale
-  // "granted" badge for a location no longer in flight.
-  useEffect(() => {
-    if (filters.lat == null && filters.lng == null && location.status === 'granted') {
-      location.reset();
-    }
-  }, [filters.lat, filters.lng, location]);
+  // Do not reset the hook whenever `location` changes identity. That raced
+  // the granted write and cleared a successful fix before lat/lng landed.
 
   // Run the data fetch whenever the canonical query string changes. We track
   // liveness with `active` so an in-flight response from a stale query can't
@@ -235,9 +252,12 @@ export function InstructorDirectory({
   );
 
   const clearFilters = useCallback(() => {
-    setFilters(EMPTY_FILTERS);
-    router.replace(pathname, { scroll: false });
-  }, [pathname, router]);
+    resetLocation();
+    const next: Filters = heavyScope ? { ...EMPTY_FILTERS, heavy: 'all' } : EMPTY_FILTERS;
+    setFilters(next);
+    const qs = buildQueryString(next);
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [heavyScope, pathname, resetLocation, router]);
 
   const toggleComparison = useCallback((id: string) => {
     setComparisonLimitReached(false);
@@ -261,8 +281,8 @@ export function InstructorDirectory({
   const showingCurrentResults = status === 'ready' && loadedQuery === queryString;
 
   const onLocationRequest = useCallback(() => {
-    location.request();
-  }, [location]);
+    requestLocation();
+  }, [requestLocation]);
 
   // When the hook resolves to `granted`, write the coords into filters so the
   // `?lat=…&lng=…` URL becomes canonical (shareable, bookmarkable, refresh-
@@ -274,7 +294,15 @@ export function InstructorDirectory({
     const grantedLng = location.coords.longitude;
     setFilters((curr) => {
       if (curr.lat === grantedLat && curr.lng === grantedLng) return curr;
-      const next: Filters = { ...curr, lat: grantedLat, lng: grantedLng };
+      const city = curr.city || nearestKnownCity(grantedLat, grantedLng);
+      const next: Filters = {
+        ...curr,
+        lat: grantedLat,
+        lng: grantedLng,
+        sort: 'distance',
+        ...(city ? { city } : {}),
+        ...(curr.nearKm === '' ? { nearKm: 40 } : {}),
+      };
       replaceUrl(next);
       return next;
     });
@@ -297,10 +325,18 @@ export function InstructorDirectory({
           onNearKmChange={(value) => updateFilters({ nearKm: value })}
           onSortChange={(value) => updateFilters({ sort: value })}
           onAffiliationChange={(value) => updateFilters({ affiliation: value })}
+          onHeavyChange={(value) => updateFilters({ heavy: value })}
+          heavyScope={heavyScope}
           onLocationRequest={onLocationRequest}
-          onClearGeolocation={() =>
-            updateFilters({ lat: null, lng: null, sort: 'default', nearKm: '' })
-          }
+          onClearGeolocation={() => {
+            resetLocation();
+            updateFilters({
+              lat: null,
+              lng: null,
+              sort: filters.sort === 'distance' ? 'default' : filters.sort,
+              nearKm: '',
+            });
+          }}
         />
 
         {hasAnyFilter && (
@@ -324,6 +360,7 @@ export function InstructorDirectory({
             providers={comparisonItems}
             onRemove={toggleComparison}
             onClear={() => setComparisonIds([])}
+            heavyScope={heavyScope}
           />
         ) : null}
         <div aria-live="polite" className="min-h-5 text-small text-muted-foreground">
@@ -338,6 +375,7 @@ export function InstructorDirectory({
             items={items}
             comparisonIds={comparisonIds}
             onToggleComparison={toggleComparison}
+            heavyScope={heavyScope}
           />
         )}
       </Suspense>
@@ -361,6 +399,8 @@ function FilterBar({
   onNearKmChange,
   onSortChange,
   onAffiliationChange,
+  onHeavyChange,
+  heavyScope = false,
   onLocationRequest,
   onClearGeolocation,
 }: {
@@ -377,6 +417,8 @@ function FilterBar({
   onNearKmChange: (value: number | '') => void;
   onSortChange: (value: SortMode) => void;
   onAffiliationChange: (value: 'school' | 'independent' | 'all' | '') => void;
+  onHeavyChange: (value: HeavyFilter | '') => void;
+  heavyScope?: boolean;
   onLocationRequest: () => void;
   onClearGeolocation: () => void;
 }) {
@@ -391,31 +433,33 @@ function FilterBar({
   return (
     <Card className="surface-panel border-border bg-card">
       <CardContent className="flex min-w-0 flex-col gap-6 p-6">
-        <div className="flex flex-col gap-2">
-          <p className="text-eyebrow">{tr('categoryLabel')}</p>
-          <div className="flex flex-wrap gap-2">
-            {LICENCE_CATEGORY_CODES.map((code) => {
-              const active = filters.categories.includes(code);
-              return (
-                <Button
-                  key={code}
-                  type="button"
-                  variant={active ? 'secondary' : 'outline'}
-                  size="sm"
-                  aria-pressed={active}
-                  className={
-                    active
-                      ? 'border border-brand-500/40 bg-brand-100 text-brand-700 shadow-sm hover:bg-brand-200 dark:bg-brand-900 dark:text-brand-300'
-                      : undefined
-                  }
-                  onClick={() => onToggleCategory(code)}
-                >
-                  {tr(`category.${code}`)}
-                </Button>
-              );
-            })}
+        {heavyScope ? null : (
+          <div className="flex flex-col gap-2">
+            <p className="text-eyebrow">{tr('categoryLabel')}</p>
+            <div className="flex flex-wrap gap-2">
+              {LICENCE_CATEGORY_CODES.map((code) => {
+                const active = filters.categories.includes(code);
+                return (
+                  <Button
+                    key={code}
+                    type="button"
+                    variant={active ? 'secondary' : 'outline'}
+                    size="sm"
+                    aria-pressed={active}
+                    className={
+                      active
+                        ? 'border border-brand-500/40 bg-brand-100 text-brand-700 shadow-sm hover:bg-brand-200 dark:bg-brand-900 dark:text-brand-300'
+                        : undefined
+                    }
+                    onClick={() => onToggleCategory(code)}
+                  >
+                    {categoryChipLabel(tr(`category.${code}`), code)}
+                  </Button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:items-end">
           <div className="flex min-w-0 flex-col gap-2">
@@ -438,55 +482,59 @@ function FilterBar({
             </Select>
           </div>
 
-          <div className="flex min-w-0 flex-col gap-2">
-            <Label htmlFor="min-rate-input">{tr('minRateLabel')}</Label>
-            <div className="relative">
-              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
-                {tr('rateSuffixShort')}
-              </span>
-              <Input
-                id="min-rate-input"
-                type="number"
-                inputMode="numeric"
-                min={1}
-                step={1}
-                value={filters.minRate}
-                onChange={(event) => {
-                  const raw = event.target.value;
-                  onMinRateChange(raw === '' ? '' : Number(raw));
-                }}
-                className="bg-background pl-12"
-                placeholder={tr('minRatePlaceholder')}
-                aria-invalid={hasInvalidRateRange}
-                aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
-              />
-            </div>
-          </div>
+          {heavyScope ? null : (
+            <>
+              <div className="flex min-w-0 flex-col gap-2">
+                <Label htmlFor="min-rate-input">{tr('minRateLabel')}</Label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
+                    {tr('rateSuffixShort')}
+                  </span>
+                  <Input
+                    id="min-rate-input"
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    step={1}
+                    value={filters.minRate}
+                    onChange={(event) => {
+                      const raw = event.target.value;
+                      onMinRateChange(raw === '' ? '' : Number(raw));
+                    }}
+                    className="bg-background pl-12"
+                    placeholder={tr('minRatePlaceholder')}
+                    aria-invalid={hasInvalidRateRange}
+                    aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
+                  />
+                </div>
+              </div>
 
-          <div className="flex min-w-0 flex-col gap-2">
-            <Label htmlFor="max-rate-input">{tr('maxRateLabel')}</Label>
-            <div className="relative">
-              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
-                {tr('rateSuffixShort')}
-              </span>
-              <Input
-                id="max-rate-input"
-                type="number"
-                inputMode="numeric"
-                min={1}
-                step={1}
-                value={filters.maxRate}
-                onChange={(event) => {
-                  const raw = event.target.value;
-                  onMaxRateChange(raw === '' ? '' : Number(raw));
-                }}
-                className="bg-background pl-12"
-                placeholder={tr('maxRatePlaceholder')}
-                aria-invalid={hasInvalidRateRange}
-                aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
-              />
-            </div>
-          </div>
+              <div className="flex min-w-0 flex-col gap-2">
+                <Label htmlFor="max-rate-input">{tr('maxRateLabel')}</Label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-caption text-muted-foreground">
+                    {tr('rateSuffixShort')}
+                  </span>
+                  <Input
+                    id="max-rate-input"
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    step={1}
+                    value={filters.maxRate}
+                    onChange={(event) => {
+                      const raw = event.target.value;
+                      onMaxRateChange(raw === '' ? '' : Number(raw));
+                    }}
+                    className="bg-background pl-12"
+                    placeholder={tr('maxRatePlaceholder')}
+                    aria-invalid={hasInvalidRateRange}
+                    aria-describedby={hasInvalidRateRange ? 'rate-range-error' : undefined}
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="flex min-w-0 flex-col gap-2">
             <Label htmlFor="rating-select">{tr('ratingLabel')}</Label>
@@ -556,6 +604,28 @@ function FilterBar({
             </Select>
           </div>
 
+          {heavyScope ? (
+            <div className="flex min-w-0 flex-col gap-2">
+              <Label htmlFor="heavy-select">{tr('heavyLabel')}</Label>
+              <Select
+                value={filters.heavy === '' ? 'all' : filters.heavy}
+                onValueChange={(value) => {
+                  onHeavyChange(HEAVY_FILTERS.find((filter) => filter === value) ?? 'all');
+                }}
+              >
+                <SelectTrigger id="heavy-select" className="bg-background">
+                  <SelectValue placeholder={tr('heavyAllVehicles')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{tr('heavyAllVehicles')}</SelectItem>
+                  <SelectItem value="truck">{tr('heavyTruck')}</SelectItem>
+                  <SelectItem value="bus">{tr('heavyBus')}</SelectItem>
+                  <SelectItem value="ykb">{tr('heavyYkb')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          ) : null}
+
           <div className="flex min-w-0 flex-wrap items-center gap-3 self-end sm:pb-0.5">
             <Switch
               id="english-switch"
@@ -618,15 +688,19 @@ function FilterBar({
               <Label htmlFor="sort-select">{tr('sortLabel')}</Label>
               <Select
                 value={filters.sort}
-                onValueChange={(value) =>
-                  onSortChange(value === 'distance' ? 'distance' : 'default')
-                }
+                onValueChange={(value) => onSortChange(toSortMode(value))}
               >
                 <SelectTrigger id="sort-select" className="bg-background">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="default">{tr('sortNewest')}</SelectItem>
+                  {heavyScope ? null : (
+                    <>
+                      <SelectItem value="lessonPrice">{tr('sortLessonPrice')}</SelectItem>
+                      <SelectItem value="packagePrice">{tr('sortPackagePrice')}</SelectItem>
+                    </>
+                  )}
                   <SelectItem value="distance" disabled={!hasLocation}>
                     {tr('sortNearest')}
                   </SelectItem>
@@ -653,6 +727,8 @@ function locationStatusCopy(
       return tr('locationStatus.granted');
     case 'denied':
       return tr('locationStatus.denied');
+    case 'failed':
+      return tr('locationStatus.failed');
     case 'unsupported':
       return tr('locationStatus.unsupported');
   }
@@ -664,34 +740,42 @@ function CardGrid({
   items,
   comparisonIds,
   onToggleComparison,
+  heavyScope = false,
 }: {
   items: InstructorFilteredItem[];
   comparisonIds: string[];
   onToggleComparison: (id: string) => void;
+  heavyScope?: boolean;
 }) {
   const tr = useTranslations('instructorDirectory');
   return (
-    <ul className="grid min-w-0 gap-4 sm:grid-cols-2">
+    <ul className={SCHOOL_LISTING_GRID_CLASS}>
       {items.map((row) => (
         // `data-next-slot-at` carries a null-safe sort key the eventual matcher
         // can scrape without re-parsing the row. Items with no upcoming slot
         // emit an empty string so a missing key means "free to interpret".
-        <li key={row.id} data-next-slot-at={row.nextSlotAt ?? ''}>
+        <li
+          key={row.id}
+          data-next-slot-at={row.nextSlotAt ?? ''}
+          className="grid h-full min-w-0 grid-rows-[1fr_auto] gap-2"
+        >
+          <SchoolListingCard row={row} heavyScope={heavyScope} />
           <div className="grid min-w-0 gap-2">
-            <Link
-              href={schoolPath(row)}
-              className="marketplace-provider-card group block min-w-0 rounded-xl outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-brand-500/60"
-              data-provider-type={row.providerType}
-            >
-              <InstructorCard row={row} />
-            </Link>
+            <SchoolContactActions
+              name={row.name}
+              contact={row.contact}
+              priceRequest={row.priceRequest}
+              listing={schoolPath(row)}
+              size="sm"
+              className="w-full"
+            />
             <Button
               type="button"
               variant={comparisonIds.includes(row.id) ? 'secondary' : 'outline'}
               size="sm"
               aria-pressed={comparisonIds.includes(row.id)}
               onClick={() => onToggleComparison(row.id)}
-              className="w-full"
+              className="w-full min-h-11"
             >
               {comparisonIds.includes(row.id)
                 ? tr('comparison.removeFromComparison')
@@ -704,220 +788,24 @@ function CardGrid({
   );
 }
 
-function InstructorCard({ row }: { row: InstructorFilteredItem }) {
-  const tr = useTranslations('instructorDirectory');
-  const locale = useLocale();
-  const trTier = useTranslations('cancellationPolicy.tierBadge');
-  const trBooking = useTranslations('bookingForm');
-  const showTimes = row.surfaces ? row.surfaces.availabilityDisplay : row.bookingMode !== 'contact';
-  const nextSlotPill =
-    showTimes && row.nextSlotAt ? formatNextSlotPill(row.nextSlotAt, tr, locale) : null;
-  const distancePill =
-    row.distanceKm != null
-      ? tr('distancePill', { km: formatNumber(row.distanceKm, locale) })
-      : null;
-  // Tier pill surfaces the cancellation tier the instructor publishes on
-  // their profile. Falls back to "flexible" on a missing tier field
-  // (a pre-tier row) so the page never shows an empty pill.
-  // Directory-only ('contact') listings show no cancellation-policy pill:
-  // no booking flows through DriveLinkUp, and an unconfirmed tier would
-  // misrepresent the school's own terms.
-  const directoryOnly = row.surfaces?.directoryOnly ?? row.bookingMode === 'contact';
-  const tierBadge =
-    directoryOnly || row.showCancellationPolicy === false
-      ? null
-      : tierBadgeLabel(row.cancellationPolicyTier, trTier);
-  // Badge follows authorization surfaces when the API sent them, so a
-  // withdrawn scope cannot keep an instant/request label on the card.
-  const bookingMode: 'instant' | 'request' | 'contact' = row.surfaces
-    ? row.surfaces.directoryOnly
-      ? 'contact'
-      : row.surfaces.requestToBook && !row.surfaces.transactionalBooking
-        ? 'request'
-        : 'instant'
-    : row.bookingMode === 'request'
-      ? 'request'
-      : row.bookingMode === 'contact'
-        ? 'contact'
-        : 'instant';
-  const bookingModeLabel = trBooking(
-    bookingMode === 'request'
-      ? 'bookingModeLabel.request'
-      : bookingMode === 'contact'
-        ? 'bookingModeLabel.contact'
-        : 'bookingModeLabel.instant',
-  );
-  const languageLabel = row.languages.map((language) => tr(`language.${language}`)).join(' · ');
-  const reviewLabel =
-    row.reviewSummary.averageRating === null
-      ? row.googleRating != null
-        ? tr('reviewsGoogleSummary', {
-            count: row.googleReviewCount ?? 0,
-            average: formatNumber(row.googleRating, locale),
-          })
-        : tr('reviewsNone')
-      : tr('reviewsSummary', {
-          count: row.reviewSummary.count,
-          average: formatNumber(row.reviewSummary.averageRating, locale),
-        });
-  return (
-    <Card className="surface-card lift h-full border-border bg-card transition-colors duration-200 group-hover:border-brand-500/40 group-hover:shadow-md">
-      <CardContent className="flex h-full min-w-0 flex-col gap-5 p-6">
-        <div className="marketplace-directory-card-header flex min-w-0 flex-wrap items-start justify-between gap-4">
-          <div className="flex min-w-0 flex-1 max-sm:flex-auto items-center gap-3">
-            {row.photoUrl ? (
-              <Image
-                src={row.photoUrl}
-                alt={tr('portraitAlt', { name: row.name })}
-                width={48}
-                height={48}
-                unoptimized
-                className="marketplace-provider-avatar size-12 shrink-0 rounded-full border border-brand-500/35 bg-brand-100 object-cover dark:bg-brand-900"
-              />
-            ) : (
-              <div
-                aria-hidden
-                className="marketplace-provider-avatar flex size-12 shrink-0 items-center justify-center rounded-full border border-brand-500/35 bg-brand-100 font-display text-sm font-semibold text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-              >
-                {row.name.slice(0, 1).toUpperCase()}
-              </div>
-            )}
-            <div className="min-w-0">
-              <p className="dlu-type">
-                {row.providerType === 'SCHOOL' ? tr('typeSchool') : tr('typeInstructor')}
-              </p>
-              <div className="break-words font-display text-base font-semibold text-foreground">
-                {row.name}
-              </div>
-              <div className="flex flex-wrap items-center gap-1.5 text-small text-muted-foreground">
-                <span>{row.city}</span>
-                {tierBadge ? (
-                  <span className="inline-flex items-center rounded-md border border-border bg-background px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
-                    {tierBadge.label}
-                  </span>
-                ) : null}
-                {distancePill && (
-                  <span className="rounded-md border border-brand-500/40 bg-brand-100 px-2 text-[11px] font-medium text-brand-700 dark:bg-brand-900 dark:text-brand-300">
-                    {distancePill}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-          <Badge
-            variant="secondary"
-            className="marketplace-rate-badge max-w-full shrink-0 whitespace-normal bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
-          >
-            {formatSek(row.hourlyRateSek, locale, tr('rateSuffix'))}
-          </Badge>
-        </div>
-        {bookingModeLabel ? (
-          <p className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-            <span
-              className={
-                bookingMode === 'request'
-                  ? 'inline-flex items-center rounded-md border border-brand-500/40 bg-brand-100 px-2 py-0.5 text-brand-700 dark:bg-brand-900 dark:text-brand-300'
-                  : 'inline-flex items-center rounded-md border border-border bg-muted px-2 py-0.5 text-muted-foreground'
-              }
-            >
-              {bookingModeLabel}
-            </span>
-          </p>
-        ) : null}
-
-        <div className="grid min-w-0 gap-3 rounded-lg border border-border bg-muted p-4 sm:grid-cols-2">
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('nextAvailableLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {nextSlotPill?.whenLabel ?? tr('noUpcomingSlot')}
-            </span>
-          </div>
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('languageLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {languageLabel}
-            </span>
-          </div>
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('serviceAreaLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {row.serviceArea}
-            </span>
-          </div>
-          <div className="grid min-w-0 gap-1">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('verificationLabel')}
-            </span>
-            <span className="min-w-0 break-words text-small font-medium text-foreground">
-              {tr(`verification.${row.verificationStatus}`)}
-            </span>
-          </div>
-          <div className="grid min-w-0 gap-1 sm:col-span-2">
-            <span className="text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
-              {tr('reviewsLabel')}
-            </span>
-            <span className="text-small font-medium text-foreground">{reviewLabel}</span>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-1.5">
-          {row.categories.map((code) => (
-            <Badge key={code} variant="outline" className="border-border text-foreground">
-              {tr(`category.${code}`)}
-            </Badge>
-          ))}
-        </div>
-
-        <div className="mt-auto flex items-center justify-between border-t border-border pt-4 text-small">
-          <span className="min-w-0 font-medium text-foreground">{tr('profileCta')}</span>
-          <span
-            aria-hidden
-            className="text-brand-700 transition-transform group-hover:translate-x-0.5 dark:text-brand-300"
-          >
-            →
-          </span>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-// `trTier` is namespaced under `cancellationPolicy.tierBadge`; the
-// `keyof` shape matches the contract enum so we can sanity-check the
-// tier argument before calling the translator with a non-existent key.
-function tierBadgeLabel(
-  tier: string | null,
-  trTier: ReturnType<typeof useTranslations<'cancellationPolicy.tierBadge'>>,
-): { label: string } | null {
-  if (!tier) return null;
-  if (tier !== 'flexible' && tier !== 'moderate' && tier !== 'strict') return null;
-  return { label: trTier(tier) };
-}
-
 function CardGridSkeleton() {
   return (
-    <ul className="grid gap-4 sm:grid-cols-2">
-      {['directory-skeleton-a', 'directory-skeleton-b'].map((skeletonId) => (
-        <li key={skeletonId}>
-          <Card className="surface-card marketplace-directory-card border-border">
-            <CardContent className="flex flex-col gap-5 p-6">
-              <div className="flex items-center gap-3">
-                <Skeleton className="size-12 rounded-full" />
-                <div className="flex flex-1 flex-col gap-2">
-                  <Skeleton className="h-4 w-2/3" />
-                  <Skeleton className="h-3 w-1/3" />
-                </div>
-              </div>
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-5/6" />
-            </CardContent>
-          </Card>
+    <ul className={SCHOOL_LISTING_GRID_CLASS}>
+      {[
+        'directory-skeleton-a',
+        'directory-skeleton-b',
+        'directory-skeleton-c',
+        'directory-skeleton-d',
+      ].map((skeletonId) => (
+        <li key={skeletonId} aria-hidden>
+          <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white sm:rounded-[1.25rem] dark:bg-card">
+            <Skeleton className="aspect-[5/3] w-full rounded-none sm:aspect-[4/3]" />
+            <div className="flex flex-col gap-3 p-4">
+              <Skeleton className="h-3 w-1/4" />
+              <Skeleton className="h-5 w-3/4" />
+              <Skeleton className="h-7 w-1/3" />
+            </div>
+          </div>
         </li>
       ))}
     </ul>
@@ -982,12 +870,19 @@ function buildQueryString(filters: Filters): string {
   if (typeof filters.nearKm === 'number' && Number.isFinite(filters.nearKm)) {
     params.set('nearKm', String(filters.nearKm));
   }
-  if (filters.sort === 'distance') params.set('sort', 'distance');
+  if (filters.sort !== 'default') params.set('sort', filters.sort);
   if (filters.providerRole) params.set('providerRole', filters.providerRole);
   if (filters.affiliation === 'school' || filters.affiliation === 'independent') {
     params.set('affiliation', filters.affiliation);
   }
+  if (filters.heavy) params.set('heavy', filters.heavy);
   return params.toString();
+}
+
+function toSortMode(value: string | undefined): SortMode {
+  return value === 'distance' || value === 'lessonPrice' || value === 'packagePrice'
+    ? value
+    : 'default';
 }
 
 function normaliseFromUrl(q: InstructorQuery): Filters {
@@ -1002,9 +897,10 @@ function normaliseFromUrl(q: InstructorQuery): Filters {
     lat: typeof q.lat === 'number' ? q.lat : null,
     lng: typeof q.lng === 'number' ? q.lng : null,
     nearKm: typeof q.nearKm === 'number' ? q.nearKm : '',
-    sort: q.sort === 'distance' ? 'distance' : 'default',
+    sort: toSortMode(q.sort),
     providerRole: q.providerRole ?? '',
     affiliation: q.affiliation === 'school' || q.affiliation === 'independent' ? q.affiliation : '',
+    heavy: q.heavy ?? '',
   };
 }
 
@@ -1047,10 +943,11 @@ function hasActiveFilter(f: Filters): boolean {
     f.lat != null ||
     f.lng != null ||
     f.nearKm !== '' ||
-    f.sort === 'distance' ||
+    f.sort !== 'default' ||
     f.providerRole !== '' ||
     f.affiliation === 'school' ||
-    f.affiliation === 'independent'
+    f.affiliation === 'independent' ||
+    f.heavy !== ''
   );
 }
 
@@ -1060,75 +957,4 @@ function isInvalidRateRange(filters: Filters): boolean {
     typeof filters.maxRate === 'number' &&
     filters.minRate > filters.maxRate
   );
-}
-
-// Native-Intl pill formatter. Within a week → "Weekday 18:30"; further out
-// the pill stays compact via "{monthShort} {day} {time}". The caller passes
-// the matching i18n translator so the label text remains in the
-// operator-approved copy (Swedish "fre 18:30", English "Fri 6:30 PM", …).
-function formatNextSlotPill(
-  iso: string,
-  t: ReturnType<typeof useTranslations<'instructorDirectory'>>,
-  locale: string,
-): { whenLabel: string; iso: string } {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return { whenLabel: t('slotLabel'), iso };
-  const intlLocale = locale === 'sv' ? 'sv-SE' : 'en-GB';
-  const dateOptions = { timeZone: 'Europe/Stockholm' } as const;
-  const day = new Intl.DateTimeFormat(intlLocale, { ...dateOptions, day: 'numeric' }).format(date);
-  const monthShort = new Intl.DateTimeFormat(intlLocale, {
-    ...dateOptions,
-    month: 'short',
-  }).format(date);
-  const time = new Intl.DateTimeFormat(intlLocale, {
-    ...dateOptions,
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(date);
-  const weekday = new Intl.DateTimeFormat(intlLocale, { ...dateOptions, weekday: 'short' }).format(
-    date,
-  );
-  const today = new Date();
-  const todayKey = formatDayKey(today.toISOString());
-  const todayParts = todayKey.split('-').map(Number);
-  const todayAtNoon = Date.UTC(
-    todayParts[0] ?? 0,
-    (todayParts[1] ?? 1) - 1,
-    todayParts[2] ?? 1,
-    12,
-  );
-  const dateKey = formatDayKey(iso);
-  const dateParts = dateKey.split('-').map(Number);
-  const dateAtNoon = Date.UTC(dateParts[0] ?? 0, (dateParts[1] ?? 1) - 1, dateParts[2] ?? 1, 12);
-  const diffDays = Math.round((dateAtNoon - todayAtNoon) / (24 * 60 * 60 * 1000));
-  const when =
-    diffDays >= 0 && diffDays < 7
-      ? t('slotTimeAndWeekday', { weekday, time })
-      : `${t('slotMonthDay', { monthShort, day })} · ${t('slotTime', { time })}`;
-  return { whenLabel: when, iso };
-}
-
-function formatDayKey(iso: string): string {
-  const date = new Date(iso);
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Stockholm',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).formatToParts(date);
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  return `${values.year ?? '0000'}-${values.month ?? '00'}-${values.day ?? '00'}`;
-}
-
-function formatNumber(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
-    maximumFractionDigits: 1,
-  }).format(value);
-}
-
-function formatSek(value: number, locale: string, suffix: string): string {
-  if (!value) {
-    return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  }
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(value)} ${suffix}`;
 }

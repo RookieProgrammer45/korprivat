@@ -13,6 +13,7 @@ import {
   CompletedLessonsResponse,
   type CompletedLessonsResponse as CompletedLessonsResponseType,
 } from '@/lib/contracts/completed-lessons';
+import { intlLocale } from '@/lib/intl-locale';
 
 export function CompletedLessonsCard() {
   const t = useTranslations('dashboard.completedLessons');
@@ -133,7 +134,7 @@ function LessonRow({
 }
 
 function formatDate(iso: string, locale: string) {
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeZone: 'Europe/Stockholm',
   }).format(new Date(iso));

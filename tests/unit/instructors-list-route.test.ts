@@ -10,13 +10,19 @@ const {
   mockSlotFindMany,
   mockLicenseFindMany,
   mockReviewFindMany,
+  mockGoogleReviewFindMany,
   mockGetSessionUser,
+  mockAuthzFindMany,
+  mockMembershipFindMany,
 } = vi.hoisted(() => ({
   mockInstructorFindMany: vi.fn(),
   mockSlotFindMany: vi.fn(),
   mockLicenseFindMany: vi.fn(),
   mockReviewFindMany: vi.fn(),
+  mockGoogleReviewFindMany: vi.fn(),
   mockGetSessionUser: vi.fn(),
+  mockAuthzFindMany: vi.fn(),
+  mockMembershipFindMany: vi.fn(),
 }));
 
 vi.mock('@/lib/db', () => ({
@@ -25,6 +31,9 @@ vi.mock('@/lib/db', () => ({
     availabilitySlot: { findMany: mockSlotFindMany },
     instructorLicense: { findMany: mockLicenseFindMany },
     review: { findMany: mockReviewFindMany },
+    googleReview: { findMany: mockGoogleReviewFindMany },
+    schoolAuthorizationEvent: { findMany: mockAuthzFindMany },
+    membership: { findMany: mockMembershipFindMany },
   },
 }));
 
@@ -61,6 +70,8 @@ function instructorRow(
     userId: string | null;
     cancellationPolicyTier: string | null;
     bookingMode: 'instant' | 'request' | null;
+    providerRole?: 'SCHOOL' | 'INSTRUCTOR' | 'HANDLEDARE' | null;
+    email?: string | null;
   }> = {},
 ) {
   return {
@@ -79,6 +90,8 @@ function instructorRow(
     userId: null,
     cancellationPolicyTier: 'flexible',
     bookingMode: 'instant',
+    providerRole: 'SCHOOL',
+    email: null,
     ...overrides,
   };
 }
@@ -120,9 +133,33 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     mockSlotFindMany.mockReset();
     mockLicenseFindMany.mockReset();
     mockReviewFindMany.mockReset();
+    mockGoogleReviewFindMany.mockReset();
+    mockAuthzFindMany.mockReset();
+    mockMembershipFindMany.mockReset();
+    mockMembershipFindMany.mockResolvedValue([]);
+    mockGetSessionUser.mockReset();
+    mockGetSessionUser.mockResolvedValue({ id: 'user_signed_in' });
     mockSlotFindMany.mockResolvedValue([]);
     mockLicenseFindMany.mockResolvedValue([]);
     mockReviewFindMany.mockResolvedValue([]);
+    mockGoogleReviewFindMany.mockResolvedValue([]);
+    mockAuthzFindMany.mockImplementation(
+      async (args: { where?: { listingId?: { in?: string[] } } }) => {
+        const ids = args.where?.listingId?.in ?? [];
+        return ids.map((listingId) => ({
+          listingId,
+          sequence: 1,
+          kind: 'grant',
+          scopes: ['availability_display'],
+          decisionVersion: 1,
+          actorUserId: 'rep-1',
+          evidenceRef: 'ev',
+          note: null,
+          idempotencyKey: `avail-${listingId}`,
+          createdAt: new Date('2026-10-23T00:00:00.000Z'),
+        }));
+      },
+    );
   });
 
   afterEach(() => {
@@ -145,9 +182,9 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req());
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: Array<{ id: string; nextSlotAt: string | null }> };
-    expect(body.items).toHaveLength(1);
-    expect(body.items[0]?.nextSlotAt).toBe('2030-01-15T18:30:00.000Z');
-    expect(body.items[0]).not.toHaveProperty('bookedHours');
+    const row = body.items.find((item) => item.id === instructorId);
+    expect(row?.nextSlotAt).toBe('2030-01-15T18:30:00.000Z');
+    expect(row).not.toHaveProperty('bookedHours');
     expect(mockSlotFindMany).toHaveBeenCalledOnce();
   });
 
@@ -161,7 +198,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req());
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: Array<{ id: string; nextSlotAt: string | null }> };
-    expect(body.items[0]?.nextSlotAt).toBeNull();
+    expect(body.items.find((item) => item.id === 'instructor_anna')?.nextSlotAt).toBeNull();
   });
 
   it('keeps the earliest startsAt per instructor when several slots are returned', async () => {
@@ -200,7 +237,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       cities: string[];
     };
     expect(body.items.every((i) => i.nextSlotAt === null)).toBe(true);
-    expect(body.cities).toEqual(['Göteborg', 'Stockholm']);
+    expect(body.cities).toEqual(expect.arrayContaining(['Göteborg', 'Stockholm', 'Oslo']));
   });
 
   it('returns safe profile facts with coarse verification and review aggregates', async () => {
@@ -225,16 +262,123 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     const res = await GET(req());
     expect(res.status).toBe(200);
     const body = (await res.json()) as {
-      items: Array<Record<string, unknown>>;
+      items: Array<Record<string, unknown> & { id: string }>;
     };
-    expect(body.items[0]).toMatchObject({
+    const row = body.items.find((item) => item.id === instructorId);
+    expect(row).toMatchObject({
       serviceArea: 'Södermalm + 15 km',
       languages: ['sv', 'en'],
       verificationStatus: 'verified',
       reviewSummary: { count: 2, averageRating: 4.5 },
-      bookingMode: 'request',
+      bookingMode: 'contact',
     });
-    expect(body.items[0]).not.toHaveProperty('userId');
+    expect(row).not.toHaveProperty('userId');
+  });
+
+  it('omits Google review bodies from list items', async () => {
+    const instructorId = 'school_globen';
+    mockInstructorFindMany.mockResolvedValueOnce([
+      instructorRow({
+        id: instructorId,
+        name: 'Globens Trafikskola AB',
+        userId: 'user_verified',
+      }),
+    ]);
+    mockLicenseFindMany.mockResolvedValue([{ userId: 'user_verified', status: 'VERIFIED' }]);
+    mockGoogleReviewFindMany.mockResolvedValueOnce([
+      {
+        id: 'rev-1',
+        instructorId,
+        authorName: 'Lilly Ask',
+        rating: 5,
+        comment: 'Bra skola',
+        relativeTime: 'för 2 månader sedan',
+      },
+    ]);
+
+    const res = await GET(req());
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as {
+      items: Array<{ id: string; googleReviews?: Array<Record<string, unknown>> }>;
+    };
+    expect(body.items.find((item) => item.id === instructorId)?.googleReviews).toBeUndefined();
+    expect(mockGoogleReviewFindMany).not.toHaveBeenCalled();
+  });
+
+  it('resolves school contact to mailto and never serializes email', async () => {
+    mockInstructorFindMany.mockResolvedValue([
+      instructorRow({
+        id: 'school_sjobo',
+        name: 'Sjöbo Trafikskola',
+        email: 'info@sjobotrafikskola.se',
+        bio: 'https://www.sjobotrafikskola.se',
+        userId: 'user_verified',
+      }),
+    ]);
+    mockLicenseFindMany.mockResolvedValue([{ userId: 'user_verified', status: 'VERIFIED' }]);
+
+    const res = await GET(req());
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as {
+      items: Array<Record<string, unknown> & { id: string }>;
+    };
+    const row = body.items.find((item) => item.id === 'school_sjobo');
+    expect(row).toMatchObject({
+      contact: { kind: 'inbox', href: 'mailto:info@sjobotrafikskola.se' },
+    });
+    expect(row).not.toHaveProperty('email');
+  });
+
+  it('hides payment surfaces for an instructor who is not part of a driving school', async () => {
+    mockAuthzFindMany.mockImplementation(
+      async (args: { where?: { listingId?: { in?: string[] } } }) => {
+        const ids = args.where?.listingId?.in ?? [];
+        return ids.map((listingId) => ({
+          listingId,
+          sequence: 1,
+          kind: 'grant',
+          scopes: ['availability_display', 'request_to_book', 'transactional_booking'],
+          decisionVersion: 1,
+          actorUserId: 'rep-1',
+          evidenceRef: 'ev',
+          note: null,
+          idempotencyKey: `grant-${listingId}`,
+          createdAt: new Date('2026-10-23T00:00:00.000Z'),
+        }));
+      },
+    );
+    mockInstructorFindMany.mockResolvedValueOnce([
+      instructorRow({ id: 'school_one', providerRole: 'SCHOOL' }),
+      instructorRow({
+        id: 'solo_instructor',
+        providerRole: 'INSTRUCTOR',
+        userId: 'user_solo',
+      }),
+    ]);
+
+    const res = await GET(req());
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as {
+      items: Array<{
+        id: string;
+        canCollectPayment?: boolean;
+        surfaces?: {
+          requestToBook: boolean;
+          transactionalBooking: boolean;
+          directoryOnly: boolean;
+        };
+      }>;
+    };
+    const school = body.items.find((item) => item.id === 'school_one');
+    const instructor = body.items.find((item) => item.id === 'solo_instructor');
+    expect(school).toMatchObject({
+      canCollectPayment: true,
+      surfaces: { requestToBook: true, transactionalBooking: true, directoryOnly: false },
+    });
+    expect(instructor).toMatchObject({
+      canCollectPayment: false,
+      surfaces: { requestToBook: false, transactionalBooking: false },
+    });
   });
 
   it('SC-10 hides the cancellation tier when enforcement is on and no policy is approved', async () => {
@@ -246,10 +390,12 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       mockSlotFindMany.mockResolvedValueOnce([]);
 
       const res = await GET(req());
-      const body = (await res.json()) as { items: Array<Record<string, unknown>> };
+      const body = (await res.json()) as {
+        items: Array<Record<string, unknown> & { id: string }>;
+      };
 
       expect(res.status).toBe(200);
-      expect(body.items[0]).toMatchObject({
+      expect(body.items.find((item) => item.id === 'instructor_erik')).toMatchObject({
         cancellationPolicyTier: null,
         showCancellationPolicy: false,
       });
@@ -299,10 +445,29 @@ describe('GET /api/instructors — next-open-slot projection', () => {
 
     expect(res.status).toBe(200);
     const where = mockInstructorFindMany.mock.calls[0]?.[0]?.where;
-    expect(whereField(where, 'city')).toBe('Stockholm');
+    expect(where).toEqual(
+      expect.objectContaining({
+        AND: expect.arrayContaining([
+          expect.objectContaining({
+            OR: expect.arrayContaining([{ city: { equals: 'Stockholm', mode: 'insensitive' } }]),
+          }),
+        ]),
+      }),
+    );
     expect(whereField(where, 'englishSpeaking')).toBe(true);
     expect(hourlyRateFromWhere(where)).toEqual({ gte: 500, lte: 600 });
     expect(whereField(where, 'OR')).toEqual([{ categories: { has: 'B' } }]);
+  });
+
+  it('does not treat a car listing as motorcycle when the search asks for A', async () => {
+    mockInstructorFindMany.mockResolvedValueOnce([instructorRow({ categories: ['B'] })]);
+    const res = await GET(req('?categories=A'));
+    expect(res.status).toBe(200);
+    expect(whereField(mockInstructorFindMany.mock.calls[0]?.[0]?.where, 'OR')).toEqual([
+      { categories: { has: 'A' } },
+    ]);
+    const body = (await res.json()) as { items: Array<{ id: string; categories: string[] }> };
+    expect(body.items.find((item) => item.id === 'instructor_erik')?.categories).toEqual(['B']);
   });
 
   it('keeps instructors at or above the inclusive minimum rating threshold', async () => {
@@ -421,7 +586,7 @@ describe('GET /api/instructors — next-open-slot projection', () => {
     expect(res.status).toBe(200);
     const body = (await res.json()) as { items: unknown[]; cities: string[] };
     expect(body.items).toEqual([]);
-    expect(body.cities).toEqual(['Stockholm']);
+    expect(body.cities).toEqual(expect.arrayContaining(['Stockholm', 'Oslo']));
   });
 
   it('rejects a minimum hourly rate above the maximum with the standard error envelope', async () => {
@@ -432,5 +597,27 @@ describe('GET /api/instructors — next-open-slot projection', () => {
       errors: { minRate: 'Minimum rate cannot exceed maximum rate' },
     });
     expect(mockInstructorFindMany).not.toHaveBeenCalled();
+  });
+
+  it('rejects an unsigned full-catalog list', async () => {
+    mockGetSessionUser.mockResolvedValueOnce(null);
+    const res = await GET(req());
+    expect(res.status).toBe(401);
+    expect(mockInstructorFindMany).not.toHaveBeenCalled();
+  });
+
+  it('rejects an unsigned filtered preview even when limit is 3', async () => {
+    mockGetSessionUser.mockResolvedValueOnce(null);
+    const res = await GET(req('?limit=3&city=Stockholm'));
+    expect(res.status).toBe(401);
+    expect(mockInstructorFindMany).not.toHaveBeenCalled();
+  });
+
+  it('allows an unsigned home teaser of at most three unfiltered listings', async () => {
+    mockGetSessionUser.mockResolvedValueOnce(null);
+    mockInstructorFindMany.mockResolvedValueOnce([instructorRow({ id: 'teaser' })]);
+    const res = await GET(req('?limit=3'));
+    expect(res.status).toBe(200);
+    expect(mockInstructorFindMany).toHaveBeenCalled();
   });
 });

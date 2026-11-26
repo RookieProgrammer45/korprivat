@@ -6,6 +6,11 @@ export const MIN_INSTRUCTOR_LICENSE_YEARS = 5;
 
 export type SignupPath = 'LEARNER' | 'SCHOOL' | 'INSTRUCTOR';
 
+/** Nordic launch: independent instructors join through a school, not as a solo listing. */
+export function isIndependentInstructorSignupOpen(): boolean {
+  return false;
+}
+
 export function ageYearsFromDateOfBirth(dateOfBirth: Date, now = new Date()): number {
   let age = now.getUTCFullYear() - dateOfBirth.getUTCFullYear();
   const monthDelta = now.getUTCMonth() - dateOfBirth.getUTCMonth();

@@ -2,6 +2,9 @@
   "mcpServers": {
     "lance": {
       "url": "https://api.lance.app/mcp"
+    },
+    "mobbin": {
+      "url": "https://api.mobbin.com/mcp"
     }
   }
 }

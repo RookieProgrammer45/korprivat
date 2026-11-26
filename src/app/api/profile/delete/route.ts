@@ -1,6 +1,6 @@
 //
 // Self-service account erasure for the signed-in user (GDPR art. 17 — the
-// right the /privacy page promises via support@drivelinkup.com, now wired as
+// right the /privacy page promises via frank@drivelinkup.com, now wired as
 // a button at the bottom of /profile). POST action-style route so the caller
 // can't trigger it with a navigational prefetch: it mutates + is destructive.
 //

@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
-import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { nordicCountryHasSchools } from '@/lib/discovery/nordic-catalogue';
+import { absoluteUrl, publicAlternatesFor } from '@/lib/seo/alternates';
+import { locationsForCountry } from '@/lib/seo/catalogue-locations';
+import { localePath } from '@/lib/seo/locale-path';
+import { marketCopy } from '@/lib/seo/market-copy';
 import {
   countryPath,
   displayName,
   isNordicCountry,
-  listLocationsForCountry,
   listRegions,
   locationPath,
   NORDIC_COUNTRIES,
@@ -28,20 +31,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isNordicCountry(country)) return { title: 'Not found' };
   const meta = NORDIC_COUNTRY_META[country];
   const t = await getTranslations('locationHub.meta');
+  const market = marketCopy(country);
   const path = countryPath(country);
-  const title = t('titleCountry', { country: meta.nameLocal });
-  const description = t('descriptionCountry', { country: meta.nameLocal });
+  const title = market
+    ? market.countryTitle(meta.nameLocal)
+    : t('titleCountry', { country: meta.nameLocal });
+  const description = market
+    ? market.countryDescription(meta.nameLocal)
+    : t('descriptionCountry', { country: meta.nameLocal });
   const brandedTitle = `${title} · ${siteName}`;
   return {
     title,
     description,
-    alternates: publicAlternates(path),
+    alternates: await publicAlternatesFor(path),
     openGraph: {
       type: 'website',
       siteName,
       title: brandedTitle,
       description,
-      url: absoluteUrl(path),
+      url: absoluteUrl(localePath(await getLocale(), path)),
     },
   };
 }
@@ -51,24 +59,36 @@ export default async function CountryLocationsPage({ params }: Props) {
   if (!isNordicCountry(country)) notFound();
   const meta = NORDIC_COUNTRY_META[country];
   const t = await getTranslations('locationHub');
+  const locale = await getLocale();
+  const href = (path: string) => localePath(locale, path);
+  const market = marketCopy(country);
   const regions = listRegions(country);
-  const cities = listLocationsForCountry(country).filter((l) => l.kind === 'city');
+  // Cities stay on the region page. Listing every city here made Germany
+  // one ~480 KB document. The sitemap still contains each city URL.
+  const cities =
+    regions.length === 0 ? locationsForCountry(country).filter((l) => l.kind === 'city') : [];
 
   return (
     <main className="container-page section">
       <header className="mx-auto flex max-w-3xl flex-col gap-3">
         <p className="text-eyebrow">
-          <Link className="underline underline-offset-4" href="/locations">
+          <Link className="underline underline-offset-4" href={href('/locations')}>
             {t('breadcrumbLocations')}
           </Link>
         </p>
-        <h1 className="font-display text-h1 leading-tight tracking-tight">
-          {t('headerTitleCountry', { name: meta.nameLocal })}
+        <h1 lang={market?.htmlLang} className="font-display text-h1 leading-tight tracking-tight">
+          {market
+            ? market.countryHeading(meta.nameLocal)
+            : t('headerTitleCountry', { name: meta.nameLocal })}
         </h1>
-        <p className="text-body-lg text-muted-foreground">
-          {country === 'se'
-            ? t('subtitleCountryLive', { name: meta.nameLocal })
-            : t('subtitleCountryExpansion', { name: meta.nameLocal })}
+        <p lang={market?.htmlLang} className="text-body-lg text-muted-foreground">
+          {market
+            ? market.countryDescription(meta.nameLocal)
+            : country === 'se'
+              ? t('subtitleCountryLive', { name: meta.nameLocal })
+              : nordicCountryHasSchools(country)
+                ? t('subtitleCountryCatalogue', { name: meta.nameLocal })
+                : t('subtitleCountryExpansion', { name: meta.nameLocal })}
         </p>
       </header>
 
@@ -78,25 +98,27 @@ export default async function CountryLocationsPage({ params }: Props) {
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
             {regions.map((r) => (
               <li key={r.slug}>
-                <Link className="underline underline-offset-4" href={locationPath(r)}>
+                <Link className="underline underline-offset-4" href={href(locationPath(r))}>
                   {displayName(r)}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-        <div>
-          <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
-          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-            {cities.map((c) => (
-              <li key={c.slug}>
-                <Link className="underline underline-offset-4" href={locationPath(c)}>
-                  {displayName(c)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {cities.length > 0 ? (
+          <div>
+            <h2 className="font-display text-h3">{t('citiesTitle')}</h2>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {cities.map((c) => (
+                <li key={c.slug}>
+                  <Link className="underline underline-offset-4" href={href(locationPath(c))}>
+                    {displayName(c)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </section>
     </main>
   );

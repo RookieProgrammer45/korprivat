@@ -48,9 +48,9 @@ import {
   isInstructorLicenseTenureEligible,
   MIN_INSTRUCTOR_LICENSE_YEARS,
 } from '@/lib/signup-eligibility';
-import { ageInYears, MINIMUM_AGE } from '@/lib/verification/age';
+import { AnimatedTitle } from './animated-title';
 import { ClickwrapStep } from './clickwrap-step';
-import { claimedDobIsUnderage, LearnerDobConsentFields } from './learner-dob-consent-fields';
+import { LearnerDobConsentFields } from './learner-dob-consent-fields';
 import { ProfileDetailsStep } from './profile-details-step';
 import { SocialAuthButtons } from './social-auth-buttons';
 
@@ -66,11 +66,6 @@ const PATH_OPTIONS = [
     value: 'SCHOOL' as const,
     labelKey: 'roleSchool' as const,
     descKey: 'roleSchoolDesc' as const,
-  },
-  {
-    value: 'INSTRUCTOR' as const,
-    labelKey: 'roleInstructor' as const,
-    descKey: 'roleInstructorDesc' as const,
   },
 ];
 
@@ -113,8 +108,9 @@ export function SignUpForm({
   const tConsentBanner = useTranslations('consentBanner');
   const { data: session } = useSession();
 
-  const resolvedPath: SignupPathType = initialPath ?? 'LEARNER';
-  // Deep-link from hero (role=instructor) skips the path picker; user can go back.
+  const resolvedPath: SignupPathType =
+    initialPath === 'INSTRUCTOR' ? 'SCHOOL' : (initialPath ?? 'LEARNER');
+  // Deep-link from hero (role=school) skips the path picker; user can go back.
   const [step, setStep] = useState<Step>(
     initialStep === 'photo' ? 'photo' : initialPath ? 'account' : 'path',
   );
@@ -157,10 +153,7 @@ export function SignUpForm({
   });
 
   const selectedPath = useWatch({ control: form.control, name: 'path' });
-  const dateOfBirthValue = useWatch({ control: form.control, name: 'dateOfBirth' });
   const consentValue = useWatch({ control: form.control, name: 'consent' });
-  const learnerUnderage =
-    selectedPath === 'LEARNER' && claimedDobIsUnderage(dateOfBirthValue ?? '');
 
   const completeSignup = useCallback(async () => {
     try {
@@ -210,10 +203,7 @@ export function SignUpForm({
       if (state.nextPrerequisite === 'photo') setStep('photo');
       else if (state.nextPrerequisite === 'license') setStep('license');
       else if (state.nextPrerequisite === 'clickwrap') setStep('handledare');
-      else if (state.role === 'STUDENT' && state.photo.status !== 'CONFIRMED') {
-        // LEARNER: account → email → optional profile photo → verify (via complete).
-        setStep('photo');
-      } else {
+      else {
         void completeSignup();
       }
     },
@@ -315,15 +305,6 @@ export function SignUpForm({
       if (!values.consent) {
         form.setError('consent', { message: tConsentForm('signupCheckboxError') });
         return;
-      }
-      if (values.path === 'LEARNER') {
-        const dob = new Date(values.dateOfBirth);
-        if (!values.dateOfBirth || Number.isNaN(dob.getTime()) || ageInYears(dob) < MINIMUM_AGE) {
-          form.setError('dateOfBirth', {
-            message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
-          });
-          return;
-        }
       }
       if (values.path === 'SCHOOL') {
         if (!values.schoolName.trim()) {
@@ -501,9 +482,10 @@ export function SignUpForm({
     return (
       <div className="grid gap-8">
         <div className="grid gap-2">
-          <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            {t('pathTitle')}
-          </h1>
+          <AnimatedTitle
+            text={t('pathTitle')}
+            className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+          />
           <p className="text-pretty text-body text-muted-foreground">{t('pathSubtitle')}</p>
         </div>
         <ul className="grid gap-3">
@@ -738,16 +720,17 @@ export function SignUpForm({
           ← {t('backToPaths')}
         </button>
         <div className="grid gap-2">
-          <h1 className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            {t(accountTitleKey)}
-          </h1>
+          <AnimatedTitle
+            text={t(accountTitleKey)}
+            className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+          />
           <p className="text-pretty text-body text-muted-foreground">{t(accountLeadKey)}</p>
         </div>
       </div>
 
       <SocialAuthButtons
         mode="signup"
-        role={selectedPath === 'INSTRUCTOR' ? 'INSTRUCTOR' : 'STUDENT'}
+        role={selectedPath === 'SCHOOL' ? 'STUDENT' : 'STUDENT'}
         next={selectedPath === 'SCHOOL' ? (resumeNext ?? '/for-skolor') : resumeNext}
       />
 
@@ -817,27 +800,6 @@ export function SignUpForm({
 
           {selectedPath === 'LEARNER' ? (
             <div className="grid gap-4 border-t border-border pt-4">
-              <LearnerDobConsentFields
-                idPrefix="signup-dob"
-                includeDob
-                includeConsent={false}
-                dob={dateOfBirthValue ?? ''}
-                onDobChange={(value) => {
-                  form.setValue('dateOfBirth', value, { shouldDirty: true, shouldValidate: true });
-                  if (claimedDobIsUnderage(value)) {
-                    form.setError('dateOfBirth', {
-                      message: t('fields.errors.learnerAge', { age: MINIMUM_AGE }),
-                    });
-                  } else if (value) {
-                    form.clearErrors('dateOfBirth');
-                  }
-                }}
-                consent={false}
-                onConsentChange={() => {}}
-                errors={{
-                  dateOfBirth: form.formState.errors.dateOfBirth?.message,
-                }}
-              />
               <FormField
                 control={form.control}
                 name="phone"
@@ -1010,7 +972,7 @@ export function SignUpForm({
           <Button
             type="submit"
             size="lg"
-            disabled={form.formState.isSubmitting || learnerUnderage}
+            disabled={form.formState.isSubmitting}
             className="auth-submit mt-1 h-12 w-full text-base shadow-sm"
           >
             {form.formState.isSubmitting ? t('submitting') : t('submit')}

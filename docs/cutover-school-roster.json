@@ -1,7 +1,7 @@
 {
   "source": "neon production branch main br-rough-frost-b7ttlbxj read-only 2026-10-24",
   "counts": {
-    "schools": 635,
+    "schools": 623,
     "contact": 1,
     "instant": 459,
     "request": 175,
@@ -982,15 +982,6 @@
       "confirmedBookingsKeepLifecycle": 0
     },
     {
-      "id": "fc58f521-df6c-4714-8c9d-c171168d4522",
-      "name": "DP World Logistics Sweden AB",
-      "city": "Karlshamn",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
       "id": "b3ac0dd3-f913-43b5-bd68-9d6ee7a98555",
       "name": "Dahls Trafikskola AB",
       "city": "Växjö",
@@ -1184,15 +1175,6 @@
       "name": "Einar Svenssons Trafikskola",
       "city": "Uddevalla",
       "bookingMode": "request",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
-      "id": "d81a8445-328d-407e-8794-714f283f0a47",
-      "name": "Ekologg o Görans Bygg AB",
-      "city": "Örsundsbro",
-      "bookingMode": "instant",
       "today": "bookable-via-legacy-bookingMode",
       "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
       "confirmedBookingsKeepLifecycle": 0
@@ -1423,15 +1405,6 @@
       "confirmedBookingsKeepLifecycle": 0
     },
     {
-      "id": "4245b7ed-9412-42cd-9101-b2175ff1ac79",
-      "name": "Freedomoutdoor",
-      "city": "Sävar",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
       "id": "85e1b50e-ec0e-4f08-9f10-8644137c94c3",
       "name": "Fränsta Trafikskola",
       "city": "Fränsta",
@@ -1445,15 +1418,6 @@
       "name": "Globens Trafikskola AB",
       "city": "Stockholm",
       "bookingMode": "request",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
-      "id": "a381fd71-d912-44c4-a4ab-2932d8418178",
-      "name": "Go-Ahead AB",
-      "city": "Växjö",
-      "bookingMode": "instant",
       "today": "bookable-via-legacy-bookingMode",
       "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
       "confirmedBookingsKeepLifecycle": 0
@@ -2084,15 +2048,6 @@
       "name": "JP´s Trafikskola",
       "city": "Sundbyberg",
       "bookingMode": "request",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
-      "id": "8d529c50-bc80-45ee-ba17-4b5d5ab12af5",
-      "name": "JR Logistic AB",
-      "city": "Farsta",
-      "bookingMode": "instant",
       "today": "bookable-via-legacy-bookingMode",
       "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
       "confirmedBookingsKeepLifecycle": 0
@@ -3394,27 +3349,9 @@
       "confirmedBookingsKeepLifecycle": 0
     },
     {
-      "id": "d1c610f6-02a2-4256-9d61-2ae1c45c09ab",
-      "name": "Nickes Åkeritjänst AB",
-      "city": "Hisings-backa",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
       "id": "5bdec273-c049-4855-b008-8b34d537afb5",
       "name": "Niklas Trafikskola AB",
       "city": "Älmhult",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
-      "id": "89f4d86d-6b97-45d1-b35e-bc6fc264c12f",
-      "name": "Nobina Sverige AB",
-      "city": "Solna",
       "bookingMode": "instant",
       "today": "bookable-via-legacy-bookingMode",
       "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
@@ -4198,15 +4135,6 @@
       "id": "0fd9de34-3fa5-40af-b8f7-32b89d6c420b",
       "name": "PostNord Sverige AB",
       "city": "Stockholm",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
-      "id": "c7312093-1601-4bb0-a5b9-ce9db045cc74",
-      "name": "Presto AB",
-      "city": "Hässleholm",
       "bookingMode": "instant",
       "today": "bookable-via-legacy-bookingMode",
       "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
@@ -5122,15 +5050,6 @@
       "confirmedBookingsKeepLifecycle": 0
     },
     {
-      "id": "dd10d111-4df5-452a-af8b-df85b7fb2792",
-      "name": "Transdev Sverige AB",
-      "city": "Bromma",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
       "id": "e6a6d41b-85c2-489b-b9e5-e5a2e0cbbd18",
       "name": "Trestads Trfsk Uddevalla AB",
       "city": "Uddevalla",
@@ -5197,15 +5116,6 @@
       "id": "776ae054-64b5-4353-9ff6-7e29de89e5a9",
       "name": "UJ Terräng & Förarutbildning AB",
       "city": "Skövde",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
-      "id": "adf7020d-588f-4d7a-95da-8681d66b4959",
-      "name": "Uddevalla Omnibuss AB",
-      "city": "Uddevalla",
       "bookingMode": "instant",
       "today": "bookable-via-legacy-bookingMode",
       "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
@@ -5383,15 +5293,6 @@
       "confirmedBookingsKeepLifecycle": 0
     },
     {
-      "id": "a822334c-0719-492f-bc03-3d073031da74",
-      "name": "Vy Buss AB",
-      "city": "Göteborg",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
       "id": "9132a108-79d0-4c2b-a769-4cce0adda008",
       "name": "Vägsjö Trafikskola",
       "city": "Växjö",
@@ -5485,15 +5386,6 @@
       "id": "00e7afe2-9267-4b6f-99ba-9f79ac9a33a5",
       "name": "Widells TU",
       "city": "Lidköping",
-      "bookingMode": "instant",
-      "today": "bookable-via-legacy-bookingMode",
-      "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",
-      "confirmedBookingsKeepLifecycle": 0
-    },
-    {
-      "id": "ec899134-197d-425c-bb86-e3a3d4ed9cbc",
-      "name": "Widéns Åkeri",
-      "city": "Kalmar",
       "bookingMode": "instant",
       "today": "bookable-via-legacy-bookingMode",
       "ifSCHOOL_AUTHZ_ENFORCEMENTOn": "directory-only (no SchoolAuthorizationEvent table or grants)",

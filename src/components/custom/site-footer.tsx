@@ -8,10 +8,10 @@
 // active locale, mirroring SiteNav.
 
 import { ArrowRight, Mail } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useIsAuthenticated } from '@/components/custom/site-nav';
+import { LocaleLink as Link } from '@/components/locale-link';
 import type { NavItem } from '@/lib/nav';
 import { isFocusedShellPath } from '@/lib/shell-mode';
 import { siteName } from '@/lib/site';
@@ -37,10 +37,10 @@ const COLUMNS: readonly FooterColumn[] = [
   {
     titleKey: 'footer.columnProduct',
     items: [
-      { labelKey: 'nav.findProvider', href: '/instructors' },
-      { labelKey: 'nav.howItWorks', href: '/#how' },
+      { labelKey: 'nav.findProvider', href: '/locations/se' },
       { labelKey: 'nav.pricing', href: '/pricing' },
       { labelKey: 'nav.drivingSchool', href: '/for-skolor' },
+      { labelKey: 'nav.dealershipOwner', href: '/contact?topic=list_dealer' },
     ],
   },
   {
@@ -66,11 +66,6 @@ const COLUMNS: readonly FooterColumn[] = [
     items: [
       { labelKey: 'nav.privacy', href: '/privacy' },
       { labelKey: 'nav.terms', href: '/terms' },
-      {
-        labelKey: 'nav.paymentMethods',
-        href: '/dashboard/student/payment-methods',
-        requiresAuth: true,
-      },
     ],
   },
 ];
@@ -83,10 +78,29 @@ const CITY_LINKS: readonly FooterLink[] = [
   { labelKey: 'nav.cityVasteras', href: '/locations/se/vasteras' },
 ];
 
-// Support inbox — outreach replies land here (see ops/reply_playbook). Render
-// only real destinations: add social URLs to SOCIAL_LINKS when profiles go
-// live, never before.
+// Public support inbox. Product mail stays on Resend; outreach stays on
+// marketing@drivelinkup.com. Privacy and terms use this same address.
+// Social links are only profiles that resolve to DriveLinkUp. Do not add a
+// network until its public URL is known.
 const CONTACT_EMAIL = 'frank@drivelinkup.com';
+
+const SOCIAL_LINKS = [
+  { href: 'https://x.com/Drivelinkup', labelKey: 'footer.socialX' as const },
+  { href: 'https://www.instagram.com/drivelinkup', labelKey: 'footer.socialInstagram' as const },
+  {
+    href: 'https://www.facebook.com/profile.php?id=61595254779697',
+    labelKey: 'footer.socialFacebook' as const,
+  },
+  {
+    href: 'https://www.linkedin.com/company/drivelinkup',
+    labelKey: 'footer.socialLinkedin' as const,
+  },
+  { href: 'https://www.tiktok.com/@drivelinkup_', labelKey: 'footer.socialTiktok' as const },
+  {
+    href: 'https://www.reddit.com/user/DriveLinkup_app/',
+    labelKey: 'footer.socialReddit' as const,
+  },
+];
 
 export function SiteFooter() {
   const pathname = usePathname();
@@ -162,6 +176,19 @@ export function SiteFooter() {
             <Mail className="size-4" aria-hidden />
             <span className="dlu-footer-email">{CONTACT_EMAIL}</span>
           </a>
+          <nav aria-label={t('footer.socialNav')} className="dlu-footer-socials">
+            {SOCIAL_LINKS.map((link) => (
+              <a
+                key={link.href}
+                className="dlu-footer-social"
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t(link.labelKey)}
+              </a>
+            ))}
+          </nav>
           <p className="dlu-footer-copy">{t('footer.copyright', { year })}</p>
         </div>
       </div>
