@@ -2485,7 +2485,10 @@
           "van": "Van",
           "heavy": "Heavy vehicle",
           "other": "Other"
-        }
+        },
+        "modelLabel": "Model",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Popular:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Compare vehicle prices at dealers",
-      "description": "Compare car models with year, mileage, fuel and gearbox. The price is the one the dealer published."
+      "description": "Compare new and used cars, trucks and motorcycles by model and place. Specifications and the advertised price come from the listing."
     },
     "eyebrow": "Dealers",
     "title": "Compare vehicle prices",
-    "lead": "Each card is a car the dealer has published, with the model, year, mileage, fuel and gearbox. The price is the dealer's. DriveLinkUp does not sell the car.",
+    "lead": "Each card is a car, truck or motorcycle a dealer has published, new or used, with the specifications on that listing. The price is the advertised amount. DriveLinkUp does not sell the vehicle.",
     "cityLabel": "City",
     "cityAll": "All cities",
     "kindLabel": "Vehicle",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Car",
       "van": "Van",
-      "heavy": "Heavy vehicle",
-      "other": "Other"
+      "heavy": "Truck",
+      "other": "Other",
+      "motorcycle": "Motorcycle"
     },
     "filter": "Show",
     "sourceNote": "Details come from the dealer's website and the public member list that links to it. DriveLinkUp has not verified them.",
-    "empty": "No cars with published specifications in this selection yet.",
+    "empty": "No dealer in this place has published that vehicle with specifications yet.",
     "offer": "{name} from {price}",
     "noPrice": "Price on the dealer's website",
     "openSite": "Website",
@@ -4038,6 +4042,16 @@
     "listPrefill": "I run a dealership and want it listed on DriveLinkUp.\n\nBusiness:\nCity:\nWebsite:",
     "claim": "This is my dealership",
     "claimAria": "Ask DriveLinkUp to list or update {name}",
-    "claimPrefill": "I represent {name} and want the listing added or updated on DriveLinkUp."
+    "claimPrefill": "I represent {name} and want the listing added or updated on DriveLinkUp.",
+    "modelLabel": "Model",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "Condition",
+    "conditionAny": "New and used",
+    "condition": {
+      "new": "New",
+      "used": "Used"
+    },
+    "msrp": "MSRP"
   }
 }

@@ -2485,7 +2485,10 @@
           "van": "Varebil",
           "heavy": "Tungt køretøj",
           "other": "Andet"
-        }
+        },
+        "modelLabel": "Model",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Populært:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Sammenlign bilpriser hos forhandlere",
-      "description": "Sammenlign bilmodeller med årgang, kilometer, drivmiddel og gear. Prisen er den, forhandleren har offentliggjort."
+      "description": "Sammenlign nye og brugte biler, lastbiler og motorcykler efter model og sted. Specifikationer og den annoncerede pris kommer fra annoncen."
     },
     "eyebrow": "Bilforhandlere",
     "title": "Sammenlign køretøjspriser",
-    "lead": "Hvert kort er en bil, forhandleren har offentliggjort, med model, årgang, kilometer, drivmiddel og gear. Prisen er forhandlerens. DriveLinkUp sælger ikke bilen.",
+    "lead": "Hvert kort er en bil, lastbil eller motorcykel, som en forhandler har offentliggjort, ny eller brugt, med specifikationerne i annoncen. Prisen er det annoncerede beløb. DriveLinkUp sælger ikke køretøjet.",
     "cityLabel": "By",
     "cityAll": "Alle byer",
     "kindLabel": "Køretøj",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Personbil",
       "van": "Varebil",
-      "heavy": "Tungt køretøj",
-      "other": "Andet"
+      "heavy": "Lastbil",
+      "other": "Andet",
+      "motorcycle": "Motorcykel"
     },
     "filter": "Vis",
     "sourceNote": "Oplysningen kommer fra forhandlerens hjemmeside og den offentlige medlemsliste, der linker dertil. DriveLinkUp har ikke verificeret den.",
-    "empty": "Ingen biler med offentliggjorte specifikationer i dette udvalg endnu.",
+    "empty": "Ingen forhandler på dette sted har offentliggjort det køretøj med specifikationer endnu.",
     "offer": "{name} fra {price}",
     "noPrice": "Pris på forhandlerens hjemmeside",
     "openSite": "Hjemmeside",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Jeg driver en bilforhandler og vil stå på DriveLinkUp.\n\nVirksomhed:\nBy:\nHjemmeside:",
     "claim": "Det her er min bilforhandler",
     "claimAria": "Bed DriveLinkUp om at vise eller opdatere {name}",
-    "claimPrefill": "Jeg repræsenterer {name} og vil have annoncen vist eller opdateret på DriveLinkUp."
+    "claimPrefill": "Jeg repræsenterer {name} og vil have annoncen vist eller opdateret på DriveLinkUp.",
+    "modelLabel": "Model",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "Stand",
+    "conditionAny": "Nye og brugte",
+    "condition": {
+      "new": "Ny",
+      "used": "Brugt"
+    },
+    "msrp": "Vejl. pris"
   }
 }

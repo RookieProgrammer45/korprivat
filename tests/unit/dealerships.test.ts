@@ -6,6 +6,7 @@ import {
   type DealershipVehicle,
   listDealerships,
   publishedCars,
+  searchPublishedCars,
 } from '@/lib/discovery/dealerships';
 import { dealerSearchPath } from '@/lib/seo/dealer-search-path';
 
@@ -22,6 +23,12 @@ function vehicle(
     fuel: null,
     gearbox: null,
     imageUrl: null,
+    make: null,
+    model: null,
+    condition: null,
+    priceKind: null,
+    power: null,
+    color: null,
     ...partial,
   };
 }
@@ -144,5 +151,60 @@ describe('compareDealerships', () => {
     expect(dealerSearchPath('')).toBe('/bilhandlare');
     expect(dealerSearchPath('Oslo', 'car')).toBe('/bilhandlare?city=Oslo&kind=car');
     expect(dealerSearchPath('Malmö', 'nope')).toBe('/bilhandlare?city=Malm%C3%B6');
+    expect(dealerSearchPath('New York', null, 'Volvo')).toBe('/bilhandlare?q=Volvo&city=New+York');
+  });
+
+  it('keeps a Volvo in Rochester out of a New York search', () => {
+    const rochester = searchPublishedCars({ q: 'Volvo XC90', city: 'Rochester', condition: 'new' });
+    expect(rochester.length).toBeGreaterThan(0);
+    expect(
+      rochester.every((car) => car.dealerCity === 'Rochester' && car.vehicle.priceKind === 'msrp'),
+    ).toBe(true);
+    expect(
+      searchPublishedCars({ q: 'Volvo', city: 'New York' }).some(
+        (car) => car.dealerCountry === 'US',
+      ),
+    ).toBe(false);
+  });
+
+  it('does not rank a dollar price ahead of kronor', () => {
+    const cars = publishedCars();
+    const lastKrona = cars.findLastIndex((car) => car.vehicle.currency === 'SEK');
+    const firstDollar = cars.findIndex((car) => car.vehicle.currency === 'USD');
+    expect(lastKrona).toBeGreaterThanOrEqual(0);
+    expect(firstDollar).toBeGreaterThan(lastKrona);
+  });
+
+  it('matches a used motorcycle to the place and model', () => {
+    const shop = dealer({
+      id: 'ny-moto',
+      name: 'Hudson Motorcycles',
+      city: 'New York',
+      country: 'US',
+      vehicles: [
+        vehicle({
+          name: 'Harley Sportster',
+          make: 'Harley',
+          model: 'Sportster',
+          kind: 'motorcycle',
+          condition: 'used',
+          price: 9000,
+          currency: 'USD',
+          sourceUrl: 'https://example.com/sportster',
+          year: 2019,
+          mileage: 12000,
+          mileageUnit: 'km',
+          fuel: 'Petrol',
+        }),
+      ],
+    });
+    const found = searchPublishedCars(
+      { q: 'Harley', city: 'New York', kind: 'motorcycle', condition: 'used' },
+      [shop],
+    );
+    expect(found.map((car) => car.dealerName)).toEqual(['Hudson Motorcycles']);
+    expect(
+      searchPublishedCars({ q: 'Harley', city: 'New York', condition: 'new' }, [shop]),
+    ).toEqual([]);
   });
 });

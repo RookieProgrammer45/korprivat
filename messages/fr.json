@@ -2485,7 +2485,10 @@
           "van": "Utilitaire",
           "heavy": "Véhicule lourd",
           "other": "Autre"
-        }
+        },
+        "modelLabel": "Modèle",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Populaire :",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Comparer les prix des voitures chez les concessionnaires",
-      "description": "Comparez les modèles avec l'année, le kilométrage, le carburant et la boîte. Le prix est celui publié par le concessionnaire."
+      "description": "Comparez les voitures, camions et motos neufs et d'occasion par modèle et par lieu. Les caractéristiques et le prix annoncé viennent de l'annonce."
     },
     "eyebrow": "Concessionnaires",
     "title": "Comparer les prix des véhicules",
-    "lead": "Chaque fiche est une voiture publiée par le concessionnaire, avec le modèle, l'année, le kilométrage, le carburant et la boîte. Le prix est le sien. DriveLinkUp ne vend pas la voiture.",
+    "lead": "Chaque fiche est une voiture, un camion ou une moto publié par un concessionnaire, neuf ou d'occasion, avec les caractéristiques de l'annonce. Le prix est le montant annoncé. DriveLinkUp ne vend pas le véhicule.",
     "cityLabel": "Ville",
     "cityAll": "Toutes les villes",
     "kindLabel": "Véhicule",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Voiture",
       "van": "Utilitaire",
-      "heavy": "Véhicule lourd",
-      "other": "Autre"
+      "heavy": "Camion",
+      "other": "Autre",
+      "motorcycle": "Moto"
     },
     "filter": "Afficher",
     "sourceNote": "L'information vient du site du concessionnaire et de la liste publique de membres qui y renvoie. DriveLinkUp ne l'a pas vérifiée.",
-    "empty": "Aucune voiture avec des caractéristiques publiées dans cette sélection pour le moment.",
+    "empty": "Aucun concessionnaire à cet endroit n'a encore publié ce véhicule avec ses caractéristiques.",
     "offer": "{name} dès {price}",
     "noPrice": "Prix sur le site du concessionnaire",
     "openSite": "Site web",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Je gère une concession et je souhaite être listé sur DriveLinkUp.\n\nEntreprise:\nVille:\nSite web:",
     "claim": "C'est ma concession",
     "claimAria": "Demander à DriveLinkUp de lister ou de mettre à jour {name}",
-    "claimPrefill": "Je représente {name} et je souhaite que l'annonce soit ajoutée ou mise à jour sur DriveLinkUp."
+    "claimPrefill": "Je représente {name} et je souhaite que l'annonce soit ajoutée ou mise à jour sur DriveLinkUp.",
+    "modelLabel": "Modèle",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "État",
+    "conditionAny": "Neufs et d'occasion",
+    "condition": {
+      "new": "Neuf",
+      "used": "Occasion"
+    },
+    "msrp": "Prix conseillé"
   }
 }

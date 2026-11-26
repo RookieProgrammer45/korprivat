@@ -2485,7 +2485,10 @@
           "van": "Bestelbus",
           "heavy": "Zwaar voertuig",
           "other": "Overig"
-        }
+        },
+        "modelLabel": "Model",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Populair:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Vergelijk autoprijzen bij dealers",
-      "description": "Vergelijk automodellen met bouwjaar, kilometerstand, brandstof en versnellingsbak. De prijs is de prijs die de dealer heeft gepubliceerd."
+      "description": "Vergelijk nieuwe en gebruikte auto's, vrachtwagens en motoren op model en plaats. Specificaties en de geadverteerde prijs komen uit de advertentie."
     },
     "eyebrow": "Autodealers",
     "title": "Vergelijk voertuigprijzen",
-    "lead": "Elke kaart is een auto die de dealer heeft gepubliceerd, met model, bouwjaar, kilometerstand, brandstof en versnellingsbak. De prijs is van de dealer. DriveLinkUp verkoopt de auto niet.",
+    "lead": "Elke kaart is een auto, vrachtwagen of motor die een dealer nieuw of gebruikt heeft gepubliceerd, met de gegevens uit de advertentie. De prijs is het geadverteerde bedrag. DriveLinkUp verkoopt het voertuig niet.",
     "cityLabel": "Plaats",
     "cityAll": "Alle plaatsen",
     "kindLabel": "Voertuig",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Personenauto",
       "van": "Bestelbus",
-      "heavy": "Zwaar voertuig",
-      "other": "Overig"
+      "heavy": "Vrachtwagen",
+      "other": "Overig",
+      "motorcycle": "Motor"
     },
     "filter": "Toon",
     "sourceNote": "Het gegeven komt van de website van de dealer en de openbare ledenlijst die daarnaar linkt. DriveLinkUp heeft het niet geverifieerd.",
-    "empty": "Nog geen auto's met gepubliceerde specificaties in deze selectie.",
+    "empty": "Geen dealer op deze plaats heeft dit voertuig met specificaties gepubliceerd.",
     "offer": "{name} vanaf {price}",
     "noPrice": "Prijs op de website van de dealer",
     "openSite": "Website",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Ik heb een autodealer en wil op DriveLinkUp staan.\n\nBedrijf:\nPlaats:\nWebsite:",
     "claim": "Dit is mijn autodealer",
     "claimAria": "Vraag DriveLinkUp om {name} te vermelden of bij te werken",
-    "claimPrefill": "Ik vertegenwoordig {name} en wil dat de vermelding op DriveLinkUp wordt toegevoegd of bijgewerkt."
+    "claimPrefill": "Ik vertegenwoordig {name} en wil dat de vermelding op DriveLinkUp wordt toegevoegd of bijgewerkt.",
+    "modelLabel": "Model",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "Staat",
+    "conditionAny": "Nieuw en gebruikt",
+    "condition": {
+      "new": "Nieuw",
+      "used": "Gebruikt"
+    },
+    "msrp": "Adviesprijs"
   }
 }

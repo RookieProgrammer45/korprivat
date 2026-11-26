@@ -2485,7 +2485,10 @@
           "van": "Pakettiauto",
           "heavy": "Raskas ajoneuvo",
           "other": "Muu"
-        }
+        },
+        "modelLabel": "Malli",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Suositut:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Vertaa auton hintoja jälleenmyyjillä",
-      "description": "Vertaa automalleja vuosimallin, mittarilukeman, käyttövoiman ja vaihteiston mukaan. Hinta on se, jonka jälleenmyyjä on julkaissut."
+      "description": "Vertaile uusia ja käytettyjä autoja, kuorma-autoja ja moottoripyöriä mallin ja paikan mukaan. Tiedot ja ilmoitettu hinta tulevat ilmoituksesta."
     },
     "eyebrow": "Autoliikkeet",
     "title": "Vertaa ajoneuvojen hintoja",
-    "lead": "Jokainen kortti on auto, jonka jälleenmyyjä on julkaissut: malli, vuosimalli, mittarilukema, käyttövoima ja vaihteisto. Hinta on jälleenmyyjän. DriveLinkUp ei myy autoa.",
+    "lead": "Jokainen kortti on jälleenmyyjän julkaisema auto, kuorma-auto tai moottoripyörä, uusi tai käytetty, ilmoituksen tiedoilla. Hinta on ilmoitettu summa. DriveLinkUp ei myy ajoneuvoa.",
     "cityLabel": "Paikkakunta",
     "cityAll": "Kaikki paikkakunnat",
     "kindLabel": "Ajoneuvo",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Henkilöauto",
       "van": "Pakettiauto",
-      "heavy": "Raskas ajoneuvo",
-      "other": "Muu"
+      "heavy": "Kuorma-auto",
+      "other": "Muu",
+      "motorcycle": "Moottoripyörä"
     },
     "filter": "Näytä",
     "sourceNote": "Tieto tulee jälleenmyyjän verkkosivulta ja julkisesta jäsenluettelosta, joka linkittää sinne. DriveLinkUp ei ole vahvistanut sitä.",
-    "empty": "Tässä valinnassa ei ole vielä autoja, joilla on julkaistut tiedot.",
+    "empty": "Yksikään jälleenmyyjä tällä paikkakunnalla ei ole vielä julkaissut tätä ajoneuvoa tiedoilla.",
     "offer": "{name} alkaen {price}",
     "noPrice": "Hinta jälleenmyyjän sivulla",
     "openSite": "Verkkosivu",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Pidän autoliikettä ja haluan sen DriveLinkUpiin.\n\nYritys:\nPaikkakunta:\nVerkkosivu:",
     "claim": "Tämä on minun autoliikkeeni",
     "claimAria": "Pyydä DriveLinkUpia lisäämään tai päivittämään {name}",
-    "claimPrefill": "Edustan yritystä {name} ja haluan ilmoituksen lisättäväksi tai päivitettäväksi DriveLinkUpiin."
+    "claimPrefill": "Edustan yritystä {name} ja haluan ilmoituksen lisättäväksi tai päivitettäväksi DriveLinkUpiin.",
+    "modelLabel": "Malli",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "Kunto",
+    "conditionAny": "Uudet ja käytetyt",
+    "condition": {
+      "new": "Uusi",
+      "used": "Käytetty"
+    },
+    "msrp": "Ohjevähittäishinta"
   }
 }

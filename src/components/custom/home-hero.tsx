@@ -15,7 +15,6 @@ import { localePath } from '@/lib/seo/locale-path';
 import { SEARCH_CITIES, schoolSearchPath } from '@/lib/seo/school-search-path';
 
 const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
-const VEHICLE_KINDS = ['car', 'van', 'heavy', 'other'] as const;
 
 const POPULAR_LINKS = [
   { key: 'dealers', href: '/bilhandlare' },
@@ -45,12 +44,13 @@ export function HomeHero({
   const [mode, setMode] = useState<'school' | 'dealer'>('school');
   const [category, setCategory] = useState<string>('B');
   const [city, setCity] = useState<string>('');
+  const [model, setModel] = useState('');
   const dealerMode = mode === 'dealer';
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const path = dealerMode
-      ? dealerSearchPath(city, category || null)
+      ? dealerSearchPath(city, null, model)
       : schoolSearchPath(city, category);
     router.push(localePath(locale, path));
   }
@@ -59,6 +59,7 @@ export function HomeHero({
     setMode(next);
     setCategory(next === 'school' ? 'B' : '');
     setCity('');
+    setModel('');
   }
 
   const money = (amount: number, currency: string) =>
@@ -91,47 +92,57 @@ export function HomeHero({
               </ModeButton>
             </fieldset>
 
-            <SearchField
-              id={categoryId}
-              label={dealerMode ? t('search.kindLabel') : t('search.categoryLabel')}
-              value={category}
-              onChange={setCategory}
-              divider
-            >
-              {dealerMode ? <option value="">{t('search.kindAny')}</option> : null}
-              {dealerMode
-                ? VEHICLE_KINDS.map((kind) => (
-                    <option key={kind} value={kind}>
-                      {t(`search.kinds.${kind}`)}
-                    </option>
-                  ))
-                : SEARCH_CATEGORIES.map((item) => (
-                    <option key={item} value={item}>
-                      {t(`search.categories.${item}`)}
-                    </option>
-                  ))}
-            </SearchField>
+            {dealerMode ? (
+              <SearchText
+                id={categoryId}
+                label={t('search.modelLabel')}
+                value={model}
+                onChange={setModel}
+                placeholder={t('search.modelPlaceholder')}
+                divider
+              />
+            ) : (
+              <SearchField
+                id={categoryId}
+                label={t('search.categoryLabel')}
+                value={category}
+                onChange={setCategory}
+                divider
+              >
+                {SEARCH_CATEGORIES.map((item) => (
+                  <option key={item} value={item}>
+                    {t(`search.categories.${item}`)}
+                  </option>
+                ))}
+              </SearchField>
+            )}
 
-            <SearchField
-              id={cityId}
-              label={t('search.cityLabel')}
-              value={city}
-              onChange={setCity}
-              divider
-            >
-              <option value="">{t('search.cityAny')}</option>
-              {dealerMode
-                ? dealerCities.map((name) => (
-                    <option key={name} value={name}>
-                      {name}
-                    </option>
-                  ))
-                : SEARCH_CITIES.map((item) => (
-                    <option key={item.id} value={item.value}>
-                      {t(`search.cities.${item.id}`)}
-                    </option>
-                  ))}
-            </SearchField>
+            {dealerMode ? (
+              <SearchText
+                id={cityId}
+                label={t('search.cityLabel')}
+                value={city}
+                onChange={setCity}
+                placeholder={t('search.placePlaceholder')}
+                list="hero-dealer-cities"
+                divider
+              />
+            ) : (
+              <SearchField
+                id={cityId}
+                label={t('search.cityLabel')}
+                value={city}
+                onChange={setCity}
+                divider
+              >
+                <option value="">{t('search.cityAny')}</option>
+                {SEARCH_CITIES.map((item) => (
+                  <option key={item.id} value={item.value}>
+                    {t(`search.cities.${item.id}`)}
+                  </option>
+                ))}
+              </SearchField>
+            )}
 
             <button
               type="submit"
@@ -141,6 +152,13 @@ export function HomeHero({
               {t('search.submit')}
             </button>
           </form>
+          {dealerMode ? (
+            <datalist id="hero-dealer-cities">
+              {dealerCities.map((name) => (
+                <option key={name} value={name} />
+              ))}
+            </datalist>
+          ) : null}
 
           <div className="marketplace-reveal dlu-hero-in-3 mt-5 grid min-w-0 gap-3">
             <div className="flex min-w-0 flex-wrap items-center gap-2 text-sm">
@@ -223,6 +241,46 @@ function ModeButton({
     >
       {children}
     </button>
+  );
+}
+
+function SearchText({
+  id,
+  label,
+  value,
+  onChange,
+  placeholder,
+  list,
+  divider = false,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  list?: string;
+  divider?: boolean;
+}) {
+  return (
+    <div
+      className={`relative min-w-0 rounded-2xl px-4 py-2 transition-colors focus-within:bg-muted hover:bg-muted sm:rounded-full sm:px-5 ${
+        divider
+          ? 'sm:before:absolute sm:before:left-0 sm:before:top-1/2 sm:before:h-7 sm:before:w-px sm:before:-translate-y-1/2 sm:before:bg-border'
+          : ''
+      }`}
+    >
+      <label htmlFor={id} className="block text-xs font-medium text-foreground">
+        {label}
+      </label>
+      <input
+        id={id}
+        value={value}
+        placeholder={placeholder}
+        list={list}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full border-0 bg-transparent py-0.5 text-base text-foreground outline-none placeholder:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+      />
+    </div>
   );
 }
 

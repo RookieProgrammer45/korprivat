@@ -1,24 +1,33 @@
 import dataset from '../../../data/dealerships/dealerships.json';
+import markets from '../../../data/dealerships/published-markets.json';
 
-export type DealershipVehicleKind = 'car' | 'van' | 'heavy' | 'other';
+export type DealershipVehicleKind = 'car' | 'van' | 'heavy' | 'motorcycle' | 'other';
+export type VehicleCondition = 'new' | 'used';
+export type VehiclePriceKind = 'msrp';
 
 export type DealershipVehicle = {
   name: string;
+  make: string | null;
+  model: string | null;
   kind: DealershipVehicleKind;
+  condition: VehicleCondition | null;
   price: number;
   currency: string;
+  priceKind: VehiclePriceKind | null;
   sourceUrl: string;
   year: number | null;
   mileage: number | null;
   mileageUnit: 'mil' | 'km' | null;
   fuel: string | null;
   gearbox: string | null;
+  power: string | null;
+  color: string | null;
   imageUrl: string | null;
 };
 
 export type Dealership = {
   id: string;
-  country: 'SE' | 'NO' | 'DK' | 'FI' | 'IS';
+  country: string;
   name: string;
   city: string;
   address: string;
@@ -34,8 +43,17 @@ export type Dealership = {
   vehicles: DealershipVehicle[];
 };
 
-const KINDS = new Set<DealershipVehicleKind>(['car', 'van', 'heavy', 'other']);
-const CURRENCY_ORDER: Record<string, number> = { SEK: 0, NOK: 1, DKK: 2, EUR: 3 };
+const KINDS = new Set<DealershipVehicleKind>(['car', 'van', 'heavy', 'motorcycle', 'other']);
+const CURRENCY_ORDER: Record<string, number> = {
+  SEK: 0,
+  NOK: 1,
+  DKK: 2,
+  EUR: 3,
+  USD: 4,
+  CAD: 5,
+  GBP: 6,
+  INR: 7,
+};
 
 function httpUrl(value: unknown): string | null {
   return typeof value === 'string' && /^https?:\/\/\S+$/i.test(value.trim()) ? value.trim() : null;
@@ -64,17 +82,8 @@ function asDealership(row: unknown): Dealership | null {
   const record = row as Record<string, unknown>;
   const id = typeof record.id === 'string' ? record.id.trim() : '';
   const name = typeof record.name === 'string' ? record.name.trim() : '';
-  const country = record.country;
-  if (!id || !name) return null;
-  if (
-    country !== 'SE' &&
-    country !== 'NO' &&
-    country !== 'DK' &&
-    country !== 'FI' &&
-    country !== 'IS'
-  ) {
-    return null;
-  }
+  const country = typeof record.country === 'string' ? record.country.trim().toUpperCase() : '';
+  if (!id || !name || !/^[A-Z]{2}$/.test(country)) return null;
   const vehicles = Array.isArray(record.vehicles)
     ? record.vehicles.flatMap((vehicle) => {
         if (!vehicle || typeof vehicle !== 'object') return [];
@@ -90,18 +99,27 @@ function asDealership(row: unknown): Dealership | null {
         if (!currency || !sourceUrl || !vehicleName) return [];
         const mileageUnit: 'mil' | 'km' | null =
           item.mileageUnit === 'mil' || item.mileageUnit === 'km' ? item.mileageUnit : null;
+        const condition: VehicleCondition | null =
+          item.condition === 'new' || item.condition === 'used' ? item.condition : null;
+        const priceKind: VehiclePriceKind | null = item.priceKind === 'msrp' ? 'msrp' : null;
         return [
           {
             name: vehicleName,
+            make: shortText(item.make),
+            model: shortText(item.model),
             kind: kind as DealershipVehicleKind,
+            condition,
             price,
             currency,
+            priceKind,
             sourceUrl,
             year: modelYear(item.year),
             mileage: mileageValue(item.mileage),
             mileageUnit,
             fuel: shortText(item.fuel),
             gearbox: shortText(item.gearbox),
+            power: shortText(item.power),
+            color: shortText(item.color),
             imageUrl: httpUrl(item.imageUrl),
           },
         ];
@@ -133,7 +151,13 @@ function asDealership(row: unknown): Dealership | null {
   };
 }
 
-const dealers = (Array.isArray(dataset.dealers) ? dataset.dealers : [])
+function dealerRows(file: unknown): unknown[] {
+  if (!file || typeof file !== 'object' || !('dealers' in file)) return [];
+  const rows = file.dealers;
+  return Array.isArray(rows) ? rows : [];
+}
+
+const dealers = [...dealerRows(dataset), ...dealerRows(markets)]
   .map(asDealership)
   .filter((dealer): dealer is Dealership => dealer !== null);
 
@@ -160,6 +184,7 @@ export function cheapestVehicle(dealer: Dealership): DealershipVehicle | null {
 
 export type PublishedCar = {
   id: string;
+  dealerId: string;
   dealerName: string;
   dealerCity: string;
   dealerCountry: Dealership['country'];
@@ -179,6 +204,7 @@ export function publishedCars(rows: Dealership[] = dealers): PublishedCar[] {
       if (!isSpecifiedVehicle(vehicle)) continue;
       cars.push({
         id: `${dealer.id}:${vehicle.sourceUrl}`,
+        dealerId: dealer.id,
         dealerName: dealer.name,
         dealerCity: dealer.city,
         dealerCountry: dealer.country,
@@ -186,14 +212,95 @@ export function publishedCars(rows: Dealership[] = dealers): PublishedCar[] {
       });
     }
   }
-  cars.sort((left, right) => {
-    const currency =
-      (CURRENCY_ORDER[left.vehicle.currency] ?? 9) - (CURRENCY_ORDER[right.vehicle.currency] ?? 9);
-    if (currency !== 0) return currency;
-    if (left.vehicle.price !== right.vehicle.price) return left.vehicle.price - right.vehicle.price;
-    return left.vehicle.name.localeCompare(right.vehicle.name, 'sv');
-  });
+  cars.sort(
+    (left, right) =>
+      compareMoney(left.vehicle, right.vehicle) ||
+      left.vehicle.name.localeCompare(right.vehicle.name, 'sv'),
+  );
   return cars;
+}
+
+function currencyRank(currency: string): number {
+  return CURRENCY_ORDER[currency] ?? 50;
+}
+
+function compareMoney(
+  left: Pick<DealershipVehicle, 'price' | 'currency'>,
+  right: Pick<DealershipVehicle, 'price' | 'currency'>,
+): number {
+  const rank = currencyRank(left.currency) - currencyRank(right.currency);
+  if (rank !== 0) return rank;
+  if (left.currency !== right.currency) return left.currency.localeCompare(right.currency);
+  return left.price - right.price;
+}
+
+export type VehicleSearch = {
+  q?: string;
+  city?: string;
+  country?: string;
+  kind?: string;
+  condition?: string;
+};
+
+function fold(value: string): string {
+  return value.trim().toLocaleLowerCase();
+}
+
+/** Published vehicles for a model and place. A place matches the dealer's city only. */
+export function searchPublishedCars(
+  query: VehicleSearch,
+  rows: Dealership[] = dealers,
+): PublishedCar[] {
+  const words = fold(query.q ?? '')
+    .split(/\s+/)
+    .filter(Boolean);
+  const city = fold(query.city ?? '');
+  const country = query.country?.trim().toUpperCase() ?? '';
+  const kind = KINDS.has(query.kind as DealershipVehicleKind)
+    ? (query.kind as DealershipVehicleKind)
+    : null;
+  const condition =
+    query.condition === 'new' || query.condition === 'used' ? query.condition : null;
+  return publishedCars(rows).filter((car) => {
+    if (country && car.dealerCountry !== country) return false;
+    if (kind && car.vehicle.kind !== kind) return false;
+    if (condition && car.vehicle.condition !== condition) return false;
+    if (city && !fold(car.dealerCity).includes(city)) return false;
+    if (words.length === 0) return true;
+    const haystack = fold(
+      `${car.vehicle.make ?? ''} ${car.vehicle.model ?? ''} ${car.vehicle.name} ${car.dealerName}`,
+    );
+    return words.every((word) => haystack.includes(word));
+  });
+}
+
+export function dealersForCars(cars: PublishedCar[]): Array<{
+  id: string;
+  name: string;
+  city: string;
+  country: string;
+  cars: PublishedCar[];
+}> {
+  const groups: Array<{
+    id: string;
+    name: string;
+    city: string;
+    country: string;
+    cars: PublishedCar[];
+  }> = [];
+  for (const car of cars) {
+    const existing = groups.find((group) => group.id === car.dealerId);
+    if (existing) existing.cars.push(car);
+    else
+      groups.push({
+        id: car.dealerId,
+        name: car.dealerName,
+        city: car.dealerCity,
+        country: car.dealerCountry,
+        cars: [car],
+      });
+  }
+  return groups;
 }
 
 export function compareDealerships(a: Dealership, b: Dealership): number {
@@ -202,8 +309,5 @@ export function compareDealerships(a: Dealership, b: Dealership): number {
   if (!left && !right) return a.name.localeCompare(b.name, 'sv');
   if (!left) return 1;
   if (!right) return -1;
-  const currency = (CURRENCY_ORDER[left.currency] ?? 9) - (CURRENCY_ORDER[right.currency] ?? 9);
-  if (currency !== 0) return currency;
-  if (left.price !== right.price) return left.price - right.price;
-  return a.name.localeCompare(b.name, 'sv');
+  return compareMoney(left, right) || a.name.localeCompare(b.name, 'sv');
 }

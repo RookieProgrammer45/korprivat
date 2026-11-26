@@ -2485,7 +2485,10 @@
           "van": "Furgoneta",
           "heavy": "Vehículo pesado",
           "other": "Otro"
-        }
+        },
+        "modelLabel": "Modelo",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "Nueva York"
       },
       "popular": {
         "label": "Populares:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Compara precios de coches en concesionarios",
-      "description": "Compara modelos con año, kilometraje, combustible y caja de cambios. El precio es el que publicó el concesionario."
+      "description": "Compara coches, camiones y motos nuevos y de ocasión por modelo y lugar. Las especificaciones y el precio anunciado salen del anuncio."
     },
     "eyebrow": "Concesionarios",
     "title": "Compara precios de vehículos",
-    "lead": "Cada ficha es un coche que el concesionario ha publicado, con modelo, año, kilometraje, combustible y caja de cambios. El precio es del concesionario. DriveLinkUp no vende el coche.",
+    "lead": "Cada ficha es un coche, camión o moto que un concesionario ha publicado, nuevo o de ocasión, con los datos del anuncio. El precio es el importe anunciado. DriveLinkUp no vende el vehículo.",
     "cityLabel": "Ciudad",
     "cityAll": "Todas las ciudades",
     "kindLabel": "Vehículo",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Coche",
       "van": "Furgoneta",
-      "heavy": "Vehículo pesado",
-      "other": "Otro"
+      "heavy": "Camión",
+      "other": "Otro",
+      "motorcycle": "Moto"
     },
     "filter": "Mostrar",
     "sourceNote": "El dato viene del sitio del concesionario y de la lista pública de miembros que enlaza allí. DriveLinkUp no lo ha verificado.",
-    "empty": "Todavía no hay coches con especificaciones publicadas en esta selección.",
+    "empty": "Ningún concesionario en este lugar ha publicado ese vehículo con especificaciones.",
     "offer": "{name} desde {price}",
     "noPrice": "Precio en el sitio del concesionario",
     "openSite": "Sitio web",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Tengo un concesionario y quiero aparecer en DriveLinkUp.\n\nEmpresa:\nCiudad:\nWeb:",
     "claim": "Este es mi concesionario",
     "claimAria": "Pide a DriveLinkUp que publique o actualice {name}",
-    "claimPrefill": "Represento a {name} y quiero que el anuncio se publique o se actualice en DriveLinkUp."
+    "claimPrefill": "Represento a {name} y quiero que el anuncio se publique o se actualice en DriveLinkUp.",
+    "modelLabel": "Modelo",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "Nueva York",
+    "conditionLabel": "Estado",
+    "conditionAny": "Nuevos y de ocasión",
+    "condition": {
+      "new": "Nuevo",
+      "used": "Ocasión"
+    },
+    "msrp": "PVP"
   }
 }

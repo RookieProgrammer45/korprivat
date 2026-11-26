@@ -2485,7 +2485,10 @@
           "van": "Transportbil",
           "heavy": "Tungt fordon",
           "other": "Övrigt"
-        }
+        },
+        "modelLabel": "Modell",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Populärt:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Jämför bilpriser hos handlare",
-      "description": "Jämför bilmodeller med årsmodell, miltal, drivmedel och växellåda. Priset är det handlaren publicerat."
+      "description": "Jämför nya och begagnade bilar, lastbilar och motorcyklar efter modell och plats. Specifikationer och det annonserade priset kommer från annonsen."
     },
     "eyebrow": "Bilhandlare",
     "title": "Jämför fordonspriser",
-    "lead": "Varje kort är en bil som handlaren publicerat, med modell, årsmodell, miltal, drivmedel och växellåda. Priset är handlarens. DriveLinkUp säljer inte bilen.",
+    "lead": "Varje kort är en bil, lastbil eller motorcykel som en handlare har publicerat, ny eller begagnad, med specifikationerna i annonsen. Priset är det annonserade beloppet. DriveLinkUp säljer inte fordonet.",
     "cityLabel": "Ort",
     "cityAll": "Alla orter",
     "kindLabel": "Fordon",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Personbil",
       "van": "Transportbil",
-      "heavy": "Tungt fordon",
-      "other": "Övrigt"
+      "heavy": "Lastbil",
+      "other": "Övrigt",
+      "motorcycle": "Motorcykel"
     },
     "filter": "Visa",
     "sourceNote": "Uppgiften kommer från handlarens webbplats och den offentliga medlemslista som länkar dit. Den är inte verifierad av DriveLinkUp.",
-    "empty": "Inga bilar med publicerade specifikationer i det här urvalet ännu.",
+    "empty": "Ingen handlare på den här platsen har publicerat det fordonet med specifikationer ännu.",
     "offer": "{name} från {price}",
     "noPrice": "Pris på handlarens webbplats",
     "openSite": "Webbplats",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Jag driver en bilhandel och vill bli listad på DriveLinkUp.\n\nFöretag:\nOrt:\nWebbplats:",
     "claim": "Det här är min bilhandel",
     "claimAria": "Be DriveLinkUp lista eller uppdatera {name}",
-    "claimPrefill": "Jag företräder {name} och vill att annonsen ska listas eller uppdateras på DriveLinkUp."
+    "claimPrefill": "Jag företräder {name} och vill att annonsen ska listas eller uppdateras på DriveLinkUp.",
+    "modelLabel": "Modell",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "Skick",
+    "conditionAny": "Nya och begagnade",
+    "condition": {
+      "new": "Ny",
+      "used": "Begagnad"
+    },
+    "msrp": "Rek. pris"
   }
 }

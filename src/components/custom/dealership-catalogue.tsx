@@ -6,16 +6,19 @@ import {
   type DealershipVehicle,
   type DealershipVehicleKind,
   dealerCountries,
+  dealersForCars,
   listDealerships,
   type PublishedCar,
-  publishedCars,
+  searchPublishedCars,
 } from '@/lib/discovery/dealerships';
+import { intlLocale } from '@/lib/intl-locale';
 import { localePath } from '@/lib/seo/locale-path';
 
-const KINDS: DealershipVehicleKind[] = ['car', 'van', 'heavy', 'other'];
+const KINDS: DealershipVehicleKind[] = ['car', 'van', 'heavy', 'motorcycle', 'other'];
+const CONDITIONS = ['new', 'used'] as const;
 
-function formatMoney(amount: number, currency: string) {
-  return `${new Intl.NumberFormat('sv-SE').format(amount)} ${currency}`;
+function formatMoney(amount: number, currency: string, locale: string) {
+  return `${new Intl.NumberFormat(intlLocale(locale)).format(amount)} ${currency}`;
 }
 
 function specLine(
@@ -29,17 +32,23 @@ function specLine(
       : vehicle.mileageUnit === 'mil'
         ? mileageMil(new Intl.NumberFormat('sv-SE').format(vehicle.mileage))
         : mileageKm(new Intl.NumberFormat('sv-SE').format(vehicle.mileage));
-  return [vehicle.year, mileage, vehicle.fuel, vehicle.gearbox].filter(Boolean).join(' · ');
+  return [vehicle.year, mileage, vehicle.fuel, vehicle.gearbox, vehicle.power, vehicle.color]
+    .filter(Boolean)
+    .join(' · ');
 }
 
 export async function DealershipCatalogue({
   city,
   kind,
   country,
+  q,
+  condition,
 }: {
   city?: string;
   kind?: string;
   country?: string;
+  q?: string;
+  condition?: string;
 }) {
   const t = await getTranslations('dealershipsPage');
   const locale = await getLocale();
@@ -47,28 +56,28 @@ export async function DealershipCatalogue({
   const countries = dealerCountries();
   const selectedCountry = countries.find((code) => code === country?.toUpperCase()) ?? null;
   const selectedKind = KINDS.find((value) => value === kind) ?? null;
+  const selectedCondition = CONDITIONS.find((value) => value === condition) ?? null;
+  const model = q?.trim() ?? '';
+  const place = city?.trim() ?? '';
   const businesses = listDealerships().filter((dealer) =>
     selectedCountry ? dealer.country === selectedCountry : false,
   );
-  const cars = publishedCars().filter(
-    (car) =>
-      (selectedCountry ? car.dealerCountry === selectedCountry : true) &&
-      (selectedKind ? car.vehicle.kind === selectedKind : true),
+  const cars = searchPublishedCars({
+    q: model,
+    city: place,
+    country: selectedCountry ?? undefined,
+    kind: selectedKind ?? undefined,
+    condition: selectedCondition ?? undefined,
+  });
+  const cities = [...new Set(cars.map((car) => car.dealerCity).filter(Boolean))].sort((a, b) =>
+    a.localeCompare(b, locale),
   );
-  const cities = [
-    ...new Set(
-      (selectedCountry
-        ? businesses.map((dealer) => dealer.city)
-        : cars.map((car) => car.dealerCity)
-      ).filter(Boolean),
-    ),
-  ].sort((a, b) => a.localeCompare(b, 'sv'));
-  const selectedCity = city && cities.includes(city) ? city : null;
-  const rows = cars
-    .filter((car) => (selectedCity ? car.dealerCity === selectedCity : true))
-    .slice(0, 60);
+  const rows = cars.slice(0, model || place ? 120 : 60);
+  const dealerGroups = model ? dealersForCars(rows) : [];
   const listedBusinesses = businesses
-    .filter((dealer) => (selectedCity ? dealer.city === selectedCity : true))
+    .filter((dealer) =>
+      place ? dealer.city.toLocaleLowerCase().includes(place.toLocaleLowerCase()) : true,
+    )
     .sort((a, b) => a.city.localeCompare(b.city, 'sv') || a.name.localeCompare(b.name, 'sv'))
     .slice(0, 240);
 
@@ -88,6 +97,30 @@ export async function DealershipCatalogue({
         action={localePath(locale, '/bilhandlare')}
       >
         <label className="flex min-w-40 flex-1 flex-col gap-1 text-small text-muted-foreground">
+          {t('modelLabel')}
+          <input
+            name="q"
+            defaultValue={model}
+            placeholder={t('modelPlaceholder')}
+            className="rounded-full border border-border bg-card px-3 py-2 text-foreground"
+          />
+        </label>
+        <label className="flex min-w-40 flex-1 flex-col gap-1 text-small text-muted-foreground">
+          {t('cityLabel')}
+          <input
+            name="city"
+            defaultValue={place}
+            placeholder={t('placePlaceholder')}
+            list="dealer-cities"
+            className="rounded-full border border-border bg-card px-3 py-2 text-foreground"
+          />
+          <datalist id="dealer-cities">
+            {cities.map((name) => (
+              <option key={name} value={name} />
+            ))}
+          </datalist>
+        </label>
+        <label className="flex min-w-40 flex-1 flex-col gap-1 text-small text-muted-foreground">
           {t('countryLabel')}
           <select
             name="country"
@@ -103,16 +136,16 @@ export async function DealershipCatalogue({
           </select>
         </label>
         <label className="flex min-w-40 flex-1 flex-col gap-1 text-small text-muted-foreground">
-          {t('cityLabel')}
+          {t('conditionLabel')}
           <select
-            name="city"
-            defaultValue={selectedCity ?? ''}
+            name="condition"
+            defaultValue={selectedCondition ?? ''}
             className="rounded-full border border-border bg-card px-3 py-2 text-foreground"
           >
-            <option value="">{t('cityAll')}</option>
-            {cities.map((name) => (
-              <option key={name} value={name}>
-                {name}
+            <option value="">{t('conditionAny')}</option>
+            {CONDITIONS.map((value) => (
+              <option key={value} value={value}>
+                {t(`condition.${value}`)}
               </option>
             ))}
           </select>
@@ -144,6 +177,40 @@ export async function DealershipCatalogue({
 
       {rows.length === 0 ? (
         <p className="mx-auto mt-10 max-w-3xl text-body text-muted-foreground">{t('empty')}</p>
+      ) : dealerGroups.length > 0 ? (
+        <div className="mx-auto mt-8 grid max-w-6xl gap-10">
+          {dealerGroups.map((group) => (
+            <section key={group.id}>
+              <h2 className="font-display text-h3 font-normal tracking-tight">{group.name}</h2>
+              <p className="mt-1 text-small text-muted-foreground">
+                {[group.city, regionNames.of(group.country) ?? group.country]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </p>
+              <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {group.cars.map((car) => (
+                  <CarCard
+                    key={car.id}
+                    car={car}
+                    specs={specLine(
+                      car.vehicle,
+                      (value) => t('mileageMil', { value }),
+                      (value) => t('mileageKm', { value }),
+                    )}
+                    price={formatMoney(car.vehicle.price, car.vehicle.currency, locale)}
+                    priceCaption={car.vehicle.priceKind === 'msrp' ? t('msrp') : null}
+                    conditionLabel={
+                      car.vehicle.condition ? t(`condition.${car.vehicle.condition}`) : null
+                    }
+                    claimHref={localePath(locale, dealerListingHref({ name: car.dealerName }))}
+                    claimLabel={t('claim')}
+                    claimAria={t('claimAria', { name: car.dealerName })}
+                  />
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
       ) : (
         <ul className="mx-auto mt-8 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {rows.map((car) => (
@@ -155,7 +222,11 @@ export async function DealershipCatalogue({
                 (value) => t('mileageMil', { value }),
                 (value) => t('mileageKm', { value }),
               )}
-              price={formatMoney(car.vehicle.price, car.vehicle.currency)}
+              price={formatMoney(car.vehicle.price, car.vehicle.currency, locale)}
+              priceCaption={car.vehicle.priceKind === 'msrp' ? t('msrp') : null}
+              conditionLabel={
+                car.vehicle.condition ? t(`condition.${car.vehicle.condition}`) : null
+              }
               claimHref={localePath(locale, dealerListingHref({ name: car.dealerName }))}
               claimLabel={t('claim')}
               claimAria={t('claimAria', { name: car.dealerName })}
@@ -164,7 +235,7 @@ export async function DealershipCatalogue({
         </ul>
       )}
 
-      {listedBusinesses.length > 0 ? (
+      {model ? null : listedBusinesses.length > 0 ? (
         <section className="mx-auto mt-16 max-w-5xl">
           <h2 className="font-display text-h2 font-normal tracking-tight">
             {t('businessesTitle')}
@@ -214,6 +285,8 @@ function CarCard({
   car,
   specs,
   price,
+  priceCaption,
+  conditionLabel,
   claimHref,
   claimLabel,
   claimAria,
@@ -221,6 +294,8 @@ function CarCard({
   car: PublishedCar;
   specs: string;
   price: string;
+  priceCaption: string | null;
+  conditionLabel: string | null;
   claimHref: string;
   claimLabel: string;
   claimAria: string;
@@ -240,9 +315,19 @@ function CarCard({
           ) : null}
         </div>
         <div className="flex flex-1 flex-col gap-2 p-4">
-          <h2 className="font-display text-h4 font-normal tracking-tight">{car.vehicle.name}</h2>
+          <h3 className="font-display text-h4 font-normal tracking-tight">{car.vehicle.name}</h3>
+          {conditionLabel ? (
+            <p className="text-small text-muted-foreground">{conditionLabel}</p>
+          ) : null}
           <p className="text-small text-muted-foreground">{specs}</p>
-          <p className="mt-auto font-display text-h3 font-normal tracking-tight">{price}</p>
+          {priceCaption ? (
+            <p className="mt-auto text-small text-muted-foreground">{priceCaption}</p>
+          ) : null}
+          <p
+            className={`${priceCaption ? '' : 'mt-auto '}font-display text-h3 font-normal tracking-tight`}
+          >
+            {price}
+          </p>
           <p className="truncate text-small text-muted-foreground">
             {car.dealerName}
             {car.dealerCity ? ` · ${car.dealerCity}` : ''}

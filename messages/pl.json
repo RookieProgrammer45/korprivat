@@ -2485,7 +2485,10 @@
           "van": "Samochód dostawczy",
           "heavy": "Pojazd ciężki",
           "other": "Inne"
-        }
+        },
+        "modelLabel": "Model",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "Nowy Jork"
       },
       "popular": {
         "label": "Popularne:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Porównaj ceny samochodów u dealerów",
-      "description": "Porównaj modele z rocznikiem, przebiegiem, paliwem i skrzynią biegów. Cena jest tą, którą opublikował dealer."
+      "description": "Porównuj nowe i używane samochody, ciężarówki i motocykle według modelu i miejsca. Specyfikacja i ogłoszona cena pochodzą z ogłoszenia."
     },
     "eyebrow": "Dealerzy",
     "title": "Porównaj ceny pojazdów",
-    "lead": "Każda karta to samochód opublikowany przez dealera, z modelem, rocznikiem, przebiegiem, paliwem i skrzynią biegów. Cena należy do dealera. DriveLinkUp nie sprzedaje samochodu.",
+    "lead": "Każda karta to samochód, ciężarówka albo motocykl, który dealer opublikował jako nowy lub używany, ze specyfikacją z ogłoszenia. Cena jest kwotą z ogłoszenia. DriveLinkUp nie sprzedaje pojazdu.",
     "cityLabel": "Miejscowość",
     "cityAll": "Wszystkie miejscowości",
     "kindLabel": "Pojazd",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Samochód osobowy",
       "van": "Samochód dostawczy",
-      "heavy": "Pojazd ciężki",
-      "other": "Inne"
+      "heavy": "Ciężarówka",
+      "other": "Inne",
+      "motorcycle": "Motocykl"
     },
     "filter": "Pokaż",
     "sourceNote": "Informacja pochodzi ze strony dealera i z publicznej listy członków, która do niej prowadzi. DriveLinkUp jej nie zweryfikował.",
-    "empty": "W tym wyborze nie ma jeszcze samochodów z opublikowanymi danymi.",
+    "empty": "Żaden dealer w tym miejscu nie opublikował jeszcze tego pojazdu ze specyfikacją.",
     "offer": "{name} od {price}",
     "noPrice": "Cena na stronie dealera",
     "openSite": "Strona",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Prowadzę salon samochodowy i chcę być na DriveLinkUp.\n\nFirma:\nMiasto:\nStrona:",
     "claim": "To mój salon samochodowy",
     "claimAria": "Poproś DriveLinkUp o dodanie lub aktualizację {name}",
-    "claimPrefill": "Reprezentuję {name} i chcę, aby ogłoszenie zostało dodane lub zaktualizowane na DriveLinkUp."
+    "claimPrefill": "Reprezentuję {name} i chcę, aby ogłoszenie zostało dodane lub zaktualizowane na DriveLinkUp.",
+    "modelLabel": "Model",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "Nowy Jork",
+    "conditionLabel": "Stan",
+    "conditionAny": "Nowe i używane",
+    "condition": {
+      "new": "Nowy",
+      "used": "Używany"
+    },
+    "msrp": "Cena katalogowa"
   }
 }

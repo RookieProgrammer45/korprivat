@@ -2485,7 +2485,10 @@
           "van": "Furgone",
           "heavy": "Veicolo pesante",
           "other": "Altro"
-        }
+        },
+        "modelLabel": "Modello",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Popolari:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Confronta i prezzi delle auto dai concessionari",
-      "description": "Confronta i modelli con anno, chilometraggio, carburante e cambio. Il prezzo è quello pubblicato dal concessionario."
+      "description": "Confronta auto, camion e moto nuovi e usati per modello e luogo. Specifiche e prezzo annunciato provengono dall'annuncio."
     },
     "eyebrow": "Concessionarie",
     "title": "Confronta i prezzi dei veicoli",
-    "lead": "Ogni scheda è un'auto pubblicata dal concessionario, con modello, anno, chilometraggio, carburante e cambio. Il prezzo è del concessionario. DriveLinkUp non vende l'auto.",
+    "lead": "Ogni scheda è un'auto, un camion o una moto pubblicati da un concessionario, nuovi o usati, con i dati dell'annuncio. Il prezzo è l'importo annunciato. DriveLinkUp non vende il veicolo.",
     "cityLabel": "Città",
     "cityAll": "Tutte le città",
     "kindLabel": "Veicolo",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Auto",
       "van": "Furgone",
-      "heavy": "Veicolo pesante",
-      "other": "Altro"
+      "heavy": "Camion",
+      "other": "Altro",
+      "motorcycle": "Moto"
     },
     "filter": "Mostra",
     "sourceNote": "Il dato viene dal sito del concessionario e dall'elenco pubblico dei membri che rimanda lì. DriveLinkUp non lo ha verificato.",
-    "empty": "Nessuna auto con specifiche pubblicate in questa selezione.",
+    "empty": "Nessun concessionario in questo luogo ha pubblicato quel veicolo con le specifiche.",
     "offer": "{name} da {price}",
     "noPrice": "Prezzo sul sito del concessionario",
     "openSite": "Sito web",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Gestisco una concessionaria e voglio essere elencato su DriveLinkUp.\n\nAzienda:\nCittà:\nSito web:",
     "claim": "Questa è la mia concessionaria",
     "claimAria": "Chiedi a DriveLinkUp di elencare o aggiornare {name}",
-    "claimPrefill": "Rappresento {name} e voglio che l'annuncio sia aggiunto o aggiornato su DriveLinkUp."
+    "claimPrefill": "Rappresento {name} e voglio che l'annuncio sia aggiunto o aggiornato su DriveLinkUp.",
+    "modelLabel": "Modello",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "Condizione",
+    "conditionAny": "Nuovi e usati",
+    "condition": {
+      "new": "Nuovo",
+      "used": "Usato"
+    },
+    "msrp": "Prezzo di listino"
   }
 }

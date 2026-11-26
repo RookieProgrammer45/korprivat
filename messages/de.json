@@ -2485,7 +2485,10 @@
           "van": "Transporter",
           "heavy": "Schweres Fahrzeug",
           "other": "Sonstiges"
-        }
+        },
+        "modelLabel": "Modell",
+        "modelPlaceholder": "Volvo",
+        "placePlaceholder": "New York"
       },
       "popular": {
         "label": "Beliebt:",
@@ -4007,11 +4010,11 @@
   "dealershipsPage": {
     "meta": {
       "title": "Autopreise bei Händlern vergleichen",
-      "description": "Vergleiche Automodelle mit Baujahr, Kilometerstand, Kraftstoff und Getriebe. Der Preis ist der, den der Händler veröffentlicht hat."
+      "description": "Neue und gebrauchte Autos, Lkw und Motorräder nach Modell und Ort vergleichen. Angaben und der angegebene Preis stammen aus dem Inserat."
     },
     "eyebrow": "Autohändler",
     "title": "Fahrzeugpreise vergleichen",
-    "lead": "Jede Karte ist ein Auto, das der Händler veröffentlicht hat, mit Modell, Baujahr, Kilometerstand, Kraftstoff und Getriebe. Der Preis ist der des Händlers. DriveLinkUp verkauft das Auto nicht.",
+    "lead": "Jede Karte ist ein Auto, Lkw oder Motorrad, das ein Händler neu oder gebraucht mit den Angaben des Inserats veröffentlicht hat. Der Preis ist der angegebene Betrag. DriveLinkUp verkauft das Fahrzeug nicht.",
     "cityLabel": "Ort",
     "cityAll": "Alle Orte",
     "kindLabel": "Fahrzeug",
@@ -4019,12 +4022,13 @@
     "kind": {
       "car": "Pkw",
       "van": "Transporter",
-      "heavy": "Schweres Fahrzeug",
-      "other": "Sonstiges"
+      "heavy": "Lkw",
+      "other": "Sonstiges",
+      "motorcycle": "Motorrad"
     },
     "filter": "Anzeigen",
     "sourceNote": "Die Angabe stammt von der Website des Händlers und der öffentlichen Mitgliederliste, die dorthin verlinkt. DriveLinkUp hat sie nicht geprüft.",
-    "empty": "In dieser Auswahl gibt es noch keine Autos mit veröffentlichten Angaben.",
+    "empty": "Kein Händler an diesem Ort hat dieses Fahrzeug mit Angaben veröffentlicht.",
     "offer": "{name} ab {price}",
     "noPrice": "Preis auf der Website des Händlers",
     "openSite": "Website",
@@ -4038,6 +4042,16 @@
     "listPrefill": "Ich betreibe ein Autohaus und möchte auf DriveLinkUp gelistet werden.\n\nUnternehmen:\nOrt:\nWebsite:",
     "claim": "Das ist mein Autohaus",
     "claimAria": "DriveLinkUp bitten, {name} zu listen oder zu aktualisieren",
-    "claimPrefill": "Ich vertrete {name} und möchte den Eintrag auf DriveLinkUp hinzufügen oder aktualisieren."
+    "claimPrefill": "Ich vertrete {name} und möchte den Eintrag auf DriveLinkUp hinzufügen oder aktualisieren.",
+    "modelLabel": "Modell",
+    "modelPlaceholder": "Volvo",
+    "placePlaceholder": "New York",
+    "conditionLabel": "Zustand",
+    "conditionAny": "Neu und gebraucht",
+    "condition": {
+      "new": "Neu",
+      "used": "Gebraucht"
+    },
+    "msrp": "UVP"
   }
 }

@@ -7,7 +7,15 @@ import { siteName } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
 
-type Props = { searchParams: Promise<{ city?: string; kind?: string; country?: string }> };
+type Props = {
+  searchParams: Promise<{
+    city?: string;
+    kind?: string;
+    country?: string;
+    q?: string;
+    condition?: string;
+  }>;
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dealershipsPage.meta');
@@ -29,6 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function DealershipsPage({ searchParams }: Props) {
-  const { city, kind, country } = await searchParams;
-  return <DealershipCatalogue city={city} kind={kind} country={country} />;
+  const { city, kind, country, q, condition } = await searchParams;
+  return (
+    <DealershipCatalogue city={city} kind={kind} country={country} q={q} condition={condition} />
+  );
 }
