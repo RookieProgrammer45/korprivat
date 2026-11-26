@@ -16,6 +16,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { BookingList } from '@/lib/contracts/auth';
 import type { BookingPaymentStatus } from '@/lib/contracts/bookings';
+import { intlLocale } from '@/lib/intl-locale';
 
 export function StudentDashboard() {
   const t = useTranslations('dashboard.student');
@@ -206,7 +207,7 @@ function formatDate(iso: string, locale: string): string {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       dateStyle: 'medium',
       timeStyle: 'short',
       timeZone: 'Europe/Stockholm',

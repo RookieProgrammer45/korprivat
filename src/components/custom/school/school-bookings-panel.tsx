@@ -11,6 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { type SchoolBookingItem, SchoolBookingList } from '@/lib/contracts/provider-operations';
+import { intlLocale } from '@/lib/intl-locale';
 
 type Props = { organizationId: string };
 
@@ -137,7 +138,7 @@ function formatDate(iso: string, locale: string): string {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       dateStyle: 'medium',
       timeStyle: 'short',
       timeZone: 'Europe/Stockholm',

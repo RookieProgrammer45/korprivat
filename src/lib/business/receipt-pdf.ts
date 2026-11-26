@@ -3,6 +3,7 @@ import { getBookingAccessToken, matchesLearnerAccessToken } from '@/lib/business
 import { assertTokenMatches } from '@/lib/business/escrow';
 import { isReceiptPaymentStatus, type ReceiptRole } from '@/lib/business/receipts';
 import { prisma } from '@/lib/db';
+import { intlLocale } from '@/lib/intl-locale';
 import type { DocumentSpec } from '@/lib/pdf/schema';
 import { requireAuth, type SessionUser } from '@/lib/require-auth';
 
@@ -144,12 +145,12 @@ const PDF_COPY = {
 export function buildReceiptPdfSpec(receipt: CanonicalReceiptRow): DocumentSpec {
   const locale = receipt.locale === 'en' ? 'en' : 'sv';
   const copy = PDF_COPY[locale];
-  const formattedDate = new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  const formattedDate = new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'full',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',
   }).format(receipt.scheduledAt);
-  const formattedUsd = new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  const formattedUsd = new Intl.NumberFormat(intlLocale(locale), {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,

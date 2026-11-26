@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { intlLocale } from '@/lib/intl-locale';
 
 export type GoogleReviewQuote = {
   id: string;
@@ -163,13 +164,13 @@ function GoogleG() {
 }
 
 function formatNumber(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     maximumFractionDigits: 1,
   }).format(value);
 }
 
 function formatDay(iso: string, locale: string): string {
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeZone: 'Europe/Stockholm',
   }).format(new Date(iso));

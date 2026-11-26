@@ -5,6 +5,8 @@
 // renderEmail() auto-escapes its heading/body/cta/footer, so pass RAW values (don't escapeHtml() them
 // first — that double-escapes). escapeHtml() is only for when you hand-build an html string yourself.
 
+import { intlLocale } from '@/lib/intl-locale';
+
 /** Subject + rendered bodies — spread into sendEmail({ to, ... }). */
 export interface EmailContent {
   subject: string;
@@ -435,7 +437,7 @@ function formatBookingTimestamp(lessonDate: string, locale: 'sv' | 'en'): string
   const date = new Date(lessonDate);
   if (Number.isNaN(date.getTime())) return lessonDate;
 
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'full',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',

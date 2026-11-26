@@ -28,6 +28,7 @@ import {
   InstructorRecommendations,
   type RecommendedInstructor,
 } from '@/lib/contracts/instructor-recommendations';
+import { intlLocale } from '@/lib/intl-locale';
 
 type State =
   | { kind: 'loading' }
@@ -188,7 +189,7 @@ function formatNextSlotPill(iso: string, locale: 'en' | 'sv'): string {
 }
 
 function formatPercent(value: number, locale: 'en' | 'sv'): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     maximumFractionDigits: 0,
   }).format(value * 100);
 }

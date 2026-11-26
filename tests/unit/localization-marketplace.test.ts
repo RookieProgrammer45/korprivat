@@ -167,6 +167,29 @@ describe('public marketplace localization', () => {
     }
   });
 
+  it('keeps homepage comparison titles in the page language', () => {
+    for (const locale of locales) {
+      if (locale === 'en') continue;
+      const hero = (
+        loadMessages(locale) as {
+          publicHome: {
+            hero: { titleDealer: string; titleSchool: string; search: { modeSchool: string } };
+          };
+        }
+      ).publicHome.hero;
+      expect(hero.titleDealer).not.toBe('Compare car prices.');
+      expect(hero.titleSchool).not.toBe('Compare driving schools.');
+      expect(hero.search.modeSchool).not.toBe('Driving school');
+    }
+    const danish = loadMessages('da') as {
+      publicHome: {
+        hero: { search: { submit: string }; popular: { links: { goteborg: string } } };
+      };
+    };
+    expect(danish.publicHome.hero.search.submit).toBe('Søg');
+    expect(danish.publicHome.hero.popular.links.goteborg).toBe('Gøteborg');
+  });
+
   it('does not reintroduce retired public marketplace claims', () => {
     const publicCopy = JSON.stringify(
       Object.fromEntries(locales.map((locale) => [locale, loadMessages(locale)])),

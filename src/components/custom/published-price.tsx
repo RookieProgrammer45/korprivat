@@ -5,6 +5,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
+import { intlLocale } from '@/lib/intl-locale';
 
 type Prices = NonNullable<InstructorFilteredItem['publishedPrices']>;
 
@@ -257,11 +258,11 @@ function money(
 }
 
 function formatAmount(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount);
+  return new Intl.NumberFormat(intlLocale(locale)).format(amount);
 }
 
 function formatDate(isoDate: string, locale: string): string {
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     day: 'numeric',
     month: 'short',
     year: 'numeric',

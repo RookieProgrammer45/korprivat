@@ -34,7 +34,7 @@
       "profile": "Profil",
       "locations": "Steder",
       "cityStockholm": "Stockholm",
-      "cityGoteborg": "Gøteborg",
+      "cityGoteborg": "Göteborg",
       "cityMalmo": "Malmö",
       "cityUppsala": "Uppsala",
       "cityVasteras": "Västerås",
@@ -458,7 +458,7 @@
         "linkPricing": "Prissetting",
         "linkFaq": "Spørsmål",
         "linkBlog": "Blogg",
-        "faqTitle": "Malmö FAQ",
+        "faqTitle": "Vanlige spørsmål om Malmö",
         "faq1q": "Vises prisene før registrering?",
         "faq1a": "Ja. Timepriser publiseres på hver oppføring, slik at du kan sammenligne før du oppretter en konto.",
         "faq2q": "Kan jeg trene privat også?",
@@ -593,13 +593,13 @@
     "errorBody": "Prøv igjen om et øyeblikk.",
     "retry": "Prøv igjen",
     "nextAvailableLabel": "Neste tilgjengelig",
-    "noUpcomingSlot": "Ingen kommende spilleautomater oppført",
+    "noUpcomingSlot": "Ingen kommende tid er listet",
     "languageLabel": "Språk",
     "phoneLabel": "Telefon",
     "englishAvailable": "Engelsk tilgjengelig",
     "swedishAvailable": "svensk",
     "slotLabel": "Neste tilgjengelig",
-    "slotMonthDay": "{monthShort} {day}",
+    "slotMonthDay": "{day} {monthShort}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "geoTitle": "Søk i nærheten av deg",
@@ -654,7 +654,7 @@
       "A2": "A2",
       "A": "Motorsykkel",
       "B": "Bil",
-      "BE": "\n\t\t\t\tTrailer\t\t\t"
+      "BE": "Tilhenger"
     },
     "comparison": {
       "eyebrow": "Huskeliste",
@@ -718,9 +718,9 @@
   "instructorDetail": {
     "meta": {
       "title": "Kjøreskoleoppføring",
-      "titleNamed": "{name} — driving school in {city}",
+      "titleNamed": "{name} — kjøreskole i {city}",
       "description": "Gjennomgå en skoles kategorier, publiserte pris og by. Ta kontakt med skolen for å avtale time.",
-      "descriptionNamed": "{name} in {city} — from {rate} SEK/lesson."
+      "descriptionNamed": "{name} i {city}. Kjøretime fra {rate} kr. Kontakt skolen."
     },
     "profileEyebrow": "Kjøreskoleoppføring",
     "locatedIn": "Basert i {city}",
@@ -742,7 +742,7 @@
       "A2": "A2",
       "A": "Motorsykkel",
       "B": "Bil",
-      "BE": "\n\t\t\t\tTrailer\t\t\t",
+      "BE": "Tilhenger",
       "C1": "C1",
       "C1E": "C1E",
       "C": "C",
@@ -787,21 +787,21 @@
     "reviews": {
       "none": "Ingen anmeldelser ennå",
       "summary": "{average} · {antall, flertall, én {# anmeldelse} andre {# anmeldelser}}",
-      "googleSummary": "{average} · {count, plural, one {# review} other {# reviews}} on Google"
+      "googleSummary": "{average} · {count, plural, one {# omtale} other {# omtaler}} på Google"
     },
     "availability": {
-      "none": "Ingen kommende spilleautomater oppført"
+      "none": "Ingen kommende tid er listet"
     },
-    "loadError": "We could not load this profile.",
+    "loadError": "Profilen kunne ikke lastes.",
     "notFoundTitle": "Finner ikke skoleoppføringen",
-    "notFoundBody": "This listing may no longer be available. Return to the directory to browse current schools.",
+    "notFoundBody": "Oppføringen kan være fjernet. Gå tilbake til katalogen for å se aktuelle skoler.",
     "backDirectory": "Tilbake til skolene",
     "fallbackError": "Noe gikk galt under innlasting av denne profilen.",
     "bookingModeEyebrow": "Hvordan denne oppføringen fungerer",
     "bookingMode": {
       "instant": {
         "title": "Umiddelbar bestilling",
-        "body": "Velg en åpen spilleautomat og fortsett til vertskasse for å sikre leksjonen."
+        "body": "Velg en ledig tid og gå videre til den eksterne kassen for å sikre timen."
       },
       "request": {
         "title": "Forespørsel om å bestille",
@@ -809,7 +809,7 @@
       },
       "contact": {
         "title": "Katalogoppføring",
-        "body": "This school is listed with its information and prices. Use Contact the school to reach them directly."
+        "body": "Skolen vises med informasjon og priser. Bruk Kontakt skolen for å nå dem direkte."
       },
       "paymentThroughSchool": {
         "title": "Betaler gjennom en kjøreskole",
@@ -1034,10 +1034,10 @@
     },
     "visual": {
       "label": "Kjøretimer",
-      "role": "carousel",
+      "role": "karusell",
       "goTo": "Vis bilde {n}",
       "lessonAlt": "En sjåfør som holder rattet på en skumringsvei",
-      "schoolAlt": "{name} in {city}"
+      "schoolAlt": "{name} i {city}"
     },
     "signIn": {
       "title": "Logg inn",
@@ -1567,7 +1567,7 @@
       "recommended": {
         "eyebrow": "Anbefalte kjøreskoler",
         "title": "Skoler som passer din bestilling",
-        "lead": "AI-rangerte kamper for din valgte kategori, by og tilgjengelighet – trukket fra pilotkohorten og sortert etter passform, bymatch og tilgjengelige spilleautomater.",
+        "lead": "Treff for valgt kategori, by og ledighet — fra pilotgruppen, sortert etter treff, by og ledige tider.",
         "viewProfile": "Vis profil",
         "nextSlot": "Neste åpne spor · {when}",
         "portraitAlt": "Bilde for {name}, kjøreskole",
@@ -1721,7 +1721,7 @@
         "durationHint": "Mellom 15 og 240.",
         "submitBulk": "Slipp sporene",
         "submitBulkSubmitting": "Slipper …",
-        "submitBulkDone": "Spilleautomater utgitt",
+        "submitBulkDone": "Tider opprettet",
         "submitSingle": "Legg til spor",
         "submitSingleSubmitting": "Legger til …",
         "submitSingleDone": "Spor lagt til",
@@ -1729,7 +1729,7 @@
         "invalidDate": "Velg en gyldig start- og sluttdato/tid.",
         "loadError": "Kunne ikke laste inn sporene dine.",
         "retry": "Prøv igjen",
-        "emptyTitle": "Ingen kommende spilleautomater.",
+        "emptyTitle": "Ingen kommende tider.",
         "emptyBody": "Slipp noen timer i ukeskjemaet ovenfor – elevene vil se dem og bestille.",
         "upcomingTitle": "Upcoming slots",
         "bookedCount": "{count, plural, one {# booked} other {# booked}}",
@@ -2008,16 +2008,16 @@
       "A2": "A2",
       "A": "Motorsykkel",
       "B": "Bil",
-      "BE": "\n\t\t\t\tTrailer\t\t\t"
+      "BE": "Tilhenger"
     },
     "nextAvailableLabel": "Neste tilgjengelig",
-    "noUpcomingSlot": "Ingen kommende spilleautomater oppført",
+    "noUpcomingSlot": "Ingen kommende tid er listet",
     "englishAvailable": "Engelsk tilgjengelig",
     "swedishAvailable": "svensk",
     "profileCta": "Vis profil",
     "slotLabel": "Neste tilgjengelig",
     "slotLabelRelative": "{when}",
-    "slotMonthDay": "{monthShort} {day}",
+    "slotMonthDay": "{day} {monthShort}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "typeSchool": "Skole",
@@ -2345,9 +2345,9 @@
   "consentForm": {
     "signupCheckbox": "Jeg har lest og godtar personvernreglene.",
     "signupCheckboxLinkText": "Personvernerklæring",
-    "signupCheckboxError": "Tick the box to confirm you've read the Privacy Policy.",
+    "signupCheckboxError": "Kryss av for å bekrefte at du har lest personvernerklæringen.",
     "licenseCheckbox": "Jeg godtar at DriveLinkUp kan lagre undervisningslisensfilen jeg laster opp, og relaterte personlige data, slik at den kan gjennomgå oppføringen. Dette er ikke en automatisk sjekk med Transportstyrelsen.",
-    "licenseCheckboxError": "Tick the box to confirm you consent to processing your licence data."
+    "licenseCheckboxError": "Kryss av for å bekrefte at du samtykker til behandling av løyveopplysningene."
   },
   "learnerSubscription": {
     "removed": "Elevabonnementet er ikke lenger en del av DriveLinkUp. Skolens publiserte bestillingspris vises før utsjekking, uten separat DriveLinkUp-avgift."
@@ -2399,13 +2399,13 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "Compare car prices and driving schools.",
-      "metaTitle": "Compare car prices and driving schools",
-      "metaDescription": "Compare car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
-      "body": "DriveLinkUp is where you compare car prices, driving schools, and the rest of cars. Today that is published prices from schools and dealers.",
+      "title": "Sammenlign bilpriser og kjøreskoler.",
+      "metaTitle": "Sammenlign bilpriser og kjøreskoler",
+      "metaDescription": "Sammenlign bilpriser og kjøreskoler. Prisen er den virksomheten har publisert. Gratis katalog for alle.",
+      "body": "DriveLinkUp er stedet der du sammenligner bilpriser, kjøreskoler og det som hører til bilen. I dag er det publiserte priser fra skoler og forhandlere.",
       "primaryCta": "Finn en skole",
       "instructorCta": "Jeg jobber på en kjøreskole",
-      "marketplaceTag": "Car prices · Driving schools",
+      "marketplaceTag": "Bilpriser · Kjøreskoler",
       "schoolCta": "Jeg driver en skole",
       "panelEyebrow": "Hvordan det fungerer",
       "panelTitle": "Skolen står bak undervisningen",
@@ -2475,16 +2475,16 @@
           "roma": "Roma",
           "warszawa": "Warszawa"
         },
-        "modeLabel": "What to compare",
-        "modeSchool": "Driving school",
-        "modeDealer": "Dealer",
-        "kindLabel": "Vehicle",
-        "kindAny": "All vehicles",
+        "modeLabel": "Hva vil du sammenligne",
+        "modeSchool": "Kjøreskole",
+        "modeDealer": "Bilforhandler",
+        "kindLabel": "Kjøretøy",
+        "kindAny": "Alle kjøretøy",
         "kinds": {
-          "car": "Car",
-          "van": "Van",
-          "heavy": "Heavy vehicle",
-          "other": "Other"
+          "car": "Personbil",
+          "van": "Varebil",
+          "heavy": "Tungt kjøretøy",
+          "other": "Annet"
         }
       },
       "popular": {
@@ -2492,7 +2492,7 @@
         "links": {
           "categoryB": "Bil · B",
           "stockholm": "Stockholm",
-          "goteborg": "Gøteborg",
+          "goteborg": "Göteborg",
           "malmo": "Malmö",
           "oslo": "Oslo",
           "sydney": "Sydney",
@@ -2510,14 +2510,14 @@
         "price": "Publisert pris i kroner",
         "cancellation": "Ta kontakt med skolen for vilkår"
       },
-      "titleSchool": "Compare driving schools.",
-      "titleDealer": "Compare car prices.",
+      "titleSchool": "Sammenlign kjøreskoler.",
+      "titleDealer": "Sammenlign bilpriser.",
       "facts": {
-        "lesson": "Driving lesson",
-        "vehicle": "Vehicle",
-        "from": "from {price}",
-        "lessonFallback": "Published lesson prices",
-        "vehicleFallback": "Published vehicle prices"
+        "lesson": "Kjøretime",
+        "vehicle": "Kjøretøy",
+        "from": "fra {price}",
+        "lessonFallback": "Publiserte timepriser",
+        "vehicleFallback": "Publiserte kjøretøypriser"
       }
     },
     "quickLinks": {
@@ -3674,12 +3674,12 @@
     "linkBlog": "Guider",
     "filteredEmpty": "Ingen annonse for denne førerkortklassen i {name} akkurat nå.",
     "headerTitleCityPriced": "Kjøretimer i {name} fra {price} kr",
-    "compareTitle": "Published driving lessons",
-    "compareCaption": "Cheapest first. The price is what the school published on its website.",
-    "compareFullLink": "Open the full driving-lesson comparison for {name}",
-    "compareSchool": "School",
-    "compareLesson": "Lesson",
-    "compareLength": "Length",
+    "compareTitle": "Publiserte kjøretimer",
+    "compareCaption": "Billigst først. Prisen er det skolen har publisert på nettstedet sitt.",
+    "compareFullLink": "Åpne hele sammenligningen av kjøretimer i {name}",
+    "compareSchool": "Skole",
+    "compareLesson": "Kjøretime",
+    "compareLength": "Lengde",
     "compareMinutes": "{minutes} min"
   },
   "termsPage": {
@@ -3939,7 +3939,7 @@
     "honestSeats": "Gjenstående seter og priser er visninger, ikke en vent eller en bekreftelse.",
     "empty": "Ingen publiserte økter i denne kommunen.",
     "when": "{when}",
-    "price": "{price} SEK",
+    "price": "{price} kr",
     "seats": "{count, plural, one {# plass vist} other {# plasser vist}}",
     "requestCta": "Be om denne økten",
     "recipient": "Forespørselen lagres av DriveLinkUp og venter på skolens vurdering. Det reserveres ikke sete.",
@@ -3949,8 +3949,8 @@
     "requestError": "Forespørselen kunne ikke lagres."
   },
   "publishedPrice": {
-    "amount": "SEK {amount}",
-    "amountCurrency": "{currency} {amount}",
+    "amount": "{amount} kr",
+    "amountCurrency": "{amount} {currency}",
     "minutes": "{minutes} min",
     "source": "Fra skolens nettsted, {date}.",
     "sourceLink": "Se prislisten",
@@ -3978,62 +3978,62 @@
   },
   "lessonComparison": {
     "meta": {
-      "title": "Compare driving lessons in {name} – from {price} SEK",
-      "description": "Compare {count} published driving lessons in {name}. Cheapest first from {price} SEK. The price is from the school's own website."
+      "title": "Sammenlign kjøretimer i {name} – fra {price} kr",
+      "description": "Sammenlign {count} publiserte kjøretimer i {name}. Billigst først fra {price} kr. Prisen er fra skolens eget nettsted."
     },
-    "heading": "Compare driving lessons in {name} from {price} SEK",
-    "lead": "{count} schools in {name} have published a lesson price. Cheapest right now: {price} SEK. Contact the school to book.",
-    "breadcrumbLocations": "Locations",
-    "breadcrumbLesson": "Lesson",
-    "tableTitle": "Driving lessons in {name}",
-    "tableCaption": "Cheapest first. Price and length come from the school's own website.",
+    "heading": "Sammenlign kjøretimer i {name} fra {price} kr",
+    "lead": "{count} skoler i {name} har publisert en kjøretime. Billigst akkurat nå: {price} kr. Kontakt skolen for å bestille.",
+    "breadcrumbLocations": "Steder",
+    "breadcrumbLesson": "Kjøretime",
+    "tableTitle": "Kjøretimer i {name}",
+    "tableCaption": "Billigst først. Pris og lengde kommer fra skolens eget nettsted.",
     "colRank": "#",
-    "colSchool": "School",
-    "colLesson": "Lesson",
-    "colLength": "Length",
-    "colPerMinute": "SEK/min",
+    "colSchool": "Skole",
+    "colLesson": "Kjøretime",
+    "colLength": "Lengde",
+    "colPerMinute": "Kr/min",
     "minutes": "{minutes} min",
-    "sourceNote": "The price is what the school published on its website. DriveLinkUp has not verified it and does not use it as a booking amount.",
-    "cardsHeading": "Schools with a published price in {name}",
-    "faqTitle": "FAQ",
-    "faq1q": "Are the prices in {name} up to date?",
-    "faq1a": "They were read from each school's own website. The school may have changed the price since — open the school's price list from the listing.",
-    "faq2q": "Does DriveLinkUp charge for the comparison?",
-    "faq2a": "No. The directory is free. You pay the school, not DriveLinkUp.",
-    "backToHub": "All driving schools in {name}",
-    "offerLesson": "Driving lesson",
-    "offerMinutes": "Driving lesson {minutes} min"
+    "sourceNote": "Prisen er det skolen har publisert på nettstedet sitt. DriveLinkUp har ikke verifisert den, og den brukes ikke som bestillingsbeløp.",
+    "cardsHeading": "Skoler med publisert pris i {name}",
+    "faqTitle": "Vanlige spørsmål",
+    "faq1q": "Er prisene i {name} oppdaterte?",
+    "faq1a": "De er hentet fra hver skoles eget nettsted. Skolen kan ha endret prisen etterpå — åpne skolens prisliste fra oppføringen.",
+    "faq2q": "Tar DriveLinkUp betalt for sammenligningen?",
+    "faq2a": "Nei. Katalogen er gratis. Du betaler skolen, ikke DriveLinkUp.",
+    "backToHub": "Alle kjøreskoler i {name}",
+    "offerLesson": "Kjøretime",
+    "offerMinutes": "Kjøretime {minutes} min"
   },
   "dealershipsPage": {
     "meta": {
-      "title": "Compare vehicle prices at dealers",
-      "description": "Compare car models with year, mileage, fuel and gearbox. The price is the one the dealer published."
+      "title": "Sammenlign bilpriser hos forhandlere",
+      "description": "Sammenlign bilmodeller med årsmodell, kilometerstand, drivstoff og girkasse. Prisen er den forhandleren har publisert."
     },
     "eyebrow": "Bilforhandlere",
-    "title": "Compare vehicle prices",
-    "lead": "Each card is a car the dealer has published, with the model, year, mileage, fuel and gearbox. The price is the dealer's. DriveLinkUp does not sell the car.",
-    "cityLabel": "City",
-    "cityAll": "All cities",
-    "kindLabel": "Vehicle",
-    "kindAll": "All vehicles",
+    "title": "Sammenlign kjøretøypriser",
+    "lead": "Hvert kort er en bil forhandleren har publisert, med modell, årsmodell, kilometerstand, drivstoff og girkasse. Prisen er forhandlerens. DriveLinkUp selger ikke bilen.",
+    "cityLabel": "Sted",
+    "cityAll": "Alle steder",
+    "kindLabel": "Kjøretøy",
+    "kindAll": "Alle kjøretøy",
     "kind": {
-      "car": "Car",
-      "van": "Van",
-      "heavy": "Heavy vehicle",
-      "other": "Other"
+      "car": "Personbil",
+      "van": "Varebil",
+      "heavy": "Tungt kjøretøy",
+      "other": "Annet"
     },
-    "filter": "Show",
-    "sourceNote": "Details come from the dealer's website and the public member list that links to it. DriveLinkUp has not verified them.",
-    "empty": "No cars with published specifications in this selection yet.",
-    "offer": "{name} from {price}",
-    "noPrice": "Price on the dealer's website",
-    "openSite": "Website",
+    "filter": "Vis",
+    "sourceNote": "Opplysningen kommer fra forhandlerens nettsted og den offentlige medlemslisten som lenker dit. DriveLinkUp har ikke verifisert den.",
+    "empty": "Ingen biler med publiserte spesifikasjoner i dette utvalget ennå.",
+    "offer": "{name} fra {price}",
+    "noPrice": "Pris på forhandlerens nettsted",
+    "openSite": "Nettsted",
     "mileageMil": "{value} mil",
     "mileageKm": "{value} km",
-    "countryLabel": "Country",
-    "countryAll": "All countries",
-    "businessesTitle": "Dealers",
-    "businessesLead": "The business is on a public member list that links to its website. A car card appears when the dealer publishes the model and specifications.",
+    "countryLabel": "Land",
+    "countryAll": "Alle land",
+    "businessesTitle": "Forhandlere",
+    "businessesLead": "Virksomheten står på en offentlig medlemsliste som lenker til nettstedet. Et bilkort vises når forhandleren publiserer modell og spesifikasjoner.",
     "listCta": "Jeg driver en bilforhandler",
     "listPrefill": "Jeg driver en bilforhandler og vil bli oppført på DriveLinkUp.\n\nBedrift:\nSted:\nNettsted:",
     "claim": "Dette er min bilforhandler",

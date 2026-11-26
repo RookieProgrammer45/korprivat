@@ -13,6 +13,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { BookingFeeQuote } from '@/lib/contracts/booking-fees';
+import { intlLocale } from '@/lib/intl-locale';
 
 type QuoteSnapshot = Pick<BookingFeeQuote, 'priceAmountSek' | 'serviceFeeSek' | 'grossChargedSek'>;
 
@@ -140,5 +141,5 @@ export function BookingPriceSummary({
 }
 
 function formatSek(amount: number, locale: string): string {
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} SEK`;
+  return `${new Intl.NumberFormat(intlLocale(locale)).format(amount)} SEK`;
 }

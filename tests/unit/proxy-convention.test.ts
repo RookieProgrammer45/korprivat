@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -11,5 +11,11 @@ describe('proxy convention', () => {
     expect(existsSync(path.join(root, 'src/proxy.ts'))).toBe(true);
     expect(existsSync(path.join(root, 'src/instrumentation.ts'))).toBe(true);
     expect(existsSync(path.join(root, 'proxy.ts'))).toBe(false);
+  });
+
+  it('rewrites locale prefetches instead of skipping them', () => {
+    const source = readFileSync(path.join(process.cwd(), 'src/proxy.ts'), 'utf8');
+    expect(source).not.toContain('next-router-prefetch');
+    expect(source).not.toContain("purpose', value: 'prefetch'");
   });
 });

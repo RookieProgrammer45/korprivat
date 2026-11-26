@@ -18,6 +18,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { apiFetch } from '@/lib/api-client';
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { intlLocale } from '@/lib/intl-locale';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
 type Status = 'loading' | 'not-found' | 'error' | 'profile';
@@ -297,13 +298,13 @@ function Fact({ label, children }: { label: string; children: ReactNode }) {
 }
 
 function formatNumber(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     maximumFractionDigits: 1,
   }).format(value);
 }
 
 function formatSlotDate(iso: string, locale: string): string {
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',

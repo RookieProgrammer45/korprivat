@@ -8,6 +8,7 @@ import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
 import { LocaleLink as Link } from '@/components/locale-link';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
 import { type SchoolHeavyAdvertised, schoolPortraitUrl } from '@/lib/discovery/school-portrait';
+import { intlLocale } from '@/lib/intl-locale';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
 export { SCHOOL_LISTING_GRID_CLASS };
@@ -161,7 +162,7 @@ function listingRating(row: InstructorFilteredItem): { average: number; count: n
 }
 
 function formatRating(average: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
   }).format(average);

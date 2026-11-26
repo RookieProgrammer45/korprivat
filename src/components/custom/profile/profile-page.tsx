@@ -43,6 +43,7 @@ import {
   Profile,
   ProfileNameUpdated,
 } from '@/lib/contracts/profile';
+import { intlLocale } from '@/lib/intl-locale';
 
 type ProfileResponse = ReturnType<typeof Profile.parse>;
 type UpcomingItem = ProfileResponse['upcoming']['items'][number];
@@ -495,7 +496,7 @@ function formatDate(iso: string, locale: string): string {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       dateStyle: 'medium',
       timeStyle: 'short',
       timeZone: 'Europe/Stockholm',

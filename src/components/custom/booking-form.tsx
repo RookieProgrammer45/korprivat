@@ -47,6 +47,7 @@ import {
 import { InstructorItem } from '@/lib/contracts/instructors';
 import { RebookSuggestResponse } from '@/lib/contracts/saved-payment-methods';
 import { applyServerErrors } from '@/lib/forms';
+import { intlLocale } from '@/lib/intl-locale';
 import { cn } from '@/lib/utils';
 import { type LearnerVerificationState, stateToRoute } from '@/lib/verification/state';
 
@@ -1034,14 +1035,14 @@ function groupLabel(
     if (diffDays === 0) return t('groupToday');
     if (diffDays === 1) return t('groupTomorrow');
     if (diffDays > 1 && diffDays < 7) {
-      return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+      return new Intl.DateTimeFormat(intlLocale(locale), {
         weekday: 'long',
         day: 'numeric',
         month: 'short',
         timeZone: 'Europe/Stockholm',
       }).format(date);
     }
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       dateStyle: 'medium',
       timeZone: 'Europe/Stockholm',
     }).format(date);
@@ -1054,7 +1055,7 @@ function formatSlotTime(iso: string, locale: string): string {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(locale), {
       hour: '2-digit',
       minute: '2-digit',
       timeZone: 'Europe/Stockholm',
@@ -1070,7 +1071,7 @@ function accessHeaders(token: string | undefined): HeadersInit {
 
 function formatSek(amount: number, locale: string, suffix: string): string {
   if (!amount) return locale === 'en' ? 'Price on request' : 'Pris på förfrågan';
-  return `${new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB').format(amount)} ${suffix}`;
+  return `${new Intl.NumberFormat(intlLocale(locale)).format(amount)} ${suffix}`;
 }
 
 function makeErrorMap<T extends ReturnType<typeof useTranslations<'bookingForm'>>>(t: T) {

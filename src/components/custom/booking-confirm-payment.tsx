@@ -16,6 +16,7 @@ import {
   BookingPaymentPollResponse,
   BookingRead,
 } from '@/lib/contracts/bookings';
+import { intlLocale } from '@/lib/intl-locale';
 
 const POLL_INTERVAL_MS = 1500;
 const POLL_MAX_ATTEMPTS = 10;
@@ -373,7 +374,7 @@ function readBooking(id: string, token: string | undefined): Promise<BookingRead
 function formatDate(iso: string, locale: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Europe/Stockholm',

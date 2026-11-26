@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import type { ConversationSummary } from '@/lib/contracts/messaging';
+import { intlLocale } from '@/lib/intl-locale';
 
 export function ConversationList({
   items,
@@ -71,7 +72,7 @@ export function ConversationList({
 function formatDate(iso: string, locale: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeZone: 'Europe/Stockholm',
   }).format(date);

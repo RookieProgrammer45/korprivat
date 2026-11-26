@@ -7,6 +7,7 @@ import { SchoolContactActions } from '@/components/custom/school-contact-button'
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { InstructorFilteredItem } from '@/lib/contracts/instructors';
+import { intlLocale } from '@/lib/intl-locale';
 import { schoolPath } from '@/lib/seo/school-slugs';
 
 const MAX_COMPARISON_ITEMS = 3;
@@ -169,7 +170,7 @@ function PublishedPricesFact({
 }
 
 function formatNumber(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.NumberFormat(intlLocale(locale), {
     maximumFractionDigits: 1,
   }).format(amount);
 }
@@ -177,7 +178,7 @@ function formatNumber(amount: number, locale: string): string {
 function formatDate(iso: string, locale: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     dateStyle: 'medium',
     timeZone: 'Europe/Stockholm',
   }).format(date);

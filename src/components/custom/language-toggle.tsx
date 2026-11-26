@@ -1,12 +1,11 @@
-// One language control for every viewport. Options are real links so Next
-// prefetches the translated page the same way on mobile and desktop, and the
-// switch does not wait on a network round-trip.
+// One language control for every viewport. Choosing a language writes the
+// cookie and client-navigates to the prefixed URL. The menu prefetches those
+// URLs when it opens, and the proxy rewrites them, so the page swaps in place.
 
 'use client';
 
 import { Languages } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
@@ -83,6 +82,7 @@ function LanguageToggleMenu({
   const current = useLocale();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const t = useTranslations('common');
   const search = searchParams.toString();
 
@@ -90,8 +90,15 @@ function LanguageToggleMenu({
     return switchLocalePath(pathname, locale, search ? `?${search}` : '');
   }
 
+  function prefetchLocales() {
+    for (const locale of locales) {
+      if (locale === current) continue;
+      router.prefetch(hrefFor(locale));
+    }
+  }
+
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={(open) => open && prefetchLocales()}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
@@ -128,16 +135,18 @@ function LanguageToggleMenu({
             );
           }
           return (
-            <DropdownMenuItem key={locale} asChild>
-              <Link
-                href={hrefFor(locale)}
-                hrefLang={locale}
-                prefetch
-                className="flex w-full items-center justify-between gap-3"
-                onClick={() => writeLocaleCookie(locale)}
-              >
-                {label}
-              </Link>
+            <DropdownMenuItem
+              key={locale}
+              className="flex w-full cursor-pointer items-center justify-between gap-3"
+              onSelect={() => {
+                writeLocaleCookie(locale);
+                router.push(hrefFor(locale));
+                // The locale URL rewrites to the same page. Push changes the
+                // address; refresh pulls the translated server render into it.
+                router.refresh();
+              }}
+            >
+              {label}
             </DropdownMenuItem>
           );
         })}

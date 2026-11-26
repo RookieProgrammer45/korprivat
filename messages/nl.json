@@ -28,13 +28,13 @@
       "signingOut": "Bezig met uitloggen…",
       "signOutError": "Uitloggen is niet gelukt. Probeer het opnieuw.",
       "languageError": "Taal wijzigen is niet gelukt. Probeer het opnieuw.",
-      "dashboard": "Dashboard",
+      "dashboard": "Overzicht",
       "resources": "Bronnen",
       "blog": "Blog",
       "profile": "Profiel",
       "locations": "Locaties",
       "cityStockholm": "Stockholm",
-      "cityGoteborg": "Gothenburg",
+      "cityGoteborg": "Göteborg",
       "cityMalmo": "Malmö",
       "cityUppsala": "Uppsala",
       "cityVasteras": "Västerås",
@@ -458,7 +458,7 @@
         "linkPricing": "Prijzen",
         "linkFaq": "FAQ",
         "linkBlog": "Blog",
-        "faqTitle": "Malmö FAQ",
+        "faqTitle": "Veelgestelde vragen over Malmö",
         "faq1q": "Worden prijzen getoond vóór je een account aanmaakt?",
         "faq1a": "Ja. Uurtarieven staan op elke vermelding, zodat je kunt vergelijken voordat je een account aanmaakt.",
         "faq2q": "Kan ik ook privé oefenen?",
@@ -599,7 +599,7 @@
     "englishAvailable": "Engels beschikbaar",
     "swedishAvailable": "Zweeds",
     "slotLabel": "Eerstvolgende",
-    "slotMonthDay": "{monthShort} {day}",
+    "slotMonthDay": "{day} {monthShort}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "geoTitle": "Zoek bij jou in de buurt",
@@ -642,7 +642,7 @@
     "reviewsSummary": "{average} · {count, plural, one {# recensie} other {# recensies}}",
     "language": {
       "sv": "Zweeds",
-      "en": "English",
+      "en": "Engels",
       "no": "Noors",
       "da": "Deens",
       "fi": "Fins",
@@ -670,7 +670,7 @@
       "language": "Talen",
       "languages": {
         "sv": "Zweeds",
-        "en": "English"
+        "en": "Engels"
       },
       "serviceArea": "Werkgebied",
       "phone": "Telefoon",
@@ -717,13 +717,13 @@
   },
   "instructorDetail": {
     "meta": {
-      "title": "Driving-school listing",
-      "titleNamed": "{name} — driving school in {city}",
-      "description": "Review a school's categories, published price and city. Contact the school to arrange a lesson.",
-      "descriptionNamed": "{name} in {city} — from {rate} SEK/lesson."
+      "title": "Vermelding van de rijschool",
+      "titleNamed": "{name} — rijschool in {city}",
+      "description": "Bekijk de categorieën, de gepubliceerde prijs en de plaats van de school. Neem contact op met de school.",
+      "descriptionNamed": "{name} in {city}. Rijles vanaf {rate} kr. Neem contact op met de school."
     },
-    "profileEyebrow": "Driving-school listing",
-    "locatedIn": "Based in {city}",
+    "profileEyebrow": "Vermelding van de rijschool",
+    "locatedIn": "Te vinden in {city}",
     "hourlyRate": "Lesprijs",
     "rateSuffix": "SEK / les",
     "portraitAlt": "Profielfoto van {name}",
@@ -754,29 +754,29 @@
     },
     "language": {
       "sv": "Zweeds",
-      "en": "English",
+      "en": "Engels",
       "no": "Noors",
       "da": "Deens",
       "fi": "Fins",
       "is": "IJslands",
-      "es": "Spanish",
-      "fr": "French",
-      "de": "German",
-      "it": "Italian",
-      "pl": "Polish",
-      "nl": "Dutch",
-      "pt": "Portuguese",
-      "cs": "Czech",
-      "hu": "Hungarian",
-      "ro": "Romanian",
-      "bg": "Bulgarian",
-      "hr": "Croatian",
-      "sl": "Slovenian",
-      "sk": "Slovak",
-      "el": "Greek",
-      "et": "Estonian",
-      "lv": "Latvian",
-      "lt": "Lithuanian"
+      "es": "Spaans",
+      "fr": "Frans",
+      "de": "Duits",
+      "it": "Italiaans",
+      "pl": "Pools",
+      "nl": "Nederlands",
+      "pt": "Portugees",
+      "cs": "Tsjechisch",
+      "hu": "Hongaars",
+      "ro": "Roemeens",
+      "bg": "Bulgaars",
+      "hr": "Kroatisch",
+      "sl": "Sloveens",
+      "sk": "Slowaaks",
+      "el": "Grieks",
+      "et": "Ests",
+      "lv": "Lets",
+      "lt": "Litouws"
     },
     "verification": {
       "verified": "Geverifieerd",
@@ -787,47 +787,47 @@
     "reviews": {
       "none": "Nog geen beoordelingen",
       "summary": "{average} · {count, plural, one {# recensie} other {# recensies}}",
-      "googleSummary": "{average} · {count, plural, one {# review} other {# reviews}} on Google"
+      "googleSummary": "{average} · {count, plural, one {# review} other {# reviews}} op Google"
     },
     "availability": {
       "none": "Geen aankomend tijdslot vermeld"
     },
-    "loadError": "We could not load this profile.",
-    "notFoundTitle": "School listing not found",
-    "notFoundBody": "This listing may no longer be available. Return to the directory to browse current schools.",
-    "backDirectory": "Back to schools",
-    "fallbackError": "Something went wrong while loading this profile.",
-    "bookingModeEyebrow": "How this listing works",
+    "loadError": "Het profiel kon niet worden geladen.",
+    "notFoundTitle": "Rijschoolvermelding niet gevonden",
+    "notFoundBody": "De vermelding is misschien verwijderd. Ga terug naar de catalogus voor de huidige scholen.",
+    "backDirectory": "Terug naar de scholen",
+    "fallbackError": "Er ging iets mis bij het laden van het profiel.",
+    "bookingModeEyebrow": "Zo wordt de school getoond",
     "bookingMode": {
       "instant": {
-        "title": "Instant booking",
-        "body": "Choose an open slot and continue to hosted checkout to secure the lesson."
+        "title": "Direct boeken",
+        "body": "Kies een vrije tijd en ga verder naar de externe kassa om de les vast te leggen."
       },
       "request": {
         "title": "Boeking aanvragen",
-        "body": "Choose an open slot and send a request. The school confirms before payment is collected."
+        "body": "Kies een vrije tijd en stuur een verzoek. De school bevestigt voordat er wordt betaald."
       },
       "contact": {
         "title": "Catalogusvermelding",
-        "body": "This school is listed with its information and prices. Use Contact the school to reach them directly."
+        "body": "Deze school staat vermeld met informatie en prijzen. Gebruik Contact met de school om hen te bereiken."
       },
       "paymentThroughSchool": {
-        "title": "Pays through a driving school",
-        "body": "An instructor cannot take payment on DriveLinkUp unless they belong to a driving school. Contact the school they teach with."
+        "title": "Betaling via een rijschool",
+        "body": "Een instructeur kan op DriveLinkUp geen betaling ontvangen zonder bij een rijschool te horen. Neem contact op met de school waarvoor die lesgeeft."
       }
     },
     "safetyEyebrow": "",
-    "safetyTitle": "Ask the school",
+    "safetyTitle": "Vraag het de school",
     "safetyBody": "",
     "safetyItems": {
-      "credentials": "Permit for the category and city.",
-      "insurance": "Car and lesson setup.",
-      "checkBeforeBooking": "Anything the listing does not say."
+      "credentials": "Vergunning voor categorie en plaats.",
+      "insurance": "Auto en lesopzet.",
+      "checkBeforeBooking": "Wat de vermelding niet zegt."
     },
     "slots": {
-      "loadError": "Could not load available times.",
+      "loadError": "Beschikbare tijden konden niet worden geladen.",
       "retry": "Opnieuw proberen",
-      "empty": "No open times are listed right now."
+      "empty": "Er staan nu geen vrije tijden vermeld."
     }
   },
   "bookingForm": {
@@ -1033,9 +1033,9 @@
       "or": "or"
     },
     "visual": {
-      "label": "Driving lessons",
-      "role": "carousel",
-      "goTo": "Show photo {n}",
+      "label": "Rijlessen",
+      "role": "carrousel",
+      "goTo": "Toon foto {n}",
       "lessonAlt": "Een bestuurder die het stuur vasthoudt op een weg in de schemering",
       "schoolAlt": "{name} in {city}"
     },
@@ -2017,7 +2017,7 @@
     "profileCta": "Bekijk profiel",
     "slotLabel": "Eerstvolgende",
     "slotLabelRelative": "{when}",
-    "slotMonthDay": "{monthShort} {day}",
+    "slotMonthDay": "{day} {monthShort}",
     "slotTime": "{time}",
     "slotTimeAndWeekday": "{weekday} {time}",
     "typeSchool": "Rijschool",
@@ -2343,11 +2343,11 @@
     "privacy": "Privacybeleid"
   },
   "consentForm": {
-    "signupCheckbox": "I have read and agree to the Privacy Policy.",
+    "signupCheckbox": "Ik heb het privacybeleid gelezen en ga ermee akkoord.",
     "signupCheckboxLinkText": "Privacybeleid",
-    "signupCheckboxError": "Tick the box to confirm you've read the Privacy Policy.",
-    "licenseCheckbox": "I agree that DriveLinkUp may store the teaching-licence file I upload, and related personal data, so it can review the listing. This is not an automatic check with Transportstyrelsen.",
-    "licenseCheckboxError": "Tick the box to confirm you consent to processing your licence data."
+    "signupCheckboxError": "Vink het vakje aan om te bevestigen dat u het privacybeleid hebt gelezen.",
+    "licenseCheckbox": "Ik stem ermee in dat DriveLinkUp het bestand met de lesbevoegdheid dat ik upload, en de bijbehorende persoonsgegevens, bewaart om de vermelding te beoordelen. Dit is geen automatische controle bij Transportstyrelsen.",
+    "licenseCheckboxError": "Vink het vakje aan om te bevestigen dat u instemt met de verwerking van uw bevoegdheidsgegevens."
   },
   "learnerSubscription": {
     "removed": "The learner subscription is no longer part of DriveLinkUp. The school’s published booking price is shown before checkout, with no separate DriveLinkUp fee."
@@ -2399,13 +2399,13 @@
   "publicHome": {
     "hero": {
       "eyebrow": "",
-      "title": "Compare car prices and driving schools.",
-      "metaTitle": "Compare car prices and driving schools",
-      "metaDescription": "Compare car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
-      "body": "DriveLinkUp is where you compare car prices, driving schools, and the rest of cars. Today that is published prices from schools and dealers.",
+      "title": "Vergelijk autoprijzen en rijscholen.",
+      "metaTitle": "Vergelijk autoprijzen en rijscholen",
+      "metaDescription": "Vergelijk autoprijzen en rijscholen. De prijs is de prijs die het bedrijf heeft gepubliceerd. Gratis catalogus voor iedereen.",
+      "body": "DriveLinkUp is de plek waar je autoprijzen, rijscholen en alles rond de auto vergelijkt. Vandaag zijn dat gepubliceerde prijzen van scholen en dealers.",
       "primaryCta": "Vind een rijschool",
       "instructorCta": "Ik werk bij een rijschool",
-      "marketplaceTag": "Car prices · Driving schools",
+      "marketplaceTag": "Autoprijzen · Rijscholen",
       "schoolCta": "Ik run een rijschool",
       "panelEyebrow": "Hoe het werkt",
       "panelTitle": "De rijschool staat achter de les",
@@ -2442,7 +2442,7 @@
         },
         "cities": {
           "stockholm": "Stockholm",
-          "goteborg": "Gothenburg",
+          "goteborg": "Göteborg",
           "malmo": "Malmö",
           "uppsala": "Uppsala",
           "vasteras": "Västerås",
@@ -2475,16 +2475,16 @@
           "roma": "Roma",
           "warszawa": "Warszawa"
         },
-        "modeLabel": "What to compare",
-        "modeSchool": "Driving school",
-        "modeDealer": "Dealer",
-        "kindLabel": "Vehicle",
-        "kindAny": "All vehicles",
+        "modeLabel": "Wat wil je vergelijken",
+        "modeSchool": "Rijschool",
+        "modeDealer": "Autodealer",
+        "kindLabel": "Voertuig",
+        "kindAny": "Alle voertuigen",
         "kinds": {
-          "car": "Car",
-          "van": "Van",
-          "heavy": "Heavy vehicle",
-          "other": "Other"
+          "car": "Personenauto",
+          "van": "Bestelbus",
+          "heavy": "Zwaar voertuig",
+          "other": "Overig"
         }
       },
       "popular": {
@@ -2492,7 +2492,7 @@
         "links": {
           "categoryB": "Auto · B",
           "stockholm": "Stockholm",
-          "goteborg": "Gothenburg",
+          "goteborg": "Göteborg",
           "malmo": "Malmö",
           "oslo": "Oslo",
           "sydney": "Sydney",
@@ -2510,14 +2510,14 @@
         "price": "Gepubliceerde prijs in kronen",
         "cancellation": "Neem contact op met de rijschool voor de voorwaarden"
       },
-      "titleSchool": "Compare driving schools.",
-      "titleDealer": "Compare car prices.",
+      "titleSchool": "Vergelijk rijscholen.",
+      "titleDealer": "Vergelijk autoprijzen.",
       "facts": {
-        "lesson": "Driving lesson",
-        "vehicle": "Vehicle",
-        "from": "from {price}",
-        "lessonFallback": "Published lesson prices",
-        "vehicleFallback": "Published vehicle prices"
+        "lesson": "Rijles",
+        "vehicle": "Voertuig",
+        "from": "vanaf {price}",
+        "lessonFallback": "Gepubliceerde lesprijzen",
+        "vehicleFallback": "Gepubliceerde voertuigprijzen"
       }
     },
     "quickLinks": {
@@ -2529,7 +2529,7 @@
       },
       "cities": {
         "stockholm": "Stockholm",
-        "goteborg": "Gothenburg",
+        "goteborg": "Göteborg",
         "malmo": "Malmö",
         "vasteras": "Västerås"
       }
@@ -2588,8 +2588,8 @@
     "footer": {
       "prompt": "Meer context nodig?",
       "label": "Handige links",
-      "faq": "FAQ",
-      "privacy": "Privacy",
+      "faq": "Veelgestelde vragen",
+      "privacy": "Privacybeleid",
       "contact": "Contact met support"
     }
   },
@@ -2861,28 +2861,28 @@
     "footer": "DriveLinkUp · Sweden"
   },
   "providerEntry": {
-    "eyebrow": "For people who teach at a school",
-    "title": "Instructors come in through the school.",
-    "body": "The school sends the invite. The school's permission sets category, price and terms. An instructor does not take payment on DriveLinkUp apart from the school.",
+    "eyebrow": "Voor wie lesgeeft op een school",
+    "title": "Instructeurs komen binnen via de school.",
+    "body": "De school stuurt de uitnodiging. De toestemming van de school bepaalt categorie, prijs en voorwaarden. Een instructeur incasseert op DriveLinkUp niet buiten de school om.",
     "primaryCta": "Rijschool registreren",
-    "learnerCta": "Browse light vehicles",
+    "learnerCta": "Lichte voertuigen bekijken",
     "rolesEyebrow": "Hoe het werkt",
     "roles": {
       "trafiklarare": {
         "title": "De vermelding van de rijschool",
-        "body": "What gets published is set by the school: licence, price, times and cancellation. Only what the school is permitted to teach.",
-        "expectation": "An instructor cannot take payment here without belonging to the school."
+        "body": "Wat wordt gepubliceerd, bepaalt de school: toestemming, prijs, tijden en annulering. Alleen waar de school les in mag geven.",
+        "expectation": "Een instructeur kan hier niet betaald worden zonder bij de school te horen."
       },
       "commission": {
         "title": "Vermelden is gratis",
-        "body": "A catalog listing is free. DriveLinkUp does not charge a school to be listed. The school pays its instructors itself.",
-        "expectation": "No learner fee. No promise of how many people book."
+        "body": "Een vermelding in de catalogus is gratis. DriveLinkUp rekent een school niets om vermeld te staan. De school betaalt zelf haar instructeurs.",
+        "expectation": "Geen toeslag voor de leerling. Geen belofte over hoeveel mensen boeken."
       }
     },
     "safety": {
-      "title": "Learners should be able to read the listing",
-      "body": "Permission, price and terms should be readable before anyone decides.",
-      "review": "A badge appears only when the check is stored. A listing is not a teaching permit."
+      "title": "Leerlingen moeten de vermelding kunnen lezen",
+      "body": "Toestemming, prijs en voorwaarden moeten leesbaar zijn voordat iemand beslist.",
+      "review": "Een badge verschijnt alleen als de controle is opgeslagen. Een vermelding is geen lesbevoegdheid."
     }
   },
   "bookingConfirmPayment": {
@@ -3674,12 +3674,12 @@
     "linkBlog": "Gidsen",
     "filteredEmpty": "Geen advertenties voor dit rijbewijs in {name} op dit moment.",
     "headerTitleCityPriced": "Rijlessen in {name} vanaf {price} kr",
-    "compareTitle": "Published driving lessons",
-    "compareCaption": "Cheapest first. The price is what the school published on its website.",
-    "compareFullLink": "Open the full driving-lesson comparison for {name}",
+    "compareTitle": "Gepubliceerde rijlessen",
+    "compareCaption": "Goedkoopste eerst. De prijs is wat de school op de eigen website heeft gepubliceerd.",
+    "compareFullLink": "Open de volledige vergelijking van rijlessen in {name}",
     "compareSchool": "School",
-    "compareLesson": "Lesson",
-    "compareLength": "Length",
+    "compareLesson": "Rijles",
+    "compareLength": "Duur",
     "compareMinutes": "{minutes} min"
   },
   "termsPage": {
@@ -3950,7 +3950,7 @@
   },
   "publishedPrice": {
     "amount": "SEK {amount}",
-    "amountCurrency": "{currency} {amount}",
+    "amountCurrency": "{amount} {currency}",
     "minutes": "{minutes} min",
     "source": "Van de website van de rijschool, {date}.",
     "sourceLink": "Bekijk de prijslijst",
@@ -3978,62 +3978,62 @@
   },
   "lessonComparison": {
     "meta": {
-      "title": "Compare driving lessons in {name} – from {price} SEK",
-      "description": "Compare {count} published driving lessons in {name}. Cheapest first from {price} SEK. The price is from the school's own website."
+      "title": "Vergelijk rijlessen in {name} – vanaf {price} kr",
+      "description": "Vergelijk {count} gepubliceerde rijlessen in {name}. Goedkoopste eerst vanaf {price} kr. De prijs komt van de website van de school."
     },
-    "heading": "Compare driving lessons in {name} from {price} SEK",
-    "lead": "{count} schools in {name} have published a lesson price. Cheapest right now: {price} SEK. Contact the school to book.",
-    "breadcrumbLocations": "Locations",
-    "breadcrumbLesson": "Lesson",
-    "tableTitle": "Driving lessons in {name}",
-    "tableCaption": "Cheapest first. Price and length come from the school's own website.",
+    "heading": "Vergelijk rijlessen in {name} vanaf {price} kr",
+    "lead": "{count} scholen in {name} hebben een rijles gepubliceerd. Goedkoopste nu: {price} kr. Neem contact op met de school.",
+    "breadcrumbLocations": "Plaatsen",
+    "breadcrumbLesson": "Rijles",
+    "tableTitle": "Rijlessen in {name}",
+    "tableCaption": "Goedkoopste eerst. Prijs en duur komen van de website van de school.",
     "colRank": "#",
     "colSchool": "School",
-    "colLesson": "Lesson",
-    "colLength": "Length",
-    "colPerMinute": "SEK/min",
+    "colLesson": "Rijles",
+    "colLength": "Duur",
+    "colPerMinute": "Kr/min",
     "minutes": "{minutes} min",
-    "sourceNote": "The price is what the school published on its website. DriveLinkUp has not verified it and does not use it as a booking amount.",
-    "cardsHeading": "Schools with a published price in {name}",
-    "faqTitle": "FAQ",
-    "faq1q": "Are the prices in {name} up to date?",
-    "faq1a": "They were read from each school's own website. The school may have changed the price since — open the school's price list from the listing.",
-    "faq2q": "Does DriveLinkUp charge for the comparison?",
-    "faq2a": "No. The directory is free. You pay the school, not DriveLinkUp.",
-    "backToHub": "All driving schools in {name}",
-    "offerLesson": "Driving lesson",
-    "offerMinutes": "Driving lesson {minutes} min"
+    "sourceNote": "De prijs is wat de school op haar website heeft gepubliceerd. DriveLinkUp heeft die niet geverifieerd en gebruikt die niet als boekingsbedrag.",
+    "cardsHeading": "Scholen met een gepubliceerde prijs in {name}",
+    "faqTitle": "Veelgestelde vragen",
+    "faq1q": "Zijn de prijzen in {name} actueel?",
+    "faq1a": "Ze zijn gelezen op de website van elke school. De school kan de prijs daarna hebben gewijzigd — open de prijslijst via de vermelding.",
+    "faq2q": "Rekent DriveLinkUp voor de vergelijking?",
+    "faq2a": "Nee. De catalogus is gratis. Je betaalt de school, niet DriveLinkUp.",
+    "backToHub": "Alle rijscholen in {name}",
+    "offerLesson": "Rijles",
+    "offerMinutes": "Rijles {minutes} min"
   },
   "dealershipsPage": {
     "meta": {
-      "title": "Compare vehicle prices at dealers",
-      "description": "Compare car models with year, mileage, fuel and gearbox. The price is the one the dealer published."
+      "title": "Vergelijk autoprijzen bij dealers",
+      "description": "Vergelijk automodellen met bouwjaar, kilometerstand, brandstof en versnellingsbak. De prijs is de prijs die de dealer heeft gepubliceerd."
     },
     "eyebrow": "Autodealers",
-    "title": "Compare vehicle prices",
-    "lead": "Each card is a car the dealer has published, with the model, year, mileage, fuel and gearbox. The price is the dealer's. DriveLinkUp does not sell the car.",
-    "cityLabel": "City",
-    "cityAll": "All cities",
-    "kindLabel": "Vehicle",
-    "kindAll": "All vehicles",
+    "title": "Vergelijk voertuigprijzen",
+    "lead": "Elke kaart is een auto die de dealer heeft gepubliceerd, met model, bouwjaar, kilometerstand, brandstof en versnellingsbak. De prijs is van de dealer. DriveLinkUp verkoopt de auto niet.",
+    "cityLabel": "Plaats",
+    "cityAll": "Alle plaatsen",
+    "kindLabel": "Voertuig",
+    "kindAll": "Alle voertuigen",
     "kind": {
-      "car": "Car",
-      "van": "Van",
-      "heavy": "Heavy vehicle",
-      "other": "Other"
+      "car": "Personenauto",
+      "van": "Bestelbus",
+      "heavy": "Zwaar voertuig",
+      "other": "Overig"
     },
-    "filter": "Show",
-    "sourceNote": "Details come from the dealer's website and the public member list that links to it. DriveLinkUp has not verified them.",
-    "empty": "No cars with published specifications in this selection yet.",
-    "offer": "{name} from {price}",
-    "noPrice": "Price on the dealer's website",
+    "filter": "Toon",
+    "sourceNote": "Het gegeven komt van de website van de dealer en de openbare ledenlijst die daarnaar linkt. DriveLinkUp heeft het niet geverifieerd.",
+    "empty": "Nog geen auto's met gepubliceerde specificaties in deze selectie.",
+    "offer": "{name} vanaf {price}",
+    "noPrice": "Prijs op de website van de dealer",
     "openSite": "Website",
     "mileageMil": "{value} mil",
     "mileageKm": "{value} km",
-    "countryLabel": "Country",
-    "countryAll": "All countries",
+    "countryLabel": "Land",
+    "countryAll": "Alle landen",
     "businessesTitle": "Dealers",
-    "businessesLead": "The business is on a public member list that links to its website. A car card appears when the dealer publishes the model and specifications.",
+    "businessesLead": "Het bedrijf staat op een openbare ledenlijst die naar de website linkt. Een autokaart verschijnt wanneer de dealer model en specificaties publiceert.",
     "listCta": "Ik heb een autodealer",
     "listPrefill": "Ik heb een autodealer en wil op DriveLinkUp staan.\n\nBedrijf:\nPlaats:\nWebsite:",
     "claim": "Dit is mijn autodealer",

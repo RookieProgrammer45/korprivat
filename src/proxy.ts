@@ -55,13 +55,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
-      missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
-      ],
-    },
-  ],
+  // Prefetch must run this proxy. The App Router caches a prefetched locale
+  // URL, and skipping the rewrite stored a 404. Choosing a language then
+  // fell through to a full document load instead of swapping the page.
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
