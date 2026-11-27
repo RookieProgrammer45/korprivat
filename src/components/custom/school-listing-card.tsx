@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { rememberCatalogueOpen } from '@/components/custom/catalogue-outbound-link';
 import { PublishedHeavyOffer, PublishedLessonPrice } from '@/components/custom/published-price';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
 import { SchoolMarkFallback } from '@/components/custom/school-mark-fallback';
@@ -28,6 +29,7 @@ export function SchoolListingCard({
   return (
     <Link
       href={schoolPath(row)}
+      onClick={() => rememberCatalogueOpen('school', row.id)}
       className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       data-provider-type={row.providerType}
     >

@@ -1,0 +1,43 @@
+name: Tire prices refresh
+
+# Re-reads each workshop price page every day. A page that cannot be read
+# keeps its previous amount. A successful re-read merges, so the phone app
+# and the desktop load the same prices.
+on:
+  schedule:
+    - cron: '45 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-read published tire prices
+        run: python3 scripts/tires/refresh.py --self-test && python3 scripts/tires/refresh.py --write
+      - name: Open pull request
+        id: prices
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data/tire-prices-refresh
+          delete-branch: true
+          add-paths: data/tires/published.json
+          commit-message: 'data: daily tire price refresh'
+          title: 'data: daily tire price refresh'
+          body: |
+            Prices re-read from each workshop page.
+
+            An amount changes only when that page shows a new number. A page that could not be read keeps the previous amount; those addresses are listed in `meta.unreadable`. A large drop is a failed read, not a workshop removing its price.
+      - name: Publish the re-read
+        if: steps.prices.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge ${{ steps.prices.outputs.pull-request-number }} --squash --delete-branch

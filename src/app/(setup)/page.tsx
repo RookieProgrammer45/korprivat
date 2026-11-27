@@ -8,6 +8,8 @@ import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { localeHreflang, localePath } from '@/lib/seo/locale-path';
 import { NORDIC_COUNTRIES } from '@/lib/seo/nordic-locations';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await resolveLocale();
   const t = await getTranslations('publicHome.hero');
@@ -47,6 +49,10 @@ export default async function DriveLinkUpLanding({
   const inLanguage = isLocale(locale) ? localeHreflang[locale] : localeHreflang[defaultLocale];
   const catalogues = [
     { name: t('popular.links.inspection'), path: '/besiktning' },
+    { name: t('popular.links.tires'), path: '/dack' },
+    { name: t('popular.links.taxi'), path: '/taxiutbildning' },
+    { name: t('popular.links.leasing'), path: '/privatleasing' },
+    { name: t('popular.links.parking'), path: '/parkering' },
     { name: t('popular.links.ownerParts'), path: '/reservdelar?buyer=owner' },
     { name: t('popular.links.workshopParts'), path: '/reservdelar?buyer=workshop' },
     { name: t('popular.links.heavy'), path: '/tung-trafik' },

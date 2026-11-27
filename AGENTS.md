@@ -9,7 +9,8 @@ authoritative. Read it before every task.
 [ADR-002 better-auth](docs/decisions/ADR-002-better-auth.md) ·
 [ADR-003 canonical webhook host](docs/decisions/ADR-003-canonical-webhook-host.md) ·
 [ADR-006 directory-first](docs/decisions/ADR-006-directory-first.md) ·
-[ADR-007 store shell](docs/decisions/ADR-007-store-shell.md)
+[ADR-007 store shell](docs/decisions/ADR-007-store-shell.md) ·
+[ADR-008 catalogue read model](docs/decisions/ADR-008-catalogue-read-model.md)
 
 ## Invariants (never violate)
 

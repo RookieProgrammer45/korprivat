@@ -47,7 +47,11 @@
       "terms": "Ehdot",
       "dealers": "Autoliikkeet",
       "parts": "Varaosat",
-      "inspection": "Katsastus"
+      "inspection": "Katsastus",
+      "tires": "Renkaat",
+      "taxi": "Taksinkuljettaja",
+      "leasing": "Leasing",
+      "parking": "Pysäköinti"
     },
     "language": {
       "sv": "Svenska",
@@ -2404,7 +2408,7 @@
       "title": "Vertaa auton hintoja ja autokouluja.",
       "metaTitle": "Vertaile varaosia, auton hintoja ja autokouluja",
       "metaDescription": "Vertaile varaosia, auton hintoja ja autokouluja. Hinta on se, jonka yritys on julkaissut. Ilmainen luettelo kaikille.",
-      "body": "Vertaile autokouluja, raskasta liikennettä, auton hintoja ja varaosia, jotka kauppa on julkaissut auton omistajalle tai korjaamolle. Luku on julkaistu hinta.",
+      "body": "Vertaile autokouluja, raskasta liikennettä, auton hintoja ja varaosia, jotka kauppa on julkaissut auton omistajalle tai korjaamolle. Vertaamme myös katsastushintoja, rengashintoja, taksinkuljettajan koulutusta, leasinghintoja ja pysäköintihintoja. Luku on julkaistu hinta.",
       "primaryCta": "Etsi koulu",
       "instructorCta": "Työskentelen autokoulussa",
       "marketplaceTag": "Auton hinnat · Autokoulut",
@@ -2515,7 +2519,11 @@
           "parts": "Varaosat",
           "ownerParts": "Varaosat auton omistajalle",
           "workshopParts": "Varaosat korjaamolle",
-          "inspection": "Katsastus"
+          "inspection": "Katsastus",
+          "tires": "Renkaat",
+          "taxi": "Taksinkuljettaja",
+          "leasing": "Leasing",
+          "parking": "Pysäköinti"
         }
       },
       "lead": "Ilmainen. Maksat koulun hinnan.",
@@ -2536,7 +2544,12 @@
         "parts": "Varaosat",
         "partsFallback": "Julkaistut kauppahinnat"
       },
-      "titleParts": "Vertaile varaosia."
+      "titleParts": "Vertaile varaosia.",
+      "titleInspection": "Vertaa katsastushintoja.",
+      "titleTires": "Vertaa rengashintoja.",
+      "titleTaxi": "Vertaa taksinkuljettajan koulutusta.",
+      "titleLeasing": "Vertaile leasinghintoja.",
+      "titleParking": "Vertaile pysäköintihintoja."
     },
     "quickLinks": {
       "label": "Aloita",
@@ -4074,7 +4087,8 @@
       "new": "Uusi",
       "used": "Käytetty"
     },
-    "msrp": "Ohjevähittäishinta"
+    "msrp": "Ohjevähittäishinta",
+    "from": "Alkaen"
   },
   "partsPage": {
     "meta": {
@@ -4180,6 +4194,190 @@
       "partnerMayDiffer": "Kumppaniasemat voivat veloittaa eri maksun.",
       "retestIfRepaired": "Veloitetaan, kun korjaamo korjaa viat.",
       "namedWorkshops": "Julkaistu nimetyille korjaamoille."
+    }
+  },
+  "tirePage": {
+    "meta": {
+      "title": "Vertaa rengashintoja",
+      "description": "Julkaistut hinnat renkaanvaihdolle, rengashotellille ja asennukselle korjaamon omalta sivulta. Maa näkyy, kun hinta on julkaistu. DriveLinkUp ei varaa vaihtoa."
+    },
+    "title": "Vertaa rengashintoja",
+    "lead": "Hinta on se, jonka korjaamo on julkaissut renkaanvaihdolle, säilytykselle, asennukselle tai liikkuvalle käynnille. DriveLinkUp ei varaa työtä eikä kutsu korjaamoa vahvistetuksi.",
+    "countryLabel": "Maa",
+    "countryAll": "Kaikki maat",
+    "vehicleLabel": "Ajoneuvo",
+    "serviceLabel": "Palvelu",
+    "vehicles": {
+      "car": "Henkilöauto",
+      "van": "Pakettiauto"
+    },
+    "services": {
+      "change": "Renkaanvaihto",
+      "hotel": "Rengashotelli",
+      "mount": "Asennus",
+      "mobile": "Liikkuva käynti"
+    },
+    "priceFrom": "alkaen",
+    "priceMaximum": "Enintään",
+    "empty": "Tälle valinnalle ei ole vielä julkaistua hintaa.",
+    "source": "Hintasivu",
+    "currencyGroup": "Hinnat valuutassa {currency}",
+    "countries": {
+      "SE": "Ruotsi",
+      "NO": "Norja",
+      "FI": "Suomi",
+      "NL": "Alankomaat",
+      "GB": "Yhdistynyt kuningaskunta"
+    },
+    "notes": {
+      "wheelsBrought": "Tuot vanteet mukanasi. Sivu ilmoittaa tämän alkaen-hinnan nimeämilleen kokoille.",
+      "extrasMayApply": "Sivu sanoo, että lisät kuten TPMS-huolto ja uudet venttiilit voivat maksaa enemmän.",
+      "includesCheck": "Sivu sisältää renkaiden ja rengaspaineen tarkistuksen.",
+      "includesChangeAndWash": "Sisältää renkaanvaihdon, säilytyksen ja pesun.",
+      "includesChangeWashAndCheck": "Sisältää säilytyksen, konepesun, renkaanvaihdon ja tarkistuksen.",
+      "ownTyres": "Omien renkaiden asennus ja tasapainotus, sitten vanteet autoon.",
+      "storageOnly": "Säilytys. Sivu ei sano, että renkaanvaihto sisältyy.",
+      "fourWheels": "Julkaistu hinta koskee neljää vannetta.",
+      "upTo14Inch": "Julkaistu enintään 14 tuuman renkaille.",
+      "memberDiscount": "ANWB-jäsenet saavat 15 prosenttia tästä vaihdosta. Luku on alkaen-hinta.",
+      "boughtElsewhere": "Sivu lisää 12 EUR renkaalta, jos renkaat on ostettu muualta.",
+      "slotMaximum": "Sivu sanoo, että käynti maksaa enintään tämän ajanvarauksesta riippuen."
+    }
+  },
+  "taxiPage": {
+    "meta": {
+      "title": "Vertaa taksinkuljettajan koulutusta",
+      "description": "Julkaistut hinnat taksinkuljettajan kurssille ja viralliselle kokeelle. Maa näkyy, kun koulu tai viranomainen on julkaissut summan. DriveLinkUp ei ilmoita sinua kurssille."
+    },
+    "title": "Vertaa taksinkuljettajan koulutusta",
+    "lead": "Hinta on se, jonka koulu tai viranomainen on julkaissut kurssille tai viralliselle kokeelle. DriveLinkUp ei ilmoita sinua eikä kutsu koulua vahvistetuksi.",
+    "countryLabel": "Maa",
+    "countryAll": "Kaikki maat",
+    "kindLabel": "Mitä hinta koskee",
+    "kinds": {
+      "course": "Koulutus",
+      "exam": "Virallinen koe"
+    },
+    "priceFrom": "alkaen",
+    "priceMaximum": "Enintään",
+    "empty": "Tälle valinnalle ei ole vielä julkaistua hintaa.",
+    "source": "Hintasivu",
+    "currencyGroup": "Hinnat valuutassa {currency}",
+    "countries": {
+      "SE": "Ruotsi",
+      "GB": "Yhdistynyt kuningaskunta"
+    },
+    "notes": {
+      "questionBankAndThreeLessons": "Kysymyspankki 850 kr ja kolme 40 minuutin tuntia 1 800 kr.",
+      "bookAndLessonListedSeparately": "Koulu sanoo, että hinta sisältää sen, mitä hakemiseen tarvitaan. Sivu listaa myös kirjan 500 kr ja 40 minuutin tunnin 650 kr erillisinä ostoina.",
+      "theoryMaterial": "Teoriamateriaali kolmeen viralliseen kokeeseen. Ajotunnit ovat erillinen paketti.",
+      "includesTwoLessons": "Sisältää kaksi 40 minuutin ajotuntia ja valmistautumisen ajokokeeseen.",
+      "localKnowledge": "Teoria ja paikallistuntemus.",
+      "authorityFeesExtra": "Viranomaisen koe- ja lupamaksut tulevat päälle.",
+      "materialFourLessonsOneDrive": "Teoriamateriaali, neljä opetustuntia ja yksi ajotunti.",
+      "includesWrittenTest": "Samana päivänä tehtävä kirjallinen koe sisältyy.",
+      "includesAssessment": "Kurssin lopun arviointi sisältyy. Paikallistuntemuksen koe on erillinen maksu.",
+      "standaloneAssessment": "Maksu paikallistuntemuskokeen varaamisesta erikseen.",
+      "paidToTrainer": "Kunnan sivu ilmoittaa hinnan. Maksat kouluttajalle.",
+      "topographyExtra": "Paikallistuntemuskoe on erillinen maksu.",
+      "refresher": "Täydennys sille, jolla todistus jo on. Uusi kuljettaja maksaa peruskurssin.",
+      "weekday": "Koe arkipäivänä.",
+      "eveningWeekend": "Koe illalla tai viikonloppuna.",
+      "privateHireCourse": "Kurssi on private hire -kurssi Wolverhamptonin taksikorttiin. Sivu ei julkaise hackney carriage -kurssin hintaa.",
+      "topographyTest": "Paikallistuntemuksen koe. Uusinta maksaa saman verran."
+    }
+  },
+  "leasingPage": {
+    "meta": {
+      "title": "Vertaile leasinghintoja",
+      "description": "Julkaistut yksityisleasinghinnat nimetyille malleille. Maa näkyy, kun leasingyhtiö julkaisi mallin ja kuukausisumman. DriveLinkUp ei vuokraa autoa."
+    },
+    "title": "Vertaile leasinghintoja",
+    "lead": "Hinta on kuukausisumma, jonka leasingyhtiö julkaisi tälle mallille. Maa on se, jossa hinta julkaistiin. DriveLinkUp ei vuokraa autoa eikä kutsu tarjousta varmennetuksi.",
+    "countryLabel": "Maa",
+    "countryAll": "Kaikki maat",
+    "priceFrom": "alkaen",
+    "priceMaximum": "Enintään",
+    "perMonth": "kuukaudessa",
+    "termMonths": "{months} kuukautta",
+    "mileageYear": "{km} km vuodessa",
+    "mileageTerm": "{km} km sopimuskaudella",
+    "empty": "Tälle maalle ei ole vielä julkaistua leasinghintaa.",
+    "source": "Hintasivu",
+    "currencyGroup": "Hinnat valuutassa {currency}",
+    "countries": {
+      "SE": "Ruotsi",
+      "NO": "Norja",
+      "FI": "Suomi",
+      "NL": "Alankomaat"
+    },
+    "notes": {
+      "offerThrough20261231": "Sivu sanoo, että tarjous on voimassa 31. joulukuuta 2026 asti.",
+      "termNotOnPage": "Sivu ei ilmoita sopimusaikaa tai vuosittaista ajomäärää hinnan vieressä.",
+      "variableFee": "Sivu sanoo, että kuukausimaksu voi muuttua.",
+      "mileageChoice": "Sivulla voit valita 1 000, 1 500, 2 000 tai 3 000 peninkulmaa vuodessa.",
+      "taxListedSeparately": "Sivu ilmoittaa ajoneuvoveron vuodessa erikseen.",
+      "feesExtra": "Avausmaksu ja hallintomaksu tulevat lisäksi. Ylikilometrit laskutetaan erikseen.",
+      "serviceIncluded": "Huoltosopimus sisältyy.",
+      "kiaFinans": "Kia Finans yhdessä Santander Consumer Bankin kanssa on leasingyhtiö.",
+      "noDeposit": "Ei käsirahaa tälle ladattavalle mallille.",
+      "inclVat": "Sivu sisältää arvonlisäveron.",
+      "utrechtRegion": "Alkaen-hinta koskee Utrechtin aluetta. Sivu sanoo, että toinen maakunta voi poiketa.",
+      "excess500": "Omavastuu on 500 euroa.",
+      "fuelNotIncluded": "Polttoaine ei sisälly.",
+      "examplePrice": "Sivu kutsuu tätä hintaesimerkiksi.",
+      "noInitialPayment": "Ei käsirahaa.",
+      "includesTyresService": "Kuukausihinta sisältää 600 euron toimituskulun, kesä- ja talvirenkaat, rahoituksen, sovitun ajomäärän, huollot ja tekniset korjaukset.",
+      "providedByKAuto": "K Auto Leasing Oy tarjoaa leasingin.",
+      "initialPayment140685": "Sivu vaatii myös 140 685 Norjan kruunun aloitusmaksun.",
+      "interestCanChange": "Sivu sanoo, että kuukausimaksu voi muuttua koron mukana.",
+      "deliveredOslo": "Sivun toimituskulu koskee Osloa. Rahti Oslon ulkopuolelle ja vuosimaksu tulevat lisäksi."
+    }
+  },
+  "parkingPage": {
+    "meta": {
+      "title": "Pysäköintihinnat",
+      "description": "Vertaile tuntihintaa, jonka kaupunki tai operaattori on julkaissut nimetylle paikalle. Valitse kaupunki ja näe se muiden hintojen rinnalla."
+    },
+    "title": "Pysäköintihinnat",
+    "lead": "Vertaile tuntihintaa, jonka kaupunki tai operaattori on julkaissut nimetylle paikalle. Valitse kaupunki, niin näet paikan muiden hintojen rinnalla. Luku on se julkaistu tunti. Yhden valuutan sisällä paikka, jonka ihmiset avaavat, voi nousta. DriveLinkUp ei varaa paikkaa. Paikan kyltti ratkaisee.",
+    "countryLabel": "Maa",
+    "countryAll": "Kaikki maat",
+    "cityLabel": "Kaupunki",
+    "cityAll": "Kaikki kaupungit",
+    "perHour": "tunnilta",
+    "empty": "Yksikään julkaistu tuntihinta ei vastaa tätä paikkaa.",
+    "source": "Operaattorin sivu",
+    "currencyGroup": "Hinnat valuutassa {currency}",
+    "countries": {
+      "SE": "Ruotsi",
+      "NO": "Norja",
+      "DK": "Tanska",
+      "FI": "Suomi"
+    },
+    "cities": {
+      "stockholm": "Tukholma",
+      "goteborg": "Göteborg",
+      "malmo": "Malmö",
+      "oslo": "Oslo",
+      "helsinki": "Helsinki",
+      "kobenhavn": "Kööpenhamina"
+    },
+    "notes": {
+      "allDay": "Sivu hinnoittelee tämän tunnin koko vuorokauden.",
+      "daytime0822": "Sivu hinnoittelee tämän tunnin kello 8–22. Muu aika maksaa vähemmän.",
+      "daytime0820": "Sivu hinnoittelee tämän tunnin kello 8–20. Muu aika maksaa vähemmän.",
+      "daytime0818": "Sivu hinnoittelee tämän tunnin kello 8–18. Ilta ja yö maksavat vähemmän, ja ne hinnat ovat samat kaikilla vyöhykkeillä.",
+      "weekday921": "Kaupunki veloittaa tämän tunnin arkisin kello 9–21 ja lauantaisin kello 9–18.",
+      "fossilHour": "Tuntihinta koskee bensiiniä, dieseliä ja hybridia. Sivu ilmoittaa sähköautolle alemman tuntihinnan.",
+      "signWins": "Paikan liikennemerkki ratkaisee.",
+      "maxTwoHours": "Sivu rajoittaa tämän pysäköinnin kahteen tuntiin.",
+      "loadingCombined": "Sivu kuvaa tämän kadunvarsipysäköinniksi Ring 1:n sisäpuolella, yhdessä lastausvyöhykkeen kanssa.",
+      "feeWindow1320": "Arkisin maksu on voimassa kello 13–20 ja lauantaisin kello 9–20.",
+      "feeWindow0920": "Maksu on voimassa kello 9–20.",
+      "weekendFirstHour": "Lauantaista kello 17 maanantaihin kello 8 ensimmäisen pysäköinnin ensimmäinen tunti on ilmainen. Auto pitää silti rekisteröidä.",
+      "prepaid": "Operaattori veloittaa maksun etukäteen.",
+      "outerCityGuest": "Sivu ilmoittaa tämän ulkokaupungin asukas- ja vieraspysäköinniksi."
     }
   }
 }

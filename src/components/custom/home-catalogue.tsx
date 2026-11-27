@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { rememberCatalogueOpen } from '@/components/custom/catalogue-outbound-link';
 import { type HomeCatalogueMode, HomeHero } from '@/components/custom/home-hero';
 import { InstructorPreview } from '@/components/custom/instructor-preview';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
@@ -12,6 +13,7 @@ import { intlLocale } from '@/lib/intl-locale';
 
 export type HomeOfferCard = {
   id: string;
+  learn: 'car' | 'part';
   href: string;
   place: string;
   name: string;
@@ -114,6 +116,7 @@ function OfferCard({ offer }: { offer: HomeOfferCard }) {
   return (
     <Link
       href={offer.href}
+      onClick={() => rememberCatalogueOpen(offer.learn, offer.id)}
       className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-foreground/20 group-hover:shadow-md motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 sm:rounded-[1.25rem] dark:bg-card">

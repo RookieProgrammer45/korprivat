@@ -1,0 +1,43 @@
+name: Parking prices refresh
+
+# Re-reads each city and operator page once a week. A page that cannot be read
+# keeps its previous amount and the job stops, so a failed read is not merged.
+# A successful re-read merges, and the phone app and the desktop both load it.
+on:
+  schedule:
+    - cron: '15 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-read published parking prices
+        run: python3 scripts/parking/refresh.py --self-test && python3 scripts/parking/refresh.py --write
+      - name: Open pull request
+        id: prices
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data/parking-prices-refresh
+          delete-branch: true
+          add-paths: data/parking/published.json
+          commit-message: 'data: weekly parking price refresh'
+          title: 'data: weekly parking price refresh'
+          body: |
+            Hour prices re-read from each city or operator page.
+
+            An amount changes only when that page shows a new number for the same place. A page that could not be read keeps the previous amount and this job does not merge. The job does not add a city.
+      - name: Publish the re-read
+        if: steps.prices.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge ${{ steps.prices.outputs.pull-request-number }} --squash --delete-branch

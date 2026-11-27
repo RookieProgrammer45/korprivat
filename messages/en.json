@@ -47,7 +47,11 @@
       "terms": "Terms",
       "dealers": "Dealers",
       "parts": "Parts",
-      "inspection": "Inspection"
+      "inspection": "Inspection",
+      "tires": "Tires",
+      "taxi": "Taxi training",
+      "leasing": "Leasing",
+      "parking": "Parking"
     },
     "language": {
       "sv": "Svenska",
@@ -2404,7 +2408,7 @@
       "title": "Compare car prices and driving schools.",
       "metaTitle": "Compare car parts, prices and driving schools",
       "metaDescription": "Compare car parts, car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
-      "body": "Compare driving schools, heavy-vehicle schools, car prices, and the parts a shop published for a car owner or a workshop. The figure is that published price.",
+      "body": "Compare driving schools, heavy-vehicle schools, car prices, and the parts a shop published for a car owner or a workshop. We compare inspection prices, tire prices, taxi-driver training, lease prices, and parking prices too. The figure is that published price.",
       "primaryCta": "Find a school",
       "instructorCta": "I work at a driving school",
       "marketplaceTag": "Car prices · Driving schools",
@@ -2515,7 +2519,11 @@
           "parts": "Parts and accessories",
           "ownerParts": "Parts for car owners",
           "workshopParts": "Parts for workshops",
-          "inspection": "Inspection"
+          "inspection": "Inspection",
+          "tires": "Tires",
+          "taxi": "Taxi training",
+          "leasing": "Leasing",
+          "parking": "Parking"
         }
       },
       "lead": "Free. You pay the school's price.",
@@ -2536,7 +2544,12 @@
         "parts": "Parts",
         "partsFallback": "Published shop prices"
       },
-      "titleParts": "Compare car parts."
+      "titleParts": "Compare car parts.",
+      "titleInspection": "Compare inspection prices.",
+      "titleTires": "Compare tire prices.",
+      "titleTaxi": "Compare taxi-driver training.",
+      "titleLeasing": "Compare lease prices.",
+      "titleParking": "Compare parking prices."
     },
     "quickLinks": {
       "label": "Start with",
@@ -4074,7 +4087,8 @@
       "new": "New",
       "used": "Used"
     },
-    "msrp": "MSRP"
+    "msrp": "MSRP",
+    "from": "From"
   },
   "partsPage": {
     "meta": {
@@ -4180,6 +4194,190 @@
       "partnerMayDiffer": "Partner stations can charge a different fee.",
       "retestIfRepaired": "Charged when the workshop repairs the faults.",
       "namedWorkshops": "Published for named workshops."
+    }
+  },
+  "tirePage": {
+    "meta": {
+      "title": "Compare tire prices",
+      "description": "Published tire-change, storage and fitting prices from the workshop's own page. A country is listed when that price is published. DriveLinkUp does not book the change."
+    },
+    "title": "Compare tire prices",
+    "lead": "The price is what the workshop published for a wheel change, tire storage, fitting, or a mobile visit. DriveLinkUp does not book the work and does not call a workshop verified.",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "vehicleLabel": "Vehicle",
+    "serviceLabel": "Service",
+    "vehicles": {
+      "car": "Car",
+      "van": "Van"
+    },
+    "services": {
+      "change": "Wheel change",
+      "hotel": "Tire hotel",
+      "mount": "Fit a set",
+      "mobile": "Mobile fitting"
+    },
+    "priceFrom": "from",
+    "priceMaximum": "Maximum",
+    "empty": "No published price for that choice yet.",
+    "source": "Price page",
+    "currencyGroup": "Prices in {currency}",
+    "countries": {
+      "SE": "Sweden",
+      "NO": "Norway",
+      "FI": "Finland",
+      "NL": "Netherlands",
+      "GB": "United Kingdom"
+    },
+    "notes": {
+      "wheelsBrought": "You bring the wheels. The page lists this from-price for the sizes it names.",
+      "extrasMayApply": "The page says extras such as TPMS service and new valves can cost more.",
+      "includesCheck": "The page includes a check of the tires and the air pressure.",
+      "includesChangeAndWash": "Includes the wheel change, storage and a wash.",
+      "includesChangeWashAndCheck": "Includes storage, a machine wash, the wheel change and a tire check.",
+      "ownTyres": "Mounting and balancing tires you already have, then fitting the wheels.",
+      "storageOnly": "Storage. The page does not say the wheel change is included.",
+      "fourWheels": "The published price is for four wheels.",
+      "upTo14Inch": "Published for tires up to 14 inches.",
+      "memberDiscount": "ANWB members get 15 percent off this change. The figure is the published from-price.",
+      "boughtElsewhere": "The page adds 12 EUR per tire when the tires were bought somewhere else.",
+      "slotMaximum": "The page says the visit costs up to this, depending on the appointment slot."
+    }
+  },
+  "taxiPage": {
+    "meta": {
+      "title": "Compare taxi-driver training",
+      "description": "Published taxi-driver course prices and official test fees. A country is listed when the school or the authority published the amount. DriveLinkUp does not enrol you."
+    },
+    "title": "Compare taxi-driver training",
+    "lead": "The price is what the school or the authority published for the course or the official test. DriveLinkUp does not enrol you and does not call a school verified.",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "kindLabel": "What the price is",
+    "kinds": {
+      "course": "Course",
+      "exam": "Official test"
+    },
+    "priceFrom": "from",
+    "priceMaximum": "Maximum",
+    "empty": "No published price for that choice yet.",
+    "source": "Price page",
+    "currencyGroup": "Prices in {currency}",
+    "countries": {
+      "SE": "Sweden",
+      "GB": "United Kingdom"
+    },
+    "notes": {
+      "questionBankAndThreeLessons": "Question bank at 850 kr and three 40-minute lessons at 1 800 kr.",
+      "bookAndLessonListedSeparately": "The school says this price includes what you need to apply. The page also lists the book at 500 kr and a 40-minute lesson at 650 kr as separate purchases.",
+      "theoryMaterial": "Theory material for the three official tests. Driving lessons are a separate package.",
+      "includesTwoLessons": "Includes two 40-minute driving lessons and preparation for the driving test.",
+      "localKnowledge": "Theory and local knowledge.",
+      "authorityFeesExtra": "The authority's test and licence fees are extra.",
+      "materialFourLessonsOneDrive": "Theory material, four taught lessons and one driving lesson.",
+      "includesWrittenTest": "Includes the written test taken the same day.",
+      "includesAssessment": "Includes the assessment at the end of the course. The street-knowledge test is a separate fee.",
+      "standaloneAssessment": "The fee for booking the street-knowledge assessment on its own.",
+      "paidToTrainer": "The council page states the price. You pay the trainer.",
+      "topographyExtra": "The street-knowledge test is a separate fee.",
+      "refresher": "The refresher for a driver who already holds the certificate. A new driver pays the initial course.",
+      "weekday": "Weekday test.",
+      "eveningWeekend": "Evening or weekend test.",
+      "privateHireCourse": "Private-hire course for the Wolverhampton taxi badge. This page does not publish the hackney carriage course price.",
+      "topographyTest": "The street-knowledge test. A resit costs the same amount."
+    }
+  },
+  "leasingPage": {
+    "meta": {
+      "title": "Compare lease prices",
+      "description": "Published private-lease prices for named models. A country is listed when the lessor published the model and the monthly amount. DriveLinkUp does not lease the car."
+    },
+    "title": "Compare lease prices",
+    "lead": "The price is the monthly amount the lessor published for that model. The country is where that price was published. DriveLinkUp does not lease the car and does not call an offer verified.",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "priceFrom": "from",
+    "priceMaximum": "Maximum",
+    "perMonth": "per month",
+    "termMonths": "{months} months",
+    "mileageYear": "{km} km a year",
+    "mileageTerm": "{km} km over the contract",
+    "empty": "No published lease price for that country yet.",
+    "source": "Price page",
+    "currencyGroup": "Prices in {currency}",
+    "countries": {
+      "SE": "Sweden",
+      "NO": "Norway",
+      "FI": "Finland",
+      "NL": "Netherlands"
+    },
+    "notes": {
+      "offerThrough20261231": "The page says the offer runs through 31 December 2026.",
+      "termNotOnPage": "This page does not state the contract length or the yearly distance next to the price.",
+      "variableFee": "The page says the monthly fee can move.",
+      "mileageChoice": "The page lets you choose 1 000, 1 500, 2 000 or 3 000 Scandinavian miles a year.",
+      "taxListedSeparately": "The page lists the yearly vehicle tax separately.",
+      "feesExtra": "A setup fee and an administration fee are extra. Excess distance is charged separately.",
+      "serviceIncluded": "The service agreement is included.",
+      "kiaFinans": "Kia Finans, with Santander Consumer Bank, is the lessor.",
+      "noDeposit": "No initial payment for this chargeable model.",
+      "inclVat": "The page includes VAT.",
+      "utrechtRegion": "The from-price is for the Utrecht region. The page says another province can differ.",
+      "excess500": "The excess is 500 EUR.",
+      "fuelNotIncluded": "Fuel is not included.",
+      "examplePrice": "The page calls this an example price.",
+      "noInitialPayment": "No initial payment.",
+      "includesTyresService": "The monthly price includes the 600 EUR delivery fee, summer and winter tires, finance, the agreed distance, servicing and technical repairs.",
+      "providedByKAuto": "K Auto Leasing Oy provides the lease.",
+      "initialPayment140685": "The page also requires an initial payment of 140 685 NOK.",
+      "interestCanChange": "The page says the monthly payment can change with the interest rate.",
+      "deliveredOslo": "The delivery cost on the page is for Oslo. Freight outside Oslo and the yearly fee are extra."
+    }
+  },
+  "parkingPage": {
+    "meta": {
+      "title": "Parking prices",
+      "description": "Compare the hour price a city or an operator published for a named place. Pick the city to see it next to the other prices there."
+    },
+    "title": "Parking prices",
+    "lead": "Compare the hour a city or an operator published for a named place. Pick the city to set that place next to the other prices there. The figure is that published hour. Inside one currency, a place people open can move up. DriveLinkUp does not reserve the spot. The sign at the place decides.",
+    "countryLabel": "Country",
+    "countryAll": "All countries",
+    "cityLabel": "City",
+    "cityAll": "All cities",
+    "perHour": "per hour",
+    "empty": "No published hour price matches this place.",
+    "source": "The operator’s page",
+    "currencyGroup": "Prices in {currency}",
+    "countries": {
+      "SE": "Sweden",
+      "NO": "Norway",
+      "DK": "Denmark",
+      "FI": "Finland"
+    },
+    "cities": {
+      "stockholm": "Stockholm",
+      "goteborg": "Gothenburg",
+      "malmo": "Malmö",
+      "oslo": "Oslo",
+      "helsinki": "Helsinki",
+      "kobenhavn": "Copenhagen"
+    },
+    "notes": {
+      "allDay": "The page prices this hour all day.",
+      "daytime0822": "The page prices this hour from 08:00 to 22:00. Other hours cost less.",
+      "daytime0820": "The page prices this hour from 08:00 to 20:00. Other hours cost less.",
+      "daytime0818": "The page prices this hour from 08:00 to 18:00. Evening and night cost less, and those prices are the same in every zone.",
+      "weekday921": "The city charges this hour on weekdays from 09:00 to 21:00 and on Saturday from 09:00 to 18:00.",
+      "fossilHour": "This hour is for petrol, diesel and hybrid. The page lists a lower hour for an electric car.",
+      "signWins": "The sign at the place decides.",
+      "maxTwoHours": "The page limits this parking to two hours.",
+      "loadingCombined": "The page describes this as street parking inside Ring 1, combined with a loading zone.",
+      "feeWindow1320": "On weekdays the fee runs from 13:00 to 20:00, and on Saturday from 09:00 to 20:00.",
+      "feeWindow0920": "The fee runs from 09:00 to 20:00.",
+      "weekendFirstHour": "From Saturday 17:00 to Monday 08:00 the first hour of the first stay is free. You still register the car.",
+      "prepaid": "The operator takes the fee in advance.",
+      "outerCityGuest": "The page lists this as resident and guest parking in the outer city."
     }
   }
 }

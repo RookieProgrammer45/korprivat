@@ -15,6 +15,7 @@ describe('proxy convention', () => {
 
   it('rewrites locale prefetches instead of skipping them', () => {
     const source = readFileSync(path.join(process.cwd(), 'src/proxy.ts'), 'utf8');
+    expect(source).toContain('private, no-store');
     expect(source).not.toContain('next-router-prefetch');
     expect(source).not.toContain("purpose', value: 'prefetch'");
   });

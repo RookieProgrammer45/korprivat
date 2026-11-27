@@ -1,0 +1,43 @@
+name: Lease prices refresh
+
+# Re-reads each lessor price page every day. A page that cannot be read keeps
+# its previous amount and the job stops, so a failed read is not merged.
+# A successful re-read merges, and the phone app and the desktop both load it.
+on:
+  schedule:
+    - cron: '45 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-read published lease prices
+        run: python3 scripts/leasing/refresh.py --self-test && python3 scripts/leasing/refresh.py --write
+      - name: Open pull request
+        id: prices
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data/lease-prices-refresh
+          delete-branch: true
+          add-paths: data/leasing/published.json
+          commit-message: 'data: daily lease price refresh'
+          title: 'data: daily lease price refresh'
+          body: |
+            Prices re-read from each lessor page.
+
+            An amount changes only when that page shows a new number for the same model. A page that could not be read keeps the previous amount; those addresses are listed in `meta.unreadable`. A large drop is a failed read, not a lessor removing its price.
+      - name: Publish the re-read
+        if: steps.prices.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge ${{ steps.prices.outputs.pull-request-number }} --squash --delete-branch

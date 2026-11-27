@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { InspectionCatalogue } from '@/components/custom/inspection-catalogue';
+import { orderCatalogue } from '@/lib/discovery/catalogue-rank-store';
 import {
   inspectionCountries,
   inspectionFiltersFromSearch,
@@ -38,11 +39,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function InspectionPage({ searchParams }: Props) {
   const params = await searchParams;
   const filters = inspectionFiltersFromSearch(params);
-  return (
-    <InspectionCatalogue
-      filters={filters}
-      rows={listInspections(filters)}
-      countries={inspectionCountries()}
-    />
-  );
+  const rows = await orderCatalogue('inspection', listInspections(filters), (row) => ({
+    id: row.id,
+    currency: row.currency,
+    amount: row.amount,
+    country: row.country,
+    checkedAt: null,
+  }));
+  return <InspectionCatalogue filters={filters} rows={rows} countries={inspectionCountries()} />;
 }

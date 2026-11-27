@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import { rememberCatalogueOpen } from '@/components/custom/catalogue-outbound-link';
 import { useUserLocation } from '@/hooks/use-user-location';
 import type { PartMatch } from '@/lib/discovery/parts';
 import { intlLocale } from '@/lib/intl-locale';
@@ -324,6 +325,7 @@ function PartRow({
         </p>
         <a
           href={product.sourceUrl}
+          onClick={() => rememberCatalogueOpen('part', product.id)}
           className="inline-flex min-h-11 items-center text-small text-foreground underline underline-offset-4"
         >
           {t('openSite', { seller: product.sellerName })}

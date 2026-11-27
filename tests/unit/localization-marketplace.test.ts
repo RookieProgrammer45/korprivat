@@ -177,6 +177,11 @@ describe('public marketplace localization', () => {
               titleDealer: string;
               titleSchool: string;
               titleParts: string;
+              titleInspection: string;
+              titleTires: string;
+              titleTaxi: string;
+              titleLeasing: string;
+              titleParking: string;
               search: { modeSchool: string };
             };
           };
@@ -185,6 +190,11 @@ describe('public marketplace localization', () => {
       expect(hero.titleDealer).not.toBe('Compare car prices.');
       expect(hero.titleSchool).not.toBe('Compare driving schools.');
       expect(hero.titleParts).not.toBe('Compare parts and helmets.');
+      expect(hero.titleInspection).not.toBe('Compare inspection prices.');
+      expect(hero.titleTires).not.toBe('Compare tire prices.');
+      expect(hero.titleTaxi).not.toBe('Compare taxi-driver training.');
+      expect(hero.titleLeasing).not.toBe('Compare lease prices.');
+      expect(hero.titleParking).not.toBe('Compare parking prices.');
       expect(hero.search.modeSchool).not.toBe('Driving school');
     }
     const danish = loadMessages('da') as {

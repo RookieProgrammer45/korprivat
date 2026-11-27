@@ -47,7 +47,11 @@
       "terms": "Términos",
       "dealers": "Concesionarios",
       "parts": "Recambios",
-      "inspection": "ITV"
+      "inspection": "ITV",
+      "tires": "Neumáticos",
+      "taxi": "Formación taxi",
+      "leasing": "Renting",
+      "parking": "Aparcamiento"
     },
     "language": {
       "sv": "Svenska",
@@ -2404,7 +2408,7 @@
       "title": "Compara precios de coches y autoescuelas.",
       "metaTitle": "Compara recambios, precios y autoescuelas",
       "metaDescription": "Compara recambios, precios de coches y autoescuelas. El precio es el publicado. Catálogo gratis para todos.",
-      "body": "Compara autoescuelas, vehículos pesados, precios de coches y recambios que una tienda publicó para un conductor o un taller. La cifra es el precio publicado.",
+      "body": "Compara autoescuelas, vehículos pesados, precios de coches y recambios que una tienda publicó para un conductor o un taller. También comparamos precios de ITV, precios de neumáticos, la formación de taxi, precios de renting y precios de aparcamiento. La cifra es el precio publicado.",
       "primaryCta": "Buscar una autoescuela",
       "instructorCta": "Trabajo en una autoescuela",
       "marketplaceTag": "Precios de coches · Autoescuelas",
@@ -2515,7 +2519,11 @@
           "parts": "Recambios",
           "ownerParts": "Recambios para conductores",
           "workshopParts": "Recambios para talleres",
-          "inspection": "ITV"
+          "inspection": "ITV",
+          "tires": "Neumáticos",
+          "taxi": "Formación taxi",
+          "leasing": "Renting",
+          "parking": "Aparcamiento"
         }
       },
       "lead": "Gratis. Pagas el precio de la autoescuela.",
@@ -2536,7 +2544,12 @@
         "parts": "Recambios",
         "partsFallback": "Precios publicados por las tiendas"
       },
-      "titleParts": "Compara recambios."
+      "titleParts": "Compara recambios.",
+      "titleInspection": "Compara precios de ITV.",
+      "titleTires": "Compara precios de neumáticos.",
+      "titleTaxi": "Compara la formación de taxi.",
+      "titleLeasing": "Compara precios de renting.",
+      "titleParking": "Compara precios de aparcamiento."
     },
     "quickLinks": {
       "label": "Empezar por",
@@ -4074,7 +4087,8 @@
       "new": "Nuevo",
       "used": "Ocasión"
     },
-    "msrp": "PVP"
+    "msrp": "PVP",
+    "from": "Desde"
   },
   "partsPage": {
     "meta": {
@@ -4180,6 +4194,190 @@
       "partnerMayDiffer": "Las estaciones asociadas pueden cobrar otra tarifa.",
       "retestIfRepaired": "Se cobra cuando el taller repara los fallos.",
       "namedWorkshops": "Publicado para talleres concretos."
+    }
+  },
+  "tirePage": {
+    "meta": {
+      "title": "Comparar precios de neumáticos",
+      "description": "Precios publicados de cambio, guardería y montaje en la página del taller. Un país aparece cuando ese precio está publicado. DriveLinkUp no reserva el cambio."
+    },
+    "title": "Comparar precios de neumáticos",
+    "lead": "El precio es el que el taller publicó para un cambio de ruedas, la guardería, el montaje o una visita a domicilio. DriveLinkUp no reserva el trabajo y no llama verificado a un taller.",
+    "countryLabel": "País",
+    "countryAll": "Todos los países",
+    "vehicleLabel": "Vehículo",
+    "serviceLabel": "Servicio",
+    "vehicles": {
+      "car": "Coche",
+      "van": "Furgoneta"
+    },
+    "services": {
+      "change": "Cambio de ruedas",
+      "hotel": "Guardería",
+      "mount": "Montaje",
+      "mobile": "Visita a domicilio"
+    },
+    "priceFrom": "desde",
+    "priceMaximum": "Máximo",
+    "empty": "Todavía no hay un precio publicado para esa elección.",
+    "source": "Página de precios",
+    "currencyGroup": "Precios en {currency}",
+    "countries": {
+      "SE": "Suecia",
+      "NO": "Noruega",
+      "FI": "Finlandia",
+      "NL": "Países Bajos",
+      "GB": "Reino Unido"
+    },
+    "notes": {
+      "wheelsBrought": "Llevas las ruedas. La página indica este precio desde para las medidas que nombra.",
+      "extrasMayApply": "La página dice que extras como el servicio TPMS y válvulas nuevas pueden costar más.",
+      "includesCheck": "La página incluye una revisión de los neumáticos y de la presión.",
+      "includesChangeAndWash": "Incluye el cambio, el guardado y un lavado.",
+      "includesChangeWashAndCheck": "Incluye guardado, lavado a máquina, el cambio y una revisión.",
+      "ownTyres": "Montaje y equilibrado de neumáticos que ya tienes, y después las ruedas en el coche.",
+      "storageOnly": "Guardado. La página no dice que el cambio esté incluido.",
+      "fourWheels": "El precio publicado es para cuatro ruedas.",
+      "upTo14Inch": "Publicado para neumáticos de hasta 14 pulgadas.",
+      "memberDiscount": "Los socios de ANWB tienen un 15 por ciento en este cambio. La cifra es el precio desde.",
+      "boughtElsewhere": "La página suma 12 EUR por neumático si se compraron en otro sitio.",
+      "slotMaximum": "La página dice que la visita cuesta como mucho esto, según la franja."
+    }
+  },
+  "taxiPage": {
+    "meta": {
+      "title": "Comparar la formación de taxi",
+      "description": "Precios publicados del curso de taxista y del examen oficial. Un país aparece cuando la escuela o la autoridad publicó el importe. DriveLinkUp no te inscribe."
+    },
+    "title": "Comparar la formación de taxi",
+    "lead": "El precio es el que la escuela o la autoridad publicó para el curso o el examen oficial. DriveLinkUp no te inscribe y no llama verificada a una escuela.",
+    "countryLabel": "País",
+    "countryAll": "Todos los países",
+    "kindLabel": "A qué corresponde el precio",
+    "kinds": {
+      "course": "Curso",
+      "exam": "Examen oficial"
+    },
+    "priceFrom": "desde",
+    "priceMaximum": "Máximo",
+    "empty": "Todavía no hay un precio publicado para esa elección.",
+    "source": "Página de precios",
+    "currencyGroup": "Precios en {currency}",
+    "countries": {
+      "SE": "Suecia",
+      "GB": "Reino Unido"
+    },
+    "notes": {
+      "questionBankAndThreeLessons": "Banco de preguntas por 850 kr y tres clases de 40 minutos por 1 800 kr.",
+      "bookAndLessonListedSeparately": "La escuela dice que este precio incluye lo que hace falta para solicitarlo. La página también lista el libro a 500 kr y una clase de 40 minutos a 650 kr como compras aparte.",
+      "theoryMaterial": "Material de teoría para los tres exámenes oficiales. Las clases de conducir son otro paquete.",
+      "includesTwoLessons": "Incluye dos clases de conducir de 40 minutos y la preparación del examen práctico.",
+      "localKnowledge": "Teoría y conocimiento local.",
+      "authorityFeesExtra": "Las tasas de examen y de licencia de la autoridad van aparte.",
+      "materialFourLessonsOneDrive": "Material de teoría, cuatro clases con profesor y una clase de conducir.",
+      "includesWrittenTest": "El examen escrito del mismo día está incluido.",
+      "includesAssessment": "La evaluación al final del curso está incluida. El examen de conocimiento de las calles es una tasa aparte.",
+      "standaloneAssessment": "La tasa por reservar solo el examen de conocimiento de las calles.",
+      "paidToTrainer": "La página del ayuntamiento indica el precio. Pagas al formador.",
+      "topographyExtra": "El examen de conocimiento de las calles es una tasa aparte.",
+      "refresher": "El reciclaje para quien ya tiene el certificado. Un conductor nuevo paga el curso inicial.",
+      "weekday": "Examen en día laborable.",
+      "eveningWeekend": "Examen por la tarde o el fin de semana.",
+      "privateHireCourse": "El curso es el de private hire para la licencia de taxi de Wolverhampton. La página no publica el precio del curso de hackney carriage.",
+      "topographyTest": "El examen de conocimiento de las calles. Una repetición cuesta lo mismo."
+    }
+  },
+  "leasingPage": {
+    "meta": {
+      "title": "Compara precios de renting",
+      "description": "Precios de renting publicados para modelos con nombre. Un país aparece cuando el arrendador publicó el modelo y la cuota mensual. DriveLinkUp no arrienda el coche."
+    },
+    "title": "Compara precios de renting",
+    "lead": "El precio es la cuota mensual que el arrendador publicó para ese modelo. El país es donde se publicó ese precio. DriveLinkUp no arrienda el coche y no llama verificada a una oferta.",
+    "countryLabel": "País",
+    "countryAll": "Todos los países",
+    "priceFrom": "desde",
+    "priceMaximum": "Máximo",
+    "perMonth": "al mes",
+    "termMonths": "{months} meses",
+    "mileageYear": "{km} km al año",
+    "mileageTerm": "{km} km durante el contrato",
+    "empty": "Todavía no hay un precio de renting publicado para ese país.",
+    "source": "Página de precios",
+    "currencyGroup": "Precios en {currency}",
+    "countries": {
+      "SE": "Suecia",
+      "NO": "Noruega",
+      "FI": "Finlandia",
+      "NL": "Países Bajos"
+    },
+    "notes": {
+      "offerThrough20261231": "La página dice que la oferta sigue hasta el 31 de diciembre de 2026.",
+      "termNotOnPage": "La página no indica la duración del contrato ni la distancia anual junto al precio.",
+      "variableFee": "La página dice que la cuota mensual puede cambiar.",
+      "mileageChoice": "La página permite elegir 1 000, 1 500, 2 000 o 3 000 millas escandinavas al año.",
+      "taxListedSeparately": "La página indica el impuesto anual del vehículo aparte.",
+      "feesExtra": "Una comisión de apertura y una de administración se suman. El exceso de distancia se cobra aparte.",
+      "serviceIncluded": "El contrato de mantenimiento está incluido.",
+      "kiaFinans": "Kia Finans, con Santander Consumer Bank, es el arrendador.",
+      "noDeposit": "Sin entrada para este modelo enchufable.",
+      "inclVat": "La página incluye el IVA.",
+      "utrechtRegion": "El precio desde es para la región de Utrecht. La página dice que otra provincia puede diferir.",
+      "excess500": "La franquicia es de 500 euros.",
+      "fuelNotIncluded": "El combustible no está incluido.",
+      "examplePrice": "La página llama a esto un precio de ejemplo.",
+      "noInitialPayment": "Sin pago inicial.",
+      "includesTyresService": "La cuota mensual incluye la entrega de 600 euros, neumáticos de verano e invierno, la financiación, la distancia acordada, el mantenimiento y las reparaciones técnicas.",
+      "providedByKAuto": "K Auto Leasing Oy ofrece el renting.",
+      "initialPayment140685": "La página también exige un pago inicial de 140 685 coronas noruegas.",
+      "interestCanChange": "La página dice que la cuota mensual puede cambiar con el tipo de interés.",
+      "deliveredOslo": "El coste de entrega de la página es para Oslo. El transporte fuera de Oslo y la tasa anual se suman."
+    }
+  },
+  "parkingPage": {
+    "meta": {
+      "title": "Precios de aparcamiento",
+      "description": "Compara el precio por hora que una ciudad o un operador publicó para un lugar con nombre."
+    },
+    "title": "Precios de aparcamiento",
+    "lead": "Compara el precio por hora que una ciudad o un operador publicó para un lugar con nombre. Elige la ciudad para ver ese lugar junto a los otros precios. La cifra es esa hora publicada. Dentro de una moneda, un lugar que la gente abre puede subir. DriveLinkUp no reserva la plaza. La señal en el lugar decide.",
+    "countryLabel": "País",
+    "countryAll": "Todos los países",
+    "cityLabel": "Ciudad",
+    "cityAll": "Todas las ciudades",
+    "perHour": "por hora",
+    "empty": "Ningún precio por hora publicado coincide con este lugar.",
+    "source": "La página del operador",
+    "currencyGroup": "Precios en {currency}",
+    "countries": {
+      "SE": "Suecia",
+      "NO": "Noruega",
+      "DK": "Dinamarca",
+      "FI": "Finlandia"
+    },
+    "cities": {
+      "stockholm": "Estocolmo",
+      "goteborg": "Gotemburgo",
+      "malmo": "Malmö",
+      "oslo": "Oslo",
+      "helsinki": "Helsinki",
+      "kobenhavn": "Copenhague"
+    },
+    "notes": {
+      "allDay": "La página fija este precio por hora todo el día.",
+      "daytime0822": "La página fija este precio por hora de 8 a 22. Las otras horas cuestan menos.",
+      "daytime0820": "La página fija este precio por hora de 8 a 20. Las otras horas cuestan menos.",
+      "daytime0818": "La página fija este precio por hora de 8 a 18. La tarde y la noche cuestan menos, y esos precios son iguales en cada zona.",
+      "weekday921": "La ciudad cobra esta hora los días laborables de 9 a 21 y el sábado de 9 a 18.",
+      "fossilHour": "Esta hora es para gasolina, diésel e híbrido. La página indica una hora más baja para un coche eléctrico.",
+      "signWins": "La señal en el lugar decide.",
+      "maxTwoHours": "La página limita este aparcamiento a dos horas.",
+      "loadingCombined": "La página describe esto como aparcamiento en la calle dentro del Ring 1, combinado con una zona de carga.",
+      "feeWindow1320": "Los días laborables la tarifa va de 13 a 20, y el sábado de 9 a 20.",
+      "feeWindow0920": "La tarifa va de 9 a 20.",
+      "weekendFirstHour": "Del sábado a las 17 al lunes a las 8, la primera hora del primer estacionamiento es gratis. El coche igual se registra.",
+      "prepaid": "El operador cobra la tarifa por adelantado.",
+      "outerCityGuest": "La página indica esto como aparcamiento de residentes y visitantes en la ciudad exterior."
     }
   }
 }

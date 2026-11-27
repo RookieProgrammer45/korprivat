@@ -3,7 +3,7 @@ import markets from '../../../data/dealerships/published-markets.json';
 
 export type DealershipVehicleKind = 'car' | 'van' | 'heavy' | 'motorcycle' | 'other';
 export type VehicleCondition = 'new' | 'used';
-export type VehiclePriceKind = 'msrp';
+export type VehiclePriceKind = 'msrp' | 'from';
 
 export type DealershipVehicle = {
   name: string;
@@ -101,7 +101,8 @@ function asDealership(row: unknown): Dealership | null {
           item.mileageUnit === 'mil' || item.mileageUnit === 'km' ? item.mileageUnit : null;
         const condition: VehicleCondition | null =
           item.condition === 'new' || item.condition === 'used' ? item.condition : null;
-        const priceKind: VehiclePriceKind | null = item.priceKind === 'msrp' ? 'msrp' : null;
+        const priceKind: VehiclePriceKind | null =
+          item.priceKind === 'msrp' || item.priceKind === 'from' ? item.priceKind : null;
         return [
           {
             name: vehicleName,
@@ -193,7 +194,10 @@ export type PublishedCar = {
 
 export function isSpecifiedVehicle(vehicle: DealershipVehicle): boolean {
   return (
-    vehicle.year != null || vehicle.mileage != null || Boolean(vehicle.fuel || vehicle.gearbox)
+    vehicle.priceKind != null ||
+    vehicle.year != null ||
+    vehicle.mileage != null ||
+    Boolean(vehicle.fuel || vehicle.gearbox)
   );
 }
 
@@ -203,7 +207,7 @@ export function publishedCars(rows: Dealership[] = dealers): PublishedCar[] {
     for (const vehicle of dealer.vehicles) {
       if (!isSpecifiedVehicle(vehicle)) continue;
       cars.push({
-        id: `${dealer.id}:${vehicle.sourceUrl}`,
+        id: `${dealer.id}:${vehicle.sourceUrl}:${vehicle.name}:${vehicle.price}`,
         dealerId: dealer.id,
         dealerName: dealer.name,
         dealerCity: dealer.city,

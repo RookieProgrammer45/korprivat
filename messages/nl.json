@@ -47,7 +47,11 @@
       "terms": "Voorwaarden",
       "dealers": "Autodealers",
       "parts": "Onderdelen",
-      "inspection": "APK"
+      "inspection": "APK",
+      "tires": "Banden",
+      "taxi": "Taxichauffeur",
+      "leasing": "Private lease",
+      "parking": "Parkeren"
     },
     "language": {
       "sv": "Svenska",
@@ -2404,7 +2408,7 @@
       "title": "Vergelijk autoprijzen en rijscholen.",
       "metaTitle": "Onderdelen, prijzen en rijscholen vergelijken",
       "metaDescription": "Vergelijk onderdelen, autoprijzen en rijscholen. De prijs is de gepubliceerde. Gratis catalogus voor iedereen.",
-      "body": "Vergelijk rijscholen, zwaar verkeer, autoprijzen en onderdelen die een winkel publiceerde voor een autobezitter of een werkplaats. Het bedrag is de gepubliceerde prijs.",
+      "body": "Vergelijk rijscholen, zwaar verkeer, autoprijzen en onderdelen die een winkel publiceerde voor een autobezitter of een werkplaats. We vergelijken ook APK-prijzen, bandenprijzen, de taxichauffeursopleiding, leaseprijzen en parkeertarieven. Het bedrag is de gepubliceerde prijs.",
       "primaryCta": "Vind een rijschool",
       "instructorCta": "Ik werk bij een rijschool",
       "marketplaceTag": "Autoprijzen · Rijscholen",
@@ -2515,7 +2519,11 @@
           "parts": "Onderdelen",
           "ownerParts": "Onderdelen voor autobezitters",
           "workshopParts": "Onderdelen voor werkplaatsen",
-          "inspection": "APK"
+          "inspection": "APK",
+          "tires": "Banden",
+          "taxi": "Taxichauffeur",
+          "leasing": "Private lease",
+          "parking": "Parkeren"
         }
       },
       "lead": "Gratis. Je betaalt de prijs van de rijschool.",
@@ -2536,7 +2544,12 @@
         "parts": "Onderdelen",
         "partsFallback": "Gepubliceerde winkelprijzen"
       },
-      "titleParts": "Auto-onderdelen vergelijken."
+      "titleParts": "Auto-onderdelen vergelijken.",
+      "titleInspection": "Vergelijk APK-prijzen.",
+      "titleTires": "Vergelijk bandenprijzen.",
+      "titleTaxi": "Vergelijk de taxichauffeursopleiding.",
+      "titleLeasing": "Vergelijk leaseprijzen.",
+      "titleParking": "Vergelijk parkeertarieven."
     },
     "quickLinks": {
       "label": "Begin met",
@@ -4074,7 +4087,8 @@
       "new": "Nieuw",
       "used": "Gebruikt"
     },
-    "msrp": "Adviesprijs"
+    "msrp": "Adviesprijs",
+    "from": "Vanaf"
   },
   "partsPage": {
     "meta": {
@@ -4180,6 +4194,190 @@
       "partnerMayDiffer": "Partnerstations kunnen een ander tarief rekenen.",
       "retestIfRepaired": "Verschuldigd wanneer de werkplaats de gebreken herstelt.",
       "namedWorkshops": "Gepubliceerd voor genoemde werkplaatsen."
+    }
+  },
+  "tirePage": {
+    "meta": {
+      "title": "Vergelijk bandenprijzen",
+      "description": "Gepubliceerde prijzen voor een wissel, bandenhotel en montage van de eigen pagina van de werkplaats. Een land staat er als die prijs is gepubliceerd. DriveLinkUp boekt de wissel niet."
+    },
+    "title": "Vergelijk bandenprijzen",
+    "lead": "De prijs is wat de werkplaats publiceerde voor een wielenwissel, opslag, montage of een bezoek aan huis. DriveLinkUp boekt het werk niet en noemt een werkplaats niet geverifieerd.",
+    "countryLabel": "Land",
+    "countryAll": "Alle landen",
+    "vehicleLabel": "Voertuig",
+    "serviceLabel": "Dienst",
+    "vehicles": {
+      "car": "Auto",
+      "van": "Bestelwagen"
+    },
+    "services": {
+      "change": "Wielenwissel",
+      "hotel": "Bandenhotel",
+      "mount": "Montage",
+      "mobile": "Bezoek aan huis"
+    },
+    "priceFrom": "vanaf",
+    "priceMaximum": "Hoogstens",
+    "empty": "Nog geen gepubliceerde prijs voor die keuze.",
+    "source": "Prijsblad",
+    "currencyGroup": "Prijzen in {currency}",
+    "countries": {
+      "SE": "Zweden",
+      "NO": "Noorwegen",
+      "FI": "Finland",
+      "NL": "Nederland",
+      "GB": "Verenigd Koninkrijk"
+    },
+    "notes": {
+      "wheelsBrought": "Je neemt de wielen mee. De pagina noemt deze vanaf-prijs voor de maten die ze noemt.",
+      "extrasMayApply": "De pagina zegt dat extra's zoals TPMS-service en nieuwe ventielen meer kunnen kosten.",
+      "includesCheck": "De pagina omvat een controle van de banden en de spanning.",
+      "includesChangeAndWash": "Inclusief de wissel, opslag en een wasbeurt.",
+      "includesChangeWashAndCheck": "Inclusief opslag, machinewas, de wissel en een bandencontrole.",
+      "ownTyres": "Monteren en balanceren van banden die je al hebt, daarna de wielen op de auto.",
+      "storageOnly": "Opslag. De pagina zegt niet dat de wissel is inbegrepen.",
+      "fourWheels": "De gepubliceerde prijs geldt voor vier wielen.",
+      "upTo14Inch": "Gepubliceerd voor banden tot 14 inch.",
+      "memberDiscount": "ANWB-leden krijgen 15 procent op deze wissel. Het bedrag is de vanaf-prijs.",
+      "boughtElsewhere": "De pagina rekent 12 EUR per band extra als de banden ergens anders zijn gekocht.",
+      "slotMaximum": "De pagina zegt dat het bezoek hoogstens dit kost, afhankelijk van het tijdvak."
+    }
+  },
+  "taxiPage": {
+    "meta": {
+      "title": "Vergelijk de taxichauffeursopleiding",
+      "description": "Gepubliceerde prijzen voor de taxichauffeursopleiding en het officiële examen. Een land staat er als de school of de instantie het bedrag publiceerde. DriveLinkUp schrijft je niet in."
+    },
+    "title": "Vergelijk de taxichauffeursopleiding",
+    "lead": "De prijs is wat de school of de instantie publiceerde voor de opleiding of het officiële examen. DriveLinkUp schrijft je niet in en noemt een school niet geverifieerd.",
+    "countryLabel": "Land",
+    "countryAll": "Alle landen",
+    "kindLabel": "Waar de prijs voor is",
+    "kinds": {
+      "course": "Opleiding",
+      "exam": "Officieel examen"
+    },
+    "priceFrom": "vanaf",
+    "priceMaximum": "Hoogstens",
+    "empty": "Nog geen gepubliceerde prijs voor die keuze.",
+    "source": "Prijsblad",
+    "currencyGroup": "Prijzen in {currency}",
+    "countries": {
+      "SE": "Zweden",
+      "GB": "Verenigd Koninkrijk"
+    },
+    "notes": {
+      "questionBankAndThreeLessons": "Vragenbank voor 850 kr en drie lessen van 40 minuten voor 1 800 kr.",
+      "bookAndLessonListedSeparately": "De school schrijft dat deze prijs omvat wat je nodig hebt om aan te vragen. De pagina zet het boek voor 500 kr en een les van 40 minuten voor 650 kr ook als aparte aankopen.",
+      "theoryMaterial": "Theoriemateriaal voor de drie officiële examens. Rijlessen zijn een apart pakket.",
+      "includesTwoLessons": "Inclusief twee rijlessen van 40 minuten en voorbereiding op het praktijkexamen.",
+      "localKnowledge": "Theorie en lokale kennis.",
+      "authorityFeesExtra": "Examen- en vergunningskosten van de instantie komen erbij.",
+      "materialFourLessonsOneDrive": "Theoriemateriaal, vier lessen met een docent en één rijles.",
+      "includesWrittenTest": "De schriftelijke toets op dezelfde dag is inbegrepen.",
+      "includesAssessment": "De toets aan het eind van de cursus is inbegrepen. De straatkennisproef is een apart bedrag.",
+      "standaloneAssessment": "Het tarief om de straatexamen alleen te boeken.",
+      "paidToTrainer": "De pagina van de gemeente noemt de prijs. Je betaalt de opleider.",
+      "topographyExtra": "Het straatexamen is een apart tarief.",
+      "refresher": "De opfrisser voor wie het certificaat al heeft. Een nieuwe chauffeur betaalt de eerste cursus.",
+      "weekday": "Examen op een weekdag.",
+      "eveningWeekend": "Examen 's avonds of in het weekend.",
+      "privateHireCourse": "De cursus is de private-hirecursus voor de taxibadge in Wolverhampton. De pagina publiceert geen prijs voor de hackney-carriagecursus.",
+      "topographyTest": "De straatkennisproef. Een herkansing kost hetzelfde bedrag."
+    }
+  },
+  "leasingPage": {
+    "meta": {
+      "title": "Vergelijk leaseprijzen",
+      "description": "Gepubliceerde private-leaseprijzen voor genoemde modellen. Een land staat er als de leasemaatschappij het model en het maandbedrag publiceerde. DriveLinkUp least de auto niet."
+    },
+    "title": "Vergelijk leaseprijzen",
+    "lead": "De prijs is het maandbedrag dat de leasemaatschappij voor dat model publiceerde. Het land is waar die prijs werd gepubliceerd. DriveLinkUp least de auto niet en noemt een aanbod niet geverifieerd.",
+    "countryLabel": "Land",
+    "countryAll": "Alle landen",
+    "priceFrom": "vanaf",
+    "priceMaximum": "Hoogstens",
+    "perMonth": "per maand",
+    "termMonths": "{months} maanden",
+    "mileageYear": "{km} km per jaar",
+    "mileageTerm": "{km} km over de looptijd",
+    "empty": "Nog geen gepubliceerde leaseprijs voor dat land.",
+    "source": "Prijs pagina",
+    "currencyGroup": "Prijzen in {currency}",
+    "countries": {
+      "SE": "Zweden",
+      "NO": "Noorwegen",
+      "FI": "Finland",
+      "NL": "Nederland"
+    },
+    "notes": {
+      "offerThrough20261231": "De pagina zegt dat de aanbieding loopt tot en met 31 december 2026.",
+      "termNotOnPage": "De pagina noemt de looptijd en de jaarlijkse afstand niet naast de prijs.",
+      "variableFee": "De pagina zegt dat het maandbedrag kan veranderen.",
+      "mileageChoice": "De pagina laat je 1 000, 1 500, 2 000 of 3 000 Scandinavische mijl per jaar kiezen.",
+      "taxListedSeparately": "De pagina vermeldt de jaarlijkse voertuigbelasting apart.",
+      "feesExtra": "Een afsluitvergoeding en administratiekosten komen erbij. Extra kilometers worden apart berekend.",
+      "serviceIncluded": "Het servicecontract is inbegrepen.",
+      "kiaFinans": "Kia Finans, samen met Santander Consumer Bank, is de leasemaatschappij.",
+      "noDeposit": "Geen aanbetaling voor dit oplaadbare model.",
+      "inclVat": "De pagina is inclusief btw.",
+      "utrechtRegion": "De vanaf-prijs geldt voor de regio Utrecht. De pagina zegt dat een andere provincie kan afwijken.",
+      "excess500": "Het eigen risico is 500 euro.",
+      "fuelNotIncluded": "Brandstof is niet inbegrepen.",
+      "examplePrice": "De pagina noemt dit een voorbeeldprijs.",
+      "noInitialPayment": "Geen aanbetaling.",
+      "includesTyresService": "De maandprijs bevat de leveringskosten van 600 euro, zomer- en winterbanden, financiering, de afgesproken afstand, onderhoud en technische reparaties.",
+      "providedByKAuto": "K Auto Leasing Oy levert de lease.",
+      "initialPayment140685": "De pagina vraagt ook een startbetaling van 140 685 Noorse kronen.",
+      "interestCanChange": "De pagina zegt dat het maandbedrag met de rente kan veranderen.",
+      "deliveredOslo": "De leveringskosten op de pagina gelden voor Oslo. Vracht buiten Oslo en de jaarlijkse heffing komen erbij."
+    }
+  },
+  "parkingPage": {
+    "meta": {
+      "title": "Parkeertarieven",
+      "description": "Vergelijk het uurtarief dat een stad of een exploitant voor een genoemde plek heeft gepubliceerd."
+    },
+    "title": "Parkeertarieven",
+    "lead": "Vergelijk het uurtarief dat een stad of een exploitant voor een genoemde plek heeft gepubliceerd. Kies de stad om die plek naast de andere prijzen daar te zien. Het bedrag is dat gepubliceerde uur. Binnen één valuta kan een plek die mensen openen omhoog schuiven. DriveLinkUp reserveert de plek niet. Het bord ter plaatse geldt.",
+    "countryLabel": "Land",
+    "countryAll": "Alle landen",
+    "cityLabel": "Stad",
+    "cityAll": "Alle steden",
+    "perHour": "per uur",
+    "empty": "Geen gepubliceerd uurtarief past bij deze plek.",
+    "source": "De pagina van de exploitant",
+    "currencyGroup": "Prijzen in {currency}",
+    "countries": {
+      "SE": "Zweden",
+      "NO": "Noorwegen",
+      "DK": "Denemarken",
+      "FI": "Finland"
+    },
+    "cities": {
+      "stockholm": "Stockholm",
+      "goteborg": "Göteborg",
+      "malmo": "Malmö",
+      "oslo": "Oslo",
+      "helsinki": "Helsinki",
+      "kobenhavn": "Kopenhagen"
+    },
+    "notes": {
+      "allDay": "De pagina zet dit uurtarief de hele dag.",
+      "daytime0822": "De pagina zet dit uurtarief van 8 tot 22 uur. Andere uren kosten minder.",
+      "daytime0820": "De pagina zet dit uurtarief van 8 tot 20 uur. Andere uren kosten minder.",
+      "daytime0818": "De pagina zet dit uurtarief van 8 tot 18 uur. Avond en nacht kosten minder, en die prijzen zijn in elke zone gelijk.",
+      "weekday921": "De stad rekent dit uur op werkdagen van 9 tot 21 uur en op zaterdag van 9 tot 18 uur.",
+      "fossilHour": "Dit uur geldt voor benzine, diesel en hybride. De pagina noemt een lager uur voor een elektrische auto.",
+      "signWins": "Het bord ter plaatse geldt.",
+      "maxTwoHours": "De pagina begrenst dit parkeren tot twee uur.",
+      "loadingCombined": "De pagina beschrijft dit als straatparkeren binnen Ring 1, gecombineerd met een laadzone.",
+      "feeWindow1320": "Op werkdagen geldt het tarief van 13 tot 20 uur, en op zaterdag van 9 tot 20 uur.",
+      "feeWindow0920": "Het tarief geldt van 9 tot 20 uur.",
+      "weekendFirstHour": "Van zaterdag 17 uur tot maandag 8 uur is het eerste uur van de eerste parkeerbeurt gratis. De auto moet wel worden geregistreerd.",
+      "prepaid": "De exploitant rekent het tarief vooraf.",
+      "outerCityGuest": "De pagina noemt dit bewoners- en bezoekersparkeren in de buitenstad."
     }
   }
 }

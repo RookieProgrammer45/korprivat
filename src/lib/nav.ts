@@ -14,6 +14,10 @@ export interface NavItem {
     | 'nav.dealers'
     | 'nav.parts'
     | 'nav.inspection'
+    | 'nav.tires'
+    | 'nav.taxi'
+    | 'nav.leasing'
+    | 'nav.parking'
     | 'nav.howItWorks'
     | 'nav.licenceCategories'
     | 'nav.drivingInstructor'
@@ -104,6 +108,34 @@ export const navItems: NavItem[] = [
     href: '/besiktning',
     group: 'primary',
     order: 5,
+  },
+  {
+    label: 'Tires',
+    labelKey: 'nav.tires',
+    href: '/dack',
+    group: 'primary',
+    order: 6,
+  },
+  {
+    label: 'Taxi training',
+    labelKey: 'nav.taxi',
+    href: '/taxiutbildning',
+    group: 'primary',
+    order: 7,
+  },
+  {
+    label: 'Leasing',
+    labelKey: 'nav.leasing',
+    href: '/privatleasing',
+    group: 'primary',
+    order: 8,
+  },
+  {
+    label: 'Parking',
+    labelKey: 'nav.parking',
+    href: '/parkering',
+    group: 'primary',
+    order: 9,
   },
   // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
   // primary bar — keeps marketing chrome short once a session exists.

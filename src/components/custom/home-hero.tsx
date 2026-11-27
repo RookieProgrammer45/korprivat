@@ -1,5 +1,5 @@
-// Search-first entry. The title alternates between schools, car prices, and parts.
-// The photograph stays on desktop, with those three comparison paths on top of it.
+// Search-first entry. The title alternates between schools, car prices, parts, inspections, tires, taxi training, lease prices, and parking prices.
+// The photograph stays on desktop, with those comparison paths on top of it.
 
 'use client';
 
@@ -19,6 +19,10 @@ const SEARCH_CATEGORIES = ['B', 'A', 'BE'] as const;
 
 const POPULAR_LINKS = [
   { key: 'inspection', href: '/besiktning' },
+  { key: 'tires', href: '/dack' },
+  { key: 'taxi', href: '/taxiutbildning' },
+  { key: 'leasing', href: '/privatleasing' },
+  { key: 'parking', href: '/parkering' },
   { key: 'ownerParts', href: '/reservdelar?buyer=owner' },
   { key: 'workshopParts', href: '/reservdelar?buyer=workshop' },
   { key: 'heavy', href: '/tung-trafik' },
@@ -81,7 +85,16 @@ export function HomeHero({
       <div className="container-page grid items-start gap-8 pt-4 pb-8 sm:pt-5 lg:grid-cols-[1.05fr_0.95fr] lg:pt-6 lg:pb-10">
         <div className="dlu-hero-copy flex min-w-0 flex-col">
           <RotatingTitle
-            lines={[t('titleSchool'), t('titleDealer'), t('titleParts')]}
+            lines={[
+              t('titleSchool'),
+              t('titleDealer'),
+              t('titleParts'),
+              t('titleInspection'),
+              t('titleTires'),
+              t('titleTaxi'),
+              t('titleLeasing'),
+              t('titleParking'),
+            ]}
             className="marketplace-hero-title max-w-[16ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
           />
           <p className="marketplace-reveal dlu-hero-in-2 mt-4 max-w-xl text-body text-muted-foreground">

@@ -1,0 +1,14 @@
+// Learned catalogue order. One row per catalogue. The bias map is the
+// per-listing weight. Published prices stay in the JSON files.
+
+model CatalogueRankModel {
+  id          String   @id
+  samples     Int      @default(0)
+  sameCountry Float    @default(0)
+  fresh       Float    @default(0)
+  bias        Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("catalogue_rank_model")
+}

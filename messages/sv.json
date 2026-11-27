@@ -47,7 +47,11 @@
       "terms": "Villkor",
       "dealers": "Bilhandlare",
       "parts": "Reservdelar",
-      "inspection": "Besiktning"
+      "inspection": "Besiktning",
+      "tires": "Däck",
+      "taxi": "Taxiförare",
+      "leasing": "Privatleasing",
+      "parking": "Parkering"
     },
     "language": {
       "sv": "Svenska",
@@ -2404,7 +2408,7 @@
       "title": "Jämför bilpriser och trafikskolor.",
       "metaTitle": "Jämför reservdelar, bilpriser och trafikskolor",
       "metaDescription": "Jämför reservdelar, bilpriser och trafikskolor. Priset är det som publicerats. Gratis katalog för alla.",
-      "body": "Jämför trafikskolor, tung trafik, bilpriser och reservdelar som en butik publicerat för en bilägare eller en verkstad. Siffran är det publicerade priset.",
+      "body": "Jämför trafikskolor, tung trafik, bilpriser och reservdelar som en butik publicerat för en bilägare eller en verkstad. Vi jämför besiktningspriser, däckpriser, taxiförarutbildning, leasingpriser och parkeringspriser också. Siffran är det publicerade priset.",
       "primaryCta": "Hitta en skola",
       "instructorCta": "Jag undervisar på en trafikskola",
       "marketplaceTag": "Bilpriser · Trafikskolor",
@@ -2515,7 +2519,11 @@
           "parts": "Reservdelar",
           "ownerParts": "Reservdelar för bilägare",
           "workshopParts": "Reservdelar för verkstad",
-          "inspection": "Besiktning"
+          "inspection": "Besiktning",
+          "tires": "Däck",
+          "taxi": "Taxiförare",
+          "leasing": "Privatleasing",
+          "parking": "Parkering"
         }
       },
       "lead": "Gratis. Du betalar skolans pris.",
@@ -2536,7 +2544,12 @@
         "parts": "Reservdelar",
         "partsFallback": "Publicerade butikspriser"
       },
-      "titleParts": "Jämför reservdelar."
+      "titleParts": "Jämför reservdelar.",
+      "titleInspection": "Jämför besiktningspriser.",
+      "titleTires": "Jämför däckpriser.",
+      "titleTaxi": "Jämför taxiförarutbildning.",
+      "titleLeasing": "Jämför leasingpriser.",
+      "titleParking": "Jämför parkeringspriser."
     },
     "quickLinks": {
       "label": "Börja med",
@@ -4074,7 +4087,8 @@
       "new": "Ny",
       "used": "Begagnad"
     },
-    "msrp": "Rek. pris"
+    "msrp": "Rek. pris",
+    "from": "Från"
   },
   "partsPage": {
     "meta": {
@@ -4180,6 +4194,190 @@
       "partnerMayDiffer": "Partnerstationer kan ta en annan avgift.",
       "retestIfRepaired": "Tas ut när verkstaden åtgärdar felen.",
       "namedWorkshops": "Publicerat för namngivna verkstäder."
+    }
+  },
+  "tirePage": {
+    "meta": {
+      "title": "Jämför däckpriser",
+      "description": "Publicerade priser för däckbyte, däckhotell och montering från verkstadens egen sida. Ett land visas när det priset är publicerat. DriveLinkUp bokar inte bytet."
+    },
+    "title": "Jämför däckpriser",
+    "lead": "Priset är det verkstaden publicerat för ett hjulskifte, däckhotell, montering eller ett mobilt besök. DriveLinkUp bokar inte arbetet och kallar inte en verkstad verifierad.",
+    "countryLabel": "Land",
+    "countryAll": "Alla länder",
+    "vehicleLabel": "Fordon",
+    "serviceLabel": "Tjänst",
+    "vehicles": {
+      "car": "Personbil",
+      "van": "Lätt lastbil"
+    },
+    "services": {
+      "change": "Hjulskifte",
+      "hotel": "Däckhotell",
+      "mount": "Montering",
+      "mobile": "Mobilt besök"
+    },
+    "priceFrom": "från",
+    "priceMaximum": "Högst",
+    "empty": "Inget publicerat pris för det valet ännu.",
+    "source": "Prissida",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "FI": "Finland",
+      "NL": "Nederländerna",
+      "GB": "Storbritannien"
+    },
+    "notes": {
+      "wheelsBrought": "Du tar med hjulen. Sidan anger samma frånpris för de storlekar den namnger.",
+      "extrasMayApply": "Sidan säger att tillägg som TPMS-service och nya ventiler kan kosta mer.",
+      "includesCheck": "Sidan inkluderar kontroll av däcken och lufttrycket.",
+      "includesChangeAndWash": "Ingår: hjulskifte, förvaring och tvätt.",
+      "includesChangeWashAndCheck": "Ingår: förvaring, maskintvätt, hjulskifte och däckkontroll.",
+      "ownTyres": "Montering och balansering av däck du redan har, sedan hjulen på bilen.",
+      "storageOnly": "Förvaring. Sidan säger inte att hjulskiftet ingår.",
+      "fourWheels": "Det publicerade priset gäller fyra hjul.",
+      "upTo14Inch": "Publicerat för däck upp till 14 tum.",
+      "memberDiscount": "ANWB-medlemmar får 15 procent på det här bytet. Siffran är frånpriset.",
+      "boughtElsewhere": "Sidan lägger till 12 EUR per däck om däcken är köpta någon annanstans.",
+      "slotMaximum": "Sidan säger att besöket kostar högst så här, beroende på tid."
+    }
+  },
+  "taxiPage": {
+    "meta": {
+      "title": "Jämför taxiförarutbildning",
+      "description": "Publicerade priser för taxiförarutbildning och officiella prov. Ett land visas när skolan eller myndigheten publicerat beloppet. DriveLinkUp anmäler dig inte."
+    },
+    "title": "Jämför taxiförarutbildning",
+    "lead": "Priset är det skolan eller myndigheten publicerat för utbildningen eller det officiella provet. DriveLinkUp anmäler dig inte och kallar inte en skola verifierad.",
+    "countryLabel": "Land",
+    "countryAll": "Alla länder",
+    "kindLabel": "Vad priset gäller",
+    "kinds": {
+      "course": "Utbildning",
+      "exam": "Officiellt prov"
+    },
+    "priceFrom": "från",
+    "priceMaximum": "Högst",
+    "empty": "Inget publicerat pris för det valet ännu.",
+    "source": "Prissida",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "GB": "Storbritannien"
+    },
+    "notes": {
+      "questionBankAndThreeLessons": "Frågebank för 850 kr och tre lektioner à 40 minuter för 1 800 kr.",
+      "bookAndLessonListedSeparately": "Skolan säger att priset inkluderar det du behöver för att ansöka. Sidan listar också boken för 500 kr och en lektion à 40 minuter för 650 kr som egna köp.",
+      "theoryMaterial": "Teorimaterial för de tre officiella proven. Körlektioner är ett eget paket.",
+      "includesTwoLessons": "Ingår: två körlektioner à 40 minuter och förberedelse för körprovet.",
+      "localKnowledge": "Teori och lokalkännedom.",
+      "authorityFeesExtra": "Myndighetens prov- och legitimationsavgifter tillkommer.",
+      "materialFourLessonsOneDrive": "Teorimaterial, fyra lärarledda lektioner och en körlektion.",
+      "includesWrittenTest": "Det skriftliga provet samma dag ingår.",
+      "includesAssessment": "Bedömningen i slutet av kursen ingår. Lokalkännedomsprovet är en egen avgift.",
+      "standaloneAssessment": "Avgiften för att boka lokalkännedomsprovet för sig.",
+      "paidToTrainer": "Kommunens sida anger priset. Du betalar utbildaren.",
+      "topographyExtra": "Lokalkännedomsprovet är en egen avgift.",
+      "refresher": "Fortbildning för den som redan har intyget. En ny förare betalar grundkursen.",
+      "weekday": "Prov på vardag.",
+      "eveningWeekend": "Prov på kväll eller helg.",
+      "privateHireCourse": "Kursen gäller private hire för taxilegitimationen i Wolverhampton. Sidan publicerar inget pris för hackney carriage-kursen.",
+      "topographyTest": "Lokalkännedomsprovet. Ett omprov kostar samma belopp."
+    }
+  },
+  "leasingPage": {
+    "meta": {
+      "title": "Jämför leasingpriser",
+      "description": "Publicerade privatleasingpriser för namngivna modeller. Ett land visas när leasegivaren publicerat modellen och månadsbeloppet. DriveLinkUp leasar inte bilen."
+    },
+    "title": "Jämför leasingpriser",
+    "lead": "Priset är månadsbeloppet som leasegivaren publicerat för den modellen. Landet är där det priset publicerades. DriveLinkUp leasar inte bilen och kallar inte ett erbjudande verifierat.",
+    "countryLabel": "Land",
+    "countryAll": "Alla länder",
+    "priceFrom": "från",
+    "priceMaximum": "Högst",
+    "perMonth": "per månad",
+    "termMonths": "{months} månader",
+    "mileageYear": "{km} km om året",
+    "mileageTerm": "{km} km under avtalet",
+    "empty": "Inget publicerat leasingpris för det landet ännu.",
+    "source": "Prissida",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "FI": "Finland",
+      "NL": "Nederländerna"
+    },
+    "notes": {
+      "offerThrough20261231": "Sidan säger att erbjudandet gäller till och med den 31 december 2026.",
+      "termNotOnPage": "Sidan anger inte avtalstid eller årlig körsträcka bredvid priset.",
+      "variableFee": "Sidan säger att månadsavgiften kan ändras.",
+      "mileageChoice": "Sidan låter dig välja 1 000, 1 500, 2 000 eller 3 000 mil om året.",
+      "taxListedSeparately": "Sidan listar fordonsskatten per år för sig.",
+      "feesExtra": "Uppläggningsavgift och administrationsavgift tillkommer. Övermil debiteras separat.",
+      "serviceIncluded": "Serviceavtalet ingår.",
+      "kiaFinans": "Kia Finans, tillsammans med Santander Consumer Bank, är leasegivaren.",
+      "noDeposit": "Ingen kontantinsats för den här laddbara modellen.",
+      "inclVat": "Sidan inkluderar moms.",
+      "utrechtRegion": "Frånpriset gäller regionen Utrecht. Sidan säger att en annan provins kan skilja sig.",
+      "excess500": "Självrisken är 500 euro.",
+      "fuelNotIncluded": "Drivmedel ingår inte.",
+      "examplePrice": "Sidan kallar detta ett prisexempel.",
+      "noInitialPayment": "Ingen kontantinsats.",
+      "includesTyresService": "Månadspriset inkluderar leveransavgiften på 600 euro, sommar- och vinterdäck, finansiering, den avtalade körsträckan, service och tekniska reparationer.",
+      "providedByKAuto": "K Auto Leasing Oy tillhandahåller leasingen.",
+      "initialPayment140685": "Sidan kräver också en startavgift på 140 685 norska kronor.",
+      "interestCanChange": "Sidan säger att månadsavgiften kan ändras med räntan.",
+      "deliveredOslo": "Leveranskostnaden på sidan gäller Oslo. Frakt utanför Oslo och årsavgiften tillkommer."
+    }
+  },
+  "parkingPage": {
+    "meta": {
+      "title": "Parkeringspriser",
+      "description": "Jämför timpriset som en stad eller en operatör publicerat för en namngiven plats. Välj staden för att se det bredvid de andra priserna där."
+    },
+    "title": "Parkeringspriser",
+    "lead": "Jämför timpriset som en stad eller en operatör publicerat för en namngiven plats. Välj staden för att se platsen bredvid de andra priserna där. Siffran är den publicerade timmen. Inom en valuta kan en plats som folk öppnar flyttas upp. DriveLinkUp reserverar inte platsen. Skylten på platsen gäller.",
+    "countryLabel": "Land",
+    "countryAll": "Alla länder",
+    "cityLabel": "Stad",
+    "cityAll": "Alla städer",
+    "perHour": "per timme",
+    "empty": "Inget publicerat timpris matchar den här platsen.",
+    "source": "Operatörens sida",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "DK": "Danmark",
+      "FI": "Finland"
+    },
+    "cities": {
+      "stockholm": "Stockholm",
+      "goteborg": "Göteborg",
+      "malmo": "Malmö",
+      "oslo": "Oslo",
+      "helsinki": "Helsingfors",
+      "kobenhavn": "Köpenhamn"
+    },
+    "notes": {
+      "allDay": "Sidan sätter det här timpriset hela dygnet.",
+      "daytime0822": "Sidan sätter det här timpriset klockan 08–22. Övrig tid kostar mindre.",
+      "daytime0820": "Sidan sätter det här timpriset klockan 08–20. Övrig tid kostar mindre.",
+      "daytime0818": "Sidan sätter det här timpriset klockan 08–18. Kväll och natt kostar mindre, och de priserna är samma i alla zoner.",
+      "weekday921": "Staden tar det här timpriset vardagar 9–21 och lördag 9–18.",
+      "fossilHour": "Timpriset gäller bensin, diesel och hybrid. Sidan listar ett lägre timpris för elbil.",
+      "signWins": "Skylten på platsen gäller.",
+      "maxTwoHours": "Sidan begränsar den här parkeringen till två timmar.",
+      "loadingCombined": "Sidan beskriver det här som gatuparkering innanför Ring 1, kombinerad med en lastzon.",
+      "feeWindow1320": "Vardagar gäller avgiften 13–20, och lördag 9–20.",
+      "feeWindow0920": "Avgiften gäller klockan 9–20.",
+      "weekendFirstHour": "Från lördag 17 till måndag 8 är första timmen av första parkeringen gratis. Bilen ska ändå registreras.",
+      "prepaid": "Operatören tar avgiften i förskott.",
+      "outerCityGuest": "Sidan listar det här som boende- och gästparkering i yttre staden."
     }
   }
 }

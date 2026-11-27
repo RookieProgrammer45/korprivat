@@ -27,13 +27,21 @@ import type { LlmsConfig } from '@/lib/llms';
 
 export const llmsConfig: LlmsConfig = {
   intro:
-    'DriveLinkUp is a Sweden-first catalogue of driving schools, heavy-vehicle schools, published car prices, spare parts a shop published for a car owner or a workshop, and vehicle-inspection prices a station or an authority published. It is not a driving school, a parts shop, an inspection station, a licensing authority, or a government service. Anyone can compare the published price and specifications for free. DriveLinkUp does not sell the part, does not book the inspection, and does not take lesson payments. A listing is not a verified permit. A country appears in the inspection catalogue only when a price was published. Handledare / övningskörning is a separate legal path, not a school listing.',
+    'DriveLinkUp is a Sweden-first catalogue of driving schools, heavy-vehicle schools, published car prices, spare parts a shop published for a car owner or a workshop, vehicle-inspection prices a station or an authority published, tire-service prices a workshop published, taxi-driver course prices a school or an authority published, private-lease prices a lessor published for a named model, and parking prices a city or an operator published for a named place. It is not a driving school, a parts shop, an inspection station, a tire workshop, a licensing authority, a lessor, a parking operator, or a government service. Anyone can compare the published price and specifications for free. DriveLinkUp does not sell the part, does not book the inspection or the tire change, does not enrol a taxi driver, does not lease the car, does not reserve a parking space, and does not take lesson payments. A listing is not a verified permit. A country appears in a price catalogue only when a price was published. Handledare / övningskörning is a separate legal path, not a school listing.',
   pageDescriptions: {
-    '/': 'Compare driving schools, heavy-vehicle schools, published car prices, and spare parts a shop published for a car owner or a workshop.',
+    '/': 'Compare driving schools, heavy-vehicle schools, published car prices, spare parts, inspection prices, tire prices, taxi-driver training, private-lease prices, and parking prices.',
     '/reservdelar':
       'Published spare-part and accessory prices from the shop’s own page. Filter by car owner or workshop, and by the seller’s country. Currencies stay in separate groups.',
     '/besiktning':
       'Published vehicle-inspection prices. A country appears when the station or the authority published the amount. A maximum is the legal cap, not the price every garage charges. DriveLinkUp does not book the inspection.',
+    '/dack':
+      'Published tire-change, tire-hotel and fitting prices from the workshop’s own page. A country appears when that page stated the amount. DriveLinkUp does not book the change.',
+    '/taxiutbildning':
+      'Published taxi-driver course prices and official test fees. A course price is not the authority’s test fee. DriveLinkUp does not enrol the driver.',
+    '/privatleasing':
+      'Published private-lease prices for named models. A country appears when the lessor’s page stated the model and the monthly amount. DriveLinkUp does not lease the car.',
+    '/parkering':
+      'Published parking hour prices for a named place. A city appears when that city or operator stated the hour. DriveLinkUp does not reserve the spot. The sign at the place decides.',
     '/tung-trafik':
       'Heavy-vehicle driving schools whose source listed a truck or bus licence class. A school name alone does not make it a truck school.',
     '/bilhandlare':

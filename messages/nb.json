@@ -47,7 +47,11 @@
       "terms": "Vilkår",
       "dealers": "Bilforhandlere",
       "parts": "Reservedeler",
-      "inspection": "EU-kontroll"
+      "inspection": "EU-kontroll",
+      "tires": "Dekk",
+      "taxi": "Drosjesjåfør",
+      "leasing": "Leasing",
+      "parking": "Parkering"
     },
     "language": {
       "sv": "Svenska",
@@ -2404,7 +2408,7 @@
       "title": "Sammenlign bilpriser og kjøreskoler.",
       "metaTitle": "Sammenlign reservedeler, bilpriser og trafikkskoler",
       "metaDescription": "Sammenlign reservedeler, bilpriser og trafikkskoler. Prisen er den bedriften har publisert. Gratis katalog for alle.",
-      "body": "Sammenlign trafikkskoler, tungtrafikk, bilpriser og reservedeler som en butikk har publisert for en bileier eller et verksted. Tallet er den publiserte prisen.",
+      "body": "Sammenlign trafikkskoler, tungtrafikk, bilpriser og reservedeler som en butikk har publisert for en bileier eller et verksted. Vi sammenligner priser for EU-kontroll, dekkpriser, drosjesjåførkurs, leasingpriser og parkeringspriser også. Tallet er den publiserte prisen.",
       "primaryCta": "Finn en skole",
       "instructorCta": "Jeg jobber på en kjøreskole",
       "marketplaceTag": "Bilpriser · Kjøreskoler",
@@ -2515,7 +2519,11 @@
           "parts": "Reservedeler",
           "ownerParts": "Reservedeler for bileiere",
           "workshopParts": "Reservedeler for verksted",
-          "inspection": "EU-kontroll"
+          "inspection": "EU-kontroll",
+          "tires": "Dekk",
+          "taxi": "Drosjesjåfør",
+          "leasing": "Leasing",
+          "parking": "Parkering"
         }
       },
       "lead": "Gratis. Du betaler skolens pris.",
@@ -2536,7 +2544,12 @@
         "parts": "Deler",
         "partsFallback": "Publiserte butikkpriser"
       },
-      "titleParts": "Sammenlign reservedeler."
+      "titleParts": "Sammenlign reservedeler.",
+      "titleInspection": "Sammenlign priser for EU-kontroll.",
+      "titleTires": "Sammenlign dekkpriser.",
+      "titleTaxi": "Sammenlign drosjesjåførkurs.",
+      "titleLeasing": "Sammenlign leasingpriser.",
+      "titleParking": "Sammenlign parkeringspriser."
     },
     "quickLinks": {
       "label": "Start med",
@@ -4074,7 +4087,8 @@
       "new": "Ny",
       "used": "Brukt"
     },
-    "msrp": "Veil. pris"
+    "msrp": "Veil. pris",
+    "from": "Fra"
   },
   "partsPage": {
     "meta": {
@@ -4180,6 +4194,190 @@
       "partnerMayDiffer": "Partnerstasjoner kan ta et annet gebyr.",
       "retestIfRepaired": "Tas når verkstedet utbedrer feilene.",
       "namedWorkshops": "Publisert for navngitte verksteder."
+    }
+  },
+  "tirePage": {
+    "meta": {
+      "title": "Sammenlign dekkpriser",
+      "description": "Publiserte priser for dekkskift, dekkhotell og montering fra verkstedets egen side. Et land vises når prisen er publisert. DriveLinkUp bestiller ikke skiftet."
+    },
+    "title": "Sammenlign dekkpriser",
+    "lead": "Prisen er det verkstedet har publisert for et hjulskift, dekkhotell, montering eller et mobilt besøk. DriveLinkUp bestiller ikke arbeidet og kaller ikke et verksted verifisert.",
+    "countryLabel": "Land",
+    "countryAll": "Alle land",
+    "vehicleLabel": "Kjøretøy",
+    "serviceLabel": "Tjeneste",
+    "vehicles": {
+      "car": "Personbil",
+      "van": "Varebil"
+    },
+    "services": {
+      "change": "Hjulskift",
+      "hotel": "Dekkhotell",
+      "mount": "Montering",
+      "mobile": "Mobilt besøk"
+    },
+    "priceFrom": "fra",
+    "priceMaximum": "Høyest",
+    "empty": "Ingen publisert pris for det valget ennå.",
+    "source": "Prisside",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "FI": "Finland",
+      "NL": "Nederland",
+      "GB": "Storbritannia"
+    },
+    "notes": {
+      "wheelsBrought": "Du tar med hjulene. Siden oppgir denne fra-prisen for størrelsene den navngir.",
+      "extrasMayApply": "Siden sier at tillegg som TPMS-service og nye ventiler kan koste mer.",
+      "includesCheck": "Siden inkluderer kontroll av dekkene og lufttrykket.",
+      "includesChangeAndWash": "Inkluderer hjulskift, lagring og vask.",
+      "includesChangeWashAndCheck": "Inkluderer lagring, maskinvask, hjulskift og dekkontroll.",
+      "ownTyres": "Montering og balansering av dekk du allerede har, deretter hjulene på bilen.",
+      "storageOnly": "Lagring. Siden sier ikke at hjulskiftet er inkludert.",
+      "fourWheels": "Den publiserte prisen gjelder fire hjul.",
+      "upTo14Inch": "Publisert for dekk opp til 14 tommer.",
+      "memberDiscount": "ANWB-medlemmer får 15 prosent på dette skiftet. Tallet er fra-prisen.",
+      "boughtElsewhere": "Siden legger til 12 EUR per dekk når dekkene er kjøpt et annet sted.",
+      "slotMaximum": "Siden sier at besøket koster opptil dette, avhengig av tiden."
+    }
+  },
+  "taxiPage": {
+    "meta": {
+      "title": "Sammenlign drosjesjåførkurs",
+      "description": "Publiserte priser for drosjesjåførkurs og offisielle prøver. Et land vises når skolen eller myndigheten har publisert beløpet. DriveLinkUp melder deg ikke på."
+    },
+    "title": "Sammenlign drosjesjåførkurs",
+    "lead": "Prisen er det skolen eller myndigheten har publisert for kurset eller den offisielle prøven. DriveLinkUp melder deg ikke på og kaller ikke en skole verifisert.",
+    "countryLabel": "Land",
+    "countryAll": "Alle land",
+    "kindLabel": "Hva prisen gjelder",
+    "kinds": {
+      "course": "Kurs",
+      "exam": "Offisiell prøve"
+    },
+    "priceFrom": "fra",
+    "priceMaximum": "Høyest",
+    "empty": "Ingen publisert pris for det valget ennå.",
+    "source": "Prisside",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "GB": "Storbritannia"
+    },
+    "notes": {
+      "questionBankAndThreeLessons": "Spørsmålsbank for 850 kr og tre leksjoner à 40 minutter for 1 800 kr.",
+      "bookAndLessonListedSeparately": "Skolen sier at prisen inkluderer det du trenger for å søke. Siden lister også boken for 500 kr og en leksjon à 40 minutter for 650 kr som egne kjøp.",
+      "theoryMaterial": "Teorimateriell for de tre offisielle prøvene. Kjøreleksjoner er en egen pakke.",
+      "includesTwoLessons": "Inkluderer to kjøreleksjoner à 40 minutter og forberedelse til kjøreprøven.",
+      "localKnowledge": "Teori og lokalkunnskap.",
+      "authorityFeesExtra": "Myndighetens prøve- og lisensgebyr kommer i tillegg.",
+      "materialFourLessonsOneDrive": "Teorimateriell, fire lærerstyrte leksjoner og én kjøreleksjon.",
+      "includesWrittenTest": "Den skriftlige prøven samme dag er inkludert.",
+      "includesAssessment": "Vurderingen på slutten av kurset inngår. Gatekunnskapsprøven er et eget gebyr.",
+      "standaloneAssessment": "Gebyret for å bestille lokalkunnskapsprøven alene.",
+      "paidToTrainer": "Kommunens side oppgir prisen. Du betaler opplæringsstedet.",
+      "topographyExtra": "Lokalkunnskapsprøven er et eget gebyr.",
+      "refresher": "Oppfriskning for den som allerede har beviset. En ny sjåfør betaler grunnkurset.",
+      "weekday": "Prøve på hverdag.",
+      "eveningWeekend": "Prøve på kveld eller helg.",
+      "privateHireCourse": "Kurset gjelder private hire for taxilisensen i Wolverhampton. Siden oppgir ingen pris for hackney carriage-kurset.",
+      "topographyTest": "Gatekunnskapsprøven. En ny prøve koster det samme."
+    }
+  },
+  "leasingPage": {
+    "meta": {
+      "title": "Sammenlign leasingpriser",
+      "description": "Publiserte privatleasingpriser for navngitte modeller. Et land vises når leasegiveren publiserte modellen og månedsbeløpet. DriveLinkUp leaser ikke bilen."
+    },
+    "title": "Sammenlign leasingpriser",
+    "lead": "Prisen er månedsbeløpet leasegiveren publiserte for den modellen. Landet er der prisen ble publisert. DriveLinkUp leaser ikke bilen og kaller ikke et tilbud verifisert.",
+    "countryLabel": "Land",
+    "countryAll": "Alle land",
+    "priceFrom": "fra",
+    "priceMaximum": "Høyest",
+    "perMonth": "per måned",
+    "termMonths": "{months} måneder",
+    "mileageYear": "{km} km i året",
+    "mileageTerm": "{km} km i avtaleperioden",
+    "empty": "Ingen publisert leasingpris for det landet ennå.",
+    "source": "Prisside",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "FI": "Finland",
+      "NL": "Nederland"
+    },
+    "notes": {
+      "offerThrough20261231": "Siden sier at tilbudet gjelder til og med 31. desember 2026.",
+      "termNotOnPage": "Siden oppgir ikke avtaletid eller årlig kjørelengde ved siden av prisen.",
+      "variableFee": "Siden sier at månedsbeløpet kan endres.",
+      "mileageChoice": "Siden lar deg velge 1 000, 1 500, 2 000 eller 3 000 mil i året.",
+      "taxListedSeparately": "Siden oppgir årsavgiften for seg.",
+      "feesExtra": "Etableringsgebyr og administrasjonsgebyr kommer i tillegg. Ekstra kjørelengde faktureres separat.",
+      "serviceIncluded": "Serviceavtalen er inkludert.",
+      "kiaFinans": "Kia Finans, sammen med Santander Consumer Bank, er leasegiver.",
+      "noDeposit": "Ingen egenandel for denne ladbare modellen.",
+      "inclVat": "Siden inkluderer merverdiavgift.",
+      "utrechtRegion": "Fra-prisen gjelder regionen Utrecht. Siden sier at en annen provins kan avvike.",
+      "excess500": "Egenandelen er 500 euro.",
+      "fuelNotIncluded": "Drivstoff er ikke inkludert.",
+      "examplePrice": "Siden kaller dette et priseksempel.",
+      "noInitialPayment": "Ingen startbetaling.",
+      "includesTyresService": "Månedsprisen inkluderer leveringsgebyret på 600 euro, sommer- og vinterdekk, finansiering, avtalt kjørelengde, service og tekniske reparasjoner.",
+      "providedByKAuto": "K Auto Leasing Oy leverer leasen.",
+      "initialPayment140685": "Siden krever også en startbetaling på 140 685 norske kroner.",
+      "interestCanChange": "Siden sier at månedsbeløpet kan endres med renten.",
+      "deliveredOslo": "Leveringskostnaden på siden gjelder Oslo. Frakt utenfor Oslo og årsavgiften kommer i tillegg."
+    }
+  },
+  "parkingPage": {
+    "meta": {
+      "title": "Parkeringspriser",
+      "description": "Sammenlign timeprisen som en by eller en operatør har publisert for et navngitt sted. Velg byen for å se den ved siden av de andre prisene der."
+    },
+    "title": "Parkeringspriser",
+    "lead": "Sammenlign timeprisen som en by eller en operatør har publisert for et navngitt sted. Velg byen for å se stedet ved siden av de andre prisene der. Tallet er den publiserte timen. Innen én valuta kan et sted folk åpner flyttes opp. DriveLinkUp reserverer ikke plassen. Skiltet på stedet gjelder.",
+    "countryLabel": "Land",
+    "countryAll": "Alle land",
+    "cityLabel": "By",
+    "cityAll": "Alle byer",
+    "perHour": "per time",
+    "empty": "Ingen publisert timepris matcher dette stedet.",
+    "source": "Operatørens side",
+    "currencyGroup": "Priser i {currency}",
+    "countries": {
+      "SE": "Sverige",
+      "NO": "Norge",
+      "DK": "Danmark",
+      "FI": "Finland"
+    },
+    "cities": {
+      "stockholm": "Stockholm",
+      "goteborg": "Göteborg",
+      "malmo": "Malmö",
+      "oslo": "Oslo",
+      "helsinki": "Helsingfors",
+      "kobenhavn": "København"
+    },
+    "notes": {
+      "allDay": "Siden setter denne timeprisen hele døgnet.",
+      "daytime0822": "Siden setter denne timeprisen klokken 08–22. Øvrig tid koster mindre.",
+      "daytime0820": "Siden setter denne timeprisen klokken 08–20. Øvrig tid koster mindre.",
+      "daytime0818": "Siden setter denne timeprisen klokken 08–18. Kveld og natt koster mindre, og de prisene er like i alle soner.",
+      "weekday921": "Byen tar denne timeprisen på hverdager 9–21 og lørdag 9–18.",
+      "fossilHour": "Timeprisen gjelder bensin, diesel og hybrid. Siden lister en lavere timepris for elbil.",
+      "signWins": "Skiltet på stedet gjelder.",
+      "maxTwoHours": "Siden begrenser denne parkeringen til to timer.",
+      "loadingCombined": "Siden beskriver dette som gateparkering innenfor Ring 1, kombinert med en lastesone.",
+      "feeWindow1320": "På hverdager gjelder avgiften 13–20, og lørdag 9–20.",
+      "feeWindow0920": "Avgiften gjelder klokken 9–20.",
+      "weekendFirstHour": "Fra lørdag 17 til mandag 8 er første time av første parkering gratis. Bilen skal likevel registreres.",
+      "prepaid": "Operatøren tar avgiften på forskudd.",
+      "outerCityGuest": "Siden lister dette som beboer- og gjesteparkering i ytre by."
     }
   }
 }

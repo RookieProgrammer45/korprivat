@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "checkedAt": "2026-11-27",
+    "note": "A row stays only when the workshop page published the amount. The monthly refresh reads those pages again and changes an amount only when the page shows a new one. A page that cannot be read leaves the previous amount in place.",
+    "unreadable": []
+  },
+  "rows": [
+    {
+      "id": "se-euromaster-car-change",
+      "country": "SE",
+      "provider": "Euromaster",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 350,
+      "currency": "SEK",
+      "notes": [
+        "wheelsBrought",
+        "extrasMayApply"
+      ],
+      "sourceUrl": "https://www.euromaster.se/bilservice/dack/dackbyte",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-euromaster-van-change",
+      "country": "SE",
+      "provider": "Euromaster",
+      "place": "",
+      "vehicle": "van",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 350,
+      "currency": "SEK",
+      "notes": [
+        "wheelsBrought",
+        "extrasMayApply"
+      ],
+      "sourceUrl": "https://www.euromaster.se/bilservice/dack/dackbyte",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-vianor-car-change",
+      "country": "SE",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 545,
+      "currency": "SEK",
+      "notes": [
+        "includesCheck"
+      ],
+      "sourceUrl": "https://vianor.se/dackverkstad/dackbyte/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-vianor-car-hotel",
+      "country": "SE",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "from",
+      "amount": 970,
+      "currency": "SEK",
+      "notes": [
+        "includesChangeAndWash"
+      ],
+      "sourceUrl": "https://vianor.se/dackverkstad/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-vianor-car-mount",
+      "country": "SE",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "mount",
+      "priceKind": "from",
+      "amount": 2160,
+      "currency": "SEK",
+      "notes": [
+        "ownTyres"
+      ],
+      "sourceUrl": "https://vianor.se/dackverkstad/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-vianor-car-change",
+      "country": "NO",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 780,
+      "currency": "NOK",
+      "notes": [
+        "includesCheck"
+      ],
+      "sourceUrl": "https://vianor.no/dekkverksted/dekkskift/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-vianor-car-hotel",
+      "country": "NO",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "from",
+      "amount": 1690,
+      "currency": "NOK",
+      "notes": [
+        "includesChangeWashAndCheck"
+      ],
+      "sourceUrl": "https://vianor.no/dekkverksted/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-vianor-car-mount",
+      "country": "NO",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "mount",
+      "priceKind": "from",
+      "amount": 3080,
+      "currency": "NOK",
+      "notes": [
+        "ownTyres"
+      ],
+      "sourceUrl": "https://vianor.no/dekkverksted/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "fi-vianor-car-change",
+      "country": "FI",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 42,
+      "currency": "EUR",
+      "notes": [
+        "includesCheck"
+      ],
+      "sourceUrl": "https://vianor.fi/rengaspalvelut/renkaiden-vaihto/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "fi-vianor-car-hotel",
+      "country": "FI",
+      "provider": "Vianor",
+      "place": "",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "from",
+      "amount": 37,
+      "currency": "EUR",
+      "notes": [
+        "storageOnly"
+      ],
+      "sourceUrl": "https://vianor.fi/rengaspalvelut/",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "nl-kwikfit-car-change",
+      "country": "NL",
+      "provider": "Kwik Fit",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 70,
+      "currency": "EUR",
+      "notes": [
+        "fourWheels",
+        "memberDiscount"
+      ],
+      "sourceUrl": "https://www.kwik-fit.nl/banden-wisselen",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "nl-kwikfit-car-mount",
+      "country": "NL",
+      "provider": "Kwik Fit",
+      "place": "",
+      "vehicle": "car",
+      "service": "mount",
+      "priceKind": "from",
+      "amount": 140,
+      "currency": "EUR",
+      "notes": [
+        "fourWheels",
+        "upTo14Inch",
+        "memberDiscount",
+        "boughtElsewhere"
+      ],
+      "sourceUrl": "https://www.kwik-fit.nl/banden-wisselen",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "gb-kwikfit-car-mobile",
+      "country": "GB",
+      "provider": "Kwik Fit",
+      "place": "",
+      "vehicle": "car",
+      "service": "mobile",
+      "priceKind": "maximum",
+      "amount": 30,
+      "currency": "GBP",
+      "notes": [
+        "slotMaximum"
+      ],
+      "sourceUrl": "https://www.kwik-fit.com/tyres/mobile-tyre-fitting",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "gb-kwikfit-van-mobile",
+      "country": "GB",
+      "provider": "Kwik Fit",
+      "place": "",
+      "vehicle": "van",
+      "service": "mobile",
+      "priceKind": "maximum",
+      "amount": 30,
+      "currency": "GBP",
+      "notes": [
+        "slotMaximum"
+      ],
+      "sourceUrl": "https://www.kwik-fit.com/tyres/mobile-tyre-fitting",
+      "checkedAt": "2026-11-27"
+    }
+  ]
+}

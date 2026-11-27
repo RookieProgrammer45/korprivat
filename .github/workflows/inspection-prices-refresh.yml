@@ -1,11 +1,11 @@
 name: Inspection prices refresh
 
-# Re-reads each station or authority price page once a month and opens a pull
-# request. A page that cannot be read keeps its previous amount. Nothing goes
-# live until the pull request is merged.
+# Re-reads each station or authority price page every day. A page that cannot
+# be read keeps its previous amount. A successful re-read merges, so the phone
+# app and the desktop load the same prices.
 on:
   schedule:
-    - cron: '0 4 1 * *'
+    - cron: '15 4 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,14 +24,20 @@ jobs:
       - name: Re-read published inspection prices
         run: python3 scripts/inspections/refresh.py --self-test && python3 scripts/inspections/refresh.py --write
       - name: Open pull request
+        id: prices
         uses: peter-evans/create-pull-request@v7
         with:
           branch: data/inspection-prices-refresh
           delete-branch: true
           add-paths: data/inspections/published.json
-          commit-message: 'data: monthly inspection price refresh'
-          title: 'data: monthly inspection price refresh'
+          commit-message: 'data: daily inspection price refresh'
+          title: 'data: daily inspection price refresh'
           body: |
             Prices re-read from each station or authority page.
 
             An amount changes only when that page shows a new number. A page that could not be read keeps the previous amount; those addresses are listed in `meta.unreadable`. A large drop is a failed read, not a station removing its price.
+      - name: Publish the re-read
+        if: steps.prices.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge ${{ steps.prices.outputs.pull-request-number }} --squash --delete-branch

@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
+import { CatalogueOutboundLink } from '@/components/custom/catalogue-outbound-link';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
 import { LocaleLink as Link } from '@/components/locale-link';
 import {
@@ -158,10 +159,10 @@ async function InspectionCard({ row, locale }: { row: PublishedInspection; local
   const place = row.place || t(`countries.${row.country}`);
 
   return (
-    <a
+    <CatalogueOutboundLink
+      catalogue="inspection"
+      itemId={row.id}
       href={row.sourceUrl}
-      target="_blank"
-      rel="noopener noreferrer"
       className="group block h-full min-w-0 rounded-[1.25rem] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-foreground/20 group-hover:shadow-md motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 sm:rounded-[1.25rem] dark:bg-card">
@@ -199,6 +200,6 @@ async function InspectionCard({ row, locale }: { row: PublishedInspection; local
           </div>
         </div>
       </article>
-    </a>
+    </CatalogueOutboundLink>
   );
 }

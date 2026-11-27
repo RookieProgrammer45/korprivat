@@ -1,0 +1,477 @@
+{
+  "meta": {
+    "checkedAt": "2026-11-27",
+    "note": "A row exists only when the city or the operator page stated a numeric hour price for a named place. The weekly re-read updates that amount. It does not invent a place.",
+    "unreadable": []
+  },
+  "rows": [
+    {
+      "id": "se-stockholm-norra-djurgardsstaden",
+      "country": "SE",
+      "city": "stockholm",
+      "spot": "Norra Djurgårdsstaden",
+      "place": "",
+      "provider": "Stockholm Parkering",
+      "amount": 25,
+      "currency": "SEK",
+      "notes": [
+        "allDay",
+        "prepaid",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.stockholmparkering.se/anlaggningar/204683/Norra-Djurgardsstaden",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-stockholm-fafangan",
+      "country": "SE",
+      "city": "stockholm",
+      "spot": "Fåfängan",
+      "place": "Södermalm",
+      "provider": "Stockholm Parkering",
+      "amount": 30,
+      "currency": "SEK",
+      "notes": [
+        "allDay",
+        "prepaid",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.stockholmparkering.se/anlaggningar/200017/Fafangan",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-stockholm-st-eriksplan",
+      "country": "SE",
+      "city": "stockholm",
+      "spot": "S:t Eriksplan",
+      "place": "Vasastan",
+      "provider": "Stockholm Parkering",
+      "amount": 60,
+      "currency": "SEK",
+      "notes": [
+        "allDay",
+        "prepaid",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.stockholmparkering.se/hitta-oss-pa-kartan/104232/S-t-Eriksplan,-Phus",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-stockholm-norra-bantorget",
+      "country": "SE",
+      "city": "stockholm",
+      "spot": "Norra Bantorget",
+      "place": "Norrmalm",
+      "provider": "Stockholm Parkering",
+      "amount": 95,
+      "currency": "SEK",
+      "notes": [
+        "allDay",
+        "prepaid",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.stockholmparkering.se/anlaggningar/104511/Norra-Bantorget%2C-PHus",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-goteborg-focus",
+      "country": "SE",
+      "city": "goteborg",
+      "spot": "P-hus Focus",
+      "place": "Åvägen 40-42",
+      "provider": "Göteborgs Stads Parkering",
+      "amount": 30,
+      "currency": "SEK",
+      "notes": [
+        "daytime0822",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.parkeringgoteborg.se/vara-anlaggningar/p-hus-focus/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-goteborg-liseberg-sodra",
+      "country": "SE",
+      "city": "goteborg",
+      "spot": "P-hus Liseberg Södra",
+      "place": "Nellickevägen 18",
+      "provider": "Göteborgs Stads Parkering",
+      "amount": 32,
+      "currency": "SEK",
+      "notes": [
+        "daytime0822",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.parkeringgoteborg.se/vara-anlaggningar/p-hus-liseberg-sodra/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-goteborg-skanegatan",
+      "country": "SE",
+      "city": "goteborg",
+      "spot": "P-hus Skånegatan",
+      "place": "Skånegatan 13",
+      "provider": "Göteborgs Stads Parkering",
+      "amount": 32,
+      "currency": "SEK",
+      "notes": [
+        "daytime0822",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.parkeringgoteborg.se/vara-anlaggningar/p-hus-skanegatan/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-goteborg-tomtegatan",
+      "country": "SE",
+      "city": "goteborg",
+      "spot": "P-hus Tomtegatan",
+      "place": "Fabriksgatan 36",
+      "provider": "Göteborgs Stads Parkering",
+      "amount": 32,
+      "currency": "SEK",
+      "notes": [
+        "daytime0822",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.parkeringgoteborg.se/vara-anlaggningar/p-hus-tomtegatan/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-malmo-taxa-a",
+      "country": "SE",
+      "city": "malmo",
+      "spot": "Taxa A",
+      "place": "",
+      "provider": "Malmö stad",
+      "amount": 30,
+      "currency": "SEK",
+      "notes": [
+        "daytime0822",
+        "signWins"
+      ],
+      "sourceUrl": "https://malmo.se/Bo-och-leva/Stadsmiljo-och-trafik/Parkering/Parkeringsavgifter.html",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-malmo-taxa-b",
+      "country": "SE",
+      "city": "malmo",
+      "spot": "Taxa B",
+      "place": "",
+      "provider": "Malmö stad",
+      "amount": 25,
+      "currency": "SEK",
+      "notes": [
+        "daytime0822",
+        "signWins"
+      ],
+      "sourceUrl": "https://malmo.se/Bo-och-leva/Stadsmiljo-och-trafik/Parkering/Parkeringsavgifter.html",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-malmo-taxa-c",
+      "country": "SE",
+      "city": "malmo",
+      "spot": "Taxa C",
+      "place": "",
+      "provider": "Malmö stad",
+      "amount": 20,
+      "currency": "SEK",
+      "notes": [
+        "daytime0822",
+        "signWins"
+      ],
+      "sourceUrl": "https://malmo.se/Bo-och-leva/Stadsmiljo-och-trafik/Parkering/Parkeringsavgifter.html",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-malmo-taxa-d",
+      "country": "SE",
+      "city": "malmo",
+      "spot": "Taxa D",
+      "place": "",
+      "provider": "Malmö stad",
+      "amount": 15,
+      "currency": "SEK",
+      "notes": [
+        "daytime0820",
+        "signWins"
+      ],
+      "sourceUrl": "https://malmo.se/Bo-och-leva/Stadsmiljo-och-trafik/Parkering/Parkeringsavgifter.html",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-malmo-taxa-e",
+      "country": "SE",
+      "city": "malmo",
+      "spot": "Taxa E",
+      "place": "",
+      "provider": "Malmö stad",
+      "amount": 10,
+      "currency": "SEK",
+      "notes": [
+        "daytime0820",
+        "signWins"
+      ],
+      "sourceUrl": "https://malmo.se/Bo-och-leva/Stadsmiljo-och-trafik/Parkering/Parkeringsavgifter.html",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "se-malmo-taxa-f",
+      "country": "SE",
+      "city": "malmo",
+      "spot": "Taxa F",
+      "place": "",
+      "provider": "Malmö stad",
+      "amount": 5,
+      "currency": "SEK",
+      "notes": [
+        "daytime0820",
+        "signWins"
+      ],
+      "sourceUrl": "https://malmo.se/Bo-och-leva/Stadsmiljo-och-trafik/Parkering/Parkeringsavgifter.html",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-oslo-ring-1",
+      "country": "NO",
+      "city": "oslo",
+      "spot": "Gateparkering innenfor Ring 1",
+      "place": "",
+      "provider": "Oslo kommune",
+      "amount": 93,
+      "currency": "NOK",
+      "notes": [
+        "fossilHour",
+        "maxTwoHours",
+        "loadingCombined",
+        "feeWindow1320",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.oslo.kommune.no/gate-transport-og-parkering/parkering/priser-og-betaling-for-parkering/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-oslo-utenfor-ring-1",
+      "country": "NO",
+      "city": "oslo",
+      "spot": "Gateparkering utenfor Ring 1",
+      "place": "",
+      "provider": "Oslo kommune",
+      "amount": 93,
+      "currency": "NOK",
+      "notes": [
+        "fossilHour",
+        "maxTwoHours",
+        "feeWindow0920",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.oslo.kommune.no/gate-transport-og-parkering/parkering/priser-og-betaling-for-parkering/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-oslo-mellom-ringene",
+      "country": "NO",
+      "city": "oslo",
+      "spot": "Gateparkering mellom Ring 1 og Ring 3",
+      "place": "",
+      "provider": "Oslo kommune",
+      "amount": 71,
+      "currency": "NOK",
+      "notes": [
+        "fossilHour",
+        "maxTwoHours",
+        "feeWindow0920",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.oslo.kommune.no/gate-transport-og-parkering/parkering/priser-og-betaling-for-parkering/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-oslo-ytre-by",
+      "country": "NO",
+      "city": "oslo",
+      "spot": "Beboer- og gjesteparkering, ytre by",
+      "place": "",
+      "provider": "Oslo kommune",
+      "amount": 41,
+      "currency": "NOK",
+      "notes": [
+        "fossilHour",
+        "outerCityGuest",
+        "feeWindow0920",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.oslo.kommune.no/gate-transport-og-parkering/parkering/priser-og-betaling-for-parkering/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "no-oslo-utenfor-ring-3",
+      "country": "NO",
+      "city": "oslo",
+      "spot": "P-plasser utenfor Ring 3",
+      "place": "",
+      "provider": "Oslo kommune",
+      "amount": 21,
+      "currency": "NOK",
+      "notes": [
+        "fossilHour",
+        "feeWindow0920",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.oslo.kommune.no/gate-transport-og-parkering/parkering/priser-og-betaling-for-parkering/",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "fi-helsinki-zone-1",
+      "country": "FI",
+      "city": "helsinki",
+      "spot": "Vyöhyke 1",
+      "place": "Ydinkeskusta",
+      "provider": "Helsingin kaupunki",
+      "amount": 4,
+      "currency": "EUR",
+      "notes": [
+        "weekday921",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.hel.fi/fi/kaupunkiymparisto-ja-liikenne/pysakointi/pysakointipaikat-hinnat-ja-maksutavat",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "fi-helsinki-zone-2",
+      "country": "FI",
+      "city": "helsinki",
+      "spot": "Vyöhyke 2",
+      "place": "Muu kantakaupunki",
+      "provider": "Helsingin kaupunki",
+      "amount": 2,
+      "currency": "EUR",
+      "notes": [
+        "weekday921",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.hel.fi/fi/kaupunkiymparisto-ja-liikenne/pysakointi/pysakointipaikat-hinnat-ja-maksutavat",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "dk-kobenhavn-rod",
+      "country": "DK",
+      "city": "kobenhavn",
+      "spot": "Rød zone",
+      "place": "",
+      "provider": "Københavns Kommune",
+      "amount": 45,
+      "currency": "DKK",
+      "notes": [
+        "daytime0818",
+        "weekendFirstHour",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.kk.dk/borger/parkering-trafik-og-veje/parkering/priser-og-parkeringszoner",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "dk-kobenhavn-gron",
+      "country": "DK",
+      "city": "kobenhavn",
+      "spot": "Grøn zone",
+      "place": "",
+      "provider": "Københavns Kommune",
+      "amount": 45,
+      "currency": "DKK",
+      "notes": [
+        "daytime0818",
+        "weekendFirstHour",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.kk.dk/borger/parkering-trafik-og-veje/parkering/priser-og-parkeringszoner",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "dk-kobenhavn-bla",
+      "country": "DK",
+      "city": "kobenhavn",
+      "spot": "Blå zone",
+      "place": "",
+      "provider": "Københavns Kommune",
+      "amount": 26,
+      "currency": "DKK",
+      "notes": [
+        "daytime0818",
+        "weekendFirstHour",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.kk.dk/borger/parkering-trafik-og-veje/parkering/priser-og-parkeringszoner",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    },
+    {
+      "id": "dk-kobenhavn-gul",
+      "country": "DK",
+      "city": "kobenhavn",
+      "spot": "Gul zone",
+      "place": "",
+      "provider": "Københavns Kommune",
+      "amount": 17,
+      "currency": "DKK",
+      "notes": [
+        "daytime0818",
+        "weekendFirstHour",
+        "signWins"
+      ],
+      "sourceUrl": "https://www.kk.dk/borger/parkering-trafik-og-veje/parkering/priser-og-parkeringszoner",
+      "priceKind": "fixed",
+      "unit": "hour",
+      "checkedAt": "2026-11-27"
+    }
+  ]
+}

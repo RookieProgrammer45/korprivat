@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { PartsBrowser } from '@/components/custom/parts-browser';
+import { orderCatalogue } from '@/lib/discovery/catalogue-rank-store';
 import { type PartKind, partSellerCountries, searchParts } from '@/lib/discovery/parts';
 import { localePath } from '@/lib/seo/locale-path';
 import { PART_PLACES } from '@/lib/seo/parts-search-path';
@@ -44,7 +45,7 @@ export async function PartsCatalogue({
   const selectedBuyer = BUYERS.find((value) => value === buyer) ?? null;
   const selectedCountry =
     partSellerCountries().find((value) => value === country?.trim().toUpperCase()) ?? null;
-  const products = searchParts({
+  const matched = searchParts({
     q: query,
     kind: selectedKind ?? undefined,
     place: near,
@@ -52,7 +53,18 @@ export async function PartsCatalogue({
     lng: longitude,
     buyer: selectedBuyer ?? undefined,
     country: selectedCountry ?? undefined,
-  }).slice(0, 60);
+  });
+  const located = near.length > 0 || latitude != null || longitude != null;
+  const ordered = located
+    ? matched
+    : await orderCatalogue('part', matched, (row) => ({
+        id: row.id,
+        currency: row.currency,
+        amount: row.price,
+        country: row.sellerCountry,
+        checkedAt: row.checkedAt || null,
+      }));
+  const products = ordered.slice(0, 60);
 
   return (
     <main className="container-page section">

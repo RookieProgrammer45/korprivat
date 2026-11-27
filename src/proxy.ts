@@ -38,7 +38,7 @@ export function proxy(request: NextRequest) {
     url.pathname = decision.pathname;
     const response = NextResponse.redirect(url, 308);
     response.headers.set('Content-Security-Policy', csp);
-    return response;
+    return freshDocument(response);
   }
   if (decision.action === 'rewrite') {
     requestHeaders.set(LOCALE_HEADER, decision.locale);
@@ -46,11 +46,18 @@ export function proxy(request: NextRequest) {
     url.pathname = decision.pathname;
     const response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
     response.headers.set('Content-Security-Policy', csp);
-    return response;
+    return freshDocument(response);
   }
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set('Content-Security-Policy', csp);
+  return freshDocument(response);
+}
+
+/** Phone, desktop, and the store app all open the same host. Do not let any of them keep an old page. */
+function freshDocument(response: NextResponse): NextResponse {
+  response.headers.set('Cache-Control', 'private, no-store');
+  response.headers.set('Vercel-CDN-Cache-Control', 'no-store');
   return response;
 }
 

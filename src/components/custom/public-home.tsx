@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { HomeCatalogue, type HomeOfferCard } from '@/components/custom/home-catalogue';
 import { HOMEPAGE_SCHOOL_PREVIEW_LIMIT } from '@/lib/catalog-preview';
+import { orderCatalogue } from '@/lib/discovery/catalogue-rank-store';
 import {
   cheapestVehicle,
   dealerCities,
@@ -18,6 +19,7 @@ import {
 import { pickHomepageCars, pickHomepageParts } from '@/lib/discovery/homepage-offers';
 import { listHomepageSchools } from '@/lib/discovery/homepage-schools';
 import { type ListedPart, listParts } from '@/lib/discovery/parts';
+import { publishedLessonSek } from '@/lib/discovery/published-lesson-order';
 import { visitorCatalogueRegionFromHeaders } from '@/lib/discovery/visitor-catalogue-region';
 import { absoluteUrl } from '@/lib/seo/alternates';
 import { dealerSearchPath } from '@/lib/seo/dealer-search-path';
@@ -30,9 +32,18 @@ export async function PublicHome({ category }: { category?: string | null } = {}
   const t = await getTranslations('publicHome');
   const headerStore = await headers();
   const region = visitorCatalogueRegionFromHeaders((name) => headerStore.get(name));
-  const schools = await listHomepageSchools(HOMEPAGE_SCHOOL_PREVIEW_LIMIT, region, category).catch(
+  const listed = await listHomepageSchools(HOMEPAGE_SCHOOL_PREVIEW_LIMIT, region, category).catch(
     () => undefined,
   );
+  const schools = listed
+    ? await orderCatalogue('school', listed, (school) => ({
+        id: school.id,
+        currency: 'SEK',
+        amount: publishedLessonSek(school),
+        country: 'SE',
+        checkedAt: null,
+      }))
+    : undefined;
   const licence = parseHeroSearchCategory(category);
   const filtered = Boolean(licence && licence !== 'B');
   const itemList =
@@ -56,8 +67,8 @@ export async function PublicHome({ category }: { category?: string | null } = {}
       {itemList ? jsonLdScript(itemList) : null}
       <HomeCatalogue
         schools={schools}
-        cars={previewCars(region.countryCode)}
-        parts={previewParts(region.countryCode)}
+        cars={await previewCars(region.countryCode)}
+        parts={await previewParts(region.countryCode)}
         dealerCities={dealerCities()}
         lessonFrom={lowestLessonSek(schools)}
         vehicleFrom={lowestVehicle()}
@@ -84,16 +95,32 @@ export async function PublicHome({ category }: { category?: string | null } = {}
   );
 }
 
-function previewCars(countryCode: string): HomeOfferCard[] {
-  return pickHomepageCars(publishedCars(), countryCode, HOMEPAGE_SCHOOL_PREVIEW_LIMIT).map(carCard);
+async function previewCars(countryCode: string): Promise<HomeOfferCard[]> {
+  const picked = pickHomepageCars(publishedCars(), countryCode, HOMEPAGE_SCHOOL_PREVIEW_LIMIT);
+  const ranked = await orderCatalogue('car', picked, (car) => ({
+    id: car.id,
+    currency: car.vehicle.currency,
+    amount: car.vehicle.price,
+    country: car.dealerCountry,
+    checkedAt: null,
+  }));
+  return ranked.map(carCard);
 }
 
-function previewParts(countryCode: string): HomeOfferCard[] {
+async function previewParts(countryCode: string): Promise<HomeOfferCard[]> {
   const rows = listParts().map((part) => ({
     ...part,
     text: `${part.name} ${part.category ?? ''} ${part.specs.join(' ')}`,
   }));
-  return pickHomepageParts(rows, countryCode, HOMEPAGE_SCHOOL_PREVIEW_LIMIT).map(partCard);
+  const picked = pickHomepageParts(rows, countryCode, HOMEPAGE_SCHOOL_PREVIEW_LIMIT);
+  const ranked = await orderCatalogue('part', picked, (part) => ({
+    id: part.id,
+    currency: part.currency,
+    amount: part.price,
+    country: part.sellerCountry,
+    checkedAt: part.checkedAt || null,
+  }));
+  return ranked.map(partCard);
 }
 
 function carCard(car: PublishedCar): HomeOfferCard {
@@ -102,6 +129,7 @@ function carCard(car: PublishedCar): HomeOfferCard {
   );
   return {
     id: car.id,
+    learn: 'car',
     href: dealerSearchPath(car.dealerCity, car.vehicle.kind, car.vehicle.model ?? car.vehicle.name),
     place: car.dealerCity,
     name: car.vehicle.name,
@@ -115,6 +143,7 @@ function carCard(car: PublishedCar): HomeOfferCard {
 function partCard(part: ListedPart): HomeOfferCard {
   return {
     id: part.id,
+    learn: 'part',
     href: partsSearchPath(part.name),
     place: part.sellerName,
     name: part.name,

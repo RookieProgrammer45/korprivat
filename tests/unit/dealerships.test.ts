@@ -138,6 +138,51 @@ describe('compareDealerships', () => {
     expect(danish.every((dealer) => dealer.sourceName === 'DI Bilbranchen')).toBe(true);
   });
 
+  it('keeps a manufacturer from-price when the page did not state a year', () => {
+    const cars = publishedCars([
+      dealer({
+        id: 'br-renault',
+        name: 'Renault',
+        country: 'BR',
+        city: '',
+        vehicles: [
+          vehicle({
+            name: 'Renault Kwid',
+            price: 71390,
+            currency: 'BRL',
+            priceKind: 'from',
+            condition: 'new',
+          }),
+        ],
+      }),
+    ]);
+    expect(cars).toHaveLength(1);
+    expect(cars[0]?.vehicle.priceKind).toBe('from');
+  });
+
+  it('reads published car prices from Europe and the Americas', () => {
+    const countries = new Set(publishedCars().map((car) => car.dealerCountry));
+    for (const code of [
+      'SE',
+      'NO',
+      'DK',
+      'US',
+      'BR',
+      'MX',
+      'CO',
+      'CL',
+      'FR',
+      'GB',
+      'ES',
+      'IT',
+      'NL',
+      'FI',
+      'PL',
+    ]) {
+      expect(countries.has(code)).toBe(true);
+    }
+  });
+
   it('reads model, year and fuel from the published dealer file', () => {
     const cars = publishedCars();
     expect(cars.length).toBeGreaterThan(20);

@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
+import { CatalogueOutboundLink } from '@/components/custom/catalogue-outbound-link';
 import { Button } from '@/components/ui/button';
 import { dealerListingHref } from '@/lib/contact/claim-listing';
+import { orderCatalogue } from '@/lib/discovery/catalogue-rank-store';
 import {
   type DealershipVehicle,
   type DealershipVehicleKind,
@@ -19,6 +21,15 @@ const CONDITIONS = ['new', 'used'] as const;
 
 function formatMoney(amount: number, currency: string, locale: string) {
   return `${new Intl.NumberFormat(intlLocale(locale)).format(amount)} ${currency}`;
+}
+
+function priceCaption(
+  kind: DealershipVehicle['priceKind'],
+  label: (key: 'msrp' | 'from') => string,
+) {
+  if (kind === 'msrp') return label('msrp');
+  if (kind === 'from') return label('from');
+  return null;
 }
 
 function specLine(
@@ -72,7 +83,14 @@ export async function DealershipCatalogue({
   const cities = [...new Set(cars.map((car) => car.dealerCity).filter(Boolean))].sort((a, b) =>
     a.localeCompare(b, locale),
   );
-  const rows = cars.slice(0, model || place ? 120 : 60);
+  const ranked = await orderCatalogue('car', cars, (car) => ({
+    id: car.id,
+    currency: car.vehicle.currency,
+    amount: car.vehicle.price,
+    country: car.dealerCountry,
+    checkedAt: null,
+  }));
+  const rows = ranked.slice(0, model || place ? 120 : 60);
   const dealerGroups = model ? dealersForCars(rows) : [];
   const listedBusinesses = businesses
     .filter((dealer) =>
@@ -198,7 +216,7 @@ export async function DealershipCatalogue({
                       (value) => t('mileageKm', { value }),
                     )}
                     price={formatMoney(car.vehicle.price, car.vehicle.currency, locale)}
-                    priceCaption={car.vehicle.priceKind === 'msrp' ? t('msrp') : null}
+                    priceCaption={priceCaption(car.vehicle.priceKind, t)}
                     conditionLabel={
                       car.vehicle.condition ? t(`condition.${car.vehicle.condition}`) : null
                     }
@@ -223,7 +241,7 @@ export async function DealershipCatalogue({
                 (value) => t('mileageKm', { value }),
               )}
               price={formatMoney(car.vehicle.price, car.vehicle.currency, locale)}
-              priceCaption={car.vehicle.priceKind === 'msrp' ? t('msrp') : null}
+              priceCaption={priceCaption(car.vehicle.priceKind, t)}
               conditionLabel={
                 car.vehicle.condition ? t(`condition.${car.vehicle.condition}`) : null
               }
@@ -302,7 +320,13 @@ function CarCard({
 }) {
   return (
     <li className="flex min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-card shadow-[0_1px_2px_rgba(19,19,18,.04),0_8px_24px_-12px_rgba(19,19,18,.12)]">
-      <a href={car.vehicle.sourceUrl} rel="noopener noreferrer" className="flex flex-1 flex-col">
+      <CatalogueOutboundLink
+        catalogue="car"
+        itemId={car.id}
+        href={car.vehicle.sourceUrl}
+        className="flex flex-1 flex-col"
+        newTab={false}
+      >
         <div className="aspect-[16/10] bg-muted">
           {car.vehicle.imageUrl ? (
             // biome-ignore lint/performance/noImgElement: the photo is hosted on the dealer's own image host
@@ -333,7 +357,7 @@ function CarCard({
             {car.dealerCity ? ` · ${car.dealerCity}` : ''}
           </p>
         </div>
-      </a>
+      </CatalogueOutboundLink>
       <div className="px-4 pb-4">
         <Button asChild variant="outline" size="sm">
           <Link href={claimHref} aria-label={claimAria}>
