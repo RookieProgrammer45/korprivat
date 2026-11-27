@@ -5,7 +5,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { AnimatedTitle } from '@/components/custom/animated-title';
+import { RotatingTitle } from '@/components/custom/animated-title';
 import { AuthSchoolCarousel } from '@/components/custom/auth-school-carousel';
 import { AuthShell } from '@/components/custom/auth-shell';
 import { SignInForm } from '@/components/custom/sign-in-form';
@@ -27,8 +27,19 @@ export default async function LoginPage({
   searchParams: Promise<{ next?: string }>;
 }) {
   const t = await getTranslations('auth.signIn');
+  const hero = await getTranslations('publicHome.hero');
   const params = await searchParams;
   const next = sanitizeNext(params.next);
+  const headlines = [
+    hero('titleSchool'),
+    hero('titleDealer'),
+    hero('titleParts'),
+    hero('titleInspection'),
+    hero('titleTires'),
+    hero('titleTaxi'),
+    hero('titleLeasing'),
+    hero('titleParking'),
+  ];
 
   return (
     <AuthShell
@@ -45,11 +56,15 @@ export default async function LoginPage({
         </>
       }
     >
-      <div className="mb-8 grid gap-2">
-        <AnimatedTitle
-          text={t('title')}
-          className="font-display text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
-        />
+      <div className="mb-8 grid gap-3">
+        <h1 className="text-caption font-medium text-muted-foreground">{t('title')}</h1>
+        <div aria-hidden="true">
+          <RotatingTitle
+            as="p"
+            lines={headlines}
+            className="min-h-[3.2em] font-display text-balance text-3xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-4xl"
+          />
+        </div>
         <p className="text-pretty text-body text-muted-foreground">{t('subtitle')}</p>
       </div>
       <SignInForm next={next} />

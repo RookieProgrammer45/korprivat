@@ -6,7 +6,7 @@ const WORD_DELAY_MS = 55;
 const LINE_HOLD_MS = 3400;
 
 type AnimatedTitleProps = {
-  as?: 'h1' | 'h2';
+  as?: 'h1' | 'h2' | 'p';
   text: string;
   className?: string;
 };
@@ -35,11 +35,13 @@ export function AnimatedTitle({ as: Tag = 'h1', text, className }: AnimatedTitle
   );
 }
 
-/** Cycles the hero lines and replays the word animation. Reduced motion keeps the first line. */
+/** Cycles the catalogue lines and replays the word animation. Reduced motion keeps the first line. */
 export function RotatingTitle({
+  as = 'h1',
   lines,
   className,
 }: {
+  as?: 'h1' | 'h2' | 'p';
   lines: readonly string[];
   className?: string;
 }) {
@@ -57,5 +59,5 @@ export function RotatingTitle({
   }, [count]);
 
   const text = safe[index] ?? safe[0] ?? '';
-  return <AnimatedTitle key={text} text={text} className={className} />;
+  return <AnimatedTitle as={as} key={text} text={text} className={className} />;
 }

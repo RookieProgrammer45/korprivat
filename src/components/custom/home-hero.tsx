@@ -1,5 +1,6 @@
-// Search-first entry. The title alternates between schools, car prices, parts, inspections, tires, taxi training, lease prices, and parking prices.
-// The photograph stays on desktop, with those comparison paths on top of it.
+// Search-first entry. The title names the catalogue the visitor just chose.
+// Inspection, tires, taxi, leasing and parking stay as chips. The photograph
+// stays on desktop, with those comparison paths on top of it.
 
 'use client';
 
@@ -8,7 +9,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { type FormEvent, useId, useState } from 'react';
-import { RotatingTitle } from '@/components/custom/animated-title';
+import { AnimatedTitle } from '@/components/custom/animated-title';
 import { LocaleLink as Link } from '@/components/locale-link';
 import { dealerSearchPath } from '@/lib/seo/dealer-search-path';
 import { localePath } from '@/lib/seo/locale-path';
@@ -58,6 +59,7 @@ export function HomeHero({
   const [query, setQuery] = useState('');
   const dealerMode = mode === 'dealer';
   const partsMode = mode === 'parts';
+  const title = partsMode ? t('titleParts') : dealerMode ? t('titleDealer') : t('titleSchool');
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -84,17 +86,9 @@ export function HomeHero({
     <section className="marketplace-hero dlu-hero border-b border-border">
       <div className="container-page grid items-start gap-8 pt-4 pb-8 sm:pt-5 lg:grid-cols-[1.05fr_0.95fr] lg:pt-6 lg:pb-10">
         <div className="dlu-hero-copy flex min-w-0 flex-col">
-          <RotatingTitle
-            lines={[
-              t('titleSchool'),
-              t('titleDealer'),
-              t('titleParts'),
-              t('titleInspection'),
-              t('titleTires'),
-              t('titleTaxi'),
-              t('titleLeasing'),
-              t('titleParking'),
-            ]}
+          <AnimatedTitle
+            key={title}
+            text={title}
             className="marketplace-hero-title max-w-[16ch] font-display text-[2.6rem] leading-[1.02] tracking-[-0.035em] text-balance text-foreground sm:text-6xl xl:text-[4.25rem]"
           />
           <p className="marketplace-reveal dlu-hero-in-2 mt-4 max-w-xl text-body text-muted-foreground">

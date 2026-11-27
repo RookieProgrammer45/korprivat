@@ -131,7 +131,10 @@ function OfferCard({ offer }: { offer: HomeOfferCard }) {
               className="absolute inset-0 h-full w-full object-contain p-3"
             />
           ) : (
-            <span className="flex h-full items-center justify-center font-display text-lg font-normal text-foreground">
+            <span
+              aria-hidden
+              className="flex h-full items-center justify-center font-display text-lg font-normal text-foreground"
+            >
               {offer.name.slice(0, 1)}
             </span>
           )}
