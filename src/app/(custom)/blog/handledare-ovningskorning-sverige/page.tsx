@@ -5,7 +5,7 @@ import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 export const metadata: Metadata = {
   title: 'Handledare och övningskörning i Sverige',
   description:
-    'Så fungerar handledarskap för övningskörning, och hur 16–17-åringar kompletterar handledarskap i Sverige.',
+    'Privat övningskörning kräver en handledare som Transportstyrelsen har godkänt för eleven. DriveLinkUp utfärdar inte det godkännandet.',
   alternates: swedishCanonicalAlternates('/blog/handledare-ovningskorning-sverige'),
 };
 
@@ -17,13 +17,15 @@ export default function HandledareBlogPost() {
         Handledare och övningskörning i Sverige
       </h1>
       <p className="text-lg text-muted-foreground">
-        För elever mellan 16 och 17 år krävs handledarskap för privat övningskörning. Det är ett
-        Trafikverket-orienterat handledarskap — inte ett generellt föräldramedgivande.
+        Privat övningskörning kräver en handledare som Transportstyrelsen har godkänt för just den
+        eleven. Det är inte ett föräldramedgivande, och DriveLinkUp utfärdar inte godkännandet.
       </p>
       <div className="grid gap-4 text-body text-foreground">
         <p>
-          Eleven verifierar ålder med ID via Didit. Om åldern är 16–17 skickas en inbjudan till
-          handledaren, som godkänner via en unik länk. Först därefter blir kontot ACTIVE.
+          Eleven behöver ett giltigt körkortstillstånd. Personbil utan släp får övningsköras från 16
+          år. Handledaren ska ha fyllt 24 år, ha giltigt körkort för fordonet och ha haft det i
+          minst fem av de senaste tio åren. Från den 1 augusti 2026 krävs inte
+          introduktionsutbildning för behörighet B.
         </p>
         <p>
           Letar du efter en trafikskola? Börja i{' '}

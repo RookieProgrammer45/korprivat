@@ -127,7 +127,9 @@ export default function KorkortBStegForStegPage() {
             </p>
             <p>
               Privat övningskörning kräver att både elev och handledare uppfyller
-              Transportstyrelsens villkor, inklusive introduktionsutbildning där den krävs. Läs{' '}
+              Transportstyrelsens villkor. Från den 1 augusti 2026 krävs inte
+              introduktionsutbildning för behörighet B. Körkortstillstånd och ett godkänt
+              handledarskap finns kvar. Läs{' '}
               <Link
                 className="underline underline-offset-4"
                 href="/blog/handledare-ovningskorning-sverige"

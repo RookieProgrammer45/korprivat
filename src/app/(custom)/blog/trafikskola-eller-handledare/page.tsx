@@ -32,7 +32,7 @@ export default function TrafikskolaEllerHandledarePage() {
       </h1>
       <p className="text-lg text-muted-foreground">
         Det är två olika produkter. Trafikskolor ger strukturerade lektioner. Handledare möjliggör
-        privat övningskörning under Trafikverket-orienterade regler.
+        privat övningskörning under Transportstyrelsens regler för handledare.
       </p>
       <div className="grid gap-4 text-body text-foreground">
         <p>

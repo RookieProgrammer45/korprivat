@@ -99,23 +99,56 @@ export default function JamforParkeringsprisPage() {
               Stockholm, läst den 27 november 2026
             </h2>
             <p>
-              Stockholm Parkering anger de här timpriserna för besöksparkering. De gäller hela
-              dygnet, de är förbetalda, och skylten på platsen gäller. Källa:{' '}
-              <a
-                className="underline underline-offset-4"
-                href="https://www.stockholmparkering.se/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                stockholmparkering.se
-              </a>
-              .
+              Stockholm Parkering anger de här timpriserna för besöksparkering. Betalningen är
+              förbetald, och skylten på platsen gäller. Timprisraden är satt till alla dagar
+              00:00–24:00. Norra Djurgårdsstaden, Fåfängan och S:t Eriksplan har också öppet dygnet
+              runt på samma sida. Norra Bantorget anger öppettider 06:00–24:00.
             </p>
             <ul className="ml-6 list-disc space-y-2">
-              <li>Norra Djurgårdsstaden: 25 kronor per timme.</li>
-              <li>Fåfängan, Södermalm: 30 kronor per timme.</li>
-              <li>S:t Eriksplan, Vasastan: 60 kronor per timme.</li>
-              <li>Norra Bantorget, Norrmalm: 95 kronor per timme.</li>
+              <li>
+                <a
+                  className="underline underline-offset-4"
+                  href="https://www.stockholmparkering.se/anlaggningar/204683/Norra-Djurgardsstaden"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Norra Djurgårdsstaden
+                </a>
+                : 25 kronor per timme.
+              </li>
+              <li>
+                <a
+                  className="underline underline-offset-4"
+                  href="https://www.stockholmparkering.se/anlaggningar/200017/Fafangan"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Fåfängan, Södermalm
+                </a>
+                : 30 kronor per timme.
+              </li>
+              <li>
+                <a
+                  className="underline underline-offset-4"
+                  href="https://www.stockholmparkering.se/hitta-oss-pa-kartan/104232/S-t-Eriksplan,-Phus"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  S:t Eriksplan, Vasastan
+                </a>
+                : 60 kronor per timme.
+              </li>
+              <li>
+                <a
+                  className="underline underline-offset-4"
+                  href="https://www.stockholmparkering.se/anlaggningar/104511/Norra-Bantorget%2C-PHus"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Norra Bantorget, Norrmalm
+                </a>
+                : 95 kronor per timme.
+              </li>
             </ul>
           </section>
           <section className="grid gap-3">

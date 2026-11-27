@@ -127,7 +127,7 @@ export default function JamforBilpriserPage() {
               >
                 ford.com/new-trucks
               </a>
-              . Renault Brasilien anger Kwid från 71 390 BRL på{' '}
+              . Renault Brasiliens modellkort anger Kwid från 71 390 BRL på{' '}
               <a
                 className="underline underline-offset-4"
                 href="https://www.renault.com.br/"
@@ -136,7 +136,8 @@ export default function JamforBilpriserPage() {
               >
                 renault.com.br
               </a>
-              . Korten behåller den etiketten.
+              . Samma sida har en lanseringsbanner på 71 190 BRL. Katalogen behåller modellkortets
+              frånpris, inte bannern. Korten behåller den etiketten.
             </p>
           </section>
           <section className="grid gap-3">

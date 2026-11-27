@@ -108,8 +108,10 @@ export default function VadKostarBesiktningPage() {
             </h2>
             <p>
               Opus Bilprovning anger kontrollbesiktning av personbil från 699 kronor, inklusive
-              moms, som sitt lägsta publicerade pris. Samma sida anger efterkontroll från 399
-              kronor. Det är två kontroller. Källa:{' '}
+              moms, som sitt lägsta publicerade pris. I samma konsumenttabell står efterkontroll som
+              399 kronor, utan ordet från. Sidan kallar beloppen sitt lägsta pris och skriver att de
+              kan variera mellan station och tid. Det är två kontroller. Företagstabellen på samma
+              adress är exklusive moms och är ett annat belopp. Källa:{' '}
               <a
                 className="underline underline-offset-4"
                 href="https://opus.se/priser/"
