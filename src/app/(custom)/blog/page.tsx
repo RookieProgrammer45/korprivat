@@ -14,6 +14,21 @@ import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 const POSTS = [
   {
+    slug: 'jamfor-bilpriser',
+    index: '12',
+    minutes: 6,
+  },
+  {
+    slug: 'vad-kostar-besiktning',
+    index: '13',
+    minutes: 6,
+  },
+  {
+    slug: 'jamfor-parkeringspris',
+    index: '14',
+    minutes: 6,
+  },
+  {
     slug: 'korkort-b-malmo',
     index: '11',
     minutes: 8,

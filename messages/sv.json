@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blogg",
-      "description": "Praktiska guider för körkortselever i Sverige — Transportstyrelsens steg, skoljämförelse, språk och publicerade lektionspriser."
+      "description": "Guider om publicerade bilpriser, besiktningspriser, parkeringspriser och stegen till svenskt körkort."
     },
     "header": {
       "eyebrow": "Blogg",
@@ -336,6 +336,27 @@
         "title": "Trafikskola eller handledare?",
         "excerpt": "När en trafikskola i katalogen passar, och när privat övningskörning med handledare gäller.",
         "meta": "{minutes} min läsning",
+        "readCta": "Läs guiden"
+      },
+      "12": {
+        "eyebrow": "Bilpriser",
+        "title": "Jämför publicerade bilpriser",
+        "excerpt": "Ett annonserat pris, ett frånpris och ett MSRP är tre olika belopp. Jämför bara inom samma valuta.",
+        "meta": "{minutes} min läsning · 27 november 2026",
+        "readCta": "Läs guiden"
+      },
+      "13": {
+        "eyebrow": "Besiktning",
+        "title": "Vad ett publicerat besiktningspris betyder",
+        "excerpt": "Frånpris, fast pris och lagstadgat tak är olika. Landet syns när stationen eller lagen publicerat ett belopp.",
+        "meta": "{minutes} min läsning · 27 november 2026",
+        "readCta": "Läs guiden"
+      },
+      "14": {
+        "eyebrow": "Parkering",
+        "title": "Jämför parkeringspris i en stad",
+        "excerpt": "Timpriset gäller en namngiven plats. Skylten på platsen avgör. DriveLinkUp reserverar inte platsen.",
+        "meta": "{minutes} min läsning · 27 november 2026",
         "readCta": "Läs guiden"
       }
     }

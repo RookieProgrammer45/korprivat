@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guías prácticas para alumnos en Suecia: pasos de Transportstyrelsen, comparación de autoescuelas y precios publicados."
+      "description": "Guías sobre precios publicados de coches, de inspección, de aparcamiento y los pasos del permiso sueco."
     },
     "header": {
       "eyebrow": "Blog",
@@ -336,6 +336,27 @@
         "title": "¿Autoescuela o handledare?",
         "excerpt": "Cuándo encaja una autoescuela del catálogo y cuándo aplica la övningskörning privada con un handledare.",
         "meta": "{minutes} min de lectura",
+        "readCta": "Leer la guía"
+      },
+      "12": {
+        "eyebrow": "Precios de coches",
+        "title": "Compara precios de coches publicados",
+        "excerpt": "Un precio anunciado, un precio desde y un MSRP son tres importes distintos. Compáralos solo dentro de la misma moneda.",
+        "meta": "{minutes} min de lectura · 27 de noviembre de 2026",
+        "readCta": "Leer la guía"
+      },
+      "13": {
+        "eyebrow": "Inspección",
+        "title": "Qué significa un precio de inspección publicado",
+        "excerpt": "Un precio desde, un precio fijo y un máximo legal son distintos. Un país aparece cuando la estación o la norma publicó un importe.",
+        "meta": "{minutes} min de lectura · 27 de noviembre de 2026",
+        "readCta": "Leer la guía"
+      },
+      "14": {
+        "eyebrow": "Aparcamiento",
+        "title": "Compara el precio del aparcamiento en una ciudad",
+        "excerpt": "La hora corresponde a un lugar con nombre. La señal en el sitio decide. DriveLinkUp no reserva la plaza.",
+        "meta": "{minutes} min de lectura · 27 de noviembre de 2026",
         "readCta": "Leer la guía"
       }
     }

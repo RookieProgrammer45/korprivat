@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Praktiske guides til køreelever i Sverige — Transportstyrelsens trin, skolevalg og offentliggjorte priser."
+      "description": "Guider om offentliggjorte bilpriser, synspriser, parkeringspriser og trinnene til kørekort i Sverige."
     },
     "header": {
       "eyebrow": "Blog",
@@ -337,6 +337,27 @@
         "excerpt": "Når en opført køreskole passer, og hvornår privat övningskörning med en Handledare gælder.",
         "meta": "{minutes} min lesing",
         "readCta": "Læs guide"
+      },
+      "12": {
+        "eyebrow": "Bilpriser",
+        "title": "Sammenlign offentliggjorte bilpriser",
+        "excerpt": "Annoncepris, fra-pris og MSRP er tre forskellige beløb. Sammenlign kun inden for samme valuta.",
+        "meta": "{minutes} min læsning · 27. november 2026",
+        "readCta": "Læs guiden"
+      },
+      "13": {
+        "eyebrow": "Syn",
+        "title": "Hvad en offentliggjort synspris betyder",
+        "excerpt": "Fra-pris, fast pris og lovbestemt loft er forskellige. Landet vises, når stationen eller forskriften har offentliggjort et beløb.",
+        "meta": "{minutes} min læsning · 27. november 2026",
+        "readCta": "Læs guiden"
+      },
+      "14": {
+        "eyebrow": "Parkering",
+        "title": "Sammenlign parkeringspris i en by",
+        "excerpt": "Timeprisen gælder et navngivet sted. Skiltet på stedet afgør. DriveLinkUp reserverer ikke pladsen.",
+        "meta": "{minutes} min læsning · 27. november 2026",
+        "readCta": "Læs guiden"
       }
     }
   },

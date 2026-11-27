@@ -14,6 +14,24 @@ export type SeoRoute = { path: string } & Omit<MetadataRoute.Sitemap[number], 'u
 
 const EDITORIAL: SeoRoute[] = [
   {
+    path: '/blog/jamfor-bilpriser',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+    lastModified: '2026-11-27',
+  },
+  {
+    path: '/blog/vad-kostar-besiktning',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+    lastModified: '2026-11-27',
+  },
+  {
+    path: '/blog/jamfor-parkeringspris',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+    lastModified: '2026-11-27',
+  },
+  {
     path: '/blog/korkort-b-malmo',
     priority: 0.75,
     changeFrequency: 'monthly',

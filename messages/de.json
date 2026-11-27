@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Praktische Leitfäden für Fahrschüler in Schweden — Schritte der Transportstyrelsen, Schulvergleich und veröffentlichte Preise."
+      "description": "Leitfäden zu veröffentlichten Autopreisen, Untersuchungspreisen, Parkpreisen und den Schritten zum schwedischen Führerschein."
     },
     "header": {
       "eyebrow": "Blog",
@@ -336,6 +336,27 @@
         "title": "Fahrschule oder Handledare?",
         "excerpt": "Wann eine gelistete Fahrschule passt und wann private övningskörning mit einem Handledare gilt.",
         "meta": "{minutes} Min. Lesezeit",
+        "readCta": "Leitfaden lesen"
+      },
+      "12": {
+        "eyebrow": "Autopreise",
+        "title": "Veröffentlichte Autopreise vergleichen",
+        "excerpt": "Inseratspreis, Ab-Preis und MSRP sind drei verschiedene Beträge. Vergleichen Sie nur innerhalb einer Währung.",
+        "meta": "{minutes} Min. Lesezeit · 27. November 2026",
+        "readCta": "Leitfaden lesen"
+      },
+      "13": {
+        "eyebrow": "Untersuchung",
+        "title": "Was ein veröffentlichter Untersuchungspreis bedeutet",
+        "excerpt": "Ab-Preis, Festpreis und gesetzliche Obergrenze sind verschieden. Ein Land erscheint, wenn die Station oder die Vorschrift einen Betrag veröffentlicht hat.",
+        "meta": "{minutes} Min. Lesezeit · 27. November 2026",
+        "readCta": "Leitfaden lesen"
+      },
+      "14": {
+        "eyebrow": "Parken",
+        "title": "Parkpreise in einer Stadt vergleichen",
+        "excerpt": "Der Stundenpreis gilt für einen benannten Platz. Das Schild vor Ort entscheidet. DriveLinkUp reserviert den Platz nicht.",
+        "meta": "{minutes} Min. Lesezeit · 27. November 2026",
         "readCta": "Leitfaden lesen"
       }
     }

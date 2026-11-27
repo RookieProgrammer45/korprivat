@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blogi",
-      "description": "Käytännön oppaita ajokorttioppilaille Ruotsissa — Transportstyrelsensin vaiheet, koulujen vertailu ja julkaistut hinnat."
+      "description": "Oppaita julkaistuista auton hinnoista, katsastushinnoista, pysäköintihinnoista ja Ruotsin ajokortin vaiheista."
     },
     "header": {
       "eyebrow": "Blogi",
@@ -336,6 +336,27 @@
         "title": "Autokoulu vai handledare?",
         "excerpt": "Milloin listattu autokoulu sopii, ja milloin yksityinen övningskörning handledaren kanssa tulee kyseeseen.",
         "meta": "{minutes} min lukuaika",
+        "readCta": "Lue opas"
+      },
+      "12": {
+        "eyebrow": "Auton hinta",
+        "title": "Vertaile julkaistuja auton hintoja",
+        "excerpt": "Ilmoitettu hinta, alkaen-hinta ja MSRP ovat eri summia. Vertaile vain samaa valuuttaa.",
+        "meta": "{minutes} min lukuaika · 27. marraskuuta 2026",
+        "readCta": "Lue opas"
+      },
+      "13": {
+        "eyebrow": "Katsastus",
+        "title": "Mitä julkaistu katsastushinta tarkoittaa",
+        "excerpt": "Alkaen-hinta, kiinteä hinta ja lakisääteinen katto ovat eri asioita. Maa näkyy, kun asema tai säädös julkaisi summan.",
+        "meta": "{minutes} min lukuaika · 27. marraskuuta 2026",
+        "readCta": "Lue opas"
+      },
+      "14": {
+        "eyebrow": "Pysäköinti",
+        "title": "Vertaile pysäköintihintaa kaupungissa",
+        "excerpt": "Tuntuhinta koskee nimettyä paikkaa. Paikan kyltti ratkaisee. DriveLinkUp ei varaa paikkaa.",
+        "meta": "{minutes} min lukuaika · 27. marraskuuta 2026",
         "readCta": "Lue opas"
       }
     }

@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Praktische gidsen voor leerlingen in Zweden — stappen van Transportstyrelsen, schoolvergelijking en gepubliceerde prijzen."
+      "description": "Gidsen over gepubliceerde autoprijzen, keuringsprijzen, parkeertarieven en de stappen naar een Zweeds rijbewijs."
     },
     "header": {
       "eyebrow": "Blog",
@@ -336,6 +336,27 @@
         "title": "Rijschool of handledare?",
         "excerpt": "Wanneer een vermelde rijschool past, en wanneer privé övningskörning met een handledare geldt.",
         "meta": "{minutes} min lezen",
+        "readCta": "Lees de gids"
+      },
+      "12": {
+        "eyebrow": "Autoprijzen",
+        "title": "Vergelijk gepubliceerde autoprijzen",
+        "excerpt": "Een advertentieprijs, een vanaf-prijs en een MSRP zijn drie verschillende bedragen. Vergelijk alleen binnen dezelfde valuta.",
+        "meta": "{minutes} min lezen · 27 november 2026",
+        "readCta": "Lees de gids"
+      },
+      "13": {
+        "eyebrow": "Keuring",
+        "title": "Wat een gepubliceerde keuringsprijs betekent",
+        "excerpt": "Een vanaf-prijs, een vaste prijs en een wettelijk maximum zijn verschillend. Een land verschijnt wanneer het station of het voorschrift een bedrag publiceerde.",
+        "meta": "{minutes} min lezen · 27 november 2026",
+        "readCta": "Lees de gids"
+      },
+      "14": {
+        "eyebrow": "Parkeren",
+        "title": "Vergelijk parkeertarieven in een stad",
+        "excerpt": "Het uurtarief geldt voor een genoemde plek. Het bord ter plaatse beslist. DriveLinkUp reserveert de plek niet.",
+        "meta": "{minutes} min lezen · 27 november 2026",
         "readCta": "Lees de gids"
       }
     }

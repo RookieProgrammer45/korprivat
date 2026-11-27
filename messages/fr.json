@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Journal",
-      "description": "Guides pratiques pour les élèves conducteurs en Suède — étapes de Transportstyrelsen, comparaison d’écoles et prix publiés."
+      "description": "Guides sur les prix publiés des voitures, des contrôles, du stationnement, et les étapes du permis suédois."
     },
     "header": {
       "eyebrow": "Journal",
@@ -336,6 +336,27 @@
         "title": "Auto-école ou handledare ?",
         "excerpt": "Quand une auto-école répertoriée convient, et quand l'övningskörning privée avec un handledare s'applique.",
         "meta": "{minutes} min de lecture",
+        "readCta": "Lire le guide"
+      },
+      "12": {
+        "eyebrow": "Prix des voitures",
+        "title": "Comparer les prix de voitures publiés",
+        "excerpt": "Un prix annoncé, un prix « à partir de » et un MSRP sont trois montants différents. Comparez-les dans la même devise.",
+        "meta": "{minutes} min de lecture · 27 novembre 2026",
+        "readCta": "Lire le guide"
+      },
+      "13": {
+        "eyebrow": "Contrôle",
+        "title": "Ce que signifie un prix de contrôle publié",
+        "excerpt": "Un prix « à partir de », un prix fixe et un plafond légal sont différents. Un pays apparaît quand la station ou le texte a publié un montant.",
+        "meta": "{minutes} min de lecture · 27 novembre 2026",
+        "readCta": "Lire le guide"
+      },
+      "14": {
+        "eyebrow": "Stationnement",
+        "title": "Comparer le prix du stationnement dans une ville",
+        "excerpt": "Le tarif horaire concerne un lieu nommé. Le panneau sur place décide. DriveLinkUp ne réserve pas la place.",
+        "meta": "{minutes} min de lecture · 27 novembre 2026",
         "readCta": "Lire le guide"
       }
     }

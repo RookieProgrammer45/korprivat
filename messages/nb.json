@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blogg",
-      "description": "Praktiske guider for kjøreelever i Sverige — Transportstyrelsens steg, skolevalg og publiserte priser."
+      "description": "Guider om publiserte bilpriser, kontrollpriser, parkeringspriser og stegene til førerkort i Sverige."
     },
     "header": {
       "eyebrow": "Blogg",
@@ -337,6 +337,27 @@
         "excerpt": "Når en oppført kjøreskole passer, og når privat övningskörning med en handlevogn gjelder.",
         "meta": "{minutes} min lesing",
         "readCta": "Les guide"
+      },
+      "12": {
+        "eyebrow": "Bilpriser",
+        "title": "Sammenlign publiserte bilpriser",
+        "excerpt": "Annonsepris, fra-pris og MSRP er tre ulike beløp. Sammenlign bare innen samme valuta.",
+        "meta": "{minutes} min lesing · 27. november 2026",
+        "readCta": "Les guiden"
+      },
+      "13": {
+        "eyebrow": "Kontroll",
+        "title": "Hva en publisert kontrollpris betyr",
+        "excerpt": "Fra-pris, fast pris og lovbestemt tak er ulike. Landet vises når stasjonen eller forskriften publiserte et beløp.",
+        "meta": "{minutes} min lesing · 27. november 2026",
+        "readCta": "Les guiden"
+      },
+      "14": {
+        "eyebrow": "Parkering",
+        "title": "Sammenlign parkeringspris i en by",
+        "excerpt": "Timeprisen gjelder et navngitt sted. Skiltet på stedet avgjør. DriveLinkUp reserverer ikke plassen.",
+        "meta": "{minutes} min lesing · 27. november 2026",
+        "readCta": "Les guiden"
       }
     }
   },

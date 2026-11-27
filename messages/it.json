@@ -246,7 +246,7 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guide pratiche per allievi in Svezia — passi di Transportstyrelsen, confronto tra scuole e prezzi pubblicati."
+      "description": "Guide sui prezzi pubblicati di auto, revisioni e parcheggi, e sui passi della patente svedese."
     },
     "header": {
       "eyebrow": "Blog",
@@ -336,6 +336,27 @@
         "title": "Autoscuola o handledare?",
         "excerpt": "Quando conviene un'autoscuola in elenco e quando si applica l'övningskörning privata con un handledare.",
         "meta": "{minutes} min di lettura",
+        "readCta": "Leggi la guida"
+      },
+      "12": {
+        "eyebrow": "Prezzi auto",
+        "title": "Confronta i prezzi auto pubblicati",
+        "excerpt": "Un prezzo annunciato, un prezzo a partire da e un MSRP sono tre importi diversi. Confrontali solo nella stessa valuta.",
+        "meta": "{minutes} min di lettura · 27 novembre 2026",
+        "readCta": "Leggi la guida"
+      },
+      "13": {
+        "eyebrow": "Revisione",
+        "title": "Cosa significa un prezzo di revisione pubblicato",
+        "excerpt": "Un prezzo a partire da, un prezzo fisso e un tetto di legge sono diversi. Un paese compare quando la stazione o la norma ha pubblicato un importo.",
+        "meta": "{minutes} min di lettura · 27 novembre 2026",
+        "readCta": "Leggi la guida"
+      },
+      "14": {
+        "eyebrow": "Parcheggio",
+        "title": "Confronta il prezzo del parcheggio in una città",
+        "excerpt": "La tariffa oraria vale per un posto con nome. Il cartello sul posto decide. DriveLinkUp non prenota il posto.",
+        "meta": "{minutes} min di lettura · 27 novembre 2026",
         "readCta": "Leggi la guida"
       }
     }

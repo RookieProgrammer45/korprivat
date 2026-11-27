@@ -68,7 +68,13 @@ export const llmsConfig: LlmsConfig = {
     '/handledare':
       'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
     '/blog':
-      'Guides for learners: category B in Malmö and Gothenburg, driving lessons, the learner permit, risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+      'Guides for learners: published car prices, inspection prices, parking prices, category B in Malmö and Gothenburg, driving lessons, the learner permit, risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+    '/blog/jamfor-bilpriser':
+      'Swedish guide to a published car price: the dealer or manufacturer amount, a from-price as a floor, MSRP as the advertised starting price, and why currencies stay in separate groups.',
+    '/blog/vad-kostar-besiktning':
+      'Swedish guide to a published inspection price: from, fixed and statutory maximum, with the Opus car inspection and the UK MOT maximum read on 27 November 2026. DriveLinkUp does not book the inspection.',
+    '/blog/jamfor-parkeringspris':
+      'Swedish guide to comparing a published parking hour for a named place. Stockholm figures read on 27 November 2026. The sign at the place decides. DriveLinkUp does not reserve the spot.',
     '/blog/korkort-b-malmo':
       'Swedish guide to category B in Malmö: learner permit, traffic-school lessons, risk education, Trafikverket theory and driving tests at Cederströmsgatan 1, foreign-licence readers, and published school prices.',
     '/blog/korkort-b-goteborg':
