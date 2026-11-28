@@ -108,6 +108,6 @@ Per school: owner, representative-review status, requested/granted/withdrawn sco
 - Cohort-assignment script: `npm run cohorts:assign` reads `docs/cutover-school-roster.json`, applies §3 precedence + dedup + unclassified queue, writes `docs/authorization-cohort-worklists.json`.
 - Coverage report: `docs/authorization-coverage-report.md` — the five §6 buckets, per-city density, roster delta for a hypothetical flip.
 - Optional `--enrichment` JSON may add categories, offerings, grants, and E0–E4 facts. Missing fields stay unclassified / not-eligible — they are never inferred from a school name.
-- Outreach sequence drafts in the concierge tooling (from-address + signature per policy; sending remains a separately authorized human action). **Not in this slice.**
+- Outreach sequence drafts: `npm run outreach:draft` writes the unsent day 0/4/10 playbook (`docs/authorization-outreach-sequence.md`) from `marketing@drivelinkup.com` with signature `frank - founder of drivelinkup.com`. The same payload is accepted on `POST /api/admin/concierge-drafts` as `kind: OUTREACH_SEQUENCE` while `CONCIERGE_ONBOARDING` is on. Sending remains `channel_not_authorized`. Contact-restricted listings are excluded. A public claim page is recorded as missing.
 
 No flag flips, no sends, no vendor contact — founder actions per `docs/implementation/next-steps.md`.

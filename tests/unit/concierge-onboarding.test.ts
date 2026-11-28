@@ -217,4 +217,50 @@ describe('concierge onboarding', () => {
     expect(mockGrant).not.toHaveBeenCalled();
     delete process.env.CONCIERGE_ONBOARDING;
   });
+
+  it('stores an unsent outreach sequence without granting scopes', async () => {
+    process.env.CONCIERGE_ONBOARDING = '1';
+    const { buildOutreachSequence } = await import('@/lib/acquisition/outreach-sequence-policy');
+    const sequence = buildOutreachSequence({
+      schoolName: 'Example Trafikskola (synthetic)',
+      listingId: 'listing-synthetic',
+    });
+    expect(sequence.allowed).toBe(true);
+    if (!sequence.allowed) {
+      return;
+    }
+    const { allowed: _allowed, ...payload } = sequence;
+    mockCreate.mockResolvedValue({
+      id: 'draft_outreach',
+      listingId: 'listing-synthetic',
+      source: 'SYNTHETIC_FIXTURE',
+      provenance,
+      payload,
+      state: 'DRAFT',
+      approvedAt: null,
+      publishedAt: null,
+    });
+    const res = await adminCreate(
+      new Request('http://localhost/api/admin/concierge-drafts', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          listingId: 'listing-synthetic',
+          source: 'SYNTHETIC_FIXTURE',
+          provenance: {
+            source: 'SYNTHETIC_FIXTURE',
+            sourceUrl: 'synthetic://outreach-sequence',
+            retrievedAt: '2026-10-24T00:00:00.000Z',
+            fields: ['outreachSequence'],
+          },
+          payload,
+        }),
+      }),
+    );
+    expect(res.status).toBe(201);
+    expect(mockCreate).toHaveBeenCalled();
+    expect(mockGrant).not.toHaveBeenCalled();
+    expect(payload.sent).toBe(false);
+    delete process.env.CONCIERGE_ONBOARDING;
+  });
 });

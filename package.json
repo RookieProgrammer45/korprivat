@@ -20,6 +20,7 @@
     "rehearse:cutover": "tsx scripts/run-cutover-rehearsal.ts",
     "walkthrough:readiness": "tsx scripts/run-production-readiness-walkthrough.ts",
     "cohorts:assign": "tsx scripts/assign-authorization-cohorts.ts",
+    "outreach:draft": "tsx scripts/draft-authorization-outreach.ts",
     "test:integration": "vitest run --config vitest.config.integration.ts --exclude '**/profile-picture.test.ts'",
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
