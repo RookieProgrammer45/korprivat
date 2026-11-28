@@ -1,6 +1,6 @@
 {
   "meta": {
-    "checkedAt": "2026-11-27",
+    "checkedAt": "2026-11-28",
     "note": "A row stays only when the workshop page published the amount. The monthly refresh reads those pages again and changes an amount only when the page shows a new one. A page that cannot be read leaves the previous amount in place.",
     "unreadable": []
   },
@@ -20,7 +20,7 @@
         "extrasMayApply"
       ],
       "sourceUrl": "https://www.euromaster.se/bilservice/dack/dackbyte",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-euromaster-van-change",
@@ -37,7 +37,7 @@
         "extrasMayApply"
       ],
       "sourceUrl": "https://www.euromaster.se/bilservice/dack/dackbyte",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-vianor-car-change",
@@ -53,7 +53,7 @@
         "includesCheck"
       ],
       "sourceUrl": "https://vianor.se/dackverkstad/dackbyte/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-vianor-car-hotel",
@@ -69,7 +69,7 @@
         "includesChangeAndWash"
       ],
       "sourceUrl": "https://vianor.se/dackverkstad/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-vianor-car-mount",
@@ -85,7 +85,7 @@
         "ownTyres"
       ],
       "sourceUrl": "https://vianor.se/dackverkstad/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "no-vianor-car-change",
@@ -101,7 +101,7 @@
         "includesCheck"
       ],
       "sourceUrl": "https://vianor.no/dekkverksted/dekkskift/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "no-vianor-car-hotel",
@@ -117,7 +117,7 @@
         "includesChangeWashAndCheck"
       ],
       "sourceUrl": "https://vianor.no/dekkverksted/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "no-vianor-car-mount",
@@ -133,7 +133,7 @@
         "ownTyres"
       ],
       "sourceUrl": "https://vianor.no/dekkverksted/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "fi-vianor-car-change",
@@ -149,7 +149,7 @@
         "includesCheck"
       ],
       "sourceUrl": "https://vianor.fi/rengaspalvelut/renkaiden-vaihto/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "fi-vianor-car-hotel",
@@ -165,7 +165,7 @@
         "storageOnly"
       ],
       "sourceUrl": "https://vianor.fi/rengaspalvelut/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "nl-kwikfit-car-change",
@@ -182,7 +182,7 @@
         "memberDiscount"
       ],
       "sourceUrl": "https://www.kwik-fit.nl/banden-wisselen",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "nl-kwikfit-car-mount",
@@ -201,7 +201,7 @@
         "boughtElsewhere"
       ],
       "sourceUrl": "https://www.kwik-fit.nl/banden-wisselen",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-kwikfit-car-mobile",
@@ -217,7 +217,7 @@
         "slotMaximum"
       ],
       "sourceUrl": "https://www.kwik-fit.com/tyres/mobile-tyre-fitting",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-kwikfit-van-mobile",
@@ -233,7 +233,7 @@
         "slotMaximum"
       ],
       "sourceUrl": "https://www.kwik-fit.com/tyres/mobile-tyre-fitting",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     }
   ]
 }
