@@ -1,6 +1,6 @@
 {
   "meta": {
-    "checkedAt": "2026-11-27",
+    "checkedAt": "2026-11-28",
     "note": "A row stays only when the school or the authority page published the amount. The monthly refresh reads those pages again and changes an amount only when the page shows a new one. A page that cannot be read leaves the previous amount in place.",
     "unreadable": []
   },
@@ -18,7 +18,7 @@
         "questionBankAndThreeLessons"
       ],
       "sourceUrl": "https://elev.kptrafikskola.se/shop/taxi/taxiforarutbildning",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-pedagogen-course",
@@ -33,7 +33,7 @@
         "bookAndLessonListedSeparately"
       ],
       "sourceUrl": "https://korkortspedagogen.se/taxilicens",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-korkortcenter-theory",
@@ -48,7 +48,7 @@
         "theoryMaterial"
       ],
       "sourceUrl": "https://www.korkortcenter.se/taxi-korkort",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-korkortcenter-course",
@@ -63,7 +63,7 @@
         "includesTwoLessons"
       ],
       "sourceUrl": "https://www.korkortcenter.se/taxi-korkort",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-skarholmen-course",
@@ -79,7 +79,7 @@
         "authorityFeesExtra"
       ],
       "sourceUrl": "https://www.skarholmenstrafikskola.se/taxi-korkort",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-skarholmen-premium",
@@ -95,7 +95,7 @@
         "authorityFeesExtra"
       ],
       "sourceUrl": "https://www.skarholmenstrafikskola.se/taxi-korkort",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "se-vagsjo-course",
@@ -110,7 +110,7 @@
         "materialFourLessonsOneDrive"
       ],
       "sourceUrl": "https://www.vagsjotrafikskola.se/taxiforarlegitimation/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-worcestershire-course",
@@ -126,7 +126,7 @@
         "includesWrittenTest"
       ],
       "sourceUrl": "https://www.worcestershire.gov.uk/council-services/travel-and-highways/driver-assessments-and-training/taxi-driver-training-wolverhampton",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-edinburgh-course",
@@ -141,7 +141,7 @@
         "includesAssessment"
       ],
       "sourceUrl": "https://www.edinburgh.gov.uk/licences-permits/licences-permits-applications/6",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-edinburgh-topography",
@@ -156,7 +156,7 @@
         "standaloneAssessment"
       ],
       "sourceUrl": "https://www.edinburgh.gov.uk/licences-permits/licences-permits-applications/6",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-chelmsford-course",
@@ -172,7 +172,7 @@
         "topographyExtra"
       ],
       "sourceUrl": "https://www.chelmsford.gov.uk/business/licensing/taxis/driver-licence/taxi-driver-training/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-chelmsford-refresher",
@@ -188,7 +188,7 @@
         "paidToTrainer"
       ],
       "sourceUrl": "https://www.chelmsford.gov.uk/business/licensing/taxis/driver-licence/taxi-driver-training/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-chelmsford-topography",
@@ -204,7 +204,7 @@
         "paidToTrainer"
       ],
       "sourceUrl": "https://www.chelmsford.gov.uk/business/licensing/taxis/driver-licence/taxi-driver-training/",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-ni-theory",
@@ -217,7 +217,7 @@
       "currency": "GBP",
       "notes": [],
       "sourceUrl": "https://www.nidirect.gov.uk/articles/driving-test-fees",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-ni-practical",
@@ -232,7 +232,7 @@
         "weekday"
       ],
       "sourceUrl": "https://www.nidirect.gov.uk/articles/driving-test-fees",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     },
     {
       "id": "gb-ni-practical-evening",
@@ -247,7 +247,7 @@
         "eveningWeekend"
       ],
       "sourceUrl": "https://www.nidirect.gov.uk/articles/driving-test-fees",
-      "checkedAt": "2026-11-27"
+      "checkedAt": "2026-11-28"
     }
   ]
 }
