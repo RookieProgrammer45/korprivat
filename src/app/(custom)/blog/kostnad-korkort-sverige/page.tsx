@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ExpatMoverGuide } from '@/components/custom/expat-mover-guide';
 import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
 
@@ -35,6 +36,7 @@ export default function KostnadKorkortPage() {
         Totalkostnaden varierar med antal lektioner, teori och prov. Det du kan jämföra tidigt är
         skolans publicerade lektionspris.
       </p>
+      <ExpatMoverGuide lang="sv" />
       <div className="grid gap-4 text-body text-foreground">
         <p>Du ser skolans pris i SEK per timme. Kontakta skolan för att ordna lektionen.</p>
         <p>Listningen är gratis. Betalning för lektionen ordnas med skolan.</p>

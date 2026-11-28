@@ -109,6 +109,52 @@ export const NORDIC_COUNTRY_META: Record<NordicCountryCode, NordicCountryMeta> =
   br: { code: 'br', name: 'Brazil', nameLocal: 'Brasil', adjective: 'Brazilian' },
 };
 
+/** Catalogue continents. Australia is the continent, with its states and territories under `au`. */
+export const CATALOGUE_CONTINENTS = [
+  {
+    id: 'europe',
+    countries: [
+      'se',
+      'no',
+      'dk',
+      'fi',
+      'is',
+      'gb',
+      'es',
+      'fr',
+      'de',
+      'it',
+      'pl',
+      'at',
+      'be',
+      'nl',
+      'pt',
+      'ie',
+      'lu',
+      'ch',
+      'cz',
+      'sk',
+      'hu',
+      'ro',
+      'bg',
+      'hr',
+      'si',
+      'gr',
+      'cy',
+      'mt',
+      'ee',
+      'lv',
+      'lt',
+    ],
+  },
+  { id: 'northAmerica', countries: ['us', 'ca'] },
+  { id: 'southAmerica', countries: ['br'] },
+  { id: 'australia', countries: ['au'] },
+] as const satisfies ReadonlyArray<{
+  id: 'europe' | 'northAmerica' | 'southAmerica' | 'australia';
+  countries: readonly NordicCountryCode[];
+}>;
+
 function city(
   country: NordicCountryCode,
   slug: string,
@@ -321,6 +367,8 @@ const AU_REGIONS: NordicLocation[] = [
   region('au', 'western-australia', 'Western Australia'),
   region('au', 'south-australia', 'South Australia'),
   region('au', 'tasmania', 'Tasmania'),
+  region('au', 'australian-capital-territory', 'Australian Capital Territory'),
+  region('au', 'northern-territory', 'Northern Territory'),
 ];
 
 const AU_CITIES: NordicLocation[] = [
@@ -332,6 +380,8 @@ const AU_CITIES: NordicLocation[] = [
   city('au', 'perth', 'Perth', 'western-australia'),
   city('au', 'adelaide', 'Adelaide', 'south-australia'),
   city('au', 'hobart', 'Hobart', 'tasmania'),
+  city('au', 'canberra', 'Canberra', 'australian-capital-territory'),
+  city('au', 'darwin', 'Darwin', 'northern-territory'),
 ];
 
 const GB_REGIONS: NordicLocation[] = [

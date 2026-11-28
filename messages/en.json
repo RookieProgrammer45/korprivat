@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guides on published car prices, inspection prices, parking prices, and the Swedish licence steps."
+      "description": "Guides for people moving who are getting a driving licence, owning a car, or working with a car. A price appears only when the publisher wrote it."
     },
     "header": {
       "eyebrow": "Blog",
-      "title": "Driving in Sweden, in plain English.",
-      "subtitle": "Short guides for people learning on Swedish roads. We cover Transportstyrelsen steps, school comparison, local requirements and clear SEK prices."
+      "title": "Moving: a licence and a car",
+      "subtitle": "For people getting a driving licence, owning a car, or working with a car after a move. A price appears only when the publisher wrote it."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Read guide"
       },
       "4": {
-        "eyebrow": "Category B",
+        "eyebrow": "Licence",
         "title": "Swedish category B licence: from learner permit to the driving test",
         "excerpt": "Learner permit, risk education, theory test and driving test — and how to compare a school's published lesson price.",
         "meta": "{minutes} min read · 26 October 2026",
         "readCta": "Read guide"
       },
       "0": {
-        "eyebrow": "Article · Stockholm expats",
+        "eyebrow": "Licence",
         "title": "How to get a Swedish driver's license as an expat in Stockholm",
         "excerpt": "Transportstyrelsen steps, realistic price planning, and how to compare driving-school listings in Stockholm.",
         "readCta": "Read article",
         "meta": "{minutes} min read · Updated August 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Licence",
         "title": "Handledare and supervised practice in Sweden",
         "excerpt": "How 16–17-year-olds complete handledare enrollment for private practice driving.",
         "meta": "{minutes} min read",
         "readCta": "Read guide"
       },
       "2": {
-        "eyebrow": "Costs",
+        "eyebrow": "Licence",
         "title": "What does a Swedish driving licence cost?",
         "excerpt": "How lesson prices work, and why DriveLinkUp shows school prices without a learner fee.",
         "meta": "{minutes} min read",
         "readCta": "Read guide"
       },
       "3": {
-        "eyebrow": "Paths",
+        "eyebrow": "Licence",
         "title": "Traffic school or handledare?",
         "excerpt": "When a listed driving school fits, and when private övningskörning with a handledare applies.",
         "meta": "{minutes} min read",
         "readCta": "Read guide"
       },
       "12": {
-        "eyebrow": "Car prices",
+        "eyebrow": "Own a car",
         "title": "Compare published car prices",
         "excerpt": "An advertised price, a from-price and an MSRP are three different amounts. Compare them only inside one currency.",
         "meta": "{minutes} min read · 27 November 2026",
         "readCta": "Read guide"
       },
       "13": {
-        "eyebrow": "Inspection",
+        "eyebrow": "Own a car",
         "title": "What a published inspection price means",
         "excerpt": "A from-price, a fixed price and a legal maximum are different. A country appears when the station or the statute published an amount.",
         "meta": "{minutes} min read · 27 November 2026",
         "readCta": "Read guide"
       },
       "14": {
-        "eyebrow": "Parking",
+        "eyebrow": "Own a car",
         "title": "Compare parking prices in a city",
         "excerpt": "The hour applies to a named place. The sign at the place decides. DriveLinkUp does not reserve the spot.",
         "meta": "{minutes} min read · 27 November 2026",
+        "readCta": "Read guide"
+      },
+      "15": {
+        "eyebrow": "Work with a car",
+        "title": "Working with a car after you move",
+        "excerpt": "A car licence is not a taxi licence. A course or test fee appears only when the school or the authority published it. Workshop parts use the shop’s price.",
+        "meta": "{minutes} min read · 28 November 2026",
         "readCta": "Read guide"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "School",
     "compareLesson": "Lesson",
     "compareLength": "Length",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europe",
+      "northAmerica": "North America",
+      "southAmerica": "South America",
+      "australia": "Australia"
+    }
   },
   "termsPage": {
     "meta": {

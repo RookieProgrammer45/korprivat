@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Poradniki o opublikowanych cenach aut, przeglądów i parkowania oraz o krokach do szwedzkiego prawa jazdy."
+      "description": "Przewodniki dla osoby, która się przeprowadza i zdaje na prawo jazdy, ma samochód albo pracuje z samochodem. Cena pojawia się tylko wtedy, gdy wydawca ją napisał."
     },
     "header": {
       "eyebrow": "Blog",
-      "title": "Jazda w Szwecji, jasnym językiem.",
-      "subtitle": "Krótkie poradniki dla osób uczących się na szwedzkich drogach. Opisujemy kroki w Transportstyrelsen, porównywanie szkół, lokalne wymagania i czytelne ceny w SEK."
+      "title": "Przeprowadzka: prawo jazdy i samochód",
+      "subtitle": "Dla osoby, która po przeprowadzce zdaje na prawo jazdy, ma samochód albo pracuje z samochodem. Cena pojawia się tylko wtedy, gdy wydawca ją napisał."
     },
     "posts": {
       "11": {
@@ -304,60 +304,67 @@
         "readCta": "Czytaj poradnik"
       },
       "4": {
-        "eyebrow": "Kategoria B",
+        "eyebrow": "Prawo jazdy",
         "title": "Szwedzkie prawo jazdy kat. B: od pozwolenia na naukę jazdy do egzaminu praktycznego",
         "excerpt": "Pozwolenie na naukę jazdy, szkolenie z ryzyka, egzamin teoretyczny i praktyczny — oraz jak porównać opublikowaną cenę lekcji szkoły.",
         "meta": "{minutes} min czytania · 26 października 2026",
         "readCta": "Czytaj poradnik"
       },
       "0": {
-        "eyebrow": "Artykuł · Ekspaci w Stockholm",
+        "eyebrow": "Prawo jazdy",
         "title": "Jak uzyskać szwedzkie prawo jazdy jako ekspat w Stockholm",
         "excerpt": "Kroki w Transportstyrelsen, realistyczne planowanie kosztów i porównywanie wpisów szkół jazdy w Stockholm.",
         "readCta": "Czytaj artykuł",
         "meta": "{minutes} min czytania · Aktualizacja: sierpień 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Prawo jazdy",
         "title": "Handledare i jazda ćwiczebna pod nadzorem w Szwecji",
         "excerpt": "Jak 16–17-latkowie przechodzą rejestrację handledare do prywatnej övningskörning.",
         "meta": "{minutes} min czytania",
         "readCta": "Czytaj poradnik"
       },
       "2": {
-        "eyebrow": "Koszty",
+        "eyebrow": "Prawo jazdy",
         "title": "Ile kosztuje szwedzkie prawo jazdy?",
         "excerpt": "Jak działają ceny lekcji i dlaczego DriveLinkUp pokazuje ceny szkół bez opłaty dla kursanta.",
         "meta": "{minutes} min czytania",
         "readCta": "Czytaj poradnik"
       },
       "3": {
-        "eyebrow": "Ścieżki",
+        "eyebrow": "Prawo jazdy",
         "title": "Szkoła jazdy czy handledare?",
         "excerpt": "Kiedy pasuje szkoła z katalogu, a kiedy obowiązuje prywatna övningskörning z handledare.",
         "meta": "{minutes} min czytania",
         "readCta": "Czytaj poradnik"
       },
       "12": {
-        "eyebrow": "Ceny aut",
+        "eyebrow": "Mieć samochód",
         "title": "Porównaj opublikowane ceny aut",
         "excerpt": "Cena z ogłoszenia, cena od i MSRP to trzy różne kwoty. Porównuj je tylko w tej samej walucie.",
         "meta": "{minutes} min czytania · 27 listopada 2026",
         "readCta": "Czytaj poradnik"
       },
       "13": {
-        "eyebrow": "Przegląd",
+        "eyebrow": "Mieć samochód",
         "title": "Co oznacza opublikowana cena przeglądu",
         "excerpt": "Cena od, cena stała i ustawowy limit to różne kwoty. Kraj pojawia się, gdy stacja lub przepis podały kwotę.",
         "meta": "{minutes} min czytania · 27 listopada 2026",
         "readCta": "Czytaj poradnik"
       },
       "14": {
-        "eyebrow": "Parkowanie",
+        "eyebrow": "Mieć samochód",
         "title": "Porównaj cenę parkowania w mieście",
         "excerpt": "Stawka godzinowa dotyczy nazwanego miejsca. Znak na miejscu rozstrzyga. DriveLinkUp nie rezerwuje miejsca.",
         "meta": "{minutes} min czytania · 27 listopada 2026",
         "readCta": "Czytaj poradnik"
+      },
+      "15": {
+        "eyebrow": "Praca z samochodem",
+        "title": "Praca z samochodem po przeprowadzce",
+        "excerpt": "Zwykłe prawo jazdy nie jest licencją taxi. Cena kursu albo egzaminu pojawia się tylko wtedy, gdy szkoła albo urząd ją opublikowały. Części pokazują cenę sklepu.",
+        "meta": "{minutes} min czytania · 28 listopada 2026",
+        "readCta": "Czytaj przewodnik"
       }
     }
   },
@@ -3739,7 +3746,13 @@
     "compareSchool": "Szkoła",
     "compareLesson": "Lekcja",
     "compareLength": "Czas",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europa",
+      "northAmerica": "Ameryka Północna",
+      "southAmerica": "Ameryka Południowa",
+      "australia": "Australia"
+    }
   },
   "termsPage": {
     "meta": {

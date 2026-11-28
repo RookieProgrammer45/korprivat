@@ -114,6 +114,18 @@ const BR_REGION_TO_SLUG: Record<string, string> = {
   TO: 'tocantins',
 };
 
+/** Australian state and territory codes → catalogue region slug. */
+const AU_REGION_TO_SLUG: Record<string, string> = {
+  NSW: 'new-south-wales',
+  VIC: 'victoria',
+  QLD: 'queensland',
+  WA: 'western-australia',
+  SA: 'south-australia',
+  TAS: 'tasmania',
+  ACT: 'australian-capital-territory',
+  NT: 'northern-territory',
+};
+
 export type VisitorCatalogueRegion = {
   countryCode: string;
   regionSlug: string | null;
@@ -133,6 +145,8 @@ export function visitorCatalogueRegionFromHeaders(
     regionSlug = CA_REGION_TO_SLUG[regionRaw] ?? null;
   } else if (countryCode === 'br' && regionRaw) {
     regionSlug = BR_REGION_TO_SLUG[regionRaw] ?? null;
+  } else if (countryCode === 'au' && regionRaw) {
+    regionSlug = AU_REGION_TO_SLUG[regionRaw] ?? null;
   }
 
   return { countryCode, regionSlug };

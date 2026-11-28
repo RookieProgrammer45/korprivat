@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Gidsen over gepubliceerde autoprijzen, keuringsprijzen, parkeertarieven en de stappen naar een Zweeds rijbewijs."
+      "description": "Gidsen voor wie verhuist en een rijbewijs haalt, een auto heeft of met een auto werkt. Een prijs staat er alleen als de uitgever die zelf schreef."
     },
     "header": {
       "eyebrow": "Blog",
-      "title": "Rijden in Zweden, in duidelijke taal.",
-      "subtitle": "Korte gidsen voor wie leert rijden op Zweedse wegen. We behandelen stappen bij Transportstyrelsen, rijschoolvergelijking, lokale eisen en duidelijke SEK-prijzen."
+      "title": "Verhuizen: rijbewijs en auto",
+      "subtitle": "Voor wie na een verhuizing een rijbewijs haalt, een auto heeft of met een auto werkt. Een prijs staat er alleen als de uitgever die zelf schreef."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Lees de gids"
       },
       "4": {
-        "eyebrow": "Categorie B",
+        "eyebrow": "Rijbewijs",
         "title": "Zweeds rijbewijs categorie B: van leerlingvergunning tot praktijkexamen",
         "excerpt": "Leerlingvergunning, risico-opleiding, theorie-examen en praktijkexamen — en hoe je de gepubliceerde lesprijs van een rijschool vergelijkt.",
         "meta": "{minutes} min lezen · 26 oktober 2026",
         "readCta": "Lees de gids"
       },
       "0": {
-        "eyebrow": "Artikel · Expats in Stockholm",
+        "eyebrow": "Rijbewijs",
         "title": "Zo haal je als expat in Stockholm een Zweeds rijbewijs",
         "excerpt": "Stappen bij Transportstyrelsen, realistische prijsplanning en hoe je rijschoolvermeldingen in Stockholm vergelijkt.",
         "readCta": "Lees het artikel",
         "meta": "{minutes} min lezen · Bijgewerkt augustus 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Rijbewijs",
         "title": "Handledare en begeleide oefenritten in Zweden",
         "excerpt": "Hoe 16–17-jarigen de handledare-inschrijving afronden voor privé oefenritten.",
         "meta": "{minutes} min lezen",
         "readCta": "Lees de gids"
       },
       "2": {
-        "eyebrow": "Kosten",
+        "eyebrow": "Rijbewijs",
         "title": "Wat kost een Zweeds rijbewijs?",
         "excerpt": "Hoe lesprijzen werken, en waarom DriveLinkUp rijschoolprijzen toont zonder leerlingtarief.",
         "meta": "{minutes} min lezen",
         "readCta": "Lees de gids"
       },
       "3": {
-        "eyebrow": "Trajecten",
+        "eyebrow": "Rijbewijs",
         "title": "Rijschool of handledare?",
         "excerpt": "Wanneer een vermelde rijschool past, en wanneer privé övningskörning met een handledare geldt.",
         "meta": "{minutes} min lezen",
         "readCta": "Lees de gids"
       },
       "12": {
-        "eyebrow": "Autoprijzen",
+        "eyebrow": "Een auto hebben",
         "title": "Vergelijk gepubliceerde autoprijzen",
         "excerpt": "Een advertentieprijs, een vanaf-prijs en een MSRP zijn drie verschillende bedragen. Vergelijk alleen binnen dezelfde valuta.",
         "meta": "{minutes} min lezen · 27 november 2026",
         "readCta": "Lees de gids"
       },
       "13": {
-        "eyebrow": "Keuring",
+        "eyebrow": "Een auto hebben",
         "title": "Wat een gepubliceerde keuringsprijs betekent",
         "excerpt": "Een vanaf-prijs, een vaste prijs en een wettelijk maximum zijn verschillend. Een land verschijnt wanneer het station of het voorschrift een bedrag publiceerde.",
         "meta": "{minutes} min lezen · 27 november 2026",
         "readCta": "Lees de gids"
       },
       "14": {
-        "eyebrow": "Parkeren",
+        "eyebrow": "Een auto hebben",
         "title": "Vergelijk parkeertarieven in een stad",
         "excerpt": "Het uurtarief geldt voor een genoemde plek. Het bord ter plaatse beslist. DriveLinkUp reserveert de plek niet.",
         "meta": "{minutes} min lezen · 27 november 2026",
+        "readCta": "Lees de gids"
+      },
+      "15": {
+        "eyebrow": "Werken met een auto",
+        "title": "Werken met een auto na een verhuizing",
+        "excerpt": "Een gewoon rijbewijs is geen taxivergunning. Een cursus- of examengeld staat er alleen als de school of de instantie het publiceerde. Onderdelen tonen de prijs van de winkel.",
+        "meta": "{minutes} min lezen · 28 november 2026",
         "readCta": "Lees de gids"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "School",
     "compareLesson": "Rijles",
     "compareLength": "Duur",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europa",
+      "northAmerica": "Noord-Amerika",
+      "southAmerica": "Zuid-Amerika",
+      "australia": "Australië"
+    }
   },
   "termsPage": {
     "meta": {

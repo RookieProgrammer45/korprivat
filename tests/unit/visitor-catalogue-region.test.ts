@@ -33,6 +33,15 @@ describe('visitorCatalogueRegionFromHeaders', () => {
     expect(region).toEqual({ countryCode: 'br', regionSlug: 'sao-paulo' });
   });
 
+  it('maps an Australian visitor to the state on the Australian continent', () => {
+    const region = visitorCatalogueRegionFromHeaders((name) => {
+      if (name === 'x-vercel-ip-country') return 'AU';
+      if (name === 'x-vercel-ip-country-region') return 'NSW';
+      return null;
+    });
+    expect(region).toEqual({ countryCode: 'au', regionSlug: 'new-south-wales' });
+  });
+
   it('defaults to Sweden when geo headers are missing', () => {
     expect(visitorCatalogueRegionFromHeaders(() => null)).toEqual({
       countryCode: 'se',

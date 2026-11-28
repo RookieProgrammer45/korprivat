@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blogg",
-      "description": "Guider om publicerade bilpriser, besiktningspriser, parkeringspriser och stegen till svenskt körkort."
+      "description": "Guider för den som flyttar och ska ta körkort, äga en bil eller arbeta med en bil. Ett pris visas bara när utgivaren skrivit det."
     },
     "header": {
       "eyebrow": "Blogg",
-      "title": "Att köra i Sverige, på riktigt klarspråk.",
-      "subtitle": "Korta guider för dig som lär dig köra på svenska vägar. Vi tar upp Transportstyrelsens steg, skoljämförelse, lokala krav och tydliga priser i SEK."
+      "title": "Flytta: körkort och bil",
+      "subtitle": "För den som ska ta körkort, äga en bil eller arbeta med en bil efter en flytt. Ett pris visas bara när utgivaren skrivit det."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Läs guiden"
       },
       "4": {
-        "eyebrow": "Körkort B",
+        "eyebrow": "Körkort",
         "title": "Körkort B i Sverige: stegen från körkortstillstånd till uppkörning",
         "excerpt": "Körkortstillstånd, riskutbildning, kunskapsprov och körprov — och hur du jämför trafikskolors publicerade priser.",
         "meta": "{minutes} min läsning · 26 oktober 2026",
         "readCta": "Läs guiden"
       },
       "0": {
-        "eyebrow": "Artikel · Stockholmsexpater",
+        "eyebrow": "Körkort",
         "title": "Så skaffar du svenskt körkort som expat i Stockholm",
         "excerpt": "Transportstyrelsens steg, realistisk prisplanering och hur du jämför trafikskolor i katalogen i Stockholm.",
         "readCta": "Läs artikeln",
         "meta": "{minutes} min läsning · Uppdaterad augusti 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Körkort",
         "title": "Handledare och övningskörning i Sverige",
         "excerpt": "Så kompletterar 16–17-åringar handledarskap för privat övningskörning.",
         "meta": "{minutes} min läsning",
         "readCta": "Läs guiden"
       },
       "2": {
-        "eyebrow": "Kostnad",
+        "eyebrow": "Körkort",
         "title": "Vad kostar körkortet i Sverige?",
         "excerpt": "Hur lektionspriser fungerar och varför DriveLinkUp visar skolans pris utan elevavgift.",
         "meta": "{minutes} min läsning",
         "readCta": "Läs guiden"
       },
       "3": {
-        "eyebrow": "Val",
+        "eyebrow": "Körkort",
         "title": "Trafikskola eller handledare?",
         "excerpt": "När en trafikskola i katalogen passar, och när privat övningskörning med handledare gäller.",
         "meta": "{minutes} min läsning",
         "readCta": "Läs guiden"
       },
       "12": {
-        "eyebrow": "Bilpriser",
+        "eyebrow": "Äga en bil",
         "title": "Jämför publicerade bilpriser",
         "excerpt": "Ett annonserat pris, ett frånpris och ett MSRP är tre olika belopp. Jämför bara inom samma valuta.",
         "meta": "{minutes} min läsning · 27 november 2026",
         "readCta": "Läs guiden"
       },
       "13": {
-        "eyebrow": "Besiktning",
+        "eyebrow": "Äga en bil",
         "title": "Vad ett publicerat besiktningspris betyder",
         "excerpt": "Frånpris, fast pris och lagstadgat tak är olika. Landet syns när stationen eller lagen publicerat ett belopp.",
         "meta": "{minutes} min läsning · 27 november 2026",
         "readCta": "Läs guiden"
       },
       "14": {
-        "eyebrow": "Parkering",
+        "eyebrow": "Äga en bil",
         "title": "Jämför parkeringspris i en stad",
         "excerpt": "Timpriset gäller en namngiven plats. Skylten på platsen avgör. DriveLinkUp reserverar inte platsen.",
         "meta": "{minutes} min läsning · 27 november 2026",
+        "readCta": "Läs guiden"
+      },
+      "15": {
+        "eyebrow": "Arbeta med bil",
+        "title": "Arbeta med bil efter en flytt",
+        "excerpt": "Ett personbilskort är inte ett taxitillstånd. Ett kurs- eller provpris visas bara när skolan eller myndigheten publicerade det. Reservdelar visar butikens pris.",
+        "meta": "{minutes} min läsning · 28 november 2026",
         "readCta": "Läs guiden"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "Skola",
     "compareLesson": "Körlektion",
     "compareLength": "Längd",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europa",
+      "northAmerica": "Nordamerika",
+      "southAmerica": "Sydamerika",
+      "australia": "Australien"
+    }
   },
   "termsPage": {
     "meta": {

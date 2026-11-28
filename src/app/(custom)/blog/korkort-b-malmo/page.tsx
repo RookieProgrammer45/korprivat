@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ExpatMoverGuide } from '@/components/custom/expat-mover-guide';
 import { Button } from '@/components/ui/button';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
@@ -82,6 +83,7 @@ export default function KorkortBMalmoPage() {
           <p className="text-body-lg text-muted-foreground">{DESCRIPTION}</p>
           <p className="text-small text-muted-foreground">Av {siteName} · 16 november 2026</p>
         </header>
+        <ExpatMoverGuide lang="sv" />
         <div className="surface-panel grid gap-8 rounded-xl border border-border p-6 text-body leading-relaxed sm:p-10">
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { absoluteUrl, publicAlternatesFor } from '@/lib/seo/alternates';
 import { localePath } from '@/lib/seo/locale-path';
-import { countryPath, NORDIC_COUNTRIES, NORDIC_COUNTRY_META } from '@/lib/seo/nordic-locations';
+import { CATALOGUE_CONTINENTS, countryPath, NORDIC_COUNTRY_META } from '@/lib/seo/nordic-locations';
 import { siteName } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
@@ -37,22 +37,31 @@ export default async function LocationsIndexPage() {
         <h1 className="font-display text-h1 leading-tight tracking-tight">{t('indexTitle')}</h1>
         <p className="text-body-lg text-muted-foreground">{t('indexSubtitle')}</p>
       </header>
-      <ul className="mx-auto mt-10 grid max-w-3xl gap-4">
-        {NORDIC_COUNTRIES.map((code) => {
-          const meta = NORDIC_COUNTRY_META[code];
-          return (
-            <li key={code}>
-              <Link
-                href={localePath(locale, countryPath(code))}
-                className="surface-card block rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <p className="font-display text-h3">{meta.nameLocal}</p>
-                <p className="mt-1 text-body text-muted-foreground">{meta.name}</p>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="mx-auto mt-10 grid max-w-3xl gap-10">
+        {CATALOGUE_CONTINENTS.map((continent) => (
+          <section key={continent.id} className="grid gap-4">
+            <h2 className="font-display text-h2 leading-tight">
+              {t(`continents.${continent.id}`)}
+            </h2>
+            <ul className="grid gap-4">
+              {continent.countries.map((code) => {
+                const meta = NORDIC_COUNTRY_META[code];
+                return (
+                  <li key={code}>
+                    <Link
+                      href={localePath(locale, countryPath(code))}
+                      className="surface-card block rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
+                    >
+                      <p className="font-display text-h3">{meta.nameLocal}</p>
+                      <p className="mt-1 text-body text-muted-foreground">{meta.name}</p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
+      </div>
     </main>
   );
 }

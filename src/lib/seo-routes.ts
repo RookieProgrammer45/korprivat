@@ -14,6 +14,12 @@ export type SeoRoute = { path: string } & Omit<MetadataRoute.Sitemap[number], 'u
 
 const EDITORIAL: SeoRoute[] = [
   {
+    path: '/blog/jobba-med-bil',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+    lastModified: '2026-11-28',
+  },
+  {
     path: '/blog/jamfor-bilpriser',
     priority: 0.75,
     changeFrequency: 'monthly',
@@ -30,42 +36,6 @@ const EDITORIAL: SeoRoute[] = [
     priority: 0.75,
     changeFrequency: 'monthly',
     lastModified: '2026-11-27',
-  },
-  {
-    path: '/blog/korkort-b-malmo',
-    priority: 0.75,
-    changeFrequency: 'monthly',
-    lastModified: '2026-11-16',
-  },
-  {
-    path: '/blog/korkort-b-goteborg',
-    priority: 0.75,
-    changeFrequency: 'monthly',
-    lastModified: '2026-11-11',
-  },
-  {
-    path: '/blog/korlektion-korkort-b',
-    priority: 0.75,
-    changeFrequency: 'monthly',
-    lastModified: '2026-11-09',
-  },
-  {
-    path: '/blog/korkortstillstand-korkort-b',
-    priority: 0.75,
-    changeFrequency: 'monthly',
-    lastModified: '2026-11-04',
-  },
-  {
-    path: '/blog/riskutbildning-korkort-b',
-    priority: 0.75,
-    changeFrequency: 'monthly',
-    lastModified: '2026-11-02',
-  },
-  {
-    path: '/blog/korprov-korkort-b',
-    priority: 0.75,
-    changeFrequency: 'monthly',
-    lastModified: '2026-10-28',
   },
   { path: '/southern-sweden', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/western-northern-sweden', priority: 0.8, changeFrequency: 'weekly' },
@@ -84,12 +54,6 @@ const EDITORIAL: SeoRoute[] = [
   { path: '/om-oss', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.6, changeFrequency: 'weekly' },
-  {
-    path: '/blog/kunskapsprov-korkort-b',
-    priority: 0.75,
-    changeFrequency: 'monthly',
-    lastModified: '2026-10-26',
-  },
   {
     path: '/blog/korkort-b-steg-for-steg',
     priority: 0.75,

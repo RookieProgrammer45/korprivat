@@ -68,29 +68,17 @@ export const llmsConfig: LlmsConfig = {
     '/handledare':
       'A Swedish explainer for private handledare and övningskörning. Handledare are distinct from driving schools and are not marketplace school listings.',
     '/blog':
-      'Guides for learners: published car prices, inspection prices, parking prices, category B in Malmö and Gothenburg, driving lessons, the learner permit, risk education, the driving test, theory test, costs, handledare, and choosing a traffic school in Sweden.',
+      'Guides for people moving to Europe, the United Kingdom, the United States, South America or Australia who are getting a driving licence, owning a car, or working with a car. A price appears only when the publisher wrote it.',
+    '/blog/jobba-med-bil':
+      'A car licence is not a taxi licence. A taxi course or official test fee is listed only when the school or the authority published the amount. Workshop parts use the shop’s published price.',
     '/blog/jamfor-bilpriser':
       'Swedish guide to a published car price: the dealer or manufacturer amount, a from-price as a floor, MSRP as the advertised starting price, and why currencies stay in separate groups.',
     '/blog/vad-kostar-besiktning':
       'Swedish guide to a published inspection price: from, fixed and statutory maximum, with the Opus car inspection and the UK MOT maximum read on 27 November 2026. DriveLinkUp does not book the inspection.',
     '/blog/jamfor-parkeringspris':
       'Swedish guide to comparing a published parking hour for a named place. Stockholm figures read on 27 November 2026. The sign at the place decides. DriveLinkUp does not reserve the spot.',
-    '/blog/korkort-b-malmo':
-      'Swedish guide to category B in Malmö: learner permit, traffic-school lessons, risk education, Trafikverket theory and driving tests at Cederströmsgatan 1, foreign-licence readers, and published school prices.',
-    '/blog/korkort-b-goteborg':
-      'Swedish guide to category B in Gothenburg: learner permit, traffic-school lessons, risk education, Trafikverket theory and driving tests at Hisingen, Högsbo and Partille, foreign-licence readers, and published school prices.',
-    '/blog/korlektion-korkort-b':
-      'Swedish guide to a category B driving lesson: learner permit, a traffic-school permit versus a catalog listing, published prices in Stockholm, Gothenburg, Malmö and Lund, and readers who already drive in another country.',
-    '/blog/korkortstillstand-korkort-b':
-      'Swedish guide to the category B learner permit: group 1 application, vision certificate, five-year validity, foreign-licence readers, and published school prices.',
-    '/blog/riskutbildning-korkort-b':
-      'Swedish guide to mandatory category B risk education: riskettan, skidpad (halkbana), validity before the theory and driving tests, foreign-licence readers, and published school prices.',
-    '/blog/korprov-korkort-b':
-      'Swedish guide to the category B driving test at Trafikverket: learner permit, risk education, theory-test validity, safety check, and published school prices.',
     '/blog/korkort-b-steg-for-steg':
-      'Swedish guide to category B: learner permit, risk education, theory test, driving test, and how to compare published school prices.',
-    '/blog/kunskapsprov-korkort-b':
-      'Swedish guide to the category B theory test at Trafikverket: learner permit, risk education, scoring, validity, and published school prices.',
+      'Swedish guide to category B for someone moving: learner permit, risk education, theory test, driving test, and how to compare published school prices.',
     '/om-oss':
       'About DriveLinkUp: a catalog of driving schools. Published prices are visible on the listing. Founded in Stockholm in 2026.',
     '/terms': 'Terms of service: directory listings, school-arranged payment, and account rules.',

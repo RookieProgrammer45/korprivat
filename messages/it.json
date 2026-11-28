@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guide sui prezzi pubblicati di auto, revisioni e parcheggi, e sui passi della patente svedese."
+      "description": "Guide per chi si trasferisce e prende la patente, ha un’auto o lavora con un’auto. Un prezzo compare solo se chi lo pubblica lo ha scritto."
     },
     "header": {
       "eyebrow": "Blog",
-      "title": "Guidare in Svezia, in linguaggio chiaro.",
-      "subtitle": "Guide brevi per chi impara sulle strade svedesi. Trattiamo i passi di Transportstyrelsen, il confronto tra scuole, i requisiti locali e prezzi chiari in SEK."
+      "title": "Trasferimento: patente e auto",
+      "subtitle": "Per chi prende la patente, ha un’auto o lavora con un’auto dopo un trasferimento. Un prezzo compare solo se chi lo pubblica lo ha scritto."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Leggi la guida"
       },
       "4": {
-        "eyebrow": "Categoria B",
+        "eyebrow": "Patente",
         "title": "Patente svedese categoria B: dal permesso allievo all'esame di guida",
         "excerpt": "Permesso allievo, formazione sui rischi, esame di teoria ed esame di guida — e come confrontare il prezzo della lezione pubblicato da una scuola.",
         "meta": "{minutes} min di lettura · 26 ottobre 2026",
         "readCta": "Leggi la guida"
       },
       "0": {
-        "eyebrow": "Articolo · Expat a Stockholm",
+        "eyebrow": "Patente",
         "title": "Come ottenere la patente svedese da expat a Stockholm",
         "excerpt": "Passi di Transportstyrelsen, pianificazione realistica dei costi e come confrontare le schede delle autoscuole a Stockholm.",
         "readCta": "Leggi l'articolo",
         "meta": "{minutes} min di lettura · Aggiornato agosto 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Patente",
         "title": "Handledare e pratica supervisionata in Svezia",
         "excerpt": "Come i 16–17enni completano l'iscrizione handledare per la pratica di guida privata.",
         "meta": "{minutes} min di lettura",
         "readCta": "Leggi la guida"
       },
       "2": {
-        "eyebrow": "Costi",
+        "eyebrow": "Patente",
         "title": "Quanto costa una patente svedese?",
         "excerpt": "Come funzionano i prezzi delle lezioni e perché DriveLinkUp mostra i prezzi delle scuole senza un costo per l'allievo.",
         "meta": "{minutes} min di lettura",
         "readCta": "Leggi la guida"
       },
       "3": {
-        "eyebrow": "Percorsi",
+        "eyebrow": "Patente",
         "title": "Autoscuola o handledare?",
         "excerpt": "Quando conviene un'autoscuola in elenco e quando si applica l'övningskörning privata con un handledare.",
         "meta": "{minutes} min di lettura",
         "readCta": "Leggi la guida"
       },
       "12": {
-        "eyebrow": "Prezzi auto",
+        "eyebrow": "Avere un’auto",
         "title": "Confronta i prezzi auto pubblicati",
         "excerpt": "Un prezzo annunciato, un prezzo a partire da e un MSRP sono tre importi diversi. Confrontali solo nella stessa valuta.",
         "meta": "{minutes} min di lettura · 27 novembre 2026",
         "readCta": "Leggi la guida"
       },
       "13": {
-        "eyebrow": "Revisione",
+        "eyebrow": "Avere un’auto",
         "title": "Cosa significa un prezzo di revisione pubblicato",
         "excerpt": "Un prezzo a partire da, un prezzo fisso e un tetto di legge sono diversi. Un paese compare quando la stazione o la norma ha pubblicato un importo.",
         "meta": "{minutes} min di lettura · 27 novembre 2026",
         "readCta": "Leggi la guida"
       },
       "14": {
-        "eyebrow": "Parcheggio",
+        "eyebrow": "Avere un’auto",
         "title": "Confronta il prezzo del parcheggio in una città",
         "excerpt": "La tariffa oraria vale per un posto con nome. Il cartello sul posto decide. DriveLinkUp non prenota il posto.",
         "meta": "{minutes} min di lettura · 27 novembre 2026",
+        "readCta": "Leggi la guida"
+      },
+      "15": {
+        "eyebrow": "Lavorare con un’auto",
+        "title": "Lavorare con un’auto dopo un trasferimento",
+        "excerpt": "Una patente per auto non è un’autorizzazione taxi. Un prezzo di corso o di esame compare solo se la scuola o l’autorità lo ha pubblicato. I ricambi mostrano il prezzo del negozio.",
+        "meta": "{minutes} min di lettura · 28 novembre 2026",
         "readCta": "Leggi la guida"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "Scuola",
     "compareLesson": "Lezione",
     "compareLength": "Durata",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europa",
+      "northAmerica": "Nord America",
+      "southAmerica": "Sud America",
+      "australia": "Australia"
+    }
   },
   "termsPage": {
     "meta": {

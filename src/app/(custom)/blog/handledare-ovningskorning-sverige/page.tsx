@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ExpatMoverGuide } from '@/components/custom/expat-mover-guide';
 import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function HandledareBlogPost() {
         Privat övningskörning kräver en handledare som Transportstyrelsen har godkänt för just den
         eleven. Det är inte ett föräldramedgivande, och DriveLinkUp utfärdar inte godkännandet.
       </p>
+      <ExpatMoverGuide lang="sv" />
       <div className="grid gap-4 text-body text-foreground">
         <p>
           Eleven behöver ett giltigt körkortstillstånd. Personbil utan släp får övningsköras från 16

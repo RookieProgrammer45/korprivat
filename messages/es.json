@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guías sobre precios publicados de coches, de inspección, de aparcamiento y los pasos del permiso sueco."
+      "description": "Guías para quien se muda y saca el permiso, tiene un coche o trabaja con un coche. Un precio aparece solo cuando quien lo publica lo escribió."
     },
     "header": {
       "eyebrow": "Blog",
-      "title": "Conducir en Suecia, en lenguaje claro.",
-      "subtitle": "Guías breves para quien aprende a conducir en las carreteras suecas. Cubren los pasos de Transportstyrelsen, la comparación de autoescuelas, los requisitos locales y precios claros en SEK."
+      "title": "Mudanza: permiso y coche",
+      "subtitle": "Para quien saca el permiso, tiene un coche o trabaja con un coche después de mudarse. Un precio aparece solo cuando quien lo publica lo escribió."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Leer la guía"
       },
       "4": {
-        "eyebrow": "Categoría B",
+        "eyebrow": "Permiso",
         "title": "Permiso sueco de categoría B: del permiso de aprendizaje al examen práctico",
         "excerpt": "Permiso de aprendizaje, formación en riesgos, examen teórico y examen práctico, y cómo comparar el precio de clase publicado por una autoescuela.",
         "meta": "{minutes} min de lectura · 26 de octubre de 2026",
         "readCta": "Leer la guía"
       },
       "0": {
-        "eyebrow": "Artículo · Expatriados en Stockholm",
+        "eyebrow": "Permiso",
         "title": "Cómo obtener el permiso de conducir sueco si eres expatriado en Stockholm",
         "excerpt": "Pasos de Transportstyrelsen, planificación realista de costes y cómo comparar las fichas de autoescuelas en Stockholm.",
         "readCta": "Leer el artículo",
         "meta": "{minutes} min de lectura · Actualizado en agosto de 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Permiso",
         "title": "Handledare y práctica supervisada en Suecia",
         "excerpt": "Cómo los jóvenes de 16–17 años completan la inscripción handledare para la práctica privada de la conducción.",
         "meta": "{minutes} min de lectura",
         "readCta": "Leer la guía"
       },
       "2": {
-        "eyebrow": "Costes",
+        "eyebrow": "Permiso",
         "title": "¿Cuánto cuesta un permiso de conducir sueco?",
         "excerpt": "Cómo funcionan los precios de las clases y por qué DriveLinkUp muestra el precio de la autoescuela sin una tarifa para el alumno.",
         "meta": "{minutes} min de lectura",
         "readCta": "Leer la guía"
       },
       "3": {
-        "eyebrow": "Recorridos",
+        "eyebrow": "Permiso",
         "title": "¿Autoescuela o handledare?",
         "excerpt": "Cuándo encaja una autoescuela del catálogo y cuándo aplica la övningskörning privada con un handledare.",
         "meta": "{minutes} min de lectura",
         "readCta": "Leer la guía"
       },
       "12": {
-        "eyebrow": "Precios de coches",
+        "eyebrow": "Tener un coche",
         "title": "Compara precios de coches publicados",
         "excerpt": "Un precio anunciado, un precio desde y un MSRP son tres importes distintos. Compáralos solo dentro de la misma moneda.",
         "meta": "{minutes} min de lectura · 27 de noviembre de 2026",
         "readCta": "Leer la guía"
       },
       "13": {
-        "eyebrow": "Inspección",
+        "eyebrow": "Tener un coche",
         "title": "Qué significa un precio de inspección publicado",
         "excerpt": "Un precio desde, un precio fijo y un máximo legal son distintos. Un país aparece cuando la estación o la norma publicó un importe.",
         "meta": "{minutes} min de lectura · 27 de noviembre de 2026",
         "readCta": "Leer la guía"
       },
       "14": {
-        "eyebrow": "Aparcamiento",
+        "eyebrow": "Tener un coche",
         "title": "Compara el precio del aparcamiento en una ciudad",
         "excerpt": "La hora corresponde a un lugar con nombre. La señal en el sitio decide. DriveLinkUp no reserva la plaza.",
         "meta": "{minutes} min de lectura · 27 de noviembre de 2026",
+        "readCta": "Leer la guía"
+      },
+      "15": {
+        "eyebrow": "Trabajar con un coche",
+        "title": "Trabajar con un coche después de mudarse",
+        "excerpt": "Un permiso de coche no es una licencia de taxi. Un precio de curso o de examen aparece solo cuando la escuela o la autoridad lo publicó. Los recambios muestran el precio de la tienda.",
+        "meta": "{minutes} min de lectura · 28 de noviembre de 2026",
         "readCta": "Leer la guía"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "Autoescuela",
     "compareLesson": "Clase",
     "compareLength": "Duración",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europa",
+      "northAmerica": "Norteamérica",
+      "southAmerica": "Sudamérica",
+      "australia": "Australia"
+    }
   },
   "termsPage": {
     "meta": {

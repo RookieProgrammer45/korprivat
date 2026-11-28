@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Leitfäden zu veröffentlichten Autopreisen, Untersuchungspreisen, Parkpreisen und den Schritten zum schwedischen Führerschein."
+      "description": "Leitfäden für Menschen, die nach einem Umzug einen Führerschein machen, ein Auto halten oder mit einem Auto arbeiten. Ein Preis erscheint nur, wenn der Anbieter ihn geschrieben hat."
     },
     "header": {
       "eyebrow": "Blog",
-      "title": "Fahren in Schweden, in klarer Sprache.",
-      "subtitle": "Kurze Leitfäden für alle, die auf schwedischen Straßen lernen. Wir decken Schritte bei Transportstyrelsen, Schulvergleich, lokale Anforderungen und klare SEK-Preise ab."
+      "title": "Umzug: Führerschein und Auto",
+      "subtitle": "Für alle, die nach einem Umzug einen Führerschein machen, ein Auto halten oder mit einem Auto arbeiten. Ein Preis erscheint nur, wenn der Anbieter ihn geschrieben hat."
     },
     "posts": {
       "11": {
@@ -304,60 +304,67 @@
         "readCta": "Leitfaden lesen"
       },
       "4": {
-        "eyebrow": "Klasse B",
+        "eyebrow": "Führerschein",
         "title": "Schwedischer Führerschein Klasse B: vom Lernerlaubnisschein bis zur Fahrprüfung",
         "excerpt": "Lernerlaubnis, Risikoausbildung, Theorie- und Fahrprüfung — und wie Sie den veröffentlichten Fahrstundenpreis einer Schule vergleichen.",
         "meta": "{minutes} Min. Lesezeit · 26. Oktober 2026",
         "readCta": "Leitfaden lesen"
       },
       "0": {
-        "eyebrow": "Artikel · Expats in Stockholm",
+        "eyebrow": "Führerschein",
         "title": "So erhalten Sie als Expat in Stockholm einen schwedischen Führerschein",
         "excerpt": "Schritte bei Transportstyrelsen, realistische Preisplanung und wie Sie Fahrschuleinträge in Stockholm vergleichen.",
         "readCta": "Artikel lesen",
         "meta": "{minutes} Min. Lesezeit · Aktualisiert August 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Führerschein",
         "title": "Handledare und begleitetes Üben in Schweden",
         "excerpt": "Wie 16–17-Jährige die Handledare-Anmeldung für private övningskörning abschließen.",
         "meta": "{minutes} Min. Lesezeit",
         "readCta": "Leitfaden lesen"
       },
       "2": {
-        "eyebrow": "Kosten",
+        "eyebrow": "Führerschein",
         "title": "Was kostet ein schwedischer Führerschein?",
         "excerpt": "Wie Fahrstundenpreise funktionieren und warum DriveLinkUp Schulpreise ohne Lernendengebühr anzeigt.",
         "meta": "{minutes} Min. Lesezeit",
         "readCta": "Leitfaden lesen"
       },
       "3": {
-        "eyebrow": "Wege",
+        "eyebrow": "Führerschein",
         "title": "Fahrschule oder Handledare?",
         "excerpt": "Wann eine gelistete Fahrschule passt und wann private övningskörning mit einem Handledare gilt.",
         "meta": "{minutes} Min. Lesezeit",
         "readCta": "Leitfaden lesen"
       },
       "12": {
-        "eyebrow": "Autopreise",
+        "eyebrow": "Ein Auto halten",
         "title": "Veröffentlichte Autopreise vergleichen",
         "excerpt": "Inseratspreis, Ab-Preis und MSRP sind drei verschiedene Beträge. Vergleichen Sie nur innerhalb einer Währung.",
         "meta": "{minutes} Min. Lesezeit · 27. November 2026",
         "readCta": "Leitfaden lesen"
       },
       "13": {
-        "eyebrow": "Untersuchung",
+        "eyebrow": "Ein Auto halten",
         "title": "Was ein veröffentlichter Untersuchungspreis bedeutet",
         "excerpt": "Ab-Preis, Festpreis und gesetzliche Obergrenze sind verschieden. Ein Land erscheint, wenn die Station oder die Vorschrift einen Betrag veröffentlicht hat.",
         "meta": "{minutes} Min. Lesezeit · 27. November 2026",
         "readCta": "Leitfaden lesen"
       },
       "14": {
-        "eyebrow": "Parken",
+        "eyebrow": "Ein Auto halten",
         "title": "Parkpreise in einer Stadt vergleichen",
         "excerpt": "Der Stundenpreis gilt für einen benannten Platz. Das Schild vor Ort entscheidet. DriveLinkUp reserviert den Platz nicht.",
         "meta": "{minutes} Min. Lesezeit · 27. November 2026",
         "readCta": "Leitfaden lesen"
+      },
+      "15": {
+        "eyebrow": "Mit dem Auto arbeiten",
+        "title": "Mit dem Auto arbeiten nach einem Umzug",
+        "excerpt": "Ein Pkw-Führerschein ist keine Taxigenehmigung. Ein Kurs- oder Prüfungspreis erscheint nur, wenn die Schule oder die Behörde ihn veröffentlicht hat. Ersatzteile zeigen den Preis des Händlers.",
+        "meta": "{minutes} Min. Lesezeit · 28. November 2026",
+        "readCta": "Ratgeber lesen"
       }
     }
   },
@@ -3739,7 +3746,13 @@
     "compareSchool": "Schule",
     "compareLesson": "Fahrstunde",
     "compareLength": "Dauer",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europa",
+      "northAmerica": "Nordamerika",
+      "southAmerica": "Südamerika",
+      "australia": "Australien"
+    }
   },
   "termsPage": {
     "meta": {

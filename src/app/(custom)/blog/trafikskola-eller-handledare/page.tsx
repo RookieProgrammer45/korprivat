@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ExpatMoverGuide } from '@/components/custom/expat-mover-guide';
 import { absoluteUrl, swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
 
@@ -34,6 +35,7 @@ export default function TrafikskolaEllerHandledarePage() {
         Det är två olika produkter. Trafikskolor ger strukturerade lektioner. Handledare möjliggör
         privat övningskörning under Transportstyrelsens regler för handledare.
       </p>
+      <ExpatMoverGuide lang="sv" />
       <div className="grid gap-4 text-body text-foreground">
         <p>
           <strong>Trafikskola:</strong> jämför skolannonser i katalogen och se publicerat pris. En

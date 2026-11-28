@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blogi",
-      "description": "Oppaita julkaistuista auton hinnoista, katsastushinnoista, pysäköintihinnoista ja Ruotsin ajokortin vaiheista."
+      "description": "Oppaita muuttajalle, joka hankkii ajokortin, omistaa auton tai tekee töitä auton kanssa. Hinta näkyy vain, kun julkaisija on kirjoittanut sen."
     },
     "header": {
       "eyebrow": "Blogi",
-      "title": "Ajaminen Ruotsissa, selkeällä kielellä.",
-      "subtitle": "Lyhyitä oppaita ruotsalaisilla teillä opiskeleville. Käsittelemme Transportstyrelsenin vaiheet, koulujen vertailun, paikalliset vaatimukset ja selkeät SEK-hinnat."
+      "title": "Muutto: ajokortti ja auto",
+      "subtitle": "Sille, joka hankkii ajokortin, omistaa auton tai tekee töitä auton kanssa muuton jälkeen. Hinta näkyy vain, kun julkaisija on kirjoittanut sen."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Lue opas"
       },
       "4": {
-        "eyebrow": "Luokka B",
+        "eyebrow": "Ajokortti",
         "title": "Ruotsalainen B-luokan ajokortti: opetusluvasta ajokokeeseen",
         "excerpt": "Opetuslupa, riskikoulutus, teoriakoe ja ajokoe — ja miten vertailet autokoulun julkaisemaa tuntihintaa.",
         "meta": "{minutes} min lukuaika · 26. lokakuuta 2026",
         "readCta": "Lue opas"
       },
       "0": {
-        "eyebrow": "Artikkeli · Stockholmin ulkomaalaiset",
+        "eyebrow": "Ajokortti",
         "title": "Näin saat ruotsalaisen ajokortin ulkomailta muuttaneena Stockholmissa",
         "excerpt": "Transportstyrelsenin vaiheet, realistinen hintasuunnittelu ja miten vertailet autokouluilmoituksia Stockholmissa.",
         "readCta": "Lue artikkeli",
         "meta": "{minutes} min lukuaika · Päivitetty elokuussa 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Ajokortti",
         "title": "Handledare ja valvottu harjoittelu Ruotsissa",
         "excerpt": "Miten 16–17-vuotiaat hoitavat handledare-ilmoittautumisen yksityiseen harjoitteluajoon.",
         "meta": "{minutes} min lukuaika",
         "readCta": "Lue opas"
       },
       "2": {
-        "eyebrow": "Kustannukset",
+        "eyebrow": "Ajokortti",
         "title": "Paljonko ruotsalainen ajokortti maksaa?",
         "excerpt": "Miten tuntihinnat toimivat ja miksi DriveLinkUp näyttää koulun hinnat ilman oppilasmaksua.",
         "meta": "{minutes} min lukuaika",
         "readCta": "Lue opas"
       },
       "3": {
-        "eyebrow": "Polut",
+        "eyebrow": "Ajokortti",
         "title": "Autokoulu vai handledare?",
         "excerpt": "Milloin listattu autokoulu sopii, ja milloin yksityinen övningskörning handledaren kanssa tulee kyseeseen.",
         "meta": "{minutes} min lukuaika",
         "readCta": "Lue opas"
       },
       "12": {
-        "eyebrow": "Auton hinta",
+        "eyebrow": "Omistaa auto",
         "title": "Vertaile julkaistuja auton hintoja",
         "excerpt": "Ilmoitettu hinta, alkaen-hinta ja MSRP ovat eri summia. Vertaile vain samaa valuuttaa.",
         "meta": "{minutes} min lukuaika · 27. marraskuuta 2026",
         "readCta": "Lue opas"
       },
       "13": {
-        "eyebrow": "Katsastus",
+        "eyebrow": "Omistaa auto",
         "title": "Mitä julkaistu katsastushinta tarkoittaa",
         "excerpt": "Alkaen-hinta, kiinteä hinta ja lakisääteinen katto ovat eri asioita. Maa näkyy, kun asema tai säädös julkaisi summan.",
         "meta": "{minutes} min lukuaika · 27. marraskuuta 2026",
         "readCta": "Lue opas"
       },
       "14": {
-        "eyebrow": "Pysäköinti",
+        "eyebrow": "Omistaa auto",
         "title": "Vertaile pysäköintihintaa kaupungissa",
         "excerpt": "Tuntuhinta koskee nimettyä paikkaa. Paikan kyltti ratkaisee. DriveLinkUp ei varaa paikkaa.",
         "meta": "{minutes} min lukuaika · 27. marraskuuta 2026",
+        "readCta": "Lue opas"
+      },
+      "15": {
+        "eyebrow": "Työ auton kanssa",
+        "title": "Työskentely auton kanssa muuton jälkeen",
+        "excerpt": "Tavallinen ajokortti ei ole taksilupa. Kurssi- tai koemaksu näkyy vain, kun koulu tai viranomainen on julkaissut sen. Varaosat näyttävät kaupan hinnan.",
+        "meta": "{minutes} min lukuaika · 28. marraskuuta 2026",
         "readCta": "Lue opas"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "Koulu",
     "compareLesson": "Ajotunti",
     "compareLength": "Kesto",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Eurooppa",
+      "northAmerica": "Pohjois-Amerikka",
+      "southAmerica": "Etelä-Amerikka",
+      "australia": "Australia"
+    }
   },
   "termsPage": {
     "meta": {

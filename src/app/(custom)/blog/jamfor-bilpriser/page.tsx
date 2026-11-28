@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ExpatMoverGuide } from '@/components/custom/expat-mover-guide';
 import { Button } from '@/components/ui/button';
 import { absoluteUrl, publicAlternates } from '@/lib/seo/alternates';
 import { siteName } from '@/lib/site';
@@ -88,6 +89,7 @@ export default function JamforBilpriserPage() {
             tillverkarens annonserade utgångspris, inte priset återförsäljaren säljer bilen för.
           </p>
         </header>
+        <ExpatMoverGuide lang="sv" />
         <div className="grid gap-8 text-body text-foreground">
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">Vad visar kortet?</h2>

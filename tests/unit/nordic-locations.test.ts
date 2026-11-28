@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   allLocationSitemapPaths,
+  CATALOGUE_CONTINENTS,
   cityFilterCandidates,
   getLocation,
   listCitiesInRegion,
@@ -51,6 +52,19 @@ describe('nordic-locations registry', () => {
     ]);
     const keys = NORDIC_LOCATIONS.map((l) => `${l.country}/${l.slug}`);
     expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it('puts every catalogue country in one continent, including Australia', () => {
+    const assigned = CATALOGUE_CONTINENTS.flatMap((continent) => [...continent.countries]);
+    expect(new Set(assigned).size).toBe(assigned.length);
+    expect(assigned.slice().sort()).toEqual([...NORDIC_COUNTRIES].slice().sort());
+    const australia = CATALOGUE_CONTINENTS.find((continent) => continent.id === 'australia');
+    expect(australia?.countries).toEqual(['au']);
+    expect(getLocation('au', 'canberra')?.regionSlug).toBe('australian-capital-territory');
+    expect(getLocation('au', 'darwin')?.regionSlug).toBe('northern-territory');
+    expect(listCitiesInRegion('au', 'new-south-wales').map((city) => city.slug)).toContain(
+      'sydney',
+    );
   });
 
   it('keeps marketplaceLive only for Sweden locations', () => {

@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guider om offentliggjorte bilpriser, synspriser, parkeringspriser og trinnene til kørekort i Sverige."
+      "description": "Guider til den, der flytter og skal have kørekort, eje en bil eller arbejde med en bil. En pris vises kun, når udgiveren har skrevet den."
     },
     "header": {
       "eyebrow": "Blog",
-      "title": "At køre i Sverige, på klart sprog.",
-      "subtitle": "Korte guider for folk som lærer på svenske veier. Vi dekker Transportstyrelsen-trinn, skolesammenligning, lokale krav og klare SEK-priser."
+      "title": "Flytte: kørekort og bil",
+      "subtitle": "Til den, der skal have kørekort, eje en bil eller arbejde med en bil efter en flytning. En pris vises kun, når udgiveren har skrevet den."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Læs guide"
       },
       "4": {
-        "eyebrow": "Kategori B",
+        "eyebrow": "Kørekort",
         "title": "Svensk klasse B-sertifikat: fra elevtilladelse til køreprøven",
         "excerpt": "Elevtilladelse, risikoudannelse, teoriprøve og køreprøve – og hvordan man sammenligner en skoles offentliggjorte kurspris.",
         "meta": "{minutes} min lesing · 26. oktober 2026",
         "readCta": "Læs guide"
       },
       "0": {
-        "eyebrow": "Artikkel · Utvandrere fra Stockholm",
+        "eyebrow": "Kørekort",
         "title": "Hvordan få svensk kørekort som expat i Stockholm",
         "excerpt": "Transportstyrelsens trin, en realistisk prisplan og hvordan man sammenligner køreskoler i Stockholm.",
         "readCta": "Læs artikkelen",
         "meta": "{minutes} min lesing · Oppdatert august 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Kørekort",
         "title": "Handledare og vejledt øvelseskørsel i Sverige",
         "excerpt": "Hvordan 16–17-årige gennemfører handledare-tilmelding til privat övningskörning.",
         "meta": "{minutes} min lesing",
         "readCta": "Læs guide"
       },
       "2": {
-        "eyebrow": "Kostnader",
+        "eyebrow": "Kørekort",
         "title": "Hva koster et svensk kørekort?",
         "excerpt": "Hvordan undervisningspriser fungerer, og hvorfor DriveLinkUp viser skolepriser uden gebyr for kursisten.",
         "meta": "{minutes} min lesing",
         "readCta": "Læs guide"
       },
       "3": {
-        "eyebrow": "Veje",
+        "eyebrow": "Kørekort",
         "title": "Trafikkskole eller handledare?",
         "excerpt": "Når en opført køreskole passer, og hvornår privat övningskörning med en Handledare gælder.",
         "meta": "{minutes} min lesing",
         "readCta": "Læs guide"
       },
       "12": {
-        "eyebrow": "Bilpriser",
+        "eyebrow": "Eje en bil",
         "title": "Sammenlign offentliggjorte bilpriser",
         "excerpt": "Annoncepris, fra-pris og MSRP er tre forskellige beløb. Sammenlign kun inden for samme valuta.",
         "meta": "{minutes} min læsning · 27. november 2026",
         "readCta": "Læs guiden"
       },
       "13": {
-        "eyebrow": "Syn",
+        "eyebrow": "Eje en bil",
         "title": "Hvad en offentliggjort synspris betyder",
         "excerpt": "Fra-pris, fast pris og lovbestemt loft er forskellige. Landet vises, når stationen eller forskriften har offentliggjort et beløb.",
         "meta": "{minutes} min læsning · 27. november 2026",
         "readCta": "Læs guiden"
       },
       "14": {
-        "eyebrow": "Parkering",
+        "eyebrow": "Eje en bil",
         "title": "Sammenlign parkeringspris i en by",
         "excerpt": "Timeprisen gælder et navngivet sted. Skiltet på stedet afgør. DriveLinkUp reserverer ikke pladsen.",
         "meta": "{minutes} min læsning · 27. november 2026",
+        "readCta": "Læs guiden"
+      },
+      "15": {
+        "eyebrow": "Arbejde med bil",
+        "title": "Arbejde med bil efter en flytning",
+        "excerpt": "Et almindeligt kørekort er ikke en taxitilladelse. Et kursus- eller prøvegebyr vises kun, når skolen eller myndigheden har offentliggjort det. Reservedele viser butikkens pris.",
+        "meta": "{minutes} min læsning · 28. november 2026",
         "readCta": "Læs guiden"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "Skole",
     "compareLesson": "Køretime",
     "compareLength": "Længde",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europa",
+      "northAmerica": "Nordamerika",
+      "southAmerica": "Sydamerika",
+      "australia": "Australien"
+    }
   },
   "termsPage": {
     "meta": {

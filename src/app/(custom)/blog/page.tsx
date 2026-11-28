@@ -14,6 +14,36 @@ import { publicAlternatesFor } from '@/lib/seo/alternates';
 
 const POSTS = [
   {
+    slug: 'korkort-b-steg-for-steg',
+    index: '4',
+    minutes: 7,
+  },
+  {
+    slug: 'swedish-drivers-license-expat-stockholm',
+    index: '0',
+    minutes: 7,
+  },
+  {
+    slug: 'kostnad-korkort-sverige',
+    index: '2',
+    minutes: 5,
+  },
+  {
+    slug: 'trafikskola-eller-handledare',
+    index: '3',
+    minutes: 5,
+  },
+  {
+    slug: 'handledare-ovningskorning-sverige',
+    index: '1',
+    minutes: 6,
+  },
+  {
+    slug: 'jobba-med-bil',
+    index: '15',
+    minutes: 4,
+  },
+  {
     slug: 'jamfor-bilpriser',
     index: '12',
     minutes: 6,
@@ -27,66 +57,6 @@ const POSTS = [
     slug: 'jamfor-parkeringspris',
     index: '14',
     minutes: 6,
-  },
-  {
-    slug: 'korkort-b-malmo',
-    index: '11',
-    minutes: 8,
-  },
-  {
-    slug: 'korkort-b-goteborg',
-    index: '10',
-    minutes: 8,
-  },
-  {
-    slug: 'korlektion-korkort-b',
-    index: '9',
-    minutes: 8,
-  },
-  {
-    slug: 'korkortstillstand-korkort-b',
-    index: '8',
-    minutes: 8,
-  },
-  {
-    slug: 'riskutbildning-korkort-b',
-    index: '7',
-    minutes: 8,
-  },
-  {
-    slug: 'korprov-korkort-b',
-    index: '6',
-    minutes: 8,
-  },
-  {
-    slug: 'kunskapsprov-korkort-b',
-    index: '5',
-    minutes: 8,
-  },
-  {
-    slug: 'korkort-b-steg-for-steg',
-    index: '4',
-    minutes: 7,
-  },
-  {
-    slug: 'swedish-drivers-license-expat-stockholm',
-    index: '0',
-    minutes: 7,
-  },
-  {
-    slug: 'handledare-ovningskorning-sverige',
-    index: '1',
-    minutes: 6,
-  },
-  {
-    slug: 'kostnad-korkort-sverige',
-    index: '2',
-    minutes: 5,
-  },
-  {
-    slug: 'trafikskola-eller-handledare',
-    index: '3',
-    minutes: 5,
   },
 ] as const;
 

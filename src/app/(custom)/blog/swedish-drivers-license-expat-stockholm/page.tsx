@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ExpatMoverGuide } from '@/components/custom/expat-mover-guide';
 import { Button } from '@/components/ui/button';
 import { swedishCanonicalAlternates } from '@/lib/seo/alternates';
 import { siteName, siteUrl } from '@/lib/site';
@@ -44,6 +45,7 @@ export default function SwedishDriversLicenseExpatStockholmPost() {
             By {siteName} · Updated 5 September 2026
           </p>
         </header>
+        <ExpatMoverGuide lang="en" />
         <div className="surface-panel grid gap-8 rounded-xl border border-border p-6 text-body leading-relaxed sm:p-10">
           <section className="grid gap-3">
             <h2 className="font-display text-h2 leading-tight">Start with the official path</h2>

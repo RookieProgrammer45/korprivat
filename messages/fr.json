@@ -246,12 +246,12 @@
   "blogPage": {
     "meta": {
       "title": "Journal",
-      "description": "Guides sur les prix publiés des voitures, des contrôles, du stationnement, et les étapes du permis suédois."
+      "description": "Guides pour une personne qui s’installe et veut un permis, une voiture, ou un travail avec une voiture. Un prix n’apparaît que si l’éditeur l’a écrit."
     },
     "header": {
       "eyebrow": "Journal",
-      "title": "Conduire en Suède, en langage clair.",
-      "subtitle": "Guides courts pour apprendre sur les routes suédoises. Nous couvrons les démarches Transportstyrelsen, la comparaison d'écoles, les exigences locales et des prix clairs en SEK."
+      "title": "S’installer : permis et voiture",
+      "subtitle": "Pour obtenir un permis, détenir une voiture ou travailler avec une voiture après une installation. Un prix n’apparaît que si l’éditeur l’a écrit."
     },
     "posts": {
       "11": {
@@ -304,59 +304,66 @@
         "readCta": "Lire le guide"
       },
       "4": {
-        "eyebrow": "Catégorie B",
+        "eyebrow": "Permis",
         "title": "Permis suédois catégorie B : du permis d'apprenti à l'examen pratique",
         "excerpt": "Permis d'apprenti, formation aux risques, examen théorique et examen pratique — et comment comparer le prix de leçon publié par une école.",
         "meta": "{minutes} min de lecture · 26 octobre 2026",
         "readCta": "Lire le guide"
       },
       "0": {
-        "eyebrow": "Article · Expatriés à Stockholm",
+        "eyebrow": "Permis",
         "title": "Comment obtenir un permis de conduire suédois en tant qu'expatrié à Stockholm",
         "excerpt": "Étapes Transportstyrelsen, planification réaliste des coûts, et comment comparer les fiches d'auto-écoles à Stockholm.",
         "readCta": "Lire l'article",
         "meta": "{minutes} min de lecture · Mis à jour en août 2026"
       },
       "1": {
-        "eyebrow": "Handledare",
+        "eyebrow": "Permis",
         "title": "Handledare et pratique supervisée en Suède",
         "excerpt": "Comment les 16–17 ans finalisent l'inscription handledare pour la pratique privée de la conduite.",
         "meta": "{minutes} min de lecture",
         "readCta": "Lire le guide"
       },
       "2": {
-        "eyebrow": "Coûts",
+        "eyebrow": "Permis",
         "title": "Combien coûte un permis de conduire suédois ?",
         "excerpt": "Comment fonctionnent les prix des leçons, et pourquoi DriveLinkUp affiche les prix des écoles sans frais pour l'apprenant.",
         "meta": "{minutes} min de lecture",
         "readCta": "Lire le guide"
       },
       "3": {
-        "eyebrow": "Parcours",
+        "eyebrow": "Permis",
         "title": "Auto-école ou handledare ?",
         "excerpt": "Quand une auto-école répertoriée convient, et quand l'övningskörning privée avec un handledare s'applique.",
         "meta": "{minutes} min de lecture",
         "readCta": "Lire le guide"
       },
       "12": {
-        "eyebrow": "Prix des voitures",
+        "eyebrow": "Avoir une voiture",
         "title": "Comparer les prix de voitures publiés",
         "excerpt": "Un prix annoncé, un prix « à partir de » et un MSRP sont trois montants différents. Comparez-les dans la même devise.",
         "meta": "{minutes} min de lecture · 27 novembre 2026",
         "readCta": "Lire le guide"
       },
       "13": {
-        "eyebrow": "Contrôle",
+        "eyebrow": "Avoir une voiture",
         "title": "Ce que signifie un prix de contrôle publié",
         "excerpt": "Un prix « à partir de », un prix fixe et un plafond légal sont différents. Un pays apparaît quand la station ou le texte a publié un montant.",
         "meta": "{minutes} min de lecture · 27 novembre 2026",
         "readCta": "Lire le guide"
       },
       "14": {
-        "eyebrow": "Stationnement",
+        "eyebrow": "Avoir une voiture",
         "title": "Comparer le prix du stationnement dans une ville",
         "excerpt": "Le tarif horaire concerne un lieu nommé. Le panneau sur place décide. DriveLinkUp ne réserve pas la place.",
         "meta": "{minutes} min de lecture · 27 novembre 2026",
+        "readCta": "Lire le guide"
+      },
+      "15": {
+        "eyebrow": "Travailler avec une voiture",
+        "title": "Travailler avec une voiture après une installation",
+        "excerpt": "Un permis voiture n’est pas une autorisation de taxi. Un prix de cours ou d’examen n’apparaît que si l’école ou l’autorité l’a publié. Les pièces montrent le prix du magasin.",
+        "meta": "{minutes} min de lecture · 28 novembre 2026",
         "readCta": "Lire le guide"
       }
     }
@@ -3739,7 +3746,13 @@
     "compareSchool": "École",
     "compareLesson": "Leçon",
     "compareLength": "Durée",
-    "compareMinutes": "{minutes} min"
+    "compareMinutes": "{minutes} min",
+    "continents": {
+      "europe": "Europe",
+      "northAmerica": "Amérique du Nord",
+      "southAmerica": "Amérique du Sud",
+      "australia": "Australie"
+    }
   },
   "termsPage": {
     "meta": {
