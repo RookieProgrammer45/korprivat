@@ -51,7 +51,9 @@
       "tires": "Tires",
       "taxi": "Taxi training",
       "leasing": "Leasing",
-      "parking": "Parking"
+      "parking": "Parking",
+      "sellCar": "Sell a car",
+      "workshops": "Workshops"
     },
     "language": {
       "sv": "Svenska",
@@ -206,7 +208,7 @@
     "header": {
       "eyebrow": "FAQ",
       "title": "Questions",
-      "subtitle": "Common questions about comparing driving schools, prices and driving lessons in Sweden."
+      "subtitle": "Short answers on schools, prices and driving lessons."
     },
     "items": {
       "scope": {
@@ -246,12 +248,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guides for people moving who are getting a driving licence, owning a car, or working with a car. A price appears only when the publisher wrote it."
+      "description": "Guides for you if you are moving and need a licence, a car, or work that involves a car."
     },
     "header": {
       "eyebrow": "Blog",
       "title": "Moving: a licence and a car",
-      "subtitle": "For people getting a driving licence, owning a car, or working with a car after a move. A price appears only when the publisher wrote it."
+      "subtitle": "Guides for you if you are moving and need a licence, a car, or work that involves a car."
     },
     "posts": {
       "11": {
@@ -2361,11 +2363,11 @@
     }
   },
   "consentBanner": {
-    "intro": "We use cookies that the directory needs to run. With your consent we may also load ads. You can change your choice at any time.",
+    "intro": "Cookies the page needs are always on. Ads appear only if you say yes. You can change the choice at any time.",
     "essentialLabel": "Essential",
-    "essentialBody": "Sign-in, security, language, and remembering this choice. Required — cannot be turned off.",
+    "essentialBody": "Sign-in, security and language. These cannot be turned off.",
     "analyticsLabel": "Analytics",
-    "analyticsBody": "No separate analytics tool runs today. This toggle is reserved. Leave it off unless you want that processing if we add it later.",
+    "analyticsBody": "No analytics run right now. Leave this off if you do not want it switched on later.",
     "marketingLabel": "Marketing",
     "marketingBody": "Google AdSense, which can show ads and set Google cookies. Loads only if you accept.",
     "acceptAll": "Accept all",
@@ -2373,7 +2375,7 @@
     "customize": "Customize",
     "save": "Save my choice",
     "saved": "Your cookie choice is saved.",
-    "error": "Could not save your cookie choice — try again.",
+    "error": "Could not save your choice. Try again.",
     "privacy": "Privacy policy"
   },
   "consentForm": {
@@ -2435,8 +2437,8 @@
       "eyebrow": "",
       "title": "Compare car prices and driving schools.",
       "metaTitle": "Compare car parts, prices and driving schools",
-      "metaDescription": "Compare car parts, car prices and driving schools. The price is the one the business published. Free catalogue for everyone.",
-      "body": "Compare driving schools, heavy-vehicle schools, car prices, and the parts a shop published for a car owner or a workshop. We compare inspection prices, tire prices, taxi-driver training, lease prices, and parking prices too. The figure is that published price.",
+      "metaDescription": "Compare driving schools, cars, parts, inspections and tires. The price is the one the company published. Free for everyone.",
+      "body": "Compare schools, cars, parts, inspections, tires, taxi training, leasing and parking. You see the price the company published.",
       "primaryCta": "Find a school",
       "instructorCta": "I work at a driving school",
       "marketplaceTag": "Car prices · Driving schools",
@@ -2460,7 +2462,7 @@
       "imageAlt": "Driving lesson: a driver holding the wheel at dusk",
       "previewLines": {
         "profile": "Compare categories, language and location.",
-        "price": "Review the school's published price — no added fees.",
+        "price": "See the school's published price. No added fee.",
         "time": "Open the school and read what is on the listing."
       },
       "search": {
@@ -2508,6 +2510,8 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa",
+          "helsinki": "Helsinki",
+          "amsterdam": "Amsterdam",
           "newYork": "New York"
         },
         "modeLabel": "What to compare",
@@ -2551,11 +2555,12 @@
           "tires": "Tires",
           "taxi": "Taxi training",
           "leasing": "Leasing",
-          "parking": "Parking"
+          "parking": "Parking",
+          "workshops": "Workshops"
         }
       },
-      "lead": "Free. You pay the school's price.",
-      "note": "DriveLinkUp is a catalog. We do not take payment for a catalog listing.",
+      "lead": "Free for everyone. You pay the company.",
+      "note": "A listing here is not a booking and not a permit.",
       "schoolLink": "I run a school",
       "chips": {
         "price": "Published price in kronor",
@@ -2608,7 +2613,7 @@
         },
         "book": {
           "title": "Contact the school",
-          "body": "You contact the school. DriveLinkUp does not book the lesson."
+          "body": "Write to the school. We do not book the lesson."
         }
       }
     },
@@ -2626,19 +2631,19 @@
     },
     "assurance": {
       "eyebrow": "How the directory works",
-      "title": "Nothing hidden in the fine print.",
+      "title": "Clear from the start.",
       "cards": {
         "price": {
           "title": "The published price",
-          "body": "When a school has published a price, you see it in kronor. DriveLinkUp does not add a fee."
+          "body": "When the school has set a price, you see it in kronor. We do not add a fee."
         },
         "safety": {
           "title": "A listing is a catalog card",
-          "body": "A catalog card is not a teaching permit and not an agreement. Confirm permission, lesson setup and terms with the school."
+          "body": "A listing is not a licence and not a contract. Ask the school about its permit and terms."
         },
         "cancellation": {
           "title": "Contact the school",
-          "body": "Lessons are arranged with the school. Contact the school opens their inbox or website. DriveLinkUp does not take payment for a catalog listing."
+          "body": "You contact the school. We do not charge for the school to appear here."
         }
       }
     },
@@ -3576,12 +3581,12 @@
   "pricingPage": {
     "meta": {
       "title": "Pricing",
-      "description": "Compare driving-school listings for free. A catalog listing is free. DriveLinkUp does not take payment for directory listings."
+      "description": "The comparison is free for everyone. DriveLinkUp does not charge for a listing."
     },
     "hero": {
       "eyebrow": "Directory",
-      "title": "The school price is the figure on the listing.",
-      "body": "Discover and compare driving-school listings."
+      "title": "You see the price. Nothing is added.",
+      "body": "Compare the schools for free. You pay the school for the lesson."
     },
     "learner": {
       "title": "For learners",
@@ -3597,7 +3602,7 @@
     },
     "notes": {
       "title": "How listing works (Sweden)",
-      "body": "A catalog listing is free. DriveLinkUp does not take payment for directory listings and does not add a learner fee. Lessons and terms are arranged with the school."
+      "body": "The listing is free. You arrange the lesson and the terms with the school."
     },
     "cta": {
       "learner": "Compare schools",
@@ -3695,18 +3700,18 @@
     "headerTitleCountry": "Driving schools in {name}",
     "subtitleLive": "Compare school listings in {name} by category, language and published SEK price. Contact the school to arrange a lesson.",
     "subtitleCatalogue": "Driving schools in {name} are in the same catalog. A price is shown in the currency on the school's website. Contact the school to arrange a lesson.",
-    "subtitleExpansion": "{name} in {country} is an expansion hub. The catalog is live in Sweden today; use these pages to explore Nordic coverage as we grow.",
+    "subtitleExpansion": "{name} is ready. The comparison is live in Sweden.",
     "subtitleCountryLive": "Browse regions and cities across {name}. Open a city hub to compare listings.",
     "subtitleCountryCatalogue": "Open a city to compare driving schools in {name}. They are in the same catalog as the Swedish schools.",
-    "subtitleCountryExpansion": "{name} hubs are ready for SEO and expansion. The catalog is live in Sweden first (ADR-001).",
+    "subtitleCountryExpansion": "The pages for {name} are here. The comparison is live in Sweden.",
     "breadcrumbLocations": "Locations",
-    "expansionTitle": "The catalog is Sweden-first",
-    "expansionBody": "DriveLinkUp lists driving schools in Sweden first. This Nordic location page is indexable so learners can find us as we expand — explore Swedish cities today.",
+    "expansionTitle": "Sweden is live",
+    "expansionBody": "We compare driving schools in Sweden. This page is here so you can find us when more countries are added.",
     "expansionCtaSweden": "Browse Swedish driving schools",
     "seoLead": "Compare driving schools in {name}, {country}",
     "seoP1Live": "Listings in {name} show schools that appear in the catalog. Compare before you contact the school.",
     "seoP1Catalogue": "Schools in {name} are listed from their own websites. They are not marked verified. Compare them in the catalog, then contact the school.",
-    "seoP1Expansion": "We publish a structured hub for {name}, {country} so search and AI assistants can route learners correctly while supply is onboarded.",
+    "seoP1Expansion": "The page for {name}, {country} is here. The school comparison is live in Sweden.",
     "seoP2": "A catalog listing is free. DriveLinkUp does not add a learner fee. Lessons and payment are arranged with the school. Handledare / private practice is a separate legal path.",
     "howTitle": "How DriveLinkUp works",
     "howBodyLive": "Open a listing, read the published price, then contact the school. Lessons are arranged with the school.",
@@ -3871,9 +3876,9 @@
       "description": "DriveLinkUp compares driving schools. Published prices are visible on the listing. Listing is free."
     },
     "hero": {
-      "eyebrow": "Driving schools and learners. One directory.",
+      "eyebrow": "For the licence and the car.",
       "title": "We built the comparison we wished existed.",
-      "intro": "What does the lesson cost, and who stands behind it? On DriveLinkUp the answer is the school's published price.",
+      "intro": "What does it cost, and who do you pay? You see the price the company published.",
       "chips": [
         "Published price in kronor",
         "The school's permit sets the licence",
@@ -4046,7 +4051,7 @@
   "heavyVehiclesPage": {
     "eyebrow": "Truck, bus and YKB",
     "title": "Heavy vehicles",
-    "subtitle": "Driving schools whose websites say they train for a C or D licence, or for YKB. The price is shown when the school publishes it."
+    "subtitle": "Schools whose own site trains for truck, bus or CPC. The price appears when the school has set it."
   },
   "lessonComparison": {
     "meta": {
@@ -4065,11 +4070,11 @@
     "colLength": "Length",
     "colPerMinute": "SEK/min",
     "minutes": "{minutes} min",
-    "sourceNote": "The price is what the school published on its website. DriveLinkUp has not verified it and does not use it as a booking amount.",
+    "sourceNote": "The price comes from the school's website. We have not checked it, and it is not a booking amount.",
     "cardsHeading": "Schools with a published price in {name}",
     "faqTitle": "FAQ",
     "faq1q": "Are the prices in {name} up to date?",
-    "faq1a": "They were read from each school's own website. The school may have changed the price since — open the school's price list from the listing.",
+    "faq1a": "They are read from each school's own website. The school may have changed the price since we read the page. Open the school's price list from the listing.",
     "faq2q": "Does DriveLinkUp charge for the comparison?",
     "faq2a": "No. The directory is free. You pay the school, not DriveLinkUp.",
     "backToHub": "All driving schools in {name}",
@@ -4083,7 +4088,7 @@
     },
     "eyebrow": "Dealers",
     "title": "Compare vehicle prices",
-    "lead": "Each card is a car, truck or motorcycle a dealer has published, new or used, with the specifications on that listing. The price is the advertised amount. DriveLinkUp does not sell the vehicle.",
+    "lead": "Compare cars, trucks and motorcycles a dealer has published. The price is the dealer's.",
     "cityLabel": "City",
     "cityAll": "All cities",
     "kindLabel": "Vehicle",
@@ -4131,7 +4136,7 @@
     },
     "eyebrow": "Parts",
     "title": "Compare parts and accessories",
-    "lead": "A car owner and a workshop compare the price and specifications a shop published. DriveLinkUp does not sell the product.",
+    "lead": "Compare the price and the specification the shop published.",
     "queryLabel": "Product",
     "queryPlaceholder": "Brake pads",
     "kindLabel": "Type",
@@ -4184,10 +4189,10 @@
   "inspectionPage": {
     "meta": {
       "title": "Compare vehicle inspection prices",
-      "description": "Published inspection prices from the station or the authority. A country is listed when that price is published. DriveLinkUp does not book the inspection."
+      "description": "Inspection prices the station or the authority published. We do not book the inspection."
     },
     "title": "Compare inspection prices",
-    "lead": "The price is what the station or the authority published. DriveLinkUp does not book the inspection and does not call a station verified.",
+    "lead": "Compare the price the station or the authority published. We do not book the inspection.",
     "countryLabel": "Country",
     "countryAll": "All countries",
     "vehicleLabel": "Vehicle",
@@ -4233,12 +4238,24 @@
   "tirePage": {
     "meta": {
       "title": "Compare tire prices",
-      "description": "Published tire-change, storage and fitting prices from the workshop's own page. A country is listed when that price is published. DriveLinkUp does not book the change."
+      "description": "Tire prices from the workshop's own page. We do not book the change."
     },
     "title": "Compare tire prices",
-    "lead": "The price is what the workshop published for a wheel change, tire storage, fitting, or a mobile visit. DriveLinkUp does not book the work and does not call a workshop verified.",
+    "lead": "Compare the price the workshop set for a wheel change, tire storage or fitting. We do not book the change.",
     "countryLabel": "Country",
     "countryAll": "All countries",
+    "cityLabel": "City",
+    "cityAll": "All cities",
+    "filter": "Show",
+    "useMyLocation": "Use my location",
+    "clearLocation": "Clear location",
+    "locationPrompt": "Choose a city, or use your location, to see published prices that apply there.",
+    "locationRequesting": "Finding your location…",
+    "locationGranted": "Showing published prices for the city nearest to you.",
+    "locationDenied": "Location access was denied. You can still choose a city.",
+    "locationFailed": "We could not find your location. Try again, or choose a city.",
+    "locationUnsupported": "Location is not available in this browser. You can still choose a city.",
+    "locationNone": "No listed city is close enough. Choose a city instead.",
     "vehicleLabel": "Vehicle",
     "serviceLabel": "Service",
     "vehicles": {
@@ -4267,6 +4284,7 @@
       "wheelsBrought": "You bring the wheels. The page lists this from-price for the sizes it names.",
       "extrasMayApply": "The page says extras such as TPMS service and new valves can cost more.",
       "includesCheck": "The page includes a check of the tires and the air pressure.",
+      "includesChange": "Includes storage and the wheel change.",
       "includesChangeAndWash": "Includes the wheel change, storage and a wash.",
       "includesChangeWashAndCheck": "Includes storage, a machine wash, the wheel change and a tire check.",
       "ownTyres": "Mounting and balancing tires you already have, then fitting the wheels.",
@@ -4281,10 +4299,10 @@
   "taxiPage": {
     "meta": {
       "title": "Compare taxi-driver training",
-      "description": "Published taxi-driver course prices and official test fees. A country is listed when the school or the authority published the amount. DriveLinkUp does not enrol you."
+      "description": "Prices for taxi-driver training and official tests. We do not enrol you."
     },
     "title": "Compare taxi-driver training",
-    "lead": "The price is what the school or the authority published for the course or the official test. DriveLinkUp does not enrol you and does not call a school verified.",
+    "lead": "Compare the price the school or the authority set for the course or the test. We do not enrol you.",
     "countryLabel": "Country",
     "countryAll": "All countries",
     "kindLabel": "What the price is",
@@ -4324,10 +4342,10 @@
   "leasingPage": {
     "meta": {
       "title": "Compare lease prices",
-      "description": "Published private-lease prices for named models. A country is listed when the lessor published the model and the monthly amount. DriveLinkUp does not lease the car."
+      "description": "Private-lease prices for named models. We do not lease the car."
     },
     "title": "Compare lease prices",
-    "lead": "The price is the monthly amount the lessor published for that model. The country is where that price was published. DriveLinkUp does not lease the car and does not call an offer verified.",
+    "lead": "Compare the monthly price the lessor published for that model. We do not lease the car.",
     "countryLabel": "Country",
     "countryAll": "All countries",
     "priceFrom": "from",
@@ -4374,7 +4392,7 @@
       "description": "Compare the hour price a city or an operator published for a named place. Pick the city to see it next to the other prices there."
     },
     "title": "Parking prices",
-    "lead": "Compare the hour a city or an operator published for a named place. Pick the city to set that place next to the other prices there. The figure is that published hour. Inside one currency, a place people open can move up. DriveLinkUp does not reserve the spot. The sign at the place decides.",
+    "lead": "Compare the hour price the city or the operator published. The sign at the place decides.",
     "countryLabel": "Country",
     "countryAll": "All countries",
     "cityLabel": "City",
@@ -4413,5 +4431,140 @@
       "prepaid": "The operator takes the fee in advance.",
       "outerCityGuest": "The page lists this as resident and guest parking in the outer city."
     }
+  },
+  "sellCarPage": {
+    "meta": {
+      "title": "Sell a car",
+      "description": "Sign in to estimate a market price from published catalogue prices and publish the car so a buyer can find it. DriveLinkUp does not buy the car."
+    },
+    "header": {
+      "title": "Sell a car",
+      "lead": "See a price built from listings already here. Create an account to publish the car. We do not buy it."
+    },
+    "gate": {
+      "title": "Sign up to estimate and publish",
+      "body": "The price estimate and the listing are available after you create an account.",
+      "signup": "Create an account",
+      "login": "Log in"
+    },
+    "form": {
+      "make": "Make",
+      "model": "Model",
+      "year": "Year",
+      "yearNone": "Year unknown",
+      "country": "Country",
+      "currency": "Currency",
+      "city": "City",
+      "asking": "Your asking price",
+      "note": "Note",
+      "noteHint": "Do not include a registration number or a VIN.",
+      "estimate": "Estimate the market price",
+      "publish": "Publish so a buyer can find it",
+      "working": "Working…"
+    },
+    "result": {
+      "median": "Median of published prices",
+      "range": "Published range {low}–{high}",
+      "count": "Based on {count} published prices",
+      "none": "Fewer than three published prices match this model in this currency, so there is no estimate.",
+      "buyers": "Dealers who publish this model",
+      "buyersNone": "No dealer in this country publishes this model.",
+      "published": "The car is published.",
+      "open": "Open the listing"
+    },
+    "errors": {
+      "auth": "Sign in to continue.",
+      "invalid": "Check the make, model, city, and price.",
+      "identifier": "Remove the registration number or VIN.",
+      "own": "This is your listing.",
+      "limit": "You have sent the daily limit of messages."
+    },
+    "mine": {
+      "title": "Your listings",
+      "empty": "You have not published a car yet."
+    }
+  },
+  "carsForSalePage": {
+    "meta": {
+      "title": "Cars for sale",
+      "description": "Cars private owners have published. An estimate is the median of published catalogue prices. Contact requires an account."
+    },
+    "header": {
+      "title": "Cars for sale",
+      "lead": "Cars private owners have published. The estimate uses prices already listed here. We do not complete the sale.",
+      "sell": "Sell a car"
+    },
+    "empty": "No private cars are published yet.",
+    "card": {
+      "noEstimate": "Not enough published prices for an estimate",
+      "asking": "Asking price {amount}"
+    },
+    "detail": {
+      "back": "All cars for sale",
+      "estimate": "Median of published prices",
+      "range": "Published range {low}–{high}, from {count} prices",
+      "none": "Fewer than three published prices match this model, so there is no estimate.",
+      "inquire": "Write to the owner",
+      "inquireBody": "Your name and email are sent to the owner. DriveLinkUp does not take payment.",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending…",
+      "sent": "The owner has your message.",
+      "messages": "Messages from buyers",
+      "noMessages": "No buyer has written yet.",
+      "signInTitle": "Create an account to chat",
+      "signInBody": "The car is free to view. The conversation opens after you create an account.",
+      "signup": "Create an account",
+      "login": "Log in"
+    },
+    "errors": {
+      "auth": "Create an account before the conversation.",
+      "invalid": "Write at least 10 characters.",
+      "identifier": "Remove the registration number or VIN.",
+      "own": "This is your listing.",
+      "limit": "You have sent the daily limit of messages."
+    },
+    "thread": {
+      "title": "Conversation",
+      "body": "The listing is free. The conversation is only for accounts. DriveLinkUp does not take payment.",
+      "emptyOwner": "No buyer has written yet.",
+      "emptyBuyer": "Write the first message.",
+      "with": "Conversation with {name}",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending…",
+      "you": "You",
+      "yours": "Car conversations"
+    }
+  },
+  "adminConversationsPage": {
+    "title": "Conversations",
+    "lead": "Every conversation on DriveLinkUp. This view is read-only.",
+    "empty": "No conversations yet.",
+    "vehicle": "Private car",
+    "booking": "Lesson",
+    "messages": "Messages",
+    "noMessages": "This conversation has no messages."
+  },
+  "workshopPage": {
+    "meta": {
+      "title": "Car workshops",
+      "description": "Car repair workshops mapped with a name and address. A workshop is listed even when it publishes no price."
+    },
+    "title": "Workshops",
+    "lead": "Find a workshop when the car stops or the tires need changing.",
+    "sourceNote": "The name and address come from OpenStreetMap. A workshop stays listed when no price is published. We do not book the repair.",
+    "countryLabel": "Country",
+    "cityLabel": "City",
+    "cityAll": "Choose a city",
+    "cityUnknown": "City not published",
+    "filter": "Show",
+    "chooseCity": "Choose a city to see the workshops mapped there.",
+    "empty": "No mapped workshop in that city.",
+    "addressMissing": "Address not published on the map.",
+    "count": "{count} workshops",
+    "pageLabel": "Page {page}",
+    "next": "Next",
+    "previous": "Previous"
   }
 }

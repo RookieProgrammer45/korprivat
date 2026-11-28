@@ -1,3 +1,4 @@
+import { tireAppliesAtPlace } from '@/lib/discovery/tire-place';
 import dataset from '../../../data/tires/published.json';
 
 /** A published tire-service price. A row exists only when the workshop page stated the amount. */
@@ -8,6 +9,7 @@ export type TireNote =
   | 'wheelsBrought'
   | 'extrasMayApply'
   | 'includesCheck'
+  | 'includesChange'
   | 'includesChangeAndWash'
   | 'includesChangeWashAndCheck'
   | 'ownTyres'
@@ -39,6 +41,7 @@ const NOTES: readonly TireNote[] = [
   'wheelsBrought',
   'extrasMayApply',
   'includesCheck',
+  'includesChange',
   'includesChangeAndWash',
   'includesChangeWashAndCheck',
   'ownTyres',
@@ -84,18 +87,22 @@ export function tireCountries(): string[] {
 
 export type TireFilters = {
   country: string | null;
+  place: string | null;
   vehicle: TireVehicle;
   service: TireService;
 };
 
 export function tireFiltersFromSearch(input: {
   country?: string;
+  place?: string;
   vehicle?: string;
   service?: string;
 }): TireFilters {
   const country = input.country?.trim().toUpperCase() ?? '';
+  const place = input.place?.trim().replace(/\s+/g, ' ') ?? '';
   return {
     country: /^[A-Z]{2}$/.test(country) ? country : null,
+    place: place.length > 0 && place.length <= 80 ? place : null,
     vehicle: input.vehicle && isMember(VEHICLES, input.vehicle) ? input.vehicle : 'car',
     service: input.service && isMember(SERVICES, input.service) ? input.service : 'change',
   };
@@ -117,6 +124,7 @@ export function compareTirePrice(a: PublishedTire, b: PublishedTire): number {
 export function listTires(filters: TireFilters): PublishedTire[] {
   return ROWS.filter((row) => {
     if (filters.country && row.country !== filters.country) return false;
+    if (filters.place && !tireAppliesAtPlace(row, filters.place)) return false;
     if (row.vehicle !== filters.vehicle) return false;
     if (row.service !== filters.service) return false;
     return true;

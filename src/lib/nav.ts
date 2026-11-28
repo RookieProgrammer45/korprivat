@@ -15,9 +15,11 @@ export interface NavItem {
     | 'nav.parts'
     | 'nav.inspection'
     | 'nav.tires'
+    | 'nav.workshops'
     | 'nav.taxi'
     | 'nav.leasing'
     | 'nav.parking'
+    | 'nav.sellCar'
     | 'nav.howItWorks'
     | 'nav.licenceCategories'
     | 'nav.drivingInstructor'
@@ -117,25 +119,32 @@ export const navItems: NavItem[] = [
     order: 6,
   },
   {
+    label: 'Workshops',
+    labelKey: 'nav.workshops',
+    href: '/verkstad',
+    group: 'primary',
+    order: 7,
+  },
+  {
     label: 'Taxi training',
     labelKey: 'nav.taxi',
     href: '/taxiutbildning',
     group: 'primary',
-    order: 7,
+    order: 8,
   },
   {
     label: 'Leasing',
     labelKey: 'nav.leasing',
     href: '/privatleasing',
     group: 'primary',
-    order: 8,
+    order: 9,
   },
   {
     label: 'Parking',
     labelKey: 'nav.parking',
     href: '/parkering',
     group: 'primary',
-    order: 9,
+    order: 10,
   },
   // Profile + Dashboard live in the signed-in AuthNav menu (avatar), not the
   // primary bar — keeps marketing chrome short once a session exists.
@@ -170,6 +179,13 @@ export const navItems: NavItem[] = [
   { label: 'About', labelKey: 'nav.about', href: '/om-oss', group: 'footer', order: 2 },
   { label: 'Terms', labelKey: 'nav.terms', href: '/terms', group: 'footer', order: 2 },
   { label: 'Journal', labelKey: 'nav.blog', href: '/blog', group: 'footer', order: 3 },
+  {
+    label: 'Sell a car',
+    labelKey: 'nav.sellCar',
+    href: '/salj-bil',
+    group: 'footer',
+    order: 3,
+  },
   {
     label: 'Handledare guidance',
     labelKey: 'nav.handledare',

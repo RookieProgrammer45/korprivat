@@ -88,6 +88,257 @@
       "checkedAt": "2026-11-27"
     },
     {
+      "id": "se-mekonomen-car-change",
+      "country": "SE",
+      "provider": "Mekonomen",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 249,
+      "currency": "SEK",
+      "notes": [
+        "includesCheck"
+      ],
+      "sourceUrl": "https://www.mekonomen.se/bilverkstad/dackbyte",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-bilia-car-change",
+      "country": "SE",
+      "provider": "Bilia",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 495,
+      "currency": "SEK",
+      "notes": [
+        "includesCheck"
+      ],
+      "sourceUrl": "https://www.bilia.se/verkstad/dacktjanster/dackbyte/",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-bilia-car-hotel",
+      "country": "SE",
+      "provider": "Bilia",
+      "place": "",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "from",
+      "amount": 1195,
+      "currency": "SEK",
+      "notes": [
+        "includesChange"
+      ],
+      "sourceUrl": "https://www.bilia.se/verkstad/dacktjanster/dackbyte/",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-holmgrens-car-change",
+      "country": "SE",
+      "provider": "Holmgrens Bil",
+      "place": "12 orter",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "fixed",
+      "amount": 475,
+      "currency": "SEK",
+      "notes": [],
+      "sourceUrl": "https://www.holmgrensbil.se/dackverkstad/dackbyte",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-citydack-car-change",
+      "country": "SE",
+      "provider": "CityDäck",
+      "place": "Malmö, Vellinge, Göteborg",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "fixed",
+      "amount": 345,
+      "currency": "SEK",
+      "notes": [
+        "fourWheels",
+        "includesCheck"
+      ],
+      "sourceUrl": "https://www.citydack.se/vara_tjanster",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-citydack-van-change",
+      "country": "SE",
+      "provider": "CityDäck",
+      "place": "Malmö, Vellinge, Göteborg",
+      "vehicle": "van",
+      "service": "change",
+      "priceKind": "fixed",
+      "amount": 395,
+      "currency": "SEK",
+      "notes": [
+        "fourWheels",
+        "includesCheck"
+      ],
+      "sourceUrl": "https://www.citydack.se/vara_tjanster",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-citydack-car-hotel",
+      "country": "SE",
+      "provider": "CityDäck",
+      "place": "Malmö, Vellinge, Göteborg",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "from",
+      "amount": 895,
+      "currency": "SEK",
+      "notes": [
+        "includesChangeWashAndCheck"
+      ],
+      "sourceUrl": "https://www.citydack.se/vara_tjanster",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-thansen-car-change",
+      "country": "SE",
+      "provider": "thansen",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 359.8,
+      "currency": "SEK",
+      "notes": [
+        "fourWheels"
+      ],
+      "sourceUrl": "https://www.thansen.se/bil/dack-och-falgar/montering-och-balansering/n-2084705019",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-meca-car-change",
+      "country": "SE",
+      "provider": "MECA",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 250,
+      "currency": "SEK",
+      "notes": [
+        "includesCheck"
+      ],
+      "sourceUrl": "https://www.meca.se/vara-tjanster/dackbyte/byta-till-sommardack",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-meca-car-hotel",
+      "country": "SE",
+      "provider": "MECA",
+      "place": "",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "from",
+      "amount": 300,
+      "currency": "SEK",
+      "notes": [
+        "includesChange",
+        "fourWheels"
+      ],
+      "sourceUrl": "https://www.meca.se/vara-tjanster/dackhotell",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-mechanum-car-change",
+      "country": "SE",
+      "provider": "Mechanum",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "fixed",
+      "amount": 499,
+      "currency": "SEK",
+      "notes": [],
+      "sourceUrl": "https://mechanum.com/tjanster/dack/hjulskifte/",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-mechanum-car-hotel",
+      "country": "SE",
+      "provider": "Mechanum",
+      "place": "",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "fixed",
+      "amount": 1299,
+      "currency": "SEK",
+      "notes": [
+        "includesChange"
+      ],
+      "sourceUrl": "https://mechanum.com/tjanster/dack/hjulskifte/",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-brandt-car-change",
+      "country": "SE",
+      "provider": "Brandt Bil",
+      "place": "Mora, Alingsås, Lysekil, Skövde",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 695,
+      "currency": "SEK",
+      "notes": [
+        "includesCheck"
+      ],
+      "sourceUrl": "https://www.brandtbil.se/utbud/dackverkstad/dackbyte/",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "se-brandt-car-hotel",
+      "country": "SE",
+      "provider": "Brandt Bil",
+      "place": "Mora, Alingsås, Lysekil, Skövde",
+      "vehicle": "car",
+      "service": "hotel",
+      "priceKind": "from",
+      "amount": 1295,
+      "currency": "SEK",
+      "notes": [
+        "includesChangeWashAndCheck"
+      ],
+      "sourceUrl": "https://www.brandtbil.se/utbud/dackverkstad/dackbyte/",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "no-autoria-car-change",
+      "country": "NO",
+      "provider": "Autoria",
+      "place": "Kolbotn, Ski, Rød, Mysen, Nordlie",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 599,
+      "currency": "NOK",
+      "notes": [],
+      "sourceUrl": "https://www.autoria.no/verksted/dekkskift",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "id": "no-bos-car-change",
+      "country": "NO",
+      "provider": "Bertel O. Steen",
+      "place": "",
+      "vehicle": "car",
+      "service": "change",
+      "priceKind": "from",
+      "amount": 699,
+      "currency": "NOK",
+      "notes": [],
+      "sourceUrl": "https://www.bos.no/bilverksted/dekkskift",
+      "checkedAt": "2026-11-28"
+    },
+    {
       "id": "no-vianor-car-change",
       "country": "NO",
       "provider": "Vianor",

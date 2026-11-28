@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { nearestTireCity, TIRE_PLACES } from '@/lib/discovery/tire-place';
 import {
   compareTirePrice,
   listTires,
@@ -32,6 +33,19 @@ describe('published tire prices', () => {
     expect(currencies.indexOf('SEK')).toBeLessThan(currencies.indexOf('NOK'));
     expect(currencies.indexOf('NOK')).toBeLessThan(currencies.indexOf('EUR'));
     const finland = rows.find((row) => row.id === 'fi-vianor-car-change');
+    expect(rows.some((row) => row.id === 'se-mekonomen-car-change' && row.amount === 249)).toBe(
+      true,
+    );
+    expect(rows.some((row) => row.id === 'se-bilia-car-change' && row.amount === 495)).toBe(true);
+    expect(rows.some((row) => row.id === 'se-holmgrens-car-change' && row.amount === 475)).toBe(
+      true,
+    );
+    expect(rows.some((row) => row.id === 'se-citydack-car-change' && row.amount === 345)).toBe(
+      true,
+    );
+    expect(rows.some((row) => row.id === 'se-thansen-car-change' && row.amount === 359.8)).toBe(
+      true,
+    );
     const sweden = rows.find((row) => row.id === 'se-vianor-car-change');
     expect(finland && sweden && compareTirePrice(sweden, finland)).toBeLessThan(0);
   });
@@ -49,5 +63,37 @@ describe('published tire prices', () => {
     expect(van.map((row) => row.vehicle)).toEqual(['van']);
     expect(tireSearchPath(tireFiltersFromSearch({}))).toBe('/dack');
     expect(tireSearchPath(tireFiltersFromSearch({ service: 'hotel' }))).toBe('/dack?service=hotel');
+  });
+
+  it('keeps a country-wide price in that country and a named workshop in its cities', () => {
+    const goteborg = listTires(tireFiltersFromSearch({ place: 'Göteborg' }));
+    expect(goteborg.some((row) => row.id === 'se-citydack-car-change')).toBe(true);
+    expect(goteborg.some((row) => row.id === 'se-mekonomen-car-change')).toBe(true);
+    expect(goteborg.some((row) => row.country !== 'SE')).toBe(false);
+    const stockholm = listTires(tireFiltersFromSearch({ place: 'Stockholm' }));
+    expect(stockholm.some((row) => row.id === 'se-citydack-car-change')).toBe(false);
+    expect(stockholm.some((row) => row.id === 'se-brandt-car-change')).toBe(false);
+    expect(stockholm.some((row) => row.id === 'se-holmgrens-car-change')).toBe(false);
+    expect(stockholm.some((row) => row.id === 'se-mekonomen-car-change')).toBe(true);
+    expect(stockholm.some((row) => row.id === 'se-meca-car-change' && row.amount === 250)).toBe(
+      true,
+    );
+    expect(stockholm.some((row) => row.id === 'se-mechanum-car-change' && row.amount === 499)).toBe(
+      true,
+    );
+    const oslo = listTires(tireFiltersFromSearch({ place: 'Oslo' }));
+    expect(oslo.some((row) => row.id === 'no-bos-car-change' && row.amount === 699)).toBe(true);
+    expect(oslo.some((row) => row.id === 'no-autoria-car-change')).toBe(false);
+    expect(oslo.every((row) => row.country === 'NO')).toBe(true);
+    const path = tireSearchPath(tireFiltersFromSearch({ place: 'Göteborg', country: 'SE' }));
+    const params = new URLSearchParams(path.slice(path.indexOf('?') + 1));
+    expect(params.get('place')).toBe('Göteborg');
+    expect(params.get('country')).toBe('SE');
+    expect(nearestTireCity(59.3293, 18.0686)).toBe('Stockholm');
+    expect(nearestTireCity(55.47, 13.02)).toBe('Malmö');
+    expect(nearestTireCity(0, 0)).toBeNull();
+    expect(TIRE_PLACES.some((city) => city.value === 'Helsinki' && city.country === 'FI')).toBe(
+      true,
+    );
   });
 });

@@ -4,6 +4,7 @@ import type { TireFilters } from '@/lib/discovery/tires';
 export function tireSearchPath(filters: TireFilters): string {
   const params = new URLSearchParams();
   if (filters.country) params.set('country', filters.country);
+  if (filters.place) params.set('place', filters.place);
   if (filters.vehicle !== 'car') params.set('vehicle', filters.vehicle);
   if (filters.service !== 'change') params.set('service', filters.service);
   const search = params.toString();

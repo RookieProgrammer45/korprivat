@@ -51,7 +51,9 @@
       "tires": "Renkaat",
       "taxi": "Taksinkuljettaja",
       "leasing": "Leasing",
-      "parking": "Pysäköinti"
+      "parking": "Pysäköinti",
+      "sellCar": "Myy auto",
+      "workshops": "Korjaamot"
     },
     "language": {
       "sv": "Svenska",
@@ -206,7 +208,7 @@
     "header": {
       "eyebrow": "Kysymyksiä",
       "title": "Kysymyksiä",
-      "subtitle": "Usein kysytyt kysymykset ajokoulujen, hintojen ja ajotuntien vertailusta Ruotsissa."
+      "subtitle": "Lyhyet vastaukset kouluista, hinnoista ja ajotunneista."
     },
     "items": {
       "scope": {
@@ -246,12 +248,12 @@
   "blogPage": {
     "meta": {
       "title": "Blogi",
-      "description": "Oppaita muuttajalle, joka hankkii ajokortin, omistaa auton tai tekee töitä auton kanssa. Hinta näkyy vain, kun julkaisija on kirjoittanut sen."
+      "description": "Oppaita sinulle, joka muutat ja tarvitset ajokortin, auton tai työtä auton parissa."
     },
     "header": {
       "eyebrow": "Blogi",
       "title": "Muutto: ajokortti ja auto",
-      "subtitle": "Sille, joka hankkii ajokortin, omistaa auton tai tekee töitä auton kanssa muuton jälkeen. Hinta näkyy vain, kun julkaisija on kirjoittanut sen."
+      "subtitle": "Oppaita sinulle, joka muutat ja tarvitset ajokortin, auton tai työtä auton parissa."
     },
     "posts": {
       "11": {
@@ -2361,11 +2363,11 @@
     }
   },
   "consentBanner": {
-    "intro": "Käytämme evästeitä, joita hakemisto tarvitsee toimiakseen. Suostumuksellasi voimme myös ladata mainoksia. Voit muuttaa valintaasi milloin tahansa.",
+    "intro": "Sivun tarvitsemat evästeet ovat aina päällä. Mainoksia näytetään vain, jos sanot kyllä. Voit muuttaa valintaa milloin tahansa.",
     "essentialLabel": "Välttämättömät",
-    "essentialBody": "Kirjautuminen, tietoturva, kieli ja tämän valinnan muistaminen. Pakollinen — ei voi kytkeä pois.",
+    "essentialBody": "Kirjautuminen, turvallisuus ja kieli. Näitä ei voi sulkea.",
     "analyticsLabel": "Analytiikka",
-    "analyticsBody": "Erillistä analytiikkatyökalua ei ole tänään käytössä. Tämä kytkin on varattu. Jätä se pois päältä, ellet halua kyseistä käsittelyä, jos lisäämme sen myöhemmin.",
+    "analyticsBody": "Analytiikkaa ei ole käynnissä. Jätä valinta pois, jos et halua sen käynnistyvän myöhemmin.",
     "marketingLabel": "Markkinointi",
     "marketingBody": "Google AdSense, joka voi näyttää mainoksia ja asettaa Googlen evästeitä. Latautuu vain, jos hyväksyt.",
     "acceptAll": "Hyväksy kaikki",
@@ -2373,7 +2375,7 @@
     "customize": "Mukauta",
     "save": "Tallenna valintani",
     "saved": "Evästevalintasi on tallennettu.",
-    "error": "Evästevalintaa ei voitu tallentaa — yritä uudelleen.",
+    "error": "Valintaa ei voitu tallentaa. Yritä uudelleen.",
     "privacy": "Tietosuojakäytäntö"
   },
   "consentForm": {
@@ -2435,8 +2437,8 @@
       "eyebrow": "",
       "title": "Vertaa auton hintoja ja autokouluja.",
       "metaTitle": "Vertaile varaosia, auton hintoja ja autokouluja",
-      "metaDescription": "Vertaile varaosia, auton hintoja ja autokouluja. Hinta on se, jonka yritys on julkaissut. Ilmainen luettelo kaikille.",
-      "body": "Vertaile autokouluja, raskasta liikennettä, auton hintoja ja varaosia, jotka kauppa on julkaissut auton omistajalle tai korjaamolle. Vertaamme myös katsastushintoja, rengashintoja, taksinkuljettajan koulutusta, leasinghintoja ja pysäköintihintoja. Luku on julkaistu hinta.",
+      "metaDescription": "Vertaile autokouluja, autoja, osia, katsastusta ja renkaita. Hinta on se, jonka yritys on julkaissut. Ilmainen kaikille.",
+      "body": "Vertaile koulua, autoa, osia, katsastusta, renkaita, taksia, leasingia ja pysäköintiä. Näet hinnan, jonka yritys on julkaissut.",
       "primaryCta": "Etsi koulu",
       "instructorCta": "Työskentelen autokoulussa",
       "marketplaceTag": "Auton hinnat · Autokoulut",
@@ -2460,7 +2462,7 @@
       "imageAlt": "Ajotunti: kuljettaja pitää ohjauspyörästä hämärällä",
       "previewLines": {
         "profile": "Vertaa luokkia, kieltä ja sijaintia.",
-        "price": "Katso koulun julkaistu hinta — ei lisämaksuja.",
+        "price": "Näe koulun julkaisema hinta. Ei lisämaksua.",
         "time": "Avaa koulu ja lue, mitä ilmoituksessa lukee."
       },
       "search": {
@@ -2508,6 +2510,8 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa",
+          "helsinki": "Helsinki",
+          "amsterdam": "Amsterdam",
           "newYork": "New York"
         },
         "modeLabel": "Mitä haluat vertailla",
@@ -2551,11 +2555,12 @@
           "tires": "Renkaat",
           "taxi": "Taksinkuljettaja",
           "leasing": "Leasing",
-          "parking": "Pysäköinti"
+          "parking": "Pysäköinti",
+          "workshops": "Korjaamot"
         }
       },
-      "lead": "Ilmainen. Maksat koulun hinnan.",
-      "note": "DriveLinkUp on luettelo. Emme ota maksua luetteloilmoituksesta.",
+      "lead": "Ilmainen kaikille. Maksat yritykselle.",
+      "note": "Listaus tässä ei ole varaus eikä lupa.",
       "schoolLink": "Pidän autokoulua",
       "chips": {
         "price": "Julkaistu hinta kruunuina",
@@ -2608,7 +2613,7 @@
         },
         "book": {
           "title": "Ota yhteyttä kouluun",
-          "body": "Otat yhteyttä kouluun. DriveLinkUp ei varaa ajotuntia."
+          "body": "Kirjoita koululle. Emme varaa ajotuntia."
         }
       }
     },
@@ -2626,19 +2631,19 @@
     },
     "assurance": {
       "eyebrow": "Miten hakemisto toimii",
-      "title": "Ei mitään piilossa pienessä präntissä.",
+      "title": "Selvää alusta asti.",
       "cards": {
         "price": {
           "title": "Julkaistu hinta",
-          "body": "Kun koulu on julkaissut hinnan, näet sen kruunuina. DriveLinkUp ei lisää maksua."
+          "body": "Kun koulu on asettanut hinnan, näet sen kruunuina. Emme lisää maksua."
         },
         "safety": {
           "title": "Ilmoitus on luettelokortti",
-          "body": "Luettelokortti ei ole opetuslupa eikä sopimus. Vahvista lupa, ajotunnin järjestelyt ja ehdot koulun kanssa."
+          "body": "Ilmoitus ei ole lupa eikä sopimus. Kysy koululta luvasta ja ehdoista."
         },
         "cancellation": {
           "title": "Ota yhteyttä kouluun",
-          "body": "Ajotunnit sovitaan koulun kanssa. Ota yhteyttä kouluun avaa koulun sähköpostin tai verkkosivuston. DriveLinkUp ei ota maksua luetteloilmoituksesta."
+          "body": "Otat yhteyttä kouluun. Emme veloita siitä, että koulu näkyy täällä."
         }
       }
     },
@@ -3576,12 +3581,12 @@
   "pricingPage": {
     "meta": {
       "title": "Hinnat",
-      "description": "Vertaa autokouluja ilmaiseksi. Luettelomerkintä on ilmainen. DriveLinkUp ei peri maksua luettelosta."
+      "description": "Vertailu on ilmainen kaikille. DriveLinkUp ei veloita listauksesta."
     },
     "hero": {
       "eyebrow": "Hakemisto",
-      "title": "Koulun hinta on ilmoituksessa näkyvä summa.",
-      "body": "Tutustu autokouluilmoituksiin ja vertaile niitä."
+      "title": "Näet hinnan. Mitään ei lisätä.",
+      "body": "Vertaile kouluja ilmaiseksi. Ajotunnin maksat koululle."
     },
     "learner": {
       "title": "Oppilaille",
@@ -3597,7 +3602,7 @@
     },
     "notes": {
       "title": "Miten listaus toimii (Ruotsi)",
-      "body": "Luetteloilmoitus on ilmainen. DriveLinkUp ei ota maksua hakemistoilmoituksista eikä lisää oppilasmaksua. Ajotunnit ja ehdot sovitaan koulun kanssa."
+      "body": "Listaus on ilmainen. Tunnin ja ehdot sovit koulun kanssa."
     },
     "cta": {
       "learner": "Vertaa kouluja",
@@ -3695,18 +3700,18 @@
     "headerTitleCountry": "Autokoulut — {name}",
     "subtitleLive": "Vertaa kouluilmoituksia paikassa {name} luokan, kielen ja julkaistun SEK-hinnan mukaan. Ota yhteyttä kouluun sopiaksesi ajotunnista.",
     "subtitleCatalogue": "Autokoulut paikassa {name} ovat samassa luettelossa. Hinta näytetään koulun sivuston valuutassa. Ota yhteyttä kouluun sopiaksesi ajotunnista.",
-    "subtitleExpansion": "{name} maassa {country} on laajentumissivu. Luettelo on tänään live Ruotsissa; näillä sivuilla näet pohjoismaisen kattavuuden kasvaessamme.",
+    "subtitleExpansion": "{name} on valmis. Vertailu on käytössä Ruotsissa.",
     "subtitleCountryLive": "Selaa alueita ja kaupunkeja kohteessa {name}. Avaa kaupunkisivu vertaillaksesi ilmoituksia.",
     "subtitleCountryCatalogue": "Avaa kaupunki vertaillaksesi autokouluja kohteessa {name}. Ne ovat samassa luettelossa kuin ruotsalaiset koulut.",
-    "subtitleCountryExpansion": "{name}-sivut ovat valmiit hakuun ja laajentumiseen. Luettelo on ensin live Ruotsissa (ADR-001).",
+    "subtitleCountryExpansion": "Sivut kohteelle {name} ovat täällä. Vertailu on käytössä Ruotsissa.",
     "breadcrumbLocations": "Paikat",
-    "expansionTitle": "Luettelo on Ruotsi ensin",
-    "expansionBody": "DriveLinkUp listaa autokoulut ensin Ruotsissa. Tämä pohjoismainen sijaintisivu on indeksoitavissa, jotta oppilaat löytävät meidät laajentuessamme — selaa ruotsalaisia kaupunkeja tänään.",
+    "expansionTitle": "Ruotsi on käytössä",
+    "expansionBody": "Vertailemme autokouluja Ruotsissa. Tämä sivu on täällä, jotta löydät meidät, kun maita lisätään.",
     "expansionCtaSweden": "Selaa ruotsalaisia autokouluja",
     "seoLead": "Vertaa autokouluja: {name}, {country}",
     "seoP1Live": "Ilmoitukset kohteessa {name} näyttävät luettelossa olevat koulut. Vertaa ennen kuin otat yhteyttä kouluun.",
     "seoP1Catalogue": "Koulut kohteessa {name} on listattu omilta sivustoiltaan. Niitä ei ole merkitty vahvistetuiksi. Vertaa niitä luettelossa ja ota sitten yhteyttä kouluun.",
-    "seoP1Expansion": "Julkaisemme jäsennellyn sivun kohteelle {name}, {country}, jotta haku ja tekoälyavustajat ohjaavat oppilaat oikein tarjonnan kasvaessa.",
+    "seoP1Expansion": "Sivu kohteelle {name}, {country} on täällä. Koulujen vertailu on käytössä Ruotsissa.",
     "seoP2": "Luetteloilmoitus on ilmainen. DriveLinkUp ei lisää oppilasmaksua. Ajotunnit ja maksu sovitaan koulun kanssa. Handledare / yksityinen harjoittelu on erillinen juridinen polku.",
     "howTitle": "Miten DriveLinkUp toimii",
     "howBodyLive": "Avaa ilmoitus, lue julkaistu hinta ja ota yhteyttä kouluun. Ajotunnit sovitaan koulun kanssa.",
@@ -3871,9 +3876,9 @@
       "description": "DriveLinkUp vertaa autokouluja. Julkaistut hinnat näkyvät ilmoituksessa. Listaus on ilmainen."
     },
     "hero": {
-      "eyebrow": "Autokoulut ja oppilaat. Yksi hakemisto.",
+      "eyebrow": "Ajokortille ja autolle.",
       "title": "Rakensimme vertailun, jota olisimme itse kaivanneet.",
-      "intro": "Mitä ajotunti maksaa, ja kuka sen antaa? DriveLinkUpissa vastaus on koulun julkaisema hinta.",
+      "intro": "Mitä se maksaa, ja kenelle maksat? Näet hinnan, jonka yritys on julkaissut.",
       "chips": [
         "Julkaistu hinta kruunuina",
         "Koulun lupa määrää ajokorttiluokan",
@@ -4046,7 +4051,7 @@
   "heavyVehiclesPage": {
     "eyebrow": "Kuorma-auto, linja-auto ja YKB",
     "title": "Raskaat ajoneuvot",
-    "subtitle": "Autokoulut, joiden sivuston mukaan ne kouluttavat C- tai D-korttiin tai YKB:hen. Hinta näkyy, kun koulu julkaisee sen."
+    "subtitle": "Koulut, joiden omalla sivulla koulutetaan kuorma-autoon, linja-autoon tai YKB:hen. Hinta näkyy, kun koulu on asettanut sen."
   },
   "lessonComparison": {
     "meta": {
@@ -4065,11 +4070,11 @@
     "colLength": "Kesto",
     "colPerMinute": "Kr/min",
     "minutes": "{minutes} min",
-    "sourceNote": "Hinta on se, jonka koulu on julkaissut sivullaan. DriveLinkUp ei ole vahvistanut sitä, eikä sitä käytetä varaussummana.",
+    "sourceNote": "Hinta tulee koulun verkkosivulta. Emme ole tarkistaneet sitä, eikä se ole varaussumma.",
     "cardsHeading": "Koulut, joilla on julkaistu hinta paikassa {name}",
     "faqTitle": "Kysymyksiä",
     "faq1q": "Ovatko hinnat paikassa {name} ajan tasalla?",
-    "faq1a": "Ne on luettu kunkin koulun omalta sivulta. Koulu on voinut muuttaa hintaa sen jälkeen — avaa koulun hinnasto ilmoituksesta.",
+    "faq1a": "Ne on luettu kunkin koulun omalta sivulta. Koulu on voinut muuttaa hintaa sen jälkeen, kun luimme sivun. Avaa koulun hinnasto ilmoituksesta.",
     "faq2q": "Veloittaako DriveLinkUp vertailusta?",
     "faq2a": "Ei. Luettelo on ilmainen. Maksat koululle, et DriveLinkUpille.",
     "backToHub": "Kaikki autokoulut paikassa {name}",
@@ -4083,7 +4088,7 @@
     },
     "eyebrow": "Autoliikkeet",
     "title": "Vertaa ajoneuvojen hintoja",
-    "lead": "Jokainen kortti on jälleenmyyjän julkaisema auto, kuorma-auto tai moottoripyörä, uusi tai käytetty, ilmoituksen tiedoilla. Hinta on ilmoitettu summa. DriveLinkUp ei myy ajoneuvoa.",
+    "lead": "Vertaile autoja, kuorma-autoja ja moottoripyöriä, jotka kauppias on julkaissut. Hinta on kauppiaan.",
     "cityLabel": "Paikkakunta",
     "cityAll": "Kaikki paikkakunnat",
     "kindLabel": "Ajoneuvo",
@@ -4131,7 +4136,7 @@
     },
     "eyebrow": "Varaosat",
     "title": "Vertaile varaosia ja tarvikkeita",
-    "lead": "Auton omistaja ja korjaamo vertaavat hintaa ja tietoja, jotka kauppa on julkaissut. DriveLinkUp ei myy tuotetta.",
+    "lead": "Vertaile hintaa ja tietoja, jotka kauppa on julkaissut.",
     "queryLabel": "Tuote",
     "queryPlaceholder": "Jarrupalat",
     "kindLabel": "Tyyppi",
@@ -4184,10 +4189,10 @@
   "inspectionPage": {
     "meta": {
       "title": "Vertaa katsastushintoja",
-      "description": "Julkaistut hinnat asemalta tai viranomaiselta. Maa näkyy, kun hinta on julkaistu. DriveLinkUp ei varaa katsastusta."
+      "description": "Katsastushinnat, jotka asema tai viranomainen on julkaissut. Emme varaa katsastusta."
     },
     "title": "Vertaa katsastushintoja",
-    "lead": "Hinta on se, jonka asema tai viranomainen on julkaissut. DriveLinkUp ei varaa katsastusta eikä kutsu asemaa varmennetuksi.",
+    "lead": "Vertaile hintaa, jonka asema tai viranomainen on julkaissut. Emme varaa katsastusta.",
     "countryLabel": "Maa",
     "countryAll": "Kaikki maat",
     "vehicleLabel": "Ajoneuvo",
@@ -4233,12 +4238,24 @@
   "tirePage": {
     "meta": {
       "title": "Vertaa rengashintoja",
-      "description": "Julkaistut hinnat renkaanvaihdolle, rengashotellille ja asennukselle korjaamon omalta sivulta. Maa näkyy, kun hinta on julkaistu. DriveLinkUp ei varaa vaihtoa."
+      "description": "Rengashinnat korjaamon omalta sivulta. Emme varaa vaihtoa."
     },
     "title": "Vertaa rengashintoja",
-    "lead": "Hinta on se, jonka korjaamo on julkaissut renkaanvaihdolle, säilytykselle, asennukselle tai liikkuvalle käynnille. DriveLinkUp ei varaa työtä eikä kutsu korjaamoa vahvistetuksi.",
+    "lead": "Vertaile hintaa, jonka korjaamo on asettanut renkaanvaihdolle, rengashotellille tai asennukselle. Emme varaa vaihtoa.",
     "countryLabel": "Maa",
     "countryAll": "Kaikki maat",
+    "cityLabel": "Kaupunki",
+    "cityAll": "Kaikki kaupungit",
+    "filter": "Näytä",
+    "useMyLocation": "Käytä sijaintiani",
+    "clearLocation": "Tyhjennä sijainti",
+    "locationPrompt": "Valitse kaupunki tai käytä sijaintiasi, niin näet siellä pätevät julkaistut hinnat.",
+    "locationRequesting": "Haetaan sijaintia…",
+    "locationGranted": "Näytetään julkaistut hinnat lähintä kaupunkia varten.",
+    "locationDenied": "Sijainnin käyttö estettiin. Voit silti valita kaupungin.",
+    "locationFailed": "Sijaintia ei löytynyt. Yritä uudelleen tai valitse kaupunki.",
+    "locationUnsupported": "Sijainti ei ole käytettävissä tässä selaimessa. Voit silti valita kaupungin.",
+    "locationNone": "Yksikään listan kaupunki ei ole tarpeeksi lähellä. Valitse kaupunki.",
     "vehicleLabel": "Ajoneuvo",
     "serviceLabel": "Palvelu",
     "vehicles": {
@@ -4267,6 +4284,7 @@
       "wheelsBrought": "Tuot vanteet mukanasi. Sivu ilmoittaa tämän alkaen-hinnan nimeämilleen kokoille.",
       "extrasMayApply": "Sivu sanoo, että lisät kuten TPMS-huolto ja uudet venttiilit voivat maksaa enemmän.",
       "includesCheck": "Sivu sisältää renkaiden ja rengaspaineen tarkistuksen.",
+      "includesChange": "Sisältää säilytyksen ja renkaiden vaihdon.",
       "includesChangeAndWash": "Sisältää renkaanvaihdon, säilytyksen ja pesun.",
       "includesChangeWashAndCheck": "Sisältää säilytyksen, konepesun, renkaanvaihdon ja tarkistuksen.",
       "ownTyres": "Omien renkaiden asennus ja tasapainotus, sitten vanteet autoon.",
@@ -4281,10 +4299,10 @@
   "taxiPage": {
     "meta": {
       "title": "Vertaa taksinkuljettajan koulutusta",
-      "description": "Julkaistut hinnat taksinkuljettajan kurssille ja viralliselle kokeelle. Maa näkyy, kun koulu tai viranomainen on julkaissut summan. DriveLinkUp ei ilmoita sinua kurssille."
+      "description": "Hinnat taksinkuljettajan koulutukselle ja virallisille kokeille. Emme ilmoita sinua."
     },
     "title": "Vertaa taksinkuljettajan koulutusta",
-    "lead": "Hinta on se, jonka koulu tai viranomainen on julkaissut kurssille tai viralliselle kokeelle. DriveLinkUp ei ilmoita sinua eikä kutsu koulua vahvistetuksi.",
+    "lead": "Vertaile hintaa, jonka koulu tai viranomainen on asettanut kurssille tai kokeelle. Emme ilmoita sinua.",
     "countryLabel": "Maa",
     "countryAll": "Kaikki maat",
     "kindLabel": "Mitä hinta koskee",
@@ -4324,10 +4342,10 @@
   "leasingPage": {
     "meta": {
       "title": "Vertaile leasinghintoja",
-      "description": "Julkaistut yksityisleasinghinnat nimetyille malleille. Maa näkyy, kun leasingyhtiö julkaisi mallin ja kuukausisumman. DriveLinkUp ei vuokraa autoa."
+      "description": "Yksityisleasingin hinnat nimetyille malleille. Emme liisaa autoa."
     },
     "title": "Vertaile leasinghintoja",
-    "lead": "Hinta on kuukausisumma, jonka leasingyhtiö julkaisi tälle mallille. Maa on se, jossa hinta julkaistiin. DriveLinkUp ei vuokraa autoa eikä kutsu tarjousta varmennetuksi.",
+    "lead": "Vertaile kuukausihintaa, jonka liisaaja on julkaissut juuri sille mallille. Emme liisaa autoa.",
     "countryLabel": "Maa",
     "countryAll": "Kaikki maat",
     "priceFrom": "alkaen",
@@ -4374,7 +4392,7 @@
       "description": "Vertaile tuntihintaa, jonka kaupunki tai operaattori on julkaissut nimetylle paikalle. Valitse kaupunki ja näe se muiden hintojen rinnalla."
     },
     "title": "Pysäköintihinnat",
-    "lead": "Vertaile tuntihintaa, jonka kaupunki tai operaattori on julkaissut nimetylle paikalle. Valitse kaupunki, niin näet paikan muiden hintojen rinnalla. Luku on se julkaistu tunti. Yhden valuutan sisällä paikka, jonka ihmiset avaavat, voi nousta. DriveLinkUp ei varaa paikkaa. Paikan kyltti ratkaisee.",
+    "lead": "Vertaile tuntimaksua, jonka kaupunki tai operaattori on julkaissut. Paikan kyltti ratkaisee.",
     "countryLabel": "Maa",
     "countryAll": "Kaikki maat",
     "cityLabel": "Kaupunki",
@@ -4413,5 +4431,140 @@
       "prepaid": "Operaattori veloittaa maksun etukäteen.",
       "outerCityGuest": "Sivu ilmoittaa tämän ulkokaupungin asukas- ja vieraspysäköinniksi."
     }
+  },
+  "sellCarPage": {
+    "meta": {
+      "title": "Myy auto",
+      "description": "Kirjaudu sisään arvioidaksesi markkinahinnan julkaistuista katalogihinnoista ja julkaistaksesi auton, jotta ostaja voi löytää sen. DriveLinkUp ei osta autoa."
+    },
+    "header": {
+      "title": "Myy auto",
+      "lead": "Näe hinta, joka rakentuu täällä jo olevista ilmoituksista. Luo tili, jotta voit julkaista auton. Emme osta sitä."
+    },
+    "gate": {
+      "title": "Luo tili arviota ja julkaisua varten",
+      "body": "Hinta-arvio ja ilmoitus ovat käytettävissä, kun olet luonut tilin.",
+      "signup": "Luo tili",
+      "login": "Kirjaudu sisään"
+    },
+    "form": {
+      "make": "Merkki",
+      "model": "Malli",
+      "year": "Vuosimalli",
+      "yearNone": "Vuosimalli ei tiedossa",
+      "country": "Maa",
+      "currency": "Valuutta",
+      "city": "Paikkakunta",
+      "asking": "Pyyntihintasi",
+      "note": "Huomautus",
+      "noteHint": "Älä lisää rekisterinumeroa tai VIN-koodia.",
+      "estimate": "Arvioi markkinahinta",
+      "publish": "Julkaise, jotta ostaja voi löytää auton",
+      "working": "Käsitellään…"
+    },
+    "result": {
+      "median": "Julkaistujen hintojen mediaani",
+      "range": "Julkaistu vaihteluväli {low}–{high}",
+      "count": "Perustuu {count} julkaistuun hintaan",
+      "none": "Alle kolme julkaistua hintaa vastaa tätä mallia tässä valuutassa, joten arviota ei ole.",
+      "buyers": "Kauppiaat, jotka julkaisevat tämän mallin",
+      "buyersNone": "Yksikään kauppias tässä maassa ei julkaise tätä mallia.",
+      "published": "Auto on julkaistu.",
+      "open": "Avaa ilmoitus"
+    },
+    "errors": {
+      "auth": "Kirjaudu sisään jatkaaksesi.",
+      "invalid": "Tarkista merkki, malli, paikkakunta ja hinta.",
+      "identifier": "Poista rekisterinumero tai VIN.",
+      "own": "Tämä on sinun ilmoituksesi.",
+      "limit": "Olet lähettänyt päivän viestirajan."
+    },
+    "mine": {
+      "title": "Omat ilmoituksesi",
+      "empty": "Et ole vielä julkaissut autoa."
+    }
+  },
+  "carsForSalePage": {
+    "meta": {
+      "title": "Autot myynnissä",
+      "description": "Yksityisten omistajien julkaisemia autoja. Arvio on julkaistujen katalogihintojen mediaani. Yhteydenotto vaatii tilin."
+    },
+    "header": {
+      "title": "Autot myynnissä",
+      "lead": "Autot, jotka yksityiset ovat julkaisseet. Arvio käyttää hintoja, jotka ovat jo täällä. Emme tee kauppaa.",
+      "sell": "Myy auto"
+    },
+    "empty": "Yksityisiä autoja ei ole vielä julkaistu.",
+    "card": {
+      "noEstimate": "Julkaistuja hintoja on liian vähän arvioon",
+      "asking": "Pyyntihinta {amount}"
+    },
+    "detail": {
+      "back": "Kaikki myytävät autot",
+      "estimate": "Julkaistujen hintojen mediaani",
+      "range": "Julkaistu vaihteluväli {low}–{high}, {count} hinnasta",
+      "none": "Alle kolme julkaistua hintaa vastaa tätä mallia, joten arviota ei ole.",
+      "inquire": "Kirjoita omistajalle",
+      "inquireBody": "Nimesi ja sähköpostisi lähetetään omistajalle. DriveLinkUp ei välitä maksua.",
+      "message": "Viesti",
+      "send": "Lähetä",
+      "sending": "Lähetetään…",
+      "sent": "Omistajalla on viestisi.",
+      "messages": "Ostajien viestit",
+      "noMessages": "Yksikään ostaja ei ole vielä kirjoittanut.",
+      "signInTitle": "Luo tili keskustelua varten",
+      "signInBody": "Auto on ilmainen lukea. Keskustelu aukeaa, kun olet luonut tilin.",
+      "signup": "Luo tili",
+      "login": "Kirjaudu sisään"
+    },
+    "errors": {
+      "auth": "Luo tili ennen keskustelua.",
+      "invalid": "Kirjoita vähintään 10 merkkiä.",
+      "identifier": "Poista rekisterinumero tai VIN.",
+      "own": "Tämä on sinun ilmoituksesi.",
+      "limit": "Olet lähettänyt päivän viestirajan."
+    },
+    "thread": {
+      "title": "Keskustelu",
+      "body": "Ilmoitus on ilmainen. Keskustelu on vain tileille. DriveLinkUp ei välitä maksua.",
+      "emptyOwner": "Yksikään ostaja ei ole vielä kirjoittanut.",
+      "emptyBuyer": "Kirjoita ensimmäinen viesti.",
+      "with": "Keskustelu henkilön {name} kanssa",
+      "message": "Viesti",
+      "send": "Lähetä",
+      "sending": "Lähetetään…",
+      "you": "Sinä",
+      "yours": "Autokeskustelut"
+    }
+  },
+  "adminConversationsPage": {
+    "title": "Keskustelut",
+    "lead": "Jokainen DriveLinkUpin keskustelu. Tämä näkymä on vain luettavissa.",
+    "empty": "Ei vielä keskusteluja.",
+    "vehicle": "Yksityinen auto",
+    "booking": "Ajotunti",
+    "messages": "Viestit",
+    "noMessages": "Tässä keskustelussa ei ole viestejä."
+  },
+  "workshopPage": {
+    "meta": {
+      "title": "Autokorjaamot",
+      "description": "Autokorjaamoja nimellä ja osoitteella. Korjaamo näkyy myös silloin, kun se ei julkaise hintaa."
+    },
+    "title": "Korjaamot",
+    "lead": "Etsi korjaamo, kun auto pysähtyy tai renkaat pitää vaihtaa.",
+    "sourceNote": "Nimi ja osoite tulevat OpenStreetMapista. Jos hintaa ei ole, korjaamo jää listalle. Emme varaa korjausta.",
+    "countryLabel": "Maa",
+    "cityLabel": "Kaupunki",
+    "cityAll": "Valitse kaupunki",
+    "cityUnknown": "Kaupunkia ei ole julkaistu",
+    "filter": "Näytä",
+    "chooseCity": "Valitse kaupunki, niin näet siellä kartoitetut korjaamot.",
+    "empty": "Ei kartoitettua korjaamoa siinä kaupungissa.",
+    "addressMissing": "Osoitetta ei ole julkaistu kartalla.",
+    "count": "{count} korjaamoa",
+    "pageLabel": "Sivu {page}",
+    "next": "Seuraava",
+    "previous": "Edellinen"
   }
 }

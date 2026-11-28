@@ -120,9 +120,12 @@ export function DashboardNav({ role, isAdmin, userLabel }: DashboardNavProps) {
           </Link>
         ) : null}
         {isAdmin ? (
-          <span className="ml-1 rounded-md border border-brand-500/40 bg-brand-100 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-brand-700 dark:bg-brand-900 dark:text-brand-300">
+          <Link
+            href="/dashboard/admin/conversations"
+            className="ml-1 rounded-md border border-brand-500/40 bg-brand-100 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-brand-700 dark:bg-brand-900 dark:text-brand-300"
+          >
             {t('adminBadge')}
-          </span>
+          </Link>
         ) : null}
       </div>
       <div className="ml-auto flex items-center gap-2">

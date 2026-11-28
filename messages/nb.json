@@ -51,7 +51,9 @@
       "tires": "Dekk",
       "taxi": "Drosjesjåfør",
       "leasing": "Leasing",
-      "parking": "Parkering"
+      "parking": "Parkering",
+      "sellCar": "Selg bil",
+      "workshops": "Verksteder"
     },
     "language": {
       "sv": "Svenska",
@@ -206,7 +208,7 @@
     "header": {
       "eyebrow": "Spørsmål",
       "title": "Spørsmål",
-      "subtitle": "Vanlige spørsmål om å sammenligne trafikkskoler, priser og kjøretimer i Sverige."
+      "subtitle": "Korte svar om skoler, priser og kjøretimer."
     },
     "items": {
       "scope": {
@@ -246,12 +248,12 @@
   "blogPage": {
     "meta": {
       "title": "Blogg",
-      "description": "Guider for den som flytter og skal ta førerkort, eie en bil eller arbeide med en bil. En pris vises bare når utgiveren skrev den."
+      "description": "Guider for deg som flytter og skal ta førerkort, eie en bil eller jobbe med en bil."
     },
     "header": {
       "eyebrow": "Blogg",
       "title": "Flytte: førerkort og bil",
-      "subtitle": "For den som skal ta førerkort, eie en bil eller arbeide med en bil etter en flytting. En pris vises bare når utgiveren skrev den."
+      "subtitle": "Guider for deg som flytter og skal ta førerkort, eie en bil eller jobbe med en bil."
     },
     "posts": {
       "11": {
@@ -2361,11 +2363,11 @@
     }
   },
   "consentBanner": {
-    "intro": "Vi bruker informasjonskapsler som katalogen trenger for å kjøre. Med ditt samtykke kan vi også laste inn annonser. Du kan endre valget ditt når som helst.",
+    "intro": "Informasjonskapsler siden trenger, er alltid på. Annonser vises bare hvis du sier ja. Du kan endre valget når som helst.",
     "essentialLabel": "Viktig",
-    "essentialBody": "Pålogging, sikkerhet, språk og husk dette valget. Påkrevd — kan ikke slås av.",
+    "essentialBody": "Innlogging, sikkerhet og språk. Disse kan ikke slås av.",
     "analyticsLabel": "Analytics",
-    "analyticsBody": "Ingen separat analyseverktøy kjører i dag. Denne bryteren er reservert. La den være av med mindre du vil ha den behandlingen hvis vi legger den til senere.",
+    "analyticsBody": "Ingen analyse kjører nå. La valget stå av hvis du ikke vil at det skal kunne slås på senere.",
     "marketingLabel": "Markedsføring",
     "marketingBody": "Google AdSense, som kan vise annonser og angi Google-informasjonskapsler. Laster kun hvis du godtar.",
     "acceptAll": "Godta alle",
@@ -2373,7 +2375,7 @@
     "customize": "Tilpass",
     "save": "Lagre valget mitt",
     "saved": "Informasjonskapselvalget ditt er lagret.",
-    "error": "Kunne ikke lagre informasjonskapselvalget – prøv igjen.",
+    "error": "Kunne ikke lagre valget ditt. Prøv igjen.",
     "privacy": "Personvernerklæring"
   },
   "consentForm": {
@@ -2435,8 +2437,8 @@
       "eyebrow": "",
       "title": "Sammenlign bilpriser og kjøreskoler.",
       "metaTitle": "Sammenlign reservedeler, bilpriser og trafikkskoler",
-      "metaDescription": "Sammenlign reservedeler, bilpriser og trafikkskoler. Prisen er den bedriften har publisert. Gratis katalog for alle.",
-      "body": "Sammenlign trafikkskoler, tungtrafikk, bilpriser og reservedeler som en butikk har publisert for en bileier eller et verksted. Vi sammenligner priser for EU-kontroll, dekkpriser, drosjesjåførkurs, leasingpriser og parkeringspriser også. Tallet er den publiserte prisen.",
+      "metaDescription": "Sammenlign trafikkskoler, biler, deler, kontroll og dekk. Prisen er den bedriften har publisert. Gratis for alle.",
+      "body": "Sammenlign skole, bil, deler, kontroll, dekk, taxi, leasing og parkering. Du ser prisen bedriften har publisert.",
       "primaryCta": "Finn en skole",
       "instructorCta": "Jeg jobber på en kjøreskole",
       "marketplaceTag": "Bilpriser · Kjøreskoler",
@@ -2460,7 +2462,7 @@
       "imageAlt": "Kjøretime: en sjåfør holder rattet i skumringen",
       "previewLines": {
         "profile": "Sammenlign kategorier, språk og plassering.",
-        "price": "Se gjennom skolens publiserte pris – ingen ekstra avgifter.",
+        "price": "Se skolens publiserte pris. Ingen ekstra avgift.",
         "time": "Åpne skolen og les hva som står på listen."
       },
       "search": {
@@ -2508,6 +2510,8 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa",
+          "helsinki": "Helsinki",
+          "amsterdam": "Amsterdam",
           "newYork": "New York"
         },
         "modeLabel": "Hva vil du sammenligne",
@@ -2551,11 +2555,12 @@
           "tires": "Dekk",
           "taxi": "Drosjesjåfør",
           "leasing": "Leasing",
-          "parking": "Parkering"
+          "parking": "Parkering",
+          "workshops": "Verksteder"
         }
       },
-      "lead": "Gratis. Du betaler skolens pris.",
-      "note": "DriveLinkUp er en katalog. Vi tar ikke betaling for en katalogoppføring.",
+      "lead": "Gratis for alle. Du betaler bedriften.",
+      "note": "En liste her er verken en bestilling eller en tillatelse.",
       "schoolLink": "Jeg driver en skole",
       "chips": {
         "price": "Publisert pris i kroner",
@@ -2608,7 +2613,7 @@
         },
         "book": {
           "title": "Ta kontakt med skolen",
-          "body": "Du kontakter skolen. DriveLinkUp bestiller ikke timen."
+          "body": "Skriv til skolen. Vi bestiller ikke timen."
         }
       }
     },
@@ -2626,19 +2631,19 @@
     },
     "assurance": {
       "eyebrow": "Hvordan katalogen fungerer",
-      "title": "Ingenting skjult i den fine skriften.",
+      "title": "Tydelig fra start.",
       "cards": {
         "price": {
           "title": "Den publiserte prisen",
-          "body": "Når en skole har publisert en pris, ser du den i kroner. DriveLinkUp legger ikke til noe gebyr."
+          "body": "Når skolen har satt en pris, ser du den i kroner. Vi legger ikke på et gebyr."
         },
         "safety": {
           "title": "En oppføring er et katalogkort",
-          "body": "Et katalogkort er ikke en undervisningstillatelse og ikke en avtale. Bekreft tillatelse, leksjonsoppsett og vilkår med skolen."
+          "body": "En annonse er verken en lisens eller en avtale. Spør skolen om tillatelse og vilkår."
         },
         "cancellation": {
           "title": "Ta kontakt med skolen",
-          "body": "Undervisningen avtales med skolen. Kontakt skolen åpner deres innboks eller nettside. DriveLinkUp tar ikke betalt for en katalogoppføring."
+          "body": "Du kontakter skolen. Vi tar ikke betalt for at skolen vises her."
         }
       }
     },
@@ -3576,12 +3581,12 @@
   "pricingPage": {
     "meta": {
       "title": "Priser",
-      "description": "Sammenlign trafikkskoler gratis. En katalogoppføring er gratis. DriveLinkUp tar ikke betalt for katalogoppføringer."
+      "description": "Sammenligningen er gratis for alle. DriveLinkUp tar ikke betalt for en liste."
     },
     "hero": {
       "eyebrow": "Katalog",
-      "title": "Skoleprisen er tallet på oppføringen.",
-      "body": "Oppdag og sammenlign kjøreskoleoppføringer."
+      "title": "Du ser prisen. Ingenting legges på.",
+      "body": "Sammenlign skolene gratis. Timen betaler du til skolen."
     },
     "learner": {
       "title": "For elever",
@@ -3597,7 +3602,7 @@
     },
     "notes": {
       "title": "Slik fungerer oppføringen (Sverige)",
-      "body": "En katalogoppføring er gratis. DriveLinkUp tar ikke betalt for katalogoppføringer og legger ikke til en elevavgift. Leksjoner og terminer avtales med skolen."
+      "body": "Listen er gratis. Timen og vilkårene avtaler du med skolen."
     },
     "cta": {
       "learner": "Sammenlign skoler",
@@ -3695,18 +3700,18 @@
     "headerTitleCountry": "Trafikkskoler i {name}",
     "subtitleLive": "Sammenlign skoleoppføringer i {name} etter kategori, språk og publisert SEK-pris. Ta kontakt med skolen for å avtale time.",
     "subtitleCatalogue": "Kjøreskoler i {name} er i samme katalog. En pris vises i valuta på skolens hjemmeside. Ta kontakt med skolen for å avtale time.",
-    "subtitleExpansion": "{name} i {country} er et ekspansjonssenter. Katalogen er tilgjengelig i Sverige i dag. Bruk disse sidene til å utforske nordisk dekning etter hvert som vi vokser.",
+    "subtitleExpansion": "{name} er klar. Sammenligningen er live i Sverige.",
     "subtitleCountryLive": "Bla gjennom regioner og byer på tvers av {name}. Åpne et byknutepunkt for å sammenligne oppføringer.",
     "subtitleCountryCatalogue": "Åpne en by for å sammenligne kjøreskoler i {name}. De er i samme katalog som de svenske skolene.",
-    "subtitleCountryExpansion": "{name}-hubene er klare for SEO og utvidelse. Katalogen er først tilgjengelig i Sverige (ADR-001).",
+    "subtitleCountryExpansion": "Sidene for {name} finnes. Sammenligningen er live i Sverige.",
     "breadcrumbLocations": "Steder",
-    "expansionTitle": "Katalogen er først i Sverige",
-    "expansionBody": "DriveLinkUp viser først kjøreskoler i Sverige. Denne nordiske posisjonssiden kan indekseres slik at elever kan finne oss mens vi utvider – utforsk svenske byer i dag.",
+    "expansionTitle": "Sverige er live",
+    "expansionBody": "Vi sammenligner trafikkskoler i Sverige. Denne siden finnes så du finner oss når flere land legges til.",
     "expansionCtaSweden": "Bla gjennom svenske kjøreskoler",
     "seoLead": "Sammenlign kjøreskoler i {name}, {country}",
     "seoP1Live": "Oppføringer i {name} viser skoler som vises i katalogen. Sammenlign før du kontakter skolen.",
     "seoP1Catalogue": "Skoler i {name} er oppført fra sine egne nettsider. De er ikke merket som verifisert. Sammenlign dem i katalogen, og kontakt deretter skolen.",
-    "seoP1Expansion": "Vi publiserer et strukturert knutepunkt for {name}, {country}, slik at søke- og AI-assistenter kan rute elever riktig mens forsyningen registreres.",
+    "seoP1Expansion": "Siden for {name}, {country} finnes. Sammenligningen av skoler er live i Sverige.",
     "seoP2": "En katalogoppføring er gratis. DriveLinkUp legger ikke til en elevavgift. Undervisning og betaling avtales med skolen. Håndleder / privat praksis er en egen juridisk vei.",
     "howTitle": "Hvordan DriveLinkUp fungerer",
     "howBodyLive": "Åpne en oppføring, les den publiserte prisen, og kontakt deretter skolen. Undervisningen avtales med skolen.",
@@ -3871,9 +3876,9 @@
       "description": "DriveLinkUp sammenligner trafikkskoler. Publiserte priser vises på oppføringen. Listingen er gratis."
     },
     "hero": {
-      "eyebrow": "Kjøreskoler og elever. Én katalog.",
+      "eyebrow": "For førerkortet og bilen.",
       "title": "Vi bygde sammenligningen vi ønsket eksisterte.",
-      "intro": "Hva koster timen, og hvem står bak den? På DriveLinkUp er svaret skolens publiserte pris.",
+      "intro": "Hva koster det, og hvem betaler du? Du ser prisen bedriften har publisert.",
       "chips": [
         "Publisert pris i kroner",
         "Skolens tillatelse fastsetter lisensen",
@@ -4046,7 +4051,7 @@
   "heavyVehiclesPage": {
     "eyebrow": "Lastebil, buss og YKB",
     "title": "Tunge kjøretøy",
-    "subtitle": "Kjøreskoler hvis nettsider sier at de trener for et C- eller D-sertifikat, eller for YKB. Prisen vises når skolen publiserer den."
+    "subtitle": "Skoler som på eget nettsted utdanner for lastebil, buss eller YKB. Prisen vises når skolen har satt den."
   },
   "lessonComparison": {
     "meta": {
@@ -4065,11 +4070,11 @@
     "colLength": "Lengde",
     "colPerMinute": "Kr/min",
     "minutes": "{minutes} min",
-    "sourceNote": "Prisen er det skolen har publisert på nettstedet sitt. DriveLinkUp har ikke verifisert den, og den brukes ikke som bestillingsbeløp.",
+    "sourceNote": "Prisen kommer fra skolens nettsted. Vi har ikke kontrollert den, og den er ikke et bestillingsbeløp.",
     "cardsHeading": "Skoler med publisert pris i {name}",
     "faqTitle": "Vanlige spørsmål",
     "faq1q": "Er prisene i {name} oppdaterte?",
-    "faq1a": "De er hentet fra hver skoles eget nettsted. Skolen kan ha endret prisen etterpå — åpne skolens prisliste fra oppføringen.",
+    "faq1a": "De er hentet fra hver skoles eget nettsted. Skolen kan ha endret prisen etter at vi leste siden. Åpne skolens prisliste fra annonsen.",
     "faq2q": "Tar DriveLinkUp betalt for sammenligningen?",
     "faq2a": "Nei. Katalogen er gratis. Du betaler skolen, ikke DriveLinkUp.",
     "backToHub": "Alle kjøreskoler i {name}",
@@ -4083,7 +4088,7 @@
     },
     "eyebrow": "Bilforhandlere",
     "title": "Sammenlign kjøretøypriser",
-    "lead": "Hvert kort er en bil, lastebil eller motorsykkel en forhandler har publisert, ny eller brukt, med spesifikasjonene i annonsen. Prisen er det annonserte beløpet. DriveLinkUp selger ikke kjøretøyet.",
+    "lead": "Sammenlign biler, lastebiler og motorsykler en forhandler har publisert. Prisen er forhandlerens.",
     "cityLabel": "Sted",
     "cityAll": "Alle steder",
     "kindLabel": "Kjøretøy",
@@ -4131,7 +4136,7 @@
     },
     "eyebrow": "Reservedeler",
     "title": "Sammenlign reservedeler og tilbehør",
-    "lead": "En bileier og et verksted sammenligner prisen og spesifikasjonen butikken har publisert. DriveLinkUp selger ikke produktet.",
+    "lead": "Sammenlign pris og spesifikasjon butikken har publisert.",
     "queryLabel": "Produkt",
     "queryPlaceholder": "Bremseklosser",
     "kindLabel": "Type",
@@ -4184,10 +4189,10 @@
   "inspectionPage": {
     "meta": {
       "title": "Sammenlign priser for EU-kontroll",
-      "description": "Publiserte priser fra stasjonen eller myndigheten. Et land vises når prisen er publisert. DriveLinkUp bestiller ikke kontrollen."
+      "description": "Kontrollpriser som stasjonen eller myndigheten har publisert. Vi bestiller ikke kontrollen."
     },
     "title": "Sammenlign priser for EU-kontroll",
-    "lead": "Prisen er det stasjonen eller myndigheten har publisert. DriveLinkUp bestiller ikke kontrollen og kaller ikke en stasjon verifisert.",
+    "lead": "Sammenlign prisen stasjonen eller myndigheten har publisert. Vi bestiller ikke kontrollen.",
     "countryLabel": "Land",
     "countryAll": "Alle land",
     "vehicleLabel": "Kjøretøy",
@@ -4233,12 +4238,24 @@
   "tirePage": {
     "meta": {
       "title": "Sammenlign dekkpriser",
-      "description": "Publiserte priser for dekkskift, dekkhotell og montering fra verkstedets egen side. Et land vises når prisen er publisert. DriveLinkUp bestiller ikke skiftet."
+      "description": "Dekkpriser fra verkstedets egen side. Vi bestiller ikke skiftet."
     },
     "title": "Sammenlign dekkpriser",
-    "lead": "Prisen er det verkstedet har publisert for et hjulskift, dekkhotell, montering eller et mobilt besøk. DriveLinkUp bestiller ikke arbeidet og kaller ikke et verksted verifisert.",
+    "lead": "Sammenlign prisen verkstedet har satt for hjulskift, dekkhotell eller montering. Vi bestiller ikke skiftet.",
     "countryLabel": "Land",
     "countryAll": "Alle land",
+    "cityLabel": "By",
+    "cityAll": "Alle byer",
+    "filter": "Vis",
+    "useMyLocation": "Bruk posisjonen min",
+    "clearLocation": "Fjern sted",
+    "locationPrompt": "Velg en by, eller bruk posisjonen din, for å se publiserte priser som gjelder der.",
+    "locationRequesting": "Finner posisjonen din…",
+    "locationGranted": "Viser publiserte priser for byen nærmest deg.",
+    "locationDenied": "Posisjonstilgang ble avslått. Du kan fortsatt velge by.",
+    "locationFailed": "Vi fant ikke posisjonen din. Prøv igjen, eller velg en by.",
+    "locationUnsupported": "Posisjon er ikke tilgjengelig i denne nettleseren. Du kan fortsatt velge by.",
+    "locationNone": "Ingen by på listen er nær nok. Velg en by i stedet.",
     "vehicleLabel": "Kjøretøy",
     "serviceLabel": "Tjeneste",
     "vehicles": {
@@ -4267,6 +4284,7 @@
       "wheelsBrought": "Du tar med hjulene. Siden oppgir denne fra-prisen for størrelsene den navngir.",
       "extrasMayApply": "Siden sier at tillegg som TPMS-service og nye ventiler kan koste mer.",
       "includesCheck": "Siden inkluderer kontroll av dekkene og lufttrykket.",
+      "includesChange": "Inkluderer lagring og hjulskift.",
       "includesChangeAndWash": "Inkluderer hjulskift, lagring og vask.",
       "includesChangeWashAndCheck": "Inkluderer lagring, maskinvask, hjulskift og dekkontroll.",
       "ownTyres": "Montering og balansering av dekk du allerede har, deretter hjulene på bilen.",
@@ -4281,10 +4299,10 @@
   "taxiPage": {
     "meta": {
       "title": "Sammenlign drosjesjåførkurs",
-      "description": "Publiserte priser for drosjesjåførkurs og offisielle prøver. Et land vises når skolen eller myndigheten har publisert beløpet. DriveLinkUp melder deg ikke på."
+      "description": "Priser for drosjesjåføropplæring og offisielle prøver. Vi melder deg ikke på."
     },
     "title": "Sammenlign drosjesjåførkurs",
-    "lead": "Prisen er det skolen eller myndigheten har publisert for kurset eller den offisielle prøven. DriveLinkUp melder deg ikke på og kaller ikke en skole verifisert.",
+    "lead": "Sammenlign prisen skolen eller myndigheten har satt for kurset eller prøven. Vi melder deg ikke på.",
     "countryLabel": "Land",
     "countryAll": "Alle land",
     "kindLabel": "Hva prisen gjelder",
@@ -4324,10 +4342,10 @@
   "leasingPage": {
     "meta": {
       "title": "Sammenlign leasingpriser",
-      "description": "Publiserte privatleasingpriser for navngitte modeller. Et land vises når leasegiveren publiserte modellen og månedsbeløpet. DriveLinkUp leaser ikke bilen."
+      "description": "Privatleiepriser for navngitte modeller. Vi leier ikke ut bilen."
     },
     "title": "Sammenlign leasingpriser",
-    "lead": "Prisen er månedsbeløpet leasegiveren publiserte for den modellen. Landet er der prisen ble publisert. DriveLinkUp leaser ikke bilen og kaller ikke et tilbud verifisert.",
+    "lead": "Sammenlign månedsprisen utleieren har publisert for akkurat den modellen. Vi leier ikke ut bilen.",
     "countryLabel": "Land",
     "countryAll": "Alle land",
     "priceFrom": "fra",
@@ -4374,7 +4392,7 @@
       "description": "Sammenlign timeprisen som en by eller en operatør har publisert for et navngitt sted. Velg byen for å se den ved siden av de andre prisene der."
     },
     "title": "Parkeringspriser",
-    "lead": "Sammenlign timeprisen som en by eller en operatør har publisert for et navngitt sted. Velg byen for å se stedet ved siden av de andre prisene der. Tallet er den publiserte timen. Innen én valuta kan et sted folk åpner flyttes opp. DriveLinkUp reserverer ikke plassen. Skiltet på stedet gjelder.",
+    "lead": "Sammenlign timeprisen byen eller operatøren har publisert. Skiltet på stedet gjelder.",
     "countryLabel": "Land",
     "countryAll": "Alle land",
     "cityLabel": "By",
@@ -4413,5 +4431,140 @@
       "prepaid": "Operatøren tar avgiften på forskudd.",
       "outerCityGuest": "Siden lister dette som beboer- og gjesteparkering i ytre by."
     }
+  },
+  "sellCarPage": {
+    "meta": {
+      "title": "Selg bil",
+      "description": "Logg inn for å anslå en markedspris fra publiserte katalogpriser og publisere bilen slik at en kjøper kan finne den. DriveLinkUp kjøper ikke bilen."
+    },
+    "header": {
+      "title": "Selg bil",
+      "lead": "Se en pris bygget på annonser som allerede finnes her. Opprett konto for å legge ut bilen. Vi kjøper den ikke."
+    },
+    "gate": {
+      "title": "Opprett konto for å anslå og publisere",
+      "body": "Prisanslaget og annonsen er tilgjengelige etter at du har opprettet en konto.",
+      "signup": "Opprett konto",
+      "login": "Logg inn"
+    },
+    "form": {
+      "make": "Merke",
+      "model": "Modell",
+      "year": "Årsmodell",
+      "yearNone": "Årsmodell ukjent",
+      "country": "Land",
+      "currency": "Valuta",
+      "city": "Sted",
+      "asking": "Din prisantydning",
+      "note": "Notat",
+      "noteHint": "Ikke ta med registreringsnummer eller VIN.",
+      "estimate": "Anslå markedsprisen",
+      "publish": "Publiser slik at en kjøper kan finne bilen",
+      "working": "Arbeider…"
+    },
+    "result": {
+      "median": "Median av publiserte priser",
+      "range": "Publisert intervall {low}–{high}",
+      "count": "Basert på {count} publiserte priser",
+      "none": "Færre enn tre publiserte priser matcher denne modellen i denne valutaen, så det finnes ikke noe anslag.",
+      "buyers": "Forhandlere som publiserer denne modellen",
+      "buyersNone": "Ingen forhandler i dette landet publiserer denne modellen.",
+      "published": "Bilen er publisert.",
+      "open": "Åpne annonsen"
+    },
+    "errors": {
+      "auth": "Logg inn for å fortsette.",
+      "invalid": "Kontroller merke, modell, sted og pris.",
+      "identifier": "Fjern registreringsnummer eller VIN.",
+      "own": "Dette er din annonse.",
+      "limit": "Du har sendt dagens grense for meldinger."
+    },
+    "mine": {
+      "title": "Dine annonser",
+      "empty": "Du har ikke publisert en bil ennå."
+    }
+  },
+  "carsForSalePage": {
+    "meta": {
+      "title": "Biler til salgs",
+      "description": "Biler privatpersoner har publisert. Et anslag er medianen av publiserte katalogpriser. Kontakt krever en konto."
+    },
+    "header": {
+      "title": "Biler til salgs",
+      "lead": "Biler privatpersoner har lagt ut. Anslaget bygger på priser som allerede finnes her. Vi gjennomfører ikke salget.",
+      "sell": "Selg bil"
+    },
+    "empty": "Ingen privatbiler er publisert ennå.",
+    "card": {
+      "noEstimate": "For få publiserte priser til et anslag",
+      "asking": "Prisantydning {amount}"
+    },
+    "detail": {
+      "back": "Alle biler til salgs",
+      "estimate": "Median av publiserte priser",
+      "range": "Publisert intervall {low}–{high}, fra {count} priser",
+      "none": "Færre enn tre publiserte priser matcher denne modellen, så det finnes ikke noe anslag.",
+      "inquire": "Skriv til eieren",
+      "inquireBody": "Navnet og e-posten din sendes til eieren. DriveLinkUp tar ikke betalt.",
+      "message": "Melding",
+      "send": "Send",
+      "sending": "Sender…",
+      "sent": "Eieren har meldingen din.",
+      "messages": "Meldinger fra kjøpere",
+      "noMessages": "Ingen kjøper har skrevet ennå.",
+      "signInTitle": "Opprett konto for å chatte",
+      "signInBody": "Bilen er gratis å lese. Samtalen åpnes etter at du har opprettet en konto.",
+      "signup": "Opprett konto",
+      "login": "Logg inn"
+    },
+    "errors": {
+      "auth": "Opprett en konto før samtalen.",
+      "invalid": "Skriv minst 10 tegn.",
+      "identifier": "Fjern registreringsnummer eller VIN.",
+      "own": "Dette er din annonse.",
+      "limit": "Du har sendt dagens grense for meldinger."
+    },
+    "thread": {
+      "title": "Samtale",
+      "body": "Annonsen er gratis. Samtalen er bare for kontoer. DriveLinkUp tar ikke betalt.",
+      "emptyOwner": "Ingen kjøper har skrevet ennå.",
+      "emptyBuyer": "Skriv den første meldingen.",
+      "with": "Samtale med {name}",
+      "message": "Melding",
+      "send": "Send",
+      "sending": "Sender…",
+      "you": "Du",
+      "yours": "Bilsamtaler"
+    }
+  },
+  "adminConversationsPage": {
+    "title": "Samtaler",
+    "lead": "Hver samtale på DriveLinkUp. Denne visningen er skrivebeskyttet.",
+    "empty": "Ingen samtaler ennå.",
+    "vehicle": "Privat bil",
+    "booking": "Time",
+    "messages": "Meldinger",
+    "noMessages": "Denne samtalen har ingen meldinger."
+  },
+  "workshopPage": {
+    "meta": {
+      "title": "Bilverksteder",
+      "description": "Bilverksteder med navn og adresse. Et verksted vises også når det ikke publiserer en pris."
+    },
+    "title": "Verksteder",
+    "lead": "Finn et verksted når bilen stopper eller dekkene skal skiftes.",
+    "sourceNote": "Navn og adresse kommer fra OpenStreetMap. Mangler prisen, står verkstedet likevel. Vi bestiller ikke reparasjonen.",
+    "countryLabel": "Land",
+    "cityLabel": "By",
+    "cityAll": "Velg en by",
+    "cityUnknown": "By er ikke oppgitt",
+    "filter": "Vis",
+    "chooseCity": "Velg en by for å se verkstedene som er kartlagt der.",
+    "empty": "Ingen kartlagt verksted i den byen.",
+    "addressMissing": "Adressen er ikke publisert på kartet.",
+    "count": "{count} verksteder",
+    "pageLabel": "Side {page}",
+    "next": "Neste",
+    "previous": "Forrige"
   }
 }

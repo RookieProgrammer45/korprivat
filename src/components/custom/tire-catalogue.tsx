@@ -2,7 +2,9 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { CatalogueOutboundLink } from '@/components/custom/catalogue-outbound-link';
 import { SCHOOL_LISTING_GRID_CLASS } from '@/components/custom/school-listing-grid';
+import { TireLocation } from '@/components/custom/tire-location';
 import { LocaleLink as Link } from '@/components/locale-link';
+import { TIRE_PLACES, tireCityCountry } from '@/lib/discovery/tire-place';
 import {
   groupTiresByCurrency,
   type PublishedTire,
@@ -11,6 +13,7 @@ import {
   type TireVehicle,
 } from '@/lib/discovery/tires';
 import { intlLocale } from '@/lib/intl-locale';
+import { localePath } from '@/lib/seo/locale-path';
 import { tireSearchPath } from '@/lib/seo/tire-search-path';
 
 const VEHICLES: TireVehicle[] = ['car', 'van'];
@@ -27,6 +30,7 @@ export async function TireCatalogue({
   countries: string[];
 }) {
   const t = await getTranslations('tirePage');
+  const cities = await getTranslations('publicHome.hero.search.cities');
   const locale = await getLocale();
   const groups = groupTiresByCurrency(rows);
   const countryRank = (code: string) => {
@@ -34,12 +38,23 @@ export async function TireCatalogue({
     return index === -1 ? COUNTRY_ORDER.length : index;
   };
   const orderedCountries = [...countries].sort((a, b) => countryRank(a) - countryRank(b));
-  const hrefFor = (next: Partial<TireFilters> & { country?: string | null }) =>
-    tireSearchPath({
-      country: next.country === undefined ? filters.country : next.country,
+  const placeFor = (country: string | null) => {
+    if (!filters.place) return null;
+    if (country === filters.country || country === null) return filters.place;
+    return tireCityCountry(filters.place) === country ? filters.place : null;
+  };
+  const hrefFor = (next: Partial<TireFilters> & { country?: string | null }) => {
+    const country = next.country === undefined ? filters.country : next.country;
+    return tireSearchPath({
+      country,
+      place: next.place === undefined ? placeFor(country) : next.place,
       vehicle: next.vehicle ?? filters.vehicle,
       service: next.service ?? filters.service,
     });
+  };
+  const cityChoices = TIRE_PLACES.filter(
+    (city) => !filters.country || city.country === filters.country,
+  );
 
   return (
     <section className="border-t border-border" data-tire-catalogue="">
@@ -65,6 +80,45 @@ export async function TireCatalogue({
               </FilterLink>
             ))}
           </FilterRow>
+          <form
+            action={localePath(locale, '/dack')}
+            className="grid min-w-0 gap-3 rounded-[1.25rem] border border-border bg-card p-4 sm:grid-cols-[minmax(12rem,20rem)_1fr_auto] sm:items-end"
+          >
+            {filters.country ? (
+              <input type="hidden" name="country" value={filters.country} />
+            ) : null}
+            {filters.vehicle !== 'car' ? (
+              <input type="hidden" name="vehicle" value={filters.vehicle} />
+            ) : null}
+            {filters.service !== 'change' ? (
+              <input type="hidden" name="service" value={filters.service} />
+            ) : null}
+            <label className="grid min-w-0 gap-2 text-small text-muted-foreground sm:col-span-1">
+              {t('cityLabel')}
+              <select
+                name="place"
+                defaultValue={filters.place ?? ''}
+                className="min-h-11 rounded-full border border-border bg-card px-4 text-sm text-foreground"
+              >
+                <option value="">{t('cityAll')}</option>
+                {filters.place && !cityChoices.some((city) => city.value === filters.place) ? (
+                  <option value={filters.place}>{filters.place}</option>
+                ) : null}
+                {cityChoices.map((city) => (
+                  <option key={city.id} value={city.value}>
+                    {cities(city.id)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <TireLocation place={filters.place} />
+            <button
+              type="submit"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-foreground bg-foreground px-4 text-sm text-background"
+            >
+              {t('filter')}
+            </button>
+          </form>
           <FilterRow label={t('vehicleLabel')}>
             {VEHICLES.map((vehicle) => (
               <FilterLink

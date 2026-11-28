@@ -36,6 +36,8 @@ export const llmsConfig: LlmsConfig = {
       'Published vehicle-inspection prices. A country appears when the station or the authority published the amount. A maximum is the legal cap, not the price every garage charges. DriveLinkUp does not book the inspection.',
     '/dack':
       'Published tire-change, tire-hotel and fitting prices from the workshop’s own page. A country appears when that page stated the amount. DriveLinkUp does not book the change.',
+    '/verkstad':
+      'Car-repair workshops mapped on OpenStreetMap with the name and address the map entry published. A workshop is listed when it has no price. DriveLinkUp does not book the repair.',
     '/taxiutbildning':
       'Published taxi-driver course prices and official test fees. A course price is not the authority’s test fee. DriveLinkUp does not enrol the driver.',
     '/privatleasing':
@@ -46,6 +48,10 @@ export const llmsConfig: LlmsConfig = {
       'Heavy-vehicle driving schools whose source listed a truck or bus licence class. A school name alone does not make it a truck school.',
     '/bilhandlare':
       'Published car prices and specifications from the dealer’s own page. DriveLinkUp does not sell the car.',
+    '/salj-bil':
+      'A signed-in owner can estimate a market price from published catalogue prices in one currency and publish the car so a buyer can find it. DriveLinkUp does not buy the car and does not take payment.',
+    '/bilar-till-salu':
+      'Cars private owners have published. A price estimate is the median of published catalogue prices in the same currency. Contact requires an account. DriveLinkUp does not complete the sale.',
     '/locations':
       'Nordic location directory: Sweden live for discovery; Norway, Denmark, Finland, and Iceland expansion hubs.',
     '/locations/se': 'Sweden country hub with län and city pages for driving-school discovery.',

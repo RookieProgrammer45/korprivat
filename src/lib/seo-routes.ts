@@ -13,6 +13,8 @@ import { schoolPath } from '@/lib/seo/school-slugs';
 export type SeoRoute = { path: string } & Omit<MetadataRoute.Sitemap[number], 'url'>;
 
 const EDITORIAL: SeoRoute[] = [
+  { path: '/salj-bil', priority: 0.7, changeFrequency: 'weekly', lastModified: '2026-11-28' },
+  { path: '/bilar-till-salu', priority: 0.7, changeFrequency: 'daily', lastModified: '2026-11-28' },
   {
     path: '/blog/jobba-med-bil',
     priority: 0.75,
@@ -45,6 +47,7 @@ const EDITORIAL: SeoRoute[] = [
   { path: '/reservdelar', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/besiktning', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/dack', priority: 0.8, changeFrequency: 'weekly' },
+  { path: '/verkstad', priority: 0.8, changeFrequency: 'weekly', lastModified: '2026-11-28' },
   { path: '/taxiutbildning', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/privatleasing', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/parkering', priority: 0.8, changeFrequency: 'weekly' },

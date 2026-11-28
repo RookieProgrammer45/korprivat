@@ -51,7 +51,9 @@
       "tires": "Neumáticos",
       "taxi": "Formación taxi",
       "leasing": "Renting",
-      "parking": "Aparcamiento"
+      "parking": "Aparcamiento",
+      "sellCar": "Vender un coche",
+      "workshops": "Talleres"
     },
     "language": {
       "sv": "Svenska",
@@ -206,7 +208,7 @@
     "header": {
       "eyebrow": "Preguntas frecuentes",
       "title": "Preguntas",
-      "subtitle": "Preguntas frecuentes sobre comparar escuelas de conducción, precios y clases en Suecia."
+      "subtitle": "Respuestas breves sobre escuelas, precios y clases."
     },
     "items": {
       "scope": {
@@ -246,12 +248,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Guías para quien se muda y saca el permiso, tiene un coche o trabaja con un coche. Un precio aparece solo cuando quien lo publica lo escribió."
+      "description": "Guías para ti si te mudas y necesitas un permiso, un coche o un trabajo con un coche."
     },
     "header": {
       "eyebrow": "Blog",
       "title": "Mudanza: permiso y coche",
-      "subtitle": "Para quien saca el permiso, tiene un coche o trabaja con un coche después de mudarse. Un precio aparece solo cuando quien lo publica lo escribió."
+      "subtitle": "Guías para ti si te mudas y necesitas un permiso, un coche o un trabajo con un coche."
     },
     "posts": {
       "11": {
@@ -2361,11 +2363,11 @@
     }
   },
   "consentBanner": {
-    "intro": "Usamos las cookies que el directorio necesita para funcionar. Con su consentimiento también podemos cargar anuncios. Puede cambiar su elección en cualquier momento.",
+    "intro": "Las cookies que la página necesita están siempre activas. Los anuncios aparecen solo si dices que sí. Puedes cambiar la elección en cualquier momento.",
     "essentialLabel": "Esenciales",
-    "essentialBody": "Inicio de sesión, seguridad, idioma y recordar esta elección. Obligatorias: no se pueden desactivar.",
+    "essentialBody": "Inicio de sesión, seguridad e idioma. No se pueden desactivar.",
     "analyticsLabel": "Analítica",
-    "analyticsBody": "Hoy no hay una herramienta de analítica aparte en funcionamiento. Este interruptor está reservado. Déjelo desactivado salvo que quiera ese tratamiento si lo añadimos más adelante.",
+    "analyticsBody": "Ahora no hay analítica. Déjalo desactivado si no quieres que se active más adelante.",
     "marketingLabel": "Marketing",
     "marketingBody": "Google AdSense, que puede mostrar anuncios y establecer cookies de Google. Se carga solo si acepta.",
     "acceptAll": "Aceptar todas",
@@ -2373,7 +2375,7 @@
     "customize": "Personalizar",
     "save": "Guardar mi elección",
     "saved": "Tu elección de cookies está guardada.",
-    "error": "No se ha podido guardar tu elección de cookies: inténtalo de nuevo.",
+    "error": "No se pudo guardar tu elección. Inténtalo de nuevo.",
     "privacy": "Política de privacidad"
   },
   "consentForm": {
@@ -2435,8 +2437,8 @@
       "eyebrow": "",
       "title": "Compara precios de coches y autoescuelas.",
       "metaTitle": "Compara recambios, precios y autoescuelas",
-      "metaDescription": "Compara recambios, precios de coches y autoescuelas. El precio es el publicado. Catálogo gratis para todos.",
-      "body": "Compara autoescuelas, vehículos pesados, precios de coches y recambios que una tienda publicó para un conductor o un taller. También comparamos precios de ITV, precios de neumáticos, la formación de taxi, precios de renting y precios de aparcamiento. La cifra es el precio publicado.",
+      "metaDescription": "Compara autoescuelas, coches, recambios, inspección y neumáticos. El precio es el que publicó la empresa. Gratis para todos.",
+      "body": "Compara escuela, coche, recambios, inspección, neumáticos, taxi, leasing y aparcamiento. Ves el precio que publicó la empresa.",
       "primaryCta": "Buscar una autoescuela",
       "instructorCta": "Trabajo en una autoescuela",
       "marketplaceTag": "Precios de coches · Autoescuelas",
@@ -2460,7 +2462,7 @@
       "imageAlt": "Clase de conducir: un conductor al volante al anochecer",
       "previewLines": {
         "profile": "Compara categorías, idioma y ubicación.",
-        "price": "Consulta el precio publicado por la autoescuela, sin cargos añadidos.",
+        "price": "Ve el precio publicado por la escuela. Sin recargo.",
         "time": "Abre la autoescuela y lee lo que figura en la ficha."
       },
       "search": {
@@ -2508,6 +2510,8 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa",
+          "helsinki": "Helsinki",
+          "amsterdam": "Amsterdam",
           "newYork": "New York"
         },
         "modeLabel": "Qué quieres comparar",
@@ -2551,11 +2555,12 @@
           "tires": "Neumáticos",
           "taxi": "Formación taxi",
           "leasing": "Renting",
-          "parking": "Aparcamiento"
+          "parking": "Aparcamiento",
+          "workshops": "Talleres"
         }
       },
-      "lead": "Gratis. Pagas el precio de la autoescuela.",
-      "note": "DriveLinkUp es un catálogo. No cobramos por una ficha del catálogo.",
+      "lead": "Gratis para todos. Pagas a la empresa.",
+      "note": "Una ficha aquí no es una reserva ni un permiso.",
       "schoolLink": "Dirijo una autoescuela",
       "chips": {
         "price": "Precio publicado en coronas",
@@ -2608,7 +2613,7 @@
         },
         "book": {
           "title": "Contactar con la autoescuela",
-          "body": "Tú contactas con la autoescuela. DriveLinkUp no reserva la clase."
+          "body": "Escribe a la escuela. No reservamos la clase."
         }
       }
     },
@@ -2626,19 +2631,19 @@
     },
     "assurance": {
       "eyebrow": "Cómo funciona el directorio",
-      "title": "Nada escondido en la letra pequeña.",
+      "title": "Claro desde el principio.",
       "cards": {
         "price": {
           "title": "El precio publicado",
-          "body": "Cuando una autoescuela ha publicado un precio, lo ves en coronas. DriveLinkUp no añade ninguna tarifa."
+          "body": "Cuando la escuela ha puesto un precio, lo ves en coronas. No añadimos una tarifa."
         },
         "safety": {
           "title": "Una ficha es una tarjeta del catálogo",
-          "body": "Una tarjeta del catálogo no es un permiso de enseñanza ni un contrato. Confirma la autorización, el planteamiento de las clases y las condiciones con la autoescuela."
+          "body": "Una ficha no es una licencia ni un contrato. Pregunta a la escuela por el permiso y las condiciones."
         },
         "cancellation": {
           "title": "Contactar con la autoescuela",
-          "body": "Las clases se conciertan con la autoescuela. Contactar con la autoescuela abre su bandeja o su web. DriveLinkUp no cobra por una ficha del catálogo."
+          "body": "Contactas con la escuela. No cobramos porque la escuela aparezca aquí."
         }
       }
     },
@@ -3576,12 +3581,12 @@
   "pricingPage": {
     "meta": {
       "title": "Precios",
-      "description": "Compara autoescuelas gratis. Un anuncio de catálogo es gratis. DriveLinkUp no cobra por los anuncios."
+      "description": "La comparación es gratis para todos. DriveLinkUp no cobra por una ficha."
     },
     "hero": {
       "eyebrow": "Directorio",
-      "title": "El precio de la autoescuela es la cifra que figura en la ficha.",
-      "body": "Descubre y compara anuncios de autoescuelas."
+      "title": "Ves el precio. No se añade nada.",
+      "body": "Compara las escuelas gratis. La clase la pagas a la escuela."
     },
     "learner": {
       "title": "Para alumnos",
@@ -3597,7 +3602,7 @@
     },
     "notes": {
       "title": "Cómo funciona el catálogo (Suecia)",
-      "body": "Una ficha del catálogo es gratuita. DriveLinkUp no cobra por las fichas del directorio y no añade una tarifa para el alumno. Las clases y las condiciones se conciertan con la autoescuela."
+      "body": "La ficha es gratis. La clase y las condiciones las acuerdas con la escuela."
     },
     "cta": {
       "learner": "Comparar autoescuelas",
@@ -3695,18 +3700,18 @@
     "headerTitleCountry": "Autoescuelas en {name}",
     "subtitleLive": "Compara fichas de autoescuelas en {name} por categoría, idioma y precio publicado en SEK. Contacta con la autoescuela para concertar una clase.",
     "subtitleCatalogue": "Las autoescuelas en {name} están en el mismo catálogo. Un precio se muestra en la moneda de la web de la autoescuela. Contacta con la autoescuela para concertar una clase.",
-    "subtitleExpansion": "{name} en {country} es un hub de expansión. El catálogo está activo en Suecia hoy; usa estas páginas para explorar la cobertura nórdica a medida que crecemos.",
+    "subtitleExpansion": "{name} está listo. La comparación está activa en Suecia.",
     "subtitleCountryLive": "Explora regiones y ciudades de {name}. Abre un hub de ciudad para comparar fichas.",
     "subtitleCountryCatalogue": "Abre una ciudad para comparar autoescuelas en {name}. Están en el mismo catálogo que las autoescuelas suecas.",
-    "subtitleCountryExpansion": "Los hubs de {name} están listos para SEO y expansión. El catálogo está activo primero en Suecia (ADR-001).",
+    "subtitleCountryExpansion": "Las páginas de {name} están aquí. La comparación está activa en Suecia.",
     "breadcrumbLocations": "Lugares",
-    "expansionTitle": "El catálogo es Suecia primero",
-    "expansionBody": "DriveLinkUp lista autoescuelas primero en Suecia. Esta página nórdica es indexable para que los alumnos nos encuentren a medida que nos expandimos: explora ciudades suecas hoy.",
+    "expansionTitle": "Suecia está activa",
+    "expansionBody": "Comparamos autoescuelas en Suecia. Esta página está aquí para que nos encuentres cuando se añadan más países.",
     "expansionCtaSweden": "Ver autoescuelas suecas",
     "seoLead": "Comparar autoescuelas en {name}, {country}",
     "seoP1Live": "Las fichas en {name} muestran autoescuelas que aparecen en el catálogo. Compara antes de contactar con la autoescuela.",
     "seoP1Catalogue": "Las autoescuelas en {name} se listan a partir de sus propias webs. No están marcadas como verificadas. Compáralas en el catálogo y luego contacta con la autoescuela.",
-    "seoP1Expansion": "Publicamos un hub estructurado para {name}, {country} para que la búsqueda y los asistentes de IA dirijan bien a los alumnos mientras se incorpora la oferta.",
+    "seoP1Expansion": "La página de {name}, {country} está aquí. La comparación de escuelas está activa en Suecia.",
     "seoP2": "Una ficha del catálogo es gratuita. DriveLinkUp no añade una tarifa para el alumno. Las clases y el pago se conciertan con la autoescuela. Handledare / práctica privada es un recorrido legal aparte.",
     "howTitle": "Cómo funciona DriveLinkUp",
     "howBodyLive": "Abre una ficha, lee el precio publicado y luego contacta con la autoescuela. Las clases se conciertan con la autoescuela.",
@@ -3871,9 +3876,9 @@
       "description": "DriveLinkUp compara autoescuelas. Los precios publicados aparecen en el anuncio. Listarse es gratis."
     },
     "hero": {
-      "eyebrow": "Autoescuelas y alumnos. Un solo directorio.",
+      "eyebrow": "Para el permiso y el coche.",
       "title": "Hemos construido la comparación que nos hubiera gustado encontrar.",
-      "intro": "¿Cuánto cuesta la clase y quién está detrás? En DriveLinkUp la respuesta es el precio publicado de la autoescuela.",
+      "intro": "¿Cuánto cuesta y a quién pagas? Ves el precio que publicó la empresa.",
       "chips": [
         "Precio publicado en coronas",
         "La autorización de la autoescuela determina el permiso",
@@ -4046,7 +4051,7 @@
   "heavyVehiclesPage": {
     "eyebrow": "Camión, autobús y YKB",
     "title": "Vehículos pesados",
-    "subtitle": "Autoescuelas cuyo sitio indica formación para el permiso C o D, o YKB. El precio se muestra cuando la escuela lo publica."
+    "subtitle": "Escuelas que en su propia web forman para camión, autobús o YKB. El precio aparece cuando la escuela lo ha fijado."
   },
   "lessonComparison": {
     "meta": {
@@ -4065,11 +4070,11 @@
     "colLength": "Duración",
     "colPerMinute": "Kr/min",
     "minutes": "{minutes} min",
-    "sourceNote": "El precio es el que la escuela publicó en su sitio. DriveLinkUp no lo ha verificado y no lo usa como importe de reserva.",
+    "sourceNote": "El precio viene de la web de la escuela. No lo hemos comprobado y no es un importe de reserva.",
     "cardsHeading": "Escuelas con precio publicado en {name}",
     "faqTitle": "Preguntas",
     "faq1q": "¿Los precios en {name} están al día?",
-    "faq1a": "Se leyeron en el sitio de cada escuela. La escuela puede haber cambiado el precio después — abre su lista de precios desde la ficha.",
+    "faq1a": "Se leen en la web de cada escuela. La escuela puede haber cambiado el precio desde que leímos la página. Abre la lista de precios desde la ficha.",
     "faq2q": "¿DriveLinkUp cobra por la comparación?",
     "faq2a": "No. El catálogo es gratis. Pagas a la escuela, no a DriveLinkUp.",
     "backToHub": "Todas las autoescuelas en {name}",
@@ -4083,7 +4088,7 @@
     },
     "eyebrow": "Concesionarios",
     "title": "Compara precios de vehículos",
-    "lead": "Cada ficha es un coche, camión o moto que un concesionario ha publicado, nuevo o de ocasión, con los datos del anuncio. El precio es el importe anunciado. DriveLinkUp no vende el vehículo.",
+    "lead": "Compara coches, camiones y motos que un concesionario ha publicado. El precio es del concesionario.",
     "cityLabel": "Ciudad",
     "cityAll": "Todas las ciudades",
     "kindLabel": "Vehículo",
@@ -4131,7 +4136,7 @@
     },
     "eyebrow": "Recambios",
     "title": "Compara recambios y accesorios",
-    "lead": "Un conductor y un taller comparan el precio y las especificaciones que publicó la tienda. DriveLinkUp no vende el producto.",
+    "lead": "Compara el precio y la ficha que publicó la tienda.",
     "queryLabel": "Producto",
     "queryPlaceholder": "Pastillas de freno",
     "kindLabel": "Tipo",
@@ -4184,10 +4189,10 @@
   "inspectionPage": {
     "meta": {
       "title": "Comparar precios de ITV",
-      "description": "Precios publicados por la estación o la autoridad. Un país aparece cuando el precio está publicado. DriveLinkUp no reserva la inspección."
+      "description": "Precios de inspección que publicó la estación o la autoridad. No reservamos la inspección."
     },
     "title": "Comparar precios de ITV",
-    "lead": "El precio es el que publicó la estación o la autoridad. DriveLinkUp no reserva la inspección y no llama verificada a una estación.",
+    "lead": "Compara el precio que publicó la estación o la autoridad. No reservamos la inspección.",
     "countryLabel": "País",
     "countryAll": "Todos los países",
     "vehicleLabel": "Vehículo",
@@ -4233,12 +4238,24 @@
   "tirePage": {
     "meta": {
       "title": "Comparar precios de neumáticos",
-      "description": "Precios publicados de cambio, guardería y montaje en la página del taller. Un país aparece cuando ese precio está publicado. DriveLinkUp no reserva el cambio."
+      "description": "Precios de neumáticos en la página del taller. No reservamos el cambio."
     },
     "title": "Comparar precios de neumáticos",
-    "lead": "El precio es el que el taller publicó para un cambio de ruedas, la guardería, el montaje o una visita a domicilio. DriveLinkUp no reserva el trabajo y no llama verificado a un taller.",
+    "lead": "Compara el precio que el taller fijó para un cambio de ruedas, un hotel de neumáticos o un montaje. No reservamos el cambio.",
     "countryLabel": "País",
     "countryAll": "Todos los países",
+    "cityLabel": "Ciudad",
+    "cityAll": "Todas las ciudades",
+    "filter": "Ver",
+    "useMyLocation": "Usar mi ubicación",
+    "clearLocation": "Borrar ubicación",
+    "locationPrompt": "Elige una ciudad, o usa tu ubicación, para ver los precios publicados que valen allí.",
+    "locationRequesting": "Buscando tu ubicación…",
+    "locationGranted": "Precios publicados de la ciudad más cercana.",
+    "locationDenied": "Se denegó el acceso a la ubicación. Aún puedes elegir una ciudad.",
+    "locationFailed": "No encontramos tu ubicación. Inténtalo de nuevo o elige una ciudad.",
+    "locationUnsupported": "La ubicación no está disponible en este navegador. Aún puedes elegir una ciudad.",
+    "locationNone": "Ninguna ciudad de la lista está lo bastante cerca. Elige una ciudad.",
     "vehicleLabel": "Vehículo",
     "serviceLabel": "Servicio",
     "vehicles": {
@@ -4267,6 +4284,7 @@
       "wheelsBrought": "Llevas las ruedas. La página indica este precio desde para las medidas que nombra.",
       "extrasMayApply": "La página dice que extras como el servicio TPMS y válvulas nuevas pueden costar más.",
       "includesCheck": "La página incluye una revisión de los neumáticos y de la presión.",
+      "includesChange": "Incluye el guardado y el cambio de ruedas.",
       "includesChangeAndWash": "Incluye el cambio, el guardado y un lavado.",
       "includesChangeWashAndCheck": "Incluye guardado, lavado a máquina, el cambio y una revisión.",
       "ownTyres": "Montaje y equilibrado de neumáticos que ya tienes, y después las ruedas en el coche.",
@@ -4281,10 +4299,10 @@
   "taxiPage": {
     "meta": {
       "title": "Comparar la formación de taxi",
-      "description": "Precios publicados del curso de taxista y del examen oficial. Un país aparece cuando la escuela o la autoridad publicó el importe. DriveLinkUp no te inscribe."
+      "description": "Precios de la formación de taxista y de los exámenes oficiales. No te inscribimos."
     },
     "title": "Comparar la formación de taxi",
-    "lead": "El precio es el que la escuela o la autoridad publicó para el curso o el examen oficial. DriveLinkUp no te inscribe y no llama verificada a una escuela.",
+    "lead": "Compara el precio que la escuela o la autoridad fijó para el curso o el examen. No te inscribimos.",
     "countryLabel": "País",
     "countryAll": "Todos los países",
     "kindLabel": "A qué corresponde el precio",
@@ -4324,10 +4342,10 @@
   "leasingPage": {
     "meta": {
       "title": "Compara precios de renting",
-      "description": "Precios de renting publicados para modelos con nombre. Un país aparece cuando el arrendador publicó el modelo y la cuota mensual. DriveLinkUp no arrienda el coche."
+      "description": "Precios de leasing privado para modelos con nombre. No arrendamos el coche."
     },
     "title": "Compara precios de renting",
-    "lead": "El precio es la cuota mensual que el arrendador publicó para ese modelo. El país es donde se publicó ese precio. DriveLinkUp no arrienda el coche y no llama verificada a una oferta.",
+    "lead": "Compara el precio mensual que el arrendador publicó para ese modelo. No arrendamos el coche.",
     "countryLabel": "País",
     "countryAll": "Todos los países",
     "priceFrom": "desde",
@@ -4374,7 +4392,7 @@
       "description": "Compara el precio por hora que una ciudad o un operador publicó para un lugar con nombre."
     },
     "title": "Precios de aparcamiento",
-    "lead": "Compara el precio por hora que una ciudad o un operador publicó para un lugar con nombre. Elige la ciudad para ver ese lugar junto a los otros precios. La cifra es esa hora publicada. Dentro de una moneda, un lugar que la gente abre puede subir. DriveLinkUp no reserva la plaza. La señal en el lugar decide.",
+    "lead": "Compara el precio por hora que publicó la ciudad o el operador. La señal en el sitio manda.",
     "countryLabel": "País",
     "countryAll": "Todos los países",
     "cityLabel": "Ciudad",
@@ -4413,5 +4431,140 @@
       "prepaid": "El operador cobra la tarifa por adelantado.",
       "outerCityGuest": "La página indica esto como aparcamiento de residentes y visitantes en la ciudad exterior."
     }
+  },
+  "sellCarPage": {
+    "meta": {
+      "title": "Vender un coche",
+      "description": "Inicia sesión para estimar un precio de mercado a partir de precios publicados y publicar el coche para que un comprador pueda encontrarlo. DriveLinkUp no compra el coche."
+    },
+    "header": {
+      "title": "Vender un coche",
+      "lead": "Ve un precio hecho con anuncios que ya están aquí. Crea una cuenta para publicar el coche. No lo compramos."
+    },
+    "gate": {
+      "title": "Crea una cuenta para estimar y publicar",
+      "body": "La estimación de precio y el anuncio están disponibles después de crear una cuenta.",
+      "signup": "Crear cuenta",
+      "login": "Iniciar sesión"
+    },
+    "form": {
+      "make": "Marca",
+      "model": "Modelo",
+      "year": "Año",
+      "yearNone": "Año desconocido",
+      "country": "País",
+      "currency": "Moneda",
+      "city": "Ciudad",
+      "asking": "Tu precio",
+      "note": "Nota",
+      "noteHint": "No incluyas una matrícula ni un VIN.",
+      "estimate": "Estimar el precio de mercado",
+      "publish": "Publicar para que un comprador pueda encontrar el coche",
+      "working": "Trabajando…"
+    },
+    "result": {
+      "median": "Mediana de precios publicados",
+      "range": "Rango publicado {low}–{high}",
+      "count": "Basado en {count} precios publicados",
+      "none": "Menos de tres precios publicados coinciden con este modelo en esta moneda, así que no hay estimación.",
+      "buyers": "Concesionarios que publican este modelo",
+      "buyersNone": "Ningún concesionario de este país publica este modelo.",
+      "published": "El coche está publicado.",
+      "open": "Abrir el anuncio"
+    },
+    "errors": {
+      "auth": "Inicia sesión para continuar.",
+      "invalid": "Revisa la marca, el modelo, la ciudad y el precio.",
+      "identifier": "Quita la matrícula o el VIN.",
+      "own": "Este es tu anuncio.",
+      "limit": "Has enviado el límite diario de mensajes."
+    },
+    "mine": {
+      "title": "Tus anuncios",
+      "empty": "Todavía no has publicado un coche."
+    }
+  },
+  "carsForSalePage": {
+    "meta": {
+      "title": "Coches en venta",
+      "description": "Coches que han publicado propietarios particulares. Una estimación es la mediana de los precios de catálogo publicados. El contacto requiere una cuenta."
+    },
+    "header": {
+      "title": "Coches en venta",
+      "lead": "Coches que han publicado particulares. La estimación usa precios que ya están aquí. No cerramos la venta.",
+      "sell": "Vender un coche"
+    },
+    "empty": "Todavía no hay coches particulares publicados.",
+    "card": {
+      "noEstimate": "No hay suficientes precios publicados para una estimación",
+      "asking": "Precio pedido {amount}"
+    },
+    "detail": {
+      "back": "Todos los coches en venta",
+      "estimate": "Mediana de precios publicados",
+      "range": "Rango publicado {low}–{high}, de {count} precios",
+      "none": "Menos de tres precios publicados coinciden con este modelo, así que no hay estimación.",
+      "inquire": "Escribir al propietario",
+      "inquireBody": "Tu nombre y tu correo se envían al propietario. DriveLinkUp no cobra el pago.",
+      "message": "Mensaje",
+      "send": "Enviar",
+      "sending": "Enviando…",
+      "sent": "El propietario tiene tu mensaje.",
+      "messages": "Mensajes de compradores",
+      "noMessages": "Ningún comprador ha escrito todavía.",
+      "signInTitle": "Crea una cuenta para chatear",
+      "signInBody": "El coche es gratis de ver. La conversación se abre después de crear una cuenta.",
+      "signup": "Crear cuenta",
+      "login": "Iniciar sesión"
+    },
+    "errors": {
+      "auth": "Crea una cuenta antes de la conversación.",
+      "invalid": "Escribe al menos 10 caracteres.",
+      "identifier": "Quita la matrícula o el VIN.",
+      "own": "Este es tu anuncio.",
+      "limit": "Has enviado el límite diario de mensajes."
+    },
+    "thread": {
+      "title": "Conversación",
+      "body": "El anuncio es gratis. La conversación es solo para cuentas. DriveLinkUp no cobra el pago.",
+      "emptyOwner": "Ningún comprador ha escrito todavía.",
+      "emptyBuyer": "Escribe el primer mensaje.",
+      "with": "Conversación con {name}",
+      "message": "Mensaje",
+      "send": "Enviar",
+      "sending": "Enviando…",
+      "you": "Tú",
+      "yours": "Conversaciones del coche"
+    }
+  },
+  "adminConversationsPage": {
+    "title": "Conversaciones",
+    "lead": "Cada conversación en DriveLinkUp. Esta vista es de solo lectura.",
+    "empty": "Todavía no hay conversaciones.",
+    "vehicle": "Coche particular",
+    "booking": "Clase",
+    "messages": "Mensajes",
+    "noMessages": "Esta conversación no tiene mensajes."
+  },
+  "workshopPage": {
+    "meta": {
+      "title": "Talleres mecánicos",
+      "description": "Talleres mecánicos con nombre y dirección. Un taller aparece aunque no publique un precio."
+    },
+    "title": "Talleres",
+    "lead": "Encuentra un taller cuando el coche se para o hay que cambiar los neumáticos.",
+    "sourceNote": "El nombre y la dirección vienen de OpenStreetMap. Si no hay precio, el taller sigue en la lista. No reservamos la reparación.",
+    "countryLabel": "País",
+    "cityLabel": "Ciudad",
+    "cityAll": "Elige una ciudad",
+    "cityUnknown": "Ciudad no publicada",
+    "filter": "Mostrar",
+    "chooseCity": "Elige una ciudad para ver los talleres cartografiados allí.",
+    "empty": "Ningún taller cartografiado en esa ciudad.",
+    "addressMissing": "La dirección no está publicada en el mapa.",
+    "count": "{count} talleres",
+    "pageLabel": "Página {page}",
+    "next": "Siguiente",
+    "previous": "Anterior"
   }
 }

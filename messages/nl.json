@@ -51,7 +51,9 @@
       "tires": "Banden",
       "taxi": "Taxichauffeur",
       "leasing": "Private lease",
-      "parking": "Parkeren"
+      "parking": "Parkeren",
+      "sellCar": "Auto verkopen",
+      "workshops": "Werkplaatsen"
     },
     "language": {
       "sv": "Svenska",
@@ -206,7 +208,7 @@
     "header": {
       "eyebrow": "FAQ",
       "title": "Vragen",
-      "subtitle": "Veelgestelde vragen over het vergelijken van rijscholen, prijzen en rijlessen in Zweden."
+      "subtitle": "Korte antwoorden over scholen, prijzen en rijlessen."
     },
     "items": {
       "scope": {
@@ -246,12 +248,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Gidsen voor wie verhuist en een rijbewijs haalt, een auto heeft of met een auto werkt. Een prijs staat er alleen als de uitgever die zelf schreef."
+      "description": "Gidsen voor jou als je verhuist en een rijbewijs, een auto of werk met een auto nodig hebt."
     },
     "header": {
       "eyebrow": "Blog",
       "title": "Verhuizen: rijbewijs en auto",
-      "subtitle": "Voor wie na een verhuizing een rijbewijs haalt, een auto heeft of met een auto werkt. Een prijs staat er alleen als de uitgever die zelf schreef."
+      "subtitle": "Gidsen voor jou als je verhuist en een rijbewijs, een auto of werk met een auto nodig hebt."
     },
     "posts": {
       "11": {
@@ -2361,11 +2363,11 @@
     }
   },
   "consentBanner": {
-    "intro": "We gebruiken cookies die de catalogus nodig heeft om te werken. Met uw toestemming kunnen we ook advertenties laden. U kunt uw keuze op elk moment wijzigen.",
+    "intro": "Cookies die de pagina nodig heeft, staan altijd aan. Advertenties verschijnen alleen als je ja zegt. Je kunt de keuze altijd wijzigen.",
     "essentialLabel": "Essentieel",
-    "essentialBody": "Inloggen, beveiliging, taal en het onthouden van deze keuze. Vereist — kan niet worden uitgeschakeld.",
+    "essentialBody": "Inloggen, beveiliging en taal. Deze kun je niet uitzetten.",
     "analyticsLabel": "Analytics",
-    "analyticsBody": "Er draait vandaag geen aparte analytics-tool. Deze schakelaar is gereserveerd. Laat hem uit, tenzij u die verwerking wilt als we die later toevoegen.",
+    "analyticsBody": "Er draait nu geen analyse. Laat de keuze uit als je niet wilt dat die later aan gaat.",
     "marketingLabel": "Marketing",
     "marketingBody": "Google AdSense, dat advertenties kan tonen en Google-cookies kan plaatsen. Laadt alleen als u accepteert.",
     "acceptAll": "Alles accepteren",
@@ -2373,7 +2375,7 @@
     "customize": "Aanpassen",
     "save": "Mijn keuze opslaan",
     "saved": "Uw cookiekeuze is opgeslagen.",
-    "error": "Uw cookiekeuze kon niet worden opgeslagen — probeer het opnieuw.",
+    "error": "Je keuze kon niet worden opgeslagen. Probeer het opnieuw.",
     "privacy": "Privacybeleid"
   },
   "consentForm": {
@@ -2435,8 +2437,8 @@
       "eyebrow": "",
       "title": "Vergelijk autoprijzen en rijscholen.",
       "metaTitle": "Onderdelen, prijzen en rijscholen vergelijken",
-      "metaDescription": "Vergelijk onderdelen, autoprijzen en rijscholen. De prijs is de gepubliceerde. Gratis catalogus voor iedereen.",
-      "body": "Vergelijk rijscholen, zwaar verkeer, autoprijzen en onderdelen die een winkel publiceerde voor een autobezitter of een werkplaats. We vergelijken ook APK-prijzen, bandenprijzen, de taxichauffeursopleiding, leaseprijzen en parkeertarieven. Het bedrag is de gepubliceerde prijs.",
+      "metaDescription": "Vergelijk rijscholen, auto's, onderdelen, keuring en banden. De prijs is de prijs die het bedrijf heeft gepubliceerd. Gratis voor iedereen.",
+      "body": "Vergelijk school, auto, onderdelen, keuring, banden, taxi, leasing en parkeren. Je ziet de prijs die het bedrijf heeft gepubliceerd.",
       "primaryCta": "Vind een rijschool",
       "instructorCta": "Ik werk bij een rijschool",
       "marketplaceTag": "Autoprijzen · Rijscholen",
@@ -2460,7 +2462,7 @@
       "imageAlt": "Rijles: een bestuurder aan het stuur in de schemering",
       "previewLines": {
         "profile": "Vergelijk categorieën, taal en locatie.",
-        "price": "Bekijk de gepubliceerde prijs van de rijschool — zonder extra kosten.",
+        "price": "Zie de gepubliceerde prijs van de school. Geen extra toeslag.",
         "time": "Open de rijschool en lees wat er op de vermelding staat."
       },
       "search": {
@@ -2508,6 +2510,8 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa",
+          "helsinki": "Helsinki",
+          "amsterdam": "Amsterdam",
           "newYork": "New York"
         },
         "modeLabel": "Wat wil je vergelijken",
@@ -2551,11 +2555,12 @@
           "tires": "Banden",
           "taxi": "Taxichauffeur",
           "leasing": "Private lease",
-          "parking": "Parkeren"
+          "parking": "Parkeren",
+          "workshops": "Werkplaatsen"
         }
       },
-      "lead": "Gratis. Je betaalt de prijs van de rijschool.",
-      "note": "DriveLinkUp is een catalogus. We nemen geen betaling in ontvangst voor een catalogusvermelding.",
+      "lead": "Gratis voor iedereen. Je betaalt het bedrijf.",
+      "note": "Een vermelding hier is geen boeking en geen vergunning.",
       "schoolLink": "Ik run een rijschool",
       "chips": {
         "price": "Gepubliceerde prijs in kronen",
@@ -2608,7 +2613,7 @@
         },
         "book": {
           "title": "Neem contact op met de rijschool",
-          "body": "Jij neemt contact op met de rijschool. DriveLinkUp boekt de les niet."
+          "body": "Schrijf de school. Wij boeken de les niet."
         }
       }
     },
@@ -2626,19 +2631,19 @@
     },
     "assurance": {
       "eyebrow": "Hoe de catalogus werkt",
-      "title": "Niets verstopt in de kleine lettertjes.",
+      "title": "Duidelijk vanaf het begin.",
       "cards": {
         "price": {
           "title": "De gepubliceerde prijs",
-          "body": "Wanneer een rijschool een prijs heeft gepubliceerd, zie je die in kronen. DriveLinkUp rekent geen extra tarief."
+          "body": "Als de school een prijs heeft gezet, zie je die in kronen. Wij tellen geen toeslag op."
         },
         "safety": {
           "title": "Een vermelding is een cataloguskaart",
-          "body": "Een cataloguskaart is geen lesbevoegdheid en geen overeenkomst. Bevestig bevoegdheid, lesopzet en voorwaarden bij de rijschool."
+          "body": "Een vermelding is geen licentie en geen contract. Vraag de school naar vergunning en voorwaarden."
         },
         "cancellation": {
           "title": "Neem contact op met de rijschool",
-          "body": "Lessen regel je met de rijschool. ‘Neem contact op met de rijschool’ opent hun inbox of website. DriveLinkUp neemt geen betaling in ontvangst voor een catalogusvermelding."
+          "body": "Je neemt contact op met de school. Wij rekenen niets voor het feit dat de school hier staat."
         }
       }
     },
@@ -3576,12 +3581,12 @@
   "pricingPage": {
     "meta": {
       "title": "Prijzen",
-      "description": "Rijscholen gratis vergelijken. Een catalogusvermelding is gratis. DriveLinkUp neemt geen betaling voor vermeldingen."
+      "description": "De vergelijking is gratis voor iedereen. DriveLinkUp rekent niets voor een vermelding."
     },
     "hero": {
       "eyebrow": "Catalogus",
-      "title": "De rijschoolprijs is het bedrag op de vermelding.",
-      "body": "Ontdek en vergelijk rijschoolvermeldingen."
+      "title": "Je ziet de prijs. Er komt niets bij.",
+      "body": "Vergelijk de scholen gratis. De les betaal je aan de school."
     },
     "learner": {
       "title": "Voor leerlingen",
@@ -3597,7 +3602,7 @@
     },
     "notes": {
       "title": "Hoe vermelden werkt (Zweden)",
-      "body": "Een catalogusvermelding is gratis. DriveLinkUp neemt geen betaling in ontvangst voor catalogusvermeldingen en rekent geen leerlingtarief. Lessen en voorwaarden regel je met de rijschool."
+      "body": "De vermelding is gratis. Les en voorwaarden regel je met de school."
     },
     "cta": {
       "learner": "Vergelijk rijscholen",
@@ -3695,18 +3700,18 @@
     "headerTitleCountry": "Rijscholen in {name}",
     "subtitleLive": "Vergelijk rijschoolvermeldingen in {name} op categorie, taal en gepubliceerde SEK-prijs. Neem contact op met de rijschool om een les te regelen.",
     "subtitleCatalogue": "Rijscholen in {name} staan in dezelfde catalogus. Een prijs wordt getoond in de valuta op de website van de rijschool. Neem contact op met de rijschool om een les te regelen.",
-    "subtitleExpansion": "{name} in {country} is een uitbreidingshub. De catalogus is vandaag live in Zweden; gebruik deze pagina’s om de Noordse dekking te verkennen terwijl we groeien.",
+    "subtitleExpansion": "{name} is klaar. De vergelijking is live in Zweden.",
     "subtitleCountryLive": "Blader door regio’s en steden in {name}. Open een stadshub om vermeldingen te vergelijken.",
     "subtitleCountryCatalogue": "Open een stad om rijscholen in {name} te vergelijken. Ze staan in dezelfde catalogus als de Zweedse rijscholen.",
-    "subtitleCountryExpansion": "{name}-hubs zijn klaar voor SEO en uitbreiding. De catalogus is eerst live in Zweden (ADR-001).",
+    "subtitleCountryExpansion": "De pagina's voor {name} staan er. De vergelijking is live in Zweden.",
     "breadcrumbLocations": "Locaties",
-    "expansionTitle": "De catalogus is Sweden-first",
-    "expansionBody": "DriveLinkUp vermeldt eerst rijscholen in Zweden. Deze Noordse locatiepagina is indexeerbaar zodat leerlingen ons kunnen vinden terwijl we uitbreiden — bekijk vandaag Zweedse steden.",
+    "expansionTitle": "Zweden is live",
+    "expansionBody": "Wij vergelijken rijscholen in Zweden. Deze pagina staat er zodat je ons vindt als er landen bijkomen.",
     "expansionCtaSweden": "Bekijk Zweedse rijscholen",
     "seoLead": "Vergelijk rijscholen in {name}, {country}",
     "seoP1Live": "Vermeldingen in {name} tonen rijscholen die in de catalogus staan. Vergelijk voordat je contact opneemt met de rijschool.",
     "seoP1Catalogue": "Rijscholen in {name} worden vermeld vanaf hun eigen websites. Ze zijn niet als geverifieerd gemarkeerd. Vergelijk ze in de catalogus en neem daarna contact op met de rijschool.",
-    "seoP1Expansion": "We publiceren een gestructureerde hub voor {name}, {country} zodat zoekmachines en AI-assistenten leerlingen juist kunnen leiden terwijl het aanbod wordt aangesloten.",
+    "seoP1Expansion": "De pagina voor {name}, {country} staat er. De schoolvergelijking is live in Zweden.",
     "seoP2": "Een catalogusvermelding is gratis. DriveLinkUp rekent geen leerlingtarief. Lessen en betaling regel je met de rijschool. Handledare / privé oefenen is een apart juridisch traject.",
     "howTitle": "Hoe DriveLinkUp werkt",
     "howBodyLive": "Open een vermelding, lees de gepubliceerde prijs en neem daarna contact op met de rijschool. Lessen regel je met de rijschool.",
@@ -3871,9 +3876,9 @@
       "description": "DriveLinkUp vergelijkt rijscholen. Gepubliceerde prijzen staan op de vermelding. Listen is gratis."
     },
     "hero": {
-      "eyebrow": "Rijscholen en leerlingen. Eén catalogus.",
+      "eyebrow": "Voor het rijbewijs en de auto.",
       "title": "We bouwden de vergelijking waarvan we hadden gewild dat die bestond.",
-      "intro": "Wat kost de les, en wie geeft die? Op DriveLinkUp is het antwoord de gepubliceerde prijs van de school.",
+      "intro": "Wat kost het, en wie betaal je? Je ziet de prijs die het bedrijf heeft gepubliceerd.",
       "chips": [
         "Gepubliceerde prijs in kronen",
         "De bevoegdheid van de rijschool bepaalt het rijbewijs",
@@ -4046,7 +4051,7 @@
   "heavyVehiclesPage": {
     "eyebrow": "Vrachtwagen, bus en YKB",
     "title": "Zware voertuigen",
-    "subtitle": "Rijscholen waarvan de website C- of D-rijbewijs of YKB noemt. De prijs verschijnt als de school die publiceert."
+    "subtitle": "Scholen die op hun eigen site opleiden voor vrachtwagen, bus of YKB. De prijs verschijnt als de school hem heeft gezet."
   },
   "lessonComparison": {
     "meta": {
@@ -4065,11 +4070,11 @@
     "colLength": "Duur",
     "colPerMinute": "Kr/min",
     "minutes": "{minutes} min",
-    "sourceNote": "De prijs is wat de school op haar website heeft gepubliceerd. DriveLinkUp heeft die niet geverifieerd en gebruikt die niet als boekingsbedrag.",
+    "sourceNote": "De prijs komt van de website van de school. Wij hebben hem niet gecontroleerd, en het is geen boekingsbedrag.",
     "cardsHeading": "Scholen met een gepubliceerde prijs in {name}",
     "faqTitle": "Veelgestelde vragen",
     "faq1q": "Zijn de prijzen in {name} actueel?",
-    "faq1a": "Ze zijn gelezen op de website van elke school. De school kan de prijs daarna hebben gewijzigd — open de prijslijst via de vermelding.",
+    "faq1a": "Ze zijn gelezen op de eigen website van elke school. De school kan de prijs hebben gewijzigd sinds wij de pagina lazen. Open de prijslijst via de vermelding.",
     "faq2q": "Rekent DriveLinkUp voor de vergelijking?",
     "faq2a": "Nee. De catalogus is gratis. Je betaalt de school, niet DriveLinkUp.",
     "backToHub": "Alle rijscholen in {name}",
@@ -4083,7 +4088,7 @@
     },
     "eyebrow": "Autodealers",
     "title": "Vergelijk voertuigprijzen",
-    "lead": "Elke kaart is een auto, vrachtwagen of motor die een dealer nieuw of gebruikt heeft gepubliceerd, met de gegevens uit de advertentie. De prijs is het geadverteerde bedrag. DriveLinkUp verkoopt het voertuig niet.",
+    "lead": "Vergelijk auto's, vrachtwagens en motoren die een dealer heeft gepubliceerd. De prijs is van de dealer.",
     "cityLabel": "Plaats",
     "cityAll": "Alle plaatsen",
     "kindLabel": "Voertuig",
@@ -4131,7 +4136,7 @@
     },
     "eyebrow": "Onderdelen",
     "title": "Vergelijk onderdelen en accessoires",
-    "lead": "Een autobezitter en een werkplaats vergelijken de prijs en de specificaties die de winkel heeft gepubliceerd. DriveLinkUp verkoopt het product niet.",
+    "lead": "Vergelijk de prijs en de specificatie die de winkel heeft gepubliceerd.",
     "queryLabel": "Product",
     "queryPlaceholder": "Remblokken",
     "kindLabel": "Soort",
@@ -4184,10 +4189,10 @@
   "inspectionPage": {
     "meta": {
       "title": "APK-prijzen vergelijken",
-      "description": "Gepubliceerde prijzen van het station of de overheid. Een land staat erbij wanneer de prijs is gepubliceerd. DriveLinkUp boekt de keuring niet."
+      "description": "Keuringprijzen die het station of de overheid heeft gepubliceerd. Wij boeken de keuring niet."
     },
     "title": "APK-prijzen vergelijken",
-    "lead": "De prijs is wat het station of de overheid heeft gepubliceerd. DriveLinkUp boekt de keuring niet en noemt een station niet geverifieerd.",
+    "lead": "Vergelijk de prijs die het station of de overheid heeft gepubliceerd. Wij boeken de keuring niet.",
     "countryLabel": "Land",
     "countryAll": "Alle landen",
     "vehicleLabel": "Voertuig",
@@ -4233,12 +4238,24 @@
   "tirePage": {
     "meta": {
       "title": "Vergelijk bandenprijzen",
-      "description": "Gepubliceerde prijzen voor een wissel, bandenhotel en montage van de eigen pagina van de werkplaats. Een land staat er als die prijs is gepubliceerd. DriveLinkUp boekt de wissel niet."
+      "description": "Bandenprijzen van de eigen pagina van de werkplaats. Wij boeken de wissel niet."
     },
     "title": "Vergelijk bandenprijzen",
-    "lead": "De prijs is wat de werkplaats publiceerde voor een wielenwissel, opslag, montage of een bezoek aan huis. DriveLinkUp boekt het werk niet en noemt een werkplaats niet geverifieerd.",
+    "lead": "Vergelijk de prijs die de werkplaats heeft gezet voor een wielwissel, bandenhotel of montage. Wij boeken de wissel niet.",
     "countryLabel": "Land",
     "countryAll": "Alle landen",
+    "cityLabel": "Plaats",
+    "cityAll": "Alle plaatsen",
+    "filter": "Toon",
+    "useMyLocation": "Gebruik mijn locatie",
+    "clearLocation": "Wis locatie",
+    "locationPrompt": "Kies een plaats, of gebruik je locatie, om gepubliceerde prijzen te zien die daar gelden.",
+    "locationRequesting": "Locatie zoeken…",
+    "locationGranted": "Gepubliceerde prijzen voor de dichtstbijzijnde plaats.",
+    "locationDenied": "Locatietoegang is geweigerd. Je kunt nog een plaats kiezen.",
+    "locationFailed": "Je locatie is niet gevonden. Probeer opnieuw, of kies een plaats.",
+    "locationUnsupported": "Locatie is niet beschikbaar in deze browser. Je kunt nog een plaats kiezen.",
+    "locationNone": "Geen plaats op de lijst is dichtbij genoeg. Kies een plaats.",
     "vehicleLabel": "Voertuig",
     "serviceLabel": "Dienst",
     "vehicles": {
@@ -4267,6 +4284,7 @@
       "wheelsBrought": "Je neemt de wielen mee. De pagina noemt deze vanaf-prijs voor de maten die ze noemt.",
       "extrasMayApply": "De pagina zegt dat extra's zoals TPMS-service en nieuwe ventielen meer kunnen kosten.",
       "includesCheck": "De pagina omvat een controle van de banden en de spanning.",
+      "includesChange": "Inclusief opslag en het wisselen van de wielen.",
       "includesChangeAndWash": "Inclusief de wissel, opslag en een wasbeurt.",
       "includesChangeWashAndCheck": "Inclusief opslag, machinewas, de wissel en een bandencontrole.",
       "ownTyres": "Monteren en balanceren van banden die je al hebt, daarna de wielen op de auto.",
@@ -4281,10 +4299,10 @@
   "taxiPage": {
     "meta": {
       "title": "Vergelijk de taxichauffeursopleiding",
-      "description": "Gepubliceerde prijzen voor de taxichauffeursopleiding en het officiële examen. Een land staat er als de school of de instantie het bedrag publiceerde. DriveLinkUp schrijft je niet in."
+      "description": "Prijzen voor taxichauffeuropleiding en officiële examens. Wij schrijven je niet in."
     },
     "title": "Vergelijk de taxichauffeursopleiding",
-    "lead": "De prijs is wat de school of de instantie publiceerde voor de opleiding of het officiële examen. DriveLinkUp schrijft je niet in en noemt een school niet geverifieerd.",
+    "lead": "Vergelijk de prijs die de school of de overheid heeft gezet voor de cursus of het examen. Wij schrijven je niet in.",
     "countryLabel": "Land",
     "countryAll": "Alle landen",
     "kindLabel": "Waar de prijs voor is",
@@ -4324,10 +4342,10 @@
   "leasingPage": {
     "meta": {
       "title": "Vergelijk leaseprijzen",
-      "description": "Gepubliceerde private-leaseprijzen voor genoemde modellen. Een land staat er als de leasemaatschappij het model en het maandbedrag publiceerde. DriveLinkUp least de auto niet."
+      "description": "Private-leaseprijzen voor genoemde modellen. Wij leasen de auto niet."
     },
     "title": "Vergelijk leaseprijzen",
-    "lead": "De prijs is het maandbedrag dat de leasemaatschappij voor dat model publiceerde. Het land is waar die prijs werd gepubliceerd. DriveLinkUp least de auto niet en noemt een aanbod niet geverifieerd.",
+    "lead": "Vergelijk de maandprijs die de lessor voor dat model heeft gepubliceerd. Wij leasen de auto niet.",
     "countryLabel": "Land",
     "countryAll": "Alle landen",
     "priceFrom": "vanaf",
@@ -4374,7 +4392,7 @@
       "description": "Vergelijk het uurtarief dat een stad of een exploitant voor een genoemde plek heeft gepubliceerd."
     },
     "title": "Parkeertarieven",
-    "lead": "Vergelijk het uurtarief dat een stad of een exploitant voor een genoemde plek heeft gepubliceerd. Kies de stad om die plek naast de andere prijzen daar te zien. Het bedrag is dat gepubliceerde uur. Binnen één valuta kan een plek die mensen openen omhoog schuiven. DriveLinkUp reserveert de plek niet. Het bord ter plaatse geldt.",
+    "lead": "Vergelijk het uurtarief dat de stad of de exploitant heeft gepubliceerd. Het bord ter plaatse geldt.",
     "countryLabel": "Land",
     "countryAll": "Alle landen",
     "cityLabel": "Stad",
@@ -4413,5 +4431,140 @@
       "prepaid": "De exploitant rekent het tarief vooraf.",
       "outerCityGuest": "De pagina noemt dit bewoners- en bezoekersparkeren in de buitenstad."
     }
+  },
+  "sellCarPage": {
+    "meta": {
+      "title": "Auto verkopen",
+      "description": "Meld je aan om een marktprijs te schatten uit gepubliceerde catalogusprijzen en de auto te publiceren zodat een koper hem kan vinden. DriveLinkUp koopt de auto niet."
+    },
+    "header": {
+      "title": "Auto verkopen",
+      "lead": "Zie een prijs op basis van advertenties die hier al staan. Maak een account om de auto te plaatsen. Wij kopen hem niet."
+    },
+    "gate": {
+      "title": "Maak een account om te schatten en te publiceren",
+      "body": "De prijsschatting en de advertentie zijn beschikbaar nadat je een account hebt gemaakt.",
+      "signup": "Account maken",
+      "login": "Inloggen"
+    },
+    "form": {
+      "make": "Merk",
+      "model": "Model",
+      "year": "Bouwjaar",
+      "yearNone": "Bouwjaar onbekend",
+      "country": "Land",
+      "currency": "Valuta",
+      "city": "Plaats",
+      "asking": "Jouw vraagprijs",
+      "note": "Notitie",
+      "noteHint": "Zet er geen kenteken of VIN in.",
+      "estimate": "Schat de marktprijs",
+      "publish": "Publiceer zodat een koper de auto kan vinden",
+      "working": "Bezig…"
+    },
+    "result": {
+      "median": "Mediaan van gepubliceerde prijzen",
+      "range": "Gepubliceerde bandbreedte {low}–{high}",
+      "count": "Gebaseerd op {count} gepubliceerde prijzen",
+      "none": "Minder dan drie gepubliceerde prijzen passen bij dit model in deze valuta, dus er is geen schatting.",
+      "buyers": "Dealers die dit model publiceren",
+      "buyersNone": "Geen dealer in dit land publiceert dit model.",
+      "published": "De auto is gepubliceerd.",
+      "open": "Open de advertentie"
+    },
+    "errors": {
+      "auth": "Log in om verder te gaan.",
+      "invalid": "Controleer merk, model, plaats en prijs.",
+      "identifier": "Verwijder het kenteken of de VIN.",
+      "own": "Dit is jouw advertentie.",
+      "limit": "Je hebt de daglimiet voor berichten bereikt."
+    },
+    "mine": {
+      "title": "Jouw advertenties",
+      "empty": "Je hebt nog geen auto gepubliceerd."
+    }
+  },
+  "carsForSalePage": {
+    "meta": {
+      "title": "Auto's te koop",
+      "description": "Auto's die particuliere eigenaren hebben gepubliceerd. Een schatting is de mediaan van gepubliceerde catalogusprijzen. Contact vereist een account."
+    },
+    "header": {
+      "title": "Auto's te koop",
+      "lead": "Auto's die particulieren hebben geplaatst. De schatting gebruikt prijzen die hier al staan. Wij ronden de verkoop niet af.",
+      "sell": "Auto verkopen"
+    },
+    "empty": "Er zijn nog geen particuliere auto's gepubliceerd.",
+    "card": {
+      "noEstimate": "Te weinig gepubliceerde prijzen voor een schatting",
+      "asking": "Vraagprijs {amount}"
+    },
+    "detail": {
+      "back": "Alle auto's te koop",
+      "estimate": "Mediaan van gepubliceerde prijzen",
+      "range": "Gepubliceerde bandbreedte {low}–{high}, uit {count} prijzen",
+      "none": "Minder dan drie gepubliceerde prijzen passen bij dit model, dus er is geen schatting.",
+      "inquire": "Schrijf de eigenaar",
+      "inquireBody": "Je naam en e-mail gaan naar de eigenaar. DriveLinkUp neemt geen betaling aan.",
+      "message": "Bericht",
+      "send": "Versturen",
+      "sending": "Versturen…",
+      "sent": "De eigenaar heeft je bericht.",
+      "messages": "Berichten van kopers",
+      "noMessages": "Nog geen koper heeft geschreven.",
+      "signInTitle": "Maak een account om te chatten",
+      "signInBody": "De auto is gratis te bekijken. Het gesprek opent nadat je een account hebt gemaakt.",
+      "signup": "Account maken",
+      "login": "Inloggen"
+    },
+    "errors": {
+      "auth": "Maak een account voordat het gesprek begint.",
+      "invalid": "Schrijf minstens 10 tekens.",
+      "identifier": "Verwijder het kenteken of de VIN.",
+      "own": "Dit is jouw advertentie.",
+      "limit": "Je hebt de daglimiet voor berichten bereikt."
+    },
+    "thread": {
+      "title": "Gesprek",
+      "body": "De advertentie is gratis. Het gesprek is alleen voor accounts. DriveLinkUp neemt geen betaling aan.",
+      "emptyOwner": "Nog geen koper heeft geschreven.",
+      "emptyBuyer": "Schrijf het eerste bericht.",
+      "with": "Gesprek met {name}",
+      "message": "Bericht",
+      "send": "Versturen",
+      "sending": "Versturen…",
+      "you": "Jij",
+      "yours": "Autogesprekken"
+    }
+  },
+  "adminConversationsPage": {
+    "title": "Gesprekken",
+    "lead": "Elk gesprek op DriveLinkUp. Deze weergave is alleen-lezen.",
+    "empty": "Nog geen gesprekken.",
+    "vehicle": "Particuliere auto",
+    "booking": "Les",
+    "messages": "Berichten",
+    "noMessages": "Dit gesprek heeft geen berichten."
+  },
+  "workshopPage": {
+    "meta": {
+      "title": "Autowerkplaatsen",
+      "description": "Autowerkplaatsen met een naam en een adres. Een werkplaats blijft vermeld als er geen prijs is gepubliceerd."
+    },
+    "title": "Werkplaatsen",
+    "lead": "Vind een werkplaats als de auto stilvalt of de banden gewisseld moeten worden.",
+    "sourceNote": "Naam en adres komen van OpenStreetMap. Zonder prijs blijft de werkplaats staan. Wij boeken de reparatie niet.",
+    "countryLabel": "Land",
+    "cityLabel": "Stad",
+    "cityAll": "Kies een stad",
+    "cityUnknown": "Stad niet gepubliceerd",
+    "filter": "Toon",
+    "chooseCity": "Kies een stad om de werkplaatsen te zien die daar zijn ingetekend.",
+    "empty": "Geen ingetekende werkplaats in die stad.",
+    "addressMissing": "Het adres is niet op de kaart gepubliceerd.",
+    "count": "{count} werkplaatsen",
+    "pageLabel": "Pagina {page}",
+    "next": "Volgende",
+    "previous": "Vorige"
   }
 }

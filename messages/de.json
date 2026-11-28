@@ -51,7 +51,9 @@
       "tires": "Reifen",
       "taxi": "Taxischein",
       "leasing": "Leasing",
-      "parking": "Parken"
+      "parking": "Parken",
+      "sellCar": "Auto verkaufen",
+      "workshops": "Werkstätten"
     },
     "language": {
       "sv": "Svenska",
@@ -206,7 +208,7 @@
     "header": {
       "eyebrow": "FAQ",
       "title": "Fragen",
-      "subtitle": "Häufige Fragen zum Vergleichen von Fahrschulen, Preisen und Fahrstunden in Schweden."
+      "subtitle": "Kurze Antworten zu Schulen, Preisen und Fahrstunden."
     },
     "items": {
       "scope": {
@@ -246,12 +248,12 @@
   "blogPage": {
     "meta": {
       "title": "Blog",
-      "description": "Leitfäden für Menschen, die nach einem Umzug einen Führerschein machen, ein Auto halten oder mit einem Auto arbeiten. Ein Preis erscheint nur, wenn der Anbieter ihn geschrieben hat."
+      "description": "Ratgeber für dich, wenn du umziehst und einen Führerschein, ein Auto oder Arbeit mit dem Auto brauchst."
     },
     "header": {
       "eyebrow": "Blog",
       "title": "Umzug: Führerschein und Auto",
-      "subtitle": "Für alle, die nach einem Umzug einen Führerschein machen, ein Auto halten oder mit einem Auto arbeiten. Ein Preis erscheint nur, wenn der Anbieter ihn geschrieben hat."
+      "subtitle": "Ratgeber für dich, wenn du umziehst und einen Führerschein, ein Auto oder Arbeit mit dem Auto brauchst."
     },
     "posts": {
       "11": {
@@ -2361,11 +2363,11 @@
     }
   },
   "consentBanner": {
-    "intro": "Wir nutzen Cookies, die das Verzeichnis braucht. Mit Ihrer Einwilligung können wir Anzeigen laden. Sie können Ihre Wahl jederzeit ändern.",
+    "intro": "Cookies, die die Seite braucht, sind immer an. Anzeigen erscheinen nur, wenn du ja sagst. Du kannst die Wahl jederzeit ändern.",
     "essentialLabel": "Notwendig",
-    "essentialBody": "Anmeldung, Sicherheit, Sprache und Speicherung dieser Wahl. Erforderlich — nicht abschaltbar.",
+    "essentialBody": "Anmeldung, Sicherheit und Sprache. Diese lassen sich nicht abschalten.",
     "analyticsLabel": "Analyse",
-    "analyticsBody": "Heute läuft kein separates Analyse-Tool. Dieser Schalter ist reserviert. Lassen Sie ihn aus, außer Sie wünschen diese Verarbeitung, falls wir sie später hinzufügen.",
+    "analyticsBody": "Es läuft gerade keine Analyse. Lass die Wahl aus, wenn du sie später nicht einschalten willst.",
     "marketingLabel": "Marketing",
     "marketingBody": "Google AdSense, das Anzeigen zeigen und Google-Cookies setzen kann. Lädt nur bei Akzeptanz.",
     "acceptAll": "Alle akzeptieren",
@@ -2373,7 +2375,7 @@
     "customize": "Anpassen",
     "save": "Meine Wahl speichern",
     "saved": "Ihre Cookie-Auswahl wurde gespeichert.",
-    "error": "Cookie-Auswahl konnte nicht gespeichert werden — bitte erneut versuchen.",
+    "error": "Deine Wahl konnte nicht gespeichert werden. Versuch es noch einmal.",
     "privacy": "Datenschutzerklärung"
   },
   "consentForm": {
@@ -2435,8 +2437,8 @@
       "eyebrow": "",
       "title": "Autopreise und Fahrschulen vergleichen.",
       "metaTitle": "Autoteile, Preise und Fahrschulen vergleichen",
-      "metaDescription": "Vergleichen Sie Autoteile, Autopreise und Fahrschulen. Der Preis ist der veröffentlichte. Kostenloser Katalog für alle.",
-      "body": "Vergleichen Sie Fahrschulen, Schwerverkehr, Autopreise und Teile, die ein Geschäft für einen Autobesitzer oder eine Werkstatt veröffentlicht hat. Wir vergleichen auch die Preise der Hauptuntersuchung, Reifenpreise, die Taxischein-Ausbildung, Leasingpreise und Parkpreise. Die Zahl ist der veröffentlichte Preis.",
+      "metaDescription": "Vergleiche Fahrschulen, Autos, Teile, Untersuchung und Reifen. Der Preis ist der, den das Unternehmen veröffentlicht hat. Kostenlos für alle.",
+      "body": "Vergleiche Schule, Auto, Teile, Untersuchung, Reifen, Taxi, Leasing und Parken. Du siehst den Preis, den das Unternehmen veröffentlicht hat.",
       "primaryCta": "Schule finden",
       "instructorCta": "Ich arbeite an einer Fahrschule",
       "marketplaceTag": "Autopreise · Fahrschulen",
@@ -2460,7 +2462,7 @@
       "imageAlt": "Fahrstunde: ein Fahrer am Steuer in der Dämmerung",
       "previewLines": {
         "profile": "Kategorien, Sprache und Standort vergleichen.",
-        "price": "Veröffentlichten Schulpreis prüfen — ohne Zusatzgebühren.",
+        "price": "Sieh den veröffentlichten Preis der Schule. Kein Aufschlag.",
         "time": "Schule öffnen und den Eintrag lesen."
       },
       "search": {
@@ -2508,6 +2510,8 @@
           "berlin": "Berlin",
           "roma": "Roma",
           "warszawa": "Warszawa",
+          "helsinki": "Helsinki",
+          "amsterdam": "Amsterdam",
           "newYork": "New York"
         },
         "modeLabel": "Was möchtest du vergleichen",
@@ -2551,11 +2555,12 @@
           "tires": "Reifen",
           "taxi": "Taxischein",
           "leasing": "Leasing",
-          "parking": "Parken"
+          "parking": "Parken",
+          "workshops": "Werkstätten"
         }
       },
-      "lead": "Kostenlos. Sie zahlen den Preis der Schule.",
-      "note": "DriveLinkUp ist ein Katalog. Wir nehmen keine Zahlung für einen Katalogeintrag entgegen.",
+      "lead": "Kostenlos für alle. Du zahlst das Unternehmen.",
+      "note": "Ein Eintrag hier ist keine Buchung und keine Erlaubnis.",
       "schoolLink": "Ich betreibe eine Schule",
       "chips": {
         "price": "Veröffentlichter Preis in Kronen",
@@ -2608,7 +2613,7 @@
         },
         "book": {
           "title": "Schule kontaktieren",
-          "body": "Sie kontaktieren die Schule. DriveLinkUp bucht die Fahrstunde nicht."
+          "body": "Schreib der Schule. Wir buchen die Stunde nicht."
         }
       }
     },
@@ -2626,19 +2631,19 @@
     },
     "assurance": {
       "eyebrow": "So funktioniert das Verzeichnis",
-      "title": "Nichts im Kleingedruckten versteckt.",
+      "title": "Klar von Anfang an.",
       "cards": {
         "price": {
           "title": "Der veröffentlichte Preis",
-          "body": "Hat eine Schule einen Preis veröffentlicht, sehen Sie ihn in Kronen. DriveLinkUp erhebt keine Gebühr."
+          "body": "Wenn die Schule einen Preis gesetzt hat, siehst du ihn in Kronen. Wir legen keine Gebühr drauf."
         },
         "safety": {
           "title": "Ein Eintrag ist eine Katalogkarte",
-          "body": "Eine Katalogkarte ist keine Unterrichtserlaubnis und kein Vertrag. Bestätigen Sie Erlaubnis, Fahrstunden-Setup und Bedingungen mit der Schule."
+          "body": "Ein Eintrag ist keine Lizenz und kein Vertrag. Frag die Schule nach Erlaubnis und Bedingungen."
         },
         "cancellation": {
           "title": "Schule kontaktieren",
-          "body": "Fahrstunden werden mit der Schule vereinbart. „Schule kontaktieren“ öffnet Posteingang oder Website. DriveLinkUp nimmt keine Zahlung für einen Katalogeintrag."
+          "body": "Du schreibst der Schule. Wir verlangen nichts dafür, dass die Schule hier steht."
         }
       }
     },
@@ -3576,12 +3581,12 @@
   "pricingPage": {
     "meta": {
       "title": "Preise",
-      "description": "Fahrschulen kostenlos vergleichen. Ein Katalogeintrag ist kostenlos. DriveLinkUp nimmt keine Zahlung für Verzeichniseinträge."
+      "description": "Der Vergleich ist für alle kostenlos. DriveLinkUp verlangt nichts für einen Eintrag."
     },
     "hero": {
       "eyebrow": "Verzeichnis",
-      "title": "Der Schulpreis ist die Zahl auf dem Eintrag.",
-      "body": "Fahrschulangebote entdecken und vergleichen."
+      "title": "Du siehst den Preis. Nichts kommt dazu.",
+      "body": "Vergleiche die Schulen kostenlos. Die Stunde zahlst du an die Schule."
     },
     "learner": {
       "title": "Für Lernende",
@@ -3597,7 +3602,7 @@
     },
     "notes": {
       "title": "So funktioniert die Listung (Schweden)",
-      "body": "Ein Katalogeintrag ist kostenlos. DriveLinkUp nimmt keine Zahlung für Verzeichniseinträge und rechnet keine Lernendengebühr hinzu. Stunden und Bedingungen werden mit der Schule vereinbart."
+      "body": "Der Eintrag ist kostenlos. Stunde und Bedingungen klärst du mit der Schule."
     },
     "cta": {
       "learner": "Schulen vergleichen",
@@ -3695,18 +3700,18 @@
     "headerTitleCountry": "Fahrschulen in {name}",
     "subtitleLive": "Vergleichen Sie Schulangebote in {name} nach Klasse, Sprache und veröffentlichtem SEK-Preis. Kontaktieren Sie die Schule, um eine Stunde zu vereinbaren.",
     "subtitleCatalogue": "Fahrschulen in {name} stehen im selben Katalog. Ein Preis erscheint in der Währung auf der Website der Schule. Kontaktieren Sie die Schule, um eine Stunde zu vereinbaren.",
-    "subtitleExpansion": "{name} in {country} ist ein Ausbau-Hub. Der Katalog ist heute in Schweden live; nutzen Sie diese Seiten, um die nordische Abdeckung zu erkunden, während wir wachsen.",
+    "subtitleExpansion": "{name} ist bereit. Der Vergleich ist in Schweden live.",
     "subtitleCountryLive": "Regionen und Städte in {name} durchsuchen. Öffnen Sie einen Stadthub, um Einträge zu vergleichen.",
     "subtitleCountryCatalogue": "Öffnen Sie eine Stadt, um Fahrschulen in {name} zu vergleichen. Sie stehen im selben Katalog wie die schwedischen Schulen.",
-    "subtitleCountryExpansion": "Hubs für {name} sind für SEO und Ausbau bereit. Der Katalog ist zuerst in Schweden live (ADR-001).",
+    "subtitleCountryExpansion": "Die Seiten für {name} sind da. Der Vergleich ist in Schweden live.",
     "breadcrumbLocations": "Orte",
-    "expansionTitle": "Der Katalog ist Sweden-first",
-    "expansionBody": "DriveLinkUp listet Fahrschulen zuerst in Schweden. Diese nordische Ortsseite ist indexierbar, damit Lernende uns beim Ausbau finden — durchsuchen Sie heute schwedische Städte.",
+    "expansionTitle": "Schweden ist live",
+    "expansionBody": "Wir vergleichen Fahrschulen in Schweden. Diese Seite ist da, damit du uns findest, wenn weitere Länder dazukommen.",
     "expansionCtaSweden": "Schwedische Fahrschulen durchsuchen",
     "seoLead": "Fahrschulen in {name}, {country} vergleichen",
     "seoP1Live": "Einträge in {name} zeigen Schulen im Katalog. Vergleichen Sie, bevor Sie die Schule kontaktieren.",
     "seoP1Catalogue": "Schulen in {name} stammen von ihren eigenen Websites. Sie sind nicht als geprüft markiert. Vergleichen Sie im Katalog, dann kontaktieren Sie die Schule.",
-    "seoP1Expansion": "Wir veröffentlichen einen strukturierten Hub für {name}, {country}, damit Suche und Assistenten Lernende richtig führen, während das Angebot onboarded wird.",
+    "seoP1Expansion": "Die Seite für {name}, {country} ist da. Der Schulvergleich ist in Schweden live.",
     "seoP2": "Ein Katalogeintrag ist kostenlos. DriveLinkUp rechnet keine Lernendengebühr hinzu. Stunden und Zahlung laufen über die Schule. Handledare / privates Üben ist ein eigener rechtlicher Weg.",
     "howTitle": "So funktioniert DriveLinkUp",
     "howBodyLive": "Öffnen Sie einen Eintrag, lesen Sie den veröffentlichten Preis, dann kontaktieren Sie die Schule. Stunden werden mit der Schule vereinbart.",
@@ -3871,9 +3876,9 @@
       "description": "DriveLinkUp vergleicht Fahrschulen. Veröffentlichte Preise stehen in der Anzeige. Die Listung ist kostenlos."
     },
     "hero": {
-      "eyebrow": "Fahrschulen und Lernende. Ein Verzeichnis.",
+      "eyebrow": "Für den Führerschein und das Auto.",
       "title": "Wir haben den Vergleich gebaut, den wir uns gewünscht haben.",
-      "intro": "Was kostet die Stunde, und wer steht dahinter? Auf DriveLinkUp ist die Antwort der veröffentlichte Preis der Schule.",
+      "intro": "Was kostet es, und wen bezahlst du? Du siehst den Preis, den das Unternehmen veröffentlicht hat.",
       "chips": [
         "Veröffentlichter Preis in Kronen",
         "Die Erlaubnis der Schule bestimmt die Klasse",
@@ -4046,7 +4051,7 @@
   "heavyVehiclesPage": {
     "eyebrow": "Lkw, Bus und YKB",
     "title": "Schwere Fahrzeuge",
-    "subtitle": "Fahrschulen, deren Website eine Ausbildung für C- oder D-Führerschein oder YKB nennt. Der Preis erscheint, wenn die Schule ihn veröffentlicht."
+    "subtitle": "Schulen, die auf ihrer eigenen Seite für Lkw, Bus oder YKB ausbilden. Der Preis erscheint, wenn die Schule ihn gesetzt hat."
   },
   "lessonComparison": {
     "meta": {
@@ -4065,11 +4070,11 @@
     "colLength": "Dauer",
     "colPerMinute": "Kr/min",
     "minutes": "{minutes} min",
-    "sourceNote": "Der Preis ist der, den die Schule auf ihrer Website veröffentlicht hat. DriveLinkUp hat ihn nicht geprüft und nutzt ihn nicht als Buchungsbetrag.",
+    "sourceNote": "Der Preis kommt von der Website der Schule. Wir haben ihn nicht geprüft, und er ist kein Buchungsbetrag.",
     "cardsHeading": "Schulen mit veröffentlichtem Preis in {name}",
     "faqTitle": "Häufige Fragen",
     "faq1q": "Sind die Preise in {name} aktuell?",
-    "faq1a": "Sie stammen von der Website jeder Schule. Die Schule kann den Preis seitdem geändert haben — öffne die Preisliste über den Eintrag.",
+    "faq1a": "Sie stammen von der eigenen Website jeder Schule. Die Schule kann den Preis geändert haben, seit wir die Seite gelesen haben. Öffne die Preisliste über den Eintrag.",
     "faq2q": "Verlangt DriveLinkUp Geld für den Vergleich?",
     "faq2a": "Nein. Der Katalog ist kostenlos. Du zahlst die Schule, nicht DriveLinkUp.",
     "backToHub": "Alle Fahrschulen in {name}",
@@ -4083,7 +4088,7 @@
     },
     "eyebrow": "Autohändler",
     "title": "Fahrzeugpreise vergleichen",
-    "lead": "Jede Karte ist ein Auto, Lkw oder Motorrad, das ein Händler neu oder gebraucht mit den Angaben des Inserats veröffentlicht hat. Der Preis ist der angegebene Betrag. DriveLinkUp verkauft das Fahrzeug nicht.",
+    "lead": "Vergleiche Autos, Lkw und Motorräder, die ein Händler veröffentlicht hat. Der Preis ist der des Händlers.",
     "cityLabel": "Ort",
     "cityAll": "Alle Orte",
     "kindLabel": "Fahrzeug",
@@ -4131,7 +4136,7 @@
     },
     "eyebrow": "Ersatzteile",
     "title": "Ersatzteile und Zubehör vergleichen",
-    "lead": "Ein Autobesitzer und eine Werkstatt vergleichen den Preis und die Angaben, die der Shop veröffentlicht hat. DriveLinkUp verkauft das Produkt nicht.",
+    "lead": "Vergleiche Preis und Angabe, die der Shop veröffentlicht hat.",
     "queryLabel": "Produkt",
     "queryPlaceholder": "Bremsbeläge",
     "kindLabel": "Art",
@@ -4184,10 +4189,10 @@
   "inspectionPage": {
     "meta": {
       "title": "Hauptuntersuchung vergleichen",
-      "description": "Veröffentlichte Preise der Prüfstelle oder der Behörde. Ein Land erscheint, wenn der Preis veröffentlicht ist. DriveLinkUp bucht die Prüfung nicht."
+      "description": "Untersuchungspreise, die die Station oder die Behörde veröffentlicht hat. Wir buchen die Untersuchung nicht."
     },
     "title": "Hauptuntersuchung vergleichen",
-    "lead": "Der Preis ist der, den die Prüfstelle oder die Behörde veröffentlicht hat. DriveLinkUp bucht die Prüfung nicht und nennt eine Stelle nicht verifiziert.",
+    "lead": "Vergleiche den Preis, den die Station oder die Behörde veröffentlicht hat. Wir buchen die Untersuchung nicht.",
     "countryLabel": "Land",
     "countryAll": "Alle Länder",
     "vehicleLabel": "Fahrzeug",
@@ -4233,12 +4238,24 @@
   "tirePage": {
     "meta": {
       "title": "Reifenpreise vergleichen",
-      "description": "Veröffentlichte Preise für Radwechsel, Reifenhotel und Montage von der eigenen Seite der Werkstatt. Ein Land erscheint, wenn dieser Preis veröffentlicht ist. DriveLinkUp bucht den Wechsel nicht."
+      "description": "Reifenpreise von der eigenen Seite der Werkstatt. Wir buchen den Wechsel nicht."
     },
     "title": "Reifenpreise vergleichen",
-    "lead": "Der Preis ist der, den die Werkstatt für einen Radwechsel, ein Reifenhotel, die Montage oder einen mobilen Besuch veröffentlicht hat. DriveLinkUp bucht die Arbeit nicht und nennt eine Werkstatt nicht verifiziert.",
+    "lead": "Vergleiche den Preis, den die Werkstatt für Radwechsel, Reifenhotel oder Montage gesetzt hat. Wir buchen den Wechsel nicht.",
     "countryLabel": "Land",
     "countryAll": "Alle Länder",
+    "cityLabel": "Stadt",
+    "cityAll": "Alle Städte",
+    "filter": "Zeigen",
+    "useMyLocation": "Meinen Standort verwenden",
+    "clearLocation": "Standort löschen",
+    "locationPrompt": "Wähle eine Stadt oder verwende deinen Standort, um veröffentlichte Preise zu sehen, die dort gelten.",
+    "locationRequesting": "Standort wird gesucht…",
+    "locationGranted": "Veröffentlichte Preise für die nächstgelegene Stadt.",
+    "locationDenied": "Der Standortzugriff wurde abgelehnt. Du kannst trotzdem eine Stadt wählen.",
+    "locationFailed": "Der Standort wurde nicht gefunden. Versuche es erneut oder wähle eine Stadt.",
+    "locationUnsupported": "Der Standort ist in diesem Browser nicht verfügbar. Du kannst trotzdem eine Stadt wählen.",
+    "locationNone": "Keine Stadt auf der Liste ist nah genug. Wähle eine Stadt.",
     "vehicleLabel": "Fahrzeug",
     "serviceLabel": "Leistung",
     "vehicles": {
@@ -4267,6 +4284,7 @@
       "wheelsBrought": "Sie bringen die Räder mit. Die Seite nennt diesen Ab-Preis für die genannten Größen.",
       "extrasMayApply": "Die Seite sagt, dass Zuschläge wie RDKS-Service und neue Ventile mehr kosten können.",
       "includesCheck": "Die Seite schließt eine Prüfung der Reifen und des Luftdrucks ein.",
+      "includesChange": "Enthält die Lagerung und den Radwechsel.",
       "includesChangeAndWash": "Enthält den Radwechsel, die Lagerung und eine Wäsche.",
       "includesChangeWashAndCheck": "Enthält Lagerung, Maschinenwäsche, Radwechsel und Reifenprüfung.",
       "ownTyres": "Montage und Auswuchten von Reifen, die Sie schon haben, danach die Räder ans Fahrzeug.",
@@ -4281,10 +4299,10 @@
   "taxiPage": {
     "meta": {
       "title": "Taxischein vergleichen",
-      "description": "Veröffentlichte Preise für die Taxischulung und die amtliche Prüfung. Ein Land erscheint, wenn die Schule oder die Behörde den Betrag veröffentlicht hat. DriveLinkUp meldet Sie nicht an."
+      "description": "Preise für Taxifahrerausbildung und amtliche Prüfungen. Wir melden dich nicht an."
     },
     "title": "Taxischein vergleichen",
-    "lead": "Der Preis ist der, den die Schule oder die Behörde für den Kurs oder die amtliche Prüfung veröffentlicht hat. DriveLinkUp meldet Sie nicht an und nennt eine Schule nicht verifiziert.",
+    "lead": "Vergleiche den Preis, den die Schule oder die Behörde für den Kurs oder die Prüfung gesetzt hat. Wir melden dich nicht an.",
     "countryLabel": "Land",
     "countryAll": "Alle Länder",
     "kindLabel": "Wofür der Preis gilt",
@@ -4324,10 +4342,10 @@
   "leasingPage": {
     "meta": {
       "title": "Leasingpreise vergleichen",
-      "description": "Veröffentlichte Privatleasingpreise für benannte Modelle. Ein Land erscheint, wenn der Leasinggeber Modell und Monatsbetrag veröffentlicht hat. DriveLinkUp least das Auto nicht."
+      "description": "Privatleasingpreise für benannte Modelle. Wir leasen das Auto nicht."
     },
     "title": "Leasingpreise vergleichen",
-    "lead": "Der Preis ist der Monatsbetrag, den der Leasinggeber für dieses Modell veröffentlicht hat. Das Land ist der Ort dieser Veröffentlichung. DriveLinkUp least das Auto nicht und nennt ein Angebot nicht verifiziert.",
+    "lead": "Vergleiche den Monatspreis, den der Leasinggeber für genau dieses Modell veröffentlicht hat. Wir leasen das Auto nicht.",
     "countryLabel": "Land",
     "countryAll": "Alle Länder",
     "priceFrom": "ab",
@@ -4374,7 +4392,7 @@
       "description": "Vergleichen Sie den Stundenpreis, den eine Stadt oder ein Betreiber für einen genannten Ort veröffentlicht hat."
     },
     "title": "Parkpreise",
-    "lead": "Vergleichen Sie den Stundenpreis, den eine Stadt oder ein Betreiber für einen genannten Ort veröffentlicht hat. Wählen Sie die Stadt, um den Ort neben den anderen Preisen dort zu sehen. Die Zahl ist diese veröffentlichte Stunde. Innerhalb einer Währung kann ein Ort, den Leute öffnen, nach oben rücken. DriveLinkUp reserviert den Platz nicht. Das Schild vor Ort gilt.",
+    "lead": "Vergleiche den Stundenpreis, den die Stadt oder der Betreiber veröffentlicht hat. Das Schild vor Ort gilt.",
     "countryLabel": "Land",
     "countryAll": "Alle Länder",
     "cityLabel": "Stadt",
@@ -4413,5 +4431,140 @@
       "prepaid": "Der Betreiber nimmt die Gebühr im Voraus.",
       "outerCityGuest": "Die Seite nennt dies Anwohner- und Besucherparken in der äußeren Stadt."
     }
+  },
+  "sellCarPage": {
+    "meta": {
+      "title": "Auto verkaufen",
+      "description": "Melde dich an, um einen Marktpreis aus veröffentlichten Katalogpreisen zu schätzen und das Auto zu veröffentlichen, damit ein Käufer es finden kann. DriveLinkUp kauft das Auto nicht."
+    },
+    "header": {
+      "title": "Auto verkaufen",
+      "lead": "Sieh einen Preis aus Anzeigen, die schon hier stehen. Leg ein Konto an, um das Auto einzustellen. Wir kaufen es nicht."
+    },
+    "gate": {
+      "title": "Konto erstellen, um zu schätzen und zu veröffentlichen",
+      "body": "Die Preisschätzung und das Inserat gibt es, nachdem du ein Konto erstellt hast.",
+      "signup": "Konto erstellen",
+      "login": "Anmelden"
+    },
+    "form": {
+      "make": "Marke",
+      "model": "Modell",
+      "year": "Baujahr",
+      "yearNone": "Baujahr unbekannt",
+      "country": "Land",
+      "currency": "Währung",
+      "city": "Ort",
+      "asking": "Dein Angebotspreis",
+      "note": "Hinweis",
+      "noteHint": "Keine Zulassungsnummer und keine FIN angeben.",
+      "estimate": "Marktpreis schätzen",
+      "publish": "Veröffentlichen, damit ein Käufer das Auto finden kann",
+      "working": "Arbeitet…"
+    },
+    "result": {
+      "median": "Median der veröffentlichten Preise",
+      "range": "Veröffentlichte Spanne {low}–{high}",
+      "count": "Basiert auf {count} veröffentlichten Preisen",
+      "none": "Weniger als drei veröffentlichte Preise passen zu diesem Modell in dieser Währung, deshalb gibt es keine Schätzung.",
+      "buyers": "Händler, die dieses Modell veröffentlichen",
+      "buyersNone": "Kein Händler in diesem Land veröffentlicht dieses Modell.",
+      "published": "Das Auto ist veröffentlicht.",
+      "open": "Inserat öffnen"
+    },
+    "errors": {
+      "auth": "Melde dich an, um fortzufahren.",
+      "invalid": "Prüfe Marke, Modell, Ort und Preis.",
+      "identifier": "Entferne die Zulassungsnummer oder die FIN.",
+      "own": "Das ist dein Inserat.",
+      "limit": "Du hast das Tageslimit für Nachrichten erreicht."
+    },
+    "mine": {
+      "title": "Deine Inserate",
+      "empty": "Du hast noch kein Auto veröffentlicht."
+    }
+  },
+  "carsForSalePage": {
+    "meta": {
+      "title": "Autos zu verkaufen",
+      "description": "Autos, die private Eigentümer veröffentlicht haben. Eine Schätzung ist der Median veröffentlichter Katalogpreise. Kontakt braucht ein Konto."
+    },
+    "header": {
+      "title": "Autos zu verkaufen",
+      "lead": "Autos, die Privatpersonen eingestellt haben. Die Schätzung nutzt Preise, die schon hier stehen. Wir schließen den Verkauf nicht ab.",
+      "sell": "Auto verkaufen"
+    },
+    "empty": "Noch keine privaten Autos veröffentlicht.",
+    "card": {
+      "noEstimate": "Zu wenige veröffentlichte Preise für eine Schätzung",
+      "asking": "Angebotspreis {amount}"
+    },
+    "detail": {
+      "back": "Alle Autos zu verkaufen",
+      "estimate": "Median der veröffentlichten Preise",
+      "range": "Veröffentlichte Spanne {low}–{high}, aus {count} Preisen",
+      "none": "Weniger als drei veröffentlichte Preise passen zu diesem Modell, deshalb gibt es keine Schätzung.",
+      "inquire": "An den Eigentümer schreiben",
+      "inquireBody": "Dein Name und deine E-Mail gehen an den Eigentümer. DriveLinkUp nimmt keine Zahlung an.",
+      "message": "Nachricht",
+      "send": "Senden",
+      "sending": "Wird gesendet…",
+      "sent": "Der Eigentümer hat deine Nachricht.",
+      "messages": "Nachrichten von Käufern",
+      "noMessages": "Noch kein Käufer hat geschrieben.",
+      "signInTitle": "Konto erstellen, um zu chatten",
+      "signInBody": "Das Auto ist kostenlos zu lesen. Die Unterhaltung öffnet sich, nachdem du ein Konto erstellt hast.",
+      "signup": "Konto erstellen",
+      "login": "Anmelden"
+    },
+    "errors": {
+      "auth": "Erstelle ein Konto vor der Unterhaltung.",
+      "invalid": "Schreibe mindestens 10 Zeichen.",
+      "identifier": "Entferne die Zulassungsnummer oder die FIN.",
+      "own": "Das ist dein Inserat.",
+      "limit": "Du hast das Tageslimit für Nachrichten erreicht."
+    },
+    "thread": {
+      "title": "Unterhaltung",
+      "body": "Das Inserat ist kostenlos. Die Unterhaltung ist nur für Konten. DriveLinkUp nimmt keine Zahlung an.",
+      "emptyOwner": "Noch kein Käufer hat geschrieben.",
+      "emptyBuyer": "Schreibe die erste Nachricht.",
+      "with": "Unterhaltung mit {name}",
+      "message": "Nachricht",
+      "send": "Senden",
+      "sending": "Wird gesendet…",
+      "you": "Du",
+      "yours": "Auto-Unterhaltungen"
+    }
+  },
+  "adminConversationsPage": {
+    "title": "Unterhaltungen",
+    "lead": "Jede Unterhaltung auf DriveLinkUp. Diese Ansicht ist nur zum Lesen.",
+    "empty": "Noch keine Unterhaltungen.",
+    "vehicle": "Privates Auto",
+    "booking": "Fahrstunde",
+    "messages": "Nachrichten",
+    "noMessages": "Diese Unterhaltung hat keine Nachrichten."
+  },
+  "workshopPage": {
+    "meta": {
+      "title": "Autowerkstätten",
+      "description": "Autowerkstätten mit Name und Adresse. Eine Werkstatt bleibt gelistet, auch wenn sie keinen Preis veröffentlicht."
+    },
+    "title": "Werkstätten",
+    "lead": "Finde eine Werkstatt, wenn das Auto stehen bleibt oder die Reifen gewechselt werden.",
+    "sourceNote": "Name und Adresse kommen von OpenStreetMap. Fehlt ein Preis, bleibt die Werkstatt stehen. Wir buchen die Reparatur nicht.",
+    "countryLabel": "Land",
+    "cityLabel": "Stadt",
+    "cityAll": "Stadt wählen",
+    "cityUnknown": "Stadt nicht angegeben",
+    "filter": "Zeigen",
+    "chooseCity": "Wähle eine Stadt, um die dort kartierten Werkstätten zu sehen.",
+    "empty": "Keine kartierte Werkstatt in dieser Stadt.",
+    "addressMissing": "Die Adresse ist auf der Karte nicht veröffentlicht.",
+    "count": "{count} Werkstätten",
+    "pageLabel": "Seite {page}",
+    "next": "Weiter",
+    "previous": "Zurück"
   }
 }

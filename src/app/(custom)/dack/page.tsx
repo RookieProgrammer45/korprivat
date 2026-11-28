@@ -10,7 +10,7 @@ import { siteName } from '@/lib/site';
 export const dynamic = 'force-dynamic';
 
 type Props = {
-  searchParams: Promise<{ country?: string; vehicle?: string; service?: string }>;
+  searchParams: Promise<{ country?: string; place?: string; vehicle?: string; service?: string }>;
 };
 
 export async function generateMetadata(): Promise<Metadata> {

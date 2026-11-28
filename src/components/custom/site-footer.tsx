@@ -41,6 +41,8 @@ const COLUMNS: readonly FooterColumn[] = [
       { labelKey: 'nav.pricing', href: '/pricing' },
       { labelKey: 'nav.drivingSchool', href: '/for-skolor' },
       { labelKey: 'nav.dealershipOwner', href: '/contact?topic=list_dealer' },
+      { labelKey: 'nav.sellCar', href: '/salj-bil' },
+      { labelKey: 'nav.workshops', href: '/verkstad' },
     ],
   },
   {

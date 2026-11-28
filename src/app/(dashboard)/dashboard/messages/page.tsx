@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { MessagingWorkspace } from '@/components/custom/messaging/messaging-workspace';
+import { LocaleLink } from '@/components/locale-link';
 import { dashboardPathFor, requireDashboardSession } from '@/lib/dashboard-guard';
+import { listMyVehicleThreads } from '@/lib/vehicle-sales/threads';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('dashboard');
@@ -23,5 +25,29 @@ export default async function MessagesPage({ searchParams }: PageProps) {
   }
   const params = await searchParams;
   const rawBookingId = Array.isArray(params.bookingId) ? params.bookingId[0] : params.bookingId;
-  return <MessagingWorkspace initialBookingId={rawBookingId} />;
+  const vehicleThreads = await listMyVehicleThreads(session.userId);
+  const sales = await getTranslations('carsForSalePage');
+  return (
+    <div className="grid gap-6">
+      {vehicleThreads.length > 0 ? (
+        <section className="grid gap-2">
+          <h2 className="text-lg">{sales('thread.yours')}</h2>
+          <ul className="grid gap-2">
+            {vehicleThreads.map((thread) => (
+              <li key={thread.id}>
+                <LocaleLink
+                  className="text-sm underline-offset-4 hover:underline"
+                  href={`/bilar-till-salu/${thread.listingId}#conversation`}
+                >
+                  {thread.title}
+                  {thread.otherName ? ` · ${thread.otherName}` : ''}
+                </LocaleLink>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+      <MessagingWorkspace initialBookingId={rawBookingId} />
+    </div>
+  );
 }

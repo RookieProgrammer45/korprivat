@@ -71,6 +71,72 @@ def extract(url: str, text: str) -> dict[str, float]:
         if van:
             found["se-euromaster-van-change"] = van
         return found
+    if "mekonomen.se/bilverkstad/dackbyte" in url:
+        price = first(r"däckbyte från\s+(\d+)\s*kr", text)
+        if price:
+            found["se-mekonomen-car-change"] = price
+        return found
+    if "bilia.se/verkstad/dacktjanster/dackbyte" in url:
+        change = first(r"Från\s+(\d+)\s*kr", text)
+        if change:
+            found["se-bilia-car-change"] = change
+        if re.search(r"Från\s+1\.195\s*kr", text):
+            found["se-bilia-car-hotel"] = 1195
+        return found
+    if "holmgrensbil.se" in url and "dackbyte" in url:
+        price = first(r"däckbyte för endast\s+(\d+)\s*kr", text)
+        if price:
+            found["se-holmgrens-car-change"] = price
+        return found
+    if "citydack.se/vara_tjanster" in url:
+        car = first(r"Personbil\s+(\d+)\s*kr", text)
+        van = first(r"Lätt lastbil och SUV\s+(\d+)\s*kr", text)
+        hotel = first(r"Från\s+(\d+)\s*kr per säsong", text)
+        if car:
+            found["se-citydack-car-change"] = car
+        if van:
+            found["se-citydack-van-change"] = van
+        if hotel:
+            found["se-citydack-car-hotel"] = hotel
+        return found
+    if "thansen.se" in url:
+        price = first(r"alla fyra hjul kostar det från\s+(\d+,\d{2})", text)
+        if price:
+            found["se-thansen-car-change"] = price
+        return found
+    if "meca.se/vara-tjanster/dackbyte" in url:
+        price = first(r"däckbyte från\s+(\d+)\s*kr", text)
+        if price:
+            found["se-meca-car-change"] = price
+        return found
+    if "meca.se/vara-tjanster/dackhotell" in url:
+        price = first(r"däckhotell från\s+(\d+)\s*kr", text)
+        if price:
+            found["se-meca-car-hotel"] = price
+        return found
+    if "brandtbil.se" in url and "dackbyte" in url:
+        ordinary = re.findall(r"Ordinarie pris från:\s*([\d\s]+)\s*kr", text, re.I)
+        if ordinary:
+            found["se-brandt-car-change"] = amount(ordinary[0])
+        if len(ordinary) > 1:
+            found["se-brandt-car-hotel"] = amount(ordinary[1])
+        return found
+    if "mechanum.com/tjanster/dack/hjulskifte" in url:
+        if re.search(r"Ordinarie pris\s+499\s*kr", text):
+            found["se-mechanum-car-change"] = 499
+        if re.search(r"paketpris\.\s*1\s*299\s*kr", text):
+            found["se-mechanum-car-hotel"] = 1299
+        return found
+    if "autoria.no/verksted/dekkskift" in url:
+        price = first(r"Fra\s+(\d+),-", text)
+        if price:
+            found["no-autoria-car-change"] = price
+        return found
+    if "bos.no" in url and "dekkskift" in url:
+        price = first(r"hjulskift fra\s+(\d+)\s*kr", text)
+        if price:
+            found["no-bos-car-change"] = price
+        return found
     if url.rstrip("/").endswith("dackbyte"):
         price = first(r"Från (\d+) kr", text)
         if price:
@@ -219,6 +285,65 @@ def self_test() -> int:
         "appointments cost up to £30 depending on the slot",
     )
     assert mobile == {"gb-kwikfit-car-mobile": 30, "gb-kwikfit-van-mobile": 30}, mobile
+    mekonomen = extract(
+        "https://www.mekonomen.se/bilverkstad/dackbyte",
+        "däckbyte från 249 kr",
+    )
+    assert mekonomen == {"se-mekonomen-car-change": 249}, mekonomen
+    bilia = extract(
+        "https://www.bilia.se/verkstad/dacktjanster/dackbyte/",
+        "Från 495 kr Däckhotell Från 1.195 kr",
+    )
+    assert bilia == {"se-bilia-car-change": 495, "se-bilia-car-hotel": 1195}, bilia
+    holmgren = extract(
+        "https://www.holmgrensbil.se/dackverkstad/dackbyte",
+        "däckbyte för endast 475 kr",
+    )
+    assert holmgren == {"se-holmgrens-car-change": 475}, holmgren
+    city = extract(
+        "https://www.citydack.se/vara_tjanster",
+        "Från 895 kr per säsong Personbil 345 kr Lätt lastbil och SUV 395 kr",
+    )
+    assert city == {
+        "se-citydack-car-change": 345,
+        "se-citydack-van-change": 395,
+        "se-citydack-car-hotel": 895,
+    }, city
+    thansen = extract(
+        "https://www.thansen.se/bil/dack-och-falgar/montering-och-balansering/n-2084705019",
+        "För alla fyra hjul kostar det från 359,80 kr",
+    )
+    assert thansen == {"se-thansen-car-change": 359.8}, thansen
+    meca = extract(
+        "https://www.meca.se/vara-tjanster/dackbyte/byta-till-sommardack",
+        "ett däckbyte från 250 kr",
+    )
+    assert meca == {"se-meca-car-change": 250}, meca
+    hotel = extract(
+        "https://www.meca.se/vara-tjanster/dackhotell",
+        "däckhotell från 300 kr per säsong",
+    )
+    assert hotel == {"se-meca-car-hotel": 300}, hotel
+    brandt = extract(
+        "https://www.brandtbil.se/utbud/dackverkstad/dackbyte/",
+        "Ordinarie pris från: 695 kr Ordinarie pris från: 1 295 kr",
+    )
+    assert brandt == {"se-brandt-car-change": 695, "se-brandt-car-hotel": 1295}, brandt
+    mechanum = extract(
+        "https://mechanum.com/tjanster/dack/hjulskifte/",
+        "Ordinarie pris 499 kr paketpris. 1 299 kr",
+    )
+    assert mechanum == {"se-mechanum-car-change": 499, "se-mechanum-car-hotel": 1299}, mechanum
+    autoria = extract(
+        "https://www.autoria.no/verksted/dekkskift",
+        "Fra 599,-",
+    )
+    assert autoria == {"no-autoria-car-change": 599}, autoria
+    steen = extract(
+        "https://www.bos.no/bilverksted/dekkskift",
+        "Bestill hjulskift fra 699 kr",
+    )
+    assert steen == {"no-bos-car-change": 699}, steen
     print("self-test ok")
     return 0
 
